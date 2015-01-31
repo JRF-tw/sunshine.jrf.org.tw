@@ -1,7 +1,7 @@
 class EnabledPostgis < ActiveRecord::Migration
   def change
     execute '
-      DROP EXTENSION postgis CASCADE;
+      DROP EXTENSION IF EXISTS postgis CASCADE;
       CREATE SCHEMA postgis;
       CREATE EXTENSION postgis WITH SCHEMA postgis;
       GRANT ALL ON postgis.geometry_columns TO PUBLIC;
