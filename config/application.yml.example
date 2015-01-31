@@ -1,5 +1,5 @@
 defaults: &defaults
-  SECRET_KEY_BASE: "abcdefghijklmnopqustuvwxyz"
+  SECRET_KEY_BASE: abcdefghijklmnopqustuvwxyz
   host: localhost
   redis:
     url: redis://127.0.0.1:6379/0
