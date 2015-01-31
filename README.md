@@ -72,3 +72,17 @@ CREATE DATABASE "your_name";
 GRANT ALL PRIVILEGES ON DATABASE "your_name" to "your_name";
 ALTER USER "your_name" WITH SUPERUSER;
 ```
+
+First Use This Template App
+================================
+
+- `rails g rename:app_to your_new_app_name`
+- configs
+  - config/application.yml
+  - config/database.yml
+- Setup deploy
+  - lib/capistrano/tasks/salck.rake
+  - config/deploy.rb
+  - config/deploy/production.rb
+  - config/deploy/staging.rb
+  - config/unicorn/nginx.conf.example
