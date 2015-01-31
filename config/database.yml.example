@@ -1,0 +1,18 @@
+development: &default
+  adapter: 'postgis'
+  encoding: 'unicode'
+  database: 'myapp_development'
+  host: '127.0.0.1'
+  username: 'root'
+  password: ''
+  postgis_extension: true
+  schema_search_path: 'public, postgis'
+
+test: &TEST
+  <<: *default
+  database: 'myapp_test'
+
+production:
+  <<: *default
+  database: 'myapp_production'
+

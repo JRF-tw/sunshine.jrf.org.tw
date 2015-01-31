@@ -1,0 +1,26 @@
+defaults: &defaults
+  host: localhost
+  redis:
+    url: redis://127.0.0.1:6379/0
+  dalli:
+    servers:
+    - 127.0.0.1
+    options:
+      namespace: alfred-api
+      expires_in: 0
+      threadsafe: true
+      failover: true
+      compress: false
+      keepalive: true
+      username: 
+      password: 
+      pool_size: 1
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
