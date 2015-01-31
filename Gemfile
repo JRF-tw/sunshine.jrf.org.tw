@@ -12,7 +12,6 @@ gem 'dalli'
 gem 'connection_pool'
 
 # ENV
-gem 'figaro'
 gem 'settingslogic'
 
 # view rendering
