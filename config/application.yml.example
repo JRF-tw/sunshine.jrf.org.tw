@@ -7,7 +7,7 @@ defaults: &defaults
     servers:
     - 127.0.0.1
     options:
-      namespace: alfred-api
+      namespace: myapp
       expires_in: 0
       threadsafe: true
       failover: true
