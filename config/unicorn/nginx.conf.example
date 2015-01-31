@@ -1,0 +1,41 @@
+# insert to /opt/nginx/config/nginx.conf
+
+  upstream myapp {
+    server unix:/tmp/unicorn.myapp.sock;
+  }
+
+  server {
+    listen 80;
+    client_max_body_size         10M;
+    client_body_buffer_size     128k;
+    server_name myapp.5fpro.com;
+    root /home/apps/myapp/current/public;
+    # passenger_enabled on;
+    # rack_env staging;
+    access_log /home/apps/myapp/shared/log/nginx-access.log;
+    error_log /home/apps/myapp/shared/log/nginx-error.log;
+
+    location / {
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header Host $http_host;
+      proxy_pass http://myapp;
+    }
+
+
+    location ~ ^/(assets|uploads)/  {
+      root /home/apps/myapp/current/public;
+      gzip_static on; # to serve pre-gzipped version
+      expires max;
+      add_header  Cache-Control public;
+    }
+
+    location ~ \.(png|ico|jpg|html|txt)$  {
+      root /home/apps/myapp/current/public;
+      gzip_static on; # to serve pre-gzipped version
+      expires max;
+      add_header  Cache-Control public;
+    }
+
+    add_header "X-UA-Compatible" "IE=Edge,chrome=1";
+  }

@@ -47,13 +47,13 @@ gem 'jbuilder', '~> 2.0'
 
 group :development do
   # capistrano
-  # gem 'capistrano-rails'
-  # gem 'capistrano-rvm'
+  gem 'capistrano-rails'
+  gem 'capistrano-rvm'
   # gem 'capistrano-sidekiq'
   # unicorn
-  # gem 'capistrano3-unicorn'
+  gem 'capistrano3-unicorn'
   # slack
-  # gem 'slackistrano', require: false
+  gem 'slackistrano', require: false
 
   gem 'guard-annotate'
   gem 'annotate'
@@ -95,4 +95,4 @@ gem 'devise'
 gem 'aws-sdk'
 
 # unicorn
-# gem 'unicorn'
+gem 'unicorn'
