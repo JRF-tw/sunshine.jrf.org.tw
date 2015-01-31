@@ -16,6 +16,9 @@ defaults: &defaults
       username: 
       password: 
       pool_size: 1
+  aws:
+    access_key_id: '12341234'
+    secret_access_key: ''
 
 development:
   <<: *defaults

@@ -37,7 +37,6 @@ gem 'jbuilder', '~> 2.0'
 # gem 'carrierwave'
 # gem 'mini_magick'
 # gem 'fog'
-# gem 'aws-sdk'
 # gem 'carrierwave_backgrounder'
 
 # soft delete
@@ -91,6 +90,9 @@ gem 'kaminari'
 # devise 
 gem 'devise'
 # gem 'devise-async'
+
+# aws
+gem 'aws-sdk'
 
 # unicorn
 # gem 'unicorn'

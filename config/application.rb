@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module Myapp
   class Application < Rails::Application
+    config.action_mailer.delivery_method = :aws_ses
 
     # disable some file generators
     config.generators.stylesheets = false
