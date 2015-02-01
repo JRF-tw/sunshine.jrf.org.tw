@@ -108,3 +108,5 @@ gem 'newrelic_rpm'
 # front-end
 gem 'jquery-ui-rails'
 gem 'bootstrap-sass', '~> 2.3'
+
+gem 'crummy'

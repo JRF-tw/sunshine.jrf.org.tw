@@ -19,7 +19,7 @@ html
         h1= @admin_page_title
         .btn-group= yield :btns
       #breadcrumb
-        /= render_crumbs separator: ' '
+        = render_crumbs separator: ' '
 
       .container-fluid
         .row-fluid
