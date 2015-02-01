@@ -1,6 +1,6 @@
 GIT
   remote: git@github.com:marsz/venus.git
-  revision: af26aefc94d8b90e6fa70cefc5b1e186c328faf6
+  revision: 8a5edd2067f333badd1ddcacf6e7407111162e00
   branch: v1.0
   specs:
     venus (0.8.6)
