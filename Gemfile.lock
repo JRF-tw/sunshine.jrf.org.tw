@@ -357,7 +357,7 @@ GEM
       colorize (>= 0.7.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
-    test_after_commit (0.3.0)
+    test_after_commit (0.4.0)
       activerecord (>= 3.2)
     thor (0.19.1)
     thread_safe (0.3.4)
