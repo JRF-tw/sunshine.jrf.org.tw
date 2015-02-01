@@ -17,8 +17,11 @@ defaults: &defaults
       password: 
       pool_size: 1
   aws:
-    access_key_id: '12341234'
-    secret_access_key: ''
+    access_key_id: 'abcdabcd'
+    secret_access_key: 'abcdabcd'
+  sidekiq:
+    url: redis://127.0.0.1:6379/0
+    namespace: myapp
 
 development:
   <<: *defaults

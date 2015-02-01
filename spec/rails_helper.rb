@@ -50,6 +50,8 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.include Util
   config.include Webmock
+  config.include SidekiqHelper
 
   config.before(:each){ webmock_all! }
+  config.before(:each){ sidekiq_reset! }
 end

@@ -29,9 +29,9 @@ gem 'jbuilder', '~> 2.0'
 # gem 'turbolinks'
 
 # background jobs
-# gem 'sidekiq'
-# gem 'sinatra', '>= 1.3.0', :require => nil
-# gem 'sidekiq-limit_fetch'
+gem 'sidekiq'
+gem 'sinatra', '>= 1.3.0', :require => nil
+gem 'sidekiq-limit_fetch'
 
 # file upload
 # gem 'carrierwave'
@@ -49,7 +49,7 @@ group :development do
   # capistrano
   gem 'capistrano-rails'
   gem 'capistrano-rvm'
-  # gem 'capistrano-sidekiq'
+  gem 'capistrano-sidekiq'
   # unicorn
   gem 'capistrano3-unicorn'
   # slack
@@ -79,6 +79,7 @@ end
 
 group :test do
   gem 'webmock'
+  gem 'test_after_commit'
 end
 
 group :doc do
@@ -89,7 +90,7 @@ gem 'kaminari'
 
 # devise 
 gem 'devise'
-# gem 'devise-async'
+gem 'devise-async'
 
 # aws
 gem 'aws-sdk'
