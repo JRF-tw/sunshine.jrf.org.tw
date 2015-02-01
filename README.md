@@ -95,5 +95,7 @@ First Use This Template App
   - app/helpers/admin_menu_helper.rb
 - SEO
   - app/helpers/meta_tag_helper.rb
+  - config/schedule.rb (just uncomment)
+  - config/deploy/production.rb (just uncomment)
 - staging http auth
   - app/controllers/application_controller.rb

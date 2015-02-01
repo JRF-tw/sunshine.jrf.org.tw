@@ -30,7 +30,7 @@
       add_header  Cache-Control public;
     }
 
-    location ~ \.(png|ico|jpg|html|txt)$  {
+    location ~ \.(png|ico|jpg|html)$  {
       root /home/apps/myapp/current/public;
       gzip_static on; # to serve pre-gzipped version
       expires max;

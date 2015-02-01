@@ -109,5 +109,7 @@ gem 'newrelic_rpm'
 gem 'jquery-ui-rails'
 gem 'bootstrap-sass', '~> 2.3'
 
+# SEO
 gem 'crummy'
 gem 'meta-tags', :require => 'meta_tags'
+gem 'sitemap_generator'
