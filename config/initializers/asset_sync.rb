@@ -34,4 +34,5 @@ AssetSync.configure do |config|
   #
   # 
   config.enabled = true
+  config.run_on_precompile = false
 end

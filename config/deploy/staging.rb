@@ -11,12 +11,12 @@ set :ssh_options, {
 # property set.  Don't declare `role :all`, it's a meta role.
 
 server = "myapp.5fpro.com"
-role :app,             server
-role :web,             server
-role :db,              server
-role :whenever_server, server
-role :sidekiq_server,  server
-
+role :app,                server
+role :web,                server
+role :db,                 server
+role :whenever_server,    server
+role :sidekiq_server,     server
+role :assets_sync_server, server
 
 # Extended Server Syntax
 # ======================

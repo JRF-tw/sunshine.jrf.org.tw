@@ -19,11 +19,12 @@ lb_name = "lb.5fpro.com"
 servers = AWS::ELB.new.load_balancers[lb_name].instances.map(&:ip_address)
 
 shadow_server = "myapp.5fpro.com"
-role :app,             servers + [ shadow_server ]
-role :web,             servers + [ shadow_server ]
-role :db,              shadow_server
-role :whenever_server, shadow_server
-role :sidekiq_server,  shadow_server
+role :app,                servers + [ shadow_server ]
+role :web,                servers + [ shadow_server ]
+role :db,                 shadow_server
+role :whenever_server,    shadow_server
+role :sidekiq_server,     shadow_server
+role :assets_sync_server, shadow_server
 
 # sitemap_generator
 # after "deploy", "deploy:sitemap:create"
