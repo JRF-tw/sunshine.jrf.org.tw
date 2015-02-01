@@ -27,6 +27,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'therubyracer',  platforms: :ruby
 gem 'jquery-rails'
 gem 'turbolinks'
+gem 'asset_sync'
 
 # background jobs
 gem 'sidekiq'

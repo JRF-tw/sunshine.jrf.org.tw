@@ -1,6 +1,10 @@
 defaults: &defaults
   SECRET_KEY_BASE: daskdjaslkjdsalkdj12341234
   host: localhost
+  assets_host: localhost:3000
+  asset_sync:
+    bucket: myapp.5fpro.com
+    region: us-east-1
   redis:
     url: redis://127.0.0.1:6379/0
   dalli:

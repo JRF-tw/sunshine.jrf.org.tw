@@ -46,6 +46,10 @@ GEM
       activerecord (>= 3.2, <= 4.3)
       rake (~> 10.4)
     arel (5.0.1.20140414130214)
+    asset_sync (1.1.0)
+      activemodel
+      fog (>= 1.8.0)
+      unf
     awesome_print (1.6.1)
     aws-sdk (2.0.34)
       aws-sdk-resources (= 2.0.34)
@@ -416,6 +420,9 @@ GEM
     uglifier (2.7.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.6)
     unicorn (4.8.3)
       kgio (~> 2.6)
       rack
@@ -437,6 +444,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord-postgis-adapter
   annotate
+  asset_sync
   awesome_print
   aws-sdk
   aws-sdk-v1
