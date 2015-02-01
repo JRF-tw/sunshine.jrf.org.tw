@@ -86,3 +86,6 @@ First Use This Template App
   - config/deploy/production.rb
   - config/deploy/staging.rb
   - config/unicorn/nginx.conf.example
+- rollbar
+  - config/initializers/rollbar.rb
+  - config/deploy.rb

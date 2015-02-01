@@ -98,3 +98,6 @@ gem 'aws-sdk'
 
 # unicorn
 gem 'unicorn'
+
+# system mionitor
+gem 'rollbar'

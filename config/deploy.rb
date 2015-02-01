@@ -34,6 +34,11 @@ set :linked_dirs, fetch(:linked_dirs, []).push('bin', 'log', 'tmp/pids', 'tmp/ca
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
+# Rollbar deployment log
+# set :rollbar_token, 'abcdabcd'
+# set :rollbar_env, Proc.new { fetch :stage }
+# set :rollbar_role, Proc.new { :db }
+
 namespace :deploy do
 
   after :restart, :clear_cache do
