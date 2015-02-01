@@ -91,3 +91,7 @@ First Use This Template App
   - config/deploy.rb
 - newrelic
   - congif/newrelic.yml
+- admin sidebar menu
+  - app/helpers/admin_menu_helper.rb
+- SEO
+  - app/helpers/meta_tag_helper.rb
