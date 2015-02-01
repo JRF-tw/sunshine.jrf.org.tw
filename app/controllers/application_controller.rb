@@ -4,4 +4,15 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   include MetaTagHelper
+
+  before_filter :http_auth_for_staging
+
+  private
+
+  def http_auth_for_staging
+    return unless Rails.env.staging?
+    authenticate_or_request_with_http_basic do |username, password|
+      username == "myapp" && password == "myapp"
+    end
+  end
 end
