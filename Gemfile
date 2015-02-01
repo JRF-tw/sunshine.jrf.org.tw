@@ -104,3 +104,6 @@ gem 'unicorn'
 # system mionitor
 gem 'rollbar'
 gem 'newrelic_rpm'
+
+# front-end
+gem 'jquery-ui-rails'

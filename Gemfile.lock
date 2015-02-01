@@ -249,6 +249,8 @@ GEM
     jquery-rails (3.1.2)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
+    jquery-ui-rails (5.0.3)
+      railties (>= 3.2.16)
     json (1.8.2)
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
@@ -468,6 +470,7 @@ DEPENDENCIES
   http_logger
   jbuilder (~> 2.0)
   jquery-rails
+  jquery-ui-rails
   kaminari
   mini_magick
   nested_form
