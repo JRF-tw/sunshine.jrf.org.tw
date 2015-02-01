@@ -1,5 +1,5 @@
 defaults: &defaults
-  SECRET_KEY_BASE: abcdefghijklmnopqustuvwxyz
+  SECRET_KEY_BASE: daskdjaslkjdsalkdj12341234
   host: localhost
   redis:
     url: redis://127.0.0.1:6379/0
@@ -17,11 +17,15 @@ defaults: &defaults
       password: 
       pool_size: 1
   aws:
-    access_key_id: 'abcdabcd'
-    secret_access_key: 'abcdabcd'
+    access_key_id: abcdabcd
+    secret_access_key: abcdabcd
   sidekiq:
     url: redis://127.0.0.1:6379/0
     namespace: myapp
+  carrierwave:
+    region: us-east-1
+    bucket: myapp.5fpro.com
+    host: myapp.5fpro.com.s3-website-us-east-1.amazonaws.com
 
 development:
   <<: *defaults

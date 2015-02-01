@@ -32,12 +32,13 @@ gem 'jbuilder', '~> 2.0'
 gem 'sidekiq'
 gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'sidekiq-limit_fetch'
+gem 'whenever'
 
 # file upload
-# gem 'carrierwave'
-# gem 'mini_magick'
-# gem 'fog'
-# gem 'carrierwave_backgrounder'
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog'
+gem 'carrierwave_backgrounder'
 
 # soft delete
 # gem 'paranoia'
@@ -97,4 +98,3 @@ gem 'aws-sdk'
 
 # unicorn
 gem 'unicorn'
-gem 'whenever'
