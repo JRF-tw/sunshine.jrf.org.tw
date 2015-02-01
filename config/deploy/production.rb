@@ -1,15 +1,31 @@
 set :deploy_to, '/home/apps/myapp'
 set :rails_env, 'production'
 set :branch, ENV["BR"] || 'master'
+set :ssh_options, {
+  user: 'apps'
+}
 # Simple Role Syntax
 # ==================
 # Supports bulk-adding hosts to roles, the primary server in each group
 # is considered to be the first unless any hosts have the primary
 # property set.  Don't declare `role :all`, it's a meta role.
 
-role :app, %w{apps@myapp.5fpro.com}
-role :web, %w{apps@myapp.5fpro.com}
-role :db, %w{apps@myapp.5fpro.com}
+
+require "aws-sdk"
+AWS.config(
+  access_key_id:     "",
+  secret_access_key: "",
+  region:            "ap-northeast-1"
+)
+lb_name = ""
+servers = AWS::ELB.new.load_balancers[lb_name].instances.map(&:ip_address)
+
+shadow_server = "myapp.5fpro.com"
+role :app,             servers
+role :web,             servers
+role :db,              shadow_server
+role :whenever_server, shadow_server
+role :sidekiq_server,  shadow_server
 
 
 # Extended Server Syntax

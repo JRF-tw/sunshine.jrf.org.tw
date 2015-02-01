@@ -3,7 +3,7 @@
 
 namespace :load do
   task :defaults do
-    # set :whenever_roles,        ->{ :db }
+    set :whenever_roles,        ->{ :whenever_server }
     # set :whenever_command,      ->{ [:bundle, :exec, :whenever] }
     # set :whenever_command_environment_variables, ->{ {} }
     # set :whenever_identifier,   ->{ fetch :application }

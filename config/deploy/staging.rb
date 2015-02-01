@@ -1,15 +1,21 @@
 set :deploy_to, '/home/apps/myapp'
 set :rails_env, 'staging'
 set :branch, ENV["BR"] || 'develop'
+set :ssh_options, {
+  user: 'apps'
+}
 # Simple Role Syntax
 # ==================
 # Supports bulk-adding hosts to roles, the primary server in each group
 # is considered to be the first unless any hosts have the primary
 # property set.  Don't declare `role :all`, it's a meta role.
 
-role :app, %w{apps@myapp.5fpro.com}
-role :web, %w{apps@myapp.5fpro.com}
-role :db, %w{apps@myapp.5fpro.com}
+server = "myapp.5fpro.com"
+role :app,             server
+role :web,             server
+role :db,              server
+role :whenever_server, server
+role :sidekiq_server,  server
 
 
 # Extended Server Syntax
