@@ -8,6 +8,7 @@ class Admin::BaseController < ApplicationController
 
   def index
     @admin_page_title = "Admin"
+    set_meta(title: "Myapp Admin")
   end
 
   private

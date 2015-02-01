@@ -268,6 +268,8 @@ GEM
     lumberjack (1.0.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    meta-tags (2.0.0)
+      actionpack (>= 3.0.0)
     method_source (0.8.2)
     mime-types (2.4.3)
     mini_magick (4.2.0)
@@ -477,6 +479,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   kaminari
+  meta-tags
   mini_magick
   nested_form
   newrelic_rpm
