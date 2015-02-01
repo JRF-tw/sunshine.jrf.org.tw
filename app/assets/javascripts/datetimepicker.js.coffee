@@ -1,3 +1,7 @@
+#= require jquery-ui/datepicker
+#= require jquery-ui/slider
+#= require jquery.timepicker
+
 $(document).ready ->
   $('[data-datepicker]').datepicker dateFormat: 'yy-mm-dd'
   return

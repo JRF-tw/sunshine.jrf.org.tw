@@ -1,0 +1,6 @@
+ul.nav.btn-group
+  li.btn.btn-inverse
+    - if user_signed_in?
+      = link_to( destroy_user_session_path, :method => :delete) do
+        i.icon.icon-share-alt
+        span.text= "Sign Out"

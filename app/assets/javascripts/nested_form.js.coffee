@@ -1,3 +1,4 @@
+#= require jquery_nested_form
 $(document).on 'nested:fieldAdded', (event) ->
   # this field was just inserted into your form
   field = event.field

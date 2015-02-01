@@ -1,0 +1,33 @@
+doctype 5
+html
+  head
+    title Unicorn Admin
+    meta content="width=device-width, initial-scale=1.0" name="viewport"
+    = stylesheet_link_tag    "admin", media: 'all'
+    = javascript_include_tag "admin"
+    = csrf_meta_tags
+  body
+    #header
+      h1= link_to "Unicorn Admin", admin_root_path
+    #user-nav.navbar.navbar-inverse
+      = render partial: "admin/base/nav"
+    #sidebar
+      = render partial: "admin/base/sidebar_menu" if user_signed_in?
+
+    #content
+      #content-header
+        h1= @admin_page_title
+        .btn-group= yield :btns
+      #breadcrumb
+        /= render_crumbs separator: ' '
+
+      .container-fluid
+        .row-fluid
+          - flash.each do |k, message|
+            div class= "alert fade in alert-#{k}"
+              a.close data-dismiss="alert" href="#"
+              = message
+          = yield
+        .row-fluid
+          #footer.span12
+            | Footer

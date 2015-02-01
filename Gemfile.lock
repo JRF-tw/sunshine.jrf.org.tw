@@ -69,6 +69,8 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-sass (2.3.2.2)
+      sass (~> 3.2)
     builder (3.2.2)
     capistrano (3.4.0)
       i18n
@@ -452,6 +454,7 @@ DEPENDENCIES
   aws-sdk-v1
   better_errors
   binding_of_caller
+  bootstrap-sass (~> 2.3)
   capistrano-rails
   capistrano-rvm
   capistrano-sidekiq
