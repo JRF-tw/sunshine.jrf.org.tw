@@ -89,3 +89,5 @@ First Use This Template App
 - rollbar
   - config/initializers/rollbar.rb
   - config/deploy.rb
+- newrelic
+  - congif/newrelic.yml
