@@ -1,5 +1,6 @@
 def connect_to_redis!
   Redis.current = Redis.new(Setting.redis)
+  Redis.current.client.reconnect
 end
 
 connect_to_redis!
