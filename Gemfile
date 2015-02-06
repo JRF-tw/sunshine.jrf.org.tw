@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 2.0'
 # gem 'turbolinks'
 
 # background jobs
-gem 'sidekiq', '3.3.0'
+gem 'sidekiq'
 gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'sidekiq-limit_fetch'
 gem 'whenever'
