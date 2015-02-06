@@ -1,0 +1,3 @@
+= admin_widget_box "New User", icon: :pencil do
+  = simple_form_for @user, as: :user, wrapper: :admin do |f|
+    = render partial: "form", object: f, as: :f

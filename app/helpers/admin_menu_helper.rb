@@ -7,7 +7,8 @@ module AdminMenuHelper
         },
         icon: "star"
       },
-      "Menu #2" => { url: url_for(q: 789), icon: "pencil", match: /q=789/ }
+      "Menu #2" => { url: url_for(q: 789), icon: "pencil", match: /q=789/ },
+      "Users"   => { url: admin_users_path, icon: "user", match: /\/admin\/users/ }
     }
   end
 

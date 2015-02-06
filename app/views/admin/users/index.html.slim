@@ -1,0 +1,29 @@
+= admin_widget_box "Users", icon: :pencil do
+  .dataTables_wrapper
+    div
+      .dataTables_length
+        = link_to "New User", new_admin_user_path, class: "btn btn-primary btn-mini"
+    table.table.table-bordered.table-striped.table-hover
+      thead
+        tr
+          th= "#"
+          th= "Name"
+          th= "Email"
+          th= "Confirmed"
+          th= "actions"
+      tbody
+        - @users.each do |user|
+          tr
+            td= user.id
+            td= user.name
+            td= user.email
+            td
+              = "Y" if user.try(:confirmed?)
+            td
+              = link_to "show", admin_user_path(user), class: "btn btn-mini"
+              | &nbsp;
+              = link_to "edit", edit_admin_user_path(user), class: "btn btn-mini btn-success"
+              | &nbsp;
+              = link_to "delete", admin_user_path(user), class: "btn btn-mini btn-danger", method: :delete, "data-confirm" => "Delete?"
+    .ui-toolbar.ui-widget-header
+      = paginate @users, theme: :admin

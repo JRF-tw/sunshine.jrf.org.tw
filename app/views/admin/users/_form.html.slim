@@ -1,0 +1,6 @@
+= f.input :name
+= f.input :email
+= f.input :password, as: :password if f.object.new_record?
+= f.input :admin, as: :boolean
+.form-actions
+  = f.submit class: "btn btn-primary"

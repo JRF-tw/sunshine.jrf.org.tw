@@ -1,0 +1,26 @@
+- content_for :btns do
+  = link_to "Back", admin_users_path, class: "btn btn-large"
+= admin_widget_box "User ##{@user.id}", icon: :th do
+  table.table.table-bordered.table-striped.table-hover
+    tbody
+      tr
+        td= "ID"
+        td= @user.id
+      tr
+        td= "Name"
+        td= @user.name
+      tr
+        td= "Email"
+        td= @user.email
+      tr
+        td= "Admin"
+        td= "Y" if @user.admin?
+      tr
+        td= "Confirmed"
+        td= "Y" if @user.confirmed?
+      tr
+        td= "last_sign_in_at"
+        td= @user.last_sign_in_at
+      tr
+        td= "last_sign_in_ip"
+        td= @user.last_sign_in_ip

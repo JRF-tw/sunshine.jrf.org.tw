@@ -98,14 +98,14 @@ SimpleForm.setup do |config|
   # config.item_wrapper_class = nil
 
   # How the label text should be generated altogether with the required text.
-  # config.label_text = lambda { |label, required, explicit_label| "#{required} #{label}" }
+  config.label_text = lambda { |label, required, explicit_label| "#{label} #{required}" }
 
   # You can define the class to use on all labels. Default is nil.
-  # config.label_class = nil
+  config.label_class = "control-label"
 
   # You can define the default class to be used on forms. Can be overriden
   # with `html: { :class }`. Defaulting to none.
-  # config.default_form_class = nil
+  config.default_form_class = "form-horizontal"
 
   # You can define which elements should obtain additional classes
   # config.generate_additional_classes_for = [:wrapper, :label, :input]
@@ -163,15 +163,4 @@ SimpleForm.setup do |config|
 
   # Defines which i18n scope will be used in Simple Form.
   # config.i18n_scope = 'simple_form'
-  config.wrappers :unicorn_admin, :tag => :div, :class => 'control-group' do |b|
-    b.use :placeholder
-    b.use :label, :wrap_with => { :class => 'control-label', :tag => false }
-    b.wrapper :tag => :div, :class => 'controls' do |ba|
-      ba.use :input
-      ba.use :hint, :wrap_with => { :tag => :span, :class => 'help-block' }
-      ba.use :error, :wrap_with => { :tag => :span, :class => 'help-inline' }
-    end
-  end
-
-
 end

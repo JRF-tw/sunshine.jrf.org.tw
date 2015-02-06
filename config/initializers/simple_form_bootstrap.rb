@@ -127,10 +127,20 @@ SimpleForm.setup do |config|
   # to learn about the different styles for forms and inputs,
   # buttons and other elements.
   config.default_wrapper = :vertical_form
-  config.wrapper_mappings = {
-    check_boxes: :vertical_radio_and_checkboxes,
-    radio_buttons: :vertical_radio_and_checkboxes,
-    file: :vertical_file_input,
-    boolean: :vertical_boolean,
-  }
+  # config.wrapper_mappings = {
+  #   check_boxes: :vertical_radio_and_checkboxes,
+  #   radio_buttons: :vertical_radio_and_checkboxes,
+  #   file: :vertical_file_input,
+  #   boolean: :vertical_boolean,
+  # }
+
+  config.wrappers :admin, :tag => :div, :class => 'control-group' do |b|
+    b.use :placeholder
+    b.use :label, class: 'control-label'
+    b.wrapper :tag => :div, :class => 'controls' do |ba|
+      ba.use :input
+      ba.use :hint,  wrap_with: { tag: 'span', class: 'help-block' }
+      ba.use :error, wrap_with: { tag: 'span', class: 'help-inline' }
+    end
+  end
 end
