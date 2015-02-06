@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 2.0'
 # gem 'turbolinks'
 
 # background jobs
-gem 'sidekiq'
+gem 'sidekiq', '3.3.0'
 gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'sidekiq-limit_fetch'
 gem 'whenever'
@@ -94,6 +94,7 @@ gem 'devise'
 gem 'devise-async'
 
 # aws
+gem 'aws-sdk-v1'
 gem 'aws-sdk'
 
 # unicorn

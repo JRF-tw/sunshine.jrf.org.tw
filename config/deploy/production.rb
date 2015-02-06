@@ -11,6 +11,7 @@ set :ssh_options, {
 # property set.  Don't declare `role :all`, it's a meta role.
 
 
+require "aws-sdk-v1"
 require "aws-sdk"
 AWS.config(
   access_key_id:     "",
