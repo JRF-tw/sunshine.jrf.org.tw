@@ -8,6 +8,8 @@ namespace :dev do
 
   desc "generate fake data for development"
   task :fake => :environment do
+    email = "admin@5fpro.com"
+    user = User.find_by(email: email) || FactoryGirl.create(:user, email: email, password: "12341234", admin: true)
   end
   
 end
