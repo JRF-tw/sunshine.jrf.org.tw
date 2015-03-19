@@ -8,7 +8,7 @@ Bundler.require(*Rails.groups)
 
 module Myapp
   class Application < Rails::Application
-    config.action_mailer.delivery_method = :aws_ses
+    config.action_mailer.delivery_method = :amazon_ses
 
     # disable some file generators
     config.generators.stylesheets = false
