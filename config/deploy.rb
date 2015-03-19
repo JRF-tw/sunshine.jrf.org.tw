@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.3.5'
+lock '3.4.0'
 
 set :application, 'myapp'
 set :repo_url, 'git@github.com:5fpro/rails4-template.git'
