@@ -5,8 +5,9 @@ module SidekiqHelper
     Sidekiq::ScheduledSet.new.map(&:delete)
   end
 
-  def fetch_sidekiq_jobs(worker_klass, method = nil, scheduled: false)
-    queue = method ? "default" : worker_klass.get_sidekiq_options["queue"]
+  def fetch_sidekiq_jobs(worker_klass, method = nil, scheduled: false, queue: nil)
+    queue ||= worker_klass.get_sidekiq_options["queue"] rescue nil
+    queue ||= "default"
     ( scheduled ? Sidekiq::ScheduledSet.new : Sidekiq::Queue.new(queue) ).to_a.select do |j|
       if method # delay extension
         j = YAML::load(j.args.first)
@@ -21,12 +22,12 @@ module SidekiqHelper
     ( scheduled ? Sidekiq::ScheduledSet.new : Sidekiq::Queue.new(queue) ).to_a.first
   end
 
-  def change_sidekiq_jobs_size_of(worker_klass, method = nil, scheduled: false)
-    change{ fetch_sidekiq_jobs(worker_klass, method, scheduled: scheduled).size }
+  def change_sidekiq_jobs_size_of(worker_klass, method = nil, scheduled: false, queue: nil)
+    change{ fetch_sidekiq_jobs(worker_klass, method, scheduled: scheduled, queue: queue).size }
   end
 
   def perform_sidekiq_job(sidekiq_job)
     sidekiq_job.klass.constantize.new.perform(*sidekiq_job.args)
   end
-  
+
 end
