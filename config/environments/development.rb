@@ -35,6 +35,4 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   config.cache_store = :dalli_store, *(Setting.dalli.servers + [ Setting.dalli.options.symbolize_keys ])
-
-  config.action_mailer.default_url_options = { host: Setting.host }
 end
