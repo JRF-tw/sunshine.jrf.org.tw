@@ -1,4 +1,4 @@
-set :deploy_to, '/home/apps/myapp'
+set :deploy_to, '/home/apps/election2016-official'
 set :rails_env, 'staging'
 set :branch, ENV["BR"] || 'develop'
 set :ssh_options, {

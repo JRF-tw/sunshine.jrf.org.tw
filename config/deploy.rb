@@ -1,8 +1,8 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-set :application, 'myapp'
-set :repo_url, 'git@github.com:5fpro/rails4-template.git'
+set :application, 'election2016-official'
+set :repo_url, 'git@github.com:5fpro/election2016-official.git'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
@@ -73,3 +73,7 @@ end
 #     end
 #   end
 # end
+
+set :rollbar_token, '60e3ef75051c4c798cfb7fbae569e2df'
+set :rollbar_env, Proc.new { fetch :stage }
+set :rollbar_role, Proc.new { :db }

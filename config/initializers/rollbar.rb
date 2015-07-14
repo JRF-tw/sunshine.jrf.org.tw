@@ -3,10 +3,10 @@ Rollbar.configure do |config|
   # Without configuration, Rollbar is enabled in all environments.
   # To disable in specific environments, set config.enabled=false.
   
-  config.access_token = 'abcdabcd'
+  config.access_token = 'c52b1a86ca1c414982e514c3a862f21b'
 
-  # Here we'll disable in 'test':
-  if Rails.env.test?
+  # Here we'll disable in 'test' & 'development':
+  if Rails.env.test? || Rails.env.development?
     config.enabled = false
   end
   
@@ -46,7 +46,7 @@ Rollbar.configure do |config|
   # config.use_sucker_punch
 
   # Enable delayed reporting (using Sidekiq)
-  config.use_sidekiq
+  # config.use_sidekiq
   # You can supply custom Sidekiq options:
-  config.use_sidekiq 'queue' => 'default'
+  # config.use_sidekiq 'queue' => 'default'
 end
