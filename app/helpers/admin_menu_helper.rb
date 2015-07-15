@@ -1,14 +1,15 @@
 module AdminMenuHelper
   def admin_menus
-    { "Menu #1" => { 
-        submenu: { 
-          "Submenu #1" => { url: url_for(q: 123), match: /q=123/ },
-          "Submenu #2" => { url: url_for(q: 456), match: /q=456/ }
-        },
-        icon: "star"
-      },
-      "Menu #2" => { url: url_for(q: 789), icon: "pencil", match: /q=789/ },
-      "Users"   => { url: admin_users_path, icon: "user", match: /\/admin\/users/ }
+    {
+      # "Menu #1" => { 
+      #   submenu: { 
+      #     "Submenu #1" => { url: url_for(q: 123), match: /q=123/ },
+      #     "Submenu #2" => { url: url_for(q: 456), match: /q=456/ }
+      #   },
+      #   icon: "star"
+      # },
+      # "Menu #2" => { url: url_for(q: 789), icon: "pencil", match: /q=789/ },
+      "後台使用者管理"   => { url: admin_users_path, match: /\/admin\/users/ }
     }
   end
 

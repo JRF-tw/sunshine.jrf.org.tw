@@ -3,12 +3,12 @@ class Admin::BaseController < ApplicationController
   before_filter :authenticate_user!
   before_filter :authenticate_admin_user!
   before_filter do
-    add_crumb "Admin", admin_root_path
+    add_crumb "首頁", admin_root_path
   end
 
   def index
-    @admin_page_title = "Admin"
-    set_meta(title: "Myapp Admin")
+    @admin_page_title = "首頁"
+    set_meta(title: "首頁")
   end
 
   private
