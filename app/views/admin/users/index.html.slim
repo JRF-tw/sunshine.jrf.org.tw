@@ -1,16 +1,15 @@
-= admin_widget_box "Users", icon: :pencil do
+= admin_widget_box "後台使用者管理", icon: :pencil do
   .dataTables_wrapper
     div
       .dataTables_length
-        = link_to "New User", new_admin_user_path, class: "btn btn-primary btn-mini"
+        = link_to "新增後台使用者", new_admin_user_path, class: "btn btn-primary btn-mini"
     table.table.table-bordered.table-striped.table-hover
       thead
         tr
-          th= "#"
-          th= "Name"
-          th= "Email"
-          th= "Confirmed"
-          th= "actions"
+          th #
+          th 姓名
+          th Email
+          th 
       tbody
         - @users.each do |user|
           tr
@@ -18,12 +17,10 @@
             td= user.name
             td= user.email
             td
-              = "Y" if user.try(:confirmed?)
-            td
-              = link_to "show", admin_user_path(user), class: "btn btn-mini"
+              = link_to "資訊", admin_user_path(user), class: "btn btn-mini"
               | &nbsp;
-              = link_to "edit", edit_admin_user_path(user), class: "btn btn-mini btn-success"
+              = link_to "編輯", edit_admin_user_path(user), class: "btn btn-mini btn-success"
               | &nbsp;
-              = link_to "delete", admin_user_path(user), class: "btn btn-mini btn-danger", method: :delete, "data-confirm" => "Delete?"
+              = link_to "刪除", admin_user_path(user), class: "btn btn-mini btn-danger", method: :delete, "data-confirm" => "確認刪除後台使用者 - #{user.name}？"
     .ui-toolbar.ui-widget-header
       = paginate @users, theme: :admin

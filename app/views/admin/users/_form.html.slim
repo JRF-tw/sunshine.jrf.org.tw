@@ -1,6 +1,16 @@
-= f.input :name
+= f.input :name, label: '姓名'
 = f.input :email
-= f.input :password, as: :password if f.object.new_record?
+- if f.object.new_record?
+  = f.input :password, as: :password 
+- elsif f.object.id == current_user.id
+  .control-group
+    label.control-label 新密碼
+    .controls= f.password_field :password, class: 'text_field'
+  .control-group
+    label.control-label 新密碼確認
+    .controls= f.password_field :password_confirmation, class: 'text_field'
 = f.input :admin, as: :boolean
 .form-actions
-  = f.submit class: "btn btn-primary"
+  = f.submit '送出', class: "btn btn-primary"
+  = ' '
+  = link_to "回到後台使用者列表", admin_users_path, class: "btn"
