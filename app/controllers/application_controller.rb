@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
 
   before_filter :http_auth_for_staging
 
+  layout :layout_by_resource
+
   private
 
   def http_auth_for_staging
@@ -14,5 +16,9 @@ class ApplicationController < ActionController::Base
     authenticate_or_request_with_http_basic do |username, password|
       username == "myapp" && password == "myapp"
     end
+  end
+
+  def layout_by_resource
+    "admin" if devise_controller?
   end
 end

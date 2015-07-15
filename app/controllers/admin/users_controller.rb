@@ -1,31 +1,31 @@
 class Admin::UsersController < Admin::BaseController
-  before_filter :user
-  before_filter(except: [:index]){ add_crumb("Users", admin_users_path) }
+  before_action :user
+  before_action(except: [:index]){ add_crumb("後台使用者列表", admin_users_path) }
 
   def index
     @users = User.all.page(params[:page]).per(10)
-    @admin_page_title = "Users"
+    @admin_page_title = "後台使用者列表"
     add_crumb @admin_page_title, "#"
   end
 
   def show
-    @admin_page_title = "##{user.id}"
+    @admin_page_title = "後台使用者 - #{user.name} 的資訊"
     add_crumb @admin_page_title, "#"
   end
 
   def new
-    @admin_page_title = "New User"
+    @admin_page_title = "新增後台使用者"
     add_crumb @admin_page_title, "#"
   end
 
   def edit
-    @admin_page_title = "Edit User"
+    @admin_page_title = "編輯後台使用者"
     add_crumb @admin_page_title, "#"
   end
 
   def create
     if user.save
-      redirect_to admin_user_path(user), flash: { success: "user created" }
+      redirect_to admin_user_path(user), flash: { success: "後台使用者 - #{user.name} 已新增" }
     else
       render :new, flash: { error: user.errors.full_messages }
     end
@@ -33,7 +33,7 @@ class Admin::UsersController < Admin::BaseController
 
   def update
     if user.update_attributes(user_params)
-      redirect_to admin_user_path(user), flash: { success: "user updated" }
+      redirect_to admin_user_path(user), flash: { success: "後台使用者 - #{user.name} 已修改" }
     else
       render :edit, flash: { error: user.errors.full_messages }
     end
@@ -41,7 +41,7 @@ class Admin::UsersController < Admin::BaseController
 
   def destroy
     if user.destroy
-      redirect_to admin_users_path, flash: { success: "user deleted" }
+      redirect_to admin_users_path, flash: { success: "後台使用者 - #{user.name} 已刪除" }
     else
       redirect_to :back, flash: { error: user.errors.full_messages }
     end
