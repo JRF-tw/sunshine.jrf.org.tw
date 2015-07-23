@@ -74,6 +74,6 @@ end
 #   end
 # end
 
-set :rollbar_token, '60e3ef75051c4c798cfb7fbae569e2df'
+set :rollbar_token, '758daa0b26bd4f589ca484d5e1b1d9b3'
 set :rollbar_env, Proc.new { fetch :stage }
 set :rollbar_role, Proc.new { :db }
