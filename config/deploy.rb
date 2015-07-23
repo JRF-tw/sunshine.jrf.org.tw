@@ -1,8 +1,8 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-set :application, 'election2016-official'
-set :repo_url, 'git@github.com:5fpro/election2016-official.git'
+set :application, 'jrf-sunny'
+set :repo_url, 'git@github.com:5fpro/jrf-sunny.git'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call

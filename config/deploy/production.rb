@@ -1,4 +1,4 @@
-set :deploy_to, '/home/apps/election2016-official'
+set :deploy_to, '/home/apps/jrf-sunny'
 set :rails_env, 'production'
 set :branch, ENV["BR"] || 'master'
 set :ssh_options, {

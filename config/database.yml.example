@@ -1,7 +1,7 @@
 development: &default
   adapter: 'postgis'
   encoding: 'unicode'
-  database: 'election_official_development'
+  database: 'jrf_sunny_development'
   host: '127.0.0.1'
   username: 'root'
   password: ''
@@ -10,9 +10,9 @@ development: &default
 
 test: &TEST
   <<: *default
-  database: 'election_official_test'
+  database: 'jrf_sunny_test'
 
 production:
   <<: *default
-  database: 'election_official_production'
+  database: 'jrf_sunny_production'
 
