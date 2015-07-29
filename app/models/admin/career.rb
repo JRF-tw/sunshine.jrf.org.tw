@@ -26,6 +26,8 @@
 #  updated_at          :datetime
 #
 
-class Admin::Career < Career
-
+class Admin::Career < ::Career
+  belongs_to :profile, :class_name => "Admin::Profile"
+  
+  validates_presence_of :profile_id, :career_type
 end

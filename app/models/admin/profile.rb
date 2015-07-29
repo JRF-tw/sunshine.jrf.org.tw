@@ -19,10 +19,15 @@
 #  updated_at         :datetime
 #
 
-class Admin::Profile < Profile
+class Admin::Profile < ::Profile
+  has_many :educations, :class_name => "Admin::Education", :dependent => :destroy
+  has_many :careers, :class_name => "Admin::Career", :dependent => :destroy
+  has_many :licenses, :class_name => "Admin::License", :dependent => :destroy
 
   CURRENT_TYPES = [
     "法官",
     "檢察官"
   ]
+
+  validates_presence_of :name, :current
 end
