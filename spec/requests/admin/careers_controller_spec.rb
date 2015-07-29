@@ -25,7 +25,7 @@ RSpec.describe Admin::CareersController do
 
     it "PUT /admin/profiles/profile.id/careers/123" do
       expect{
-        put "/admin/profiles/#{profile.id}/careers/#{career.id}", career: { career_type: "haha" }
+        put "/admin/profiles/#{profile.id}/careers/#{career.id}", admin_career: { career_type: "haha" }
       }.to change{ career.reload.career_type }.to("haha")
       expect(response).to be_redirect
     end
@@ -38,7 +38,7 @@ RSpec.describe Admin::CareersController do
 
   it "POST /admin/profiles/profile.id/careers" do
     expect{
-      post "/admin/profiles/#{profile.id}/careers", career: FactoryGirl.attributes_for(:career)
+      post "/admin/profiles/#{profile.id}/careers", admin_career: FactoryGirl.attributes_for(:career)
     }.to change{ Career.count }.by(1)
     expect(response).to be_redirect
   end

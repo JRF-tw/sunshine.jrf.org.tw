@@ -1,13 +1,13 @@
 = f.input :name
 = f.input :current, :as => :select, :collection => Admin::Profile::CURRENT_TYPES, :include_blank => "請選擇"
 = f.input :avatar
-= f.input :gender
+= f.input :gender, :as => :select, :collection => Admin::Profile::GENDER_TYPES, :include_blank => "請選擇"
 = f.input :gender_source
 = f.input :birth_year
 = f.input :birth_year_source
 = f.input :stage
 = f.input :stage_source
-= f.input :appointment
+= f.input :appointment, :hint => "非經司法官考試及格者，所具之任用資格。"
 = f.input :appointment_source
 = f.input :memo
 .form-actions

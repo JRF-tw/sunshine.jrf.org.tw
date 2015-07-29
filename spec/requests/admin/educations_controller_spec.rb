@@ -25,7 +25,7 @@ RSpec.describe Admin::EducationsController do
 
     it "PUT /admin/profiles/profile.id/educations/123" do
       expect{
-        put "/admin/profiles/#{profile.id}/educations/#{education.id}", education: { title: "haha" }
+        put "/admin/profiles/#{profile.id}/educations/#{education.id}", admin_education: { title: "haha" }
       }.to change{ education.reload.title }.to("haha")
       expect(response).to be_redirect
     end
@@ -38,7 +38,7 @@ RSpec.describe Admin::EducationsController do
 
   it "POST /admin/profiles/profile.id/educations" do
     expect{
-      post "/admin/profiles/#{profile.id}/educations", education: FactoryGirl.attributes_for(:education)
+      post "/admin/profiles/#{profile.id}/educations", admin_education: FactoryGirl.attributes_for(:education)
     }.to change{ Education.count }.by(1)
     expect(response).to be_redirect
   end

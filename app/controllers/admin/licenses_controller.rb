@@ -58,6 +58,6 @@ class Admin::LicensesController < Admin::BaseController
   end
 
   def license_params
-    params.fetch(:license, {}).permit(:profile_id, :license_type, :unit, :title, :publish_at, :source, :source_link, :origin_desc, :memo)
+    params.fetch(:admin_license, {}).permit(:profile_id, :license_type, :unit, :title, :publish_at, :source, :source_link, :origin_desc, :memo)
   end
 end

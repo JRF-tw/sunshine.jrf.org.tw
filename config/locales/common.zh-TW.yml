@@ -5,6 +5,7 @@ zh-TW:
       education: "學經歷"
       career: "職務經歷"
       license: "專業證書"
+      award: "獎勵記錄"
     attributes:
       profile:
         name: "姓名"
@@ -49,6 +50,15 @@ zh-TW:
         license_type: "專業證照類型"
         unit: "服務單位"
         title: "職稱"
+        publish_at: "公告日期"
+        source: "資料來源"
+        source_link: "資料來源連結"
+        origin_desc: "原始描述"
+        memo: "備註"
+      award:
+        award_type: "授獎種類"
+        unit: "授獎機關"
+        content: "授獎事由"
         publish_at: "公告日期"
         source: "資料來源"
         source_link: "資料來源連結"

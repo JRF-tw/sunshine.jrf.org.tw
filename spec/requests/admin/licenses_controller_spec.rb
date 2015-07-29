@@ -25,7 +25,7 @@ RSpec.describe Admin::LicensesController do
 
     it "PUT /admin/profiles/profile.id/licenses/123" do
       expect{
-        put "/admin/profiles/#{profile.id}/licenses/#{license.id}", license: { license_type: "keke" }
+        put "/admin/profiles/#{profile.id}/licenses/#{license.id}", admin_license: { license_type: "keke" }
       }.to change{ license.reload.license_type }.to("keke")
       expect(response).to be_redirect
     end
@@ -38,7 +38,7 @@ RSpec.describe Admin::LicensesController do
 
   it "POST /admin/profiles/profile.id/licenses" do
     expect{
-      post "/admin/profiles/#{profile.id}/licenses", license: FactoryGirl.attributes_for(:license)
+      post "/admin/profiles/#{profile.id}/licenses", admin_license: FactoryGirl.attributes_for(:license)
     }.to change{ License.count }.by(1)
     expect(response).to be_redirect
   end

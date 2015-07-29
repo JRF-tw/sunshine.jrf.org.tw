@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       resources :educations
       resources :careers
       resources :licenses
+      resources :awards
     end
     resources :users
   end

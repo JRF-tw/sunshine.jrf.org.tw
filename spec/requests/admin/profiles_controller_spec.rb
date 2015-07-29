@@ -23,7 +23,7 @@ RSpec.describe Admin::ProfilesController do
 
     it "PUT /admin/profiles/123" do
       expect{
-        put "/admin/profiles/#{profile.id}", profile: { name: "haha" }
+        put "/admin/profiles/#{profile.id}", admin_profile: { name: "haha" }
       }.to change{ profile.reload.name }.to("haha")
       expect(response).to be_redirect
     end
@@ -36,7 +36,7 @@ RSpec.describe Admin::ProfilesController do
 
   it "POST /admin/profiles" do
     expect{
-      post "/admin/profiles", profile: FactoryGirl.attributes_for(:profile)
+      post "/admin/profiles", admin_profile: FactoryGirl.attributes_for(:profile)
     }.to change{ Profile.count }.by(1)
     expect(response).to be_redirect
   end

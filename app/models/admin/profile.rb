@@ -29,5 +29,11 @@ class Admin::Profile < ::Profile
     "檢察官"
   ]
 
+  GENDER_TYPES = [
+    "男",
+    "女",
+    "其他"
+  ]
+
   validates_presence_of :name, :current
 end
