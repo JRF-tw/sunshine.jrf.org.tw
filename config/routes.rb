@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :profiles do
       resources :educations
       resources :careers
+      resources :licenses
     end
     resources :users
   end

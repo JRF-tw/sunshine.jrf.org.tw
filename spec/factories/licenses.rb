@@ -21,6 +21,7 @@ FactoryGirl.define do
     profile do
       FactoryGirl.create :profile
     end
+    license_type "haha"
     unit "foo"
     title "bar"
   end

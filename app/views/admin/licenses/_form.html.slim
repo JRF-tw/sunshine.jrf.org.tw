@@ -1,0 +1,13 @@
+= f.input :license_type
+= f.input :unit
+= f.input :title
+= f.input :publish_at, as: "string", hint: "半型純數字，民國，格式：YY/MM/DD"
+= f.input :source
+= f.input :source_link
+= f.input :origin_desc
+= f.input :memo
+.form-actions
+  = f.submit "送出", class: "btn btn-primary"
+  = " "
+  = link_to admin_profile_licenses_path(@profile), :class => "btn" do
+    = "回到#{@profile.name}的專業證書列表"

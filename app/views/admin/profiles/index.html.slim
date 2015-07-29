@@ -31,6 +31,8 @@
               | &nbsp;
               = link_to "職務經歷管理", admin_profile_careers_path(profile), class: "btn btn-mini btn-primary"
               | &nbsp;
+              = link_to "專業證書管理", admin_profile_licenses_path(profile), class: "btn btn-mini btn-primary"
+              | &nbsp;
               = link_to "刪除", admin_profile_path(profile), class: "btn btn-mini btn-danger", method: :delete, "data-confirm" => "確認刪除個人檔案 - #{profile.name}？"
     .ui-toolbar.ui-widget-header
       = paginate @profiles, theme: :admin

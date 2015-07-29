@@ -4,6 +4,7 @@ zh-TW:
       profile: "個人檔案"
       education: "學經歷"
       career: "職務經歷"
+      license: "專業證書"
     attributes:
       profile:
         name: "姓名"
@@ -39,6 +40,15 @@ zh-TW:
         new_pt: "新兼任"
         start_at: "開始日期"
         end_at: "結束日期"
+        publish_at: "公告日期"
+        source: "資料來源"
+        source_link: "資料來源連結"
+        origin_desc: "原始描述"
+        memo: "備註"
+      license:
+        license_type: "專業證照類型"
+        unit: "服務單位"
+        title: "職稱"
         publish_at: "公告日期"
         source: "資料來源"
         source_link: "資料來源連結"
