@@ -21,28 +21,28 @@
         td 性別
         td
           = @profile.gender
-          - if @profile.source.gender.present?
+          - if @profile.gender_source.present?
             br
             = "來源：#{@profile.gender_source}"
       tr
         td 出生年
         td
           = @profile.birth_year
-          - if @profile.source.birth_year.present?
+          - if @profile.birth_year_source.present?
             br
             = "來源：#{@profile.birth_year_source}"
       tr
         td 司訓所期別
         td
           = @profile.stage
-          - if @profile.source.stage.present?
+          - if @profile.stage_source.present?
             br
             = "來源：#{@profile.stage_source}"
       tr
         td 任用資格
         td
           = @profile.appointment
-          - if @profile.source.appointment.present?
+          - if @profile.appointment_source.present?
             br
             = "來源：#{@profile.appointment_source}"
       tr
