@@ -1,0 +1,28 @@
+= admin_widget_box "#{@profile.name}的學經歷列表", icon: :pencil do
+  .dataTables_wrapper
+    div
+      .dataTables_length
+        = link_to "新增#{@profile.name}的學經歷", new_admin_profile_education_path(@profile), class: "btn btn-primary btn-mini"
+    table.table.table-bordered.table-striped.table-hover
+      thead
+        tr
+          th #
+          th 學經歷
+          th 開始日期
+          th 結束日期
+          th 備註
+          th
+      tbody
+        - @educations.each do |education|
+          tr
+            td= education.id
+            td= education.title
+            td= education.start_at
+            td= education.end_at
+            td= education.memo
+            td
+              = link_to "編輯", edit_admin_profile_education_path(@profile, education), class: "btn btn-mini btn-success"
+              | &nbsp;
+              = link_to "刪除", admin_profile_education_path(@profile, education), class: "btn btn-mini btn-danger", method: :delete, "data-confirm" => "確認刪除#{@profile.name}的學經歷 - #{education.title}？"
+    .ui-toolbar.ui-widget-header
+      = paginate @educations, theme: :admin
