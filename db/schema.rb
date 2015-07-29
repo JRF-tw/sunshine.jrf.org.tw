@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728071846) do
+ActiveRecord::Schema.define(version: 20150729065640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,22 @@ ActiveRecord::Schema.define(version: 20150728071846) do
   end
 
   add_index "educations", ["profile_id"], :name => "index_educations_on_profile_id"
+
+  create_table "licenses", force: true do |t|
+    t.integer  "profile_id"
+    t.string   "license_type"
+    t.string   "unit"
+    t.string   "title"
+    t.date     "publish_at"
+    t.text     "source"
+    t.string   "source_link"
+    t.text     "origin_desc"
+    t.text     "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "licenses", ["profile_id"], :name => "index_licenses_on_profile_id"
 
   create_table "profiles", force: true do |t|
     t.string   "name"

@@ -23,9 +23,6 @@ class Profile < ActiveRecord::Base
 
   has_many :educations, :dependent => :destroy
   has_many :careers, :dependent => :destroy
-
-  CURRENT_TYPES = [
-    "法官",
-    "檢察官"
-  ]
+  has_many :licenses, :dependent => :destroy
+  
 end

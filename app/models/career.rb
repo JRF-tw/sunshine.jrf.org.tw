@@ -27,6 +27,5 @@
 #
 
 class Career < ActiveRecord::Base
-
   belongs_to :profile
 end
