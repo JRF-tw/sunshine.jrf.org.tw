@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: "base#index"
+    root to: "profiles#index"
+    resources :profiles do
     resources :users
   end
 end

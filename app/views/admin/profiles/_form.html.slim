@@ -1,0 +1,17 @@
+= f.input :name
+= f.input :current, :as => :select, :collection => Admin::Profile::CURRENT_TYPES, :include_blank => "請選擇"
+= f.input :avatar
+= f.input :gender
+= f.input :gender_source
+= f.input :birth_year
+= f.input :birth_year_source
+= f.input :stage
+= f.input :stage_source
+= f.input :appointment
+= f.input :appointment_source
+= f.input :memo
+.form-actions
+  = f.submit "送出", class: "btn btn-primary"
+  = " "
+  = link_to admin_profiles_path, :class => "btn" do
+    | 回到個人檔案列表

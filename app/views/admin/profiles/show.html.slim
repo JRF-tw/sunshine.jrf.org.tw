@@ -1,0 +1,50 @@
+- content_for :btns do
+  = link_to "個人檔案列表", admin_profiles_path, class: "btn btn-large"
+  = link_to "編輯#{@profile.name}的個人檔案", edit_admin_profile_path(@profile), class: "btn btn-large btn-success"
+= admin_widget_box "#{@profile.name}的個人檔案", icon: :th do
+  table.table.table-bordered.table-striped.table-hover
+    tbody
+      tr
+        td
+        td= @profile.id
+      tr
+        td 姓名
+        td= @profile.name
+      tr
+        td 現職
+        td= @profile.current
+      tr
+        td 頭像
+        td
+          = image_tag @profile.avatar if @profile.avatar.present?
+      tr
+        td 性別
+        td
+          = @profile.gender
+          - if @profile.source.gender.present?
+            br
+            = "來源：#{@profile.gender_source}"
+      tr
+        td 出生年
+        td
+          = @profile.birth_year
+          - if @profile.source.birth_year.present?
+            br
+            = "來源：#{@profile.birth_year_source}"
+      tr
+        td 司訓所期別
+        td
+          = @profile.stage
+          - if @profile.source.stage.present?
+            br
+            = "來源：#{@profile.stage_source}"
+      tr
+        td 任用資格
+        td
+          = @profile.appointment
+          - if @profile.source.appointment.present?
+            br
+            = "來源：#{@profile.appointment_source}"
+      tr
+        td 備註
+        td= @profile.memo
