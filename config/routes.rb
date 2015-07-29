@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     root to: "profiles#index"
     resources :profiles do
       resources :educations
+      resources :careers
     end
     resources :users
   end

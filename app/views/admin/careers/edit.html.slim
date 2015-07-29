@@ -1,0 +1,3 @@
+= admin_widget_box "編輯#{@profile.name}的職務經歷", icon: :pencil do
+  = simple_form_for @career, url: admin_profile_career_path(@profile, @career), method: :put, wrapper: :admin do |f|
+    = render partial: "form", object: f, as: :f

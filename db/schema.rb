@@ -11,12 +11,71 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150201093154) do
+ActiveRecord::Schema.define(version: 20150728071846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
   enable_extension "postgis"
+
+  create_table "careers", force: true do |t|
+    t.integer  "profile_id"
+    t.string   "career_type"
+    t.string   "old_unit"
+    t.string   "old_title"
+    t.string   "old_assign_court"
+    t.string   "old_assign_judicial"
+    t.string   "old_pt"
+    t.string   "new_unit"
+    t.string   "new_title"
+    t.string   "new_assign_court"
+    t.string   "new_assign_judicial"
+    t.string   "new_pt"
+    t.date     "start_at"
+    t.date     "end_at"
+    t.date     "publish_at"
+    t.text     "source"
+    t.string   "source_link"
+    t.text     "origin_desc"
+    t.text     "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "careers", ["profile_id"], :name => "index_careers_on_profile_id"
+
+  create_table "educations", force: true do |t|
+    t.integer  "profile_id"
+    t.string   "title"
+    t.text     "content"
+    t.date     "start_at"
+    t.date     "end_at"
+    t.string   "source"
+    t.text     "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "educations", ["profile_id"], :name => "index_educations_on_profile_id"
+
+  create_table "profiles", force: true do |t|
+    t.string   "name"
+    t.string   "current"
+    t.string   "avatar"
+    t.string   "gender"
+    t.string   "gender_source"
+    t.integer  "birth_year"
+    t.string   "birth_year_source"
+    t.integer  "stage"
+    t.string   "stage_source"
+    t.string   "appointment"
+    t.string   "appointment_source"
+    t.text     "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "profiles", ["current"], :name => "index_profiles_on_current"
 
   create_table "users", force: true do |t|
     t.string   "name"
