@@ -8,9 +8,10 @@ Rails.application.routes.draw do
   get '/robots.txt', to: "base#robots", defaults: { format: "text" }
 
   namespace :admin do
-    root to: "base#index"
     root to: "profiles#index"
     resources :profiles do
+      resources :educations
+    end
     resources :users
   end
 end
