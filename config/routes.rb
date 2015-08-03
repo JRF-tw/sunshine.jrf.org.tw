@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       resources :careers
       resources :licenses
       resources :awards
+      resources :punishments
     end
     resources :users
   end
