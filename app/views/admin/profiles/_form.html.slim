@@ -3,7 +3,7 @@
 = f.input :avatar
 = f.input :gender, :as => :select, :collection => Admin::Profile::GENDER_TYPES, :include_blank => "請選擇"
 = f.input :gender_source
-= f.input :birth_year
+= f.input :birth_year, :hint => "請填入民國年"
 = f.input :birth_year_source
 = f.input :stage
 = f.input :stage_source

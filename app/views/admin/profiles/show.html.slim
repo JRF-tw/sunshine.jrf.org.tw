@@ -32,7 +32,7 @@
       tr
         td 出生年
         td
-          = @profile.birth_year
+          = "民國#{@profile.birth_year}年"
           - if @profile.birth_year_source.present?
             br
             = "來源：#{@profile.birth_year_source}"
