@@ -22,7 +22,8 @@ FactoryGirl.define do
     profile do
       FactoryGirl.create :profile
     end
-    title "foo"
+    name "foo"
+    title "bar"
   end
 
 end

@@ -7,6 +7,7 @@ zh-TW:
       license: "專業證書"
       award: "獎勵記錄"
       punishment: "懲處記錄"
+      review: "相關新聞評論"
     attributes:
       profile:
         name: "姓名"
@@ -90,3 +91,14 @@ zh-TW:
         content: "簡述"
         summary: "自定摘要"
         memo: "備註"
+      review:
+        publish_at: "發表日期"
+        name: "報刊名稱"
+        title: "文章標題"
+        content: "文章內容"
+        comment: "說明評論"
+        no: "裁判字號"
+        source: "資料來源"
+        file: "檔案上傳"
+        memo: "備註"
+         
