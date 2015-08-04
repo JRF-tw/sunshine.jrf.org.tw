@@ -26,5 +26,6 @@ class Profile < ActiveRecord::Base
   has_many :licenses, :dependent => :destroy
   has_many :awards, :dependent => :destroy
   has_many :punishments, :dependent => :destroy
+  has_many :reviews, :dependent => :destroy
   
 end

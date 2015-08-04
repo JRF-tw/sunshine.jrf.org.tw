@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150803093911) do
+ActiveRecord::Schema.define(version: 20150804082911) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,6 +140,23 @@ ActiveRecord::Schema.define(version: 20150803093911) do
   end
 
   add_index "punishments", ["profile_id"], :name => "index_punishments_on_profile_id"
+
+  create_table "reviews", force: true do |t|
+    t.integer  "profile_id"
+    t.date     "publish_at"
+    t.string   "name"
+    t.string   "title"
+    t.text     "content"
+    t.text     "comment"
+    t.string   "no"
+    t.string   "source"
+    t.string   "file"
+    t.text     "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "reviews", ["profile_id"], :name => "index_reviews_on_profile_id"
 
   create_table "users", force: true do |t|
     t.string   "name"

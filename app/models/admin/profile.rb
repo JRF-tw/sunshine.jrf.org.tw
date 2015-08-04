@@ -20,9 +20,14 @@
 #
 
 class Admin::Profile < ::Profile
+
+
   has_many :educations, :class_name => "Admin::Education", :dependent => :destroy
   has_many :careers, :class_name => "Admin::Career", :dependent => :destroy
   has_many :licenses, :class_name => "Admin::License", :dependent => :destroy
+  has_many :awards, :class_name => "Admin::Award", :dependent => :destroy
+  has_many :punishments, :class_name => "Admin::Punishment", :dependent => :destroy
+  has_many :reviews, :class_name => "Admin::Review", :dependent => :destroy
 
   CURRENT_TYPES = [
     "法官",
