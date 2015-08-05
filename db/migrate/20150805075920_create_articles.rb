@@ -6,6 +6,7 @@ class CreateArticles < ActiveRecord::Migration
       t.integer :publish_year
       t.date :paper_publish_at
       t.date :news_publish_at
+      t.string :book_title
       t.string :title
       t.string :journal_no
       t.string :journal_periods

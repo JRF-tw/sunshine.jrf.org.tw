@@ -8,6 +8,7 @@
 #  publish_year     :integer
 #  paper_publish_at :date
 #  news_publish_at  :date
+#  book_title       :string(255)
 #  title            :string(255)
 #  journal_no       :string(255)
 #  journal_periods  :string(255)
