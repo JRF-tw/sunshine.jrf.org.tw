@@ -11,12 +11,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150804082911) do
+ActiveRecord::Schema.define(version: 20150805075920) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
   enable_extension "postgis"
+
+  create_table "articles", force: true do |t|
+    t.integer  "profile_id"
+    t.string   "article_type"
+    t.integer  "publish_year"
+    t.date     "paper_publish_at"
+    t.date     "news_publish_at"
+    t.string   "title"
+    t.string   "journal_no"
+    t.string   "journal_periods"
+    t.integer  "start_page"
+    t.integer  "end_page"
+    t.string   "editor"
+    t.string   "author"
+    t.string   "publisher"
+    t.string   "publish_locat"
+    t.string   "department"
+    t.string   "degree"
+    t.string   "source"
+    t.text     "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "articles", ["profile_id"], :name => "index_articles_on_profile_id"
 
   create_table "awards", force: true do |t|
     t.integer  "profile_id"

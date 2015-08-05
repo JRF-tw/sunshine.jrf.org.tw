@@ -28,6 +28,7 @@ class Admin::Profile < ::Profile
   has_many :awards, :class_name => "Admin::Award", :dependent => :destroy
   has_many :punishments, :class_name => "Admin::Punishment", :dependent => :destroy
   has_many :reviews, :class_name => "Admin::Review", :dependent => :destroy
+  has_many :articles, :class_name => "Admin::Article", :dependent => :destroy
 
   CURRENT_TYPES = [
     "法官",
