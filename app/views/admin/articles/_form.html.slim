@@ -1,0 +1,24 @@
+= f.input :article_type
+= f.input :publish_year
+= f.input :paper_publish_at, as: "string", hint: "半型純數字，民國，格式：YY/MM/DD，如不清楚確切日期就填該年第一天或該月第一天"
+= f.input :news_publish_at, as: "string", hint: "半型純數字，民國，格式：YY/MM/DD，如不清楚確切日期就填該年第一天或該月第一天"
+= f.input :book_title
+= f.input :title
+= f.input :journal_no
+= f.input :journal_periods
+= f.input :start_page
+= f.input :end_page
+= f.input :editor
+= f.input :author
+= f.input :publisher
+= f.input :publish_locat
+= f.input :department
+= f.input :degree
+= f.input :source
+= f.input :memo
+
+.form-actions
+  = f.submit "送出", class: "btn btn-primary"
+  = " "
+  = link_to admin_profile_articles_path(@profile), class: "btn" do
+    = "回到#{@profile.name}的發表言論列表"

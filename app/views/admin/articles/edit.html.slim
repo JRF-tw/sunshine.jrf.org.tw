@@ -1,0 +1,3 @@
+= admin_widget_box "編輯#{@profile.name}的發表言論列表", icon: :pencil do
+  = simple_form_for @article, url: admin_profile_article_path(@profile, @article), method: :put, wrapper: :admin do |f|
+    = render partial: "form", object: f, as: :f

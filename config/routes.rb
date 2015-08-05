@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       resources :awards
       resources :punishments
       resources :reviews
+      resources :articles
     end
     resources :users
   end
