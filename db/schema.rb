@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150805075920) do
+ActiveRecord::Schema.define(version: 20150806105939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,6 +85,19 @@ ActiveRecord::Schema.define(version: 20150805075920) do
   end
 
   add_index "careers", ["profile_id"], :name => "index_careers_on_profile_id"
+
+  create_table "courts", force: true do |t|
+    t.string   "court_type"
+    t.string   "full_name"
+    t.string   "name"
+    t.integer  "weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "courts", ["court_type"], :name => "index_courts_on_court_type"
+  add_index "courts", ["full_name"], :name => "index_courts_on_full_name"
+  add_index "courts", ["name"], :name => "index_courts_on_name"
 
   create_table "educations", force: true do |t|
     t.integer  "profile_id"
