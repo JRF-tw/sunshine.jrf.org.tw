@@ -1,0 +1,26 @@
+= admin_widget_box "法院 / 檢察署列表", icon: :pencil do
+  .dataTables_wrapper
+    div
+      .dataTables_length
+        = link_to "新增法院 / 檢察署", new_admin_court_path, class: "btn btn-primary btn-mini"
+    table.table.table-bordered.table-striped.table-hover
+      thead
+        tr
+          th #
+          th 類型
+          th 全名
+          th 前台顯示簡稱
+          th
+      tbody
+        - @courts.each do |court|
+          tr
+            td= court.id
+            td= court.court_type
+            td= court.full_name
+            td= court.name
+            td
+              = link_to "編輯", edit_admin_court_path(court), class: "btn btn-mini btn-success"
+              | &nbsp;
+              = link_to "刪除", admin_court_path(court), class: "btn btn-mini btn-danger", method: :delete, "data-confirm" => "確認刪除法院 / 檢察署 - #{court.name}？"
+    .ui-toolbar.ui-widget-header
+      = paginate @courts, theme: :admin

@@ -13,4 +13,10 @@
 
 class Admin::Court < ::Court
   validates_presence_of :court_type, :full_name
+
+  COURT_TYPES = [
+    "法院",
+    "檢察署"
+  ]
+
 end

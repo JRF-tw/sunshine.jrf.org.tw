@@ -1,6 +1,7 @@
 zh-TW:
   activerecord:
     models:
+      court: "法院 / 檢察署"
       profile: "個人檔案"
       education: "學經歷"
       career: "職務經歷"
@@ -10,6 +11,11 @@ zh-TW:
       review: "相關新聞評論"
       article: "發表言論"
     attributes:
+      court:
+        court_type: "類型"
+        full_name: "全名"
+        name: "前台顯示簡稱"
+        weight: "顯示權重"
       profile:
         name: "姓名"
         current: "現職"
