@@ -1,0 +1,30 @@
+= admin_widget_box "#{@profile.name}的懲處記錄列表", icon: :pencil do
+  .dataTables_wrapper
+    div
+      .dataTables_length
+        = link_to "新增#{@profile.name}的懲處記錄", new_admin_profile_punishment_path(@profile), class: "btn btn-primary btn-mini"
+    table.table.table-bordered.table-striped.table-hover
+      thead
+        tr
+          th #
+          th 日期
+          th 決定機關
+          th 種類
+          th 決議結果
+          th 備註
+          th
+      tbody
+        - @punishments.each do |punishment|
+          tr
+            td= punishment.id
+            td= punishment.relevant_date
+            td= punishment.decision_unit
+            td= punishment.punish_type
+            td= punishment.decision_result
+            td= punishment.memo
+            td
+              = link_to "編輯", edit_admin_profile_punishment_path(@profile, punishment), class: "btn btn-mini btn-success"
+              | &nbsp;
+              = link_to "刪除", admin_profile_punishment_path(@profile, punishment), class: "btn btn-mini btn-danger", method: :delete, "data-confirm" => "確認刪除#{@profile.name}的懲處記錄？"
+    .ui-toolbar.ui-widget-header
+      = paginate @punishments, theme: :admin

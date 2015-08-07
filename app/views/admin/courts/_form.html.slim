@@ -1,0 +1,9 @@
+= f.input :court_type, :as => :select, :collection => Admin::Court::COURT_TYPES, :include_blank => "請選擇"
+= f.input :full_name
+= f.input :name
+= f.input :weight
+.form-actions
+  = f.submit "送出", class: "btn btn-primary"
+  = " "
+  = link_to admin_courts_path, class: "btn" do
+    | 回到法院 / 檢察署列表

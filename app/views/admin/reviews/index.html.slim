@@ -1,0 +1,28 @@
+= admin_widget_box "#{@profile.name}的相關新聞評論列表", icon: :pencil do
+  .dataTables_wrapper
+    div
+      .dataTables_length
+        = link_to "新增#{@profile.name}的相關新聞評論", new_admin_profile_review_path(@profile), class: "btn btn-primary btn-mini"
+    table.table.table-bordered.table-striped.table-hover
+      thead
+        tr
+          th #
+          th 發表日期
+          th 報刊名稱
+          th 文章標題
+          th 備註
+          th
+      tbody
+        - @reviews.each do |review|
+          tr
+            td= review.id
+            td= review.publish_at
+            td= review.name
+            td= review.title
+            td= review.memo
+            td
+              = link_to "編輯", edit_admin_profile_review_path(@profile, review), class: "btn btn-mini btn-success"
+              | &nbsp;
+              = link_to "刪除", admin_profile_review_path(@profile, review), class: "btn btn-mini btn-danger", method: :delete, "data-confirm" => "確認刪除#{@profile.name}的相關新聞評論？"
+    .ui-toolbar.ui-widget-header
+      = paginate @reviews, theme: :admin

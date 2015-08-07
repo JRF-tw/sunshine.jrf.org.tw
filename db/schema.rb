@@ -11,12 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729090055) do
+ActiveRecord::Schema.define(version: 20150806105939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
   enable_extension "postgis"
+
+  create_table "articles", force: true do |t|
+    t.integer  "profile_id"
+    t.string   "article_type"
+    t.integer  "publish_year"
+    t.date     "paper_publish_at"
+    t.date     "news_publish_at"
+    t.string   "book_title"
+    t.string   "title"
+    t.string   "journal_no"
+    t.string   "journal_periods"
+    t.integer  "start_page"
+    t.integer  "end_page"
+    t.string   "editor"
+    t.string   "author"
+    t.string   "publisher"
+    t.string   "publish_locat"
+    t.string   "department"
+    t.string   "degree"
+    t.string   "source"
+    t.text     "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "articles", ["profile_id"], :name => "index_articles_on_profile_id"
 
   create_table "awards", force: true do |t|
     t.integer  "profile_id"
@@ -59,6 +85,19 @@ ActiveRecord::Schema.define(version: 20150729090055) do
   end
 
   add_index "careers", ["profile_id"], :name => "index_careers_on_profile_id"
+
+  create_table "courts", force: true do |t|
+    t.string   "court_type"
+    t.string   "full_name"
+    t.string   "name"
+    t.integer  "weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "courts", ["court_type"], :name => "index_courts_on_court_type"
+  add_index "courts", ["full_name"], :name => "index_courts_on_full_name"
+  add_index "courts", ["name"], :name => "index_courts_on_name"
 
   create_table "educations", force: true do |t|
     t.integer  "profile_id"
@@ -108,6 +147,55 @@ ActiveRecord::Schema.define(version: 20150729090055) do
   end
 
   add_index "profiles", ["current"], :name => "index_profiles_on_current"
+
+  create_table "punishments", force: true do |t|
+    t.integer  "profile_id"
+    t.string   "decision_unit"
+    t.string   "unit"
+    t.string   "title"
+    t.string   "claimant"
+    t.string   "no"
+    t.string   "decision_no"
+    t.string   "punish_type"
+    t.date     "relevant_date"
+    t.text     "decision_result"
+    t.string   "decision_source"
+    t.text     "reason"
+    t.boolean  "is_anonymous"
+    t.string   "anonymous_source"
+    t.string   "anonymous"
+    t.text     "origin_desc"
+    t.string   "proposer"
+    t.string   "plaintiff"
+    t.string   "defendant"
+    t.text     "reply"
+    t.string   "reply_source"
+    t.string   "punish"
+    t.text     "content"
+    t.text     "summary"
+    t.text     "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "punishments", ["profile_id"], :name => "index_punishments_on_profile_id"
+
+  create_table "reviews", force: true do |t|
+    t.integer  "profile_id"
+    t.date     "publish_at"
+    t.string   "name"
+    t.string   "title"
+    t.text     "content"
+    t.text     "comment"
+    t.string   "no"
+    t.string   "source"
+    t.string   "file"
+    t.text     "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "reviews", ["profile_id"], :name => "index_reviews_on_profile_id"
 
   create_table "users", force: true do |t|
     t.string   "name"

@@ -10,6 +10,7 @@ module AdminMenuHelper
       # },
       # "Menu #2" => { url: url_for(q: 789), icon: "pencil", match: /q=789/ },
       "個人檔案管理"   => { url: admin_profiles_path, match: /\/admin\/profiles/ },
+      "法院 / 檢察署管理"   => { url: admin_courts_path, match: /\/admin\/courts/ },
       "後台使用者管理"   => { url: admin_users_path, match: /\/admin\/users/ }
     }
   end

@@ -1,0 +1,14 @@
+= f.input :publish_at, as: "string", hint: "半型純數字，民國，格式：YY/MM/DD"
+= f.input :name
+= f.input :title
+= f.input :content
+= f.input :comment
+= f.input :no, label: "裁判字號"
+= f.input :source
+= f.input :file
+= f.input :memo
+.form-actions
+  = f.submit "送出", class: "btn btn-primary"
+  = " "
+  = link_to admin_profile_reviews_path(@profile), class: "btn" do
+    = "回到#{@profile.name}的相關新聞評論列表"
