@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150806105939) do
+ActiveRecord::Schema.define(version: 20150808115926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,6 +112,29 @@ ActiveRecord::Schema.define(version: 20150806105939) do
   end
 
   add_index "educations", ["profile_id"], :name => "index_educations_on_profile_id"
+
+  create_table "judgments", force: true do |t|
+    t.integer  "court_id"
+    t.integer  "main_judge_id"
+    t.integer  "presiding_judge_id"
+    t.string   "judge_no"
+    t.string   "court_no"
+    t.string   "judge_type"
+    t.date     "judge_date"
+    t.text     "reason"
+    t.text     "content"
+    t.text     "comment"
+    t.string   "source"
+    t.string   "source_link"
+    t.text     "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "judgments", ["court_id"], :name => "index_judgments_on_court_id"
+  add_index "judgments", ["court_no"], :name => "index_judgments_on_court_no"
+  add_index "judgments", ["judge_no"], :name => "index_judgments_on_judge_no"
+  add_index "judgments", ["main_judge_id"], :name => "index_judgments_on_main_judge_id"
 
   create_table "licenses", force: true do |t|
     t.integer  "profile_id"

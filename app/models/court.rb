@@ -12,4 +12,5 @@
 #
 
 class Court < ActiveRecord::Base
+  has_many :judgments
 end
