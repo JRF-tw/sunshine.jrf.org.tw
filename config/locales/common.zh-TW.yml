@@ -10,6 +10,7 @@ zh-TW:
       punishment: "懲處記錄"
       review: "相關新聞評論"
       article: "發表言論"
+      court: "法院 / 檢察署"
     attributes:
       court:
         court_type: "類型"
@@ -127,3 +128,8 @@ zh-TW:
         degree: "學位"
         source: "文章連結"
         memo: "備註"
+      court:
+        court_type: "類型"
+        full_name: "全名"
+        name: "前台顯示簡稱"
+        weight: "顯示權重"

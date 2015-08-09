@@ -55,6 +55,6 @@ class Admin::CourtsController < Admin::BaseController
   end
 
   def court_params
-    params.fetch(:admin_court, {}).permit(:court_type, :full_name, :name, :sort )
+    params.fetch(:admin_court, {}).permit(:court_type, :full_name, :name, :weight )
   end
 end

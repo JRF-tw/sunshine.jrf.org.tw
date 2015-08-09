@@ -1,7 +1,7 @@
 = f.input :court_type, :as => :select, :collection => Admin::Court::COURT_TYPES, :include_blank => "請選擇"
 = f.input :full_name
 = f.input :name
-= f.input :weight
+= f.input :weight, hint: "數字越大 = 權重越高 = 排越前面"
 .form-actions
   = f.submit "送出", class: "btn btn-primary"
   = " "
