@@ -21,5 +21,4 @@ RSpec.describe JudgmentJudge, type: :model do
     expect(JudgmentJudge.count).to be_zero
   end
 
-
 end

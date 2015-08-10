@@ -12,6 +12,7 @@ zh-TW:
       article: "發表言論"
       court: "法院 / 檢察署"
       judgment: "重要判決"
+      suit: "評鑑資料-案例"
     attributes:
       court:
         court_type: "類型"
@@ -150,3 +151,11 @@ zh-TW:
         source: "資料來源"
         source_link: "資料來源網址"
         memo: "備註"
+      suit:
+        title: "標題"
+        summary: "簡短介紹"
+        content: "介紹"
+        state: "狀態"
+        pic: "圖片"
+        suit_no: "案例編號"
+        keyword: "關鍵字"

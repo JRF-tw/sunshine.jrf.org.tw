@@ -32,6 +32,10 @@ class Profile < ActiveRecord::Base
   has_many :judgments, :through => :judgment_judges
   has_many :judgment_prosecutors, :dependent => :destroy
   has_many :judgments, :through => :judgment_prosecutors
+  has_many :suit_judges, :dependent => :destroy
+  has_many :suit, :through => :suit_judges
+  has_many :suit_prosecutors, :dependent => :destroy
+  has_many :suit, :through => :suit_prosecutors
 
   def self.judges
     where(current: "法官")

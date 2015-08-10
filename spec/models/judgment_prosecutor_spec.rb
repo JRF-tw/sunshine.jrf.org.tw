@@ -20,4 +20,5 @@ RSpec.describe JudgmentProsecutor, type: :model do
     judgment.destroy
     expect(JudgmentProsecutor.count).to be_zero
   end
+  
 end
