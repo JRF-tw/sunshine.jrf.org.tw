@@ -1,0 +1,28 @@
+= admin_widget_box "重要判決列表", icon: :pencil do
+  .dataTables_wrapper
+    div
+      .dataTables_length
+        = link_to "新增重要判決", new_admin_judgment_path, class: "btn btn-primary btn-mini"
+    table.table.table-bordered.table-striped.table-hover
+      thead
+        tr
+          th #
+          th 法院
+          th 裁判字號 / 庭號
+          th 裁判日期
+          th 備註
+          th
+      tbody
+        - @judgments.each do |judgment|
+          tr
+            td= judgment.id
+            td= judgment.court.name
+            td= "#{judgment.judge_no} / #{judgment.court_no}"
+            td= judgment.judge_date
+            td= judgment.memo
+            td
+              = link_to "編輯", edit_admin_judgment_path(judgment), class: "btn btn-mini btn-success"
+              | &nbsp;
+              = link_to "刪除", admin_judgment_path(judgment), class: "btn btn-mini btn-danger", method: :delete, "data-confirm" => "確認刪除重要判決？"
+    .ui-toolbar.ui-widget-header
+      = paginate @judgments, theme: :admin

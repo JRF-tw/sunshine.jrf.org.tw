@@ -1,0 +1,19 @@
+= f.input :court_id, :as => :select, :collection => Court.all.map{ |c| [c.name, c.id] }, :include_blank => "請選擇"
+= f.input :main_judge_id, :collection => Profile.all.map{ |p| [p.name, p.id] }, :include_blank => "請選擇"
+= f.input :presiding_judge_id, :collection => Profile.all.map{ |p| [p.name, p.id] }, :include_blank => "請選擇"
+= f.input :judge_no
+= f.input :court_no
+= f.input :judge_type, :as => :select, :collection => Admin::Judgment::JUDGMENT_TYPES, :include_blank => "請選擇"
+= f.input :judge_date, as: "string", hint: "半型純數字，民國，格式：YY/MM/DD，如不清楚確切日期就填該年第一天或該月第一天"
+= f.input :reason
+= f.input :content
+= f.input :comment
+= f.input :source
+= f.input :source_link
+= f.input :memo
+
+.form-actions
+  = f.submit "送出", class: "btn btn-primary"
+  = " "
+  = link_to admin_judgments_path, :class => "btn" do
+    | 回到重要判決列表

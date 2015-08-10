@@ -11,6 +11,7 @@ zh-TW:
       review: "相關新聞評論"
       article: "發表言論"
       court: "法院 / 檢察署"
+      judgment: "重要判決"
     attributes:
       court:
         court_type: "類型"
@@ -133,3 +134,17 @@ zh-TW:
         full_name: "全名"
         name: "前台顯示簡稱"
         weight: "顯示權重"
+      judgment:
+        court_id: "法院"
+        main_judge_id: "受命法官"
+        presiding_judge_id: "審判長"
+        judge_no: "裁判字號"
+        court_no: "庭號"
+        judge_type: "判決或裁定"
+        judge_date: "裁判日期"
+        reason: "案由"
+        content: "裁判內容"
+        comment: "說明評論"
+        source: "資料來源"
+        source_link: "資料來源網址"
+        memo: "備註"

@@ -24,6 +24,11 @@ class Admin::Judgment < ::Judgment
   validates_presence_of :court_id
   validates_presence_of :judge_no, unless: :court_no?
   
+  JUDGMENT_TYPES = [
+    "判決",
+    "裁定"
+  ]
+
   def court_no?
     court_no.present?
   end 
