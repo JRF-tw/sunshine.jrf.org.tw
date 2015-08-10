@@ -18,6 +18,7 @@ FactoryGirl.define do
   factory :suit do
     title "foobar"
     suit_no 123
+    state "處理中"
   end
 
 end

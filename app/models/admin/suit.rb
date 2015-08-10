@@ -15,5 +15,7 @@
 #
 
 class Admin::Suit < ::Suit
-  validates_presence_of :title, :suit_no
+  validates_presence_of :title, :state, :suit_no
+
+  STATE = ["處理中", "結束"]
 end
