@@ -35,4 +35,10 @@ RSpec.describe Judgment, type: :model do
     judgment2.court_no = "baabaa"
     expect(judgment2.save).to be_truthy
   end
+
+  it "has_many :judges" do
+    judgment_judge = FactoryGirl.create :judgment_judge
+    judgment = judgment_judge.judgment
+    expect(judgment.judges.last.current.to_s).to eq("法官")
+  end
 end

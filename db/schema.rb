@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150808115926) do
+ActiveRecord::Schema.define(version: 20150810081600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,6 +112,28 @@ ActiveRecord::Schema.define(version: 20150808115926) do
   end
 
   add_index "educations", ["profile_id"], :name => "index_educations_on_profile_id"
+
+  create_table "judgment_judges", force: true do |t|
+    t.integer  "profile_id"
+    t.integer  "judgment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "judgment_judges", ["judgment_id"], :name => "index_judgment_judges_on_judgment_id"
+  add_index "judgment_judges", ["profile_id", "judgment_id"], :name => "index_judgment_judges_on_profile_id_and_judgment_id"
+  add_index "judgment_judges", ["profile_id"], :name => "index_judgment_judges_on_profile_id"
+
+  create_table "judgment_prosecutors", force: true do |t|
+    t.integer  "profile_id"
+    t.integer  "judgment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "judgment_prosecutors", ["judgment_id"], :name => "index_judgment_prosecutors_on_judgment_id"
+  add_index "judgment_prosecutors", ["profile_id", "judgment_id"], :name => "index_judgment_prosecutors_on_profile_id_and_judgment_id"
+  add_index "judgment_prosecutors", ["profile_id"], :name => "index_judgment_prosecutors_on_profile_id"
 
   create_table "judgments", force: true do |t|
     t.integer  "court_id"

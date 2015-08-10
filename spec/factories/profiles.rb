@@ -24,6 +24,11 @@ FactoryGirl.define do
     name "Dahlia"
     current "法官"
     gender "女"
+    factory :judge_profile do
+      current "法官"
+    end
+    factory :prosecutor_profile do
+      current "檢察官"
+    end
   end
-
 end
