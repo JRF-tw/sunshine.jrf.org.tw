@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     end
     resources :courts
     resources :judgments
+    resources :suits
     resources :users
   end
 end

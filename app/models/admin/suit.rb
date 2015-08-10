@@ -14,10 +14,6 @@
 #  updated_at :datetime
 #
 
-FactoryGirl.define do
-  factory :suit do
-    title "foobar"
-    suit_no 123
-  end
-
+class Admin::Suit < ::Suit
+  validates_presence_of :title, :suit_no
 end

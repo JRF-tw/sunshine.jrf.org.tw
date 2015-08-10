@@ -159,3 +159,5 @@ zh-TW:
         pic: "圖片"
         suit_no: "案例編號"
         keyword: "關鍵字"
+        judge_ids: "相關法官"
+        prosecutor_ids: "相關檢察官"
