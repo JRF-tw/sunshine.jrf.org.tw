@@ -81,7 +81,7 @@ zh-TW:
         unit: "服務機關"
         title: "職稱"
         claimant: "請求人"
-        no: "字號"
+        punish_no: "字號"
         decision_no: "決議案號"
         punish_type: "種類"
         relevant_date: "日期"

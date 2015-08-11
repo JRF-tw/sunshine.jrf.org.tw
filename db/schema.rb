@@ -222,7 +222,7 @@ ActiveRecord::Schema.define(version: 20150811074619) do
     t.string   "unit"
     t.string   "title"
     t.string   "claimant"
-    t.string   "no"
+    t.string   "punish_no"
     t.string   "decision_no"
     t.string   "punish_type"
     t.date     "relevant_date"
@@ -248,20 +248,6 @@ ActiveRecord::Schema.define(version: 20150811074619) do
 
   add_index "punishments", ["profile_id"], :name => "index_punishments_on_profile_id"
 
->>>>>>> create punishment model
-  create_table "suit_judges", force: true do |t|
-    t.integer  "suit_id"
-    t.integer  "profile_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "punishments", ["profile_id"], :name => "index_punishments_on_profile_id"
-  add_index "suit_judges", ["profile_id", "suit_id"], :name => "index_suit_judges_on_profile_id_and_suit_id"
-  add_index "suit_judges", ["profile_id"], :name => "index_suit_judges_on_profile_id"
-  add_index "suit_judges", ["suit_id"], :name => "index_suit_judges_on_suit_id"
-
-
   create_table "reviews", force: true do |t|
     t.integer  "profile_id"
     t.date     "publish_at"
@@ -273,7 +259,22 @@ ActiveRecord::Schema.define(version: 20150811074619) do
     t.string   "source"
     t.string   "file"
     t.text     "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
+
+  add_index "reviews", ["profile_id"], :name => "index_reviews_on_profile_id"
+
+  create_table "suit_judges", force: true do |t|
+    t.integer  "suit_id"
+    t.integer  "profile_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "suit_judges", ["profile_id", "suit_id"], :name => "index_suit_judges_on_profile_id_and_suit_id"
+  add_index "suit_judges", ["profile_id"], :name => "index_suit_judges_on_profile_id"
+  add_index "suit_judges", ["suit_id"], :name => "index_suit_judges_on_suit_id"
 
   create_table "suit_prosecutors", force: true do |t|
     t.integer  "suit_id"
@@ -297,8 +298,6 @@ ActiveRecord::Schema.define(version: 20150811074619) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "reviews", ["profile_id"], :name => "index_reviews_on_profile_id"
 
   create_table "users", force: true do |t|
     t.string   "name"
