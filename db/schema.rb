@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150811065731) do
+ActiveRecord::Schema.define(version: 20150811074619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -227,21 +227,28 @@ ActiveRecord::Schema.define(version: 20150811065731) do
     t.string   "punish_type"
     t.date     "relevant_date"
     t.text     "decision_result"
-    t.string   "decision_source"
+    t.text     "decision_source"
     t.text     "reason"
     t.boolean  "is_anonymous"
-    t.string   "anonymous_source"
+    t.text     "anonymous_source"
     t.string   "anonymous"
     t.text     "origin_desc"
     t.string   "proposer"
     t.string   "plaintiff"
     t.string   "defendant"
     t.text     "reply"
-    t.string   "reply_source"
-    t.string   "punish"
+    t.text     "reply_source"
+    t.text     "punish"
     t.text     "content"
     t.text     "summary"
     t.text     "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "punishments", ["profile_id"], :name => "index_punishments_on_profile_id"
+
+>>>>>>> create punishment model
   create_table "suit_judges", force: true do |t|
     t.integer  "suit_id"
     t.integer  "profile_id"
