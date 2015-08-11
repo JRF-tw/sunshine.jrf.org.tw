@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150810135245) do
+ActiveRecord::Schema.define(version: 20150811065731) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -173,6 +173,29 @@ ActiveRecord::Schema.define(version: 20150810135245) do
   end
 
   add_index "licenses", ["profile_id"], :name => "index_licenses_on_profile_id"
+
+  create_table "procedures", force: true do |t|
+    t.integer  "profile_id"
+    t.integer  "suit_id"
+    t.string   "unit"
+    t.string   "title"
+    t.string   "procedure_unit"
+    t.text     "procedure_content"
+    t.text     "procedure_result"
+    t.string   "procedure_no"
+    t.date     "procedure_date"
+    t.integer  "suit_no"
+    t.text     "source"
+    t.string   "source_link"
+    t.string   "punish_link"
+    t.string   "file"
+    t.text     "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "procedures", ["profile_id"], :name => "index_procedures_on_profile_id"
+  add_index "procedures", ["suit_id"], :name => "index_procedures_on_suit_id"
 
   create_table "profiles", force: true do |t|
     t.string   "name"
