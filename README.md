@@ -73,29 +73,8 @@ GRANT ALL PRIVILEGES ON DATABASE "your_name" to "your_name";
 ALTER USER "your_name" WITH SUPERUSER;
 ```
 
-First Use This Template App
-================================
+Generate Fake Data
+=============================
 
-- `rails g rename:app_to your_new_app_name`
-- configs
-  - config/application.yml
-  - config/database.yml
-- Setup deploy
-  - lib/capistrano/tasks/salck.rake
-  - config/deploy.rb
-  - config/deploy/production.rb
-  - config/deploy/staging.rb
-  - config/unicorn/nginx.conf.example
-- rollbar
-  - config/initializers/rollbar.rb
-  - config/deploy.rb
-- newrelic
-  - congif/newrelic.yml
-- admin sidebar menu
-  - app/helpers/admin_menu_helper.rb
-- SEO
-  - app/helpers/meta_tag_helper.rb
-  - config/schedule.rb (just uncomment)
-  - config/deploy/production.rb (just uncomment)
-- staging http auth
-  - app/controllers/application_controller.rb
+1. `bundle exec rake dev:fake`
+2. Will generate user `admin@5fpro.com` with password `12341234` and items data.
