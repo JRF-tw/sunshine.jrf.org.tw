@@ -7,6 +7,25 @@ Rails.application.routes.draw do
   root to: "base#index"
   get '/robots.txt', to: "base#robots", defaults: { format: "text" }
 
+  resources :judges, :to => "profiles#judges"
+  resources :prosecutors, :to => "profiles#prosecutors"
+  resources :searchs, path: "search" do
+    collection do
+      get :judges
+      get :prosecutors
+      get :suits
+    end
+  end
+  resources :about, :to => "base#about"
+  resources :suits do
+    resources :procedures
+  end
+  resources :profiles do
+    resources :awards
+    resources :punishments
+    resources :reviews
+  end
+
   namespace :admin do
     root to: "profiles#index"
     resources :courts

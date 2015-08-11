@@ -32,7 +32,7 @@ module MetaTagHelper
       separator: " | ",
       reverse: true,
       og_type: "website",
-      site: "5Fpro"
+      site: "司法陽光網"
     }
   end
 end
