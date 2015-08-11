@@ -12,6 +12,8 @@
 #
 
 class Admin::Court < ::Court
+  has_many :judgments, :class_name => "Admin::Judgment"
+
   validates_presence_of :court_type, :full_name
 
   COURT_TYPES = [

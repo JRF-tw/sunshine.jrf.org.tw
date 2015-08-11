@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150806105939) do
+ActiveRecord::Schema.define(version: 20150811074619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,51 @@ ActiveRecord::Schema.define(version: 20150806105939) do
 
   add_index "educations", ["profile_id"], :name => "index_educations_on_profile_id"
 
+  create_table "judgment_judges", force: true do |t|
+    t.integer  "profile_id"
+    t.integer  "judgment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "judgment_judges", ["judgment_id"], :name => "index_judgment_judges_on_judgment_id"
+  add_index "judgment_judges", ["profile_id", "judgment_id"], :name => "index_judgment_judges_on_profile_id_and_judgment_id"
+  add_index "judgment_judges", ["profile_id"], :name => "index_judgment_judges_on_profile_id"
+
+  create_table "judgment_prosecutors", force: true do |t|
+    t.integer  "profile_id"
+    t.integer  "judgment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "judgment_prosecutors", ["judgment_id"], :name => "index_judgment_prosecutors_on_judgment_id"
+  add_index "judgment_prosecutors", ["profile_id", "judgment_id"], :name => "index_judgment_prosecutors_on_profile_id_and_judgment_id"
+  add_index "judgment_prosecutors", ["profile_id"], :name => "index_judgment_prosecutors_on_profile_id"
+
+  create_table "judgments", force: true do |t|
+    t.integer  "court_id"
+    t.integer  "main_judge_id"
+    t.integer  "presiding_judge_id"
+    t.string   "judge_no"
+    t.string   "court_no"
+    t.string   "judge_type"
+    t.date     "judge_date"
+    t.text     "reason"
+    t.text     "content"
+    t.text     "comment"
+    t.string   "source"
+    t.string   "source_link"
+    t.text     "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "judgments", ["court_id"], :name => "index_judgments_on_court_id"
+  add_index "judgments", ["court_no"], :name => "index_judgments_on_court_no"
+  add_index "judgments", ["judge_no"], :name => "index_judgments_on_judge_no"
+  add_index "judgments", ["main_judge_id"], :name => "index_judgments_on_main_judge_id"
+
   create_table "licenses", force: true do |t|
     t.integer  "profile_id"
     t.string   "license_type"
@@ -128,6 +173,29 @@ ActiveRecord::Schema.define(version: 20150806105939) do
   end
 
   add_index "licenses", ["profile_id"], :name => "index_licenses_on_profile_id"
+
+  create_table "procedures", force: true do |t|
+    t.integer  "profile_id"
+    t.integer  "suit_id"
+    t.string   "unit"
+    t.string   "title"
+    t.string   "procedure_unit"
+    t.text     "procedure_content"
+    t.text     "procedure_result"
+    t.string   "procedure_no"
+    t.date     "procedure_date"
+    t.integer  "suit_no"
+    t.text     "source"
+    t.string   "source_link"
+    t.string   "punish_link"
+    t.string   "file"
+    t.text     "memo"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "procedures", ["profile_id"], :name => "index_procedures_on_profile_id"
+  add_index "procedures", ["suit_id"], :name => "index_procedures_on_suit_id"
 
   create_table "profiles", force: true do |t|
     t.string   "name"
@@ -154,23 +222,23 @@ ActiveRecord::Schema.define(version: 20150806105939) do
     t.string   "unit"
     t.string   "title"
     t.string   "claimant"
-    t.string   "no"
+    t.string   "punish_no"
     t.string   "decision_no"
     t.string   "punish_type"
     t.date     "relevant_date"
     t.text     "decision_result"
-    t.string   "decision_source"
+    t.text     "decision_source"
     t.text     "reason"
     t.boolean  "is_anonymous"
-    t.string   "anonymous_source"
+    t.text     "anonymous_source"
     t.string   "anonymous"
     t.text     "origin_desc"
     t.string   "proposer"
     t.string   "plaintiff"
     t.string   "defendant"
     t.text     "reply"
-    t.string   "reply_source"
-    t.string   "punish"
+    t.text     "reply_source"
+    t.text     "punish"
     t.text     "content"
     t.text     "summary"
     t.text     "memo"
@@ -196,6 +264,40 @@ ActiveRecord::Schema.define(version: 20150806105939) do
   end
 
   add_index "reviews", ["profile_id"], :name => "index_reviews_on_profile_id"
+
+  create_table "suit_judges", force: true do |t|
+    t.integer  "suit_id"
+    t.integer  "profile_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "suit_judges", ["profile_id", "suit_id"], :name => "index_suit_judges_on_profile_id_and_suit_id"
+  add_index "suit_judges", ["profile_id"], :name => "index_suit_judges_on_profile_id"
+  add_index "suit_judges", ["suit_id"], :name => "index_suit_judges_on_suit_id"
+
+  create_table "suit_prosecutors", force: true do |t|
+    t.integer  "suit_id"
+    t.integer  "profile_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "suit_prosecutors", ["profile_id", "suit_id"], :name => "index_suit_prosecutors_on_profile_id_and_suit_id"
+  add_index "suit_prosecutors", ["profile_id"], :name => "index_suit_prosecutors_on_profile_id"
+  add_index "suit_prosecutors", ["suit_id"], :name => "index_suit_prosecutors_on_suit_id"
+
+  create_table "suits", force: true do |t|
+    t.string   "title"
+    t.text     "summary"
+    t.text     "content"
+    t.string   "state"
+    t.string   "pic"
+    t.integer  "suit_no"
+    t.string   "keyword"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "name"

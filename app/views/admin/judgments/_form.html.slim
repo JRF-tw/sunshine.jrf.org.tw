@@ -1,0 +1,21 @@
+= f.input :court_id, as: :select, collection: Court.judges.map{ |c| [c.name, c.id] }, include_blank: "請選擇", input_html: { class: 'chosen-select' }
+= f.input :main_judge_id, as: :select, collection: Profile.judges.map{ |p| [p.name, p.id] }, include_blank: "請選擇", input_html: { class: 'chosen-select' }
+= f.input :presiding_judge_id, collection: Profile.judges.map{ |p| [p.name, p.id] }, include_blank: "請選擇", input_html: { class: 'chosen-select' }
+= f.input :judge_ids, as: :select, collection: Profile.judges.map{ |p| [p.name, p.id] }, include_blank: "請選擇", input_html: { multiple: true, class: 'chosen-select' }
+= f.input :prosecutor_ids, as: :select, collection: Profile.prosecutors.map{ |p| [p.name, p.id] }, include_blank: "請選擇", input_html: { multiple: true, class: 'chosen-select' }
+= f.input :judge_no
+= f.input :court_no, hint: "裁判字號及庭號擇一必填"
+= f.input :judge_type, as: :select, collection: Admin::Judgment::JUDGMENT_TYPES, include_blank: "請選擇"
+= f.input :judge_date, as: "string", hint: "半型純數字，民國，格式：YY/MM/DD，如不清楚確切日期就填該年第一天或該月第一天"
+= f.input :reason
+= f.input :content
+= f.input :comment
+= f.input :source
+= f.input :source_link
+= f.input :memo
+
+.form-actions
+  = f.submit "送出", class: "btn btn-primary"
+  = " "
+  = link_to admin_judgments_path, class: "btn" do
+    | 回到重要判決列表

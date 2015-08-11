@@ -28,6 +28,7 @@ gem 'therubyracer',  platforms: :ruby
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'asset_sync'
+gem 'chosen-rails', "~> 1.2.0"
 
 # background jobs
 gem 'sidekiq'

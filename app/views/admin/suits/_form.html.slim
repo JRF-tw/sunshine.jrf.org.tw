@@ -1,0 +1,15 @@
+= f.input :title
+= f.input :summary
+= f.input :content
+= f.input :state, :as => :select, :collection => Admin::Suit::STATE, :include_blank => "請選擇"
+= f.input :pic
+= f.input :suit_no
+= f.input :keyword
+= f.input :judge_ids, as: :select, collection: Profile.judges.map{ |p| [p.name, p.id] }, include_blank: "請選擇", input_html: { multiple: true, class: 'chosen-select' }
+= f.input :prosecutor_ids, as: :select, collection: Profile.prosecutors.map{ |p| [p.name, p.id] }, include_blank: "請選擇", input_html: { multiple: true, class: 'chosen-select' }
+
+.form-actions
+  = f.submit "送出", class: "btn btn-primary"
+  = " "
+  = link_to admin_suits_path, class: "btn" do
+    | 回到評鑑資料-案例列表

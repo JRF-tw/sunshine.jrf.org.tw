@@ -19,6 +19,9 @@ Rails.application.routes.draw do
       resources :reviews
       resources :articles
     end
+    resources :courts
+    resources :judgments
+    resources :suits
     resources :users
   end
 end
