@@ -1,0 +1,15 @@
+%button-base
+  display: inline-block
+  padding: 0 rhythm(0.5)
+  text-align: center
+  border-radius: 3px
+  +adjust-font-size-to(13px, 1.5)
+
+// @each $color, $code in $colors {
+//   .button--#{$color} {
+//     @extend %button-base;
+//     @include scut-color-swap(#fff $code, #fff darken($code, 10%));
+//   }
+// }
+
+// [class^="button--"] + [class^="button--"] {margin-left: rhythm(.5);}

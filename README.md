@@ -78,3 +78,8 @@ Generate Fake Data
 
 1. `bundle exec rake dev:fake`
 2. Will generate user `admin@5fpro.com` with password `12341234` and items data.
+
+Gulp Rails
+=============================
+
+- 放在 `./gulp/assets/images/img/` 裡的圖片才會被壓縮/最佳化

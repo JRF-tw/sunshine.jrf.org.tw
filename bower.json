@@ -1,0 +1,29 @@
+{
+  "name": "jrf-sunny",
+  "version": "0.1.0",
+  "homepage": "https://github.com/5fpro/jrf-sunny",
+  "authors": [
+    "Jude Wang <jude@jude.asia>"
+  ],
+  "moduleType": [
+    "es6"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "scut": "~1.2.1",
+    "normalize-scss": "~3.0.3",
+    "picturefill": "~2.3.1",
+    "modular-scale": "~2.1.1",
+    "toolkit": "~2.1.7",
+    "compass-mixins": "~1.0.2",
+    "susy": "~2.2.5"
+  }
+}

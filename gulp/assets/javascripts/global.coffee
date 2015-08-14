@@ -1,0 +1,1 @@
+console.log 'required owl carousel!'

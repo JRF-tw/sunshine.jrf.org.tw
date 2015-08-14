@@ -1,0 +1,14 @@
+//  Module Scale and base font settings
+//  ===================================
+
+$base-font-size:   13px;
+$ideal-font-size:  15px;
+$base-line-height: ms(1, $base-font-size);
+
+$rhythm-unit: rem;
+$rem-with-px-fallback: false;
+
+$ms-base:          $base-font-size, $ideal-font-size;
+$ms-ratio:         $fifth;
+
+$scut-rem-base: scut-strip-unit($base-font-size);

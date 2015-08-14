@@ -1,0 +1,30 @@
+//  Type
+//  ====
+
+%body
+  p, ul, ol, dl, pre, blockquote
+    +leader
+    +trailer
+  p:empty
+    display: none
+  a
+    @extend %link
+  dt
+    font-weight: bold
+  dd
+    margin-left: 0
+    +trailer
+    ul, ol
+      padding-left: ms(1)
+      margin-top: 0
+
+%type
+  @extend %headings
+  @extend %body
+
+//  Selection style
+//  ===============
+
+\::selection
+  text-shadow: none
+  background-color: $blue-light

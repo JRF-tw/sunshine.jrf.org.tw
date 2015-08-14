@@ -37,5 +37,9 @@ module JrfSunny
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.enforce_available_locales = false
     config.i18n.default_locale = "zh-TW"
+
+    # Make public assets requireable in manifest files
+    config.assets.paths << Rails.root.join("public", "assets", "stylesheets")
+    config.assets.paths << Rails.root.join("public", "assets", "javascripts")
   end
 end

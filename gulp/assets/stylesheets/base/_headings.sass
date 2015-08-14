@@ -1,0 +1,22 @@
+//  Headings
+//  ========
+
+%h1
+  +leader
+  +trailer
+  +adjust-font-size-to(ms(2))
+
+%h2
+  +leader
+  +trailer
+  +adjust-font-size-to(ms(1))
+
+%h3
+  +leader
+  +trailer
+  +adjust-font-size-to(ms(0))
+
+%headings
+  @for $i from 1 through 3
+    h#{$i}
+      @extend %h#{$i}
