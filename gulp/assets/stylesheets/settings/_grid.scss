@@ -1,0 +1,34 @@
+//  Grid settings
+//  =============
+
+$susy: (
+  flow: ltr,                // rtl | ltr
+  math: fluid,              // fluid | static
+  output: float,            // float | isolate
+  gutter-position: after,   // before | after | split | inside | inside-static
+  container: auto,          // <length> | auto
+  container-position: center,
+  // left | center | right | <length> [*2]
+  columns: 4,               // <number> | <list>
+  gutters: .25,             // <ratio>
+  // 960gs = 16px / 64px
+  column-width: false,      // <length> | false/null
+  // 960gs = 64px
+  global-box-sizing: content-box,
+  // border-box | content-box
+  last-flow: to,            // from | to
+  debug: (
+    image: hide,            // show | hide | show-columns | show-baseline
+    color: rgba(#66f, .25), // <color>
+    output: background,     // background | overlay
+    toggle: top right,      // right | left and top | bottom
+  ),
+  use-custom: (
+    background-image: true, 
+    background-options: false,
+    // if set to true Susy will look for existing background-size, -origin, and -clip mixins (like the ones provided by Compass and Bourbon), and fallback to plain CSS output if none is found.
+    box-sizing: false,
+    clearfix: false,
+    rem: true,
+  )
+);
