@@ -20,3 +20,7 @@ config/database.yml
 .DS_Store
 /public/assets
 /.capistrano/*
+/node_modules
+jrf.sublime-workspace
+jrf.sublime-project
+dump.rdb
