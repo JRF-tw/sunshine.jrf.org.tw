@@ -18,8 +18,10 @@
 config/database.yml
 /config/application.yml
 .DS_Store
+
 /public/assets
 /.capistrano/*
+/vendor/assets/bower_components
 /node_modules
 jrf.sublime-workspace
 jrf.sublime-project

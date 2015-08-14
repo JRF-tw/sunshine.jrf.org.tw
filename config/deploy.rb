@@ -60,6 +60,24 @@ namespace :deploy do
   end
 end
 
+# Install Bower assets before compile assest with Gulp
+before "deploy:npm_install", "deploy:bower_install"
+namespace :deploy do
+  desc "Run bower install"
+  task :bower_install do
+    invoke "cd #{release_path} && bower install'"
+  end
+end
+
+# Compile assets with Gulp before assets pipeline
+before "deploy:assets:precompile", "deploy:npm_install"
+namespace :deploy do
+  desc "Run npm install"
+  task :npm_install do
+    invoke "cd #{release_path} && npm install'"
+  end
+end
+
 # uncomment while first deploy
 # before "deploy:migrate", "deploy:db_create"
 # namespace :deploy do

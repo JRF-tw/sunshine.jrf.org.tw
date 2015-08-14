@@ -52,15 +52,3 @@ role :assets_sync_server, server
 #     auth_methods: %w(publickey password)
 #     # password: 'please use keys'
 #   }
-
-#
-# Compile assets with gulp before assets pipeline
-#
-before "deploy:assets:precompile", "deploy:npm_install"
-
-namespace :deploy do
-  desc "Run npm install"
-  task :npm_install do
-    invoke_command "cd #{release_path} && npm install'"
-  end
-end
