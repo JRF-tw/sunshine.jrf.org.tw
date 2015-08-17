@@ -26,3 +26,5 @@ config/database.yml
 jrf.sublime-workspace
 jrf.sublime-project
 dump.rdb
+
+*.log

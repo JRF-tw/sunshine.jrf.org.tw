@@ -1,0 +1,3 @@
+= admin_widget_box "編輯#{@suit.title}的案例處理經過", icon: :pencil do
+  = simple_form_for @procedure, url: admin_suit_procedure_path(@suit, @procedure), method: :put, wrapper: :admin do |f|
+    = render partial: "form", object: f, as: :f
