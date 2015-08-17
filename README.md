@@ -18,16 +18,8 @@ cp config/application.yml.example config/application.yml
 bundle exec rake dev:build
 ```
 
-memcached
-===========
+Will generate user `admin@5fpro.com` with password `12341234` and items data.
 
-```
-brew install memcached
-```
-
-```
-memcached -d
-```
 
 Redis
 ================
@@ -73,11 +65,6 @@ GRANT ALL PRIVILEGES ON DATABASE "your_name" to "your_name";
 ALTER USER "your_name" WITH SUPERUSER;
 ```
 
-Generate Fake Data
-=============================
-
-1. `bundle exec rake dev:fake`
-2. Will generate user `admin@5fpro.com` with password `12341234` and items data.
 
 Gulp Rails
 =============================
