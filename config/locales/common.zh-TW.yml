@@ -13,6 +13,7 @@ zh-TW:
       court: "法院 / 檢察署"
       judgment: "重要判決"
       suit: "評鑑資料-案例"
+      procedure: "評鑑資料-案例處理經過"
     attributes:
       court:
         court_type: "類型"
@@ -161,3 +162,18 @@ zh-TW:
         keyword: "關鍵字"
         judge_ids: "相關法官"
         prosecutor_ids: "相關檢察官"
+      procedure:
+        profile_id: "姓名"
+        unit: "服務機關"
+        title: "職稱"
+        procedure_unit: "處理單位"
+        procedure_content: "處理狀況"
+        procedure_result: "處理結果"
+        procedure_no: "處理案號"
+        procedure_date: "日期"
+        suit_no: "案例編號"
+        source: "資料來源名稱"
+        source_link: "資料來源連結"
+        punish_link: "懲處網址"
+        file: "相關文件（上傳文件用）"
+        memo: "備註"

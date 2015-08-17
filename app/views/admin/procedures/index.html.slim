@@ -1,0 +1,30 @@
+= admin_widget_box "#{@suit.title}的案例處理經過列表", icon: :pencil do
+  .dataTables_wrapper
+    div
+      .dataTables_length
+        = link_to "新增#{@suit.title}的案例處理經過", new_admin_suit_procedure_path(@suit), class: "btn btn-primary btn-mini"
+    table.table.table-bordered.table-striped.table-hover
+      thead
+        tr
+          th #
+          th 姓名
+          th 服務機關/職稱
+          th 處理狀況
+          th 日期
+          th 備註
+          th
+      tbody
+        - @procedures.each do |procedure|
+          tr
+            td= procedure.id
+            td= procedure.profile.name
+            td= "#{procedure.unit} / #{procedure.title}"
+            td= procedure.procedure_content
+            td= procedure.procedure_date
+            td= procedure.memo
+            td
+              = link_to "編輯", edit_admin_suit_procedure_path(@suit, procedure), class: "btn btn-mini btn-success"
+              | &nbsp;
+              = link_to "刪除", admin_suit_procedure_path(@suit, procedure), class: "btn btn-mini btn-danger", method: :delete, "data-confirm" => "確認刪除#{@suit.title}的案例處理經過？"
+    .ui-toolbar.ui-widget-header
+      = paginate @procedures, theme: :admin
