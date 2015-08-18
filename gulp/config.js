@@ -21,15 +21,18 @@ module.exports = {
     }
   },
   images: {
-    src: sourceFiles + "/images/**",
+    src: sourceFiles + "/images/**/*.{jpg,gif,png}",
     dest: publicAssets + "/images",
-    options: {
-      svgoPlugins: [
-        {cleanupIDs: true},
-        {removeComments: true},
-        {removeDesc: true }
-      ]
-    }   
+    options: {}
+  },
+  svgs: {
+    src: sourceFiles + "/images/*.svg",
+    dest: publicAssets + "/images",
+    options: [
+      {cleanupIDs: true},
+      {removeComments: true},
+      {removeDesc: true }
+    ]
   },
   browserify: {
     bundleConfigs: [{
