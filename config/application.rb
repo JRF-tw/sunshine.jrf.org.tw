@@ -38,6 +38,7 @@ module JrfSunny
     config.i18n.enforce_available_locales = false
     config.i18n.default_locale = "zh-TW"
 
+    PRECOMPILE_FILES = ['priority.js']
     # Make public assets requireable in manifest files
     config.assets.paths << Rails.root.join("public", "assets", "stylesheets")
     config.assets.paths << Rails.root.join("public", "assets", "javascripts")

@@ -30,6 +30,7 @@ Rails.application.configure do
   # Disables appending md5 hashes for caching with future expire headers.
   # BrowserSync can reference and replace them properly as they get changed.
   config.assets.digest = false
+  config.assets.precompile += JrfSunny::Application::PRECOMPILE_FILES
 
   # Adds additional error checking when serving assets at runtime.
   # Checks for improperly declared sprockets dependencies.
