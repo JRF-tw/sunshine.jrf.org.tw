@@ -32,6 +32,7 @@ FactoryGirl.define do
       FactoryGirl.create :profile
     end
     career_type "調派"
+    publish_at Date.today
   end
 
 end
