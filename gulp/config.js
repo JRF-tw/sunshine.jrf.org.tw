@@ -55,6 +55,7 @@ module.exports = {
     src: sourceFiles + '/icons/**',
     view: views + '/_svgs.slim',
     dest: views,
+    prefix: 'icon-',
     options: {
       inlineSvg: true
     },
