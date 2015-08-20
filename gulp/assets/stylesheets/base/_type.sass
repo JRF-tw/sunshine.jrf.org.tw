@@ -1,5 +1,5 @@
-//  Type
-//  ====
+// Type
+// ====
 
 %body
   p, ul, ol, dl, pre, blockquote
@@ -15,15 +15,50 @@
     margin-left: 0
     +trailer
     ul, ol
-      padding-left: ms(1)
+      // padding-left: ms(1)
       margin-top: 0
 
 %type
   @extend %headings
   @extend %body
 
-//  Selection style
-//  ===============
+// Element Typography
+// ==================
+%indent-font
+  +font(32, 40)
+
+%lead
+  +font(22, 40)
+
+%sub
+  +font(18, 30)
+
+%nav-font
+  +font(18, 40)
+
+%page-font
+  +font(18, 18)
+
+%list-font
+  +font(16, 28)
+
+%date-font
+  +font(15, 20)
+
+%copy-font
+  +font(13, 20)
+
+%label-font
+  +font(13, 21)
+
+%year-font
+  +font(12, 12)
+
+%button-font
+  +adjust-font-size-to(15px)
+
+// Selection style
+// ===============
 
 \::selection
   text-shadow: none
