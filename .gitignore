@@ -19,12 +19,21 @@ config/database.yml
 /config/application.yml
 .DS_Store
 
-/public/assets
 /.capistrano/*
+
+# Ignore bower and node modules to reduce commit size.
+# Remember to run `bower install` and `npm install` after pulling from GitHub.
 /vendor/assets/bower_components
 /node_modules
+
+# Ignore compiled assets by Gulp to prevent rev issue.
+# Capistranno will execute Gulp to compile the assets during deploy process.
+/public/assets
+
+# My sublime reference
 jrf.sublime-workspace
 jrf.sublime-project
-dump.rdb
+todo.TODO
 
+dump.rdb
 *.log

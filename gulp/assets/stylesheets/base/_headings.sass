@@ -4,19 +4,28 @@
 %h1
   +leader
   +trailer
-  +adjust-font-size-to(ms(2))
+  +adjust-font-size-to(42px)
 
 %h2
   +leader
   +trailer
-  +adjust-font-size-to(ms(1))
+  +adjust-font-size-to(34px)
 
 %h3
   +leader
   +trailer
-  +adjust-font-size-to(ms(0))
+  +adjust-font-size-to(24px)
 
 %headings
   @for $i from 1 through 3
     h#{$i}
       @extend %h#{$i}
+
+%cart-heading
+  +adjust-font-size-to(28px)
+
+%sub-heading
+  +font(18, 40)
+
+%footer-heading
+  +font(15, 20)

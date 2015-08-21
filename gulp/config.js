@@ -1,4 +1,5 @@
 var manifestAssets = "./app/assets";
+var components     = "./app/views/components";
 var publicAssets   = "./public/assets";
 var sourceFiles    = "./gulp/assets";
 var bowerFiles     = "./vendor/assets/bower_components";
@@ -20,8 +21,18 @@ module.exports = {
     }
   },
   images: {
-    src: sourceFiles + "/images/**",
-    dest: publicAssets + "/images"
+    src: sourceFiles + "/images/**/*.{jpg,gif,png}",
+    dest: publicAssets + "/images",
+    options: {}
+  },
+  svgs: {
+    src: sourceFiles + "/images/*.svg",
+    dest: publicAssets + "/images",
+    options: [
+      {cleanupIDs: true},
+      {removeComments: true},
+      {removeDesc: true }
+    ]
   },
   browserify: {
     bundleConfigs: [{
@@ -42,6 +53,16 @@ module.exports = {
   },
   svgSprite: {
     src: sourceFiles + '/icons/**',
-    dest: publicAssets + '/images'
+    view: components + '/_svgs.slim',
+    dest: components,
+    prefix: 'icon-',
+    options: {
+      inlineSvg: true
+    },
+    minOptions: [
+      {cleanupIDs: true},
+      {removeComments: true},
+      {removeDesc: true}
+    ]
   }
 };

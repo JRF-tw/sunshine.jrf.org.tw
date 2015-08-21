@@ -2,3 +2,15 @@
 //  ============
 
 // @import "mixins/parrallax";
+
+=font($font, $lh)
+  @if $rhythm-unit == rem
+    font-size: scut-rem($font)
+    line-height: scut-rem($lh)
+  @else
+    font-size: $font + 'px'
+    line-height: $lh + 'px'
+
+=susy($map)
+  +susy-breakpoint(map-get($map, query), map-get($map, layout))
+    @content

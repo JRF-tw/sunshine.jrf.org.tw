@@ -9,10 +9,10 @@ $susy: (
   container: auto,          // <length> | auto
   container-position: center,
   // left | center | right | <length> [*2]
-  columns: 4,               // <number> | <list>
+  columns: 5,               // <number> | <list>
   gutters: .25,             // <ratio>
   // 960gs = 16px / 64px
-  column-width: false,      // <length> | false/null
+  column-width: 4em,      // <length> | false/null
   // 960gs = 64px
   global-box-sizing: content-box,
   // border-box | content-box
@@ -31,4 +31,21 @@ $susy: (
     clearfix: false,
     rem: true,
   )
+);
+
+$pad-breakpoint: container(9);
+$pad-layout: 9;
+$pad: (
+  query: $pad-breakpoint,
+  layout: $pad-layout,
+);
+$desktop-breakpoint: scut-em(1000);
+$desktop-layout: scut-em(1000) 12;
+$desktop: (
+  query: $desktop-breakpoint,
+  layout: $desktop-layout,
+);
+$susy-media: (
+  pad: $pad-breakpoint,
+  desktop:  $desktop-breakpoint,
 );

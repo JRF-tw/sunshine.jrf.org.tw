@@ -19,12 +19,14 @@ module MetaTagHelper
     set_meta_tags(data.merge(
       :reverse => default_meta[:reverse], 
       :separator => default_meta[:separator], 
-      :canonical => url
+      :canonical => url,
+      :viewport => default_meta[:viewport]
     ))
   end
 
   def default_meta
     { title: "My app",
+      viewport: "width=device-width, initial-scale=1.0, user-scalable=no",
       description: "5Fpro awesome!",
       keywords: "5fpro",
       fb_app_id: "12341234",

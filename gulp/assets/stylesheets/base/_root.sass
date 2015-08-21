@@ -2,8 +2,7 @@
 //  ====
 
 +establish-baseline
-
-// @import bower_components/sass-toolkit/stylesheets/toolkit/kickstart
+@import vendor/assets/bower_components/sass-toolkit/stylesheets/toolkit/kickstart
 
 html
   font-family: $sans
@@ -16,8 +15,12 @@ html
 textarea
   resize: vertical
 
-img
+img, svg
   vertical-align: middle
+
+img[data-sizes="auto"]
+  display: block
+  width: 100%
 
 .cf
   @extend %scut-clearfix
