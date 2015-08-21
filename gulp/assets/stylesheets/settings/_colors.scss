@@ -68,3 +68,15 @@ $link-hover-color:   #912200 !default;
 $link-focus-color:     false !default;
 $link-active-color:    false !default;
 $link-visited-color:   false !default;
+
+// {{ Gradient }}
+// --------------
+%gradient--gray {
+  background-image: linear-gradient(to bottom, #e3e3e3 0%, #e4e4e4 4%, #ffffff 15%, #ffffff 100%);
+}
+%gradient--purple {
+  background: linear-gradient(to bottom, #c7a4e0 0%, #c8a5e1 1%, #eed6ff 5%, #eed6ff 45%, #eed6ff 100%);
+}
+%gradient--blue {
+  background: linear-gradient(to bottom, #acc2f5 0%, #adc3f5 2%, #ebf1ff 4%, #ebf1ff 39%, #ebf1ff 100%);
+}

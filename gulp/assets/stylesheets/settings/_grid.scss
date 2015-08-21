@@ -9,7 +9,7 @@ $susy: (
   container: auto,          // <length> | auto
   container-position: center,
   // left | center | right | <length> [*2]
-  columns: 5,               // <number> | <list>
+  columns: 6,               // <number> | <list>
   gutters: .25,             // <ratio>
   // 960gs = 16px / 64px
   column-width: 4em,      // <length> | false/null
