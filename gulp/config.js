@@ -1,5 +1,5 @@
 var manifestAssets = "./app/assets";
-var views          = "./app/views";
+var components     = "./app/views/components";
 var publicAssets   = "./public/assets";
 var sourceFiles    = "./gulp/assets";
 var bowerFiles     = "./vendor/assets/bower_components";
@@ -53,8 +53,8 @@ module.exports = {
   },
   svgSprite: {
     src: sourceFiles + '/icons/**',
-    view: views + '/_svgs.slim',
-    dest: views,
+    view: components + '/_svgs.slim',
+    dest: components,
     prefix: 'icon-',
     options: {
       inlineSvg: true

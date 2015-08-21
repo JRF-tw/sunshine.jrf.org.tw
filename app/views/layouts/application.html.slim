@@ -9,7 +9,11 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
 
-    = render partial: './svgs'
+    = render partial: 'components/svgs'
   
   body
-    = yield
+    .page-wrapper
+      
+      main.main role='main' = yield
+      
+      = render partial: 'components/main_footer'
