@@ -1,3 +1,5 @@
 .container
   h1 首頁
-  = rias_holder
+
+= render partial: 'people', locals: {heading: '認識法官', color: 'blue'}
+= render partial: 'people', locals: {heading: '認識檢察官', color: 'purple'}

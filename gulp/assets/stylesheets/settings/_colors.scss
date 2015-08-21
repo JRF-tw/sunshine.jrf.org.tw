@@ -47,7 +47,7 @@ $gray-dark:    #7f8c8d;
 //  -------
 
 // $alt: $theme;
-
+$purple: #44008a;
 
 
 //  Texts
@@ -79,4 +79,11 @@ $link-visited-color:   false !default;
 }
 %gradient--blue {
   background: linear-gradient(to bottom, #acc2f5 0%, #adc3f5 2%, #ebf1ff 4%, #ebf1ff 39%, #ebf1ff 100%);
+}
+
+.gradient--blue {
+  @extend %gradient--blue;
+}
+.gradient--purple {
+  @extend %gradient--purple;
 }

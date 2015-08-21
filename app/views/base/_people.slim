@@ -1,0 +1,10 @@
+section.section-people class="gradient--#{color}"
+  .container
+    h2.section-heading--black = heading
+
+    ul.list--avatar
+      - 6.times do
+        li.list--avatar__cell
+          = link_to '#link', class: 'avatar' do
+            .avatar__pic-wrapper = render partial: 'avatar_pic'
+            p.avatar__name = zh_lorem_name
