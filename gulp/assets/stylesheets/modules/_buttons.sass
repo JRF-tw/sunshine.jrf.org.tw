@@ -1,15 +1,12 @@
 %button-base
+  @extend %button-font
   display: inline-block
-  padding: 0 rhythm(0.5)
+  padding: 0 scut-rem(11)
   text-align: center
-  border-radius: 3px
-  +adjust-font-size-to(13px, 1.5)
+  border-radius: scut-rem(8)
+  border: none
+  outline: none
 
-// @each $color, $code in $colors {
-//   .button--#{$color} {
-//     @extend %button-base;
-//     @include scut-color-swap(#fff $code, #fff darken($code, 10%));
-//   }
-// }
-
-// [class^="button--"] + [class^="button--"] {margin-left: rhythm(.5);}
+.button--gray
+  @extend %button-base
+  +scut-color-swap(#fff #a0a0a0, #fff #777)
