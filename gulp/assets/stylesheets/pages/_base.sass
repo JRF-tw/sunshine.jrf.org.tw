@@ -1,2 +1,31 @@
 .section-people
   +scut-padding(scut-rem(54) n)
+
+.base__feature-posts
+  padding: scut-rem(30) 0
+
+  +susy($pad)
+    .feature-post
+      $layout: (320px 35px)
+      &:first-child
+        +full
+        .feature-post__button-wrapper
+          display: none
+      &:nth-child(2)
+        +span(1 of 2 $layout)
+      &:nth-child(3)
+        +span(last 1 of 2 $layout)
+
+  +susy($desktop)
+    padding: scut-rem(52) 0
+    .feature-post
+      $layout: (272px 41px)
+      margin-top: 0
+      &:first-child
+        +span(1 of 3 $layout)
+        .feature-post__button-wrapper
+          display: block
+      &:nth-child(2)
+        +span(1 of 3 $layout)
+      &:last-child
+        +span(last 1 of 3 $layout)

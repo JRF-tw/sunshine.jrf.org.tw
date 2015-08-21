@@ -1,5 +1,20 @@
 .container
   h1 首頁
 
+section.container
+  .base__feature-posts.cf
+    - 3.times do
+      article.feature-post
+        = link_to '#link', class: 'feature-post__wrapper' do
+          .feature-post__pic-wrapper
+            = render partial: 'feature_post_pic'
+            span.feature-post__label 未受懲處
+
+          h3.feature-post__heading
+            = zh_lorem_sentence.truncate 12
+
+        .feature-post__button-wrapper
+          = link_to '了解更多', '#link', class: 'button--gray'
+
 = render partial: 'people', locals: {heading: '認識法官', color: 'blue'}
 = render partial: 'people', locals: {heading: '認識檢察官', color: 'purple'}
