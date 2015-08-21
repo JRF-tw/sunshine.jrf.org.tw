@@ -21,9 +21,9 @@
     "scut": "~1.2.1",
     "normalize-scss": "~3.0.3",
     "picturefill": "~2.3.1",
-    "compass-mixins": "~1.0.2",
     "susy": "~2.2.5",
     "lazysizes": "~1.1.5",
-    "sass-toolkit": "~2.9.0"
+    "sass-toolkit": "~2.9.0",
+    "vertical-rhythms-without-compass": "~1.0.1"
   }
 }
