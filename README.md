@@ -77,7 +77,7 @@ Gulp Rails
 
 2. 安裝 Node
 
-        nvm install
+        nvm install stable
 
 3. 安裝 Gulp 與 Bower
 
