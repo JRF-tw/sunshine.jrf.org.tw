@@ -1,12 +1,10 @@
 var gulp        = require('gulp');
-var changed     = require('gulp-changed');
 var responsive  = require('gulp-responsive');
 var browserSync = require('browser-sync');
 var config      = require('../config').responsive;
 
 gulp.task('responsive', function () {
   return gulp.src(config.src)
-    .pipe(changed(config.dest))
     .pipe(responsive(buildSet(config.sets)))
     .pipe(gulp.dest(config.dest))
     .pipe(browserSync.reload({stream:true}));    
