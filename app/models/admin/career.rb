@@ -30,4 +30,12 @@ class Admin::Career < ::Career
   belongs_to :profile, :class_name => "Admin::Profile"
   
   validates_presence_of :profile_id, :career_type, :publish_at
+
+  after_save :update_profile_current_court
+
+  private
+
+  def update_profile_current_court
+   	profile.update_column :current_court, new_unit if new_unit
+  end 
 end

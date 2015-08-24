@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150811074619) do
+ActiveRecord::Schema.define(version: 20150824104016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
   enable_extension "postgis"
+  enable_extension "hstore"
 
   create_table "articles", force: true do |t|
     t.integer  "profile_id"
@@ -212,9 +212,11 @@ ActiveRecord::Schema.define(version: 20150811074619) do
     t.text     "memo"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "current_court"
   end
 
   add_index "profiles", ["current"], :name => "index_profiles_on_current"
+  add_index "profiles", ["current_court"], :name => "index_profiles_on_current_court"
 
   create_table "punishments", force: true do |t|
     t.integer  "profile_id"

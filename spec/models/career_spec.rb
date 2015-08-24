@@ -2,20 +2,28 @@
 #
 # Table name: careers
 #
-#  id          :integer          not null, primary key
-#  profile_id  :integer
-#  career_type        :string(255)
-#  older       :hstore
-#  newer       :hstore
-#  start_at    :date
-#  end_at      :date
-#  publish_at  :date
-#  source      :text
-#  source_link :string(255)
-#  origin_desc :text
-#  memo        :text
-#  created_at  :datetime
-#  updated_at  :datetime
+#  id                  :integer          not null, primary key
+#  profile_id          :integer
+#  career_type         :string(255)
+#  old_unit            :string(255)
+#  old_title           :string(255)
+#  old_assign_court    :string(255)
+#  old_assign_judicial :string(255)
+#  old_pt              :string(255)
+#  new_unit            :string(255)
+#  new_title           :string(255)
+#  new_assign_court    :string(255)
+#  new_assign_judicial :string(255)
+#  new_pt              :string(255)
+#  start_at            :date
+#  end_at              :date
+#  publish_at          :date
+#  source              :text
+#  source_link         :string(255)
+#  origin_desc         :text
+#  memo                :text
+#  created_at          :datetime
+#  updated_at          :datetime
 #
 
 require 'rails_helper'
@@ -32,5 +40,13 @@ RSpec.describe Career, type: :model do
     profile = career.profile
     profile.destroy
     expect(Career.count).to be_zero
+  end
+
+  it "after_save :update_profile_current_court" do
+    profile = FactoryGirl.create :profile
+    career = Admin::Career.create profile_id: profile.id, career_type: 'aa', publish_at: Date.today
+    expect(profile.reload.current_court).to be_nil
+    career.update_attributes new_unit: 'foobar'
+    expect(profile.reload.current_court).to eq('foobar')
   end
 end
