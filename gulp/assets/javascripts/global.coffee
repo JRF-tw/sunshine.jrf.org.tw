@@ -1,1 +1,4 @@
-console.log 'required owl carousel!'
+carousel = require './carousel'
+
+$(document).on 'page:change', ->
+  carousel()

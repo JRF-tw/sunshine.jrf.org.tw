@@ -8,5 +8,8 @@
 #= require jquery_ujs
 #= require turbolinks
 
+# Bower components
+#= require slick-carousel
+
 # Pull compiled from /public/assets/javascripts
 #= require global
