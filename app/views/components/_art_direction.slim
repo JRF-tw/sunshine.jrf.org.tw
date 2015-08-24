@@ -1,0 +1,17 @@
+| <picture>
+    <!--[if IE 9]><audio><![endif]-->
+    <source
+            data-srcset="#{gulp_asset_path('images/demo-rwd-dist/banner-1-L.png')}"
+            media="--desktop" />
+    <source
+            data-srcset="#{gulp_asset_path('images/demo-rwd-dist/banner-1-M.png')}"
+            media="--pad" />
+    <source
+            data-srcset="#{gulp_asset_path('images/demo-rwd-dist/banner-1-S.png')}" />
+    <!--[if IE 9]></audio><![endif]-->
+    <img
+        src="#{gulp_asset_path('images/demo-rwd-dist/banner-1-S.png')}"
+        data-sizes="auto"
+        class="lazyload"
+        alt="" />
+  </picture>

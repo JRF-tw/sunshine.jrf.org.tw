@@ -52,5 +52,6 @@ $susy-media: (
 
 html:after {
   display: none;
-  content: "--pad: (min-width: #{$pad-breakpoint}) | --desktop: (min-width: #{$desktop-breakpoint})";
+  // content: "--pad: (min-width: #{$pad-breakpoint}) | --desktop: (min-width: #{$desktop-breakpoint})";
+  content: "--pad: (min-width: 704px) | --desktop: (min-width: 1000px)";
 }

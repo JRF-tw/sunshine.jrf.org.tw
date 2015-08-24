@@ -73,7 +73,10 @@ module.exports = {
     dest: sourceFiles + '/images/demo-rwd-dist',
     sets: [
       {name: 'people-*.jpg', widths: [540, 360, 240, 180]},
-      {name: 'case-*.jpg', widths: [1512, 1080, 900, 720,  540, 360]}
+      {name: 'case-*.jpg', widths: [1512, 1080, 900, 720,  540, 360]},
+      {name: 'banner-*-S.png', widths: [360, 540, 720, 1080, 1296]},
+      {name: 'banner-*-M.png', widths: [900, 1080, 1512, 1728, 1944]},
+      {name: 'banner-*-L.png', widths: [1080, 1296, 2160, 2592]}
     ]
   }
 };
