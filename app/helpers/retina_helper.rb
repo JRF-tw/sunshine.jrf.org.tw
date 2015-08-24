@@ -7,20 +7,17 @@ module RetinaHelper
   end
   
   def rias_holder(name)
-    tag :img, class: "lazyload #{name}", alt: '', 'data-sizes' => 'auto', 'data-src' => 'http://placehold.it/{width}'
+    tag :img, class: "#{name} lazyload", alt: '', 'data-sizes' => 'auto', 'data-src' => 'http://placehold.it/{width}'
   end
 
-  def image_srcset(asset_path, sizes, name)
-    tag :img, class: "lazyload #{name}", 'data-sizes' => 'auto', 'data-srcset' => rwd_srcset(gulp_asset_path("images/#{asset_path}"), sizes)
-  end
+  def rias_srcset(asset_path, sizes, name)
+    _src  = asset_path.gsub(/\./) { |match| "-#{sizes.min}." }  # 最小的當 fallback 圖片
+    _path = gulp_asset_path("images/#{asset_path}") # 其他尺寸的要抓出完整路徑來處理
 
-  def rwd_srcset(asset_path, sizes)
-    srcset = []
-    sizes.each do |size|
-      dest_path = asset_path.gsub(/\./) { |match| "-#{size}." }
-      srcset.push "#{dest_path} #{size}w"
-    end
-    return srcset.join ', '
+    image_tag _src, class: "#{name} lazyload",
+      'data-sizes'  => 'auto',
+      'data-srcset' => _path.gsub(/\./) { |match| '-{width}.' },
+      'data-widths' => sizes.to_s # 縮放後的尺寸列表以陣列來帶入
   end
 
 end
