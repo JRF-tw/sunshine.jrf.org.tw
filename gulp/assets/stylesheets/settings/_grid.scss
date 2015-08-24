@@ -49,3 +49,8 @@ $susy-media: (
   pad: $pad-breakpoint,
   desktop:  $desktop-breakpoint,
 );
+
+html:after {
+  display: none;
+  content: "--pad: (min-width: #{$pad-breakpoint}) | --desktop: (min-width: #{$desktop-breakpoint})";
+}
