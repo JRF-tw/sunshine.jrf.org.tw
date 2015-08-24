@@ -3,11 +3,11 @@
 
 section.container
   .base__feature-posts.cf
-    - 3.times do
+    - 1.upto 3 do |i|
       article.feature-post
         = link_to '#link', class: 'feature-post__wrapper' do
           .feature-post__pic-wrapper
-            = render partial: 'feature_post_pic'
+            = render partial: 'feature_post_pic', locals: {num: i}
             span.feature-post__label 未受懲處
 
           h3.feature-post__heading
@@ -16,5 +16,7 @@ section.container
         .feature-post__button-wrapper
           = link_to '了解更多', '#link', class: 'button--gray'
 
-= render partial: 'people', locals: {heading: '認識法官', color: 'blue'}
-= render partial: 'people', locals: {heading: '認識檢察官', color: 'purple'}
+= render partial: 'people',
+  locals: {heading: '認識法官', color: 'blue', avatar_offset: 0}
+= render partial: 'people',
+  locals: {heading: '認識檢察官', color: 'purple', avatar_offset: 12}
