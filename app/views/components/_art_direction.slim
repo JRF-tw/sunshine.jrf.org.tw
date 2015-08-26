@@ -2,24 +2,21 @@ picture
   | <!--[if IE 9]><audio><![endif]-->
   source[
     data-srcset="#{gulp_asset_path("images/demo-rwd-dist/#{pic}-L-{width}.jpg")}"
-    data-parent-fit="cover"
     media="--desktop"
   ]
   source[
       data-srcset="#{gulp_asset_path("images/demo-rwd-dist/#{pic}-M-{width}.jpg")}"
-      data-parent-fit="cover"
       media="--pad"
   ]
   source[
       data-srcset="#{gulp_asset_path("images/demo-rwd-dist/#{pic}-S-{width}.jpg")}"
-      data-parent-fit="cover"
   ]
   | <!--[if IE 9]></audio><![endif]-->
   img[
     src="#{gulp_asset_path("images/demo-rwd-dist/#{pic}-S-360.jpg")}"
+    data-parent-fit="cover"
     data-widths="[360, 540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2160, 2592]"
     data-sizes="auto"
     class="lazyload"
     alt=""
-    data-parent-fit="cover"
   ]

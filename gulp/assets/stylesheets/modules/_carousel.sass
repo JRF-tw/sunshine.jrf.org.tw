@@ -1,20 +1,34 @@
+// Banner 的極限寬度
+$carousel-width-max: 2000
+
 .hero-carousel
-  $banner-width: 2000
-  +ir(1296/1944, 100%)
-  max-width: scut-rem($banner-width)
+  +ir(1296/1944, 100%) // 初始比例
+  max-width: scut-rem($carousel-width-max)
   margin: 0 auto
   z-index: index($layers, hero-carousel)
-  
-  +susy($pad)
+    
+  // 限制高度 500px 的 pad 狀態
+  +susy-media(medium)
+    $carousel-height: scut-rem(500)
     padding: 0
-    height: 500px
-  
+    height: $carousel-height
+    .lazyloaded
+      min-height: $carousel-height
+
+  // 桌面版比例
   +susy($desktop)
     +ir(2592/1296, 100%)
-    height: auto
   
-  +susy-media(scut-em($banner-width))
-    padding: 0
+// 超過「極限寬度」以後
++susy-media(scut-em($carousel-width-max))
+  // 防止 hero nav 超出 carousel 範圍
+  .base-hero
+    max-width: scut-rem($carousel-width-max)
+    margin: 0 auto
+
+  .hero-carousel
+    padding: 0    // reset ratio
+    height: auto  // reset ratio
     & > *
       position: static
       height: auto !important

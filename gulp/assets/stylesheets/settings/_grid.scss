@@ -46,8 +46,7 @@ $desktop: (
   layout: $desktop-layout,
 );
 $susy-media: (
-  pad: $pad-breakpoint,
-  desktop:  $desktop-breakpoint,
+  medium: $pad-breakpoint $desktop-breakpoint,
 );
 
 html:after {
