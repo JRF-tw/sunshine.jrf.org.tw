@@ -47,6 +47,8 @@ $desktop: (
 );
 $susy-media: (
   medium: $pad-breakpoint $desktop-breakpoint,
+  footer-address-break: $pad-breakpoint,
+  footer-address-nowrap: scut-rem(831),
 );
 
 html:after {

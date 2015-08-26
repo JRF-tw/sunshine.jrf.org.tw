@@ -1,14 +1,16 @@
-//  Sticky footer
-//  =============
+// {{ Sticky footer ---------------- }}
 
-$footer-height: 258px
-$root-selector: unquote("#page")
-$root-footer-selector: unquote("#push")
-$footer-selector: unquote("#ft")
+// $footer-height: (338)
+$wrapper-selector: unquote(".page-wrapper")
+$footer-selector: unquote(".main-footer")
 
-// @include sticky-footer($footer-height, "#{$root-selector}", "#{$root-footer-selector}", "#{$footer-selector}");
++scut-sticky-footer-fixed(scut-rem(338), $wrapper-selector, $footer-selector)
++susy-media(footer-address-break)
+  +scut-sticky-footer-fixed(scut-rem(208), $wrapper-selector, $footer-selector)
++susy-media(footer-address-nowrap)
+  +scut-sticky-footer-fixed(scut-rem(188), $wrapper-selector, $footer-selector)
 
-// +scut-sticky-footer-fluid('.page-wrapper', '.main-footer')
+// 
 
 .main-footer
   .left
