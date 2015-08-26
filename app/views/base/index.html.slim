@@ -1,14 +1,15 @@
 section.base-hero
   .base-hero__mask
-    h1.base-logo 司法陽光網
-    p.base-slogan 揭開司法的神秘面紗
-    nav.base-nav
-      ul.base-nav__cells
-        li = link_to '司法恐龍面面觀', '#link', class: 'base-nav__cell'
-        li = link_to '認識法官', '#link', class: 'base-nav__cell'
-        li = link_to '認識檢察官', '#link', class: 'base-nav__cell'
-        li = link_to '關於我們', '#link', class: 'base-nav__cell'
-        li = link_to '我想找', '#link', class: 'base-nav__cell'
+    .wrapper
+      h1.base-logo 司法陽光網
+      p.base-slogan 揭開司法的神秘面紗
+      nav.base-nav
+        ul.base-nav__cells
+          li = link_to '司法恐龍面面觀', '#link', class: 'base-nav__cell'
+          li = link_to '認識法官', '#link', class: 'base-nav__cell'
+          li = link_to '認識檢察官', '#link', class: 'base-nav__cell'
+          li = link_to '關於我們', '#link', class: 'base-nav__cell'
+          li = link_to '我想找', '#link', class: 'base-nav__cell'
 
   #hero-carousel.hero-carousel
     .hero-carousel__cell = render partial: 'components/art_direction', locals: {pic: 'banner-1'}

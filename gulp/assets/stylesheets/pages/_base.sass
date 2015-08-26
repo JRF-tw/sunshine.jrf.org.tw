@@ -1,6 +1,45 @@
-.section-people
-  +scut-padding(scut-rem(54) n)
+// {{首頁 Hero -----------}}
+.base-hero
+  position: relative
 
+.base-hero__mask
+  +scut-absolute(0 n n 0)
+  +scut-size(100%)
+  text-align: center
+  z-index: index($layers, hero-mask)
+  background-color: rgba(255,255,255,.8)
+  .wrapper
+    +scut-center-transform(y)
+    width: 100%
+
+.base-logo
+  @extend %scut-image-replace
+  margin: 
+    top: 0
+    bottom: scut-rem(16)
+  height: scut-rem(88)
+  background: image-url('logo.svg') center center no-repeat
+  background-size: contain
+
+.base-slogan
+  +adjust-font-size-to(24px)
+  margin: 
+    top: 0
+    bottom: scut-rem(30)
+
+.base-nav__cells
+  @extend %scut-list-unstyled
+
+.base-nav__cell
+  @extend %lead
+  color: #5d5d5d !important
+
+  +susy($pad)
+    +scut-selected
+      border: 1px solid #a0a0a0
+      border-radius: 3px
+
+// {{首頁的文章列表 ---------}}
 .base__feature-posts
   padding: scut-rem(30) 0
 
@@ -29,3 +68,7 @@
         +span(1 of 3 $layout)
       &:last-child
         +span(last 1 of 3 $layout)
+
+// {{法官跟檢察官列表 --------}}
+.section-people
+  +scut-padding(scut-rem(54) n)

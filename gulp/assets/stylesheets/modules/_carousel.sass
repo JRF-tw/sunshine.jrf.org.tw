@@ -1,14 +1,18 @@
 .hero-carousel
   $banner-width: 2000
+  +ir(1296/1944, 100%)
   max-width: scut-rem($banner-width)
   margin: 0 auto
-  +ir(1296/1944, 100%)
+  z-index: index($layers, hero-carousel)
+  
   +susy($pad)
     padding: 0
     height: 500px
+  
   +susy($desktop)
     +ir(2592/1296, 100%)
     height: auto
+  
   +susy-media(scut-em($banner-width))
     padding: 0
     & > *
