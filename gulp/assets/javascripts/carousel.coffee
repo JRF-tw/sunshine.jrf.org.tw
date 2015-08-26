@@ -7,7 +7,7 @@ module.exports = ->
   #   autoplayTimeout: 3000
   #   animateOut: 'fadeOut'
 
-  $('#base-carousel').slick
+  $('#hero-carousel').slick
     dots: false
     infinite: true
     speed: 300
