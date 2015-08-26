@@ -1,8 +1,8 @@
-var manifestAssets = "./app/assets";
-var components     = "./app/views/components";
-var publicAssets   = "./public/assets";
-var sourceFiles    = "./gulp/assets";
-var bowerFiles     = "./vendor/assets/bower_components";
+// var manifestAssets = "./app/assets";
+var components     = './app/views/components';
+var publicAssets   = './public/assets';
+var sourceFiles    = './gulp/assets';
+// var bowerFiles     = "./vendor/assets/bower_components";
 
 module.exports = {
   publicAssets: publicAssets,
@@ -11,8 +11,8 @@ module.exports = {
     files: ['./app/views/**']
   },
   sass: {
-    src: sourceFiles + "/stylesheets/**/*.{sass,scss}",
-    dest: publicAssets + "/stylesheets",
+    src: sourceFiles + '/stylesheets/**/*.{sass,scss}',
+    dest: publicAssets + '/stylesheets',
     settings: {
       indentedSyntax: true, // Enable .sass syntax!
       // sourceMap: true,
@@ -21,13 +21,16 @@ module.exports = {
     }
   },
   images: {
-    src: sourceFiles + "/images/**/*.{jpg,gif,png}",
-    dest: publicAssets + "/images",
+    src: [
+      sourceFiles + '/images/**/*.{jpg,gif,png}',
+      '!' + sourceFiles + '/images/demo-rwd-src/*.{jpg,gif,png}'
+    ],
+    dest: publicAssets + '/images',
     options: {}
   },
   svgs: {
-    src: sourceFiles + "/images/*.svg",
-    dest: publicAssets + "/images",
+    src: sourceFiles + '/images/*.svg',
+    dest: publicAssets + '/images',
     options: [
       {cleanupIDs: true},
       {removeComments: true},
@@ -63,6 +66,18 @@ module.exports = {
       {cleanupIDs: true},
       {removeComments: true},
       {removeDesc: true}
+    ]
+  },
+  responsive: {
+    src: sourceFiles + '/images/demo-rwd-src/*.{jpg,png}',
+    dest: sourceFiles + '/images/demo-rwd-dist',
+    sets: [
+      {name: 'people-*.jpg', widths: [540, 360, 240, 180]},
+      {name: 'case-*.jpg', widths: [1512, 1080, 900, 720,  540, 360]},
+      {
+        name: 'banner-*.jpg',
+        widths: [360, 540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2160, 2592]
+      }
     ]
   }
 };

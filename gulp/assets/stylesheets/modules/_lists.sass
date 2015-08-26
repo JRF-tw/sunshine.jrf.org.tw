@@ -1,0 +1,16 @@
+.list--unstyled
+  @extend %scut-list-unstyled
+
+.list--avatar
+  @extend %scut-list-unstyled
+  @extend %scut-clearfix
+
+.list--avatar__cell
+  +gallery(1 of 2 (131px 17px))
+  
+  +susy($pad)
+    +gallery(1 of 3 (131px 17px))
+  
+  +susy($desktop)
+    +gallery(1 of 6 (131px 17px))
+    

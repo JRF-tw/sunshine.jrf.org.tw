@@ -1,3 +1,16 @@
+// RWD toggles
+// -----------
+.show-from-pad
+  display: none
+  +susy($pad)
+    display: block
+
+.hide-from-pad
+  +susy($pad)
+    display: none
+
+// Container
+// ---------
 .container
   +container
   padding: 0 scut-rem(20)
@@ -8,3 +21,6 @@
   
   +susy($desktop)
     +container
+
+// {{Layers ------------}}
+$layers: (hero-carousel, hero-mask)
