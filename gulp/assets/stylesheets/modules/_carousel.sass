@@ -1,11 +1,16 @@
 .base-carousel
-  max-width: scut-rem(2000)
+  $banner-width: 2000
+  max-width: scut-rem($banner-width)
   margin: 0 auto
-
-.base-carousel__cell
+  +ir(1296/1944, 100%)
   +susy($pad)
+    padding: 0
     height: 500px
-  
   +susy($desktop)
+    +ir(2592/1296, 100%)
     height: auto
-
+  +susy-media(scut-em($banner-width))
+    padding: 0
+    & > *
+      position: static
+      height: auto !important

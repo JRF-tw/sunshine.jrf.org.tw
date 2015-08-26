@@ -16,7 +16,8 @@ function widthSet (widths) {
   while (i--) {
     set.push({
       width: widths[i],
-      rename: {suffix: '-' + widths[i]}
+      rename: {suffix: '-' + widths[i]},
+      withoutEnlargement: false
     });
   }
   return set;

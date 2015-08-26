@@ -13,7 +13,7 @@ module.exports = ->
     speed: 300
     fade: true
     cssEase: 'linear'
-    adaptiveHeight: true
+    adaptiveHeight: false
     slidesToShow: 1
     autoplay: true
     autoplaySpeed: 3000
