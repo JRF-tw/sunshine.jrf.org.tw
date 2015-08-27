@@ -1,0 +1,12 @@
+ruby:
+  m_size_path = gulp_asset_path("images/hero-#{type}-M.png")
+  l_size_path = gulp_asset_path("images/hero-#{type}-L.png")
+
+.hero[
+  class="hero--#{type} lazyload"
+  data-bgset="#{m_size_path} 1000w, #{l_size_path} 2000w"
+  data-sizes="auto"
+]
+  h2.hero__heading = heading
+  .text-center
+    p.hero__description = description
