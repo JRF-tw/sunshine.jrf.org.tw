@@ -1,1 +1,40 @@
+.main-header
+  border-bottom: 7px solid $border-gray
 
+.main-header__wrapper
+  padding:
+    top: scut-rem(11)
+    bottom: scut-rem(11)
+  position: relative
+
+// {{Logo ----------------------}}
+.main-logo
+  display: inline-block
+  float: left
+
+.main-logo__icon
+  @extend %scut-image-replace
+  margin: 0
+  width: scut-rem(109)
+  height: scut-rem(40)
+  background: image-url('logo.svg') left center no-repeat
+  background-size: contain
+
+.main-logo__slogan
+  display: none
+
+// {{Mobile nav ----------------}}
+.mb-nav-toggle
+  display: inline-block
+  padding: 0
+  +scut-center-transform(y)
+  +scut-coords(n 0 n n)
+  width: scut-rem(26)
+  background-color: transparent
+  border: none
+  border-radius: 0
+  .bar
+    height: scut-rem(5)
+    background-color: $border-gray
+    + .bar
+      margin-top: scut-rem(3)

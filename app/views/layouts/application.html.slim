@@ -12,7 +12,8 @@ html
   
   body
     .page-wrapper
-      
+      = render partial: 'components/main_header' unless controller.controller_name == 'base' && controller.action_name == 'index'
+        
       main.main role='main' = yield
       
     = render partial: 'components/main_footer'
