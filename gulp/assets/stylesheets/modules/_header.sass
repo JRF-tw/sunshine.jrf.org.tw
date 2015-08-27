@@ -19,9 +19,42 @@
   height: scut-rem(40)
   background: image-url('logo.svg') left center no-repeat
   background-size: contain
+  +susy($desktop)
+    margin-bottom: scut-rem(4)
+    width: scut-rem(154)
+    height: scut-rem(57)
 
 .main-logo__slogan
   display: none
+  +susy($desktop)
+    display: block
+    margin: 0
+    +adjust-font-size-to(17px, .5)
+
+// {{Main nav ------------------}}
+.main-nav
+  display: none
+  +susy($pad)
+    display: block
+    float: right
+
+.main-nav__cells
+  +scut-list-floated(rhythm(.5))
+
+.main-nav__cell
+  +font(18, 20)
+  display: block
+  margin-top: scut-rem(20)
+  vertical-align: bottom
+  position: relative
+  +susy($desktop)
+    margin-top: scut-rem(60)    
+
+  &.active:after
+    content: ""
+    +scut-triangle(up, scut-rem(10) scut-rem(8), $border-gray)
+    +scut-center-transform(x)
+    bottom: scut-rem(-12)
 
 // {{Mobile nav ----------------}}
 .mb-nav-toggle
@@ -33,6 +66,9 @@
   background-color: transparent
   border: none
   border-radius: 0
+  +susy($pad)
+    display: none
+
   .bar
     height: scut-rem(5)
     background-color: $border-gray
