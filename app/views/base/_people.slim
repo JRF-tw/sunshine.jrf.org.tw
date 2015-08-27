@@ -2,6 +2,5 @@ section.section-people class="gradient--#{color}"
   .container
     h2.section-heading--black = heading
 
-    ul.list--avatar
-      = render partial: 'components/avatar_list',
-        locals: {from: from, to: to}
+    = render partial: 'components/avatar_list',
+      locals: {from: from, to: to}
