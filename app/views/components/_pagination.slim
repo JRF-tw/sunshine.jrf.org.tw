@@ -1,0 +1,22 @@
+nav.pagination
+  ul.pagination__cells
+    li
+      = link_to '#link', class: 'pagination__arrow' do
+        = inline_svg 'start-page'
+    li
+      = link_to '#link', class: 'pagination__arrow' do
+        = inline_svg 'pre'
+    
+    li.pagination__cell.active
+      = link_to '1', '#link', class: 'link'
+    
+    - 2.upto 10 do |i|
+      li.pagination__cell
+        = link_to i, '#link', class: 'link'
+
+    li
+      = link_to '#link', class: 'pagination__arrow' do
+        = inline_svg 'next'    
+    li
+      = link_to '#link', class: 'pagination__arrow' do
+        = inline_svg 'end-page'

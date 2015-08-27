@@ -1,0 +1,45 @@
+.pagination
+  +leader()
+  text-align: center
+
+.pagination__cells
+  +scut-list-inline(scut-rem(15))
+
+.pagination__arrow
+  display: inline-block
+  fill: $yellow
+  .start-page,
+  .end-page
+    height: scut-rem(23)
+    width: scut-rem(30)
+  .pre,
+  .next
+    height: scut-rem(23)
+    width: scut-rem(20)
+
+  &:hover
+    fill: $yellow-dark
+
+.pagination__cell
+  +scut-hide-visually
+  +susy($desktop)
+    +reverse-hide-visually
+    vertical-align: middle
+
+  .link
+    $size: scut-rem(36)
+    display: block
+    width: $size
+    text-align: center
+    border-radius: scut-rem(3)
+    color: #fff
+    +scut-vcenter-lh($size)
+    +scut-color-swap($yellow, $yellow-dark, $bg: true)
+  
+  &.active
+    +reverse-hide-visually
+    vertical-align: middle
+
+    .link
+      background-color: $yellow-dark
+    
