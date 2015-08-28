@@ -1,3 +1,7 @@
+ruby:
+  is_base_index =
+    controller.controller_name == 'base' && controller.action_name == 'index'
+
 doctype 5
 html
   head
@@ -11,8 +15,8 @@ html
     = render partial: 'components/svgs'
   
   body
-    .page-wrapper
-      = render partial: 'components/main_header' unless controller.controller_name == 'base' && controller.action_name == 'index'
+    .page-wrapper class="#{'base-page-wrapper' if is_base_index}"
+      = render partial: 'components/main_header' unless is_base_index
         
       main.main role='main' = yield
       
