@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="230px" height="223px" viewBox="0 0 230 223" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+<svg width="30px" height="23px" viewBox="0 0 30 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
     <!-- Generator: Sketch 3.3.3 (12072) - http://www.bohemiancoding.com/sketch -->
     <title>end-page</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-        <g id="end-page" sketch:type="MSLayerGroup" transform="translate(100.000000, 100.000000)">
-            <path d="M0.4,22.5 L10.4,16.7 L10.4,22.5 L29.4,11.5 L10.4,0.5 L10.4,6.3 L0.4,0.5 L0.4,22.5 Z" id="Shape" sketch:type="MSShapeGroup"></path>
+        <g id="end-page-copy" sketch:type="MSLayerGroup" fill="#D8D8D8">
+            <g id="Page-1" sketch:type="MSShapeGroup">
+                <g id="end-page">
+                    <path d="M0.4,22.5 L10.4,16.7 L10.4,22.5 L29.4,11.5 L10.4,0.5 L10.4,6.3 L0.4,0.5 L0.4,22.5 L0.4,22.5 Z"></path>
+                </g>
+            </g>
         </g>
     </g>
 </svg>

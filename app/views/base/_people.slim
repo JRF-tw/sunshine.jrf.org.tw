@@ -2,11 +2,5 @@ section.section-people class="gradient--#{color}"
   .container
     h2.section-heading--black = heading
 
-    ul.list--avatar
-      - 1.upto 12 do |i|
-        li.list--avatar__cell
-          = link_to '#link', class: 'avatar' do
-            .avatar__pic-wrapper
-              = render partial: 'avatar_pic', locals: {num: i + avatar_offset}
-            
-            p.avatar__name = zh_lorem_name
+    = render partial: 'components/avatar_list',
+      locals: {from: from, to: to}

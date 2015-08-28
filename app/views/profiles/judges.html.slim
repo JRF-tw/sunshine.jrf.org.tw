@@ -1,1 +1,11 @@
-| 認識法官
+= render partial: 'components/hero', locals: {\
+    heading: '認識法官',
+    description: '決定當事人一生的法官，究竟有什麼記錄？帶您來看看！',
+    type: "#{controller.controller_name}-#{controller.action_name}"\
+  }
+
+section.section-rhythm.bg-yellow.cf
+  .container
+    = render partial: 'components/avatar_list', locals: {from: 1, to: 18}
+
+    = render partial: 'components/pagination'

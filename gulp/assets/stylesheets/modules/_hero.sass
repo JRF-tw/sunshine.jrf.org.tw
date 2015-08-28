@@ -1,0 +1,26 @@
+.hero
+  padding: scut-rem(75) scut-rem(20)
+  background:
+    color: $blue
+    size: cover
+    position: 50% 50%
+    repeat: no-repeat
+
+.hero--profiles-judges
+  background-position: 0 50%
+
+.hero__heading
+  @extend %hero-heading
+  text-align: center
+  text-shadow: 0 1px .5px #040000;
+  color: #fff
+
+.hero__description
+  display: inline-block
+  margin: 0
+  padding: scut-rem(14)
+  text-align: left
+  +adjust-font-size-to(14px, .5)
+  color: #fff
+  background-color: rgba(0,0,0,.55)
+  border-radius: scut-rem(3)

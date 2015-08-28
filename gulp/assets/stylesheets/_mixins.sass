@@ -15,6 +15,15 @@
   +susy-breakpoint(map-get($map, query), map-get($map, layout))
     @content
 
+=reverse-hide-visually
+  border: 0
+  clip: auto
+  overflow: hidden
+  padding: 0
+  position: static
+  height: auto
+  width: auto
+
 =shareBreakpoints($map, $cssprop: content)
   $description: ''
 

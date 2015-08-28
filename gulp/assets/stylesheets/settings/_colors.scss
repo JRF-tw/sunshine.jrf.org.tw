@@ -49,6 +49,11 @@ $gray-dark:    #7f8c8d;
 // $alt: $theme;
 $purple: #44008a;
 
+$yellow-light: #F7F3E7;
+$yellow:       #dbd3c2;
+$yellow-dark:  #b8af9a;
+
+$border-gray: #b0b0b0;
 
 //  Texts
 //  -----
@@ -87,3 +92,5 @@ $link-visited-color:   false !default;
 .gradient--purple {
   @extend %gradient--purple;
 }
+
+.bg-yellow {background-color: $yellow-light}
