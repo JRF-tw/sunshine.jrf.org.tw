@@ -1,9 +1,9 @@
 @import nav_size_map
 
 .page-wrapper
-  padding-top: $mb-logo-height
+  padding-top: $mb-header-height
   +susy($desktop)
-    padding-top: $main-logo-height
+    padding-top: $main-header-height
 
 .main-header
   +scut-absolute(0 0 n 0)
@@ -67,8 +67,17 @@
 
 // {{Mobile nav ----------------}}
 .mb-nav
-  display: none
-  
+  +scut-absolute($mb-header-height 0 n 0)
+  z-index: index($layers, header)
+.mb-nav__cells
+  @extend %scut-list-unstyled
+.mb-nav__cell
+  +font(24, 50)
+  display: block  
+  text-align: center
+  color: #fff !important
+  background-color: #6A6A6A
+  border-bottom: 1px solid #9D9D9D
   
 .mb-nav-toggle
   display: inline-block

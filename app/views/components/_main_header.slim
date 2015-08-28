@@ -13,7 +13,16 @@ header.main-header
           li = link_to '我想找', '#link', class: 'main-nav__cell'
           li = link_to '關於我們', '#link', class: 'main-nav__cell'
 
-      button.mb-nav-toggle type='button'
+
+      button#mb-nav-toggle.mb-nav-toggle type='button'
         .bar
         .bar
         .bar
+
+    nav#mb-nav.mb-nav
+      ul.mb-nav__cells
+        li = link_to '司法恐龍面面觀', '#link', class: 'mb-nav__cell'
+        li = link_to '認識檢察官', '#link', class: 'mb-nav__cell'
+        li = link_to '認識法官', '#link', class: 'mb-nav__cell'
+        li = link_to '關於我們', '#link', class: 'mb-nav__cell'
+        li = link_to '我想找', '#link', class: 'mb-nav__cell'

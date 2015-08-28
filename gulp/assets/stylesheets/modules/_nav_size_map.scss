@@ -3,7 +3,7 @@ $header-border-size: scut-rem(7);
 $mb-logo-icon-height: scut-rem(40);
 $mb-logo-icon-leader: scut-rem(5);
 $mb-logo-icon-trailer: scut-rem(11);
-$mb-logo-height: 
+$mb-header-height: 
   $mb-logo-icon-height
 + $mb-logo-icon-leader
 + $mb-logo-icon-trailer
@@ -13,7 +13,7 @@ $main-logo-icon-height: scut-rem(57);
 $main-logo-icon-trailer: scut-rem(4);
 $main-logo-slogan-leading: .5;
 $main-logo-slogan-height: rhythm($main-logo-slogan-leading);
-$main-logo-height:
+$main-header-height:
   $mb-logo-icon-leader
 + $mb-logo-icon-trailer
 + $main-logo-icon-height
