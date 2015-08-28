@@ -69,6 +69,9 @@
 .mb-nav
   +scut-absolute($mb-header-height 0 n 0)
   z-index: index($layers, header)
+  +susy($pad)
+    display: none !important
+    
 .mb-nav__cells
   @extend %scut-list-unstyled
 .mb-nav__cell
@@ -80,6 +83,7 @@
   border-bottom: 1px solid #9D9D9D
   
 .mb-nav-toggle
+  $bar-size: scut-rem(5)
   display: inline-block
   padding: 0
   +scut-absolute(n 0 scut-rem(11) n)
@@ -87,11 +91,27 @@
   background-color: transparent
   border: none
   border-radius: 0
+  outline: none
   +susy($pad)
     display: none
 
   .bar
-    height: scut-rem(5)
+    height: $bar-size
     background-color: $border-gray
+    backface-visibility: none
+    transition: transform .2s ease .02s
     + .bar
       margin-top: scut-rem(3)
+
+  &.active
+    .bar
+      margin: 0
+    .bar:first-child
+      transform: rotate(45deg) translateZ(0)
+    .bar:last-child
+      +scut-relative(- $bar-size n n n)
+      transform: rotate(-45deg) translateZ(0)
+
+    .bar:nth-child(2)
+      display: none
+    
