@@ -10,3 +10,17 @@
 .button--gray
   @extend %button-base
   +scut-color-swap(#fff #a0a0a0, #fff #777)
+
+// {{To top button ------------}}
+.to-top
+  +scut-fixed(n 0 0 n)
+  +font(13, 44)
+  display: inline-block
+  z-index: index($layers, to-top)
+  width: scut-rem(60)
+  text-align: center
+  color: #fff
+  border: none
+  outline: none
+  background-color: rgba(0,0,0,.3)
+  border-radius: scut-rem(3) 0 0 scut-rem(3)
