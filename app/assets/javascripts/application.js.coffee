@@ -9,6 +9,7 @@
 #= require turbolinks
 
 # Bower components
+#= require jquery-throttle-debounce/jquery.ba-throttle-debounce
 #= require slick-carousel
 
 # Pull compiled from /public/assets/javascripts
