@@ -14,3 +14,15 @@
 =susy($map)
   +susy-breakpoint(map-get($map, query), map-get($map, layout))
     @content
+
+=shareBreakpoints($map, $cssprop: content)
+  $description: ''
+
+  @each $property, $value in $map
+    @if $description !=  ''
+      $description: $description + ' | '
+    
+    $description: $description + $property +': '+ inspect($value)
+
+  display: none
+  #{$cssprop}:  $description

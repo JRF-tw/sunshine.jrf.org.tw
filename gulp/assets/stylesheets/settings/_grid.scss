@@ -51,7 +51,12 @@ $susy-media: (
   footer-address-nowrap: scut-rem(831),
 );
 
+$breakpoints: (
+  '--small': (max-width: $pad-breakpoint),
+  '--medium': (min-width: $pad-breakpoint),
+  '--large': (min-width: $desktop-breakpoint),
+);
+
 html:after {
-  display: none;
-  content: "--pad: (min-width: #{$pad-breakpoint}) | --desktop: (min-width: #{$desktop-breakpoint})";
+  @include shareBreakpoints($breakpoints);
 }

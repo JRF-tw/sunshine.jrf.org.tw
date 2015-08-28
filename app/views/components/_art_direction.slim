@@ -2,19 +2,18 @@ picture
   | <!--[if IE 9]><audio><![endif]-->
   source[
     data-srcset="#{gulp_asset_path("images/demo-rwd-dist/#{pic}-L-{width}.jpg")}"
-    media="--desktop"
+    media="(min-width: 62.5em)"
   ]
   source[
-      data-srcset="#{gulp_asset_path("images/demo-rwd-dist/#{pic}-M-{width}.jpg")}"
-      media="--pad"
+    data-srcset="#{gulp_asset_path("images/demo-rwd-dist/#{pic}-M-{width}.jpg")}"
+    media="(min-width: 44em)"
   ]
   source[
-      data-srcset="#{gulp_asset_path("images/demo-rwd-dist/#{pic}-S-{width}.jpg")}"
+    data-srcset="#{gulp_asset_path("images/demo-rwd-dist/#{pic}-S-{width}.jpg")}"
   ]
   | <!--[if IE 9]></audio><![endif]-->
   img[
     src="#{gulp_asset_path("images/demo-rwd-dist/#{pic}-S-360.jpg")}"
-    data-parent-fit="cover"
     data-widths="[360, 540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2160, 2592]"
     data-sizes="auto"
     class="lazyload"
