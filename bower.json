@@ -25,6 +25,7 @@
     "lazysizes": "~1.1.5",
     "sass-toolkit": "~2.9.0",
     "vertical-rhythms-without-compass": "~1.0.1",
-    "slick-carousel": "~1.5.8"
+    "slick-carousel": "~1.5.8",
+    "jquery-throttle-debounce": "*"
   }
 }
