@@ -1,10 +1,19 @@
+@import nav_size_map
+
+.page-wrapper
+  padding-top: $mb-logo-height
+  +susy($desktop)
+    padding-top: $main-logo-height
+
 .main-header
-  border-bottom: 7px solid $border-gray
+  +scut-absolute(0 0 n 0)
+  z-index: index($layers, header)
+  border-bottom: $header-border-size solid $border-gray
 
 .main-header__wrapper
   padding:
-    top: scut-rem(11)
-    bottom: scut-rem(11)
+    top: $mb-logo-icon-leader
+    bottom: $mb-logo-icon-trailer
   position: relative
 
 // {{Logo ----------------------}}
@@ -16,20 +25,20 @@
   @extend %scut-image-replace
   margin: 0
   width: scut-rem(109)
-  height: scut-rem(40)
+  height: $mb-logo-icon-height
   background: image-url('logo.svg') left center no-repeat
   background-size: contain
   +susy($desktop)
-    margin-bottom: scut-rem(4)
+    margin-bottom: $main-logo-icon-trailer
     width: scut-rem(154)
-    height: scut-rem(57)
+    height: $main-logo-icon-height
 
 .main-logo__slogan
   display: none
   +susy($desktop)
     display: block
     margin: 0
-    +adjust-font-size-to(17px, .5)
+    +adjust-font-size-to(17px, $main-logo-slogan-leading)
 
 // {{Main nav ------------------}}
 .main-nav
@@ -57,11 +66,14 @@
     bottom: scut-rem(-12)
 
 // {{Mobile nav ----------------}}
+.mb-nav
+  display: none
+  
+  
 .mb-nav-toggle
   display: inline-block
   padding: 0
-  +scut-center-transform(y)
-  +scut-coords(n 0 n n)
+  +scut-absolute(n 0 scut-rem(11) n)
   width: scut-rem(26)
   background-color: transparent
   border: none
