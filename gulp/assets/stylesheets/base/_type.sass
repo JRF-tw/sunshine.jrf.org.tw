@@ -70,3 +70,17 @@ address
 \::selection
   text-shadow: none
   background-color: $blue-light
+
+// {{Article typography ---------}}
+.article-content
+  @extend %type
+  max-width: scut-rem(650)
+  margin: 0 auto
+  
+  p:first-letter
+    +adjust-font-size-to(32px, 1)
+  
+  > :first-child
+    margin-top: 0
+  > :last-child
+    margin-bottom: 0
