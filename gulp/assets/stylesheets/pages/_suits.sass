@@ -44,3 +44,104 @@
       margin-right: scut-rem(28)
       float: left
       width: scut-rem(272)
+
+// {{Suit procedure --------------}}
+.suit-procedure
+  position: relative
+  margin-bottom: scut-rem(51)
+
+.suit-procedure__heading
+  +font(42, 50)
+  margin:
+    top: 0
+    bottom: scut-rem(10)
+  font-weight: normal
+  color: $gray
+
+  +susy($pad)
+    display: inline-block
+    margin:
+      right: scut-rem(19)
+      bottom: 0
+
+.suit-procedure__job
+  +font(14, 35)
+  display: inline-block
+  padding: 0 scut-rem(15)
+  border: scut-rem(1) solid $border-gray
+
+  +susy($pad)
+    font-size: scut-rem(16)
+    +scut-relative(scut-rem(-9) n n n)
+
+.list--suit-process
+  @extend %scut-list-unstyled
+  margin-top: scut-rem(21)
+  +susy($pad)
+    margin-top: scut-rem(30)
+
+.list--suit-process__cell
+  padding-left: scut-rem(38)
+  position: relative
+
+  .cal
+    +scut-absolute(0 n n scut-rem(15))
+    z-index: index($layers, suit-date)
+    display: block
+    text-align: center
+    width: scut-rem(57)
+    border: scut-rem(2) solid $brown-light
+
+  .year
+    +font(12, 12)
+    background-color: $brown-light
+    color: #fff
+    border-bottom: scut-rem(1) solid $brown-light
+
+  .date
+    +font(15, 20)
+    color: $brown-light
+    background-color: #fff
+  
+  .content
+    +adjust-leading-to(.7)
+    padding:
+      left: scut-rem(37)
+      right: scut-rem(15)
+      bottom: scut-rem(20)
+    border-left: scut-rem(14) solid $brown-light
+
+  .doc-num
+    display: block
+    +font(13, 13)
+
+  &:last-child
+    padding-top: scut-rem(15)
+    background-color: #f9f5ec
+    border-bottom: scut-rem(17) solid #ece7db
+
+    .cal
+      top: scut-rem(15)
+
+    .content
+      border-left-color: transparent
+
+.list--suit-process-toggle
+  +font(12, 17)
+  +scut-absolute(n n 0 scut-rem(27))
+  padding: 0
+  color: #c4baa0
+  background-color: transparent
+  outline: none
+  border-radius: 0
+  border: none
+
+  &.close:after    
+    content: ""
+    +scut-triangle(up, scut-rem(33) scut-rem(11), #ece7db)
+    +scut-absolute(scut-rem(-11) n n scut-rem(3))
+
+  &.open:after
+    content: ""
+    +scut-triangle(down, scut-rem(33) scut-rem(11), #ece7db)
+    +scut-absolute(n n scut-rem(-11) scut-rem(3))
