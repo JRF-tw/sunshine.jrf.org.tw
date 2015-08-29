@@ -1,1 +1,17 @@
-| 案例內容
+article
+  = render partial: 'components/hero', locals: {\
+      heading: '檢察總長向總統洩露偵查機密',
+      description: '案例內文短摘要可以放在這個位子案例內文短摘'\
+    }
+
+  .container
+    nav.suits-tab
+      ul.suits-tab__cells
+        li.suits-tab__cell
+          => inline_svg 'case'
+          | 案例故事
+        
+        li.suits-tab__cell
+          = link_to '#link' do
+            => inline_svg 'case-process'
+            | 案例處理經過
