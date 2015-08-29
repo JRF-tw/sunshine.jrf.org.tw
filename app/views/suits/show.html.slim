@@ -6,3 +6,10 @@ article
 
   .container
     = render partial: 'components/suits_tab', locals: {active: 'left'}
+    
+    section.suit-story
+      .suit-story__photo = render partial: 'components/feature_post_pic', locals: {num: 1}
+
+      - 3.times do
+
+        p = zh_lorem_paragraphs(2)

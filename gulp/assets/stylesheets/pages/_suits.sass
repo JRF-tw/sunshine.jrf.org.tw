@@ -1,3 +1,4 @@
+// {{Suits tab ----------------}}
 .suits-tab
   +rhythm-margins(.5)
 
@@ -7,6 +8,12 @@
 
 .suits-tab__cell
   +font(18, 33)
+  
+  +susy($pad)
+    +font(24, 34)    
+    
+    & + .suits-tab__cell
+      margin-left: scut-rem(20)
 
   .link
     +scut-color-swap($gray-dark, $link-hover-color)
@@ -18,7 +25,22 @@
   .case
     +scut-size(scut-rem(33) scut-rem(28))
     fill: currentColor
+    +susy($pad)
+      +scut-size(scut-rem(39) scut-rem(34))
 
   .case-process
     +scut-size(scut-rem(28) scut-rem(26))
     fill: currentColor
+    +susy($pad)
+      +scut-size(scut-rem(33) scut-rem(32))
+
+// {{Suit story -------------------}}
+.suit-story
+  @extend %type
+  +padding-trailer(.5)
+
+  +susy($pad)
+    .suit-story__photo
+      margin-right: scut-rem(28)
+      float: left
+      width: scut-rem(272)
