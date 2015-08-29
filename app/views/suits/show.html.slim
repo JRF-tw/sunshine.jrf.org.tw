@@ -1,7 +1,7 @@
 article
   = render partial: 'components/hero', locals: {\
-      heading: '檢察總長向總統洩露偵查機密',
-      description: '案例內文短摘要可以放在這個位子案例內文短摘'\
+      heading: truncate('檢察總長向總統洩露偵查機密', length: 14),
+      description: truncate('案例內文短摘要可以放在這個位子案例內文短摘', length: 42)\
     }
 
   .container
