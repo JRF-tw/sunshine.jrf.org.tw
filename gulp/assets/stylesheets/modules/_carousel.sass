@@ -35,17 +35,20 @@ $carousel-width-max: 2000
 
 // {{Carousel -----------}}
 .carousel
-  +ir(1296/1944, 100%) // 初始比例
-  margin: 0 auto
+  +ir(1296/1944, 100%, '.slick-list') // 初始比例
+  margin: 0 auto scut-rem(30)
   z-index: index($layers, hero-carousel)
 
   +susy($pad)
+    margin-bottom: 0
     padding-top: 0
-    height: auto    
-    > *
+    height: auto
+    .slick-list
       position: static
 
 .carousel__cell
+  position: relative
+
   .caption
     +scut-absolute(n 0 0 0)
     padding: scut-rem(16)
