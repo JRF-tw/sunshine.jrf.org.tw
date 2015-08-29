@@ -7,10 +7,13 @@
 
 .suits-tab__cell
   +font(18, 33)
-  color: $link-hover-color
 
   .link
     +scut-color-swap($gray-dark, $link-hover-color)
+
+  .active
+    color: $link-hover-color
+    pointer-events: none
 
   .case
     +scut-size(scut-rem(33) scut-rem(28))
