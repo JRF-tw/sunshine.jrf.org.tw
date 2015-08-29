@@ -1,0 +1,21 @@
+.suits-tab
+  +rhythm-margins(.5)
+
+.suits-tab__cells
+  +scut-list-inline(scut-rem(10))
+  text-align: center
+
+.suits-tab__cell
+  +font(18, 33)
+  color: $link-hover-color
+
+  .link
+    +scut-color-swap($gray-dark, $link-hover-color)
+
+  .case
+    +scut-size(scut-rem(33) scut-rem(28))
+    fill: currentColor
+
+  .case-process
+    +scut-size(scut-rem(28) scut-rem(26))
+    fill: currentColor
