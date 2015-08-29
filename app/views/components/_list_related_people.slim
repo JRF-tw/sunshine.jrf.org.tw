@@ -1,0 +1,7 @@
+dl.list-related-people
+  - ['法官', '檢察官'].each do |job|
+    dt.job = job
+    dd.people
+      = link_to zh_lorem_name, '#link'
+      | 、
+      = link_to zh_lorem_name, '#link'

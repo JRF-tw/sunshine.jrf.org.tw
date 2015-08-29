@@ -13,3 +13,18 @@ article
       - 3.times do
 
         p = zh_lorem_paragraphs(2)
+
+
+section.section-rhythm.bg-yellow
+  .container.feature-cards
+    = feature_card '本案相關人物' do
+      = render partial: 'components/list_related_people'
+
+    = feature_card '案件處理現況' do
+      p
+        ' 102/5/17
+        = truncate zh_lorem_paragraph, length: 30
+      = link_to '看更多', '#link', class: 'button--brown'
+
+    = feature_card '你可能會有興趣' do
+      = render partial: 'components/list_related_suits'
