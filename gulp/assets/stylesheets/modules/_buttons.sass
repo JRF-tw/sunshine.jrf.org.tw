@@ -11,6 +11,11 @@
   @extend %button-base
   +scut-color-swap(#fff #a0a0a0, #fff #777)
 
+.button--brown
+  @extend %button-base
+  +scut-color-swap(#fff $brown-dark, #fff shade($brown-dark, 20%))
+
+
 // {{To top button ------------}}
 .to-top
   +scut-fixed(n 0 0 n)
