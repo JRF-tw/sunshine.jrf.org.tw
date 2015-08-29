@@ -1,6 +1,33 @@
 // {{Feature card ----------}}
+.feature-cards
+  +susy($pad)
+    $layout: (334px 26px)
+    .feature-card:first-child
+      +full
+    .feature-card:nth-child(2)
+      +span(1 of 2 $layout)
+      min-height: scut-rem(213)
+    .feature-card:nth-child(3)
+      +span(last 1 of 2 $layout)
+      min-height: scut-rem(213)
+
+  +susy($desktop)
+    $layout: (275px 38px)
+    .feature-card
+      margin-top: 0 !important
+    .feature-card:first-child
+      +span(1 of 3 $layout)
+      min-height: scut-rem(216)
+    .feature-card:nth-child(2)
+      +span(1 of 3 $layout)
+      min-height: scut-rem(216)
+    .feature-card:nth-child(3)
+      +span(last 1 of 3 $layout)
+      min-height: scut-rem(216)
+
 .feature-card
   padding: scut-rem(24)
+  +font(16, 24)
   background-color: $brown
   
   & + &
@@ -20,6 +47,3 @@
     bottom: scut-rem(22)
   font-weight: normal
   color: #fff
-
-.feature-card__content
-  +font(16, 24)

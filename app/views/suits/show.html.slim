@@ -23,8 +23,13 @@ section.section-rhythm.bg-yellow
     = feature_card '案件處理現況' do
       p
         ' 102/5/17
-        = truncate zh_lorem_paragraph, length: 30
-      = link_to '看更多', '#link', class: 'button--brown'
+        = truncate zh_lorem_paragraph, length: 35
+
+      .text-center
+        = link_to '看更多', '#link', class: 'button--brown'
 
     = feature_card '你可能會有興趣' do
       = render partial: 'components/list_related_suits'
+
+      .text-center
+        = link_to '看更多', '#link', class: 'button--brown'
