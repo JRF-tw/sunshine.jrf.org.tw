@@ -7,5 +7,6 @@ article.feature-post
     h3.feature-post__heading
       = zh_lorem_sentence.truncate 12
 
-  .feature-post__button-wrapper
-    = link_to '了解更多', '#link', class: 'button--gray'
+  - if show_more_button
+    .feature-post__button-wrapper
+      = link_to '了解更多', '#link', class: 'button--gray'

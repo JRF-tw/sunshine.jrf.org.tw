@@ -1,4 +1,6 @@
 section.container
   .base__feature-posts.cf
     - 1.upto 3 do |i|
-      = render partial: 'components/feature_post', locals: {num: i}
+      = render partial: 'components/feature_post', locals: {\
+        num: i, show_more_button: true\
+      }
