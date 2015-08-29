@@ -32,3 +32,59 @@ $carousel-width-max: 2000
     & > *
       position: static
       height: auto !important
+
+// {{Carousel -----------}}
+.carousel
+  +ir(1296/1944, 100%) // 初始比例
+  margin: 0 auto
+  z-index: index($layers, hero-carousel)
+
+  +susy($pad)
+    padding-top: 0
+    height: auto    
+    > *
+      position: static
+
+.carousel__cell
+  .caption
+    +scut-absolute(n 0 0 0)
+    padding: scut-rem(16)
+    background-color: rgba(0,0,0,.5)
+
+    +susy($pad)
+      padding: scut-rem(27)
+      
+  .heading
+    +font(32, 38)
+    margin: 0
+    color: #fff
+  
+  .description
+    display: none
+    
+    +susy($pad)
+      +font(15, 20)
+      display: block
+      margin:
+        top: rhythm(.25)
+        bottom: 0
+      color: #fff
+
+.slick-dots
+  +scut-list-inline(scut-rem(14))
+  margin-top: scut-rem(11)
+  text-align: center
+  line-height: scut-rem(12)
+
+  button
+    +scut-size(scut-rem(12) scut-rem(12))
+    font-size: 0
+    background-image: none
+    background-color: $dot
+    border-radius: 50%
+    border: none
+    &:hover
+      background-color: $dot-active
+
+.slick-active button
+  background-color: $dot-active
