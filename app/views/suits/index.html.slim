@@ -3,6 +3,12 @@
     description: '司法恐龍長怎樣？看看幾個案例，認識司法恐龍！'\
   }
 
+section.section-rhythm.bg-yellow
+  .container
+    #carousel.carousel
+      = render partial: 'carousel_cell', locals: {pic: 'banner-1'}
+      = render partial: 'carousel_cell', locals: {pic: 'banner-2'}
+
 section.section-rhythm
   .container
     .feature-posts.cf
