@@ -1,8 +1,6 @@
 article.feature-post
   = link_to '#link', class: 'feature-post__wrapper' do
-    .feature-post__pic-wrapper
-      = render partial: 'components/feature_post_pic', locals: {num: num}
-      span.feature-post__label 未受懲處
+    = render partial: 'components/feature_post_pic', locals: {num: num}
 
     h3.feature-post__heading
       = zh_lorem_sentence.truncate 12

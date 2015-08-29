@@ -1,1 +1,35 @@
-| 案例內容
+article
+  = render partial: 'components/hero', locals: {\
+      heading: truncate('檢察總長向總統洩露偵查機密', length: 14),
+      description: truncate('案例內文短摘要可以放在這個位子案例內文短摘', length: 42)\
+    }
+
+  .container
+    = render partial: 'components/suits_tab', locals: {active: 'left'}
+    
+    section.suit-story
+      .suit-story__photo = render partial: 'components/feature_post_pic', locals: {num: 1}
+
+      - 3.times do
+
+        p = zh_lorem_paragraphs(2)
+
+
+section.section-rhythm.bg-yellow
+  .container.feature-cards
+    = feature_card '本案相關人物' do
+      = render partial: 'components/list_related_people'
+
+    = feature_card '案件處理現況' do
+      p
+        ' 102/5/17
+        = truncate zh_lorem_paragraph, length: 35
+
+      .text-center
+        = link_to '看更多', '#link', class: 'button--brown'
+
+    = feature_card '你可能會有興趣' do
+      = render partial: 'components/list_related_suits'
+
+      .text-center
+        = link_to '看更多', '#link', class: 'button--brown'

@@ -47,16 +47,22 @@ $gray-dark:    #7f8c8d;
 //  -------
 
 // $alt: $theme;
-$purple: #44008a;
+$purple:       #44008a;
+$gray:         #cfcfcf;
+$gray-dark:    #4f4534;
 
 $yellow-light: #F7F3E7;
 $yellow:       #dbd3c2;
 $yellow-dark:  #b8af9a;
 
+$brown-light:  #c4baa0;
+$brown:        #bdb39d;
+$brown-dark:   #8c7e60;
+
 $border-gray: #b0b0b0;
 
-$dot-active: #4f4534;
-$dot:        #c4baa0;
+$dot-active: $gray-dark;
+$dot:        $brown-light;
 
 //  Texts
 //  -----
