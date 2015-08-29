@@ -23,7 +23,6 @@ module.exports = ->
     dots: true
     infinite: true
     speed: 300
-    fade: true
     cssEase: 'linear'
     adaptiveHeight: false
     slidesToShow: 1
