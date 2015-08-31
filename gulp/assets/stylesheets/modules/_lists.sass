@@ -22,3 +22,12 @@
 
 .list--arrow
   +scut-list-custom($scut-rstri, scut-rem(20))
+
+.list--profile
+  +scut-list-custom('。', 1rem, $no-margin: true)
+  +scut-clearfix
+
+  +susy($pad)
+    .cell
+      display: inline-block
+      margin-right: 2rem
