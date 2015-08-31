@@ -17,10 +17,10 @@ article
 
 section.section-rhythm.bg-yellow
   .container.feature-cards
-    = feature_card '本案相關人物' do
+    = render layout: 'components/feature_card', locals: {heading: '本案相關人物'} do
       = render partial: 'components/list_related_people'
 
-    = feature_card '案件處理現況' do
+    = render layout: 'components/feature_card', locals: {heading: '案件處理現況'} do
       p
         ' 102/5/17
         = truncate zh_lorem_paragraph, length: 35
@@ -28,7 +28,7 @@ section.section-rhythm.bg-yellow
       .text-center
         = link_to '看更多', '#link', class: 'button--brown'
 
-    = feature_card '你可能會有興趣' do
+    = render layout: 'components/feature_card', locals: {heading: '你可能會有興趣'} do
       = render partial: 'components/list_related_suits'
 
       .text-center
