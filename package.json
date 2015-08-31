@@ -47,6 +47,7 @@
     "watchify": "^2.2.1"
   },
   "devDependencies": {
+    "grunt-modernizr": "^0.6.0",
     "gulp-responsive": "^1.2.1",
     "gulp-watch": "^4.1.1",
     "wiredep": "^3.0.0-beta"
