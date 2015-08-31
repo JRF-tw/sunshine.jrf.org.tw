@@ -1,17 +1,3 @@
 = render 'components/profile_hero', name: @profile.name
 
-section.section-rhythm.bg-yellow
-  .container
-    #profile-carousel.profile-carousel
-      - 1.upto 3 do |i|
-        article
-          = link_to '#link', class: "profile-carousel__cell" do
-            .image-wrapper
-              = render 'components/feature_post_pic', num: i
-
-            .text-wrapper
-              h3.heading = truncate(zh_lorem_sentence, length: 14)
-
-              p.description = truncate(zh_lorem_paragraphs(2), length: 100)
-
-            span.button.button--black.button--square 看案例
+= render 'carousel'
