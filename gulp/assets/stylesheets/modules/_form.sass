@@ -1,5 +1,7 @@
 $all-text-inputs: 'input[type="color"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="email"], input[type="month"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"]'
 
+// {{Select custom ------}}
+
 %select-normalize
   appearance: none
   padding:
@@ -8,7 +10,7 @@ $all-text-inputs: 'input[type="color"], input[type="date"], input[type="datetime
   +font(16, 28)
   background-color: $gray-dark
   color: #fff
-  border-color: #aaaaaa
+  border-color: $form-border
   
 .select-container
   position: relative
@@ -41,3 +43,35 @@ $all-text-inputs: 'input[type="color"], input[type="date"], input[type="datetime
     
     +susy($pad)
       font-size: scut-rem(24)
+
+// {{Input group --------}}
+.input-group--large
+  margin-top: scut-rem(3)
+
+  +susy($pad)  
+    display: table
+    width: 100%
+    border: scut-rem(1) solid $form-border
+
+  .input
+    display: block
+    width: 100%
+    height: scut-rem(60)
+    margin-bottom: scut-rem(12)
+    font-size: scut-rem(24)
+    border-radius: 0
+    border: scut-rem(1) solid $form-border
+
+    +susy($pad)
+      display: table-cell
+      margin-bottom: 0
+      padding: .75rem scut-rem(12)
+      height: auto
+      line-height: 1.5rem
+      border: none
+
+  .button--gray-dark
+    border-radius: 0
+
+    +susy($pad)
+      display: table-cell

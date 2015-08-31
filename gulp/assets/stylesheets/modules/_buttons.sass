@@ -15,6 +15,13 @@
   @extend %button-base
   +scut-color-swap(#fff $brown-dark, #fff shade($brown-dark, 20%))
 
+.button--gray-dark
+  @extend %button-base
+  +scut-color-swap(#fff $gray-dark, #fff shade($gray-dark, 20%))
+
+.button--large
+  +font(24, 60)
+  padding: 0 scut-rem(23)
 
 // {{To top button ------------}}
 .to-top
