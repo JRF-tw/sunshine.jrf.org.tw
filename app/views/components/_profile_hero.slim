@@ -1,0 +1,25 @@
+ruby:
+  type = "#{controller.controller_name}-#{controller.action_name}"
+  m_size_path = gulp_asset_path("images/hero-#{type}-M.png")
+  l_size_path = gulp_asset_path("images/hero-#{type}-L.png")
+
+section.hero--profile[
+  class="hero--#{type} lazyload"
+  data-bgset="#{m_size_path} 1000w, #{l_size_path} 2000w"
+  data-sizes="auto"
+]
+  .wrapper.cf
+    .hero--profile__avatar
+      .image-wrapper
+        = render 'components/avatar_pic', num: 1
+
+      .text-wrapper
+        h2.name = name
+        p.job 法官 / 檢察官
+
+    .hero--profile__profile
+      ul.list--profile
+        li.cell 性別：女    
+        li.cell 出生年份：1940    
+        li.cell 司訓期別：第11223期
+        li.cell.break 臺灣臺北地方法院 試署法官

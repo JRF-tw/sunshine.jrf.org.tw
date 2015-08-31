@@ -91,3 +91,62 @@ $carousel-width-max: 2000
 
 .slick-active button
   background-color: $dot-active
+
+// {{Profile carousel ---------------}}
+.profile-carousel__cell
+  $pad-size: scut-rem(14)
+  @extend %scut-clearfix
+  display: block
+  padding: $pad-size
+  background-color: $gray-dark
+
+  +susy($pad)
+    position: relative
+
+  +susy($desktop)
+    &:hover
+      opacity: .8
+
+  .image-wrapper
+    margin-bottom: scut-rem(12)
+
+    +susy($pad)
+      +span(55% no-gutters)
+      margin: 0
+
+    +susy($desktop)
+      width: 40%
+
+  .text-wrapper
+    +susy($pad)
+      +span(last 45%)
+      padding: 0 $pad-size scut-rem(50)
+
+    +susy($desktop)
+      width: 60%
+      padding-left: scut-rem(21)
+
+  .heading
+    margin: 0
+    +font(32, 40)
+    color: #fff
+
+  .description
+    display: none
+
+    +susy($pad)
+      display: block
+      margin-top: $pad-size
+      +font(15, 18)
+      color: #bababa
+    
+  .button
+    display: none
+    
+    +susy($pad)
+      display: inline-block
+      padding: 0 scut-rem(16)
+      +font(18, 35)
+      +scut-absolute(n $pad-size $pad-size n)
+      white-space: nowrap
+      z-index: index($layers, base)
