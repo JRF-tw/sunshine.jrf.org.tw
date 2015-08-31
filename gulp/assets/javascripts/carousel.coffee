@@ -30,3 +30,14 @@ module.exports = ->
     autoplay: true
     autoplaySpeed: 8000
     arrows: false
+
+  $('#profile-carousel').slick
+    dots: true
+    infinite: true
+    speed: 300
+    cssEase: 'linear'
+    adaptiveHeight: false
+    slidesToShow: 1
+    autoplay: true
+    autoplaySpeed: 8000
+    arrows: false

@@ -19,6 +19,14 @@
   @extend %button-base
   +scut-color-swap(#fff $gray-dark, #fff shade($gray-dark, 20%))
 
+.button--black
+  @extend %button-base
+  color: #fff
+  background-color: #000
+
+.button--square
+  border-radius: 0
+
 .button--large
   +font(24, 60)
   padding: 0 scut-rem(23)
