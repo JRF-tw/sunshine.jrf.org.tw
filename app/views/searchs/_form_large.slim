@@ -1,0 +1,12 @@
+.section-rhythm
+  .search-form-wrapper
+    form
+      - if options.length > 0
+        .select-container--search-form
+          select.select-custom
+            - options.each do |option|
+              option = option
+
+      .input-group--large
+        input.input type='text' placeholder=placeholder
+        = link_to '馬上找', '/search/suits', class: 'button--gray-dark button--large'

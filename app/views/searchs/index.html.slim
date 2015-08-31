@@ -14,20 +14,10 @@
           button.search-tab__cell type='button' data-content="search-tab-#{i}" = text
 
   #search-tab-1
-    .section-rhythm
-      .search-form-wrapper
-        form
-          .select-container--search-form
-            select.select-custom
-              option 台北高等法源檢察署或是法院喔
-              option 台北高等法源檢察署或是法院喔
-
-          .input-group--large
-            input.input type='text' placeholder='輸入案例關鍵字'
-            = link_to '馬上找', '/search/suits', class: 'button--gray-dark button--large'
+    = render 'form_large', options: [], placeholder: '輸入案例關鍵字'
 
   #search-tab-2
-    .section-rhythm
+    = render 'form_large', options: ['台北高等法源檢察署或是法院喔'], placeholder: '選法院或輸入關鍵字'
 
   #search-tab-3
-    .section-rhythm
+    = render 'form_large', options: ['台北高等法源檢察署或是法院喔'], placeholder: '選法院或輸入關鍵字'
