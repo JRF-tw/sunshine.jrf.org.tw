@@ -1,0 +1,18 @@
+$search-tab-height: scut-rem(43)
+
+.section-search-forms
+  +scut-relative(n n $search-tab-height n)
+
+.search-tabs
+  +scut-list-inline(scut-rem(10))
+
+.search-tab__cell
+  font-size: scut-rem(20)
+  line-height: $search-tab-height
+  padding: 0 scut-rem(16)
+  border: none
+  border-radius: scut-rem(8) scut-rem(8) 0 0
+  background-color: $brown-light
+  
+  .active &
+    background-color: $yellow-light
