@@ -1,10 +1,13 @@
+= content_for :body_classes do
+  = 'bg-yellow'
+
 article
   = render partial: 'components/hero', locals: {\
     heading: '關於我們',
     description: '司法陽光網，是財團法人民間司法改革基金會所成立的網站。'\
   }
 
-  section.section-rhythm.bg-yellow.cf
+  section.section-rhythm.cf
     .container
       .article-content
         p 過去二十年來，民間司改會一直致力於結合全民的力量，建立一個公平、正義、值得人民信賴的司法。但在推行司法改革的過程中，我們發現，司法相關資訊的不公開，或只是片面的公開，是導致人民不信任司法的重要因素之一。
