@@ -7,8 +7,18 @@
 
   = render 'form', options: [], placeholder: '顯示關鍵字'
 
-section.section-rhythm.cf
+nav.text-center
+  ul.search-group
+    li.active.search-group__cell = link_to '全部', '#link', class: 'link'
+    li.search-group__cell = link_to '未受懲處', '#link', class: 'link'
+    li.search-group__cell = link_to '已懲處', '#link', class: 'link'
+
+section.section-rhythm
   .container
-    = render partial: 'components/avatar_list', locals: {from: 1, to: 18}
+    .feature-posts.cf
+      - 1.upto 9 do |i|
+        = render partial: 'components/feature_post', locals: {\
+          num: i % 3, show_more_button: false\
+        }
 
     = render partial: 'components/pagination'
