@@ -1,3 +1,43 @@
-// {{ Variables --------------------- }}
-
 $all-text-inputs: 'input[type="color"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="email"], input[type="month"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"]'
+
+%select-normalize
+  appearance: none
+  padding:
+    left: scut-rem(12)
+    right: scut-rem(12)
+  +font(16, 28)
+  background-color: $gray-dark
+  color: #fff
+  border-color: #aaaaaa
+  
+.select-container
+  position: relative
+
+  &:after
+    content: ""
+    +centered-triangle(scut-rem(13), scut-rem(11))
+    +scut-absolute(n scut-rem(12) n n)
+    pointer-events: none
+    z-index: index($layers, base)
+
+  .no-css-appearance &:after
+    display: none
+
+.select-custom
+  @extend %select-normalize
+  border-radius: 0
+
+.select-container--search-form
+  @extend .select-container
+
+  &:after
+    +susy($pad)
+      +centered-triangle(scut-rem(19), scut-rem(16))
+
+  .select-custom
+    display: block
+    width: 100%
+    line-height: scut-rem(50)
+    
+    +susy($pad)
+      font-size: scut-rem(24)

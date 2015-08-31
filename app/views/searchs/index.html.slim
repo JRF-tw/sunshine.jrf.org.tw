@@ -1,3 +1,6 @@
+= content_for :body_classes do
+  = 'bg-yellow'
+
 = render partial: 'components/hero', locals: {\
     heading: '我想找',
     description: '想知道發生什麼故事？法官和檢察官都在這裡！快來搜尋！'\
@@ -11,18 +14,20 @@
           button.search-tab__cell type='button' data-content="search-tab-#{i}" = text
 
   #search-tab-1
-    .section-rhythm.bg-yellow
-      form
-        select.select--custom
-          option 台北高等法源檢察署或是法院喔
-          option 台北高等法源檢察署或是法院喔
+    .section-rhythm
+      .search-form-wrapper
+        form
+          .select-container--search-form
+            select.select-custom
+              option 台北高等法源檢察署或是法院喔
+              option 台北高等法源檢察署或是法院喔
 
-        .input-group
-          input.input type='text' placeholder='輸入案例關鍵字'
-          = link_to '馬上找', '/searchs/suits', class: 'button--brown-dark button--large'
+          .input-group--block
+            input.input type='text' placeholder='輸入案例關鍵字'
+            = link_to '馬上找', '/searchs/suits', class: 'button--brown-dark button--large'
 
   #search-tab-2
-    .section-rhythm.bg-yellow
+    .section-rhythm
 
   #search-tab-3
-    .section-rhythm.bg-yellow
+    .section-rhythm
