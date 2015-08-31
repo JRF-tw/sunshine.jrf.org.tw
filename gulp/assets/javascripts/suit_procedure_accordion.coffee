@@ -2,8 +2,8 @@ module.exports = ->
   
   class SuitProcedureAccordion
     constructor: (@button) ->
-      @lists = @button.prev('.list--suit-process')
-                      .children(':not(:last-child)')
+      @lists = @button.parent()
+                      .find('.list--suit-process__cell:not(:last-child)')
 
       @default = @button.data 'default'
       

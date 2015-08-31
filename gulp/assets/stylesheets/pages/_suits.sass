@@ -130,6 +130,8 @@
   +font(12, 17)
   +scut-absolute(n n 0 scut-rem(27))
   padding: 0
+  text-align: center
+  // min-width: scut-rem(50)
   color: #c4baa0
   background-color: transparent
   outline: none
@@ -139,9 +141,11 @@
   &.close:after    
     content: ""
     +scut-triangle(up, scut-rem(33) scut-rem(11), #ece7db)
-    +scut-absolute(scut-rem(-11) n n scut-rem(3))
+    +scut-center-transform(x)
+    +scut-absolute(scut-rem(-11) n n n)
 
   &.open:after
     content: ""
     +scut-triangle(down, scut-rem(33) scut-rem(11), #ece7db)
-    +scut-absolute(n n scut-rem(-11) scut-rem(3))
+    +scut-center-transform(x)
+    +scut-absolute(n n scut-rem(-11) n)
