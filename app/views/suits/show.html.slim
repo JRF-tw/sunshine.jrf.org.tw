@@ -29,7 +29,7 @@ section.section-rhythm.bg-yellow
         = link_to '看更多', '#link', class: 'button--brown'
 
     = render layout: 'components/feature_card', locals: {heading: '你可能會有興趣'} do
-      = render partial: 'components/list_related_suits'
+      = render partial: 'components/list_related_suits', locals: {length: 15}
 
       .text-center
         = link_to '看更多', '#link', class: 'button--brown'

@@ -3,3 +3,20 @@
 = render 'carousel'
 
 = render 'profiles'
+
+section.section-rhythm.bg-yellow
+  .container.feature-cards
+    = render layout: 'components/feature_card', locals: {heading: '獎勵紀錄'} do
+      p = truncate '調職時移交未結案件數，符合「法官調職移交報告書」規定之獎勵', length: 30
+
+      .text-center
+        = link_to '看更多', '#link', class: 'button--brown'
+
+    = render layout: 'components/feature_card', locals: {heading: '懲處相關紀錄'} do
+      = render 'components/list_related_suits', length: 10
+
+    = render layout: 'components/feature_card', locals: {heading: '相關新聞評論'} do
+      = render 'components/list_related_suits', length: 10
+
+      .text-center
+        = link_to '看更多', '#link', class: 'button--brown'
