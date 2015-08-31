@@ -1,1 +1,24 @@
-| 案例搜尋結果
+= content_for :body_classes do
+  = 'bg-yellow'
+
+= render layout: 'components/hero', locals: {\
+    heading: '案例搜尋結果', description: ''\
+  } do
+
+  = render 'form', options: [], placeholder: '顯示關鍵字'
+
+nav.text-center
+  ul.search-group
+    li.active.search-group__cell = link_to '全部', '#link', class: 'link'
+    li.search-group__cell = link_to '未受懲處', '#link', class: 'link'
+    li.search-group__cell = link_to '已懲處', '#link', class: 'link'
+
+section.section-rhythm
+  .container
+    .feature-posts.cf
+      - 1.upto 9 do |i|
+        = render partial: 'components/feature_post', locals: {\
+          num: i % 3, show_more_button: false\
+        }
+
+    = render partial: 'components/pagination'

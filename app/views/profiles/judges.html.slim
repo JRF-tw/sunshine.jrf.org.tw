@@ -1,9 +1,12 @@
+= content_for :body_classes do
+  = 'bg-yellow'
+
 = render partial: 'components/hero', locals: {\
     heading: '認識法官',
     description: '決定當事人一生的法官，究竟有什麼記錄？帶您來看看！'\
   }
 
-section.section-rhythm.bg-yellow.cf
+section.section-rhythm.cf
   .container
     = render partial: 'components/avatar_list', locals: {from: 1, to: 18}
 

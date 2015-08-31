@@ -1,10 +1,14 @@
-carousel                 = require './carousel'
-mobile_nav               = require './mobile_nav'
-to_top                   = require './to_top'
-suit_procedure_accordion = require './suit_procedure_accordion'
+carousel   = require './carousel'
+mobile_nav = require './mobile_nav'
+to_top     = require './to_top'
+accordions = require './accordions'
+modernizr  = require './modernizr'
+tab        = require './tab'
 
 $(document).on 'page:change', ->
+  modernizr()
   carousel()
   mobile_nav()
   to_top()
-  suit_procedure_accordion()
+  accordions()
+  tab()

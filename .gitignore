@@ -25,6 +25,7 @@ config/database.yml
 # Remember to run `bower install` and `npm install` after pulling from GitHub.
 /vendor/assets/bower_components
 /node_modules
+/gulp/tasks/responsive.js
 
 # Ignore compiled assets by Gulp to prevent rev issue.
 # Capistranno will execute Gulp to compile the assets during deploy process.

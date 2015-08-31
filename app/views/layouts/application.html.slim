@@ -14,7 +14,7 @@ html
 
     = render partial: 'components/svgs'
   
-  body
+  body class="#{yield :body_classes}"
     .page-wrapper class="#{'base-page-wrapper' if is_base_index}"
       = render partial: 'components/main_header' unless is_base_index
         

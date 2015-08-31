@@ -20,6 +20,7 @@ module.exports = ->
     arrows: false
 
   $('#carousel').slick
+    fade: true
     dots: true
     infinite: true
     speed: 300

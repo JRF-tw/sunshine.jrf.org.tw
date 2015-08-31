@@ -97,5 +97,5 @@ Gulp Rails
 
 1. assets 原始檔都在 `gulp/assets` 底下，`app/assets` 裡的是為了讓原本的 assets pipeline helper 可以使用才留下來的檔案，裡面的 code 是用來 require `public/assets` 裡的檔案用的。
 1. 放在 `./gulp/assets/images/img/` 裡的圖片才會被壓縮/最佳化
-2. 每次 pull 完都要 `gulp build` 才能 compile 出最新版
+2. 每次 pull 完都要 `bower install` 跟 `npm install` 才能確保 assests 有安裝好
 3. 也可以在開發的時候在 `bundle exec rails s` 之後接著跑 `gulp`，可以結合 browserSync 並 compile 前端的 sass 跟 coffeescript。
