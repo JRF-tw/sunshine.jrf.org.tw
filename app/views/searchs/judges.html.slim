@@ -1,1 +1,5 @@
-| 法官搜尋結果
+= render layout: 'components/hero', locals: {\
+    heading: '法官搜尋結果', description: ''\
+  } do
+
+  = render 'form', options: ['台北高等法源檢察署或是法院喔'], placeholder: '選法院或輸入關鍵字'

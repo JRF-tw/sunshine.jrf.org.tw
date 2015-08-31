@@ -4,13 +4,13 @@ $all-text-inputs: 'input[type="color"], input[type="date"], input[type="datetime
 
 %select-normalize
   appearance: none
-  padding:
-    left: scut-rem(12)
-    right: scut-rem(12)
-  +font(16, 28)
+  padding: scut-rem(10) scut-rem(35) scut-rem(10) scut-rem(12)
+  +font(16, 20)
   background-color: $gray-dark
   color: #fff
-  border-color: $form-border
+  border: scut-rem(1) solid $form-border
+  max-width: 100%
+  overflow: hidden
   
 .select-container
   position: relative
@@ -28,6 +28,7 @@ $all-text-inputs: 'input[type="color"], input[type="date"], input[type="datetime
 .select-custom
   @extend %select-normalize
   border-radius: 0
+  width: 100%
 
 .select-container--search-form
   @extend .select-container
@@ -39,10 +40,12 @@ $all-text-inputs: 'input[type="color"], input[type="date"], input[type="datetime
   .select-custom
     display: block
     width: 100%
-    line-height: scut-rem(50)
+    padding:
+      top: scut-rem(15)
+      bottom: scut-rem(15)
     
     +susy($pad)
-      font-size: scut-rem(24)
+      +font(24, 24)
 
 // {{Input group --------}}
 .input-group--large
@@ -57,6 +60,7 @@ $all-text-inputs: 'input[type="color"], input[type="date"], input[type="datetime
     display: block
     width: 100%
     height: scut-rem(60)
+    padding-left: scut-rem(12)
     margin-bottom: scut-rem(12)
     font-size: scut-rem(24)
     border-radius: 0
@@ -75,3 +79,26 @@ $all-text-inputs: 'input[type="color"], input[type="date"], input[type="datetime
 
     +susy($pad)
       display: table-cell
+
+.input-group
+  display: table
+  margin-top: scut-rem(3)
+  width: 100%
+  border: scut-rem(1) solid $form-border
+  background-color: #fff
+
+  .input
+    display: table-cell
+    width: 100%
+    padding: scut-rem(4) scut-rem(12)
+    +font(18, 20)
+    border: none
+    border-radius: 0
+
+  .button--gray-dark
+    display: table-cell
+    line-height: scut-rem(28)
+    min-width: scut-rem(80)
+    border-radius: 0
+    vertical-align: middle
+    
