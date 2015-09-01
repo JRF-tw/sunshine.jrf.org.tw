@@ -1,2 +1,18 @@
 = render 'components/profile_hero', name: @profile.name
 
+section.section-rhythm.container
+  h3.section-heading--gray.text-center 相關新聞評論
+
+  - 10.times do
+
+    = link_to '#link', class: 'profile-card profile-card--news' do
+      
+      article
+        
+        h4.heading = truncate zh_lorem_sentence, length: 26
+      
+        = calendar '2013', '10/10'
+        
+        span.paper-name 自由時報
+
+  = render 'components/pagination'

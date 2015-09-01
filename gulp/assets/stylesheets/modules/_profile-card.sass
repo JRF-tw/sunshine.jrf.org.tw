@@ -1,0 +1,45 @@
+.profile-card
+  display: block
+  margin-bottom: scut-rem(20)
+  background-color: $gray-light
+
+  +scut-selected
+    opacity: .7
+
+.profile-card--news
+  $pad-size: scut-rem(14)
+  padding: scut-rem(75) $pad-size scut-rem(29)
+  position: relative
+
+  &:first-of-type
+    margin-top: scut-rem(45)
+
+  +susy($pad)
+    padding: scut-rem(24) scut-rem(54) scut-rem(42) scut-rem(112)
+
+  +susy($desktop)
+    padding:
+      right: scut-rem(32)
+      bottom: scut-rem(48)
+  
+  .heading
+    +font(28, 32)
+    margin: 0
+    color: $link-hover-color
+
+  .cal
+    +scut-absolute(scut-rem(22) n n $pad-size)
+
+    +susy($pad)
+      +scut-absolute(n n n scut-rem(35))
+
+  .paper-name
+    +font(15, 15)
+    +scut-absolute(scut-rem(48) $pad-size n n)
+    color: #000
+    
+    +susy($pad)
+      +scut-absolute(auto scut-rem(54) scut-rem(18) n)
+
+    +susy($desktop)
+      +scut-absolute(n auto scut-rem(23) scut-rem(112))
