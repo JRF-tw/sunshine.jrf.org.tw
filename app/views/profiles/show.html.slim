@@ -14,7 +14,10 @@ section.section-rhythm.bg-yellow
 
     = render layout: 'components/feature_card', locals: {heading: '懲處相關紀錄'} do
       = render 'components/list_related_suits', length: 10
-
+      
+      .text-center
+        = link_to '看更多', '#link', class: 'button--brown'
+    
     = render layout: 'components/feature_card', locals: {heading: '相關新聞評論'} do
       = render 'components/list_related_suits', length: 10
 
