@@ -4,6 +4,14 @@
     $layout: (334px 26px)
     .feature-card:first-child
       +full
+      padding: scut-rem(6) scut-rem(174) scut-rem(6) scut-rem(163)
+
+      .feature-card__heading
+        +scut-absolute(scut-rem(24) n n scut-rem(24))
+
+      .button--brown
+        +scut-absolute(scut-rem(24) scut-rem(24) n n)
+
     .feature-card:nth-child(2)
       +span(1 of 2 $layout)
       min-height: scut-rem(216)
@@ -18,6 +26,12 @@
     .feature-card:first-child
       +span(1 of 3 $layout)
       min-height: scut-rem(216)
+      padding: scut-rem(24)
+
+      .feature-card__heading,
+      .button--brown
+        position: static
+
     .feature-card:nth-child(2)
       +span(1 of 3 $layout)
     .feature-card:nth-child(3)
@@ -27,6 +41,7 @@
   padding: scut-rem(24)
   +font(16, 24)
   background-color: $brown
+  position: relative
   
   & + &
     margin-top: scut-rem(36)
