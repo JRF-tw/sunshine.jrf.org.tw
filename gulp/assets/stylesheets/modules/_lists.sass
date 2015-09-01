@@ -32,6 +32,18 @@
       display: inline-block
       margin-right: 2rem
 
+.list--punishment-detail
+  @extend %scut-list-unstyled
+  +font(13, 20)
+
+  .link
+    text-decoration: underline
+
+  +susy($pad)
+    +scut-list-inline(scut-rem(26))
+    +font(16, 24)
+    text-align: center
+
 // {{Key value list ---------------}}
 .kv-year-job
   +scut-key-val('', .5rem, 2.5rem)
@@ -42,3 +54,23 @@
 
   +susy($pad)
     +scut-key-val('', .5rem, 5.2rem)
+
+.kv-punishment
+  margin-top: scut-rem(45)
+  +scut-key-val('', 0, scut-rem(90), scut-rem(3))
+  +font(16, 33)
+  // +scut-key-val($divider, $pad, $indent, $spacing, $pad-left)
+
+  +susy($pad)
+    +font(20, 33)
+    +scut-key-val('', 0, scut-rem(114))
+
+  .term
+    width: scut-rem(80)
+    text-align: center
+    color: #fff
+    background-color: #a49884
+    border-radius: scut-rem(5)
+
+    +susy($pad)
+      width: scut-rem(104)
