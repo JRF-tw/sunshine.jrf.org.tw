@@ -25,6 +25,7 @@
   .heading
     +font(28, 32)
     margin: 0
+    font-weight: normal
     color: $link-hover-color
 
   .cal
@@ -43,3 +44,57 @@
 
     +susy($desktop)
       +scut-absolute(n auto scut-rem(23) scut-rem(112))
+
+.profile-card--award
+  $pad-size: scut-rem(14)
+  padding: scut-rem(24) $pad-size scut-rem(30)
+  position: relative
+
+  +susy($pad)
+    padding: 
+      left: scut-rem(40)
+      right: scut-rem(40)
+
+  +susy($desktop)
+    padding-bottom: scut-rem(24)
+
+  &:first-of-type
+    margin-top: scut-rem(45)
+
+  .wrapper
+    +susy($desktop)
+      float: left
+
+  .prize
+    margin: 0
+    +font(32, 32)
+    font-weight: normal
+    color: #473610
+
+  .date
+    +font(15, 15)
+    color: #000
+
+    +susy($pad)
+      +scut-absolute(scut-rem(42) scut-rem(40) n n)
+
+    +susy($desktop)
+      position: static
+
+  .description
+    margin: 
+      top: scut-rem(18)
+      bottom: scut-rem(18)
+    +font(18, 22)
+    color: #000
+
+    +susy($desktop)
+      margin: 0 auto scut-rem(10) scut-rem(255)
+
+  .from
+    +font(15, 20)
+    margin: 0
+    color: #000
+
+    +susy($desktop)
+      margin-left: scut-rem(255)
