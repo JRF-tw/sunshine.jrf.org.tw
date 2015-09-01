@@ -32,7 +32,7 @@
     +scut-absolute(scut-rem(22) n n $pad-size)
 
     +susy($pad)
-      +scut-absolute(n n n scut-rem(35))
+      +scut-coords(n n n scut-rem(35))
 
   .paper-name
     +font(15, 15)
@@ -40,10 +40,10 @@
     color: #000
     
     +susy($pad)
-      +scut-absolute(auto scut-rem(54) scut-rem(18) n)
+      +scut-coords(auto scut-rem(54) scut-rem(18) n)
 
     +susy($desktop)
-      +scut-absolute(n auto scut-rem(23) scut-rem(112))
+      +scut-coords(n auto scut-rem(23) scut-rem(112))
 
 .profile-card--award
   $pad-size: scut-rem(14)
@@ -98,3 +98,35 @@
 
     +susy($desktop)
       margin-left: scut-rem(255)
+
+.profile-card--punishment
+  $pad-size: scut-rem(14)
+  padding: scut-rem(21) $pad-size scut-rem(58)
+  position: relative
+
+  &:first-of-type
+    margin-top: scut-rem(45)
+
+  +susy($pad)
+    padding: scut-rem(28) scut-rem(42) scut-rem(58)
+
+  .summary
+    margin: 0
+    +font(24, 28)
+    color: $link-hover-color
+
+  .date
+    +font(15, 20)
+    color: #000
+    +scut-absolute(n n scut-rem(23) $pad-size)
+
+    +susy($pad)
+      +scut-coords(n n scut-rem(28) scut-rem(42))
+
+  .by
+    +font(15, 20)
+    color: #000
+    +scut-absolute(n $pad-size scut-rem(23) n)
+
+    +susy($pad)
+      +scut-coords(n scut-rem(42) scut-rem(28) n)
