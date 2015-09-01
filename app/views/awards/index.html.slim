@@ -1,1 +1,40 @@
-= "#{@profile.name}的獎勵記錄列表"
+= render 'components/profile_hero', name: @profile.name
+
+section.section-rhythm.container
+  h3.section-heading--gray.text-center 獎勵紀錄
+
+  - 10.times do
+
+    = link_to '#link', class: 'profile-card profile-card--award' do
+      
+      article
+        .wrapper
+          h4.prize = truncate zh_lorem_sentence, length: 6
+
+          time.date 2012-10-10
+
+        p.description = truncate zh_lorem_paragraphs(2), length: 60
+              
+        p.from 授獎機關：司法院
+
+  = render 'components/pagination'
+
+section.section-rhythm.bg-yellow
+  .container.feature-cards
+    = render layout: 'components/feature_card', locals: {heading: '獎勵紀錄'} do
+      p = truncate '調職時移交未結案件數，符合「法官調職移交報告書」規定之獎勵', length: 30
+
+      .text-center
+        = link_to '看更多', '#link', class: 'button--brown'
+
+    = render layout: 'components/feature_card', locals: {heading: '懲處相關紀錄'} do
+      = render 'components/list_related_suits', length: 10
+
+      .text-center
+        = link_to '看更多', '#link', class: 'button--brown'
+
+    = render layout: 'components/feature_card', locals: {heading: '相關新聞評論'} do
+      = render 'components/list_related_suits', length: 10
+
+      .text-center
+        = link_to '看更多', '#link', class: 'button--brown'
