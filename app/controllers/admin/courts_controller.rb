@@ -26,7 +26,12 @@ class Admin::CourtsController < Admin::BaseController
         end
     else
       respond_to do |f|
-        f.html { render :new, flash: { error: court.errors.full_messages } }
+        f.html {
+          @admin_page_title = "新增法院 / 檢察署"
+          add_crumb @admin_page_title, "#"
+          flash[:error] = court.errors.full_messages
+          render :new
+        }
         f.js { render }
       end
     end
@@ -36,7 +41,10 @@ class Admin::CourtsController < Admin::BaseController
     if court.update_attributes(court_params)
       redirect_to admin_courts_path, flash: { success: "法院 / 檢察署 - #{court.name} 已修改" }
     else
-      render :edit, flash: { error: court.errors.full_messages }
+      @admin_page_title = "編輯法院 / 檢察署 - #{court.name}"
+      add_crumb @admin_page_title, "#"
+      flash[:error] = court.errors.full_messages
+      render :edit
     end
   end
 
@@ -44,7 +52,8 @@ class Admin::CourtsController < Admin::BaseController
     if court.destroy
       redirect_to admin_courts_path, flash: { success: "法院 / 檢察署 - #{court.name} 已刪除" }
     else
-      redirect_to :back, flash: { error: court.errors.full_messages }
+      flash[:error] = court.errors.full_messages
+      redirect_to :back
     end
   end
 

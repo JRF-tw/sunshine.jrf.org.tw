@@ -28,7 +28,12 @@ class Admin::ArticlesController < Admin::BaseController
         end
     else
       respond_to do |f|
-        f.html { render :new, flash: { error: article.errors.full_messages } }
+        f.html {
+          @admin_page_title = "新增#{@profile.name}的發表言論"
+          add_crumb @admin_page_title, "#"
+          flash[:error] = article.errors.full_messages
+          render :new
+        }
         f.js { render }
       end
     end
@@ -38,7 +43,10 @@ class Admin::ArticlesController < Admin::BaseController
     if article.update_attributes(article_params)
       redirect_to admin_profile_articles_path(@profile), flash: { success: "#{@profile.name}的發表言論 - 已修改" }
     else
-      render :edit, flash: { error: article.errors.full_messages }
+      @admin_page_title = "編輯#{@profile.name}的發表言論"
+      add_crumb @admin_page_title, "#"
+      flash[:error] = article.errors.full_messages
+      render :edit
     end
   end
 
@@ -46,7 +54,8 @@ class Admin::ArticlesController < Admin::BaseController
     if article.destroy
       redirect_to admin_profile_articles_path(@profile), flash: { success: "#{@profile.name}的發表言論 - 已刪除" }
     else
-      redirect_to :back, flash: { error: article.errors.full_messages }
+      flash[:error] = article.errors.full_messages
+      redirect_to :back
     end
   end
 

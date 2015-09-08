@@ -28,7 +28,12 @@ class Admin::CareersController < Admin::BaseController
         end
     else
       respond_to do |f|
-        f.html { render :new, flash: { error: career.errors.full_messages } }
+        f.html {
+          @admin_page_title = "新增#{@profile.name}的職務經歷"
+          add_crumb @admin_page_title, "#"
+          flash[:error] = career.errors.full_messages
+          render :new
+        }
         f.js { render }
       end
     end
@@ -38,7 +43,10 @@ class Admin::CareersController < Admin::BaseController
     if career.update_attributes(career_params)
       redirect_to admin_profile_careers_path(@profile), flash: { success: "#{@profile.name}的職務經歷 - 已修改" }
     else
-      render :edit, flash: { error: career.errors.full_messages }
+      @admin_page_title = "編輯#{@profile.name}的職務經歷"
+      add_crumb @admin_page_title, "#"
+      flash[:error] = career.errors.full_messages
+      render :edit
     end
   end
 
@@ -46,7 +54,8 @@ class Admin::CareersController < Admin::BaseController
     if career.destroy
       redirect_to admin_profile_careers_path(@profile), flash: { success: "#{@profile.name}的職務經歷 - 已刪除" }
     else
-      redirect_to :back, flash: { error: career.errors.full_messages }
+      flash[:error] = career.errors.full_messages
+      redirect_to :back
     end
   end
 
