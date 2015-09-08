@@ -12,8 +12,8 @@ module.exports = function (grunt) {
                 "extra" : {
                     "shiv" : true,
                     "printshiv" : false,
-                    "load" : true,
-                    "mq" : true,
+                    "load" : false,
+                    "mq" : false,
                     "cssclasses" : true
                 },
 
@@ -23,7 +23,7 @@ module.exports = function (grunt) {
                     "prefixed" : false,
                     "teststyles" : false,
                     "testprops" : false,
-                    "testallprops" : false,
+                    "testallprops" : true,
                     "hasevents" : false,
                     "prefixes" : false,
                     "domprefixes" : false,
@@ -62,5 +62,5 @@ module.exports = function (grunt) {
     
     grunt.loadNpmTasks("grunt-modernizr");
 
-    grunt.registerTask("default", "grunt");
+    grunt.registerTask("default", ["modernizr"]);
 };
