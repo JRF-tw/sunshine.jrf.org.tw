@@ -4,6 +4,7 @@ to_top     = require './to_top'
 accordions = require './accordions'
 modernizr  = require './modernizr'
 tab        = require './tab'
+turbolinks = require './turbolinks'
 
 $(document).on 'page:change', ->
   modernizr()
@@ -12,3 +13,4 @@ $(document).on 'page:change', ->
   to_top()
   accordions()
   tab()
+  turbolinks()

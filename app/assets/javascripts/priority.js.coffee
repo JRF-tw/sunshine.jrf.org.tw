@@ -1,4 +1,4 @@
-#= require modernizr-dev
+#= require modernizr-custom
 
 #= require lazysizes
 #= require lazysizes/plugins/rias/ls.rias
