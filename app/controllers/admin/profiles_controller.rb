@@ -31,7 +31,12 @@ class Admin::ProfilesController < Admin::BaseController
         end
     else
       respond_to do |f|
-        f.html { render :new, flash: { error: profile.errors.full_messages } }
+        f.html {
+          @admin_page_title = "新增個人檔案"
+          add_crumb @admin_page_title, "#"
+          flash[:error] = profile.errors.full_messages
+          render :new
+        }
         f.js { render }
       end
     end
@@ -41,7 +46,10 @@ class Admin::ProfilesController < Admin::BaseController
     if profile.update_attributes(profile_params)
       redirect_to admin_profiles_path, flash: { success: "個人檔案 - #{profile.name} 已修改" }
     else
-      render :edit, flash: { error: profile.errors.full_messages }
+      @admin_page_title = "編輯個人檔案 - #{profile.name}"
+      add_crumb @admin_page_title, "#"
+      flash[:error] = profile.errors.full_messages
+      render :edit
     end
   end
 
@@ -49,7 +57,8 @@ class Admin::ProfilesController < Admin::BaseController
     if profile.destroy
       redirect_to admin_profiles_path, flash: { success: "個人檔案 - #{profile.name} 已刪除" }
     else
-      redirect_to :back, flash: { error: profile.errors.full_messages }
+      flash[:error] = profile.errors.full_messages
+      redirect_to :back
     end
   end
 

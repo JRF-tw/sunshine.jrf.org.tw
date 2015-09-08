@@ -28,7 +28,12 @@ class Admin::ReviewsController < Admin::BaseController
         end
     else
       respond_to do |f|
-        f.html { render :new, flash: { error: review.errors.full_messages } }
+        f.html {
+          @admin_page_title = "新增#{@profile.name}的相關新聞評論"
+          add_crumb @admin_page_title, "#"
+          flash[:error] = review.errors.full_messages
+          render :new
+        }
         f.js { render }
       end
     end
@@ -38,7 +43,10 @@ class Admin::ReviewsController < Admin::BaseController
     if review.update_attributes(review_params)
       redirect_to admin_profile_reviews_path(@profile), flash: { success: "#{@profile.name}的相關新聞評論 - 已修改" }
     else
-      render :edit, flash: { error: review.errors.full_messages }
+      @admin_page_title = "編輯#{@profile.name}的相關新聞評論"
+      add_crumb @admin_page_title, "#"
+      flash[:error] = review.errors.full_messages
+      render :edit
     end
   end
 
@@ -46,7 +54,8 @@ class Admin::ReviewsController < Admin::BaseController
     if review.destroy
       redirect_to admin_profile_reviews_path(@profile), flash: { success: "#{@profile.name}的相關新聞評論 - 已刪除" }
     else
-      redirect_to :back, flash: { error: review.errors.full_messages }
+      flash[:error] = review.errors.full_messages
+      redirect_to :back
     end
   end
 

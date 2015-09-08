@@ -19,7 +19,7 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def edit
-    @admin_page_title = "編輯後台使用者"
+    @admin_page_title = "編輯後台使用者 - #{user.name}"
     add_crumb @admin_page_title, "#"
   end
 
@@ -27,7 +27,10 @@ class Admin::UsersController < Admin::BaseController
     if user.save
       redirect_to admin_user_path(user), flash: { success: "後台使用者 - #{user.name} 已新增" }
     else
-      render :new, flash: { error: user.errors.full_messages }
+      @admin_page_title = "新增後台使用者"
+      add_crumb @admin_page_title, "#"
+      flash[:error] = user.errors.full_messages
+      render :new
     end
   end
 
@@ -35,7 +38,10 @@ class Admin::UsersController < Admin::BaseController
     if user.update_attributes(user_params)
       redirect_to admin_user_path(user), flash: { success: "後台使用者 - #{user.name} 已修改" }
     else
-      render :edit, flash: { error: user.errors.full_messages }
+      @admin_page_title = "編輯後台使用者 - #{user.name}"
+      add_crumb @admin_page_title, "#"
+      flash[:error] = user.errors.full_messages
+      render :edit
     end
   end
 
@@ -43,7 +49,8 @@ class Admin::UsersController < Admin::BaseController
     if user.destroy
       redirect_to admin_users_path, flash: { success: "後台使用者 - #{user.name} 已刪除" }
     else
-      redirect_to :back, flash: { error: user.errors.full_messages }
+      flash[:error] = user.errors.full_messages
+      redirect_to :back
     end
   end
 
