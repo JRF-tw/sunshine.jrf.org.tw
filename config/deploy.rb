@@ -65,7 +65,7 @@ before "deploy:npm_install", "deploy:bower_install"
 namespace :deploy do
   desc "Run bower install"
   task :bower_install do
-    invoke "cd #{release_path} && bower install'"
+    invoke "cd #{release_path} && sudo bower install'"
   end
 end
 
@@ -74,7 +74,7 @@ before "deploy:assets:precompile", "deploy:npm_install"
 namespace :deploy do
   desc "Run npm install"
   task :npm_install do
-    invoke "cd #{release_path} && npm install'"
+    invoke "cd #{release_path} && sudo npm install'"
   end
 end
 
