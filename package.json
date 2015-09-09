@@ -10,7 +10,7 @@
     "url": "git://github.com/5fpro/jrf-sunny.git"
   },
   "scripts": {
-    "postinstall": "gulp build"
+    "postinstall": "sudo gulp build"
   },
   "browserify": {
     "transform": [
