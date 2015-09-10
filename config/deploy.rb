@@ -58,6 +58,17 @@ namespace :deploy do
     # execute :mkdir, '-p', release_path.join('tmp')
     # execute :touch, release_path.join('tmp/restart.txt')
   end
+
+  desc "Run bower install"
+  task :bower_install do
+    invoke "cd #{release_path} && bower install"
+  end
+
+  desc "Run npm install"
+  task :npm_install do
+    invoke "cd #{release_path} && npm install && RAILS_ENV='production' gulp build"
+  end
+
 end
 
 # Install Bower assets before compile assest with Gulp
