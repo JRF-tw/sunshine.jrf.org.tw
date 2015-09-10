@@ -1,6 +1,9 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
+# 指定使用 nvm 的 bash 指令，防止 capistrano 回去找 usr/bin/env
+nvm_sh       = '. /home/apps/.nvm/nvm.sh'
+
 set :application, 'jrf-sunny'
 set :repo_url, 'git@github.com:5fpro/jrf-sunny.git'
 
@@ -61,20 +64,27 @@ namespace :deploy do
 end
 
 # Compile assets with Gulp before assets pipeline
-before "deploy:assets:precompile", "deploy:npm_install"
+before "deploy:assets:precompile", "deploy:gulp_build"
 namespace :deploy do
-  desc "Run npm install"
-  task :npm_install do
-    invoke "bash -c 'cd #{release_path} && npm install && RAILS_ENV=production gulp build'"
+  desc "Build public assets"
+  task :gulp_build => [:deploy, :npm_install] do
+    on roles(:web) do
+      execute "bash -c '#{nvm_sh} && cd #{release_path} && RAILS_ENV=production gulp build'"
+    end
   end
-end
 
-# Install Bower assets before compile assest with Gulp
-before "deploy:npm_install", "deploy:bower_install"
-namespace :deploy do
+  desc "Run npm install"
+  task :npm_install => [:deploy, :bower_install] do
+    on roles(:web) do
+      execute "bash -c '#{nvm_sh} && cd #{release_path} && npm install'"
+    end
+  end
+
   desc "Run bower install"
   task :bower_install do
-    invoke "bash -c 'cd #{release_path} && bower install'"
+    on roles(:web) do
+      execute "bash -c '#{nvm_sh} && cd #{release_path} && bower install'"
+    end
   end
 end
 
