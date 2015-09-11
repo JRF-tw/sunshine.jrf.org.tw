@@ -39,3 +39,4 @@ todo.TODO
 dump.rdb
 *.log
 app/assets/stylesheets/main.css.erb
+app/assets/javascripts/global.js

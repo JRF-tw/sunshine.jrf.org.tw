@@ -14,6 +14,9 @@
       "coffeeify"
     ]
   },
+  "scripts": {
+    "postinstall": "gulp build"
+  },
   "dependencies": {
     "browser-sync": "~2.4.0",
     "browserify": "^8.0.2",

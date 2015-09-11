@@ -64,15 +64,8 @@ namespace :deploy do
 end
 
 # Compile assets with Gulp before assets pipeline
-before "deploy:assets:precompile", "deploy:gulp_build"
+before "deploy:assets:precompile", "deploy:npm_install"
 namespace :deploy do
-  desc "Build public assets"
-  task :gulp_build => [:deploy, :npm_install] do
-    on roles(:web) do
-      execute "bash -c '#{nvm_sh} && cd #{release_path} && RAILS_ENV=production gulp build'"
-    end
-  end
-
   desc "Run npm install"
   task :npm_install => [:deploy, :bower_install] do
     on roles(:web) do
