@@ -28,4 +28,7 @@
 
 class Article < ActiveRecord::Base
   belongs_to :profile
+
+  include TaiwanAge
+  tw_age_columns :paper_publish_at
 end
