@@ -12,7 +12,16 @@ test: &TEST
   <<: *default
   database: 'jrf_sunny_test'
 
+staging: &default
+  adapter: 'postgis'
+  encoding: 'unicode'
+  database: 'jrf_sunny_staging'
+  host: 'staging.cgtmlj8zesdu.ap-northeast-1.rds.amazonaws.com'
+  username: 'root'
+  password: ''
+  postgis_extension: true
+  schema_search_path: 'public, postgis'
+
 production:
   <<: *default
   database: 'jrf_sunny_production'
-
