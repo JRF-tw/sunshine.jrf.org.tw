@@ -28,4 +28,7 @@ class Judgment < ActiveRecord::Base
   has_many :judges, :through => :judgment_judges
   has_many :judgment_prosecutors, :dependent => :destroy
   has_many :prosecutors, :through => :judgment_prosecutors
+
+  include TaiwanAge
+  tw_age_columns :judge_date
 end
