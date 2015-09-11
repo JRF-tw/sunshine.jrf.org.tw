@@ -16,7 +16,7 @@ module RetinaHelper
     # 把每個尺寸加入 srcset 的檔名跟 w 指示
     sizes.each do |size|
       file = source.gsub(/\./) { |match| "-#{size}." }
-      path = gulp_asset_path("images/#{file}")
+      path = path_to_image "#{file}"
       paths.push "#{path} #{size}w"
     end
 

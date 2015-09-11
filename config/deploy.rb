@@ -69,7 +69,7 @@ namespace :deploy do
   desc "Build public assets"
   task :gulp_build => [:deploy, :npm_install] do
     on roles(:web) do
-      execute "bash -c '#{nvm_sh} && cd #{release_path} && RAILS_ENV=production gulp build'"
+      execute "bash -c '#{nvm_sh} && cd #{release_path} && gulp build'"
     end
   end
 
