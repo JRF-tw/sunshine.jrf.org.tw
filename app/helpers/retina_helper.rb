@@ -10,17 +10,37 @@ module RetinaHelper
     tag :img, class: "#{name} lazyload", alt: '', 'data-sizes' => 'auto', 'data-src' => 'http://placehold.it/{width}'
   end
 
-  def rias_srcset(asset_path, sizes, name)
-    _src  = asset_path.gsub(/\./) { |match| "-#{sizes.min}." }  # 最小的當 fallback 圖片
-    _path = gulp_asset_path("images/#{asset_path}") # 其他尺寸的要抓出完整路徑來處理
+  def srcset(source, sizes)
+    paths = []
+    
+    # 把每個尺寸加入 srcset 的檔名跟 w 指示
+    sizes.each do |size|
+      file = source.gsub(/\./) { |match| "-#{size}." }
+      path = gulp_asset_path("images/#{file}")
+      paths.push "#{path} #{size}w"
+    end
+
+    paths.join ","
+  end
+
+  def image_srcset(source, sizes, name)
+    _src   = source.gsub(/\./) { |match| "-#{sizes.min}." }  # 最小的當 fallback 圖片
+    _paths = srcset source, sizes
 
     image_tag _src, class: "#{name} lazyload",
       'data-sizes'  => 'auto',
-      'data-srcset' => _path.gsub(/\./) { |match| '-{width}.' },
-      'data-widths' => sizes.to_s # 縮放後的尺寸列表以陣列來帶入
+      'data-srcset' => _paths
 
     # 所有的正規表示式都只是在把寬度塞進副檔名前
     # eg. filename.jpg -> filename-300.jpg
+  end
+
+  def source_srcset(source, sizes, media)
+    _paths = srcset source, sizes
+    
+    tag :source,
+      'data-srcset' => _paths,
+      'media'       => media
   end
 
 end

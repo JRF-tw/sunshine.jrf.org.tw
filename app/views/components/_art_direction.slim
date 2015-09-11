@@ -1,16 +1,15 @@
 picture
   | <!--[if IE 9]><audio><![endif]-->
-  source[
-    data-srcset="#{gulp_asset_path("images/demo-rwd-dist/#{pic}-L-{width}.jpg")}"
-    media="(min-width: 62.5em)"
-  ]
-  source[
-    data-srcset="#{gulp_asset_path("images/demo-rwd-dist/#{pic}-M-{width}.jpg")}"
-    media="(min-width: 44em)"
-  ]
-  source[
-    data-srcset="#{gulp_asset_path("images/demo-rwd-dist/#{pic}-S-{width}.jpg")}"
-  ]
+  
+  = source_srcset "demo-rwd-dist/#{pic}-L.jpg",
+    [1080, 1296, 2160, 2592], "(min-width: 62.5em)"
+  
+  = source_srcset "demo-rwd-dist/#{pic}-M.jpg",
+    [900, 1080, 1512, 1728, 1944], "(min-width: 44em)"
+  
+  = source_srcset "demo-rwd-dist/#{pic}-S.jpg",
+    [360, 540, 720, 1080, 1296], ""
+  
   | <!--[if IE 9]></audio><![endif]-->
   img[
     src="#{gulp_asset_path("images/demo-rwd-dist/#{pic}-S-360.jpg")}"
