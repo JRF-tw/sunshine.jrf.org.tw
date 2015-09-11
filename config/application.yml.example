@@ -42,7 +42,7 @@ test:
 
 staging: &defaults
   SECRET_KEY_BASE: daskdjaslkjdsalkdj12341234
-  host: staging.jrf-sunny.tw
+  host: staging-1.jrf-sunny.tw
   assets_host: assets-staging-jrf.s3-website-ap-northeast-1.amazonaws.com
   asset_sync:
     bucket: assets-staging-jrf
