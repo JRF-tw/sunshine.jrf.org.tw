@@ -55,7 +55,7 @@ Rails.application.configure do
   config.cache_store = :dalli_store, *(Setting.dalli.servers + [ Setting.dalli.options.symbolize_keys ])
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  config.action_controller.asset_host = ->(source){ Setting.assets_host }
+  config.action_controller.asset_host = "//#{Setting.assets_host}"
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

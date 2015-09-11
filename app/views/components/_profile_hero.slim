@@ -1,7 +1,7 @@
 ruby:
   type = "#{controller.controller_name}-#{controller.action_name}"
-  m_size_path = gulp_asset_path("images/hero-#{type}-M.png")
-  l_size_path = gulp_asset_path("images/hero-#{type}-L.png")
+  m_size_path = path_to_image "hero-#{type}-M.png"
+  l_size_path = path_to_image "hero-#{type}-L.png"
 
 section.hero--profile[
   class="hero--#{type} lazyload"

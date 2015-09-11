@@ -40,7 +40,7 @@ module JrfSunny
 
     PRECOMPILE_FILES = ['priority.js']
     # Make public assets requireable in manifest files
-    config.assets.paths << Rails.root.join("public", "assets", "stylesheets")
-    config.assets.paths << Rails.root.join("public", "assets", "javascripts")
+    # config.assets.paths << Rails.root.join("public", "assets", "stylesheets")
+    # config.assets.paths << Rails.root.join("public", "assets", "javascripts")
   end
 end

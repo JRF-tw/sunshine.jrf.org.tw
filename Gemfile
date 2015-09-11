@@ -91,7 +91,7 @@ end
 
 gem 'kaminari'
 
-# devise 
+# devise
 gem 'devise'
 gem 'devise-async'
 

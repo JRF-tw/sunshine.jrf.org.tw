@@ -1,6 +1,6 @@
 // var manifestAssets = "./app/assets";
 var components     = './app/views/components';
-var publicAssets   = './public/assets';
+var publicAssets   = './app/assets';
 var sourceFiles    = './gulp/assets';
 // var bowerFiles     = "./vendor/assets/bower_components";
 
@@ -17,19 +17,19 @@ module.exports = {
       indentedSyntax: true, // Enable .sass syntax!
       // sourceMap: true,
       // includePaths: [bowerFiles],
-      imagePath: '/assets/images' // Used by the image-url helper
+      // imagePath: '/assets/images' // Used by the image-url helper
     }
   },
   images: {
     src: [
-      sourceFiles + '/images/**/*.{jpg,gif,png}',
-      '!' + sourceFiles + '/images/demo-rwd-src/*.{jpg,gif,png}'
+      publicAssets + '/images/**/*.{jpg,gif,png}',
+      '!' + publicAssets + '/images/demo-rwd-src/*.{jpg,gif,png}'
     ],
     dest: publicAssets + '/images',
     options: {}
   },
   svgs: {
-    src: sourceFiles + '/images/*.svg',
+    src: publicAssets + '/images/*.svg',
     dest: publicAssets + '/images',
     options: [
       {cleanupIDs: true},
@@ -69,8 +69,8 @@ module.exports = {
     ]
   },
   responsive: {
-    src: sourceFiles + '/images/demo-rwd-src/*.{jpg,png}',
-    dest: sourceFiles + '/images/demo-rwd-dist',
+    src: publicAssets + '/images/demo-rwd-src/*.{jpg,png}',
+    dest: publicAssets + '/images/demo-rwd-dist',
     sets: [
       {name: 'people-*.jpg', widths: [540, 360, 240, 180]},
       {name: 'case-*.jpg', widths: [1512, 1080, 900, 720,  540, 360]},
