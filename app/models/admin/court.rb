@@ -21,4 +21,12 @@ class Admin::Court < ::Court
     "檢察署"
   ]
 
+	def self.judges
+    where(court_type: "法院")
+  end
+
+  def self.prosecutors
+    where(court_type: "檢察署")
+  end
+
 end
