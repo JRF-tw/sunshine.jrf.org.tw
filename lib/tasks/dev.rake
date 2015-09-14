@@ -178,7 +178,7 @@ namespace :dev do
         procedure_units = ["司改會", "檢評會", "監察院", "法評會", "司法院人審會"]
         procedure_contents = ["結束", "行政處理中"]
         procedure_results = ["請求個案評鑑", "受評鑑人有懲戒之必要，報由法務部移送監察院審查，建議休職二年。", "休職，期間壹年陸月。", "受評鑑法官詹駿鴻報由司法院交付司法院人事審議委員會審議，建議處分記過貳次。", "警告處分", "本件請求不成立，並移請職務監督權人為適當之處分"]
-        suit.procedures.create!(profile: profile, unit: unit, title: titles.sample, procedure_unit: procedure_units.sample, procedure_content: procedure_contents.sample, procedure_result: procedure_results.sample, procedure_date: rand(20.years).ago, suit_no: suit.suit_no)
+        suit.procedures.create!(profile: profile, unit: unit.name, title: titles.sample, procedure_unit: procedure_units.sample, procedure_content: procedure_contents.sample, procedure_result: procedure_results.sample, procedure_date: rand(20.years).ago, suit_no: suit.suit_no)
       end
     end
   end
