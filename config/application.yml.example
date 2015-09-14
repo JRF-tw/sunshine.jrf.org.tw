@@ -30,7 +30,7 @@ defaults: &defaults
   carrierwave:
     region: us-east-1
     bucket: myapp.5fpro.com
-    host: myapp.5fpro.com.s3-website-us-east-1.amazonaws.com
+    host: localhost:3000
   sitemap:
     path: "sitemaps/"
 
@@ -71,7 +71,7 @@ staging: &defaults
     namespace: jrf-sunny
   carrierwave:
     region: ap-northeast-1
-    bucket: staging.jrf-sunny.tw
+    bucket: assets-staging-jrf
     host: assets-staging-jrf.s3-website-ap-northeast-1.amazonaws.com
   sitemap:
     path: "sitemaps/"
