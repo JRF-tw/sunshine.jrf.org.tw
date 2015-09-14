@@ -16,15 +16,15 @@ module.exports = ->
 
       @init()
 
-    open: =>
+    open: ->
       @lists.slideDown 300
       @change_method 'close'
 
-    close: =>
+    close: ->
       @lists.slideUp 300
       @change_method 'open'
 
-    change_method: (order) =>
+    change_method: (order) ->
       unless order is 'open'
         @button.removeClass 'open'
                .addClass 'close'
@@ -34,7 +34,7 @@ module.exports = ->
                .addClass 'open'
                .text 'OPEN'
 
-    init: =>
+    init: ->
       unless @default is 'open'
         @change_method 'close'
       else
