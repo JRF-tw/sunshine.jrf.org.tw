@@ -8,10 +8,24 @@ class BaseUploader < CarrierWave::Uploader::Base
 
   # Choose what kind of storage to use for this uploader:
   # storage :file
-  storage Rails.env.test? ? :file : :fog
+  storage (Rails.env.test? || Rails.env.development?) ? :file : :fog
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
+  STORE_DIR_HASH = {
+    "admin/procedure" => "procedure",
+    "admin/review" => "review",
+    "admin/suit" => "suit",
+    "admin/profile" => "profile"
+  }
+
+  def store_dir
+    model_class = model.class.to_s.underscore
+    model_str = STORE_DIR_HASH.fetch(model_class, model_class)
+    "uploads/#{model_str}/#{mounted_as}/#{id_partition(model)}"
+  end
+
+
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end

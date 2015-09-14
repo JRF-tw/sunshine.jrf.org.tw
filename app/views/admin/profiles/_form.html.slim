@@ -1,6 +1,11 @@
 = f.input :name
 = f.input :current, :as => :select, :collection => Admin::Profile::CURRENT_TYPES, :include_blank => "請選擇"
-= f.input :avatar
+- if f.object.avatar?
+  .control-group
+    label.control-label 已上傳頭像：
+    .controls= image_tag f.object.avatar.thumb.url
+    = f.input :remove_avatar, as: :boolean
+= f.input :avatar, as: :file
 = f.input :gender, :as => :select, :collection => Admin::Profile::GENDER_TYPES, :include_blank => "請選擇"
 = f.input :gender_source
 = f.input :birth_year, :hint => "請填入民國年"
