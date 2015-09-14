@@ -22,6 +22,7 @@ zh-TW:
       profile:
         name: "姓名"
         current: "現職"
+        remove_avatar: "移除現有頭像"
         avatar: "頭像"
         gender: "性別"
         gender_source: "性別來源"
@@ -157,6 +158,7 @@ zh-TW:
         content: "介紹"
         state: "狀態"
         pic: "圖片"
+        remove_pic: "移除現有圖片"
         suit_no: "案例編號"
         keyword: "關鍵字"
         judge_ids: "相關法官"

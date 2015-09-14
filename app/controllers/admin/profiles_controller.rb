@@ -69,6 +69,6 @@ class Admin::ProfilesController < Admin::BaseController
   end
 
   def profile_params
-    params.fetch(:admin_profile, {}).permit(:name, :current, :avatar, :gender, :birth_year, :stage, :appointment, :memo, :gender_source, :birth_year_source, :stage_source, :appointment_source )
+    params.fetch(:admin_profile, {}).permit(:name, :current, :avatar, :remove_avatar, :gender, :birth_year, :stage, :appointment, :memo, :gender_source, :birth_year_source, :stage_source, :appointment_source )
   end
 end

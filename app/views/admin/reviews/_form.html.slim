@@ -5,7 +5,11 @@
 = f.input :comment
 = f.input :no, label: "裁判字號"
 = f.input :source
-= f.input :file
+- if f.object.file?
+  .control-group
+    label.control-label 檔案路徑：
+    .controls= link_to "下載檔案", "#{f.object.file.url}", target: "_blank", download: "download", class: "btn"
+= f.input :file, as: :file
 = f.input :memo
 .form-actions
   = f.submit "送出", class: "btn btn-primary"

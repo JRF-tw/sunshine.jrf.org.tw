@@ -69,6 +69,6 @@ class Admin::SuitsController < Admin::BaseController
   end
 
   def suit_params
-    params.fetch(:admin_suit, {}).permit(:title, :summary, :content, :state, :pic, :suit_no, :keyword, judge_ids: [], prosecutor_ids: [])
+    params.fetch(:admin_suit, {}).permit(:title, :summary, :content, :state, :pic, :remove_pic, :suit_no, :keyword, judge_ids: [], prosecutor_ids: [])
   end
 end
