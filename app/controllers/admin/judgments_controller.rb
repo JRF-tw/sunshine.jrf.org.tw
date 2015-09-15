@@ -64,6 +64,6 @@ class Admin::JudgmentsController < Admin::BaseController
   end
 
   def judgment_params
-    params.fetch(:admin_judgment, {}).permit(:court_id, :main_judge_id, :presiding_judge_id, :judge_no, :court_no, :judge_type, :judge_date, :judge_date_in_tw, :reason, :content, :comment, :source, :source_link, :memo, judge_ids: [], prosecutor_ids: [])
+    params.fetch(:admin_judgment, {}).permit(:court_id, :main_judge_id, :presiding_judge_id, :judge_no, :court_no, :judge_type, :judge_date_in_tw, :judge_date, :judge_date_in_tw, :reason, :content, :comment, :source, :source_link, :memo, judge_ids: [], prosecutor_ids: [])
   end
 end

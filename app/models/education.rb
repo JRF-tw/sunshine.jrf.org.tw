@@ -15,5 +15,8 @@
 #
 
 class Education < ActiveRecord::Base
+	include TaiwanAge
+  tw_age_columns :start_at, :end_at
+
   belongs_to :profile
 end

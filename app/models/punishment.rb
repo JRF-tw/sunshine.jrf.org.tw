@@ -33,5 +33,8 @@
 #
 
 class Punishment < ActiveRecord::Base
+	include TaiwanAge
+  tw_age_columns :relevant_date
+
   belongs_to :profile
 end

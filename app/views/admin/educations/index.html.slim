@@ -17,8 +17,8 @@
           tr
             td= education.id
             td= education.title
-            td= education.start_at
-            td= education.end_at
+            td= education.start_at_in_tw
+            td= education.end_at_in_tw
             td= education.memo
             td
               = link_to "編輯", edit_admin_profile_education_path(@profile, education), class: "btn btn-mini btn-success"

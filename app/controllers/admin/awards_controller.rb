@@ -67,6 +67,6 @@ class Admin::AwardsController < Admin::BaseController
   end
 
   def award_params
-    params.fetch(:admin_award, {}).permit(:profile_id, :award_type, :unit, :content, :publish_at, :source, :source_link, :origin_desc, :memo)
+    params.fetch(:admin_award, {}).permit(:profile_id, :award_type, :unit, :content, :publish_at_in_tw, :publish_at, :source, :source_link, :origin_desc, :memo)
   end
 end

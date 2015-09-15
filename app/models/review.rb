@@ -18,5 +18,8 @@
 #
 
 class Review < ActiveRecord::Base
+	include TaiwanAge
+  tw_age_columns :publish_at
+
   belongs_to :profile
 end

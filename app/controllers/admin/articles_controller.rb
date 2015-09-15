@@ -67,6 +67,6 @@ class Admin::ArticlesController < Admin::BaseController
   end
 
   def article_params
-    params.fetch(:admin_article, {}).permit(:profile_id, :article_type, :publish_year, :paper_publish_at_in_tw, :paper_publish_at, :news_publish_at, :book_title, :title, :journal_no, :journal_periods, :start_page, :end_page, :editor, :author, :publisher, :publish_locat, :department, :degree, :source, :memo)
+    params.fetch(:admin_article, {}).permit(:profile_id, :article_type, :publish_year, :paper_publish_at_in_tw, :paper_publish_at, :news_publish_at_in_tw, :news_publish_at, :book_title, :title, :journal_no, :journal_periods, :start_page, :end_page, :editor, :author, :publisher, :publish_locat, :department, :degree, :source, :memo)
   end
 end
