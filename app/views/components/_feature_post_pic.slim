@@ -1,9 +1,6 @@
-ruby:
-  num = 3 if num == 0
-
 .feature-post__pic-wrapper
-  = image_srcset("demo-rwd-dist/case-#{num}.jpg",
+  = image_srcset("#{suit.pic}",
                 [1512, 1080, 900, 720,  540, 360],
                 'feature-post__pic')
                 
-  span.feature-post__label 未受懲處
+  span.feature-post__label= suit.state

@@ -1,4 +1,4 @@
 ul.list--avatar
-  - from.upto to do |i|
+  - people.each do |person|
     li.list--avatar__cell
-      = render partial: 'components/avatar', locals: {i: i}
+      = render partial: 'components/avatar', locals: {person: person}
