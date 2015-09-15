@@ -15,6 +15,8 @@
 #
 
 class Suit < ActiveRecord::Base
+  mount_uploader :pic, SuitPicUploader
+  
   has_many :suit_judges, :dependent => :destroy
   has_many :judges, :through => :suit_judges
   has_many :suit_prosecutors, :dependent => :destroy

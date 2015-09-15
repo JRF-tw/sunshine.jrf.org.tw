@@ -20,6 +20,7 @@
 #
 
 class Profile < ActiveRecord::Base
+  mount_uploader :avatar, ProfileAvatarUploader
 
   has_many :educations, :dependent => :destroy
   has_many :careers, :dependent => :destroy

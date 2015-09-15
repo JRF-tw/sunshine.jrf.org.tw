@@ -18,6 +18,8 @@
 #
 
 class Review < ActiveRecord::Base
+	mount_uploader :file, FileUploader
+	
 	include TaiwanAge
   tw_age_columns :publish_at
 

@@ -20,7 +20,6 @@
 #
 
 class Admin::Profile < ::Profile
-  mount_uploader :avatar, ProfileAvatarUploader
 
   has_many :educations, :class_name => "Admin::Education", :dependent => :destroy
   has_many :careers, :class_name => "Admin::Career", :dependent => :destroy

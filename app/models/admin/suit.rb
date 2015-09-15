@@ -15,7 +15,6 @@
 #
 
 class Admin::Suit < ::Suit
-  mount_uploader :pic, SuitPicUploader
   
   has_many :suit_judges, :dependent => :destroy
   has_many :judges, :class_name => "Admin::Profile", :through => :suit_judges

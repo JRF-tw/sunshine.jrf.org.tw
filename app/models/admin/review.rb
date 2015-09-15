@@ -17,9 +17,7 @@
 #  updated_at :datetime
 #
 
-class Admin::Review < ::Review
-	mount_uploader :file, FileUploader
-	
+class Admin::Review < ::Review	
   belongs_to :profile, :class_name => "Admin::Profile"
 
   validates_presence_of :profile_id, :name, :title

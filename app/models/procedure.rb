@@ -23,6 +23,8 @@
 #
 
 class Procedure < ActiveRecord::Base
+	mount_uploader :file, FileUploader
+	
 	include TaiwanAge
   tw_age_columns :procedure_date
 

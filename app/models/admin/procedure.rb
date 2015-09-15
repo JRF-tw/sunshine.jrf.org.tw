@@ -23,7 +23,6 @@
 #
 
 class Admin::Procedure < Procedure
-	mount_uploader :file, FileUploader
 	
   belongs_to :profile, :class_name => "Admin::Profile"
   belongs_to :suit, :class_name => "Admin::Suit"
