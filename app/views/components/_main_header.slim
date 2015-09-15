@@ -7,11 +7,11 @@ header.main-header
 
       nav.main-nav
         ul.main-nav__cells
-          li = link_to '司法恐龍面面觀', '#link', class: 'main-nav__cell active'
-          li = link_to '認識法官', '#link', class: 'main-nav__cell'
-          li = link_to '認識檢察官', '#link', class: 'main-nav__cell'
-          li = link_to '我想找', '#link', class: 'main-nav__cell'
-          li = link_to '關於我們', '#link', class: 'main-nav__cell'
+          li = link_to '司法恐龍面面觀', suits_path, class: "#{class_of_suits} main-nav__cell"
+          li = link_to '認識法官', judges_path, class: "#{class_of_judges} main-nav__cell"
+          li = link_to '認識檢察官', prosecutors_path, class: "#{class_of_prosecutors} main-nav__cell"
+          li = link_to '關於我們', about_path, class: "#{class_of_about} main-nav__cell"
+          li = link_to '我想找', searchs_path, class: "#{class_of_searchs} main-nav__cell"
 
 
       button#mb-nav-toggle.mb-nav-toggle type='button'
@@ -21,8 +21,8 @@ header.main-header
 
     nav#mb-nav.mb-nav
       ul.mb-nav__cells
-        li = link_to '司法恐龍面面觀', '#link', class: 'mb-nav__cell'
-        li = link_to '認識檢察官', '#link', class: 'mb-nav__cell'
-        li = link_to '認識法官', '#link', class: 'mb-nav__cell'
-        li = link_to '關於我們', '#link', class: 'mb-nav__cell'
-        li = link_to '我想找', '#link', class: 'mb-nav__cell'
+        li = link_to '司法恐龍面面觀', suits_path, class: 'mb-nav__cell'
+        li = link_to '認識法官', judges_path, class: 'mb-nav__cell'
+        li = link_to '認識檢察官', prosecutors_path, class: 'mb-nav__cell'
+        li = link_to '關於我們', about_path, class: 'mb-nav__cell'
+        li = link_to '我想找', searchs_path, class: 'mb-nav__cell'

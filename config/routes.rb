@@ -4,11 +4,11 @@ Rails.application.routes.draw do
 
   devise_for :users
   
-  root to: "base#index"
+  root to: "base#index", only: [:show]
   get '/robots.txt', to: "base#robots", defaults: { format: "text" }
 
-  resources :judges, :to => "profiles#judges"
-  resources :prosecutors, :to => "profiles#prosecutors"
+  get "judges", :to => "profiles#judges", :as => :judges
+  get "prosecutors", :to => "profiles#prosecutors", :as => :prosecutors
   resources :searchs, path: "search" do
     collection do
       get :judges
@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       get :suits
     end
   end
-  resources :about, :to => "base#about"
+  get "about", :to => "base#about", :as => :about
   resources :suits do
     resources :procedures
   end
