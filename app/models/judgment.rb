@@ -21,6 +21,9 @@
 #
 
 class Judgment < ActiveRecord::Base
+  include TaiwanAge
+  tw_age_columns :judge_date
+
   belongs_to :court
   belongs_to :main_judge, :class_name => "Profile", :foreign_key => :main_judge_id
   belongs_to :presiding_judge, :class_name => "Profile", :foreign_key => :presiding_judge_id

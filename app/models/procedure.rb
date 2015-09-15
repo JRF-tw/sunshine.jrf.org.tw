@@ -23,6 +23,9 @@
 #
 
 class Procedure < ActiveRecord::Base
+	include TaiwanAge
+  tw_age_columns :procedure_date
+
   belongs_to :profile
   belongs_to :suit
 end

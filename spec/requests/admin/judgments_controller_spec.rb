@@ -36,10 +36,11 @@ RSpec.describe Admin::JudgmentsController do
 
   it "POST /admin/judgments" do
     FactoryGirl.create :court
-    admin_judgment = { :court_id => Court.last.id, :judge_no => "foo" }
+    admin_judgment = { :court_id => Court.last.id, :judge_no => "foo", :judge_date_in_tw => "103/8/8" }
     expect{
       post "/admin/judgments", admin_judgment: admin_judgment
     }.to change{ Judgment.count }.by(1)
     expect(response).to be_redirect
+    expect( Judgment.last.judge_date.year ).to eq 2014
   end
 end

@@ -27,5 +27,9 @@
 #
 
 class Career < ActiveRecord::Base
+  include TaiwanAge
+  tw_age_columns :publish_at, :start_at, :end_at
+  
   belongs_to :profile
+
 end

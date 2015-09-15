@@ -41,4 +41,15 @@ RSpec.describe Article, type: :model do
     profile.destroy
     expect(Article.count).to be_zero
   end
+
+  context "TaiwanAge" do
+    it "#paper_publish_at" do
+      a = Article.new
+      a.paper_publish_at_in_tw = "104/9/9"
+      expect( a.paper_publish_at.year ).to eq 2015
+      expect( a.paper_publish_at.month ).to eq 9
+      expect( a.paper_publish_at.day ).to eq 9
+      expect( a.paper_publish_at_in_tw ).to eq "104/9/9"
+    end
+  end
 end

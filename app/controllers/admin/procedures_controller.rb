@@ -67,6 +67,6 @@ class Admin::ProceduresController < Admin::BaseController
   end
 
   def procedure_params
-    params.fetch(:admin_procedure, {}).permit(:profile_id, :suit_id, :unit, :title, :procedure_unit, :procedure_content, :procedure_result, :procedure_no, :procedure_date, :suit_no, :source, :source_link, :punish_link, :file, :memo)
+    params.fetch(:admin_procedure, {}).permit(:profile_id, :suit_id, :unit, :title, :procedure_unit, :procedure_content, :procedure_result, :procedure_no, :procedure_date_in_tw, :procedure_date, :suit_no, :source, :source_link, :punish_link, :file, :memo)
   end
 end

@@ -1,7 +1,7 @@
 = f.input :article_type
-= f.input :publish_year
-= f.input :paper_publish_at, as: "string", hint: "半型純數字，民國，格式：YY/MM/DD，如不清楚確切日期就填該年第一天或該月第一天"
-= f.input :news_publish_at, as: "string", hint: "半型純數字，民國，格式：YY/MM/DD，如不清楚確切日期就填該年第一天或該月第一天"
+= f.input :publish_year, hint: "半型純數字，民國"
+= f.input :paper_publish_at_in_tw, as: "string", hint: "半型純數字，民國，格式：YY/MM/DD，如不清楚確切日期就填該年第一天或該月第一天"
+= f.input :news_publish_at_in_tw, as: "string", hint: "半型純數字，民國，格式：YY/MM/DD，如不清楚確切日期就填該年第一天或該月第一天"
 = f.input :book_title
 = f.input :title
 = f.input :journal_no

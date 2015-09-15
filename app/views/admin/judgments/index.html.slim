@@ -18,7 +18,7 @@
             td= judgment.id
             td= judgment.court.name
             td= "#{judgment.judge_no} / #{judgment.court_no}"
-            td= judgment.judge_date
+            td= judgment.judge_date_in_tw
             td= judgment.memo
             td
               = link_to "編輯", edit_admin_judgment_path(judgment), class: "btn btn-mini btn-success"

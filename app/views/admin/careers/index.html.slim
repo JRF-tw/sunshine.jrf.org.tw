@@ -20,7 +20,7 @@
             td= career.career_type
             td= "#{career.old_unit} / #{career.old_title}"
             td= "#{career.new_unit} / #{career.new_title}"
-            td= career.publish_at
+            td= career.publish_at_in_tw
             td= career.memo
             td
               = link_to "編輯", edit_admin_profile_career_path(@profile, career), class: "btn btn-mini btn-success"

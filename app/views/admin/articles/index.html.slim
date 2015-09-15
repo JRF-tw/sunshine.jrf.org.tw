@@ -19,8 +19,8 @@
             td= article.id
             td= article.article_type
             td= article.publish_year
-            td= article.paper_publish_at
-            td= article.news_publish_at
+            td= article.paper_publish_at_in_tw
+            td= article.news_publish_at_in_tw
             td= article.memo
             td
               = link_to "編輯", edit_admin_profile_article_path(@profile, article), class: "btn btn-mini btn-success"
