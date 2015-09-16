@@ -21,6 +21,6 @@
             td
               = link_to "編輯", edit_admin_court_path(court), class: "btn btn-mini btn-success"
               | &nbsp;
-              = link_to "刪除", admin_court_path(court), class: "btn btn-mini btn-danger", method: :delete, "data-confirm" => "確認刪除法院 / 檢察署 - #{court.name}？"
+              = link_to "刪除", admin_court_path(court), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除法院 / 檢察署 - #{court.name}？"
     .ui-toolbar.ui-widget-header
       = paginate @courts, theme: :admin

@@ -35,7 +35,7 @@ RSpec.describe Article, type: :model do
     expect(article).not_to be_new_record
   end
 
-  it "has_many :awards, :dependent => :destroy" do
+  it "has_many :awards, dependent: :destroy" do
     expect(Article.count).to eq(1)
     profile = article.profile
     profile.destroy

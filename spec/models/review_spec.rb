@@ -26,7 +26,7 @@ RSpec.describe Review, type: :model do
     expect(review).not_to be_new_record
   end
 
-  it "has_many :careers, :dependent => :destroy" do
+  it "has_many :careers, dependent: :destroy" do
     expect(Review.count).to eq(1)
     profile = review.profile
     profile.destroy

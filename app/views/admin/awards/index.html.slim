@@ -23,6 +23,6 @@
             td
               = link_to "編輯", edit_admin_profile_award_path(@profile, award), class: "btn btn-mini btn-success"
               | &nbsp;
-              = link_to "刪除", admin_profile_award_path(@profile, award), class: "btn btn-mini btn-danger", method: :delete, "data-confirm" => "確認刪除#{@profile.name}的獎勵記錄？"
+              = link_to "刪除", admin_profile_award_path(@profile, award), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除#{@profile.name}的獎勵記錄？"
     .ui-toolbar.ui-widget-header
       = paginate @awards, theme: :admin

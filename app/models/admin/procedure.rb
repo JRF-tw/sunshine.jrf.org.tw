@@ -24,8 +24,8 @@
 
 class Admin::Procedure < Procedure
 	
-  belongs_to :profile, :class_name => "Admin::Profile"
-  belongs_to :suit, :class_name => "Admin::Suit"
+  belongs_to :profile, class_name: "Admin::Profile"
+  belongs_to :suit, class_name: "Admin::Suit"
 
   validates_presence_of :profile_id, :suit_id, :unit, :title, :procedure_unit, :procedure_content, :procedure_date
 end

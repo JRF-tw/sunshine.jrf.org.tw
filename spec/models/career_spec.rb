@@ -35,7 +35,7 @@ RSpec.describe Career, type: :model do
     expect(career).not_to be_new_record
   end
 
-  it "has_many :careers, :dependent => :destroy" do
+  it "has_many :careers, dependent: :destroy" do
     expect(Career.count).to eq(1)
     profile = career.profile
     profile.destroy

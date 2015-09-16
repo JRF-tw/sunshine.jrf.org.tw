@@ -18,7 +18,7 @@
 #
 
 class Admin::Review < ::Review	
-  belongs_to :profile, :class_name => "Admin::Profile"
+  belongs_to :profile, class_name: "Admin::Profile"
 
   validates_presence_of :profile_id, :name, :title
 end

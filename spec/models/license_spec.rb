@@ -25,7 +25,7 @@ RSpec.describe License, type: :model do
     expect(license).not_to be_new_record
   end
 
-  it "has_many :licenses, :dependent => :destroy" do
+  it "has_many :licenses, dependent: :destroy" do
     expect(License.count).to eq(1)
     profile = license.profile
     profile.destroy

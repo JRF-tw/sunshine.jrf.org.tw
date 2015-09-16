@@ -11,6 +11,6 @@
 
 class JudgmentJudge < ActiveRecord::Base
   belongs_to :judgment
-  belongs_to :judge, :class_name => "Profile", :foreign_key => :profile_id
-  validates_uniqueness_of :judgment_id, :scope => [:profile_id]
+  belongs_to :judge, class_name: "Profile", foreign_key: :profile_id
+  validates_uniqueness_of :judgment_id, scope: [:profile_id]
 end
