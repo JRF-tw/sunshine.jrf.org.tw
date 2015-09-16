@@ -1,5 +1,5 @@
 = link_to profile_path(person), class: 'avatar' do
 	.avatar__pic-wrapper
-		= image_tag person.avatar.url
-		/ = render partial: 'components/avatar_pic', locals: {person: person}
+		/ = image_tag person.avatar.url
+		= render partial: 'components/avatar_pic', locals: {person: person}
 	p.avatar__name = person.name
