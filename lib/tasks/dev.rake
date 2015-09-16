@@ -46,11 +46,13 @@ namespace :dev do
     Profile.destroy_all
     judge_name = ["連添泰", "蕭健銘", "謝孟蓮", "陳信宏", "趙定輝", "賴雅婷", "梁貴鑫", "林旭弘", "陳宛臻", "陳幸愛"]
     prosecutor_name = ["郭耿妹", "蔡宜玉", "賴枝仰", "李孟霞", "洪偉裕", "張育如", "黃秀琴", "吳秀芬", "周哲銘", "施依婷"]
-    judge_name.each do |n|
-      Admin::Profile.create!(name: n, current: "法官", gender: Admin::Profile::GENDER_TYPES.sample, birth_year: (50..70).to_a.sample)
+    judge_name.each_with_index do |n, i|
+      file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-#{i+1}.jpg"
+      Admin::Profile.create!(name: n, current: "法官", gender: Admin::Profile::GENDER_TYPES.sample, birth_year: (50..70).to_a.sample, avatar: file)
     end
-    prosecutor_name.each do |n|
-      Admin::Profile.create!(name: n, current: "檢察官", gender: Admin::Profile::GENDER_TYPES.sample, birth_year: (50..70).to_a.sample)
+    prosecutor_name.each_with_index do |n, i|
+      file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-#{i+11}.jpg"
+      Admin::Profile.create!(name: n, current: "檢察官", gender: Admin::Profile::GENDER_TYPES.sample, birth_year: (50..70).to_a.sample, avatar: file)
     end
   end
 
