@@ -24,4 +24,10 @@ RSpec.describe Profile, type: :model do
   it "FactoryGirl" do
     expect(profile).not_to be_new_record
   end
+
+  it "scope had_avatar" do
+  	expect(Profile.had_avatar.count).to be_zero
+  	FactoryGirl.create :profile_had_avatar
+  	expect(Profile.had_avatar.count).to eq(1)
+  end
 end

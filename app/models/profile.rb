@@ -39,6 +39,8 @@ class Profile < ActiveRecord::Base
   has_many :suits, through: :suit_prosecutors
   has_many :procedures, dependent: :destroy
 
+  scope :had_avatar, -> { where.not(:avatar => nil) }
+
   def self.judges
     where(current: "法官")
   end
