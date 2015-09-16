@@ -14,8 +14,8 @@ module RetinaHelper
     paths = []
     
     # 把每個尺寸加入 srcset 的檔名跟 w 指示
-    sizes.each do |size|
-      file = source.gsub(/\./) { |match| "-#{size}." }
+    sizes.each do |name, size|
+      file = source.sub(/[^\/]*$/) { |matched| "#{name}_#{matched}" }
       path = path_to_image "#{file}"
       paths.push "#{path} #{size}w"
     end
@@ -24,7 +24,8 @@ module RetinaHelper
   end
 
   def image_srcset(source, sizes, name)
-    _src   = source.gsub(/\./) { |match| "-#{sizes.min}." }  # 最小的當 fallback 圖片
+    _src   = source.sub(/[^\/]*$/) { |matched| "thumb_#{matched}" }
+    # 最小的當 fallback 圖片
     _paths = srcset source, sizes
 
     image_tag _src, class: "#{name} lazyload",
