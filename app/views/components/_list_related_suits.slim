@@ -1,4 +1,4 @@
 ul.list--arrow
-  - 3.times do
+  - @newest_punishments.each do |punishment|
     li
-      = link_to truncate(zh_lorem_sentence, length: length), '#link'
+      = link_to summary_text(punishment.reason, 10), profile_punishment_path(@profile, punishment)

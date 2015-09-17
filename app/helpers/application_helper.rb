@@ -39,4 +39,16 @@ module ApplicationHelper
       return nil
     end
   end
+
+  def year_in_bc(year_in_tw)
+    year_in_tw + 1911
+  end
+
+  def summary_text(content, len)
+    if content.length > len
+      content.first(len) + "..."
+    else
+      content
+    end
+  end
 end

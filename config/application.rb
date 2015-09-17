@@ -42,5 +42,7 @@ module JrfSunny
     # Make public assets requireable in manifest files
     # config.assets.paths << Rails.root.join("public", "assets", "stylesheets")
     # config.assets.paths << Rails.root.join("public", "assets", "javascripts")
+
+    Time::DATE_FORMATS.merge!(:default => "%Y-%m-%d %H:%M", :year => "%Y")
   end
 end

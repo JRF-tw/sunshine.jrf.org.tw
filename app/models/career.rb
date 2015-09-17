@@ -32,4 +32,6 @@ class Career < ActiveRecord::Base
   
   belongs_to :profile
 
+  scope :newest, ->{ order("id DESC") }
+
 end

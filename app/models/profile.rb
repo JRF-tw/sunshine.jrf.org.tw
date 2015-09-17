@@ -48,5 +48,10 @@ class Profile < ActiveRecord::Base
   def self.prosecutors
     where(current: "檢察官")
   end
+
+  def suit_list
+    ids = (self.suit_judges.map(&:suit_id) + self.suit_prosecutors.map(&:suit_id)).uniq
+    Suit.where(id: ids)
+  end
   
 end

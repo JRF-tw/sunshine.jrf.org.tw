@@ -21,4 +21,6 @@ class Award < ActiveRecord::Base
   tw_age_columns :publish_at
   
   belongs_to :profile
+
+  scope :newest, ->{ order("id DESC") }
 end

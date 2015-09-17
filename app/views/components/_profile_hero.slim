@@ -11,15 +11,19 @@ section.hero--profile[
   .wrapper.cf
     .hero--profile__avatar
       .image-wrapper
-        = render 'components/avatar_pic', num: 1
+        = render partial: 'components/avatar_pic', locals: { person: @profile }
 
       .text-wrapper
-        h2.name = name
-        p.job 法官 / 檢察官
+        h2.name= person.name
+        p.job= person.current
 
     .hero--profile__profile
       ul.list--profile
-        li.cell 性別：女    
-        li.cell 出生年份：1940    
-        li.cell 司訓期別：第11223期
-        li.cell.break 臺灣臺北地方法院 試署法官
+        - if @profile.gender.present?
+          li.cell= "性別：#{@profile.gender}"
+        - if @profile.birth_year.present?
+          li.cell= "出生年份：#{year_in_bc(@profile.birth_year)}"
+        - if @profile.stage.present?
+          li.cell= "司訓期別：第#{@profile.stage}期"
+        - if @current_career.present?
+          li.cell.break= "#{@current_career.new_unit} #{@current_career.new_title}"

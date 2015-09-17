@@ -24,4 +24,7 @@ class Review < ActiveRecord::Base
   tw_age_columns :publish_at
 
   belongs_to :profile
+
+  scope :newest, ->{ order("id DESC") }
+  scope :had_title, -> { where.not(:title => nil) }
 end

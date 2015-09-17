@@ -37,4 +37,8 @@ class Punishment < ActiveRecord::Base
   tw_age_columns :relevant_date
 
   belongs_to :profile
+
+  scope :newest, ->{ order("id DESC") }
+  scope :had_reason, -> { where.not(:reason => nil) }
+
 end

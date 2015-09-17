@@ -10,8 +10,8 @@
 = f.input :pic, as: :file
 = f.input :suit_no
 = f.input :keyword
-= f.input :judge_ids, as: :select, collection: Profile.judges.map{ |p| [p.name, p.id] }, include_blank: "請選擇", input_html: { multiple: true, class: 'chosen-select' }
-= f.input :prosecutor_ids, as: :select, collection: Profile.prosecutors.map{ |p| [p.name, p.id] }, include_blank: "請選擇", input_html: { multiple: true, class: 'chosen-select' }
+= f.input :judge_ids, as: :select, collection: Profile.all.map{ |p| [p.name, p.id] }, include_blank: "請選擇", input_html: { multiple: true, class: 'chosen-select' }
+= f.input :prosecutor_ids, as: :select, collection: Profile.all.map{ |p| [p.name, p.id] }, include_blank: "請選擇", input_html: { multiple: true, class: 'chosen-select' }
 
 .form-actions
   = f.submit "送出", class: "btn btn-primary"
