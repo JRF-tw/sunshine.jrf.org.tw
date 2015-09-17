@@ -1,31 +1,27 @@
 .container.section-rhythm
   .profiles
-    section.profile
-      h3.section-heading--gray 學經歷
+    - if @educations.present?
+      section.profile
+        h3.section-heading--gray 學經歷
 
-      ul.list--unstyled.list
-        li 政治大學法律系
-        li 為理法律事務所律師
-        li 聯大法律事務所律師
-        li 永然聯合法律事務所律師
-        li 華南永昌證券法務主管學經歷
+        ul.list--unstyled.list
+          - @educations.each do |education|
+            li= education.title
 
-    section.profile
-      h3.section-heading--gray 職務經歷
+    - if @careers.present?
+      section.profile
+        h3.section-heading--gray 職務經歷
 
-      dl.kv-year-job.list
-        dt 1981
-        dd 臺灣高等法院檢察署 檢察官
-        dt 1981
-        dd 臺灣高等法院臺南分院檢察署 檢察官
-        dt 1981
-        dd 臺灣高等法院高雄分院檢察署 主任檢察官
-        dt 1981
-        dd 臺灣花蓮地方法院 法官
+        dl.kv-year-job.list
+          - @careers.each do |career|
+            dt= career.publish_at.to_s(:year).to_i
+            dd= "#{career.new_unit} #{career.new_title}"
 
-    section.profile
-      h3.section-heading--gray 專業證書
+    - if @licenses.present?
+      section.profile
+        h3.section-heading--gray 專業證書
 
-      dl.kv-yymmdd-license.list
-        dt 1981-10-10
-        dd 家事類型特殊專業證明書
+        dl.kv-yymmdd-license.list
+          - @licenses.each do |license|
+            dt= license.publish_at
+            dd= license.license_type

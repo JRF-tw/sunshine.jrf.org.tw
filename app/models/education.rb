@@ -19,4 +19,6 @@ class Education < ActiveRecord::Base
   tw_age_columns :start_at, :end_at
 
   belongs_to :profile
+
+  scope :newest, ->{ order("id DESC") }
 end

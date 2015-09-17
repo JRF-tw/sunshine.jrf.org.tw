@@ -1,4 +1,4 @@
-= render 'components/profile_hero', name: @profile.name
+= render partial: 'components/profile_hero', locals: { person: @profile }
 
 section.section-rhythm.container
   h3.section-heading--gray.text-center 懲處相關紀錄

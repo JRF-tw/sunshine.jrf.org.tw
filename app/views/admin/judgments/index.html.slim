@@ -23,6 +23,6 @@
             td
               = link_to "編輯", edit_admin_judgment_path(judgment), class: "btn btn-mini btn-success"
               | &nbsp;
-              = link_to "刪除", admin_judgment_path(judgment), class: "btn btn-mini btn-danger", method: :delete, "data-confirm" => "確認刪除重要判決？"
+              = link_to "刪除", admin_judgment_path(judgment), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除重要判決？"
     .ui-toolbar.ui-widget-header
       = paginate @judgments, theme: :admin

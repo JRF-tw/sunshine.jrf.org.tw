@@ -30,5 +30,8 @@ FactoryGirl.define do
     factory :prosecutor_profile do
       current "檢察官"
     end
+    factory :profile_had_avatar do
+      avatar File.open "#{Rails.root}/spec/fixtures/person_avatar/people-1.jpg"
+    end
   end
 end

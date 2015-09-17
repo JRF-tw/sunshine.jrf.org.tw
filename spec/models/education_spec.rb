@@ -23,7 +23,7 @@ RSpec.describe Education, type: :model do
     expect(education).not_to be_new_record
   end
 
-  it "has_many :educations, :dependent => :destroy" do
+  it "has_many :educations, dependent: :destroy" do
     expect(Education.count).to eq(1)
     profile = education.profile
     profile.destroy

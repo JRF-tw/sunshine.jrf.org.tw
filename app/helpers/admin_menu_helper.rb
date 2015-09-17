@@ -1,19 +1,19 @@
 module AdminMenuHelper
   def admin_menus
     {
-      # "Menu #1" => { 
+      # "Menu #1": { 
       #   submenu: { 
-      #     "Submenu #1" => { url: url_for(q: 123), match: /q=123/ },
-      #     "Submenu #2" => { url: url_for(q: 456), match: /q=456/ }
+      #     "Submenu #1": { url: url_for(q: 123), match: /q=123/ },
+      #     "Submenu #2": { url: url_for(q: 456), match: /q=456/ }
       #   },
       #   icon: "star"
       # },
       # "Menu #2" => { url: url_for(q: 789), icon: "pencil", match: /q=789/ },
-      "個人檔案管理"   => { url: admin_profiles_path, match: /\/admin\/profiles/ },
-      "重要判決管理"   => { url: admin_judgments_path, match: /\/admin\/judgments/ },
-      "評鑑資料-案例管理"   => { url: admin_suits_path, match: /\/admin\/suits/ },
-      "法院 / 監察院管理"   => { url: admin_courts_path, match: /\/admin\/courts/ },
-      "後台使用者管理"   => { url: admin_users_path, match: /\/admin\/users/ }
+      "個人檔案管理": { url: admin_profiles_path, match: /\/admin\/profiles/ },
+      "重要判決管理": { url: admin_judgments_path, match: /\/admin\/judgments/ },
+      "評鑑資料-案例管理": { url: admin_suits_path, match: /\/admin\/suits/ },
+      "法院 / 監察院管理": { url: admin_courts_path, match: /\/admin\/courts/ },
+      "後台使用者管理": { url: admin_users_path, match: /\/admin\/users/ }
     }
   end
 

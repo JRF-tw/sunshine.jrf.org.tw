@@ -25,6 +25,6 @@
             td
               = link_to "編輯", edit_admin_profile_article_path(@profile, article), class: "btn btn-mini btn-success"
               | &nbsp;
-              = link_to "刪除", admin_profile_article_path(@profile, article), class: "btn btn-mini btn-danger", method: :delete, "data-confirm" => "確認刪除#{@profile.name}的發表言論？"
+              = link_to "刪除", admin_profile_article_path(@profile, article), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除#{@profile.name}的發表言論？"
     .ui-toolbar.ui-widget-header
       = paginate @articles, theme: :admin

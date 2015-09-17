@@ -25,6 +25,6 @@
             td
               = link_to "編輯", edit_admin_suit_procedure_path(@suit, procedure), class: "btn btn-mini btn-success"
               | &nbsp;
-              = link_to "刪除", admin_suit_procedure_path(@suit, procedure), class: "btn btn-mini btn-danger", method: :delete, "data-confirm" => "確認刪除#{@suit.title}的案例處理經過？"
+              = link_to "刪除", admin_suit_procedure_path(@suit, procedure), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除#{@suit.title}的案例處理經過？"
     .ui-toolbar.ui-widget-header
       = paginate @procedures, theme: :admin

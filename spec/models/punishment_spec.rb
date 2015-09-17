@@ -41,7 +41,7 @@ RSpec.describe Punishment, type: :model do
     expect(punishment).not_to be_new_record
   end
 
-  it "has_many :punishment, :dependent => :destroy" do
+  it "has_many :punishment, dependent: :destroy" do
     expect(Punishment.count).to eq(1)
     profile = punishment.profile
     profile.destroy

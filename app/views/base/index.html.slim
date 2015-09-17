@@ -5,11 +5,11 @@ section.base-hero
       p.base-slogan 揭開司法的神秘面紗
       nav.base-nav
         ul.base-nav__cells
-          li = link_to '司法恐龍面面觀', '#link', class: 'base-nav__cell'
-          li = link_to '認識法官', '#link', class: 'base-nav__cell'
-          li = link_to '認識檢察官', '#link', class: 'base-nav__cell'
-          li = link_to '關於我們', '#link', class: 'base-nav__cell'
-          li = link_to '我想找', '#link', class: 'base-nav__cell'
+          li = link_to '司法恐龍面面觀', suits_path, class: 'base-nav__cell'
+          li = link_to '認識法官', judges_path, class: 'base-nav__cell'
+          li = link_to '認識檢察官', prosecutors_path, class: 'base-nav__cell'
+          li = link_to '我想找', searchs_path, class: 'base-nav__cell'
+          li = link_to '關於我們', about_path, class: 'base-nav__cell'
 
   #hero-carousel.hero-carousel
     .hero-carousel__cell = render partial: 'components/art_direction', locals: {pic: 'banner-1'}
@@ -18,7 +18,5 @@ section.base-hero
 
 = render partial: 'feature_posts'
 
-= render partial: 'people',
-  locals: {heading: '認識法官', color: 'blue', from: 1, to: 12}
-= render partial: 'people',
-  locals: {heading: '認識檢察官', color: 'purple', from: 13, to: 24}
+= render partial: 'people_judges'
+= render partial: 'people_prosecutors'

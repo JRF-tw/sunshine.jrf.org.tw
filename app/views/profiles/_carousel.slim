@@ -1,15 +1,15 @@
 section.section-rhythm.bg-yellow
   .container
     #profile-carousel.profile-carousel
-      - 1.upto 3 do |i|
+      - @suits.each do |suit|
         article
-          = link_to '#link', class: "profile-carousel__cell" do
+          = link_to suit_path(suit), class: "profile-carousel__cell" do
             .image-wrapper
-              = render 'components/feature_post_pic', num: i
+              = render partial: 'components/feature_post_pic', locals: { suit: suit }
 
             .text-wrapper
-              h3.heading = truncate(zh_lorem_sentence, length: 14)
+              h3.heading= suit.title
 
-              p.description = truncate(zh_lorem_paragraphs(2), length: 100)
+              p.description= suit.summary
 
             span.button.button--black.button--square 看案例

@@ -21,6 +21,6 @@
               | &nbsp;
               = link_to "編輯", edit_admin_user_path(user), class: "btn btn-mini btn-success"
               | &nbsp;
-              = link_to "刪除", admin_user_path(user), class: "btn btn-mini btn-danger", method: :delete, "data-confirm" => "確認刪除後台使用者 - #{user.name}？"
+              = link_to "刪除", admin_user_path(user), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除後台使用者 - #{user.name}？"
     .ui-toolbar.ui-widget-header
       = paginate @users, theme: :admin

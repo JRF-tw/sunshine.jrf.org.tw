@@ -12,7 +12,7 @@
 #
 
 class Admin::Court < ::Court
-  has_many :judgments, :class_name => "Admin::Judgment"
+  has_many :judgments, class_name: "Admin::Judgment"
 
   validates_presence_of :court_type, :full_name
 
