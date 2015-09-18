@@ -17,8 +17,12 @@ module TaiwanAge
         define_method "#{column}_in_tw=", ->(value) do
           public_send "#{column}=", value
           date = public_send(column)
-          year = date.year < 1000 ? date.year + 1911 : date.year
-          public_send "#{column}=", "#{year}/#{date.month}/#{date.day}"
+          if value.blank?
+            public_send(column)
+          else
+            year = date.year < 1000 ? date.year + 1911 : date.year
+            public_send "#{column}=", "#{year}/#{date.month}/#{date.day}"
+          end
         end
       end
     end
