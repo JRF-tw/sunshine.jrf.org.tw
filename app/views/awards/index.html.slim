@@ -3,19 +3,14 @@
 section.section-rhythm.container
   h3.section-heading--gray.text-center 獎勵紀錄
 
-  - 10.times do
-
-    = link_to '#link', class: 'profile-card profile-card--award' do
-      
+  - @awards.each do |award|
+    .profile-card.profile-card--award
       article
         .wrapper
-          h4.prize = truncate zh_lorem_sentence, length: 6
-
-          time.date 2012-10-10
-
-        p.description = truncate zh_lorem_paragraphs(2), length: 60
-              
-        p.from 授獎機關：司法院
+          h4.prize= award.award_type
+          time.date= award.publish_at
+        p.description= award.content.present? ? summary_text(award.content, 60) : "尚未填寫授獎事由"
+        p.from= "授獎機關：#{@newest_award.unit}"
 
   = render 'components/pagination'
 
