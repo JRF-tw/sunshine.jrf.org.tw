@@ -23,4 +23,6 @@ class Suit < ActiveRecord::Base
   has_many :prosecutors, through: :suit_prosecutors
   has_many :procedures, dependent: :destroy
 
+  scope :newest, ->{ order("id DESC") }
+
 end

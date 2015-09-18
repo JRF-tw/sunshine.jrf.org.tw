@@ -5,7 +5,7 @@ class Admin::AwardsController < Admin::BaseController
   before_action(except: [:index]){ add_crumb("#{@profile.name}的獎勵記錄列表", admin_profile_awards_path(@profile)) }
 
   def index
-    @awards = @profile.awards.all.page(params[:page]).per(10)
+    @awards = @profile.awards.all.newest.page(params[:page]).per(10)
     @admin_page_title = "#{@profile.name}的獎勵記錄列表"
     add_crumb @admin_page_title, "#"
   end

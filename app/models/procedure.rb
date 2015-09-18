@@ -30,4 +30,6 @@ class Procedure < ActiveRecord::Base
 
   belongs_to :profile
   belongs_to :suit
+
+  scope :newest, ->{ order("id DESC") }
 end

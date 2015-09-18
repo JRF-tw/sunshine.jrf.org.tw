@@ -3,7 +3,7 @@ class Admin::SuitsController < Admin::BaseController
   before_action(except: [:index]){ add_crumb("評鑑資料-案例列表", admin_suits_path) }
 
   def index
-    @suits = Suit.all.page(params[:page]).per(10)
+    @suits = Suit.all.newest.page(params[:page]).per(10)
     @admin_page_title = "評鑑資料-案例列表"
     add_crumb @admin_page_title, "#"
   end

@@ -3,7 +3,7 @@ class Admin::ProfilesController < Admin::BaseController
   before_action(except: [:index]){ add_crumb("個人檔案列表", admin_profiles_path) }
 
   def index
-    @profiles = Profile.all.page(params[:page]).per(10)
+    @profiles = Profile.all.newest.page(params[:page]).per(10)
     @admin_page_title = "個人檔案列表"
     add_crumb @admin_page_title, "#"
   end

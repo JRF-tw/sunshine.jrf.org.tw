@@ -5,7 +5,7 @@ class Admin::ProceduresController < Admin::BaseController
   before_action(except: [:index]){ add_crumb("#{@suit.title}的案例處理經過列表", admin_suit_procedures_path(@suit)) }
 
   def index
-    @procedures = @suit.procedures.all.page(params[:page]).per(10)
+    @procedures = @suit.procedures.all.newest.page(params[:page]).per(10)
     @admin_page_title = "#{@suit.title}的案例處理經過列表"
     add_crumb @admin_page_title, "#"
   end

@@ -5,7 +5,7 @@ class Admin::PunishmentsController < Admin::BaseController
   before_action(except: [:index]){ add_crumb("#{@profile.name}的懲處記錄列表", admin_profile_punishments_path(@profile)) }
 
   def index
-    @punishments = @profile.punishments.all.page(params[:page]).per(10)
+    @punishments = @profile.punishments.all.newest.page(params[:page]).per(10)
     @admin_page_title = "#{@profile.name}的懲處記錄列表"
     add_crumb @admin_page_title, "#"
   end

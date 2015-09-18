@@ -22,4 +22,5 @@ class Court < ActiveRecord::Base
     where(court_type: "檢察署")
   end
 
+  scope :newest, ->{ order("id DESC") }
 end

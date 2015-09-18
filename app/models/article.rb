@@ -31,4 +31,6 @@ class Article < ActiveRecord::Base
   tw_age_columns :paper_publish_at, :news_publish_at
   
   belongs_to :profile
+
+  scope :newest, ->{ order("id DESC") }
 end

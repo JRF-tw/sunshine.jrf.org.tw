@@ -5,7 +5,7 @@ class Admin::EducationsController < Admin::BaseController
   before_action(except: [:index]){ add_crumb("#{@profile.name}的學經歷列表", admin_profile_educations_path(@profile)) }
 
   def index
-    @educations = @profile.educations.all.page(params[:page]).per(10)
+    @educations = @profile.educations.all.newest.page(params[:page]).per(10)
     @admin_page_title = "#{@profile.name}的學經歷列表"
     add_crumb @admin_page_title, "#"
   end
