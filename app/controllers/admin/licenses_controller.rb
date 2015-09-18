@@ -5,7 +5,7 @@ class Admin::LicensesController < Admin::BaseController
   before_action(except: [:index]){ add_crumb("#{@profile.name}的專業證書列表", admin_profile_licenses_path(@profile)) }
 
   def index
-    @licenses = @profile.licenses.all.page(params[:page]).per(10)
+    @licenses = @profile.licenses.all.newest.page(params[:page]).per(10)
     @admin_page_title = "#{@profile.name}的專業證書列表"
     add_crumb @admin_page_title, "#"
   end

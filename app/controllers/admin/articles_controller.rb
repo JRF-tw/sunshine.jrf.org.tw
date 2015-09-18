@@ -5,7 +5,7 @@ class Admin::ArticlesController < Admin::BaseController
   before_action(except: [:index]){ add_crumb("#{@profile.name}的發表言論列表", admin_profile_articles_path(@profile)) }
 
   def index
-    @articles = @profile.articles.all.page(params[:page]).per(10)
+    @articles = @profile.articles.all.newest.page(params[:page]).per(10)
     @admin_page_title = "#{@profile.name}的發表言論列表"
     add_crumb @admin_page_title, "#"
   end

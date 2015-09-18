@@ -5,7 +5,7 @@ class Admin::ReviewsController < Admin::BaseController
   before_action(except: [:index]){ add_crumb("#{@profile.name}的相關新聞評論列表", admin_profile_reviews_path(@profile)) }
 
   def index
-    @reviews = @profile.reviews.all.page(params[:page]).per(10)
+    @reviews = @profile.reviews.all.newest.page(params[:page]).per(10)
     @admin_page_title = "#{@profile.name}的相關新聞評論列表"
     add_crumb @admin_page_title, "#"
   end

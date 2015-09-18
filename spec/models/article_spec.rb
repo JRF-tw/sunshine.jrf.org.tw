@@ -51,5 +51,15 @@ RSpec.describe Article, type: :model do
       expect( a.paper_publish_at.day ).to eq 9
       expect( a.paper_publish_at_in_tw ).to eq "104/9/9"
     end
+
+    it "paper_publish_at = nil" do
+      article.update_attributes paper_publish_at_in_tw: "104/9/9"
+      expect(article.paper_publish_at.nil?).to be_falsey
+      expect{
+        article.paper_publish_at_in_tw = nil
+        article.save
+      }.to change{ article.paper_publish_at }
+      expect(article.paper_publish_at).to be_nil
+    end
   end
 end
