@@ -3,16 +3,16 @@
 section.section-rhythm.container
   h3.section-heading--gray.text-center 懲處相關紀錄
 
-  - 10.times do
+  - @punishments.each do |punishment|
 
-    = link_to '#link', class: 'profile-card profile-card--punishment' do
+    = link_to profile_punishment_path(@profile, punishment), class: 'profile-card profile-card--punishment' do
       
       article
-        h4.summary = truncate zh_lorem_paragraph, length: 28
+        h4.summary= punishment.reason.present? ? summary_text(punishment.reason, 28) : "尚未填寫懲處事由"
 
-        time.date 2012-10-10
+        time.date= punishment.relevant_date
 
-        span.by 法官評鑑決議
+        span.by= punishment.decision_unit
 
   = render 'components/pagination'
 
