@@ -17,7 +17,7 @@ class ProfilesController < BaseController
     @educations = @profile.educations.newest
     @licenses = @profile.licenses.newest
     @newest_award = @profile.awards.newest.last
-    @newest_punishments = @profile.punishments.had_reason.newest.first(3)
+    @newest_punishments = @profile.punishments.newest.first(3)
     @newest_reviews = @profile.reviews.had_title.newest.first(3)
     set_meta(title: "#{@profile.name}的個人頁")
   end

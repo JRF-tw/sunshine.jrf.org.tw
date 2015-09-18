@@ -1,0 +1,25 @@
+section.section-rhythm.bg-yellow
+  .container.feature-cards
+    = render layout: 'components/feature_card', locals: {heading: '獎勵紀錄'} do
+      - if @newest_award.present?
+        p= @newest_award.content.present? ? summary_text(@newest_award.content, 50) : "#{@newest_award.unit}獎勵#{@newest_award.award_type}"
+        .text-center
+          = link_to '看更多', profile_awards_path(@profile), class: 'button--brown'
+      - else
+        p 目前無獎勵紀錄
+
+    = render layout: 'components/feature_card', locals: {heading: '懲處相關紀錄'} do
+      - if @newest_punishments.present?
+        = render partial: 'components/list_related_suits', locals: { newest_punishments: @newest_punishments }
+        .text-center
+          = link_to '看更多', profile_punishments_path(@profile), class: 'button--brown'
+      - else
+        | 目前無懲處紀錄
+    
+    = render layout: 'components/feature_card', locals: {heading: '相關新聞評論'} do
+      - if @newest_reviews.present?
+        = render 'components/list_related_reviews', locals: { newest_reviews: @newest_reviews }
+        .text-center
+          = link_to '看更多', profile_reviews_path(@profile), class: 'button--brown'
+      - else
+        | 目前無新聞評論紀錄

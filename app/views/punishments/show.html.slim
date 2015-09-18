@@ -1,74 +1,26 @@
 = render partial: 'components/profile_hero', locals: { person: @profile }
   
 article
-  section.section-rhythm.bg-yellow
-    .container--narrow
-      h2.section-heading--black.text-center 懲戒摘要
-
-      p = zh_lorem_paragraph
+  - if @punishment.summary.present?
+    section.section-rhythm.bg-yellow
+      .container--narrow
+        h2.section-heading--black.text-center 懲戒摘要
+        p= @punishment.summary
 
   section.section-rhythm
     .container--narrow
       h2.section-heading--gray.text-center 懲戒詳情
 
       ul.list--punishment-detail
-        li = link_to "資料來源", "#link", class: 'link'
-        li 懲戒時當事者之服務機關：臺灣高等法院
-        li 懲戒時當事者之職稱：法官
-
+        - if @punishment.decision_source.present?
+          li = link_to "資料來源", @punishment.decision_source, target: 'blank', class: 'link'
+        - if @punishment.unit.present?
+          li= "懲戒時當事者之服務機關：#{@punishment.unit}"
+        - if @punishment.title.present?
+          li= "懲戒時當事者之職稱：#{@punishment.title}"
+      
       dl.kv-punishment
-        = kv_cell '公告時間', '2010-01-01'
-        = kv_cell '懲處機關', '司法院'
-        = kv_cell '懲處種類', '口頭發命令促其注意'
-        = kv_cell '懲處事由', '辦理案件違反法官倫理規範'
+        - render_punishment_cell(@punishment).each do |k, v|
+          = kv_cell k, v
 
-      dl.kv-punishment
-        = kv_cell '日　　期', '2010-01-01'
-        = kv_cell '決定機關', '法官評鑑決議'
-        = kv_cell '決　　議', '報由司法院交付司法院人事審議委員會審議，建議處分記過貳次'
-
-      dl.kv-punishment
-        = kv_cell '裁判日期', '2010-01-01'
-        = kv_cell '決定機關', '職務法庭'
-        = kv_cell '移送機關', '監察院'
-        = kv_cell '裁判案由', '停止職務'
-        = kv_cell '裁判主文', '被告中華民國一○一年八月二十日院台人法字第一○一○○二○八三二號停職處分，及一○一年十月十二日院台人議決字第一○一○○二七六○六號異議決定，應予撤銷。'
-
-      dl.kv-punishment
-        = kv_cell '公告日期', '2010-01-01'
-        = kv_cell '決定機關', '監察院'
-        = kv_cell '提案監委', '高鳳仙'
-        = kv_cell '案　　由', '臺灣高雄少年及家事法院法官王俊隆，未忖法官身分，以新臺幣100萬元投資入股哈佛補習班，並據此每年固定受領新臺幣50萬元之高額報酬，嚴重破壞法官廉潔形象，違失情節重大，爰依法提案彈劾。'
-
-      dl.kv-punishment
-        = kv_cell '日　　期', '2010-01-01'
-        = kv_cell '決定機關', '檢察官評鑑決議'
-        = kv_cell '請 求 人', '法務部'
-        = kv_cell '決　　議', '有懲戒之必要，報由法務部移送監察院審查，建議免除檢察官職務，轉任檢察官以外之其他職務。'
-
-      dl.kv-punishment
-        = kv_cell '議決日期', '2010-01-01'
-        = kv_cell '決定機關', '公懲會議決書'
-        = kv_cell '移送機關', '監察院'
-        = kv_cell '案　　由', '違法失職'
-        = kv_cell '議決結果', '撤職並停止任用三年'
-
-section.section-rhythm.bg-yellow
-  .container.feature-cards
-    = render layout: 'components/feature_card', locals: {heading: '獎勵紀錄'} do
-      p = truncate '調職時移交未結案件數，符合「法官調職移交報告書」規定之獎勵', length: 30
-
-      .text-center
-        = link_to '看更多', '#link', class: 'button--brown'
-
-    = render layout: 'components/feature_card', locals: {heading: '懲處相關紀錄'} do
-      = render 'components/list_related_suits', length: 10
-
-      .text-center
-        = link_to '看更多', '#link', class: 'button--brown'
-
-    = render layout: 'components/feature_card', locals: {heading: '相關新聞評論'} do
-      = render 'components/list_related_suits', length: 10
-
-      .text-center
-        = link_to '看更多', '#link', class: 'button--brown'
+= render partial: 'components/related_records'

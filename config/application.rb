@@ -43,6 +43,6 @@ module JrfSunny
     # config.assets.paths << Rails.root.join("public", "assets", "stylesheets")
     # config.assets.paths << Rails.root.join("public", "assets", "javascripts")
 
-    Time::DATE_FORMATS.merge!(:default => "%Y-%m-%d %H:%M", :year => "%Y")
+    Time::DATE_FORMATS.merge!(default: "%Y-%m-%d %H:%M", year: "%Y", date: "%m/%d")
   end
 end
