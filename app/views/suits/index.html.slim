@@ -12,9 +12,7 @@ section.section-rhythm.bg-yellow
 section.section-rhythm
   .container
     .feature-posts.cf
-      - 1.upto 9 do |i|
-        = render partial: 'components/feature_post', locals: {\
-          num: i % 3, show_more_button: false\
-        }
+      - @suits.each do |suit|
+        = render partial: 'components/feature_post', locals: { suit: suit, show_more_button: false }
 
     = render partial: 'components/pagination'

@@ -1,18 +1,16 @@
 article
   = render partial: 'components/hero', locals: {\
-      heading: truncate('檢察總長向總統洩露偵查機密', length: 14),
-      description: truncate('案例內文短摘要可以放在這個位子案例內文短摘', length: 42)\
+      heading: @suit.title,
+      description: @suit.summary\
     }
 
   .container
     = render partial: 'components/suits_tab', locals: {active: 'left'}
     
     section.suit-story
-      .suit-story__photo = render partial: 'components/feature_post_pic', locals: {num: 1}
+      .suit-story__photo = render partial: 'components/feature_post_pic', locals: { suit: @suit }
 
-      - 3.times do
-
-        p = zh_lorem_paragraphs(2)
+      p = @suit.content
 
 
 section.section-rhythm.bg-yellow
@@ -22,14 +20,16 @@ section.section-rhythm.bg-yellow
 
     = render layout: 'components/feature_card', locals: {heading: '案件處理現況'} do
       p
-        ' 102/5/17
-        = truncate zh_lorem_paragraph, length: 35
+        - if @last_procedure.procedure_content == "結束"
+          = @last_procedure.procedure_result
+        - else
+          = "#{@last_procedure.procedure_unit}#{@last_procedure.procedure_content}"
 
       .text-center
-        = link_to '看更多', '#link', class: 'button--brown'
+        = link_to '看更多', suit_procedures_path(@suit), class: 'button--brown'
 
     = render layout: 'components/feature_card', locals: {heading: '你可能會有興趣'} do
-      = render partial: 'components/list_related_suits', locals: {length: 15}
+      = render partial: 'components/list_related_suits', locals: { related_suits: @related_suits }
 
       .text-center
-        = link_to '看更多', '#link', class: 'button--brown'
+        = link_to '看更多', suits_path, class: 'button--brown'

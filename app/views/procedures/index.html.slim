@@ -1,47 +1,31 @@
 article
   = render partial: 'components/hero', locals: {\
-      heading: truncate('檢察總長向總統洩露偵查機密', length: 14),
-      description: truncate('案例內文短摘要可以放在這個位子案例內文短摘', length: 42)\
+      heading: @suit.title,
+      description: @suit.summary\
     }
 
   .container
     = render partial: 'components/suits_tab', locals: {active: 'right'}
 
-    - 3.times do
+    - @procedures_by_person.each do |procedures|
+      - first_procedure = procedures.first
+      - person = first_procedure.profile
       section.suit-procedure
-        h3.suit-procedure__heading = zh_lorem_name
+        h3.suit-procedure__heading = person.name
 
-        span.suit-procedure__job 時任 臺灣臺北地方法院檢察署   檢察官
+        span.suit-procedure__job= "時任 #{first_procedure.unit}   #{first_procedure.title}"
 
         ul.list--suit-process
-          li.list--suit-process__cell
-            = calendar '2014', '10/10'
+          - procedures.each do |procedure|
+            li.list--suit-process__cell
+              - if procedure.procedure_date.present?
+                = calendar "#{procedure.procedure_date.to_s(:year).to_i}", "#{procedure.procedure_date.strftime("%m/%d")}"
 
-            .content
-              small.doc-num 101年檢評字第3號
-              | 法務部：彈劾並移送職務法庭
-
-          li.list--suit-process__cell
-            = calendar '2014', '5/10'
-
-            .content
-              small.doc-num 101年檢評字第3號
-              ' 司改會：有懲戒之必要，報由法務部移送監察院審查，建議休職二年
-              = link_to '懲處紀錄', '#link', class: 'button--brown'
-
-          li.list--suit-process__cell
-            = calendar '2016', '1/10'
-
-            .content
-              small.doc-num 101年檢評字第3號
-              | 司改會：有懲戒之必要，報由法務部移送監察院審查，建議休職二年
-
-          li.list--suit-process__cell
-            = calendar '2016', '2/10'
-
-            .content
-              small.doc-num 101年檢評字第3號
-              | 司改會：有懲戒之必要，報由法務部移送監察院審查，建議休職二年司改會：有懲戒之必要，報由法務部移送監察院審查，建議休職二年
+              .content
+                - if procedure.procedure_no.present?
+                  small.doc-num =procedure.procedure_no
+                - if procedure.procedure_result.present?
+                  = "#{procedure.procedure_unit}：#{procedure.procedure_result}"
 
         / 
         / 這個 button 在 slim 裡的位置至關重要！
@@ -52,4 +36,4 @@ article
         / 只要改下面 button 的 `data-default` 即可
         / 改他的預設機能就可以自動啟動收合/展開的預設配套惹
         / 
-        button.list--suit-process-toggle type='button' data-default='close'
+        button.list--suit-process-toggle type='button' data-default='open'

@@ -25,4 +25,21 @@ class Suit < ActiveRecord::Base
 
   scope :newest, ->{ order("id DESC") }
 
+  def related_suits
+    judge_ids = self.judges.map(&:id)
+    prosecutor_ids = self.prosecutors.map(&:id)
+    suit_ids = (SuitJudge.where(profile_id: judge_ids).map(&:suit_id) + SuitProsecutor.where(profile_id: prosecutor_ids).map(&:suit_id)).uniq
+    Suit.where(id: suit_ids)
+  end
+
+  def procedures_by_person
+    profile_ids = self.procedures.map(&:profile_id)
+    people = Profile.where(id: profile_ids)
+    arr = []
+    people.each do |person|
+      arr << person.procedures.where(suit_id: self.id).flow_by_procedure_date
+    end
+    arr
+  end
+
 end

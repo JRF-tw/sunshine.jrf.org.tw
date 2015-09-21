@@ -1,4 +1,4 @@
 section.container
   .base__feature-posts.cf
     - @suits.each do |suit|
-      = render partial: 'components/feature_post', locals: { suit: suit }
+      = render partial: 'components/feature_post', locals: { suit: suit, show_more_button: true }

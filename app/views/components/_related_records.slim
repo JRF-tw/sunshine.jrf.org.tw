@@ -10,7 +10,7 @@ section.section-rhythm.bg-yellow
 
     = render layout: 'components/feature_card', locals: {heading: '懲處相關紀錄'} do
       - if @newest_punishments.present?
-        = render partial: 'components/list_related_suits', locals: { newest_punishments: @newest_punishments }
+        = render partial: 'components/list_related_punishments', locals: { newest_punishments: @newest_punishments }
         .text-center
           = link_to '看更多', profile_punishments_path(@profile), class: 'button--brown'
       - else
