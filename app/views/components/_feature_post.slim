@@ -5,5 +5,6 @@ article.feature-post
     h3.feature-post__heading
       = suit.title
 
-  .feature-post__button-wrapper
-    = link_to '了解更多', suit_path(suit), class: 'button--gray'
+  - if show_more_button == true
+    .feature-post__button-wrapper
+      = link_to '了解更多', suit_path(suit), class: 'button--gray'

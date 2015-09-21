@@ -1,7 +1,18 @@
 dl.list--related-people
-  - ['法官', '檢察官'].each do |job|
-    dt.job = job
+  - judges_count = @related_judges.count
+  - prosecutors_count = @related_prosecutors.count
+  - if judges_count > 0
+    dt.job 法官
     dd
-      = link_to zh_lorem_name, '#link', class: 'people'
-      | 、
-      = link_to zh_lorem_name, '#link', class: 'people'
+      - @related_judges.each_with_index do |judge, i|
+        = link_to judge.name, profile_path(judge), class: 'people'
+        - unless i + 1 == judges_count
+          | 、
+
+  - if prosecutors_count > 0
+    dt.job 檢察官
+    dd
+      - @related_prosecutors.each_with_index do |prosecutor, i|
+        = link_to prosecutor.name, profile_path(prosecutor), class: 'people'
+        - unless i + 1 == prosecutors_count
+          | 、

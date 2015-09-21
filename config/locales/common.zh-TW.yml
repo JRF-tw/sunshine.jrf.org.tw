@@ -166,10 +166,10 @@ zh-TW:
         prosecutor_ids: "相關檢察官"
       procedure:
         profile_id: "姓名"
-        unit: "服務機關"
-        title: "職稱"
+        unit: "當時服務機關"
+        title: "當時職稱"
         procedure_unit: "處理單位"
-        procedure_content: "處理狀況"
+        procedure_content: "處理狀態"
         procedure_result: "處理結果"
         procedure_no: "處理案號"
         procedure_date_in_tw: "日期"
