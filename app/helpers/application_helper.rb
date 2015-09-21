@@ -52,6 +52,14 @@ module ApplicationHelper
     end
   end
 
+  def render_punishment_decision_unit(punishment)
+    if punishment.decision_unit == "監察院(新)" || "監察院(舊)"
+      "監察院"
+    else
+      punishment.decision_unit
+    end
+  end
+
   def render_punishment_cell(punishment)
     hash = Hash.new
     if punishment.decision_unit == "公懲會"

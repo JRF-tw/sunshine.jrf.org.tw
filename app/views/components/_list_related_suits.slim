@@ -6,4 +6,4 @@ ul.list--arrow
       - elsif punishment.reason.present?
         = link_to summary_text(punishment.reason, 10), profile_punishment_path(@profile, punishment)
       - else
-        = link_to "決定機關：#{punishment.decision_unit}", profile_punishment_path(@profile, punishment)
+        = link_to "決定機關：#{render_punishment_decision_unit(punishment)}", profile_punishment_path(@profile, punishment)
