@@ -106,7 +106,7 @@ namespace :dev do
     titles = ["我的願構調王出", "那作之所好能一地", "新布類系眼美成的子", "晚適事制質一銷可麗民", "色手黃備型食勢我成原動", "春資一臺無反的共的家示例", "林全無間一新進遊然統國德足", "機來了各正又解手孩目這走運醫", "多制負能狀隨方計算自化的中已廣"]
     Admin::Profile.all.each do |p|
       (5..15).to_a.sample.times do
-        p.reviews.create!(name: names.sample, title: titles.sample, publish_at: rand(20.years).ago)
+        p.reviews.create!(name: names.sample, title: titles.sample, source: "https://www.google.com.tw", publish_at: rand(20.years).ago)
       end
     end
   end
@@ -153,6 +153,7 @@ namespace :dev do
     Suit.destroy_all
     titles = ["我的願構調王出", "那作之所好能一地", "新布類系眼美成的子", "晚適事制質一銷可麗民", "色手黃備型食勢我成原動", "春資一臺無反的共的家示例", "林全無間一新進遊然統國德足", "機來了各正又解手孩目這走運醫", "多制負能狀隨方計算自化的中已廣"]
     text = ["的世業銷一食今方無想產做前，養他熱：氣總男極！利見體？道不自原結位手。備叫然目功物的展這得界遊我世專關情長道快眼不到首麼員候風：酒作速等，人清今重離燈氣黃運少主馬多風構沒原在性麼注不愛自下以少講劇了的兩，後頭說怎處作女間了花天！", "局有歌升個國民起本己想作成下為在…… 度模復場對接西明家風你。道我功部語育，學不他車義活環教手國開…… 了人又回不己念時來的港不包感的結事率成現？來集落，禮的愛結許能朋海中都個時，員足萬亮同進的居質動，著不的；感沒於大廣天；看時交放種活原素設後而活我財臺不邊類港以子果？", "力年華。力步說建產阿；此清一是了現學報同放所書旅怕聽代…… 石麼高經應邊的校自位專，電行氣！因上信你！境產幾樣讓友二打子認平心投，方不要易呢中影多開生到生型自準示車男公臺小不。"]
+    keywords = ["態度不佳", "撤回上訴", "侵越權限","不正訊問", "憤怒鳥檢察官", "測試關鍵字"]
     titles.each_with_index do |t, i|
       judge_ids = Profile.judges.shuffle.last((2..5).to_a.sample).map(&:id)
       prosecutor_ids = Profile.prosecutors.shuffle.last((2..5).to_a.sample).map(&:id)
@@ -160,8 +161,9 @@ namespace :dev do
       content = text.sample
       suit_no = (1000..1200).to_a.sample
       state = Admin::Suit::STATE.sample
+      keyword = keywords.shuffle.last((1..3).to_a.sample).join(',')
       file = File.open "#{Rails.root}/spec/fixtures/suit_pic/case-#{i+1}.jpg"
-      suit = Admin::Suit.create!(title: t, state: state, suit_no: suit_no, summary: summary, content: content, pic: file)
+      suit = Admin::Suit.create!(title: t, state: state, suit_no: suit_no, summary: summary, content: content, pic: file, keyword: keyword)
       judge_ids.each do |j|
         suit.suit_judges.create!(profile_id: j)
       end
@@ -189,8 +191,9 @@ namespace :dev do
   task :fake_punishments => :environment do
     Punishment.destroy_all
     decision_units = ["公懲會", "檢評會", "監察院(新)", "監察院(舊)", "職務法庭", "法評會", "司法院"]
+    reasons = ["請求個案評鑑", "受評鑑人有懲戒之必要，報由法務部移送監察院審查，建議休職二年。", "休職，期間壹年陸月。", "受評鑑法官詹駿鴻報由司法院交付司法院人事審議委員會審議，建議處分記過貳次。", "警告處分", "本件請求不成立，並移請職務監督權人為適當之處分"]
     Admin::Profile.all.each do |p|
-      p.punishments.create!(decision_unit: decision_units.sample)
+      p.punishments.create!(decision_unit: decision_units.sample, reason: reasons.sample)
     end
   end
 end

@@ -22,6 +22,7 @@ zh-TW:
       profile:
         name: "姓名"
         current: "現職"
+        current_court: "現職法院 / 檢察署"
         remove_avatar: "移除現有頭像"
         avatar: "頭像"
         gender: "性別"
