@@ -17,6 +17,7 @@
 #  memo               :text
 #  created_at         :datetime
 #  updated_at         :datetime
+#  current_court      :string(255)
 #
 
 class Admin::Profile < ::Profile
