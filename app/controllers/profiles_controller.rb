@@ -1,7 +1,7 @@
 class ProfilesController < BaseController
   def judges
     set_meta(title: "認識法官")
-    @judges = Profile.judges.random.page(params[:page]).per(2)
+    @judges = Profile.judges.random.page(params[:page]).per(12)
   end
 
   def prosecutors
