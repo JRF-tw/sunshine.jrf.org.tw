@@ -15,4 +15,4 @@ section.section-rhythm
       - @suits.each do |suit|
         = render partial: 'components/feature_post', locals: { suit: suit, show_more_button: false }
 
-    = render partial: 'components/pagination'
+    = paginate @suits, theme: 'www'

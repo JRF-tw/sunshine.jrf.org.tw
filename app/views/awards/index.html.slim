@@ -12,6 +12,6 @@ section.section-rhythm.container
         p.description= award.content.present? ? summary_text(award.content, 60) : "尚未填寫授獎事由"
         p.from= "授獎機關：#{@newest_award.unit}"
 
-  = render 'components/pagination'
+  = paginate @awards, theme: 'www'
 
 = render partial: 'components/related_records'

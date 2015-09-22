@@ -21,6 +21,7 @@ section.section-rhythm.container
             = calendar "#{review.publish_at.to_s(:year).to_i}", "#{review.publish_at.strftime("%m/%d")}"
           - if review.name.present?
             span.paper-name= review.name
-  = render 'components/pagination'
+  
+  = paginate @reviews, theme: 'www'
 
 = render partial: 'components/related_records'
