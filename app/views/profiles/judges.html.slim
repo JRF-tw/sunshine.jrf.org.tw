@@ -10,5 +10,5 @@ section.section-rhythm.cf
   .container
     = render partial: 'components/avatar_list', locals: { people: @judges }
 
-    / = paginate @judges
+    = paginate @judges, theme: 'www'
     = render partial: 'components/pagination'

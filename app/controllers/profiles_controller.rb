@@ -1,12 +1,12 @@
 class ProfilesController < BaseController
   def judges
     set_meta(title: "認識法官")
-    @judges = Profile.judges.shuffle
+    @judges = Profile.judges.random.page(params[:page]).per(2)
   end
 
   def prosecutors
     set_meta(title: "認識檢察官")
-    @prosecutors = Profile.prosecutors.shuffle
+    @prosecutors = Profile.prosecutors.random.page(params[:page]).per(12)
   end
 
   def show

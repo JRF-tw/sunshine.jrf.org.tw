@@ -1,6 +1,6 @@
 class SuitsController < BaseController
   def index
-    @suits = Suit.all.newest
+    @suits = Suit.all.newest.page(params[:page]).per(9)
     set_meta(title: "司法恐龍面面觀")
   end
 

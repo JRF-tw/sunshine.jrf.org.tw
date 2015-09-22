@@ -14,6 +14,7 @@ section.section-rhythm.container
 
         span.by= render_punishment_decision_unit(punishment)
 
-  = render 'components/pagination'
+  = paginate @punishments, theme: 'www'
+  = render partial: 'components/pagination'
 
 = render partial: 'components/related_records'

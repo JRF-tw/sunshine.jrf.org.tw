@@ -2,6 +2,7 @@ class PunishmentsController < BaseController
 	before_action :get_instances
 
   def index
+    @punishments = @punishments.page(params[:page]).per(12)
     set_meta(title: "#{@profile.name}的懲處相關紀錄")
   end
 

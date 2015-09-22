@@ -41,7 +41,8 @@ class Profile < ActiveRecord::Base
   has_many :procedures, dependent: :destroy
 
   scope :newest, ->{ order("id DESC") }
-  scope :had_avatar, -> { where.not(:avatar => nil) }
+  scope :had_avatar, ->{ where.not(:avatar => nil) }
+  scope :random, ->{ order("RANDOM()") }
 
   def self.judges
     where(current: "法官")

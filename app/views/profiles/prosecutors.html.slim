@@ -10,4 +10,5 @@ section.section-rhythm.cf
   .container
     = render partial: 'components/avatar_list', locals: { people: @prosecutors }
 
+    = paginate @prosecutors, theme: 'www'
     = render partial: 'components/pagination'
