@@ -10,35 +10,21 @@ module RetinaHelper
     tag :img, class: "#{name} lazyload", alt: '', 'data-sizes' => 'auto', 'data-src' => 'http://placehold.it/{width}'
   end
 
-  def srcset(source, sizes)
-    paths = []
-    
-    # 把每個尺寸加入 srcset 的檔名跟 w 指示
-    sizes.each do |name, size|
-      file = source.sub(/[^\/]*$/) { |matched| "#{name}_#{matched}" }
-      path = path_to_image "#{file}"
-      paths.push "#{path} #{size}w"
-    end
-
-    paths.join ","
-  end
-
-  def image_srcset(source, sizes, name)
-    _src   = source.sub(/[^\/]*$/) { |matched| "thumb_#{matched}" }
-    # 最小的當 fallback 圖片
-    _paths = srcset source, sizes
+  def rias_srcset(source, sizes, name)
+    _src  = source.sub(/[^\/]*$/) { |matched| "L_#{sizes.min}_#{matched}" }  # 最小的當 fallback 圖片
+    _file = source.sub(/[^\/]*$/) { |matched| "L_{width}_#{matched}" }
+    path  = path_to_image _file # 其他尺寸的要抓出完整路徑來處理
 
     image_tag _src, class: "#{name} lazyload",
       'data-sizes'  => 'auto',
-      'data-srcset' => _paths
+      'data-srcset' => path,
+      'data-widths' => sizes.to_s # 縮放後的尺寸列表以陣列來帶入
 
-    # 所有的正規表示式都只是在把寬度塞進副檔名前
-    # eg. filename.jpg -> large_filename.jpg
   end
 
   def source_srcset(source, size, media)
-    file = source.sub(/[^\/]*$/) { |matched| "#{size}_{width}_#{matched}" }
-    path = path_to_image "#{file}"
+    _file = source.sub(/[^\/]*$/) { |matched| "#{size}_{width}_#{matched}" }
+    path  = path_to_image "#{_file}"
     
     tag :source,
       'data-srcset' => path,
