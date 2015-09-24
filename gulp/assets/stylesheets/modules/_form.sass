@@ -50,9 +50,9 @@ $all-text-inputs: 'input[type="color"], input[type="date"], input[type="datetime
 // {{Input group --------}}
 .input-group--large
   margin-top: scut-rem(3)
+  position: relative
 
   +susy($pad)  
-    display: table
     width: 100%
     border: scut-rem(1) solid $form-border
 
@@ -68,9 +68,8 @@ $all-text-inputs: 'input[type="color"], input[type="date"], input[type="datetime
     outline: none
 
     +susy($pad)
-      display: table-cell
       margin-bottom: 0
-      padding: .75rem scut-rem(12)
+      padding: .75rem scut-rem(130) .75rem scut-rem(12)
       height: auto
       line-height: 1.5rem
       border: none
@@ -79,28 +78,29 @@ $all-text-inputs: 'input[type="color"], input[type="date"], input[type="datetime
     border-radius: 0
 
     +susy($pad)
-      display: table-cell
+      +scut-absolute(0 0 n n)
+      // display: table-cell
 
 .input-group
-  display: table
   margin-top: scut-rem(3)
   width: 100%
   border: scut-rem(1) solid $form-border
   background-color: #fff
+  position: relative
 
   .input
-    display: table-cell
+    display: block
     width: 100%
-    padding: scut-rem(4) scut-rem(12)
+    padding: scut-rem(4) scut-rem(92) scut-rem(4) scut-rem(12)
     +font(18, 20)
     border: none
     border-radius: 0
     outline: none
 
   .button--gray-dark
-    display: table-cell
     line-height: scut-rem(28)
     min-width: scut-rem(80)
     border-radius: 0
     vertical-align: middle
+    +scut-absolute(0 0 n n)
     

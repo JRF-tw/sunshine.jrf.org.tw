@@ -1,16 +1,15 @@
 picture
   | <!--[if IE 9]><audio><![endif]-->
   
-  = source_srcset "demo-rwd-dist/#{pic}-L.jpg",
-    [1080, 1296, 2160, 2592], "(min-width: 62.5em)"
+  = source_srcset "demo-rwd-dist/#{pic}.jpg", "L", "(min-width: 62.5em)"
   
-  = source_srcset "demo-rwd-dist/#{pic}-M.jpg",
-    [900, 1080, 1512, 1728, 1944], "(min-width: 44em)"
+  = source_srcset "demo-rwd-dist/#{pic}.jpg", "M", "(min-width: 44em)"
   
-  = source_srcset "demo-rwd-dist/#{pic}-S.jpg",
-    [360, 540, 720, 1080, 1296], ""
+  = source_srcset "demo-rwd-dist/#{pic}.jpg", "S", ""
   
   | <!--[if IE 9]></audio><![endif]-->
   
   = image_tag "",
-    "data-sizes" => "auto", class: "lazyload"
+    "data-sizes" => "auto",
+    "data-widths" => "[360, 540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2160, 2592]",
+    class: "lazyload"
