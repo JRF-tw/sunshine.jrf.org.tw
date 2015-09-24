@@ -1,0 +1,26 @@
+= admin_widget_box "首頁 banner 列表", icon: :pencil do
+  .dataTables_wrapper
+    div
+      .dataTables_length
+        = link_to "新增首頁 banner", new_admin_banner_path, class: "btn btn-primary btn-mini"
+    table.table.table-bordered.table-striped.table-hover
+      thead
+        tr
+          th #
+          th 圖片
+          th 權重
+          th 是否隱藏
+          th
+      tbody
+        - @banners.each do |banner|
+          tr
+            td= banner.id
+            td= image_tag banner.pic_l if banner.pic_l.present?
+            td= banner.weight
+            td= banner.is_hidden ? "隱藏" : "-"
+            td
+              = link_to "編輯", edit_admin_banner_path(banner), class: "btn btn-mini btn-success"
+              | &nbsp;
+              = link_to "刪除", admin_banner_path(banner), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除首頁 banner？"
+    .ui-toolbar.ui-widget-header
+      = paginate @banners, theme: :admin

@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class SuitPicUploader < BaseUploader
-	version :xlarge  do
+  version :xlarge  do
     process :resize_to_fill => [1512, 1145]
   end
 

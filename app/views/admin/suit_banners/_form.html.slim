@@ -1,0 +1,30 @@
+- if f.object.pic_l?
+  .control-group
+    label.control-label 已上傳桌機用圖：
+    .controls= image_tag f.object.pic_l.thumb.url
+= f.input :pic_l, as: :file
+
+- if f.object.pic_m?
+  .control-group
+    label.control-label 已上傳平板用圖：
+    .controls= image_tag f.object.pic_m.thumb.url
+= f.input :pic_m, as: :file
+
+- if f.object.pic_s?
+  .control-group
+    label.control-label 已上傳手機用圖：
+    .controls= image_tag f.object.pic_s.thumb.url
+= f.input :pic_s, as: :file
+
+= f.input :url
+= f.input :alt_string
+= f.input :title
+= f.input :content
+= f.input :weight, hint: "數字越大 = 權重越高 = 排越前面"
+= f.input :is_hidden, as: :boolean, hint: "打勾 = 前端頁面不顯示"
+
+.form-actions
+  = f.submit "送出", class: "btn btn-primary"
+  = " "
+  = link_to admin_profiles_path, class: "btn" do
+    | 回到個人檔案列表
