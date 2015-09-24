@@ -1,0 +1,3 @@
+= admin_widget_box "編輯首頁橫幅", icon: :pencil do
+  = simple_form_for @banner, url: admin_banner_path(@banner), method: :put, wrapper: :admin do |f|
+    = render partial: "form", object: f, as: :f

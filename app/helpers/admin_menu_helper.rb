@@ -13,6 +13,8 @@ module AdminMenuHelper
       "重要判決管理": { url: admin_judgments_path, match: /\/admin\/judgments/ },
       "評鑑資料-案例管理": { url: admin_suits_path, match: /\/admin\/suits/ },
       "法院 / 監察院管理": { url: admin_courts_path, match: /\/admin\/courts/ },
+      "首頁橫幅管理": { url: admin_banners_path, match: /\/admin\/banners/ },
+      "司法恐龍面面觀橫幅管理": { url: admin_suit_banners_path, match: /\/admin\/suit_banners/ },
       "後台使用者管理": { url: admin_users_path, match: /\/admin\/users/ }
     }
   end

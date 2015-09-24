@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150824104016) do
+ActiveRecord::Schema.define(version: 20150924100203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
   enable_extension "postgis"
+  enable_extension "hstore"
 
   create_table "articles", force: true do |t|
     t.integer  "profile_id"
@@ -59,6 +59,16 @@ ActiveRecord::Schema.define(version: 20150824104016) do
   end
 
   add_index "awards", ["profile_id"], :name => "index_awards_on_profile_id"
+
+  create_table "banners", force: true do |t|
+    t.string   "pic_l"
+    t.string   "pic_m"
+    t.string   "pic_s"
+    t.integer  "weight"
+    t.boolean  "is_hidden"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "careers", force: true do |t|
     t.integer  "profile_id"
@@ -266,6 +276,20 @@ ActiveRecord::Schema.define(version: 20150824104016) do
   end
 
   add_index "reviews", ["profile_id"], :name => "index_reviews_on_profile_id"
+
+  create_table "suit_banners", force: true do |t|
+    t.string   "pic_l"
+    t.string   "pic_m"
+    t.string   "pic_s"
+    t.string   "url"
+    t.string   "alt_string"
+    t.string   "title"
+    t.text     "content"
+    t.integer  "weight"
+    t.boolean  "is_hidden"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "suit_judges", force: true do |t|
     t.integer  "suit_id"

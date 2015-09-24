@@ -5,7 +5,7 @@
 - if f.object.avatar?
   .control-group
     label.control-label 已上傳頭像：
-    .controls= image_tag f.object.avatar.thumb.url
+    .controls= image_tag f.object.avatar.L_180.url
     = f.input :remove_avatar, as: :boolean
 = f.input :avatar, as: :file
 = f.input :gender, as: :select, collection: Admin::Profile::GENDER_TYPES, include_blank: "請選擇"

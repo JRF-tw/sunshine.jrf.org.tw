@@ -13,6 +13,8 @@ zh-TW:
       judgment: "重要判決"
       suit: "評鑑資料-案例"
       procedure: "評鑑資料-案例處理經過"
+      banner: "首頁橫幅"
+      suit_banner: "司法恐龍面面觀橫幅"
     attributes:
       court:
         court_type: "類型"
@@ -179,3 +181,19 @@ zh-TW:
         punish_link: "懲處網址"
         file: "相關文件（上傳文件用）"
         memo: "備註"
+      banner:
+        pic_l: "桌機用圖"
+        pic_m: "平板用圖"
+        pic_s: "手機用圖"
+        weight: "權重"
+        is_hidden: "隱藏"
+      suit_banner:
+        pic_l: "桌機用圖"
+        pic_m: "平板用圖"
+        pic_s: "手機用圖"
+        url: "網址"
+        alt_string: "圖片敘述"
+        title: "標題"
+        content: "內文"
+        weight: "權重"
+        is_hidden: "隱藏"

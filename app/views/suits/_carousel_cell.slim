@@ -1,5 +1,5 @@
 section.carousel__cell
   .caption
-    h3.heading = truncate(zh_lorem_sentence, length: 18)
-    p.description = truncate(zh_lorem_paragraph, length: 90)
-  = render partial: 'components/art_direction', locals: {pic: pic}
+    h3.heading = banner.title
+    p.description = banner.content
+  = render partial: 'components/art_direction', locals: {banner: banner}

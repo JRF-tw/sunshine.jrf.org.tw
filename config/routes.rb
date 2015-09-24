@@ -43,6 +43,8 @@ Rails.application.routes.draw do
     end
     resources :courts
     resources :judgments
+    resources :banners
+    resources :suit_banners
     resources :users
   end
 end

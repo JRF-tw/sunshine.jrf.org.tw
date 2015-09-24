@@ -1,0 +1,28 @@
+= admin_widget_box "司法恐龍面面觀 banner 列表", icon: :pencil do
+  .dataTables_wrapper
+    div
+      .dataTables_length
+        = link_to "新增司法恐龍面面觀 banner", new_admin_suit_banner_path, class: "btn btn-primary btn-mini"
+    table.table.table-bordered.table-striped.table-hover
+      thead
+        tr
+          th #
+          th 圖片
+          th 標題
+          th 權重
+          th 是否隱藏
+          th
+      tbody
+        - @suit_banners.each do |suit_banner|
+          tr
+            td= suit_banner.id
+            td= image_tag suit_banner.pic_l.L_360 if suit_banner.pic_l.present?
+            td= suit_banner.title
+            td= suit_banner.weight
+            td= suit_banner.is_hidden ? "隱藏" : "-"
+            td
+              = link_to "編輯", edit_admin_suit_banner_path(suit_banner), class: "btn btn-mini btn-success"
+              | &nbsp;
+              = link_to "刪除", admin_suit_banner_path(suit_banner), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除司法恐龍面面觀 banner？"
+    .ui-toolbar.ui-widget-header
+      = paginate @suit_banners, theme: :admin

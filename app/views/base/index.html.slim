@@ -12,8 +12,8 @@ section.base-hero
           li = link_to '關於我們', about_path, class: 'base-nav__cell'
 
   #hero-carousel.hero-carousel
-    .hero-carousel__cell = render partial: 'components/art_direction', locals: {pic: 'banner-1'}
-    .hero-carousel__cell = render partial: 'components/art_direction', locals: {pic: 'banner-2'}
+    - @banners.each do |banner|
+      .hero-carousel__cell = render partial: 'components/art_direction', locals: {banner: banner}
 
 
 = render partial: 'feature_posts'
