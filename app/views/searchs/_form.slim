@@ -1,16 +1,4 @@
 .search-result-form-wrapper
-  / # MEMO 原始的html
-  / form
-  /   - if options.length > 0
-  /     .select-container
-  /       select.select-custom
-  /         - options.each do |option|
-  /           option = option.at(0)
-
-  /   .input-group
-  /     input.input type='text' placeholder=placeholder
-  /     = link_to '馬上找', '/search/suits', class: 'button--gray-dark'
-
   = simple_form_for :search, :url => search_url, :method => :get, :html => { :role => "menu" } do |f|
     - if options.length > 0
       .select-container

@@ -1,18 +1,5 @@
 .section-rhythm
   .search-form-wrapper
-    / # MEMO 原始的html
-    / form
-    /   - if options.length > 0
-    /     .select-container--search-form
-    /       select.select-custom name="#{type}"
-    /         - options.each do |option|
-    /           option id="#{option}" = option
-
-    /   .input-group--large
-    /     input.input type='text' placeholder=placeholder
-    /     = link_to '馬上找', '/search/suits', class: 'button--gray-dark button--large'
-
-
     = simple_form_for :search, :url => search_url, :method => :get, :html => { :role => "menu" } do |f|
       - if options.length > 0
         .select-container--search-form
