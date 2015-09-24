@@ -20,7 +20,9 @@ namespace :dev do
     "dev:fake_judgments",
     "dev:fake_suits",
     "dev:fake_procedures",
-    "dev:fake_punishments"
+    "dev:fake_punishments",
+    "dev:fake_banners",
+    "dev:fake_suit_banners"
   ]
 
   task :fake_users => :environment do
@@ -194,6 +196,33 @@ namespace :dev do
     reasons = ["請求個案評鑑", "受評鑑人有懲戒之必要，報由法務部移送監察院審查，建議休職二年。", "休職，期間壹年陸月。", "受評鑑法官詹駿鴻報由司法院交付司法院人事審議委員會審議，建議處分記過貳次。", "警告處分", "本件請求不成立，並移請職務監督權人為適當之處分"]
     Admin::Profile.all.each do |p|
       p.punishments.create!(decision_unit: decision_units.sample, reason: reasons.sample)
+    end
+  end
+
+  task :fake_banners => :environment do
+    Banner.destroy_all
+    2.times do |i|
+      Admin::Banner.create!(
+        pic_l: File.open("#{Rails.root}/spec/fixtures/banner/L_banner_#{i+1}.jpg"),
+        pic_m: File.open("#{Rails.root}/spec/fixtures/banner/M_banner_#{i+1}.jpg"),
+        pic_s: File.open("#{Rails.root}/spec/fixtures/banner/S_banner_#{i+1}.jpg"),
+        weight: i+1
+      )
+    end
+  end
+
+  task :fake_suit_banners => :environment do
+    SuitBanner.destroy_all
+    urls = ["https://www.facebook.com", "https://www.google.com", "https://www.yahoo.com"]
+    titles = ["我的願構調王出", "那作之所好能一地", "新布類系眼美成的子", "晚適事制質一銷可麗民", "色手黃備型食勢我成原動", "春資一臺無反的共的家示例", "林全無間一新進遊然統國德足", "機來了各正又解手孩目這走運醫", "多制負能狀隨方計算自化的中已廣"]
+    text = ["的世業銷一食今方無想產做前，養他熱：氣總男極！利見體？道不自原結位手。備叫然目功物的展這得界遊我世專關情長道快眼不到首麼員候風：酒作速等，人清今重離燈氣黃運少主馬多風構沒原在性麼注不愛自下以少講劇了的兩，後頭說怎處作女間了花天！", "局有歌升個國民起本己想作成下為在…… 度模復場對接西明家風你。道我功部語育，學不他車義活環教手國開…… 了人又回不己念時來的港不包感的結事率成現？來集落，禮的愛結許能朋海中都個時，員足萬亮同進的居質動，著不的；感沒於大廣天；看時交放種活原素設後而活我財臺不邊類港以子果？", "力年華。力步說建產阿；此清一是了現學報同放所書旅怕聽代…… 石麼高經應邊的校自位專，電行氣！因上信你！境產幾樣讓友二打子認平心投，方不要易呢中影多開生到生型自準示車男公臺小不。"]
+    urls.each_with_index do |url, i|
+      Admin::SuitBanner.create!(
+        pic_l: File.open("#{Rails.root}/spec/fixtures/suit_banner/case_#{i+1}.jpg"),
+        pic_m: File.open("#{Rails.root}/spec/fixtures/suit_banner/case_#{i+1}.jpg"),
+        pic_s: File.open("#{Rails.root}/spec/fixtures/suit_banner/case_#{i+1}.jpg"),
+        url: url, title: titles.sample, content: text.sample, weight: i+1
+      )
     end
   end
 end

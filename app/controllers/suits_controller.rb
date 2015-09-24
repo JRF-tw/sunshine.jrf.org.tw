@@ -1,6 +1,6 @@
 class SuitsController < BaseController
   def index
-    @banners = SuitBanner.published.order_by_weight
+    @suit_banners = SuitBanner.published.order_by_weight
     @suits = Suit.all.newest.page(params[:page]).per(9)
     set_meta(title: "司法恐龍面面觀")
   end

@@ -6,7 +6,7 @@
 section.section-rhythm.bg-yellow
   .container
     #carousel.carousel
-      - @banners.each do |banner|
+      - @suit_banners.each do |banner|
         = render partial: 'carousel_cell', locals: {banner: banner}
 
 section.section-rhythm
