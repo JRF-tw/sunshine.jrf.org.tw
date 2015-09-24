@@ -47,8 +47,7 @@ class Suit < ActiveRecord::Base
   class << self
 
     def find_state(state)
-      # TODO 確認一下要搜尋什麼欄位
-      # return where( state) if state.present?
+      return where(state: state) if state.present?
       all
     end
 
