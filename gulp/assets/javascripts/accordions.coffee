@@ -2,8 +2,8 @@ module.exports = ->
   
   class SuitProcedureAccordion
     constructor: (@button) ->
-      @lists = @button.parent()
-                      .find('.list--suit-process__cell:not(:last-child)')
+      @list = @button.parent().find('.list--suit-process__cell')
+      @rest_list = @list.not(':last-child')
 
       @default = @button.data 'default'
       
@@ -17,11 +17,11 @@ module.exports = ->
       @init()
 
     open: ->
-      @lists.slideDown 300
+      @rest_list.slideDown 300
       @change_method 'close'
 
     close: ->
-      @lists.slideUp 300
+      @rest_list.slideUp 300
       @change_method 'open'
 
     change_method: (order) ->
@@ -35,11 +35,16 @@ module.exports = ->
                .text 'OPEN'
 
     init: ->
-      unless @default is 'open'
-        @change_method 'close'
+      if @list.length <= 1
+        @button.remove()
+        @list.css {"border-bottom": "none"}
+
       else
-        @change_method 'open'
-        @lists.hide()
+        unless @default is 'open'
+          @change_method 'close'
+        else
+          @change_method 'open'
+          @rest_list.hide()
 
   $('.list--suit-process-toggle').each ->
     new SuitProcedureAccordion $(@)
