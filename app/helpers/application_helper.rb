@@ -53,7 +53,7 @@ module ApplicationHelper
   end
 
   def render_punishment_decision_unit(punishment)
-    if punishment.decision_unit == "監察院(新)" || "監察院(舊)"
+    if punishment.decision_unit == ("監察院(新)" || "監察院(舊)")
       "監察院"
     else
       punishment.decision_unit

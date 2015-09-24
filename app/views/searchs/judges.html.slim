@@ -9,6 +9,6 @@
 
 section.section-rhythm.cf
   .container
-    = render partial: 'components/avatar_list', locals: {from: 1, to: 18}
+    = render partial: 'components/avatar_list', locals: {from: 1, to: 18, people: @people}
 
     = paginate @people, theme: 'www'
