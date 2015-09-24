@@ -33,14 +33,15 @@ module RetinaHelper
       'data-srcset' => _paths
 
     # 所有的正規表示式都只是在把寬度塞進副檔名前
-    # eg. filename.jpg -> filename-300.jpg
+    # eg. filename.jpg -> large_filename.jpg
   end
 
-  def source_srcset(source, sizes, media)
-    _paths = srcset source, sizes
+  def source_srcset(source, size, media)
+    file = source.sub(/[^\/]*$/) { |matched| "#{size}_{width}_#{matched}" }
+    path = path_to_image "#{file}"
     
     tag :source,
-      'data-srcset' => _paths,
+      'data-srcset' => path,
       'media'       => media
   end
 
