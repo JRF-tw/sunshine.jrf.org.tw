@@ -25,6 +25,8 @@ class Suit < ActiveRecord::Base
 
   scope :newest, ->{ order("id DESC") }
 
+  STATE = ["處理中", "未受懲處", "已懲處"]
+
   def related_suits
     judge_ids = self.judges.map(&:id)
     prosecutor_ids = self.prosecutors.map(&:id)

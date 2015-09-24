@@ -1,7 +1,7 @@
 = f.input :title
 = f.input :summary
 = f.input :content
-= f.input :state, as: :select, collection: Admin::Suit::STATE, include_blank: "請選擇"
+= f.input :state, as: :select, collection: Suit::STATE, include_blank: "請選擇"
 - if f.object.pic?
   .control-group
     label.control-label 已上傳圖片：
