@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   include MetaTagHelper
+  include CharacterConversion
 
   before_filter :http_auth_for_staging
 

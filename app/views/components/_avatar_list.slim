@@ -1,4 +1,7 @@
 ul.list--avatar
-  - people.each do |person|
-    li.list--avatar__cell
-      = render partial: 'components/avatar', locals: { person: person }
+  - if @people.present?
+    - @people.each do |person|
+      li.list--avatar__cell
+        = render partial: 'components/avatar', locals: { person: person }
+  - else
+    = "查無資料"

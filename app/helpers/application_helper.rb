@@ -113,4 +113,17 @@ module ApplicationHelper
     hash.delete_if { |k, v| v == nil }
     hash
   end
+
+  def collection_for_judges
+    Court.judges.map{ |c| c.full_name }
+  end
+
+  def collection_for_prosecutors
+    Court.prosecutors.map{ |c| c.full_name }
+  end
+
+  def active_for_search_group_cell(param, active = nil)
+    (param == active.to_s) || (active.nil? && param.blank?) ?  "active" : ""
+  end
+
 end

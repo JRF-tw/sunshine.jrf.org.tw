@@ -22,4 +22,23 @@ RSpec.describe Suit, type: :model do
   it "FactoryGirl" do
     expect(suit).not_to be_new_record
   end
+
+  context "search for suit" do
+    it "suit" do
+      su = FactoryGirl.create :suit, title: "超級厲害"
+      word = "級"
+      suit = Suit.find_state("").front_like_search({title: word, summary: word, content: word, keyword: word})
+      expect(suit.first.title).to eq(su.title)
+    end
+
+    it "suit" do
+      su = FactoryGirl.create :suit, title: "超級厲害", state: "已懲處"
+      word = "級"
+      suit = Suit.find_state("已懲處").front_like_search({title: word, summary: word, content: word, keyword: word})
+      expect(suit.first.title).to eq(su.title)
+    end
+
+
+  end
+
 end

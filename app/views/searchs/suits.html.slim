@@ -5,21 +5,25 @@
     heading: '案例搜尋結果', description: ''\
   } do
 
-  = render 'form', options: [], placeholder: '顯示關鍵字'
+  = render 'form', options: [], placeholder: '顯示關鍵字', search_url: suits_searchs_path
 
 nav.text-center
   ul.search-group
-    li.active.search-group__cell = link_to '全部', '#link', class: 'link'
-    li.search-group__cell = link_to '未受懲處', '#link', class: 'link'
-    li.search-group__cell = link_to '已懲處', '#link', class: 'link'
+    - query = { utf8: "✓", q: params[:q], }
+    li.search-group__cell class=active_for_search_group_cell(params[:state])
+      = link_to '全部', suits_searchs_path(query), :class => "link"
+    li.search-group__cell class=active_for_search_group_cell(params[:state], "未受懲處")
+      = link_to '未受懲處', suits_searchs_path(query.merge({state: "未受懲處"})), :class => "link"
+    li.search-group__cell class=active_for_search_group_cell(params[:state], "已懲處")
+      = link_to '已懲處', suits_searchs_path(query.merge({state: "已懲處"})), :class => "link"
 
 section.section-rhythm
   .container
     .feature-posts.cf
-      - 1.upto 9 do |i|
-        = render partial: 'components/feature_post', locals: {\
-          num: i % 3, show_more_button: false\
-        }
+      - if @suit.present?
+        - @suit.each_with_index do |suit, i|
+          = render partial: 'components/feature_post', locals: { num: i % 3, show_more_button: false, suit: suit }
+      - else
+        = "查無資料"
 
-    / = paginate @xxx, theme: 'www'
-    = render partial: 'components/pagination'
+    = paginate @suit, theme: 'www'
