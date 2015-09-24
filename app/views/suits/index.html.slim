@@ -6,8 +6,8 @@
 section.section-rhythm.bg-yellow
   .container
     #carousel.carousel
-      = render partial: 'carousel_cell', locals: {pic: 'banner-1'}
-      = render partial: 'carousel_cell', locals: {pic: 'banner-2'}
+      - @banners.each do |banner|
+        = render partial: 'carousel_cell', locals: {banner: banner}
 
 section.section-rhythm
   .container

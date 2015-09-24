@@ -284,7 +284,7 @@ ActiveRecord::Schema.define(version: 20150924100203) do
     t.string   "url"
     t.string   "alt_string"
     t.string   "title"
-    t.string   "content"
+    t.text     "content"
     t.integer  "weight"
     t.boolean  "is_hidden"
     t.datetime "created_at"

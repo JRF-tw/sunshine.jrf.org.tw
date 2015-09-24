@@ -15,7 +15,7 @@
         - @banners.each do |banner|
           tr
             td= banner.id
-            td= image_tag banner.pic_l if banner.pic_l.present?
+            td= image_tag banner.pic_l.L_360
             td= banner.weight
             td= banner.is_hidden ? "隱藏" : "-"
             td

@@ -5,7 +5,7 @@
 - if f.object.pic?
   .control-group
     label.control-label 已上傳圖片：
-    .controls= image_tag f.object.pic.thumb.url
+    .controls= image_tag f.object.pic.L_360.url
     = f.input :remove_pic, as: :boolean
 = f.input :pic, as: :file
 = f.input :suit_no

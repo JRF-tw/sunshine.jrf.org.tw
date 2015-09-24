@@ -1,19 +1,19 @@
 # encoding: utf-8
 
 class ProfileAvatarUploader < BaseUploader
-	version :large  do
+	version :L_540  do
     process :resize_to_fill => [540, 540]
   end
 
-  version :middle do
+  version :L_360 do
     process :resize_to_fill => [360, 360]
   end
 
-  version :small do
+  version :L_240 do
     process :resize_to_fill => [240, 240]
   end
 
-  version :thumb do
+  version :L_180 do
     process :resize_to_fill => [180, 180]
   end
 end

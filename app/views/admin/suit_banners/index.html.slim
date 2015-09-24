@@ -16,7 +16,7 @@
         - @suit_banners.each do |suit_banner|
           tr
             td= suit_banner.id
-            td= image_tag suit_banner.pic_l if suit_banner.pic_l.present?
+            td= image_tag suit_banner.pic_l.L_360 if suit_banner.pic_l.present?
             td= suit_banner.title
             td= suit_banner.weight
             td= suit_banner.is_hidden ? "隱藏" : "-"
