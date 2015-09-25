@@ -47,7 +47,7 @@ class Suit < ActiveRecord::Base
   class << self
 
     def find_state(state)
-      return where(state: state) if state.present?
+      return where(state: state) if state.present? && Suit::STATE.include?(state)
       all
     end
 

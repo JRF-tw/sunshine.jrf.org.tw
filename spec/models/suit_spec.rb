@@ -31,7 +31,7 @@ RSpec.describe Suit, type: :model do
       expect(suit.first.title).to eq(su.title)
     end
 
-    it "suit" do
+    it "search for suit (state: 已懲處)" do
       su = FactoryGirl.create :suit, title: "超級厲害", state: "已懲處"
       word = "級"
       suit = Suit.find_state("已懲處").front_like_search({title: word, summary: word, content: word, keyword: word})

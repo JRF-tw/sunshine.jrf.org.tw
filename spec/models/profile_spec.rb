@@ -32,21 +32,34 @@ RSpec.describe Profile, type: :model do
   end
 
   context "search for profile" do
-    it "suits" do
-      #FactoryGirl.create :profile
-      #suit = Suit.find_state(params_utf8[:state]).front_like_search({title: params_utf8[:q], summary: params_utf8[:q], content: params_utf8[:q], keyword: params_utf8[:q]}).page(params[:page]).per(12)
-    end
-
     it "judges" do
-      jp = FactoryGirl.create :judge_profile, name: "xxxzzz", current_court: "台北法官"
+      court1 = FactoryGirl.create :court, court_type: "法院", full_name: "台北法官", name: "台北法官"
+      court2 = FactoryGirl.create :court, court_type: "法院", full_name: "台南法官", name: "台南法官"
+      jp1 = FactoryGirl.create :judge_profile, name: "xxxzzz", current_court: "台北法官"
+      jp2 = FactoryGirl.create :judge_profile, name: "sdgfsdg", current_court: "台北法官"
+      jp3 = FactoryGirl.create :judge_profile, name: "xzxzxz", current_court: "台南法官"
+
       people = Profile.judges.find_current_court("台北法官").front_like_search({ :name => "xz" })
-      expect(people.first.name).to eq(jp.name)
+      expect(people.count).to eq(1)
+      expect(people.first.name).to eq(jp1.name)
+
+      people = Profile.judges.find_current_court("請選擇").front_like_search({ :name => "xz" })
+      expect(people.count).to eq(2)
     end
 
     it "prosecutors" do
-      pp = FactoryGirl.create :prosecutor_profile, name: "yyyzzz", current_court: "台北檢查官"
-      people = Profile.prosecutors.find_current_court("台北檢查官").front_like_search({ :name => "yy" })
-      expect(people.first.name).to eq(pp.name)
+      court3 = FactoryGirl.create :court, court_type: "檢察署", full_name: "台北檢察署", name: "台北檢察署"
+      court4 = FactoryGirl.create :court, court_type: "檢察署", full_name: "台南檢察署", name: "台南檢察署"
+      pp1 = FactoryGirl.create :prosecutor_profile, name: "yyyzzz", current_court: "台北檢察署"
+      pp2 = FactoryGirl.create :prosecutor_profile, name: "sfdsdf", current_court: "台北檢察署"
+      pp3 = FactoryGirl.create :prosecutor_profile, name: "zyyzzyz", current_court: "台南檢察署"
+
+      people = Profile.prosecutors.find_current_court("台北檢察署").front_like_search({ :name => "yy" })
+      expect(people.count).to eq(1)
+      expect(people.first.name).to eq(pp1.name)
+
+      people = Profile.prosecutors.find_current_court("請選擇").front_like_search({ :name => "yy" })
+      expect(people.count).to eq(2)
     end
   end
 

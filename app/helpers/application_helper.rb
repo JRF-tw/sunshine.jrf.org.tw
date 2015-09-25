@@ -115,14 +115,19 @@ module ApplicationHelper
   end
 
   def collection_for_judges
-    Court.judges.map{ |c| c.full_name }
+    Court.judges.map{ |c| c.full_name }.unshift("請選擇法院")
   end
 
   def collection_for_prosecutors
-    Court.prosecutors.map{ |c| c.full_name }
+    Court.prosecutors.map{ |c| c.full_name }.unshift("請選擇檢察署")
+  end
+
+  def collection_state_for_suits
+    Suit::STATE.clone.unshift("全部")
   end
 
   def active_for_search_group_cell(param, active = nil)
+    param = "全部" if param.blank?
     (param == active.to_s) || (active.nil? && param.blank?) ?  "active" : ""
   end
 

@@ -59,7 +59,7 @@ class Profile < ActiveRecord::Base
     end
 
     def find_current_court(type)
-      return where(current_court: type) if type.present?
+      return where(current_court: type) if type.present? && (Court.where(full_name: type).count > 0)
       all
     end
 

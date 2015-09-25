@@ -10,12 +10,9 @@
 nav.text-center
   ul.search-group
     - query = { utf8: "✓", q: params[:q], }
-    li.search-group__cell class=active_for_search_group_cell(params[:state])
-      = link_to '全部', suits_searchs_path(query), :class => "link"
-    li.search-group__cell class=active_for_search_group_cell(params[:state], "未受懲處")
-      = link_to '未受懲處', suits_searchs_path(query.merge({state: "未受懲處"})), :class => "link"
-    li.search-group__cell class=active_for_search_group_cell(params[:state], "已懲處")
-      = link_to '已懲處', suits_searchs_path(query.merge({state: "已懲處"})), :class => "link"
+    - collection_state_for_suits.each do |state|
+      li.search-group__cell class=active_for_search_group_cell(params[:state], state)
+        = link_to state, suits_searchs_path(query.merge({state: state})), :class => "link"
 
 section.section-rhythm
   .container
