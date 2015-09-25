@@ -1,9 +1,9 @@
 = f.input :title
-= f.input :content
+= f.input :content, as: :text, input_html: { rows: 8 }
 = f.input :start_at_in_tw, as: "string", hint: "半型純數字，民國，格式：YY/MM/DD，如不清楚確切日期就填該年第一天或該月第一天"
 = f.input :end_at_in_tw, as: "string", hint: "半型純數字，民國，格式：YY/MM/DD，如不清楚確切日期就填該年最後一天及該月最後一天"
 = f.input :source
-= f.input :memo
+= f.input :memo, as: :text, input_html: { rows: 5 }
 .form-actions
   = f.submit "送出", class: "btn btn-primary"
   = " "

@@ -1,7 +1,7 @@
 article
   = render partial: 'components/hero', locals: {\
       heading: @suit.title,
-      description: @suit.summary\
+      description: simple_text(@suit.summary)\
     }
 
   .container

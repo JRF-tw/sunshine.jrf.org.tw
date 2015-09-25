@@ -14,8 +14,8 @@
 = f.input :publish_at_in_tw, as: "string", hint: "半型純數字，民國，格式：YY/MM/DD"
 = f.input :source
 = f.input :source_link
-= f.input :origin_desc
-= f.input :memo
+= f.input :origin_desc, as: :text, input_html: { rows: 8 }
+= f.input :memo, as: :text, input_html: { rows: 5 }
 .form-actions
   = f.submit "送出", class: "btn btn-primary"
   = " "

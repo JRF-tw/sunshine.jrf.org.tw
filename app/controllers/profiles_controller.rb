@@ -11,14 +11,14 @@ class ProfilesController < BaseController
 
   def show
     @profile = Profile.find(params[:id])
-    @careers = @profile.careers.newest
+    @careers = @profile.careers.order_by_publish_at
     @current_career = @careers.last
     @suits = @profile.suit_list
-    @educations = @profile.educations.newest
-    @licenses = @profile.licenses.newest
-    @newest_award = @profile.awards.newest.last
-    @newest_punishments = @profile.punishments.newest.first(3)
-    @newest_reviews = @profile.reviews.had_title.newest.first(3)
+    @educations = @profile.educations.order_by_end_at
+    @licenses = @profile.licenses.order_by_publish_at
+    @newest_award = @profile.awards.order_by_publish_at.first
+    @newest_punishments = @profile.punishments.order_by_relevant_date.first(3)
+    @newest_reviews = @profile.reviews.had_title.order_by_publish_at.first(3)
     set_meta(title: "#{@profile.name}的個人頁")
   end
 end
