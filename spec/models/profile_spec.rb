@@ -30,4 +30,37 @@ RSpec.describe Profile, type: :model do
   	FactoryGirl.create :profile_had_avatar
   	expect(Profile.had_avatar.count).to eq(1)
   end
+
+  context "search for profile" do
+    it "judges" do
+      court1 = FactoryGirl.create :court, court_type: "法院", full_name: "台北法官", name: "台北法官"
+      court2 = FactoryGirl.create :court, court_type: "法院", full_name: "台南法官", name: "台南法官"
+      jp1 = FactoryGirl.create :judge_profile, name: "xxxzzz", current_court: "台北法官"
+      jp2 = FactoryGirl.create :judge_profile, name: "sdgfsdg", current_court: "台北法官"
+      jp3 = FactoryGirl.create :judge_profile, name: "xzxzxz", current_court: "台南法官"
+
+      people = Profile.judges.find_current_court("台北法官").front_like_search({ :name => "xz" })
+      expect(people.count).to eq(1)
+      expect(people.first.name).to eq(jp1.name)
+
+      people = Profile.judges.find_current_court("請選擇").front_like_search({ :name => "xz" })
+      expect(people.count).to eq(2)
+    end
+
+    it "prosecutors" do
+      court3 = FactoryGirl.create :court, court_type: "檢察署", full_name: "台北檢察署", name: "台北檢察署"
+      court4 = FactoryGirl.create :court, court_type: "檢察署", full_name: "台南檢察署", name: "台南檢察署"
+      pp1 = FactoryGirl.create :prosecutor_profile, name: "yyyzzz", current_court: "台北檢察署"
+      pp2 = FactoryGirl.create :prosecutor_profile, name: "sfdsdf", current_court: "台北檢察署"
+      pp3 = FactoryGirl.create :prosecutor_profile, name: "zyyzzyz", current_court: "台南檢察署"
+
+      people = Profile.prosecutors.find_current_court("台北檢察署").front_like_search({ :name => "yy" })
+      expect(people.count).to eq(1)
+      expect(people.first.name).to eq(pp1.name)
+
+      people = Profile.prosecutors.find_current_court("請選擇").front_like_search({ :name => "yy" })
+      expect(people.count).to eq(2)
+    end
+  end
+
 end

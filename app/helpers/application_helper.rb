@@ -53,7 +53,7 @@ module ApplicationHelper
   end
 
   def render_punishment_decision_unit(punishment)
-    if punishment.decision_unit == "監察院(新)" || "監察院(舊)"
+    if punishment.decision_unit == ("監察院(新)" || "監察院(舊)")
       "監察院"
     else
       punishment.decision_unit
@@ -113,4 +113,22 @@ module ApplicationHelper
     hash.delete_if { |k, v| v == nil }
     hash
   end
+
+  def collection_for_judges
+    Court.judges.map{ |c| c.full_name }.unshift("請選擇法院")
+  end
+
+  def collection_for_prosecutors
+    Court.prosecutors.map{ |c| c.full_name }.unshift("請選擇檢察署")
+  end
+
+  def collection_state_for_suits
+    Suit::STATE.clone.unshift("全部")
+  end
+
+  def active_for_search_group_cell(param, active = nil)
+    param = "全部" if param.blank?
+    (param == active.to_s) || (active.nil? && param.blank?) ?  "active" : ""
+  end
+
 end

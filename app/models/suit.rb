@@ -16,7 +16,7 @@
 
 class Suit < ActiveRecord::Base
   mount_uploader :pic, SuitPicUploader
-  
+
   has_many :suit_judges, dependent: :destroy
   has_many :judges, through: :suit_judges
   has_many :suit_prosecutors, dependent: :destroy
@@ -24,6 +24,8 @@ class Suit < ActiveRecord::Base
   has_many :procedures, dependent: :destroy
 
   scope :newest, ->{ order("id DESC") }
+
+  STATE = ["處理中", "未受懲處", "已懲處"]
 
   def related_suits
     judge_ids = self.judges.map(&:id)
@@ -40,6 +42,24 @@ class Suit < ActiveRecord::Base
       arr << person.procedures.where(suit_id: self.id).flow_by_procedure_date
     end
     arr
+  end
+
+  class << self
+
+    def find_state(state)
+      return where(state: state) if state.present? && Suit::STATE.include?(state)
+      all
+    end
+
+    def front_like_search(search_word, combination = "or")
+      search_word.keep_if {|k, v| v.present? }
+      if search_word.present?
+        where_str = search_word.map { |k, i| "\"#{self.table_name}\".\"#{k}\" like :#{k}" }.join(" #{combination} ")
+        a_search_word = search_word.inject({}) { |hh, (k, v)| hh[k.to_sym] = "%#{v}%"; hh }
+        relation = self.where([where_str, a_search_word])
+      end
+      relation
+    end
   end
 
 end

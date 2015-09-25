@@ -44,17 +44,34 @@ class Profile < ActiveRecord::Base
   scope :had_avatar, ->{ where.not(:avatar => nil) }
   scope :random, ->{ order("RANDOM()") }
 
-  def self.judges
-    where(current: "法官")
-  end
-
-  def self.prosecutors
-    where(current: "檢察官")
-  end
-
   def suit_list
     ids = (self.suit_judges.map(&:suit_id) + self.suit_prosecutors.map(&:suit_id)).uniq
     Suit.where(id: ids)
   end
-  
+
+  class << self
+    def judges
+      where(current: "法官")
+    end
+
+    def prosecutors
+      where(current: "檢察官")
+    end
+
+    def find_current_court(type)
+      return where(current_court: type) if type.present? && (Court.where(full_name: type).count > 0)
+      all
+    end
+
+    def front_like_search(search_word, combination = "or")
+      search_word.keep_if {|k, v| v.present? }
+      if search_word.present?
+        where_str = search_word.map { |k, i| "\"#{self.table_name}\".\"#{k}\" like :#{k}" }.join(" #{combination} ")
+        a_search_word = search_word.inject({}) { |hh, (k, v)| hh[k.to_sym] = "%#{v}%"; hh }
+        relation = self.where([where_str, a_search_word])
+      end
+      relation
+    end
+  end
+
 end

@@ -1,12 +1,14 @@
 .section-rhythm
   .search-form-wrapper
-    form
+    = simple_form_for :search, :url => search_url, :method => :get, :html => { :role => "menu" } do |f|
       - if options.length > 0
         .select-container--search-form
-          select.select-custom
+          select.select-custom name="#{type}"
             - options.each do |option|
-              option = option
-
+              - if option == "#{params[:prosecutor]}"
+                option selected="selected" value="#{option}" = option
+              - else
+                option value="#{option}" = option
       .input-group--large
-        input.input type='text' placeholder=placeholder
-        button.button--gray-dark.button--large type='button' 馬上找
+        input type="text" id="search" name="q" value="#{params[:q]}" placeholder="#{placeholder}" class="input"
+        button type="submit" class="button--gray-dark button--large" 馬上找
