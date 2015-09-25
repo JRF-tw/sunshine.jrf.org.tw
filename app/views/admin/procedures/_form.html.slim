@@ -3,8 +3,8 @@
 = f.input :unit
 = f.input :title
 = f.input :procedure_unit
-= f.input :procedure_content
-= f.input :procedure_result
+= f.input :procedure_content, as: :text, input_html: { rows: 8 }
+= f.input :procedure_result, as: :text, input_html: { rows: 8 }
 = f.input :procedure_no
 = f.input :procedure_date_in_tw, as: "string", hint: "半型純數字，民國，格式：YY/MM/DD，如不清楚確切日期就填該年第一天或該月第一天。決議日期 / 公告日期 / 評鑑發文日期 / 單位處理日期。"
 = f.input :suit_no
@@ -16,7 +16,7 @@
     label.control-label 檔案路徑：
     .controls= link_to "下載檔案", "#{f.object.file.url}", target: "_blank", download: "download", class: "btn"
 = f.input :file, as: :file
-= f.input :memo
+= f.input :memo, as: :text, input_html: { rows: 5 }
 
 .form-actions
   = f.submit "送出", class: "btn btn-primary"

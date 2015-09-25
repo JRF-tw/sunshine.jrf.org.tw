@@ -1,8 +1,8 @@
 = f.input :publish_at_in_tw, as: "string", hint: "半型純數字，民國，格式：YY/MM/DD"
 = f.input :name
 = f.input :title
-= f.input :content
-= f.input :comment
+= f.input :content, as: :text, input_html: { rows: 8 }
+= f.input :comment, as: :text, input_html: { rows: 8 }
 = f.input :no, label: "裁判字號"
 = f.input :source
 - if f.object.file?

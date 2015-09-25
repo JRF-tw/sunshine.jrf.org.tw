@@ -15,7 +15,7 @@
 = f.input :department
 = f.input :degree
 = f.input :source
-= f.input :memo
+= f.input :memo, as: :text, input_html: { rows: 5 }
 
 .form-actions
   = f.submit "送出", class: "btn btn-primary"

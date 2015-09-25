@@ -6,22 +6,22 @@
 = f.input :decision_no
 = f.input :punish_type
 = f.input :relevant_date_in_tw, as: "string", hint: "半型純數字，民國，格式：YY/MM/DD"
-= f.input :decision_result
+= f.input :decision_result, as: :text, input_html: { rows: 8 }
 = f.input :decision_source
-= f.input :reason
+= f.input :reason, as: :text, input_html: { rows: 8 }
 = f.input :is_anonymous
 = f.input :anonymous_source
 = f.input :anonymous
-= f.input :origin_desc
+= f.input :origin_desc, as: :text, input_html: { rows: 8 }
 = f.input :proposer
 = f.input :plaintiff
 = f.input :defendant
-= f.input :reply
+= f.input :reply, as: :text, input_html: { rows: 8 }
 = f.input :reply_source
-= f.input :punish
-= f.input :content
-= f.input :summary
-= f.input :memo
+= f.input :punish, as: :text, input_html: { rows: 8 }
+= f.input :content, as: :text, input_html: { rows: 8 }
+= f.input :summary, as: :text, input_html: { rows: 8 }
+= f.input :memo, as: :text, input_html: { rows: 5 }
 
 .form-actions
   = f.submit "送出", class: "btn btn-primary"

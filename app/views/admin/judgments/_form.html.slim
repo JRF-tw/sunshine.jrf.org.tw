@@ -7,12 +7,12 @@
 = f.input :court_no, hint: "裁判字號及庭號擇一必填"
 = f.input :judge_type, as: :select, collection: Admin::Judgment::JUDGMENT_TYPES, include_blank: "請選擇"
 = f.input :judge_date_in_tw, as: "string", hint: "半型純數字，民國，格式：YY/MM/DD，如不清楚確切日期就填該年第一天或該月第一天"
-= f.input :reason
-= f.input :content
-= f.input :comment
+= f.input :reason, as: :text, input_html: { rows: 8 }
+= f.input :content, as: :text, input_html: { rows: 8 }
+= f.input :comment, as: :text, input_html: { rows: 8 }
 = f.input :source
 = f.input :source_link
-= f.input :memo
+= f.input :memo, as: :text, input_html: { rows: 5 }
 
 .form-actions
   = f.submit "送出", class: "btn btn-primary"
