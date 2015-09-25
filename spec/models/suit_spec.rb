@@ -38,6 +38,15 @@ RSpec.describe Suit, type: :model do
       expect(suit.first.title).to eq(su.title)
     end
 
+    it "search for suit (word: nil)" do
+      Suit.destroy_all
+      su1 = FactoryGirl.create :suit, title: "哈哈哈", state: "處理中"
+      su2 = FactoryGirl.create :suit, title: "超級厲害", state: "已懲處"
+      su3 = FactoryGirl.create :suit, title: "SDEFXZDFSD", state: "已懲處"
+      word = ""
+      suit = Suit.find_state("").front_like_search({title: word, summary: word, content: word, keyword: word})
+      expect(suit.count).to eq(3)
+    end
 
   end
 
