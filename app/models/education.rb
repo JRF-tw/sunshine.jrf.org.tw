@@ -21,4 +21,5 @@ class Education < ActiveRecord::Base
   belongs_to :profile
 
   scope :newest, ->{ order("id DESC") }
+  scope :order_by_end_at, ->{ order("end_at DESC, id DESC") }
 end
