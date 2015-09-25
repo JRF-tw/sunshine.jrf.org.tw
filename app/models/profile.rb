@@ -69,6 +69,8 @@ class Profile < ActiveRecord::Base
         where_str = search_word.map { |k, i| "\"#{self.table_name}\".\"#{k}\" like :#{k}" }.join(" #{combination} ")
         a_search_word = search_word.inject({}) { |hh, (k, v)| hh[k.to_sym] = "%#{v}%"; hh }
         relation = self.where([where_str, a_search_word])
+      else
+        relation = all
       end
       relation
     end

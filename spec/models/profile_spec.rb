@@ -33,6 +33,7 @@ RSpec.describe Profile, type: :model do
 
   context "search for profile" do
     it "judges" do
+      Profile.destroy_all
       court1 = FactoryGirl.create :court, court_type: "法院", full_name: "台北法官", name: "台北法官"
       court2 = FactoryGirl.create :court, court_type: "法院", full_name: "台南法官", name: "台南法官"
       jp1 = FactoryGirl.create :judge_profile, name: "xxxzzz", current_court: "台北法官"
@@ -45,9 +46,13 @@ RSpec.describe Profile, type: :model do
 
       people = Profile.judges.find_current_court("請選擇").front_like_search({ :name => "xz" })
       expect(people.count).to eq(2)
+
+      people = Profile.judges.find_current_court("請選擇").front_like_search({ :name => "" })
+      expect(people.count).to eq(3)
     end
 
     it "prosecutors" do
+      Profile.destroy_all
       court3 = FactoryGirl.create :court, court_type: "檢察署", full_name: "台北檢察署", name: "台北檢察署"
       court4 = FactoryGirl.create :court, court_type: "檢察署", full_name: "台南檢察署", name: "台南檢察署"
       pp1 = FactoryGirl.create :prosecutor_profile, name: "yyyzzz", current_court: "台北檢察署"
@@ -60,7 +65,10 @@ RSpec.describe Profile, type: :model do
 
       people = Profile.prosecutors.find_current_court("請選擇").front_like_search({ :name => "yy" })
       expect(people.count).to eq(2)
-    end
-  end
 
+      people = Profile.prosecutors.find_current_court("請選擇").front_like_search({ :name => "" })
+      expect(people.count).to eq(3)
+    end
+
+  end
 end
