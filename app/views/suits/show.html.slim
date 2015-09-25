@@ -1,7 +1,7 @@
 article
   = render partial: 'components/hero', locals: {\
       heading: @suit.title,
-      description: @suit.summary\
+      description: simple_text(@suit.summary)\
     }
 
   .container
@@ -10,7 +10,7 @@ article
     section.suit-story.cf
       .suit-story__photo = render partial: 'components/feature_post_pic', locals: { suit: @suit }
 
-      p = @suit.content
+      p = simple_text(@suit.content)
 
 
 section.section-rhythm.bg-yellow

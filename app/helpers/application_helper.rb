@@ -48,6 +48,8 @@ module ApplicationHelper
     truncate(content, length: len)
   end
 
+  def simple_text(text)
+    sanitize(text, tags: []).gsub(/\n/, '<br>').html_safe
   end
 
   def render_punishment_decision_unit(punishment)
