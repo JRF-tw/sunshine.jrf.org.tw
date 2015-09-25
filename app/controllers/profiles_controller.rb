@@ -12,7 +12,6 @@ class ProfilesController < BaseController
   def show
     @profile = Profile.find(params[:id])
     @careers = @profile.careers.order_by_publish_at
-    @current_career = @careers.last
     @suits = @profile.suit_list
     @educations = @profile.educations.order_by_end_at
     @licenses = @profile.licenses.order_by_publish_at
