@@ -45,11 +45,9 @@ module ApplicationHelper
   end
 
   def summary_text(content, len)
-    if content.length > len
-      content.first(len) + "..."
-    else
-      content
-    end
+    truncate(content, length: len)
+  end
+
   end
 
   def render_punishment_decision_unit(punishment)

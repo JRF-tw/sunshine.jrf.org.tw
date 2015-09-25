@@ -2,6 +2,6 @@ ul.list--arrow
   - @newest_reviews.each do |review|
     li
       - if review.source.present?
-        = link_to summary_text(review.title, 10), review.source, target: "blank"
+        = link_to summary_text(review.title, 16), review.source, target: "blank"
       - else
-        = summary_text(review.title, 10)
+        = summary_text(review.title, 16)
