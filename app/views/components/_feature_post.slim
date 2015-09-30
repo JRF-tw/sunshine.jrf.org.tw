@@ -3,7 +3,7 @@ article.feature-post
     = render partial: 'components/feature_post_pic', locals: { suit: suit }
 
     h3.feature-post__heading
-      = suit.title
+      = summary_text(suit.title, 12)
 
   - if show_more_button == true
     .feature-post__button-wrapper
