@@ -32,11 +32,12 @@ class ProfilesController < BaseController
     description << "性別#{@profile.gender}、" if @profile.gender.present?
     description << "出生年份#{@profile.birth_year}、" if @profile.birth_year.present?
     description << "現任#{@profile.current}" if @profile.current.present?
+    image = @profile.avatar.present? ? @profile.avatar.L_540.url : nil
     set_meta(
       title: "#{@profile.name}",
       description: description.join(""),
       keywords: "#{@profile.name},#{@profile.current}",
-      image: @profile.avatar.L_540.url
+      image: image
     )
   end
 end

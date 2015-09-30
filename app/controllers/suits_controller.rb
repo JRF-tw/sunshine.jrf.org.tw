@@ -17,11 +17,12 @@ class SuitsController < BaseController
     @procedures = @suit.procedures.sort_by_procedure_date
     @last_procedure = @procedures.is_done.last.present? ? @procedures.is_done.last : @procedures.first
     @related_suits = @suit.related_suits.last(3)
+    image = @suit.pic.present? ? @suit.pic.L_540.url : nil
     set_meta(
       title: @suit.title,
       description: "#{@suit.title} #{@suit.summary}",
       keywords: "司法恐龍案例,司法案例",
-      image: @suit.pic.L_540.url
+      image: image
     )
   end
 end
