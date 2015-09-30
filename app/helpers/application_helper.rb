@@ -45,7 +45,7 @@ module ApplicationHelper
   end
 
   def summary_text(content, len)
-    truncate(content, length: len)
+    truncate(content, length: len + 3)
   end
 
   def simple_text(text)

@@ -2,7 +2,12 @@ class SuitsController < BaseController
   def index
     @suit_banners = SuitBanner.published.order_by_weight
     @suits = Suit.newest.page(params[:page]).per(9)
-    set_meta(title: "司法恐龍面面觀")
+    set_meta(
+      title: "司法恐龍面面觀",
+      description: "司法恐龍長怎樣？看看幾個案例，認識司法恐龍！",
+      keywords: "司法恐龍,司法恐龍面面觀,恐龍法官,恐龍檢察官",
+      image: ActionController::Base.helpers.asset_path('hero-suits-index-M.png')
+    )
   end
 
   def show
@@ -12,6 +17,11 @@ class SuitsController < BaseController
     @procedures = @suit.procedures.sort_by_procedure_date
     @last_procedure = @procedures.is_done.last.present? ? @procedures.is_done.last : @procedures.first
     @related_suits = @suit.related_suits.last(3)
-    set_meta(title: "案例內容")
+    set_meta(
+      title: @suit.title,
+      description: "#{@suit.title} #{@suit.summary}",
+      keywords: "司法恐龍案例,司法案例",
+      image: @suit.pic.L_540.url
+    )
   end
 end
