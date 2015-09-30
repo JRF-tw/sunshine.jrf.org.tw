@@ -64,39 +64,3 @@ CREATE DATABASE "your_name";
 GRANT ALL PRIVILEGES ON DATABASE "your_name" to "your_name";
 ALTER USER "your_name" WITH SUPERUSER;
 ```
-
-
-Gulp Rails
-=============================
-
-整合 Gulp 進 Rails 的 Assets pipeline 才不用受制於 ruby sass 悲劇的效能。以下說明如何將 Gulp 整合進專案。
-
-1. 安裝 NVM
-        
-        curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.26.0/install.sh | bash
-
-2. 安裝 Node
-
-        nvm install stable
-
-3. 安裝 Gulp 與 Bower
-
-        npm install --global gulp bower
-
-4. 安裝 Bower assets
-
-        bower install
-
-5. 安裝 Node modules
-
-        npm install
-
-6. 手動 compile 一次最新 assets
-
-        gulp build
-
-注意事項
-
-1. assets 原始檔都在 `gulp/assets` 底下，`gulp build` 過程會產生 css 跟 js 到 `app/assets` 裡給 sprockets 用。
-2. 每次 pull 完都要 `bower install` 跟 `npm install` 才能確保 module 有安裝好，跑完記得 `gulp build` 來產生最新的 assets
-3. 也可以在開發的時候在 `bundle exec rails s` 之後接著跑 `gulp`，可以結合 browserSync 並 compile 前端的 sass 跟 coffeescript。

@@ -64,29 +64,29 @@ namespace :deploy do
 end
 
 # Compile assets with Gulp before assets pipeline
-before "deploy:assets:precompile", "deploy:gulp_build"
-namespace :deploy do
-  desc "Build public assets"
-  task :gulp_build => [:deploy, :npm_install] do
-    on roles(:web) do
-      execute "bash -c '#{nvm_sh} && cd #{release_path} && gulp build'"
-    end
-  end
+# before "deploy:assets:precompile", "deploy:gulp_build"
+# namespace :deploy do
+#   desc "Build public assets"
+#   task :gulp_build => [:deploy, :npm_install] do
+#     on roles(:web) do
+#       execute "bash -c '#{nvm_sh} && cd #{release_path} && gulp build'"
+#     end
+#   end
 
-  desc "Run npm install"
-  task :npm_install => [:deploy, :bower_install] do
-    on roles(:web) do
-      execute "bash -c '#{nvm_sh} && cd #{release_path} && npm install'"
-    end
-  end
+#   desc "Run npm install"
+#   task :npm_install => [:deploy, :bower_install] do
+#     on roles(:web) do
+#       execute "bash -c '#{nvm_sh} && cd #{release_path} && npm install'"
+#     end
+#   end
 
-  desc "Run bower install"
-  task :bower_install do
-    on roles(:web) do
-      execute "bash -c '#{nvm_sh} && cd #{release_path} && bower install'"
-    end
-  end
-end
+#   desc "Run bower install"
+#   task :bower_install do
+#     on roles(:web) do
+#       execute "bash -c '#{nvm_sh} && cd #{release_path} && bower install'"
+#     end
+#   end
+# end
 
 
 set :rollbar_token, '758daa0b26bd4f589ca484d5e1b1d9b3'
