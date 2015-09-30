@@ -1,3 +1,3 @@
-= admin_widget_box "新增#{@profile.name}的懲處記錄", icon: :pencil do
+= admin_widget_box "新增#{@profile.name}的懲處紀錄", icon: :pencil do
   = simple_form_for @punishment, url: admin_profile_punishments_path(@profile), method: :post, wrapper: :admin do |f|
     = render partial: "form", object: f, as: :f
