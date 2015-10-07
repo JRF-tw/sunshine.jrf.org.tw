@@ -61,9 +61,9 @@ module.exports = function() {
 
     SuitProcedureAccordion.prototype.change_method = function(order) {
       if (order !== 'open') {
-        return this.button.removeClass('open').addClass('close').text('CLOSE');
+        return this.button.removeClass('open').addClass('close').text('關閉');
       } else {
-        return this.button.removeClass('close').addClass('open').text('OPEN');
+        return this.button.removeClass('close').addClass('open').text('展開');
       }
     };
 
