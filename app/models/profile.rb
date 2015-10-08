@@ -42,6 +42,7 @@ class Profile < ActiveRecord::Base
 
   scope :newest, ->{ order("id DESC") }
   scope :had_avatar, ->{ where.not(:avatar => nil) }
+  scope :active, ->{ where.not(:is_active => [false,nil]) }
   scope :random, ->{ order("RANDOM()") }
 
   def suit_list

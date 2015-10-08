@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150924100203) do
+ActiveRecord::Schema.define(version: 20151008080158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
   enable_extension "postgis"
+  enable_extension "hstore"
 
   create_table "articles", force: true do |t|
     t.integer  "profile_id"
@@ -223,10 +223,12 @@ ActiveRecord::Schema.define(version: 20150924100203) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "current_court"
+    t.boolean  "is_active"
   end
 
   add_index "profiles", ["current"], :name => "index_profiles_on_current"
   add_index "profiles", ["current_court"], :name => "index_profiles_on_current_court"
+  add_index "profiles", ["is_active"], :name => "index_profiles_on_is_active"
 
   create_table "punishments", force: true do |t|
     t.integer  "profile_id"

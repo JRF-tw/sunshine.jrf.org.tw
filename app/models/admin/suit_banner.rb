@@ -9,7 +9,7 @@
 #  url        :string(255)
 #  alt_string :string(255)
 #  title      :string(255)
-#  content    :string(255)
+#  content    :text
 #  weight     :integer
 #  is_hidden  :boolean
 #  created_at :datetime

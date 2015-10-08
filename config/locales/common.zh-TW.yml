@@ -35,6 +35,7 @@ zh-TW:
         stage_source: "司訓所期別來源"
         appointment: "任用資格"
         appointment_source: "任用資格來源"
+        is_active: "在職中？"
         memo: "備註"
       education:
         title: "學經歷"
