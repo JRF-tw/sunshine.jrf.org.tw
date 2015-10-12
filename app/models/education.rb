@@ -16,6 +16,7 @@
 #
 
 class Education < ActiveRecord::Base
+  include HiddenOrNot
 	include TaiwanAge
   tw_age_columns :start_at, :end_at
 

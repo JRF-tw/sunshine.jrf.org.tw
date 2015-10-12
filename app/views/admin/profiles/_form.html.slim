@@ -18,6 +18,7 @@
 = f.input :appointment_source
 = f.input :is_active, hint: "打勾 = 在職中"
 = f.input :memo, as: :text, input_html: { rows: 5 }
+= f.input :is_hidden, as: :boolean, hint: "打勾 = 前端頁面不顯示"
 .form-actions
   = f.submit "送出", class: "btn btn-primary"
   = " "

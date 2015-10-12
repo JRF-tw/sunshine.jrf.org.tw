@@ -13,6 +13,7 @@
 #
 
 class Court < ActiveRecord::Base
+  include HiddenOrNot
   has_many :judgments
 
   def self.judges

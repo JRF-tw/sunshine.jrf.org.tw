@@ -1,10 +1,10 @@
 class BaseController < ApplicationController
   
   def index
-    @banners = Banner.published.order_by_weight
-    @suits = Suit.last(3)
-    @judges = Profile.judges.active.had_avatar.shuffle.last(12)
-    @prosecutors = Profile.prosecutors.active.had_avatar.shuffle.last(12)
+    @banners = Banner.shown.order_by_weight
+    @suits = Suit.shown.last(3)
+    @judges = Profile.judges.shown.active.had_avatar.shuffle.last(12)
+    @prosecutors = Profile.prosecutors.shown.active.had_avatar.shuffle.last(12)
     image = @banners.count > 0 ? @banners.first.pic_l.L_540.url : nil
     set_meta(
       title: "揭開司法的神秘面紗",

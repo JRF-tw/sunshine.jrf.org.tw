@@ -16,6 +16,7 @@
 #
 
 class Suit < ActiveRecord::Base
+  include HiddenOrNot
   mount_uploader :pic, SuitPicUploader
 
   has_many :suit_judges, dependent: :destroy

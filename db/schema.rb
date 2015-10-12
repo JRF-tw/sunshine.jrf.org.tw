@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 20151012094255) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "postgis"
   enable_extension "hstore"
+  enable_extension "postgis"
 
   create_table "articles", force: true do |t|
     t.integer  "profile_id"
