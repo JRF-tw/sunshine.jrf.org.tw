@@ -24,6 +24,7 @@
 #  memo             :text
 #  created_at       :datetime
 #  updated_at       :datetime
+#  is_hidden        :boolean
 #
 
 class Article < ActiveRecord::Base

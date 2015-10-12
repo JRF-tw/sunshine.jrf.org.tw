@@ -9,6 +9,7 @@
 #  weight     :integer
 #  created_at :datetime
 #  updated_at :datetime
+#  is_hidden  :boolean
 #
 
 class Court < ActiveRecord::Base

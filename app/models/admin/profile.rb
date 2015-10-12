@@ -19,6 +19,7 @@
 #  updated_at         :datetime
 #  current_court      :string(255)
 #  is_active          :boolean
+#  is_hidden          :boolean
 #
 
 class Admin::Profile < ::Profile
