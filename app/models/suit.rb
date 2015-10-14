@@ -41,7 +41,7 @@ class Suit < ActiveRecord::Base
   end
 
   def procedures_by_person
-    profile_ids = self.procedures.map(&:profile_id)
+    profile_ids = self.procedures.shown.map(&:profile_id)
     people = Profile.where(id: profile_ids)
     arr = []
     people.each do |person|
