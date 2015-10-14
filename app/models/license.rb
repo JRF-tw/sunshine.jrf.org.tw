@@ -14,9 +14,11 @@
 #  memo         :text
 #  created_at   :datetime
 #  updated_at   :datetime
+#  is_hidden    :boolean
 #
 
 class License < ActiveRecord::Base
+  include HiddenOrNot
 	include TaiwanAge
   tw_age_columns :publish_at
   

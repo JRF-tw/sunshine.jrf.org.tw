@@ -1,6 +1,6 @@
 class ProfilesController < BaseController
   def judges
-    @judges = Profile.judges.active.had_avatar.random.page(params[:page]).per(12)
+    @judges = Profile.judges.shown.active.had_avatar.random.page(params[:page]).per(12)
     set_meta(
       title: "認識法官",
       description: "認識法官，決定當事人一生的法官，究竟有什麼紀錄？帶您來看看！",
@@ -10,7 +10,7 @@ class ProfilesController < BaseController
   end
 
   def prosecutors
-    @prosecutors = Profile.prosecutors.active.had_avatar.random.page(params[:page]).per(12)
+    @prosecutors = Profile.prosecutors.shown.active.had_avatar.random.page(params[:page]).per(12)
     set_meta(
       title: "認識檢察官",
       description: "認識檢察官，代表國家調查案例的檢察官，有什麼背景資料呢？一起來瞭解！",

@@ -12,10 +12,16 @@
 #  keyword    :string(255)
 #  created_at :datetime
 #  updated_at :datetime
+#  is_hidden  :boolean
 #
 
 class Suit < ActiveRecord::Base
+  include HiddenOrNot
+  include Redis::Objects
+
   mount_uploader :pic, SuitPicUploader
+
+  before_save :check_procedure_count
 
   has_many :suit_judges, dependent: :destroy
   has_many :judges, through: :suit_judges
@@ -61,6 +67,15 @@ class Suit < ActiveRecord::Base
         relation = all
       end
       relation
+    end
+  end
+
+  private
+
+  def check_procedure_count
+    if is_hidden_changed? && procedure_count == 0
+      self.is_hidden = true
+      errors.add(:base, "目前案例「#{title}」的案件處理經過數量為 0，已自動在前端隱藏")
     end
   end
 

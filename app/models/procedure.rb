@@ -20,16 +20,18 @@
 #  memo              :text
 #  created_at        :datetime
 #  updated_at        :datetime
+#  is_hidden         :boolean
 #
 
 class Procedure < ActiveRecord::Base
 	mount_uploader :file, FileUploader
-
+  
+  include HiddenOrNot
 	include TaiwanAge
   tw_age_columns :procedure_date
 
   belongs_to :profile
-  belongs_to :suit
+  belongs_to :suit, counter_cache: :procedure_count
 
   scope :newest, ->{ order("id DESC") }
   scope :sort_by_procedure_date, ->{ order("procedure_date DESC") }

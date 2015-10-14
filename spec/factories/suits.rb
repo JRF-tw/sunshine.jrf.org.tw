@@ -12,6 +12,7 @@
 #  keyword    :string(255)
 #  created_at :datetime
 #  updated_at :datetime
+#  is_hidden  :boolean
 #
 
 FactoryGirl.define do

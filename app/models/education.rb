@@ -12,9 +12,11 @@
 #  memo       :text
 #  created_at :datetime
 #  updated_at :datetime
+#  is_hidden  :boolean
 #
 
 class Education < ActiveRecord::Base
+  include HiddenOrNot
 	include TaiwanAge
   tw_age_columns :start_at, :end_at
 

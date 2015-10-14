@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151008080158) do
+ActiveRecord::Schema.define(version: 20151014084710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,8 +40,10 @@ ActiveRecord::Schema.define(version: 20151008080158) do
     t.text     "memo"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_hidden"
   end
 
+  add_index "articles", ["is_hidden"], :name => "index_articles_on_is_hidden"
   add_index "articles", ["profile_id"], :name => "index_articles_on_profile_id"
 
   create_table "awards", force: true do |t|
@@ -56,8 +58,10 @@ ActiveRecord::Schema.define(version: 20151008080158) do
     t.text     "memo"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_hidden"
   end
 
+  add_index "awards", ["is_hidden"], :name => "index_awards_on_is_hidden"
   add_index "awards", ["profile_id"], :name => "index_awards_on_profile_id"
 
   create_table "banners", force: true do |t|
@@ -69,6 +73,8 @@ ActiveRecord::Schema.define(version: 20151008080158) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "banners", ["is_hidden"], :name => "index_banners_on_is_hidden"
 
   create_table "careers", force: true do |t|
     t.integer  "profile_id"
@@ -92,8 +98,10 @@ ActiveRecord::Schema.define(version: 20151008080158) do
     t.text     "memo"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_hidden"
   end
 
+  add_index "careers", ["is_hidden"], :name => "index_careers_on_is_hidden"
   add_index "careers", ["profile_id"], :name => "index_careers_on_profile_id"
 
   create_table "courts", force: true do |t|
@@ -103,10 +111,12 @@ ActiveRecord::Schema.define(version: 20151008080158) do
     t.integer  "weight"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_hidden"
   end
 
   add_index "courts", ["court_type"], :name => "index_courts_on_court_type"
   add_index "courts", ["full_name"], :name => "index_courts_on_full_name"
+  add_index "courts", ["is_hidden"], :name => "index_courts_on_is_hidden"
   add_index "courts", ["name"], :name => "index_courts_on_name"
 
   create_table "educations", force: true do |t|
@@ -119,8 +129,10 @@ ActiveRecord::Schema.define(version: 20151008080158) do
     t.text     "memo"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_hidden"
   end
 
+  add_index "educations", ["is_hidden"], :name => "index_educations_on_is_hidden"
   add_index "educations", ["profile_id"], :name => "index_educations_on_profile_id"
 
   create_table "judgment_judges", force: true do |t|
@@ -161,10 +173,12 @@ ActiveRecord::Schema.define(version: 20151008080158) do
     t.text     "memo"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_hidden"
   end
 
   add_index "judgments", ["court_id"], :name => "index_judgments_on_court_id"
   add_index "judgments", ["court_no"], :name => "index_judgments_on_court_no"
+  add_index "judgments", ["is_hidden"], :name => "index_judgments_on_is_hidden"
   add_index "judgments", ["judge_no"], :name => "index_judgments_on_judge_no"
   add_index "judgments", ["main_judge_id"], :name => "index_judgments_on_main_judge_id"
 
@@ -180,8 +194,10 @@ ActiveRecord::Schema.define(version: 20151008080158) do
     t.text     "memo"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_hidden"
   end
 
+  add_index "licenses", ["is_hidden"], :name => "index_licenses_on_is_hidden"
   add_index "licenses", ["profile_id"], :name => "index_licenses_on_profile_id"
 
   create_table "procedures", force: true do |t|
@@ -202,8 +218,10 @@ ActiveRecord::Schema.define(version: 20151008080158) do
     t.text     "memo"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_hidden"
   end
 
+  add_index "procedures", ["is_hidden"], :name => "index_procedures_on_is_hidden"
   add_index "procedures", ["profile_id"], :name => "index_procedures_on_profile_id"
   add_index "procedures", ["suit_id"], :name => "index_procedures_on_suit_id"
 
@@ -224,11 +242,13 @@ ActiveRecord::Schema.define(version: 20151008080158) do
     t.datetime "updated_at"
     t.string   "current_court"
     t.boolean  "is_active"
+    t.boolean  "is_hidden"
   end
 
   add_index "profiles", ["current"], :name => "index_profiles_on_current"
   add_index "profiles", ["current_court"], :name => "index_profiles_on_current_court"
   add_index "profiles", ["is_active"], :name => "index_profiles_on_is_active"
+  add_index "profiles", ["is_hidden"], :name => "index_profiles_on_is_hidden"
 
   create_table "punishments", force: true do |t|
     t.integer  "profile_id"
@@ -258,8 +278,10 @@ ActiveRecord::Schema.define(version: 20151008080158) do
     t.text     "memo"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_hidden"
   end
 
+  add_index "punishments", ["is_hidden"], :name => "index_punishments_on_is_hidden"
   add_index "punishments", ["profile_id"], :name => "index_punishments_on_profile_id"
 
   create_table "reviews", force: true do |t|
@@ -275,8 +297,10 @@ ActiveRecord::Schema.define(version: 20151008080158) do
     t.text     "memo"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_hidden"
   end
 
+  add_index "reviews", ["is_hidden"], :name => "index_reviews_on_is_hidden"
   add_index "reviews", ["profile_id"], :name => "index_reviews_on_profile_id"
 
   create_table "suit_banners", force: true do |t|
@@ -292,6 +316,8 @@ ActiveRecord::Schema.define(version: 20151008080158) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "suit_banners", ["is_hidden"], :name => "index_suit_banners_on_is_hidden"
 
   create_table "suit_judges", force: true do |t|
     t.integer  "suit_id"
@@ -325,7 +351,11 @@ ActiveRecord::Schema.define(version: 20151008080158) do
     t.string   "keyword"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_hidden"
+    t.integer  "procedure_count", default: 0
   end
+
+  add_index "suits", ["is_hidden"], :name => "index_suits_on_is_hidden"
 
   create_table "users", force: true do |t|
     t.string   "name"

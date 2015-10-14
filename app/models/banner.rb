@@ -13,10 +13,10 @@
 #
 
 class Banner < ActiveRecord::Base
+  include HiddenOrNot
   mount_uploader :pic_l, BannerPicLUploader
   mount_uploader :pic_m, BannerPicMUploader
   mount_uploader :pic_s, BannerPicSUploader
 
   scope :order_by_weight, ->{ order("weight DESC, id DESC") }
-  scope :published, ->{ where(:is_hidden => [false,nil]) }
 end

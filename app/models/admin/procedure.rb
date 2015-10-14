@@ -20,10 +20,10 @@
 #  memo              :text
 #  created_at        :datetime
 #  updated_at        :datetime
+#  is_hidden         :boolean
 #
 
 class Admin::Procedure < Procedure
-	
   belongs_to :profile, class_name: "Admin::Profile"
   belongs_to :suit, class_name: "Admin::Suit"
 

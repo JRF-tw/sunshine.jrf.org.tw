@@ -14,10 +14,12 @@
 #  memo        :text
 #  created_at  :datetime
 #  updated_at  :datetime
+#  is_hidden   :boolean
 #
 
 class Award < ActiveRecord::Base
-	include TaiwanAge
+	include HiddenOrNot
+  include TaiwanAge
   tw_age_columns :publish_at
   
   belongs_to :profile

@@ -18,9 +18,11 @@
 #  memo               :text
 #  created_at         :datetime
 #  updated_at         :datetime
+#  is_hidden          :boolean
 #
 
 class Judgment < ActiveRecord::Base
+  include HiddenOrNot
   include TaiwanAge
   tw_age_columns :judge_date
 

@@ -15,11 +15,13 @@
 #  memo       :text
 #  created_at :datetime
 #  updated_at :datetime
+#  is_hidden  :boolean
 #
 
 class Review < ActiveRecord::Base
 	mount_uploader :file, FileUploader
 	
+  include HiddenOrNot
 	include TaiwanAge
   tw_age_columns :publish_at
 

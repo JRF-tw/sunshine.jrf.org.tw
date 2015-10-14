@@ -1,7 +1,7 @@
 class ProceduresController < BaseController
   def index
     @suit = Suit.find(params[:suit_id])
-    @procedures_by_person = @suit.procedures_by_person
+    @procedures_by_person = @suit.shown.procedures_by_person
     image = @suit.pic.present? ? @suit.pic.L_540.url : nil
     set_meta(
       title: "#{@suit.title} - 處理經過",

@@ -21,6 +21,7 @@ zh-TW:
         full_name: "全名"
         name: "前台顯示簡稱"
         weight: "顯示權重"
+        is_hidden: "隱藏"
       profile:
         name: "姓名"
         current: "現職"
@@ -37,6 +38,7 @@ zh-TW:
         appointment_source: "任用資格來源"
         is_active: "在職中？"
         memo: "備註"
+        is_hidden: "隱藏"
       education:
         title: "學經歷"
         content: "說明"
@@ -44,6 +46,7 @@ zh-TW:
         end_at_in_tw: "結束日期"
         source: "確認來源"
         memo: "備註"
+        is_hidden: "隱藏"
       career:
         career_type: "主遷調改任類別"
         old_unit: "原服務機關"
@@ -63,6 +66,7 @@ zh-TW:
         source_link: "資料來源連結"
         origin_desc: "原始描述"
         memo: "備註"
+        is_hidden: "隱藏"
       license:
         license_type: "專業證照類型"
         unit: "服務單位"
@@ -72,6 +76,7 @@ zh-TW:
         source_link: "資料來源連結"
         origin_desc: "原始描述"
         memo: "備註"
+        is_hidden: "隱藏"
       award:
         award_type: "授獎種類"
         unit: "授獎機關"
@@ -81,6 +86,7 @@ zh-TW:
         source_link: "資料來源連結"
         origin_desc: "原始描述"
         memo: "備註"
+        is_hidden: "隱藏"
       punishment:
         decision_unit: "決定機關"
         unit: "服務機關"
@@ -106,6 +112,7 @@ zh-TW:
         content: "簡述"
         summary: "自定摘要"
         memo: "備註"
+        is_hidden: "隱藏"
       review:
         publish_at_in_tw: "發表日期"
         name: "報刊名稱"
@@ -116,6 +123,7 @@ zh-TW:
         source: "資料來源"
         file: "檔案上傳"
         memo: "備註"
+        is_hidden: "隱藏"
       article:
         article_type: "文章種類"
         publish_year: "出版年"
@@ -135,11 +143,7 @@ zh-TW:
         degree: "學位"
         source: "文章連結"
         memo: "備註"
-      court:
-        court_type: "類型"
-        full_name: "全名"
-        name: "前台顯示簡稱"
-        weight: "顯示權重"
+        is_hidden: "隱藏"
       judgment:
         court_id: "法院"
         main_judge_id: "受命法官"
@@ -156,6 +160,7 @@ zh-TW:
         source: "資料來源"
         source_link: "資料來源網址"
         memo: "備註"
+        is_hidden: "隱藏"
       suit:
         title: "標題"
         summary: "簡短介紹"
@@ -167,6 +172,7 @@ zh-TW:
         keyword: "關鍵字"
         judge_ids: "相關法官"
         prosecutor_ids: "相關檢察官"
+        is_hidden: "隱藏"
       procedure:
         profile_id: "姓名"
         unit: "當時服務機關"
@@ -182,6 +188,7 @@ zh-TW:
         punish_link: "懲處網址"
         file: "相關文件（上傳文件用）"
         memo: "備註"
+        is_hidden: "隱藏"
       banner:
         pic_l: "桌機用圖"
         pic_m: "平板用圖"

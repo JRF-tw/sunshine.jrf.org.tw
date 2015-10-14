@@ -18,9 +18,12 @@
 #  created_at         :datetime
 #  updated_at         :datetime
 #  current_court      :string(255)
+#  is_active          :boolean
+#  is_hidden          :boolean
 #
 
 class Profile < ActiveRecord::Base
+  include HiddenOrNot
   mount_uploader :avatar, ProfileAvatarUploader
 
   has_many :educations, dependent: :destroy
@@ -41,8 +44,8 @@ class Profile < ActiveRecord::Base
   has_many :procedures, dependent: :destroy
 
   scope :newest, ->{ order("id DESC") }
-  scope :had_avatar, ->{ where.not(:avatar => nil) }
-  scope :active, ->{ where.not(:is_active => [false,nil]) }
+  scope :had_avatar, ->{ where.not(avatar: nil) }
+  scope :active, ->{ where.not(is_active: [false,nil]) }
   scope :random, ->{ order("RANDOM()") }
 
   def suit_list

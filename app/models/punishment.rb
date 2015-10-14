@@ -30,9 +30,11 @@
 #  memo             :text
 #  created_at       :datetime
 #  updated_at       :datetime
+#  is_hidden        :boolean
 #
 
 class Punishment < ActiveRecord::Base
+  include HiddenOrNot
 	include TaiwanAge
   tw_age_columns :relevant_date
 

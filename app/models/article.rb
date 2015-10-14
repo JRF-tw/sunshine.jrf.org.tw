@@ -24,10 +24,12 @@
 #  memo             :text
 #  created_at       :datetime
 #  updated_at       :datetime
+#  is_hidden        :boolean
 #
 
 class Article < ActiveRecord::Base
-	include TaiwanAge
+	include HiddenOrNot
+  include TaiwanAge
   tw_age_columns :paper_publish_at, :news_publish_at
   
   belongs_to :profile
