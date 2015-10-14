@@ -188,6 +188,7 @@ namespace :dev do
         suit.procedures.create!(profile: profile, unit: unit.name, title: titles.sample, procedure_unit: procedure_units.sample, procedure_content: procedure_contents.sample, procedure_result: procedure_results.sample, procedure_date: rand(20.years).ago, suit_no: suit.suit_no, procedure_no: "#{(90..105).to_a.sample}年檢評字第#{(1..100).to_a.sample}號", is_hidden: false)
       end
     end
+    Suit.all.each {|suit| suit.update_attributes(is_hidden: false)}
   end
 
   task :fake_punishments => :environment do
