@@ -44,7 +44,14 @@ class Admin::SuitsController < Admin::BaseController
 
   def update
     if suit.update_attributes(suit_params)
-      redirect_to admin_suits_path, flash: { success: "評鑑資料-案例已修改" }
+      if suit.errors.full_messages.count > 0
+        state = "error"
+        msg = suit.errors.full_messages
+      else
+        state = "success"
+        msg = "評鑑資料-案例已更新"
+      end
+      redirect_to admin_suits_path, flash: { "#{state}": "#{msg}" }
     else
       @admin_page_title = "編輯評鑑資料-案例"
       add_crumb @admin_page_title, "#"
