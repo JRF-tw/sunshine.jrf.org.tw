@@ -131,4 +131,12 @@ module ApplicationHelper
     (param == active.to_s) || (active.nil? && param.blank?) ?  "active" : ""
   end
 
+  def render_career_content(career)
+    if career.new_unit.present? || career.new_title.present?
+      "#{career.new_unit} #{career.new_title}"
+    else
+      "暫無詳細資訊"
+    end
+  end
+
 end
