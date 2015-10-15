@@ -139,4 +139,16 @@ module ApplicationHelper
     end
   end
 
+  def render_punishment_reason(punishment)
+    arr = []
+    arr << punishment.relevant_date if punishment.relevant_date.present?
+    arr << punishment.decision_unit if punishment.decision_unit.present?
+    if punishment.punish.present?
+      arr << summary_text(punishment.punish , 20)
+    elsif punishment.decision_result.present?
+      arr << summary_text(punishment.decision_result , 20)
+    end
+    return arr.join(" ")
+  end
+
 end

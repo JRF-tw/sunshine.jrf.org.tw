@@ -8,7 +8,7 @@ section.section-rhythm.container
     = link_to profile_punishment_path(@profile, punishment), class: 'profile-card profile-card--punishment' do
       
       article
-        h4.summary= punishment.reason.present? ? summary_text(punishment.reason, 28) : "尚未填寫懲處事由"
+        h4.summary= render_punishment_reason(punishment)
 
         time.date= punishment.relevant_date
 
