@@ -16,6 +16,7 @@ class Admin::Court < ::Court
   has_many :judgments, class_name: "Admin::Judgment"
 
   validates_presence_of :court_type, :full_name
+  validates_uniqueness_of :full_name, :name
 
   COURT_TYPES = [
     "法院",
