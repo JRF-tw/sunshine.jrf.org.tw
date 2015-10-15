@@ -10,6 +10,8 @@ class Admin::SuitsController < Admin::BaseController
 
   def show
     @admin_page_title = "評鑑資料-案例 - #{suit.title} 的詳細資料"
+    @related_judges = @suit.judges
+    @related_prosecutors = @suit.prosecutors
     add_crumb @admin_page_title, "#"
   end
 

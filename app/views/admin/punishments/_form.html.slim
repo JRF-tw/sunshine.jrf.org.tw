@@ -8,6 +8,7 @@
 = f.input :relevant_date_in_tw, as: "string", hint: "半型純數字，民國，格式：YY/MM/DD"
 = f.input :decision_result, as: :text, input_html: { rows: 8 }
 = f.input :decision_source
+= f.input :punish, as: :text, input_html: { rows: 8 }, hint: "決議結果的簡短描述"
 = f.input :reason, as: :text, input_html: { rows: 8 }
 = f.input :is_anonymous
 = f.input :anonymous_source
@@ -18,7 +19,6 @@
 = f.input :defendant
 = f.input :reply, as: :text, input_html: { rows: 8 }
 = f.input :reply_source
-= f.input :punish, as: :text, input_html: { rows: 8 }
 = f.input :content, as: :text, input_html: { rows: 8 }
 = f.input :summary, as: :text, input_html: { rows: 8 }
 = f.input :memo, as: :text, input_html: { rows: 5 }

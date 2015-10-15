@@ -23,5 +23,5 @@ class Admin::Suit < ::Suit
   has_many :prosecutors, class_name: "Admin::Profile", through: :suit_prosecutors
   has_many :procedures, class_name: "Admin::Procedure", dependent: :destroy
 
-  validates_presence_of :title, :state, :suit_no
+  validates_presence_of :title, :state
 end

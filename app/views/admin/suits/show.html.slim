@@ -1,0 +1,47 @@
+- content_for :btns do
+  = link_to "編輯", edit_admin_suit_path(@suit), class: "btn btn-large btn-success"
+  = link_to "案例處理經過管理", admin_suit_procedures_path(@suit), class: "btn btn-large btn-info"
+
+= admin_widget_box "評鑑資料-案例 #{@suit.title}", icon: :th do
+  table.table.table-bordered.table-striped.table-hover
+    tbody
+      tr
+        td 標題
+        td= @suit.title
+      tr
+        td 簡短介紹
+        td= @suit.summary
+      tr
+        td 介紹
+        td
+          = @suit.content
+      tr
+        td 狀態
+        td
+          = @suit.state
+      tr
+        td 圖片
+        td
+          = image_tag @suit.pic.L_360 if @suit.pic.present?
+      tr
+        td 關鍵字
+        td
+          = @suit.keyword
+      tr
+        - judges_count = @related_judges.count
+        - if judges_count > 0
+          td 相關法官
+          td
+            - @related_judges.each_with_index do |judge, i|
+              = link_to judge.name, admin_profile_path(judge)
+              - unless i + 1 == judges_count
+                | 、
+      tr
+        - prosecutors_count = @related_prosecutors.count
+        - if prosecutors_count > 0
+          td 相關檢察官
+          td
+            - @related_prosecutors.each_with_index do |prosecutor, i|
+              = link_to prosecutor.name, admin_profile_path(prosecutor)
+              - unless i + 1 == prosecutors_count
+                | 、

@@ -15,7 +15,7 @@
         dl.kv-year-job.list
           - @careers.each do |career|
             dt= career.publish_at.to_s(:year).to_i
-            dd= "#{career.new_unit} #{career.new_title}"
+            dd= render_career_content(career)
 
     - if @licenses.present?
       section.profile

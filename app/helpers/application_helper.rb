@@ -131,4 +131,24 @@ module ApplicationHelper
     (param == active.to_s) || (active.nil? && param.blank?) ?  "active" : ""
   end
 
+  def render_career_content(career)
+    if career.new_unit.present? || career.new_title.present?
+      "#{career.new_unit} #{career.new_title}"
+    else
+      "暫無詳細資訊"
+    end
+  end
+
+  def render_punishment_reason(punishment)
+    arr = []
+    arr << punishment.relevant_date if punishment.relevant_date.present?
+    arr << punishment.decision_unit if punishment.decision_unit.present?
+    if punishment.punish.present?
+      arr << summary_text(punishment.punish , 20)
+    elsif punishment.decision_result.present?
+      arr << summary_text(punishment.decision_result , 20)
+    end
+    return arr.join(" ")
+  end
+
 end
