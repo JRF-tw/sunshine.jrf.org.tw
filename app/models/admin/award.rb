@@ -20,5 +20,5 @@
 class Admin::Award < ::Award
   belongs_to :profile, class_name: "Admin::Profile"
   
-  validates_presence_of :profile_id, :award_type, :unit, :publish_at
+  validates_presence_of :profile_id, :award_type, :unit, :publish_at_in_tw
 end

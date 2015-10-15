@@ -30,7 +30,7 @@
 class Admin::Career < ::Career
   belongs_to :profile, class_name: "Admin::Profile"
   
-  validates_presence_of :profile_id, :career_type, :publish_at
+  validates_presence_of :profile_id, :career_type, :publish_at_in_tw
 
   after_save :update_profile_current_court
 
