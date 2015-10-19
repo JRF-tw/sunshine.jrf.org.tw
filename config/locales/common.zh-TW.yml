@@ -205,3 +205,10 @@ zh-TW:
         content: "內文"
         weight: "權重"
         is_hidden: "隱藏"
+  ransack:
+    attributes:
+      profile:
+        is_active_true: "在職中"
+        is_hidden_true: "不顯示於前端"
+        current_eq: "現職"
+        name_cont: "姓名包含"

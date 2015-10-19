@@ -4,7 +4,7 @@ RSpec.describe Admin::ProfilesController do
   before{ signin_user }
 
   describe "already had a profile" do
-    let(:profile){ FactoryGirl.create :profile }
+    let!(:profile){ FactoryGirl.create :profile, name: "Dahlia", current: "法官" }
 
     it "GET /admin/profiles" do
       get "/admin/profiles"
@@ -31,6 +31,32 @@ RSpec.describe Admin::ProfilesController do
     it "DELETE /admin/profiles/123" do
       delete "/admin/profiles/#{profile.id}"
       expect(Profile.count).to be_zero
+    end
+
+    context "ransack" do
+      let!(:hidden_profile){ FactoryGirl.create :profile, name: "Mars", current: "檢察官", is_hidden: true }
+      let!(:unactive_profile){ FactoryGirl.create :profile, name: "Billy", current: "檢察官", is_active: false }
+      it "is_active_true" do
+        get "/admin/profiles", { q: { is_active_true: true } }
+        expect(response.body).not_to match(unactive_profile.name)
+      end
+
+      it "is_hidden_true" do
+        get "/admin/profiles", { q: { is_hidden_true: true } }
+        expect(response.body).to match(hidden_profile.name)
+      end
+
+      it "name_cont" do
+        get "/admin/profiles", { q: { name_cont: "Da" } }
+        expect(response.body).to match(profile.name)
+      end
+
+      it "current_eq" do
+        get "/admin/profiles", { q: { current_eq: "法官" } }
+        expect(response.body).to match(profile.name)
+        expect(response.body).not_to match(unactive_profile.name)
+        expect(response.body).not_to match(hidden_profile.name)
+      end
     end
   end
 
