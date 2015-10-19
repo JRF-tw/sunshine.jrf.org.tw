@@ -25,4 +25,5 @@ class Court < ActiveRecord::Base
   end
 
   scope :newest, ->{ order("id DESC") }
+  scope :order_by_weight, ->{ order("weight DESC, id DESC") }
 end
