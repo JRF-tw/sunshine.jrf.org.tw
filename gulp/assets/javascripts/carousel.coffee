@@ -31,13 +31,17 @@ module.exports = ->
     autoplaySpeed: 8000
     arrows: false
 
-  $('#profile-carousel').slick
-    dots: true
-    infinite: true
-    speed: 300
-    cssEase: 'linear'
-    adaptiveHeight: false
-    slidesToShow: 1
-    autoplay: true
-    autoplaySpeed: 8000
-    arrows: false
+  $profile_carousel = $('#profile-carousel')  
+  if $profile_carousel.length > 0
+    $profile_carousel.slick
+      dots: true
+      infinite: true
+      speed: 300
+      cssEase: 'linear'
+      adaptiveHeight: false
+      slidesToShow: 1
+      autoplay: true
+      autoplaySpeed: 8000
+      arrows: false
+
+    $(window).trigger "resize"
