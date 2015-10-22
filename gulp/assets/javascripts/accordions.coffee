@@ -28,11 +28,11 @@ module.exports = ->
       unless order is 'open'
         @button.removeClass 'open'
                .addClass 'close'
-               .text 'CLOSE'
+               .text '關閉'
       else
         @button.removeClass 'close'
                .addClass 'open'
-               .text 'OPEN'
+               .text '展開'
 
     init: ->
       if @list.length <= 1
