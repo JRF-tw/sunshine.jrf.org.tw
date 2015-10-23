@@ -4,7 +4,7 @@ class Admin::ProfilesController < Admin::BaseController
 
   def index
     @search = Profile.all.newest.ransack(params[:q])
-    @profiles = @search.result.page(params[:page]).per(10)
+    @profiles = @search.result.page(params[:page]).per(20)
     @admin_page_title = "個人檔案列表"
     add_crumb @admin_page_title, "#"
   end
