@@ -8,9 +8,10 @@ turbolinks = require './turbolinks'
 
 $(document).on 'page:change', ->
   modernizr()
-  carousel()
   mobile_nav()
   to_top()
   accordions()
   tab()
   turbolinks()
+
+carousel()
