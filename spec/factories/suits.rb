@@ -20,6 +20,8 @@ FactoryGirl.define do
     title "foobar"
     suit_no 123
     state "處理中"
+    summary "foooofooooofooooo"
+    content "barrrrbaaar"
   end
 
 end
