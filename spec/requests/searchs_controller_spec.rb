@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe SearchsController, type: :controller do
+RSpec.describe SearchsController, :type => :request do
 
 end
