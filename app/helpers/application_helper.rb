@@ -115,11 +115,11 @@ module ApplicationHelper
   end
 
   def collection_for_judges
-    Court.judges.order_by_weight.map{ |c| c.full_name }.unshift("請選擇法院")
+    Court.judges.order_by_weight.map{ |c| c.full_name }.unshift("全部法院")
   end
 
   def collection_for_prosecutors
-    Court.prosecutors.order_by_weight.map{ |c| c.full_name }.unshift("請選擇檢察署")
+    Court.prosecutors.order_by_weight.map{ |c| c.full_name }.unshift("全部檢察署")
   end
 
   def collection_state_for_suits

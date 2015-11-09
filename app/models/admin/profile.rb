@@ -43,7 +43,8 @@ class Admin::Profile < ::Profile
 
   CURRENT_TYPES = [
     "法官",
-    "檢察官"
+    "檢察官",
+    "其他"
   ]
 
   GENDER_TYPES = [
