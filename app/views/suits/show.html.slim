@@ -29,7 +29,9 @@ section.section-rhythm.bg-yellow
         = link_to '看更多', suit_procedures_path(@suit), class: 'button--brown'
 
     = render layout: 'components/feature_card', locals: {heading: '你可能會有興趣'} do
-      = render partial: 'components/list_related_suits', locals: { related_suits: @related_suits }
-
-      .text-center
-        = link_to '看更多', suits_path, class: 'button--brown'
+      - if @related_suits.present?
+        = render partial: 'components/list_related_suits', locals: { related_suits: @related_suits }
+        .text-center
+          = link_to '看更多', suits_path, class: 'button--brown'
+      - else
+        | 目前沒有相關案例

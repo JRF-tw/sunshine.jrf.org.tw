@@ -37,7 +37,7 @@ class Suit < ActiveRecord::Base
   def related_suits
     judge_ids = self.judges.map(&:id)
     prosecutor_ids = self.prosecutors.map(&:id)
-    suit_ids = (SuitJudge.where(profile_id: judge_ids).map(&:suit_id) + SuitProsecutor.where(profile_id: prosecutor_ids).map(&:suit_id)).uniq
+    suit_ids = (SuitJudge.where(profile_id: judge_ids).map(&:suit_id) + SuitProsecutor.where(profile_id: prosecutor_ids).map(&:suit_id)).uniq - [self.id]
     Suit.where(id: suit_ids)
   end
 
