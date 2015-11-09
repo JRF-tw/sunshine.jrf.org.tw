@@ -20,6 +20,7 @@
 #  current_court      :string(255)
 #  is_active          :boolean
 #  is_hidden          :boolean
+#  punishments_count  :integer          default(0)
 #
 
 FactoryGirl.define do

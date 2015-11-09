@@ -47,4 +47,14 @@ RSpec.describe Punishment, type: :model do
     profile.destroy
     expect(Punishment.count).to be_zero
   end
+
+  it "#punishments_count counter cache" do
+    profile = FactoryGirl.create :profile 
+    Admin::Punishment.create decision_unit: "foofoo", profile_id: profile.id
+    profile.reload
+    expect(profile.punishments_count).to eq(1)
+    Admin::Punishment.last.destroy
+    profile.reload
+    expect(profile.punishments_count).to be_zero
+  end
 end

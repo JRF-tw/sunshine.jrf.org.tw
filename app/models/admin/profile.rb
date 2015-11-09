@@ -20,6 +20,7 @@
 #  current_court      :string(255)
 #  is_active          :boolean
 #  is_hidden          :boolean
+#  punishments_count  :integer          default(0)
 #
 
 class Admin::Profile < ::Profile
@@ -43,7 +44,8 @@ class Admin::Profile < ::Profile
 
   CURRENT_TYPES = [
     "法官",
-    "檢察官"
+    "檢察官",
+    "其他"
   ]
 
   GENDER_TYPES = [

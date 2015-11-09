@@ -1,4 +1,4 @@
-= f.input :article_type
+= f.input :article_type, as: :select, collection: Admin::Article::ARTICLE_TYPES, include_blank: "請選擇"
 = f.input :publish_year, hint: "半型純數字，民國"
 = f.input :paper_publish_at_in_tw, as: "string", hint: "半型純數字，民國，格式：YY/MM/DD，如不清楚確切日期就填該年第一天或該月第一天"
 = f.input :news_publish_at_in_tw, as: "string", hint: "半型純數字，民國，格式：YY/MM/DD，如不清楚確切日期就填該年第一天或該月第一天"

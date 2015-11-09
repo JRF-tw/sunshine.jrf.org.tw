@@ -2,17 +2,18 @@
 #
 # Table name: suits
 #
-#  id         :integer          not null, primary key
-#  title      :string(255)
-#  summary    :text
-#  content    :text
-#  state      :string(255)
-#  pic        :string(255)
-#  suit_no    :integer
-#  keyword    :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#  is_hidden  :boolean
+#  id              :integer          not null, primary key
+#  title           :string(255)
+#  summary         :text
+#  content         :text
+#  state           :string(255)
+#  pic             :string(255)
+#  suit_no         :integer
+#  keyword         :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
+#  is_hidden       :boolean
+#  procedure_count :integer          default(0)
 #
 
 class Suit < ActiveRecord::Base
@@ -36,7 +37,7 @@ class Suit < ActiveRecord::Base
   def related_suits
     judge_ids = self.judges.map(&:id)
     prosecutor_ids = self.prosecutors.map(&:id)
-    suit_ids = (SuitJudge.where(profile_id: judge_ids).map(&:suit_id) + SuitProsecutor.where(profile_id: prosecutor_ids).map(&:suit_id)).uniq
+    suit_ids = (SuitJudge.where(profile_id: judge_ids).map(&:suit_id) + SuitProsecutor.where(profile_id: prosecutor_ids).map(&:suit_id)).uniq - [self.id]
     Suit.where(id: suit_ids)
   end
 

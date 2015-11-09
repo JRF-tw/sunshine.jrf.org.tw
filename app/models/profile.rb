@@ -20,6 +20,7 @@
 #  current_court      :string(255)
 #  is_active          :boolean
 #  is_hidden          :boolean
+#  punishments_count  :integer          default(0)
 #
 
 class Profile < ActiveRecord::Base
@@ -47,6 +48,7 @@ class Profile < ActiveRecord::Base
   scope :had_avatar, ->{ where.not(avatar: nil) }
   scope :active, ->{ where.not(is_active: [false,nil]) }
   scope :random, ->{ order("RANDOM()") }
+  scope :by_punishments, ->{ order("punishments_count DESC") }
 
   def suit_list
     ids = (self.suit_judges.map(&:suit_id) + self.suit_prosecutors.map(&:suit_id)).uniq
