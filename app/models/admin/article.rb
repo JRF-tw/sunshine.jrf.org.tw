@@ -33,6 +33,17 @@ class Admin::Article < ::Article
   validates_presence_of :profile_id, :article_type
   validate :validate_publish_date
 
+  ARTICLE_TYPES = [
+    "編輯專書",
+    "期刊文章",
+    "會議論文",
+    "報紙投書",
+    "專書",
+    "碩博士論文",
+    "報告",
+    "其他"
+  ]
+
   private
 
   def validate_publish_date
