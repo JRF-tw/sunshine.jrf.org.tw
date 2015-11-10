@@ -49,6 +49,7 @@ class Profile < ActiveRecord::Base
   scope :active, ->{ where.not(is_active: [false,nil]) }
   scope :random, ->{ order("RANDOM()") }
   scope :by_punishments, ->{ order("punishments_count DESC") }
+  scope :order_by_name, ->{ order("name ASC") }
 
   def suit_list
     ids = (self.suit_judges.map(&:suit_id) + self.suit_prosecutors.map(&:suit_id)).uniq
