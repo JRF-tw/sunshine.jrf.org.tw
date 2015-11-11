@@ -43,13 +43,24 @@ RSpec.describe Article, type: :model do
   end
 
   context "TaiwanAge" do
-    it "#paper_publish_at" do
-      a = Article.new
-      a.paper_publish_at_in_tw = "104/9/9"
-      expect( a.paper_publish_at.year ).to eq 2015
-      expect( a.paper_publish_at.month ).to eq 9
-      expect( a.paper_publish_at.day ).to eq 9
-      expect( a.paper_publish_at_in_tw ).to eq "104/9/9"
+    describe "#paper_publish_at" do
+      it "normal date" do
+        a = Article.new
+        a.paper_publish_at_in_tw = "104/9/29"
+        expect( a.paper_publish_at.year ).to eq 2015
+        expect( a.paper_publish_at.month ).to eq 9
+        expect( a.paper_publish_at.day ).to eq 29
+        expect( a.paper_publish_at_in_tw ).to eq "104/9/29"
+      end
+
+      it "2/29" do
+        a = Article.new
+        a.paper_publish_at_in_tw = "101/2/29"
+        expect( a.paper_publish_at.year ).to eq 2012
+        expect( a.paper_publish_at.month ).to eq 2
+        expect( a.paper_publish_at.day ).to eq 29
+        expect( a.paper_publish_at_in_tw ).to eq "101/2/29"
+      end
     end
 
     it "paper_publish_at = nil" do
