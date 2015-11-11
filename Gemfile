@@ -117,3 +117,5 @@ gem 'sitemap_generator'
 
 # internal search
 gem 'ransack'
+
+gem 'smarter_csv', '~> 1.1'
