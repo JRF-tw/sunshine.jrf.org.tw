@@ -1,6 +1,6 @@
 set :deploy_to, '/home/apps/jrf-sunny'
 set :rails_env, 'production'
-set :branch, ENV["BR"] || 'master'
+set :branch, ENV["BR"] || 'develop'
 set :ssh_options, {
   user: 'apps'
 }
@@ -15,10 +15,10 @@ require "aws-sdk-v1"
 require "aws-sdk"
 aws_conf = YAML.load(IO.read("./config/application.yml"))["development"]["aws"].symbolize_keys
 AWS.config(aws_conf)
-lb_name = "lb.5fpro.com"
+lb_name = "web"
 servers = AWS::ELB.new.load_balancers[lb_name].instances.map(&:ip_address)
 
-shadow_server = "myapp.5fpro.com"
+shadow_server = "52.192.156.48"
 role :app,                servers + [ shadow_server ]
 role :web,                servers + [ shadow_server ]
 role :db,                 shadow_server
