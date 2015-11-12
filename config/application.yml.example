@@ -77,4 +77,37 @@ staging: &defaults
     path: "sitemaps/"
 
 production:
-  <<: *defaults
+  SECRET_KEY_BASE: daskdjaslkjdsalkdj12341234
+  host: jrf-sunny.tw
+  assets_host: assets-jrf.s3-website-ap-northeast-1.amazonaws.com
+  asset_sync:
+    bucket: assets-jrf
+    region: ap-northeast-1
+  redis:
+    url: redis://production.vzvst8.0001.apne1.cache.amazonaws.com/0
+  dalli:
+    servers:
+    - production-cache.vzvst8.cfg.apne1.cache.amazonaws.com
+    options:
+      namespace: jrf-sunny
+      expires_in: 0
+      threadsafe: true
+      failover: true
+      compress: false
+      keepalive: true
+      username:
+      password:
+      pool_size: 1
+  aws:
+    access_key_id: AKIAJQBNVL6S33RM5ZQA
+    secret_access_key: aaa
+    region: ap-northeast-1
+  sidekiq:
+    url: redis://production.vzvst8.0001.apne1.cache.amazonaws.com/0
+    namespace: jrf-sunny
+  carrierwave:
+    region: ap-northeast-1
+    bucket: assets-jrf
+    host: assets-jrf.s3-website-ap-northeast-1.amazonaws.com
+  sitemap:
+    path: "sitemaps/"
