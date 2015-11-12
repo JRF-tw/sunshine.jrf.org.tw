@@ -20,7 +20,10 @@ module TaiwanAge
           if value.blank?
             public_send(column)
           else
+            is_leap_year = date == nil
+            date = Time.parse(value) if is_leap_year
             year = date.year < 1000 ? date.year + 1911 : date.year
+            date = Time.parse("#{year}/#{date.month}/#{date.day}") - 1.day if is_leap_year
             public_send "#{column}=", "#{year}/#{date.month}/#{date.day}"
           end
         end
