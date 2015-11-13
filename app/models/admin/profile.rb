@@ -55,5 +55,4 @@ class Admin::Profile < ::Profile
   ]
 
   validates_presence_of :name, :current
-  validates_uniqueness_of :name
 end
