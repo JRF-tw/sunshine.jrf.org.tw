@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151111102943) do
+ActiveRecord::Schema.define(version: 20151113092741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -280,6 +280,7 @@ ActiveRecord::Schema.define(version: 20151111102943) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_hidden"
+    t.text     "status"
   end
 
   add_index "punishments", ["is_hidden"], :name => "index_punishments_on_is_hidden"

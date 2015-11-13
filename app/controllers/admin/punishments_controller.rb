@@ -67,6 +67,6 @@ class Admin::PunishmentsController < Admin::BaseController
   end
 
   def punishment_params
-    params.fetch(:admin_punishment, {}).permit(:profile_id, :decision_unit, :unit, :title, :claimant, :punish_no, :decision_no, :punish_type, :relevant_date_in_tw, :relevant_date, :decision_result, :decision_source, :reason, :is_anonymous, :anonymous_source, :anonymous, :origin_desc, :proposer, :plaintiff, :defendant, :reply, :reply_source, :punish, :content, :summary, :memo, :is_hidden)
+    params.fetch(:admin_punishment, {}).permit(:profile_id, :decision_unit, :unit, :title, :claimant, :punish_no, :decision_no, :punish_type, :relevant_date_in_tw, :relevant_date, :decision_result, :decision_source, :reason, :is_anonymous, :anonymous_source, :anonymous, :origin_desc, :proposer, :plaintiff, :defendant, :reply, :reply_source, :punish, :content, :summary, :status, :memo, :is_hidden)
   end
 end

@@ -111,6 +111,7 @@ zh-TW:
         punish: "懲處"
         content: "簡述"
         summary: "自定摘要"
+        status: "現狀"
         memo: "備註"
         is_hidden: "隱藏"
       review:
