@@ -24,5 +24,6 @@ section.hero--profile[
         - if @profile.birth_year.present?
           li.cell= "出生年份：#{year_in_bc(@profile.birth_year)}"
         - if @profile.stage.present?
-          li.cell= "司訓期別：第#{@profile.stage}期"
+          - stage = @profile.stage == 0 ? "不明" : "第#{@profile.stage}期"
+          li.cell= "司訓期別：#{stage}"
         li.cell.break= "#{@profile.current_court} #{@profile.current}"
