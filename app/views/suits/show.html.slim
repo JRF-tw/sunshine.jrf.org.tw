@@ -21,7 +21,7 @@ section.section-rhythm.bg-yellow
     = render layout: 'components/feature_card', locals: {heading: '案件處理現況'} do
       p
         - if @last_procedure.procedure_content == "結束"
-          = @last_procedure.procedure_result
+          = "#{@last_procedure.procedure_unit}：#{@last_procedure.procedure_result}"
         - else
           = "#{@last_procedure.procedure_unit}#{@last_procedure.procedure_content}"
 

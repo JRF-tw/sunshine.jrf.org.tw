@@ -15,7 +15,7 @@ class SuitsController < BaseController
     @related_judges = @suit.judges
     @related_prosecutors = @suit.prosecutors
     @procedures = @suit.procedures.shown.sort_by_procedure_date
-    @last_procedure = @procedures.is_done.last.present? ? @procedures.is_done.last : @procedures.first
+    @last_procedure = @procedures.is_done.first.present? ? @procedures.is_done.first : @procedures.first
     @related_suits = @suit.related_suits.shown.last(3)
     image = @suit.pic.present? ? @suit.pic.L_540.url : nil
     set_meta(
