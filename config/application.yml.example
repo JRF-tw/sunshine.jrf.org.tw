@@ -78,7 +78,7 @@ staging: &defaults
 
 production:
   SECRET_KEY_BASE: daskdjaslkjdsalkdj12341234
-  host: jrf-sunny.tw
+  host: sunshine.jrf.org.tw
   assets_host: assets-jrf.s3-website-ap-northeast-1.amazonaws.com
   asset_sync:
     bucket: assets-jrf
