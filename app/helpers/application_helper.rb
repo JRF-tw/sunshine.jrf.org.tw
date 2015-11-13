@@ -67,39 +67,55 @@ module ApplicationHelper
         "議決日期": punishment.relevant_date.present? ? punishment.relevant_date : nil,
         "決定機關": punishment.decision_unit.present? ? punishment.decision_unit : nil,
         "移送機關": punishment.claimant.present? ? punishment.claimant : nil,
-        "決議結果": punishment.decision_result.present? ? punishment.decision_result : nil
+        "字    號": punishment.punish_no.present? ? punishment.punish_no : nil,
+        "決議結果": punishment.decision_result.present? ? punishment.decision_result : nil,
+        "懲處結果": punishment.punish.present? ? punishment.punish : nil,
+        "摘    要": punishment.summary.present? ? punishment.summary : nil
       }
     elsif punishment.decision_unit == "檢評會"
       hash = {
         "決議日期": punishment.relevant_date.present? ? punishment.relevant_date : nil,
         "決定機關": punishment.decision_unit.present? ? punishment.decision_unit : nil,
-        "請 求 人": punishment.claimant.present? ? punishment.claimant : nil
+        "請 求 人": punishment.claimant.present? ? punishment.claimant : nil,
+        "字    號": punishment.punish_no.present? ? punishment.punish_no : nil,
+        "懲處結果": punishment.punish.present? ? punishment.punish : nil,
+        "摘    要": punishment.summary.present? ? punishment.summary : nil
       }
     elsif punishment.decision_unit == ("監察院(新)" || "監察院")
       hash = {
         "議決日期": punishment.relevant_date.present? ? punishment.relevant_date : nil,
         "決定機關": "監察院",
         "決議案號": punishment.decision_no.present? ? punishment.decision_no : nil,
-        "決議種類": punishment.punish_type.present? ? punishment.punish_type : nil
+        "決議種類": punishment.punish_type.present? ? punishment.punish_type : nil,
+        "懲處結果": punishment.punish.present? ? punishment.punish : nil,
+        "摘    要": punishment.summary.present? ? punishment.summary : nil
       }
     elsif punishment.decision_unit == "監察院(舊)"
       hash = {
         "公告日期": punishment.relevant_date.present? ? punishment.relevant_date : nil,
         "決定機關": "監察院",
         "發文字號": punishment.decision_no.present? ? punishment.decision_no : nil,
-        "決議種類": punishment.punish_type.present? ? punishment.punish_type : nil
+        "決議種類": punishment.punish_type.present? ? punishment.punish_type : nil,
+        "懲處結果": punishment.punish.present? ? punishment.punish : nil,
+        "摘    要": punishment.summary.present? ? punishment.summary : nil
       }
     elsif punishment.decision_unit == "職務法庭"
       hash = {
         "裁判日期": punishment.relevant_date.present? ? punishment.relevant_date : nil,
         "決定機關": punishment.decision_unit.present? ? punishment.decision_unit : nil,
-        "移送機關": punishment.claimant.present? ? punishment.claimant : nil
+        "移送機關": punishment.claimant.present? ? punishment.claimant : nil,
+        "字    號": punishment.punish_no.present? ? punishment.punish_no : nil,
+        "懲處結果": punishment.punish.present? ? punishment.punish : nil,
+        "摘    要": punishment.summary.present? ? punishment.summary : nil
       }
     elsif punishment.decision_unit.to_s == "法評會"
       hash = {
         "決議日期": punishment.relevant_date.present? ? punishment.relevant_date : nil,
         "決定機關": punishment.decision_unit.present? ? punishment.decision_unit : nil,
-        "請 求 人": punishment.claimant.present? ? punishment.claimant : nil
+        "請 求 人": punishment.claimant.present? ? punishment.claimant : nil,
+        "字    號": punishment.punish_no.present? ? punishment.punish_no : nil,
+        "懲處結果": punishment.punish.present? ? punishment.punish : nil,
+        "摘    要": punishment.summary.present? ? punishment.summary : nil
       }
     elsif punishment.decision_unit == "司法院"
       hash = {
@@ -107,7 +123,10 @@ module ApplicationHelper
         "決定機關": punishment.decision_unit.present? ? punishment.decision_unit : nil,
         "懲處機關": punishment.claimant.present? ? punishment.claimant : nil,
         "會議名稱": punishment.decision_no.present? ? punishment.decision_no : nil,
-        "懲處種類": punishment.punish_type.present? ? punishment.punish_type : nil
+        "字    號": punishment.punish_no.present? ? punishment.punish_no : nil,
+        "懲處種類": punishment.punish_type.present? ? punishment.punish_type : nil,
+        "懲處結果": punishment.punish.present? ? punishment.punish : nil,
+        "摘    要": punishment.summary.present? ? punishment.summary : nil
       }
     end
     hash.delete_if { |k, v| v == nil }
@@ -141,7 +160,7 @@ module ApplicationHelper
 
   def render_punishment_reason(punishment)
     arr = []
-    arr << punishment.decision_unit if punishment.decision_unit.present?
+    arr << render_punishment_decision_unit(punishment) if punishment.decision_unit.present?
     if punishment.punish.present?
       arr << summary_text(punishment.punish , 20)
     elsif punishment.decision_result.present?
