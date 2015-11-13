@@ -1,9 +1,11 @@
 ul.list--arrow
   - @newest_punishments.each do |punishment|
     li
-      - if punishment.summary.present?
+      - if punishment.punish.present?
+        = link_to summary_text(punishment.punish, 16), profile_punishment_path(@profile, punishment)
+      - elsif punishment.decision_result.present?
+        = link_to summary_text(punishment.decision_result, 16), profile_punishment_path(@profile, punishment)
+      - elsif punishment.summary.present?
         = link_to summary_text(punishment.summary, 16), profile_punishment_path(@profile, punishment)
-      - elsif punishment.reason.present?
-        = link_to summary_text(punishment.reason, 16), profile_punishment_path(@profile, punishment)
       - else
         = link_to "決定機關：#{render_punishment_decision_unit(punishment)}", profile_punishment_path(@profile, punishment)
