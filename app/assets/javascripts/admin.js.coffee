@@ -7,9 +7,8 @@
 #= require chosen-jquery
 #= require redactor-rails
 #= require redactor-rails/plugins
-#= require redactor-rails/plugins/inlinestyle
-#= require redactor-rails/plugins/source
 #= require redactor-rails/langs/zh_tw
+#= require redactor-rails/config
 #= require_self
 
 # admin menu auto active
