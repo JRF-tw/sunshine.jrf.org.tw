@@ -3,8 +3,9 @@ footer.main-footer
     section.container
       .left
         h6.main-footer__heading
-          | 財團法人民間司法改革基金會#{tag :br}
-          | Judicial Reform Foundation
+          = link_to 'http://www.jrf.org.tw/', target: '_blank' do
+            | 財團法人民間司法改革基金會#{tag :br}
+            | Judicial Reform Foundation
         br
         address
           | 104-56 台北市中山區松江路90巷3號7樓#{tag :br}
