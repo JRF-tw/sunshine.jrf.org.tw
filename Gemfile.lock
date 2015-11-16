@@ -336,6 +336,10 @@ GEM
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
     rdoc (4.2.0)
+    redactor-rails (0.5.0)
+      devise
+      mime-types
+      orm_adapter
     redis (3.2.1)
     redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
@@ -505,6 +509,7 @@ DEPENDENCIES
   pry-remote
   rails (= 4.1.10)
   ransack
+  redactor-rails
   redis
   redis-objects
   rename

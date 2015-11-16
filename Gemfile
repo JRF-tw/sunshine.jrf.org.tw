@@ -42,6 +42,9 @@ gem 'mini_magick'
 gem 'fog'
 gem 'carrierwave_backgrounder'
 
+# editor
+gem 'redactor-rails'
+
 # soft delete
 # gem 'paranoia'
 

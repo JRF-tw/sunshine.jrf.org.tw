@@ -1,6 +1,6 @@
 = f.input :title
 = f.input :summary, input_html: { rows: 8 }
-= f.input :content, input_html: { rows: 8 }
+= f.input :content, input_html: { class: 'redactor', rows: 8 }
 = f.input :state, as: :select, collection: Suit::STATE, include_blank: "請選擇"
 - if f.object.pic?
   .control-group

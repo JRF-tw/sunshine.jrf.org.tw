@@ -1,5 +1,6 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
+  mount RedactorRails::Engine => '/redactor_rails'
   mount Sidekiq::Web => '/sidekiq'
 
   devise_for :users
