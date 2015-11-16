@@ -5,6 +5,9 @@
 #= require bootstrap
 #= require unicorn
 #= require chosen-jquery
+#= require redactor-rails
+#= require redactor-rails/langs/zh_tw
+#= require redactor-rails/plugins
 #= require_self
 
 # admin menu auto active

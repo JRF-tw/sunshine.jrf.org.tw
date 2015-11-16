@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151113092741) do
+ActiveRecord::Schema.define(version: 20151116091324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -285,6 +285,22 @@ ActiveRecord::Schema.define(version: 20151113092741) do
 
   add_index "punishments", ["is_hidden"], :name => "index_punishments_on_is_hidden"
   add_index "punishments", ["profile_id"], :name => "index_punishments_on_profile_id"
+
+  create_table "redactor_assets", force: true do |t|
+    t.string   "data_file_name",               null: false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    limit: 30
+    t.string   "type",              limit: 30
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "redactor_assets", ["assetable_type", "assetable_id"], :name => "idx_redactor_assetable"
+  add_index "redactor_assets", ["assetable_type", "type", "assetable_id"], :name => "idx_redactor_assetable_type"
 
   create_table "reviews", force: true do |t|
     t.integer  "profile_id"
