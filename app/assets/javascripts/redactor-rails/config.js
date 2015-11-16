@@ -17,6 +17,7 @@ window.init_redactor = function(){
         "path":"/assets/redactor-rails",
         "css":"style.css",
         "lang":'zh_tw',
+        "buttonSource": true,
         "plugins": ['fontsize',
                 'fontcolor',
                 'fontfamily',
