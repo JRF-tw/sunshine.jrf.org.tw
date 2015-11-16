@@ -3,9 +3,9 @@ class SuitsController < BaseController
     @suit_banners = SuitBanner.shown.order_by_weight
     @suits = Suit.shown.newest.page(params[:page]).per(9)
     set_meta(
-      title: "司法恐龍面面觀",
-      description: "司法恐龍長怎樣？看看幾個案例，認識司法恐龍！",
-      keywords: "司法恐龍,司法恐龍面面觀,恐龍法官,恐龍檢察官",
+      title: "司法案例面面觀",
+      description: "不適任的法官、檢察官狀況有哪些？看看幾個案例，認識不適任的法官、檢察官！",
+      keywords: "不適任法官,不適任檢察官,司法案例面面觀,司法恐龍,恐龍法官,恐龍檢察官",
       image: ActionController::Base.helpers.asset_path('hero-suits-index-M.png')
     )
   end
@@ -21,7 +21,7 @@ class SuitsController < BaseController
     set_meta(
       title: @suit.title,
       description: "#{@suit.title} #{@suit.summary}",
-      keywords: "司法恐龍案例,司法案例",
+      keywords: "不適任法官,不適任檢察官,司法恐龍案例,司法案例",
       image: image
     )
   end
