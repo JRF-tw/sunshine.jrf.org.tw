@@ -3,7 +3,7 @@ class SearchsController < BaseController
     set_meta(
       title: "我想找",
       description: "想找司法案例嗎？想找法官檢察官基本資料嗎？你想找的全在這！",
-      keywords: "找法官,找檢察官,找案例,找司法恐龍",
+      keywords: "找法官,找檢察官,找案例,找不適任法官,找不適任檢察官,找司法恐龍",
       image: ActionController::Base.helpers.asset_path('hero-searchs-index-M.png')
     )
   end
@@ -14,7 +14,7 @@ class SearchsController < BaseController
     set_meta(
       title: "案例搜尋結果",
       description: "案例搜尋結果，快來看看有哪些案例！",
-      keywords: "司法恐龍案例,法官案例,檢察官案例",
+      keywords: "不適任法官案例,不適任檢察官案例,司法恐龍案例,法官案例,檢察官案例",
       image: ActionController::Base.helpers.asset_path('hero-searchs-index-M.png')
     )
   end

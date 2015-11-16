@@ -14,7 +14,7 @@ zh-TW:
       suit: "評鑑資料-案例"
       procedure: "評鑑資料-案例處理經過"
       banner: "首頁橫幅"
-      suit_banner: "司法恐龍面面觀橫幅"
+      suit_banner: "司法案例面面觀橫幅"
     attributes:
       court:
         court_type: "類型"
