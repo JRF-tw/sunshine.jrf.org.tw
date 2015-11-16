@@ -20,7 +20,9 @@ window.init_redactor = function(){
         "plugins": ['fontsize',
                 'fontcolor',
                 'fontfamily',
-                'clips']
+                'clips',
+                'source',
+                'inlinestyle']
       });
 }
 
