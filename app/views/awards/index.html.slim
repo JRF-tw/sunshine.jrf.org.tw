@@ -2,15 +2,23 @@
 
 section.section-rhythm.container
   h3.section-heading--gray.text-center 獎勵紀錄
-
   - @awards.each do |award|
-    .profile-card.profile-card--award
-      article
-        .wrapper
-          h4.prize= award.award_type
-          time.date= award.publish_at
-        p.description= award.content.present? ? summary_text(award.content, 60) : "尚未填寫授獎事由"
-        p.from= "授獎機關：#{@newest_award.unit}"
+    - if award.source_link.present?
+      = link_to award.source_link, target: "blank", class: 'profile-card profile-card--award' do
+        article
+          .wrapper
+            h4.prize= award.award_type
+            time.date= award.publish_at
+          p.description= award.content.present? ? summary_text(award.content, 60) : "尚未填寫授獎事由"
+          p.from= "授獎機關：#{@newest_award.unit}"
+    - else
+      .profile-card.profile-card--award
+        article
+          .wrapper
+            h4.prize= award.award_type
+            time.date= award.publish_at
+          p.description= award.content.present? ? summary_text(award.content, 60) : "尚未填寫授獎事由"
+          p.from= "授獎機關：#{@newest_award.unit}"
 
   = paginate @awards, theme: 'www'
 
