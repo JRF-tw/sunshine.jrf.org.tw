@@ -5,10 +5,10 @@
   "description": "Judicial sunshine: Informations of ROC judges and prosecutors",
   "description_zh": "司法陽光網：收集法官與檢察官之公開資訊",
   "homepage": "http://sunshine.jrf.org.tw",
-  "document": "https://github.com/JRF-tw/sunshine.jrf.org.tw/tree/master",
+  "document": "https://github.com/JRF-tw/sunshine.jrf.org.tw/tree/develop",
   "repository": {
     "type": "git",
-    "url": "https://github.com/JRF-tw/sunshine.jrf.org.tw/tree/master"
+    "url": "https://github.com/JRF-tw/sunshine.jrf.org.tw/"
   },
   "licenses": [
     {
