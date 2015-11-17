@@ -21,13 +21,13 @@ class ProfilesController < BaseController
 
   def show
     @profile = Profile.find(params[:id])
-    @careers = @profile.careers.order_by_publish_at
+    @careers = @profile.careers.shown.order_by_publish_at
     @suits = @profile.suit_list
-    @educations = @profile.educations.order_by_end_at
-    @licenses = @profile.licenses.order_by_publish_at
-    @newest_award = @profile.awards.order_by_publish_at.first
-    @newest_punishments = @profile.punishments.order_by_relevant_date.first(3)
-    @newest_reviews = @profile.reviews.had_title.order_by_publish_at.first(3)
+    @educations = @profile.educations.shown.order_by_end_at
+    @licenses = @profile.licenses.shown.order_by_publish_at
+    @newest_award = @profile.awards.shown.order_by_publish_at.first
+    @newest_punishments = @profile.punishments.shown.order_by_relevant_date.first(3)
+    @newest_reviews = @profile.reviews.shown.had_title.order_by_publish_at.first(3)
     description = ["#{@profile.name}個人資料介紹。"]
     description << "性別#{@profile.gender}、" if @profile.gender.present?
     description << "出生年份#{@profile.birth_year}、" if @profile.birth_year.present?
