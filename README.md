@@ -65,3 +65,7 @@ CREATE DATABASE "your_name";
 GRANT ALL PRIVILEGES ON DATABASE "your_name" to "your_name";
 ALTER USER "your_name" WITH SUPERUSER;
 ```
+
+LICENSE
+=================
+This project is release under MIT License.
