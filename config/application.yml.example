@@ -33,6 +33,10 @@ defaults: &defaults
     host: localhost:3000
   sitemap:
     path: "sitemaps/"
+  gtm:
+    id: ""
+  disqus:
+    id: ""
 
 development:
   <<: *defaults
