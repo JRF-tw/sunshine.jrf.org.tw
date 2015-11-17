@@ -27,8 +27,8 @@ namespace :dev do
 
   task :fake_users => :environment do
     User.destroy_all
-    email = "admin@5fpro.com"
-    user = User.find_by(email: email) || FactoryGirl.create(:user, email: email, password: "12341234", admin: true)
+    email = "admin@jrf.org.tw"
+    user = User.find_by(email: email) || FactoryGirl.create(:user, email: email, password: "P@ssw0rd", admin: true)
   end
 
   task :fake_courts => :environment do

@@ -18,7 +18,7 @@ cp config/application.yml.example config/application.yml
 bundle exec rake dev:build
 ```
 
-Will generate user `admin@5fpro.com` with password `12341234` and items data.
+Will generate user `admin@jrf.org.tw` with password `P@ssw0rd` and items data.
 
 
 Redis
@@ -43,6 +43,7 @@ PostgreSql
 
 ```
 brew install postgresql
+brew install postgis
 brew unlink postgresql
 brew link postgresql
 ARCHFLAGS="-arch x86_64" gem install pg
