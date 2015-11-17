@@ -11,7 +11,7 @@ article
       - first_procedure = procedures.first
       - person = first_procedure.profile
       section.suit-procedure
-        h3.suit-procedure__heading = person.name
+        h3.suit-procedure__heading = link_to person.name, profile_path(person)
 
         span.suit-procedure__job= "時任 #{first_procedure.unit}   #{first_procedure.title}"
 
