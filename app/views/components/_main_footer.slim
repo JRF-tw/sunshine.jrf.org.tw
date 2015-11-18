@@ -23,13 +23,15 @@ footer.main-footer
 
       .right
         ul.list--unstyled
+          li
+            strong 若本網站資料有任何錯誤或侵權之內容，敬請#{link_to '點選此處', 'https://jrf.neticrm.tw/civicrm/profile/create?gid=49&reset=1', target: '_blank', class: 'license-link'}填寫回報表單。
+          li 若您想支持本站繼續運作，歡迎#{link_to '捐款支持', 'http://2015.jrf.org.tw', target: '_blank', class: 'license-link'}。
           li 會務洽詢 TEL：#{link_to '02-2523-1178', 'tel:0225231178'}
           li 傳真 FAX：#{link_to '02-2531-9373', 'fax:0225319373'}
           li 會務洽詢 Email：#{mail_to 'contact@jrf.org.tw', 'contact@jrf.org.tw'}
           li 案件申訴 TEL：#{link_to '02-2542-1958', 'tel:0225421958'}
           li （週一~週五 14:00~17:30，來會須先電話預約）
           li 案件申訴 Email：#{mail_to 'case@jrf.org.tw', 'case@jrf.org.tw'}
-          li 若本網站資料有任何錯誤或侵權之內容，敬請#{link_to '回報', 'https://jrf.neticrm.tw/civicrm/profile/create?gid=49&reset=1', target: '_blank'}。
           li.hide-from-pad
             small.copy
               | 本網站資料授權條款為
