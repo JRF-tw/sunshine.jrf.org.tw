@@ -19,6 +19,10 @@ section.hero--profile[
 
     .hero--profile__profile
       ul.list--profile
+        - if @profile.is_active
+          li.cell= "在職"
+        - else
+          li.cell= "不在職"
         - if @profile.gender.present?
           li.cell= "性別：#{@profile.gender}"
         - if @profile.birth_year.present?
