@@ -1,6 +1,5 @@
 = f.input :name
-- if !f.object.new_record?
-  = f.input :current_court, input_html: { disabled: true }
+= f.input :current_court
 = f.input :current, as: :select, collection: Admin::Profile::CURRENT_TYPES, include_blank: "請選擇"
 - if f.object.avatar?
   .control-group
