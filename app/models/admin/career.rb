@@ -37,6 +37,7 @@ class Admin::Career < ::Career
   private
 
   def update_profile_current_court
-   	profile.update_column :current_court, new_unit if new_unit
+    newest_career = profile.careers.order_by_publish_at.first
+    profile.update_column :current_court, new_unit if (is_hidden == false) && new_unit.present? && (newest_career == self)
   end 
 end

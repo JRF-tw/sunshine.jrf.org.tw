@@ -41,12 +41,4 @@ RSpec.describe Career, type: :model do
     profile.destroy
     expect(Career.count).to be_zero
   end
-
-  it "after_save :update_profile_current_court" do
-    profile = FactoryGirl.create :profile
-    career = Admin::Career.create profile_id: profile.id, career_type: 'aa', publish_at: Date.today
-    expect(profile.reload.current_court).to be_nil
-    career.update_attributes new_unit: 'foobar'
-    expect(profile.reload.current_court).to eq('foobar')
-  end
 end

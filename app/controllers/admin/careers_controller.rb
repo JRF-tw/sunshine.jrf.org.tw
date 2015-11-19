@@ -5,7 +5,7 @@ class Admin::CareersController < Admin::BaseController
   before_action(except: [:index]){ add_crumb("#{@profile.name}的職務經歷列表", admin_profile_careers_path(@profile)) }
 
   def index
-    @careers = @profile.careers.all.newest.page(params[:page]).per(10)
+    @careers = @profile.careers.all.order_by_publish_at.page(params[:page]).per(10)
     @admin_page_title = "#{@profile.name}的職務經歷列表"
     add_crumb @admin_page_title, "#"
   end
