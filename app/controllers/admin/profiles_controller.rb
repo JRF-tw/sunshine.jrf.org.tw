@@ -27,7 +27,7 @@ class Admin::ProfilesController < Admin::BaseController
   def create
     if profile.save
         respond_to do |f|
-          f.html { redirect_to admin_profiles_path, flash: { success: "個人檔案 - #{profile.name} 已新增" } }
+          f.html { redirect_to admin_profile_path(profile), flash: { success: "個人檔案 - #{profile.name} 已新增" } }
           f.js { render }
         end
     else
@@ -45,7 +45,7 @@ class Admin::ProfilesController < Admin::BaseController
 
   def update
     if profile.update_attributes(profile_params)
-      redirect_to admin_profiles_path, flash: { success: "個人檔案 - #{profile.name} 已修改" }
+      redirect_to admin_profile_path(profile), flash: { success: "個人檔案 - #{profile.name} 已修改" }
     else
       @admin_page_title = "編輯個人檔案 - #{profile.name}"
       add_crumb @admin_page_title, "#"
