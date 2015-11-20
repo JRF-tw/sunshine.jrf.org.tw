@@ -13,3 +13,5 @@
 
 # Pull compiled from /public/assets/javascripts
 #= require global
+
+#= require gtm
