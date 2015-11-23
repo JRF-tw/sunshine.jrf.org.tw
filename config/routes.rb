@@ -24,7 +24,6 @@ Rails.application.routes.draw do
   resources :profiles do
     resources :awards
     resources :punishments
-    resources :reviews
   end
 
   namespace :admin do

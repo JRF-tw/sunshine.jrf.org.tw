@@ -4,20 +4,20 @@ article
   - if @punishment.summary.present?
     section.section-rhythm.bg-yellow
       .container--narrow
-        h2.section-heading--black.text-center 懲戒摘要
+        h2.section-heading--black.text-center 摘要
         p= @punishment.summary
 
   section.section-rhythm
     .container--narrow
-      h2.section-heading--gray.text-center 懲戒詳情
+      h2.section-heading--gray.text-center 詳情
 
       ul.list--punishment-detail
         - if @punishment.decision_source.present?
           li = link_to "資料來源", @punishment.decision_source, target: 'blank', class: 'link'
         - if @punishment.unit.present?
-          li= "懲戒時當事者之服務機關：#{@punishment.unit}"
+          li= "決議時當事者之服務機關：#{@punishment.unit}"
         - if @punishment.title.present?
-          li= "懲戒時當事者之職稱：#{@punishment.title}"
+          li= "決議時當事者之職稱：#{@punishment.title}"
       
       dl.kv-punishment
         - render_punishment_cell(@punishment).each do |k, v|

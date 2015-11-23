@@ -8,7 +8,7 @@ section.section-rhythm.bg-yellow
       - else
         p 目前無獎勵紀錄
 
-    = render layout: 'components/feature_card', locals: {heading: '懲處相關紀錄'} do
+    = render layout: 'components/feature_card', locals: {heading: '懲處與其他相關紀錄'} do
       - if @newest_punishments.present?
         = render partial: 'components/list_related_punishments', locals: { newest_punishments: @newest_punishments }
         .text-center
@@ -17,9 +17,5 @@ section.section-rhythm.bg-yellow
         | 目前無懲處紀錄
     
     = render layout: 'components/feature_card', locals: {heading: '相關新聞評論'} do
-      - if @newest_reviews.present?
-        = render 'components/list_related_reviews', locals: { newest_reviews: @newest_reviews }
-        .text-center
-          = link_to '看更多', profile_reviews_path(@profile), class: 'button--brown'
-      - else
-        | 目前無新聞評論紀錄
+      .text-center
+        = link_to 'Google相關新聞', "https://www.google.com.tw/search?q=#{@profile.name}+#{@profile.current}&hl=zh-TW&tbm=nws", class: 'button--brown', target: '_blank'
