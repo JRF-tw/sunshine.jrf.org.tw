@@ -18,4 +18,4 @@ section.section-rhythm.bg-yellow
     
     = render layout: 'components/feature_card', locals: {heading: '相關新聞評論'} do
       .text-center
-        = link_to 'Google相關新聞', "https://www.google.com.tw/search?q=#{@profile.name}+#{@profile.current}&hl=zh-TW&tbm=nws", class: 'button--brown', target: '_blank'
+        = link_to 'Google相關新聞', "https://www.google.com.tw/search?q=\"#{@profile.name}\"+\"#{@profile.current}\"&hl=zh-TW&tbm=nws", class: 'button--brown', target: '_blank'
