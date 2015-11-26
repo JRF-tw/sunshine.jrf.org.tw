@@ -30,11 +30,11 @@ class Api::ProfilesController < BaseController
     ransack_params[:name_cont] = params[:query] if params[:query]
     if ransack_params.blank?
       @profiles = Profile.includes(:punishments, :awards, :careers, :educations, :licenses).judges.shown.offset(params[:offset]).limit(limit)
-      @profiles_count = Profile.count
+      @profiles_count = Profile.judges.shown.count
     else
       @profiles = Profile.includes(:punishments, :awards, :careers, :educations, :licenses).judges.shown.ransack(ransack_params).result(distinct: true)
         .offset(params[:offset]).limit(limit)
-      @profiles_count = Profile.ransack(ransack_params).result(distinct: true).count
+      @profiles_count = Profile.ransack(ransack_params).result(distinct: true).judges.shown.count
     end
     respond_with(@profiles, @profiles_count)
   end
