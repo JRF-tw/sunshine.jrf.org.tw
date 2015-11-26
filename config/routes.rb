@@ -14,7 +14,6 @@ Rails.application.routes.draw do
     collection do
       get :judges
       get :prosecutors
-      get :suits
     end
   end
   get "about", to: "base#about", as: :about
@@ -24,6 +23,15 @@ Rails.application.routes.draw do
   resources :profiles do
     resources :awards
     resources :punishments
+  end
+
+  namespace :api, defaults: { format: 'json' } do
+    resources :profiles, only: [:show, :index] do
+      collection do
+        get :judges
+        get :prosecutors
+      end
+    end
   end
 
   namespace :admin do
