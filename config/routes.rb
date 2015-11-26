@@ -26,12 +26,9 @@ Rails.application.routes.draw do
   end
 
   namespace :api, defaults: { format: 'json' } do
-    resources :profiles, only: [:show, :index] do
-      collection do
-        get :judges
-        get :prosecutors
-      end
-    end
+    resources :profiles, only: [:show, :index]
+    get "judges", to: "profiles#judges", as: :judges
+    get "prosecutors", to: "profiles#prosecutors", as: :prosecutors
   end
 
   namespace :admin do
