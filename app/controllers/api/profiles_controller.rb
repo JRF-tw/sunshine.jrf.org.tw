@@ -6,6 +6,7 @@ class Api::ProfilesController < BaseController
     limit = params[:limit].blank? ? 10 : params[:limit]
     ransack_params = {}
     ransack_params[:name_cont] = params[:query] if params[:query]
+    ransack_params[:current_court_cont] = params[:court] if params[:court]
     if ransack_params.blank?
       @profiles = Profile.includes(:punishments, :awards, :careers, :educations, :licenses).shown.order_by_name.offset(params[:offset]).limit(limit)
       @profiles_count = Profile.shown.count
@@ -28,6 +29,7 @@ class Api::ProfilesController < BaseController
     limit = params[:limit].blank? ? 10 : params[:limit]
     ransack_params = {}
     ransack_params[:name_cont] = params[:query] if params[:query]
+    ransack_params[:current_court_cont] = params[:court] if params[:court]
     if ransack_params.blank?
       @profiles = Profile.includes(:punishments, :awards, :careers, :educations, :licenses).judges.shown.order_by_name.offset(params[:offset]).limit(limit)
       @profiles_count = Profile.judges.shown.count
@@ -43,6 +45,7 @@ class Api::ProfilesController < BaseController
     limit = params[:limit].blank? ? 10 : params[:limit]
     ransack_params = {}
     ransack_params[:name_cont] = params[:query] if params[:query]
+    ransack_params[:current_court_cont] = params[:court] if params[:court]
     if ransack_params.blank?
       @profiles = Profile.includes(:punishments, :awards, :careers, :educations, :licenses).prosecutors.shown.order_by_name.offset(params[:offset]).limit(limit)
       @profiles_count = Profile.prosecutors.shown.count

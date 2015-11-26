@@ -2,7 +2,7 @@ object @profiles
 node(:count) { |_| @profiles_count }
 child(:@profiles) do
   attributes :id, :name, :current, :gender, :gender_source, :birth_year, :birth_year_source, :stage, :stage_source
-  attributes :appointment, :appointment_source, :memo, :current_court
+  attributes :appointment, :appointment_source, :memo, :current_court, :current_department, :current_branch
   attributes avatar_url: :avatar
   node(:profile_url) { |u| "/api/profiles/#{u.id}.json" }
   child(:educations) do

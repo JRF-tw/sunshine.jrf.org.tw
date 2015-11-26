@@ -1,7 +1,7 @@
 object @profile
 child(:@profile) do
   attributes :id, :name, :current, :gender, :gender_source, :birth_year, :birth_year_source, :stage, :stage_source
-  attributes :appointment, :appointment_source, :memo, :current_court
+  attributes :appointment, :appointment_source, :memo, :current_court, :current_department, :current_branch
   attributes avatar_url: :avatar
   child(:educations) do
     attributes :id, :title, :content, :start_at, :end_at, :source, :memo

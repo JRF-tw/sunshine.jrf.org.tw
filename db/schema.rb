@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151116091324) do
+ActiveRecord::Schema.define(version: 20151126070845) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -244,6 +244,8 @@ ActiveRecord::Schema.define(version: 20151116091324) do
     t.boolean  "is_active"
     t.boolean  "is_hidden"
     t.integer  "punishments_count",  default: 0
+    t.string   "current_department"
+    t.string   "current_branch"
   end
 
   add_index "profiles", ["current"], :name => "index_profiles_on_current"
