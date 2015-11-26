@@ -304,6 +304,10 @@ GEM
     pry-remote (0.1.8)
       pry (~> 0.9)
       slop (~> 3.0)
+    rabl-rails (0.4.1)
+      activesupport (>= 3.1)
+      railties (>= 3.1)
+      thread_safe (~> 0.3.1)
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
@@ -507,6 +511,7 @@ DEPENDENCIES
   pry
   pry-rails
   pry-remote
+  rabl-rails
   rails (= 4.1.10)
   ransack
   redactor-rails

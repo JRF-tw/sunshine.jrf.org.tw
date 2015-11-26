@@ -45,6 +45,9 @@ gem 'carrierwave_backgrounder'
 # editor
 gem 'redactor-rails'
 
+# api
+gem 'rabl-rails'
+
 # soft delete
 # gem 'paranoia'
 
