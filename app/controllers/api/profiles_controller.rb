@@ -1,4 +1,7 @@
 class Api::ProfilesController < BaseController
+
+  respond_to :json
+
   def index
     limit = params[:limit].blank? ? 10 : params[:limit]
     ransack_params = {}
@@ -16,6 +19,9 @@ class Api::ProfilesController < BaseController
 
   def show
     @profile = Profile.find(params[:id])
+    if @profile.is_hidden?
+      not_found
+    end
   end
 
   def judges

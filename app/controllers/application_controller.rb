@@ -22,4 +22,8 @@ class ApplicationController < ActionController::Base
   def layout_by_resource
     "admin" if devise_controller?
   end
+
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
+  end
 end

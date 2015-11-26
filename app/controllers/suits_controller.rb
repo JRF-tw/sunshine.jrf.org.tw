@@ -12,6 +12,9 @@ class SuitsController < BaseController
 
   def show
     @suit = Suit.find(params[:id])
+    if @suit.is_hidden?
+      not_found
+    end
     @related_judges = @suit.judges
     @related_prosecutors = @suit.prosecutors
     @procedures = @suit.procedures.shown.sort_by_procedure_date

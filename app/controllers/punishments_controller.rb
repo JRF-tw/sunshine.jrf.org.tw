@@ -13,6 +13,9 @@ class PunishmentsController < BaseController
 
   def show
   	@punishment = @profile.punishments.find(params[:id])
+    if @punishment.is_hidden?
+      not_found
+    end
     set_meta(
       title: "#{@profile.name}的懲處紀錄內容",
       description: "#{@profile.name}懲處內容。",
@@ -25,6 +28,9 @@ class PunishmentsController < BaseController
 
   def get_instances
   	@profile = Profile.find(params[:profile_id])
+    if @profile.is_hidden?
+      not_found
+    end
     @punishments = @profile.punishments.shown.order_by_relevant_date
     @newest_award = @profile.awards.shown.order_by_publish_at.first
     @newest_punishments = @punishments.shown.first(3)
