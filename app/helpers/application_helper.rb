@@ -55,6 +55,8 @@ module ApplicationHelper
   def render_punishment_decision_unit(punishment)
     if ["監察院(新)", "監察院(舊)"].include? punishment.decision_unit
       "監察院"
+    elsif punishment.decision_unit == "公務人員保障暨培訓委員會"
+      "保訓會"
     else
       punishment.decision_unit
     end
@@ -79,7 +81,7 @@ module ApplicationHelper
         "字    號": punishment.punish_no.present? ? punishment.punish_no : nil,
         "結    果": punishment.punish.present? ? punishment.punish : nil
       }
-    elsif punishment.decision_unit == ("監察院(新)" || "監察院")
+    elsif ["監察院(新)", "監察院"].include?(punishment.decision_unit)
       hash = {
         "議決日期": punishment.relevant_date.present? ? punishment.relevant_date : nil,
         "決定機關": "監察院",
@@ -119,6 +121,13 @@ module ApplicationHelper
         "會議名稱": punishment.decision_no.present? ? punishment.decision_no : nil,
         "字    號": punishment.punish_no.present? ? punishment.punish_no : nil,
         "種    類": punishment.punish_type.present? ? punishment.punish_type : nil,
+        "結    果": punishment.punish.present? ? punishment.punish : nil
+      }
+    elsif punishment.decision_unit == "公務人員保障暨培訓委員會"
+      hash = {
+        "決定日期": punishment.relevant_date.present? ? punishment.relevant_date : nil,
+        "字    號": punishment.punish_no.present? ? punishment.punish_no : nil,
+        "決    議": punishment.decision_result.present? ? punishment.decision_result : nil,
         "結    果": punishment.punish.present? ? punishment.punish : nil
       }
     end
@@ -163,5 +172,4 @@ module ApplicationHelper
     end
     return arr.join(" ")
   end
-
 end
