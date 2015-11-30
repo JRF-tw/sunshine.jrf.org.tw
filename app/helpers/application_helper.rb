@@ -126,6 +126,7 @@ module ApplicationHelper
     elsif punishment.decision_unit == "公務人員保障暨培訓委員會"
       hash = {
         "決定日期": punishment.relevant_date.present? ? punishment.relevant_date : nil,
+        "決定機關": punishment.decision_unit.present? ? punishment.decision_unit : nil,
         "字    號": punishment.punish_no.present? ? punishment.punish_no : nil,
         "決    議": punishment.decision_result.present? ? punishment.decision_result : nil,
         "結    果": punishment.punish.present? ? punishment.punish : nil
