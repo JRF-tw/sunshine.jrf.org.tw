@@ -40,7 +40,7 @@
           th 名稱
           th 現職
           th 性別
-          th 司訓所期別
+          th 任職地點
           th 是否在職
           th 是否在前端隱藏
           th 備註
@@ -52,7 +52,7 @@
             td= profile.name
             td= profile.current
             td= profile.gender
-            td= profile.stage
+            td= profile.current_court
             td= profile.is_active? ? "在職" : "-"
             td= profile.is_hidden? ? "隱藏" : "-"
             td= profile.memo

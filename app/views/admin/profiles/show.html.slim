@@ -22,6 +22,12 @@
         td 現職
         td= "#{@profile.current_court} #{@profile.current}"
       tr
+        td 庭別
+        td= @profile.current_department
+      tr
+        td 股別
+        td= @profile.current_branch
+      tr
         td 頭像
         td
           = image_tag @profile.avatar.L_180 if @profile.avatar.present?

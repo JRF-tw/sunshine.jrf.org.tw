@@ -26,6 +26,8 @@ zh-TW:
         name: "姓名"
         current: "現職"
         current_court: "現職法院 / 檢察署"
+        current_department: "庭別"
+        current_branch: "股別"
         remove_avatar: "移除現有頭像"
         avatar: "頭像"
         gender: "性別"

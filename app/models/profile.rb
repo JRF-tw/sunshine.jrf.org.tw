@@ -21,6 +21,8 @@
 #  is_active          :boolean
 #  is_hidden          :boolean
 #  punishments_count  :integer          default(0)
+#  current_department :string(255)
+#  current_branch     :string(255)
 #
 
 class Profile < ActiveRecord::Base
