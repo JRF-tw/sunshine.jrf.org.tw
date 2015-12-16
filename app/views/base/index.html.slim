@@ -9,6 +9,7 @@ section.base-hero
           li = link_to '認識檢察官', prosecutors_path, class: 'base-nav__cell'
           li = link_to '我想找', searchs_path, class: 'base-nav__cell'
           li = link_to '關於我們', about_path, class: 'base-nav__cell'
+          li = link_to '回報錯誤', 'https://jrf.neticrm.tw/civicrm/profile/create?gid=49&reset=1', target: '_blank', class: 'base-nav__cell'
 
   #hero-carousel.hero-carousel
     - @banners.each do |banner|
