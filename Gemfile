@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-gem 'rails', '4.1.10'
+gem 'rails', '4.2.5.1'
 
 # DB
 gem 'pg'
