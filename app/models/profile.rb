@@ -67,6 +67,10 @@ class Profile < ActiveRecord::Base
       where(current: "檢察官")
     end
 
+    def justices
+      where(current: "大法官")
+    end
+
     def find_current_court(type)
       return where(current_court: type) if type.present? && (Court.where(full_name: type).count > 0)
       all

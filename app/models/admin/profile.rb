@@ -45,6 +45,7 @@ class Admin::Profile < ::Profile
   CURRENT_TYPES = [
     "法官",
     "檢察官",
+    "大法官",
     "其他"
   ]
 
