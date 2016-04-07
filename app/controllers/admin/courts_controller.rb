@@ -18,7 +18,8 @@ class Admin::CourtsController < Admin::BaseController
   before_action(except: [:index]){ add_crumb("法院 / 檢察署列表", admin_courts_path) }
 
   def index
-    @courts = Court.all.newest.page(params[:page]).per(20)
+    @search = Court.all.newest.ransack(params[:q])
+    @courts = @search.result.page(params[:page]).per(20)
     @admin_page_title = "法院 / 檢察署列表"
     add_crumb @admin_page_title, "#"
   end
