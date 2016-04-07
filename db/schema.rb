@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160407033138) do
+ActiveRecord::Schema.define(version: 20160407033533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -372,6 +372,20 @@ ActiveRecord::Schema.define(version: 20160407033138) do
 
   add_index "reviews", ["is_hidden"], name: "index_reviews_on_is_hidden", using: :btree
   add_index "reviews", ["profile_id"], name: "index_reviews_on_profile_id", using: :btree
+
+  create_table "schedules", force: :cascade do |t|
+    t.integer  "story_id"
+    t.integer  "court_id"
+    t.integer  "branch_name"
+    t.date     "date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "schedules", ["court_id"], name: "index_schedules_on_court_id", using: :btree
+  add_index "schedules", ["date"], name: "index_schedules_on_date", using: :btree
+  add_index "schedules", ["story_id", "court_id"], name: "index_schedules_on_story_id_and_court_id", using: :btree
+  add_index "schedules", ["story_id"], name: "index_schedules_on_story_id", using: :btree
 
   create_table "stories", force: :cascade do |t|
     t.integer  "court_id"
