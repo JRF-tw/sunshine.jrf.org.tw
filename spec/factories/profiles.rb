@@ -3,24 +3,26 @@
 # Table name: profiles
 #
 #  id                 :integer          not null, primary key
-#  name               :string(255)
-#  current            :string(255)
-#  avatar             :string(255)
-#  gender             :string(255)
-#  gender_source      :string(255)
+#  name               :string
+#  current            :string
+#  avatar             :string
+#  gender             :string
+#  gender_source      :text
 #  birth_year         :integer
-#  birth_year_source  :string(255)
+#  birth_year_source  :text
 #  stage              :integer
-#  stage_source       :string(255)
-#  appointment        :string(255)
-#  appointment_source :string(255)
+#  stage_source       :text
+#  appointment        :string
+#  appointment_source :text
 #  memo               :text
 #  created_at         :datetime
 #  updated_at         :datetime
-#  current_court      :string(255)
+#  current_court      :string
 #  is_active          :boolean
 #  is_hidden          :boolean
 #  punishments_count  :integer          default(0)
+#  current_department :string
+#  current_branch     :string
 #
 
 FactoryGirl.define do

@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: courts
+#
+#  id         :integer          not null, primary key
+#  court_type :string
+#  full_name  :string
+#  name       :string
+#  weight     :integer
+#  created_at :datetime
+#  updated_at :datetime
+#  is_hidden  :boolean
+#  code       :string
+#
+
 class Admin::CourtsController < Admin::BaseController
   before_action :court
   before_action(except: [:index]){ add_crumb("法院 / 檢察署列表", admin_courts_path) }

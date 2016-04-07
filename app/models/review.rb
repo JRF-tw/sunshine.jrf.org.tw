@@ -5,13 +5,13 @@
 #  id         :integer          not null, primary key
 #  profile_id :integer
 #  publish_at :date
-#  name       :string(255)
-#  title      :string(255)
+#  name       :string
+#  title      :string
 #  content    :text
 #  comment    :text
-#  no         :string(255)
-#  source     :string(255)
-#  file       :string(255)
+#  no         :string
+#  source     :text
+#  file       :string
 #  memo       :text
 #  created_at :datetime
 #  updated_at :datetime

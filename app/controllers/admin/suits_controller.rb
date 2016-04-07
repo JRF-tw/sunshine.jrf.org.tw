@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: suits
+#
+#  id              :integer          not null, primary key
+#  title           :string
+#  summary         :text
+#  content         :text
+#  state           :string
+#  pic             :string
+#  suit_no         :integer
+#  keyword         :string
+#  created_at      :datetime
+#  updated_at      :datetime
+#  is_hidden       :boolean
+#  procedure_count :integer          default(0)
+#
+
 class Admin::SuitsController < Admin::BaseController
   before_action :suit
   before_action(except: [:index]){ add_crumb("評鑑資料-案例列表", admin_suits_path) }
