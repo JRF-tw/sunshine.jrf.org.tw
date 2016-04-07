@@ -10,6 +10,7 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  is_hidden  :boolean
+#  code       :string
 #
 
 class Court < ActiveRecord::Base

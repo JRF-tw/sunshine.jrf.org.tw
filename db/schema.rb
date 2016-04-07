@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160406085409) do
+ActiveRecord::Schema.define(version: 20160407024648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,8 +112,10 @@ ActiveRecord::Schema.define(version: 20160406085409) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_hidden"
+    t.string   "code"
   end
 
+  add_index "courts", ["code"], name: "index_courts_on_code", using: :btree
   add_index "courts", ["court_type"], name: "index_courts_on_court_type", using: :btree
   add_index "courts", ["full_name"], name: "index_courts_on_full_name", using: :btree
   add_index "courts", ["is_hidden"], name: "index_courts_on_is_hidden", using: :btree
