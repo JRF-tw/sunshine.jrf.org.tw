@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160407034153) do
+ActiveRecord::Schema.define(version: 20160407034612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -231,6 +231,17 @@ ActiveRecord::Schema.define(version: 20160407034153) do
   add_index "judgments", ["is_hidden"], name: "index_judgments_on_is_hidden", using: :btree
   add_index "judgments", ["judge_no"], name: "index_judgments_on_judge_no", using: :btree
   add_index "judgments", ["main_judge_id"], name: "index_judgments_on_main_judge_id", using: :btree
+
+  create_table "lawyer_stories", force: :cascade do |t|
+    t.integer  "story_id"
+    t.integer  "lawyer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "lawyer_stories", ["lawyer_id"], name: "index_lawyer_stories_on_lawyer_id", using: :btree
+  add_index "lawyer_stories", ["story_id", "lawyer_id"], name: "index_lawyer_stories_on_story_id_and_lawyer_id", using: :btree
+  add_index "lawyer_stories", ["story_id"], name: "index_lawyer_stories_on_story_id", using: :btree
 
   create_table "lawyers", force: :cascade do |t|
     t.string   "name"
