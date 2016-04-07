@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160407033533) do
+ActiveRecord::Schema.define(version: 20160407034153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -231,6 +231,17 @@ ActiveRecord::Schema.define(version: 20160407033533) do
   add_index "judgments", ["is_hidden"], name: "index_judgments_on_is_hidden", using: :btree
   add_index "judgments", ["judge_no"], name: "index_judgments_on_judge_no", using: :btree
   add_index "judgments", ["main_judge_id"], name: "index_judgments_on_main_judge_id", using: :btree
+
+  create_table "lawyers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "current"
+    t.string   "avatar"
+    t.string   "gender"
+    t.integer  "birth_year"
+    t.string   "memo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "licenses", force: :cascade do |t|
     t.integer  "profile_id"
