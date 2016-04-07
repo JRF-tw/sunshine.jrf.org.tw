@@ -14,4 +14,6 @@
 #
 
 class Story < ActiveRecord::Base
+  has_many :judge_stories
+  has_many :judges, through: :judge_stories
 end

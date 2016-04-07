@@ -23,5 +23,8 @@
 #
 
 class Judge < ActiveRecord::Base
+  has_many :judge_stories
+  has_many :stories, through: :judge_stories
+
   mount_uploader :avatar, ProfileAvatarUploader
 end
