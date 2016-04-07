@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160407024648) do
+ActiveRecord::Schema.define(version: 20160407025016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,19 @@ ActiveRecord::Schema.define(version: 20160407024648) do
   end
 
   add_index "banners", ["is_hidden"], name: "index_banners_on_is_hidden", using: :btree
+
+  create_table "branches", force: :cascade do |t|
+    t.integer  "court_id"
+    t.integer  "judge_id"
+    t.string   "name"
+    t.string   "chamber_name"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "branches", ["court_id", "judge_id"], name: "index_branches_on_court_id_and_judge_id", using: :btree
+  add_index "branches", ["court_id"], name: "index_branches_on_court_id", using: :btree
+  add_index "branches", ["judge_id"], name: "index_branches_on_judge_id", using: :btree
 
   create_table "careers", force: :cascade do |t|
     t.integer  "profile_id"
