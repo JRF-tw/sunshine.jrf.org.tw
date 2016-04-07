@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: educations
+#
+#  id         :integer          not null, primary key
+#  profile_id :integer
+#  title      :string
+#  content    :text
+#  start_at   :date
+#  end_at     :date
+#  source     :text
+#  memo       :text
+#  created_at :datetime
+#  updated_at :datetime
+#  is_hidden  :boolean
+#
+
 class Admin::EducationsController < Admin::BaseController
   before_action :education
   before_action{ add_crumb("個人檔案列表", admin_profiles_path) }
