@@ -5,7 +5,7 @@
 #  id            :integer          not null, primary key
 #  court_id      :integer
 #  main_judge_id :integer
-#  type          :string
+#  story_type    :string
 #  year          :integer
 #  word_type     :string
 #  number        :integer
@@ -18,4 +18,6 @@ class Story < ActiveRecord::Base
   has_many :judges, through: :judge_stories
   has_many :lawyer_stories
   has_many :lawyer, through: :lawyer_stories
+  belongs_to :court
+  has_many :schedules
 end
