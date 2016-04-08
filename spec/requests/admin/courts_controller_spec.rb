@@ -20,7 +20,7 @@ RSpec.describe Admin::CourtsController do
     end  
   end  
   describe "already had a court" do
-    let(:court){ FactoryGirl.create :court }
+    let!(:court){ FactoryGirl.create :court }
 
     it "GET /admin/courts" do
       get "/admin/courts"
@@ -43,10 +43,9 @@ RSpec.describe Admin::CourtsController do
       }.to change{ court.reload.name }.to("haha")
       expect(response).to be_redirect
     end
-
+  
     it "DELETE /admin/courts/123" do
-      delete "/admin/courts/#{court.id}"
-      expect(Court.count).to be_zero
+      expect{ delete "/admin/courts/#{court.id}" }.to change{ Court.count }.by(-1)   
     end
   end
 
