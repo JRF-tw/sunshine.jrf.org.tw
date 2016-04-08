@@ -65,7 +65,8 @@ class Admin::CourtsController < Admin::BaseController
   end
 
   def destroy
-    if court.destroy
+    context = CourtDeleteContext.new(@court)
+    if context.perform
       redirect_to admin_courts_path, flash: { success: "法院 / 檢察署 - #{court.name} 已刪除" }
     else
       flash[:error] = court.errors.full_messages
