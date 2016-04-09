@@ -218,3 +218,4 @@ zh-TW:
       court:
         court_type_eq: "類型"
         full_name_cont: "全名包含"
+        name_cont: "前台顯示簡稱包含"

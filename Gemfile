@@ -79,13 +79,13 @@ group :development do
   gem 'spring'
   gem 'venus', git: "git@github.com:marsz/venus.git", branch: 'v1.0'
   gem 'rename'
+  gem 'byebug'
 end
 
 group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
-  gem 'byebug'
 end
 
 group :test do

@@ -14,7 +14,7 @@
 #
 
 class Admin::CourtsController < Admin::BaseController
-  before_action :find_court
+  before_action :court
   before_action(except: [:index]){ add_crumb("法院 / 檢察署列表", admin_courts_path) }
 
   def index
@@ -25,13 +25,12 @@ class Admin::CourtsController < Admin::BaseController
   end
 
   def new
-    @court ||= Admin::Court.new 
     @admin_page_title = "新增法院 / 檢察署"
     add_crumb @admin_page_title, "#"
   end
 
   def edit
-    @admin_page_title = "編輯法院 / 檢察署 - #{@court.name}"
+    @admin_page_title = "編輯法院 / 檢察署 - #{court.name}"
     add_crumb @admin_page_title, "#"
   end
 
@@ -39,7 +38,7 @@ class Admin::CourtsController < Admin::BaseController
     context = CourtCreateContext.new(params)
     if @court = context.perform
         respond_to do |f|
-          f.html { redirect_as_success(admin_courts_path, "法院 / 檢察署 - #{@court.name} 已新增") }
+          f.html { redirect_as_success(admin_courts_path, "法院 / 檢察署 - #{court.name} 已新增") }
           f.js { render }
         end
     else
@@ -57,9 +56,9 @@ class Admin::CourtsController < Admin::BaseController
   def update
     context = CourtUpdateContext.new(@court)
     if context.perform(params)
-      redirect_as_success(admin_courts_path, "法院 / 檢察署 - #{@court.name} 已修改")
+      redirect_as_success(admin_courts_path, "法院 / 檢察署 - #{court.name} 已修改")
     else
-      @admin_page_title = "編輯法院 / 檢察署 - #{@court.name}"
+      @admin_page_title = "編輯法院 / 檢察署 - #{court.name}"
       add_crumb @admin_page_title, "#"
       render_as_fail(:edit, context.error_messages) 
     end
@@ -68,7 +67,7 @@ class Admin::CourtsController < Admin::BaseController
   def destroy
     context = CourtDeleteContext.new(@court)
     if context.perform
-      redirect_as_success(admin_courts_path, "法院 / 檢察署 - #{@court.name} 已刪除")
+      redirect_as_success(admin_courts_path, "法院 / 檢察署 - #{court.name} 已刪除")
     else
       redirect_to :back, flash: { error: context.error_messages.join(", ") }
     end
@@ -76,8 +75,8 @@ class Admin::CourtsController < Admin::BaseController
 
   private
 
-  def find_court
-    @court ||=  Admin::Court.find(params[:id]) if params[:id]
+  def court
+    @court ||= params[:id] ? Admin::Court.find(params[:id]) : Admin::Court.new
   end
   
 end

@@ -8,10 +8,16 @@
             label.control-label= f.label :court_type_eq
             .controls= f.select :court_type_eq,
             Admin::Court::COURT_TYPES, include_blank: "請選擇"
+      .row  
         .span6
           .control-group
             label.control-label= f.label :full_name_cont
             .controls= f.search_field :full_name_cont
+    
+        .span6
+          .control-group
+            label.control-label= f.label :name_cont
+            .controls= f.search_field :name_cont    
     hr
     .form-actions
       = f.submit :value => "搜尋", :class => "btn btn-primary"

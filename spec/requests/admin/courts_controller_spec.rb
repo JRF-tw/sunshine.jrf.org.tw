@@ -4,21 +4,26 @@ RSpec.describe Admin::CourtsController do
   before{ signin_user }
   
   describe "#index" do
-    context "search" do
-      court1 = FactoryGirl.create :court, court_type: "法院", full_name: "台北第一法院", name: "台北第一"
-      court2 = FactoryGirl.create :court, court_type: "檢察署", full_name: "台南第一法院", name: "台北第一"
+    let!(:court1){ FactoryGirl.create :court, court_type: "法院", full_name: "台北第一法院", name: "台北第一" }
+    let!(:court2){ FactoryGirl.create :court, court_type: "檢察署", full_name: "台南第一法院", name: "台北第一" }
 
-      it "search the type of courts " do
-        get "/admin/courts", q: { court_type_eq: "法院" } 
+    context "search the type of courts" do
+      before { get "/admin/courts", q: { court_type_eq: "法院" } }
+      it {
+        expect(response.body).to match(court1.full_name)
         expect(assigns(:courts).first.id).to eq court1.id
-      end
+      }
+    end  
 
-      it "search the fullname of courts" do
-        get "/admin/courts", q: { full_name_cont: "台南第一法院" } 
+    context "search the fullname of courts" do
+      before { get "/admin/courts", q: { full_name_cont: "台南第一法院" } }
+      it {
+        expect(response.body).to match(court2.full_name)
         expect(assigns(:courts).first.id).to eq court2.id
-      end
+      }
     end  
   end  
+
   describe "already had a court" do
     let!(:court){ FactoryGirl.create :court }
 
@@ -44,9 +49,8 @@ RSpec.describe Admin::CourtsController do
       expect(response).to be_redirect
     end
   
-    it "DELETE /admin/courts/123" do
-      expect{ delete "/admin/courts/#{court.id}" }.to change{ Court.count }.by(-1)   
-    end
+    it { expect{ delete "/admin/courts/#{court.id}" }.to change{ Court.count }.by(-1) }
+       
   end
 
   it "POST /admin/courts" do

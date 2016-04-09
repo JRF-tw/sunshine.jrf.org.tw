@@ -10,10 +10,10 @@ class CourtCreateContext < BaseContext
   def perform
     run_callbacks :perform do
       if @court.save
-      	@court
+        @court
       else
-      	add_error(:data_create_fail, @court.errors.full_messages.join("\n"))
-      end	
+        add_error(:data_create_fail, @court.errors.full_messages.join("\n"))
+      end
     end
   end
 
@@ -21,5 +21,6 @@ class CourtCreateContext < BaseContext
 
   def build_court
   	@court = Admin::Court.new(@params)
-  end	
+  end
+
 end

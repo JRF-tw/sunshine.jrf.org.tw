@@ -10,8 +10,8 @@ class CourtUpdateContext < BaseContext
   def perform(params)
   	@params = permit_params(params[:admin_court] || params, PERMITS)
     run_callbacks :perform do
-      return @court if @court.save
-      add_error(:data_update_fail, @court.errors.full_message.join("\n"))
+      return add_error(:data_update_fail, @court.errors.full_messages.join("\n")) unless @court.save
+      true
     end	
   end
 
