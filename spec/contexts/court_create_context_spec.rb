@@ -12,5 +12,4 @@ require 'rails_helper'
       subject { described_class.new(params) }
       it { expect { subject.perform }.not_to change{ Court.count } }
     end
-  
-	end	
+  end	
