@@ -1,6 +1,5 @@
 class Scrap::ImportScheduleContext < BaseContext
   ## TODO  COURT_CODES slould collect court.code
-  COURT_CODES = ["TPH"]
   COURT_INFO_URI = "http://csdi.judicial.gov.tw/abbs/wkw/WHD3A01.jsp"
   SCHEDULE_INFO_URI = "http://csdi.judicial.gov.tw/abbs/wkw/WHD3A02.jsp"
   START_DATE = Time.zone.today
@@ -8,6 +7,7 @@ class Scrap::ImportScheduleContext < BaseContext
   START_DATE_FORMAT = "#{START_DATE.strftime("%Y").to_i - 1911}#{START_DATE.strftime('%m%d')}"
   END_DATE_FORMAT = "#{END_DATE.strftime("%Y").to_i - 1911}#{END_DATE.strftime('%m%d')}"
   SCRAP_TIME_SLEEP_INTERVEL = rand(1..2)
+  PAGE_PER = 15
 
   class << self
     def perform_all
@@ -28,7 +28,7 @@ class Scrap::ImportScheduleContext < BaseContext
 
     def get_courts_info
       courts_info = []
-      COURT_CODES.each do |court_code|
+      Court.all.map(&:code).compact.each do |court_code|
         story_types = get_story_types_by_court(court_code)
         story_types.each do |story_type|
           page_total = page_total_by_story_type(court_code, story_type)
@@ -49,7 +49,9 @@ class Scrap::ImportScheduleContext < BaseContext
       sql = "UPPER(CRTID)='#{court_code}' AND DUDT>='#{START_DATE_FORMAT}' AND DUDT<='#{END_DATE_FORMAT}' AND SYS='#{story_type}'  ORDER BY  DUDT,DUTM,CRMYY,CRMID,CRMNO"
       data = { sql_conction: sql }
       response_data = Mechanize.new.get(SCHEDULE_INFO_URI, data)
-      return response_data.form.field_with(name: "pageTotal").value.to_i
+      response_data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
+      total = response_data.css('table')[2].css('tr')[0].text.match(/\d+/)[0].to_i
+      return total / PAGE_PER + 1
     end
   end
 
@@ -73,6 +75,8 @@ class Scrap::ImportScheduleContext < BaseContext
   rescue => e
     puts "create error"
   end
+
+  private
 
   def scrap_schedule
     sql = "UPPER(CRTID)='#{@court_code}' AND DUDT>='#{START_DATE_FORMAT}' AND DUDT<='#{END_DATE_FORMAT}' AND SYS='#{@story_type}'  ORDER BY  DUDT,DUTM,CRMYY,CRMID,CRMNO"
