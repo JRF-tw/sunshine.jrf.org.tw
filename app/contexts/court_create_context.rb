@@ -4,7 +4,7 @@ class CourtCreateContext < BaseContext
   before_perform :build_court
 
   def initialize(params)
-  	@params = permit_params(params[:admin_court] || params, PERMITS)
+    @params = permit_params(params[:admin_court] || params, PERMITS)
   end
 
   def perform
@@ -20,7 +20,7 @@ class CourtCreateContext < BaseContext
   private
 
   def build_court
-  	@court = Admin::Court.new(@params)
+    @court = Admin::Court.new(@params)
   end
 
 end

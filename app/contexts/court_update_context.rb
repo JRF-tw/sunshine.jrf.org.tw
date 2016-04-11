@@ -4,11 +4,11 @@ class CourtUpdateContext < BaseContext
   before_perform :assign_value
 
   def initialize(court)
-  	@court = court
+    @court = court
   end
 
   def perform(params)
-  	@params = permit_params(params[:admin_court] || params, PERMITS)
+    @params = permit_params(params[:admin_court] || params, PERMITS)
     run_callbacks :perform do
       return add_error(:data_update_fail, @court.errors.full_messages.join("\n")) unless @court.save
       true
@@ -18,6 +18,6 @@ class CourtUpdateContext < BaseContext
   private
 
   def assign_value
-  	@court.assign_attributes @params
+    @court.assign_attributes @params
   end
 end	

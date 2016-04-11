@@ -1,7 +1,7 @@
 class CourtDeleteContext < BaseContext
 
   def initialize(court)
-  	@court = court
+    @court = court
   end
 
   def perform
