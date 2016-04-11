@@ -48,7 +48,7 @@ RSpec.describe Admin::CourtsController do
       it { expect(response).to be_redirect }
     end
 
-    context "delete" do
+    context "#delete" do
       it { expect{ delete "/admin/courts/#{court.id}" }.to change{ Court.count }.by(-1) }
     end   
   end
