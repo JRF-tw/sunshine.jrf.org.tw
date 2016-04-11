@@ -37,10 +37,10 @@ class Admin::CourtsController < Admin::BaseController
   def create
     context = CourtCreateContext.new(params)
     if @court = context.perform
-        respond_to do |f|
-          f.html { redirect_as_success(admin_courts_path, "法院 / 檢察署 - #{court.name} 已新增") }
-          f.js { render }
-        end
+      respond_to do |f|
+        f.html { redirect_as_success(admin_courts_path, "法院 / 檢察署 - #{court.name} 已新增") }
+        f.js { render }
+      end
     else
       respond_to do |f|
         f.html {

@@ -4,8 +4,8 @@ RSpec.describe Admin::CourtsController do
   before{ signin_user }
   
   describe "#index" do
-    let!(:court1){ FactoryGirl.create :court, court_type: "法院", full_name: "台北第一法院", name: "台北第一" }
-    let!(:court2){ FactoryGirl.create :court, court_type: "檢察署", full_name: "台南第一法院", name: "台北第一" }
+    let!(:court1) { FactoryGirl.create :court, court_type: "法院", full_name: "台北第一法院", name: "台北第一" }
+    let!(:court2) { FactoryGirl.create :court, court_type: "檢察署", full_name: "台南第一法院", name: "台北第一" }
 
     context "search the type of courts" do
       before { get "/admin/courts", q: { court_type_eq: "法院" } }
@@ -25,7 +25,7 @@ RSpec.describe Admin::CourtsController do
   end  
 
   describe "already had a court" do
-    let!(:court){ FactoryGirl.create :court }
+    let!(:court) { FactoryGirl.create :court }
 
     it "GET /admin/courts" do
       get "/admin/courts"
@@ -41,22 +41,21 @@ RSpec.describe Admin::CourtsController do
       get "/admin/courts/#{court.id}/edit"
       expect(response).to be_success
     end
-
-    it "PUT /admin/courts/123" do
-      expect{
-        put "/admin/courts/#{court.id}", admin_court: { name: "haha" }
-      }.to change{ court.reload.name }.to("haha")
-      expect(response).to be_redirect
+    
+    context "#update" do
+      subject { put "/admin/courts/#{court.id}", admin_court: { name: "haha" } }
+      it { expect{ subject }.to change{ court.reload.name }.to("haha") }
+      it { expect(response).to be_redirect }
     end
-  
-    it { expect{ delete "/admin/courts/#{court.id}" }.to change{ Court.count }.by(-1) }
-       
-  end
 
-  it "POST /admin/courts" do
-    expect{
-      post "/admin/courts", admin_court: FactoryGirl.attributes_for(:court)
-    }.to change{ Court.count }.by(1)
-    expect(response).to be_redirect
+    context "delete" do
+      it { expect{ delete "/admin/courts/#{court.id}" }.to change{ Court.count }.by(-1) }
+    end   
+  end
+  
+  describe "#create" do
+    subject { post "/admin/courts", admin_court: FactoryGirl.attributes_for(:court) }
+    it { expect{ subject }.to change{ Court.count }.by(1) }
+    it { expect(response).to be_redirect }
   end
 end

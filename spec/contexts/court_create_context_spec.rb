@@ -7,12 +7,10 @@ describe CourtCreateContext do
 	  subject { described_class.new(params) }
 	  it { expect { subject.perform }.to change { Court.count }.by(1) }
 	end  
-
-	context "fail" do
-	  context "aleady has the same nam" do 
-	    let!(:court){ FactoryGirl.create :court_for_params }
-	    subject { described_class.new(params) }
-	    it { expect { subject.perform }.to change{ Court.count }.by(0) }
-	  end
-	end
+	
+  context "aleady has the same name" do 
+    let!(:court){ FactoryGirl.create :court_for_params }
+    subject { described_class.new(params) }
+    it { expect { subject.perform }.not_to change{ Court.count } }
+  end
 end	
