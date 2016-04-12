@@ -1,0 +1,470 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+        <html>
+        <head>
+        <title>案件庭期查詢系統</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=MS950">
+        <style type="text/css">
+        <!--
+        @import "../image/css.css";
+        -->
+        </style>
+        </head>
+
+        <body text="#000000" bgcolor="#FFFFFF"  >
+        <form name="form">
+        <table width="90%" border="0" align="center" cellspacing="0" cellpadding="0">
+          <tr>
+              <td width="1%">&nbsp;</td>
+              <td width="98%">
+                <div align="center"></div>
+            </td>
+              <td width="1%">&nbsp;</td>
+          </tr>
+          <tr>
+              <td colspan="3">
+                <div align="center"><strong><font face="標楷體" color="#000080" >臺灣高等法院</font></strong></div></td>
+          </tr>
+          <tr>
+              <td width="1%">&nbsp;</td>
+              <td bgcolor="#FFFFFF" width="98%"> <img alt="" src="../image/line.gif" width="1" height="1"></td>
+              <td width="1%">&nbsp;</td>
+          </tr>
+          <tr>
+              <td width="1%" bgcolor="#FFFFFF">&nbsp;</td>
+              <td width="98%">
+                <table width="100%" border="1" cellspacing="0"  cellpadding="0">
+                  <tr>
+                    <td width="7%" class="head">
+                      <div align="center"> 筆數</div></td>
+                    <td width="7%" class="head">
+                      <div align="center">類別
+                      </div></td>
+                    <td class="head" width="7%">
+                      <div align="center">年度</div></td>
+                    <td class="head" width="14%">
+                      <div align="center">字別</div></td>
+                    <td class="head" width="9%">
+                      <div align="center">案號</div></td>
+                    <td class="head" width="11%">
+                      <div align="center">開庭<br>
+                        日期</div></td>
+                    <td class="head" width="10%">
+                      <div align="center">開庭<br>
+                        時間</div></td>
+                    <td class="head" width="17%">
+                      <div align="center">法庭</div></td>
+                    <td class="head" width="9%">股別</td>
+                    <td class="head" width="9%">
+                      <div align="center">庭類</div></td>
+                  </tr>
+
+                  <tr>
+                    <td width="7%">
+                      <div align="center">1</div></td>
+                    <td width="7%">
+                      <div align="center">民事</div></td>
+                    <td width="7%">
+                      <div align="center">105</div></td>
+                    <td width="14%">抗</td>
+                    <td width="9%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;485</td>
+                    <td width="11%">105/04/11</td>
+                    <td width="10%">
+                      <div align="center">0900</div></td>
+                    <td width="17%">
+                      <div align="center">第十二法庭</div></td>
+                    <td width="9%">孝</td>
+                    <td width="9%">
+                      訊問</td>
+                  </tr>
+
+                  <tr>
+                    <td width="7%">
+                      <div align="center">2</div></td>
+                    <td width="7%">
+                      <div align="center">民事</div></td>
+                    <td width="7%">
+                      <div align="center">104</div></td>
+                    <td width="14%">重家上</td>
+                    <td width="9%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;79</td>
+                    <td width="11%">105/04/11</td>
+                    <td width="10%">
+                      <div align="center">0910</div></td>
+                    <td width="17%">
+                      <div align="center">第九法庭</div></td>
+                    <td width="9%">洪</td>
+                    <td width="9%">
+                      準備程序</td>
+                  </tr>
+
+                  <tr>
+                    <td width="7%">
+                      <div align="center">3</div></td>
+                    <td width="7%">
+                      <div align="center">民事</div></td>
+                    <td width="7%">
+                      <div align="center">105</div></td>
+                    <td width="14%">上</td>
+                    <td width="9%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;238</td>
+                    <td width="11%">105/04/11</td>
+                    <td width="10%">
+                      <div align="center">0920</div></td>
+                    <td width="17%">
+                      <div align="center">第十四法庭</div></td>
+                    <td width="9%">和</td>
+                    <td width="9%">
+                      準備程序</td>
+                  </tr>
+
+                  <tr>
+                    <td width="7%">
+                      <div align="center">4</div></td>
+                    <td width="7%">
+                      <div align="center">民事</div></td>
+                    <td width="7%">
+                      <div align="center">105</div></td>
+                    <td width="14%">上更㯲</td>
+                    <td width="9%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;11</td>
+                    <td width="11%">105/04/11</td>
+                    <td width="10%">
+                      <div align="center">0920</div></td>
+                    <td width="17%">
+                      <div align="center">第十六法庭</div></td>
+                    <td width="9%">信</td>
+                    <td width="9%">
+                      準備程序</td>
+                  </tr>
+
+                  <tr>
+                    <td width="7%">
+                      <div align="center">5</div></td>
+                    <td width="7%">
+                      <div align="center">民事</div></td>
+                    <td width="7%">
+                      <div align="center">105</div></td>
+                    <td width="14%">勞上更㯲</td>
+                    <td width="9%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1</td>
+                    <td width="11%">105/04/11</td>
+                    <td width="10%">
+                      <div align="center">0920</div></td>
+                    <td width="17%">
+                      <div align="center">第七法庭</div></td>
+                    <td width="9%">團</td>
+                    <td width="9%">
+                      準備程序</td>
+                  </tr>
+
+                  <tr>
+                    <td width="7%">
+                      <div align="center">6</div></td>
+                    <td width="7%">
+                      <div align="center">民事</div></td>
+                    <td width="7%">
+                      <div align="center">101</div></td>
+                    <td width="14%">上</td>
+                    <td width="9%">&nbsp;&nbsp;&nbsp;&nbsp;1097</td>
+                    <td width="11%">105/04/11</td>
+                    <td width="10%">
+                      <div align="center">0930</div></td>
+                    <td width="17%">
+                      <div align="center">第二調解室(B1F)</div></td>
+                    <td width="9%">廉</td>
+                    <td width="9%">
+                      調解</td>
+                  </tr>
+
+                  <tr>
+                    <td width="7%">
+                      <div align="center">7</div></td>
+                    <td width="7%">
+                      <div align="center">民事</div></td>
+                    <td width="7%">
+                      <div align="center">103</div></td>
+                    <td width="14%">上</td>
+                    <td width="9%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;783</td>
+                    <td width="11%">105/04/11</td>
+                    <td width="10%">
+                      <div align="center">0930</div></td>
+                    <td width="17%">
+                      <div align="center">第四法庭</div></td>
+                    <td width="9%">晉</td>
+                    <td width="9%">
+                      準備程序</td>
+                  </tr>
+
+                  <tr>
+                    <td width="7%">
+                      <div align="center">8</div></td>
+                    <td width="7%">
+                      <div align="center">民事</div></td>
+                    <td width="7%">
+                      <div align="center">103</div></td>
+                    <td width="14%">上</td>
+                    <td width="9%">&nbsp;&nbsp;&nbsp;&nbsp;1198</td>
+                    <td width="11%">105/04/11</td>
+                    <td width="10%">
+                      <div align="center">0930</div></td>
+                    <td width="17%">
+                      <div align="center">第二法庭</div></td>
+                    <td width="9%">康</td>
+                    <td width="9%">
+                      準備程序</td>
+                  </tr>
+
+                  <tr>
+                    <td width="7%">
+                      <div align="center">9</div></td>
+                    <td width="7%">
+                      <div align="center">民事</div></td>
+                    <td width="7%">
+                      <div align="center">104</div></td>
+                    <td width="14%">上</td>
+                    <td width="9%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;780</td>
+                    <td width="11%">105/04/11</td>
+                    <td width="10%">
+                      <div align="center">0930</div></td>
+                    <td width="17%">
+                      <div align="center">第十一法庭</div></td>
+                    <td width="9%">正</td>
+                    <td width="9%">
+                      準備程序</td>
+                  </tr>
+
+                  <tr>
+                    <td width="7%">
+                      <div align="center">10</div></td>
+                    <td width="7%">
+                      <div align="center">民事</div></td>
+                    <td width="7%">
+                      <div align="center">104</div></td>
+                    <td width="14%">上</td>
+                    <td width="9%">&nbsp;&nbsp;&nbsp;&nbsp;1087</td>
+                    <td width="11%">105/04/11</td>
+                    <td width="10%">
+                      <div align="center">0930</div></td>
+                    <td width="17%">
+                      <div align="center">第十二法庭</div></td>
+                    <td width="9%">孝</td>
+                    <td width="9%">
+                      準備程序</td>
+                  </tr>
+
+                  <tr>
+                    <td width="7%">
+                      <div align="center">11</div></td>
+                    <td width="7%">
+                      <div align="center">民事</div></td>
+                    <td width="7%">
+                      <div align="center">104</div></td>
+                    <td width="14%">上</td>
+                    <td width="9%">&nbsp;&nbsp;&nbsp;&nbsp;1461</td>
+                    <td width="11%">105/04/11</td>
+                    <td width="10%">
+                      <div align="center">0930</div></td>
+                    <td width="17%">
+                      <div align="center">協商室(2F)</div></td>
+                    <td width="9%">情</td>
+                    <td width="9%">
+                      準備程序</td>
+                  </tr>
+
+                  <tr>
+                    <td width="7%">
+                      <div align="center">12</div></td>
+                    <td width="7%">
+                      <div align="center">民事</div></td>
+                    <td width="7%">
+                      <div align="center">104</div></td>
+                    <td width="14%">重上</td>
+                    <td width="9%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;154</td>
+                    <td width="11%">105/04/11</td>
+                    <td width="10%">
+                      <div align="center">0930</div></td>
+                    <td width="17%">
+                      <div align="center">協商室(1F)</div></td>
+                    <td width="9%">良</td>
+                    <td width="9%">
+                      調解</td>
+                  </tr>
+
+                  <tr>
+                    <td width="7%">
+                      <div align="center">13</div></td>
+                    <td width="7%">
+                      <div align="center">民事</div></td>
+                    <td width="7%">
+                      <div align="center">104</div></td>
+                    <td width="14%">重上</td>
+                    <td width="9%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;482</td>
+                    <td width="11%">105/04/11</td>
+                    <td width="10%">
+                      <div align="center">0930</div></td>
+                    <td width="17%">
+                      <div align="center">第九法庭</div></td>
+                    <td width="9%">洪</td>
+                    <td width="9%">
+                      準備程序</td>
+                  </tr>
+
+                  <tr>
+                    <td width="7%">
+                      <div align="center">14</div></td>
+                    <td width="7%">
+                      <div align="center">民事</div></td>
+                    <td width="7%">
+                      <div align="center">104</div></td>
+                    <td width="14%">重上</td>
+                    <td width="9%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;702</td>
+                    <td width="11%">105/04/11</td>
+                    <td width="10%">
+                      <div align="center">0930</div></td>
+                    <td width="17%">
+                      <div align="center">第十三法庭</div></td>
+                    <td width="9%">乙</td>
+                    <td width="9%">
+                      準備程序</td>
+                  </tr>
+
+                  <tr>
+                    <td width="7%">
+                      <div align="center">15</div></td>
+                    <td width="7%">
+                      <div align="center">民事</div></td>
+                    <td width="7%">
+                      <div align="center">104</div></td>
+                    <td width="14%">重上</td>
+                    <td width="9%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;785</td>
+                    <td width="11%">105/04/11</td>
+                    <td width="10%">
+                      <div align="center">0930</div></td>
+                    <td width="17%">
+                      <div align="center">第十法庭</div></td>
+                    <td width="9%">光</td>
+                    <td width="9%">
+                      準備程序</td>
+                  </tr>
+
+                </table></td>
+              <td width="1%" bgcolor="#FFFFFF">&nbsp;</td>
+          </tr>
+          <tr>
+              <td width="1%">&nbsp;</td>
+              <td bgcolor="#FFFFFF" width="98%"><img alt="" src="../image/line.gif" width="1" height="1"></td>
+              <td width="1%">&nbsp;</td>
+          </tr>
+          <table width=\'95%\' boder=\'0\' align=\'center\'>
+        <tr><td>
+        合計件數:&nbsp;168&nbsp;件&nbsp;&nbsp;
+        </td></tr>
+        <tr><td align=\'center\'>
+        <<第一頁
+        &nbsp;&nbsp;
+        <nobr><<上10頁
+        </nobr>&nbsp;&nbsp;
+        <nobr><上一頁
+        </nobr>&nbsp;&nbsp;
+        <nobr>[1]
+        </nobr>&nbsp;&nbsp;
+        <nobr onmouseover="this.style.cursor=\'hand\'" onfocus="this.style.cursor=\'hand\'" onkeypress=\'form.pageNow.value=2;form.submit();\' onclick=\'form.pageNow.value=2;form.submit();\'><font color=\'#0000FF\'>2
+        </font></nobr>&nbsp;&nbsp;
+        <nobr onmouseover="this.style.cursor=\'hand\'" onfocus="this.style.cursor=\'hand\'" onkeypress=\'form.pageNow.value=3;form.submit();\' onclick=\'form.pageNow.value=3;form.submit();\'><font color=\'#0000FF\'>3
+        </font></nobr>&nbsp;&nbsp;
+        <nobr onmouseover="this.style.cursor=\'hand\'" onfocus="this.style.cursor=\'hand\'" onkeypress=\'form.pageNow.value=4;form.submit();\' onclick=\'form.pageNow.value=4;form.submit();\'><font color=\'#0000FF\'>4
+        </font></nobr>&nbsp;&nbsp;
+        <nobr onmouseover="this.style.cursor=\'hand\'" onfocus="this.style.cursor=\'hand\'" onkeypress=\'form.pageNow.value=5;form.submit();\' onclick=\'form.pageNow.value=5;form.submit();\'><font color=\'#0000FF\'>5
+        </font></nobr>&nbsp;&nbsp;
+        <nobr onmouseover="this.style.cursor=\'hand\'" onfocus="this.style.cursor=\'hand\'" onkeypress=\'form.pageNow.value=6;form.submit();\' onclick=\'form.pageNow.value=6;form.submit();\'><font color=\'#0000FF\'>6
+        </font></nobr>&nbsp;&nbsp;
+        <nobr onmouseover="this.style.cursor=\'hand\'" onfocus="this.style.cursor=\'hand\'" onkeypress=\'form.pageNow.value=7;form.submit();\' onclick=\'form.pageNow.value=7;form.submit();\'><font color=\'#0000FF\'>7
+        </font></nobr>&nbsp;&nbsp;
+        <nobr onmouseover="this.style.cursor=\'hand\'" onfocus="this.style.cursor=\'hand\'" onkeypress=\'form.pageNow.value=8;form.submit();\' onclick=\'form.pageNow.value=8;form.submit();\'><font color=\'#0000FF\'>8
+        </font></nobr>&nbsp;&nbsp;
+        <nobr onmouseover="this.style.cursor=\'hand\'" onfocus="this.style.cursor=\'hand\'" onkeypress=\'form.pageNow.value=9;form.submit();\' onclick=\'form.pageNow.value=9;form.submit();\'><font color=\'#0000FF\'>9
+        </font></nobr>&nbsp;&nbsp;
+        <nobr onmouseover="this.style.cursor=\'hand\'" onfocus="this.style.cursor=\'hand\'" onkeypress=\'form.pageNow.value=10;form.submit();\' onclick=\'form.pageNow.value=10;form.submit();\'><font color=\'#0000FF\'>10
+        </font></nobr>&nbsp;&nbsp;
+        <nobr onmouseover="this.style.cursor=\'hand\'" onfocus="this.style.cursor=\'hand\'" onclick=\'form.pageNow.value=2;form.submit();\' onkeypress=\'form.pageNow.value=2;form.submit();\'><font color=\'#0000FF\'>下一頁></font>
+        </nobr>&nbsp;&nbsp;
+        <nobr onmouseover="this.style.cursor=\'hand\'" onfocus="this.style.cursor=\'hand\'" onclick=\'form.pageNow.value=11;form.submit();\' onkeypress=\'form.pageNow.value=11;form.submit();\'><font color=\'#0000FF\'>下10頁>></font>
+        </nobr>&nbsp;&nbsp;
+        <nobr onmouseover="this.style.cursor=\'hand\'" onfocus="this.style.cursor=\'hand\'" onclick=\'form.pageNow.value=12;form.submit();\' onkeypress=\'form.pageNow.value=12;form.submit();\'><font color=\'#0000FF\'>最後一頁>></font>
+        </nobr>
+        <input type=\'hidden\' name=\'pageNow\' value=\'1\'>
+        </td></tr>
+        </table>
+
+        </table>
+
+        <br>
+        <input type="hidden" name="sql_conction" value=" UPPER(CRTID)=\'TPH\' AND DUDT>=\'1050411\'  AND DUDT<=\'1050411\'  AND SYS=\'V\'  ORDER BY  DUDT,DUTM,CRMYY,CRMID,CRMNO">
+        <input type="hidden" name="pageTotal" value="12">
+        <input type="hidden" name="pageSize" value="15">
+        <input type="hidden" name="rowStart" value="1">
+        </form>
+
+        <DIV align=center>
+        <CENTER>
+        <TABLE cellPadding=1 width="100%" border=0>
+          <TBODY>
+          <TR>
+            <TD>
+              <DIV align=center>
+
+
+        </DIV></TD></TR></TBODY></TABLE>
+            <TABLE class=big cellSpacing=0 cellPadding=2 width=640 align=center border=0>
+              <TBODY>
+              <TR>
+                <TD vAlign=top width=44 height=20><FONT size=2>說明 :</FONT></TD>
+                <TD vAlign=top width=12 height=20><FONT size=2>1. </FONT></TD>
+                <TD vAlign=top width=584 height=20 align="left"><FONT size=2>本庭期僅供參考，如有闕漏、不符者，以實際開庭通知單為準，若查無庭期，請逕向該管法院查詢。</font></TD>
+              </TR>
+              <TR>
+                <TD vAlign=top height=20><FONT size=2>&nbsp;</FONT></TD>
+                <TD vAlign=top height=20><FONT size=2>2.</FONT></TD>
+                <TD vAlign=top height=20 align="left"><FONT size=2>本系統僅提供尚未開庭之庭期查詢，恕不提供已開庭期之查詢，尚
+                  祈見諒。</font></TD>
+              </TR>
+              <TR>
+                <TD vAlign=top width=44 height=20><FONT size=2>&nbsp;</FONT></TD>
+                <TD vAlign=top height=20><FONT size=2>3.</FONT></TD>
+                <TD vAlign=top height=20 align="left"><FONT size="2" color="red">Android手機之庭期表查詢程式 需 Android 2.2(含)以上版本</font></TD>
+              </TR>
+              <TR>
+              <TR>
+                <TD vAlign=top width=44 height=20><FONT size=2>&nbsp;</FONT></TD>
+                <TD vAlign=top height=20><FONT size=2>4.</FONT></TD>
+                <TD vAlign=top height=20 align="left"><FONT size=2>對本系統若有任何疑議建言，歡迎來信指教。</font></TD>
+              </TR>
+              <TR>
+                <TD vAlign=top width=44 height=20><FONT size=2>&nbsp;</FONT></TD>
+                <TD vAlign=top height=20><FONT size=2>4.</FONT></TD>
+                <TD vAlign=top height=20 align="left"><FONT size=2>下載測試<a href="javascript:downloadAffair()">
+                  cvs </a> 下載&nbsp;</font></TD>
+              </TR>
+              <TR>
+                <TD vAlign=top colspan="3" height=20 align="center"><FONT size=2>&nbsp;</FONT>
+                  <font size=2>建議您使用800*600全彩及 <a href="http://www.microsoft.com/taiwan/products/ie/" target="_blank" title="下載IE">
+                  Explorer 5.5 </a> 版本以上瀏覽器&nbsp;</font> </TD>
+              </TR>
+
+              </TBODY>
+            </TABLE>
+
+
+        <TABLE height=33 cellSpacing=0 cellPadding=0 width=760 align=center border=0>
+          <TBODY>
+          <TR>
+            <TD background="../image/welcome.gif">
+              <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+                <TBODY>
+                <TR>
+                  <TD width="12%">&nbsp;</TD>
+                  <TD width="75%">
+                    <DIV align=center><FONT size=2><A href="http://www.judicial.gov.tw/"
+                    target=_parent>司法院</A> 資訊管理處 製作。 對於本系統功能有任何建議，<A
+                    href="http://www.judicial.gov.tw/email/write.htm" target=_blank>
+                    歡迎來信</A></FONT>。</DIV></TD>
+                  <TD
+        width="13%">&nbsp;</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></CENTER></DIV>
+        </body>
+        </html>
