@@ -18,6 +18,7 @@ class Court < ActiveRecord::Base
   has_many :judgments
   has_many :stories
   has_many :schedules
+  has_many :branches
 
   def self.judges
     where(court_type: "法院")
