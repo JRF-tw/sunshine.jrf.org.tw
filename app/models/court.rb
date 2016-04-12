@@ -16,6 +16,8 @@
 class Court < ActiveRecord::Base
   include HiddenOrNot
   has_many :judgments
+  has_many :stories
+  has_many :schedules
 
   def self.judges
     where(court_type: "法院")

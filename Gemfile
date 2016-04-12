@@ -126,3 +126,5 @@ gem 'sitemap_generator'
 gem 'ransack'
 
 gem 'smarter_csv', '~> 1.1'
+gem 'mechanize'
+gem 'iconv'

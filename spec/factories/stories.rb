@@ -5,7 +5,7 @@
 #  id            :integer          not null, primary key
 #  court_id      :integer
 #  main_judge_id :integer
-#  type          :string
+#  story_type    :string
 #  year          :integer
 #  word_type     :string
 #  number        :integer
@@ -15,7 +15,7 @@
 
 FactoryGirl.define do
   factory :story do
-    type "民事"
+    story_type "民事"
     year { rand(70..105) }
     word_type "聲"
     number { rand(100..999) }
