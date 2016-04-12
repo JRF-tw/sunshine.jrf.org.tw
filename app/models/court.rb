@@ -18,6 +18,7 @@ class Court < ActiveRecord::Base
   has_many :judgments
   has_many :stories
   has_many :schedules
+  has_many :branches
 
   def self.judges
     where(court_type: "法院")
@@ -29,4 +30,10 @@ class Court < ActiveRecord::Base
 
   scope :newest, ->{ order("id DESC") }
   scope :order_by_weight, ->{ order("weight DESC, id DESC") }
+
+  class << self
+    def collect_codes
+      all.map(&:code).compact
+    end
+  end
 end
