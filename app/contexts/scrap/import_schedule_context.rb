@@ -1,5 +1,4 @@
 class Scrap::ImportScheduleContext < BaseContext
-  ## TODO  COURT_CODES slould collect court.code
   COURT_INFO_URI = "http://csdi.judicial.gov.tw/abbs/wkw/WHD3A01.jsp"
   SCHEDULE_INFO_URI = "http://csdi.judicial.gov.tw/abbs/wkw/WHD3A02.jsp"
   START_DATE = Time.zone.today

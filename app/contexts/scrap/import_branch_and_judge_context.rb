@@ -1,5 +1,4 @@
 class Scrap::ImportBranchAndJudgeContext < BaseContext
-  ## TODO  COURT_CODES slould collect court.code
   EXCEL_URL = "http://csdi.judicial.gov.tw/abbs/wkw/WHD3A01_DOWNLOADCVS.jsp?court="
   before_perform :parse_import_data
   before_perform :find_or_create_judge
