@@ -30,4 +30,10 @@ class Court < ActiveRecord::Base
 
   scope :newest, ->{ order("id DESC") }
   scope :order_by_weight, ->{ order("weight DESC, id DESC") }
+
+  class << self
+    def collect_codes
+      all.map(&:code).compact
+    end
+  end
 end

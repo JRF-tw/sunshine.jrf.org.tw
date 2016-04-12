@@ -28,7 +28,7 @@ class Scrap::ImportScheduleContext < BaseContext
 
     def get_courts_info
       courts_info = []
-      Court.all.map(&:code).compact.each do |court_code|
+      Court.collect_codes.each do |court_code|
         story_types = get_story_types_by_court(court_code)
         story_types.each do |story_type|
           page_total = page_total_by_story_type(court_code, story_type)
@@ -96,7 +96,7 @@ class Scrap::ImportScheduleContext < BaseContext
           story_type: row_data[1].text.strip,
           year: row_data[2].text.strip.to_i,
           word_type: row_data[3].text.strip,
-          number: row_data[4].text.match(/\d+/)[0],
+          number: row_data[4].text.squish,
           date: convert_scrap_time(row_data[5].text.strip),
           branch_name: row_data[8].text.strip
       }
