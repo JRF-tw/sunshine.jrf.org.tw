@@ -33,10 +33,10 @@
     table.table.table-bordered.table-striped.table-hover
       thead
         tr
-          th #
-          th 類型
-          th 全名
-          th 前台顯示簡稱
+          th= sort_link(@search, :id, "#")
+          th= sort_link(@search, :court_type, "類別")
+          th= sort_link(@search, :full_name, "全名")
+          th= sort_link(@search, :name, "前台顯示簡稱")
           th
       tbody
         - @courts.each do |court|
