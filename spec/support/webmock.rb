@@ -835,5 +835,8 @@ module Webmock
         </body>
         </html>
       ')
+
+    stub_request(:get, /http:\/\/csdi\.judicial\.gov\.tw\/abbs\/wkw\/WHD3A01_DOWNLOADCVS\.jsp/).
+      to_return(:status => 200, :body => File.read("#{Rails.root}/spec/fixtures/scrap_data/tph_dpt.csv"))
   end
 end
