@@ -79,6 +79,7 @@ GEM
     bootstrap-sass (2.3.2.2)
       sass (~> 3.2)
     builder (3.2.2)
+    byebug (8.2.2)
     capistrano (3.4.0)
       i18n
       rake (>= 10.0.0)
@@ -548,6 +549,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-sass (~> 2.3)
+  byebug
   capistrano-rails
   capistrano-rvm
   capistrano-sidekiq

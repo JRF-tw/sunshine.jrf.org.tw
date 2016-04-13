@@ -1,3 +1,30 @@
+= search_form_for @search, :url => admin_courts_path, :wrapper => :admin, :html => { :class => "form-horizontal" } do |f|
+  .well
+    fieldset
+      legend 搜尋      
+      .row
+        .span6
+          .control-group
+            label.control-label= f.label :court_type_eq
+            .controls= f.select :court_type_eq,
+            Admin::Court::COURT_TYPES, include_blank: "請選擇"
+      .row  
+        .span6
+          .control-group
+            label.control-label= f.label :full_name_cont
+            .controls= f.search_field :full_name_cont
+    
+        .span6
+          .control-group
+            label.control-label= f.label :name_cont
+            .controls= f.search_field :name_cont    
+    hr
+    .form-actions
+      = f.submit :value => "搜尋", :class => "btn btn-primary"
+      = " "
+      = link_to "清空搜尋結果", admin_courts_path, :class => "btn btn-default"
+
+
 = admin_widget_box "法院 / 檢察署列表", icon: :pencil do
   .dataTables_wrapper
     div
@@ -6,10 +33,10 @@
     table.table.table-bordered.table-striped.table-hover
       thead
         tr
-          th #
-          th 類型
-          th 全名
-          th 前台顯示簡稱
+          th= sort_link(@search, :id, "#")
+          th= sort_link(@search, :court_type, "類別")
+          th= sort_link(@search, :full_name, "全名")
+          th= sort_link(@search, :name, "前台顯示簡稱")
           th
       tbody
         - @courts.each do |court|

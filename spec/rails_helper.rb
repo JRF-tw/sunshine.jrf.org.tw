@@ -53,6 +53,7 @@ RSpec.configure do |config|
   config.include SidekiqHelper
   config.include RequestClient, type: :request
   config.include MetaTagMatchers, type: :request
+  config.include FactoryGirl::Syntax::Methods
 
   config.before(:each){ webmock_all! }
   config.before(:each){ sidekiq_reset! }

@@ -20,4 +20,10 @@ FactoryGirl.define do
     name "‎新北地院"
   end
 
+  factory :court_for_params, class: Court do
+    court_type "法院"
+    full_name "‎臺灣"
+    name "‎新北"
+  end  	
+
 end

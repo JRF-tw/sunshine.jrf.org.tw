@@ -215,3 +215,7 @@ zh-TW:
         is_hidden_true: "不顯示於前端"
         current_eq: "現職"
         name_cont: "姓名包含"
+      court:
+        court_type_eq: "類型"
+        full_name_cont: "全名包含"
+        name_cont: "前台顯示簡稱包含"
