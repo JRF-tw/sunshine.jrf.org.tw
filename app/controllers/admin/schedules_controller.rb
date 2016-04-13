@@ -11,9 +11,13 @@
 #  updated_at  :datetime         not null
 #
 
-class Schedule < ActiveRecord::Base
-  belongs_to :story
-  belongs_to :court
+class Admin::SchedulesController < Admin::BaseController
 
-  scope :newest, ->{ order("id DESC") }
+  def index
+    @search = Schedule.all.newest.ransack(params[:q])
+    @schedules = @search.result.page(params[:page]).per(20)
+    @admin_page_title = "庭期表列表"
+    add_crumb @admin_page_title, "#"
+  end
+
 end

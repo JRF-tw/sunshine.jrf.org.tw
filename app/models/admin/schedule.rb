@@ -11,9 +11,14 @@
 #  updated_at  :datetime         not null
 #
 
-class Schedule < ActiveRecord::Base
-  belongs_to :story
-  belongs_to :court
+class Admin::Schedule < ::Schedule
+  belongs_to :story, class_name: "Admin::Story"
+  belongs_to :court, class_name: "Admin::Court"
 
-  scope :newest, ->{ order("id DESC") }
+  SCHEDULE_BRANCH_NAMES = [
+    "信",
+    "愛",
+    "美",
+    "德"
+  ]
 end
