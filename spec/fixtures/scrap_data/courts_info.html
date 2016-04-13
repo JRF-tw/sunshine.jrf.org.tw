@@ -1,0 +1,203 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+    程式名稱：案件庭期查詢系統       程式功能：案件庭期查詢
+    程式設計：林志賢                 更新日期：
+-->
+<HTML><HEAD><TITLE>案件庭期查詢系統</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=MS950">
+
+
+
+<META content="MSHTML 6.00.2900.2802" name=GENERATOR></HEAD>
+<script language="javascript" src="../script/FORM.js"></script>
+<script language="javascript" src="../script/BRING.js"></script>
+<script language="javascript" src="../script/STRING.js"></script>
+<script language="javascript" src="../script/WINDOW.js"></script>
+<script language="javascript" src="../script/jquery-1.6.4.min.js"></script>
+<script type="text/javascript">
+    function downloadApk(){
+      window.location.href='http://210.69.124.97/abbs/CourtApp.apk';
+    }
+
+    function downloadAffair(){
+        var p = "WHD3A01_DOWNLOADCVS.jsp?court=";
+        var courtList = '';
+
+        $("#court option").each(function(){
+          courtList += $(this).val() +',';
+       });
+
+       courtList = courtList.substring(0, courtList.length-1  );
+
+        window.location.href = p + courtList;
+    }
+
+
+</script>
+<BODY leftMargin=0 topMargin=0 onload=""><BR>
+<form name="form" method="post" action="WHD3A01.jsp" >
+<TABLE cellSpacing=0 cellPadding=0 width=760 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD width=640 background="../image/title_03.gif" height=33>
+      <TABLE cellSpacing=0 cellPadding=0 width=439 align=left border=0>
+        <TBODY>
+        <TR>
+          <TD width=164>
+            <DIV align=right></DIV></TD>
+          <TD noWrap width=275>
+            <DIV align=left><FONT
+    size=2>請輸入查詢條件</FONT></DIV></TD></TR></TBODY></TABLE></TD></TR>
+  <TR>
+    <TD background="../image/fjudqry01table02.gif">
+      <DIV align=center>
+      <DIV align=center>
+      <CENTER>
+              <TABLE class=big cellSpacing=0 cellPadding=4 width=603 border=0>
+                <TBODY>
+                <TR>
+                  <TD  align=right width="13%"><FONT
+          size=2>法院名稱：</FONT></TD>
+                  <TD width="59%" align="left"><font size=2>
+                    <select name="court" id="court" size="1">
+                      <option value="TPC">司法院職務法庭</option>
+                      <optgroup label="高等(行政)法院">
+                      <option value="TPH">臺灣高等法院</option>
+                      <option value="TPB">臺北高等行政法院</option>
+                      <option value="TCB">臺中高等行政法院</option>
+                      <option value="KSB">高雄高等行政法院</option>
+                      <option value="IPC">智慧財產法院</option>
+                      <option value="TCH">臺灣高等法院臺中分院</option>
+                      <option value="TNH">臺灣高等法院臺南分院</option>
+                      <option value="KSH">臺灣高等法院高雄分院</option>
+                      <option value="HLH">臺灣高等法院花蓮分院</option>
+                      <option value="KMH">福建高等法院金門分院</option>
+                      </optgroup>
+                      <optgroup label="地方法院">
+                      <option value="TPD">臺灣臺北地方法院</option>
+                      <option value="PCD">臺灣新北地方法院</option>
+                      <option value="SLD">臺灣士林地方法院</option>
+                      <option value="TYD">臺灣桃園地方法院</option>
+                      <option value="SCD">臺灣新竹地方法院</option>
+                      <option value="MLD">臺灣苗栗地方法院</option>
+                      <option value="TCD">臺灣臺中地方法院</option>
+                      <option value="NTD">臺灣南投地方法院</option>
+                      <option value="CHD">臺灣彰化地方法院</option>
+                      <option value="ULD">臺灣雲林地方法院</option>
+                      <option value="CYD">臺灣嘉義地方法院</option>
+                      <option value="TND">臺灣臺南地方法院</option>
+                      <option value="KSD">臺灣高雄地方法院</option>
+                      <option value="PTD">臺灣屏東地方法院</option>
+                      <option value="TTD">臺灣臺東地方法院</option>
+                      <option value="HLD">臺灣花蓮地方法院</option>
+                      <option value="ILD">臺灣宜蘭地方法院</option>
+                      <option value="KLD">臺灣基隆地方法院</option>
+                      <option value="PHD">臺灣澎湖地方法院</option>
+                      <option value="KSY">臺灣高雄少年及家事法院</option>
+                      <option value="LCD">褔建連江地方法院</option>
+                      <option value="KMD">福建金門地方法院</option>
+                      </optgroup>
+                    </select>
+
+                  </font></TD>
+                  <TD width="14%" rowspan="2" align="right" vAlign=center> <font color="red" size="1"><img src="../image/app_qrcode.png" border="0" title="下載Android版庭期表查詢" width="50" height="50"><br>
+                  下載 Android 版<br>
+                  庭期表查詢程式</font>
+                  </TD>
+                  <TD width="14%" rowspan="2" align="right" vAlign=center><font color="red" size="1"><img src="../image/iphone_qrcode.png" border="0" title="下載iphone版庭期表查詢" width="50" height="50"><br>
+下載 iphone 版<br>
+庭期表查詢程式</font></TD>
+                </TR>
+                <TR>
+                  <TD vAlign=top align=right><FONT size=2> </FONT></TD>
+                  <TD  align="left"><font size=2>
+                    <input type=button class=small  value="下載所有法院股別分配表csv檔" style="width:200px;background-color:pink" name=Button2 onclick='javascript:downloadAffair()'>
+                  </font><font size=2>
+                  <input class=small type=submit value="　查　詢　" name=Button>
+                  </font></TD>
+                  </TR>
+                </TBODY>
+              </TABLE>
+            </CENTER></DIV>
+      <DIV align=center>
+      <CENTER></CENTER></DIV></DIV></TD></TR>
+  <TR>
+    <TD height=10><IMG height=10 src="../image/fjudqry01table03.gif"
+      width=760></TD></TR></TBODY></TABLE></FORM>
+       <center>
+       <table width="0%"  border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td valign="top"><img src="http://www.judicial.gov.tw/images/index-images/top2-02.jpg" alt="參訪人數" width="55" height="20"></td>
+          <td valign="top"><img src="http://www.judicial.gov.tw/images/index-images/top2-03.jpg" alt="" width="9" height="20"></td>
+          <td><script src=http://www.judicial.gov.tw/counter/counter.asp?page=cts&style=1></script></td>
+          <td valign="top"><img src="http://www.judicial.gov.tw/images/index-images/top2-04.jpg" alt="" width="9" height="20"></td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      </center>
+
+
+<DIV align=center>
+<CENTER>
+<TABLE cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <DIV align=center>
+
+
+</DIV></TD></TR></TBODY></TABLE>
+    <TABLE class=big cellSpacing=0 cellPadding=2 width=640 align=center border=0>
+      <TBODY>
+      <TR>
+        <TD vAlign=top width=44 height=20><FONT size=2>說明 :</FONT></TD>
+        <TD vAlign=top width=12 height=20><FONT size=2>1. </FONT></TD>
+        <TD vAlign=top width=584 height=20 align="left"><FONT size=2>本庭期僅供參考，如有闕漏、不符者，以實際開庭通知單為準，若查無庭期，請逕向該管法院查詢。</font></TD>
+      </TR>
+      <TR>
+        <TD vAlign=top height=20><FONT size=2>&nbsp;</FONT></TD>
+        <TD vAlign=top height=20><FONT size=2>2.</FONT></TD>
+        <TD vAlign=top height=20 align="left"><FONT size=2>本系統僅提供尚未開庭之庭期查詢，恕不提供已開庭期之查詢，尚
+          祈見諒。</font></TD>
+      </TR>
+      <TR>
+        <TD vAlign=top width=44 height=20><FONT size=2>&nbsp;</FONT></TD>
+        <TD vAlign=top height=20><FONT size=2>3.</FONT></TD>
+        <TD vAlign=top height=20 align="left"><FONT size="2" color="red">Android手機之庭期表查詢程式 需 Android 2.2(含)以上版本</font></TD>
+      </TR>
+      <TR>
+      <TR>
+        <TD vAlign=top width=44 height=20><FONT size=2>&nbsp;</FONT></TD>
+        <TD vAlign=top height=20><FONT size=2>4.</FONT></TD>
+        <TD vAlign=top height=20 align="left"><FONT size=2>對本系統若有任何疑議建言，歡迎來信指教。</font></TD>
+      </TR>
+      <TR>
+        <TD vAlign=top colspan="3" height=20 align="center"><FONT size=2>&nbsp;</FONT>
+          <font size=2>建議您使用800*600全彩及 <a href="http://www.microsoft.com/taiwan/products/ie/" target="_blank" title="下載IE">
+          Explorer 5.5 </a> 版本以上瀏覽器&nbsp;</font> </TD>
+      </TR>
+
+      </TBODY>
+    </TABLE>
+
+
+<TABLE height=33 cellSpacing=0 cellPadding=0 width=760 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD background="../image/welcome.gif">
+      <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD width="12%">&nbsp;</TD>
+          <TD width="75%">
+            <DIV align=center><FONT size=2><A href="http://www.judicial.gov.tw/"
+            target=_parent>司法院</A> 資訊管理處 製作。 對於本系統功能有任何建議，<A
+            href="http://www.judicial.gov.tw/email/write.htm" target=_blank>
+            歡迎來信</A></FONT>。</DIV></TD>
+          <TD
+width="13%">&nbsp;</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></CENTER></DIV>
+<P align=center><FONT face=標楷體><BR></FONT></P></BODY></HTML>
+
+
