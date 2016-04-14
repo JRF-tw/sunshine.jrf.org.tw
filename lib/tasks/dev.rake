@@ -22,7 +22,8 @@ namespace :dev do
     "dev:fake_procedures",
     "dev:fake_punishments",
     "dev:fake_banners",
-    "dev:fake_suit_banners"
+    "dev:fake_suit_banners",
+    "dev:fake_stories"
   ]
 
   task :fake_users => :environment do
@@ -226,4 +227,16 @@ namespace :dev do
       )
     end
   end
+
+  task :fake_stories => :environment do
+    Story.destroy_all
+    10.times do |i|
+      Admin::Court.all.sample.stories.create!(
+        story_type: ["民事", "邢事"].sample,
+        year: rand(70..105),
+        word_type: ["生", "老", "病", "死"].sample,
+        number: rand(100..999) 
+      )
+    end  
+  end    
 end

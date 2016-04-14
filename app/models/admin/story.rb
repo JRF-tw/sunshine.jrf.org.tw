@@ -18,12 +18,8 @@ class Admin::Story < ::Story
   has_many :judges, through: :judge_stories
   has_many :lawyer_stories
   has_many :lawyer, through: :lawyer_stories
-  belongs_to :court, class_name: "Admin::Court"
-  has_many :schedules, class_name: "Admin::Schedule"
-
-  STORY_TYPES = [
-    "民事",
-    "邢事"
-  ]
+  belongs_to :court
+  has_many :schedules
+  
 end 
   

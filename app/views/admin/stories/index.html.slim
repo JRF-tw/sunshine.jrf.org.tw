@@ -7,7 +7,7 @@
           .control-group
             label.control-label= f.label :story_type_eq
             .controls= f.select :story_type_eq,
-            Admin::Story::STORY_TYPES, include_blank: "請選擇"
+            self.STORY_TYPES, include_blank: "請選擇"
 
         .span6
           .control-group
@@ -37,11 +37,11 @@
     table.table.table-bordered.table-striped.table-hover
       thead
         tr
-          th #
-          th 案件類別
-          th 案號
-          th 字別
-          th 年度
+          th= sort_link(@search, :id, '#')
+          th= sort_link(@search, :story_type, '案件類別')
+          th= sort_link(@search, :number, '案號')
+          th= sort_link(@search, :word_type, '字別')
+          th= sort_link(@search, :year, '年度')
       tbody
         - @stories.each do |story|
           tr

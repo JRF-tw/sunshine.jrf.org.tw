@@ -173,4 +173,8 @@ module ApplicationHelper
     end
     return arr.join(" ")
   end
+
+  def STORY_TYPES 
+    Story.all.map(&:story_type).uniq
+  end  
 end
