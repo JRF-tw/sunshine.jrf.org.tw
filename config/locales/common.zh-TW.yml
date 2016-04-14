@@ -219,3 +219,8 @@ zh-TW:
         court_type_eq: "類型"
         full_name_cont: "全名包含"
         name_cont: "前台顯示簡稱包含"
+      story:
+        story_type_eq: "案件類別"
+        year_eq: "年度"
+        word_type_cont: "字別包含"
+        number_eq: "案號"
