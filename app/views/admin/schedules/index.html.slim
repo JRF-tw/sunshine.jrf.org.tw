@@ -10,9 +10,10 @@
             self.SCHEDULE_BRANCH_NAMES, include_blank: "請選擇"
         .span6
           .control-group
-            label.control-label= f.label :court_full_name_cont
-            .controls= f.search_field :court_full_name_cont
-      row          
+            label.control-label= f.label :court_full_name_eq
+            .controls= f.select :court_full_name_eq,
+            self.COURT_FULL_NAMES, include_blank: "請選擇"
+      .row
         .span6
           .control-group#datepicker
             label.control-label= f.label :date_gteq
@@ -32,7 +33,7 @@
         tr
           th= sort_link(@search, :id, "#")
           th= sort_link(@search, :court_full_name, "開庭法院")
-          th 案號
+          th= sort_link(@search, :story_number, "案號")
           th= sort_link(@search, :branch_name, "股別名稱")
           th= sort_link(@search, :date, "開庭時間")
       tbody
@@ -40,7 +41,7 @@
           tr
             td= schedule.id
             td= schedule.court.full_name
-            td= 
+            td= schedule.story.number
             td= schedule.branch_name
             td= schedule.date
     .ui-toolbar.ui-widget-header

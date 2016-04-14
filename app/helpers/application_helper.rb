@@ -181,4 +181,8 @@ module ApplicationHelper
   def SCHEDULE_BRANCH_NAMES 
     Schedule.all.map(&:branch_name).uniq
   end  
+
+  def COURT_FULL_NAMES
+    Court.all.judges.map(&:full_name).uniq
+  end  
 end
