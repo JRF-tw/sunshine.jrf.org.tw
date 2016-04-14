@@ -24,7 +24,7 @@ namespace :dev do
     "dev:fake_banners",
     "dev:fake_suit_banners",
     "dev:fake_stories",
-    "dev:fake_schedule"
+    "dev:fake_schedules"
   ]
 
   task :fake_users => :environment do
@@ -232,23 +232,24 @@ namespace :dev do
   task :fake_stories => :environment do
     Story.destroy_all
     10.times do |i|
-      Admin::Court.all.sample.stories.create!(
+      Court.all.sample.stories.create!(
         story_type: ["民事", "邢事"].sample,
         year: rand(70..105),
         word_type: ["生", "老", "病", "死"].sample,
-        number: rand(100..999) 
+        number: rand(100..999)
+      )
+    end
+  end
+
+  task :fake_schedules => :environment do
+    Schedule.destroy_all
+    Story.all.each do |story|
+      story.court.schedules.create!(
+        branch_name: ["信", "愛" , "美", "德"].sample,
+        date: rand(5).years.ago,
+        story: story
       )
     end  
   end    
-
-  task :fake_schedule => :environment do
-    Schedule.destroy_all
-    10.times do |i|
-      Admin::Court.judges.sample.schedules.create!(
-        branch_name: ["信", "愛" , "美", "德"].sample,
-        date: rand(5).years.ago
-      )
-    end  
-  end  
-
+ 
 end

@@ -15,13 +15,8 @@ FactoryGirl.define do
   factory :schedule do
     branch_name "股別名稱"
     date { Date.current }
-
-    trait :with_court do
-      after(:create) do |schedule|
-        court = FactoryGirl.create :court
-        schedule.update_attribute :court_id, court.id
-      end  
-    end
-  end  
+    court { FactoryGirl.create :court }
+    story { FactoryGirl.create :story }
+  end
 
 end
