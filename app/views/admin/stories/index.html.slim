@@ -1,0 +1,55 @@
+= search_form_for @search, :url => admin_stories_path, :wrapper => :admin, :html => { :class => "form-horizontal" } do |f|
+  .well
+    fieldset
+      legend 搜尋      
+      .row
+        .span6
+          .control-group
+            label.control-label= f.label :story_type_eq
+            .controls= f.select :story_type_eq,
+            self.STORY_TYPES, include_blank: "請選擇"
+
+        .span6
+          .control-group
+            label.control-label= f.label :number_eq
+            .controls= f.search_field :number_eq
+      .row
+        .span6
+          .control-group
+            label.control-label= f.label :word_type_cont
+            .controls= f.search_field :word_type_cont
+        .span6
+          .control-group
+            label.control-label= f.label :year_eq
+            .controls= f.search_field :year_eq
+
+
+  
+    hr
+    .form-actions
+      = f.submit :value => "搜尋", :class => "btn btn-primary"
+      = " "
+      = link_to "清空搜尋結果", admin_stories_path, :class => "btn btn-default"
+
+
+= admin_widget_box "案件列表", icon: :pencil do
+  .dataTables_wrapper
+    table.table.table-bordered.table-striped.table-hover
+      thead
+        tr
+          th= sort_link(@search, :id, '#')
+          th= sort_link(@search, :story_type, '案件類別')
+          th= sort_link(@search, :number, '案號')
+          th= sort_link(@search, :word_type, '字別')
+          th= sort_link(@search, :year, '年度')
+      tbody
+        - @stories.each do |story|
+          tr
+            td= story.id
+            td= story.story_type
+            td= story.number
+            td= story.word_type
+            td= story.year
+
+    .ui-toolbar.ui-widget-header
+      = paginate @stories, theme: :admin

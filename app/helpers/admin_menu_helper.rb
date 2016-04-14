@@ -12,6 +12,7 @@ module AdminMenuHelper
       "個人檔案管理": { url: admin_profiles_path, match: /\/admin\/profiles/ },
       "重要判決管理": { url: admin_judgments_path, match: /\/admin\/judgments/ },
       "評鑑資料-案例管理": { url: admin_suits_path, match: /\/admin\/suits/ },
+      "案件管理": { url: admin_stories_path, match: /\/admin\/stories/ },
       "法院 / 檢察署管理": { url: admin_courts_path, match: /\/admin\/courts/ },
       "首頁橫幅管理": { url: admin_banners_path, match: /\/admin\/banners/ },
       "司法案例面面觀橫幅管理": { url: admin_suit_banners_path, match: /\/admin\/suit_banners/ },
