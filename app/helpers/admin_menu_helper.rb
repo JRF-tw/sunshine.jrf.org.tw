@@ -14,6 +14,7 @@ module AdminMenuHelper
       "評鑑資料-案例管理": { url: admin_suits_path, match: /\/admin\/suits/ },
       "案件管理": { url: admin_stories_path, match: /\/admin\/stories/ },
       "法院 / 檢察署管理": { url: admin_courts_path, match: /\/admin\/courts/ },
+      "庭期表管理": { url: admin_schedules_path, match: /\/admin\/schedules/ },
       "首頁橫幅管理": { url: admin_banners_path, match: /\/admin\/banners/ },
       "司法案例面面觀橫幅管理": { url: admin_suit_banners_path, match: /\/admin\/suit_banners/ },
       "後台使用者管理": { url: admin_users_path, match: /\/admin\/users/ }
