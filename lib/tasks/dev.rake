@@ -23,7 +23,8 @@ namespace :dev do
     "dev:fake_punishments",
     "dev:fake_banners",
     "dev:fake_suit_banners",
-    "dev:fake_stories"
+    "dev:fake_stories",
+    "dev:fake_schedule"
   ]
 
   task :fake_users => :environment do
@@ -239,4 +240,16 @@ namespace :dev do
       )
     end  
   end    
+
+  task :fake_schedule => :environment do
+    Schedule.destroy_all
+    10.times do |i|
+      Admin::Schedule.create!(
+        branch_name: ["信", "愛" , "美", "德"].sample,
+        court_id: Admin::Court.judges.sample.id,
+        date: rand(5).years.ago
+      )
+    end  
+  end  
+
 end
