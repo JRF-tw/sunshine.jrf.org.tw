@@ -244,9 +244,8 @@ namespace :dev do
   task :fake_schedule => :environment do
     Schedule.destroy_all
     10.times do |i|
-      Admin::Schedule.create!(
+      Admin::Court.judges.sample.schedules.create!(
         branch_name: ["信", "愛" , "美", "德"].sample,
-        court_id: Admin::Court.judges.sample.id,
         date: rand(5).years.ago
       )
     end  

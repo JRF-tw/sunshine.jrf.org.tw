@@ -15,7 +15,7 @@ class Admin::SchedulesController < Admin::BaseController
 
   def index
     @search = Schedule.all.newest.ransack(params[:q])
-    @schedules = @search.result.page(params[:page]).per(20)
+    @schedules = @search.result.includes(:court, :story).page(params[:page]).per(20)
     @admin_page_title = "庭期表列表"
     add_crumb @admin_page_title, "#"
   end

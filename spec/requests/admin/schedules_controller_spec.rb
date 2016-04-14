@@ -11,16 +11,12 @@ RSpec.describe Admin::SchedulesController do
       it {
         expect(response.body).to match(schedule.branch_name)
       }
-    end 
+    end
+
+    context "render success" do
+      before { get "/admin/schedules" }
+      it { expect(response).to be_success }
+    end  
   end
   
-  describe "already had a schedules" do
-    let!(:schedule) { FactoryGirl.create :schedule, :with_court }
-    
-    it "GET /admin/schedules" do
-      get "/admin/schedules"
-      expect(response).to be_success
-    end
-  end
-
 end  

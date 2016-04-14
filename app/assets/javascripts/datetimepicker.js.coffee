@@ -15,3 +15,6 @@ $(document).ready ->
       stepMinute: 10
     return
   return
+$(document).ready ->
+  $('#datepicker .controls input').datepicker
+    dateFormat: 'yy-mm-dd' 

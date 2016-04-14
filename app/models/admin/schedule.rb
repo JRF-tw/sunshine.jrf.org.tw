@@ -12,13 +12,7 @@
 #
 
 class Admin::Schedule < ::Schedule
-  belongs_to :story, class_name: "Admin::Story"
-  belongs_to :court, class_name: "Admin::Court"
+  belongs_to :story
+  belongs_to :court
 
-  SCHEDULE_BRANCH_NAMES = [
-    "信",
-    "愛",
-    "美",
-    "德"
-  ]
 end

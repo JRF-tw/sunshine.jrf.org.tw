@@ -176,5 +176,9 @@ module ApplicationHelper
 
   def STORY_TYPES 
     Story.all.map(&:story_type).uniq
+  end
+    
+  def SCHEDULE_BRANCH_NAMES 
+    Schedule.all.map(&:branch_name).uniq
   end  
 end
