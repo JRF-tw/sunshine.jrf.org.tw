@@ -1,5 +1,5 @@
 class Scrap::ImportCourtContext < BaseContext
-  SCRAP_URI = "http://csdi.judicial.gov.tw/abbs/wkw/WHD3A00.jsp"
+  SCRAP_URI = "http://jirs.judicial.gov.tw/FJUD/FJUDQRY01_1.aspx"
   before_perform :find_or_create_court
 
   class << self
@@ -14,9 +14,10 @@ class Scrap::ImportCourtContext < BaseContext
     def get_court_data
       @scrap_data = []
       response_data = Mechanize.new.get(SCRAP_URI)
-      response_data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
-      response_data.css("option").each do |data|
-        @scrap_data << { fullname: data.text, code: data.attr("value") }
+      response_data =  Nokogiri::HTML(response_data.body)
+      data =  response_data.css("table")[2].css("select")[0].css("option")
+      data.each do |data|
+        @scrap_data << { fullname: data.text, code: data.attr("value").gsub(data.text, "").squish }
       end
       return @scrap_data
     rescue => e

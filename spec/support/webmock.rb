@@ -13,7 +13,7 @@ module Webmock
     stub_request(:get, /http:\/\/csdi\.judicial\.gov\.tw\/abbs\/wkw\/WHD3A01_DOWNLOADCVS\.jsp/).
       to_return(status: 200, body: File.read("#{Rails.root}/spec/fixtures/scrap_data/tph_dpt.csv"))
 
-    stub_request(:get, /http:\/\/csdi\.judicial\.gov\.tw\/abbs\/wkw\/WHD3A00\.jsp/).
+    stub_request(:get, /http:\/\/jirs\.judicial\.gov\.tw\/FJUD\/FJUDQRY01_1\.aspx/).
       to_return(status: 200, body: File.read("#{Rails.root}/spec/fixtures/scrap_data/courts_info.html"))
   end
 end
