@@ -30,4 +30,9 @@ FactoryGirl.define do
       avatar File.open "#{Rails.root}/spec/fixtures/person_avatar/people-1.jpg"
     end
   end
+
+  factory :judge_for_params, class: Judge do
+    name "不理不理左衛門"
+  end  
+
 end
