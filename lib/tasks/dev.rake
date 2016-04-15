@@ -135,7 +135,7 @@ namespace :dev do
   task :fake_judgments => :environment do
     Judgment.destroy_all
     50.times do |i|
-      court = Admin::Court.judges.sample
+      court = Admin::Court.courts.sample
       presiding_judge = Admin::Profile.judges.sample
       main_judge = Admin::Profile.judges.sample
       judge_nos = ["我的願構調王出#{i}", "那作之所好能一地#{i}", "新布類系眼美成的子#{i}", "晚適事制質一銷可麗民#{i}", "色手黃備型食勢我成原動#{i}"]

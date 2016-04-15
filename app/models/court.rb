@@ -20,7 +20,7 @@ class Court < ActiveRecord::Base
   has_many :schedules
   has_many :branches
 
-  def self.judges
+  def self.courts
     where(court_type: "法院")
   end
 

@@ -136,8 +136,8 @@ module ApplicationHelper
     hash
   end
 
-  def collection_for_judges
-    Court.judges.order_by_weight.map{ |c| c.full_name }.unshift("全部法院")
+  def collection_for_courts
+    Court.courts.order_by_weight.map{ |c| c.full_name }.unshift("全部法院")
   end
 
   def collection_for_prosecutors
