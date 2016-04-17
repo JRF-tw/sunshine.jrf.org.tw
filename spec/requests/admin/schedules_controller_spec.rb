@@ -8,9 +8,7 @@ RSpec.describe Admin::SchedulesController do
 
     context "search the branch_name of schedules" do
       before { get "/admin/schedules", q: { branch_name: schedule.branch_name } }
-      it {
-        expect(response.body).to match(schedule.branch_name)
-      }
+      it { expect(response.body).to match(schedule.branch_name) }
     end 
 
     context "render success" do

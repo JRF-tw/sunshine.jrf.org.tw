@@ -7,12 +7,12 @@
           .control-group
             label.control-label= f.label :branch_name_eq
             .controls= f.select :branch_name_eq,
-            self.SCHEDULE_BRANCH_NAMES, include_blank: "請選擇"
+            self.collect_for_schedule_branch_names, include_blank: "請選擇"
         .span6
           .control-group
             label.control-label= f.label :court_full_name_eq
             .controls= f.select :court_full_name_eq,
-            self.COURT_FULL_NAMES, include_blank: "請選擇"
+            self.collect_for_court_full_names, include_blank: "請選擇"
       .row
         .span6
           .control-group#datepicker
@@ -40,7 +40,7 @@
         - @schedules.each do |schedule|
           tr
             td= schedule.id
-            td= schedule.court.full_name
+            td= schedule.court.try(:full_name)
             td= schedule.story.number
             td= schedule.branch_name
             td= schedule.date

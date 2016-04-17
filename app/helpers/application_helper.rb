@@ -174,15 +174,15 @@ module ApplicationHelper
     return arr.join(" ")
   end
 
-  def STORY_TYPES 
+  def collect_for_story_types
     Story.all.map(&:story_type).uniq
   end
     
-  def SCHEDULE_BRANCH_NAMES 
+  def collect_for_schedule_branch_names
     Schedule.all.map(&:branch_name).uniq
   end  
 
-  def COURT_FULL_NAMES
+  def collect_for_court_full_names
     Court.all.judges.map(&:full_name).uniq
   end  
 end
