@@ -11,12 +11,8 @@
 #  updated_at  :datetime         not null
 #
 
-FactoryGirl.define do
-  factory :schedule do
-    branch_name "股別名稱"
-    date { Date.current }
-    court { FactoryGirl.create :court }
-    story { FactoryGirl.create :story }
-  end
+class Admin::Schedule < ::Schedule
+  belongs_to :story
+  belongs_to :court
 
 end

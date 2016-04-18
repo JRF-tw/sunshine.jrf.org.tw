@@ -7,7 +7,7 @@
           .control-group
             label.control-label= f.label :story_type_eq
             .controls= f.select :story_type_eq,
-            self.STORY_TYPES, include_blank: "請選擇"
+            self.collect_for_story_types, include_blank: "請選擇"
 
         .span6
           .control-group

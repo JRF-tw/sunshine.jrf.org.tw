@@ -1,0 +1,48 @@
+= search_form_for @search, :url => admin_schedules_path, :wrapper => :admin, :html => { :class => "form-horizontal" } do |f|
+  .well
+    fieldset
+      legend 搜尋      
+      .row
+        .span6
+          .control-group
+            label.control-label= f.label :branch_name_eq
+            .controls= f.select :branch_name_eq,
+            self.collect_for_schedule_branch_names, include_blank: "請選擇"
+        .span6
+          .control-group
+            label.control-label= f.label :court_full_name_eq
+            .controls= f.select :court_full_name_eq,
+            self.collect_for_court_full_names, include_blank: "請選擇"
+      .row
+        .span6
+          .control-group#datepicker
+            label.control-label= f.label :date_gteq
+            .controls= f.search_field :date_gteq, placeholder: "起始時間，非必填"
+            label.control-label= f.label :date_lteq
+            .controls= f.search_field :date_lteq, placeholder: "結束時間，非必填"
+  
+    .form-actions
+      = f.submit :value => "搜尋", :class => "btn btn-primary"
+      = " "
+      = link_to "清空搜尋結果", admin_schedules_path, :class => "btn btn-default"
+
+= admin_widget_box "庭期表列表", icon: :pencil do
+  .dataTables_wrapper
+    table.table.table-bordered.table-striped.table-hover
+      thead
+        tr
+          th= sort_link(@search, :id, "#")
+          th= sort_link(@search, :court_full_name, "開庭法院")
+          th= sort_link(@search, :story_number, "案號")
+          th= sort_link(@search, :branch_name, "股別名稱")
+          th= sort_link(@search, :date, "開庭時間")
+      tbody
+        - @schedules.each do |schedule|
+          tr
+            td= schedule.id
+            td= schedule.court.try(:full_name)
+            td= schedule.story.number
+            td= schedule.branch_name
+            td= schedule.date
+    .ui-toolbar.ui-widget-header
+      = paginate @schedules, theme: :admin

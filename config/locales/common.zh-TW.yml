@@ -224,3 +224,8 @@ zh-TW:
         year_eq: "年度"
         word_type_cont: "字別包含"
         number_eq: "案號"
+      schedule:
+        branch_name_eq: "股別名稱"
+        court_full_name_eq: "法院名稱"
+        date_gteq: "開庭日期"
+        date_lteq: "~"

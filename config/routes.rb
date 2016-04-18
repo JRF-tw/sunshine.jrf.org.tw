@@ -52,5 +52,6 @@ Rails.application.routes.draw do
     resources :suit_banners
     resources :users
     resources :stories
+    resources :schedules
   end
 end

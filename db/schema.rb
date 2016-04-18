@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160408074543) do
+ActiveRecord::Schema.define(version: 20160413053648) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
   enable_extension "postgis"
+  enable_extension "hstore"
 
   create_table "articles", force: :cascade do |t|
     t.integer  "profile_id"
@@ -398,7 +398,7 @@ ActiveRecord::Schema.define(version: 20160408074543) do
   create_table "schedules", force: :cascade do |t|
     t.integer  "story_id"
     t.integer  "court_id"
-    t.integer  "branch_name"
+    t.string   "branch_name"
     t.date     "date"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
