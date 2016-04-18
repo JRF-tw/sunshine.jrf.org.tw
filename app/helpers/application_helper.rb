@@ -184,5 +184,4 @@ module ApplicationHelper
 
   def collect_for_court_full_names
     Court.all.judges.map(&:full_name).uniq
-  end  
-end
+
