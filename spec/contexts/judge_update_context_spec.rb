@@ -9,6 +9,11 @@ describe JudgeUpdateContext do
     context "success" do  
       it { expect { subject.perform(params) }.to change { judge.name }.to eq(params[:name]) } 
     end
+
+    context "name can't be empty" do 
+      let(:empty_name) { attributes_for(:empty_name_for_judge) }
+      it { expect { subject.perform(empty_name) }.not_to change{ judge } }
+    end
   end
     
 end  

@@ -1,4 +1,4 @@
-= f.input :court_id, as: :select, collection: Court.courts.map{ |c| [c.name, c.id] }, include_blank: "請選擇", input_html: { class: 'chosen-select' }
+= f.input :court_id, as: :select, collection: self.collect_for_court, include_blank: "請選擇", input_html: { class: 'chosen-select' }
 = f.input :main_judge_id, as: :select, collection: Profile.judges.map{ |p| [p.name, p.id] }, include_blank: "請選擇", input_html: { class: 'chosen-select' }
 = f.input :presiding_judge_id, collection: Profile.judges.map{ |p| [p.name, p.id] }, include_blank: "請選擇", input_html: { class: 'chosen-select' }
 = f.input :judge_ids, as: :select, collection: Profile.judges.map{ |p| [p.name, p.id] }, include_blank: "請選擇", input_html: { multiple: true, class: 'chosen-select' }

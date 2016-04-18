@@ -20,7 +20,7 @@
           .control-group
             label.control-label= f.label :court_full_name_eq
             .controls= f.select :court_full_name_eq,
-            self.COURT_FULL_NAMES, include_blank: "請選擇"
+            self.collect_for_court_full_names, include_blank: "請選擇"
     hr
     .form-actions
       = f.submit :value => "搜尋", :class => "btn btn-primary"
@@ -58,6 +58,6 @@
               | &nbsp;
               = link_to "編輯", edit_admin_judge_path(judge), class: "btn btn-mini btn-success"
               | &nbsp;
-              = link_to "刪除", admin_judge_path(judge), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除個人檔案 - #{judge.name}？"
+              = link_to "刪除", admin_judge_path(judge), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除該法官檔案 - #{judge.name}？"
     .ui-toolbar.ui-widget-header
       = paginate @judges, theme: :admin
