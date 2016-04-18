@@ -28,12 +28,5 @@ class Admin::Judge < ::Judge
   has_many :branches
   belongs_to :court , class_name: "Court", foreign_key: :current_court_id
 
-
-  GENDER_TYPES = [
-    "男",
-    "女",
-    "其他"
-  ]
-
   validates_presence_of :name
 end
