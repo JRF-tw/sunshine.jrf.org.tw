@@ -11,6 +11,7 @@ namespace :dev do
     "dev:fake_users",
     "dev:fake_courts",
     "dev:fake_profiles",
+    "dev:fake_judges",
     "dev:fake_educations",
     "dev:fake_careers",
     "dev:fake_licenses",
@@ -59,6 +60,15 @@ namespace :dev do
       Admin::Profile.create!(name: n, current: "檢察官", gender: Admin::Profile::GENDER_TYPES.sample, birth_year: (50..70).to_a.sample, avatar: file, is_active:true, is_hidden: false)
     end
   end
+
+  task :fake_judges => :environment do
+    Judge.destroy_all
+    judge_name = ["連添泰", "蕭健銘", "謝孟蓮", "陳信宏", "趙定輝", "賴雅婷", "梁貴鑫", "林旭弘", "陳宛臻", "陳幸愛", "李欣宸", "阮宜臻"]
+    judge_name.each_with_index do |n, i|
+      file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-#{i+1}.jpg"
+      Court.all.courts.sample.judges.create!(name: n, gender: Admin::Judge::GENDER_TYPES.sample, birth_year: (50..70).to_a.sample, avatar: file, is_active:true, is_hidden: false)
+    end
+  end  
 
   task :fake_educations => :environment do
     Education.destroy_all

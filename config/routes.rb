@@ -53,5 +53,6 @@ Rails.application.routes.draw do
     resources :users
     resources :stories
     resources :schedules
+    resources :judges
   end
 end
