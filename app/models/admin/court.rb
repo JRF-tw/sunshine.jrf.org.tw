@@ -19,7 +19,7 @@ class Admin::Court < ::Court
   validates_presence_of :court_type, :full_name
   validates_uniqueness_of :full_name, :name
 
-	def self.get_courts
+  def self.get_courts
     where(court_type: "法院")
   end
 
