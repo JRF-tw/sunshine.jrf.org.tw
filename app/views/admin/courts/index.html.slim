@@ -7,7 +7,7 @@
           .control-group
             label.control-label= f.label :court_type_eq
             .controls= f.select :court_type_eq,
-            self.collect_for_court_types, include_blank: "請選擇"
+            collect_for_court_types, include_blank: "請選擇"
       .row  
         .span6
           .control-group
