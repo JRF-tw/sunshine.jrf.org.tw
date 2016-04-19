@@ -21,7 +21,8 @@ class BaseUploader < CarrierWave::Uploader::Base
     "admin/suit" => "suit",
     "admin/profile" => "profile",
     "admin/banner" => "banner",
-    "admin/suit_banner" => "suit_banner"
+    "admin/suit_banner" => "suit_banner",
+    "admin/judge" => "judge"
   }
 
   def store_dir

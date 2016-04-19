@@ -30,7 +30,7 @@ class Admin::JudgesController < Admin::BaseController
     @search = Judge.all.ransack(params[:q])
     @judges =@search.result.page(params[:page]).per(20)
     @admin_page_title = "法官列表"
-    add_crumb @admin_page_title, "admin/judges"
+    add_crumb @admin_page_title, "#"
   end
 
   def show
