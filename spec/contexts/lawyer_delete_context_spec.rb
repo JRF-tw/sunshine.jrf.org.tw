@@ -9,7 +9,7 @@ describe LawyerDeleteContext do
   end  
 
   context "has story" do
-    let!(:lawyer_with_story) {FactoryGirl.create :lawyer, :with_story}
+    let!(:lawyer_with_story) { FactoryGirl.create :lawyer, :with_story }
     subject { described_class.new(lawyer_with_story) }
     it { expect { subject.perform }.not_to change { Lawyer.count } }
   end  

@@ -1,5 +1,5 @@
 = f.input :name
-= f.input :current, as: :select, collection: Admin::Lawyer::CURRENT_TYPES, include_blank: "請選擇"
+= f.input :current
 - if f.object.avatar?
   .control-group
     label.control-label 已上傳頭像：

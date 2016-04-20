@@ -21,12 +21,6 @@ class Admin::Lawyer < ::Lawyer
   validates_presence_of :name
   mount_uploader :avatar, ProfileAvatarUploader
 
-  CURRENT_TYPES = [
-    "見習律師",
-    "律師",
-    "大律師"
-  ]
-
   GENDER_TYPES = [
     "男",
     "女",
