@@ -54,11 +54,11 @@ namespace :dev do
     prosecutor_name = ["郭耿妹", "蔡宜玉", "賴枝仰", "李孟霞", "洪偉裕", "張育如", "黃秀琴", "吳秀芬", "周哲銘", "施依婷", "賴元士", "王珮瑜"]
     judge_name.each_with_index do |n, i|
       file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-#{i+1}.jpg"
-      Admin::Profile.create!(name: n, current: "法官", gender: Admin::Profile::GENDER_TYPES.sample, birth_year: rand(50..70), avatar: file, is_active:true, is_hidden: false)
+      Admin::Profile.create!(name: n, current: "法官", gender: User::GENDER_TYPES.sample, birth_year: rand(50..70), avatar: file, is_active:true, is_hidden: false)
     end
     prosecutor_name.each_with_index do |n, i|
       file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-#{i+13}.jpg"
-      Admin::Profile.create!(name: n, current: "檢察官", gender: Admin::Profile::GENDER_TYPES.sample, birth_year: rand(50..70), avatar: file, is_active:true, is_hidden: false)
+      Admin::Profile.create!(name: n, current: "檢察官", gender: User::GENDER_TYPES.sample, birth_year: rand(50..70), avatar: file, is_active:true, is_hidden: false)
     end
   end
 
