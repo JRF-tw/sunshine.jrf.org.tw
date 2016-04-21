@@ -51,11 +51,5 @@ class Admin::Profile < ::Profile
     "其他"
   ]
 
-  GENDER_TYPES = [
-    "男",
-    "女",
-    "其他"
-  ]
-
   validates_presence_of :name, :current
 end

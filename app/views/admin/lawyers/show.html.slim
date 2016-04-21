@@ -1,0 +1,24 @@
+= admin_widget_box "#{@lawyer.name}的個人檔案", icon: :th do
+  table.table.table-bordered.table-striped.table-hover
+    tbody
+      tr
+        td 姓名
+        td= @lawyer.name
+      tr
+        td 現職
+        td= @lawyer.current
+      tr
+        td 頭像
+        td
+          = image_tag @lawyer.avatar.L_180 if @lawyer.avatar.present?
+      tr
+        td 性別
+        td
+          = @lawyer.gender
+      tr
+        td 出生年
+        td
+          = "民國#{@lawyer.birth_year}年"
+      tr
+        td 備註
+        td= @lawyer.memo

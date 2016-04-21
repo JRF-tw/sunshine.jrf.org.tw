@@ -57,6 +57,13 @@ zh-TW:
         is_active: "在職中？"
         memo: "備註"
         is_hidden: "隱藏"
+      lawyer:
+        name: "姓名"
+        current: "現職"
+        avatar: "頭像"
+        gender: "性別"
+        birth_year: "出生年"
+        memo: "備註"
       education:
         title: "學經歷"
         content: "說明"
@@ -250,4 +257,7 @@ zh-TW:
         is_hidden_true: "不顯示於前端"
         name_cont: "姓名包含"
         court_full_name_eq: "任職法院"
+      lawyer:
+        name_cont: "姓名包含"
+        current_cont: "現職包含"
 

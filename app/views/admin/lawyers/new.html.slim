@@ -1,0 +1,3 @@
+= admin_widget_box "新增律師", icon: :pencil do
+  = simple_form_for @lawyer, url: admin_lawyers_path, method: :post, wrapper: :admin do |f|
+    = render partial: "form", object: f, as: :f
