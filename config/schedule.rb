@@ -26,3 +26,23 @@ if @environment == "production"
     # rake "sitemap:refresh:no_ping"
   end
 end
+
+# scrap courts
+every 7.day, :at => '1:00 am' do
+  runner "Scrap::ImportCourtContext.perform"
+end
+
+# scrap judges and branches
+every 1.day, :at => '1:10 am' do
+  runner "Scrap::ImportBranchAndJudgeContext.perform"
+end
+
+# scrap schedules
+every 1.day, :at => '1:30 am' do
+  runner "Scrap::ImportScheduleContext.perform_all"
+end
+
+# scrap verdicts
+every 1.day, :at => '2:00 am' do
+  runner "Scrap::GetVerdictsContext.perform_all"
+end
