@@ -1,0 +1,49 @@
+= search_form_for @search, :url => admin_lawyers_path, :wrapper => :admin, :html => { :class => "form-horizontal" } do |f|
+  .well
+    fieldset
+      legend 搜尋
+      .row
+        .span6
+          .control-group
+            label.control-label= f.label :name_cont
+            .controls= f.search_field :name_cont
+        .span6
+          .control-group
+            label.control-label= f.label :current_eq
+            .controls= f.select :current_eq,
+            collect_for_lawyer_currents, include_blank: "請選擇"
+    hr
+    .form-actions
+      = f.submit :value => "搜尋", :class => "btn btn-primary"
+      = " "
+      = link_to "清空搜尋結果", admin_lawyers_path, :class => "btn btn-default"
+= admin_widget_box "律師列表", icon: :pencil do
+  .dataTables_wrapper
+    div
+      .dataTables_length
+        = link_to "新增律師", new_admin_lawyer_path, class: "btn btn-primary btn-mini"
+    table.table.table-bordered.table-striped.table-hover
+      thead
+        tr
+          th #
+          th 名稱
+          th 性別
+          th 現職
+          th 備註
+          th
+      tbody
+        - @lawyers.each do |lawyer|
+          tr
+            td= lawyer.id
+            td= lawyer.name
+            td= lawyer.gender
+            td= lawyer.current
+            td= lawyer.memo
+            td
+              = link_to "詳細資料", admin_lawyer_path(lawyer), class: "btn btn-mini"
+              | &nbsp;
+              = link_to "編輯", edit_admin_lawyer_path(lawyer), class: "btn btn-mini btn-success"
+              | &nbsp;
+              = link_to "刪除", admin_lawyer_path(lawyer), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除該律師檔案 - #{lawyer.name}？"
+    .ui-toolbar.ui-widget-header
+      = paginate @lawyers, theme: :admin

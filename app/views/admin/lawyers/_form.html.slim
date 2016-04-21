@@ -1,0 +1,16 @@
+= f.input :name
+= f.input :current, as: :select, collection: Admin::Lawyer::CURRENT_TYPES, include_blank: "請選擇"
+- if f.object.avatar?
+  .control-group
+    label.control-label 已上傳頭像：
+    .controls= image_tag f.object.avatar.L_180.url
+    = f.input :remove_avatar, as: :boolean
+= f.input :avatar, as: :file
+= f.input :gender, as: :select, collection: Admin::Lawyer::GENDER_TYPES, include_blank: "請選擇"
+= f.input :birth_year, hint: "半型純數字，民國"
+= f.input :memo, as: :text, input_html: { rows: 5 }
+.form-actions
+  = f.submit "送出", class: "btn btn-primary"
+  = " "
+  = link_to admin_lawyers_path, class: "btn" do
+    | 回到律師列表
