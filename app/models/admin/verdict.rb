@@ -10,5 +10,5 @@
 #
 
 class Admin::Verdict < ::Verdict
-  belongs_to :story
+
 end

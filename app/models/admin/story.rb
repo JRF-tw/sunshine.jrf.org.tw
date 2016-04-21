@@ -14,14 +14,6 @@
 #
 
 class Admin::Story < ::Story
-  has_many :judge_stories
-  has_many :judges, through: :judge_stories
-  has_many :lawyer_stories
-  has_many :lawyer, through: :lawyer_stories
-  has_many :schedules
-  has_many :verdicts
-  belongs_to :court
 
-  
 end 
   
