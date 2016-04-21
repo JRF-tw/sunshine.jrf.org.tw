@@ -15,13 +15,16 @@ class Scrap::ImportCourtContext < BaseContext
       @scrap_data = []
       response_data = Mechanize.new.get(SCRAP_URI)
       response_data =  Nokogiri::HTML(response_data.body)
-      data =  response_data.css("table")[2].css("select")[0].css("option")
-      data.each do |data|
+      parse_courts_data(response_data).each do |data|
         @scrap_data << { fullname: data.text, code: data.attr("value").gsub(data.text, "").squish }
       end
       return @scrap_data
     rescue => e
       puts "cant scrap website"
+    end
+
+    def parse_courts_data(response_data)
+      return response_data.css("table")[2].css("select")[0].css("option")
     end
   end
 
