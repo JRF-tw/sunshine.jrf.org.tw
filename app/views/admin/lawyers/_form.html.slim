@@ -6,7 +6,7 @@
     .controls= image_tag f.object.avatar.L_180.url
     = f.input :remove_avatar, as: :boolean
 = f.input :avatar, as: :file
-= f.input :gender, as: :select, collection: gender_types, include_blank: "請選擇"
+= f.input :gender, as: :select, collection: collect_gender_by_user, include_blank: "請選擇"
 = f.input :birth_year, hint: "半型純數字，民國"
 = f.input :memo, as: :text, input_html: { rows: 5 }
 .form-actions

@@ -29,4 +29,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
   devise :async
+
+  GENDER_TYPES = ["男", "女", "其他"]
 end

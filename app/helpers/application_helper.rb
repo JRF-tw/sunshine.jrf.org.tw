@@ -194,16 +194,12 @@ module ApplicationHelper
     Court.get_courts.map{ |c| [c.name, c.id] }
   end
   
-  def gender_types 
-    ["男", "女", "其他"]
-  end  
-
   def collect_for_lawyer_currents
     Lawyer.all.map(&:current).uniq
   end 
 
-  def gender_types 
-    ["男", "女", "其他"]
+  def collect_gender_by_user 
+    User::GENDER_TYPES
   end
 
 end
