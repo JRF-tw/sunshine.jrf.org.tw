@@ -58,6 +58,6 @@ class Scrap::ImportVerdictContext < BaseContext
   end
 
   def upload_file
-    # TODO upload to S3
+    Scrap::UploadVerdictContext.new(@orginal_data).perform(@verdict)
   end
 end
