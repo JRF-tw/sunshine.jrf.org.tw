@@ -1,0 +1,44 @@
+- content_for :btns do
+  = link_to "編輯", edit_admin_judge_path(@judge), class: "btn btn-large btn-success"
+
+= admin_widget_box "#{@judge.name}的個人檔案", icon: :th do
+  table.table.table-bordered.table-striped.table-hover
+    tbody
+      tr
+        td 姓名
+        td= @judge.name
+      tr
+        td 頭像
+        td
+          = image_tag @judge.avatar.L_180 if @judge.avatar.present?
+      tr
+        td 性別
+        td
+          = @judge.gender
+          - if @judge.gender_source.present?
+            br
+            = "來源：#{@judge.gender_source}"
+      tr
+        td 出生年
+        td
+          = "民國#{@judge.birth_year}年"
+          - if @judge.birth_year_source.present?
+            br
+            = "來源：#{@judge.birth_year_source}"
+      tr
+        td 司訓所期別
+        td
+          = @judge.stage
+          - if @judge.stage_source.present?
+            br
+            = "來源：#{@judge.stage_source}"
+      tr
+        td 任用資格
+        td
+          = @judge.appointment
+          - if @judge.appointment_source.present?
+            br
+            = "來源：#{@judge.appointment_source}"
+      tr
+        td 備註
+        td= @judge.memo

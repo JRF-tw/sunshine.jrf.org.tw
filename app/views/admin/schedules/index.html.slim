@@ -7,12 +7,12 @@
           .control-group
             label.control-label= f.label :branch_name_eq
             .controls= f.select :branch_name_eq,
-            self.collect_for_schedule_branch_names, include_blank: "請選擇"
+            collect_for_schedule_branch_names, include_blank: "請選擇"
         .span6
           .control-group
             label.control-label= f.label :court_full_name_eq
             .controls= f.select :court_full_name_eq,
-            self.collect_for_court_full_names, include_blank: "請選擇"
+            collect_for_court_full_names, include_blank: "請選擇"
       .row
         .span6
           .control-group#datepicker

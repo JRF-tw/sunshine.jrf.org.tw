@@ -41,6 +41,22 @@ zh-TW:
         is_active: "在職中？"
         memo: "備註"
         is_hidden: "隱藏"
+      judge:
+        name: "姓名"
+        court: "任職法院"
+        remove_avatar: "移除現有頭像"
+        avatar: "頭像"
+        gender: "性別"
+        gender_source: "性別來源"
+        birth_year: "出生年"
+        birth_year_source: "出生年來源"
+        stage: "司訓所期別"
+        stage_source: "司訓所期別來源"
+        appointment: "任用資格"
+        appointment_source: "任用資格來源"
+        is_active: "在職中？"
+        memo: "備註"
+        is_hidden: "隱藏"
       education:
         title: "學經歷"
         content: "說明"
@@ -229,3 +245,9 @@ zh-TW:
         court_full_name_eq: "法院名稱"
         date_gteq: "開庭日期"
         date_lteq: "~"
+      judge:
+        is_active_true: "在職中"
+        is_hidden_true: "不顯示於前端"
+        name_cont: "姓名包含"
+        court_full_name_eq: "任職法院"
+

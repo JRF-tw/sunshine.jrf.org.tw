@@ -136,8 +136,8 @@ module ApplicationHelper
     hash
   end
 
-  def collection_for_judges
-    Court.judges.order_by_weight.map{ |c| c.full_name }.unshift("全部法院")
+  def collection_for_courts
+    Court.get_courts.order_by_weight.map{ |c| c.full_name }.unshift("全部法院")
   end
 
   def collection_for_prosecutors
@@ -183,6 +183,20 @@ module ApplicationHelper
   end  
 
   def collect_for_court_full_names
-    Court.all.judges.map(&:full_name).uniq
+    Court.all.get_courts.map(&:full_name).uniq
+  end
+
+  def collect_for_court_types
+    Court.all.map(&:court_type).uniq
+  end
+
+  def collect_for_court
+    Court.get_courts.map{ |c| [c.name, c.id] }
+  end
+  
+  def gender_types 
+    ["男", "女", "其他"]
   end  
+
 end
+

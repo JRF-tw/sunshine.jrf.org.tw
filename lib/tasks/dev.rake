@@ -11,6 +11,7 @@ namespace :dev do
     "dev:fake_users",
     "dev:fake_courts",
     "dev:fake_profiles",
+    "dev:fake_judges",
     "dev:fake_educations",
     "dev:fake_careers",
     "dev:fake_licenses",
@@ -35,7 +36,7 @@ namespace :dev do
 
   task :fake_courts => :environment do
     Court.destroy_all
-    court_type = Admin::Court::COURT_TYPES.sample
+    court_type = ["法院", "檢察署"].sample
     judge_name_hash = { "臺灣基隆地方法院": "基隆地院", "臺灣臺北地方法院": "臺北地院", "臺灣士林地方法院": "士林地院", "臺灣新北地方法院": "新北地院", "臺灣宜蘭地方法院": "宜蘭地院" }
     prosecutor_name_hash = { "臺灣臺北地方法院檢察署": "臺北地檢署", "臺灣彰化地方法院檢察署": "彰化地檢署", "臺灣臺南地方法院檢察署": "臺南地檢署", "臺灣臺中地方法院檢察署": "臺中地檢署" }
     judge_name_hash.each do |k, v|
@@ -59,6 +60,16 @@ namespace :dev do
       Admin::Profile.create!(name: n, current: "檢察官", gender: Admin::Profile::GENDER_TYPES.sample, birth_year: (50..70).to_a.sample, avatar: file, is_active:true, is_hidden: false)
     end
   end
+
+  task :fake_judges => :environment do
+    Judge.destroy_all
+    judge_name = ["連添泰", "蕭健銘", "謝孟蓮", "陳信宏", "趙定輝", "賴雅婷", "梁貴鑫", "林旭弘", "陳宛臻", "陳幸愛", "李欣宸", "阮宜臻"]
+    gender = ["男", "女", "其他"]
+    judge_name.each_with_index do |n, i|
+      file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-23.jpg"
+      Court.get_courts.sample.judges.create!(name: n, gender: gender.sample, birth_year: (50..70).to_a.sample, avatar: file, is_active:true, is_hidden: false)
+    end
+  end  
 
   task :fake_educations => :environment do
     Education.destroy_all
@@ -135,7 +146,7 @@ namespace :dev do
   task :fake_judgments => :environment do
     Judgment.destroy_all
     50.times do |i|
-      court = Admin::Court.judges.sample
+      court = Admin::Court.get_courts.sample
       presiding_judge = Admin::Profile.judges.sample
       main_judge = Admin::Profile.judges.sample
       judge_nos = ["我的願構調王出#{i}", "那作之所好能一地#{i}", "新布類系眼美成的子#{i}", "晚適事制質一銷可麗民#{i}", "色手黃備型食勢我成原動#{i}"]

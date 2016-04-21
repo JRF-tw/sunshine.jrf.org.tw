@@ -22,21 +22,11 @@
 #  updated_at         :datetime         not null
 #
 
-FactoryGirl.define do
-  factory :judge do
-    name "Raptor Judge"
+class Admin::Judge < ::Judge
+  has_many :judge_stories
+  has_many :stories, through: :judge_stories
+  has_many :branches
+  belongs_to :court , class_name: "Court", foreign_key: :current_court_id
 
-    trait :with_avatar do
-      avatar File.open "#{Rails.root}/spec/fixtures/person_avatar/people-1.jpg"
-    end
-  end
-
-  factory :judge_for_params, class: Judge do
-    name "不理不理左衛門"
-  end
-
-  factory :empty_name_for_judge, class: Judge do
-    name ""
-  end
-
+  validates_presence_of :name
 end
