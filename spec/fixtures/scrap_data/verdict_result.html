@@ -1,0 +1,440 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<HTML>
+  <HEAD>
+    <title>裁判書查詢</title>
+    <meta name="GENERATOR" Content="Microsoft Visual Studio .NET 7.1">
+    <meta name="CODE_LANGUAGE" Content="C#">
+    <meta name="vs_defaultClientScript" content="JavaScript">
+    <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="AAAccessible_website" content="本網站通過第一、第二及第三優先等級無障礙網頁檢測">
+    <script language="JavaScript" src="Js/Fyls.js"></script>
+    <NOSCRIPT>
+  </HEAD>
+  <BODY bgColor="#ffffff" leftMargin="0" topMargin="0">
+    您的瀏覽器不支援JavaScript語法,但是並不影響您獲取本網站的內容</NOSCRIPT>
+    <script language="JavaScript">
+function openwin(URL,arguments,width,height)
+{
+   //功能:開一個非獨佔的視窗
+   //參數1.URL :連結的網頁
+   //參數2.arguments :傳入網頁的參數
+   /*
+   var str = URL  //+"?"+arguments;
+   newWindow=top.open("","","maximize=no,toolbar=no,directories=no,status=yes,scrollbars=yes,hscrollbars=no,resize=no,menubar=no");
+
+   if(width==null&&height==null)
+   {
+     width=screen.width;
+     height=screen.availHeight;
+
+   }
+   if ((width!=null)&&(height!=null))
+      newWindow.resizeTo(width,height);
+   else
+      newWindow.resizeTo(screen.width,screen.availHeight);
+   newWindow.moveTo((screen.width-width)/2,(screen.availHeight-height)/2);
+   newWindow.location=str;
+   */
+   if((width==null&&height==null) || (width==''&&height==''))
+   {
+    width=screen.width;
+    height=screen.availHeight;
+   }
+   pars = "width="+width+",height="+height+",maximize=no,toolbar=no,directories=no,status=yes,scrollbars=yes,hscrollbars=no,resize=no,menubar=no";
+   newWindow=top.open(URL,"",pars);
+   newWindow.moveTo((screen.width-width)/2,(screen.availHeight-height)/2);
+}
+
+    </script>
+    <NOSCRIPT>
+      您的瀏覽器不支援JavaScript語法,但是並不影響您獲取本網站的內容</NOSCRIPT>
+    <form name="Form1" method="get" action="FJUDQRY02_1.aspx" id="Form1">
+<input type="hidden" name="__VIEWSTATE" value="dDwtMTg4OTgwMzM0MDs7PucsuTjuWgQt8tUgVwgnAKRunUaK" />
+
+<input type="hidden" name="__VIEWSTATEGENERATOR" value="6503F582" />
+
+      <table summary="排版用表格" style="WIDTH:760px" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <table summary="排版用表格" width="89%" border="0" align="center" cellpadding="3">
+        <tr>
+          <td colspan="2">
+            <div align="center"><strong><big> <span style="FONT-SIZE: 80%">
+                    臺灣高等法院 裁判書 -- 刑事類
+                  </span></big></strong>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <!-- 上方分頁 -->
+      <table summary="排版用表格" style="WIDTH:760px" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+          <td style="HEIGHT: 33px" background="Images_1/fjudqry01title.gif">
+            <table summary="排版用表格" width="338" border="0" cellspacing="0" cellpadding="0" class="big">
+              <tr>
+                <td>
+                  <div align="right"><span style="FONT-SIZE: 80%">有加底線者為可點選之項目</span></div>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+      <table summary="排版用表格" style="WIDTH:760px" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+          <td background="Images_1/fjudqry01table02.gif" align="center">
+            <div align="center">
+              <table summary="排版用表格" style="WIDTH:750px" border="0" align="center" cellpadding="0" cellspacing="0">
+
+                <tr>
+                  <td width="42%" valign="middle" align="center"><font size="2"> 共
+                      8
+                      筆 / 每頁
+                      20
+                      筆 / 共
+                      1
+                      頁 / 現在第
+                      1
+                      頁</font></td>
+                  <td width="58%" valign="middle">
+                    <div align="right">
+
+                      <font size="2">跳至<select name="ddlPage" id="ddlPage" onChange="selectPage(this.selectedIndex+1)">
+  <option selected="selected" value="1">1</option>
+
+</select>頁&nbsp;&nbsp;</font>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+              <TABLE class="big" id="Table3" borderColor="#e9e3d1" cellSpacing="0" cellPadding="3" width="735"
+                align="center" border="1">
+                <TBODY>
+
+                      <TR>
+                        <TH width="8%" height="25" align="center">
+                          <span style="font-size: 80%; color:#990000"><strong>序號</strong></span>
+                        </TH>
+                        <TH width="22%" height="25" align="left">
+                          <span style="font-size: 80%; color:#990000"><strong>裁判字號(檔案大小)</strong></span>
+                        </TH>
+                        <TH width="15%" height="25" align="left">
+                          <span style="font-size: 80%; color:#990000"><strong>裁判日期</strong></span>
+                        </TH>
+                        <TH width="33%" height="25" align="left">
+                          <span style="font-size: 80%; color:#990000"><strong>裁判案由</strong></span>
+                        </TH>
+
+                        <TH width="22%" height="25" align="left">&nbsp;</TH>
+
+                      </TR>
+
+                      <TR bgcolor="#FFFFFF">
+                        <!-- 序號 -->
+                        <TD width="8%" height="25">
+                          <DIV align="center"><FONT size="2">1</FONT></DIV>
+                        </TD>
+                        <!-- 裁判字號 -->
+                        <TD width="22%" height="25">
+                          <DIV align="left"><FONT size="2"><a href="FJUDQRY03_1.aspx?id=1&v_court=TPH+%e8%87%ba%e7%81%a3%e9%ab%98%e7%ad%89%e6%b3%95%e9%99%a2&v_sys=M&jud_year=&jud_case=&jud_no=&jud_no_end=&jud_title=&keyword=&sdate=20160416&edate=20160420&page=&searchkw=&jmain=&cw=0">105,上易緝,2</a> (2K)</FONT></DIV>
+                        </TD>
+                        <!-- 日期及案由 -->
+                        <TD width="15%" height="25">
+                          <DIV align="left"><FONT size="2">1050418</FONT></DIV>
+                        </TD>
+                        <TD width="23%" height="25">
+                          <DIV align="left"><FONT size="2">恐嚇</FONT></DIV>
+                        </TD>
+
+                        <!-- 歷審裁判 -->
+                        <TD width="32%" height="25">
+                          <DIV align="left"><FONT size="2"><a href="#" onClick="openwin('HISTORYSELF.aspx?SwitchFrom=1&selectedOwner=H&selectedCrmyy=105&selectedCrmid=%e4%b8%8a%e6%98%93%e7%b7%9d&selectedCrmno=000002&selectedCrtid=TPH','',1024,688)">歷審裁判</a></FONT></DIV>
+                        </TD>
+
+                      </TR>
+                      <!-- 不可公開或太早 -->
+
+
+                      <TR bgcolor="#FFFFFF">
+                        <!-- 序號 -->
+                        <TD width="8%" height="25">
+                          <DIV align="center"><FONT size="2">2</FONT></DIV>
+                        </TD>
+                        <!-- 裁判字號 -->
+                        <TD width="22%" height="25">
+                          <DIV align="left"><FONT size="2"><a href="FJUDQRY03_1.aspx?id=2&v_court=TPH+%e8%87%ba%e7%81%a3%e9%ab%98%e7%ad%89%e6%b3%95%e9%99%a2&v_sys=M&jud_year=&jud_case=&jud_no=&jud_no_end=&jud_title=&keyword=&sdate=20160416&edate=20160420&page=&searchkw=&jmain=&cw=0">105,上訴,238</a> (1K)</FONT></DIV>
+                        </TD>
+                        <!-- 日期及案由 -->
+                        <TD width="15%" height="25">
+                          <DIV align="left"><FONT size="2">1050418</FONT></DIV>
+                        </TD>
+                        <TD width="23%" height="25">
+                          <DIV align="left"><FONT size="2">毒品危害防制條例等</FONT></DIV>
+                        </TD>
+
+                        <!-- 歷審裁判 -->
+                        <TD width="32%" height="25">
+                          <DIV align="left"><FONT size="2"><a href="#" onClick="openwin('HISTORYSELF.aspx?SwitchFrom=1&selectedOwner=H&selectedCrmyy=105&selectedCrmid=%e4%b8%8a%e8%a8%b4&selectedCrmno=000238&selectedCrtid=TPH','',1024,688)">歷審裁判</a></FONT></DIV>
+                        </TD>
+
+                      </TR>
+                      <!-- 不可公開或太早 -->
+
+
+                      <TR bgcolor="#FFFFFF">
+                        <!-- 序號 -->
+                        <TD width="8%" height="25">
+                          <DIV align="center"><FONT size="2">3</FONT></DIV>
+                        </TD>
+                        <!-- 裁判字號 -->
+                        <TD width="22%" height="25">
+                          <DIV align="left"><FONT size="2"><a href="FJUDQRY03_1.aspx?id=3&v_court=TPH+%e8%87%ba%e7%81%a3%e9%ab%98%e7%ad%89%e6%b3%95%e9%99%a2&v_sys=M&jud_year=&jud_case=&jud_no=&jud_no_end=&jud_title=&keyword=&sdate=20160416&edate=20160420&page=&searchkw=&jmain=&cw=0">105,上訴,251</a> (1K)</FONT></DIV>
+                        </TD>
+                        <!-- 日期及案由 -->
+                        <TD width="15%" height="25">
+                          <DIV align="left"><FONT size="2">1050418</FONT></DIV>
+                        </TD>
+                        <TD width="23%" height="25">
+                          <DIV align="left"><FONT size="2">貪污治罪條例等</FONT></DIV>
+                        </TD>
+
+                        <!-- 歷審裁判 -->
+                        <TD width="32%" height="25">
+                          <DIV align="left"><FONT size="2"><a href="#" onClick="openwin('HISTORYSELF.aspx?SwitchFrom=1&selectedOwner=H&selectedCrmyy=105&selectedCrmid=%e4%b8%8a%e8%a8%b4&selectedCrmno=000251&selectedCrtid=TPH','',1024,688)">歷審裁判</a></FONT></DIV>
+                        </TD>
+
+                      </TR>
+                      <!-- 不可公開或太早 -->
+
+
+                      <TR bgcolor="#FFFFFF">
+                        <!-- 序號 -->
+                        <TD width="8%" height="25">
+                          <DIV align="center"><FONT size="2">4</FONT></DIV>
+                        </TD>
+                        <!-- 裁判字號 -->
+                        <TD width="22%" height="25">
+                          <DIV align="left"><FONT size="2"><a href="FJUDQRY03_1.aspx?id=4&v_court=TPH+%e8%87%ba%e7%81%a3%e9%ab%98%e7%ad%89%e6%b3%95%e9%99%a2&v_sys=M&jud_year=&jud_case=&jud_no=&jud_no_end=&jud_title=&keyword=&sdate=20160416&edate=20160420&page=&searchkw=&jmain=&cw=0">105,上訴,310</a> (1K)</FONT></DIV>
+                        </TD>
+                        <!-- 日期及案由 -->
+                        <TD width="15%" height="25">
+                          <DIV align="left"><FONT size="2">1050418</FONT></DIV>
+                        </TD>
+                        <TD width="23%" height="25">
+                          <DIV align="left"><FONT size="2">毒品危害防制條例等</FONT></DIV>
+                        </TD>
+
+                        <!-- 歷審裁判 -->
+                        <TD width="32%" height="25">
+                          <DIV align="left"><FONT size="2"><a href="#" onClick="openwin('HISTORYSELF.aspx?SwitchFrom=1&selectedOwner=H&selectedCrmyy=105&selectedCrmid=%e4%b8%8a%e8%a8%b4&selectedCrmno=000310&selectedCrtid=TPH','',1024,688)">歷審裁判</a></FONT></DIV>
+                        </TD>
+
+                      </TR>
+                      <!-- 不可公開或太早 -->
+
+
+                      <TR bgcolor="#FFFFFF">
+                        <!-- 序號 -->
+                        <TD width="8%" height="25">
+                          <DIV align="center"><FONT size="2">5</FONT></DIV>
+                        </TD>
+                        <!-- 裁判字號 -->
+                        <TD width="22%" height="25">
+                          <DIV align="left"><FONT size="2"><a href="FJUDQRY03_1.aspx?id=5&v_court=TPH+%e8%87%ba%e7%81%a3%e9%ab%98%e7%ad%89%e6%b3%95%e9%99%a2&v_sys=M&jud_year=&jud_case=&jud_no=&jud_no_end=&jud_title=&keyword=&sdate=20160416&edate=20160420&page=&searchkw=&jmain=&cw=0">105,抗,275</a> (8K)</FONT></DIV>
+                        </TD>
+                        <!-- 日期及案由 -->
+                        <TD width="15%" height="25">
+                          <DIV align="left"><FONT size="2">1050418</FONT></DIV>
+                        </TD>
+                        <TD width="23%" height="25">
+                          <DIV align="left"><FONT size="2">交付審判</FONT></DIV>
+                        </TD>
+
+                        <!-- 歷審裁判 -->
+                        <TD width="32%" height="25">
+                          <DIV align="left"><FONT size="2"><a href="#" onClick="openwin('HISTORYSELF.aspx?SwitchFrom=1&selectedOwner=H&selectedCrmyy=105&selectedCrmid=%e6%8a%97&selectedCrmno=000275&selectedCrtid=TPH','',1024,688)">歷審裁判</a></FONT></DIV>
+                        </TD>
+
+                      </TR>
+                      <!-- 不可公開或太早 -->
+
+
+                      <TR bgcolor="#FFFFFF">
+                        <!-- 序號 -->
+                        <TD width="8%" height="25">
+                          <DIV align="center"><FONT size="2">6</FONT></DIV>
+                        </TD>
+                        <!-- 裁判字號 -->
+                        <TD width="22%" height="25">
+                          <DIV align="left"><FONT size="2"><a href="FJUDQRY03_1.aspx?id=6&v_court=TPH+%e8%87%ba%e7%81%a3%e9%ab%98%e7%ad%89%e6%b3%95%e9%99%a2&v_sys=M&jud_year=&jud_case=&jud_no=&jud_no_end=&jud_title=&keyword=&sdate=20160416&edate=20160420&page=&searchkw=&jmain=&cw=0">105,抗,314</a> (7K)</FONT></DIV>
+                        </TD>
+                        <!-- 日期及案由 -->
+                        <TD width="15%" height="25">
+                          <DIV align="left"><FONT size="2">1050418</FONT></DIV>
+                        </TD>
+                        <TD width="23%" height="25">
+                          <DIV align="left"><FONT size="2">聲請具保停止羈押</FONT></DIV>
+                        </TD>
+
+                        <!-- 歷審裁判 -->
+                        <TD width="32%" height="25">
+                          <DIV align="left"><FONT size="2"><a href="#" onClick="openwin('HISTORYSELF.aspx?SwitchFrom=1&selectedOwner=H&selectedCrmyy=105&selectedCrmid=%e6%8a%97&selectedCrmno=000314&selectedCrtid=TPH','',1024,688)">歷審裁判</a></FONT></DIV>
+                        </TD>
+
+                      </TR>
+                      <!-- 不可公開或太早 -->
+
+
+                      <TR bgcolor="#FFFFFF">
+                        <!-- 序號 -->
+                        <TD width="8%" height="25">
+                          <DIV align="center"><FONT size="2">7</FONT></DIV>
+                        </TD>
+                        <!-- 裁判字號 -->
+                        <TD width="22%" height="25">
+                          <DIV align="left"><FONT size="2"><a href="FJUDQRY03_1.aspx?id=7&v_court=TPH+%e8%87%ba%e7%81%a3%e9%ab%98%e7%ad%89%e6%b3%95%e9%99%a2&v_sys=M&jud_year=&jud_case=&jud_no=&jud_no_end=&jud_title=&keyword=&sdate=20160416&edate=20160420&page=&searchkw=&jmain=&cw=0">105,聲,992</a> (2K)</FONT></DIV>
+                        </TD>
+                        <!-- 日期及案由 -->
+                        <TD width="15%" height="25">
+                          <DIV align="left"><FONT size="2">1050418</FONT></DIV>
+                        </TD>
+                        <TD width="23%" height="25">
+                          <DIV align="left"><FONT size="2">聲請定其應執行刑</FONT></DIV>
+                        </TD>
+
+                        <!-- 歷審裁判 -->
+                        <TD width="32%" height="25">
+                          <DIV align="left"><FONT size="2"><a href="#" onClick="openwin('HISTORYSELF.aspx?SwitchFrom=1&selectedOwner=H&selectedCrmyy=105&selectedCrmid=%e8%81%b2&selectedCrmno=000992&selectedCrtid=TPH','',1024,688)">歷審裁判</a></FONT></DIV>
+                        </TD>
+
+                      </TR>
+                      <!-- 不可公開或太早 -->
+
+
+                      <TR bgcolor="#FFFFFF">
+                        <!-- 序號 -->
+                        <TD width="8%" height="25">
+                          <DIV align="center"><FONT size="2">8</FONT></DIV>
+                        </TD>
+                        <!-- 裁判字號 -->
+                        <TD width="22%" height="25">
+                          <DIV align="left"><FONT size="2"><a href="FJUDQRY03_1.aspx?id=8&v_court=TPH+%e8%87%ba%e7%81%a3%e9%ab%98%e7%ad%89%e6%b3%95%e9%99%a2&v_sys=M&jud_year=&jud_case=&jud_no=&jud_no_end=&jud_title=&keyword=&sdate=20160416&edate=20160420&page=&searchkw=&jmain=&cw=0">105,聲,1111</a> (6K)</FONT></DIV>
+                        </TD>
+                        <!-- 日期及案由 -->
+                        <TD width="15%" height="25">
+                          <DIV align="left"><FONT size="2">1050418</FONT></DIV>
+                        </TD>
+                        <TD width="23%" height="25">
+                          <DIV align="left"><FONT size="2">聲請定其應執行刑</FONT></DIV>
+                        </TD>
+
+                        <!-- 歷審裁判 -->
+                        <TD width="32%" height="25">
+                          <DIV align="left"><FONT size="2"><a href="#" onClick="openwin('HISTORYSELF.aspx?SwitchFrom=1&selectedOwner=H&selectedCrmyy=105&selectedCrmid=%e8%81%b2&selectedCrmno=001111&selectedCrtid=TPH','',1024,688)">歷審裁判</a></FONT></DIV>
+                        </TD>
+
+                      </TR>
+                      <!-- 不可公開或太早 -->
+
+
+                </TBODY>
+              </TABLE>
+              <table summary="排版用表格" style="WIDTH:750px" border="0" align="center" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td width="42%" valign="middle" align="center"><font size="2"> 共
+                      8
+                      筆 / 每頁
+                      20
+                      筆 / 共
+                      1
+                      頁 / 現在第
+                      1
+                      頁</font></td>
+                  <td width="58%" valign="middle">
+                    <div align="right">
+
+                      <font size="2">跳至<select name="ddlPage2" id="ddlPage2" onChange="selectPage(this.selectedIndex+1)">
+  <option selected="selected" value="1">1</option>
+
+</select>頁&nbsp;&nbsp;</font>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="HEIGHT: 10px"><img src="Images_1/fjudqry01table03.gif" alt="排版圖示"></td>
+        </tr>
+      </table>
+      <script language="JavaScript">
+<!--
+
+
+
+function MM_preloadImages_1() { //v3.0
+  var d=document; if(d.Images_1){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages_1.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+//-->
+      </script>
+      <NOSCRIPT>
+        您的瀏覽器不支援JavaScript語法,但是並不影響您獲取本網站的內容</NOSCRIPT>
+      <table summary="排版用表格" style="WIDTH:760px; HEIGHT:33px" border="0" align="center" cellpadding="0"
+        cellspacing="0">
+        <tr>
+          <td background="Images_1/welcome.gif"><table summary="排版用表格" width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="12%">&nbsp;</td>
+                <td width="75%"><div align="center"><span style="FONT-SIZE: 80%"><a href="http://www.judicial.gov.tw" target="_parent">司法院</a>
+                      資訊處 製作。 對於本系統功能有任何建議，<a href="http://www.judicial.gov.tw/email/write.htm" target="_blank">
+                        歡迎來信</a></span>。</div>
+                </td>
+                <td width="13%">&nbsp;</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+      </table>
+      <input type="hidden" name="id" value=""> <input type="hidden" name="v_court" value="TPH 臺灣高等法院">
+      <input type="hidden" name="v_sys" value="M"> <input type="hidden" name="jud_year" value="">
+      <input type="hidden" name="jud_case" value=""> <input type="hidden" name="jud_no" value=""> <input type="hidden" name="jud_no_end" value="">
+      <input type="hidden" name="jud_title" value=""> <input type="hidden" name="keyword" value="">
+      <input type="hidden" name="sdate" value="20160416"> <input type="hidden" name="edate" value="20160420">
+      <input type="hidden" name="page" value=""> <input type="hidden" name="searchkw" value="">
+      <input id="jmain" type="hidden" name="jmain" value="">
+    </form>
+    <form name="Form3" method="get" id="Form3" action="transfer.aspx">
+      <input type="hidden" name="LAWUNIT"> <input type="hidden" name="CASEYEAR"> <input type="hidden" name="CASEFIELD">
+      <input type="hidden" name="CASENO"> <input type="hidden" name="CASETYPE">
+    </form>
+
+    <script language="javascript">
+  function selectPage(page){
+    document.Form1.page.value = page;
+    document.Form1.submit();
+  }
+    </script>
+    <script language="javascript">
+function sendemail(sUnit,sYear,sCASE,sNO,sType){
+  document.Form3.LAWUNIT.value=sUnit;
+  document.Form3.CASEYEAR.value=sYear;
+  document.Form3.CASEFIELD.value=sCASE;
+  document.Form3.CASENO.value=sNO;
+  document.Form3.CASETYPE.value=sType;
+  document.Form3.submit();
+}
+function openNoData(){
+  window.open('nodata.aspx','說明','scrollbars=1,resizable=1,width=680,height=270,left=' + (screen.width-650)/2 + ',top=' + (screen.height-270)/2);
+}
+    </script>
+  </BODY>
+</HTML>

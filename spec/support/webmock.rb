@@ -15,5 +15,14 @@ module Webmock
 
     stub_request(:get, /http:\/\/jirs\.judicial\.gov\.tw\/FJUD\/FJUDQRY01_1\.aspx/).
       to_return(status: 200, body: File.read("#{Rails.root}/spec/fixtures/scrap_data/courts_info.html"))
+
+    stub_request(:get, /http:\/\/jirs\.judicial\.gov\.tw\/FJUD\/FJUDQRY01_1\.aspx/).
+      to_return(status: 200, body: File.read("#{Rails.root}/spec/fixtures/scrap_data/verdict_index.html"))
+
+    stub_request(:get, /http:\/\/jirs\.judicial\.gov\.tw\/FJUD\/FJUDQRY02_1\.aspx/).
+      to_return(status: 200, body: File.read("#{Rails.root}/spec/fixtures/scrap_data/verdict_result.html"))
+
+    stub_request(:get, /http:\/\/jirs\.judicial\.gov\.tw\/FJUD\/FJUDQRY03_1\.aspx/).
+      to_return(status: 200, body: File.read("#{Rails.root}/spec/fixtures/scrap_data/judgment.html"))
   end
 end
