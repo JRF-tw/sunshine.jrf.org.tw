@@ -42,10 +42,10 @@ class Admin::CourtsController < Admin::BaseController
         f.js { render }
       end
     else
+      @court = context.court
       respond_to do |f|
         f.html {
-          @admin_page_title = "新增法院 / 檢察署"
-          add_crumb @admin_page_title, "#"
+          new()
           render_as_fail(:new, context.error_messages)
         }
         f.js { render }
@@ -58,8 +58,6 @@ class Admin::CourtsController < Admin::BaseController
     if context.perform(params)
       redirect_as_success(admin_courts_path, "法院 / 檢察署 - #{court.name} 已修改")
     else
-      @admin_page_title = "編輯法院 / 檢察署 - #{court.name}"
-      add_crumb @admin_page_title, "#"
       render_as_fail(:edit, context.error_messages) 
     end
   end

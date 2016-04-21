@@ -2,6 +2,7 @@ class CourtCreateContext < BaseContext
   PERMITS = [:court_type, :full_name, :name, :weight, :is_hidden].freeze
   
   before_perform :build_court
+  attr_reader :court
 
   def initialize(params)
     @params = permit_params(params[:admin_court] || params, PERMITS)

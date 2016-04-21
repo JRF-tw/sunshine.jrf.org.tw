@@ -15,20 +15,10 @@ class BaseUploader < CarrierWave::Uploader::Base
   # def store_dir
   #   "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   # end
-  STORE_DIR_HASH = {
-    "admin/procedure" => "procedure",
-    "admin/review" => "review",
-    "admin/suit" => "suit",
-    "admin/profile" => "profile",
-    "admin/banner" => "banner",
-    "admin/suit_banner" => "suit_banner",
-    "admin/judge" => "judge"
-  }
 
   def store_dir
-    model_class = model.class.to_s.underscore
-    model_str = STORE_DIR_HASH.fetch(model_class, model_class)
-    "uploads/#{model_str}/#{mounted_as}/#{id_partition(model)}"
+    model_class = model.class.to_s.underscore.split("/").last
+    "uploads/#{model_class}/#{mounted_as}/#{id_partition(model)}"
   end
 
 

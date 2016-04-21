@@ -2,6 +2,7 @@ class LawyerCreateContext < BaseContext
   PERMITS = [:name, :current, :avatar, :gender, :birth_year, :memo].freeze
   
   before_perform :build_lawyer
+  attr_reader :lawyer
 
   def initialize(params)
     @params = permit_params(params[:admin_lawyer] || params, PERMITS)
@@ -9,13 +10,11 @@ class LawyerCreateContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      if @lawyer.save
-        @lawyer
-      else
-        add_error(:data_create_fail, @lawyer.errors.full_messages.join("\n"))
-      end
+      return add_error(:data_create_fail, @lawyer.errors.full_messages.join("\n")) unless @lawyer.save
+      @lawyer
     end
   end
+
 
   private
 
