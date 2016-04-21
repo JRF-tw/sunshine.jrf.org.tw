@@ -21,9 +21,4 @@ class Admin::Lawyer < ::Lawyer
   validates_presence_of :name
   mount_uploader :avatar, ProfileAvatarUploader
 
-  GENDER_TYPES = [
-    "男",
-    "女",
-    "其他"
-  ]
 end

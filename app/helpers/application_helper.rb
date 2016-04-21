@@ -202,5 +202,9 @@ module ApplicationHelper
     Lawyer.all.map(&:current).uniq
   end 
 
+  def gender_types 
+    ["男", "女", "其他"]
+  end
+
 end
 
