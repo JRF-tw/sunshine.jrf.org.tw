@@ -190,12 +190,12 @@ module ApplicationHelper
     Court.all.map(&:court_type).uniq
   end
 
-  def collect_for_gender_types 
-    Judge.all.map(&:gender).uniq
-  end
-
   def collect_for_court
     Court.get_courts.map{ |c| [c.name, c.id] }
+  end
+  
+  def gender_types 
+    ["男", "女", "其他"]
   end  
 
 end
