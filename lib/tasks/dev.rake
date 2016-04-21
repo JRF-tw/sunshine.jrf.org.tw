@@ -25,7 +25,8 @@ namespace :dev do
     "dev:fake_banners",
     "dev:fake_suit_banners",
     "dev:fake_stories",
-    "dev:fake_schedules"
+    "dev:fake_schedules",
+    "dev::fake_lawyer"
   ]
 
   task :fake_users => :environment do
@@ -70,6 +71,17 @@ namespace :dev do
       Court.get_courts.sample.judges.create!(name: n, gender: gender.sample, birth_year: (50..70).to_a.sample, avatar: file, is_active:true, is_hidden: false)
     end
   end  
+
+  task :fake_lawyer => :environment do
+    Lawyer.destroy_all
+    lawyer_name = ["謝祖武" , "陳金城", "王定輝", "張耀仁", "蔡有訓", "游志嘉", "陳昊", "林哲毓", "方勇正", "王雪徵", "卓俊瑋"]
+    current = ["見習律師", "律師", "大律師"]
+    gender = ["男", "女", "其他"]
+    file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-10.jpg"
+    lawyer_name.each do |n|
+      Lawyer.create!(name: n, current: current.sample, gender: gender.sample, birth_year: (50..70).to_a.sample, avatar: file)
+    end
+  end       
 
   task :fake_educations => :environment do
     Education.destroy_all

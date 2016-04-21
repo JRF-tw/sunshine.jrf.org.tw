@@ -54,5 +54,6 @@ Rails.application.routes.draw do
     resources :stories
     resources :schedules
     resources :judges
+    resources :lawyers
   end
 end
