@@ -9,9 +9,8 @@
             .controls= f.search_field :name_cont
         .span6
           .control-group
-            label.control-label= f.label :current_eq
-            .controls= f.select :current_eq,
-            collect_for_lawyer_currents, include_blank: "請選擇"
+            label.control-label= f.label :current_cont
+            .controls= f.search_field :current_cont
     hr
     .form-actions
       = f.submit :value => "搜尋", :class => "btn btn-primary"

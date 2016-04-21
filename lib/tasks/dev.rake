@@ -26,7 +26,7 @@ namespace :dev do
     "dev:fake_suit_banners",
     "dev:fake_stories",
     "dev:fake_schedules",
-    "dev::fake_lawyer"
+    "dev:fake_lawyers"
   ]
 
   task :fake_users => :environment do
@@ -72,7 +72,8 @@ namespace :dev do
     end
   end  
 
-  task :fake_lawyer => :environment do
+
+  task :fake_lawyers => :environment do
     Lawyer.destroy_all
     lawyer_name = ["謝祖武" , "陳金城", "王定輝", "張耀仁", "蔡有訓", "游志嘉", "陳昊", "林哲毓", "方勇正", "王雪徵", "卓俊瑋"]
     current = ["土城事務所", "三重事務所", "金山事務所", "萬里事務所", "板橋事務所", "新莊事務所", "士林事務所"]

@@ -201,5 +201,6 @@ module ApplicationHelper
   def collect_for_lawyer_currents
     Lawyer.all.map(&:current).uniq
   end 
+
 end
 
