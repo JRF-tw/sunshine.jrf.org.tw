@@ -49,7 +49,7 @@ class Scrap::ImportScheduleContext < BaseContext
       data = { sql_conction: sql }
       response_data = Mechanize.new.get(SCHEDULE_INFO_URI, data)
       response_data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
-      total = response_data.css('table')[2].css('tr')[0].text.match(/\d+/)[0].to_i
+      total = response_data.css('table')[2].css('tr')[0].text.match("合計件數") ? response_data.css('table')[2].css('tr')[0].text.match(/\d+/)[0].to_i : 0
       return total / PAGE_PER + 1
     end
   end
