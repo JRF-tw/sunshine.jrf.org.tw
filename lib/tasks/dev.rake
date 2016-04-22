@@ -27,7 +27,7 @@ namespace :dev do
     "dev:fake_stories",
     "dev:fake_schedules",
     "dev:fake_lawyers",
-    "dev:fake_schedules"
+    "dev:fake_verdicts"
   ]
 
   task :fake_users => :environment do
@@ -266,12 +266,15 @@ namespace :dev do
     end
   end
 
-  task :fake_verdict => :environment do
+  task :fake_verdicts => :environment do
     Verdict.destroy_all
+    content = 
+      "整術是少，士檢度公別據一如稱會還裡房人別你信、亞陽大統半現立良上大力的質參數士金，供的才星叫未上並現小成成失的在須國人銀色想實故。是成理工雖想先上初開子來做入望！在行而頭想很生？建設而於調灣學輪！手要變燈決！
+
+      業友今個？中心問了王起反？"
+    
     5.times do |i|
-      Story.all.sample.create_verdict!(
-        content: ["罪行重大", "無罪釋放","有罪可緩刑", "無期徒刑"].sample
-      )
+      Story.all.sample.verdicts.create!(content: content)
     end
   end    
 

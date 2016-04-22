@@ -28,14 +28,14 @@
         tr
           th= sort_link(@search, :id, '#')
           th= sort_link(@search, :story_court_full_name, "判決法院" )
-          th= sort_link(@search, :content, '內容')
+          th 內容
 
       tbody
         - @verdicts.each do |verdict|
           tr
             td= verdict.id
             td= verdict.story.court.full_name
-            td= verdict.content
+            td= raw(truncate(verdict.content, :length => 50))
 
 
     .ui-toolbar.ui-widget-header

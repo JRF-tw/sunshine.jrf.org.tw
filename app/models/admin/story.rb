@@ -19,7 +19,7 @@ class Admin::Story < ::Story
   has_many :lawyer_stories
   has_many :lawyer, through: :lawyer_stories
   has_many :schedules
-  has_one :verdict
+  has_many :verdicts
   belongs_to :court
 
   
