@@ -19,6 +19,10 @@ FactoryGirl.define do
   factory :verdict do
     content "無罪釋放"
     story { FactoryGirl.create(:story) }
+
+    trait :with_file do
+      file { File.open("#{Rails.root}/spec/fixtures/scrap_data/judgment.html") }
+    end
   end
 
 end
