@@ -247,6 +247,9 @@ zh-TW:
         year_eq: "年度"
         word_type_cont: "字別包含"
         number_eq: "案號"
+      verdict:
+        story_court_full_name_eq: "判決法院"
+        content_cont: "內容包含"  
       schedule:
         branch_name_eq: "股別名稱"
         court_full_name_eq: "法院名稱"
