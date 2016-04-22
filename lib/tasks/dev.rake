@@ -26,7 +26,8 @@ namespace :dev do
     "dev:fake_suit_banners",
     "dev:fake_stories",
     "dev:fake_schedules",
-    "dev:fake_lawyers"
+    "dev:fake_lawyers",
+    "dev:fake_schedules"
   ]
 
   task :fake_users => :environment do
@@ -264,6 +265,15 @@ namespace :dev do
       )
     end
   end
+
+  task :fake_verdict => :environment do
+    Verdict.destroy_all
+    5.times do |i|
+      Story.all.sample.create_verdict!(
+        content: ["罪行重大", "無罪釋放","有罪可緩刑", "無期徒刑"].sample
+      )
+    end
+  end    
 
   task :fake_schedules => :environment do
     Schedule.destroy_all

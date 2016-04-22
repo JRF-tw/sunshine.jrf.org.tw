@@ -17,7 +17,8 @@
 
 FactoryGirl.define do
   factory :verdict do
-    content "blablabla"
+    content "無罪釋放"
+    story { FactoryGirl.create(:story) }
   end
 
 end
