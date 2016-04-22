@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
 
   devise_for :users
-  
+
   root to: "base#index", only: [:show]
   get '/robots.txt', to: "base#robots", defaults: { format: "text" }
 
@@ -55,7 +55,11 @@ Rails.application.routes.draw do
     resources :schedules
     resources :judges
     resources :lawyers
-    resources :verdicts
+    resources :verdicts do
+      member do
+        get :download_file
+      end
+    end
 
   end
 end

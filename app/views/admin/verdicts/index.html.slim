@@ -1,7 +1,7 @@
 = search_form_for @search, :url => admin_verdicts_path, :wrapper => :admin, :html => { :class => "form-horizontal" } do |f|
   .well
     fieldset
-      legend 搜尋      
+      legend 搜尋
       .row
         .span6
           .control-group
@@ -13,7 +13,7 @@
           .control-group
             label.control-label= f.label :content_cont
             .controls= f.search_field :content_cont
-  
+
     hr
     .form-actions
       = f.submit :value => "搜尋", :class => "btn btn-primary"
@@ -28,15 +28,26 @@
         tr
           th= sort_link(@search, :id, '#')
           th= sort_link(@search, :story_court_full_name, "判決法院" )
+          th 是否為判決
           th 內容
+          th 參與當事人
+          th 參與律師
+          th 參與法官
+          th 參與檢察官
+          th 文件下載
 
       tbody
         - @verdicts.each do |verdict|
           tr
             td= verdict.id
             td= verdict.story.court.full_name
+            td= verdict.is_judgment ? "是" : "否"
             td= raw(truncate(verdict.content, :length => 50))
-
+            td= verdict.defendant_names.join(",")
+            td= verdict.lawyer_names.join(",")
+            td= verdict.judges_names.join(",")
+            td= verdict.prosecutor_names.join(",")
+            td= link_to "點我下載", download_file_admin_verdict_path(verdict) if verdict.file
 
     .ui-toolbar.ui-widget-header
       = paginate @verdicts, theme: :admin
