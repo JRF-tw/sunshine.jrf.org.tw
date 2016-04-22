@@ -1,0 +1,42 @@
+= search_form_for @search, :url => admin_verdicts_path, :wrapper => :admin, :html => { :class => "form-horizontal" } do |f|
+  .well
+    fieldset
+      legend 搜尋      
+      .row
+        .span6
+          .control-group
+            label.control-label= f.label :story_court_full_name_eq
+            .controls= f.select :story_court_full_name_eq,
+            collect_for_court_full_names, include_blank: "請選擇"
+
+        .span6
+          .control-group
+            label.control-label= f.label :content_cont
+            .controls= f.search_field :content_cont
+  
+    hr
+    .form-actions
+      = f.submit :value => "搜尋", :class => "btn btn-primary"
+      = " "
+      = link_to "清空搜尋結果", admin_verdicts_path, :class => "btn btn-default"
+
+
+= admin_widget_box "案件列表", icon: :pencil do
+  .dataTables_wrapper
+    table.table.table-bordered.table-striped.table-hover
+      thead
+        tr
+          th= sort_link(@search, :id, '#')
+          th= sort_link(@search, :story_court_full_name, "判決法院" )
+          th= sort_link(@search, :content, '內容')
+
+      tbody
+        - @verdicts.each do |verdict|
+          tr
+            td= verdict.id
+            td= verdict.story.court.full_name
+            td= verdict.content
+
+
+    .ui-toolbar.ui-widget-header
+      = paginate @verdicts, theme: :admin

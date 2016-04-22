@@ -18,8 +18,10 @@ class Admin::Story < ::Story
   has_many :judges, through: :judge_stories
   has_many :lawyer_stories
   has_many :lawyer, through: :lawyer_stories
-  belongs_to :court
   has_many :schedules
+  has_one :verdict
+  belongs_to :court
+
   
 end 
   

@@ -18,9 +18,9 @@ class Story < ActiveRecord::Base
   has_many :judges, through: :judge_stories
   has_many :lawyer_stories
   has_many :lawyer, through: :lawyer_stories
-  belongs_to :court
   has_many :schedules
   has_many :verdicts
+  belongs_to :court
 
   scope :newest, ->{ order("id DESC") }
 end

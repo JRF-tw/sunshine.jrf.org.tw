@@ -21,6 +21,8 @@ class Verdict < ActiveRecord::Base
   serialize :lawyer_names, Array
   serialize :judges_names, Array
   serialize :prosecutor_names, Array
-
   belongs_to :story
+  
+  scope :newest, ->{ order("id DESC") }
+
 end
