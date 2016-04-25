@@ -9,7 +9,8 @@ class Admin::VerdictsController < Admin::BaseController
   end
 
   def download_file
-    send_file @verdict.file.path, type: 'text/html; charset=utf-8'
+    @file_url = Rails.env.development? || Rails.env.test? ? @verdict.file.path : @verdict.file.url
+    send_file @file_url, type: 'text/html; charset=utf-8'
   end
 
   private
