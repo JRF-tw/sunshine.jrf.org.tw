@@ -54,6 +54,7 @@ class Scrap::ImportCourtContext < BaseContext
   end
 
   def assign_attrbutes
-    @court.assign_attributes(code: @code)
+    @court.assign_attributes(code: @code) unless @court.code == @code
+    @court.assign_attributes(court_type: "法院") unless @court.court_type
   end
 end
