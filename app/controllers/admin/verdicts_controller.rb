@@ -9,7 +9,7 @@ class Admin::VerdictsController < Admin::BaseController
   end
 
   def download_file
-    @file_url = Rails.env.development? || Rails.env.test? ? @verdict.file.path : @verdict.file.url
+    @file_url = Rails.env.development? || Rails.env.test? ? @verdict.file.path : @verdict.file.url.gsub("//", "")
     send_file @file_url, type: 'text/html; charset=utf-8'
   end
 
