@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: lawyers
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  current    :string
+#  avatar     :string
+#  gender     :string
+#  birth_year :integer
+#  memo       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Admin::LawyersController < Admin::BaseController
   before_action :lawyer
   before_action(except: [:index]){ add_crumb("律師列表", admin_lawyers_path) }

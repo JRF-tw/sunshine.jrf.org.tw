@@ -49,7 +49,6 @@ class Scrap::ImportVerdictContext < BaseContext
 
   def build_verdict
     @verdict = Verdict.new(
-      content: verdict_content,
       story: @story,
       is_judgment: @analysis_context.is_judgment?,
       judges_names: @analysis_context.judges_names,

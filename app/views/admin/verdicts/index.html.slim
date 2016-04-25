@@ -9,11 +9,6 @@
             .controls= f.select :story_court_full_name_eq,
             collect_for_court_full_names, include_blank: "請選擇"
 
-        .span6
-          .control-group
-            label.control-label= f.label :content_cont
-            .controls= f.search_field :content_cont
-
     hr
     .form-actions
       = f.submit :value => "搜尋", :class => "btn btn-primary"
@@ -29,7 +24,6 @@
           th= sort_link(@search, :id, '#')
           th= sort_link(@search, :story_court_full_name, "判決法院" )
           th 是否為判決
-          th 內容
           th 參與當事人
           th 參與律師
           th 參與法官
@@ -42,7 +36,6 @@
             td= verdict.id
             td= verdict.story.court.full_name
             td= verdict.is_judgment ? "是" : "否"
-            td= raw(truncate(verdict.content, :length => 50))
             td= verdict.defendant_names.join(",")
             td= verdict.lawyer_names.join(",")
             td= verdict.judges_names.join(",")

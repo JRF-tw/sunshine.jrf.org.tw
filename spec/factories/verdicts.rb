@@ -4,7 +4,6 @@
 #
 #  id               :integer          not null, primary key
 #  story_id         :integer
-#  content          :text
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  file             :string
@@ -17,7 +16,6 @@
 
 FactoryGirl.define do
   factory :verdict do
-    content "無罪釋放"
     story { FactoryGirl.create(:story) }
 
     trait :with_file do
