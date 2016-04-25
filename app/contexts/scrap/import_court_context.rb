@@ -1,6 +1,8 @@
 class Scrap::ImportCourtContext < BaseContext
   SCRAP_URI = "http://jirs.judicial.gov.tw/FJUD/FJUDQRY01_1.aspx"
+  before_perform :check_data
   before_perform :find_or_create_court
+  before_perform :assign_attrbutes
 
   class << self
     def perform
@@ -36,14 +38,22 @@ class Scrap::ImportCourtContext < BaseContext
 
   def perform
     run_callbacks :perform do
+      return add_error(:data_create_fail, "data not update") unless @court.save
       @court
     end
   rescue => e
     SlackService.notify_async("法院匯入失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
   end
 
+  def check_data
+    return add_error(:data_create_fail, "data info incorrect") unless @fullname && @code
+  end
+
   def find_or_create_court
-    return false unless @fullname && @code
-    @court = Court.find_or_create_by(full_name: @fullname, code: @code)
+    @court = Court.find_or_create_by(full_name: @fullname)
+  end
+
+  def assign_attrbutes
+    @court.assign_attributes(code: @code)
   end
 end
