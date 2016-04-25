@@ -1,8 +1,9 @@
-class Scrap::ImportBranchAndJudgeContext < BaseContext
+class Scrap::ImportJudgeContext < BaseContext
   EXCEL_URL = "http://csdi.judicial.gov.tw/abbs/wkw/WHD3A01_DOWNLOADCVS.jsp?court="
-  before_perform :parse_import_data
-  before_perform :find_or_create_judge
-  before_perform :find_or_create_branch
+  before_perform  :parse_import_data
+  before_perform  :find_court
+  before_perform  :build_judge
+  after_perform   :create_branch
 
 
   class << self
@@ -30,6 +31,7 @@ class Scrap::ImportBranchAndJudgeContext < BaseContext
 
   def perform
     run_callbacks :perform do
+      return add_error(:data_create_fail, "jude create fail")unless @judge.save
       @judge
     end
   rescue => e
@@ -42,20 +44,20 @@ class Scrap::ImportBranchAndJudgeContext < BaseContext
     @row_data = @data_string.split(",")
     @chamber_name = @row_data[0].strip
     @court_name = (@chamber_name.split("法院")[0]) + "法院"
-    @court = Court.find_by(full_name: @court_name)
     @branch_name = @row_data[1].strip
     @judge_name = @row_data[2].gsub("法官", "").squish
-    # @registry_name = row_data[3].strip if row_data[3]
-    # @extension_number = row_data[4].strip if row_data[4]
   end
 
-  def find_or_create_judge
-    return false unless @court
-    @judge = Judge.find_or_create_by(court: @court, name: @judge_name)
+  def find_court
+    @court = Court.find_by(full_name: @court_name)
+    return add_error(:data_not_found, "court not found") unless @court
   end
 
-  def find_or_create_branch
-    return false unless @court
+  def build_judge
+    @judge = Judge.find_by(court: @court, name: @judge_name) || Judge.new(court: @court, name: @judge_name)
+  end
+
+  def create_branch
     Branch.find_or_create_by(court: @court, judge: @judge, chamber_name: @chamber_name, name: @branch_name )
   end
 end
