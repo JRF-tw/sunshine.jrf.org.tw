@@ -9,8 +9,9 @@ class Admin::VerdictsController < Admin::BaseController
   end
 
   def download_file
-    @file_url = Rails.env.development? || Rails.env.test? ? @verdict.file.path : @verdict.file.url
-    send_file @file_url, type: 'text/html; charset=utf-8'
+    @file_url = Rails.env.development? || Rails.env.test? ? @verdict.file.path : @verdict.file.url.gsub("//", "http://")
+    data = open(@file_url).read
+    send_data data, disposition: 'attachment', filename: "verdict-#{@verdict.id}.html"
   end
 
   private
