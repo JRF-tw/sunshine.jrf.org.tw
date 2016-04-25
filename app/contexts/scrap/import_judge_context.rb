@@ -31,7 +31,7 @@ class Scrap::ImportJudgeContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      return add_error(:data_create_fail, "jude create fail")unless @judge.save
+      return add_error(:data_create_fail, "judge find_or_create fail") unless @judge.save
       @judge
     end
   rescue => e
@@ -58,6 +58,6 @@ class Scrap::ImportJudgeContext < BaseContext
   end
 
   def create_branch
-    Branch.find_or_create_by(court: @court, judge: @judge, chamber_name: @chamber_name, name: @branch_name )
+    Scrap::CreateBranchContext.new(@judge).perform(@chamber_name, @branch_name)
   end
 end
