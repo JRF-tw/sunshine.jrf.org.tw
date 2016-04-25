@@ -7,11 +7,11 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  file             :string
+#  is_judgment      :boolean
 #  defendant_names  :text
 #  lawyer_names     :text
 #  judges_names     :text
 #  prosecutor_names :text
-#  is_judgment      :boolean
 #
 
 class Admin::VerdictsController < Admin::BaseController

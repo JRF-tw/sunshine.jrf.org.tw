@@ -12,8 +12,11 @@ class Scrap::GetVerdictsContext < BaseContext
         get_story_types.each do |type|
           total_result(court, type).times.each do |index|
             scrap_id = index + 1
-            import_data = get_verdict_data(scrap_id, court, type)
-            self.delay.perform(import_data, court)
+            if @import_data = get_verdict_data(scrap_id, court, type)
+              self.delay.perform(@import_data, court)
+            else
+              puts "scrap website error"
+            end
           end
         end
       end

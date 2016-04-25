@@ -5,6 +5,7 @@ class Scrap::ImportVerdictContext < BaseContext
   before_perform :find_or_create_story
   before_perform :build_verdict
   after_perform  :upload_file
+  after_perform  :sync_analysis_data
 
   def initialize(import_data, court)
     @import_data = import_data
@@ -60,5 +61,13 @@ class Scrap::ImportVerdictContext < BaseContext
 
   def upload_file
     Scrap::UploadVerdictContext.new(@orginal_data).perform(@verdict)
+  end
+
+  def sync_analysis_data
+    @story.assign_attributes(judges_names: (@story.judges_names + @analysis_context.judges_names).uniq)
+    @story.assign_attributes(prosecutor_names: (@story.prosecutor_names + @analysis_context.prosecutor_names).uniq)
+    @story.assign_attributes(lawyer_names: (@story.lawyer_names + @analysis_context.lawyer_names).uniq)
+    @story.assign_attributes(defendant_names: (@story.defendant_names + @analysis_context.defendant_names).uniq)
+    @story.save
   end
 end
