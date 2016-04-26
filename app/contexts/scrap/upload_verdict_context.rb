@@ -13,6 +13,8 @@ class Scrap::UploadVerdictContext < BaseContext
       add_error("upload file failed") unless @verdict.save
       true
     end
+  rescue => e
+    SlackService.notify_async("判決書上傳失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
   end
 
   private

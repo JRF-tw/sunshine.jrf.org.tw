@@ -16,6 +16,8 @@ class Scrap::ImportVerdictContext < BaseContext
       add_error("create date fail") unless @verdict.save
       @verdict
     end
+  rescue => e
+    SlackService.notify_async("判決書匯入失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
   end
 
   private

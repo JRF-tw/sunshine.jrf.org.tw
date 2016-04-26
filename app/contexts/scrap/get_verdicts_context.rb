@@ -17,11 +17,15 @@ class Scrap::GetVerdictsContext < BaseContext
           end
         end
       end
+    rescue => e
+      SlackService.notify_async("判決書爬取失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
     end
 
     def perform(import_data, court)
       sleep SCRAP_TIME_SLEEP_INTERVEL
       Scrap::ImportVerdictContext.new(import_data, court).perform
+    rescue => e
+      SlackService.notify_async("判決書匯入失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
     end
 
     private
@@ -38,7 +42,8 @@ class Scrap::GetVerdictsContext < BaseContext
       response_data = Mechanize.new.get(RESULT_URI + request_query, {}, INDEX_URI)
       response_data = Nokogiri::HTML(response_data.body)
       return response_data.content.match(/共\s*([0-9]*)\s*筆/)[1].to_i
-    rescue
+    rescue => e
+      SlackService.notify_async("判決書爬取數量失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
       # maybe redirect to error page
       return 0
     end
