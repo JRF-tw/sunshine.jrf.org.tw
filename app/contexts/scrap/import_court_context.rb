@@ -7,6 +7,8 @@ class Scrap::ImportCourtContext < BaseContext
       get_court_data.each do |court_data|
         new(court_data).perform
       end
+    rescue => e
+      SlackService.notify_async("法官爬取失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
     end
 
     private
@@ -19,8 +21,6 @@ class Scrap::ImportCourtContext < BaseContext
         @scrap_data << { fullname: data.text, code: data.attr("value").gsub(data.text, "").squish }
       end
       return @scrap_data
-    rescue => e
-      puts "cant scrap website"
     end
 
     def parse_courts_data(response_data)
@@ -39,7 +39,7 @@ class Scrap::ImportCourtContext < BaseContext
       @court
     end
   rescue => e
-    puts "create error"
+    SlackService.notify_async("法院匯入失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
   end
 
   def find_or_create_court

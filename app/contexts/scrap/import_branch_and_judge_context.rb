@@ -10,6 +10,8 @@ class Scrap::ImportBranchAndJudgeContext < BaseContext
       get_remote_csv_data.each do |data_string|
         new(data_string).perform
       end
+    rescue => e
+      SlackService.notify_async("法官股別分配表爬取失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
     end
 
     private
@@ -19,8 +21,6 @@ class Scrap::ImportBranchAndJudgeContext < BaseContext
       response_data = Mechanize.new.get(scrap_file_url)
       response_data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
       return response_data.css("body p").text.split("\n")
-    rescue => e
-      puts "cant scrap website"
     end
   end
 
@@ -33,8 +33,10 @@ class Scrap::ImportBranchAndJudgeContext < BaseContext
       @judge
     end
   rescue => e
-    puts "create error"
+    SlackService.notify_async("法官匯入失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
   end
+
+  private
 
   def parse_import_data
     @row_data = @data_string.split(",")

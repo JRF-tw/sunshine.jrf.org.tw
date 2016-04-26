@@ -16,6 +16,8 @@ class Scrap::ImportScheduleContext < BaseContext
           self.delay.perform(info, current_page)
         end
       end
+    rescue => e
+      SlackService.notify_async("庭期表爬取失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
     end
 
     def perform(info, current_page)
@@ -72,7 +74,7 @@ class Scrap::ImportScheduleContext < BaseContext
       end
     end
   rescue => e
-    puts "create error"
+    SlackService.notify_async("庭期表匯入失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
   end
 
   private
