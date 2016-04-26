@@ -9,8 +9,10 @@ RSpec.describe Scrap::GetVerdictsContext, :type => :model do
   end
 
   describe "#perform" do
-    let!(:import_data) { Mechanize.new.get(Scrap::GetVerdictsContext::VERDICT_URI) }
-    subject{ described_class.perform(import_data, court) }
+    let!(:scrap_id) { "1" }
+    let!(:type) { "V" }
+    subject{ described_class.perform(scrap_id, court, type) }
+
     it { expect{ subject }.to change{ court.stories.count } }
     it { expect{ subject }.to change{ Verdict.count } }
   end

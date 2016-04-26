@@ -12,11 +12,7 @@ class Scrap::GetVerdictsContext < BaseContext
         get_story_types.each do |type|
           total_result(court, type).times.each do |index|
             scrap_id = index + 1
-            if @import_data = get_verdict_data(scrap_id, court, type)
-              self.delay.perform(@import_data, court)
-            else
-              puts "scrap website error"
-            end
+            self.delay.perform(scrap_id, court, type)
           end
         end
       end
@@ -24,9 +20,10 @@ class Scrap::GetVerdictsContext < BaseContext
       SlackService.notify_async("判決書爬取失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
     end
 
-    def perform(import_data, court)
+    def perform(scrap_id, court, type)
       sleep SCRAP_TIME_SLEEP_INTERVEL
-      Scrap::ImportVerdictContext.new(import_data, court).perform
+      @import_data = get_verdict_data(scrap_id, court, type)
+      Scrap::ImportVerdictContext.new(@import_data, court).perform
     rescue => e
       SlackService.notify_async("判決書匯入失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
     end
