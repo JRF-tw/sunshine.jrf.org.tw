@@ -27,4 +27,8 @@ class Admin::Court < ::Court
     where(court_type: "檢察署")
   end
 
+  def display_type
+    return "是" if self.is_hidden
+    "否"
+  end  
 end

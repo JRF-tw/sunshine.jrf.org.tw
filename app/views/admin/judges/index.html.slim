@@ -6,7 +6,8 @@
         .span6
           .control-group
             label.control-label= f.label :is_active_true
-            .controls= f.check_box :is_active_true, checked: true
+            .controls= f.select :is_active_true,
+            collect_for_judge_active, include_blank: "請選擇"
         .span6
           .control-group
             label.control-label= f.label :is_hidden_true
@@ -19,8 +20,8 @@
         .span6
           .control-group
             label.control-label= f.label :court_full_name_eq
-            .controls= f.select :court_full_name_eq,
-            self.collect_for_court_full_names, include_blank: "請選擇"
+            .controls#select2= f.select :court_full_name_eq,
+            collect_for_court_full_names, include_blank: "請選擇"
     hr
     .form-actions
       = f.submit :value => "搜尋", :class => "btn btn-primary"
@@ -38,7 +39,7 @@
           th #
           th 名稱
           th 性別
-          th 任職地點
+          th 任職法院
           th 是否在職
           th 是否在前端隱藏
           th 備註
@@ -49,12 +50,16 @@
             td= judge.id
             td= judge.name
             td= judge.gender
-            td= judge.court.try(:full_name)
+            td= link_to "#{judge.court.full_name}", admin_court_path(judge.court)
             td= judge.is_active? ? "在職" : "-"
             td= judge.is_hidden? ? "隱藏" : "-"
             td= judge.memo
             td
               = link_to "詳細資料", admin_judge_path(judge), class: "btn btn-mini"
+              | &nbsp;
+              = link_to "案件列表", admin_stories_path(q: { "judges_id_eq" => judge.id } ), class: "btn btn-mini"
+              | &nbsp;
+              = link_to "庭期列表", admin_schedules_path(q: { "judges_id_eq" => judge.id } ), class: "btn btn-mini"
               | &nbsp;
               = link_to "編輯", edit_admin_judge_path(judge), class: "btn btn-mini btn-success"
               | &nbsp;

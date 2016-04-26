@@ -256,7 +256,7 @@ zh-TW:
         date_gteq: "開庭日期"
         date_lteq: "~"
       judge:
-        is_active_true: "在職中"
+        is_active_true: "職況"
         is_hidden_true: "不顯示於前端"
         name_cont: "姓名包含"
         court_full_name_eq: "任職法院"

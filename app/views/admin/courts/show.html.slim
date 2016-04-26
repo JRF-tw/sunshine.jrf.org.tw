@@ -1,0 +1,18 @@
+- content_for :btns do
+  = link_to "編輯", edit_admin_court_path(@court), class: "btn btn-large btn-success"
+
+= admin_widget_box "#{@court.name}資料", icon: :th do
+  table.table.table-bordered.table-striped.table-hover
+    tbody
+      tr
+        td 全名
+        td= @court.full_name
+      tr
+        td 前台顯示簡稱
+        td= @court.name
+      tr
+        td 顯示權重
+        td= @court.weight
+      tr
+        td 前端顯示於否
+        td= @court.display_type
