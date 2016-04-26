@@ -14,6 +14,7 @@
 class Schedule < ActiveRecord::Base
   belongs_to :story
   belongs_to :court
+  has_many :judges, through: :story
 
   scope :newest, ->{ order("id DESC") }
 end
