@@ -5,7 +5,7 @@ class Scrap::AnalysisVerdictContext < BaseContext
   end
 
   def is_judgment?
-    return @content.match(/判決/).present?
+    return @content.split.first.match(/判決/).present?
   end
 
   def judges_names

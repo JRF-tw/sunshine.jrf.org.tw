@@ -4,7 +4,8 @@ class Errors::Code
     error_code_not_defined: 400,
     data_create_fail: 400,
     data_update_fail: 400,
-    data_delete_fail: 400
+    data_delete_fail: 400,
+    data_not_found: 400
   }.freeze
 
   class << self
