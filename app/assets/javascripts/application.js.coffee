@@ -5,8 +5,8 @@
 # and will be compiled with Gulp and Browserify
 #= require jquery
 #= require jquery_ujs
+#= require select2
 #= require turbolinks
-
 # Bower components
 #= require jquery-throttle-debounce/jquery.ba-throttle-debounce
 #= require slick-carousel

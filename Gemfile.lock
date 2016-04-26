@@ -460,6 +460,8 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    select2-rails (4.0.0)
+      thor (~> 0.14)
     settingslogic (2.0.9)
     shellany (0.0.1)
     sidekiq (4.0.2)
@@ -596,6 +598,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
+  select2-rails
   settingslogic
   sidekiq
   sidekiq-limit_fetch
