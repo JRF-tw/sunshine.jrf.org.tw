@@ -52,6 +52,12 @@
             td= court.name
             td= court.is_hidden?? "否" : "是"
             td
+              = link_to "法官列表", admin_judges_path(q: { "court_id_eq" => court.id } ), class: "btn btn-mini"
+              | &nbsp;
+              = link_to "案件列表", admin_stories_path(q: { "court_id_eq" => court.id } ), class: "btn btn-mini"
+              | &nbsp;
+              = link_to "庭期列表", admin_schedules_path(q: { "court_id_eq" => court.id } ), class: "btn btn-mini"
+              | &nbsp;
               = link_to "編輯", edit_admin_court_path(court), class: "btn btn-mini btn-success"
               | &nbsp;
               = link_to "刪除", admin_court_path(court), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除法院 / 檢察署 - #{court.name}？"
