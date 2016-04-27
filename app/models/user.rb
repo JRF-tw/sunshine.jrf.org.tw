@@ -31,4 +31,6 @@ class User < ActiveRecord::Base
   devise :async
 
   GENDER_TYPES = ["男", "女", "其他"]
+
+  ACTIVE_TYPES = ["在職", "未在職"]
 end

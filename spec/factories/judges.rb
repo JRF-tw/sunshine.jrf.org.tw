@@ -25,7 +25,7 @@
 FactoryGirl.define do
   factory :judge do
     name "Raptor Judge"
-
+    court { FactoryGirl.create :court }
     trait :with_avatar do
       avatar File.open "#{Rails.root}/spec/fixtures/person_avatar/people-1.jpg"
     end

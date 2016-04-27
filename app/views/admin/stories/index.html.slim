@@ -16,6 +16,11 @@
       .row
         .span6
           .control-group
+            label.control-label= f.label :judges_name_cont
+            .controls= f.search_field :judges_name_cont
+            
+        .span6
+          .control-group
             label.control-label= f.label :word_type_cont
             .controls= f.search_field :word_type_cont
         .span6

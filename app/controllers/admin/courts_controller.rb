@@ -24,6 +24,11 @@ class Admin::CourtsController < Admin::BaseController
     add_crumb @admin_page_title, "#"
   end
 
+  def show
+    @admin_page_title = "法院 - #{@court.full_name}"
+    add_crumb @admin_page_title, "#"
+  end    
+
   def new
     @admin_page_title = "新增法院 / 檢察署"
     add_crumb @admin_page_title, "#"

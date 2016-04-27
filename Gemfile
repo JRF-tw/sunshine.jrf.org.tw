@@ -30,6 +30,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'asset_sync'
 gem 'chosen-rails', "~> 1.2.0"
+gem "select2-rails"
 
 # background jobs
 gem 'sidekiq'

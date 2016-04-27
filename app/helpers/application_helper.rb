@@ -202,5 +202,8 @@ module ApplicationHelper
     User::GENDER_TYPES
   end
 
+  def collect_for_judge_active
+    User::ACTIVE_TYPES
+  end
 end
 

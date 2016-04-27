@@ -1,6 +1,7 @@
 #= require jquery
 #= require jquery_ujs
 #= require datetimepicker
+#= require select2-js
 #= require nested_form
 #= require bootstrap
 #= require unicorn
