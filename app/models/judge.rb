@@ -26,7 +26,6 @@ class Judge < ActiveRecord::Base
   has_many :judge_stories
   has_many :stories, through: :judge_stories
   has_many :branches
-  has_many :schedules, through: :stories
   belongs_to :court, foreign_key: :current_court_id
 
   mount_uploader :avatar, ProfileAvatarUploader

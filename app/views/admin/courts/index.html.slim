@@ -8,6 +8,10 @@
             label.control-label= f.label :court_type_eq
             .controls= f.select :court_type_eq,
             collect_for_court_types, include_blank: "請選擇"
+        .span6
+          .control-group
+            label.control-label= f.label :is_hidden_true
+            .controls= f.check_box :is_hidden_true
       .row  
         .span6
           .control-group
@@ -37,6 +41,7 @@
           th= sort_link(@search, :court_type, "類別")
           th= sort_link(@search, :full_name, "全名")
           th= sort_link(@search, :name, "前台顯示簡稱")
+          th= sort_link(@search, :is_hidden, "是否在前端隱藏")
           th
       tbody
         - @courts.each do |court|
@@ -45,6 +50,7 @@
             td= court.court_type
             td= court.full_name
             td= court.name
+            td= court.is_hidden?? "否" : "是"
             td
               = link_to "編輯", edit_admin_court_path(court), class: "btn btn-mini btn-success"
               | &nbsp;
