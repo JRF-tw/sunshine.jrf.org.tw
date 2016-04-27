@@ -11,8 +11,7 @@
         .span6
           .control-group
             label.control-label= f.label :court_full_name_eq
-            .controls= f.select :court_full_name_eq,
-            collect_for_court_full_names, include_blank: "請選擇"
+            .controls= f.collection_select(:court_id_eq, Court.all.get_courts, :id, :full_name, include_blank: "請選擇")
       .row
         .span6
           .control-group#datepicker
