@@ -34,4 +34,8 @@ class Story < ActiveRecord::Base
   serialize :prosecutor_names, Array
 
   scope :newest, ->{ order("id DESC") }
+
+  def story_detail
+    "#{self.year}-#{self.word_type}-#{self.number}"
+  end  
 end
