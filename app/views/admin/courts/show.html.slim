@@ -15,4 +15,4 @@
         td= @court.weight
       tr
         td 前端顯示於否
-        td= @court.display_type
+        td= @court.is_hidden?? "是" : "否"
