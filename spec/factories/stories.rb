@@ -24,6 +24,7 @@ FactoryGirl.define do
     word_type "聲"
     number { rand(100..999) }
     court { FactoryGirl.create :court }
+    main_judge { FactoryGirl.create :judge }
 
     trait :with_schedule do
       after(:create) do |story|

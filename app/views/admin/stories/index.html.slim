@@ -8,17 +8,11 @@
             label.control-label= f.label :story_type_eq
             .controls= f.select :story_type_eq,
             collect_for_story_types, include_blank: "請選擇"
-
         .span6
           .control-group
-            label.control-label= f.label :number_eq
-            .controls= f.search_field :number_eq
-      .row
-        .span6
-          .control-group
-            label.control-label= f.label :judges_name_cont
-            .controls= f.search_field :judges_name_cont
-            
+            label.control-label= f.label :main_judge_name_cont
+            .controls= f.search_field :main_judge_name_cont
+      .row  
         .span6
           .control-group
             label.control-label= f.label :word_type_cont
@@ -27,6 +21,11 @@
           .control-group
             label.control-label= f.label :year_eq
             .controls= f.search_field :year_eq
+      .row
+        .span6
+          .control-group
+            label.control-label= f.label :number_eq
+            .controls= f.search_field :number_eq
 
 
   

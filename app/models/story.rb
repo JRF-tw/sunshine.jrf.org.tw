@@ -24,6 +24,7 @@ class Story < ActiveRecord::Base
   has_many :lawyer, through: :lawyer_stories
   has_many :schedules
   has_many :verdicts
+  belongs_to :main_judge, class_name: "Judge", foreign_key: "main_judge_id"
   belongs_to :court
 
   serialize :defendant_names, Array
