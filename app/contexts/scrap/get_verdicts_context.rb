@@ -16,16 +16,12 @@ class Scrap::GetVerdictsContext < BaseContext
           end
         end
       end
-    rescue => e
-      SlackService.notify_async("判決書爬取失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
     end
 
     def perform(scrap_id, court, type)
       sleep SCRAP_TIME_SLEEP_INTERVEL
       @import_data = get_verdict_data(scrap_id, court, type)
       Scrap::ImportVerdictContext.new(@import_data, court).perform
-    rescue => e
-      SlackService.notify_async("判決書匯入失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
     end
 
     private
@@ -34,6 +30,8 @@ class Scrap::GetVerdictsContext < BaseContext
       response_data = Mechanize.new.get(INDEX_URI)
       response_data = Nokogiri::HTML(response_data.body)
       return response_data.css("input[type='radio']").map{ |row| row.attribute("value").value }.uniq
+    rescue => e
+      SlackService.notify_async("判決書取得案件分類失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
     end
 
     def total_result(court, type)
@@ -43,7 +41,7 @@ class Scrap::GetVerdictsContext < BaseContext
       response_data = Nokogiri::HTML(response_data.body)
       return response_data.content.match(/共\s*([0-9]*)\s*筆/)[1].to_i
     rescue => e
-      SlackService.notify_async("判決書爬取數量失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
+      SlackService.notify_async("判決書搜尋頁面被redirect, 總數計算為0", channel: "#scrap_notify", name: "bug")
       # maybe redirect to error page
       return 0
     end
@@ -53,6 +51,8 @@ class Scrap::GetVerdictsContext < BaseContext
       verdict_query = "?id=#{scrap_id}&v_court=#{court_value}&v_sys=#{type}&jud_year=&jud_case=&jud_no=&jud_no_end=&jud_title=&keyword=&sdate=#{START_DATE}&edate=#{END_DATE}&page=1&searchkw=&jmain=&cw=0"
       response_data = Mechanize.new.get(VERDICT_URI + verdict_query, {}, RESULT_URI)
       return response_data
+    rescue => e
+      SlackService.notify_async("判決書取得失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
     end
   end
 end
