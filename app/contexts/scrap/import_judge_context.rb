@@ -43,7 +43,7 @@ class Scrap::ImportJudgeContext < BaseContext
   def parse_import_data
     @row_data = @data_string.split(",")
     @chamber_name = @row_data[0].strip
-    @court_name = (@chamber_name.split("法院")[0]) + "法院"
+    @court_name = @chamber_name.match("分院") ? "#{@chamber_name.split("分院")[0]}分院" : "#{@chamber_name.split("法院")[0]}法院"
     @branch_name = @row_data[1].strip
     @judge_name = @row_data[2].gsub("法官", "").squish
   end
