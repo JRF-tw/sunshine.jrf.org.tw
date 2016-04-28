@@ -6,8 +6,8 @@
         .span6
           .control-group
             label.control-label= f.label :story_court_full_name_eq
-            .controls= f.select :story_court_full_name_eq,
-            collect_for_court_full_names, include_blank: "請選擇"
+            .controls= f.select :story_court_id_eq,
+            collect_for_courts, include_blank: "請選擇"
 
     hr
     .form-actions

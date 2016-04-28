@@ -182,16 +182,12 @@ module ApplicationHelper
     Schedule.all.map(&:branch_name).uniq
   end  
 
-  def collect_for_court_full_names
-    Court.all.get_courts.map(&:full_name).uniq
-  end
-
   def collect_for_court_types
     Court.all.map(&:court_type).uniq
   end
 
-  def collect_for_court
-    Court.get_courts.map{ |c| [c.name, c.id] }
+  def collect_for_courts
+    Court.get_courts.map{ |c| [c.full_name, c.id] }
   end
   
   def collect_for_lawyer_currents
