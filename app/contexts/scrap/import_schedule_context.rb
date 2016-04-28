@@ -17,12 +17,14 @@ class Scrap::ImportScheduleContext < BaseContext
         end
       end
     rescue => e
-      SlackService.notify_async("庭期表爬取失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
+      SlackService.notify_async("庭期匯入失敗:  #{e.message}\n", channel: "#scrap_notify", name: "bug")
     end
 
     def perform(info, current_page)
       sleep SCRAP_TIME_SLEEP_INTERVEL
       new(info, current_page).perform
+    rescue => e
+      SlackService.notify_async("庭期匯入失敗:  #{e.message}\n", channel: "#scrap_notify", name: "bug")
     end
 
     private
@@ -56,6 +58,9 @@ class Scrap::ImportScheduleContext < BaseContext
     end
   end
 
+  before_perform :scrap_schedule
+  before_perform :parse_schedule_info
+
   def initialize(info, current_page)
     @court = Court.find_by(code: info[:court_code])
     @court_code = info[:court_code]
@@ -66,15 +71,14 @@ class Scrap::ImportScheduleContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      scrap_schedule
-      parse_schedule_info
       @hash_array.each do |hash|
-        story = find_or_create_story(@court, hash)
+        main_judge = get_main_judge(@court, hash)
+        story = find_or_create_story(@court, hash, main_judge)
         find_or_create_schedule(story, hash)
       end
     end
   rescue => e
-    SlackService.notify_async("庭期表匯入失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
+    SlackService.notify_async("庭期匯入失敗:  #{e.message}\n", channel: "#scrap_notify", name: "bug")
   end
 
   private
@@ -111,9 +115,14 @@ class Scrap::ImportScheduleContext < BaseContext
     return Date.new(year, split_array[1], split_array[2])
   end
 
-  def find_or_create_story(court, hash)
-    ## TODO need find main_judge_id by branch
-    court.stories.find_or_create_by(story_type: hash[:story_type], year: hash[:year], word_type: hash[:word_type], number: hash[:number])
+  def get_main_judge(court, hash)
+    branches = court.branches.where(name: hash[:branch_name])
+    branches = branches.where("chamber_name LIKE ? ", "%#{hash[:story_type]}%") if branches.map(&:judge_id).uniq.count > 1
+    return branches.first ? branches.first.judge : nil
+  end
+
+  def find_or_create_story(court, hash, main_judge)
+    court.stories.find_or_create_by(story_type: hash[:story_type], year: hash[:year], word_type: hash[:word_type], number: hash[:number], main_judge: main_judge)
   end
 
   def find_or_create_schedule(story, hash)
