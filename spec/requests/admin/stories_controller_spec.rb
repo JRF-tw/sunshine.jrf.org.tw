@@ -2,10 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Admin::StoriesController do
   before{ signin_user }
+  let!(:story) { FactoryGirl.create :story, story_type: "邢事", year: 1990, word_type: "火箭", number: 100 }
 
   describe "#index" do
-    let!(:story) { FactoryGirl.create :story, story_type: "邢事", year: 1990, word_type: "火箭", number: 100 }
-
     context "search the story_type of stories" do
       before { get "/admin/stories", q: { story_type: "邢事" } }
       it { expect(response.body).to match(story.story_type) }
@@ -20,5 +19,11 @@ RSpec.describe Admin::StoriesController do
       before { get "/admin/stories" }
       it { expect(response).to be_success }
     end
-  end  
+  end
+
+  context "#show" do
+    before { get "/admin/stories/#{story.id}" }
+    it { expect(response).to be_success }
+  end
+
 end

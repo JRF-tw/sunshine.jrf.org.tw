@@ -18,6 +18,7 @@
 #
 
 class Admin::StoriesController < Admin::BaseController
+  before_action :story, :except => [:index]
 
   def index
     @search = Story.all.newest.ransack(params[:q])
@@ -25,4 +26,16 @@ class Admin::StoriesController < Admin::BaseController
     @admin_page_title = "案件列表"
     add_crumb @admin_page_title, "#"
   end
+
+  def show
+    @admin_page_title = "案件 - #{@story.identity}"
+    add_crumb @admin_page_title, "#"
+  end
+
+  private
+
+  def story
+    @story = Admin::Story.find(params[:id])
+  end
+
 end

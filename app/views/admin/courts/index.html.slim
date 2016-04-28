@@ -50,7 +50,7 @@
             td= court.court_type
             td= court.full_name
             td= court.name
-            td= court.is_hidden?? "否" : "是"
+            td= court.is_hidden? ? "是" : "否"
             td
               = link_to "法官列表", admin_judges_path(q: { "court_id_eq" => court.id } ), class: "btn btn-mini"
               | &nbsp;

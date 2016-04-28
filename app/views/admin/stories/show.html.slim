@@ -1,0 +1,17 @@
+- content_for :btns do
+
+= admin_widget_box "#{@story.identity}資料", icon: :th do
+  table.table.table-bordered.table-striped.table-hover
+    tbody
+      tr
+        td 案件類別
+        td= @story.story_type
+      tr
+        td 案號
+        td= @story.number
+      tr
+        td 字別
+        td= @story.word_type
+      tr
+        td 年度
+        td= @story.year

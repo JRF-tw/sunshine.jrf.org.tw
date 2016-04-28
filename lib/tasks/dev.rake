@@ -256,12 +256,14 @@ namespace :dev do
 
   task :fake_stories => :environment do
     Story.destroy_all
+    main_judge = Admin::Judge.all
     10.times do |i|
       Court.all.get_courts.sample.stories.create!(
         story_type: ["民事", "邢事"].sample,
         year: rand(70..105),
         word_type: ["生", "老", "病", "死"].sample,
-        number: rand(100..999)
+        number: rand(100..999),
+        main_judge_id: main_judge.sample.id
       )
     end
   end
