@@ -33,8 +33,8 @@
         tr
           th= sort_link(@search, :id, "#")
           th= sort_link(@search, :court_full_name, "開庭法院")
-          th 案件
           th 主審法官
+          th 案件
           th= sort_link(@search, :branch_name, "股別名稱")
           th= sort_link(@search, :date, "開庭時間")
       tbody
@@ -42,9 +42,9 @@
           tr
             td= schedule.id
             td= link_to "#{schedule.court.full_name}", admin_court_path(schedule.court)
+            td= link_to schedule.story.main_judge.name, admin_judge_path(schedule.story.main_judge) if schedule.story.main_judge  
             td= link_to "#{schedule.story.identity}", admin_story_path(schedule.story)
-            td= link_to "#{schedule.story.main_judge.name}", admin_judge_path(schedule.story.main_judge)
             td= schedule.branch_name
-            td= schedule.date
+            td= schedule.date    
     .ui-toolbar.ui-widget-header
       = paginate @schedules, theme: :admin
