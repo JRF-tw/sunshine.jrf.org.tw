@@ -35,7 +35,7 @@ class Story < ActiveRecord::Base
 
   scope :newest, ->{ order("id DESC") }
 
-  def story_detail
-    "#{self.year}-#{self.word_type}-#{self.number}"
+  def identity
+    "#{year}-#{word_type}-#{number}"
   end  
 end

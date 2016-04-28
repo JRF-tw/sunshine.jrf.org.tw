@@ -42,7 +42,7 @@
           tr
             td= schedule.id
             td= link_to "#{schedule.court.full_name}", admin_court_path(schedule.court)
-            td= link_to "#{schedule.story.story_detail}", admin_story_path(schedule.story)
+            td= link_to "#{schedule.story.identity}", admin_story_path(schedule.story)
             td= link_to "#{schedule.story.main_judge.name}", admin_judge_path(schedule.story.main_judge)
             td= schedule.branch_name
             td= schedule.date

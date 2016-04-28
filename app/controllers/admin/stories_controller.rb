@@ -28,7 +28,7 @@ class Admin::StoriesController < Admin::BaseController
   end
 
   def show
-    @admin_page_title = "案件 - #{@story.story_detail}"
+    @admin_page_title = "案件 - #{@story.identity}"
     add_crumb @admin_page_title, "#"
   end
 
