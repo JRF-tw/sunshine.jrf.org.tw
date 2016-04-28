@@ -8,6 +8,10 @@ class Scrap::AnalysisVerdictContext < BaseContext
     return @content.split.first.match(/判決/).present?
   end
 
+  def main_judge_name
+    return @content.match(/審判長法\s+官\s+([\p{Word}\w\s\S]+?)\n/)[1]
+  end
+
   def judges_names
     return @content.scan(/法\s+官\s+([\p{Word}\w\s\S]+?)\n/).map { |i| i[0].gsub("\r", '')  }
   end

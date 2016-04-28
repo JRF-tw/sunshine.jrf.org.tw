@@ -2,6 +2,7 @@ class Scrap::ImportVerdictContext < BaseContext
   before_perform :parse_orginal_data
   before_perform :parse_nokogiri_data
   before_perform :build_analysis_context
+  before_perform :find_main_judge
   before_perform :find_or_create_story
   before_perform :build_verdict
   after_perform  :upload_file
@@ -49,6 +50,10 @@ class Scrap::ImportVerdictContext < BaseContext
     @analysis_context = Scrap::AnalysisVerdictContext.new(verdict_content)
   end
 
+  def find_main_judge
+    @main_judge = Judge.find_by(name: @analysis_context.main_judge_name)
+  end
+
   def find_or_create_story
     array = verdict_word.split(",")
     @story = Story.find_or_create_by(year: array[0], word_type: array[1], number: array[2], court: @court)
@@ -74,6 +79,7 @@ class Scrap::ImportVerdictContext < BaseContext
     @story.assign_attributes(prosecutor_names: (@story.prosecutor_names + @analysis_context.prosecutor_names).uniq)
     @story.assign_attributes(lawyer_names: (@story.lawyer_names + @analysis_context.lawyer_names).uniq)
     @story.assign_attributes(defendant_names: (@story.defendant_names + @analysis_context.defendant_names).uniq)
+    @story.assign_attributes(main_judge: @main_judge) if @main_judge
     @story.save
   end
 end
