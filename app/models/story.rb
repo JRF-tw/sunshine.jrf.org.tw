@@ -26,7 +26,6 @@ class Story < ActiveRecord::Base
   has_many :verdicts
   belongs_to :main_judge, class_name: "Judge", foreign_key: "main_judge_id"
   belongs_to :court
-  belongs_to :main_judge, class_name: "Judge", foreign_key: "main_judge_id"
 
   serialize :defendant_names, Array
   serialize :lawyer_names, Array
@@ -37,5 +36,5 @@ class Story < ActiveRecord::Base
 
   def identity
     "#{year}-#{word_type}-#{number}"
-  end  
+  end
 end

@@ -14,6 +14,11 @@ RSpec.describe Scrap::AnalysisVerdictContext, :type => :model do
     it { expect(subject.judges_names.count > 0).to be_truthy }
   end
 
+  describe "#main_judge_name" do
+    it { expect(subject.main_judge_name).to be_a_kind_of(String) }
+    it { expect(subject.main_judge_name).to be_truthy }
+  end
+
   describe "#prosecutor_names" do
     it { expect(subject.prosecutor_names).to be_a_kind_of(Array) }
     it { expect(subject.prosecutor_names.count == 0).to be_truthy }

@@ -20,7 +20,7 @@ class Scrap::ImportCourtContext < BaseContext
       response_data = Mechanize.new.get(SCRAP_URI)
       response_data =  Nokogiri::HTML(response_data.body)
       parse_courts_data(response_data).each do |data|
-        @scrap_data << { fullname: data.text, code: data.attr("value").gsub(data.text, "").squish }
+        @scrap_data << { fullname: data.text.gsub(" ", ""), code: data.attr("value").gsub(data.text, "").squish }
       end
       return @scrap_data
     end
