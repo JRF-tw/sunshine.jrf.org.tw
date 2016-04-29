@@ -5,54 +5,67 @@
       .row
         .span6
           .control-group
+            label.control-label= f.label :court_full_name_eq
+            .controls= f.select :court_id_eq, 
+            collect_for_courts, include_blank: "請選擇"
+        .span6
+          .control-group
             label.control-label= f.label :story_type_eq
             .controls= f.select :story_type_eq,
             collect_for_story_types, include_blank: "請選擇"
+        
+      .row
         .span6
           .control-group
-            label.control-label= f.label :main_judge_name_cont
-            .controls= f.search_field :main_judge_name_cont
-      .row  
+            label.control-label= f.label :year_eq
+            .controls= f.search_field :year_eq
+        .span6
+          .control-group
+            label.control-label= f.label :number_eq
+            .controls= f.search_field :number_eq
+      .row
         .span6
           .control-group
             label.control-label= f.label :word_type_cont
             .controls= f.search_field :word_type_cont
         .span6
           .control-group
-            label.control-label= f.label :year_eq
-            .controls= f.search_field :year_eq
-      .row
-        .span6
-          .control-group
-            label.control-label= f.label :court_full_name_eq
-            .controls= f.select :court_id_eq, 
-            collect_for_courts, include_blank: "請選擇"
+            label.control-label= f.label :main_judge_name_cont
+            .controls= f.search_field :main_judge_name_cont
+        
   
     hr
     .form-actions
       = f.submit :value => "搜尋", :class => "btn btn-primary"
       = " "
       = link_to "清空搜尋結果", admin_stories_path, :class => "btn btn-default"
-
-
 = admin_widget_box "案件列表", icon: :pencil do
   .dataTables_wrapper
     table.table.table-bordered.table-striped.table-hover
       thead
         tr
           th= sort_link(@search, :id, '#')
-          th= sort_link(@search, :story_type, '案件類別')
-          th= sort_link(@search, :number, '案號')
-          th= sort_link(@search, :word_type, '字別')
+          th= sort_link(@search, :court_full_name, '所屬法院')
           th= sort_link(@search, :year, '年度')
+          th= sort_link(@search, :word_type, '字別')
+          th= sort_link(@search, :number, '案號')
+          th= sort_link(@search, :story_type, '案件類別')
+          th= sort_link(@search, :main_judge_name, '所屬法官')
+          th
       tbody
         - @stories.each do |story|
           tr
             td= story.id
-            td= story.story_type
-            td= story.number
-            td= story.word_type
+            td= link_to "#{story.court.full_name}", admin_court_path(story.court)
             td= story.year
-
+            td= story.word_type
+            td= story.number
+            td= story.story_type
+            td= link_to "#{story.main_judge.name}", admin_judge_path(story.main_judge)
+            td
+              = link_to "庭期列表", admin_schedules_path(q: { "story_id_eq" => story.id } ), class: "btn btn-mini"
+              | &nbsp;
+              = link_to "判決書列表", admin_verdicts_path(q: { "story_id_eq" => story.id } ), class: "btn btn-mini"
+              | &nbsp;
     .ui-toolbar.ui-widget-header
       = paginate @stories, theme: :admin

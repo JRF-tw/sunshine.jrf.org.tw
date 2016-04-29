@@ -7,7 +7,7 @@
           .control-group
             label.control-label= f.label :court_type_eq
             .controls= f.select :court_type_eq,
-            collect_for_court_types, include_blank: "請選擇"
+            collect_for_court_types, include_blank: "全部"
         .span6
           .control-group
             label.control-label= f.label :is_hidden_true
