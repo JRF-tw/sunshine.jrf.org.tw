@@ -61,7 +61,7 @@
             td= story.word_type
             td= story.number
             td= story.story_type
-            td= link_to "#{story.main_judge.name}", admin_judge_path(story.main_judge)
+            td= link_to "#{story.main_judge.name}", admin_judge_path(story.main_judge) if story.main_judge
             td
               = link_to "庭期列表", admin_schedules_path(q: { "story_id_eq" => story.id } ), class: "btn btn-mini"
               | &nbsp;
