@@ -39,7 +39,7 @@ end
 
 # scrap schedules
 every 1.day, :at => '1:30 am' do
-  runner "Scrap::ImportScheduleContext.perform_all"
+  runner "Scrap::GetSchedulesContext.perform_all"
 end
 
 # scrap verdicts
