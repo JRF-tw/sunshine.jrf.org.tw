@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160425103748) do
+ActiveRecord::Schema.define(version: 20160429061138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "postgis"
   enable_extension "hstore"
+  enable_extension "postgis"
 
   create_table "articles", force: :cascade do |t|
     t.integer  "profile_id"
@@ -416,15 +416,17 @@ ActiveRecord::Schema.define(version: 20160425103748) do
     t.integer  "year"
     t.string   "word_type"
     t.integer  "number"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.text     "defendant_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
+    t.boolean  "is_adjudge",       default: false
   end
 
   add_index "stories", ["court_id"], name: "index_stories_on_court_id", using: :btree
+  add_index "stories", ["is_adjudge"], name: "index_stories_on_is_adjudge", using: :btree
   add_index "stories", ["main_judge_id"], name: "index_stories_on_main_judge_id", using: :btree
 
   create_table "suit_banners", force: :cascade do |t|
@@ -512,11 +514,11 @@ ActiveRecord::Schema.define(version: 20160425103748) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.string   "file"
-    t.boolean  "is_judgment"
     t.text     "defendant_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
+    t.boolean  "is_judgment"
   end
 
   add_index "verdicts", ["is_judgment"], name: "index_verdicts_on_is_judgment", using: :btree

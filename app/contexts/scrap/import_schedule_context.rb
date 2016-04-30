@@ -1,131 +1,44 @@
 class Scrap::ImportScheduleContext < BaseContext
-  COURT_INFO_URI = "http://csdi.judicial.gov.tw/abbs/wkw/WHD3A01.jsp"
-  SCHEDULE_INFO_URI = "http://csdi.judicial.gov.tw/abbs/wkw/WHD3A02.jsp"
-  START_DATE = Time.zone.today
-  END_DATE = Time.zone.today
-  START_DATE_FORMAT = "#{START_DATE.strftime("%Y").to_i - 1911}#{START_DATE.strftime('%m%d')}"
-  END_DATE_FORMAT = "#{END_DATE.strftime("%Y").to_i - 1911}#{END_DATE.strftime('%m%d')}"
-  SCRAP_TIME_SLEEP_INTERVEL = rand(1..2)
-  PAGE_PER = 15
+  before_perform  :build_data
+  before_perform  :get_main_judge
+  before_perform  :find_or_create_story
+  after_perform   :update_story_is_adjudge
 
-  class << self
-    def perform_all
-      get_courts_info.each do |info|
-        info[:page_total].times.each_with_index do |i|
-          current_page = i + 1
-          self.delay.perform(info, current_page)
-        end
-      end
-    rescue => e
-      SlackService.notify_async("庭期匯入失敗:  #{e.message}\n", channel: "#scrap_notify", name: "bug")
-    end
-
-    def perform(info, current_page)
-      sleep SCRAP_TIME_SLEEP_INTERVEL
-      new(info, current_page).perform
-    rescue => e
-      SlackService.notify_async("庭期匯入失敗:  #{e.message}\n", channel: "#scrap_notify", name: "bug")
-    end
-
-    private
-
-    def get_courts_info
-      courts_info = []
-      Court.collect_codes.each do |court_code|
-        story_types = get_story_types_by_court(court_code)
-        story_types.each do |story_type|
-          page_total = page_total_by_story_type(court_code, story_type)
-          courts_info << { court_code: court_code, story_type: story_type, page_total: page_total } if page_total > 0
-        end
-      end
-      return courts_info
-    end
-
-    def get_story_types_by_court(court_code)
-      data = { court: court_code }
-      response_data = Mechanize.new.post(COURT_INFO_URI, data)
-      response_data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
-      return response_data.css("input[type='radio']").map{ |r| r.attribute('value').value }
-    end
-
-    def page_total_by_story_type(court_code, story_type)
-      sql = "UPPER(CRTID)='#{court_code}' AND DUDT>='#{START_DATE_FORMAT}' AND DUDT<='#{END_DATE_FORMAT}' AND SYS='#{story_type}'  ORDER BY  DUDT,DUTM,CRMYY,CRMID,CRMNO"
-      data = { sql_conction: sql }
-      response_data = Mechanize.new.get(SCHEDULE_INFO_URI, data)
-      response_data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
-      total = response_data.css('table')[2].css('tr')[0].text.match("合計件數") ? response_data.css('table')[2].css('tr')[0].text.match(/\d+/)[0].to_i : 0
-      return total / PAGE_PER + 1
-    end
+  def initialize(court)
+    @court = court
   end
 
-  before_perform :scrap_schedule
-  before_perform :parse_schedule_info
-
-  def initialize(info, current_page)
-    @court = Court.find_by(code: info[:court_code])
-    @court_code = info[:court_code]
-    @story_type = info[:story_type]
-    @current_page = current_page
-    @page_total = info[:page_total]
-  end
-
-  def perform
+  def perform(data_hash)
+    @data_hash = data_hash
     run_callbacks :perform do
-      @hash_array.each do |hash|
-        main_judge = get_main_judge(@court, hash)
-        story = find_or_create_story(@court, hash, main_judge)
-        find_or_create_schedule(story, hash)
-      end
+      @schedule = @story.schedules.find_or_create_by(court: @court, branch_name: @branch_name, date: @date)
     end
-  rescue => e
-    SlackService.notify_async("庭期匯入失敗:  #{e.message}\n", channel: "#scrap_notify", name: "bug")
   end
 
   private
 
-  def scrap_schedule
-    sql = "UPPER(CRTID)='#{@court_code}' AND DUDT>='#{START_DATE_FORMAT}' AND DUDT<='#{END_DATE_FORMAT}' AND SYS='#{@story_type}'  ORDER BY  DUDT,DUTM,CRMYY,CRMID,CRMNO"
-    data = { pageNow: @current_page, sql_conction: sql, pageTotal: @page_total, pageSize: 15, rowStart: 1 }
-    response_data = Mechanize.new.get(SCHEDULE_INFO_URI, data)
-    @data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
+  def build_data
+    @is_adjudge   = @data_hash[:is_adjudge]
+    @story_type   = @data_hash[:story_type]
+    @year         = @data_hash[:year]
+    @word_type    = @data_hash[:word_type]
+    @number       = @data_hash[:number]
+    @date         = @data_hash[:date]
+    @branch_name  = @data_hash[:branch_name]
   end
 
-  def parse_schedule_info
-    @hash_array = []
-    scope = @data.css("table")[1].css("tr")
-    scope.length.times.each do |index|
-      # first row is table desc
-      next if index == 0
-      row_data = scope[index].css('td')
-      hash = {
-          story_type: row_data[1].text.strip,
-          year: row_data[2].text.strip.to_i,
-          word_type: row_data[3].text.strip,
-          number: row_data[4].text.squish,
-          date: convert_scrap_time(row_data[5].text.strip),
-          branch_name: row_data[8].text.strip
-      }
-      @hash_array << hash
-    end
-  end
-
-  def convert_scrap_time(date_string)
-    split_array = date_string.split("/").map(&:to_i)
-    year = split_array[0] + 1911
-    return Date.new(year, split_array[1], split_array[2])
-  end
-
-  def get_main_judge(court, hash)
-    branches = court.branches.where(name: hash[:branch_name])
+  def get_main_judge
+    branches = @court.branches.where(name: @branch_name)
     branches = branches.where("chamber_name LIKE ? ", "%#{hash[:story_type]}%") if branches.map(&:judge_id).uniq.count > 1
-    return branches.first ? branches.first.judge : nil
+    @main_judge = branches.first ? branches.first.judge : nil
   end
 
-  def find_or_create_story(court, hash, main_judge)
-    court.stories.find_or_create_by(story_type: hash[:story_type], year: hash[:year], word_type: hash[:word_type], number: hash[:number], main_judge: main_judge)
+  def find_or_create_story
+    @story = @court.stories.find_or_create_by(story_type: @story_type, year: @year, word_type: @word_type, number: @number, main_judge: @main_judge)
   end
 
-  def find_or_create_schedule(story, hash)
-    story.schedules.find_or_create_by(court: story.court, branch_name: hash[:branch_name], date: hash[:date])
+  def update_story_is_adjudge
+    @story.update_attributes(is_adjudge: @is_adjudge) if @is_adjudge
   end
+
 end

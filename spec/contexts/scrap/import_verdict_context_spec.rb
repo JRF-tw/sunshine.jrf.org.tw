@@ -7,6 +7,7 @@ RSpec.describe Scrap::ImportVerdictContext, :type => :model do
 
   describe "#perform" do
     subject{ described_class.new(import_data, court).perform }
+
     context "create verdict" do
       it { expect{ subject }.to change{ Verdict.last } }
     end
@@ -26,13 +27,22 @@ RSpec.describe Scrap::ImportVerdictContext, :type => :model do
       it { expect(subject.file).to be_present }
     end
 
-    context "sync analysis data to story" do
+    context "update data to story" do
       before { subject }
-      it { expect(subject.judges_names).to eq(subject.story.judges_names) }
-      it { expect(subject.prosecutor_names).to eq(subject.story.prosecutor_names) }
-      it { expect(subject.defendant_names).to eq(subject.story.defendant_names) }
-      it { expect(subject.lawyer_names).to eq(subject.story.lawyer_names) }
-      it { expect(subject.story.main_judge).to be_present }
+      context "sync names" do
+        it { expect(subject.judges_names).to eq(subject.story.judges_names) }
+        it { expect(subject.prosecutor_names).to eq(subject.story.prosecutor_names) }
+        it { expect(subject.defendant_names).to eq(subject.story.defendant_names) }
+        it { expect(subject.lawyer_names).to eq(subject.story.lawyer_names) }
+      end
+
+      context "sync main jugde info" do
+        it { expect(subject.story.main_judge).to be_present }
+      end
+
+      context "sync is adjudge to story" do
+        it { expect(subject.story.is_adjudge).to be_truthy }
+      end
     end
   end
 end

@@ -15,6 +15,7 @@
 #  lawyer_names     :text
 #  judges_names     :text
 #  prosecutor_names :text
+#  is_adjudge       :boolean          default(FALSE)
 #
 
 class Story < ActiveRecord::Base

@@ -1,19 +1,24 @@
 = search_form_for @search, :url => admin_stories_path, :wrapper => :admin, :html => { :class => "form-horizontal" } do |f|
   .well
     fieldset
-      legend 搜尋      
+      legend 搜尋
+      .row
+        .span6
+          .control-group
+            label.control-label= f.label :is_adjudge_true
+            .controls= f.check_box :is_adjudge_true
       .row
         .span6
           .control-group
             label.control-label= f.label :court_full_name_eq
-            .controls= f.select :court_id_eq, 
+            .controls= f.select :court_id_eq,
             collect_for_courts, include_blank: "請選擇"
         .span6
           .control-group
             label.control-label= f.label :story_type_eq
             .controls= f.select :story_type_eq,
             collect_for_story_types, include_blank: "請選擇"
-        
+
       .row
         .span6
           .control-group
@@ -32,8 +37,6 @@
           .control-group
             label.control-label= f.label :main_judge_name_cont
             .controls= f.search_field :main_judge_name_cont
-        
-  
     hr
     .form-actions
       = f.submit :value => "搜尋", :class => "btn btn-primary"
@@ -51,7 +54,8 @@
           th= sort_link(@search, :number, '案號')
           th= sort_link(@search, :story_type, '案件類別')
           th= sort_link(@search, :main_judge_name, '所屬法官')
-          th
+          th= sort_link(@search, :is_adjudge, '是否已宣判')
+          th 操作
       tbody
         - @stories.each do |story|
           tr
@@ -62,6 +66,7 @@
             td= story.number
             td= story.story_type
             td= link_to "#{story.main_judge.name}", admin_judge_path(story.main_judge) if story.main_judge
+            td= story.is_adjudge ? "已宣判" : ""
             td
               = link_to "庭期列表", admin_schedules_path(q: { "story_id_eq" => story.id } ), class: "btn btn-mini"
               | &nbsp;
