@@ -80,7 +80,7 @@ class Scrap::ImportVerdictContext < BaseContext
     @story.assign_attributes(lawyer_names: (@story.lawyer_names + @verdict.lawyer_names).uniq)
     @story.assign_attributes(defendant_names: (@story.defendant_names + @verdict.defendant_names).uniq)
     @story.assign_attributes(main_judge: @main_judge) if @main_judge
-    @story.assign_attributes(is_adjudge: @verdict.is_judgment?) if @verdict.is_judgment? && !@verdict.is_judgment?
+    @story.assign_attributes(is_adjudge: @verdict.is_judgment?) if @verdict.is_judgment? && !@story.is_adjudge
     @story.save
   end
 end
