@@ -6,7 +6,7 @@ class Scrap::ImportVerdictContext < BaseContext
   before_perform :find_or_create_story
   before_perform :build_verdict
   after_perform  :upload_file
-  after_perform  :sync_analysis_data
+  after_perform  :update_data_to_story
 
   def initialize(import_data, court)
     @import_data = import_data
@@ -74,12 +74,13 @@ class Scrap::ImportVerdictContext < BaseContext
     Scrap::UploadVerdictContext.new(@orginal_data).perform(@verdict)
   end
 
-  def sync_analysis_data
-    @story.assign_attributes(judges_names: (@story.judges_names + @analysis_context.judges_names).uniq)
-    @story.assign_attributes(prosecutor_names: (@story.prosecutor_names + @analysis_context.prosecutor_names).uniq)
-    @story.assign_attributes(lawyer_names: (@story.lawyer_names + @analysis_context.lawyer_names).uniq)
-    @story.assign_attributes(defendant_names: (@story.defendant_names + @analysis_context.defendant_names).uniq)
+  def update_data_to_story
+    @story.assign_attributes(judges_names: (@story.judges_names + @verdict.judges_names).uniq)
+    @story.assign_attributes(prosecutor_names: (@story.prosecutor_names + @verdict.prosecutor_names).uniq)
+    @story.assign_attributes(lawyer_names: (@story.lawyer_names + @verdict.lawyer_names).uniq)
+    @story.assign_attributes(defendant_names: (@story.defendant_names + @verdict.defendant_names).uniq)
     @story.assign_attributes(main_judge: @main_judge) if @main_judge
+    @story.assign_attributes(is_adjudge: @verdict.is_judgment?) if @verdict.is_judgment? && !@verdict.is_judgment?
     @story.save
   end
 end
