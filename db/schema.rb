@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 20160430111608) do
   add_index "branches", ["judge_id"], name: "index_branches_on_judge_id", using: :btree
 
   create_table "bystanders", force: :cascade do |t|
+    t.string   "name",                                null: false
     t.string   "email",                               null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

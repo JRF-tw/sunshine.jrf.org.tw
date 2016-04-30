@@ -2,6 +2,7 @@ class DeviseCreateBystanders < ActiveRecord::Migration
   def change
     create_table(:bystanders) do |t|
       ## Database authenticatable
+      t.string :name,               null: false
       t.string :email,              null: false
       t.string :encrypted_password, null: false, default: ""
 

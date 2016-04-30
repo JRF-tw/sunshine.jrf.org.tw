@@ -3,6 +3,7 @@
 # Table name: bystanders
 #
 #  id                     :integer          not null, primary key
+#  name                   :string           not null
 #  email                  :string           not null
 #  encrypted_password     :string           default(""), not null
 #  reset_password_token   :string

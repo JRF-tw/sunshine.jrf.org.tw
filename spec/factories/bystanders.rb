@@ -3,6 +3,7 @@
 # Table name: bystanders
 #
 #  id                     :integer          not null, primary key
+#  name                   :string           not null
 #  email                  :string           not null
 #  encrypted_password     :string           default(""), not null
 #  reset_password_token   :string
@@ -23,6 +24,7 @@
 
 FactoryGirl.define do
   factory :bystander do
+    sequence(:name) { |n| "bystander-#{n}"}
     sequence(:email) { |n| "bystander-#{n}@test.com"}
     password "123123123"
     confirmed_at Time.now
