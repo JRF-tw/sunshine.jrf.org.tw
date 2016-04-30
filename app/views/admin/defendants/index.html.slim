@@ -21,12 +21,16 @@
         tr
           th #
           th 姓名
+          th 身分證字號
+          th 電話號碼
           th 操作
       tbody
         - @defendants.each do |defendant|
           tr
             td= defendant.id
             td= defendant.name
+            td= defendant.identify_number
+            td= defendant.phone_number
             td
               = link_to "詳細資料", admin_defendant_path(defendant), class: "btn btn-mini"
               = " "
