@@ -101,7 +101,8 @@ class Scrap::GetSchedulesContext < BaseContext
           word_type: row_data[3].text.strip,
           number: row_data[4].text.squish,
           date: convert_scrap_time(row_data[5].text.strip),
-          branch_name: row_data[8].text.strip
+          branch_name: row_data[8].text.strip,
+          is_adjudge: row_data[9].text.strip.match("宣判").present?
       }
       @hash_array << hash
     end

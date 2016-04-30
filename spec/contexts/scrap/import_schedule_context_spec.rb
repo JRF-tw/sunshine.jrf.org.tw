@@ -25,5 +25,11 @@ RSpec.describe Scrap::ImportScheduleContext, :type => :model do
     context "create story" do
       it { expect{ subject }.to change{ Story.count } }
     end
+
+    context "update story is_adjudge" do
+      let(:adjudged_data) { hash_data.merge(is_adjudge: true) }
+      subject{ described_class.new(court).perform(adjudged_data) }
+      it { expect(subject.story.is_adjudge).to be_truthy }
+    end
   end
 end

@@ -2,6 +2,7 @@ class Scrap::ImportScheduleContext < BaseContext
   before_perform  :build_data
   before_perform  :get_main_judge
   before_perform  :find_or_create_story
+  after_perform   :update_story_is_adjudge
 
   def initialize(court)
     @court = court
@@ -34,6 +35,10 @@ class Scrap::ImportScheduleContext < BaseContext
 
   def find_or_create_story
     @story = @court.stories.find_or_create_by(story_type: @story_type, year: @year, word_type: @word_type, number: @number, main_judge: @main_judge)
+  end
+
+  def update_story_is_adjudge
+    @story.update_attributes(is_adjudge: @is_adjudge) if @is_adjudge
   end
 
 end
