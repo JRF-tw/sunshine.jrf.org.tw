@@ -23,7 +23,8 @@ module AdminMenuHelper
       "用戶管理": {
         submenu: {
           "後台使用者管理": { url: admin_users_path, match: /\/admin\/users/ },
-          "觀察員管理": { url: admin_bystanders_path, match: /\/admin\/bystanders/ }
+          "觀察員管理": { url: admin_bystanders_path, match: /\/admin\/bystanders/ },
+          "當事人管理": { url: admin_defendants_path, match: /\/admin\/defendants/ }
         }
       }
     }

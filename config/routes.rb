@@ -63,6 +63,6 @@ Rails.application.routes.draw do
       end
     end
     resources :bystanders, only: [:index, :show]
-
+    resources :defendants, only: [:index, :show]
   end
 end

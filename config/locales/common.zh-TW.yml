@@ -270,4 +270,6 @@ zh-TW:
       bystander:
         name_cont: "姓名包含"
         email_cont: "EmaiL包含"
+      defendant:
+          name_cont: "姓名包含"
 
