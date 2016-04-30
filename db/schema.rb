@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160429061138) do
+ActiveRecord::Schema.define(version: 20160430111608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,6 +89,29 @@ ActiveRecord::Schema.define(version: 20160429061138) do
   add_index "branches", ["court_id"], name: "index_branches_on_court_id", using: :btree
   add_index "branches", ["judge_id"], name: "index_branches_on_judge_id", using: :btree
 
+  create_table "bystanders", force: :cascade do |t|
+    t.string   "email",                               null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  add_index "bystanders", ["confirmation_token"], name: "index_bystanders_on_confirmation_token", unique: true, using: :btree
+  add_index "bystanders", ["email"], name: "index_bystanders_on_email", unique: true, using: :btree
+  add_index "bystanders", ["reset_password_token"], name: "index_bystanders_on_reset_password_token", unique: true, using: :btree
+
   create_table "careers", force: :cascade do |t|
     t.integer  "profile_id"
     t.string   "career_type"
@@ -133,6 +156,25 @@ ActiveRecord::Schema.define(version: 20160429061138) do
   add_index "courts", ["full_name"], name: "index_courts_on_full_name", using: :btree
   add_index "courts", ["is_hidden"], name: "index_courts_on_is_hidden", using: :btree
   add_index "courts", ["name"], name: "index_courts_on_name", using: :btree
+
+  create_table "defendants", force: :cascade do |t|
+    t.string   "name",                                null: false
+    t.string   "identify_number",                     null: false
+    t.string   "phone_number",                        null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  add_index "defendants", ["reset_password_token"], name: "index_defendants_on_reset_password_token", unique: true, using: :btree
 
   create_table "educations", force: :cascade do |t|
     t.integer  "profile_id"
