@@ -1,0 +1,13 @@
+= admin_widget_box "#{@bystander.name}的個人檔案", icon: :th do
+  table.table.table-bordered.table-striped.table-hover
+    tbody
+      tr
+        td 姓名
+        td= @bystander.name
+      tr
+        td 現職
+        td= @bystander.email
+      tr
+        td 案件列表
+        td
+          = link_to "TODO 案件列表", "#", class: "btn btn-mini"

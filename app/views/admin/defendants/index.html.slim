@@ -1,0 +1,41 @@
+= search_form_for @search, :url => admin_defendants_path, :wrapper => :admin, :html => { :class => "form-horizontal" } do |f|
+  .well
+    fieldset
+      legend 搜尋
+      .row
+        .span6
+          .control-group
+            label.control-label= f.label :name_cont
+            .controls= f.search_field :name_cont
+    hr
+    .form-actions
+      = f.submit :value => "搜尋", :class => "btn btn-primary"
+      = " "
+      = link_to "清空搜尋結果", admin_defendants_path, :class => "btn btn-default"
+= admin_widget_box "當事人列表", icon: :pencil do
+  .dataTables_wrapper
+    div
+      .dataTables_length
+    table.table.table-bordered.table-striped.table-hover
+      thead
+        tr
+          th #
+          th 姓名
+          th 身分證字號
+          th 電話號碼
+          th 操作
+      tbody
+        - @defendants.each do |defendant|
+          tr
+            td= defendant.id
+            td= defendant.name
+            td= defendant.identify_number
+            td= defendant.phone_number
+            td
+              = link_to "詳細資料", admin_defendant_path(defendant), class: "btn btn-mini"
+              = " "
+              = link_to "TODO 案件列表", "#", class: "btn btn-mini"
+              = " "
+              = link_to "TODO 評鑑列表", "#", class: "btn btn-mini"
+    .ui-toolbar.ui-widget-header
+      = paginate @defendants, theme: :admin

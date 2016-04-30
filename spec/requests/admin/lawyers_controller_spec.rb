@@ -9,21 +9,21 @@ RSpec.describe Admin::LawyersController do
       before { get "/admin/lawyers" }
       it { expect(response).to be_success }
     end
-  end  
+  end
 
   describe "#new" do
     context "render success" do
       before { get "/admin/lawyers/new" }
       it { expect(response).to be_success }
     end
-  end  
+  end
 
   describe "#edit" do
     context "render edit success" do
       before { get "/admin/lawyers/#{lawyer.id}/edit" }
       it { expect(response).to be_success }
     end
-  end  
+  end
 
   describe "#update" do
     context "update success" do
@@ -40,7 +40,7 @@ RSpec.describe Admin::LawyersController do
       it { expect{ subject }.to change { Lawyer.count }.by(-1) }
       it { expect(response).to be_redirect }
     end
-  end  
+  end
 
   describe "#create" do
     context "delete success" do
