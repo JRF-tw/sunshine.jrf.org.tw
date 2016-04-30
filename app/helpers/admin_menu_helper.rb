@@ -11,7 +11,6 @@ module AdminMenuHelper
       # "Menu #2" => { url: url_for(q: 789), icon: "pencil", match: /q=789/ },
       "個人檔案管理": { url: admin_profiles_path, match: /\/admin\/profiles/ },
       "法官管理": { url: admin_judges_path, match: /\/admin\/judges/ },
-      "律師管理": { url: admin_lawyers_path, match: /\/admin\/lawyers/ },
       "重要判決管理": { url: admin_judgments_path, match: /\/admin\/judgments/ },
       "評鑑資料-案例管理": { url: admin_suits_path, match: /\/admin\/suits/ },
       "案件管理": { url: admin_stories_path, match: /\/admin\/stories/ },
@@ -24,7 +23,8 @@ module AdminMenuHelper
         submenu: {
           "後台使用者管理": { url: admin_users_path, match: /\/admin\/users/ },
           "觀察員管理": { url: admin_bystanders_path, match: /\/admin\/bystanders/ },
-          "當事人管理": { url: admin_defendants_path, match: /\/admin\/defendants/ }
+          "當事人管理": { url: admin_defendants_path, match: /\/admin\/defendants/ },
+          "律師管理": { url: admin_lawyers_path, match: /\/admin\/lawyers/ }
         }
       }
     }
