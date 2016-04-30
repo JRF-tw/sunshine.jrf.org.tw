@@ -62,6 +62,7 @@ Rails.application.routes.draw do
         get :download_file
       end
     end
+    resources :bystanders, only: [:index, :show]
 
   end
 end

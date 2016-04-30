@@ -1,8 +1,8 @@
 module AdminMenuHelper
   def admin_menus
     {
-      # "Menu #1": { 
-      #   submenu: { 
+      # "Menu #1": {
+      #   submenu: {
       #     "Submenu #1": { url: url_for(q: 123), match: /q=123/ },
       #     "Submenu #2": { url: url_for(q: 456), match: /q=456/ }
       #   },
@@ -20,7 +20,12 @@ module AdminMenuHelper
       "判決書管理": { url: admin_verdicts_path, match: /\/admin\/verdicts/ },
       "首頁橫幅管理": { url: admin_banners_path, match: /\/admin\/banners/ },
       "司法案例面面觀橫幅管理": { url: admin_suit_banners_path, match: /\/admin\/suit_banners/ },
-      "後台使用者管理": { url: admin_users_path, match: /\/admin\/users/ }
+      "用戶管理": {
+        submenu: {
+          "後台使用者管理": { url: admin_users_path, match: /\/admin\/users/ },
+          "觀察員管理": { url: admin_bystanders_path, match: /\/admin\/bystanders/ }
+        }
+      }
     }
   end
 
@@ -43,7 +48,7 @@ module AdminMenuHelper
       tmp = []
       tmp << content_tag(:i, class: "icon icon-#{item[:icon]}"){ "" } if item[:icon]
       tmp << label
-      raw tmp.join      
+      raw tmp.join
     end
     html << render_admin_menu(item[:submenu]) if item[:submenu]
     actived = item[:match] ? request.original_url =~ item[:match] : false

@@ -267,4 +267,7 @@ zh-TW:
       lawyer:
         name_cont: "姓名包含"
         current_cont: "現職包含"
+      bystander:
+        name_cont: "姓名包含"
+        email_cont: "EmaiL包含"
 
