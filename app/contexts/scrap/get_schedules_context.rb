@@ -16,15 +16,11 @@ class Scrap::GetSchedulesContext < BaseContext
           self.delay.perform(info, current_page)
         end
       end
-    rescue => e
-      SlackService.notify_async("庭期匯入失敗:  #{e.message}\n", channel: "#scrap_notify", name: "bug")
     end
 
     def perform(info, current_page)
       sleep SCRAP_TIME_SLEEP_INTERVEL
       new(info, current_page).perform
-    rescue => e
-      SlackService.notify_async("庭期匯入失敗:  #{e.message}\n", channel: "#scrap_notify", name: "bug")
     end
 
     private
@@ -39,6 +35,8 @@ class Scrap::GetSchedulesContext < BaseContext
         end
       end
       return courts_info
+    rescue => e
+      SlackService.scrap_notify_async("庭期爬取失敗: 爬取各法院資料錯誤\n #{e.message}")
     end
 
     def get_story_types_by_court(court_code)
@@ -46,6 +44,8 @@ class Scrap::GetSchedulesContext < BaseContext
       response_data = Mechanize.new.post(COURT_INFO_URI, data)
       response_data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
       return response_data.css("input[type='radio']").map{ |r| r.attribute('value').value }
+    rescue => e
+      SlackService.scrap_notify_async("庭期爬取失敗: 爬取各法院的庭期類別錯誤\n get_story_types_by_court(#{court_code})\n #{e.message}")
     end
 
     def page_total_by_story_type(court_code, story_type)
@@ -55,6 +55,8 @@ class Scrap::GetSchedulesContext < BaseContext
       response_data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
       total = response_data.css('table')[2].css('tr')[0].text.match("合計件數") ? response_data.css('table')[2].css('tr')[0].text.match(/\d+/)[0].to_i : 0
       return total / PAGE_PER + 1
+    rescue => e
+      SlackService.scrap_notify_async("庭期爬取失敗: 計算各法院撈取分頁數錯誤\n page_total_by_story_type(#{court_code}, #{story_type})\n #{e.message}")
     end
   end
 
@@ -62,11 +64,12 @@ class Scrap::GetSchedulesContext < BaseContext
   before_perform :parse_schedule_info
 
   def initialize(info, current_page)
-    @court = Court.find_by(code: info[:court_code])
-    @court_code = info[:court_code]
-    @story_type = info[:story_type]
+    @info = info
+    @court = Court.find_by(code: @info[:court_code])
+    @court_code = @info[:court_code]
+    @story_type = @info[:story_type]
     @current_page = current_page
-    @page_total = info[:page_total]
+    @page_total = @info[:page_total]
   end
 
   def perform
@@ -75,8 +78,6 @@ class Scrap::GetSchedulesContext < BaseContext
         Scrap::ImportScheduleContext.new(@court).perform(data_hash)
       end
     end
-  rescue => e
-    SlackService.notify_async("庭期匯入失敗:  #{e.message}\n", channel: "#scrap_notify", name: "bug")
   end
 
   private
@@ -86,6 +87,8 @@ class Scrap::GetSchedulesContext < BaseContext
     data = { pageNow: @current_page, sql_conction: sql, pageTotal: @page_total, pageSize: 15, rowStart: 1 }
     response_data = Mechanize.new.get(SCHEDULE_INFO_URI, data)
     @data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
+  rescue => e
+    SlackService.scrap_notify_async("庭期爬取失敗: 取得庭期表搜尋內容錯誤\n info : #{@info}\n current_page : #{@current_page}\n #{e.message}")
   end
 
   def parse_schedule_info
@@ -106,11 +109,15 @@ class Scrap::GetSchedulesContext < BaseContext
       }
       @hash_array << hash
     end
+  rescue => e
+    SlackService.scrap_notify_async("庭期爬取失敗: 解析庭期表搜尋內容錯誤\n info : #{@info}\n current_page : #{@current_page}\n #{e.message}")
   end
 
   def convert_scrap_time(date_string)
     split_array = date_string.split("/").map(&:to_i)
     year = split_array[0] + 1911
     return Date.new(year, split_array[1], split_array[2])
+  rescue => e
+    SlackService.scrap_notify_async("庭期爬取失敗: 解析庭期時間錯誤\n convert_scrap_time(#{date_string})\n #{e.message}")
   end
 end

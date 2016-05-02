@@ -27,25 +27,25 @@ class Scrap::ImportVerdictContext < BaseContext
   def parse_orginal_data
     @orginal_data = @import_data.body.force_encoding("UTF-8")
   rescue => e
-    SlackService.notify_async("判決書內容擷取失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
+    SlackService.scrap_notify_async("判決書分析資料失敗: parse_orginal_data處理資料為空\n import_data : #{@import_data}\n #{e.message}")
   end
 
   def parse_nokogiri_data
     @nokogiri_data = Nokogiri::HTML(@import_data.body)
   rescue => e
-    SlackService.notify_async("判決書內容擷取失敗(nokogiri):  #{e.message}", channel: "#scrap_notify", name: "bug")
+    SlackService.scrap_notify_async("判決書分析資料失敗: parse_nokogiri_data處理資料為空\n import_data : #{@import_data}\n #{e.message}")
   end
 
   def parse_verdict_word
     @verdict_word = @nokogiri_data.css("table")[4].css("tr")[0].css("td")[1].text
   rescue => e
-    SlackService.notify_async("判決書字別分析失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
+    SlackService.scrap_notify_async("判決書分析資料失敗: parse_verdict_word處理資料為空\n nokogiri_data : #{@nokogiri_data}\n #{e.message}")
   end
 
   def parse_verdict_content
     @verdict_content = @nokogiri_data.css("pre").text
   rescue => e
-    SlackService.notify_async("判決書內容分析失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
+    SlackService.scrap_notify_async("判決書分析資料失敗: parse_verdict_content處理資料為空\n nokogiri_data : #{@nokogiri_data}\n #{e.message}")
   end
 
   def build_analysis_context
