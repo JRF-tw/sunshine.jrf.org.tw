@@ -14,6 +14,14 @@ class SlackService
     def notify_async(message, channel: "#general", name: "slack-robot", icon_url: DEFAULT_ICON_URL, webhook: nil)
       delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook)
     end
+
+    def scrap_notify_async(message, channel: "#scrap_notify", name: "Exception", icon_url: DEFAULT_ICON_URL, webhook: nil)
+      delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook)
+    end
+
+    def analysis_notify_async(message, channel: "#analysis_notify", name: "slack-robot", icon_url: DEFAULT_ICON_URL, webhook: nil)
+      delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook)
+    end
   end
 
 end

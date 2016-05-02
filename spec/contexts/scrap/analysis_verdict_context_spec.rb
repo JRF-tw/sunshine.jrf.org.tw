@@ -1,36 +1,111 @@
 require 'rails_helper'
 
 RSpec.describe Scrap::AnalysisVerdictContext, :type => :model do
-  let!(:import_data) { Mechanize.new.get(Scrap::GetVerdictsContext::VERDICT_URI) }
-  let!(:content){ Nokogiri::HTML(import_data.body).css("pre").text }
-  subject{ described_class.new(content) }
+  let!(:verdict_word){ "測試裁判字別" }
 
   describe "#is_judgment?" do
-    it { expect(subject.is_judgment?).to be_truthy }
+    context "is judgment" do
+      let!(:verdict_content){ "判決" }
+      subject{ described_class.new(verdict_content, verdict_word) }
+
+      it { expect(subject.is_judgment?).to be_truthy }
+    end
+
+    context "is judgment" do
+      let!(:verdict_content){ "裁決" }
+      subject{ described_class.new(verdict_content, verdict_word) }
+
+      it { expect(subject.is_judgment?).to be_falsey }
+    end
   end
 
   describe "#judges_names" do
-    it { expect(subject.judges_names).to be_a_kind_of(Array) }
-    it { expect(subject.judges_names.count > 0).to be_truthy }
+    context "exist" do
+      let!(:verdict_content){ "法  官  xxxx\n" }
+      subject{ described_class.new(verdict_content, verdict_word) }
+
+      it { expect(subject.judges_names.present?).to be_truthy }
+      it { expect{ subject.judges_names }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
+    end
+
+    context "unexist" do
+      let!(:verdict_content){ "法  X  xxx\n" }
+      subject{ described_class.new(verdict_content, verdict_word) }
+
+      it { expect(subject.judges_names.present?).to be_falsey }
+      it { expect{ subject.judges_names }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+    end
   end
 
   describe "#main_judge_name" do
-    it { expect(subject.main_judge_name).to be_a_kind_of(String) }
-    it { expect(subject.main_judge_name).to be_truthy }
+    context "exist" do
+      let!(:verdict_content){ "審判長法 官 xxx\n" }
+      subject{ described_class.new(verdict_content, verdict_word) }
+
+      it { expect(subject.main_judge_name.present?).to be_truthy }
+      it { expect{ subject.main_judge_name }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
+    end
+
+    context "unexist" do
+      let!(:verdict_content){ "恐龍審判長 xxx\n" }
+      subject{ described_class.new(verdict_content, verdict_word) }
+
+      it { expect(subject.main_judge_name.present?).to be_falsey }
+      it { expect{ subject.main_judge_name }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+    end
   end
 
   describe "#prosecutor_names" do
-    it { expect(subject.prosecutor_names).to be_a_kind_of(Array) }
-    it { expect(subject.prosecutor_names.count == 0).to be_truthy }
+    context "exist" do
+      let!(:verdict_content){ "檢察官xxxx到庭執行職務" }
+      subject{ described_class.new(verdict_content, verdict_word) }
+
+      it { expect(subject.prosecutor_names.present?).to be_truthy }
+      it { expect{ subject.prosecutor_names }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
+    end
+
+    context "unexist" do
+      let!(:verdict_content){ "檢察官xxxx到處跑執行職務" }
+      subject{ described_class.new(verdict_content, verdict_word) }
+
+      it { expect(subject.prosecutor_names.present?).to be_falsey }
+      it { expect{ subject.prosecutor_names }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+    end
   end
 
   describe "#lawyer_names" do
-    it { expect(subject.lawyer_names).to be_a_kind_of(Array) }
-    it { expect(subject.prosecutor_names.count == 0).to be_truthy }
+    context "exist" do
+      let!(:verdict_content){ "選任辯護人　xxx律師" }
+      subject{ described_class.new(verdict_content, verdict_word) }
+
+      it { expect(subject.lawyer_names.present?).to be_truthy }
+      it { expect{ subject.lawyer_names }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
+    end
+
+    context "unexist" do
+      let!(:verdict_content){ "選任辯護人" }
+      subject{ described_class.new(verdict_content, verdict_word) }
+
+      it { expect(subject.lawyer_names.present?).to be_falsey }
+      it { expect{ subject.lawyer_names }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+    end
   end
 
   describe "#defendant_names" do
-    it { expect(subject.defendant_names).to be_a_kind_of(Array) }
-    it { expect(subject.defendant_names.count > 0).to be_truthy }
+    context "exist" do
+      let!(:verdict_content){ "被　　　告　xxx" }
+      subject{ described_class.new(verdict_content, verdict_word) }
+
+      it { expect(subject.defendant_names.present?).to be_truthy }
+      it { expect{ subject.defendant_names }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
+    end
+
+    context "unexist" do
+      let!(:verdict_content){ "被衝康 xxx" }
+      subject{ described_class.new(verdict_content, verdict_word) }
+
+      it { expect(subject.defendant_names.present?).to be_falsey }
+      it { expect{ subject.defendant_names }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+    end
   end
 end

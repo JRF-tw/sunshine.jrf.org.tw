@@ -21,6 +21,10 @@ RSpec.describe Scrap::ImportScheduleContext, :type => :model do
         let!(:branch1) { FactoryGirl.create :branch, court: court, judge: judge1, name: "平", chamber_name: "xxx法院民事庭" }
         it { expect(subject.story.main_judge).to eq(judge1) }
       end
+
+      context "not match judge" do
+        it { expect{ subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      end
     end
 
     context "find story" do

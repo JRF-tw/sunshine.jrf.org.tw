@@ -1,6 +1,8 @@
 class Scrap::ImportVerdictContext < BaseContext
   before_perform :parse_orginal_data
   before_perform :parse_nokogiri_data
+  before_perform :parse_verdict_word
+  before_perform :parse_verdict_content
   before_perform :build_analysis_context
   before_perform :find_main_judge
   before_perform :find_or_create_story
@@ -34,20 +36,20 @@ class Scrap::ImportVerdictContext < BaseContext
     SlackService.notify_async("判決書內容擷取失敗(nokogiri):  #{e.message}", channel: "#scrap_notify", name: "bug")
   end
 
-  def verdict_word
-    @nokogiri_data.css("table")[4].css("tr")[0].css("td")[1].text
+  def parse_verdict_word
+    @verdict_word = @nokogiri_data.css("table")[4].css("tr")[0].css("td")[1].text
   rescue => e
     SlackService.notify_async("判決書字別分析失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
   end
 
-  def verdict_content
-    @nokogiri_data.css("pre").text
+  def parse_verdict_content
+    @verdict_content = @nokogiri_data.css("pre").text
   rescue => e
     SlackService.notify_async("判決書內容分析失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
   end
 
   def build_analysis_context
-    @analysis_context = Scrap::AnalysisVerdictContext.new(verdict_content)
+    @analysis_context = Scrap::AnalysisVerdictContext.new(@verdict_content, @verdict_word)
   end
 
   def find_main_judge
@@ -55,7 +57,7 @@ class Scrap::ImportVerdictContext < BaseContext
   end
 
   def find_or_create_story
-    array = verdict_word.split(",")
+    array = @verdict_word.split(",")
     @story = Story.find_or_create_by(year: array[0], word_type: array[1], number: array[2], court: @court)
   end
 
