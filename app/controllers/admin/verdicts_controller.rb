@@ -17,6 +17,7 @@
 
 class Admin::VerdictsController < Admin::BaseController
   before_action :verdict
+  before_action(except: [:index]){ add_crumb("判決書列表", admin_verdicts_path) }
 
   def index
     @search = Verdict.all.newest.ransack(params[:q])
@@ -24,6 +25,12 @@ class Admin::VerdictsController < Admin::BaseController
     @admin_page_title = "判決書列表"
     add_crumb @admin_page_title, "#"
   end
+
+  def show
+    @admin_page_title = "判決書-#{@verdict.id}"
+    add_crumb @admin_page_title, "#"
+  end  
+
 
   def download_file
     @file_url = Rails.env.development? || Rails.env.test? ? @verdict.file.path : @verdict.file.url.gsub("//", "http://")

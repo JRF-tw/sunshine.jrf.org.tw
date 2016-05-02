@@ -52,6 +52,7 @@
           th 參與法官
           th 參與檢察官
           th 文件下載
+          th
 
       tbody
         - @verdicts.each do |verdict|
@@ -65,6 +66,9 @@
             td= verdict.judges_names.join(",")
             td= verdict.prosecutor_names.join(",")
             td= link_to "點我下載", download_file_admin_verdict_path(verdict) if verdict.file
+            td
+              = link_to "詳細資料", admin_verdict_path(verdict), class: "btn btn-mini"
+              | &nbsp;
 
     .ui-toolbar.ui-widget-header
       = paginate @verdicts, theme: :admin
