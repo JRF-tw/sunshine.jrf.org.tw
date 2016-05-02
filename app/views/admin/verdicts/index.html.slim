@@ -12,6 +12,24 @@
           .control-group#datepicker
             label.control-label= f.label :adjudge_date_eq
             .controls= f.search_field :adjudge_date_eq
+      .row
+        .span6
+          .control-group
+            label.control-label= f.label :unexist_defendant_names
+            .controls= f.check_box :unexist_defendant_names
+        .span6
+          .control-group
+            label.control-label= f.label :unexist_lawyer_names
+            .controls= f.check_box :unexist_lawyer_names
+      .row
+        .span6
+          .control-group
+            label.control-label= f.label :unexist_judges_names
+            .controls= f.check_box :unexist_judges_names
+        .span6
+          .control-group
+            label.control-label= f.label :unexist_prosecutor_names
+            .controls= f.check_box :unexist_prosecutor_names
 
     hr
     .form-actions
@@ -20,7 +38,7 @@
       = link_to "清空搜尋結果", admin_verdicts_path, :class => "btn btn-default"
 
 
-= admin_widget_box "案件列表", icon: :pencil do
+= admin_widget_box "案件列表 : 搜尋結果為 #{@search.result.count} 筆", icon: :pencil do
   .dataTables_wrapper
     table.table.table-bordered.table-striped.table-hover
       thead

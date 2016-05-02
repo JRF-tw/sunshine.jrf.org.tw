@@ -42,6 +42,7 @@ class Scrap::GetVerdictsContext < BaseContext
       return response_data.content.match(/共\s*([0-9]*)\s*筆/)[1].to_i
     rescue => e
       SlackService.scrap_notify_async("判決書爬取失敗: 判決書搜尋頁面為錯誤頁面\n court : #{court.code}\n type : #{type})\n #{e.message}")
+      return 0
     end
 
     def get_verdict_data(scrap_id, court, type)
