@@ -41,5 +41,21 @@ RSpec.describe Scrap::ImportScheduleContext, :type => :model do
       subject{ described_class.new(court).perform(adjudged_data) }
       it { expect(subject.story.is_adjudge).to be_truthy }
     end
+
+    context "update story adjudge date" do
+      let(:adjudged_data) { hash_data.merge(is_adjudge: true, date: Date.today) }
+      subject{ described_class.new(court).perform(adjudged_data) }
+
+      context "adjudge_date nil" do
+        it { expect(subject.story.adjudge_date).to be_truthy }
+      end
+
+      context "adjudge_date exist" do
+        before { described_class.new(court).perform(adjudged_data) }
+
+        it { expect{ subject }.not_to change{ subject.story.adjudge_date } }
+        it { expect{ subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      end
+    end
   end
 end
