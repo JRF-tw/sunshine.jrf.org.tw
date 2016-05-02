@@ -465,11 +465,8 @@ ActiveRecord::Schema.define(version: 20160502031411) do
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
-<<<<<<< ef7d361d3b9ba745882ca8a6f19b68d996dab10b
     t.boolean  "is_adjudge",       default: false
-=======
     t.date     "adjudge_date"
->>>>>>> add column  adjudge_date
   end
 
   add_index "stories", ["court_id"], name: "index_stories_on_court_id", using: :btree
@@ -567,10 +564,7 @@ ActiveRecord::Schema.define(version: 20160502031411) do
     t.text     "judges_names"
     t.text     "prosecutor_names"
     t.boolean  "is_judgment"
-<<<<<<< ef7d361d3b9ba745882ca8a6f19b68d996dab10b
-=======
     t.date     "adjudge_date"
->>>>>>> add column  adjudge_date
   end
 
   add_index "verdicts", ["is_judgment"], name: "index_verdicts_on_is_judgment", using: :btree
