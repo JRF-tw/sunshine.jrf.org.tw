@@ -31,7 +31,4 @@ class Judge < ActiveRecord::Base
 
   mount_uploader :avatar, ProfileAvatarUploader
 
-  def collect_for_all_branch_name
-    branches.map(&:name).join(", ")
-  end
 end

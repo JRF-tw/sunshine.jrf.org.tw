@@ -192,7 +192,7 @@ module ApplicationHelper
 
   def collect_for_judges_name
     Judge.all.map do |j| 
-      ["#{j.name} - #{j.collect_for_all_branch_name}", j.id]
+      ["#{j.name} - #{j.branches.map(&:name).join(", ")}", j.id]
     end  
   end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160502031411) do
+ActiveRecord::Schema.define(version: 20160503023005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -461,15 +461,15 @@ ActiveRecord::Schema.define(version: 20160502031411) do
     t.integer  "number"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+    t.date     "adjudge_date"
+    t.boolean  "is_adjudge",       default: false
     t.text     "defendant_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
-    t.date     "adjudge_date"
-    t.boolean  "is_adjudge",       default: false
-    t.date     "adjudge_date"
   end
 
+  add_index "stories", ["adjudge_date"], name: "index_stories_on_adjudge_date", using: :btree
   add_index "stories", ["court_id"], name: "index_stories_on_court_id", using: :btree
   add_index "stories", ["is_adjudge"], name: "index_stories_on_is_adjudge", using: :btree
   add_index "stories", ["main_judge_id"], name: "index_stories_on_main_judge_id", using: :btree
@@ -556,7 +556,6 @@ ActiveRecord::Schema.define(version: 20160502031411) do
 
   create_table "verdicts", force: :cascade do |t|
     t.integer  "story_id"
-    t.text     "content"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.string   "file"
@@ -568,6 +567,7 @@ ActiveRecord::Schema.define(version: 20160502031411) do
     t.date     "adjudge_date"
   end
 
+  add_index "verdicts", ["adjudge_date"], name: "index_verdicts_on_adjudge_date", using: :btree
   add_index "verdicts", ["is_judgment"], name: "index_verdicts_on_is_judgment", using: :btree
 
 end
