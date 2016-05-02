@@ -175,7 +175,7 @@ module ApplicationHelper
   end
 
   def collect_for_story_types
-    Story.all.map(&:story_type).uniq
+    Story.all.map(&:story_type).uniq.compact
   end
     
   def collect_for_schedule_branch_names
@@ -183,7 +183,7 @@ module ApplicationHelper
   end  
 
   def collect_for_court_types
-    Court.all.map(&:court_type).uniq
+    Court.all.map(&:court_type).uniq.compact
   end
 
   def collect_for_courts
