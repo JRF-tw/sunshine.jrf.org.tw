@@ -16,6 +16,7 @@
 #  judges_names     :text
 #  prosecutor_names :text
 #  is_adjudge       :boolean          default(FALSE)
+#  adjudge_date     :date
 #
 
 class Admin::StoriesController < Admin::BaseController
