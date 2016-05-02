@@ -24,6 +24,13 @@ RSpec.describe Admin::VerdictsController do
     end
   end
 
+  describe "#show" do
+    let!(:verdict) { FactoryGirl.create :verdict }
+    before { get "/admin/verdicts/#{verdict.id}" }
+    
+    it { expect(response).to be_success }
+  end
+
   describe "#download_file" do
     let!(:verdict) { FactoryGirl.create :verdict, :with_file }
 
