@@ -29,11 +29,17 @@ RSpec.describe Scrap::AnalysisVerdictContext, :type => :model do
     end
 
     context "unexist" do
-      let!(:verdict_content){ "法  X  xxx\n" }
-      subject{ described_class.new(verdict_content, verdict_word) }
+      context "notify" do
+        let!(:verdict_content){ "判決 法  X  xxx\n" }
+        subject{ described_class.new(verdict_content, verdict_word) }
+        it { expect{ subject.judges_names }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      end
 
-      it { expect(subject.judges_names.present?).to be_falsey }
-      it { expect{ subject.judges_names }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      context "unnotify" do
+        let!(:verdict_content){ "法  X  xxx\n" }
+        subject{ described_class.new(verdict_content, verdict_word) }
+        it { expect{ subject.judges_names }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      end
     end
   end
 
@@ -47,11 +53,17 @@ RSpec.describe Scrap::AnalysisVerdictContext, :type => :model do
     end
 
     context "unexist" do
-      let!(:verdict_content){ "恐龍審判長 xxx\n" }
-      subject{ described_class.new(verdict_content, verdict_word) }
+      context "notify" do
+        let!(:verdict_content){ "判決 恐龍審判長  xxx\n" }
+        subject{ described_class.new(verdict_content, verdict_word) }
+        it { expect{ subject.main_judge_name }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      end
 
-      it { expect(subject.main_judge_name.present?).to be_falsey }
-      it { expect{ subject.main_judge_name }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      context "unnotify" do
+        let!(:verdict_content){ "恐龍審判長  xxx\n" }
+        subject{ described_class.new(verdict_content, verdict_word) }
+        it { expect{ subject.main_judge_name }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      end
     end
   end
 
@@ -65,11 +77,17 @@ RSpec.describe Scrap::AnalysisVerdictContext, :type => :model do
     end
 
     context "unexist" do
-      let!(:verdict_content){ "檢察官xxxx到處跑執行職務" }
-      subject{ described_class.new(verdict_content, verdict_word) }
+      context "notify" do
+        let!(:verdict_content){ "判決 檢察官xxxx到處跑執行職務" }
+        subject{ described_class.new(verdict_content, verdict_word) }
+        it { expect{ subject.prosecutor_names }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      end
 
-      it { expect(subject.prosecutor_names.present?).to be_falsey }
-      it { expect{ subject.prosecutor_names }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      context "unnotify" do
+        let!(:verdict_content){ "檢察官xxxx到處跑執行職務" }
+        subject{ described_class.new(verdict_content, verdict_word) }
+        it { expect{ subject.prosecutor_names }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      end
     end
   end
 
@@ -83,11 +101,17 @@ RSpec.describe Scrap::AnalysisVerdictContext, :type => :model do
     end
 
     context "unexist" do
-      let!(:verdict_content){ "選任辯護人" }
-      subject{ described_class.new(verdict_content, verdict_word) }
+      context "notify" do
+        let!(:verdict_content){ "判決 選任辯護人" }
+        subject{ described_class.new(verdict_content, verdict_word) }
+        it { expect{ subject.lawyer_names }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      end
 
-      it { expect(subject.lawyer_names.present?).to be_falsey }
-      it { expect{ subject.lawyer_names }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      context "unnotify" do
+        let!(:verdict_content){ "選任辯護人" }
+        subject{ described_class.new(verdict_content, verdict_word) }
+        it { expect{ subject.lawyer_names }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      end
     end
   end
 
@@ -101,11 +125,17 @@ RSpec.describe Scrap::AnalysisVerdictContext, :type => :model do
     end
 
     context "unexist" do
-      let!(:verdict_content){ "被衝康 xxx" }
-      subject{ described_class.new(verdict_content, verdict_word) }
+      context "notify" do
+        let!(:verdict_content){ "判決 被衝康 xxx" }
+        subject{ described_class.new(verdict_content, verdict_word) }
+        it { expect{ subject.defendant_names }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      end
 
-      it { expect(subject.defendant_names.present?).to be_falsey }
-      it { expect{ subject.defendant_names }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      context "unnotify" do
+        let!(:verdict_content){ "被衝康 xxx" }
+        subject{ described_class.new(verdict_content, verdict_word) }
+        it { expect{ subject.defendant_names }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      end
     end
   end
 end

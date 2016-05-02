@@ -14,7 +14,7 @@ class Scrap::AnalysisVerdictContext < BaseContext
     if matched
       return matched[1]
     else
-      SlackService.analysis_notify_async("裁判字號 : #{@verdict_word}, 取得 審判長法官 資訊為空")
+      SlackService.analysis_notify_async("裁判字號 : #{@verdict_word}, 取得 審判長法官 資訊為空") if is_judgment?
       return nil
     end
   end
@@ -24,7 +24,7 @@ class Scrap::AnalysisVerdictContext < BaseContext
     if matched
       return @verdict_content.scan(/法\s+官\s+([\p{Word}\w\s\S]+?)\n/).map { |i| i[0].gsub("\r", '')  }
     else
-      SlackService.analysis_notify_async("裁判字號 : #{@verdict_word}, 取得 法官 資訊為空")
+      SlackService.analysis_notify_async("裁判字號 : #{@verdict_word}, 取得 法官 資訊為空") if is_judgment?
       return []
     end
   end
@@ -34,7 +34,7 @@ class Scrap::AnalysisVerdictContext < BaseContext
     if matched
       return @verdict_content.scan(/檢察官(\p{Word}+)到庭執行職務/).map { |i| i[0] }
     else
-      SlackService.analysis_notify_async("裁判字號 : #{@verdict_word}, 取得 檢察官 資訊為空")
+      SlackService.analysis_notify_async("裁判字號 : #{@verdict_word}, 取得 檢察官 資訊為空") if is_judgment?
       return []
     end
   end
@@ -44,7 +44,7 @@ class Scrap::AnalysisVerdictContext < BaseContext
     if matched
       return @verdict_content.squish.scan(/\s+(\p{Word}+)律師/).map { |i| i[0] }
     else
-      SlackService.analysis_notify_async("裁判字號 : #{@verdict_word}, 取得 律師 資訊為空")
+      SlackService.analysis_notify_async("裁判字號 : #{@verdict_word}, 取得 律師 資訊為空") if is_judgment?
       return []
     end
   end
@@ -60,7 +60,7 @@ class Scrap::AnalysisVerdictContext < BaseContext
     elsif matched
       return @verdict_content.squish.scan(/被\s+告\s+(\p{Word}+)/).map { |i| i[0] }
     else
-      SlackService.analysis_notify_async("裁判字號 : #{@verdict_word}, 取得 當事人 資訊為空")
+      SlackService.analysis_notify_async("裁判字號 : #{@verdict_word}, 取得 當事人 資訊為空") if is_judgment?
       return []
     end
   end
