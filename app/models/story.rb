@@ -39,4 +39,8 @@ class Story < ActiveRecord::Base
   def identity
     "#{year}-#{word_type}-#{number}"
   end
+
+  def judgment_verdict
+    verdicts.find_by_is_judgment(true)
+  end
 end

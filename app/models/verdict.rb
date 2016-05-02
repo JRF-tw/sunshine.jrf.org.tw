@@ -24,7 +24,6 @@ class Verdict < ActiveRecord::Base
   belongs_to :story
 
   scope :newest, ->{ order("id DESC") }
-  scope :true_judgment, ->{ where(is_judgment: true) }
 
   class << self
     def ransackable_scopes(auth_object = nil)
