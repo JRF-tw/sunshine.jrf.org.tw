@@ -62,8 +62,8 @@
           th= sort_link(@search, :main_judge_name, '所屬法官')
           th= sort_link(@search, :is_adjudge, '是否已宣判')
           th= sort_link(@search, :adjudge_date, '判決日期')
+          th= sort_link(@search, :is_judgment, '是否有判決書')
           th 操作
-
       tbody
         - @stories.each do |story|
           tr
@@ -77,9 +77,13 @@
             td= story.is_adjudge ? "已宣判" : ""
             td= story.adjudge_date
             td
-              = link_to "庭期列表", admin_schedules_path(q: { "story_id_eq" => story.id } ), class: "btn btn-mini"
+              - story.verdicts.true_judgment.each do |verdict| 
+                = link_to "是", admin_verdict_path(verdict)
+
+            td
+              = link_to "詳細資料", admin_story_path(story), class: "btn btn-mini"
               | &nbsp;
-              = link_to "判決書列表", admin_verdicts_path(q: { "story_id_eq" => story.id } ), class: "btn btn-mini"
+              = link_to "庭期列表", admin_schedules_path(q: { "story_id_eq" => story.id } ), class: "btn btn-mini"
               | &nbsp;
     .ui-toolbar.ui-widget-header
       = paginate @stories, theme: :admin

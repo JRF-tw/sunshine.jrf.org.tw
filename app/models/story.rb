@@ -23,7 +23,7 @@ class Story < ActiveRecord::Base
   has_many :judge_stories
   has_many :judges, through: :judge_stories
   has_many :lawyer_stories
-  has_many :lawyer, through: :lawyer_stories
+  has_many :lawyers, through: :lawyer_stories
   has_many :schedules
   has_many :verdicts
   belongs_to :main_judge, class_name: "Judge", foreign_key: "main_judge_id"
