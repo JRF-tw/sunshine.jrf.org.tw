@@ -11,7 +11,7 @@
         .span6
           .control-group
             label.control-label= f.label :story_main_judge_id_eq
-            .controls= f.select :story_main_judge_id_eq,
+            .controls#select2= f.select :story_main_judge_id_eq,
             collect_for_judges_name, include_blank: "請選擇"
       .row
         .span6
