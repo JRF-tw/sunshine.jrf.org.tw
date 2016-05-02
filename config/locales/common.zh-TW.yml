@@ -256,6 +256,10 @@ zh-TW:
         story_court_full_name_eq: "判決法院"
         content_cont: "內容包含"
         adjudge_date_eq: "宣判日期"
+        unexist_defendant_names: "當事人為空值"
+        unexist_lawyer_names: "律師為空值"
+        unexist_judges_names: "法官為空值"
+        unexist_prosecutor_names: "檢察官為空值"
       schedule:
         branch_name_eq: "股別名稱"
         court_full_name_eq: "法院名稱"
