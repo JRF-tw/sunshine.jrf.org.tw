@@ -3,6 +3,7 @@ class Scrap::ImportScheduleContext < BaseContext
   before_perform  :get_main_judge
   before_perform  :find_or_create_story
   after_perform   :update_story_is_adjudge
+  after_perform   :update_story_adjudge_date
 
   def initialize(court)
     @court = court
@@ -31,7 +32,7 @@ class Scrap::ImportScheduleContext < BaseContext
     branches = @court.branches.where(name: @branch_name)
     branches = branches.where("chamber_name LIKE ? ", "%#{@story_type}%") if branches.map(&:judge_id).uniq.count > 1
     @main_judge = branches.first ? branches.first.judge : nil
-    SlackService.analysis_notify_async("庭期資訊 : #{@verdict_word}, 取得 審判長法官 資訊為空") if @main_judge
+    SlackService.analysis_notify_async("庭期分析錯誤 : 取得 審判長法官 資訊為空\n #{@data_hash}") if @main_judge
   end
 
   def find_or_create_story
@@ -42,4 +43,11 @@ class Scrap::ImportScheduleContext < BaseContext
     @story.update_attributes(is_adjudge: @is_adjudge) if @is_adjudge
   end
 
+  def update_story_adjudge_date
+    unless @story.adjudge_date
+      @story.update_attributes(adjudge_date: @date) if @is_adjudge
+    else
+      SlackService.analysis_notify_async("庭期分析錯誤 : 庭期表有重複宣判的可能\n #{@data_hash}")
+    end
+  end
 end

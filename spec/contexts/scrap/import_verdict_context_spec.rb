@@ -44,5 +44,18 @@ RSpec.describe Scrap::ImportVerdictContext, :type => :model do
         it { expect(subject.story.is_adjudge).to be_truthy }
       end
     end
+
+    context "update adjudge date" do
+      context "story unexist adjudge_date" do
+        it { expect(subject.story.adjudge_date).to be_truthy }
+        it { expect(subject.adjudge_date).to be_truthy }
+      end
+
+      context "story exist adjudge_date" do
+        before { subject.story.update_attributes(adjudge_date: Date.today - 1.days) }
+
+        it { expect { subject }.not_to change { subject.story.adjudge_date } }
+      end
+    end
   end
 end
