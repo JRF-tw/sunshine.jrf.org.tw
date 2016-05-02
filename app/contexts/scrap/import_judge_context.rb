@@ -11,8 +11,6 @@ class Scrap::ImportJudgeContext < BaseContext
       get_remote_csv_data.each do |data_string|
         new(data_string).perform
       end
-    rescue => e
-      SlackService.notify_async("法官股別分配表爬取失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
     end
 
     private
@@ -22,6 +20,8 @@ class Scrap::ImportJudgeContext < BaseContext
       response_data = Mechanize.new.get(scrap_file_url)
       response_data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
       return response_data.css("body p").text.split("\n")
+    rescue => e
+      SlackService.scrap_notify_async("法官爬取失敗: 取得csv文件錯誤\n #{e.message}")
     end
   end
 
@@ -34,8 +34,6 @@ class Scrap::ImportJudgeContext < BaseContext
       return add_error(:data_create_fail, "judge find_or_create fail") unless @judge.save
       @judge
     end
-  rescue => e
-    SlackService.notify_async("法官匯入失敗:  #{e.message}", channel: "#scrap_notify", name: "bug")
   end
 
   private
@@ -46,6 +44,8 @@ class Scrap::ImportJudgeContext < BaseContext
     @court_name = @chamber_name.match("分院") ? "#{@chamber_name.split("分院")[0]}分院" : "#{@chamber_name.split("法院")[0]}法院"
     @branch_name = @row_data[1].strip
     @judge_name = @row_data[2].gsub("法官", "").squish
+  rescue => e
+    SlackService.scrap_notify_async("法官爬取失敗: 股別資料解析錯誤\n row_data : #{@row_data}\n #{e.message}")
   end
 
   def find_court

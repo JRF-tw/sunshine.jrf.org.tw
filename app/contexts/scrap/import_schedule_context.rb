@@ -31,6 +31,7 @@ class Scrap::ImportScheduleContext < BaseContext
     branches = @court.branches.where(name: @branch_name)
     branches = branches.where("chamber_name LIKE ? ", "%#{@story_type}%") if branches.map(&:judge_id).uniq.count > 1
     @main_judge = branches.first ? branches.first.judge : nil
+    SlackService.analysis_notify_async("庭期裁判字號 : #{@verdict_word}, 取得 審判長法官 資訊為空") if @main_judge
   end
 
   def find_or_create_story
