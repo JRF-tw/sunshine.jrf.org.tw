@@ -15,6 +15,13 @@ RSpec.describe Admin::VerdictsController do
       before { get "/admin/verdicts", q: { adjudge_date_eq: verdict.adjudge_date} }
       it { expect(response.body).to match(verdict.story.court.full_name) }
     end
+
+    context "search unexist_judges_names" do
+      let!(:verdict1) { FactoryGirl.create :verdict, judges_names: ["xxxx"]  }
+      before { get "/admin/verdicts", q: { unexist_judges_names: 1} }
+      it { expect(response.body).to match(verdict.story.court.full_name) }
+      it { expect(response.body).not_to match(verdict1.judges_names.first) }
+    end
   end
 
   describe "#download_file" do
