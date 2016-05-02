@@ -73,7 +73,7 @@
             td= story.word_type
             td= story.number
             td= story.story_type
-            td= link_to "#{story.main_judge.name}", admin_judge_path(story.main_judge) if story.
+            td= link_to "#{story.main_judge.name}", admin_judge_path(story.main_judge) if story.main_judge
             td= story.is_adjudge ? "已宣判" : ""
             td= story.adjudge_date
             td
