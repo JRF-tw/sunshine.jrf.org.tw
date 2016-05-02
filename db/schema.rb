@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< ef7d361d3b9ba745882ca8a6f19b68d996dab10b
-ActiveRecord::Schema.define(version: 20160430111608) do
-=======
 ActiveRecord::Schema.define(version: 20160502031411) do
->>>>>>> add column  adjudge_date
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"

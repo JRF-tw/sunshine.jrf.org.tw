@@ -251,9 +251,11 @@ zh-TW:
         main_judge_name_cont: "主審法官姓名包含"
         court_full_name_eq: "法院名稱"
         is_adjudge_true: "已宣判"
+        adjudge_date_eq: "宣判日期"
       verdict:
         story_court_full_name_eq: "判決法院"
         content_cont: "內容包含"
+        adjudge_date_eq: "宣判日期"
       schedule:
         branch_name_eq: "股別名稱"
         court_full_name_eq: "法院名稱"
