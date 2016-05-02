@@ -8,6 +8,10 @@
             label.control-label= f.label :story_court_full_name_eq
             .controls= f.select :story_court_id_eq,
             collect_for_courts, include_blank: "請選擇"
+        .span6
+          .control-group#datepicker
+            label.control-label= f.label :adjudge_date_eq
+            .controls= f.search_field :adjudge_date_eq
 
     hr
     .form-actions
@@ -23,6 +27,7 @@
         tr
           th= sort_link(@search, :id, '#')
           th= sort_link(@search, :story_court_full_name, "判決法院" )
+          th= sort_link(@search, :adjudge_date, "宣判日期")
           th 是否為判決
           th 參與當事人
           th 參與律師
@@ -35,6 +40,7 @@
           tr
             td= verdict.id
             td= verdict.story.court.full_name
+            td= verdict.adjudge_date
             td= verdict.is_judgment ? "是" : "否"
             td= verdict.defendant_names.join(",")
             td= verdict.lawyer_names.join(",")

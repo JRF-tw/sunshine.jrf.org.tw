@@ -10,6 +10,11 @@ RSpec.describe Admin::VerdictsController do
       before { get "/admin/verdicts" }
       it { expect(response).to be_success }
     end
+
+    context "search the adjudge_date of stories" do
+      before { get "/admin/verdicts", q: { adjudge_date_eq: verdict.adjudge_date} }
+      it { expect(response.body).to match(verdict.story.court.full_name) }
+    end
   end
 
   describe "#download_file" do

@@ -37,6 +37,12 @@
           .control-group
             label.control-label= f.label :main_judge_name_cont
             .controls= f.search_field :main_judge_name_cont
+      .row
+        .span6
+          .control-group#datepicker
+            label.control-label= f.label :adjudge_date_eq
+            .controls= f.search_field :adjudge_date_eq
+
     hr
     .form-actions
       = f.submit :value => "搜尋", :class => "btn btn-primary"
@@ -55,7 +61,9 @@
           th= sort_link(@search, :story_type, '案件類別')
           th= sort_link(@search, :main_judge_name, '所屬法官')
           th= sort_link(@search, :is_adjudge, '是否已宣判')
+          th= sort_link(@search, :adjudge_date, '判決日期')
           th 操作
+
       tbody
         - @stories.each do |story|
           tr
@@ -67,6 +75,7 @@
             td= story.story_type
             td= link_to "#{story.main_judge.name}", admin_judge_path(story.main_judge) if story.main_judge
             td= story.is_adjudge ? "已宣判" : ""
+            td= story.adjudge_date
             td
               = link_to "庭期列表", admin_schedules_path(q: { "story_id_eq" => story.id } ), class: "btn btn-mini"
               | &nbsp;

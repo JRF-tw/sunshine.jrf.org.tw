@@ -263,7 +263,8 @@ namespace :dev do
         year: rand(70..105),
         word_type: ["生", "老", "病", "死"].sample,
         number: rand(100..999),
-        main_judge_id: main_judge.sample.id
+        main_judge_id: main_judge.sample.id,
+        adjudge_date: rand(5).years.ago
       )
     end
   end
@@ -276,7 +277,7 @@ namespace :dev do
       業友今個？中心問了王起反？"
     
     5.times do |i|
-      Story.all.sample.verdicts.create!(content: content)
+      Story.all.sample.verdicts.create!(content: content, adjudge_date: rand(5).years.ago)
     end
   end    
 
