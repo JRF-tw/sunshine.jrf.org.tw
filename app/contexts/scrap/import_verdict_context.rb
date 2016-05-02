@@ -9,6 +9,7 @@ class Scrap::ImportVerdictContext < BaseContext
   before_perform :build_verdict
   after_perform  :upload_file
   after_perform  :update_data_to_story
+  after_perform  :update_adjudge_date
 
   def initialize(import_data, court)
     @import_data = import_data
@@ -84,5 +85,11 @@ class Scrap::ImportVerdictContext < BaseContext
     @story.assign_attributes(main_judge: @main_judge) if @main_judge
     @story.assign_attributes(is_adjudge: @verdict.is_judgment?) if @verdict.is_judgment? && !@story.is_adjudge
     @story.save
+  end
+
+  def update_adjudge_date
+    return unless @analysis_context.is_judgment?
+    @story.update_attributes(adjudge_date: Date.today) unless @story.adjudge_date
+    @verdict.update_attributes(adjudge_date: Date.today)
   end
 end
