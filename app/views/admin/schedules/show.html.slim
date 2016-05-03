@@ -8,8 +8,8 @@
         td 開庭法院
         td= link_to "#{@schedule.court.full_name}", admin_court_path(@schedule.court)
       tr
-        td 主審法官
-        td= link_to @schedule.story.main_judge.name, admin_judge_path(@schedule.story.main_judge) if @schedule.story.main_judge
+        td 股別法官
+        td= link_to @schedule.branch_judge.name, admin_judge_path(@schedule.branch_judge) if @schedule.branch_judge
       tr
         td 案件
         td= link_to "#{@schedule.story.identity}", admin_story_path(@schedule.story)
