@@ -37,6 +37,7 @@
           th 案件
           th= sort_link(@search, :branch_name, "股別名稱")
           th= sort_link(@search, :date, "開庭時間")
+          th
       tbody
         - @schedules.each do |schedule|
           tr
@@ -45,6 +46,7 @@
             td= link_to schedule.story.main_judge.name, admin_judge_path(schedule.story.main_judge) if schedule.story.main_judge  
             td= link_to "#{schedule.story.identity}", admin_story_path(schedule.story)
             td= schedule.branch_name
-            td= schedule.date    
+            td= schedule.date
+            td= link_to "詳細資料", admin_schedule_path(schedule), class: "btn btn-mini"
     .ui-toolbar.ui-widget-header
       = paginate @schedules, theme: :admin
