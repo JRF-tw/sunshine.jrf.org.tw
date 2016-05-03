@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160503023005) do
+ActiveRecord::Schema.define(version: 20160503072644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -443,12 +443,17 @@ ActiveRecord::Schema.define(version: 20160503023005) do
     t.integer  "court_id"
     t.string   "branch_name"
     t.date     "date"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "main_judge_id"
   end
 
   add_index "schedules", ["court_id"], name: "index_schedules_on_court_id", using: :btree
   add_index "schedules", ["date"], name: "index_schedules_on_date", using: :btree
+  add_index "schedules", ["main_judge_id", "court_id", "story_id"], name: "index_schedules_on_main_judge_id_and_court_id_and_story_id", using: :btree
+  add_index "schedules", ["main_judge_id", "court_id"], name: "index_schedules_on_main_judge_id_and_court_id", using: :btree
+  add_index "schedules", ["main_judge_id", "story_id"], name: "index_schedules_on_main_judge_id_and_story_id", using: :btree
+  add_index "schedules", ["main_judge_id"], name: "index_schedules_on_main_judge_id", using: :btree
   add_index "schedules", ["story_id", "court_id"], name: "index_schedules_on_story_id_and_court_id", using: :btree
   add_index "schedules", ["story_id"], name: "index_schedules_on_story_id", using: :btree
 
@@ -461,12 +466,12 @@ ActiveRecord::Schema.define(version: 20160503023005) do
     t.integer  "number"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
-    t.date     "adjudge_date"
-    t.boolean  "is_adjudge",       default: false
     t.text     "defendant_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
+    t.boolean  "is_adjudge",       default: false
+    t.date     "adjudge_date"
   end
 
   add_index "stories", ["adjudge_date"], name: "index_stories_on_adjudge_date", using: :btree
@@ -559,11 +564,11 @@ ActiveRecord::Schema.define(version: 20160503023005) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.string   "file"
+    t.boolean  "is_judgment"
     t.text     "defendant_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
-    t.boolean  "is_judgment"
     t.date     "adjudge_date"
   end
 
