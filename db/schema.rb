@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160503101322) do
+ActiveRecord::Schema.define(version: 20160503120111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -489,6 +489,22 @@ ActiveRecord::Schema.define(version: 20160503101322) do
   add_index "stories", ["court_id"], name: "index_stories_on_court_id", using: :btree
   add_index "stories", ["is_adjudge"], name: "index_stories_on_is_adjudge", using: :btree
   add_index "stories", ["main_judge_id"], name: "index_stories_on_main_judge_id", using: :btree
+
+  create_table "story_relations", force: :cascade do |t|
+    t.integer  "story_id"
+    t.integer  "people_id"
+    t.integer  "people_type"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "story_relations", ["people_id", "people_type"], name: "index_story_relations_on_people_id_and_people_type", using: :btree
+  add_index "story_relations", ["people_id"], name: "index_story_relations_on_people_id", using: :btree
+  add_index "story_relations", ["people_type"], name: "index_story_relations_on_people_type", using: :btree
+  add_index "story_relations", ["story_id", "people_id", "people_type"], name: "index_story_relations_on_story_id_and_people_id_and_people_type", using: :btree
+  add_index "story_relations", ["story_id", "people_id"], name: "index_story_relations_on_story_id_and_people_id", using: :btree
+  add_index "story_relations", ["story_id", "people_type"], name: "index_story_relations_on_story_id_and_people_type", using: :btree
+  add_index "story_relations", ["story_id"], name: "index_story_relations_on_story_id", using: :btree
 
   create_table "suit_banners", force: :cascade do |t|
     t.string   "pic_l"
