@@ -1,0 +1,30 @@
+- content_for :btns do
+
+= admin_widget_box "#{@verdict}資料", icon: :th do
+  table.table.table-bordered.table-striped.table-hover
+    tbody
+      tr
+        td 所屬法院
+        td= link_to "#{@verdict.story.court.full_name}", admin_court_path(@verdict.story.court)
+      tr
+        td 是否為判決
+        td= @verdict.is_judgment ? "是" : "否"
+      tr
+        td 參與檢察官
+        td= link_to "TODO 檢察官資訊頁面", "#"
+      tr
+        td 參與律師
+        td
+          - @verdict.story.lawyers.each do |lawyer| 
+            = link_to "#{lawyer.name} ", admin_lawyer_path(lawyer)
+      tr
+        td 參與法官
+        td
+          - @verdict.story.judges.each do |judge| 
+            = link_to "#{judge.name} ", admin_judge_path(judge)
+      tr
+        td 參與當事人
+        td= link_to "TODO 當事人資訊頁面", "#"
+      tr
+        td 文件下載
+        td= link_to "點我下載", download_file_admin_verdict_path(@verdict) if @verdict.file

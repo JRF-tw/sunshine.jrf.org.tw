@@ -4,14 +4,42 @@
   table.table.table-bordered.table-striped.table-hover
     tbody
       tr
-        td 案件類別
-        td= @story.story_type
+        td 所屬法院
+        td= link_to "#{@story.court.full_name}", admin_court_path(@story.court)
       tr
-        td 案號
-        td= @story.number
+        td 年度
+        td= @story.year
       tr
         td 字別
         td= @story.word_type
       tr
-        td 年度
-        td= @story.year
+        td 案號
+        td= @story.number
+      tr
+        td 案件類別
+        td= @story.story_type
+      tr
+        td 審判長法官
+        td= link_to "#{@story.main_judge.name}", admin_judge_path(@story.main_judge) if @story.main_judge
+      tr
+        td 參與法官
+        td
+          - @story.judges.each do |judge| 
+            = link_to "#{judge.name} ", admin_judge_path(judge)
+      tr
+        td 參與檢察官
+        td= link_to "TODO 檢察官資訊頁面", "#"
+
+      tr
+        td 參與律師
+        td
+          - @story.lawyers.each do |lawyer| 
+            = link_to "#{lawyer.name} ", admin_lawyer_path(lawyer)
+      tr
+        td 參與當事人
+        td= link_to "TODO 當事人資訊頁面", "#"
+          
+      tr
+        td 是否有判決書
+        td 
+          = link_to "是", admin_verdict_path(@story.judgment_verdict) if @story.judgment_verdict
