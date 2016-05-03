@@ -15,6 +15,7 @@
 class Schedule < ActiveRecord::Base
   belongs_to :story
   belongs_to :court
+  belongs_to :main_judge, class_name: "Judge", foreign_key: "main_judge_id"
 
   scope :newest, ->{ order("id DESC") }
 end

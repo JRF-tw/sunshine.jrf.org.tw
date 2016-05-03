@@ -18,6 +18,10 @@ FactoryGirl.define do
     date { Date.current }
     court { FactoryGirl.create :court }
     story { FactoryGirl.create :story }
+
+    trait :with_main_judge do
+      main_judge { FactoryGirl.create :judge }
+    end
   end
 
 end
