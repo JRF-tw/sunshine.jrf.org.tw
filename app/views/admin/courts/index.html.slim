@@ -52,6 +52,8 @@
             td= court.name
             td= court.is_hidden? ? "是" : "否"
             td
+              = link_to "詳細資料", admin_court_path(court), class: "btn btn-mini"
+              | &nbsp;
               = link_to "法官列表", admin_judges_path(q: { "court_id_eq" => court.id } ), class: "btn btn-mini"
               | &nbsp;
               = link_to "案件列表", admin_stories_path(q: { "court_id_eq" => court.id } ), class: "btn btn-mini"
