@@ -55,10 +55,6 @@
           th 案件
           th 審判長法官
           th 是否為判決
-          th 參與當事人
-          th 參與律師
-          th 參與法官
-          th 參與檢察官
           th 文件下載
           th
 
@@ -71,10 +67,6 @@
             td= link_to "#{verdict.story.identity}", admin_story_path(verdict.story)
             td= link_to "#{verdict.story.main_judge.name}", admin_judge_path(verdict.story.main_judge)
             td= verdict.is_judgment ? "是" : "否"
-            td= verdict.defendant_names.join(",")
-            td= verdict.lawyer_names.join(",")
-            td= verdict.judges_names.join(",")
-            td= verdict.prosecutor_names.join(",")
             td= link_to "點我下載", download_file_admin_verdict_path(verdict) if verdict.file
             td
               = link_to "詳細資料", admin_verdict_path(verdict), class: "btn btn-mini"
