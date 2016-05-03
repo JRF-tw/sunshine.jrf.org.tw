@@ -13,6 +13,7 @@
 #  judges_names     :text
 #  prosecutor_names :text
 #  adjudge_date     :date
+#  main_judge_id    :integer
 #
 
 class Verdict < ActiveRecord::Base
