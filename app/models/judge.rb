@@ -28,7 +28,7 @@ class Judge < ActiveRecord::Base
   has_many :branches
   has_many :main_judge_stories, class_name: "Story", foreign_key: "main_judge_id"
   belongs_to :court, foreign_key: :current_court_id
-  has_many :schedules, foreign_key: "main_judge_id"
+  has_many :schedules, foreign_key: "branch_judge_id"
 
   mount_uploader :avatar, ProfileAvatarUploader
 

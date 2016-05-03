@@ -2,14 +2,14 @@
 #
 # Table name: schedules
 #
-#  id            :integer          not null, primary key
-#  story_id      :integer
-#  court_id      :integer
-#  branch_name   :string
-#  date          :date
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  main_judge_id :integer
+#  id              :integer          not null, primary key
+#  story_id        :integer
+#  court_id        :integer
+#  branch_name     :string
+#  date            :date
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  branch_judge_id :integer
 #
 
 FactoryGirl.define do
@@ -19,8 +19,8 @@ FactoryGirl.define do
     court { FactoryGirl.create :court }
     story { FactoryGirl.create :story }
 
-    trait :with_main_judge do
-      main_judge { FactoryGirl.create :judge }
+    trait :with_branch_judge do
+      branch_judge { FactoryGirl.create :judge }
     end
   end
 

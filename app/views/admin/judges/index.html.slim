@@ -59,7 +59,7 @@
               | &nbsp;
               = link_to "案件列表", admin_stories_path(q: { "main_judge_id_eq" => judge.id } ), class: "btn btn-mini"
               | &nbsp;
-              = link_to "庭期列表", admin_schedules_path(q: { "story_main_judge_id_eq" => judge.id } ), class: "btn btn-mini"
+              = link_to "庭期列表", admin_schedules_path(q: { "branch_judge_id_eq" => judge.id } ), class: "btn btn-mini"
               | &nbsp;
               = link_to "編輯", edit_admin_judge_path(judge), class: "btn btn-mini btn-success"
               | &nbsp;

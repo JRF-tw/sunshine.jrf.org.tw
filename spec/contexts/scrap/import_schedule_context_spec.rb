@@ -19,13 +19,13 @@ RSpec.describe Scrap::ImportScheduleContext, :type => :model do
       end
 
       context "normalize" do
-        it { expect(subject.main_judge).to eq(judge) }
+        it { expect(subject.branch_judge).to eq(judge) }
       end
 
       context "mutiple branche" do
         let!(:judge1) { FactoryGirl.create :judge, court: court }
         let!(:branch1) { FactoryGirl.create :branch, court: court, judge: judge1, name: "平", chamber_name: "xxx法院民事庭" }
-        it { expect(subject.main_judge).to eq(judge1) }
+        it { expect(subject.branch_judge).to eq(judge1) }
       end
 
       context "not match judge" do
