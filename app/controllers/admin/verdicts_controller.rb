@@ -27,7 +27,7 @@ class Admin::VerdictsController < Admin::BaseController
   end
 
   def show
-    @admin_page_title = "判決書-#{@verdict.id}"
+    @admin_page_title = "#{@verdict.story.court.name}-#{@verdict.story.identity} - 判決書"
     add_crumb @admin_page_title, "#"
   end  
 
