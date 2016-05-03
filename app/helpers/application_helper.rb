@@ -189,7 +189,13 @@ module ApplicationHelper
   def collect_for_courts
     Court.get_courts.map{ |c| [c.full_name, c.id] }
   end
-  
+
+  def collect_for_judges_name
+    Judge.all.map do |j| 
+      ["#{j.name} - #{j.branches.map(&:name).join(", ")}", j.id]
+    end  
+  end
+
   def collect_for_lawyer_currents
     Lawyer.all.map(&:current).uniq
   end 

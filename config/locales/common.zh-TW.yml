@@ -261,7 +261,7 @@ zh-TW:
         unexist_judges_names: "法官為空值"
         unexist_prosecutor_names: "檢察官為空值"
       schedule:
-        branch_name_eq: "股別名稱"
+        story_main_judge_id_eq: "法官名稱"
         court_full_name_eq: "法院名稱"
         date_gteq: "開庭日期"
         date_lteq: "~"

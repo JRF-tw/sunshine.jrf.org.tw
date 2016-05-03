@@ -30,4 +30,5 @@ class Judge < ActiveRecord::Base
   belongs_to :court, foreign_key: :current_court_id
 
   mount_uploader :avatar, ProfileAvatarUploader
+
 end
