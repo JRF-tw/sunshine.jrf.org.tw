@@ -40,4 +40,16 @@ class Story < ActiveRecord::Base
   def judgment_verdict
     verdicts.find_by_is_judgment(true)
   end
+
+  def by_relation_judges
+    story_relations.where(people_type: "Judge")
+  end
+
+  def by_relation_lawyers
+    story_relations.where(people_type: "Lawyer")
+  end
+
+  def by_relation_defendants
+    story_relations.where(people_type: "Defendant")
+  end
 end

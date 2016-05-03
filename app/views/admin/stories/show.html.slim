@@ -24,25 +24,25 @@
       tr
         td 參與法官
         td
-          // TODO 更改為  story_relations
-          / - @story.judges.each do |judge|
-          /   = link_to "#{judge.name} ", admin_judge_path(judge)
+          - @story.by_relation_judges.each do |sr|
+            = link_to "#{sr.people.name} ", admin_judge_path(sr.people)
+            = " "
       tr
         td 參與檢察官
-        td
-          // TODO 更改為  story_relations
+        td= link_to "TODO 尚未實作檢察官", "#"
 
       tr
         td 參與律師
         td
-          // TODO 更改為  story_relations
-          / - @story.lawyers.each do |lawyer|
-          /   = link_to "#{lawyer.name} ", admin_lawyer_path(lawyer)
+          - @story.by_relation_lawyers.each do |sr|
+            = link_to "#{sr.people.name} ", admin_lawyer_path(sr.people)
+            = " "
       tr
         td 參與當事人
         td
-          // TODO 更改為  story_relations
-
+          - @story.by_relation_defendants.each do |sr|
+            = link_to "#{sr.people.name} ", admin_defendant_path(sr.people)
+            = " "
       tr
         td 是否有判決書
         td
