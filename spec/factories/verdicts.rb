@@ -13,6 +13,7 @@
 #  judges_names     :text
 #  prosecutor_names :text
 #  adjudge_date     :date
+#  main_judge_id    :integer
 #
 
 FactoryGirl.define do
@@ -21,6 +22,10 @@ FactoryGirl.define do
 
     trait :with_file do
       file { File.open("#{Rails.root}/spec/fixtures/scrap_data/judgment.html") }
+    end
+
+    trait :with_main_judge do
+      main_judge { FactoryGirl.create :judge }
     end
   end
 

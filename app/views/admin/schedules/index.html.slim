@@ -1,17 +1,17 @@
 = search_form_for @search, :url => admin_schedules_path, :wrapper => :admin, :html => { :class => "form-horizontal" } do |f|
   .well
     fieldset
-      legend 搜尋      
+      legend 搜尋
       .row
         .span6
           .control-group
             label.control-label= f.label :court_full_name_eq
-            .controls#select2= f.select :court_id_eq, 
+            .controls#select2= f.select :court_id_eq,
             collect_for_courts, include_blank: "請選擇"
         .span6
           .control-group
-            label.control-label= f.label :story_main_judge_id_eq
-            .controls#select2= f.select :story_main_judge_id_eq,
+            label.control-label= f.label :branch_judge_id_eq
+            .controls#select2= f.select :branch_judge_id_eq,
             collect_for_judges_name, include_blank: "請選擇"
       .row
         .span6
@@ -20,7 +20,7 @@
             .controls= f.search_field :date_gteq, placeholder: "起始時間，非必填"
             label.control-label= f.label :date_lteq
             .controls= f.search_field :date_lteq, placeholder: "結束時間，非必填"
-  
+
     .form-actions
       = f.submit :value => "搜尋", :class => "btn btn-primary"
       = " "
@@ -33,7 +33,7 @@
         tr
           th= sort_link(@search, :id, "#")
           th= sort_link(@search, :court_full_name, "開庭法院")
-          th 主審法官
+          th 股別法官
           th 案件
           th= sort_link(@search, :branch_name, "股別名稱")
           th= sort_link(@search, :date, "開庭時間")
@@ -43,7 +43,7 @@
           tr
             td= schedule.id
             td= link_to "#{schedule.court.full_name}", admin_court_path(schedule.court)
-            td= link_to schedule.story.main_judge.name, admin_judge_path(schedule.story.main_judge) if schedule.story.main_judge  
+            td= link_to schedule.branch_judge.name, admin_judge_path(schedule.branch_judge) if schedule.branch_judge
             td= link_to "#{schedule.story.identity}", admin_story_path(schedule.story)
             td= schedule.branch_name
             td= schedule.date

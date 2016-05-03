@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Scrap::ImportVerdictContext, :type => :model do
   let!(:court) { FactoryGirl.create :court, code: "TPH", full_name: "臺灣高等法院" }
   let!(:judge) { FactoryGirl.create :judge, name: "施俊堯" }
+  let!(:branch) { FactoryGirl.create :branch, court: court, judge: judge, chamber_name: "臺灣高等法院刑事庭", name: "丙"}
   let!(:import_data) { Mechanize.new.get(Scrap::GetVerdictsContext::VERDICT_URI) }
 
   describe "#perform" do
@@ -10,6 +11,10 @@ RSpec.describe Scrap::ImportVerdictContext, :type => :model do
 
     context "create verdict" do
       it { expect{ subject }.to change{ Verdict.last } }
+    end
+
+    context "get main_judge" do
+      it { expect(subject.main_judge).to eq(judge) }
     end
 
     context "find_or_create_story" do
@@ -56,6 +61,34 @@ RSpec.describe Scrap::ImportVerdictContext, :type => :model do
 
         it { expect { subject }.not_to change { subject.story.adjudge_date } }
       end
+    end
+
+    context "create judge_verdicts" do
+      let!(:judge1) { FactoryGirl.create :judge, name: "李麗珠" }
+      let!(:branch1) { FactoryGirl.create :branch, court: court, judge: judge1, chamber_name: "臺灣高等法院刑事庭", name: "丁"}
+
+      it { expect{ subject }.to change { judge1.verdicts.count } }
+    end
+
+    context "create lawyer_verdicts" do
+      let!(:lawyer) { FactoryGirl.create :lawyer, name: "陳圈圈" }
+
+      it { expect{ subject }.to change { lawyer.verdicts.count } }
+    end
+
+    context "create defendant_verdict" do
+      let!(:defendant) { FactoryGirl.create :defendant, name: "張坤樹" }
+
+      it { expect{ subject }.to change { defendant.verdicts.count } }
+    end
+
+    context "create relations" do
+      let!(:judge1) { FactoryGirl.create :judge, name: "李麗珠" }
+      let!(:lawyer) { FactoryGirl.create :lawyer, name: "陳圈圈" }
+      let!(:defendant) { FactoryGirl.create :defendant, name: "張坤樹" }
+      let!(:branch1) { FactoryGirl.create :branch, court: court, judge: judge1, chamber_name: "臺灣高等法院刑事庭"}
+
+      it { expect{ subject }.to change { StoryRelation.count }.by(4) }
     end
   end
 end

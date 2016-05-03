@@ -11,7 +11,31 @@ RSpec.describe Story do
   end
 
   context "#identity" do
-    let(:stroy1) { FactoryGirl.create :story ,year: 100, word_type: "耶", number: 100}
-    it { expect(stroy1.identity).to eq("100-耶-100") }
+    let(:story) { FactoryGirl.create :story ,year: 100, word_type: "耶", number: 100}
+    it { expect(story.identity).to eq("100-耶-100") }
+  end
+
+  context "#by_relation_judges" do
+    let(:judge){ FactoryGirl.create :judge }
+    before { FactoryGirl.create :story_relation, story: story, people: judge }
+    subject { story }
+
+    it { expect(story.by_relation_judges.first.people).to eq(judge) }
+  end
+
+  context "#by_relation_lawyers" do
+    let(:lawyer){ FactoryGirl.create :lawyer }
+    before { FactoryGirl.create :story_relation, story: story, people: lawyer }
+    subject { story }
+
+    it { expect(story.by_relation_lawyers.first.people).to eq(lawyer) }
+  end
+
+  context "#by_relation_defendants" do
+    let(:defendant){ FactoryGirl.create :defendant }
+    before { FactoryGirl.create :story_relation, story: story, people: defendant }
+    subject { story }
+
+    it { expect(story.by_relation_defendants.first.people).to eq(defendant) }
   end
 end

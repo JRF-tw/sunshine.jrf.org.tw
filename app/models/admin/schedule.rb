@@ -2,13 +2,14 @@
 #
 # Table name: schedules
 #
-#  id          :integer          not null, primary key
-#  story_id    :integer
-#  court_id    :integer
-#  branch_name :string
-#  date        :date
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id              :integer          not null, primary key
+#  story_id        :integer
+#  court_id        :integer
+#  branch_name     :string
+#  date            :date
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  branch_judge_id :integer
 #
 
 class Admin::Schedule < ::Schedule

@@ -4,7 +4,7 @@ RSpec.describe Admin::VerdictsController do
   before{ signin_user }
 
   describe "#index" do
-    let!(:verdict) { FactoryGirl.create :verdict }
+    let!(:verdict) { FactoryGirl.create :verdict, :with_main_judge }
 
     context "render success" do
       before { get "/admin/verdicts" }
@@ -17,8 +17,8 @@ RSpec.describe Admin::VerdictsController do
     end
 
     context "search the main_judge_name of stories" do
-      before { get "/admin/verdicts", q: { story_main_judge_id_eq: verdict.story.main_judge.id} }
-      it { expect(response.body).to match(verdict.story.main_judge.name) }
+      before { get "/admin/verdicts", q: { main_judge_id_eq: verdict.main_judge.id} }
+      it { expect(response.body).to match(verdict.main_judge.name) }
     end
 
     context "search unexist_judges_names" do
@@ -32,7 +32,7 @@ RSpec.describe Admin::VerdictsController do
   describe "#show" do
     let!(:verdict) { FactoryGirl.create :verdict }
     before { get "/admin/verdicts/#{verdict.id}" }
-    
+
     it { expect(response).to be_success }
   end
 

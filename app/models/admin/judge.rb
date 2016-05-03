@@ -23,8 +23,6 @@
 #
 
 class Admin::Judge < ::Judge
-  has_many :judge_stories
-  has_many :stories, through: :judge_stories
   has_many :branches
   belongs_to :court , class_name: "Court", foreign_key: :current_court_id
 

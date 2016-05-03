@@ -177,10 +177,10 @@ module ApplicationHelper
   def collect_for_story_types
     Story.all.map(&:story_type).uniq.compact
   end
-    
+
   def collect_for_schedule_branch_names
     Schedule.all.map(&:branch_name).uniq
-  end  
+  end
 
   def collect_for_court_types
     Court.all.map(&:court_type).uniq.compact
@@ -191,16 +191,16 @@ module ApplicationHelper
   end
 
   def collect_for_judges_name
-    Judge.all.map do |j| 
+    Judge.all.includes(:branches).map do |j|
       ["#{j.name} - #{j.branches.map(&:name).join(", ")}", j.id]
-    end  
+    end
   end
 
   def collect_for_lawyer_currents
     Lawyer.all.map(&:current).uniq
-  end 
+  end
 
-  def collect_gender_by_user 
+  def collect_gender_by_user
     User::GENDER_TYPES
   end
 

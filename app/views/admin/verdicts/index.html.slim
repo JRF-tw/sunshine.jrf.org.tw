@@ -10,8 +10,8 @@
             collect_for_courts, include_blank: "請選擇"
         .span6
           .control-group
-            label.control-label= f.label :story_main_judge_id_eq
-            .controls#select2= f.select :story_main_judge_id_eq,
+            label.control-label= f.label :main_judge_id_eq
+            .controls#select2= f.select :main_judge_id_eq,
             collect_for_judges_name, include_blank: "請選擇"
       .row
         .span6
@@ -65,7 +65,7 @@
             td= link_to "#{verdict.story.court.full_name}", admin_court_path(verdict.story.court)
             td= verdict.adjudge_date
             td= link_to "#{verdict.story.identity}", admin_story_path(verdict.story)
-            td= link_to "#{verdict.story.main_judge.name}", admin_judge_path(verdict.story.main_judge) if verdict.story.main_judge
+            td= link_to "#{verdict.main_judge.name}", admin_judge_path(verdict.main_judge) if verdict.main_judge
             td= verdict.is_judgment ? "是" : "否"
             td= link_to "點我下載", download_file_admin_verdict_path(verdict) if verdict.file
             td

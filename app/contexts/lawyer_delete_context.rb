@@ -1,5 +1,5 @@
 class LawyerDeleteContext < BaseContext
-  before_perform :check_story_empty
+  before_perform :check_verdict_empty
 
   def initialize(lawyer)
     @lawyer = lawyer
@@ -11,8 +11,8 @@ class LawyerDeleteContext < BaseContext
     end
   end
 
-  def check_story_empty
-    return add_error(:data_delete_fail) if @lawyer.stories.present?
+  def check_verdict_empty
+    return add_error(:data_delete_fail) if @lawyer.verdicts.present?
     true
   end
 end

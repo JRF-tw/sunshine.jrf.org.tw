@@ -21,10 +21,19 @@ RSpec.describe Scrap::AnalysisVerdictContext, :type => :model do
 
   describe "#judges_names" do
     context "exist" do
-      let!(:verdict_content){ "法  官  xxxx\n" }
+      let!(:verdict_content){ " 法  官  陪審法官\n" }
       subject{ described_class.new(verdict_content, verdict_word) }
 
       it { expect(subject.judges_names.present?).to be_truthy }
+      it { expect{ subject.judges_names }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
+    end
+
+    context "not match main judge" do
+      let!(:verdict_content){ "審判長法  官  主審法官\n 法  官  陪審法官\n" }
+      subject{ described_class.new(verdict_content, verdict_word) }
+
+      it { expect(subject.judges_names.include?("主審法官")).to be_falsey }
+      it { expect(subject.judges_names.include?("陪審法官")).to be_truthy }
       it { expect{ subject.judges_names }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
     end
 

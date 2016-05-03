@@ -12,7 +12,7 @@ class Scrap::ImportScheduleContext < BaseContext
   def perform(data_hash)
     @data_hash = data_hash
     run_callbacks :perform do
-      @schedule = @story.schedules.find_or_create_by(court: @court, branch_name: @branch_name, date: @date)
+      @schedule = @story.schedules.find_or_create_by(court: @court, branch_name: @branch_name, date: @date, branch_judge: @main_judge )
     end
   end
 
@@ -32,11 +32,11 @@ class Scrap::ImportScheduleContext < BaseContext
     branches = @court.branches.where(name: @branch_name)
     branches = branches.where("chamber_name LIKE ? ", "%#{@story_type}%") if branches.map(&:judge_id).uniq.count > 1
     @main_judge = branches.first ? branches.first.judge : nil
-    SlackService.analysis_notify_async("庭期分析錯誤 : 取得 審判長法官 資訊為空\n #{@data_hash}") if @main_judge
+    SlackService.analysis_notify_async("庭期分析錯誤 : 取得 審判長法官 資訊為空\n #{@data_hash}") unless @main_judge
   end
 
   def find_or_create_story
-    @story = @court.stories.find_or_create_by(story_type: @story_type, year: @year, word_type: @word_type, number: @number, main_judge: @main_judge)
+    @story = @court.stories.find_or_create_by(story_type: @story_type, year: @year, word_type: @word_type, number: @number)
   end
 
   def update_story_is_adjudge

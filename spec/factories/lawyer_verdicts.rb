@@ -1,18 +1,18 @@
 # == Schema Information
 #
-# Table name: judge_stories
+# Table name: lawyer_verdicts
 #
 #  id         :integer          not null, primary key
-#  story_id   :integer
-#  judge_id   :integer
+#  verdict_id :integer
+#  lawyer_id  :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 
 FactoryGirl.define do
-  factory :judge_story do
-    judge { FactoryGirl.create :judge }
-    story { FactoryGirl.create :story }
+  factory :lawyer_verdict do
+    lawyer { FactoryGirl.create :lawyer }
+    verdict { FactoryGirl.create :verdict }
   end
 
 end

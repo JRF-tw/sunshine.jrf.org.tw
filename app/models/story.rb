@@ -20,12 +20,9 @@
 #
 
 class Story < ActiveRecord::Base
-  has_many :judge_stories
-  has_many :judges, through: :judge_stories
-  has_many :lawyer_stories
-  has_many :lawyers, through: :lawyer_stories
   has_many :schedules
   has_many :verdicts
+  has_many :story_relations
   belongs_to :main_judge, class_name: "Judge", foreign_key: "main_judge_id"
   belongs_to :court
 
@@ -42,5 +39,17 @@ class Story < ActiveRecord::Base
 
   def judgment_verdict
     verdicts.find_by_is_judgment(true)
+  end
+
+  def by_relation_judges
+    story_relations.where(people_type: "Judge")
+  end
+
+  def by_relation_lawyers
+    story_relations.where(people_type: "Lawyer")
+  end
+
+  def by_relation_defendants
+    story_relations.where(people_type: "Defendant")
   end
 end
