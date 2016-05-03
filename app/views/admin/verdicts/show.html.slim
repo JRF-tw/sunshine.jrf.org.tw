@@ -18,22 +18,38 @@
         td 審判長法官
         td= link_to "#{@verdict.story.main_judge.name}", admin_judge_path(@verdict.story.main_judge) if @verdict.story.main_judge
       tr
+        td 分析檢察官結果
+        td= @verdict.prosecutor_names.join(",")
+      tr
         td 參與檢察官
         td= link_to "TODO 檢察官資訊頁面", "#"
+      tr
+        td 分析律師結果
+        td= @verdict.lawyer_names.join(",")
       tr
         td 參與律師
         td
           - @verdict.lawyers.each do |lawyer|
             = link_to "#{lawyer.name} ", admin_lawyer_path(lawyer)
+            = " "
+      tr
+        td 分析法官結果
+        td= @verdict.judges_names.join(",")
       tr
         td 參與法官
         td
           - @verdict.judges.each do |judge|
             = link_to "#{judge.name} ", admin_judge_path(judge)
+            = " "
+      tr
+        td 分析當事人結果
+        td= @verdict.defendant_names.join(",")
       tr
         td 參與當事人
-        - @verdict.defendants.each do |defendant|
-            = link_to "#{defendant.name} ", admin_defendant_path(judge)
+        td
+          - @verdict.defendants.each do |defendant|
+            = link_to "#{defendant.name} ", admin_defendant_path(defendant)
+            = " "
       tr
         td 文件下載
         td= link_to "點我下載", download_file_admin_verdict_path(@verdict) if @verdict.file
