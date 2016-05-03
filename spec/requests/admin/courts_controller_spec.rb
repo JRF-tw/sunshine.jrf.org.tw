@@ -41,6 +41,11 @@ RSpec.describe Admin::CourtsController do
       get "/admin/courts/#{court.id}/edit"
       expect(response).to be_success
     end
+
+    context "#show" do
+      before { get "/admin/courts/#{court.id}" }
+      it { expect(response).to be_success }
+    end
     
     context "#update" do
       subject { put "/admin/courts/#{court.id}", admin_court: { name: "haha" } }
