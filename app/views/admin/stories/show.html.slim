@@ -22,23 +22,23 @@
         td 審判長法官
         td= link_to "#{@story.main_judge.name}", admin_judge_path(@story.main_judge) if @story.main_judge
       tr
-        td 參與法官
+        td 與案件相關法官
         td
           - @story.by_relation_judges.each do |sr|
             = link_to "#{sr.people.name} ", admin_judge_path(sr.people)
             = " "
       tr
-        td 參與檢察官
+        td 與案件相關檢察官
         td= link_to "TODO 尚未實作檢察官", "#"
 
       tr
-        td 參與律師
+        td 與案件相關律師
         td
           - @story.by_relation_lawyers.each do |sr|
             = link_to "#{sr.people.name} ", admin_lawyer_path(sr.people)
             = " "
       tr
-        td 參與當事人
+        td 與案件相關當事人
         td
           - @story.by_relation_defendants.each do |sr|
             = link_to "#{sr.people.name} ", admin_defendant_path(sr.people)
