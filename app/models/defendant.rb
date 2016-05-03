@@ -27,6 +27,7 @@ class Defendant < ActiveRecord::Base
 
   has_many :defendant_verdicts
   has_many :verdicts, through: :defendant_verdicts
+  has_many :story_relations, as: :people
 
   def email_required?
     false

@@ -3,5 +3,4 @@ FactoryGirl.define do
     story { FactoryGirl.create :story }
     people { FactoryGirl.create :judge }
   end
-
 end

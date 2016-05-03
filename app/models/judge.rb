@@ -30,6 +30,7 @@ class Judge < ActiveRecord::Base
   has_many :main_judge_verdicts, class_name: "Verdict", foreign_key: "main_judge_id"
   belongs_to :court, foreign_key: :current_court_id
   has_many :schedules, foreign_key: "branch_judge_id"
+  has_many :story_relations, as: :people
 
   mount_uploader :avatar, ProfileAvatarUploader
 
