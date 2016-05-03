@@ -28,6 +28,7 @@ class Verdict < ActiveRecord::Base
   has_many :defendant_verdicts
   has_many :defendants, through: :defendant_verdicts
   belongs_to :story
+  belongs_to :main_judge, class_name: "Judge", foreign_key: :main_judge_id
 
   scope :newest, ->{ order("id DESC") }
 

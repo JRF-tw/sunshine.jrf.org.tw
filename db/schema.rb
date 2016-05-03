@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160503085924) do
+ActiveRecord::Schema.define(version: 20160503101322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -581,9 +581,12 @@ ActiveRecord::Schema.define(version: 20160503085924) do
     t.text     "judges_names"
     t.text     "prosecutor_names"
     t.date     "adjudge_date"
+    t.integer  "main_judge_id"
   end
 
   add_index "verdicts", ["adjudge_date"], name: "index_verdicts_on_adjudge_date", using: :btree
   add_index "verdicts", ["is_judgment"], name: "index_verdicts_on_is_judgment", using: :btree
+  add_index "verdicts", ["main_judge_id", "story_id"], name: "index_verdicts_on_main_judge_id_and_story_id", using: :btree
+  add_index "verdicts", ["main_judge_id"], name: "index_verdicts_on_main_judge_id", using: :btree
 
 end

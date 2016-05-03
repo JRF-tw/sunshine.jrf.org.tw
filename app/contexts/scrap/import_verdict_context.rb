@@ -1,6 +1,7 @@
 class Scrap::ImportVerdictContext < BaseContext
   before_perform :parse_orginal_data
   before_perform :parse_nokogiri_data
+  before_perform :parse_verdict_stroy_type
   before_perform :parse_verdict_word
   before_perform :parse_verdict_content
   before_perform :build_analysis_context
@@ -37,6 +38,12 @@ class Scrap::ImportVerdictContext < BaseContext
     SlackService.scrap_notify_async("判決書分析資料失敗: parse_nokogiri_data處理資料為空\n import_data : #{@import_data}\n #{e.message}")
   end
 
+  def parse_verdict_stroy_type
+    @verdict_stroy_type = @nokogiri_data.css("table")[0].css("b").text.match(/\s+(\p{Word}+)類/)[1]
+  rescue => e
+    SlackService.scrap_notify_async("判決書分析資料失敗: parse_nokogiri_data處理資料為空\n import_data : #{@import_data}\n #{e.message}")
+  end
+
   def parse_verdict_word
     @verdict_word = @nokogiri_data.css("table")[4].css("tr")[0].css("td")[1].text
   rescue => e
@@ -54,7 +61,13 @@ class Scrap::ImportVerdictContext < BaseContext
   end
 
   def find_main_judge
-    @main_judge = Judge.find_by(name: @analysis_context.main_judge_name)
+    branches = @court.branches.where("chamber_name LIKE ? ", "%#{@verdict_stroy_type}%")
+    main_judges = branches.map{ |a| a.judge if a.judge.name == @analysis_context.main_judge_name }.compact.uniq
+    @main_judge = main_judges.count == 1 ?  main_judges.last : nil
+
+    unless main_judges.count == 1
+      SlackService.analysis_notify_async("判決書關聯主審法官失敗 : 找到多位法官, 或者找不到任何法官\n 判決書類別 : #{@verdict_stroy_type}, 法官姓名 : #{@analysis_context.main_judge_name}, 法院 : #{@court.full_name}")
+    end
   end
 
   def find_or_create_story
@@ -65,6 +78,7 @@ class Scrap::ImportVerdictContext < BaseContext
   def build_verdict
     @verdict = Verdict.new(
       story: @story,
+      main_judge: @main_judge,
       is_judgment: @analysis_context.is_judgment?,
       judges_names: @analysis_context.judges_names,
       prosecutor_names: @analysis_context.prosecutor_names,

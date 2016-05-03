@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Scrap::ImportVerdictContext, :type => :model do
   let!(:court) { FactoryGirl.create :court, code: "TPH", full_name: "臺灣高等法院" }
   let!(:judge) { FactoryGirl.create :judge, name: "施俊堯" }
+  let!(:branch) { FactoryGirl.create :branch, court: court, judge: judge, chamber_name: "臺灣高等法院刑事庭"}
   let!(:import_data) { Mechanize.new.get(Scrap::GetVerdictsContext::VERDICT_URI) }
 
   describe "#perform" do
@@ -10,6 +11,10 @@ RSpec.describe Scrap::ImportVerdictContext, :type => :model do
 
     context "create verdict" do
       it { expect{ subject }.to change{ Verdict.last } }
+    end
+
+    context "get main_judge" do
+      it { expect(subject.main_judge).to eq(judge) }
     end
 
     context "find_or_create_story" do
