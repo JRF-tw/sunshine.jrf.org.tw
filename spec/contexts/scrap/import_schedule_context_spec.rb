@@ -13,19 +13,27 @@ RSpec.describe Scrap::ImportScheduleContext, :type => :model do
       it { expect{ subject }.to change{ Schedule.count } }
     end
 
-    context "get main judge" do
-      it { expect(subject.story.main_judge).to eq(judge) }
+    context "main_judge association" do
+      context "not association to story" do
+        it { expect(subject.story.main_judge).to be_nil }
+      end
+
+      context "normalize" do
+        it { expect(subject.main_judge).to eq(judge) }
+      end
 
       context "mutiple branche" do
         let!(:judge1) { FactoryGirl.create :judge, court: court }
         let!(:branch1) { FactoryGirl.create :branch, court: court, judge: judge1, name: "平", chamber_name: "xxx法院民事庭" }
-        it { expect(subject.story.main_judge).to eq(judge1) }
+        it { expect(subject.main_judge).to eq(judge1) }
       end
 
       context "not match judge" do
+        before { branch.update_attributes(name: "x") }
         it { expect{ subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
       end
     end
+
 
     context "find story" do
       before { subject }
