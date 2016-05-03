@@ -25,6 +25,9 @@ class Defendant < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :defendant_verdicts
+  has_many :verdicts, through: :defendant_verdicts
+
   def email_required?
     false
   end

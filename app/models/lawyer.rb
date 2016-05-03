@@ -14,6 +14,8 @@
 #
 
 class Lawyer < ActiveRecord::Base
+  has_many :lawyer_verdicts
+  has_many :verdicts, through: :lawyer_verdicts
 
   validates_presence_of :name
   mount_uploader :avatar, ProfileAvatarUploader

@@ -24,6 +24,12 @@ FactoryGirl.define do
     trait :with_gender do
       gender "男"
     end
+
+    trait :with_verdict do
+      after(:create) do |lawyer|
+        FactoryGirl.create :lawyer_verdict, lawyer: lawyer, verdict: FactoryGirl.create(:verdict)
+      end
+    end
   end
 
   factory :empty_name_for_lawyer, class: Lawyer do
