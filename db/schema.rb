@@ -493,7 +493,7 @@ ActiveRecord::Schema.define(version: 20160503120111) do
   create_table "story_relations", force: :cascade do |t|
     t.integer  "story_id"
     t.integer  "people_id"
-    t.integer  "people_type"
+    t.string   "people_type"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

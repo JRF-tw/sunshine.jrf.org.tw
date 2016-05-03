@@ -3,7 +3,7 @@ class CreateStoryRelations < ActiveRecord::Migration
     create_table :story_relations do |t|
       t.integer :story_id
       t.integer :people_id
-      t.integer :people_type
+      t.string :people_type
       t.timestamps null: false
     end
     add_index :story_relations, :story_id

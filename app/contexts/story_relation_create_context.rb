@@ -24,7 +24,11 @@ class StoryRelationCreateContext < BaseContext
   def find_people_type
     @people_type = "Defendant" if @story.defendant_names.include?(@people_name)
     @people_type = "Lawyer" if @story.lawyer_names.include?(@people_name)
-    @people_type = "Judge" if @story.judges_names.include?(@people_name) || @story.main_judge.name == @people_name
+    @people_type = "Judge" if @story.judges_names.include?(@people_name)
+
+    if @story.main_judge
+      @people_type = "Judge" if @story.main_judge.name == @people_name
+    end
     # @people_type = "Prosecutor" if @story.prosecutor_names.include?(@people_name)
     add_error(:data_create_fail, "案件內沒有該人名紀錄") unless @people_type
   end
