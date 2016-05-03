@@ -16,6 +16,11 @@ RSpec.describe Admin::VerdictsController do
       it { expect(response.body).to match(verdict.story.court.full_name) }
     end
 
+    context "search the main_judge_name of stories" do
+      before { get "/admin/verdicts", q: { story_main_judge_id_eq: verdict.story.main_judge.id} }
+      it { expect(response.body).to match(verdict.story.main_judge.name) }
+    end
+
     context "search unexist_judges_names" do
       let!(:verdict1) { FactoryGirl.create :verdict, judges_names: ["xxxx"]  }
       before { get "/admin/verdicts", q: { unexist_judges_names: 1} }
