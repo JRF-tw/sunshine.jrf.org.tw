@@ -21,6 +21,12 @@ class Verdict < ActiveRecord::Base
   serialize :lawyer_names, Array
   serialize :judges_names, Array
   serialize :prosecutor_names, Array
+  has_many :lawyer_verdicts
+  has_many :lawyers, through: :lawyer_verdicts
+  has_many :judge_verdicts
+  has_many :judges, through: :judge_verdicts
+  has_many :defendant_verdicts
+  has_many :defendants, through: :defendant_verdicts
   belongs_to :story
 
   scope :newest, ->{ order("id DESC") }
