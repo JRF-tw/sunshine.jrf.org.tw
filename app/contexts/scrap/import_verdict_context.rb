@@ -11,6 +11,10 @@ class Scrap::ImportVerdictContext < BaseContext
   after_perform  :upload_file
   after_perform  :update_data_to_story
   after_perform  :update_adjudge_date
+  after_perform  :create_relation_for_lawyer
+  after_perform  :create_relation_for_judge
+  after_perform  :create_relation_for_main_judge
+  after_perform  :create_relation_for_defendant
 
   def initialize(import_data, court)
     @import_data = import_data
@@ -105,5 +109,40 @@ class Scrap::ImportVerdictContext < BaseContext
     return unless @analysis_context.is_judgment?
     @story.update_attributes(adjudge_date: Date.today) unless @story.adjudge_date
     @verdict.update_attributes(adjudge_date: Date.today)
+  end
+
+  def create_relation_for_lawyer
+    @verdict.lawyer_names.each do |name|
+      lawyers = Lawyer.where(name: name)
+      if lawyers.count == 1
+        @verdict.lawyer_verdicts.create(lawyer: lawyers.first)
+        # CreateStoryRelation.new(@story).perform(lawyer.first)
+      end
+    end
+  end
+
+  def create_relation_for_judge
+    @verdict.judges_names.each do |name|
+      branches = @court.branches.where("chamber_name LIKE ? ", "%#{@verdict_stroy_type}%")
+      judges = branches.map{ |a| a.judge if a.judge.name == name }.compact.uniq
+      if judges.count == 1
+        @verdict.judge_verdicts.create(judge: judges.first)
+        # CreateStoryRelation.new(@story).perform(judges.first)
+      end
+    end
+  end
+
+  def create_relation_for_main_judge
+    # CreateStoryRelation.new(@story).perform(@verdict.main_judge) if @verdict.main_judge
+  end
+
+  def create_relation_for_defendant
+    @verdict.defendant_names.each do |name|
+      defendants = Defendant.where(name: name)
+      if defendants.count == 1
+        @verdict.defendant_verdicts.create(defendant: defendants.first)
+        # CreateStoryRelation.new(@story).perform(defendant.first)
+      end
+    end
   end
 end

@@ -62,5 +62,24 @@ RSpec.describe Scrap::ImportVerdictContext, :type => :model do
         it { expect { subject }.not_to change { subject.story.adjudge_date } }
       end
     end
+
+    context "create judge_verdicts" do
+      let!(:judge) { FactoryGirl.create :judge, name: "李麗珠" }
+      let!(:branch) { FactoryGirl.create :branch, court: court, judge: judge, chamber_name: "臺灣高等法院刑事庭"}
+
+      it { expect{ subject }.to change { judge.verdicts.count } }
+    end
+
+    context "create lawyer_verdicts" do
+      let!(:lawyer) { FactoryGirl.create :lawyer, name: "陳圈圈" }
+
+      it { expect{ subject }.to change { lawyer.verdicts.count } }
+    end
+
+    context "create defendant_verdict" do
+      let!(:defendant) { FactoryGirl.create :defendant, name: "張坤樹" }
+
+      it { expect{ subject }.to change { defendant.verdicts.count } }
+    end
   end
 end

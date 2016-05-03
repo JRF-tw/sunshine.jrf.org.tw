@@ -22,7 +22,7 @@ class Scrap::AnalysisVerdictContext < BaseContext
   def judges_names
     matched = @verdict_content.match(/^\s+法\s+官\s+([\p{Word}\w\s\S]+?)\n/)
     if matched
-      return @verdict_content.scan(/^\s法\s+官\s+([\p{Word}\w\s\S]+?)\n/).map { |i| i[0].gsub("\r", '') }
+      return @verdict_content.scan(/^\s+法\s+官\s+([\p{Word}\w\s\S]+?)\n/).map { |i| i[0].gsub("\r", '') }
     else
       SlackService.analysis_notify_async("裁判字號 : #{@verdict_word}, 取得 法官 資訊為空") if is_judgment?
       return []
