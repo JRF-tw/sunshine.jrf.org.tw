@@ -23,17 +23,11 @@ FactoryGirl.define do
 
     trait :with_gender do
       gender "男"
-    end  
-
-    trait :with_story do
-      after(:create) do |lawyer|
-        FactoryGirl.create :lawyer_story, lawyer: lawyer, story: FactoryGirl.create(:story) 
-      end
-    end  
+    end
   end
 
   factory :empty_name_for_lawyer, class: Lawyer do
     name ""
-  end  
+  end
 
 end

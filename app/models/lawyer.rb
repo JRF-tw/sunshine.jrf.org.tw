@@ -14,8 +14,6 @@
 #
 
 class Lawyer < ActiveRecord::Base
-  has_many :lawyer_stories
-  has_many :stories, through: :lawyer_stories
 
   validates_presence_of :name
   mount_uploader :avatar, ProfileAvatarUploader

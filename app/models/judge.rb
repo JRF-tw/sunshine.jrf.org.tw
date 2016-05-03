@@ -23,8 +23,6 @@
 #
 
 class Judge < ActiveRecord::Base
-  has_many :judge_stories
-  has_many :stories, through: :judge_stories
   has_many :branches
   has_many :main_judge_stories, class_name: "Story", foreign_key: "main_judge_id"
   belongs_to :court, foreign_key: :current_court_id
