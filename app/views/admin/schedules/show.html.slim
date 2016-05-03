@@ -1,0 +1,21 @@
+= admin_widget_box "案件 #{@schedule.story.identity} 的庭期表", icon: :th do
+  table.table.table-bordered.table-striped.table-hover
+    tbody
+      tr
+        td #
+        td= @schedule.id
+      tr
+        td 開庭法院
+        td= link_to "#{@schedule.court.full_name}", admin_court_path(@schedule.court)
+      tr
+        td 主審法官
+        td= link_to @schedule.story.main_judge.name, admin_judge_path(@schedule.story.main_judge) if @schedule.story.main_judge
+      tr
+        td 案件
+        td= link_to "#{@schedule.story.identity}", admin_story_path(@schedule.story)
+      tr
+        td 股別名稱
+        td= @schedule.branch_name
+      tr
+        td 開庭時間
+        td= @schedule.date

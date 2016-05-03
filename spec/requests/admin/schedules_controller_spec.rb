@@ -26,5 +26,11 @@ RSpec.describe Admin::SchedulesController do
       it { expect(response).to be_success }
     end  
   end
+
+  describe "#show" do
+    let!(:schedule) { FactoryGirl.create :schedule }
+    before { get "/admin/schedules/#{schedule.id}" }
+    it { expect(response).to be_success }
+  end
   
 end  
