@@ -15,17 +15,15 @@ describe Search::JudgeByCourtAndBranchContext do
   end
 
   context "not find court" do
-    let(:context) { described_class.new("xxx", branch.name) }
-    before { context.perform }
-    subject { context }
+    subject { described_class.new("xxx", branch.name) }
+    before { subject.perform }
 
     it { expect(subject.has_error?).to be_truthy }
   end
 
   context "not find branch" do
-    let(:context) { described_class.new("xxx", branch.name) }
-    before { context.perform }
-    subject { context }
+    subject { described_class.new(court.full_name, "xxx") }
+    before { subject.perform }
 
     it { expect(subject.has_error?).to be_truthy }
   end
