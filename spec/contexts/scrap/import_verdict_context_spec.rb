@@ -13,8 +13,9 @@ RSpec.describe Scrap::ImportVerdictContext, :type => :model do
       it { expect{ subject }.to change{ Verdict.last } }
     end
 
-    context "get main_judge" do
+    context "main_judge data" do
       it { expect(subject.main_judge).to eq(judge) }
+      it { expect(subject.main_judge_name).to eq("施俊堯") }
     end
 
     context "find_or_create_story" do
