@@ -5,8 +5,15 @@
       .row
         .span6
           .control-group
-            label.control-label= f.label :is_adjudge_true
-            .controls= f.check_box :is_adjudge_true
+            label.control-label= f.label :is_adjudge_eq
+            .controls= f.select :is_adjudge_eq,
+            collect_for_is_adjudge, include_blank: "請選擇"
+        .span6
+          .control-group
+            label.control-label= f.label :story_type_eq
+            .controls= f.select :story_type_eq,
+            collect_for_story_types, include_blank: "請選擇"
+
       .row
         .span6
           .control-group
@@ -14,10 +21,9 @@
             .controls#select2= f.select :court_id_eq,
             collect_for_courts, include_blank: "請選擇"
         .span6
-          .control-group
-            label.control-label= f.label :story_type_eq
-            .controls= f.select :story_type_eq,
-            collect_for_story_types, include_blank: "請選擇"
+          .control-group#datepicker
+            label.control-label= f.label :adjudge_date_eq
+            .controls= f.search_field :adjudge_date_eq
 
       .row
         .span6
@@ -37,11 +43,7 @@
           .control-group
             label.control-label= f.label :main_judge_name_cont
             .controls= f.search_field :main_judge_name_cont
-      .row
-        .span6
-          .control-group#datepicker
-            label.control-label= f.label :adjudge_date_eq
-            .controls= f.search_field :adjudge_date_eq
+        
 
     hr
     .form-actions
