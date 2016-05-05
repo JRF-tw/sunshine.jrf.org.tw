@@ -33,6 +33,7 @@ RSpec.describe Scrap::AnalysisVerdictContext, :type => :model do
       subject{ described_class.new(verdict_content, verdict_word) }
 
       it { expect(subject.judges_names.include?("主審法官")).to be_falsey }
+      it { expect(subject.main_judge_name).to eq("主審法官") }
       it { expect(subject.judges_names.include?("陪審法官")).to be_truthy }
       it { expect{ subject.judges_names }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
     end
@@ -54,7 +55,7 @@ RSpec.describe Scrap::AnalysisVerdictContext, :type => :model do
 
   describe "#main_judge_name" do
     context "exist" do
-      let!(:verdict_content){ "審判長法 官 xxx\n" }
+      let!(:verdict_content){ "刑事第四庭    審判長法  官 xxx\n" }
       subject{ described_class.new(verdict_content, verdict_word) }
 
       it { expect(subject.main_judge_name.present?).to be_truthy }
