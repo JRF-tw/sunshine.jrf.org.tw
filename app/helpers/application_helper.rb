@@ -216,5 +216,9 @@ module ApplicationHelper
     [["不顯示於前端", true],["顯示於前端", false]]
   end
 
+  def collect_for_verdicts_is_judgment
+    [["有", true]]
+  end
+
 end
 
