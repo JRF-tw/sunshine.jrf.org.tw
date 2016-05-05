@@ -10,10 +10,8 @@
             collect_for_is_adjudge, include_blank: "請選擇"
         .span6
           .control-group
-            label.control-label= f.label :story_type_eq
-            .controls= f.select :story_type_eq,
-            collect_for_story_types, include_blank: "請選擇"
-
+            label.control-label= f.label :verdicts_is_judgment_true
+            .controls= f.check_box :verdicts_is_judgment_true
       .row
         .span6
           .control-group
