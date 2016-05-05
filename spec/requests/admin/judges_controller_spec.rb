@@ -9,6 +9,11 @@ RSpec.describe Admin::JudgesController do
       before { get "/admin/judges" }
       it { expect(response).to be_success }
     end
+
+   context "search the court of judge" do
+      before { get "/admin/judges", q: { current_court_id_eq: judge.current_court_id} }
+      it { expect(response.body).to match(judge.name) }
+    end
   end  
 
   describe "#new" do
