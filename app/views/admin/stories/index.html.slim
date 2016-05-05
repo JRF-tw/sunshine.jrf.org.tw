@@ -10,10 +10,9 @@
             collect_for_is_adjudge, include_blank: "請選擇"
         .span6
           .control-group
-            label.control-label= f.label :story_type_eq
-            .controls= f.select :story_type_eq,
-            collect_for_story_types, include_blank: "請選擇"
-
+            label.control-label= f.label :verdicts_is_judgment_true
+            .controls= f.select :verdicts_is_judgment_true,
+            collect_for_verdicts_is_judgment, include_blank: "請選擇"
       .row
         .span6
           .control-group
@@ -63,7 +62,7 @@
           th= sort_link(@search, :story_type, '案件類別')
           th= sort_link(@search, :main_judge_name, '所屬法官')
           th= sort_link(@search, :is_adjudge, '是否已宣判')
-          th= sort_link(@search, :is_judgment, '是否有判決書')
+          th 是否有判決書
           th= sort_link(@search, :adjudge_date, '判決日期')
           th 操作
       tbody
