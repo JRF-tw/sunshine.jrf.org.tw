@@ -65,7 +65,7 @@
             td= link_to "#{verdict.story.court.full_name}", admin_court_path(verdict.story.court)
             td= verdict.adjudge_date
             td= link_to "#{verdict.story.identity}", admin_story_path(verdict.story)
-            td= link_to "#{verdict.main_judge.name}", admin_judge_path(verdict.main_judge) if verdict.main_judge
+            td= verdict.main_judge ? link_to(verdict.main_judge.name, admin_judge_path(verdict.main_judge)) : verdict.main_judge_name
             td= verdict.is_judgment ? "是" : "否"
             td= link_to "點我下載", download_file_admin_verdict_path(verdict) if verdict.file
             td
