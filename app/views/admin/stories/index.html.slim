@@ -7,7 +7,7 @@
           .control-group
             label.control-label= f.label :is_adjudge_eq
             .controls= f.select :is_adjudge_eq,
-            [["已宣判", true], ["尚未宣判", false]], include_blank: "請選擇"
+            collect_for_is_adjudge, include_blank: "請選擇"
         .span6
           .control-group
             label.control-label= f.label :story_type_eq
