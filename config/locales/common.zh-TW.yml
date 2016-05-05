@@ -269,6 +269,7 @@ zh-TW:
       judge:
         is_active_true: "職況"
         is_hidden_true: "不顯示於前端"
+        is_hidden_eq: "顯示方式"
         name_cont: "姓名包含"
         court_full_name_eq: "任職法院"
       lawyer:
