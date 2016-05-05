@@ -21,6 +21,11 @@
       .row
         .span6
           .control-group
+            label.control-label= f.label :main_judge_name_null
+            .controls= f.check_box :main_judge_name_null
+      .row
+        .span6
+          .control-group
             label.control-label= f.label :unexist_defendant_names
             .controls= f.check_box :unexist_defendant_names
         .span6

@@ -259,8 +259,9 @@ zh-TW:
         main_judge_id_eq: "審判長法官"
         unexist_defendant_names: "當事人為空值"
         unexist_lawyer_names: "律師為空值"
-        unexist_judges_names: "法官為空值"
+        unexist_judges_names: "陪審法官為空值"
         unexist_prosecutor_names: "檢察官為空值"
+        main_judge_name_null: "審判長法官為空值"
       schedule:
         branch_judge_id_eq: "股別法官名稱"
         court_full_name_eq: "法院名稱"
