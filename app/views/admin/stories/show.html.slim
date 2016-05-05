@@ -1,4 +1,6 @@
 - content_for :btns do
+  = link_to "庭期列表", admin_schedules_path(q: { "story_id_eq" => @story.id } ), class: "btn btn-large"
+
 
 = admin_widget_box "#{@story.identity}資料", icon: :th do
   table.table.table-bordered.table-striped.table-hover
@@ -46,6 +48,9 @@
           - @story.by_relation_defendants.each do |sr|
             = link_to "#{sr.people.name} ", admin_defendant_path(sr.people)
             = " "
+      tr
+        td 判決日期
+        td= @story.adjudge_date
       tr
         td 是否有判決書
         td
