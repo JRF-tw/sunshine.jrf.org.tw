@@ -4,6 +4,9 @@
   table.table.table-bordered.table-striped.table-hover
     tbody
       tr
+        td #
+        td= @story.id
+      tr
         td 所屬法院
         td= link_to "#{@story.court.full_name}", admin_court_path(@story.court)
       tr
@@ -47,3 +50,9 @@
         td 是否有判決書
         td
           = link_to "是", admin_verdict_path(@story.judgment_verdict) if @story.judgment_verdict
+      tr
+        td 新增日期
+        td= @story.created_at
+      tr
+        td 最後修改日期
+        td= @story.updated_at
