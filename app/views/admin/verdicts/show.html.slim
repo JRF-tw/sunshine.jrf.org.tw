@@ -16,7 +16,7 @@
         td= @verdict.is_judgment ? "是" : "否"
       tr
         td 審判長法官
-        td= link_to "#{@verdict.story.main_judge.name}", admin_judge_path(@verdict.story.main_judge) if @verdict.story.main_judge
+        td= @verdict.main_judge ? link_to(@verdict.main_judge.name, admin_judge_path(@verdict.main_judge)) : @verdict.main_judge_name
       tr
         td 分析檢察官結果
         td= @verdict.prosecutor_names.join(",")
