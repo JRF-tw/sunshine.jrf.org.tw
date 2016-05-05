@@ -10,8 +10,9 @@
             collect_for_judge_active, include_blank: "請選擇"
         .span6
           .control-group
-            label.control-label= f.label :is_hidden_true
-            .controls= f.check_box :is_hidden_true
+            label.control-label= f.label :is_hidden_eq
+            .controls= f.select :is_hidden_eq,
+            collect_for_is_hidden, include_blank: "請選擇"
       .row
         .span6
           .control-group

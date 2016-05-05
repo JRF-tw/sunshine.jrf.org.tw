@@ -211,5 +211,10 @@ module ApplicationHelper
   def collect_for_is_adjudge
     [["已宣判", true], ["尚未宣判", false]]
   end  
+
+  def collect_for_is_hidden
+    [["不顯示於前端", true],["顯示於前端", false]]
+  end
+
 end
 
