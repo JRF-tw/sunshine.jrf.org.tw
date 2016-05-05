@@ -49,6 +49,9 @@
             = link_to "#{sr.people.name} ", admin_defendant_path(sr.people)
             = " "
       tr
+        td 是否已宣判
+        td= @story.is_adjudge ? "已宣判" : ""
+      tr
         td 判決日期
         td= @story.adjudge_date
       tr
