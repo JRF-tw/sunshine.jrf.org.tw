@@ -29,7 +29,7 @@
       = link_to "清空搜尋結果", admin_courts_path, :class => "btn btn-default"
 
 
-= admin_widget_box "法院 / 檢察署列表", icon: :pencil do
+= admin_widget_box "法院 / 檢察署列表 : 搜尋結果為 #{@search.result.count} 筆", icon: :pencil do
   .dataTables_wrapper
     div
       .dataTables_length
