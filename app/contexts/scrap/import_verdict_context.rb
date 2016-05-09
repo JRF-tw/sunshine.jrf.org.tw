@@ -1,9 +1,4 @@
 class Scrap::ImportVerdictContext < BaseContext
-  before_perform :parse_orginal_data
-  before_perform :parse_nokogiri_data
-  before_perform :parse_verdict_stroy_type
-  before_perform :parse_verdict_word
-  before_perform :parse_verdict_content
   before_perform :build_analysis_context
   before_perform :find_main_judge
   before_perform :find_or_create_story
@@ -16,9 +11,18 @@ class Scrap::ImportVerdictContext < BaseContext
   after_perform  :create_relation_for_main_judge
   after_perform  :create_relation_for_defendant
 
-  def initialize(import_data, court)
-    @import_data = import_data
+  class << self
+    def perform(court, orginal_data, verdict_content, verdict_word, verdict_stroy_type)
+      new(court, orginal_data, verdict_content, verdict_word, verdict_stroy_type).perform
+    end
+  end
+
+  def initialize(court, orginal_data, verdict_content, verdict_word, verdict_stroy_type)
     @court = court
+    @orginal_data = orginal_data
+    @verdict_content = verdict_content
+    @verdict_word = verdict_word
+    @verdict_stroy_type = verdict_stroy_type
   end
 
   def perform
@@ -29,36 +33,6 @@ class Scrap::ImportVerdictContext < BaseContext
   end
 
   private
-
-  def parse_orginal_data
-    @orginal_data = @import_data.body.force_encoding("UTF-8")
-  rescue => e
-    SlackService.scrap_notify_async("判決書分析資料失敗: parse_orginal_data處理資料為空\n import_data : #{@import_data}\n #{e.message}")
-  end
-
-  def parse_nokogiri_data
-    @nokogiri_data = Nokogiri::HTML(@import_data.body)
-  rescue => e
-    SlackService.scrap_notify_async("判決書分析資料失敗: parse_nokogiri_data處理資料為空\n import_data : #{@import_data}\n #{e.message}")
-  end
-
-  def parse_verdict_stroy_type
-    @verdict_stroy_type = @nokogiri_data.css("table")[0].css("b").text.match(/\s+(\p{Word}+)類/)[1]
-  rescue => e
-    SlackService.scrap_notify_async("判決書分析資料失敗: parse_nokogiri_data處理資料為空\n import_data : #{@import_data}\n #{e.message}")
-  end
-
-  def parse_verdict_word
-    @verdict_word = @nokogiri_data.css("table")[4].css("tr")[0].css("td")[1].text
-  rescue => e
-    SlackService.scrap_notify_async("判決書分析資料失敗: parse_verdict_word處理資料為空\n nokogiri_data : #{@nokogiri_data}\n #{e.message}")
-  end
-
-  def parse_verdict_content
-    @verdict_content = @nokogiri_data.css("pre").text
-  rescue => e
-    SlackService.scrap_notify_async("判決書分析資料失敗: parse_verdict_content處理資料為空\n nokogiri_data : #{@nokogiri_data}\n #{e.message}")
-  end
 
   def build_analysis_context
     @analysis_context = Scrap::AnalysisVerdictContext.new(@verdict_content, @verdict_word)

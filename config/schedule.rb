@@ -44,5 +44,5 @@ end
 
 # scrap verdicts
 every 1.day, :at => '2:00 am' do
-  runner "Scrap::GetVerdictsContext.perform_all"
+  runner "Scrap::GetVerdictsContext.new.perform"
 end
