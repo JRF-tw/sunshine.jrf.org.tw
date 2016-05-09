@@ -1,7 +1,6 @@
 class Scrap::GetVerdictsContext < BaseContext
   INDEX_URI = "http://jirs.judicial.gov.tw/FJUD/FJUDQRY01_1.aspx"
   RESULT_URI = "http://jirs.judicial.gov.tw/FJUD/FJUDQRY02_1.aspx"
-  SCRAP_TIME_SLEEP_INTERVEL = rand(1..2)
 
   def initialize
     @start_date = Time.zone.today.strftime("%Y%m%d")
@@ -14,7 +13,7 @@ class Scrap::GetVerdictsContext < BaseContext
       @codes.each do |court|
         get_story_types.each do |type|
           total_result(court, type).times.each do |index|
-            sleep SCRAP_TIME_SLEEP_INTERVEL
+            sleep rand(1..2)
             scrap_id = index + 1
             Scrap::ParseVerdictContext.new(court, scrap_id, type, @start_date, @end_date).perform
           end

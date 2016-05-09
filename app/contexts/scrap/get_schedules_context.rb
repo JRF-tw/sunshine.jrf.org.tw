@@ -1,17 +1,17 @@
 class Scrap::GetSchedulesContext < BaseContext
   COURT_INFO_URI = "http://csdi.judicial.gov.tw/abbs/wkw/WHD3A01.jsp"
   SCHEDULE_INFO_URI = "http://csdi.judicial.gov.tw/abbs/wkw/WHD3A02.jsp"
-  START_DATE = Time.zone.today
-  END_DATE = Time.zone.today
-  START_DATE_FORMAT = "#{START_DATE.strftime("%Y").to_i - 1911}#{START_DATE.strftime('%m%d')}"
-  END_DATE_FORMAT = "#{END_DATE.strftime("%Y").to_i - 1911}#{END_DATE.strftime('%m%d')}"
-  SCRAP_TIME_SLEEP_INTERVEL = rand(1..2)
   PAGE_PER = 15
 
   class << self
     def perform_all
+      @start_date = Time.zone.today
+      @end_date = Time.zone.today
+      @start_date_format = "#{@start_date.strftime("%Y").to_i - 1911}#{@start_date.strftime('%m%d')}"
+      @end_date_format = "#{@end_date.strftime("%Y").to_i - 1911}#{@end_date.strftime('%m%d')}"
       get_courts_info.each do |info|
         info[:page_total].times.each_with_index do |i|
+          sleep rand(1..2)
           current_page = i + 1
           self.delay.perform(info, current_page)
         end
@@ -19,7 +19,6 @@ class Scrap::GetSchedulesContext < BaseContext
     end
 
     def perform(info, current_page)
-      sleep SCRAP_TIME_SLEEP_INTERVEL
       new(info, current_page).perform
     end
 
@@ -49,7 +48,7 @@ class Scrap::GetSchedulesContext < BaseContext
     end
 
     def page_total_by_story_type(court_code, story_type)
-      sql = "UPPER(CRTID)='#{court_code}' AND DUDT>='#{START_DATE_FORMAT}' AND DUDT<='#{END_DATE_FORMAT}' AND SYS='#{story_type}'  ORDER BY  DUDT,DUTM,CRMYY,CRMID,CRMNO"
+      sql = "UPPER(CRTID)='#{court_code}' AND DUDT>='#{@start_date_format}' AND DUDT<='#{@end_date_format}' AND SYS='#{story_type}'  ORDER BY  DUDT,DUTM,CRMYY,CRMID,CRMNO"
       data = { sql_conction: sql }
       response_data = Mechanize.new.get(SCHEDULE_INFO_URI, data)
       response_data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
@@ -83,7 +82,7 @@ class Scrap::GetSchedulesContext < BaseContext
   private
 
   def scrap_schedule
-    sql = "UPPER(CRTID)='#{@court_code}' AND DUDT>='#{START_DATE_FORMAT}' AND DUDT<='#{END_DATE_FORMAT}' AND SYS='#{@story_type}'  ORDER BY  DUDT,DUTM,CRMYY,CRMID,CRMNO"
+    sql = "UPPER(CRTID)='#{@court_code}' AND DUDT>='#{@start_date_format}' AND DUDT<='#{@end_date_format}' AND SYS='#{@story_type}'  ORDER BY  DUDT,DUTM,CRMYY,CRMID,CRMNO"
     data = { pageNow: @current_page, sql_conction: sql, pageTotal: @page_total, pageSize: 15, rowStart: 1 }
     response_data = Mechanize.new.get(SCHEDULE_INFO_URI, data)
     @data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
