@@ -220,8 +220,8 @@ module ApplicationHelper
     [["有", true]]
   end
 
-  def collect_for_boolean
-    [["是", true], ["否", false]]
+  def collect_for_judgement_type
+    [["是", true], ["否 (為裁決)", false]]
   end
 
 end

@@ -22,7 +22,7 @@
           .control-group
             label.control-label= f.label :is_judgment_true
             .controls= f.select :is_judgment_true,
-            collect_for_boolean, include_blank: "請選擇"
+            collect_for_judgement_type, include_blank: "請選擇"
       .row
         .span6
           .control-group
