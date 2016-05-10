@@ -9,16 +9,6 @@ module AdminMenuHelper
       #   icon: "star"
       # },
       # "Menu #2" => { url: url_for(q: 789), icon: "pencil", match: /q=789/ },
-      "個人檔案管理": { url: admin_profiles_path, match: /\/admin\/profiles/ },
-      "法官管理": { url: admin_judges_path, match: /\/admin\/judges/ },
-      "重要判決管理": { url: admin_judgments_path, match: /\/admin\/judgments/ },
-      "評鑑資料-案例管理": { url: admin_suits_path, match: /\/admin\/suits/ },
-      "案件管理": { url: admin_stories_path, match: /\/admin\/stories/ },
-      "法院 / 檢察署管理": { url: admin_courts_path, match: /\/admin\/courts/ },
-      "庭期表管理": { url: admin_schedules_path, match: /\/admin\/schedules/ },
-      "判決書管理": { url: admin_verdicts_path, match: /\/admin\/verdicts/ },
-      "首頁橫幅管理": { url: admin_banners_path, match: /\/admin\/banners/ },
-      "司法案例面面觀橫幅管理": { url: admin_suit_banners_path, match: /\/admin\/suit_banners/ },
       "用戶管理": {
         submenu: {
           "後台使用者管理": { url: admin_users_path, match: /\/admin\/users/ },
@@ -26,7 +16,17 @@ module AdminMenuHelper
           "當事人管理": { url: admin_defendants_path, match: /\/admin\/defendants/ },
           "律師管理": { url: admin_lawyers_path, match: /\/admin\/lawyers/ }
         }
-      }
+      },
+      "法官管理": { url: admin_judges_path, match: /\/admin\/judges/ },
+      "法院 / 檢察署管理": { url: admin_courts_path, match: /\/admin\/courts/ },
+      "庭期表管理": { url: admin_schedules_path, match: /\/admin\/schedules/ },
+      "案件管理": { url: admin_stories_path, match: /\/admin\/stories/ },
+      "判決書管理": { url: admin_verdicts_path, match: /\/admin\/verdicts/ },
+      "重要判決管理": { url: admin_judgments_path, match: /\/admin\/judgments/ },
+      "個人檔案管理": { url: admin_profiles_path, match: /\/admin\/profiles/ },
+      "評鑑資料-案例管理": { url: admin_suits_path, match: /\/admin\/suits/ },     
+      "首頁橫幅管理": { url: admin_banners_path, match: /\/admin\/banners/ },
+      "司法案例面面觀橫幅管理": { url: admin_suit_banners_path, match: /\/admin\/suit_banners/ }
     }
   end
 
