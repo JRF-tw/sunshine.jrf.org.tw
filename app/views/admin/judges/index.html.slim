@@ -7,7 +7,7 @@
           .control-group
             label.control-label= f.label :is_active_true
             .controls= f.select :is_active_true,
-            collect_for_judge_active, include_blank: "請選擇"
+            collect_for_boolean, include_blank: "請選擇"
         .span6
           .control-group
             label.control-label= f.label :is_hidden_eq

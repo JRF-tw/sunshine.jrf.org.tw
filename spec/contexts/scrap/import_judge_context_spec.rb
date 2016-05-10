@@ -10,8 +10,9 @@ RSpec.describe Scrap::ImportJudgeContext, :type => :model do
   end
 
   describe "#perform" do
+    let(:data_string) { "臺灣高等法院民事庭,乙,匡偉　法官,黃千鶴,2415" }
+
     context "success" do
-      let(:data_string) { "臺灣高等法院民事庭,乙,匡偉　法官,黃千鶴,2415" }
       subject{ described_class.new(data_string).perform }
 
       it { expect(subject.name).to eq("匡偉") }
@@ -23,7 +24,6 @@ RSpec.describe Scrap::ImportJudgeContext, :type => :model do
 
     context "judge exist" do
       let!(:judge){ FactoryGirl.create :judge, court: court, name: "匡偉"}
-      let(:data_string) { "臺灣高等法院民事庭,乙,匡偉　法官,黃千鶴,2415" }
       subject{ described_class.new(data_string).perform }
 
       it { expect{ subject }.not_to change{ Judge.count } }
@@ -37,10 +37,16 @@ RSpec.describe Scrap::ImportJudgeContext, :type => :model do
     end
 
     context "create_branch" do
-      let(:data_string) { "臺灣高等法院民事庭,乙,匡偉　法官,黃千鶴,2415" }
       subject{ described_class.new(data_string).perform }
 
       it { expect{ subject }.to change{ Branch.count } }
+    end
+
+    context "assign_default_value" do
+      subject!{ described_class.new(data_string).perform }
+
+      it { expect(subject.is_active).to be_truthy }
+      it { expect(subject.is_hidden).to be_truthy }
     end
   end
 end
