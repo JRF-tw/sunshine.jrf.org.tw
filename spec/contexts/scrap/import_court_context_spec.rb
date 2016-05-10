@@ -44,5 +44,24 @@ RSpec.describe Scrap::ImportCourtContext, :type => :model do
       it { expect{ subject }.not_to change { Court.count } }
       it { expect(subject).to be_falsey }
     end
+
+    context "assign default value" do
+      context "is_hidden nil" do
+        let(:data_hash) { { fullname: "xxx", code: "TTT" } }
+        subject{ described_class.new(data_hash).perform }
+
+        it { expect(subject.is_hidden).to be_truthy }
+      end
+
+      context "is_hidden not nil" do
+        let(:data_hash) { { fullname: "xxx", code: "TTT" } }
+        before { described_class.new(data_hash).perform }
+        before { subject.update_attributes(is_hidden: false) }
+        subject { described_class.new(data_hash).perform }
+
+        it { expect{ subject }.not_to change { subject.is_hidden } }
+        it { expect(subject.is_hidden).to be_falsey }
+      end
+    end
   end
 end

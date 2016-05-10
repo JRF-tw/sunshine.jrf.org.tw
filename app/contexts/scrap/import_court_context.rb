@@ -3,6 +3,7 @@ class Scrap::ImportCourtContext < BaseContext
   before_perform :check_data
   before_perform :find_or_create_court
   before_perform :assign_attrbutes
+  before_perform :assign_default_value
 
   class << self
     def perform
@@ -56,5 +57,9 @@ class Scrap::ImportCourtContext < BaseContext
   def assign_attrbutes
     @court.assign_attributes(code: @code) unless @court.code == @code
     @court.assign_attributes(court_type: "法院") unless @court.court_type
+  end
+
+  def assign_default_value
+    @court.assign_attributes(is_hidden: true) if @court.is_hidden.nil?
   end
 end
