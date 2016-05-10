@@ -32,6 +32,11 @@ RSpec.describe Scrap::ImportVerdictContext, :type => :model do
       end
     end
 
+    context "assign default value" do
+      before { subject }
+      it { expect(subject.is_judgment).to be_truthy }
+    end
+
     context "upload file to s3" do
       it { expect(subject.file).to be_present }
     end

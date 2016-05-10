@@ -3,6 +3,7 @@ class Scrap::ImportVerdictContext < BaseContext
   before_perform :find_main_judge
   before_perform :find_or_create_story
   before_perform :build_verdict
+  before_perform :assign_default_value
   after_perform  :upload_file
   after_perform  :update_data_to_story
   after_perform  :update_adjudge_date
@@ -58,12 +59,15 @@ class Scrap::ImportVerdictContext < BaseContext
       story: @story,
       main_judge: @main_judge,
       main_judge_name: @analysis_context.main_judge_name,
-      is_judgment: @analysis_context.is_judgment?,
       judges_names: @analysis_context.judges_names,
       prosecutor_names: @analysis_context.prosecutor_names,
       lawyer_names: @analysis_context.lawyer_names,
       defendant_names: @analysis_context.defendant_names
     )
+  end
+
+  def assign_default_value
+    @verdict.assign_attributes(is_judgment: @analysis_context.is_judgment?)
   end
 
   def upload_file

@@ -242,7 +242,7 @@ zh-TW:
         court_type_eq: "類型"
         full_name_cont: "全名包含"
         name_cont: "前台顯示簡稱包含"
-        is_hidden_true: "不顯示於前端"
+        is_hidden_eq: "是否在前端隱藏"
       story:
         story_type_eq: "案件類別"
         year_eq: "年度"
@@ -250,9 +250,8 @@ zh-TW:
         number_eq: "案號"
         main_judge_name_cont: "主審法官姓名包含"
         court_full_name_eq: "法院名稱"
-        is_adjudge_eq: "宣判狀態"
-        is_adjudge_true: "已宣判"
-        verdicts_is_judgment_true: "是否有判決書"
+        is_adjudge_eq: "是否已宣判"
+        verdicts_is_judgment_eq: "是否有判決書"
         adjudge_date_eq: "宣判日期"
       verdict:
         story_court_full_name_eq: "判決法院"
@@ -271,9 +270,8 @@ zh-TW:
         date_gteq: "開庭日期"
         date_lteq: "~"
       judge:
-        is_active_true: "職況"
-        is_hidden_true: "不顯示於前端"
-        is_hidden_eq: "顯示方式"
+        is_active_true: "是否在職"
+        is_hidden_eq: "是否在前端隱藏"
         name_cont: "姓名包含"
         court_full_name_eq: "任職法院"
       lawyer:

@@ -45,9 +45,17 @@ RSpec.describe Scrap::ImportScheduleContext, :type => :model do
     end
 
     context "update story is_adjudge" do
-      let(:adjudged_data) { hash_data.merge(is_adjudge: true) }
-      subject{ described_class.new(court).perform(adjudged_data) }
-      it { expect(subject.story.is_adjudge).to be_truthy }
+      context "true" do
+        let(:adjudged_data) { hash_data.merge(is_adjudge: true) }
+        subject{ described_class.new(court).perform(adjudged_data) }
+        it { expect(subject.story.is_adjudge).to be_truthy }
+      end
+
+      context "false" do
+        let(:adjudged_data) { hash_data.merge(is_adjudge: false) }
+        subject{ described_class.new(court).perform(adjudged_data) }
+        it { expect(subject.story.is_adjudge).to be_falsey }
+      end
     end
 
     context "update story adjudge date" do

@@ -7,12 +7,12 @@
           .control-group
             label.control-label= f.label :is_active_true
             .controls= f.select :is_active_true,
-            collect_for_judge_active, include_blank: "請選擇"
+            collect_for_boolean, include_blank: "請選擇"
         .span6
           .control-group
             label.control-label= f.label :is_hidden_eq
             .controls= f.select :is_hidden_eq,
-            collect_for_is_hidden, include_blank: "請選擇"
+            collect_for_boolean, include_blank: "請選擇"
       .row
         .span6
           .control-group
@@ -52,8 +52,8 @@
             td= judge.name
             td= judge.gender
             td= link_to "#{judge.court.full_name}", admin_court_path(judge.court)
-            td= judge.is_active? ? "在職" : "-"
-            td= judge.is_hidden? ? "隱藏" : "-"
+            td= judge.is_active? ? "是" : "否"
+            td= judge.is_hidden? ? "是" : "否"
             td= judge.memo
             td
               = link_to "詳細資料", admin_judge_path(judge), class: "btn btn-mini"

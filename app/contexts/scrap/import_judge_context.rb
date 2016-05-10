@@ -3,6 +3,7 @@ class Scrap::ImportJudgeContext < BaseContext
   before_perform  :parse_import_data
   before_perform  :find_court
   before_perform  :build_judge
+  before_perform  :assign_default_value
   after_perform   :create_branch
 
 
@@ -55,6 +56,11 @@ class Scrap::ImportJudgeContext < BaseContext
 
   def build_judge
     @judge = Judge.find_by(court: @court, name: @judge_name) || Judge.new(court: @court, name: @judge_name)
+  end
+
+  def assign_default_value
+    @judge.assign_attributes(is_active: true) if @judge.is_active.nil?
+    @judge.assign_attributes(is_hidden: true) if @judge.is_hidden.nil?
   end
 
   def create_branch
