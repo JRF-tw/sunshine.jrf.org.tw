@@ -7,7 +7,7 @@ RSpec.describe Scrap::ImportScheduleContext, :type => :model do
 
   describe "#perform" do
     let(:hash_data) { { story_type: "民事", year: 105, word_type: "聲", number: "485", date: Date.today, branch_name: "平", is_adjudge: false} }
-    subject{ described_class.new(court).perform(hash_data) }
+    subject{ described_class.new(court.code).perform(hash_data) }
 
     context "success" do
       it { expect{ subject }.to change{ Schedule.count } }
@@ -47,27 +47,27 @@ RSpec.describe Scrap::ImportScheduleContext, :type => :model do
     context "update story is_adjudge" do
       context "true" do
         let(:adjudged_data) { hash_data.merge(is_adjudge: true) }
-        subject{ described_class.new(court).perform(adjudged_data) }
+        subject{ described_class.new(court.code).perform(adjudged_data) }
         it { expect(subject.story.is_adjudge).to be_truthy }
       end
 
       context "false" do
         let(:adjudged_data) { hash_data.merge(is_adjudge: false) }
-        subject{ described_class.new(court).perform(adjudged_data) }
+        subject{ described_class.new(court.code).perform(adjudged_data) }
         it { expect(subject.story.is_adjudge).to be_falsey }
       end
     end
 
     context "update story adjudge date" do
       let(:adjudged_data) { hash_data.merge(is_adjudge: true, date: Date.today) }
-      subject{ described_class.new(court).perform(adjudged_data) }
+      subject{ described_class.new(court.code).perform(adjudged_data) }
 
       context "adjudge_date nil" do
         it { expect(subject.story.adjudge_date).to be_truthy }
       end
 
       context "adjudge_date exist" do
-        before { described_class.new(court).perform(adjudged_data) }
+        before { described_class.new(court.code).perform(adjudged_data) }
 
         it { expect{ subject }.not_to change{ subject.story.adjudge_date } }
         it { expect{ subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
