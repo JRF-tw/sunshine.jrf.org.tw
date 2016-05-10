@@ -224,5 +224,9 @@ module ApplicationHelper
     [["是", true], ["否 (為裁決)", false]]
   end
 
+  def collect_for_boolean
+    [["是", true], ["否", false]]
+  end
+
 end
 
