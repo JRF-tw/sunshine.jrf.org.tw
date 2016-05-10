@@ -59,7 +59,8 @@ class Scrap::ImportJudgeContext < BaseContext
   end
 
   def assign_default_value
-    @judge.assign_attributes(is_active: true, is_hidden: true)
+    @judge.assign_attributes(is_active: true) if @judge.is_active.nil?
+    @judge.assign_attributes(is_hidden: true) if @judge.is_hidden.nil?
   end
 
   def create_branch
