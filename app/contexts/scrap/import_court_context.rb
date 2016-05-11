@@ -17,7 +17,6 @@ class Scrap::ImportCourtContext < BaseContext
   def initialize(data_hash)
     @data_hash = data_hash
     @scrap_name = data_hash[:scrap_name]
-    @full_name = @scrap_name.gsub(" ", "")
     @code = data_hash[:code]
   end
 
@@ -33,7 +32,7 @@ class Scrap::ImportCourtContext < BaseContext
   end
 
   def find_court
-    @court = Court.find_by(code: @code) || Court.find_by(scrap_name: @scrap_name) || Court.find_by(full_name: @full_name)
+    @court = Court.find_by(code: @code) || Court.find_by(scrap_name: @scrap_name) || Court.find_by(full_name: @scrap_name.gsub(" ", ""))
   end
 
   def build_court
