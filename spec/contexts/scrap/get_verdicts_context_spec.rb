@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Scrap::GetVerdictsContext, :type => :model do
-  let!(:court) { FactoryGirl.create :court, code: "TPH", full_name: "臺灣高等法院" }
+  let!(:court) { FactoryGirl.create :court, code: "TPH", scrap_name: "臺灣高等法院" }
 
   describe "#perform" do
     subject{ described_class.new.perform }

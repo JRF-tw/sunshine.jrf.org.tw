@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Scrap::ParseVerdictContext, :type => :model do
-  let!(:court) { FactoryGirl.create :court, code: "TPH", full_name: "臺灣高等法院" }
+  let!(:court) { FactoryGirl.create :court, code: "TPH", scrap_name: "臺灣高等法院" }
   let!(:scrap_id) { "1" }
   let!(:type) { "V" }
   let!(:start_date) { Time.zone.today.strftime("%Y%m%d") }

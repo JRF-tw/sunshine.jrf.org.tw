@@ -33,7 +33,7 @@ class Scrap::GetVerdictsContext < BaseContext
   end
 
   def total_result(court, type)
-    court_value = court.code + " " + court.full_name
+    court_value = court.code + " " + court.scrap_name
     request_query = "?v_court=#{court_value}&v_sys=#{type}&keyword=&sdate=#{@start_date}&edate=#{@end_date}"
     response_data = Mechanize.new.get(RESULT_URI + request_query, {}, INDEX_URI)
     response_data = Nokogiri::HTML(response_data.body)

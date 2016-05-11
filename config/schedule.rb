@@ -29,7 +29,7 @@ end
 
 # scrap courts
 every 7.day, :at => '1:00 am' do
-  runner "Scrap::ImportCourtContext.perform"
+  runner "Scrap::GetCourtsContext.new.perform"
 end
 
 # scrap judges and branches

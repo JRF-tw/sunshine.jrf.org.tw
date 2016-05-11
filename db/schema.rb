@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160505042717) do
+ActiveRecord::Schema.define(version: 20160511064642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -150,6 +150,7 @@ ActiveRecord::Schema.define(version: 20160505042717) do
     t.datetime "updated_at"
     t.boolean  "is_hidden"
     t.string   "code"
+    t.string   "scrap_name"
   end
 
   add_index "courts", ["code"], name: "index_courts_on_code", using: :btree
@@ -157,6 +158,7 @@ ActiveRecord::Schema.define(version: 20160505042717) do
   add_index "courts", ["full_name"], name: "index_courts_on_full_name", using: :btree
   add_index "courts", ["is_hidden"], name: "index_courts_on_is_hidden", using: :btree
   add_index "courts", ["name"], name: "index_courts_on_name", using: :btree
+  add_index "courts", ["scrap_name"], name: "index_courts_on_scrap_name", using: :btree
 
   create_table "defendant_verdicts", force: :cascade do |t|
     t.integer  "verdict_id"
@@ -477,12 +479,12 @@ ActiveRecord::Schema.define(version: 20160505042717) do
     t.integer  "number"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
-    t.date     "adjudge_date"
-    t.boolean  "is_adjudge",       default: false
     t.text     "defendant_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
+    t.boolean  "is_adjudge",       default: false
+    t.date     "adjudge_date"
   end
 
   add_index "stories", ["adjudge_date"], name: "index_stories_on_adjudge_date", using: :btree
@@ -591,11 +593,11 @@ ActiveRecord::Schema.define(version: 20160505042717) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.string   "file"
+    t.boolean  "is_judgment"
     t.text     "defendant_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
-    t.boolean  "is_judgment"
     t.date     "adjudge_date"
     t.integer  "main_judge_id"
     t.string   "main_judge_name"

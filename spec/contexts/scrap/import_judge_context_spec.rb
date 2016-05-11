@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Scrap::ImportJudgeContext, :type => :model do
-  let!(:court) { FactoryGirl.create :court, code: "TPH", full_name: "臺灣高等法院" }
+  let!(:court) { FactoryGirl.create :court, code: "TPH", scrap_name: "臺灣高等法院" }
 
   describe ".perform" do
     subject{ described_class.perform }
@@ -19,6 +19,14 @@ RSpec.describe Scrap::ImportJudgeContext, :type => :model do
       it { expect(subject.court).to eq(court) }
       it { expect(subject.branches.last.name).to eq('乙') }
       it { expect(subject.branches.last.chamber_name).to eq('臺灣高等法院民事庭') }
+      it { expect{ subject }.to change{ Judge.count }.by(1) }
+    end
+
+    context "find court with space" do
+      let!(:court) { FactoryGirl.create :court, code: "TCH", scrap_name: "臺灣高等法院 臺中分院" }
+      let(:data_string) { "臺灣高等法院臺中分院民事庭,乙,匡偉　法官,黃千鶴,2415" }
+      subject{ described_class.new(data_string).perform }
+
       it { expect{ subject }.to change{ Judge.count }.by(1) }
     end
 

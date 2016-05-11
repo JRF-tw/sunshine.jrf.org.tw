@@ -1,67 +1,78 @@
 require 'rails_helper'
 
 RSpec.describe Scrap::ImportCourtContext, :type => :model do
-  describe ".perform" do
-    subject{ described_class.perform }
-    it { expect{ subject }.to change{ Court.count } }
-  end
 
   describe "#perform" do
-    context "success" do
-      let(:data_hash) { { fullname: "xxx", code: "TTT" } }
-      subject{ described_class.new(data_hash).perform }
+    let(:data_hash) { { scrap_name: "xxx", code: "TTT" } }
+    subject{ described_class.new(data_hash).perform }
 
+    context "find court" do
+      context "code match" do
+        let!(:court) { FactoryGirl.create(:court, code: "TTT") }
+        it { expect{ subject }.not_to change { Court.count } }
+      end
+
+      context "scrap_name match" do
+        let!(:court) { FactoryGirl.create(:court, scrap_name: "xxx") }
+        it { expect{ subject }.not_to change { Court.count } }
+      end
+
+      context "trip scrap_name match full_name" do
+        let!(:court) { FactoryGirl.create(:court, full_name: "xxx") }
+        let(:data_hash) { { scrap_name: "x x  x", code: "TTT" } }
+        it { expect{ subject }.not_to change { Court.count } }
+      end
+    end
+
+    context "create court" do
       it { expect{ subject }.to change { Court.count }.by(1) }
-      it { expect(subject.full_name).to eq(data_hash[:fullname]) }
-      it { expect(subject.code).to eq(data_hash[:code]) }
-      it { expect(subject.court_type).to eq("法院") }
     end
 
-    context "update old data" do
-      let!(:court) { FactoryGirl.create(:court, full_name: "xxx", code: "ABC") }
-      let(:data_hash) { { fullname: court.full_name, code: "TTT" } }
-      subject{ described_class.new(data_hash).perform }
 
-      it { expect{ subject }.not_to change { Court.count } }
-      it { expect(subject.full_name).to eq(data_hash[:fullname]) }
-      it { expect(subject.code).to eq(data_hash[:code]) }
+    context "update_name" do
+      context "exist" do
+        let!(:court) { FactoryGirl.create(:court, code: "TTT") }
+        before { subject }
+
+        it { expect(court.name).not_to eq(data_hash[:scrap_name]) }
+      end
+
+      context "unexist" do
+        let!(:court) { FactoryGirl.create(:court, name: nil, code: "TTT") }
+        before { subject }
+
+        it { expect(court.reload.name).to eq(data_hash[:scrap_name]) }
+      end
     end
 
-    context "data fullname incorrect" do
-      let!(:court) { FactoryGirl.create(:court) }
-      let(:data_hash) { { fullname: nil, code: "TTT" } }
-      subject{ described_class.new(data_hash).perform }
+    context "update_full_name" do
+      context "exist" do
+        let!(:court) { FactoryGirl.create(:court, code: "TTT") }
+        before { subject }
 
-      it { expect{ subject }.not_to change { Court.count } }
-      it { expect(subject).to be_falsey }
+        it { expect(court.reload.full_name).not_to eq(data_hash[:scrap_name]) }
+      end
+
+      context "unexist" do
+        let!(:court) { FactoryGirl.create(:court, full_name: nil, code: "TTT") }
+        before { subject }
+
+        it { expect(court.reload.full_name).to eq(data_hash[:scrap_name]) }
+      end
     end
 
-    context "data code incorrect" do
-      let!(:court) { FactoryGirl.create(:court) }
-      let(:data_hash) { { fullname: court.full_name, code: nil } }
-      subject{ described_class.new(data_hash).perform }
+    context "update_scrap_name" do
+      let!(:court) { FactoryGirl.create(:court, scrap_name: "blablabla", code: "TTT") }
+      before { subject }
 
-      it { expect{ subject }.not_to change { Court.count } }
-      it { expect(subject).to be_falsey }
+      it { expect(court.reload.scrap_name).to eq(data_hash[:scrap_name]) }
     end
 
     context "assign default value" do
-      context "is_hidden nil" do
-        let(:data_hash) { { fullname: "xxx", code: "TTT" } }
-        subject{ described_class.new(data_hash).perform }
+      before { subject }
 
-        it { expect(subject.is_hidden).to be_truthy }
-      end
-
-      context "is_hidden not nil" do
-        let(:data_hash) { { fullname: "xxx", code: "TTT" } }
-        before { described_class.new(data_hash).perform }
-        before { subject.update_attributes(is_hidden: false) }
-        subject { described_class.new(data_hash).perform }
-
-        it { expect{ subject }.not_to change { subject.is_hidden } }
-        it { expect(subject.is_hidden).to be_falsey }
-      end
+      it { expect(subject.court_type).to eq("法院") }
+      it { expect(subject.is_hidden).to be_truthy }
     end
   end
 end
