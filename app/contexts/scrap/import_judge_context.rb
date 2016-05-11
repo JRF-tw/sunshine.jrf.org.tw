@@ -50,7 +50,7 @@ class Scrap::ImportJudgeContext < BaseContext
   end
 
   def find_court
-    @court = Court.select{ |c| c.scrap_name.gsub(" ", "") == @court_name }.last
+    @court = Court.get_courts.select{ |c| c.scrap_name.gsub(" ", "") == @court_name }.last
     return add_error(:data_not_found, "court not found") unless @court
   end
 

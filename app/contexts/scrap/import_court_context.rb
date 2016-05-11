@@ -1,11 +1,13 @@
 class Scrap::ImportCourtContext < BaseContext
   SCRAP_URI = "http://jirs.judicial.gov.tw/FJUD/FJUDQRY01_1.aspx"
   before_perform :check_data
+  before_perform :tricky_court_data
   before_perform :find_court
   before_perform :build_court
   before_perform :update_name, unless: :is_new_record?
   before_perform :update_fullname, unless: :is_new_record?
   before_perform :update_scrap_name, unless: :is_new_record?
+  before_perform :update_code, unless: :is_new_record?
   before_perform :assign_default_value
 
   class << self
@@ -31,6 +33,10 @@ class Scrap::ImportCourtContext < BaseContext
     return add_error(:data_create_fail, "data info incorrect") unless @scrap_name && @code
   end
 
+  def tricky_court_data
+    return add_error(:data_create_fail, "tricky_court_data") if @scrap_name == "臺灣高等法院－訴願決定" && @code == "TPH"
+  end
+
   def find_court
     @court = Court.find_by(code: @code) || Court.find_by(scrap_name: @scrap_name) || Court.find_by(full_name: @scrap_name.gsub(" ", ""))
   end
@@ -53,6 +59,10 @@ class Scrap::ImportCourtContext < BaseContext
 
   def update_scrap_name
     @court.assign_attributes(scrap_name: @scrap_name)
+  end
+
+  def update_code
+    @court.assign_attributes(code: @code)
   end
 
   def assign_default_value

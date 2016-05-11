@@ -36,7 +36,7 @@ class Court < ActiveRecord::Base
 
   class << self
     def collect_codes
-      all.map(&:code).uniq.compact
+      where(court_type: "法院").map(&:code)
     end
   end
 end
