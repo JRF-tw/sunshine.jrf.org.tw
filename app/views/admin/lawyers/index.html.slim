@@ -16,7 +16,7 @@
       = f.submit :value => "搜尋", :class => "btn btn-primary"
       = " "
       = link_to "清空搜尋結果", admin_lawyers_path, :class => "btn btn-default"
-= admin_widget_box "律師列表", icon: :pencil do
+= admin_widget_box "律師列表 : 搜尋結果為 #{@search.result.count} 筆", icon: :pencil do
   .dataTables_wrapper
     div
       .dataTables_length
