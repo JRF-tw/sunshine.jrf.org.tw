@@ -68,6 +68,13 @@ RSpec.describe Scrap::ImportCourtContext, :type => :model do
       it { expect(court.reload.scrap_name).to eq(data_hash[:scrap_name]) }
     end
 
+    context "update_code" do
+      let!(:court) { FactoryGirl.create(:court, scrap_name: "xxx", code: "ABC") }
+      before { subject }
+
+      it { expect(court.reload.code).to eq(data_hash[:code]) }
+    end
+
     context "assign default value" do
       before { subject }
 
