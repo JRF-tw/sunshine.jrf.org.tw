@@ -11,6 +11,7 @@
 #  updated_at :datetime
 #  is_hidden  :boolean
 #  code       :string
+#  scrap_name :string
 #
 
 class Admin::Court < ::Court
