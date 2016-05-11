@@ -50,7 +50,7 @@ class Scrap::ImportJudgeContext < BaseContext
   end
 
   def find_court
-    @court = Court.find_by(full_name: @court_name)
+    @court = Court.find_by(scrap_name: @court_name)
     return add_error(:data_not_found, "court not found") unless @court
   end
 

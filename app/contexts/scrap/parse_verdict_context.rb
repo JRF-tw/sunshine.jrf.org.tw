@@ -26,7 +26,7 @@ class Scrap::ParseVerdictContext < BaseContext
   private
 
   def get_verdict_data
-    court_value = @court.code + " " + @court.full_name
+    court_value = @court.code + " " + @court.scrap_name
     verdict_query = "?id=#{@scrap_id}&v_court=#{court_value}&v_sys=#{@type}&jud_year=&jud_case=&jud_no=&jud_no_end=&jud_title=&keyword=&sdate=#{@start_date}&edate=#{@end_date}&page=1&searchkw=&jmain=&cw=0"
     @response_data = Mechanize.new.get(VERDICT_URI + verdict_query, {}, RESULT_URI)
   rescue => e
