@@ -67,6 +67,5 @@ class Scrap::ImportCourtContext < BaseContext
 
   def assign_default_value
     @court.assign_attributes(court_type: "法院") unless @court.court_type
-    @court.assign_attributes(is_hidden: true) if @court.is_hidden.nil?
   end
 end

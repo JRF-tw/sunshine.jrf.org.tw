@@ -49,22 +49,5 @@ RSpec.describe Scrap::ImportJudgeContext, :type => :model do
 
       it { expect{ subject }.to change{ Branch.count } }
     end
-
-    context "assign_default_value" do
-      context "if nil" do
-        subject!{ described_class.new(data_string).perform }
-
-        it { expect(subject.is_active).to be_truthy }
-        it { expect(subject.is_hidden).to be_truthy }
-      end
-
-      context "not nil" do
-        before { described_class.new(data_string).perform }
-        subject{ described_class.new(data_string).perform }
-
-        it { expect { subject }.not_to change { subject.is_active } }
-        it { expect { subject }.not_to change { subject.is_hidden } }
-      end
-    end
   end
 end
