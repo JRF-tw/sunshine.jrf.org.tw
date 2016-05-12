@@ -79,7 +79,6 @@ RSpec.describe Scrap::ImportCourtContext, :type => :model do
       before { subject }
 
       it { expect(subject.court_type).to eq("法院") }
-      it { expect(subject.is_hidden).to be_truthy }
     end
   end
 end

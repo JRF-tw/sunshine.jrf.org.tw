@@ -51,7 +51,7 @@ class Scrap::ImportScheduleContext < BaseContext
   end
 
   def update_story_is_adjudge
-    @story.update_attributes(is_adjudge: @is_adjudge)
+    @story.update_attributes(is_adjudge: @is_adjudge) if @is_adjudge
   end
 
   def update_story_adjudge_date

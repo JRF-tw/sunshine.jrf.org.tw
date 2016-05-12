@@ -9,7 +9,7 @@
 #  weight     :integer
 #  created_at :datetime
 #  updated_at :datetime
-#  is_hidden  :boolean
+#  is_hidden  :boolean          default(TRUE)
 #  code       :string
 #  scrap_name :string
 #

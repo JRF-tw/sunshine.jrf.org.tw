@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160511064642) do
+ActiveRecord::Schema.define(version: 20160512071557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,7 +148,7 @@ ActiveRecord::Schema.define(version: 20160511064642) do
     t.integer  "weight"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_hidden"
+    t.boolean  "is_hidden",  default: true
     t.string   "code"
     t.string   "scrap_name"
   end
@@ -230,11 +230,11 @@ ActiveRecord::Schema.define(version: 20160511064642) do
     t.string   "appointment"
     t.string   "appointment_source"
     t.string   "memo"
-    t.boolean  "is_active"
-    t.boolean  "is_hidden"
+    t.boolean  "is_active",          default: true
+    t.boolean  "is_hidden",          default: true
     t.integer  "punishments_count",  default: 0
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
   add_index "judges", ["current_court_id"], name: "index_judges_on_current_court_id", using: :btree
@@ -590,10 +590,10 @@ ActiveRecord::Schema.define(version: 20160511064642) do
 
   create_table "verdicts", force: :cascade do |t|
     t.integer  "story_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.string   "file"
-    t.boolean  "is_judgment"
+    t.boolean  "is_judgment",      default: false
     t.text     "defendant_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
