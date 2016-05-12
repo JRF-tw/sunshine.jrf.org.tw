@@ -15,8 +15,8 @@
 #  appointment        :string
 #  appointment_source :string
 #  memo               :string
-#  is_active          :boolean
-#  is_hidden          :boolean
+#  is_active          :boolean          default(TRUE)
+#  is_hidden          :boolean          default(TRUE)
 #  punishments_count  :integer          default(0)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null

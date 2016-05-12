@@ -7,7 +7,7 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  file             :string
-#  is_judgment      :boolean
+#  is_judgment      :boolean          default(FALSE)
 #  defendant_names  :text
 #  lawyer_names     :text
 #  judges_names     :text
