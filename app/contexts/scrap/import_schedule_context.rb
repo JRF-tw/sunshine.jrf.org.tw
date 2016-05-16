@@ -57,8 +57,6 @@ class Scrap::ImportScheduleContext < BaseContext
   def update_story_adjudge_date
     unless @story.adjudge_date
       @story.update_attributes(adjudge_date: @date) if @is_adjudge
-    else
-      SlackService.analysis_notify_async("庭期分析錯誤 : 庭期表有重複宣判的可能\n #{@hash}")
     end
   end
 end

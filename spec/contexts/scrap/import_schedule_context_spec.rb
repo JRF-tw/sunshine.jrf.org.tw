@@ -62,7 +62,6 @@ RSpec.describe Scrap::ImportScheduleContext, :type => :model do
         before { described_class.new(court.code).perform(adjudged_data) }
 
         it { expect{ subject }.not_to change{ subject.story.adjudge_date } }
-        it { expect{ subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
       end
     end
   end
