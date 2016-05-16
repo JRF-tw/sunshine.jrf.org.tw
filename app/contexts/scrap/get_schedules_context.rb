@@ -7,7 +7,7 @@ class Scrap::GetSchedulesContext < BaseContext
 
   def initialize
     @start_date = Time.zone.today
-    @end_date = Time.zone.today
+    @end_date = Time.zone.today + 3.days
     @start_date_format = "#{@start_date.strftime("%Y").to_i - 1911}#{@start_date.strftime('%m%d')}"
     @end_date_format = "#{@end_date.strftime("%Y").to_i - 1911}#{@end_date.strftime('%m%d')}"
     @sleep_time_interval = rand(3..5)
