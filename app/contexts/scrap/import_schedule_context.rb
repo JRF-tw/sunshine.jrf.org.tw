@@ -5,6 +5,7 @@ class Scrap::ImportScheduleContext < BaseContext
   before_perform  :find_or_create_story
   after_perform   :update_story_is_adjudge
   after_perform   :update_story_adjudge_date
+  after_perform   :record_count_to_daily_notify
 
   class << self
     def perform(court_code, hash)
@@ -58,5 +59,9 @@ class Scrap::ImportScheduleContext < BaseContext
     unless @story.adjudge_date
       @story.update_attributes(adjudge_date: @date) if @is_adjudge
     end
+  end
+
+  def record_count_to_daily_notify
+    Redis::Counter.new("daily_scrap_#{@schedule.class.name.downcase}_count").increment
   end
 end

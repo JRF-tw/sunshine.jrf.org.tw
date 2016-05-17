@@ -11,6 +11,7 @@ class Scrap::ImportVerdictContext < BaseContext
   after_perform  :create_relation_for_judge
   after_perform  :create_relation_for_main_judge
   after_perform  :create_relation_for_defendant
+  after_perform   :record_count_to_daily_notify
 
   class << self
     def perform(court, orginal_data, verdict_content, verdict_word, verdict_stroy_type)
@@ -123,5 +124,9 @@ class Scrap::ImportVerdictContext < BaseContext
         StoryRelationCreateContext.new(@story).perform(name)
       end
     end
+  end
+
+  def record_count_to_daily_notify
+    Redis::Counter.new("daily_scrap_#{@verdict.class.name.downcase}_count").increment
   end
 end

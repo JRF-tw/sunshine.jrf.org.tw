@@ -4,6 +4,7 @@ class Scrap::GetSchedulesContext < BaseContext
   PAGE_PER = 15
 
   before_perform :get_courts_info
+  after_perform :record_intervel_to_daily_notify
 
   def initialize
     @start_date = Time.zone.today
@@ -61,5 +62,9 @@ class Scrap::GetSchedulesContext < BaseContext
     end
   rescue => e
     SlackService.scrap_notify_async("庭期爬取失敗: 計算各法院撈取分頁數錯誤\n page_total_by_story_type(#{court_code}, #{story_type})\n #{e.message}")
+  end
+
+  def record_intervel_to_daily_notify
+    Redis::Value.new("daily_scrap_schedule_intervel").value = "#{@start_date.to_s} ~ #{@end_date.to_s}"
   end
 end

@@ -1,14 +1,15 @@
 class Scrap::ImportCourtContext < BaseContext
   SCRAP_URI = "http://jirs.judicial.gov.tw/FJUD/FJUDQRY01_1.aspx"
-  before_perform :check_data
-  before_perform :tricky_court_data
-  before_perform :find_court
-  before_perform :build_court
-  before_perform :update_name, unless: :is_new_record?
-  before_perform :update_fullname, unless: :is_new_record?
-  before_perform :update_scrap_name, unless: :is_new_record?
-  before_perform :update_code, unless: :is_new_record?
-  before_perform :assign_default_value
+  before_perform  :check_data
+  before_perform  :tricky_court_data
+  before_perform  :find_court
+  before_perform  :build_court
+  before_perform  :update_name, unless: :is_new_record?
+  before_perform  :update_fullname, unless: :is_new_record?
+  before_perform  :update_scrap_name, unless: :is_new_record?
+  before_perform  :update_code, unless: :is_new_record?
+  before_perform  :assign_default_value
+  after_perform   :record_count_to_daily_notify
 
   class << self
     def perform(data_hash)
@@ -67,5 +68,9 @@ class Scrap::ImportCourtContext < BaseContext
 
   def assign_default_value
     @court.assign_attributes(court_type: "法院") unless @court.court_type
+  end
+
+  def record_count_to_daily_notify
+    puts Redis::Counter.new("daily_scrap_#{@court.class.name.downcase}_count").increment.inspect
   end
 end
