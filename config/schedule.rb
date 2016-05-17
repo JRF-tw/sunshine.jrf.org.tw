@@ -46,3 +46,8 @@ end
 every 1.day, :at => '2:00 am' do
   runner "Scrap::GetVerdictsContext.new.perform"
 end
+
+# notify daily report
+every 1.day, :at => '6:00 am' do
+  runner "Scrap::NotifyDailyContext.new.perform"
+end
