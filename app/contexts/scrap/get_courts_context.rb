@@ -1,8 +1,8 @@
 class Scrap::GetCourtsContext < BaseContext
   SCRAP_URI = "http://jirs.judicial.gov.tw/FJUD/FJUDQRY01_1.aspx"
-  before_perform :get_court_data
-  before_perform :match_db_data
-  after_perform :record_intervel_to_daily_notify
+  before_perform  :get_court_data
+  before_perform  :match_db_data
+  after_perform   :record_intervel_to_daily_notify
 
   def perform
     run_callbacks :perform do

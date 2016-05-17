@@ -62,6 +62,6 @@ class Scrap::ImportScheduleContext < BaseContext
   end
 
   def record_count_to_daily_notify
-    Redis::Counter.new("daily_scrap_#{@schedule.class.name.downcase}_count").increment
+    Redis::Counter.new("daily_scrap_schedule_count").increment
   end
 end

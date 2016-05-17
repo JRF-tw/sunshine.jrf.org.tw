@@ -3,8 +3,8 @@ class Scrap::GetSchedulesContext < BaseContext
   SCHEDULE_INFO_URI = "http://csdi.judicial.gov.tw/abbs/wkw/WHD3A02.jsp"
   PAGE_PER = 15
 
-  before_perform :get_courts_info
-  after_perform :record_intervel_to_daily_notify
+  before_perform  :get_courts_info
+  after_perform   :record_intervel_to_daily_notify
 
   def initialize
     @start_date = Time.zone.today

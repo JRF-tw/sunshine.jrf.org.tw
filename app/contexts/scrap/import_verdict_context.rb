@@ -1,16 +1,16 @@
 class Scrap::ImportVerdictContext < BaseContext
-  before_perform :build_analysis_context
-  before_perform :find_main_judge
-  before_perform :find_or_create_story
-  before_perform :build_verdict
-  before_perform :assign_default_value
-  after_perform  :upload_file
-  after_perform  :update_data_to_story
-  after_perform  :update_adjudge_date
-  after_perform  :create_relation_for_lawyer
-  after_perform  :create_relation_for_judge
-  after_perform  :create_relation_for_main_judge
-  after_perform  :create_relation_for_defendant
+  before_perform  :build_analysis_context
+  before_perform  :find_main_judge
+  before_perform  :find_or_create_story
+  before_perform  :build_verdict
+  before_perform  :assign_default_value
+  after_perform   :upload_file
+  after_perform   :update_data_to_story
+  after_perform   :update_adjudge_date
+  after_perform   :create_relation_for_lawyer
+  after_perform   :create_relation_for_judge
+  after_perform   :create_relation_for_main_judge
+  after_perform   :create_relation_for_defendant
   after_perform   :record_count_to_daily_notify
 
   class << self
@@ -127,6 +127,6 @@ class Scrap::ImportVerdictContext < BaseContext
   end
 
   def record_count_to_daily_notify
-    Redis::Counter.new("daily_scrap_#{@verdict.class.name.downcase}_count").increment
+    Redis::Counter.new("daily_scrap_verdict_count").increment
   end
 end
