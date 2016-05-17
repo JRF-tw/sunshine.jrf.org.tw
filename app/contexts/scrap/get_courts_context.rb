@@ -1,7 +1,8 @@
 class Scrap::GetCourtsContext < BaseContext
   SCRAP_URI = "http://jirs.judicial.gov.tw/FJUD/FJUDQRY01_1.aspx"
-  before_perform :get_court_data
-  before_perform :match_db_data
+  before_perform  :get_court_data
+  before_perform  :match_db_data
+  after_perform   :record_intervel_to_daily_notify
 
   def perform
     run_callbacks :perform do
@@ -34,5 +35,9 @@ class Scrap::GetCourtsContext < BaseContext
     scrap_courts_names = @scrap_data.map{ |data| data[:scrap_name] }
     diff_courts = Court.get_courts.where.not(scrap_name: scrap_courts_names).where.not(scrap_name: nil)
     SlackService.scrap_notify_async("法院資料不再爬蟲資料內 : #{diff_courts.map(&:scrap_name).join(",")}") if diff_courts.count > 0
+  end
+
+  def record_intervel_to_daily_notify
+    Redis::Value.new("daily_scrap_court_intervel").value = "#{Date.today.to_s} ~ #{Date.today.to_s}"
   end
 end

@@ -2,6 +2,8 @@ class Scrap::GetVerdictsContext < BaseContext
   INDEX_URI = "http://jirs.judicial.gov.tw/FJUD/FJUDQRY01_1.aspx"
   RESULT_URI = "http://jirs.judicial.gov.tw/FJUD/FJUDQRY02_1.aspx"
 
+  after_perform :record_intervel_to_daily_notify
+
   def initialize
     @start_date = Time.zone.today.strftime("%Y%m%d")
     @end_date = Time.zone.today.strftime("%Y%m%d")
@@ -41,5 +43,9 @@ class Scrap::GetVerdictsContext < BaseContext
   rescue => e
     SlackService.scrap_notify_async("判決書爬取失敗: 判決書搜尋頁面為錯誤頁面\n court : #{court.code}\n type : #{type})\n #{e.message}")
     return 0
+  end
+
+  def record_intervel_to_daily_notify
+    Redis::Value.new("daily_scrap_verdict_intervel").value = "#{@start_date.to_s} ~ #{@end_date.to_s}"
   end
 end

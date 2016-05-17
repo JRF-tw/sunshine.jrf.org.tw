@@ -13,5 +13,18 @@ RSpec.describe Scrap::GetCourtsContext, :type => :model do
       subject{ described_class.new.perform }
       it { expect{ subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
     end
+
+    context "notify old data is unexist by scrap" do
+      let!(:court) { FactoryGirl.create :court, scrap_name: "xxxxxx" }
+      subject{ described_class.new.perform }
+      it { expect{ subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+    end
+
+    context "notify daily report" do
+      before{ described_class.new.perform }
+      subject{ Scrap::NotifyDailyContext.new.perform }
+
+      it { expect{ subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+    end
   end
 end

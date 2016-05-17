@@ -7,6 +7,13 @@ RSpec.describe Scrap::ImportJudgeContext, :type => :model do
     subject{ described_class.perform }
     it { expect{ subject }.to change{ court.branches.count } }
     it { expect{ subject }.to change{ Judge.count } }
+
+    context "notify daily report" do
+      before{ described_class.perform }
+      subject{ Scrap::NotifyDailyContext.new.perform }
+
+      it { expect{ subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+    end
   end
 
   describe "#perform" do

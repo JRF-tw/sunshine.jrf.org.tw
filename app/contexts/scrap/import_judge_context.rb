@@ -1,16 +1,12 @@
 class Scrap::ImportJudgeContext < BaseContext
   EXCEL_URL = "http://csdi.judicial.gov.tw/abbs/wkw/WHD3A01_DOWNLOADCVS.jsp?court="
-  before_perform  :parse_import_data
-  before_perform  :find_court
-  before_perform  :build_judge
-  after_perform   :create_branch
-
 
   class << self
     def perform
       get_remote_csv_data.each do |data_string|
         new(data_string).perform
       end
+      record_intervel_to_daily_notify
     end
 
     private
@@ -23,7 +19,17 @@ class Scrap::ImportJudgeContext < BaseContext
     rescue => e
       SlackService.scrap_notify_async("法官爬取失敗: 取得csv文件錯誤\n #{e.message}")
     end
+
+    def record_intervel_to_daily_notify
+      Redis::Value.new("daily_scrap_judge_intervel").value = "#{Date.today.to_s} ~ #{Date.today.to_s}"
+    end
   end
+
+  before_perform  :parse_import_data
+  before_perform  :find_court
+  before_perform  :build_judge
+  after_perform   :create_branch
+  after_perform   :record_count_to_daily_notify
 
   def initialize(data_string)
     @data_string = data_string
@@ -59,5 +65,9 @@ class Scrap::ImportJudgeContext < BaseContext
 
   def create_branch
     Scrap::CreateBranchContext.new(@judge).perform(@chamber_name, @branch_name)
+  end
+
+  def record_count_to_daily_notify
+    Redis::Counter.new("daily_scrap_judge_count").increment
   end
 end
