@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   # devise_for :defendants
-  # devise_for :bystanders
+  devise_for :bystanders, controllers: { registrations: 'registrations' }
 
   root to: "base#index", only: [:show]
   get '/robots.txt', to: "base#robots", defaults: { format: "text" }
@@ -26,6 +26,8 @@ Rails.application.routes.draw do
     resources :awards
     resources :punishments
   end
+
+  resources :bystanders
 
   namespace :api, defaults: { format: 'json' } do
     resources :profiles, only: [:show, :index]
