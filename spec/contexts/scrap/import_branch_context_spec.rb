@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Scrap::CreateBranchContext, :type => :model do
+RSpec.describe Scrap::ImportBranchContext, :type => :model do
   let!(:court) { FactoryGirl.create(:court) }
   let!(:judge) { FactoryGirl.create(:judge, court: court) }
 

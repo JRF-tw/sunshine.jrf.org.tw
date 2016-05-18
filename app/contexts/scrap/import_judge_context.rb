@@ -44,7 +44,7 @@ class Scrap::ImportJudgeContext < BaseContext
   end
 
   def create_branch
-    Scrap::CreateBranchContext.new(@judge).perform(@chamber_name, @branch_name)
+    Scrap::ImportBranchContext.new(@judge).perform(@chamber_name, @branch_name)
   end
 
   def record_count_to_daily_notify

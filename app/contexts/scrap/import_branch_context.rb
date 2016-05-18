@@ -1,4 +1,4 @@
-class Scrap::CreateBranchContext < BaseContext
+class Scrap::ImportBranchContext < BaseContext
   # TODO 更新部分還要確認, 目前就先拆開
   before_perform  :find_branch
   before_perform  :bulid_branch
