@@ -27,6 +27,10 @@ class SlackService
     def notify_scrap_daily(message, channel: "#notify-scrap-daily", name: "scrap-daily", icon_url: DEFAULT_ICON_URL, webhook: nil)
       delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook)
     end
+
+    def notify_scrap_court_alert(message, channel: "#notify-scrap-court", name: "scrap-court", icon_url: DEFAULT_ICON_URL, webhook: nil)
+      delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook)
+    end
   end
 
 end
