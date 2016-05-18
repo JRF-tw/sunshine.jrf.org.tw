@@ -34,7 +34,9 @@ class Scrap::GetCourtsContext < BaseContext
   def match_db_data
     scrap_courts_names = @scrap_data.map{ |data| data[:scrap_name] }
     diff_courts = Court.get_courts.where.not(scrap_name: scrap_courts_names).where.not(scrap_name: nil)
-    SlackService.scrap_notify_async("法院資料不再爬蟲資料內 : #{diff_courts.map(&:scrap_name).join(",")}") if diff_courts.count > 0
+    diff_courts.each do |court|
+      SlackService.scrap_notify_async("法院資料不再爬蟲資料內 : \n法院ID : #{ court.id }\n 法院全名 : #{ court.full_name }")
+    end
   end
 
   def record_intervel_to_daily_notify
