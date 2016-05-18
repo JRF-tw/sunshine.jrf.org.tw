@@ -22,6 +22,7 @@ zh-TW:
         name: "前台顯示簡稱"
         weight: "顯示權重"
         is_hidden: "隱藏"
+        scrap_name: "爬蟲名稱"
       profile:
         name: "姓名"
         current: "現職"
