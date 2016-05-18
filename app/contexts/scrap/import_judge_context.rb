@@ -17,7 +17,7 @@ class Scrap::ImportJudgeContext < BaseContext
       response_data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
       return response_data.css("body p").text.split("\n")
     rescue => e
-      SlackService.scrap_notify_async("法官爬取失敗: 取得csv文件錯誤\n #{e.message}")
+      SlackService.notify_scrap_async("法官爬取失敗: 取得csv文件錯誤\n #{e.message}")
     end
 
     def record_intervel_to_daily_notify
@@ -51,7 +51,7 @@ class Scrap::ImportJudgeContext < BaseContext
     @branch_name = @row_data[1].strip
     @judge_name = @row_data[2].gsub("法官", "").squish
   rescue => e
-    SlackService.scrap_notify_async("法官爬取失敗: 股別資料解析錯誤\n row_data : #{@row_data}\n #{e.message}")
+    SlackService.notify_scrap_async("法官爬取失敗: 股別資料解析錯誤\n row_data : #{@row_data}\n #{e.message}")
   end
 
   def find_court

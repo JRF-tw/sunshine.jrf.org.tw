@@ -31,7 +31,7 @@ class Scrap::GetVerdictsContext < BaseContext
     response_data = Nokogiri::HTML(response_data.body)
     return response_data.css("input[type='radio']").map{ |row| row.attribute("value").value }.uniq
   rescue => e
-    SlackService.scrap_notify_async("判決書爬取失敗: 取得裁判類別代號錯誤\n #{e.message}")
+    SlackService.notify_scrap_async("判決書爬取失敗: 取得裁判類別代號錯誤\n #{e.message}")
   end
 
   def total_result(court, type)
@@ -41,7 +41,7 @@ class Scrap::GetVerdictsContext < BaseContext
     response_data = Nokogiri::HTML(response_data.body)
     return response_data.content.match(/共\s*([0-9]*)\s*筆/)[1].to_i
   rescue => e
-    SlackService.scrap_notify_async("判決書爬取失敗: 判決書搜尋頁面為錯誤頁面\n court : #{court.code}\n type : #{type})\n #{e.message}")
+    SlackService.notify_scrap_async("判決書爬取失敗: 判決書搜尋頁面為錯誤頁面\n court : #{court.code}\n type : #{type})\n #{e.message}")
     return 0
   end
 

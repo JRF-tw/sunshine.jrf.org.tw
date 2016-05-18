@@ -46,7 +46,7 @@ class Scrap::ImportVerdictContext < BaseContext
     @main_judge = main_judges.count == 1 ?  main_judges.last : nil
 
     unless main_judges.count == 1
-      SlackService.analysis_notify_async("判決書關聯主審法官失敗 : 找到多位法官, 或者找不到任何法官\n 判決書類別 : #{@verdict_stroy_type}, 法官姓名 : #{@analysis_context.main_judge_name}, 法院 : #{@court.scrap_name}")
+      SlackService.notify_analysis_async("判決書關聯主審法官失敗 : 找到多位法官, 或者找不到任何法官\n 判決書類別 : #{@verdict_stroy_type}, 法官姓名 : #{@analysis_context.main_judge_name}, 法院 : #{@court.scrap_name}")
     end
   end
 
