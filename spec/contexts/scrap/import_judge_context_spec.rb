@@ -3,19 +3,6 @@ require 'rails_helper'
 RSpec.describe Scrap::ImportJudgeContext, :type => :model do
   let!(:court) { FactoryGirl.create :court, code: "TPH", scrap_name: "臺灣高等法院" }
 
-  describe ".perform" do
-    subject{ described_class.perform }
-    it { expect{ subject }.to change{ court.branches.count } }
-    it { expect{ subject }.to change{ Judge.count } }
-
-    context "notify daily report" do
-      before{ described_class.perform }
-      subject{ Scrap::NotifyDailyContext.new.perform }
-
-      it { expect{ subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
-    end
-  end
-
   describe "#perform" do
     let(:data_string) { "臺灣高等法院民事庭,乙,匡偉　法官,黃千鶴,2415" }
 
