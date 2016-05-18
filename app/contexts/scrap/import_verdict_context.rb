@@ -41,7 +41,7 @@ class Scrap::ImportVerdictContext < BaseContext
   end
 
   def find_main_judge
-    branches = @court.branches.where("chamber_name LIKE ? ", "%#{@verdict_stroy_type}%")
+    branches = @court.branches.current.where("chamber_name LIKE ? ", "%#{@verdict_stroy_type}%")
     main_judges = branches.map{ |a| a.judge if a.judge.name == @analysis_context.main_judge_name }.compact.uniq
     @main_judge = main_judges.count == 1 ?  main_judges.last : nil
 
@@ -103,7 +103,7 @@ class Scrap::ImportVerdictContext < BaseContext
 
   def create_relation_for_judge
     @verdict.judges_names.each do |name|
-      branches = @court.branches.where("chamber_name LIKE ? ", "%#{@verdict_stroy_type}%")
+      branches = @court.branches.current.where("chamber_name LIKE ? ", "%#{@verdict_stroy_type}%")
       judges = branches.map{ |a| a.judge if a.judge.name == name }.compact.uniq
       if judges.count == 1
         @verdict.judge_verdicts.create(judge: judges.first)

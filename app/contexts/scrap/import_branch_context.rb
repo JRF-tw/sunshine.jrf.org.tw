@@ -18,7 +18,7 @@ class Scrap::ImportBranchContext < BaseContext
   end
 
   def find_branch
-    @branch = Branch.find_by(court: @court, judge: @judge, chamber_name: @chamber_name, name: @branch_name )
+    @branch = Branch.current.find_by(court: @court, judge: @judge, chamber_name: @chamber_name, name: @branch_name )
   end
 
   def bulid_branch

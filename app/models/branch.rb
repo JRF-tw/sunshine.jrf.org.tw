@@ -15,4 +15,6 @@
 class Branch < ActiveRecord::Base
   belongs_to :court
   belongs_to :judge
+
+  scope :current, ->{ where(missed: false) }
 end

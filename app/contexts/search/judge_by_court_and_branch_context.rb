@@ -23,7 +23,7 @@ module Search
     end
 
     def find_branches
-      @branches = @court.branches.where(name: @branch_name)
+      @branches = @court.branches.current.where(name: @branch_name)
       add_error(:data_not_found, "沒有該法院下此股別相關資料") unless @branches.present?
     end
 
