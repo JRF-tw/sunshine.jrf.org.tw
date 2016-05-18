@@ -34,7 +34,7 @@ end
 
 # scrap judges and branches
 every 1.day, :at => '1:10 am' do
-  runner "Scrap::ImportJudgeContext.perform"
+  runner "Scrap::GetJudgeContext.perform"
 end
 
 # scrap schedules
