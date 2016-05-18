@@ -3,13 +3,8 @@ class Scrap::ImportJudgeContext < BaseContext
   before_perform  :find_court
   before_perform  :build_judge
   after_perform   :import_branch
+  after_perform   :record_import_daily_branch
   after_perform   :record_count_to_daily_notify
-
-  class << self
-    def perform(data_string)
-      new(data_hash).perform
-    end
-  end
 
   def initialize(data_string)
     @data_string = data_string
@@ -44,7 +39,11 @@ class Scrap::ImportJudgeContext < BaseContext
   end
 
   def import_branch
-    Scrap::ImportBranchContext.new(@judge).perform(@chamber_name, @branch_name)
+    @branch = Scrap::ImportBranchContext.new(@judge).perform(@chamber_name, @branch_name)
+  end
+
+  def record_import_daily_branch
+    Redis::List.new('daily_import_branch_ids') << @branch.id
   end
 
   def record_count_to_daily_notify
