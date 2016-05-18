@@ -26,5 +26,9 @@ RSpec.describe Scrap::GetCourtsContext, :type => :model do
 
       it { expect{ subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
     end
+
+    context "check_db_data_and_notify" do
+      # see spec/features/courts_update_from_scrap_spec.rb:37
+    end
   end
 end

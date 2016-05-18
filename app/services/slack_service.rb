@@ -15,16 +15,20 @@ class SlackService
       delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook)
     end
 
-    def scrap_notify_async(message, channel: "#notify-scrap-error", name: "Exception", icon_url: DEFAULT_ICON_URL, webhook: nil)
+    def notify_scrap_async(message, channel: "#notify-scrap-error", name: "Exception", icon_url: DEFAULT_ICON_URL, webhook: nil)
       delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook)
       false
     end
 
-    def analysis_notify_async(message, channel: "#notify-scrap-analysis", name: "slack-robot", icon_url: DEFAULT_ICON_URL, webhook: nil)
+    def notify_analysis_async(message, channel: "#notify-scrap-analysis", name: "slack-robot", icon_url: DEFAULT_ICON_URL, webhook: nil)
       delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook)
     end
 
-    def notify_scrap_daily(message, channel: "#notify-scrap-daily", name: "scrap-daily", icon_url: DEFAULT_ICON_URL, webhook: nil)
+    def notify_scrap_daily_async(message, channel: "#notify-scrap-daily", name: "scrap-daily", icon_url: DEFAULT_ICON_URL, webhook: nil)
+      delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook)
+    end
+
+    def notify_court_alert_async(message, channel: "#notify-court", name: "scrap-court", icon_url: DEFAULT_ICON_URL, webhook: nil)
       delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook)
     end
   end

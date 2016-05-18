@@ -9,6 +9,7 @@ class Scrap::ImportCourtContext < BaseContext
   before_perform  :update_scrap_name, unless: :is_new_record?
   before_perform  :update_code, unless: :is_new_record?
   before_perform  :assign_default_value
+  after_perform   :notify_diff_fullname
   after_perform   :record_count_to_daily_notify
 
   class << self
@@ -68,6 +69,10 @@ class Scrap::ImportCourtContext < BaseContext
 
   def assign_default_value
     @court.assign_attributes(court_type: "法院") unless @court.court_type
+  end
+
+  def notify_diff_fullname
+    SlackService.notify_court_alert_async("法院全名與爬蟲不符合 :\n爬蟲名稱 : #{ @scrap_name }\n資料庫名稱 : #{ @court.full_name }") if @court.full_name != @scrap_name
   end
 
   def record_count_to_daily_notify

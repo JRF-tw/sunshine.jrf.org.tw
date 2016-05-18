@@ -28,7 +28,7 @@ class Scrap::ParseSchedulesContext < BaseContext
     response_data = Mechanize.new.get(Scrap::GetSchedulesContext::SCHEDULE_INFO_URI, data)
     @data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
   rescue => e
-    SlackService.scrap_notify_async("庭期爬取失敗: 取得庭期表搜尋內容錯誤\n info : #{@info}\n current_page : #{@current_page}\n #{e.message}")
+    SlackService.notify_scrap_async("庭期爬取失敗: 取得庭期表搜尋內容錯誤\n info : #{@info}\n current_page : #{@current_page}\n #{e.message}")
   end
 
   def parse_schedule_info
@@ -50,7 +50,7 @@ class Scrap::ParseSchedulesContext < BaseContext
       @hash_array << hash
     end
   rescue => e
-    SlackService.scrap_notify_async("庭期爬取失敗: 解析庭期表搜尋內容錯誤\n info : #{@info}\n current_page : #{@current_page}\n #{e.message}")
+    SlackService.notify_scrap_async("庭期爬取失敗: 解析庭期表搜尋內容錯誤\n info : #{@info}\n current_page : #{@current_page}\n #{e.message}")
   end
 
   def convert_scrap_time(date_string)
@@ -58,6 +58,6 @@ class Scrap::ParseSchedulesContext < BaseContext
     year = split_array[0] + 1911
     return Date.new(year, split_array[1], split_array[2])
   rescue => e
-    SlackService.scrap_notify_async("庭期爬取失敗: 解析庭期時間錯誤\n convert_scrap_time(#{date_string})\n #{e.message}")
+    SlackService.notify_scrap_async("庭期爬取失敗: 解析庭期時間錯誤\n convert_scrap_time(#{date_string})\n #{e.message}")
   end
 end

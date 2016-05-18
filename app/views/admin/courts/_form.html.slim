@@ -1,6 +1,7 @@
 = f.input :court_type, as: :select, collection: collect_for_court_types, include_blank: "請選擇"
 = f.input :full_name
 = f.input :name
+= f.input :scrap_name, disabled: true
 = f.input :weight, hint: "數字越大 = 權重越高 = 排越前面"
 = f.input :is_hidden, as: :boolean, hint: "打勾 = 前端頁面不顯示"
 .form-actions

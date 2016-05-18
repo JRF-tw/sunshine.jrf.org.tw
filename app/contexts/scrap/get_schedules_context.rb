@@ -38,7 +38,7 @@ class Scrap::GetSchedulesContext < BaseContext
       end
     end
   rescue => e
-    SlackService.scrap_notify_async("庭期爬取失敗: 爬取各法院資料錯誤\n #{e.message}")
+    SlackService.notify_scrap_async("庭期爬取失敗: 爬取各法院資料錯誤\n #{e.message}")
   end
 
   def get_story_types_by_court(court_code)
@@ -47,7 +47,7 @@ class Scrap::GetSchedulesContext < BaseContext
     response_data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
     return response_data.css("input[type='radio']").map{ |r| r.attribute('value').value }
   rescue => e
-    SlackService.scrap_notify_async("庭期爬取失敗: 爬取各法院的庭期類別錯誤\n get_story_types_by_court(#{court_code})\n #{e.message}")
+    SlackService.notify_scrap_async("庭期爬取失敗: 爬取各法院的庭期類別錯誤\n get_story_types_by_court(#{court_code})\n #{e.message}")
   end
 
   def page_total_by_story_type(court_code, story_type)
@@ -61,7 +61,7 @@ class Scrap::GetSchedulesContext < BaseContext
       return 0
     end
   rescue => e
-    SlackService.scrap_notify_async("庭期爬取失敗: 計算各法院撈取分頁數錯誤\n page_total_by_story_type(#{court_code}, #{story_type})\n #{e.message}")
+    SlackService.notify_scrap_async("庭期爬取失敗: 計算各法院撈取分頁數錯誤\n page_total_by_story_type(#{court_code}, #{story_type})\n #{e.message}")
   end
 
   def record_intervel_to_daily_notify

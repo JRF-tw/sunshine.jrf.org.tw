@@ -1,7 +1,7 @@
 class Scrap::GetCourtsContext < BaseContext
   SCRAP_URI = "http://jirs.judicial.gov.tw/FJUD/FJUDQRY01_1.aspx"
   before_perform  :get_court_data
-  before_perform  :match_db_data
+  before_perform  :check_db_data_and_notify
   after_perform   :record_intervel_to_daily_notify
 
   def perform
@@ -22,19 +22,21 @@ class Scrap::GetCourtsContext < BaseContext
       @scrap_data << { scrap_name: data.text, code: data.attr("value").gsub(data.text, "").squish }
     end
   rescue => e
-    SlackService.scrap_notify_async("法院爬取失敗: 取得法院資料錯誤\n #{e.message}")
+    SlackService.notify_scrap_async("法院爬取失敗: 取得法院資料錯誤\n #{e.message}")
   end
 
   def parse_courts_data(response_data)
     return response_data.css("table")[2].css("select")[0].css("option")
   rescue => e
-    SlackService.scrap_notify_async("法院爬取失敗: 解析法院代碼資訊錯誤\n #{e.message}")
+    SlackService.notify_scrap_async("法院爬取失敗: 解析法院代碼資訊錯誤\n #{e.message}")
   end
 
-  def match_db_data
+  def check_db_data_and_notify
     scrap_courts_names = @scrap_data.map{ |data| data[:scrap_name] }
     diff_courts = Court.get_courts.where.not(scrap_name: scrap_courts_names).where.not(scrap_name: nil)
-    SlackService.scrap_notify_async("法院資料不再爬蟲資料內 : #{diff_courts.map(&:scrap_name).join(",")}") if diff_courts.count > 0
+    diff_courts.each do |court|
+      SlackService.notify_scrap_async("法院資料不再爬蟲資料內 : \n法院ID : #{ court.id }\n 法院全名 : #{ court.full_name }")
+    end
   end
 
   def record_intervel_to_daily_notify
