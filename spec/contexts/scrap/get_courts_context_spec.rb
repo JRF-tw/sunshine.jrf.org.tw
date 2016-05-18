@@ -8,16 +8,8 @@ RSpec.describe Scrap::GetCourtsContext, :type => :model do
       it { expect{ subject }.to change_sidekiq_jobs_size_of(Scrap::ImportCourtContext, :perform) }
     end
 
-    context "notify old data is unexist by scrap" do
-      let!(:court) { FactoryGirl.create :court, scrap_name: "xxxxxx" }
-      subject{ described_class.new.perform }
-      it { expect{ subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
-    end
-
-    context "notify old data is unexist by scrap" do
-      let!(:court) { FactoryGirl.create :court, scrap_name: "xxxxxx" }
-      subject{ described_class.new.perform }
-      it { expect{ subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+    context "check_db_data_and_notify" do
+      # see spec/features/courts_update_from_scrap_spec.rb:37
     end
 
     context "notify daily report" do
@@ -25,10 +17,6 @@ RSpec.describe Scrap::GetCourtsContext, :type => :model do
       subject{ Scrap::NotifyDailyContext.new.perform }
 
       it { expect{ subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
-    end
-
-    context "check_db_data_and_notify" do
-      # see spec/features/courts_update_from_scrap_spec.rb:37
     end
   end
 end

@@ -36,7 +36,7 @@ describe "爬蟲更新法院資料的機制", type: :request do
 
     context "資料庫的法院代號、爬蟲沒有" do
       let!(:court) { FactoryGirl.create(:court, code: "法院代碼", name: "舊簡稱", full_name: "舊全名", scrap_name: "爬蟲名稱") }
-      let!(:court1) { FactoryGirl.create(:court, code: "法院代碼", name: "舊簡稱", full_name: "舊全名", scrap_name: "爬蟲名稱1") }
+      let!(:court1) { FactoryGirl.create(:court, code: "法院代碼1", name: "舊簡稱", full_name: "舊全名", scrap_name: "爬蟲名稱") }
       subject { Scrap::GetCourtsContext.new.perform }
 
       it "該筆資料不會有任何名稱上的變動(本來就不會有, 因為根本沒資料匯入)"
