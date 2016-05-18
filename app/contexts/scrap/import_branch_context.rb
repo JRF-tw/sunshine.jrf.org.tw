@@ -3,6 +3,7 @@ class Scrap::ImportBranchContext < BaseContext
   before_perform  :find_branch
   before_perform  :bulid_branch
   before_perform  :update_branch, unless: :is_new_record?
+  before_perform  :update_missed
 
   def initialize(judge)
     @judge = judge
@@ -19,7 +20,7 @@ class Scrap::ImportBranchContext < BaseContext
   end
 
   def find_branch
-    @branch = Branch.includes(:court).current.find_by(court: @court, chamber_name: @chamber_name, name: @branch_name )
+    @branch = Branch.includes(:court).find_by(court: @court, chamber_name: @chamber_name, name: @branch_name )
   end
 
   def bulid_branch
@@ -31,6 +32,10 @@ class Scrap::ImportBranchContext < BaseContext
   end
 
   def update_branch
-    @branch.assign_attributes(judge: @judge, missed: false) unless @branch.judge == @judge
+    @branch.assign_attributes(judge: @judge) unless @branch.judge == @judge
+  end
+
+  def update_missed
+    @branch.assign_attributes(missed: false)
   end
 end

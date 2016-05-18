@@ -191,8 +191,8 @@ module ApplicationHelper
   end
 
   def collect_for_judges_name
-    Judge.all.includes(:branches).current.map do |j|
-      ["#{j.name} - #{j.branches.map(&:name).join(", ")}", j.id]
+    Judge.all.includes(:branches).map do |j|
+      ["#{j.name} - #{j.branches.current.map(&:name).join(", ")}", j.id]
     end
   end
 
