@@ -9,6 +9,7 @@
 #  chamber_name :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  missed       :boolean          default(FALSE)
 #
 
 FactoryGirl.define do
