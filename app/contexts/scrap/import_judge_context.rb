@@ -2,7 +2,7 @@ class Scrap::ImportJudgeContext < BaseContext
   before_perform  :parse_import_data
   before_perform  :find_court
   before_perform  :build_judge
-  after_perform   :create_branch
+  after_perform   :import_branch
   after_perform   :record_count_to_daily_notify
 
   class << self
@@ -43,7 +43,7 @@ class Scrap::ImportJudgeContext < BaseContext
     @judge = Judge.find_by(court: @court, name: @judge_name) || Judge.new(court: @court, name: @judge_name)
   end
 
-  def create_branch
+  def import_branch
     Scrap::ImportBranchContext.new(@judge).perform(@chamber_name, @branch_name)
   end
 
