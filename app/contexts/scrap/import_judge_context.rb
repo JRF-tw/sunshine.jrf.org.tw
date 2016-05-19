@@ -1,34 +1,9 @@
 class Scrap::ImportJudgeContext < BaseContext
-  EXCEL_URL = "http://csdi.judicial.gov.tw/abbs/wkw/WHD3A01_DOWNLOADCVS.jsp?court="
-
-  class << self
-    def perform
-      get_remote_csv_data.each do |data_string|
-        new(data_string).perform
-      end
-      record_intervel_to_daily_notify
-    end
-
-    private
-
-    def get_remote_csv_data
-      scrap_file_url = EXCEL_URL + Court.collect_codes.join(",")
-      response_data = Mechanize.new.get(scrap_file_url)
-      response_data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
-      return response_data.css("body p").text.split("\n")
-    rescue => e
-      SlackService.notify_scrap_async("法官爬取失敗: 取得csv文件錯誤\n #{e.message}")
-    end
-
-    def record_intervel_to_daily_notify
-      Redis::Value.new("daily_scrap_judge_intervel").value = "#{Date.today.to_s} ~ #{Date.today.to_s}"
-    end
-  end
-
   before_perform  :parse_import_data
   before_perform  :find_court
   before_perform  :build_judge
-  after_perform   :create_branch
+  after_perform   :import_branch
+  after_perform   :record_import_daily_branch
   after_perform   :record_count_to_daily_notify
 
   def initialize(data_string)
@@ -63,8 +38,12 @@ class Scrap::ImportJudgeContext < BaseContext
     @judge = Judge.find_by(court: @court, name: @judge_name) || Judge.new(court: @court, name: @judge_name)
   end
 
-  def create_branch
-    Scrap::CreateBranchContext.new(@judge).perform(@chamber_name, @branch_name)
+  def import_branch
+    @branch = Scrap::ImportBranchContext.new(@judge).perform(@chamber_name, @branch_name)
+  end
+
+  def record_import_daily_branch
+    Redis::List.new('daily_import_branch_ids') << @branch.id
   end
 
   def record_count_to_daily_notify

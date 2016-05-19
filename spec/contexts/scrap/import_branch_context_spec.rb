@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Scrap::CreateBranchContext, :type => :model do
+RSpec.describe Scrap::ImportBranchContext, :type => :model do
   let!(:court) { FactoryGirl.create(:court) }
   let!(:judge) { FactoryGirl.create(:judge, court: court) }
 
@@ -22,6 +22,14 @@ RSpec.describe Scrap::CreateBranchContext, :type => :model do
       subject!{ described_class.new(judge).perform(chamber_name, branch_name) }
 
       it { expect{ subject }.not_to change { judge.branches.count } }
+    end
+
+    context "update_branch_judge" do
+      # see spec/features/judge_and_branch_update_from_scrap_spec.rb:40
+    end
+
+    context "update_missed" do
+      # see spec/features/judge_and_branch_update_from_scrap_spec.rb:73
     end
   end
 end

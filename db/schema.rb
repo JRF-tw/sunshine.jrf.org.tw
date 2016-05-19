@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160512071557) do
+ActiveRecord::Schema.define(version: 20160518081449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,13 +81,20 @@ ActiveRecord::Schema.define(version: 20160512071557) do
     t.integer  "judge_id"
     t.string   "name"
     t.string   "chamber_name"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "missed",       default: false
   end
 
+  add_index "branches", ["chamber_name"], name: "index_branches_on_chamber_name", using: :btree
   add_index "branches", ["court_id", "judge_id"], name: "index_branches_on_court_id_and_judge_id", using: :btree
   add_index "branches", ["court_id"], name: "index_branches_on_court_id", using: :btree
   add_index "branches", ["judge_id"], name: "index_branches_on_judge_id", using: :btree
+  add_index "branches", ["missed", "court_id"], name: "index_branches_on_missed_and_court_id", using: :btree
+  add_index "branches", ["missed", "judge_id", "court_id"], name: "index_branches_on_missed_and_judge_id_and_court_id", using: :btree
+  add_index "branches", ["missed", "judge_id"], name: "index_branches_on_missed_and_judge_id", using: :btree
+  add_index "branches", ["missed"], name: "index_branches_on_missed", using: :btree
+  add_index "branches", ["name"], name: "index_branches_on_name", using: :btree
 
   create_table "bystanders", force: :cascade do |t|
     t.string   "name",                                null: false
