@@ -6,10 +6,21 @@ describe "爬蟲更新法院資料的機制", type: :request do
       let(:data_hash) { { scrap_name: "爬蟲名稱", code: "法院代碼" } }
       subject{ Scrap::ImportCourtContext.new(data_hash).perform }
 
-      it { expect{ subject }.to change { Court.count } }
-      it { expect(subject.scrap_name).to eq(data_hash[:scrap_name]) }
-      it { expect(subject.name).to eq(data_hash[:scrap_name]) }
-      it { expect(subject.full_name).to eq(data_hash[:scrap_name]) }
+      it "新增至資料庫" do
+        expect{ subject }.to change { Court.count }
+      end
+
+      it "新資料的爬蟲名稱和抓到的名稱一樣" do
+        expect(subject.scrap_name).to eq(data_hash[:scrap_name])
+      end
+
+      it "新資料的簡稱和抓到的名稱一樣" do
+        expect(subject.name).to eq(data_hash[:scrap_name])
+      end
+
+      it "新資料的全名和抓到的名稱一樣" do
+        expect(subject.full_name).to eq(data_hash[:scrap_name])
+      end
     end
 
     context "爬蟲的法院代號、資料庫有" do
@@ -17,20 +28,32 @@ describe "爬蟲更新法院資料的機制", type: :request do
       let!(:court) { FactoryGirl.create(:court, code: "法院代碼") }
       subject{ Scrap::ImportCourtContext.new(data_hash).perform }
 
-      it { expect(subject.scrap_name).to eq(data_hash[:scrap_name]) }
+      it "更新該筆資料的爬蟲名稱" do
+        expect(subject.scrap_name).to eq(data_hash[:scrap_name])
+      end
 
       context "爬蟲名稱和全名不相同時" do
         let!(:court) { FactoryGirl.create(:court, code: "法院代碼", full_name: "舊全名") }
 
-        it { expect(subject.full_name).not_to eq(data_hash[:scrap_name]) }
-        it { expect{ subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+        it "不會更新該筆資料的全名" do
+          expect(subject.full_name).not_to eq(data_hash[:scrap_name])
+        end
+
+        it "做 slack 通知" do
+          expect{ subject }.to change_sidekiq_jobs_size_of(SlackService, :notify)
+        end
       end
 
       context "爬蟲名稱和簡稱不相同、但全名是相同" do
         let!(:court) { FactoryGirl.create(:court, code: "法院代碼", name: "舊簡稱", full_name: "爬蟲名稱") }
 
-        it { expect(subject.name).not_to eq(data_hash[:scrap_name]) }
-        it { expect{ subject }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
+        it "不會更新該筆資料的簡稱" do
+          expect(subject.name).not_to eq(data_hash[:scrap_name])
+        end
+
+        it "不做 slack 通知" do
+          expect{ subject }.not_to change_sidekiq_jobs_size_of(SlackService, :notify)
+        end
       end
     end
 
@@ -40,7 +63,10 @@ describe "爬蟲更新法院資料的機制", type: :request do
       subject { Scrap::GetCourtsContext.new.perform }
 
       it "該筆資料不會有任何名稱上的變動(本來就不會有, 因為根本沒資料匯入)"
-      it { expect{ subject }.to change_sidekiq_jobs_size_of(SlackService, :notify).by(2) }
+
+      it "該筆資料會進行 slack 通知" do
+        expect{ subject }.to change_sidekiq_jobs_size_of(SlackService, :notify).by(2)
+      end
     end
   end
 
@@ -48,6 +74,8 @@ describe "爬蟲更新法院資料的機制", type: :request do
     let!(:court) { FactoryGirl.create :court, court_type: "法院", full_name: "台北第一法院", name: "台北第一" }
     subject { put "/admin/courts/#{court.id}", admin_court: { scrap_name: "haha" } }
 
-    it { expect { subject }.not_to change{ court.reload.scrap_name } }
+    it "無法更新爬蟲名稱" do
+      expect { subject }.not_to change{ court.reload.scrap_name }
+    end
   end
 end
