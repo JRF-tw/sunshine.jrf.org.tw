@@ -5,10 +5,9 @@ RSpec.describe Scrap::ImportJudgeContext, :type => :model do
 
   describe "#perform" do
     let(:data_string) { "臺灣高等法院民事庭,乙,匡偉　法官,黃千鶴,2415" }
+    subject{ described_class.new(data_string).perform }
 
     context "success" do
-      subject{ described_class.new(data_string).perform }
-
       it { expect(subject.name).to eq("匡偉") }
       it { expect(subject.court).to eq(court) }
       it { expect(subject.branches.last.name).to eq('乙') }
@@ -19,29 +18,34 @@ RSpec.describe Scrap::ImportJudgeContext, :type => :model do
     context "find court with space" do
       let!(:court) { FactoryGirl.create :court, code: "TCH", scrap_name: "臺灣高等法院 臺中分院" }
       let(:data_string) { "臺灣高等法院臺中分院民事庭,乙,匡偉　法官,黃千鶴,2415" }
-      subject{ described_class.new(data_string).perform }
 
       it { expect{ subject }.to change{ Judge.count }.by(1) }
     end
 
     context "judge exist" do
       let!(:judge){ FactoryGirl.create :judge, court: court, name: "匡偉"}
-      subject{ described_class.new(data_string).perform }
 
       it { expect{ subject }.not_to change{ Judge.count } }
     end
 
     context "court not exist" do
       let(:data_string) { "xxxxxx,乙,匡偉　法官,黃千鶴,2415" }
-      subject{ described_class.new(data_string).perform }
 
       it { expect(subject).to be_falsey }
     end
 
     context "create_branch" do
-      subject{ described_class.new(data_string).perform }
-
       it { expect{ subject }.to change{ Branch.count } }
+    end
+
+    context "record_import_daily_branch" do
+      let(:record_object) { Redis::List.new('daily_import_branch_ids') }
+      it { expect{ subject }.to change{ record_object.values.count } }
+    end
+
+    context "record_import_daily_branch" do
+      let(:record_object) { Redis::List.new('daily_import_branch_ids') }
+      it { expect{ subject }.to change{ record_object.values.count } }
     end
   end
 end

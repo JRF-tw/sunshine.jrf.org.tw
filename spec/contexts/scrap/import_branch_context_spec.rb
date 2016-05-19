@@ -23,5 +23,13 @@ RSpec.describe Scrap::ImportBranchContext, :type => :model do
 
       it { expect{ subject }.not_to change { judge.branches.count } }
     end
+
+    context "update_branch_judge" do
+      # see spec/features/judge_and_branch_update_from_scrap_spec.rb:40
+    end
+
+    context "update_missed" do
+      # see spec/features/judge_and_branch_update_from_scrap_spec.rb:73
+    end
   end
 end

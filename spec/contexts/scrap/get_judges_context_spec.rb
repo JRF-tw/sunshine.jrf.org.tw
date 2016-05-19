@@ -4,7 +4,11 @@ RSpec.describe Scrap::GetJudgesContext, :type => :model do
   describe "#perform" do
     subject{ described_class.new.perform }
 
-    # TODO 補好 context spec
+    context "notify_diff_info" do
+      let!(:branches) { FactoryGirl.create_list :branch, 2 }
+
+      it { expect{ subject }.to change_sidekiq_jobs_size_of(SlackService, :notify).by(2) }
+    end
 
     context "notify daily report" do
       before{ described_class.new.perform }
