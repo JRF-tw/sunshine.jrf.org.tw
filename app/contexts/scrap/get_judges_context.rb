@@ -3,6 +3,7 @@ class Scrap::GetJudgesContext < BaseContext
 
   before_perform  :get_remote_csv_data
   after_perform   :get_diff_import_daily_branch
+  after_perform   :notify_diff_info
   after_perform   :update_diff_branch
   after_perform   :record_intervel_to_daily_notify
 

@@ -2,7 +2,7 @@ class Scrap::ImportBranchContext < BaseContext
   # TODO 更新部分還要確認, 目前就先拆開
   before_perform  :find_branch
   before_perform  :bulid_branch
-  before_perform  :update_branch, unless: :is_new_record?
+  before_perform  :update_branch_judge, unless: :is_new_record?
   before_perform  :update_missed
 
   def initialize(judge)
@@ -31,7 +31,7 @@ class Scrap::ImportBranchContext < BaseContext
     @branch.new_record?
   end
 
-  def update_branch
+  def update_branch_judge
     @branch.assign_attributes(judge: @judge) unless @branch.judge == @judge
   end
 
