@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   # devise_for :defendants
-  devise_for :bystanders, controllers: { registrations: 'registrations' }
+  devise_for :bystanders, controllers: { registrations: 'bystander/registrations', sessions: 'bystander/sessions' }
 
   root to: "base#index", only: [:show]
   get '/robots.txt', to: "base#robots", defaults: { format: "text" }
