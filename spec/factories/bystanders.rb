@@ -29,4 +29,11 @@ FactoryGirl.define do
     password "123123123"
     confirmed_at Time.now
   end
+
+  factory :bystander_without_validate, class: Bystander do
+    name "不理不理左衛門"
+    sequence(:email) { |n| "bystander_without_prove-#{n}@test.com"}
+    password "123123123"
+  end
+
 end
