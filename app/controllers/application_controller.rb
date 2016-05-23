@@ -10,10 +10,6 @@ class ApplicationController < ActionController::Base
 
   layout :layout_by_resource
 
-  def after_sign_out_path_for(resource_or_scope)
-    request.referrer
-  end
-
   private
 
   def http_auth_for_staging

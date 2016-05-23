@@ -8,4 +8,10 @@ class Bystander::SessionsController < Devise::SessionsController
     respond_with resource, location: bystanders_path
   end
 
+  private
+
+  def after_sign_out_path_for(resource_or_scope)
+    request.referrer
+  end
+
 end
