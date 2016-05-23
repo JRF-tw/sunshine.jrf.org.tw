@@ -16,7 +16,6 @@
 /tmp
 
 config/database.yml
-config/email.yml
 /config/application.yml
 .DS_Store
 
