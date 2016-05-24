@@ -69,11 +69,6 @@ GEM
     aws-sdk-v1 (1.66.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
-    aws-ses (0.6.0)
-      builder
-      mail (> 2.2.5)
-      mime-types
-      xml-simple
     bcrypt (3.1.10)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -556,7 +551,6 @@ DEPENDENCIES
   awesome_print
   aws-sdk
   aws-sdk-v1
-  aws-ses (~> 0.6.0)
   better_errors
   binding_of_caller
   bootstrap-sass (~> 2.3)
