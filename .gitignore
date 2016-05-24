@@ -17,7 +17,6 @@
 
 config/database.yml
 /config/application.yml
-/config/initializers/amazon_ses.rb
 .DS_Store
 
 /.capistrano/*
