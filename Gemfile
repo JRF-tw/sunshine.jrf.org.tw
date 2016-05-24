@@ -107,6 +107,7 @@ gem 'devise-async'
 # aws
 gem 'aws-sdk-v1'
 gem 'aws-sdk'
+gem "aws-ses", "~> 0.6.0", :require => 'aws/ses'
 
 # unicorn
 gem 'unicorn'
