@@ -22,7 +22,10 @@ html
       - else
         = link_to('註冊', new_bystander_registration_path) 
         = link_to('登入', new_session_path(:bystander))
-        
+      - flash.each do |k, message|
+        div class= "alert fade in alert-#{k}"
+          a.close data-dismiss="alert" href="#"
+          = message
 
       main.main role='main' = yield
 
