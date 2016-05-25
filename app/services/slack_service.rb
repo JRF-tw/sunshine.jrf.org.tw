@@ -35,6 +35,15 @@ class SlackService
     def notify_branch_alert_async(message, channel: "#notify-branch", name: "scrap-branch", icon_url: DEFAULT_ICON_URL, webhook: nil)
       delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook)
     end
+
+    def notify_verdict_alert_async(message, channel: "#notify-verdict", name: "scrap-verdict", icon_url: DEFAULT_ICON_URL, webhook: nil)
+      delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook)
+    end
+
+    def render_link(link, message = nil)
+      message ||= link
+      "<#{link}|#{message}>"
+    end
   end
 
 end
