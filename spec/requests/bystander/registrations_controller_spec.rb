@@ -1,20 +1,32 @@
 require 'rails_helper'
 
 RSpec.describe Bystander::RegistrationsController, :type => :request do
-  let!(:bystander) { FactoryGirl.create :bystander }
 
-  describe "bystander action" do
-    context "sign up with exist e-mail" do
-      subject { post "/bystanders", bystander: { name: "haha", email: bystander.email, password: "55667788", password_confirmation: "55667788"} }
-      it { expect{ subject }.to_not change{ Bystander.count } }
-      it { expect(subject).to render_template("bystanders/registrations/new") }
+  describe "#update" do
+    before { signin_bystander }
+    let!(:bystander) { current_bystander }
+
+    context "update email" do
+      before { put "/bystanders", bystander: { email: "h2312@gmail.com", current_password: "123123123"} }
+      it { expect(response).to redirect_to("/bystanders")}
     end
 
-    context "sign up" do
-      subject { post "/bystanders", bystander: { name: "haha", email: "h2312@gmail.com", password: "55667788", password_confirmation: "55667788"} }
-      it { expect(subject).to redirect_to("/bystanders/sign_in")}
+    context "update same email" do
+      before { put "/bystanders", bystander: { email: current_bystander.email, current_password: "123123123"} }
+      it { expect(response.body).to match("e-mail 並未更改")}
+    end
+
+    context "sign in with unconfirmed_email" do
+      before { put "/bystanders", bystander: { email: "h2312@gmail.com", current_password: "123123123"} }
+      before { signout_bystander }
+      subject { post "/bystanders/sign_in", bystander: { email: "h2312@gmail.com", password: "123123123" } }
+
+      it { expect{ subject }.to_not change {bystander.reload.last_sign_in_at} }
+    end
+
+    context "sign in with confirmed_email" do
+      it "not done yet"
     end
   end
-
 
 end
