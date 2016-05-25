@@ -10,7 +10,7 @@ RSpec.describe BystandersController, type: :request do
     end
   end
 
-  describe "devise" do
+  describe "#action" do
 
     context "sign in" do
       before { post "/bystanders/sign_in", bystander: { email: bystander.email, password: "123123123" } }

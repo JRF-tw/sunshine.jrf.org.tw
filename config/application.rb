@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 
 module JrfSunny
   class Application < Rails::Application
-    config.action_mailer.delivery_method = :amazon_ses
+    config.action_mailer.delivery_method = :ses
 
     # disable some file generators
     config.generators.stylesheets = false
@@ -22,9 +22,6 @@ module JrfSunny
       g.factory_girl dir: "spec/factories"
     end
 
-    config.to_prepare do
-      Devise::SessionsController.layout "admin"
-    end
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
