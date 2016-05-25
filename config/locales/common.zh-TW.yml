@@ -283,4 +283,8 @@ zh-TW:
         email_cont: "EmaiL包含"
       defendant:
           name_cont: "姓名包含"
+  devise:
+    registrations:
+      bystander:
+        email_conflict: "e-mail 並未更改"
 

@@ -18,6 +18,8 @@ html
       = render partial: 'components/main_header' unless is_base_index
       - if current_bystander
         = "觀察員 #{current_bystander.name} | "
+        = link_to('修改個人資料', edit_bystander_registration_path)
+        = ' | '
         = link_to('登出', destroy_bystander_session_path, :method => :delete)
       - else
         = link_to('註冊', new_bystander_registration_path) 
