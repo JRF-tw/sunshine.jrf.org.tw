@@ -1,6 +1,6 @@
 class Scrap::ImportVerdictContext < BaseContext
   before_perform  :build_analysis_context
-  before_perform  :create_main_judge, if: :is_highest_court?
+  before_perform  :create_main_judge_by_highest, if: :is_highest_court?
   before_perform  :find_main_judge, unless: :is_highest_court?
   before_perform  :find_or_create_story
   before_perform  :build_verdict
@@ -55,8 +55,8 @@ class Scrap::ImportVerdictContext < BaseContext
     end
   end
 
-  def create_main_judge
-    Scrap::CreateJudgeByHighestCourtContext.new(@court, @analysis_context.main_judge_name).perform
+  def create_main_judge_by_highest
+    @main_judge = Scrap::CreateJudgeByHighestCourtContext.new(@court, @analysis_context.main_judge_name).perform
   end
 
   def find_or_create_story
