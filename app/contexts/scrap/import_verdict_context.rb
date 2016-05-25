@@ -1,6 +1,7 @@
 class Scrap::ImportVerdictContext < BaseContext
   before_perform  :build_analysis_context
-  before_perform  :find_main_judge
+  before_perform  :create_main_judge, if: :is_highest_court?
+  before_perform  :find_main_judge, unless: :is_highest_court?
   before_perform  :find_or_create_story
   before_perform  :build_verdict
   before_perform  :assign_default_value
@@ -40,6 +41,10 @@ class Scrap::ImportVerdictContext < BaseContext
     @analysis_context = Scrap::AnalysisVerdictContext.new(@verdict_content, @verdict_word)
   end
 
+  def is_highest_court?
+    @court.scrap_name == "最高法院"
+  end
+
   def find_main_judge
     branches = @court.branches.current.where("chamber_name LIKE ? ", "%#{@verdict_stroy_type}%")
     main_judges = branches.map{ |a| a.judge if a.judge.name == @analysis_context.main_judge_name }.compact.uniq
@@ -48,6 +53,11 @@ class Scrap::ImportVerdictContext < BaseContext
     unless main_judges.count == 1
       SlackService.notify_analysis_async("判決書關聯主審法官失敗 : 找到多位法官, 或者找不到任何法官\n 判決書類別 : #{@verdict_stroy_type}, 法官姓名 : #{@analysis_context.main_judge_name}, 法院 : #{@court.scrap_name}")
     end
+  end
+
+  def create_main_judge
+    @main_judge = @court.judges.find_by(name: @analysis_context.main_judge_name)
+    @main_judge = @court.judges.create(name: @analysis_context.main_judge_name) unless @main_judge
   end
 
   def find_or_create_story
