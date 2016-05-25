@@ -42,7 +42,7 @@ class Scrap::ImportVerdictContext < BaseContext
   end
 
   def is_highest_court?
-    @court.scrap_name == "最高法院"
+    @court.code == "TPS"
   end
 
   def find_main_judge
@@ -56,8 +56,7 @@ class Scrap::ImportVerdictContext < BaseContext
   end
 
   def create_main_judge
-    @main_judge = @court.judges.find_by(name: @analysis_context.main_judge_name)
-    @main_judge = @court.judges.create(name: @analysis_context.main_judge_name) unless @main_judge
+    Scrap::CreateJudgeByHighestCourtContext.new(@court, @analysis_context.main_judge_name).perform
   end
 
   def find_or_create_story
