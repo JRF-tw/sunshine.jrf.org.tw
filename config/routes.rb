@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   devise_scope :defendant do
     post  '/defendants/check_sign_up_info', to: 'defendants/registrations#check_sign_up_info'
   end
-  devise_for :bystanders, controllers: { registrations: 'bystander/registrations', sessions: 'bystander/sessions' }
+
+  devise_for :bystanders, controllers: { registrations: 'bystander/registrations', sessions: 'bystander/sessions', passwords: 'bystander/passwords' }
 
   root to: "base#index", only: [:show]
   get '/robots.txt', to: "base#robots", defaults: { format: "text" }
