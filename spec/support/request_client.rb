@@ -4,9 +4,9 @@ module RequestClient
     @current_user = nil
   end
 
-  def signout_defendant
-    delete "/defendants/sign_out"
-    @current_defendant = nil
+  def signout_bystander
+    delete "/bystanders/sign_out", {}, {'HTTP_REFERER' => 'http://www.example.com/bystanders'}
+    @current_bystander = nil
   end
 
   def signin_user(user = nil)
@@ -38,7 +38,15 @@ module RequestClient
     @current_bystander
   end
 
+<<<<<<< 3507ae72642a8cd25ed71f020213120060a7453d
   def current_defendant
     @current_defendant
+=======
+  def find_reset_password_token_by_Bystander
+    @reset_password_token, enc = Devise.token_generator.generate(Bystander, :reset_password_token)
+    bystander.reset_password_token   = enc
+    bystander.reset_password_sent_at = Time.now.utc
+    bystander.save(validate: false)
+>>>>>>> rspec
   end
 end
