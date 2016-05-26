@@ -6,7 +6,6 @@ RSpec.describe Bystander::PasswordsController, :type => :request do
 
   describe "bystander action" do
     context "update password" do
-      before { find_reset_password_token_by_Bystander }
       before { put "/bystanders/password", bystander: { password: "55667788", password_confirmation: "55667788", reset_password_token: token } }
       subject { post "/bystanders/sign_in", bystander: { email: bystander.email, password: "55667788" } }
 
