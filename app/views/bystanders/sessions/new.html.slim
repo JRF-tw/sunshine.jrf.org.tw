@@ -2,7 +2,7 @@
   .widget-title
     h5 登入
   .widget-content.nopadding
-    = simple_form_for(resource, as: resource_name, :url => session_path(resource_name), :wrapper => :admin) do |f|
+    = simple_form_for(resource, as: resource_name, :url => session_path(resource_name)) do |f|
       .form-group
         label.control-label Email
         = f.input :email, required: false, autofocus: true, :label => false

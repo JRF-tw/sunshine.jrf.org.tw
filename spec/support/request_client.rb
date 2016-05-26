@@ -11,7 +11,18 @@ module RequestClient
     @current_user = user if response.status == 302
   end
 
+  def signin_bystander(bystander = nil)
+    bystander ||= FactoryGirl.create(:bystander)
+    date =
+    post "/bystanders/sign_in", bystander: { email: bystander.email, password: "123123123" }
+    @current_bystander = bystander if response.status == 302
+  end
+
   def current_user
     @current_user
+  end
+
+  def current_bystander
+    @current_bystander
   end
 end
