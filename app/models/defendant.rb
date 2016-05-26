@@ -5,7 +5,7 @@
 #  id                     :integer          not null, primary key
 #  name                   :string           not null
 #  identify_number        :string           not null
-#  phone_number           :string           not null
+#  phone_number           :string
 #  encrypted_password     :string           default(""), not null
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
