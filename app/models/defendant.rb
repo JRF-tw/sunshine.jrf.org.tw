@@ -22,8 +22,10 @@
 class Defendant < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  devise :authentication_keys => [ :identify_number ]
 
   has_many :defendant_verdicts
   has_many :verdicts, through: :defendant_verdicts
