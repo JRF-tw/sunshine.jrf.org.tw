@@ -7,6 +7,7 @@ RSpec.describe Bystander::RegistrationsController, :type => :request do
     context "sign up with exist e-mail" do
       subject { post "/bystanders", bystander: { name: "haha", email: bystander.email, password: "55667788", password_confirmation: "55667788"} }
       it { expect{ subject }.to_not change{ Bystander.count } }
+      it { expect(subject).to render_template("bystanders/registrations/new") }
     end
 
     context "sign up" do
