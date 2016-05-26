@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
 
   devise_for :users
-  # devise_for :defendants
+
+  devise_for :defendants, controllers: { registrations: 'defendants/registrations', sessions: 'defendants/sessions' }
+  devise_scope :defendant do
+    post  '/defendants/check_sign_up_info', to: 'defendants/registrations#check_sign_up_info'
+  end
   devise_for :bystanders, controllers: { registrations: 'bystander/registrations', sessions: 'bystander/sessions' }
 
   root to: "base#index", only: [:show]
@@ -28,6 +32,10 @@ Rails.application.routes.draw do
   end
 
   resources :bystanders
+
+  namespace :defendants do
+    root to: "base#index"
+  end
 
   namespace :api, defaults: { format: 'json' } do
     resources :profiles, only: [:show, :index]

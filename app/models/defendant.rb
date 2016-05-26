@@ -5,7 +5,7 @@
 #  id                     :integer          not null, primary key
 #  name                   :string           not null
 #  identify_number        :string           not null
-#  phone_number           :string           not null
+#  phone_number           :string
 #  encrypted_password     :string           default(""), not null
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
@@ -22,8 +22,10 @@
 class Defendant < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  devise :authentication_keys => [ :identify_number ]
 
   has_many :defendant_verdicts
   has_many :verdicts, through: :defendant_verdicts
