@@ -24,7 +24,15 @@ FactoryGirl.define do
     sequence(:name) { |n| "當事人 - #{n}"}
     password "12321313213"
     sequence(:identify_number) { |n| "A#{ rand(100000000..299999999) }" }
-    sequence(:phone_number) { |n| "09#{ rand(1..99999999).to_s.rjust(8, '0') } " }
+    sequence(:phone_number) { |n| "09#{ rand(1..99999999).to_s.rjust(8, '0') }" }
+  end
+
+  factory :defendant_for_create, class: Defendant do
+    sequence(:name) { |n| "當事人 - #{n}"}
+    password "12321313213"
+    password_confirmation "12321313213"
+    sequence(:identify_number) { |n| "A#{ rand(100000000..299999999) }" }
+    sequence(:phone_number) { |n| "09#{ rand(1..99999999).to_s.rjust(8, '0') }" }
   end
 
 end

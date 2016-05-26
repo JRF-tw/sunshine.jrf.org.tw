@@ -4,9 +4,14 @@ module RequestClient
     @current_user = nil
   end
 
+  def signout_defendant
+    delete "/defendants/sign_out"
+    @current_defendant = nil
+  end
+
   def signin_user(user = nil)
     user ||= FactoryGirl.create(:admin_user)
-    data = 
+    data =
     post "/users/sign_in", user: { email: user.email, password: user.password }
     @current_user = user if response.status == 302
   end
@@ -18,11 +23,22 @@ module RequestClient
     @current_bystander = bystander if response.status == 302
   end
 
+  def signin_defendant(defendant = nil)
+    defendant ||= FactoryGirl.create(:defendant)
+    data =
+    post "/defendants/sign_in", defendant: { identify_number: defendant.identify_number, password: defendant.password }
+    @current_defendant = defendant if response.status == 302
+  end
+
   def current_user
     @current_user
   end
 
   def current_bystander
     @current_bystander
+  end
+
+  def current_defendant
+    @current_defendant
   end
 end
