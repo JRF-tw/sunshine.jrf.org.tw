@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 
 module JrfSunny
   class Application < Rails::Application
-    config.action_mailer.delivery_method = :ses
+    config.action_mailer.delivery_method = :amazon_ses
 
     # disable some file generators
     config.generators.stylesheets = false
