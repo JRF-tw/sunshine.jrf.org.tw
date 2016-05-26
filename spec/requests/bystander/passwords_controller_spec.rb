@@ -2,11 +2,12 @@ require 'rails_helper'
 
 RSpec.describe Bystander::PasswordsController, :type => :request do
   let!(:bystander) { FactoryGirl.create :bystander, reset_password_token: "love_peace" }
+  let(:token) { bystander.send_reset_password_instructions }
 
   describe "bystander action" do
     context "update password" do
       before { find_reset_password_token_by_Bystander }
-      before { put "/bystanders/password", bystander: { password: "55667788", password_confirmation: "55667788", reset_password_token: @reset_password_token } }
+      before { put "/bystanders/password", bystander: { password: "55667788", password_confirmation: "55667788", reset_password_token: token } }
       subject { post "/bystanders/sign_in", bystander: { email: bystander.email, password: "55667788" } }
 
       it { expect(response).to redirect_to("/bystanders") }
