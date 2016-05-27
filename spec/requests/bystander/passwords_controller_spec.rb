@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Bystander::PasswordsController, :type => :request do
-  let!(:bystander) { FactoryGirl.create :bystander, reset_password_token: "love_peace" }
+  let!(:bystander) { FactoryGirl.create :bystander }
   let(:token) { bystander.send_reset_password_instructions }
 
   describe "bystander action" do
