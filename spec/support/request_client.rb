@@ -4,9 +4,9 @@ module RequestClient
     @current_user = nil
   end
 
-  def signout_defendant
-    delete "/defendants/sign_out"
-    @current_defendant = nil
+  def signout_bystander
+    delete "/bystanders/sign_out", {}, {'HTTP_REFERER' => 'http://www.example.com/bystanders'}
+    @current_bystander = nil
   end
 
   def signin_user(user = nil)
@@ -41,4 +41,5 @@ module RequestClient
   def current_defendant
     @current_defendant
   end
+
 end
