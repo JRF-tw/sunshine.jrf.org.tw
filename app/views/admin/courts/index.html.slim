@@ -1,4 +1,36 @@
-= admin_widget_box "法院 / 檢察署列表", icon: :pencil do
+= search_form_for @search, :url => admin_courts_path, :wrapper => :admin, :html => { :class => "form-horizontal" } do |f|
+  .well
+    fieldset
+      legend 搜尋
+      .row
+        .span6
+          .control-group
+            label.control-label= f.label :court_type_eq
+            .controls= f.select :court_type_eq,
+            collect_for_court_types, include_blank: "全部"
+        .span6
+          .control-group
+            label.control-label= f.label :is_hidden_eq
+            .controls= f.select :is_hidden_eq,
+            collect_for_boolean, include_blank: "請選擇"
+      .row
+        .span6
+          .control-group
+            label.control-label= f.label :full_name_cont
+            .controls= f.search_field :full_name_cont
+
+        .span6
+          .control-group
+            label.control-label= f.label :name_cont
+            .controls= f.search_field :name_cont
+    hr
+    .form-actions
+      = f.submit :value => "搜尋", :class => "btn btn-primary"
+      = " "
+      = link_to "清空搜尋結果", admin_courts_path, :class => "btn btn-default"
+
+
+= admin_widget_box "法院 / 檢察署列表 : 搜尋結果為 #{@search.result.count} 筆", icon: :pencil do
   .dataTables_wrapper
     div
       .dataTables_length
@@ -6,10 +38,11 @@
     table.table.table-bordered.table-striped.table-hover
       thead
         tr
-          th #
-          th 類型
-          th 全名
-          th 前台顯示簡稱
+          th= sort_link(@search, :id, "#")
+          th= sort_link(@search, :court_type, "類別")
+          th= sort_link(@search, :full_name, "全名")
+          th= sort_link(@search, :name, "前台顯示簡稱")
+          th= sort_link(@search, :is_hidden, "是否在前端隱藏")
           th
       tbody
         - @courts.each do |court|
@@ -18,7 +51,16 @@
             td= court.court_type
             td= court.full_name
             td= court.name
+            td= court.is_hidden? ? "是" : "否"
             td
+              = link_to "詳細資料", admin_court_path(court), class: "btn btn-mini"
+              | &nbsp;
+              = link_to "法官列表", admin_judges_path(q: { "court_id_eq" => court.id } ), class: "btn btn-mini"
+              | &nbsp;
+              = link_to "案件列表", admin_stories_path(q: { "court_id_eq" => court.id } ), class: "btn btn-mini"
+              | &nbsp;
+              = link_to "庭期列表", admin_schedules_path(q: { "court_id_eq" => court.id } ), class: "btn btn-mini"
+              | &nbsp;
               = link_to "編輯", edit_admin_court_path(court), class: "btn btn-mini btn-success"
               | &nbsp;
               = link_to "刪除", admin_court_path(court), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除法院 / 檢察署 - #{court.name}？"

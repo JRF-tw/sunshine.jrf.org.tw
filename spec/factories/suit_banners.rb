@@ -3,12 +3,12 @@
 # Table name: suit_banners
 #
 #  id         :integer          not null, primary key
-#  pic_l      :string(255)
-#  pic_m      :string(255)
-#  pic_s      :string(255)
-#  url        :string(255)
-#  alt_string :string(255)
-#  title      :string(255)
+#  pic_l      :string
+#  pic_m      :string
+#  pic_s      :string
+#  url        :string
+#  alt_string :string
+#  title      :string
 #  content    :text
 #  weight     :integer
 #  is_hidden  :boolean

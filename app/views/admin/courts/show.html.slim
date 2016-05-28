@@ -1,0 +1,34 @@
+- content_for :btns do
+  = link_to "法官列表", admin_judges_path(q: { "court_id_eq" => @court.id } ), class: "btn btn-large"
+  = link_to "案件列表", admin_stories_path(q: { "court_id_eq" => @court.id } ), class: "btn btn-large"
+  = link_to "庭期列表", admin_schedules_path(q: { "court_id_eq" => @court.id } ), class: "btn btn-large"
+  = link_to "編輯", edit_admin_court_path(@court), class: "btn btn-large btn-success"
+  = link_to "刪除", admin_court_path(@court), method: :delete, class: "btn btn-large btn-danger"
+
+= admin_widget_box "#{@court.name}資料", icon: :th do
+  table.table.table-bordered.table-striped.table-hover
+    tbody
+      tr
+        td 全名
+        td= @court.full_name
+      tr
+        td 前台顯示簡稱
+        td= @court.name
+      tr
+        td 類型
+        td= @court.court_type
+      tr
+        td 顯示權重
+        td= @court.weight
+      tr
+        td 是否在前端隱藏
+        td= @court.is_hidden? ? "是" : "否"
+      tr
+        td 代碼
+        td= @court.code
+      tr
+        td 新增時間
+        td= @court.created_at
+      tr
+        td 最後更新時間
+        td= @court.updated_at

@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: banners
+#
+#  id         :integer          not null, primary key
+#  pic_l      :string
+#  pic_m      :string
+#  pic_s      :string
+#  weight     :integer
+#  is_hidden  :boolean
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Admin::BannersController < Admin::BaseController
   before_action :banner
   before_action(except: [:index]){ add_crumb("首頁橫幅列表", admin_banners_path) }

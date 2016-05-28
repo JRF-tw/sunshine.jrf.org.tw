@@ -4,7 +4,14 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
 
   devise_for :users
-  
+
+  devise_for :defendants, controllers: { registrations: 'defendants/registrations', sessions: 'defendants/sessions' }
+  devise_scope :defendant do
+    post  '/defendants/check_sign_up_info', to: 'defendants/registrations#check_sign_up_info'
+  end
+
+  devise_for :bystanders, controllers: { registrations: 'bystander/registrations', sessions: 'bystander/sessions', passwords: 'bystander/passwords' }
+
   root to: "base#index", only: [:show]
   get '/robots.txt', to: "base#robots", defaults: { format: "text" }
 
@@ -23,6 +30,12 @@ Rails.application.routes.draw do
   resources :profiles do
     resources :awards
     resources :punishments
+  end
+
+  resources :bystanders
+
+  namespace :defendants do
+    root to: "base#index"
   end
 
   namespace :api, defaults: { format: 'json' } do
@@ -51,5 +64,16 @@ Rails.application.routes.draw do
     resources :banners
     resources :suit_banners
     resources :users
+    resources :stories
+    resources :schedules
+    resources :judges
+    resources :lawyers
+    resources :verdicts do
+      member do
+        get :download_file
+      end
+    end
+    resources :bystanders, only: [:index, :show]
+    resources :defendants, only: [:index, :show]
   end
 end

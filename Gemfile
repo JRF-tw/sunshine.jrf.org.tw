@@ -30,6 +30,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'asset_sync'
 gem 'chosen-rails', "~> 1.2.0"
+gem "select2-rails"
 
 # background jobs
 gem 'sidekiq'
@@ -79,6 +80,7 @@ group :development do
   gem 'spring'
   gem 'venus', git: "git@github.com:marsz/venus.git", branch: 'v1.0'
   gem 'rename'
+  gem 'byebug'
 end
 
 group :development, :test do
@@ -126,3 +128,6 @@ gem 'sitemap_generator'
 gem 'ransack'
 
 gem 'smarter_csv', '~> 1.1'
+gem 'mechanize'
+gem 'iconv'
+gem 'slack-notifier'

@@ -1,0 +1,61 @@
+
+= admin_widget_box "#{@verdict.story.identity} - 判決書", icon: :th do
+  table.table.table-bordered.table-striped.table-hover
+    tbody
+      tr
+        td 所屬法院
+        td= link_to "#{@verdict.story.court.full_name}", admin_court_path(@verdict.story.court)
+      tr
+        td 案件
+        td= link_to "#{@verdict.story.identity}", admin_story_path(@verdict.story)
+      tr
+        td 宣判日期
+        td= @verdict.adjudge_date
+      tr
+        td 是否為判決
+        td= @verdict.is_judgment ? "是" : "否"
+      tr
+        td 審判長法官
+        td= @verdict.main_judge ? link_to(@verdict.main_judge.name, admin_judge_path(@verdict.main_judge)) : @verdict.main_judge_name
+      tr
+        td 分析檢察官結果
+        td= @verdict.prosecutor_names.join(",")
+      tr
+        td 陪審檢察官
+        td= link_to "TODO 檢察官資訊頁面", "#"
+      tr
+        td 分析律師結果
+        td= @verdict.lawyer_names.join(",")
+      tr
+        td 陪審律師
+        td
+          - @verdict.lawyers.each do |lawyer|
+            = link_to "#{lawyer.name} ", admin_lawyer_path(lawyer)
+            = " "
+      tr
+        td 分析陪審法官結果
+        td= @verdict.judges_names.join(",")
+      tr
+        td 陪審法官
+        td
+          - @verdict.judges.each do |judge|
+            = link_to "#{judge.name} ", admin_judge_path(judge)
+            = " "
+      tr
+        td 分析當事人結果
+        td= @verdict.defendant_names.join(",")
+      tr
+        td 陪審當事人
+        td
+          - @verdict.defendants.each do |defendant|
+            = link_to "#{defendant.name} ", admin_defendant_path(defendant)
+            = " "
+      tr
+        td 文件下載
+        td= link_to "點我下載", download_file_admin_verdict_path(@verdict) if @verdict.file
+      tr
+        td 新增時間
+        td= @verdict.created_at
+      tr
+        td 最後修改時間
+        td= @verdict.updated_at

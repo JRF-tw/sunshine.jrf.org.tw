@@ -1,0 +1,66 @@
+- content_for :btns do
+  = link_to "庭期列表", admin_schedules_path(q: { "story_id_eq" => @story.id } ), class: "btn btn-large"
+
+
+= admin_widget_box "#{@story.identity}資料", icon: :th do
+  table.table.table-bordered.table-striped.table-hover
+    tbody
+      tr
+        td #
+        td= @story.id
+      tr
+        td 所屬法院
+        td= link_to "#{@story.court.full_name}", admin_court_path(@story.court)
+      tr
+        td 年度
+        td= @story.year
+      tr
+        td 字別
+        td= @story.word_type
+      tr
+        td 案號
+        td= @story.number
+      tr
+        td 案件類別
+        td= @story.story_type
+      tr
+        td 審判長法官
+        td= link_to "#{@story.main_judge.name}", admin_judge_path(@story.main_judge) if @story.main_judge
+      tr
+        td 與案件相關法官
+        td
+          - @story.by_relation_judges.each do |sr|
+            = link_to "#{sr.people.name} ", admin_judge_path(sr.people)
+            = " "
+      tr
+        td 與案件相關檢察官
+        td= link_to "TODO 尚未實作檢察官", "#"
+
+      tr
+        td 與案件相關律師
+        td
+          - @story.by_relation_lawyers.each do |sr|
+            = link_to "#{sr.people.name} ", admin_lawyer_path(sr.people)
+            = " "
+      tr
+        td 與案件相關當事人
+        td
+          - @story.by_relation_defendants.each do |sr|
+            = link_to "#{sr.people.name} ", admin_defendant_path(sr.people)
+            = " "
+      tr
+        td 是否已宣判
+        td= @story.is_adjudge ? "已宣判" : ""
+      tr
+        td 判決日期
+        td= @story.adjudge_date
+      tr
+        td 是否有判決書
+        td
+          = link_to "是", admin_verdict_path(@story.judgment_verdict) if @story.judgment_verdict
+      tr
+        td 新增日期
+        td= @story.created_at
+      tr
+        td 最後修改日期
+        td= @story.updated_at

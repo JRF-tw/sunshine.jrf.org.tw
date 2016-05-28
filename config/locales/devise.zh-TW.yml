@@ -12,7 +12,7 @@ zh-TW:
       invalid: "信箱或密碼是無效的。"
       locked: "您的帳號已被鎖定。"
       last_attempt: "您還有最後一次嘗試機會，再次失敗您的帳號將會被鎖定。"
-      not_found_in_database: "信箱或密碼是無效的。"
+      not_found_in_database: "輸入資訊是無效的。"
       timeout: "您的登入時效過期，請重新登入。"
       unauthenticated: "您需要先登入或註冊後才能繼續。"
       unconfirmed: "您的帳號需需要經過驗證後，才能繼續。"
@@ -40,6 +40,7 @@ zh-TW:
       signed_up_but_unconfirmed: "確認信件已送至您的 Email 信箱，請點擊信件內連結以啓動您的帳號。"
       update_needs_confirmation: "您已經成功的更新帳號資訊，但我們仍需確認您的電子信箱，請至新信箱收信並點擊連結以確認您的新電子郵件帳號。"
       updated: "您已經成功的更新帳號資訊。"
+      signed_up_failed: "輸入資訊錯誤。"
     sessions:
       signed_in: "成功登入了。"
       signed_out: "成功登出了。"

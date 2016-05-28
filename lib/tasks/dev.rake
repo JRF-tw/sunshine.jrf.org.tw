@@ -11,6 +11,7 @@ namespace :dev do
     "dev:fake_users",
     "dev:fake_courts",
     "dev:fake_profiles",
+    "dev:fake_judges",
     "dev:fake_educations",
     "dev:fake_careers",
     "dev:fake_licenses",
@@ -22,7 +23,11 @@ namespace :dev do
     "dev:fake_procedures",
     "dev:fake_punishments",
     "dev:fake_banners",
-    "dev:fake_suit_banners"
+    "dev:fake_suit_banners",
+    "dev:fake_stories",
+    "dev:fake_schedules",
+    "dev:fake_lawyers",
+    "dev:fake_verdicts"
   ]
 
   task :fake_users => :environment do
@@ -33,7 +38,7 @@ namespace :dev do
 
   task :fake_courts => :environment do
     Court.destroy_all
-    court_type = Admin::Court::COURT_TYPES.sample
+    court_type = ["法院", "檢察署"].sample
     judge_name_hash = { "臺灣基隆地方法院": "基隆地院", "臺灣臺北地方法院": "臺北地院", "臺灣士林地方法院": "士林地院", "臺灣新北地方法院": "新北地院", "臺灣宜蘭地方法院": "宜蘭地院" }
     prosecutor_name_hash = { "臺灣臺北地方法院檢察署": "臺北地檢署", "臺灣彰化地方法院檢察署": "彰化地檢署", "臺灣臺南地方法院檢察署": "臺南地檢署", "臺灣臺中地方法院檢察署": "臺中地檢署" }
     judge_name_hash.each do |k, v|
@@ -50,13 +55,35 @@ namespace :dev do
     prosecutor_name = ["郭耿妹", "蔡宜玉", "賴枝仰", "李孟霞", "洪偉裕", "張育如", "黃秀琴", "吳秀芬", "周哲銘", "施依婷", "賴元士", "王珮瑜"]
     judge_name.each_with_index do |n, i|
       file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-#{i+1}.jpg"
-      Admin::Profile.create!(name: n, current: "法官", gender: Admin::Profile::GENDER_TYPES.sample, birth_year: (50..70).to_a.sample, avatar: file, is_active:true, is_hidden: false)
+      Admin::Profile.create!(name: n, current: "法官", gender: User::GENDER_TYPES.sample, birth_year: rand(50..70), avatar: file, is_active:true, is_hidden: false)
     end
     prosecutor_name.each_with_index do |n, i|
       file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-#{i+13}.jpg"
-      Admin::Profile.create!(name: n, current: "檢察官", gender: Admin::Profile::GENDER_TYPES.sample, birth_year: (50..70).to_a.sample, avatar: file, is_active:true, is_hidden: false)
+      Admin::Profile.create!(name: n, current: "檢察官", gender: User::GENDER_TYPES.sample, birth_year: rand(50..70), avatar: file, is_active:true, is_hidden: false)
     end
   end
+
+  task :fake_judges => :environment do
+    Judge.destroy_all
+    judge_name = ["連添泰", "蕭健銘", "謝孟蓮", "陳信宏", "趙定輝", "賴雅婷", "梁貴鑫", "林旭弘", "陳宛臻", "陳幸愛", "李欣宸", "阮宜臻"]
+    gender = ["男", "女", "其他"]
+    judge_name.each_with_index do |n, i|
+      file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-23.jpg"
+      Court.get_courts.sample.judges.create!(name: n, gender: gender.sample, birth_year: (50..70).to_a.sample, avatar: file, is_active:true, is_hidden: false)
+    end
+  end  
+
+
+  task :fake_lawyers => :environment do
+    Lawyer.destroy_all
+    lawyer_name = ["謝祖武" , "陳金城", "王定輝", "張耀仁", "蔡有訓", "游志嘉", "陳昊", "林哲毓", "方勇正", "王雪徵", "卓俊瑋"]
+    current = ["土城事務所", "三重事務所", "金山事務所", "萬里事務所", "板橋事務所", "新莊事務所", "士林事務所"]
+    gender = ["男", "女", "其他"]
+    file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-#{rand(1..10)}.jpg"
+    lawyer_name.each do |n|
+      Lawyer.create!(name: n, current: current.sample, gender: gender.sample, birth_year: rand(50..70), avatar: file)
+    end
+  end       
 
   task :fake_educations => :environment do
     Education.destroy_all
@@ -133,7 +160,7 @@ namespace :dev do
   task :fake_judgments => :environment do
     Judgment.destroy_all
     50.times do |i|
-      court = Admin::Court.judges.sample
+      court = Admin::Court.get_courts.sample
       presiding_judge = Admin::Profile.judges.sample
       main_judge = Admin::Profile.judges.sample
       judge_nos = ["我的願構調王出#{i}", "那作之所好能一地#{i}", "新布類系眼美成的子#{i}", "晚適事制質一銷可麗民#{i}", "色手黃備型食勢我成原動#{i}"]
@@ -226,4 +253,43 @@ namespace :dev do
       )
     end
   end
+
+  task :fake_stories => :environment do
+    Story.destroy_all
+    main_judge = Admin::Judge.all
+    10.times do |i|
+      Court.all.get_courts.sample.stories.create!(
+        story_type: ["民事", "邢事"].sample,
+        year: rand(70..105),
+        word_type: ["生", "老", "病", "死"].sample,
+        number: rand(100..999),
+        main_judge_id: main_judge.sample.id,
+        adjudge_date: rand(5).years.ago
+      )
+    end
+  end
+
+  task :fake_verdicts => :environment do
+    Verdict.destroy_all
+    content = 
+      "整術是少，士檢度公別據一如稱會還裡房人別你信、亞陽大統半現立良上大力的質參數士金，供的才星叫未上並現小成成失的在須國人銀色想實故。是成理工雖想先上初開子來做入望！在行而頭想很生？建設而於調灣學輪！手要變燈決！
+
+      業友今個？中心問了王起反？"
+    
+    5.times do |i|
+      Story.all.sample.verdicts.create!(content: content, adjudge_date: rand(5).years.ago)
+    end
+  end    
+
+  task :fake_schedules => :environment do
+    Schedule.destroy_all
+    Story.all.each do |story|
+      story.court.schedules.create!(
+        branch_name: ["信", "愛" , "美", "德"].sample,
+        date: rand(5).years.ago,
+        story: story
+      )
+    end  
+  end    
+ 
 end

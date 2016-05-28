@@ -3,13 +3,13 @@
 # Table name: suits
 #
 #  id              :integer          not null, primary key
-#  title           :string(255)
+#  title           :string
 #  summary         :text
 #  content         :text
-#  state           :string(255)
-#  pic             :string(255)
+#  state           :string
+#  pic             :string
 #  suit_no         :integer
-#  keyword         :string(255)
+#  keyword         :string
 #  created_at      :datetime
 #  updated_at      :datetime
 #  is_hidden       :boolean

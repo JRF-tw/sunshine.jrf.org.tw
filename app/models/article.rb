@@ -4,23 +4,23 @@
 #
 #  id               :integer          not null, primary key
 #  profile_id       :integer
-#  article_type     :string(255)
+#  article_type     :string
 #  publish_year     :integer
 #  paper_publish_at :date
 #  news_publish_at  :date
-#  book_title       :string(255)
-#  title            :string(255)
-#  journal_no       :string(255)
-#  journal_periods  :string(255)
+#  book_title       :string
+#  title            :string
+#  journal_no       :string
+#  journal_periods  :string
 #  start_page       :integer
 #  end_page         :integer
-#  editor           :string(255)
-#  author           :string(255)
-#  publisher        :string(255)
-#  publish_locat    :string(255)
-#  department       :string(255)
-#  degree           :string(255)
-#  source           :string(255)
+#  editor           :string
+#  author           :string
+#  publisher        :string
+#  publish_locat    :string
+#  department       :string
+#  degree           :string
+#  source           :text
 #  memo             :text
 #  created_at       :datetime
 #  updated_at       :datetime

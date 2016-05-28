@@ -136,8 +136,8 @@ module ApplicationHelper
     hash
   end
 
-  def collection_for_judges
-    Court.judges.order_by_weight.map{ |c| c.full_name }.unshift("全部法院")
+  def collection_for_courts
+    Court.get_courts.order_by_weight.map{ |c| c.full_name }.unshift("全部法院")
   end
 
   def collection_for_prosecutors
@@ -173,4 +173,44 @@ module ApplicationHelper
     end
     return arr.join(" ")
   end
+
+  def collect_for_story_types
+    Story.all.map(&:story_type).uniq.compact
+  end
+
+  def collect_for_schedule_branch_names
+    Schedule.all.map(&:branch_name).uniq
+  end
+
+  def collect_for_court_types
+    Court.all.map(&:court_type).uniq.compact
+  end
+
+  def collect_for_courts
+    Court.get_courts.map{ |c| [c.full_name, c.id] }
+  end
+
+  def collect_for_judges_name
+    Judge.all.includes(:branches).map do |j|
+      ["#{j.name} - #{j.branches.current.map(&:name).join(", ")}", j.id]
+    end
+  end
+
+  def collect_for_lawyer_currents
+    Lawyer.all.map(&:current).uniq
+  end
+
+  def collect_gender_by_user
+    User::GENDER_TYPES
+  end
+
+  def collect_for_judgement_type
+    [["是", true], ["否 (為裁決)", false]]
+  end
+
+  def collect_for_boolean
+    [["是", true], ["否", false]]
+  end
+
 end
+

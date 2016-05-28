@@ -10,10 +10,6 @@ class ApplicationController < ActionController::Base
 
   layout :layout_by_resource
 
-  def after_sign_in_path_for(resource)
-    stored_location_for(resource) || admin_root_path
-  end
-
   private
 
   def http_auth_for_staging
@@ -24,10 +20,15 @@ class ApplicationController < ActionController::Base
   end
 
   def layout_by_resource
-    "admin" if devise_controller?
+    if devise_controller? && resource_name == :user
+      'admin'
+    elsif devise_controller? && resource_name == :bystander
+      'bystander'
+    end
   end
 
   def not_found
     raise ActionController::RoutingError.new('Not Found')
   end
+
 end

@@ -1,0 +1,22 @@
+doctype 5
+html
+  head
+    = display_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+
+  body class="#{yield :body_classes}"
+    .page-wrapper class='base-page-wrapper'
+      - if current_defendant
+        = "當事人 #{current_defendant.name} | "
+        = link_to('登出', destroy_defendant_session_path, :method => :delete)
+      - else
+        = link_to('註冊', new_defendant_registration_path)
+        = link_to('登入', new_session_path(:defendant))
+      - flash.each do |k, message|
+        div class= "alert fade in alert-#{k}"
+          a.close data-dismiss="alert" href="#"
+          = message
+
+      main.main role='main' = yield

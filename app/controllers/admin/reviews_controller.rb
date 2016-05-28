@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: reviews
+#
+#  id         :integer          not null, primary key
+#  profile_id :integer
+#  publish_at :date
+#  name       :string
+#  title      :string
+#  content    :text
+#  comment    :text
+#  no         :string
+#  source     :text
+#  file       :string
+#  memo       :text
+#  created_at :datetime
+#  updated_at :datetime
+#  is_hidden  :boolean
+#
+
 class Admin::ReviewsController < Admin::BaseController
   before_action :review
   before_action{ add_crumb("個人檔案列表", admin_profiles_path) }
