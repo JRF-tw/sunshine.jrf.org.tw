@@ -34,6 +34,7 @@ FactoryGirl.define do
     name "不理不理左衛門"
     sequence(:email) { |n| "bystander_without_prove-#{n}@test.com"}
     password "123123123"
+    confirmation_token "token"
   end
 
 end
