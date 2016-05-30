@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   end
 
   devise_for :bystanders, controllers: { registrations: 'bystander/registrations', sessions: 'bystander/sessions', passwords: 'bystander/passwords' }
+  authenticated :bystander do
+    root to: "bystanders#index",  as: :bystander_root
+  end
 
   root to: "base#index", only: [:show]
   get '/robots.txt', to: "base#robots", defaults: { format: "text" }
