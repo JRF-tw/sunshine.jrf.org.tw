@@ -270,7 +270,7 @@ zh-TW:
         unexist_lawyer_names: "律師為空值"
         unexist_judges_names: "陪審法官為空值"
         unexist_prosecutor_names: "檢察官為空值"
-        main_judge_name_null: "審判長法官為空值"
+        main_judge_name_present: "有無審判長法官"
         is_judgment_true: "是否為判決"
       schedule:
         branch_judge_id_eq: "股別法官名稱"
