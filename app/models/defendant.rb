@@ -27,6 +27,9 @@ class Defendant < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   devise :authentication_keys => [ :identify_number ]
 
+  validates :name, presence: true
+  validates :identify_number, length: { is: 10 }, presence: true, uniqueness: true
+
   has_many :defendant_verdicts
   has_many :verdicts, through: :defendant_verdicts
   has_many :story_relations, as: :people
