@@ -19,15 +19,4 @@ RSpec.describe Defendants::RegistrationsController, type: :request do
       it { expect(subject).to redirect_to("/defendants/sign_up") }
     end
   end
-
-  describe "#check_sign_up_info" do
-    context "success" do
-      subject!{ post "/defendants/check_sign_up_info", defendant: { name: "xxxx", identify_number: "A111111111" } }
-      it { expect(response).to be_success }
-    end
-
-    context "not success" do
-      xit "缺少資訊, should be false"
-    end
-  end
 end

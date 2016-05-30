@@ -3,7 +3,7 @@
     h5 當事人註冊
   .widget-content.nopadding
 
-    = simple_form_for(resource, as: resource_name, url:  defendants_check_sign_up_info_path, method: :post ) do |f|
+    = simple_form_for(resource, as: resource_name, url:  defendant_registration_path, method: :post ) do |f|
       = f.error_notification
       .form-group
         label.control-label 姓名
@@ -11,6 +11,12 @@
       .form-group
         label.control-label 身分證字號
         = f.input :identify_number, required: true, :label => false
+      .form-group
+        label.control-label 密碼
+        = f.input :password, required: true, :label => false
+      .form-group
+        label.control-label 密碼確認
+        = f.input :password_confirmation, required: true, :label => false
 
       .form-actions
         input.btn.btn-primary type="submit" value="下一步"

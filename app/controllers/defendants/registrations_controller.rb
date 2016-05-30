@@ -2,12 +2,6 @@ class Defendants::RegistrationsController < Devise::RegistrationsController
   layout 'defendant'
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  # POST /resource/check_sign_up_info
-  def check_sign_up_info
-    build_resource(sign_up_params)
-    render "defendants/registrations/sign_up_password"
-  end
-
   # POST /resource
   def create
     build_resource(sign_up_params)
