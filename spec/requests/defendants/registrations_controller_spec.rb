@@ -11,23 +11,49 @@ RSpec.describe Defendants::RegistrationsController, type: :request do
       it { expect(subject).to redirect_to("/defendants") }
     end
 
-    context "failed" do
-      let!(:params){ attributes_for(:defendant_for_create).merge(password_confirmation: "xxxxx") }
+    context "nil params" do
+      let!(:params){ {} }
       subject { post "/defendants", defendant: params }
 
       it { expect { subject }.not_to change{ Defendant.count } }
       it { expect(subject).to redirect_to("/defendants/sign_up") }
     end
-  end
 
-  describe "#check_sign_up_info" do
-    context "success" do
-      subject!{ post "/defendants/check_sign_up_info", defendant: { name: "xxxx", identify_number: "A111111111" } }
-      it { expect(response).to be_success }
+    context "name empty" do
+      let!(:params){ attributes_for(:defendant_for_create).merge(name: "") }
+      subject { post "/defendants", defendant: params }
+
+      it { expect { subject }.not_to change{ Defendant.count } }
     end
 
-    context "not success" do
-      xit "缺少資訊, should be false"
+    context "identify_number length != 10" do
+      let!(:params){ attributes_for(:defendant_for_create).merge(identify_number: "123123213") }
+      subject { post "/defendants", defendant: params }
+
+      it { expect { subject }.not_to change{ Defendant.count } }
+    end
+
+    context "identify_number nil" do
+      let!(:params){ attributes_for(:defendant_for_create).merge(identify_number: "") }
+      subject { post "/defendants", defendant: params }
+
+      it { expect { subject }.not_to change{ Defendant.count } }
+    end
+
+    context "identify_number exist" do
+      let!(:defendant) { FactoryGirl.create :defendant }
+      let!(:params){ attributes_for(:defendant_for_create).merge(identify_number: defendant.identify_number) }
+      subject { post "/defendants", defendant: params }
+
+      it { expect { subject }.not_to change{ Defendant.count } }
+    end
+
+    context "password caheck failed" do
+      let!(:defendant) { FactoryGirl.create :defendant }
+      let!(:params){ attributes_for(:defendant_for_create).merge(password_confirmation: "wrong_password") }
+      subject { post "/defendants", defendant: params }
+
+      it { expect { subject }.not_to change{ Defendant.count } }
     end
   end
 end

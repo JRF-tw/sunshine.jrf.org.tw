@@ -15,8 +15,30 @@ RSpec.describe Defendants::SessionsController, type: :request do
         it { expect(response).to redirect_to("/defendants") }
       end
 
-      context "login failed" do
-        let!(:params) { { identify_number: defendant.identify_number, password: "xxxxx" } }
+      context "identify_number nil" do
+        let!(:params) { { identify_number: "", password: defendant.password } }
+        subject!{ post "/defendants/sign_in", defendant: params }
+
+        it { expect(response).to be_success }
+        it { expect(defendant.last_sign_in_at).to be_nil }
+      end
+
+      context "identify_number unexist" do
+        let!(:params) { { identify_number: "A11111111111", password: defendant.password } }
+        subject!{ post "/defendants/sign_in", defendant: params }
+
+        it { expect(response).to be_success }
+      end
+
+      context "password error" do
+        let!(:params) { { identify_number: defendant.identify_number, password: "" } }
+        subject!{ post "/defendants/sign_in", defendant: params }
+
+        it { expect(response).to be_success }
+      end
+
+      context "password error" do
+        let!(:params) { { identify_number: defendant.identify_number, password: "wrong password" } }
         subject!{ post "/defendants/sign_in", defendant: params }
 
         it { expect(response).to be_success }

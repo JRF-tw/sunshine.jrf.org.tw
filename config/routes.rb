@@ -6,10 +6,6 @@ Rails.application.routes.draw do
   devise_for :users
 
   devise_for :defendants, controllers: { registrations: 'defendants/registrations', sessions: 'defendants/sessions' }
-  devise_scope :defendant do
-    post  '/defendants/check_sign_up_info', to: 'defendants/registrations#check_sign_up_info'
-  end
-
   devise_for :bystanders, controllers: { registrations: 'bystander/registrations', sessions: 'bystander/sessions', passwords: 'bystander/passwords' }
   authenticated :bystander do
     root to: "bystanders#index",  as: :bystander_root

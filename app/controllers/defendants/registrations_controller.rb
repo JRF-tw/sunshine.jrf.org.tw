@@ -2,12 +2,6 @@ class Defendants::RegistrationsController < Devise::RegistrationsController
   layout 'defendant'
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  # POST /resource/check_sign_up_info
-  def check_sign_up_info
-    build_resource(sign_up_params)
-    render "defendants/registrations/sign_up_password"
-  end
-
   # POST /resource
   def create
     build_resource(sign_up_params)
@@ -26,7 +20,7 @@ class Defendants::RegistrationsController < Devise::RegistrationsController
     else
       clean_up_passwords resource
       set_minimum_password_length
-      set_flash_message :notice, :"signed_up_failed" if is_flashing_format?
+      flash[:notice] = resource.errors.full_messages
       redirect_to new_defendant_registration_path
     end
   end
