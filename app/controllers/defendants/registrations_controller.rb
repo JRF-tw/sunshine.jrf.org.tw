@@ -20,7 +20,7 @@ class Defendants::RegistrationsController < Devise::RegistrationsController
     else
       clean_up_passwords resource
       set_minimum_password_length
-      set_flash_message :notice, :"signed_up_failed" if is_flashing_format?
+      flash[:notice] = resource.errors.full_messages
       redirect_to new_defendant_registration_path
     end
   end

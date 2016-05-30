@@ -15,6 +15,7 @@ zh-TW:
       procedure: "評鑑資料-案例處理經過"
       banner: "首頁橫幅"
       suit_banner: "司法案例面面觀橫幅"
+      defendant: "當事人"
     attributes:
       court:
         court_type: "類型"
@@ -232,6 +233,12 @@ zh-TW:
         content: "內文"
         weight: "權重"
         is_hidden: "隱藏"
+      defendant:
+        id: "流水號"
+        name: "姓名"
+        identify_number: "身分證字號"
+        phone_number: "手機號碼"
+        password: "密碼"
   ransack:
     attributes:
       profile:
@@ -282,7 +289,7 @@ zh-TW:
         name_cont: "姓名包含"
         email_cont: "EmaiL包含"
       defendant:
-          name_cont: "姓名包含"
+        name_cont: "姓名包含"
   devise:
     registrations:
       bystander:
