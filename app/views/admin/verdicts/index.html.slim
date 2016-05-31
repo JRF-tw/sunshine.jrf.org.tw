@@ -26,8 +26,9 @@
       .row
         .span6
           .control-group
-            label.control-label= f.label :main_judge_name_null
-            .controls= f.check_box :main_judge_name_null
+            label.control-label= f.label :main_judge_name_present
+            .controls= f.select :main_judge_name_present,
+            collect_for_main_judge_present, include_blank: "請選擇"
       .row
         .span6
           .control-group

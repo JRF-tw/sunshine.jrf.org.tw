@@ -30,7 +30,7 @@
         td 與案件相關法官
         td
           - @story.by_relation_judges.each do |sr|
-            = link_to "#{sr.people.name} ", admin_judge_path(sr.people)
+            = link_to "#{sr.people.try(:name)} ", admin_judge_path(sr.people)
             = " "
       tr
         td 與案件相關檢察官
