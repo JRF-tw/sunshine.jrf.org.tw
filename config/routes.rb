@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   devise_for :defendants, controllers: { registrations: 'defendants/registrations', sessions: 'defendants/sessions' }
-  devise_for :bystanders, controllers: { registrations: 'bystander/registrations', sessions: 'bystander/sessions', passwords: 'bystander/passwords' }
+  devise_for :bystanders, controllers: { registrations: 'bystander/registrations', sessions: 'bystander/sessions', passwords: 'bystander/passwords', confirmations: 'bystander/confirmations'}
   authenticated :bystander do
     root to: "bystanders#index",  as: :bystander_root
   end
