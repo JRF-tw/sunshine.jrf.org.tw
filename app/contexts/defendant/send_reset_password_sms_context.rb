@@ -15,6 +15,7 @@ class Defendant::SendResetPasswordSmsContext < BaseContext
     run_callbacks :perform do
       return add_error(:data_update_fail, "未能重設密碼") unless can_reset_password?
       SlackService.fake_defendant_reset_password_notify_async(@message)
+      true
       ## SmsService.send_async(@message, @defendant.phone_number)
     end
   end
