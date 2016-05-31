@@ -11,15 +11,27 @@ describe Defendant::SendResetPasswordSmsContext do
     it { expect(subject.perform).to be_truthy }
   end
 
-  context "nil identify_number" do
-    let!(:params){ { identify_number: nil, phone_number: defendant.phone_number } }
+  context "wrong identify_number" do
+    let!(:params){ { identify_number: "A111111111", phone_number: defendant.phone_number } }
 
     it { expect { subject.perform }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
     it { expect(subject.perform).to be_falsey }
   end
 
+  context "nil identify_number" do
+    let!(:params){ { identify_number: nil, phone_number: defendant.phone_number } }
+
+    it { expect(subject.perform).to be_falsey }
+  end
+
   context "empty identify_number" do
     let!(:params){ { identify_number: "", phone_number: defendant.phone_number } }
+
+    it { expect(subject.perform).to be_falsey }
+  end
+
+  context "wrong phone_number" do
+    let!(:params){ { identify_number: defendant.identify_number, phone_number: "09xxxxxxxx" } }
 
     it { expect(subject.perform).to be_falsey }
   end
