@@ -13,6 +13,10 @@ class Defendants::PasswordsController < Devise::PasswordsController
 
   private
 
+  def after_sign_in_path_for(resource)
+    defendants_root_path
+  end
+
   def after_resetting_password_path_for(resource)
     defendants_root_path
   end
