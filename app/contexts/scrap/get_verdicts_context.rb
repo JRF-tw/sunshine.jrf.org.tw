@@ -4,9 +4,15 @@ class Scrap::GetVerdictsContext < BaseContext
 
   after_perform :record_intervel_to_daily_notify
 
+  class << self
+    def perform
+      new.perform
+    end
+  end
+
   def initialize
-    @start_date = Time.zone.today.strftime("%Y%m%d")
-    @end_date = Time.zone.today.strftime("%Y%m%d")
+    @start_date = Time.zone.today.strftime("%Y%m%d") - 5.days
+    @end_date = Time.zone.today.strftime("%Y%m%d") + 5.days
     @codes = Court.with_codes
   end
 
@@ -30,8 +36,6 @@ class Scrap::GetVerdictsContext < BaseContext
     response_data = Mechanize.new.get(INDEX_URI)
     response_data = Nokogiri::HTML(response_data.body)
     return response_data.css("input[type='radio']").map{ |row| row.attribute("value").value }.uniq
-  rescue => e
-    SlackService.notify_scrap_async("判決書爬取失敗: 取得裁判類別代號錯誤\n #{e.message}")
   end
 
   def total_result(court, type)
@@ -40,9 +44,6 @@ class Scrap::GetVerdictsContext < BaseContext
     response_data = Mechanize.new.get(RESULT_URI + request_query, {}, INDEX_URI)
     response_data = Nokogiri::HTML(response_data.body)
     return response_data.content.match(/共\s*([0-9]*)\s*筆/)[1].to_i
-  rescue => e
-    SlackService.notify_scrap_async("判決書爬取失敗: 判決書搜尋頁面為錯誤頁面\n court : #{court.code}\n type : #{type})\n #{e.message}")
-    return 0
   end
 
   def record_intervel_to_daily_notify
