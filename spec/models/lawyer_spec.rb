@@ -14,5 +14,10 @@ RSpec.describe Lawyer  do
       subject!{ lawyer }
       it { expect(lawyer.avatar).to be_present }
     end
+
+    describe "#need_update_info?" do
+      subject { lawyer.update_attributes(current: "xxxx") }
+      it { expect{ subject }.to change { lawyer.reload.need_update_info? }.from(true).to(false) }
+    end
   end
 end
