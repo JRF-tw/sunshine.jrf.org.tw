@@ -81,7 +81,7 @@ namespace :dev do
     gender = ["男", "女", "其他"]
     file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-#{rand(1..10)}.jpg"
     lawyer_name.each do |n|
-      Lawyer.create!(name: n, current: current.sample, gender: gender.sample, birth_year: rand(50..70), avatar: file)
+      Lawyer.create!(email: "lawyer-#{lawyer_name.index(n)}@example.com",password: "11111111", name: n, current: current.sample, gender: gender.sample, birth_year: rand(50..70), avatar: file)
     end
   end       
 

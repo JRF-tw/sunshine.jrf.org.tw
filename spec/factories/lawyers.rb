@@ -16,9 +16,15 @@
 FactoryGirl.define do
   factory :lawyer do
     name "lawyer"
+    sequence(:email) { |n| "bystander-#{n}@test.com"}
 
     trait :with_avatar do
       avatar File.open "#{Rails.root}/spec/fixtures/person_avatar/people-1.jpg"
+    end
+
+    trait :with_password_and_confirmed do
+      password "123123123"
+      confirmed_at Time.now
     end
 
     trait :with_gender do

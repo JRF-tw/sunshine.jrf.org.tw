@@ -42,6 +42,10 @@ zh-TW:
       update_needs_confirmation: "您已經成功的更新帳號資訊，但我們仍需確認您的電子信箱，請至新信箱收信並點擊連結以確認您的新電子郵件帳號。"
       updated: "您已經成功的更新帳號資訊。"
       signed_up_failed: "輸入資訊錯誤。"
+      lawyer_not_found: "查無律師資料 請改以人工管道註冊帳號"
+      lawyer_already_sign_up: "該資料已經註冊 請直接登入"
+      name_blank: "姓名 不可為空白"
+      email_blank: "email 不可以為空白"
     sessions:
       signed_in: "成功登入了。"
       signed_out: "成功登出了。"
