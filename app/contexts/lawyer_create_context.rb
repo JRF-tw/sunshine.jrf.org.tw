@@ -1,5 +1,5 @@
 class LawyerCreateContext < BaseContext
-  PERMITS = [:name, :current, :avatar, :gender, :birth_year, :memo].freeze
+  PERMITS = [:name, :current, :avatar, :gender, :birth_year, :memo, :email].freeze
   
   before_perform :build_lawyer
   attr_reader :lawyer
