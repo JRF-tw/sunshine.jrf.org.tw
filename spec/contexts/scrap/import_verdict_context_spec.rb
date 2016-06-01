@@ -7,7 +7,7 @@ RSpec.describe Scrap::ImportVerdictContext, :type => :model do
   let!(:orginal_data) { Mechanize.new.get(Scrap::ParseVerdictContext::VERDICT_URI).body.force_encoding("UTF-8") }
   let!(:content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/judgment_content.txt") }
   let!(:word) { "105,上易緝,2" }
-  let!(:publish_date) { "1050418" }
+  let!(:publish_date) { Date.today }
   let!(:stroy_type) { "刑事" }
 
   describe "#perform" do

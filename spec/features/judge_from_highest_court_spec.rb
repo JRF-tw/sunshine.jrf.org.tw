@@ -9,7 +9,7 @@ describe "從最高法院的判決書中爬取審判長法官，並且檢查建�
     let!(:orginal_data) { File.open("#{Rails.root}/spec/fixtures/scrap_data/highest_verdict.htm") }
     let!(:verdict_content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/highest_verdict_content.txt") }
     let!(:verdict_word) { "105,台上,1159" }
-    let!(:verdict_publish_date) { "1050512" }
+    let!(:verdict_publish_date) { Date.today }
     let!(:verdict_stroy_type) { "刑事" }
     subject{ Scrap::ImportVerdictContext.new(court, orginal_data, verdict_content, verdict_word, verdict_publish_date, verdict_stroy_type).perform }
 
@@ -62,7 +62,7 @@ describe "從最高法院的判決書中爬取審判長法官，並且檢查建�
     let!(:orginal_data) { File.open("#{Rails.root}/spec/fixtures/scrap_data/judgment.html") }
     let!(:verdict_content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/judgment_content.txt") }
     let!(:verdict_word) { "105,上易緝,2" }
-    let!(:verdict_publish_date) { "1050418" }
+    let!(:verdict_publish_date) { Date.today }
     let!(:verdict_stroy_type) { "刑事" }
     subject{ Scrap::ImportVerdictContext.new(court1, orginal_data, verdict_content, verdict_word, verdict_publish_date, verdict_stroy_type).perform }
 
