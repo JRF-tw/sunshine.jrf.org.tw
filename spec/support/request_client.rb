@@ -49,4 +49,8 @@ module RequestClient
     @current_defendant
   end
 
+  def current_lawyer
+    @current_lawyer
+  end
+
 end
