@@ -11,7 +11,7 @@ RSpec.describe Scrap::ParseSchedulesContext, :type => :model do
 
   describe "#perform" do
     subject{ described_class.new(court.code, story_type, current_page, page_total, start_date_format, end_date_format).perform }
-    it { raise subject.inspect }
+
     it { expect{ subject }.to change_sidekiq_jobs_size_of(Scrap::ImportScheduleContext, :perform) }
   end
 end
