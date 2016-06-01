@@ -4,6 +4,12 @@ class Scrap::GetCourtsContext < BaseContext
   before_perform  :check_db_data_and_notify
   after_perform   :record_intervel_to_daily_notify
 
+  class << self
+    def perform
+      new.perform
+    end
+  end
+
   def perform
     run_callbacks :perform do
       @scrap_data.each do |court_data|
@@ -21,8 +27,6 @@ class Scrap::GetCourtsContext < BaseContext
     parse_courts_data(response_data).each do |data|
       @scrap_data << { scrap_name: data.text, code: data.attr("value").gsub(data.text, "").squish }
     end
-  rescue => e
-    SlackService.notify_scrap_async("法院爬取失敗: 取得法院資料錯誤\n #{e.message}")
   end
 
   def parse_courts_data(response_data)
