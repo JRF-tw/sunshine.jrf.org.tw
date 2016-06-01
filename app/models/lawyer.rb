@@ -23,6 +23,10 @@ class Lawyer < ActiveRecord::Base
   validates_presence_of :name
   mount_uploader :avatar, ProfileAvatarUploader
 
+  def need_update_info?
+    !current
+  end
+
   def password_required?
     super if confirmed?
   end

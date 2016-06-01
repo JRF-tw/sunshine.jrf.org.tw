@@ -46,6 +46,9 @@ Rails.application.routes.draw do
 
   namespace :lawyers do
     root to: "base#index"
+    get "profile", to: "base#profile"
+    get "edit-profile", to: "base#edit_profile"
+    post "update_profile", to: "base#update_profile"
   end
 
   namespace :defendants do
