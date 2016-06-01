@@ -3,7 +3,7 @@
 # Table name: lawyers
 #
 #  id         :integer          not null, primary key
-#  name       :string
+#  name       :string           not null
 #  current    :string
 #  avatar     :string
 #  gender     :string
