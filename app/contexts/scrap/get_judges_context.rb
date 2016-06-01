@@ -9,7 +9,7 @@ class Scrap::GetJudgesContext < BaseContext
 
   class << self
     def perform
-      delay.new.perform
+      new.perform
     end
   end
 
@@ -28,8 +28,6 @@ class Scrap::GetJudgesContext < BaseContext
     response_data = Mechanize.new.get(scrap_file_url)
     response_data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
     @data = response_data.css("body p").text.split("\n")
-  rescue => e
-    SlackService.notify_scrap_async("法官爬取失敗: 取得csv文件錯誤\n #{e.message}")
   end
 
   def get_diff_import_daily_branch

@@ -3,7 +3,7 @@
 # Table name: lawyers
 #
 #  id         :integer          not null, primary key
-#  name       :string
+#  name       :string           not null
 #  current    :string
 #  avatar     :string
 #  gender     :string
@@ -12,7 +12,6 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-
 
 class Admin::Lawyer < ::Lawyer
   validates_presence_of :name

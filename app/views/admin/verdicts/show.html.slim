@@ -51,6 +51,9 @@
             = link_to "#{defendant.name} ", admin_defendant_path(defendant)
             = " "
       tr
+        td 發布日期
+        td= @verdict.publish_date
+      tr
         td 文件下載
         td= link_to "點我下載", download_file_admin_verdict_path(@verdict) if @verdict.file
       tr

@@ -15,6 +15,7 @@
 #  adjudge_date     :date
 #  main_judge_id    :integer
 #  main_judge_name  :string
+#  publish_date     :date
 #
 
 class Verdict < ActiveRecord::Base
