@@ -5,12 +5,13 @@ RSpec.describe Scrap::ImportVerdictContext, :type => :model do
   let!(:judge) { FactoryGirl.create :judge, name: "施俊堯" }
   let!(:branch) { FactoryGirl.create :branch, court: court, judge: judge, chamber_name: "臺灣高等法院刑事庭", name: "丙" }
   let!(:orginal_data) { Mechanize.new.get(Scrap::ParseVerdictContext::VERDICT_URI).body.force_encoding("UTF-8") }
-  let!(:verdict_content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/judgment_content.txt") }
-  let!(:verdict_word) { "105,上易緝,2" }
-  let!(:verdict_stroy_type) { "刑事" }
+  let!(:content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/judgment_content.txt") }
+  let!(:word) { "105,上易緝,2" }
+  let!(:publish_date) { "1050418" }
+  let!(:stroy_type) { "刑事" }
 
   describe "#perform" do
-    subject{ described_class.new(court, orginal_data, verdict_content, verdict_word, verdict_stroy_type).perform }
+    subject{ described_class.new(court, orginal_data, content, word, publish_date, stroy_type).perform }
 
     context "create verdict" do
       it { expect{ subject }.to change{ Verdict.last } }
