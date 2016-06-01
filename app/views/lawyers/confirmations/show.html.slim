@@ -1,0 +1,17 @@
+.widget-box
+  .widget-title
+    h5 律師設定密碼
+  .widget-content.nopadding
+
+    = simple_form_for(resource, as: resource_name, url: lawyers_confirm_path, method: :patch ) do |f|
+      = f.error_notification
+      .form-group
+        label.control-label 密碼
+        = f.input :password, required: true, autofocus: true, :label => false
+      .form-group
+        label.control-label 密碼確認
+        = f.input :password_confirmation, required: true, :label => false
+        = f.input :confirmation_token, :as => :hidden, input_html: { value: @original_token }
+
+      .form-actions
+        input.btn.btn-primary type="submit" value="送出"
