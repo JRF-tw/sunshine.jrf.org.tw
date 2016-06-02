@@ -43,8 +43,8 @@ RSpec.describe Admin::LawyersController do
   end
 
   describe "#create" do
-    context "delete success" do
-      subject { post "/admin/lawyers", admin_lawyer: { name: "火焰巴拉" } }
+    context "create success" do
+      subject { post "/admin/lawyers", admin_lawyer: { name: "火焰巴拉", email: "aron@example.com" } }
       it { expect{ subject }.to change { Lawyer.count }.by(1) }
       it { expect(response).to be_redirect }
     end

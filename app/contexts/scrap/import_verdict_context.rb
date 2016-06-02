@@ -15,17 +15,18 @@ class Scrap::ImportVerdictContext < BaseContext
   after_perform   :record_count_to_daily_notify
 
   class << self
-    def perform(court, orginal_data, verdict_content, verdict_word, verdict_stroy_type)
-      new(court, orginal_data, verdict_content, verdict_word, verdict_stroy_type).perform
+    def perform(court, orginal_data, content, word, publish_date, stroy_type)
+      new(court, orginal_data, content, word, publish_date, stroy_type).perform
     end
   end
 
-  def initialize(court, orginal_data, verdict_content, verdict_word, verdict_stroy_type)
+  def initialize(court, orginal_data, content, word, publish_date, stroy_type)
     @court = court
     @orginal_data = orginal_data
-    @verdict_content = verdict_content
-    @verdict_word = verdict_word
-    @verdict_stroy_type = verdict_stroy_type
+    @content = content
+    @word = word
+    @publish_date = publish_date
+    @stroy_type = stroy_type
   end
 
   def perform
@@ -38,7 +39,7 @@ class Scrap::ImportVerdictContext < BaseContext
   private
 
   def build_analysis_context
-    @analysis_context = Scrap::AnalysisVerdictContext.new(@verdict_content, @verdict_word)
+    @analysis_context = Scrap::AnalysisVerdictContext.new(@content, @word)
   end
 
   def is_highest_court?
@@ -46,12 +47,12 @@ class Scrap::ImportVerdictContext < BaseContext
   end
 
   def find_main_judge
-    branches = @court.branches.current.where("chamber_name LIKE ? ", "%#{@verdict_stroy_type}%")
+    branches = @court.branches.current.where("chamber_name LIKE ? ", "%#{@stroy_type}%")
     main_judges = branches.map{ |a| a.judge if a.judge.name == @analysis_context.main_judge_name }.compact.uniq
     @main_judge = main_judges.count == 1 ?  main_judges.last : nil
 
     unless main_judges.count == 1
-      SlackService.notify_analysis_async("判決書關聯主審法官失敗 : 找到多位法官, 或者找不到任何法官\n 判決書類別 : #{@verdict_stroy_type}, 法官姓名 : #{@analysis_context.main_judge_name}, 法院 : #{@court.scrap_name}")
+      SlackService.notify_analysis_async("判決書關聯主審法官失敗 : 找到多位法官, 或者找不到任何法官\n 判決書類別 : #{@stroy_type}, 法官姓名 : #{@analysis_context.main_judge_name}, 法院 : #{@court.scrap_name}")
     end
   end
 
@@ -60,14 +61,15 @@ class Scrap::ImportVerdictContext < BaseContext
   end
 
   def find_or_create_story
-    array = @verdict_word.split(",")
+    array = @word.split(",")
     @story = Story.find_or_create_by(year: array[0], word_type: array[1], number: array[2], court: @court)
   end
 
   def build_verdict
-    @verdict = Verdict.new(
+    @verdict = Verdict.find_or_initialize_by(
       story: @story,
       main_judge: @main_judge,
+      publish_date: @publish_date,
       main_judge_name: @analysis_context.main_judge_name,
       judges_names: @analysis_context.judges_names,
       prosecutor_names: @analysis_context.prosecutor_names,
@@ -112,7 +114,7 @@ class Scrap::ImportVerdictContext < BaseContext
 
   def create_relation_for_judge
     @verdict.judges_names.each do |name|
-      branches = @court.branches.current.where("chamber_name LIKE ? ", "%#{@verdict_stroy_type}%")
+      branches = @court.branches.current.where("chamber_name LIKE ? ", "%#{@stroy_type}%")
       judges = branches.map{ |a| a.judge if a.judge.name == name }.compact.uniq
       if judges.count == 1
         @verdict.judge_verdicts.create(judge: judges.first)

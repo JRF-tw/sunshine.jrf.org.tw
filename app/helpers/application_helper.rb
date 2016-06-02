@@ -191,8 +191,8 @@ module ApplicationHelper
   end
 
   def collect_for_judges_name
-    Judge.all.includes(:branches).map do |j|
-      ["#{j.name} - #{j.branches.current.map(&:name).join(", ")}", j.id]
+    Judge.all.includes(:current_branches).map do |j|
+      ["#{j.name} - #{j.current_branches.map(&:name).join(", ")}", j.id]
     end
   end
 
@@ -212,5 +212,8 @@ module ApplicationHelper
     [["是", true], ["否", false]]
   end
 
+  def collect_for_main_judge_present
+    [["有", 1], ["無", 0]]
+  end
 end
 

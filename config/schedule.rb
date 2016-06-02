@@ -29,22 +29,22 @@ end
 
 # scrap courts
 every 7.day, :at => '1:00 am' do
-  runner "Scrap::GetCourtsContext.new.perform"
+  runner "Scrap::GetCourtsContext.delay.perform"
 end
 
 # scrap judges and branches
 every 1.day, :at => '1:10 am' do
-  runner "Scrap::GetJudgeContext.perform"
+  runner "Scrap::GetJudgesContext.delay.perform"
 end
 
 # scrap schedules
 every 1.day, :at => '1:30 am' do
-  runner "Scrap::GetSchedulesContext.new.perform"
+  runner "Scrap::GetSchedulesContext.delay.perform"
 end
 
 # scrap verdicts
 every 1.day, :at => '2:00 am' do
-  runner "Scrap::GetVerdictsContext.new.perform"
+  runner "Scrap::GetVerdictsContext.delay.perform"
 end
 
 # notify daily report

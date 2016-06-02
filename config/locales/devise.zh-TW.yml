@@ -3,9 +3,10 @@
 zh-TW:
   devise:
     confirmations:
-      confirmed: "您的帳號已通過驗證，現在您已成功登入。"
+      confirmed: "您的帳號已通過驗證。"
       send_instructions: "您將在幾分鐘後收到一封電子郵件，內有驗證帳號的步驟說明。"
       send_paranoid_instructions: "如果我們有您的信箱，您將會收到一封驗證您的帳號的電子郵件。"
+      already_confirmed: "已經驗證，請直接登入。"
     failure:
       already_authenticated: "您已經登入。"
       inactive: "您的帳號尚未被啟用。"
@@ -30,7 +31,7 @@ zh-TW:
       no_token: "這是密碼重設頁面，僅能透過密碼重設信件進入。如果您是透過重設信件進入的，請確認您的網址是完整的。"
       send_instructions: "您將在幾分鐘後收到一封電子郵件，內有重新設定密碼的步驟說明。"
       send_paranoid_instructions: "如果我們有您的信箱，您將會收到一封內含可重新設定密碼連結的電子郵件。"
-      updated: "您的密碼已被修改，您現在已經登入。"
+      updated: "您的密碼已被修改，請用新密碼登入。"
       updated_not_active: "您的密碼已被修改。"
     registrations:
       destroyed: "再會！您的帳號已被取消。有緣再會。"
@@ -41,6 +42,10 @@ zh-TW:
       update_needs_confirmation: "您已經成功的更新帳號資訊，但我們仍需確認您的電子信箱，請至新信箱收信並點擊連結以確認您的新電子郵件帳號。"
       updated: "您已經成功的更新帳號資訊。"
       signed_up_failed: "輸入資訊錯誤。"
+      lawyer_not_found: "查無律師資料 請改以人工管道註冊帳號"
+      lawyer_already_sign_up: "該資料已經註冊 請直接登入"
+      name_blank: "姓名 不可為空白"
+      email_blank: "email 不可以為空白"
     sessions:
       signed_in: "成功登入了。"
       signed_out: "成功登出了。"

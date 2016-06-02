@@ -34,5 +34,4 @@ FactoryGirl.define do
     sequence(:identify_number) { |n| "A#{ rand(100000000..299999999) }" }
     sequence(:phone_number) { |n| "09#{ rand(1..99999999).to_s.rjust(8, '0') }" }
   end
-
 end

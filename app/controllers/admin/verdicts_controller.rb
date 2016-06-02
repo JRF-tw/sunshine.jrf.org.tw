@@ -15,6 +15,7 @@
 #  adjudge_date     :date
 #  main_judge_id    :integer
 #  main_judge_name  :string
+#  publish_date     :date
 #
 
 class Admin::VerdictsController < Admin::BaseController
@@ -23,7 +24,7 @@ class Admin::VerdictsController < Admin::BaseController
 
   def index
     @search = Verdict.all.newest.ransack(params[:q])
-    @verdicts = @search.result.page(params[:page]).per(20)
+    @verdicts = @search.result.includes(:story).page(params[:page]).per(20)
     @admin_page_title = "判決書列表"
     add_crumb @admin_page_title, "#"
   end

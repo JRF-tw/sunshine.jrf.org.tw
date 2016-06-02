@@ -1,15 +1,23 @@
 class Scrap::ParseSchedulesContext < BaseContext
+  SCHEDULE_INFO_URI = "http://csdi.judicial.gov.tw/abbs/wkw/WHD3A02.jsp"
+
   before_perform :scrap_schedule
   before_perform :parse_schedule_info
 
-  def initialize(info, current_page, start_date_format, end_date_format)
-    @info = info
-    @court_code = @info[:court_code]
-    @story_type = @info[:story_type]
+  class << self
+    def perform(court_code, story_type, current_page, page_total, start_date_format, end_date_format)
+      new(court_code, story_type, current_page, page_total, start_date_format, end_date_format).perform
+    end
+  end
+
+  def initialize(court_code, story_type, current_page, page_total, start_date_format, end_date_format)
+    @court_code = court_code
+    @story_type = story_type
     @current_page = current_page
-    @page_total = @info[:page_total]
+    @page_total = page_total
     @start_date_format = start_date_format
     @end_date_format = end_date_format
+    @sleep_time_interval = rand(1..2)
   end
 
   def perform
@@ -25,10 +33,9 @@ class Scrap::ParseSchedulesContext < BaseContext
   def scrap_schedule
     sql = "UPPER(CRTID)='#{@court_code}' AND DUDT>='#{@start_date_format}' AND DUDT<='#{@end_date_format}' AND SYS='#{@story_type}'  ORDER BY  DUDT,DUTM,CRMYY,CRMID,CRMNO"
     data = { pageNow: @current_page, sql_conction: sql, pageTotal: @page_total, pageSize: 15, rowStart: 1 }
-    response_data = Mechanize.new.get(Scrap::GetSchedulesContext::SCHEDULE_INFO_URI, data)
+    sleep @sleep_time_interval
+    response_data = Mechanize.new.get(SCHEDULE_INFO_URI, data)
     @data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
-  rescue => e
-    SlackService.notify_scrap_async("庭期爬取失敗: 取得庭期表搜尋內容錯誤\n info : #{@info}\n current_page : #{@current_page}\n #{e.message}")
   end
 
   def parse_schedule_info
@@ -49,15 +56,11 @@ class Scrap::ParseSchedulesContext < BaseContext
       }
       @hash_array << hash
     end
-  rescue => e
-    SlackService.notify_scrap_async("庭期爬取失敗: 解析庭期表搜尋內容錯誤\n info : #{@info}\n current_page : #{@current_page}\n #{e.message}")
   end
 
   def convert_scrap_time(date_string)
     split_array = date_string.split("/").map(&:to_i)
     year = split_array[0] + 1911
     return Date.new(year, split_array[1], split_array[2])
-  rescue => e
-    SlackService.notify_scrap_async("庭期爬取失敗: 解析庭期時間錯誤\n convert_scrap_time(#{date_string})\n #{e.message}")
   end
 end

@@ -8,7 +8,7 @@
         = f.input :identify_number, required: false, autofocus: true, :label => false
       .form-group
         label.control-label 密碼
-        = f.input :password, required: false, :label => false
+        = f.input :password, required: false, :label => false, :hint => link_to("忘記密碼", new_password_path(resource_name))
 
       .form-actions
         input.btn.btn-primary type="submit" value="登入"

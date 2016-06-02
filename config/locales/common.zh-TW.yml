@@ -15,6 +15,7 @@ zh-TW:
       procedure: "評鑑資料-案例處理經過"
       banner: "首頁橫幅"
       suit_banner: "司法案例面面觀橫幅"
+      defendant: "當事人"
     attributes:
       court:
         court_type: "類型"
@@ -232,6 +233,12 @@ zh-TW:
         content: "內文"
         weight: "權重"
         is_hidden: "隱藏"
+      defendant:
+        id: "流水號"
+        name: "姓名"
+        identify_number: "身分證字號"
+        phone_number: "手機號碼"
+        password: "密碼"
   ransack:
     attributes:
       profile:
@@ -263,7 +270,7 @@ zh-TW:
         unexist_lawyer_names: "律師為空值"
         unexist_judges_names: "陪審法官為空值"
         unexist_prosecutor_names: "檢察官為空值"
-        main_judge_name_null: "審判長法官為空值"
+        main_judge_name_present: "有無審判長法官"
         is_judgment_true: "是否為判決"
       schedule:
         branch_judge_id_eq: "股別法官名稱"
@@ -282,5 +289,9 @@ zh-TW:
         name_cont: "姓名包含"
         email_cont: "EmaiL包含"
       defendant:
-          name_cont: "姓名包含"
+        name_cont: "姓名包含"
+  devise:
+    registrations:
+      bystander:
+        email_conflict: "e-mail 並未更改"
 

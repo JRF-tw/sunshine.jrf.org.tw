@@ -81,7 +81,7 @@ namespace :dev do
     gender = ["男", "女", "其他"]
     file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-#{rand(1..10)}.jpg"
     lawyer_name.each do |n|
-      Lawyer.create!(name: n, current: current.sample, gender: gender.sample, birth_year: rand(50..70), avatar: file)
+      Lawyer.create!(email: "lawyer-#{lawyer_name.index(n)}@example.com",password: "11111111", name: n, current: current.sample, gender: gender.sample, birth_year: rand(50..70), avatar: file)
     end
   end       
 
@@ -271,13 +271,8 @@ namespace :dev do
 
   task :fake_verdicts => :environment do
     Verdict.destroy_all
-    content = 
-      "整術是少，士檢度公別據一如稱會還裡房人別你信、亞陽大統半現立良上大力的質參數士金，供的才星叫未上並現小成成失的在須國人銀色想實故。是成理工雖想先上初開子來做入望！在行而頭想很生？建設而於調灣學輪！手要變燈決！
-
-      業友今個？中心問了王起反？"
-    
     5.times do |i|
-      Story.all.sample.verdicts.create!(content: content, adjudge_date: rand(5).years.ago)
+      Story.all.sample.verdicts.create!(adjudge_date: rand(5).years.ago)
     end
   end    
 

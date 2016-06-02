@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160526054154) do
+ActiveRecord::Schema.define(version: 20160601132705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -307,15 +307,33 @@ ActiveRecord::Schema.define(version: 20160526054154) do
   add_index "lawyer_verdicts", ["verdict_id"], name: "index_lawyer_verdicts_on_verdict_id", using: :btree
 
   create_table "lawyers", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",                                null: false
     t.string   "current"
     t.string   "avatar"
     t.string   "gender"
     t.integer  "birth_year"
     t.string   "memo"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "email",                               null: false
+    t.string   "encrypted_password",     default: ""
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmation_sent_at"
+    t.datetime "confirmed_at"
+    t.string   "unconfirmed_email"
   end
+
+  add_index "lawyers", ["confirmation_token"], name: "index_lawyers_on_confirmation_token", unique: true, using: :btree
+  add_index "lawyers", ["email"], name: "index_lawyers_on_email", unique: true, using: :btree
+  add_index "lawyers", ["reset_password_token"], name: "index_lawyers_on_reset_password_token", unique: true, using: :btree
 
   create_table "licenses", force: :cascade do |t|
     t.integer  "profile_id"
@@ -486,12 +504,12 @@ ActiveRecord::Schema.define(version: 20160526054154) do
     t.integer  "number"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
-    t.date     "adjudge_date"
-    t.boolean  "is_adjudge",       default: false
     t.text     "defendant_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
+    t.boolean  "is_adjudge",       default: false
+    t.date     "adjudge_date"
   end
 
   add_index "stories", ["adjudge_date"], name: "index_stories_on_adjudge_date", using: :btree
@@ -600,19 +618,21 @@ ActiveRecord::Schema.define(version: 20160526054154) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.string   "file"
+    t.boolean  "is_judgment",      default: false
     t.text     "defendant_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
-    t.boolean  "is_judgment",      default: false
     t.date     "adjudge_date"
     t.integer  "main_judge_id"
     t.string   "main_judge_name"
+    t.date     "publish_date"
   end
 
   add_index "verdicts", ["adjudge_date"], name: "index_verdicts_on_adjudge_date", using: :btree
   add_index "verdicts", ["is_judgment"], name: "index_verdicts_on_is_judgment", using: :btree
   add_index "verdicts", ["main_judge_id", "story_id"], name: "index_verdicts_on_main_judge_id_and_story_id", using: :btree
   add_index "verdicts", ["main_judge_id"], name: "index_verdicts_on_main_judge_id", using: :btree
+  add_index "verdicts", ["publish_date"], name: "index_verdicts_on_publish_date", using: :btree
 
 end
