@@ -26,4 +26,11 @@ RSpec.describe Bystander::ConfirmationsController, :type => :request do
     end  
   end
 
+  describe "#new" do
+    context "Resend confirmation page" do
+      before { get "/bystanders/confirmation/new" }
+      it { expect(response).to redirect_to("/bystanders/sign_in") }
+    end
+  end
+
 end

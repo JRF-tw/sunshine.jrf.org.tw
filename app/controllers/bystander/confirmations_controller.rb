@@ -1,5 +1,5 @@
 class Bystander::ConfirmationsController < Devise::ConfirmationsController
-
+  before_action :redirect_new_to_sign_in, only: [:new]
 
   def show
     self.resource = resource_class.confirm_by_token(params[:confirmation_token])
@@ -14,4 +14,9 @@ class Bystander::ConfirmationsController < Devise::ConfirmationsController
     end
   end
 
+  protected
+
+  def redirect_new_to_sign_in
+    redirect_to new_bystander_session_path
+  end
 end
