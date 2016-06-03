@@ -1,8 +1,9 @@
 class Lawyers::ConfirmationsController < Devise::ConfirmationsController
+  include CrudConcern
   layout 'lawyer'
 
-  skip_before_filter :authenticate_lawyer!
   before_action :redirect_new_to_sign_in, only: [:new]
+  before_action :find_lawyer_by_token
 
   def show
     if params[:confirmation_token].present?
@@ -10,10 +11,8 @@ class Lawyers::ConfirmationsController < Devise::ConfirmationsController
     elsif params[resource_name].try(:[], :confirmation_token).present?
       @original_token = params[resource_name][:confirmation_token]
     end
-    self.resource = resource_class.find_by_confirmation_token(params[:confirmation_token])
-    # self.resource = resource_class.find_by_confirmation_token Devise.token_generator.
-    #   digest(self, :confirmation_token, @original_token)
-    if resource.nil? or resource.confirmed?
+
+    if @lawyer.nil? or @lawyer.confirmed?
       redirect_to new_lawyer_session_path
       return
     end
@@ -21,23 +20,21 @@ class Lawyers::ConfirmationsController < Devise::ConfirmationsController
 
   def confirm
     @original_token = params[resource_name].try(:[], :confirmation_token)
-    # digested_token = Devise.token_generator.digest(self, :confirmation_token, @original_token)
-    self.resource = resource_class.find_by_confirmation_token! @original_token
-    resource.assign_attributes(permitted_params) unless params[resource_name].nil?
-
-    if resource.valid? && resource.password_match?
-      self.resource.confirm!
+    # use in view
+    context = Lawyer::ConfirmContext.new(params)
+    if context.perform
       set_flash_message :notice, :confirmed
-      sign_in_and_redirect resource_name, resource
+      redirect_to new_lawyer_session_path
     else
+      flash.now[:error] = context.error_messages.join(", ") if context.error_messages
       render :action => 'show'
     end
   end
 
   protected
 
-  def permitted_params
-    params.require(resource_name).permit(:confirmation_token, :password, :password_confirmation)
+  def find_lawyer_by_token
+    @lawyer = Lawyer.find_by_confirmation_token(params[:confirmation_token] || params[:lawyer][:confirmation_token])
   end
 
   def redirect_new_to_sign_in
