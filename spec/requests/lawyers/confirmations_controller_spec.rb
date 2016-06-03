@@ -19,14 +19,13 @@ RSpec.describe Lawyers::ConfirmationsController, type: :request do
     context "success" do
       subject { patch "/lawyers/confirm", lawyer: { password: "55667788", password_confirmation: "55667788", confirmation_token: lawyer.confirmation_token } }
       
-      it { expect { subject }.to change { lawyer.reload.encrypted_password } }
+      it { expect(subject).to redirect_to("/lawyers/sign_in") }
     end
 
     context "password caheck failed" do
       subject { patch "/lawyers/confirm", lawyer: { password: "55667788", password_confirmation: "55", confirmation_token: lawyer.confirmation_token } }
 
       it { expect(subject).to render_template("lawyers/confirmations/show") } 
-      it { expect { subject }.to_not change { lawyer.reload.encrypted_password } }
     end
   end
   
