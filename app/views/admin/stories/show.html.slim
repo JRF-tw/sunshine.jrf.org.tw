@@ -40,7 +40,7 @@
         td 與案件相關律師
         td
           - @story.by_relation_lawyers.each do |sr|
-            = link_to "#{sr.people.name} ", admin_lawyer_path(sr.people)
+            = link_to "#{sr.people.try(:name)} ", admin_lawyer_path(sr.people) if sr.people
             = " "
       tr
         td 與案件相關當事人
