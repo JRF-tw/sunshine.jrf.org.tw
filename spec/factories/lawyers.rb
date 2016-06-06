@@ -40,6 +40,12 @@ FactoryGirl.define do
 
   factory :empty_name_for_lawyer, class: Lawyer do
     name ""
+    email "aron@example.com"
+  end
+
+  factory :empty_email_for_lawyer, class: Lawyer do
+    name "aron"
+    email ""
   end
 
 end

@@ -67,6 +67,15 @@ class Admin::LawyersController < Admin::BaseController
     end
   end
 
+  def manual_confirm
+    context = Lawyer::SendSetPasswordEmailContext.new(@lawyer)
+    if context.perform
+      redirect_as_success(admin_lawyers_path, "律師 - #{lawyer.name} 帳號認證信已寄出")
+    else
+      redirect_as_fail(admin_lawyers_path, context.error_messages.join(", "))
+    end
+  end
+
 
   private
 

@@ -13,6 +13,8 @@ class Lawyer::ShowSetPasswordContext < BaseContext
     end
   end
 
+  private
+  
   def check_lawyer_exist
     add_error(:lawyer_not_found, "無此律師資料") if !@lawyer 
     return false if !@lawyer

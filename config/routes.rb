@@ -83,7 +83,11 @@ Rails.application.routes.draw do
     resources :stories
     resources :schedules
     resources :judges
-    resources :lawyers
+    resources :lawyers do
+      member do
+        get :manual_confirm
+      end
+    end
     resources :verdicts do
       member do
         get :download_file
