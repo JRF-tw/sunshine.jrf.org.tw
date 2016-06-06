@@ -13,4 +13,11 @@ describe LawyerDeleteContext do
     subject { described_class.new(lawyer_with_verdict) }
     it { expect { subject.perform }.not_to change { Lawyer.count } }
   end
+
+  context "already confirmed" do
+    let!(:lawyer) { FactoryGirl.create :lawyer, :with_password_and_confirmed }
+    subject { described_class.new(lawyer) }
+
+    it { expect { subject.perform }.not_to change { Lawyer.count } }
+  end
 end
