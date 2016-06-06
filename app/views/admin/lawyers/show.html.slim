@@ -23,5 +23,8 @@
         td
           = "民國#{@lawyer.birth_year}年"
       tr
+        td 狀態
+        td= @lawyer.status
+      tr
         td 備註
         td= @lawyer.memo
