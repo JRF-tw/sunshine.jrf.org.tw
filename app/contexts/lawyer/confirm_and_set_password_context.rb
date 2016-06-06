@@ -30,7 +30,7 @@ class Lawyer::ConfirmAndSetPasswordContext < BaseContext
   def check_password
     add_error(:data_update_fail, "密碼與密碼確認不相符") unless @params[:password] == @params[:password_confirmation]
     add_error(:data_update_fail, "密碼長度不符(最少八個字元") unless @params[:password].size >= 8
-    return false unless @params[:password] == @params[:password_confirmation] && @params[:password].size >= 8
+    return false if errors.present?
   end
 
   def assign_password
