@@ -8,7 +8,10 @@ Rails.application.routes.draw do
   devise_for :defendants, controllers: { registrations: 'defendants/registrations', sessions: 'defendants/sessions', passwords: 'defendants/passwords' }
   devise_for :bystanders, controllers: { registrations: 'bystander/registrations', sessions: 'bystander/sessions', passwords: 'bystander/passwords', confirmations: 'bystander/confirmations'}
   devise_for :lawyers, controllers: { registrations: 'lawyers/registrations', sessions: 'lawyers/sessions', passwords: 'lawyers/passwords', confirmations: 'lawyers/confirmations'}
-
+  devise_scope :lawyer do
+    patch '/lawyers/confirm', to: 'lawyers/confirmations#confirm', as: :lawyers_confirm
+  end
+  
   authenticated :bystander do
     root to: "bystanders#index",  as: :bystander_root
   end
@@ -39,10 +42,6 @@ Rails.application.routes.draw do
   end
 
   resources :bystanders
-
-  devise_scope :lawyer do
-    patch '/lawyers/confirm' => 'lawyers/confirmations#confirm', as: :lawyers_confirm
-  end
 
   namespace :lawyers do
     root to: "base#index"

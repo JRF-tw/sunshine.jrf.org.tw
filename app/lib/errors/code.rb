@@ -5,7 +5,11 @@ class Errors::Code
     data_create_fail: 400,
     data_update_fail: 400,
     data_delete_fail: 400,
-    data_not_found: 400
+    data_not_found: 400,
+    date_blank: 400,
+    lawyer_not_found: 400,
+    lawyer_exist: 400,
+    send_email_fail: 400
   }.freeze
 
   class << self
