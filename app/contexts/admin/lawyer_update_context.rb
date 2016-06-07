@@ -1,4 +1,4 @@
-class LawyerUpdateContext < BaseContext
+class Admin::LawyerUpdateContext < BaseContext
   PERMITS = [:name, :current, :avatar, :gender, :birth_year, :memo, :email, :password].freeze
 
   before_perform :assign_value

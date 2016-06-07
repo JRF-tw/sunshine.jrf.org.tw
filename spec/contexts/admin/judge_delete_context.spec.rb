@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe JudgeDeleteContext do
+describe Admin::JudgeDeleteContext do
   let(:judge) { FactoryGirl.create(:judge) }
 
   describe "#perform" do

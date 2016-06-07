@@ -41,7 +41,7 @@ class Admin::CourtsController < Admin::BaseController
   end
 
   def create
-    context = CourtCreateContext.new(params)
+    context = Admin::CourtCreateContext.new(params)
     if @court = context.perform
       respond_to do |f|
         f.html { redirect_as_success(admin_courts_path, "法院 / 檢察署 - #{court.name} 已新增") }
@@ -60,7 +60,7 @@ class Admin::CourtsController < Admin::BaseController
   end
 
   def update
-    context = CourtUpdateContext.new(@court)
+    context =  Admin::CourtUpdateContext.new(@court)
     if context.perform(params)
       redirect_as_success(admin_courts_path, "法院 / 檢察署 - #{court.name} 已修改")
     else
@@ -69,7 +69,7 @@ class Admin::CourtsController < Admin::BaseController
   end
 
   def destroy
-    context = CourtDeleteContext.new(@court)
+    context =  Admin::CourtDeleteContext.new(@court)
     if context.perform
       redirect_as_success(admin_courts_path, "法院 / 檢察署 - #{court.name} 已刪除")
     else

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe LawyerCreateContext do
+describe Admin::LawyerCreateContext do
 
   describe "success" do
     let(:params) { attributes_for(:lawyer) }

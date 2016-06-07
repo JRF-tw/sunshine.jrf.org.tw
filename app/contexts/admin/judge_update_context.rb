@@ -1,5 +1,5 @@
-class JudgeUpdateContext < BaseContext
-  PERMITS = JudgeCreateContext:: PERMITS
+class Admin::JudgeUpdateContext < BaseContext
+  PERMITS = Admin::JudgeCreateContext:: PERMITS
 
   before_perform :assign_value
 

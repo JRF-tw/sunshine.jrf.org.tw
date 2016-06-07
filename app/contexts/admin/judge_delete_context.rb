@@ -1,4 +1,4 @@
-class JudgeDeleteContext < BaseContext
+class Admin::JudgeDeleteContext < BaseContext
 
   def initialize(judge)
     @judge = judge

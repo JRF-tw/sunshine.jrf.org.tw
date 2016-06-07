@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe CourtCreateContext do
+describe Admin::CourtCreateContext do
   let(:params) { attributes_for(:court_for_params) }
 
   context "success" do 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe LawyerDeleteContext do
+describe Admin::LawyerDeleteContext do
 
   context "success" do
     let!(:lawyer) {FactoryGirl.create :lawyer}

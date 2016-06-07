@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe JudgeCreateContext do
+describe Admin::JudgeCreateContext do
   let(:params) { attributes_for(:judge) }
 
   context "success" do 

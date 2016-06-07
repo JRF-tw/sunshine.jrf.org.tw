@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe JudgeUpdateContext do
+describe Admin::JudgeUpdateContext do
   let!(:judge) { FactoryGirl.create :judge }
   let(:params) { attributes_for(:judge_for_params) } 
   subject { described_class.new(judge) }
@@ -15,5 +15,5 @@ describe JudgeUpdateContext do
       it { expect { subject.perform(empty_name) }.not_to change{ judge } }
     end
   end
-    
+
 end  

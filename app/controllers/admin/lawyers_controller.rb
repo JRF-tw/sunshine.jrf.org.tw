@@ -40,7 +40,7 @@ class Admin::LawyersController < Admin::BaseController
   end
 
   def create
-    context = LawyerCreateContext.new(params)
+    context =  Admin::LawyerCreateContext.new(params)
     if @lawyer = context.perform
       redirect_as_success(admin_lawyers_path,  "律師 - #{lawyer.name} 已新增")
     else
@@ -50,7 +50,7 @@ class Admin::LawyersController < Admin::BaseController
   end
 
   def update
-    context = LawyerUpdateContext.new(@lawyer)
+    context =  Admin::LawyerUpdateContext.new(@lawyer)
     if context.perform(params)
       redirect_as_success(admin_lawyers_path, "律師 - #{lawyer.name} 已修改")
     else
@@ -59,7 +59,7 @@ class Admin::LawyersController < Admin::BaseController
   end
 
   def destroy
-    context = LawyerDeleteContext.new(@lawyer)
+    context =  Admin::LawyerDeleteContext.new(@lawyer)
     if context.perform
       redirect_as_success(admin_lawyers_path, "律師 - #{lawyer.name} 已刪除")
     else
