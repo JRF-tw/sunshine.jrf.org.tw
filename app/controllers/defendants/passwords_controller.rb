@@ -7,7 +7,12 @@ class Defendants::PasswordsController < Devise::PasswordsController
     if context.perform
       redirect_to new_session_path(:defendant), flash: { success: "已寄送簡訊" }
     else
-      redirect_to :back, flash: { error: context.error_messages.join(", ") }
+      # for build resource
+      params = self.resource_params.inject({}){ |params,(k,v)| params[k.to_sym] = v; params }
+
+      self.resource = resource_class.new(params)
+      flash[:notice] = context.error_messages.join(", ")
+      render "new"
     end
   end
 
