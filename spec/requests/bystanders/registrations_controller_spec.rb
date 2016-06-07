@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Bystander::RegistrationsController, :type => :request do
+RSpec.describe Bystanders::RegistrationsController, :type => :request do
 
   describe "#update" do
     before { signin_bystander }

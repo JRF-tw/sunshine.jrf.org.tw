@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Bystander::PasswordsController, :type => :request do
+RSpec.describe Bystanders::PasswordsController, :type => :request do
   let!(:bystander) { FactoryGirl.create :bystander }
   let(:token) { bystander.send_reset_password_instructions }
 

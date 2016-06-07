@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe BystandersController, type: :request do
+RSpec.describe Bystanders::BaseController, type: :request do
   let!(:bystander) { FactoryGirl.create :bystander }
 
   describe "#index" do
