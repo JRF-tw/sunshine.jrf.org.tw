@@ -11,6 +11,21 @@
         td 電話號碼
         td= @defendant.phone_number
       tr
+        td 最後一次登入時間
+        td= @defendant.current_sign_in_at
+      tr
+        td 最後一次登入ip
+        td= @defendant.current_sign_in_ip
+      tr
+        td 登入次數
+        td= @defendant.sign_in_count
+      tr
+        td 註冊時間
+        td= @defendant.created_at
+      tr
+        td 最後更新時間
+        td= @defendant.updated_at
+      tr
         td 案件列表
         td
           = link_to "TODO 案件列表", "#", class: "btn btn-mini"

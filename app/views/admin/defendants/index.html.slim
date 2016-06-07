@@ -7,6 +7,27 @@
           .control-group
             label.control-label= f.label :name_cont
             .controls= f.search_field :name_cont
+          .control-group
+            label.control-label= f.label :phone_number_cont
+            .controls= f.search_field :phone_number_cont
+        .span6
+          .control-group
+            label.control-label= f.label :identify_number_cont
+            .controls= f.search_field :identify_number_cont
+          .control-group
+            label.control-label= f.label :current_sign_in_ip_cont
+            .controls= f.search_field :current_sign_in_ip_cont
+      .row
+        .span6
+          .control-group#datepicker
+            label.control-label= f.label :created_at_gteq
+            .controls= f.search_field :created_at_gteq, placeholder: "起始時間，非必填"
+            .controls= f.search_field :created_at_lteq, placeholder: "結束時間，非必填"
+        .span6
+          .control-group#datepicker
+            label.control-label= f.label :current_sign_in_at_gteq
+            .controls= f.search_field :current_sign_in_at_gteq, placeholder: "起始時間，非必填"
+            .controls= f.search_field :current_sign_in_at_lteq, placeholder: "結束時間，非必填"
     hr
     .form-actions
       = f.submit :value => "搜尋", :class => "btn btn-primary"
@@ -23,6 +44,9 @@
           th 姓名
           th 身分證字號
           th 電話號碼
+          th 註冊日期
+          th 最後一次登入日期
+          th 最後一次登入ip
           th 操作
       tbody
         - @defendants.each do |defendant|
@@ -31,6 +55,9 @@
             td= defendant.name
             td= defendant.identify_number
             td= defendant.phone_number
+            td= defendant.created_at.to_date
+            td= defendant.current_sign_in_at.try(:to_date)
+            td= defendant.current_sign_in_ip
             td
               = link_to "詳細資料", admin_defendant_path(defendant), class: "btn btn-mini"
               = " "
