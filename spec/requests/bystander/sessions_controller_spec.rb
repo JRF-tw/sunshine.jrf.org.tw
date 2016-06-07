@@ -33,6 +33,15 @@ RSpec.describe Bystander::SessionsController, :type => :request do
       
       it { expect(subject).to redirect_to("/bystanders") }
     end
+
+    context "only sign out lawyer" do
+      before { signin_bystander }
+      before { signin_lawyer }
+      subject! { delete "/bystanders/sign_out", {}, {'HTTP_REFERER' => 'http://www.example.com/bystanders'} }
+
+      it { expect(get "/lawyers").to eq(200) }
+      it { expect(get "/bystanders").to eq(302) } 
+    end
   end
 
 end

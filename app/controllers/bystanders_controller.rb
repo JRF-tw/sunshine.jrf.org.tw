@@ -23,7 +23,7 @@
 #
 
 class BystandersController < ApplicationController
-  before_action :authenticate_bystander!, except: :index
+  before_action :authenticate_bystander!
 
   layout 'bystander'
 

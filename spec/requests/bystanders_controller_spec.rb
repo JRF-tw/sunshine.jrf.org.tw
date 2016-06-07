@@ -4,9 +4,16 @@ RSpec.describe BystandersController, type: :request do
   let!(:bystander) { FactoryGirl.create :bystander }
 
   describe "#index" do
-    context "render success" do
-      before { get "/bystanders" }
+
+    context "log in" do
+      before { signin_bystander }
+      subject! { get "/bystanders" }
       it { expect(response).to be_success }
+    end
+
+    context "not login" do
+      subject!{ get "/bystanders" }
+      it { expect(response).to be_redirect }
     end
   end
 
