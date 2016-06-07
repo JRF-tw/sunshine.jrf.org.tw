@@ -30,7 +30,7 @@ RSpec.describe Defendants::RegistrationsController, type: :request do
       let!(:params){ { identify_number: defendant.identify_number, phone_number: "12312312" } }
       subject! { post "/defendants/password", { defendant: params }, {'HTTP_REFERER' => 'http://www.example.com/defendants/new'} }
 
-      it { expect(response).to redirect_to("/defendants/new") }
+      it { expect(response).to be_success }
     end
   end
 end
