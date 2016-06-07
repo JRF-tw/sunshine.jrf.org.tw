@@ -14,7 +14,7 @@ RSpec.describe Defendant, type: :model do
     end
   end
 
-  describe "validate regexp_match" do
+  describe "validate" do
     context "success" do
       let(:defendant_re) { Defendant.new(name: "aron", identify_number: "S211111111", password: "11111111") }
       it { expect(defendant_re.valid?).to eq(true) }
@@ -26,7 +26,7 @@ RSpec.describe Defendant, type: :model do
     end
 
     context "identify_number empty" do
-      let(:defendant_re) { Defendant.new(name: "aron", password: "11111111") }
+      let(:defendant_re) { Defendant.new(name: "aron", identify_number: "", password: "11111111") }
       it { expect(defendant_re.valid?).to eq(false) }
     end
 

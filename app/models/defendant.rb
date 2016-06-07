@@ -28,9 +28,8 @@ class Defendant < ActiveRecord::Base
   devise authentication_keys: [ :identify_number ]
 
   validates :name, presence: true
-  validates :identify_number, presence: true, uniqueness: true
-  validates_format_of :identify_number, with: /\A[A-Z]{1}[1-2]{1}[0-9]{8}\z/, message: "身分證字號格式不符(英文字母請大寫)" 
-  validates_format_of :phone_number, with: /\A(0)(9)([0-9]{8})\z/, allow_nil: true 
+  validates :identify_number, presence: true, uniqueness: true, format: { with: /\A[A-Z]{1}[1-2]{1}[0-9]{8}\z/, message: "身分證字號格式不符(英文字母請大寫)" }  
+  validates :phone_number, format:{ with: /\A(0)(9)([0-9]{8})\z/, allow_nil: true }
 
   has_many :defendant_verdicts
   has_many :verdicts, through: :defendant_verdicts
