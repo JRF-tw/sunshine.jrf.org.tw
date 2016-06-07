@@ -16,7 +16,11 @@ RSpec.describe Defendants::RegistrationsController, type: :request do
       subject { post "/defendants", defendant: params }
 
       it { expect { subject }.not_to change{ Defendant.count } }
-      it { expect(subject).to redirect_to("/defendants/sign_up") }
+
+      context "render new" do
+        before { subject }
+        it { expect(response).to be_success }
+      end
     end
 
     context "name empty" do

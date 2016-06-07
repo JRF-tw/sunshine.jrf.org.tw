@@ -21,7 +21,7 @@ class Defendants::RegistrationsController < Devise::RegistrationsController
       clean_up_passwords resource
       set_minimum_password_length
       flash[:notice] = resource.errors.full_messages
-      redirect_to new_defendant_registration_path
+      render "new"
     end
   end
 

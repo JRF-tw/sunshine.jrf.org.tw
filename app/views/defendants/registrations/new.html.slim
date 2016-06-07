@@ -4,7 +4,6 @@
   .widget-content.nopadding
 
     = simple_form_for(resource, as: resource_name, url:  defendant_registration_path, method: :post ) do |f|
-      = f.error_notification
       .form-group
         label.control-label 姓名
         = f.input :name, required: true, autofocus: true, :label => false
