@@ -43,6 +43,12 @@ RSpec.describe Defendants::SessionsController, type: :request do
 
         it { expect(response).to be_success }
       end
+
+      context "root should not change" do
+        before { signin_defendant }
+
+        it { expect(get "/").to render_template("base/index") }
+      end
     end
 
     describe "#destroy" do
