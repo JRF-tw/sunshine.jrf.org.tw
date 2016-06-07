@@ -85,7 +85,7 @@ Rails.application.routes.draw do
     resources :judges
     resources :lawyers do
       member do
-        get :manual_confirm
+        post :manual_confirm
       end
     end
     resources :verdicts do

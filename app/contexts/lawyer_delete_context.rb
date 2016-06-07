@@ -1,6 +1,6 @@
 class LawyerDeleteContext < BaseContext
   before_perform :check_verdict_empty
-  before_perform :check_not_confirm
+  before_perform :check_confirm
 
   def initialize(lawyer)
     @lawyer = lawyer
@@ -17,7 +17,7 @@ class LawyerDeleteContext < BaseContext
     true
   end
 
-  def check_not_confirm
+  def check_confirm
     return add_error(:data_delete_fail, "該律師已經註冊") if @lawyer.confirmed?
     true
   end

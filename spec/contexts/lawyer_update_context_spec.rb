@@ -13,4 +13,8 @@ describe LawyerUpdateContext do
     let(:empty_name_params) { attributes_for(:empty_name_for_lawyer) }
     it { expect { subject.perform(empty_name_params) }.not_to change{ lawyer } }
   end
+
+  context "update email without confirm" do 
+    it { expect { subject.perform(email: "1234@example.com") }.to change{ lawyer.email } }
+  end
 end 

@@ -6,7 +6,10 @@ describe LawyerCreateContext do
     let(:params) { attributes_for(:lawyer) }
     subject { described_class.new(params) }
 
-    it { expect { subject.perform }.to change { Lawyer.count }.by(1) }
+    it do 
+      expect { subject.perform }.to change { Lawyer.count }.by(1)
+      expect(Lawyer.last.confirmed?).to be false
+    end
   end
 
   context "name can't be empty" do 

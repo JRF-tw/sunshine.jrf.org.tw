@@ -24,7 +24,7 @@
           = "民國#{@lawyer.birth_year}年"
       tr
         td 狀態
-        td= @lawyer.status
+        td= @lawyer.confirmed? ? "已註冊" : "未註冊"
       tr
         td 備註
         td= @lawyer.memo

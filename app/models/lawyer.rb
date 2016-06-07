@@ -31,8 +31,4 @@ class Lawyer < ActiveRecord::Base
     super if confirmed?
   end
 
-  def status
-    confirmed? ? "已註冊" : "未註冊"
-  end
-
 end
