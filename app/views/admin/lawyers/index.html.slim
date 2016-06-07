@@ -53,6 +53,6 @@
               | &nbsp;
               = link_to "刪除", admin_lawyer_path(lawyer), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除該律師檔案 - #{lawyer.name}？"
               | &nbsp;
-              = link_to "發送密碼設定信", manual_confirm_admin_lawyer_path(lawyer), class: "btn btn-mini", method: :post if !lawyer.confirmed?
+              = link_to "發送密碼設定信", manual_confirm_admin_lawyer_path(lawyer), class: "btn btn-mini", method: :post unless lawyer.confirmed?
     .ui-toolbar.ui-widget-header
       = paginate @lawyers, theme: :admin

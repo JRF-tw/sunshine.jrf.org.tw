@@ -2,13 +2,17 @@ require 'rails_helper'
 
 describe LawyerCreateContext do
 
-  context "success" do 
+  describe "success" do
     let(:params) { attributes_for(:lawyer) }
     subject { described_class.new(params) }
 
-    it do 
-      expect { subject.perform }.to change { Lawyer.count }.by(1)
-      expect(Lawyer.last.confirmed?).to be false
+    context "create success" do 
+      it { expect { subject.perform }.to change { Lawyer.count }.by(1) }
+    end
+
+    context "created should unconfirm" do
+      before { subject.perform }
+      it { expect(Lawyer.last.confirmed?).to be false }
     end
   end
 
