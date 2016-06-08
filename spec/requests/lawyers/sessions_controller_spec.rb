@@ -17,6 +17,12 @@ RSpec.describe Lawyers::SessionsController, type: :request do
 
       it { expect(response).to redirect_to("/lawyers/profile") }
     end
+
+    context "root should not change" do
+      before { signin_lawyer }
+
+      it { expect(get "/").to render_template("base/index") }
+    end
   end
 
   describe "#destroy" do

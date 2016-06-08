@@ -11,14 +11,6 @@ Rails.application.routes.draw do
   devise_scope :lawyer do
     patch '/lawyers/confirm', to: 'lawyers/confirmations#confirm', as: :lawyers_confirm
   end
-  
-  authenticated :bystander do
-    root to: "bystanders#index",  as: :bystander_root
-  end
-
-  authenticated :lawyer do
-    root to: "lawyers/base#index",  as: :lawyer_root
-  end
 
   root to: "base#index", only: [:show]
   get '/robots.txt', to: "base#robots", defaults: { format: "text" }
