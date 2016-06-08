@@ -1,7 +1,8 @@
-class LawyerUpdateContext < BaseContext
-  PERMITS = LawyerCreateContext::PERMITS
+class Admin::LawyerUpdateContext < BaseContext
+  PERMITS = [:name, :current, :avatar, :gender, :birth_year, :memo, :email, :password].freeze
 
   before_perform :assign_value
+  after_perform :confirm_email
 
   def initialize(lawyer)
     @lawyer = lawyer
@@ -19,5 +20,9 @@ class LawyerUpdateContext < BaseContext
 
   def assign_value
     @lawyer.assign_attributes @params
+  end
+
+  def confirm_email
+    @lawyer.confirm! if @lawyer.unconfirmed_email.present?
   end
 end 

@@ -11,6 +11,12 @@
           .control-group
             label.control-label= f.label :current_cont
             .controls= f.search_field :current_cont
+      .row
+        .span6
+          .control-group
+            label.control-label= f.label :email_cont
+            .controls= f.search_field :email_cont
+
     hr
     .form-actions
       = f.submit :value => "搜尋", :class => "btn btn-primary"
@@ -28,6 +34,7 @@
           th 名稱
           th 性別
           th 現職
+          th 狀態
           th 備註
           th
       tbody
@@ -37,6 +44,7 @@
             td= lawyer.name
             td= lawyer.gender
             td= lawyer.current
+            td= lawyer.confirmed? ? "已註冊" : "未註冊"
             td= lawyer.memo
             td
               = link_to "詳細資料", admin_lawyer_path(lawyer), class: "btn btn-mini"
@@ -44,5 +52,7 @@
               = link_to "編輯", edit_admin_lawyer_path(lawyer), class: "btn btn-mini btn-success"
               | &nbsp;
               = link_to "刪除", admin_lawyer_path(lawyer), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除該律師檔案 - #{lawyer.name}？"
+              | &nbsp;
+              = link_to "發送密碼設定信", manual_confirm_admin_lawyer_path(lawyer), class: "btn btn-mini", method: :post unless lawyer.confirmed?
     .ui-toolbar.ui-widget-header
       = paginate @lawyers, theme: :admin

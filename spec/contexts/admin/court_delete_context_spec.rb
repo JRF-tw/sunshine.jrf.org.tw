@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe CourtDeleteContext do
+describe Admin::CourtDeleteContext do
   let(:court) { FactoryGirl.create(:court) }
 
   describe "#perform" do

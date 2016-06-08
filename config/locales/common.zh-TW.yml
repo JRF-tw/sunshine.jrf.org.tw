@@ -61,6 +61,7 @@ zh-TW:
         is_hidden: "隱藏"
       lawyer:
         name: "姓名"
+        password: "密碼"
         current: "現職"
         avatar: "頭像"
         gender: "性別"
@@ -285,6 +286,7 @@ zh-TW:
       lawyer:
         name_cont: "姓名包含"
         current_cont: "現職包含"
+        email_cont: "email包含"
       bystander:
         name_cont: "姓名包含"
         email_cont: "EmaiL包含"

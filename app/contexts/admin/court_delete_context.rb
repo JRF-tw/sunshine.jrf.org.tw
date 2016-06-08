@@ -1,4 +1,4 @@
-class CourtDeleteContext < BaseContext
+class Admin::CourtDeleteContext < BaseContext
 
   def initialize(court)
     @court = court

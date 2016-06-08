@@ -49,7 +49,7 @@ class Admin::JudgesController < Admin::BaseController
   end
 
   def create
-    context = JudgeCreateContext.new(params)
+    context =  Admin::JudgeCreateContext.new(params)
     if @judge = context.perform
       redirect_as_success(admin_judges_path,  "法官 - #{judge.name} 已新增")
     else
@@ -60,7 +60,7 @@ class Admin::JudgesController < Admin::BaseController
   end
 
   def update
-    context =JudgeUpdateContext.new(@judge)
+    context =  Admin::JudgeUpdateContext.new(@judge)
     if context.perform(params)
       redirect_as_success(admin_judges_path, "法官 - #{judge.name} 已修改")
     else
@@ -71,7 +71,7 @@ class Admin::JudgesController < Admin::BaseController
   end
 
   def destroy
-    context = JudgeDeleteContext.new(@judge)
+    context =  Admin::JudgeDeleteContext.new(@judge)
     if context.perform
       redirect_as_success(admin_judges_path, "法官 - #{judge.name} 已刪除")
     else

@@ -1,4 +1,4 @@
-class LawyerCreateContext < BaseContext
+class Admin::LawyerCreateContext < BaseContext
   PERMITS = [:name, :current, :avatar, :gender, :birth_year, :memo, :email].freeze
   
   before_perform :build_lawyer

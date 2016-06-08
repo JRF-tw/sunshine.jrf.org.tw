@@ -20,7 +20,7 @@ class Lawyer < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :async, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates_presence_of :name
+  validates_presence_of :name, :email
   mount_uploader :avatar, ProfileAvatarUploader
 
   def need_update_info?

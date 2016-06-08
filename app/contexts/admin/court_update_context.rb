@@ -1,4 +1,4 @@
-class CourtUpdateContext < BaseContext
+class Admin::CourtUpdateContext < BaseContext
   PERMITS = [:court_type, :full_name, :name, :weight, :is_hidden].freeze
 
   before_perform :assign_value

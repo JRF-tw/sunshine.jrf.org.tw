@@ -1,5 +1,6 @@
 = f.input :name
 = f.input :email
+= f.input :password if @lawyer.confirmed?
 = f.input :current
 - if f.object.avatar?
   .control-group
