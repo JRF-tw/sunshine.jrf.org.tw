@@ -17,6 +17,13 @@ describe Admin::LawyerCreateContext do
       
       it { expect(Lawyer.last.confirmed?).to be false }
     end
+
+    context "create won't send confirmation email" do 
+      let(:params) { attributes_for(:lawyer) }
+      subject { described_class.new(params) }
+
+      it { expect { subject.perform }.not_to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
+    end
   
 
     context "name can't be empty" do 

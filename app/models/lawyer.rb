@@ -44,4 +44,8 @@ class Lawyer < ActiveRecord::Base
     super if confirmed?
   end
 
+  def send_on_create_confirmation_instructions
+    # 讓 create 不會自動寄出認證信
+  end
+
 end

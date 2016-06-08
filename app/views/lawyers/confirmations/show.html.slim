@@ -1,6 +1,7 @@
 .widget-box
   .widget-title
     h5 律師設定密碼
+    h5 ="律師: #{resource.name} 帳號信箱: #{resource.email}"
   .widget-content.nopadding
 
     = simple_form_for(resource, as: resource_name, url: lawyers_confirm_path, method: :patch ) do |f|

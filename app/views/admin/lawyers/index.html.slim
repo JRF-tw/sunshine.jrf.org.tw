@@ -32,6 +32,7 @@
         tr
           th #
           th 名稱
+          th email
           th 性別
           th 現職
           th 狀態
@@ -42,6 +43,7 @@
           tr
             td= lawyer.id
             td= lawyer.name
+            td= lawyer.email
             td= lawyer.gender
             td= lawyer.current
             td= lawyer.confirmed? ? "已註冊" : "未註冊"
