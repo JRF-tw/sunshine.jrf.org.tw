@@ -11,4 +11,6 @@
 #
 
 class VerdictRelation < ActiveRecord::Base
+  belongs_to :verdict
+  belongs_to :person, polymorphic: true
 end

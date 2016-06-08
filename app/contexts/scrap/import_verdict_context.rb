@@ -106,7 +106,8 @@ class Scrap::ImportVerdictContext < BaseContext
     @verdict.lawyer_names.each do |name|
       lawyers = Lawyer.where(name: name)
       if lawyers.count == 1
-        @verdict.lawyer_verdicts.create(lawyer: lawyers.first)
+        # TODO verdict_relation context
+        #@verdict.lawyer_verdicts.create(lawyer: lawyers.first)
         StoryRelationCreateContext.new(@story).perform(name)
       end
     end
@@ -117,7 +118,8 @@ class Scrap::ImportVerdictContext < BaseContext
       branches = @court.branches.current.where("chamber_name LIKE ? ", "%#{@stroy_type}%")
       judges = branches.map{ |a| a.judge if a.judge.name == name }.compact.uniq
       if judges.count == 1
-        @verdict.judge_verdicts.create(judge: judges.first)
+        # TODO verdict_relation context
+        # @verdict.judge_verdicts.create(judge: judges.first)
         StoryRelationCreateContext.new(@story).perform(name)
       end
     end
@@ -131,7 +133,8 @@ class Scrap::ImportVerdictContext < BaseContext
     @verdict.defendant_names.each do |name|
       defendants = Defendant.where(name: name)
       if defendants.count == 1
-        @verdict.defendant_verdicts.create(defendant: defendants.first)
+        # TODO verdict_relation context
+        # @verdict.defendant_verdicts.create(defendant: defendants.first)
         StoryRelationCreateContext.new(@story).perform(name)
       end
     end

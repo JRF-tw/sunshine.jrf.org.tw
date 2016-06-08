@@ -73,24 +73,25 @@ RSpec.describe Scrap::ImportVerdictContext, :type => :model do
       end
     end
 
-    context "create judge_verdicts" do
-      let!(:judge1) { FactoryGirl.create :judge, name: "李麗珠" }
-      let!(:branch1) { FactoryGirl.create :branch, court: court, judge: judge1, chamber_name: "臺灣高等法院刑事庭", name: "丁"}
+    # TODO verdict_relation create
+    # context "create judge_verdicts" do
+    #   let!(:judge1) { FactoryGirl.create :judge, name: "李麗珠" }
+    #   let!(:branch1) { FactoryGirl.create :branch, court: court, judge: judge1, chamber_name: "臺灣高等法院刑事庭", name: "丁"}
 
-      it { expect{ subject }.to change { judge1.verdicts.count } }
-    end
+    #   it { expect{ subject }.to change { judge1.verdicts.count } }
+    # end
 
-    context "create lawyer_verdicts" do
-      let!(:lawyer) { FactoryGirl.create :lawyer, name: "陳圈圈" }
+    # context "create lawyer_verdicts" do
+    #   let!(:lawyer) { FactoryGirl.create :lawyer, name: "陳圈圈" }
 
-      it { expect{ subject }.to change { lawyer.verdicts.count } }
-    end
+    #   it { expect{ subject }.to change { lawyer.verdicts.count } }
+    # end
 
-    context "create defendant_verdict" do
-      let!(:defendant) { FactoryGirl.create :defendant, name: "張坤樹" }
+    # context "create defendant_verdict" do
+    #   let!(:defendant) { FactoryGirl.create :defendant, name: "張坤樹" }
 
-      it { expect{ subject }.to change { defendant.verdicts.count } }
-    end
+    #   it { expect{ subject }.to change { defendant.verdicts.count } }
+    # end
 
     context "create relations" do
       let!(:judge1) { FactoryGirl.create :judge, name: "李麗珠" }
