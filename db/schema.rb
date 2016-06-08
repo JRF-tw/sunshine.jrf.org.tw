@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160601132705) do
+ActiveRecord::Schema.define(version: 20160608033839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -167,17 +167,6 @@ ActiveRecord::Schema.define(version: 20160601132705) do
   add_index "courts", ["name"], name: "index_courts_on_name", using: :btree
   add_index "courts", ["scrap_name"], name: "index_courts_on_scrap_name", using: :btree
 
-  create_table "defendant_verdicts", force: :cascade do |t|
-    t.integer  "verdict_id"
-    t.integer  "defendant_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
-  add_index "defendant_verdicts", ["defendant_id"], name: "index_defendant_verdicts_on_defendant_id", using: :btree
-  add_index "defendant_verdicts", ["verdict_id", "defendant_id"], name: "index_defendant_verdicts_on_verdict_id_and_defendant_id", using: :btree
-  add_index "defendant_verdicts", ["verdict_id"], name: "index_defendant_verdicts_on_verdict_id", using: :btree
-
   create_table "defendants", force: :cascade do |t|
     t.string   "name",                                null: false
     t.string   "identify_number",                     null: false
@@ -212,17 +201,6 @@ ActiveRecord::Schema.define(version: 20160601132705) do
 
   add_index "educations", ["is_hidden"], name: "index_educations_on_is_hidden", using: :btree
   add_index "educations", ["profile_id"], name: "index_educations_on_profile_id", using: :btree
-
-  create_table "judge_verdicts", force: :cascade do |t|
-    t.integer  "verdict_id"
-    t.integer  "judge_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "judge_verdicts", ["judge_id"], name: "index_judge_verdicts_on_judge_id", using: :btree
-  add_index "judge_verdicts", ["verdict_id", "judge_id"], name: "index_judge_verdicts_on_verdict_id_and_judge_id", using: :btree
-  add_index "judge_verdicts", ["verdict_id"], name: "index_judge_verdicts_on_verdict_id", using: :btree
 
   create_table "judges", force: :cascade do |t|
     t.string   "name"
@@ -294,17 +272,6 @@ ActiveRecord::Schema.define(version: 20160601132705) do
   add_index "judgments", ["is_hidden"], name: "index_judgments_on_is_hidden", using: :btree
   add_index "judgments", ["judge_no"], name: "index_judgments_on_judge_no", using: :btree
   add_index "judgments", ["main_judge_id"], name: "index_judgments_on_main_judge_id", using: :btree
-
-  create_table "lawyer_verdicts", force: :cascade do |t|
-    t.integer  "verdict_id"
-    t.integer  "lawyer_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "lawyer_verdicts", ["lawyer_id"], name: "index_lawyer_verdicts_on_lawyer_id", using: :btree
-  add_index "lawyer_verdicts", ["verdict_id", "lawyer_id"], name: "index_lawyer_verdicts_on_verdict_id_and_lawyer_id", using: :btree
-  add_index "lawyer_verdicts", ["verdict_id"], name: "index_lawyer_verdicts_on_verdict_id", using: :btree
 
   create_table "lawyers", force: :cascade do |t|
     t.string   "name",                                null: false
@@ -612,6 +579,22 @@ ActiveRecord::Schema.define(version: 20160601132705) do
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "verdict_relations", force: :cascade do |t|
+    t.integer  "verdict_id"
+    t.integer  "person_id"
+    t.string   "person_type"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "verdict_relations", ["person_id", "person_type"], name: "index_verdict_relations_on_person_id_and_person_type", using: :btree
+  add_index "verdict_relations", ["person_id"], name: "index_verdict_relations_on_person_id", using: :btree
+  add_index "verdict_relations", ["person_type"], name: "index_verdict_relations_on_person_type", using: :btree
+  add_index "verdict_relations", ["verdict_id", "person_id", "person_type"], name: "verdict_relations_full_index", using: :btree
+  add_index "verdict_relations", ["verdict_id", "person_id"], name: "index_verdict_relations_on_verdict_id_and_person_id", using: :btree
+  add_index "verdict_relations", ["verdict_id", "person_type"], name: "index_verdict_relations_on_verdict_id_and_person_type", using: :btree
+  add_index "verdict_relations", ["verdict_id"], name: "index_verdict_relations_on_verdict_id", using: :btree
 
   create_table "verdicts", force: :cascade do |t|
     t.integer  "story_id"

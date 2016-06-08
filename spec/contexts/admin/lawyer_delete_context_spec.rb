@@ -8,7 +8,7 @@ describe Admin::LawyerDeleteContext do
     it { expect { subject.perform }.to change { Lawyer.count }.by(-1) }
   end
 
-  context "has story" do
+  context "has verdict" do
     let!(:lawyer_with_verdict) { FactoryGirl.create :lawyer, :with_verdict }
     subject { described_class.new(lawyer_with_verdict) }
     it { expect { subject.perform }.not_to change { Lawyer.count } }

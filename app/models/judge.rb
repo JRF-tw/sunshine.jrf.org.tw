@@ -23,8 +23,6 @@
 #
 
 class Judge < ActiveRecord::Base
-  has_many :judge_verdicts
-  has_many :verdicts, through: :judge_verdicts
   has_many :branches
   has_many :current_branches, ->{ where(missed: false) }, class_name: "Branch"
   has_many :main_judge_stories, class_name: "Story", foreign_key: "main_judge_id"
@@ -32,6 +30,7 @@ class Judge < ActiveRecord::Base
   belongs_to :court, foreign_key: :current_court_id
   has_many :schedules, foreign_key: "branch_judge_id"
   has_many :story_relations, as: :people
+  has_many :verdict_relations, as: :person
 
   mount_uploader :avatar, ProfileAvatarUploader
 
