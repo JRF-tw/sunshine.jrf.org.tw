@@ -111,12 +111,8 @@ class Scrap::ImportVerdictContext < BaseContext
 
   def create_relation_for_judge
     @verdict.judges_names.each do |name|
-      branches = @court.branches.current.where("chamber_name LIKE ? ", "%#{@stroy_type}%")
-      judges = branches.map{ |a| a.judge if a.judge.name == name }.compact.uniq
-      if judges.count == 1
-        VerdictRelationCreateContext.new(@verdict).perform(name)
-        StoryRelationCreateContext.new(@story).perform(name)
-      end
+      VerdictRelationCreateContext.new(@verdict).perform(name)
+      StoryRelationCreateContext.new(@story).perform(name)
     end
   end
 

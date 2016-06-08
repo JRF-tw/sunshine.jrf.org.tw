@@ -1,11 +1,14 @@
 class VerdictRelationCreateContext < BaseContext
   before_perform :find_person_type
-  before_perform :find_person
+  before_perform :find_person, unless: :is_judge?
+  before_perform :find_judge_person, if: :is_judge?
   before_perform :check_scoped
   before_perform :build_data
 
   def initialize(verdict)
     @verdict = verdict
+    @story = @verdict.story
+    @court = @story.court
   end
 
   def perform(person_name)
@@ -29,8 +32,18 @@ class VerdictRelationCreateContext < BaseContext
     add_error(:data_create_fail, "案件內沒有該人名紀錄") unless @person_type
   end
 
+  def is_judge?
+    @person_type == "Judge"
+  end
+
   def find_person
     @scoped = eval("#{@person_type}.where(name: \"#{@person_name}\")")
+    @person = @scoped.first
+  end
+
+  def find_judge_person
+    branches = @court.branches.current.where("chamber_name LIKE ? ", "%#{@story.story_type}%")
+    @scoped = branches.map{ |a| a.judge if a.judge.name == @person_name }.compact.uniq
     @person = @scoped.first
   end
 
