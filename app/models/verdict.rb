@@ -51,5 +51,4 @@ class Verdict < ActiveRecord::Base
       where(prosecutor_names: nil)
     end
   end
-
 end

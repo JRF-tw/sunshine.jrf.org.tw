@@ -47,7 +47,7 @@ FactoryGirl.define do
 
     trait :with_verdict do
       after(:create) do |lawyer|
-        FactoryGirl.create :lawyer_verdict, lawyer: lawyer, verdict: FactoryGirl.create(:verdict)
+        FactoryGirl.create :verdict_relation, person: lawyer, verdict: FactoryGirl.create(:verdict)
       end
     end
   end
