@@ -300,5 +300,6 @@ zh-TW:
   devise:
     registrations:
       bystander:
-        email_conflict: "e-mail 並未更改"
+        email_conflict: "此e-mail已經被使用"
+        email_the_same: "e-mail 並未更改"
 

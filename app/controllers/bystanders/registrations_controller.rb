@@ -1,6 +1,7 @@
 class Bystanders::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :check_update_email, only: [:update]
+  before_action :check_update_email_different, only: [:update]
+  before_action :check_update_email_not_use, only: [:update]
 
   protected
 
@@ -16,8 +17,15 @@ class Bystanders::RegistrationsController < Devise::RegistrationsController
     bystanders_root_path
   end
 
-  def check_update_email
+  def check_update_email_different
     if account_update_params["email"] == current_bystander.email
+      set_flash_message :notice, :email_the_same
+      render :action =>"edit"
+    end
+  end
+
+  def check_update_email_not_use
+    if Bystander.pluck(:unconfirmed_email).include?(account_update_params["email"])
       set_flash_message :notice, :email_conflict
       render :action =>"edit"
     end
