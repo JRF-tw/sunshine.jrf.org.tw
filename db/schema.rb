@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160601132705) do
+ActiveRecord::Schema.define(version: 20160608032111) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -612,6 +612,22 @@ ActiveRecord::Schema.define(version: 20160601132705) do
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "verdict_relations", force: :cascade do |t|
+    t.integer  "verdict_id"
+    t.integer  "person_id"
+    t.string   "person_type"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "verdict_relations", ["person_id", "person_type"], name: "index_verdict_relations_on_person_id_and_person_type", using: :btree
+  add_index "verdict_relations", ["person_id"], name: "index_verdict_relations_on_person_id", using: :btree
+  add_index "verdict_relations", ["person_type"], name: "index_verdict_relations_on_person_type", using: :btree
+  add_index "verdict_relations", ["verdict_id", "person_id", "person_type"], name: "verdict_relations_full_index", using: :btree
+  add_index "verdict_relations", ["verdict_id", "person_id"], name: "index_verdict_relations_on_verdict_id_and_person_id", using: :btree
+  add_index "verdict_relations", ["verdict_id", "person_type"], name: "index_verdict_relations_on_verdict_id_and_person_type", using: :btree
+  add_index "verdict_relations", ["verdict_id"], name: "index_verdict_relations_on_verdict_id", using: :btree
 
   create_table "verdicts", force: :cascade do |t|
     t.integer  "story_id"
