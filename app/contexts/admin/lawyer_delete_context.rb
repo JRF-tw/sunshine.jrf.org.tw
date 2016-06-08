@@ -13,7 +13,7 @@ class Admin::LawyerDeleteContext < BaseContext
   end
 
   def check_verdict_empty
-    return add_error(:data_delete_fail, "該律師已有判決書") if @lawyer.verdicts.present?
+    return add_error(:data_delete_fail, "該律師已有判決書") if @lawyer.verdict_relations.present?
   end
 
   def check_confirm
