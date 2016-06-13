@@ -3,7 +3,9 @@ class SmsService
 
   class << self
     def send_to(phone, text)
-      SmsService.new(phone).send_by_twilio(text)
+      # TODO slack for test, should use twilio
+      # SmsService.new(phone).send_by_twilio(text)
+      SmsService.new(phone).send_by_slack(text)
     end
 
     def send_async(phone, text)
@@ -16,15 +18,17 @@ class SmsService
     self.phone = phone
   end
 
-  def send_by_twilio(text)
+  def send_by_slack(text)
     SlackService.fake_defendant_reset_password_notify_async(text)
+  end
 
-    # TODO
-    # Twilio::REST::Client.new(Setting.twilio.sid, Setting.twilio.token).account.messages.create({
-    #   from: '+12564102237',
-    #   to:   phone,
-    #   body: format_text(text)
-    # })
+  def send_by_twilio(text)
+    # TODO change from number
+    Twilio::REST::Client.new(Setting.twilio.sid, Setting.twilio.token).account.messages.create({
+      from: '+xxxxxxxxxxxx',
+      to:   phone,
+      body: format_text(text)
+    })
   end
 
   private
