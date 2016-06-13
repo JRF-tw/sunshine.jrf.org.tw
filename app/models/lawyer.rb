@@ -25,6 +25,8 @@
 #  confirmation_sent_at   :datetime
 #  confirmed_at           :datetime
 #  unconfirmed_email      :string
+#  phone_number           :string
+#  office_number          :string
 #
 
 class Lawyer < ActiveRecord::Base

@@ -18,9 +18,18 @@
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string
+<<<<<<< e8ce4a4bbcc1a1a91accb58550162ed919778f15:app/models/admin/user.rb
 #  created_at             :datetime
 #  updated_at             :datetime
 #  admin                  :boolean          default(FALSE)
+=======
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  phone_number           :string
+#  school                 :string
+#  student_number         :string
+#  department_level       :string
+>>>>>>> 新增 律師 旁觀者 個人資料欄位:app/controllers/bystanders_controller.rb
 #
 
 class Admin::User < ::User

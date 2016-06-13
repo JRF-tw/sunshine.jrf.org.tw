@@ -20,6 +20,10 @@
 #  unconfirmed_email      :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  phone_number           :string
+#  school                 :string
+#  student_number         :string
+#  department_level       :string
 #
 
 FactoryGirl.define do
