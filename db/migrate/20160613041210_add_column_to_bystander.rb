@@ -4,5 +4,7 @@ class AddColumnToBystander < ActiveRecord::Migration
     add_column :bystanders, :school, :string
     add_column :bystanders, :student_number, :string
     add_column :bystanders, :department_level, :string
+
+    add_index :bystanders, :school
   end
 end

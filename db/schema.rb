@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(version: 20160613091043) do
   add_index "bystanders", ["confirmation_token"], name: "index_bystanders_on_confirmation_token", unique: true, using: :btree
   add_index "bystanders", ["email"], name: "index_bystanders_on_email", unique: true, using: :btree
   add_index "bystanders", ["reset_password_token"], name: "index_bystanders_on_reset_password_token", unique: true, using: :btree
+  add_index "bystanders", ["school"], name: "index_bystanders_on_school", using: :btree
 
   create_table "careers", force: :cascade do |t|
     t.integer  "profile_id"
