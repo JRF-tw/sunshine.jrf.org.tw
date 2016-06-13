@@ -297,9 +297,4 @@ zh-TW:
         phone_number_cont: "電話號碼包含"
         current_sign_in_at_gteq: "最後一次登入日期搜尋"
         created_at_gteq: "註冊日期搜尋"
-  devise:
-    registrations:
-      bystander:
-        email_conflict: "此e-mail已經被使用"
-        email_the_same: "e-mail 並未更改"
 
