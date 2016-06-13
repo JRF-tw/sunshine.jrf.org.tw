@@ -21,9 +21,9 @@
 
 class Defendant < ActiveRecord::Base
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  # :lockable, :timeoutable and :omniauthable
 
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :async, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
   devise authentication_keys: [ :identify_number ]
 
@@ -39,6 +39,10 @@ class Defendant < ActiveRecord::Base
   end
 
   def email_changed?
+    false
+  end
+
+  def confirmation_required?
     false
   end
 
