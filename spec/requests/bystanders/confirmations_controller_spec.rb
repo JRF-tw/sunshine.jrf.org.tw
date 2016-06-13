@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Bystander::ConfirmationsController, :type => :request do
+RSpec.describe Bystanders::ConfirmationsController, :type => :request do
   before { post "/bystanders", bystander: { name: "Curry", email: "h2312@gmail.com", password: "55667788", password_confirmation: "55667788"} }
 
   describe "bystander confirm" do

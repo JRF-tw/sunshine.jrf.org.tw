@@ -1,4 +1,4 @@
-class Bystander::RegistrationsController < Devise::RegistrationsController
+class Bystanders::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :check_update_email, only: [:update]
 
@@ -13,7 +13,7 @@ class Bystander::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_update_path_for(resource)
-    bystanders_path
+    bystanders_root_path
   end
 
   def check_update_email

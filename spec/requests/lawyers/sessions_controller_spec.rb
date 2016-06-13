@@ -31,6 +31,15 @@ RSpec.describe Lawyers::SessionsController, type: :request do
       subject! { delete "/lawyers/sign_out" }
       it { expect(response).to redirect_to("/lawyers/sign_in") }
     end
+
+    context "only sign out lawyer" do
+      before { signin_lawyer }
+      before { signin_bystander }
+      subject! { delete "/lawyers/sign_out" }
+
+      it { expect(get "/bystanders/edit").to eq(200) }
+      it { expect(get "/lawyers/profile").to eq(302) }
+    end
   end
 
 end
