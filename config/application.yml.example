@@ -38,6 +38,9 @@ defaults: &defaults
     id: ""
   disqus:
     id: ""
+  twilio:
+    sid: "xxxxxxx"
+    token: "abcabc"
 
 development:
   <<: *defaults
