@@ -2,6 +2,7 @@ class Admin::LawyerUpdateContext < BaseContext
   PERMITS = [:name, :current, :avatar, :gender, :birth_year, :memo, :email, :password].freeze
 
   before_perform :assign_value
+  before_perform :skip_confirmation_mail
   after_perform :confirm_email
 
   def initialize(lawyer)
@@ -24,5 +25,9 @@ class Admin::LawyerUpdateContext < BaseContext
 
   def confirm_email
     @lawyer.confirm! if @lawyer.unconfirmed_email.present?
+  end
+
+  def skip_confirmation_mail
+    @lawyer.skip_confirmation_notification!
   end
 end 

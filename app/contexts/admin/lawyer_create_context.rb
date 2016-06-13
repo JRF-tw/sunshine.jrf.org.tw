@@ -2,6 +2,7 @@ class Admin::LawyerCreateContext < BaseContext
   PERMITS = [:name, :current, :avatar, :gender, :birth_year, :memo, :email].freeze
   
   before_perform :build_lawyer
+  before_perform :skip_confirmation_mail
   attr_reader :lawyer
 
   def initialize(params)
@@ -20,6 +21,10 @@ class Admin::LawyerCreateContext < BaseContext
 
   def build_lawyer
     @lawyer = Admin::Lawyer.new(@params)
+  end
+
+  def skip_confirmation_mail
+    @lawyer.skip_confirmation_notification!
   end
 
 end
