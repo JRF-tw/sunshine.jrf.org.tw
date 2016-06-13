@@ -1,4 +1,4 @@
-class Bystander::UpdateEmailContext < BaseContext
+class Bystander::ChangeEmailContext < BaseContext
   PERMITS = [:email, :password].freeze
 
   before_perform :check_email_not_use

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Bystander::UpdateEmailContext do
+describe Bystander::ChangeEmailContext do
   let!(:bystander) { FactoryGirl.create :bystander }
 
   describe "perform" do

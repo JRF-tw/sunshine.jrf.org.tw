@@ -5,7 +5,7 @@ class Bystanders::RegistrationsController < Devise::RegistrationsController
 
   def update
     bystander = current_bystander
-    context = Bystander::UpdateEmailContext.new(bystander)
+    context = Bystander::ChangeEmailContext.new(bystander)
     prev_unconfirmed_email = bystander.unconfirmed_email if bystander.respond_to?(:unconfirmed_email)
     
     if context.perform(params)
