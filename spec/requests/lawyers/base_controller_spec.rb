@@ -34,4 +34,11 @@ RSpec.describe Lawyers::BaseController, type: :request do
     subject!{ post "/lawyers/update_profile", lawyer: { current: "律師事務所" } }
     it { expect(response).to redirect_to("/lawyers/profile") }
   end
+
+  describe "#send_reset_password_mail" do
+    before { signin_lawyer }
+    subject! { post "/lawyers/send_reset_password_mail" }
+
+    it { expect(response).to redirect_to("/lawyers/profile") }
+  end
 end

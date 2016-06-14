@@ -36,6 +36,8 @@ Rails.application.routes.draw do
 
   namespace :bystanders do
     root to: "base#index"
+    get "profile", to: "base#profile"
+    post "send_reset_password_mail", to: "base#send_reset_password_mail"
   end
 
   namespace :lawyers do
@@ -43,6 +45,7 @@ Rails.application.routes.draw do
     get "profile", to: "base#profile"
     get "edit-profile", to: "base#edit_profile"
     post "update_profile", to: "base#update_profile"
+    post "send_reset_password_mail", to: "base#send_reset_password_mail"
   end
 
   namespace :defendants do
@@ -91,7 +94,7 @@ Rails.application.routes.draw do
     resources :judges
     resources :lawyers do
       member do
-        post :manual_confirm
+        post :send_reset_password_mail
       end
     end
     resources :verdicts do

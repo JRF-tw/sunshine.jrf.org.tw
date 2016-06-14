@@ -1,6 +1,8 @@
 class Lawyers::PasswordsController < Devise::PasswordsController
   layout 'lawyer'
 
+  prepend_before_filter :require_no_authentication, except: [:edit]
+
   # POST /resource/password
   def create
     self.resource = resource_class.send_reset_password_instructions(resource_params)
