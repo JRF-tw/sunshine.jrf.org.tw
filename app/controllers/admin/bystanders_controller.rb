@@ -14,6 +14,13 @@ class Admin::BystandersController < Admin::BaseController
     add_crumb @admin_page_title, "#"
   end
 
+  def download_file
+    @bystanders = Bystander.all
+    respond_to do |format| 
+      format.xlsx {render xlsx: 'download_file',filename: "旁觀者.xlsx"}
+    end
+  end
+
   private
 
   def bystander
