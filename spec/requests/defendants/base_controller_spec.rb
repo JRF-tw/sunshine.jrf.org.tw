@@ -31,7 +31,15 @@ RSpec.describe Defendants::BaseController, type: :request do
     context "success" do
       before { signin_defendant }
       subject!{ put "/defendants/update-email", defendant: { email: "5566@gmail", current_password: "12321313213" } }
-      it { expect expect(response).to redirect_to("/defendants/profile")}
+      it { expect(response).to redirect_to("/defendants/profile")}
+    end
+
+    context "wrong password" do
+      before { signin_defendant }
+      subject!{ put "/defendants/update-email", defendant: { email: "5566@gmail", current_password: "" } }
+    
+      it { expect { subject }.not_to change { current_defendant } }
+      it { expect(response.body).not_to match("目前等待驗證中信箱") }
     end
   end
 end
