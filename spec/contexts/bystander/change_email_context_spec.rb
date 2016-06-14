@@ -25,6 +25,13 @@ describe Bystander::ChangeEmailContext do
 
       it { expect{ subject.perform(params) }.not_to change { bystander.reload.unconfirmed_email } }
     end
+
+    context "empty password" do
+      let(:params) { { email: bystander.email, current_password: "" } }
+      subject { described_class.new(bystander) }
+
+      it { expect{ subject.perform(params) }.not_to change { bystander.reload.unconfirmed_email } }
+    end
   end
 
 end
