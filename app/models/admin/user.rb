@@ -21,12 +21,6 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  admin                  :boolean          default(FALSE)
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#  phone_number           :string
-#  school                 :string
-#  student_number         :string
-#  department_level       :string
 #
 
 class Admin::User < ::User
