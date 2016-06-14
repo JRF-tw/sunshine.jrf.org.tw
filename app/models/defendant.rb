@@ -17,6 +17,11 @@
 #  last_sign_in_ip        :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  email                  :string
+#  unconfirmed_email      :string
+#  confirmed_at           :datetime
+#  confirmation_token     :string
+#  confirmation_sent_at   :datetime
 #
 
 class Defendant < ActiveRecord::Base
