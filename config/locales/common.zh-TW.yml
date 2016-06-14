@@ -290,6 +290,8 @@ zh-TW:
       bystander:
         name_cont: "姓名包含"
         email_cont: "EmaiL包含"
+        school_cont: "學校包含"
+        department_level_cont: "系級包含"
       defendant:
         name_cont: "姓名包含"
         current_sign_in_ip_cont: "最後一次登入ip包含"

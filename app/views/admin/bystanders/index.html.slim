@@ -11,6 +11,15 @@
           .control-group
             label.control-label= f.label :email_cont
             .controls= f.search_field :email_cont
+      .row
+        .span6
+          .control-group
+            label.control-label= f.label :school_cont
+            .controls= f.search_field :school_cont
+        .span6
+          .control-group
+            label.control-label= f.label :department_level_cont
+            .controls= f.search_field :department_level_cont
     hr
     .form-actions
       = f.submit :value => "搜尋", :class => "btn btn-primary"
