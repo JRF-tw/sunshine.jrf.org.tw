@@ -4,14 +4,13 @@ class Bystanders::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def update
-    bystander = current_bystander
-    context = Bystander::ChangeEmailContext.new(bystander)
-    prev_unconfirmed_email = bystander.unconfirmed_email if bystander.respond_to?(:unconfirmed_email)
+    context = Bystander::ChangeEmailContext.new(current_bystander)
+    prev_unconfirmed_email = current_bystander.unconfirmed_email if current_bystander.respond_to?(:unconfirmed_email)
     
     if context.perform(params)
       set_flash_message :notice, :update_needs_confirmation
-      sign_in :bystander, bystander, bypass: true
-      respond_with bystander, location: after_update_path_for(bystander)
+      sign_in :bystander, current_bystander, bypass: true
+      respond_with current_bystander, location: after_update_path_for(current_bystander)
     else
       clean_up_passwords resource
       flash.now[:error] = context.error_messages.join(", ")
