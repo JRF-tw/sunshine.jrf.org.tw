@@ -114,11 +114,16 @@ ActiveRecord::Schema.define(version: 20160613091043) do
     t.string   "unconfirmed_email"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "phone_number"
+    t.string   "school"
+    t.string   "student_number"
+    t.string   "department_level"
   end
 
   add_index "bystanders", ["confirmation_token"], name: "index_bystanders_on_confirmation_token", unique: true, using: :btree
   add_index "bystanders", ["email"], name: "index_bystanders_on_email", unique: true, using: :btree
   add_index "bystanders", ["reset_password_token"], name: "index_bystanders_on_reset_password_token", unique: true, using: :btree
+  add_index "bystanders", ["school"], name: "index_bystanders_on_school", using: :btree
 
   create_table "careers", force: :cascade do |t|
     t.integer  "profile_id"
@@ -303,6 +308,8 @@ ActiveRecord::Schema.define(version: 20160613091043) do
     t.datetime "confirmation_sent_at"
     t.datetime "confirmed_at"
     t.string   "unconfirmed_email"
+    t.string   "phone_number"
+    t.string   "office_number"
   end
 
   add_index "lawyers", ["confirmation_token"], name: "index_lawyers_on_confirmation_token", unique: true, using: :btree

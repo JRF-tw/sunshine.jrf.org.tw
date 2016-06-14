@@ -26,6 +26,7 @@
           th #
           th 姓名
           th Email
+          th 學校
           th 操作
       tbody
         - @bystanders.each do |bystander|
@@ -33,6 +34,7 @@
             td= bystander.id
             td= bystander.name
             td= bystander.email
+            td= bystander.school
             td
               = link_to "詳細資料", admin_bystander_path(bystander), class: "btn btn-mini"
               = " "
