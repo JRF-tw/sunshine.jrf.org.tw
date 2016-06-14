@@ -14,17 +14,17 @@ describe Defendant::ChangeEmailContext do
 
     context "email already exist" do
       let!(:defendant2) { FactoryGirl.create :defendant, email: "55667788@gmail.com"   }
-      let(:params) { { unconfirmed_email: defendant2.email, current_password: "" } }
-      it { expect{ subject.perform(params) }.not_to change { defendant.reload.unconfirmed_email } }
-    end
-
-    context "empty password" do
-      let(:params) { { unconfirmed_email: "h2312@gmail.com", current_password: "" } }
+      let(:params) { { unconfirmed_email: defendant2.email, current_password: "12321313213" } }
       it { expect{ subject.perform(params) }.not_to change { defendant.reload.unconfirmed_email } }
     end
 
     context "empty email" do
       let(:params) { { unconfirmed_email: "", current_password: "12321313213" } }
+      it { expect{ subject.perform(params) }.not_to change { defendant.reload.unconfirmed_email } }
+    end
+    
+    context "empty password" do
+      let(:params) { { unconfirmed_email: "h2312@gmail.com", current_password: "" } }
       it { expect{ subject.perform(params) }.not_to change { defendant.reload.unconfirmed_email } }
     end
 
