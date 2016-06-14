@@ -91,7 +91,11 @@ Rails.application.routes.draw do
         get :download_file
       end
     end
-    resources :bystanders, only: [:index, :show]
+    resources :bystanders do
+      collection do
+        get :download_file
+      end
+    end
     resources :defendants, only: [:index, :show]
   end
 end

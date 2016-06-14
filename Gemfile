@@ -50,6 +50,10 @@ gem 'redactor-rails'
 # api
 gem 'rabl-rails'
 
+#xls Download
+gem 'axlsx', '~> 2.0'
+gem "axlsx_rails"
+
 # soft delete
 # gem 'paranoia'
 

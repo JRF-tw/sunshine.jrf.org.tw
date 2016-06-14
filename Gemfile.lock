@@ -69,6 +69,13 @@ GEM
     aws-sdk-v1 (1.66.0)
       json (~> 1.4)
       nokogiri (>= 1.4.4)
+    axlsx (2.0.1)
+      htmlentities (~> 4.3.1)
+      nokogiri (>= 1.4.1)
+      rubyzip (~> 1.0.0)
+    axlsx_rails (0.4.0)
+      axlsx (>= 2.0.1)
+      rails (>= 3.1)
     bcrypt (3.1.10)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -284,6 +291,7 @@ GEM
     guard-compat (1.2.1)
     hashdiff (0.2.3)
     hike (1.2.3)
+    htmlentities (4.3.4)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     http_logger (0.5.1)
@@ -452,6 +460,7 @@ GEM
       rspec-mocks (~> 3.4.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
+    rubyzip (1.0.0)
     safe_yaml (1.0.4)
     sass (3.2.19)
     sass-rails (4.0.5)
@@ -551,6 +560,8 @@ DEPENDENCIES
   awesome_print
   aws-sdk
   aws-sdk-v1
+  axlsx (~> 2.0)
+  axlsx_rails
   better_errors
   binding_of_caller
   bootstrap-sass (~> 2.3)
