@@ -8,16 +8,15 @@ RSpec.describe Bystanders::ConfirmationsController, :type => :request do
       subject { get "/bystanders/confirmation", confirmation_token: Bystander.last.confirmation_token }
 
       it { expect(subject).to redirect_to("/bystanders/sign_in") }
+      it { expect { subject }.to change { Bystander.last.confirmed_at } }
     end
 
     context "already confirmed" do
       before { get "/bystanders/confirmation", confirmation_token: Bystander.last.confirmation_token }
       subject { get "/bystanders/confirmation", confirmation_token: Bystander.last.confirmation_token }
       
-      it {
-        expect(subject).to redirect_to("/bystanders/sign_in")
-        expect(flash[:notice]).to be_present
-      }
+      it { expect(subject).to redirect_to("/bystanders/sign_in") }
+      it { expect { subject }.not_to change { Bystander.last.confirmed_at } }
     end
  
     context "invalidated confirm token" do

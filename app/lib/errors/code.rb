@@ -9,7 +9,8 @@ class Errors::Code
     date_blank: 400,
     lawyer_not_found: 400,
     lawyer_exist: 400,
-    send_email_fail: 400
+    send_email_fail: 400,
+    email_conflict: 400
   }.freeze
 
   class << self

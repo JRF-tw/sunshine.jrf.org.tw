@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160608033839) do
+ActiveRecord::Schema.define(version: 20160613091043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -182,8 +182,15 @@ ActiveRecord::Schema.define(version: 20160608033839) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "email"
+    t.string   "unconfirmed_email"
+    t.datetime "confirmed_at"
+    t.string   "confirmation_token"
+    t.datetime "confirmation_sent_at"
   end
 
+  add_index "defendants", ["confirmation_token"], name: "index_defendants_on_confirmation_token", unique: true, using: :btree
+  add_index "defendants", ["email"], name: "index_defendants_on_email", unique: true, using: :btree
   add_index "defendants", ["reset_password_token"], name: "index_defendants_on_reset_password_token", unique: true, using: :btree
 
   create_table "educations", force: :cascade do |t|
@@ -471,12 +478,12 @@ ActiveRecord::Schema.define(version: 20160608033839) do
     t.integer  "number"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+    t.date     "adjudge_date"
+    t.boolean  "is_adjudge",       default: false
     t.text     "defendant_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
-    t.boolean  "is_adjudge",       default: false
-    t.date     "adjudge_date"
   end
 
   add_index "stories", ["adjudge_date"], name: "index_stories_on_adjudge_date", using: :btree
@@ -601,11 +608,11 @@ ActiveRecord::Schema.define(version: 20160608033839) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.string   "file"
-    t.boolean  "is_judgment",      default: false
     t.text     "defendant_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
+    t.boolean  "is_judgment",      default: false
     t.date     "adjudge_date"
     t.integer  "main_judge_id"
     t.string   "main_judge_name"

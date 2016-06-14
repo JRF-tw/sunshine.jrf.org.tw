@@ -5,7 +5,8 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  devise_for :defendants, controllers: { registrations: 'defendants/registrations', sessions: 'defendants/sessions', passwords: 'defendants/passwords' }
+
+  devise_for :defendants, controllers: { registrations: 'defendants/registrations', sessions: 'defendants/sessions', passwords: 'defendants/passwords', confirmations: 'defendants/confirmations' }
   devise_for :bystanders, controllers: { registrations: 'bystanders/registrations', sessions: 'bystanders/sessions', passwords: 'bystanders/passwords', confirmations: 'bystanders/confirmations'}
   devise_for :lawyers, controllers: { registrations: 'lawyers/registrations', sessions: 'lawyers/sessions', passwords: 'lawyers/passwords', confirmations: 'lawyers/confirmations'}
   devise_scope :lawyer do
@@ -46,6 +47,9 @@ Rails.application.routes.draw do
 
   namespace :defendants do
     root to: "base#index"
+    get "profile", to: "base#profile"
+    get "edit-email", to: "base#edit_email"
+    put "update-email", to: "base#update_email"
   end
 
   namespace :api, defaults: { format: 'json' } do
