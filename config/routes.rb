@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     root to: "base#index"
     get "profile", to: "base#profile"
     get "edit-email", to: "base#edit_email"
+    get "send_reset_password_sms", to:"base#send_reset_password_sms"
     put "update-email", to: "base#update_email"
     resource :phone, only: [:new, :create, :edit, :update] do
       collection do

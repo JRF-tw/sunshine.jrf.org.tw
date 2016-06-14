@@ -52,4 +52,13 @@ RSpec.describe Defendants::BaseController, type: :request do
       it { expect(response).to redirect_to("/defendants/phone/new") }
     end
   end
+
+  describe "#send_reset_password_sms" do
+    before { signin_defendant }
+    context "success" do
+      subject! { get "/defendants/send_reset_password_sms" }
+
+      it { expect(response).to redirect_to("/defendants/profile") }
+    end
+  end
 end
