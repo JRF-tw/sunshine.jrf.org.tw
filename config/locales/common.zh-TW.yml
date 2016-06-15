@@ -66,6 +66,8 @@ zh-TW:
         avatar: "頭像"
         gender: "性別"
         birth_year: "出生年"
+        phone_number: "手機"
+        office_number: "事務所電話"
         memo: "備註"
       education:
         title: "學經歷"

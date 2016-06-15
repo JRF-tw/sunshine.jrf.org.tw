@@ -1,5 +1,5 @@
 class Admin::LawyerCreateContext < BaseContext
-  PERMITS = [:name, :current, :avatar, :gender, :birth_year, :memo, :email].freeze
+  PERMITS = [:name, :current, :avatar, :gender, :birth_year, :memo, :email, :phone_number, :office_number].freeze
   
   before_perform :build_lawyer
   before_perform :skip_confirmation_mail
