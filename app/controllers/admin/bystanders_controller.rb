@@ -21,12 +21,6 @@ class Admin::BystandersController < Admin::BaseController
     end
   end
 
-  def send_reset_password_mail
-    context = Bystander::SendSetPasswordEmailContext.new(@bystander)
-    context.perform
-    redirect_as_success(admin_bystanders_path, "重設密碼信件已寄出")
-  end
-
   private
 
   def bystander

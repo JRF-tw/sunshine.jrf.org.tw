@@ -50,5 +50,11 @@ RSpec.describe Admin::LawyersController do
     end
   end
 
+  describe "send_reset_password_mail" do
+    context "success" do
+      subject! { post "/admin/lawyers/#{lawyer.id}/send_reset_password_mail" }
+      it { expect(response).to redirect_to("/admin/lawyers") }
+    end
+  end
 
 end
