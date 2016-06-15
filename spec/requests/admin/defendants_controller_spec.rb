@@ -22,4 +22,11 @@ RSpec.describe Admin::DefendantsController do
       it { expect(response).to be_success }
     end
   end
+
+  describe "#set_to_imposter" do
+    context "success" do
+      before { post "/admin/defendants/#{defendant.id}/set_to_imposter" }
+      it { expect(response).to redirect_to("/admin/defendants")}
+    end
+  end
 end
