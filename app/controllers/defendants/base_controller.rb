@@ -17,8 +17,7 @@ class Defendants::BaseController < ApplicationController
     if context.perform(params[:defendant])
       redirect_to defendants_profile_path, flash: { success: "email已修改" }
     else
-      flash.now[:error] = context.error_messages.join(", ")
-      render :edit_email
+      redirect_to defendants_edit_email_path, flash: { error: "#{context.error_messages.join(", ")}" }
     end
   end
 

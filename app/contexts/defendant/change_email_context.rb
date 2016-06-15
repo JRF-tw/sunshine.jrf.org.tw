@@ -13,7 +13,7 @@ class Defendant::ChangeEmailContext < BaseContext
   def perform(params)
     @params = permit_params(params[:defendant] || params, PERMITS)
     run_callbacks :perform do
-      return add_error(:data_update_fail, "email 更新失敗") unless @defendant.update_with_password(@params)
+      return add_error(:data_update_fail, "密碼錯誤") unless @defendant.update_with_password(@params)
       true
     end
   end
