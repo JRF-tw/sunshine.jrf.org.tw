@@ -59,7 +59,7 @@ class Defendant::VerifyPhoneContext < BaseContext
   def reset_data
     @defendant.phone_varify_code = nil
     @defendant.retry_verify_count.reset
-    @defendant.update_attributes(phone_number: nil, unconfirmed_phone: nil)
+    @defendant.update_attributes(unconfirmed_phone: nil)
   end
 end
 

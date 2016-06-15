@@ -1,7 +1,7 @@
 class Defendants::BaseController < ApplicationController
   layout 'defendant'
   before_action :authenticate_defendant!
-  before_action :phone_confirmed?
+  before_action :set_phone?
 
   def index
   end
@@ -24,7 +24,7 @@ class Defendants::BaseController < ApplicationController
 
   private
 
-  def phone_confirmed?
+  def set_phone?
     redirect_to new_defendants_phone_path unless current_defendant.phone_number.present?
   end
 

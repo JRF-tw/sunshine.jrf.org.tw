@@ -9,7 +9,7 @@ class Defendant::SetPhoneContext < BaseContext
   after_perform   :set_unconfirm
   after_perform   :build_message
   after_perform   :send_sms
-  after_perform   :record_sms_count
+  after_perform   :increment_sms_count
 
   def initialize(defendant)
     @defendant = defendant
@@ -60,7 +60,7 @@ class Defendant::SetPhoneContext < BaseContext
     SmsService.send_async(@defendant.unconfirmed_phone, @message)
   end
 
-  def record_sms_count
+  def increment_sms_count
     @defendant.sms_sent_count.increment
   end
 end

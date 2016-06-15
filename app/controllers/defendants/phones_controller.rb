@@ -64,6 +64,6 @@ class Defendants::PhonesController < Defendants::BaseController
   end
 
   def can_verify?
-    redirect_to new_defendants_phone_path, flash: { error: "請先設定手機號碼" } unless current_defendant.phone_varify_code.value
+    redirect_to edit_defendants_phone_path, flash: { error: "請先設定手機號碼" } unless current_defendant.phone_varify_code.value
   end
 end

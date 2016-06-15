@@ -39,6 +39,10 @@ RSpec.describe Defendant, type: :model do
       let(:defendant_re) { Defendant.new(name: "aron", identify_number: "S111111111", phone_number: "0811294939") }
       it { expect(defendant_re.valid?).to eq(false) }
     end
+  end
 
+  describe "#unconfirm!" do
+    before { defendant.confirm! }
+    it { expect{ defendant.unconfirm! }.to change { defendant.confirmed? } }
   end
 end

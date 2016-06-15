@@ -10,13 +10,6 @@ RSpec.describe Defendants::BaseController, type: :request do
       it { expect(response).to be_success }
     end
 
-    context "login & phone_number nil" do
-      before { signin_defendant.update_attributes(phone_number: nil) }
-      subject!{ get "/defendants" }
-
-      it { expect(response).to redirect_to("/defendants/phone/new") }
-    end
-
     context "not login" do
       subject!{ get "/defendants" }
       it { expect(response).to be_redirect }
@@ -48,6 +41,15 @@ RSpec.describe Defendants::BaseController, type: :request do
     
       it { expect { subject }.not_to change { current_defendant } }
       it { expect(response.body).not_to match("目前等待驗證中信箱") }
+    end
+  end
+
+  describe "#set_phone?" do
+    context "phone_number nil should redirect" do
+      before { signin_defendant.update_attributes(phone_number: nil) }
+      subject!{ get "/defendants" }
+
+      it { expect(response).to redirect_to("/defendants/phone/new") }
     end
   end
 end
