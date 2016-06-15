@@ -22,4 +22,13 @@ RSpec.describe Admin::BystandersController do
       it { expect(response).to be_success }
     end
   end
+
+  describe "#download_file" do
+    let!(:bystander) { FactoryGirl.create :bystander }
+
+    context "success" do
+      before { get "/admin/bystanders/download_file", format: :xlsx }
+      it { expect(response).to be_success }
+    end
+  end
 end
