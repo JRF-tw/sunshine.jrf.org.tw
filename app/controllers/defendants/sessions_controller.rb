@@ -8,14 +8,10 @@ class Defendants::SessionsController < Devise::SessionsController
     set_flash_message(:notice, :signed_in) if is_flashing_format?
     sign_in(resource_name, resource)
     yield resource if block_given?
-    respond_with resource, location: defendants_root_path
+    respond_with resource, location: defendants_profile_path
   end
 
   private
-
-  def after_sign_in_path_for(resource)
-    defendants_root_path
-  end
 
   def after_sign_out_path_for(resource_or_scope)
     new_defendant_session_path

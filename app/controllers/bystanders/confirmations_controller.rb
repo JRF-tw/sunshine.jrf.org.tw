@@ -19,4 +19,8 @@ class Bystanders::ConfirmationsController < Devise::ConfirmationsController
   def redirect_new_to_sign_in
     redirect_to new_bystander_session_path
   end
+
+  def after_resending_confirmation_instructions_path_for(resource_name)
+    edit_bystander_registration_path
+  end
 end

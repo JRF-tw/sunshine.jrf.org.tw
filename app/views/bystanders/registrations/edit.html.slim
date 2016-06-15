@@ -16,3 +16,4 @@ h2 = "觀察者資料更改"
 
 
 = link_to "回到上一頁", :back
+div = link_to "重寄認證信", bystander_confirmation_path(bystander: { email: resource.email }), method: :post if resource.pending_reconfirmation?

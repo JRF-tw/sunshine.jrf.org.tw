@@ -12,4 +12,6 @@
 
       .form-actions
         = f.button :submit, "送出" 
-    = link_to "回到當事人資訊頁面", defendants_profile_path
+    div = link_to "重寄認證信", defendant_confirmation_path(defendant: { email: current_defendant.email }), method: :post if current_defendant.pending_reconfirmation?
+    
+    div = link_to "回到當事人資訊頁面", defendants_profile_path

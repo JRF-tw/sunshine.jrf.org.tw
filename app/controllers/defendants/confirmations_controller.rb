@@ -17,7 +17,11 @@ class Defendants::ConfirmationsController < Devise::ConfirmationsController
   protected
 
   def redirect_new_to_sign_in
-    redirect_to new_bystander_session_path
+    redirect_to new_defendants_session_path
+  end
+
+  def after_resending_confirmation_instructions_path_for(resource_name)
+    defendants_profile_path
   end
 
 end
