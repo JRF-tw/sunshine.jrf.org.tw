@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 describe Defendant::VerifyPhoneContext do
-  let!(:defendant) { FactoryGirl.create :defendant }
+  let!(:unconfirmed_phone) { "0911111111" }
+  let!(:defendant) { FactoryGirl.create :defendant, unconfirmed_phone: unconfirmed_phone }
   let!(:params) { { phone_varify_code: "1111" } }
   before { defendant.phone_varify_code = "1111" }
   subject { described_class.new(defendant) }
@@ -14,8 +15,8 @@ describe Defendant::VerifyPhoneContext do
 
     context "reset_phone_verify" do
       let!(:params) { { phone_varify_code: "2222" } }
+      before { defendant.retry_verify_count.value = 2 }
 
-      let!(:defendant1) { FactoryGirl.create :defendant, unconfirmed_phone: params[:phone_number] }
       it { expect(subject.perform(params)).to be_falsey }
     end
 
@@ -26,21 +27,20 @@ describe Defendant::VerifyPhoneContext do
     end
 
     context "success" do
-      it { expect { subject.perform(params) }.to change { defendant.sms_sent_count.value } }
       it { expect { subject.perform(params) }.to change_sidekiq_jobs_size_of(SmsService, :send_to) }
       it { expect { subject.perform(params) }.to change { defendant.phone_number } }
 
       context "assign_value" do
         before { subject.perform(params) }
 
-        it { expect(defendant.phone_varify_code.value).to be_present }
-        it { expect(defendant.unconfirmed_phone).to eq(params[:phone_number]) }
+        it { expect(defendant.phone_number).to eq(unconfirmed_phone) }
+        it { expect(defendant.unconfirmed_phone).to be_nil }
       end
 
-      context "set_unconfirm" do
+      context "confirmed" do
         before { subject.perform(params) }
 
-        it { expect(defendant.confirmed?).to be_falsey }
+        it { expect(defendant.confirmed?).to be_truthy }
       end
 
       context "reset_data" do
