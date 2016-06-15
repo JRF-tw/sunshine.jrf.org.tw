@@ -18,4 +18,13 @@ RSpec.describe Defendants::ConfirmationsController, type: :request do
     end
   end
 
+  describe "#create" do
+    context "success" do
+      let!(:defendant) { FactoryGirl.create :defendant, :with_unconfirmed_email}
+      before { post "/defendants/confirmation", defendant: { email: defendant.unconfirmed_email } }
+      
+      it { expect(response).to redirect_to("/defendants/profile") }
+    end
+  end
+
 end

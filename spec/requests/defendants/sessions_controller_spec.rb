@@ -12,7 +12,7 @@ RSpec.describe Defendants::SessionsController, type: :request do
         let!(:params) { { identify_number: defendant.identify_number, password: defendant.password } }
         subject!{ post "/defendants/sign_in", defendant: params }
 
-        it { expect(response).to redirect_to("/defendants") }
+        it { expect(response).to redirect_to("/defendants/profile") }
       end
 
       context "identify_number nil" do
