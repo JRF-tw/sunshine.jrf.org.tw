@@ -114,6 +114,11 @@ Rails.application.routes.draw do
         get :download_file
       end
     end
-    resources :defendants, only: [:index, :show]
+    resources :defendants do
+      member do
+        post :set_to_imposter
+      end
+    end
+
   end
 end

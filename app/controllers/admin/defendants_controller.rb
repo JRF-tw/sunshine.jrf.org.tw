@@ -14,6 +14,12 @@ class Admin::DefendantsController < Admin::BaseController
     add_crumb @admin_page_title, "#"
   end
 
+  def set_to_imposter
+    context = Defendant::SetToImpostorContext.new(@defendant)
+    context.perform
+    redirect_to admin_defendants_path, flash: { success: "當事人 #{@defendant.name} 已設定為冒用者" }
+  end
+
   private
 
   def defendant
