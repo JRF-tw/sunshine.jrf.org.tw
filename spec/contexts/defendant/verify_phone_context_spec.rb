@@ -29,7 +29,6 @@ describe Defendant::VerifyPhoneContext do
     end
 
     context "success" do
-      it { expect { subject.perform(params) }.to change_sidekiq_jobs_size_of(SmsService, :send_to) }
       it { expect { subject.perform(params) }.to change { defendant.phone_number } }
 
       context "assign_value" do
