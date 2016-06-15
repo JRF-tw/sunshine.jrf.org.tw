@@ -35,14 +35,14 @@ class Defendant < ActiveRecord::Base
   validates :name, presence: true
   validates :identify_number, presence: true, uniqueness: true, format: { with: /\A[A-Z]{1}[1-2]{1}[0-9]{8}\z/, message: "身分證字號格式不符(英文字母請大寫)" }
   validates :phone_number, uniqueness: true, format:{ with: /\A(0)(9)([0-9]{8})\z/ }, allow_nil: true
-  validates :unconfirmed_phone, uniqueness: true, format:{ with: /\A(0)(9)([0-9]{8})\z/ }, allow_nil: true
 
   has_many :story_relations, as: :people
   has_many :verdict_relations, as: :person
 
   include Redis::Objects
+  value :unconfirmed_phone, expiration: 1.hour
   value :phone_varify_code, expiration: 1.hour
-  counter :retry_verify_count
+  counter :retry_verify_count, expiration: 1.hour
   counter :sms_sent_count, expiration: 5.minute
 
   def email_required?

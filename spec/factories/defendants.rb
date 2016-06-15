@@ -22,7 +22,6 @@
 #  confirmed_at           :datetime
 #  confirmation_token     :string
 #  confirmation_sent_at   :datetime
-#  unconfirmed_phone      :string
 #
 
 FactoryGirl.define do

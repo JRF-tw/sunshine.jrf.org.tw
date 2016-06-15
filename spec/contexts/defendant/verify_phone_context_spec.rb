@@ -2,9 +2,11 @@ require 'rails_helper'
 
 describe Defendant::VerifyPhoneContext do
   let!(:unconfirmed_phone) { "0911111111" }
-  let!(:defendant) { FactoryGirl.create :defendant, unconfirmed_phone: unconfirmed_phone }
+  let!(:defendant) { FactoryGirl.create :defendant }
   let!(:params) { { phone_varify_code: "1111" } }
   before { defendant.phone_varify_code = "1111" }
+  before { defendant.unconfirmed_phone = unconfirmed_phone }
+
   subject { described_class.new(defendant) }
 
   describe "#perform" do
@@ -34,7 +36,7 @@ describe Defendant::VerifyPhoneContext do
         before { subject.perform(params) }
 
         it { expect(defendant.phone_number).to eq(unconfirmed_phone) }
-        it { expect(defendant.unconfirmed_phone).to be_nil }
+        it { expect(defendant.unconfirmed_phone.value).to be_nil }
       end
 
       context "confirmed" do

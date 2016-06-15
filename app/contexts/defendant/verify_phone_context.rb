@@ -42,7 +42,8 @@ class Defendant::VerifyPhoneContext < BaseContext
   end
 
   def assign_value
-    @defendant.assign_attributes(phone_number: @defendant.unconfirmed_phone, unconfirmed_phone: nil)
+    @defendant.assign_attributes(phone_number: @defendant.unconfirmed_phone.value)
+    @defendant.unconfirmed_phone = nil
   end
 
   def build_message
@@ -50,7 +51,7 @@ class Defendant::VerifyPhoneContext < BaseContext
   end
 
   def confirmed
-    @defendant.confirm!
+    @defendant.confirm
   end
 
   def send_sms

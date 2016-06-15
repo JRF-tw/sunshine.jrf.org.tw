@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 describe Defendant::ResendPhoneVerifySmsContext do
-  let!(:defendant) { FactoryGirl.create :defendant, unconfirmed_phone: "0911111111" }
+  let!(:defendant) { FactoryGirl.create :defendant }
   before { defendant.phone_varify_code = "1111" }
+  before { defendant.unconfirmed_phone = "0911111111" }
 
   subject { described_class.new(defendant) }
 

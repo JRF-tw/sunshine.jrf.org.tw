@@ -6,13 +6,25 @@ describe Defendant::SetPhoneContext do
   subject { described_class.new(defendant) }
 
   describe "#perform" do
+    context "check_phone" do
+      let!(:params) { { phone_number: "" } }
+      it { expect(subject.perform(params)).to be_falsey }
+    end
+
+    context "check_phone_format" do
+      let!(:params) { { phone_number: "092112312x" } }
+      it { expect(subject.perform(params)).to be_falsey }
+    end
+
     context "check_unexist_phone_number" do
       let!(:defendant1) { FactoryGirl.create :defendant, phone_number: params[:phone_number] }
       it { expect(subject.perform(params)).to be_falsey }
     end
 
-    context "check_unexist_unconfirmd_phone" do
-      let!(:defendant1) { FactoryGirl.create :defendant, unconfirmed_phone: params[:phone_number] }
+    context "check_unexist_unconfirmed_phone" do
+      let!(:defendant1) { FactoryGirl.create :defendant }
+      before { defendant1.unconfirmed_phone = params[:phone_number] }
+
       it { expect(subject.perform(params)).to be_falsey }
     end
 
