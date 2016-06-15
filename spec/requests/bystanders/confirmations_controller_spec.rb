@@ -32,4 +32,11 @@ RSpec.describe Bystanders::ConfirmationsController, :type => :request do
     end
   end
 
+  describe "#create" do
+    context "success" do
+      let!(:bystander) { FactoryGirl.create :bystander, :with_unconfirmed_email}
+      before { post "/bystanders/confirmation", bystander: { email: bystander.email } }
+      it { expect(response).to redirect_to("/bystanders/edit") }
+    end
+  end
 end

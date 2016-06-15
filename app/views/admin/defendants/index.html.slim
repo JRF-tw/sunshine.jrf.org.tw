@@ -44,6 +44,7 @@
           th 姓名
           th 身分證字號
           th 電話號碼
+          th email
           th 註冊日期
           th 最後一次登入日期
           th 最後一次登入ip
@@ -55,14 +56,11 @@
             td= defendant.name
             td= defendant.identify_number
             td= defendant.phone_number
+            td= defendant.email
             td= defendant.created_at.to_date
             td= defendant.current_sign_in_at.try(:to_date)
             td= defendant.current_sign_in_ip
             td
               = link_to "詳細資料", admin_defendant_path(defendant), class: "btn btn-mini"
-              = " "
-              = link_to "TODO 案件列表", "#", class: "btn btn-mini"
-              = " "
-              = link_to "TODO 評鑑列表", "#", class: "btn btn-mini"
     .ui-toolbar.ui-widget-header
       = paginate @defendants, theme: :admin

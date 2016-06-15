@@ -30,6 +30,10 @@ FactoryGirl.define do
     password "12321313213"
     sequence(:identify_number) { |n| "A#{ rand(100000000..299999999) }" }
     sequence(:phone_number) { |n| "09#{ rand(1..99999999).to_s.rjust(8, '0') }" }
+    
+    trait :with_unconfirmed_email do
+      unconfirmed_email "aron1122@gmail.com"
+    end
   end
 
   factory :defendant_for_create, class: Defendant do
