@@ -32,8 +32,7 @@ class Defendants::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_sign_up_path_for(resource)
-    # TODO 輸入手機驗證碼頁面
-    defendants_root_path
+    new_defendants_phone_path
   end
 
   def configure_permitted_parameters

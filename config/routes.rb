@@ -50,6 +50,13 @@ Rails.application.routes.draw do
     get "profile", to: "base#profile"
     get "edit-email", to: "base#edit_email"
     put "update-email", to: "base#update_email"
+    resource :phone, only: [:new, :create, :edit, :update] do
+      collection do
+        get :verify
+        put :verifing
+        put :resend
+      end
+    end
   end
 
   namespace :api, defaults: { format: 'json' } do
