@@ -6,7 +6,6 @@ class Defendant::VerifyPhoneContext < BaseContext
   before_perform  :assign_value
   after_perform   :build_message
   after_perform   :confirmed
-  after_perform   :send_sms
   after_perform   :reset_data
 
   def initialize(defendant)
@@ -52,10 +51,6 @@ class Defendant::VerifyPhoneContext < BaseContext
 
   def confirmed
     @defendant.confirm
-  end
-
-  def send_sms
-    SmsService.send_async(@defendant.phone_number, @message)
   end
 
   def reset_data

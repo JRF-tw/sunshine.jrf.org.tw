@@ -63,11 +63,11 @@ class Defendant::SetPhoneContext < BaseContext
 
   def build_message
     link = verify_defendants_phone_url(host: Setting.host)
-    @message = "當事人手機驗證簡訊 發送至 #{@defendant.unconfirmed_phone}: 認證碼 : #{@defendant.phone_varify_code.value}, #{SlackService.render_link(link, "認證手機網址")}"
+    @message = "當事人手機驗證簡訊 發送至 #{@defendant.unconfirmed_phone.value}: 認證碼 : #{@defendant.phone_varify_code.value}, #{SlackService.render_link(link, "認證手機網址")}"
   end
 
   def send_sms
-    SmsService.send_async(@defendant.unconfirmed_phone, @message)
+    SmsService.send_async(@defendant.unconfirmed_phone.value, @message)
   end
 
   def increment_sms_count
