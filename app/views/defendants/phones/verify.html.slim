@@ -1,7 +1,7 @@
 | 輸入驗證碼
 
 = simple_form_for current_defendant, url: verifing_defendants_phone_url, method: :put do |f|
-  = f.input :phone_varify_code, input_html: { value: nil }
+  = f.input :phone_varify_code, input_html: { value: nil }, label: "認證碼"
   .form-actions
     = f.submit "認證", class: "btn btn-primary"
     = " "

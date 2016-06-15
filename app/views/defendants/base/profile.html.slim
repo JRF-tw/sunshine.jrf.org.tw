@@ -3,6 +3,7 @@ div 當事人個人資訊頁
 div = "姓名: #{current_defendant.name}"
 div = "身分證字號: #{current_defendant.identify_number}"
 div = "手機號碼: #{current_defendant.phone_number}"
+div = link_to "更改手機號碼", edit_defendants_phone_path
 div
   = "email: #{current_defendant.email}"
   | &nbsp;
