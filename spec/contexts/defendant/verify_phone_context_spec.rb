@@ -47,9 +47,9 @@ describe Defendant::VerifyPhoneContext do
       context "reset_data" do
         before { subject.perform(params) }
 
+        it { expect(defendant.unconfirmed_phone).to be_nil }
         it { expect(defendant.phone_varify_code.value).to be_nil }
         it { expect(defendant.retry_verify_count.value).to eq(0) }
-        it { expect(defendant.unconfirmed_phone).to be_nil }
       end
     end
   end
