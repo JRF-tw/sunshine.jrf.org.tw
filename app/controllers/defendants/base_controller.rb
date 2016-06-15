@@ -1,6 +1,7 @@
 class Defendants::BaseController < ApplicationController
   layout 'defendant'
   before_action :authenticate_defendant!
+  before_action :set_phone?
 
   def index
   end
@@ -9,7 +10,7 @@ class Defendants::BaseController < ApplicationController
   end
 
   def edit_email
-    prev_unconfirmed_email = current_bystander.unconfirmed_email if current_bystander.respond_to?(:unconfirmed_email)    
+    prev_unconfirmed_email = current_bystander.unconfirmed_email if current_bystander.respond_to?(:unconfirmed_email)
   end
 
   def update_email
@@ -19,6 +20,12 @@ class Defendants::BaseController < ApplicationController
     else
       redirect_to defendants_edit_email_path, flash: { error: "#{context.error_messages.join(", ")}" }
     end
+  end
+
+  private
+
+  def set_phone?
+    redirect_to new_defendants_phone_path unless current_defendant.phone_number.present?
   end
 
 end

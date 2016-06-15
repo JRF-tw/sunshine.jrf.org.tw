@@ -3,9 +3,10 @@ class Defendant::SendResetPasswordSmsContext < BaseContext
 
   PERMITS = [:identify_number, :phone_number].freeze
 
-  before_perform :find_defendant
-  before_perform :generate_reset_password_token
-  before_perform :build_message
+  before_perform  :find_defendant
+  before_perform  :generate_reset_password_token
+  before_perform  :build_message
+  after_perform   :send_sms
 
   def initialize(params)
     @params = permit_params(params[:defendant] || params, PERMITS)
@@ -14,9 +15,7 @@ class Defendant::SendResetPasswordSmsContext < BaseContext
   def perform
     run_callbacks :perform do
       return add_error(:data_update_fail, "未能重設密碼") unless can_reset_password?
-      SlackService.fake_defendant_reset_password_notify_async(@message)
       true
-      ## SmsService.send_async(@message, @defendant.phone_number)
     end
   end
 
@@ -37,7 +36,11 @@ class Defendant::SendResetPasswordSmsContext < BaseContext
 
   def build_message
     link = edit_defendant_password_url(reset_password_token: @token, host: Setting.host)
-    @message = "當事人密碼重設信件 : #{SlackService.render_link(link, "重設密碼網址")}"
+    @message = "當事人密碼重設信件 發送至 #{@defendant.phone_number}: #{SlackService.render_link(link, "重設密碼網址")}"
+  end
+
+  def send_sms
+    SmsService.send_async(@defendant.phone_number, @message)
   end
 end
 

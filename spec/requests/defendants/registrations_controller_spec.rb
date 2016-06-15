@@ -8,7 +8,7 @@ RSpec.describe Defendants::RegistrationsController, type: :request do
       subject { post "/defendants", defendant: params }
 
       it { expect { subject }.to change{ Defendant.count } }
-      it { expect(subject).to redirect_to("/defendants") }
+      it { expect(subject).to redirect_to("/defendants/phone/new") }
     end
 
     context "nil params" do
