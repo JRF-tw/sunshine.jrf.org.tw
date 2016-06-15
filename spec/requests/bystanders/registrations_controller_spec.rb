@@ -7,14 +7,10 @@ RSpec.describe Bystanders::RegistrationsController, :type => :request do
     let!(:bystander) { current_bystander }
     let!(:old_email) { bystander.email }
 
-    context "update email" do
-      before { put "/bystanders", bystander: { email: "h2312@gmail.com", current_password: "123123123"} }
-      it { expect(response).to redirect_to("/bystanders")}
-    end
-
-    context "update same email" do
-      before { put "/bystanders", bystander: { email: current_bystander.email, current_password: "123123123"} }
-      it { expect(response.body).to match("e-mail 並未更改")}
+    context "success" do
+      subject { put "/bystanders", bystander: { email: "h2312@gmail.com", current_password: "123123123"} }
+      it { expect(subject).to redirect_to("/bystanders")}
+      it { expect{ subject }.to change { bystander.reload.unconfirmed_email } }
     end
 
     context "sign in after updated" do

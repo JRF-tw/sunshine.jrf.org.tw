@@ -1,6 +1,22 @@
 class Bystanders::RegistrationsController < Devise::RegistrationsController
+  include CrudConcern
+
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :check_update_email, only: [:update]
+
+  def update
+    context = Bystander::ChangeEmailContext.new(current_bystander)
+    prev_unconfirmed_email = current_bystander.unconfirmed_email if current_bystander.respond_to?(:unconfirmed_email)
+    
+    if context.perform(params)
+      set_flash_message :notice, :update_needs_confirmation
+      sign_in :bystander, current_bystander, bypass: true
+      respond_with current_bystander, location: after_update_path_for(current_bystander)
+    else
+      clean_up_passwords resource
+      flash.now[:error] = context.error_messages.join(", ")
+      render :edit
+    end
+  end
 
   protected
 
@@ -15,11 +31,5 @@ class Bystanders::RegistrationsController < Devise::RegistrationsController
   def after_update_path_for(resource)
     bystanders_root_path
   end
-
-  def check_update_email
-    if account_update_params["email"] == current_bystander.email
-      set_flash_message :notice, :email_conflict
-      render :action =>"edit"
-    end
-  end
+  
 end

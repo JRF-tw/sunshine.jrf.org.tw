@@ -32,6 +32,10 @@ FactoryGirl.define do
     sequence(:email) { |n| "bystander-#{n}@test.com"}
     password "123123123"
     confirmed_at Time.now
+
+    trait :with_unconfirmed_email do
+      unconfirmed_email "aron1122@gmail.com"
+    end
   end
 
   factory :bystander_without_validate, class: Bystander do
