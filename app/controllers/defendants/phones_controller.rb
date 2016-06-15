@@ -1,5 +1,5 @@
 class Defendants::PhonesController < Defendants::BaseController
-  before_action :phone_confirmed?
+  before_action :set_phone?, only: []
   before_action :can_verify?, only: [:verify, :verifing, :resend_verify_sms]
 
   def new
@@ -58,9 +58,6 @@ class Defendants::PhonesController < Defendants::BaseController
 
   def defendant_params
     params.fetch(:defendant, {}).permit(:phone_number, :phone_varify_code)
-  end
-
-  def phone_confirmed?
   end
 
   def can_verify?
