@@ -25,7 +25,7 @@ class Defendants::BaseController < ApplicationController
   private
 
   def phone_confirmed?
-    redirect_to new_defendants_phone_path unless current_defendant.confirmed?
+    redirect_to new_defendants_phone_path unless current_defendant.phone_number.present?
   end
 
 end

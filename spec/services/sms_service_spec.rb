@@ -11,7 +11,7 @@ describe SmsService do
 
   describe "#send_by_slack" do
     context "success async to sidekiq" do
-      subject { described_class.send_by_slack(message) }
+      subject { described_class.new(phone).send_by_slack(text) }
 
       it { expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
     end

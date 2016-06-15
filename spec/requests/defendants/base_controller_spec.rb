@@ -5,8 +5,16 @@ RSpec.describe Defendants::BaseController, type: :request do
   describe "#index" do
     context "login" do
       before { signin_defendant }
+
       subject!{ get "/defendants" }
       it { expect(response).to be_success }
+    end
+
+    context "login & phone_number nil" do
+      before { signin_defendant.update_attributes(phone_number: nil) }
+      subject!{ get "/defendants" }
+
+      it { expect(response).to redirect_to("/defendants/phone/new") }
     end
 
     context "not login" do
