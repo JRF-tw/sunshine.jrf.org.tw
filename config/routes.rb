@@ -54,7 +54,6 @@ Rails.application.routes.draw do
     get "profile", to: "base#profile"
     get "edit-profile", to: "base#edit_profile"
     post "update_profile", to: "base#update_profile"
-    post "send_reset_password_mail", to: "base#send_reset_password_mail"
   end
 
   namespace :defendants do
