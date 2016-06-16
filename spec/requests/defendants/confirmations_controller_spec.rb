@@ -7,7 +7,7 @@ RSpec.describe Defendants::ConfirmationsController, type: :request do
     context "validate token" do
       subject { get "/defendants/confirmation", confirmation_token: defendant.confirmation_token }
       it { expect(subject).to redirect_to("/defendants/sign_in") }
-      it { expect { subject }.to change { Defendant.last.confirmed_at } }
+      it { expect { subject }.to change { Defendant.last.confirmed? } }
     end
 
     context "already sign in" do
@@ -15,14 +15,14 @@ RSpec.describe Defendants::ConfirmationsController, type: :request do
       subject { get "/defendants/confirmation", confirmation_token: defendant.confirmation_token }
 
       it { expect(subject).to redirect_to("/defendants/profile") }
-      it { expect { subject }.to change { defendant.reload.confirmed_at } }
+      it { expect { subject }.to change { defendant.reload.confirmed? } }
     end
 
     context "invalidate token" do
       subject { get "/defendants/confirmation", confirmation_token: "wwwwwww" }
       it { expect(subject).to redirect_to("/defendants/sign_in")  }
 
-      it { expect { subject }.not_to change { Defendant.last.confirmed_at } }
+      it { expect { subject }.not_to change { Defendant.last.confirmed? } }
     end
   end
 
