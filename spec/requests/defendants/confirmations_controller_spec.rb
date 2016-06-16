@@ -10,6 +10,14 @@ RSpec.describe Defendants::ConfirmationsController, type: :request do
       it { expect { subject }.to change { Defendant.last.confirmed_at } }
     end
 
+    context "already sign in" do
+      before { signin_defendant(defendant) }
+      subject { get "/defendants/confirmation", confirmation_token: defendant.confirmation_token }
+
+      it { expect(subject).to redirect_to("/defendants/profile") }
+      it { expect { subject }.to change { defendant.reload.confirmed_at } }
+    end
+
     context "invalidate token" do
       subject { get "/defendants/confirmation", confirmation_token: "wwwwwww" }
       it { expect(subject).to redirect_to("/defendants/sign_in")  }
