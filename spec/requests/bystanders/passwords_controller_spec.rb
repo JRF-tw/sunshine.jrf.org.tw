@@ -24,5 +24,4 @@ RSpec.describe Bystanders::PasswordsController, :type => :request do
     it { expect(response).to redirect_to("/bystanders/profile") }
   end
 
-
 end

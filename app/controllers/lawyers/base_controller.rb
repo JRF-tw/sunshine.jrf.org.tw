@@ -23,11 +23,6 @@ class Lawyers::BaseController < ApplicationController
     end
   end
 
-  def send_reset_password_mail
-    context = Lawyer::SendSetPasswordEmailContext.new(current_lawyer)
-    context.perform
-    redirect_as_success(lawyers_profile_path, "律師 - #{current_lawyer.name} 重設密碼信件已寄出")
-  end
   # private
   # 其他action可能會用到
   # def check_profile!

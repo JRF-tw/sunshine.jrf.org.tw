@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   devise_for :lawyers, controllers: { registrations: 'lawyers/registrations', sessions: 'lawyers/sessions', passwords: 'lawyers/passwords', confirmations: 'lawyers/confirmations'}
   devise_scope :lawyer do
     patch '/lawyers/confirm', to: 'lawyers/confirmations#confirm', as: :lawyers_confirm
+    post '/lawyers/password/send_reset_password_mail', to: 'lawyers/passwords#send_reset_password_mail'
   end
 
   devise_scope :bystander do

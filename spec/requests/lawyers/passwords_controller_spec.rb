@@ -45,4 +45,12 @@ RSpec.describe Lawyers::PasswordsController, type: :request do
       it { expect(response).to redirect_to("/lawyers/sign_in") }
     end
   end
+
+  describe "#send_reset_password_mail" do
+    before { signin_lawyer }
+    subject! { post "/lawyers/password/send_reset_password_mail" }
+
+    it { expect(response).to redirect_to("/lawyers/profile") }
+  end
+
 end
