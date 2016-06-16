@@ -5,8 +5,9 @@ describe Defendant::SetToImpostorContext do
   subject { described_class.new(defendent) }
 
   describe "#perform" do
+    before { subject.perform }
     context "record identify number" do
-      it do  
+      it do 
         expect(defendent.imposter_identify_number).to eq("A225271722")
       end
     end
