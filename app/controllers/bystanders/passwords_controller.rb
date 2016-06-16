@@ -1,7 +1,6 @@
 class Bystanders::PasswordsController < Devise::PasswordsController
   include CrudConcern
   prepend_before_filter :require_no_authentication, except: [:send_reset_password_mail]
-  # before_action :bystander, only: [:send_reset_password_mail]
 
   def send_reset_password_mail
     context = Bystander::SendSetPasswordEmailContext.new(current_bystander)
@@ -10,12 +9,9 @@ class Bystanders::PasswordsController < Devise::PasswordsController
   end
 
 protected
+
   def after_sign_in_path_for(resource_or_scope)
     bystanders_root_path
   end
-
-  # def bystander
-  #   @bystander = Bystander.find(params[:id]) 
-  # end
 end
 

@@ -18,6 +18,11 @@ Rails.application.routes.draw do
     post '/bystanders/password/send_reset_password_mail', to: 'bystanders/passwords#send_reset_password_mail'
   end
 
+  devise_scope :defendant do
+    post "/defendants/password/send_reset_password_sms", to:"defendants/passwords#send_reset_password_sms"
+  end
+  
+
   root to: "base#index", only: [:show]
   get '/robots.txt', to: "base#robots", defaults: { format: "text" }
 
@@ -56,7 +61,6 @@ Rails.application.routes.draw do
     root to: "base#index"
     get "profile", to: "base#profile"
     get "edit-email", to: "base#edit_email"
-    get "send_reset_password_sms", to:"base#send_reset_password_sms"
     put "update-email", to: "base#update_email"
     resource :phone, only: [:new, :create, :edit, :update] do
       collection do

@@ -1,4 +1,7 @@
 class Defendants::PasswordsController < Devise::PasswordsController
+  include CrudConcern
+
+  prepend_before_filter :require_no_authentication, except: [:send_reset_password_sms]
   layout 'defendant'
 
   # POST /resource/password
@@ -13,6 +16,17 @@ class Defendants::PasswordsController < Devise::PasswordsController
       self.resource = resource_class.new(params)
       flash[:notice] = context.error_messages.join(", ")
       render "new"
+    end
+  end
+
+  def send_reset_password_sms
+    defendant_params = { identify_number: current_defendant.identify_number, phone_number: current_defendant.phone_number }
+    context = Defendant::SendResetPasswordSmsContext.new(defendant_params)
+    #TODO refactory
+    if context.perform
+      redirect_to defendants_profile_path, flash: { success: "已寄送重設密碼簡訊" }
+    else
+      redirect_to defendants_profile_path, flash: { error: "#{context.error_messages.join(", ")}" }
     end
   end
 

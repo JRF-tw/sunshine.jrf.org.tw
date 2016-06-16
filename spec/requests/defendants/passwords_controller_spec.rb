@@ -33,4 +33,13 @@ RSpec.describe Defendants::RegistrationsController, type: :request do
       it { expect(response).to be_success }
     end
   end
+
+  describe "#send_reset_password_sms" do
+    before { signin_defendant }
+    context "success" do
+      subject! { post "/defendants/password/send_reset_password_sms" }
+      
+      it { expect(response).to redirect_to("/defendants/profile") }
+    end
+  end
 end
