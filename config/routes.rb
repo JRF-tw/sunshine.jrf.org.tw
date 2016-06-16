@@ -13,6 +13,10 @@ Rails.application.routes.draw do
     patch '/lawyers/confirm', to: 'lawyers/confirmations#confirm', as: :lawyers_confirm
   end
 
+  devise_scope :bystander do
+    post '/bystanders/password/send_reset_password_mail', to: 'bystanders/passwords#send_reset_password_mail'
+  end
+
   root to: "base#index", only: [:show]
   get '/robots.txt', to: "base#robots", defaults: { format: "text" }
 
@@ -37,7 +41,6 @@ Rails.application.routes.draw do
   namespace :bystanders do
     root to: "base#index"
     get "profile", to: "base#profile"
-    post "send_reset_password_mail", to: "base#send_reset_password_mail"
   end
 
   namespace :lawyers do

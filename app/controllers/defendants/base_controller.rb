@@ -22,12 +22,6 @@ class Defendants::BaseController < ApplicationController
     end
   end
 
-  private
-
-  def set_phone?
-    redirect_to new_defendants_phone_path unless current_defendant.phone_number.present?
-  end
-
   def send_reset_password_sms
     defendant_params = { identify_number: current_defendant.identify_number, phone_number: current_defendant.phone_number }
     context = Defendant::SendResetPasswordSmsContext.new(defendant_params)
@@ -36,6 +30,12 @@ class Defendants::BaseController < ApplicationController
     else
       redirect_to defendants_profile_path, flash: { error: "#{context.error_messages.join(", ")}" }
     end
+  end
+
+  private
+
+  def set_phone?
+    redirect_to new_defendants_phone_path unless current_defendant.phone_number.present?
   end
 
 end

@@ -12,4 +12,4 @@ div
     p = "目前等待驗證中信箱: #{current_bystander.unconfirmed_email}"
 
 div 
-  = link_to "發送密碼設定信", bystanders_send_reset_password_mail_path(current_bystander), class: "btn btn-mini", method: :post
+  = link_to "發送密碼設定信", bystanders_password_send_reset_password_mail_path, method: :post, class: "btn btn-mini"

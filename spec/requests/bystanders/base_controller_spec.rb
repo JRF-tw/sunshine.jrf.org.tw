@@ -17,11 +17,4 @@ RSpec.describe Bystanders::BaseController, type: :request do
     end
   end
 
-  describe "#send_reset_password_mail" do
-    before { signin_bystander }
-    subject! { post "/bystanders/send_reset_password_mail" }
-
-    it { expect(response).to redirect_to("/bystanders/profile") }
-  end
-
 end
