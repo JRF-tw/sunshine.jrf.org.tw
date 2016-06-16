@@ -7,7 +7,6 @@ class Bystander::SendSetPasswordEmailContext < BaseContext
   def perform
     run_callbacks :perform do
       @bystander.send_reset_password_instructions
-      return true
     end
   end
 
