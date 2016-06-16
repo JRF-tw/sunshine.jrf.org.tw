@@ -1,0 +1,15 @@
+div 觀察者個人資訊頁
+
+div = "姓名: #{current_bystander.name}"
+div = "學校: #{current_bystander.school}"
+div = "系級: #{current_bystander.department_level}"
+div = "學號: #{current_bystander.student_number}"
+div = "手機號碼: #{current_bystander.phone_number}"
+div = "email: #{current_bystander.email}" 
+
+div 
+  - if current_bystander.unconfirmed_email
+    p = "目前等待驗證中信箱: #{current_bystander.unconfirmed_email}"
+
+div 
+  = link_to "發送密碼設定信", bystanders_password_send_reset_password_mail_path, method: :post, class: "btn btn-mini"

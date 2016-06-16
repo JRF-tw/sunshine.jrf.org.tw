@@ -11,7 +11,17 @@ Rails.application.routes.draw do
   devise_for :lawyers, controllers: { registrations: 'lawyers/registrations', sessions: 'lawyers/sessions', passwords: 'lawyers/passwords', confirmations: 'lawyers/confirmations'}
   devise_scope :lawyer do
     patch '/lawyers/confirm', to: 'lawyers/confirmations#confirm', as: :lawyers_confirm
+    post '/lawyers/password/send_reset_password_mail', to: 'lawyers/passwords#send_reset_password_mail'
   end
+
+  devise_scope :bystander do
+    post '/bystanders/password/send_reset_password_mail', to: 'bystanders/passwords#send_reset_password_mail'
+  end
+
+  devise_scope :defendant do
+    post "/defendants/password/send_reset_password_sms", to:"defendants/passwords#send_reset_password_sms"
+  end
+  
 
   root to: "base#index", only: [:show]
   get '/robots.txt', to: "base#robots", defaults: { format: "text" }
@@ -36,6 +46,7 @@ Rails.application.routes.draw do
 
   namespace :bystanders do
     root to: "base#index"
+    get "profile", to: "base#profile"
   end
 
   namespace :lawyers do
@@ -43,6 +54,7 @@ Rails.application.routes.draw do
     get "profile", to: "base#profile"
     get "edit-profile", to: "base#edit_profile"
     post "update_profile", to: "base#update_profile"
+    post "send_reset_password_mail", to: "base#send_reset_password_mail"
   end
 
   namespace :defendants do
@@ -90,7 +102,7 @@ Rails.application.routes.draw do
     resources :judges
     resources :lawyers do
       member do
-        post :manual_confirm
+        post :send_reset_password_mail
       end
     end
     resources :verdicts do

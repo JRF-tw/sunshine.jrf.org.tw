@@ -34,4 +34,5 @@ RSpec.describe Lawyers::BaseController, type: :request do
     subject!{ post "/lawyers/update_profile", lawyer: { current: "律師事務所" } }
     it { expect(response).to redirect_to("/lawyers/profile") }
   end
+  
 end

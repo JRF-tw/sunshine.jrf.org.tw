@@ -1,4 +1,6 @@
 class Lawyers::BaseController < ApplicationController
+  include CrudConcern
+  
   layout 'lawyer'
   before_action :authenticate_lawyer!, except: :index
   # before_action :check_profile!, except: [:profile, :edit_profile, :update_profile]

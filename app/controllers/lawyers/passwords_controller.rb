@@ -1,5 +1,8 @@
 class Lawyers::PasswordsController < Devise::PasswordsController
+  include CrudConcern
   layout 'lawyer'
+
+  prepend_before_filter :require_no_authentication, except: [:edit, :send_reset_password_mail]
 
   # POST /resource/password
   def create
@@ -36,6 +39,12 @@ class Lawyers::PasswordsController < Devise::PasswordsController
       set_minimum_password_length
       respond_with resource
     end
+  end
+
+  def send_reset_password_mail
+    context = Lawyer::SendSetPasswordEmailContext.new(current_lawyer)
+    context.perform
+    redirect_as_success(lawyers_profile_path, "律師 - #{current_lawyer.name} 重設密碼信件已寄出")
   end
 
   protected
