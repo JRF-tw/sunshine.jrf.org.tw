@@ -2,6 +2,8 @@
 = f.input :email
 = f.input :password if @lawyer.confirmed?
 = f.input :current
+= f.input :phone_number
+= f.input :office_number
 - if f.object.avatar?
   .control-group
     label.control-label 已上傳頭像：

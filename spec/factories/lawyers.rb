@@ -33,7 +33,8 @@ FactoryGirl.define do
   factory :lawyer do
     name "lawyer"
     sequence(:email) { |n| "bystander-#{n}@test.com"}
-
+    phone_number "0911111228"
+    office_number "02-29981827"
     trait :with_avatar do
       avatar File.open "#{Rails.root}/spec/fixtures/person_avatar/people-1.jpg"
     end
