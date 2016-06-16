@@ -16,8 +16,11 @@ class Admin::DefendantsController < Admin::BaseController
 
   def set_to_imposter
     context = Defendant::SetToImpostorContext.new(@defendant)
-    context.perform
-    redirect_to admin_defendants_path, flash: { success: "當事人 #{@defendant.name} 已設定為冒用者" }
+    if context.perform
+      redirect_to admin_defendants_path, flash: { success: "當事人 #{@defendant.name} 已設定為冒用者" }
+    else
+      redirect_to admin_defendants_path, flash: { error: context.error_messages.join(", ") }
+    end
   end
 
   private
