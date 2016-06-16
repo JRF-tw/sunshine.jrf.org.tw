@@ -35,8 +35,10 @@ RSpec.describe Bystanders::ConfirmationsController, :type => :request do
   describe "#create" do
     context "success" do
       let!(:bystander) { FactoryGirl.create :bystander, :with_unconfirmed_email}
-      before { post "/bystanders/confirmation", bystander: { email: bystander.email } }
-      it { expect(response).to redirect_to("/bystanders/edit") }
+      subject { post "/bystanders/confirmation", bystander: { email: bystander.email } }
+      
+      it { expect(subject).to redirect_to("/bystanders/edit") }
+      it { expect { subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
     end
   end
 end
