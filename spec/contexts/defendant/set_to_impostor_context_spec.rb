@@ -5,13 +5,6 @@ describe Defendant::SetToImpostorContext do
   subject { described_class.new(defendent) }
 
   describe "#perform" do
-    context "change name" do
-      it do
-        expect { subject.perform }.to change { defendent.name }
-        expect(defendent.name).to eq("我愛羅-冒用者")
-      end
-    end
-
     context "record identify number" do
       it do 
         expect { subject.perform }.to change { defendent.imposter_identify_number } 

@@ -28,6 +28,12 @@
             label.control-label= f.label :current_sign_in_at_gteq
             .controls= f.search_field :current_sign_in_at_gteq, placeholder: "起始時間，非必填"
             .controls= f.search_field :current_sign_in_at_lteq, placeholder: "結束時間，非必填"
+      .row
+        .span6
+          .control-group
+            label.control-label= f.label :imposter_true
+            .controls= f.select :imposter_true,
+            collect_for_boolean, include_blank: "請選擇"
     hr
     .form-actions
       = f.submit :value => "搜尋", :class => "btn btn-primary"

@@ -2,7 +2,6 @@ class Defendant::SetToImpostorContext < BaseContext
   before_perform :record_identify_number
   before_perform :destroy_identify_number
   before_perform :set_to_imposter
-  before_perform :reset_name
 
   def initialize(defendant)
     @defendant = defendant
@@ -25,10 +24,6 @@ class Defendant::SetToImpostorContext < BaseContext
 
   def set_to_imposter
     @defendant.imposter = true
-  end
-
-  def reset_name
-    @defendant.name = "#{@defendant.name}-冒用者"
   end
 
 end

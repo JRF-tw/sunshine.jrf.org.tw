@@ -301,4 +301,4 @@ zh-TW:
         phone_number_cont: "電話號碼包含"
         current_sign_in_at_gteq: "最後一次登入日期搜尋"
         created_at_gteq: "註冊日期搜尋"
-
+        imposter_true: "是否為冒用者"
