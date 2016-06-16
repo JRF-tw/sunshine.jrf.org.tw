@@ -63,6 +63,6 @@
             td
               = link_to "詳細資料", admin_defendant_path(defendant), class: "btn btn-mini"
               | &nbsp;
-              = link_to "設置為冒用者", set_to_imposter_admin_defendant_path(defendant), class: "btn btn-mini btn-danger", method: :post unless defendant.imposter
+              = link_to "設置為冒用者", set_to_imposter_admin_defendant_path(defendant), class: "btn btn-mini btn-danger", method: :put unless defendant.imposter
     .ui-toolbar.ui-widget-header
       = paginate @defendants, theme: :admin

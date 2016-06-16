@@ -116,7 +116,7 @@ Rails.application.routes.draw do
     end
     resources :defendants do
       member do
-        post :set_to_imposter
+        put :set_to_imposter
       end
     end
 
