@@ -7,21 +7,15 @@ describe Defendant::SetToImpostorContext do
   describe "#perform" do
     before { subject.perform }
     context "record identify number" do
-      it do 
-        expect(defendent.imposter_identify_number).to eq("A225271722")
-      end
+      it { expect(defendent.imposter_identify_number).to eq("A225271722") }
     end
 
     context "destroy identify number" do
-      it do
-        expect(defendent.identify_number).to eq("")
-      end
+      it { expect(defendent.identify_number).to eq("") }
     end
 
     context "set to imposter" do
-      it do 
-        expect(defendent.imposter).to eq(true)
-      end
+      it { expect(defendent.imposter).to be_truthy }
     end
   end
 end
