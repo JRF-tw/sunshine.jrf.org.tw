@@ -22,6 +22,7 @@
 #  confirmed_at           :datetime
 #  confirmation_token     :string
 #  confirmation_sent_at   :datetime
+#  phone_confirmed_at     :datetime
 #
 
 class Defendant < ActiveRecord::Base
