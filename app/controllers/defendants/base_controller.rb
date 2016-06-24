@@ -21,6 +21,7 @@ class Defendants::BaseController < ApplicationController
       redirect_to defendants_edit_email_path, flash: { error: "#{context.error_messages.join(", ")}" }
     end
   end
+  
 
   private
 

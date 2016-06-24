@@ -50,7 +50,7 @@ class Defendant::VerifyPhoneContext < BaseContext
   end
 
   def confirmed
-    @defendant.confirm
+    @defendant.phone_confirm!
   end
 
   def reset_data
@@ -59,4 +59,3 @@ class Defendant::VerifyPhoneContext < BaseContext
     @defendant.retry_verify_count.reset
   end
 end
-

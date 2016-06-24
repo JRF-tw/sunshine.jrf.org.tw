@@ -22,7 +22,6 @@
 #  confirmed_at           :datetime
 #  confirmation_token     :string
 #  confirmation_sent_at   :datetime
-#  phone_confirmed_at     :datetime
 #
 
 class Defendant < ActiveRecord::Base
@@ -58,8 +57,16 @@ class Defendant < ActiveRecord::Base
     false
   end
 
-  def unconfirm!
-    update_attributes(confirmed_at: nil)
+  def phone_confirm!
+    update_attributes(phone_confirmed_at: Time.now)
+  end
+
+  def phone_unconfirm!
+    update_attributes(phone_confirmed_at: nil)
+  end
+
+  def phone_confirmed?
+    !!phone_confirmed_at
   end
 
   def set_reset_password_token

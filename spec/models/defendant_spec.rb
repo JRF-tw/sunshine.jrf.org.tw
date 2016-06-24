@@ -41,8 +41,24 @@ RSpec.describe Defendant, type: :model do
     end
   end
 
-  describe "#unconfirm!" do
-    before { defendant.confirm! }
-    it { expect{ defendant.unconfirm! }.to change { defendant.confirmed? } }
+  describe "#phone_unconfirm!" do
+    before { defendant.phone_confirm! }
+    it { expect{ defendant.phone_unconfirm! }.to change { defendant.phone_confirmed? } }
+  end
+
+  describe "#phone_confirm!" do
+    it { expect{ defendant.phone_confirm! }.to change { defendant.phone_confirmed? } }
+  end
+
+  describe "#phone_confirmed?" do
+    context "should truthy" do
+      before { defendant.phone_confirm! }
+      it { expect(defendant.phone_confirmed?).to be_truthy }
+    end
+
+    context "should falsey" do
+      before { defendant.phone_unconfirm! }
+      it { expect(defendant.phone_confirmed?).to be_falsey }
+    end
   end
 end
