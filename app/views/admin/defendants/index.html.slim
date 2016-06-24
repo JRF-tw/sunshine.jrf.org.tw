@@ -50,7 +50,9 @@
           th 姓名
           th 身分證字號
           th 電話號碼
+          th 待驗證電話號碼
           th email
+          th 待驗證電話號碼
           th 註冊日期
           th 最後一次登入日期
           th 最後一次登入ip
@@ -62,6 +64,7 @@
             td= defendant.name
             td= defendant.identify_number
             td= defendant.phone_number
+            td= defendant.unconfirmed_phone.value
             td= defendant.email
             td= defendant.created_at.to_date
             td= defendant.current_sign_in_at.try(:to_date)
