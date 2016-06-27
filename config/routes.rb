@@ -70,6 +70,7 @@ Rails.application.routes.draw do
         put :resend
       end
     end
+    resources :scores, only: [:index]
   end
 
   namespace :api, defaults: { format: 'json' } do

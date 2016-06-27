@@ -1,4 +1,4 @@
-class Lawyer::ScoresController < ApplicationController
+class Lawyer::ScoresController < Lawyer::BaseController
   def index
 
   end
