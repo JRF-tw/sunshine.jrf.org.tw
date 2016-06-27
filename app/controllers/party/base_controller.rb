@@ -6,9 +6,6 @@ class Party::BaseController < ApplicationController
   def index
   end
 
-  def profile
-  end
-
   def edit_email
     prev_unconfirmed_email = current_party.unconfirmed_email if current_party.respond_to?(:unconfirmed_email)
   end
@@ -21,7 +18,6 @@ class Party::BaseController < ApplicationController
       redirect_to party_edit_email_path, flash: { error: "#{context.error_messages.join(", ")}" }
     end
   end
-
 
   private
 

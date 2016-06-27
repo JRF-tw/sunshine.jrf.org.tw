@@ -60,7 +60,7 @@ Rails.application.routes.draw do
 
   namespace :party do
     root to: "base#index"
-    get "profile", to: "base#profile"
+    resource :profile, only: [:show, :edit]
     get "edit-email", to: "base#edit_email"
     put "update-email", to: "base#update_email"
     resource :phone, only: [:new, :create, :edit, :update] do
