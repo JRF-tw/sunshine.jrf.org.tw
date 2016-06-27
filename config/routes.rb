@@ -59,6 +59,8 @@ Rails.application.routes.draw do
     resources :scores, only: [:index, :edit]
   end
 
+  resources :scores, only: [:index]
+
   resources :searchs, path: "search" do
     collection do
       get :judges
