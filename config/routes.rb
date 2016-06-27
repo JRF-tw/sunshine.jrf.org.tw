@@ -36,6 +36,11 @@ Rails.application.routes.draw do
     resources :scores, only: [:index, :edit]
     resource :score do
       get "chose-type", to: "scores#chose_type"
+      resource :schedules, only: [:new] do
+        collection do
+          post :verify
+        end
+      end
     end
     resources :stories, only: [] do
       member do
@@ -52,6 +57,11 @@ Rails.application.routes.draw do
     resources :scores, only: [:index, :edit]
     resource :score do
       get "chose-type", to: "scores#chose_type"
+      resources :schedules, only: [:new] do
+        collection do
+          post :verify
+        end
+      end
     end
     resources :stories, only: [] do
       member do
@@ -75,6 +85,11 @@ Rails.application.routes.draw do
     resources :scores, only: [:index, :edit]
     resource :score do
       get "chose-type", to: "scores#chose_type"
+      resource :schedules, only: [:new] do
+        collection do
+          post :verify
+        end
+      end
     end
     resources :stories, only: [] do
       member do
