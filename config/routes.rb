@@ -54,6 +54,8 @@ Rails.application.routes.draw do
     root to: "base#index"
     resource :appeal, only: [:new]
     resource :profile, only: [:show, :edit, :update]
+    resource :email, only: [:edit]
+    resources :scores, only: [:index]
   end
 
   namespace :parties do
