@@ -26,7 +26,7 @@ Rails.application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
-  
+
   # Disables appending md5 hashes for caching with future expire headers.
   # BrowserSync can reference and replace them properly as they get changed.
   config.assets.digest = false
@@ -36,6 +36,7 @@ Rails.application.configure do
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
+  config.active_record.raise_in_transactional_callbacks = true
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true

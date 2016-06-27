@@ -31,11 +31,11 @@ RSpec.describe Story do
     it { expect(story.by_relation_lawyers.first.people).to eq(lawyer) }
   end
 
-  context "#by_relation_defendants" do
-    let(:defendant){ FactoryGirl.create :defendant }
-    before { FactoryGirl.create :story_relation, story: story, people: defendant }
+  context "#by_relation_parties" do
+    let(:party){ FactoryGirl.create :party }
+    before { FactoryGirl.create :story_relation, story: story, people: party }
     subject { story }
 
-    it { expect(story.by_relation_defendants.first.people).to eq(defendant) }
+    it { expect(story.by_relation_parties.first.people).to eq(party) }
   end
 end

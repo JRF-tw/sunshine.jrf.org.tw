@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 describe StoryRelationCreateContext do
-  let!(:story) { FactoryGirl.create :story, defendant_names: ["defendant"], lawyer_names: ["lawyer"], judges_names: ["judge"] }
+  let!(:story) { FactoryGirl.create :story, party_names: ["party"], lawyer_names: ["lawyer"], judges_names: ["judge"] }
   subject { described_class.new(story) }
 
-  context "create defendant" do
-    let!(:defendant) { FactoryGirl.create :defendant, name: "defendant"}
+  context "create party" do
+    let!(:party) { FactoryGirl.create :party, name: "party"}
 
-    it { expect { subject.perform(story.defendant_names.first) }.to change { defendant.story_relations.count } }
+    it { expect { subject.perform(story.party_names.first) }.to change { party.story_relations.count } }
   end
 
   context "create lawyer" do

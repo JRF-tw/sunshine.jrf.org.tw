@@ -49,14 +49,14 @@ class Scrap::AnalysisVerdictContext < BaseContext
     end
   end
 
-  def defendant_names
+  def party_names
     matched_mutiple_type = @verdict_content.squish.match(/\n\s*被\s+告\s+([\p{Word}\w\s\S]+?)\n\s*[\s男\s|\s女\s|上|訴訟|法定|選任|指定|輔\s+佐\s+人]/)
     matched = @verdict_content.squish.match(/被\s+告\s+(\p{Word}+)/)
     if matched_mutiple_type
-      defendants = @verdict_content.squish.scan(/\n\s*被\s+告\s+([\p{Word}\w\s\S]+?)\n\s*[\s男\s|\s女\s|上|訴訟|法定|選任|指定|輔\s+佐\s+人]/).map { |i| i[0] }
-      defendants = defendants.join("\n")
-      defendants = defendants.split(/\n+/).map { |i| i.strip }
-      return defendants.uniq
+      parties = @verdict_content.squish.scan(/\n\s*被\s+告\s+([\p{Word}\w\s\S]+?)\n\s*[\s男\s|\s女\s|上|訴訟|法定|選任|指定|輔\s+佐\s+人]/).map { |i| i[0] }
+      parties = parties.join("\n")
+      parties = parties.split(/\n+/).map { |i| i.strip }
+      return parties.uniq
     elsif matched
       return @verdict_content.squish.scan(/被\s+告\s+(\p{Word}+)/).map { |i| i[0] }
     else

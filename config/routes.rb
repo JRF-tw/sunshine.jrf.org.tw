@@ -4,63 +4,87 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
 
   devise_for :users
+  devise_for :party, controllers: { registrations: 'party/registrations', sessions: 'party/sessions', passwords: 'party/passwords', confirmations: 'party/confirmations' }
+  devise_for :bystander, controllers: { registrations: 'bystander/registrations', sessions: 'bystander/sessions', passwords: 'bystander/passwords', confirmations: 'bystander/confirmations'}
+  devise_for :lawyer, controllers: { registrations: 'lawyer/registrations', sessions: 'lawyer/sessions', passwords: 'lawyer/passwords', confirmations: 'lawyer/confirmations'}
 
-
-  devise_for :defendants, controllers: { registrations: 'defendants/registrations', sessions: 'defendants/sessions', passwords: 'defendants/passwords', confirmations: 'defendants/confirmations' }
-  devise_for :bystanders, controllers: { registrations: 'bystanders/registrations', sessions: 'bystanders/sessions', passwords: 'bystanders/passwords', confirmations: 'bystanders/confirmations'}
-  devise_for :lawyers, controllers: { registrations: 'lawyers/registrations', sessions: 'lawyers/sessions', passwords: 'lawyers/passwords', confirmations: 'lawyers/confirmations'}
+  # custom devise scope
   devise_scope :lawyer do
-    patch '/lawyers/confirm', to: 'lawyers/confirmations#confirm', as: :lawyers_confirm
-    post '/lawyers/password/send_reset_password_mail', to: 'lawyers/passwords#send_reset_password_mail'
+    patch '/lawyer/confirm', to: 'lawyer/confirmations#confirm', as: :lawyer_confirm
+    post '/lawyer/password/send_reset_password_mail', to: 'lawyer/passwords#send_reset_password_mail'
   end
 
   devise_scope :bystander do
-    post '/bystanders/password/send_reset_password_mail', to: 'bystanders/passwords#send_reset_password_mail'
+    post '/bystander/password/send_reset_password_mail', to: 'bystander/passwords#send_reset_password_mail'
   end
 
-  devise_scope :defendant do
-    post "/defendants/password/send_reset_password_sms", to:"defendants/passwords#send_reset_password_sms"
+  devise_scope :party do
+    post "/party/password/send_reset_password_sms", to:"party/passwords#send_reset_password_sms"
   end
-  
 
+  # f2e
   root to: "base#index", only: [:show]
+  get '/who-are-you', to: "base#who_are_you"
   get '/robots.txt', to: "base#robots", defaults: { format: "text" }
-
   get "judges", to: "profiles#judges", as: :judges
   get "prosecutors", to: "profiles#prosecutors", as: :prosecutors
 
-  resources :searchs, path: "search" do
-    collection do
-      get :judges
-      get :prosecutors
+  namespace :bystander do
+    root to: "base#index"
+    resource :profile, only: [:show, :edit]
+    resource :email, only: [:edit]
+    resources :scores, only: [:index, :edit]
+    resource :score do
+      get "chose-type", to: "scores#chose_type"
+      resource :schedules, only: [:new] do
+        collection do
+          post :verify
+        end
+      end
+      resource :verdicts, only: [:new] do
+        collection do
+          post :verify
+        end
+      end
+    end
+    resources :stories, only: [] do
+      member do
+        resource :subscribe, only: [:create]
+      end
     end
   end
-  get "about", to: "base#about", as: :about
-  resources :suits do
-    resources :procedures
-  end
-  resources :profiles do
-    resources :awards
-    resources :punishments
+
+  namespace :lawyer do
+    root to: "base#index"
+    resource :appeal, only: [:new]
+    resource :profile, only: [:show, :edit, :update]
+    resource :email, only: [:edit]
+    resources :scores, only: [:index, :edit]
+    resource :score do
+      get "chose-type", to: "scores#chose_type"
+      resource :schedules, only: [:new] do
+        collection do
+          post :verify
+        end
+      end
+      resource :verdicts, only: [:new] do
+        collection do
+          post :verify
+        end
+      end
+    end
+    resources :stories, only: [] do
+      member do
+        resource :subscribe, only: [:create]
+      end
+    end
   end
 
-  namespace :bystanders do
+  namespace :party do
     root to: "base#index"
-    get "profile", to: "base#profile"
-  end
-
-  namespace :lawyers do
-    root to: "base#index"
-    get "profile", to: "base#profile"
-    get "edit-profile", to: "base#edit_profile"
-    post "update_profile", to: "base#update_profile"
-  end
-
-  namespace :defendants do
-    root to: "base#index"
-    get "profile", to: "base#profile"
-    get "edit-email", to: "base#edit_email"
-    put "update-email", to: "base#update_email"
+    resource :profile, only: [:show, :edit]
+    resource :appeal, only: [:new]
+    resource :email, only: [:edit, :update]
     resource :phone, only: [:new, :create, :edit, :update] do
       collection do
         get :verify
@@ -68,6 +92,45 @@ Rails.application.routes.draw do
         put :resend
       end
     end
+    resources :scores, only: [:index, :edit]
+    resource :score do
+      get "chose-type", to: "scores#chose_type"
+      resource :schedules, only: [:new] do
+        collection do
+          post :verify
+        end
+      end
+      resource :verdicts, only: [:new] do
+        collection do
+          post :verify
+        end
+      end
+    end
+    resources :stories, only: [] do
+      member do
+        resource :subscribe, only: [:create]
+      end
+    end
+  end
+
+  resources :scores, only: [:index]
+  resources :judges, only: [:show]
+
+  resources :searchs, path: "search" do
+    collection do
+      get :judges
+      get :prosecutors
+    end
+  end
+
+  get "about", to: "base#about", as: :about
+  resources :suits do
+    resources :procedures
+  end
+
+  resources :profiles do
+    resources :awards
+    resources :punishments
   end
 
   namespace :api, defaults: { format: 'json' } do
@@ -114,7 +177,7 @@ Rails.application.routes.draw do
         get :download_file
       end
     end
-    resources :defendants do
+    resources :parties do
       member do
         put :set_to_imposter
       end

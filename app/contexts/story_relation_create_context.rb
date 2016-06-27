@@ -22,7 +22,7 @@ class StoryRelationCreateContext < BaseContext
   private
 
   def find_people_type
-    @people_type = "Defendant" if @story.defendant_names.include?(@people_name)
+    @people_type = "Party" if @story.party_names.include?(@people_name)
     @people_type = "Lawyer" if @story.lawyer_names.include?(@people_name)
     @people_type = "Judge" if @story.judges_names.include?(@people_name)
 

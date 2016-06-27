@@ -5,7 +5,7 @@ module RequestClient
   end
 
   def signout_bystander
-    delete "/bystanders/sign_out", {}, {'HTTP_REFERER' => 'http://www.example.com/bystanders'}
+    delete "/bystander/sign_out", {}, {'HTTP_REFERER' => 'http://www.example.com/bystanders'}
     @current_bystander = nil
   end
 
@@ -19,21 +19,21 @@ module RequestClient
   def signin_bystander(bystander = nil)
     bystander ||= FactoryGirl.create(:bystander)
     date =
-    post "/bystanders/sign_in", bystander: { email: bystander.email, password: "123123123" }
+    post "/bystander/sign_in", bystander: { email: bystander.email, password: "123123123" }
     @current_bystander = bystander if response.status == 302
   end
 
-  def signin_defendant(defendant = nil)
-    defendant ||= FactoryGirl.create(:defendant)
+  def signin_party(party = nil)
+    party ||= FactoryGirl.create(:party)
     data =
-    post "/defendants/sign_in", defendant: { identify_number: defendant.identify_number, password: defendant.password }
-    @current_defendant = defendant if response.status == 302
+    post "/party/sign_in", party: { identify_number: party.identify_number, password: party.password }
+    @current_party = party if response.status == 302
   end
 
   def signin_lawyer(lawyer = nil)
     lawyer ||= FactoryGirl.create(:lawyer, :with_password_and_confirmed)
     data =
-    post "/lawyers/sign_in", lawyer: { email: lawyer.email, password: lawyer.password }
+    post "/lawyer/sign_in", lawyer: { email: lawyer.email, password: lawyer.password }
     @current_lawyer = lawyer if response.status == 302
   end
 
@@ -45,8 +45,8 @@ module RequestClient
     @current_bystander
   end
 
-  def current_defendant
-    @current_defendant
+  def current_party
+    @current_party
   end
 
   def current_lawyer
