@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     root to: "base#index"
     resource :profile, only: [:show, :edit]
     resource :email, only: [:edit]
+    resources :scores, only: [:index]
   end
 
   namespace :lawyer do
