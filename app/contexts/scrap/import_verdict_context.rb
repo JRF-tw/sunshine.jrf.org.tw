@@ -11,7 +11,7 @@ class Scrap::ImportVerdictContext < BaseContext
   after_perform   :create_relation_for_lawyer
   after_perform   :create_relation_for_judge
   after_perform   :create_relation_for_main_judge
-  after_perform   :create_relation_for_defendant
+  after_perform   :create_relation_for_party
   after_perform   :record_count_to_daily_notify
 
   class << self
@@ -74,7 +74,7 @@ class Scrap::ImportVerdictContext < BaseContext
       judges_names: @analysis_context.judges_names,
       prosecutor_names: @analysis_context.prosecutor_names,
       lawyer_names: @analysis_context.lawyer_names,
-      defendant_names: @analysis_context.defendant_names
+      party_names: @analysis_context.party_names
     )
   end
 
@@ -90,7 +90,7 @@ class Scrap::ImportVerdictContext < BaseContext
     @story.assign_attributes(judges_names: (@story.judges_names + @verdict.judges_names).uniq)
     @story.assign_attributes(prosecutor_names: (@story.prosecutor_names + @verdict.prosecutor_names).uniq)
     @story.assign_attributes(lawyer_names: (@story.lawyer_names + @verdict.lawyer_names).uniq)
-    @story.assign_attributes(defendant_names: (@story.defendant_names + @verdict.defendant_names).uniq)
+    @story.assign_attributes(party_names: (@story.party_names + @verdict.party_names).uniq)
     @story.assign_attributes(main_judge: @main_judge) if @main_judge
     @story.assign_attributes(is_adjudge: @verdict.is_judgment?) if @verdict.is_judgment? && !@story.is_adjudge
     @story.save
@@ -120,8 +120,8 @@ class Scrap::ImportVerdictContext < BaseContext
     StoryRelationCreateContext.new(@story).perform(@verdict.main_judge.name) if @verdict.main_judge
   end
 
-  def create_relation_for_defendant
-    @verdict.defendant_names.each do |name|
+  def create_relation_for_party
+    @verdict.party_names.each do |name|
       VerdictRelationCreateContext.new(@verdict).perform(name)
       StoryRelationCreateContext.new(@story).perform(name)
     end

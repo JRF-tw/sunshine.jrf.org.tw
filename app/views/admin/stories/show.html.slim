@@ -45,8 +45,8 @@
       tr
         td 與案件相關當事人
         td
-          - @story.by_relation_defendants.each do |sr|
-            = link_to "#{sr.people.name} ", admin_defendant_path(sr.people)
+          - @story.by_relation_parties.each do |sr|
+            = link_to "#{sr.people.name} ", admin_party_path(sr.people)
             = " "
       tr
         td 是否已宣判

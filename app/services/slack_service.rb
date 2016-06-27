@@ -41,7 +41,7 @@ class SlackService
       delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook) unless DISABLED_ENV.include?(Rails.env)
     end
 
-    def fake_defendant_reset_password_notify_async(message, channel: "#notify-developer", name: "notify", icon_url: DEFAULT_ICON_URL, webhook: nil)
+    def fake_party_reset_password_notify_async(message, channel: "#notify-developer", name: "notify", icon_url: DEFAULT_ICON_URL, webhook: nil)
       delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook)
     end
 

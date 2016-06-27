@@ -47,7 +47,7 @@ RSpec.describe Scrap::ImportVerdictContext, :type => :model do
       context "sync names" do
         it { expect(subject.judges_names).to eq(subject.story.judges_names) }
         it { expect(subject.prosecutor_names).to eq(subject.story.prosecutor_names) }
-        it { expect(subject.defendant_names).to eq(subject.story.defendant_names) }
+        it { expect(subject.party_names).to eq(subject.story.party_names) }
         it { expect(subject.lawyer_names).to eq(subject.story.lawyer_names) }
       end
 
@@ -77,7 +77,7 @@ RSpec.describe Scrap::ImportVerdictContext, :type => :model do
       context "verdict_relations" do
         let!(:judge1) { FactoryGirl.create :judge, name: "李麗珠" }
         let!(:lawyer) { FactoryGirl.create :lawyer, name: "陳圈圈" }
-        let!(:defendant) { FactoryGirl.create :defendant, name: "張坤樹" }
+        let!(:party) { FactoryGirl.create :party, name: "張坤樹" }
         let!(:branch1) { FactoryGirl.create :branch, court: court, judge: judge1, chamber_name: "臺灣高等法院刑事庭"}
 
         it { expect{ subject }.to change { VerdictRelation.count }.by(3) }
@@ -86,7 +86,7 @@ RSpec.describe Scrap::ImportVerdictContext, :type => :model do
       context "story_relations" do
         let!(:judge1) { FactoryGirl.create :judge, name: "李麗珠" }
         let!(:lawyer) { FactoryGirl.create :lawyer, name: "陳圈圈" }
-        let!(:defendant) { FactoryGirl.create :defendant, name: "張坤樹" }
+        let!(:party) { FactoryGirl.create :party, name: "張坤樹" }
         let!(:branch1) { FactoryGirl.create :branch, court: court, judge: judge1, chamber_name: "臺灣高等法院刑事庭"}
 
         it { expect{ subject }.to change { StoryRelation.count }.by(4) }

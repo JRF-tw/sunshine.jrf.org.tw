@@ -3,13 +3,13 @@ require 'rails_helper'
 describe VerdictRelationCreateContext do
   let!(:court) { FactoryGirl.create :court }
   let!(:story) { FactoryGirl.create :story, court: court, story_type: "民事" }
-  let!(:verdict) { FactoryGirl.create :verdict, defendant_names: ["defendant"], lawyer_names: ["lawyer"], judges_names: ["judge"], story: story }
+  let!(:verdict) { FactoryGirl.create :verdict, party_names: ["party"], lawyer_names: ["lawyer"], judges_names: ["judge"], story: story }
   subject { described_class.new(verdict) }
 
-  context "create defendant" do
-    let!(:defendant) { FactoryGirl.create :defendant, name: "defendant"}
+  context "create party" do
+    let!(:party) { FactoryGirl.create :party, name: "party"}
 
-    it { expect { subject.perform(verdict.defendant_names.first) }.to change { defendant.verdict_relations.count } }
+    it { expect { subject.perform(verdict.party_names.first) }.to change { party.verdict_relations.count } }
   end
 
   context "create lawyer" do

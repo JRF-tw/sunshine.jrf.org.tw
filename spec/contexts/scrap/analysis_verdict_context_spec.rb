@@ -125,26 +125,26 @@ RSpec.describe Scrap::AnalysisVerdictContext, :type => :model do
     end
   end
 
-  describe "#defendant_names" do
+  describe "#party_names" do
     context "exist" do
       let!(:verdict_content){ "被　　　告　xxx" }
       subject{ described_class.new(verdict_content, verdict_word) }
 
-      it { expect(subject.defendant_names.present?).to be_truthy }
-      it { expect{ subject.defendant_names }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      it { expect(subject.party_names.present?).to be_truthy }
+      it { expect{ subject.party_names }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
     end
 
     context "unexist" do
       context "notify" do
         let!(:verdict_content){ "判決 被衝康 xxx" }
         subject{ described_class.new(verdict_content, verdict_word) }
-        it { expect{ subject.defendant_names }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+        it { expect{ subject.party_names }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
       end
 
       context "unnotify" do
         let!(:verdict_content){ "被衝康 xxx" }
         subject{ described_class.new(verdict_content, verdict_word) }
-        it { expect{ subject.defendant_names }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
+        it { expect{ subject.party_names }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
       end
     end
   end

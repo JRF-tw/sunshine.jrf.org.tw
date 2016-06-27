@@ -25,7 +25,7 @@ class VerdictRelationCreateContext < BaseContext
   private
 
   def find_person_type
-    @person_type = "Defendant" if @verdict.defendant_names.include?(@person_name)
+    @person_type = "Party" if @verdict.party_names.include?(@person_name)
     @person_type = "Lawyer" if @verdict.lawyer_names.include?(@person_name)
     @person_type = "Judge" if @verdict.judges_names.include?(@person_name)
     # @person_type = "Prosecutor" if @verdict.prosecutor_names.include?(@person_name)

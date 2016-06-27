@@ -8,7 +8,7 @@
 #  updated_at       :datetime         not null
 #  file             :string
 #  is_judgment      :boolean          default(FALSE)
-#  defendant_names  :text
+#  party_names      :text
 #  lawyer_names     :text
 #  judges_names     :text
 #  prosecutor_names :text
@@ -20,7 +20,7 @@
 
 class Verdict < ActiveRecord::Base
   mount_uploader :file, VerdictFileUploader
-  serialize :defendant_names, Array
+  serialize :party_names, Array
   serialize :lawyer_names, Array
   serialize :judges_names, Array
   serialize :prosecutor_names, Array
@@ -32,11 +32,11 @@ class Verdict < ActiveRecord::Base
 
   class << self
     def ransackable_scopes(auth_object = nil)
-      [ :unexist_defendant_names, :unexist_lawyer_names, :unexist_judges_names, :unexist_prosecutor_names ]
+      [ :unexist_party_names, :unexist_lawyer_names, :unexist_judges_names, :unexist_prosecutor_names ]
     end
 
-    def unexist_defendant_names
-      where(defendant_names: nil)
+    def unexist_party_names
+      where(party_names: nil)
     end
 
     def unexist_lawyer_names

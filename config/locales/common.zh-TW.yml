@@ -15,7 +15,7 @@ zh-TW:
       procedure: "評鑑資料-案例處理經過"
       banner: "首頁橫幅"
       suit_banner: "司法案例面面觀橫幅"
-      defendant: "當事人"
+      party: "當事人"
     attributes:
       court:
         court_type: "類型"
@@ -236,7 +236,7 @@ zh-TW:
         content: "內文"
         weight: "權重"
         is_hidden: "隱藏"
-      defendant:
+      party:
         id: "流水號"
         name: "姓名"
         identify_number: "身分證字號"
@@ -269,7 +269,7 @@ zh-TW:
         content_cont: "內容包含"
         adjudge_date_eq: "宣判日期"
         main_judge_id_eq: "審判長法官"
-        unexist_defendant_names: "當事人為空值"
+        unexist_party_names: "當事人為空值"
         unexist_lawyer_names: "律師為空值"
         unexist_judges_names: "陪審法官為空值"
         unexist_prosecutor_names: "檢察官為空值"
@@ -294,7 +294,7 @@ zh-TW:
         email_cont: "EmaiL包含"
         school_cont: "學校包含"
         department_level_cont: "系級包含"
-      defendant:
+      party:
         name_cont: "姓名包含"
         current_sign_in_ip_cont: "最後一次登入ip包含"
         identify_number_cont: "身分證字號包含"

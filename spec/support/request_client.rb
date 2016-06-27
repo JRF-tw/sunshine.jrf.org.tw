@@ -23,11 +23,11 @@ module RequestClient
     @current_bystander = bystander if response.status == 302
   end
 
-  def signin_defendant(defendant = nil)
-    defendant ||= FactoryGirl.create(:defendant)
+  def signin_party(party = nil)
+    party ||= FactoryGirl.create(:party)
     data =
-    post "/defendants/sign_in", defendant: { identify_number: defendant.identify_number, password: defendant.password }
-    @current_defendant = defendant if response.status == 302
+    post "/parties/sign_in", party: { identify_number: party.identify_number, password: party.password }
+    @current_party = party if response.status == 302
   end
 
   def signin_lawyer(lawyer = nil)
@@ -45,8 +45,8 @@ module RequestClient
     @current_bystander
   end
 
-  def current_defendant
-    @current_defendant
+  def current_party
+    @current_party
   end
 
   def current_lawyer

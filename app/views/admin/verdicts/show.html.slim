@@ -43,12 +43,12 @@
             = " "
       tr
         td 分析當事人結果
-        td= @verdict.defendant_names.join(",")
+        td= @verdict.party_names.join(",")
       tr
         td 陪審當事人
         td
-          - @verdict.verdict_relations.by_type("Defendant").each do |relations|
-            = link_to "#{relations.person.name} ", admin_defendant_path(relations.person)
+          - @verdict.verdict_relations.by_type("Party").each do |relations|
+            = link_to "#{relations.person.name} ", admin_party_path(relations.person)
             = " "
       tr
         td 發布日期
