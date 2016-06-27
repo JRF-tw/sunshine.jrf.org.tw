@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Parties::SessionsController, type: :request do
+RSpec.describe Party::SessionsController, type: :request do
 
   describe "#create" do
     let!(:party) { FactoryGirl.create :party }
@@ -10,14 +10,14 @@ RSpec.describe Parties::SessionsController, type: :request do
     describe "#create" do
       context "login" do
         let!(:params) { { identify_number: party.identify_number, password: party.password } }
-        subject!{ post "/parties/sign_in", party: params }
+        subject!{ post "/party/sign_in", party: params }
 
-        it { expect(response).to redirect_to("/parties/profile") }
+        it { expect(response).to redirect_to("/party/profile") }
       end
 
       context "identify_number nil" do
         let!(:params) { { identify_number: "", password: party.password } }
-        subject!{ post "/parties/sign_in", party: params }
+        subject!{ post "/party/sign_in", party: params }
 
         it { expect(response).to be_success }
         it { expect(party.last_sign_in_at).to be_nil }
@@ -25,21 +25,21 @@ RSpec.describe Parties::SessionsController, type: :request do
 
       context "identify_number unexist" do
         let!(:params) { { identify_number: "A11111111111", password: party.password } }
-        subject!{ post "/parties/sign_in", party: params }
+        subject!{ post "/party/sign_in", party: params }
 
         it { expect(response).to be_success }
       end
 
       context "password error" do
         let!(:params) { { identify_number: party.identify_number, password: "" } }
-        subject!{ post "/parties/sign_in", party: params }
+        subject!{ post "/party/sign_in", party: params }
 
         it { expect(response).to be_success }
       end
 
       context "password error" do
         let!(:params) { { identify_number: party.identify_number, password: "wrong password" } }
-        subject!{ post "/parties/sign_in", party: params }
+        subject!{ post "/party/sign_in", party: params }
 
         it { expect(response).to be_success }
       end
@@ -54,18 +54,18 @@ RSpec.describe Parties::SessionsController, type: :request do
     describe "#destroy" do
       context "sucess" do
         before { signin_party }
-        subject!{ delete "/parties/sign_out" }
+        subject!{ delete "/party/sign_out" }
 
-        it { expect(response).to redirect_to("/parties/sign_in") }
+        it { expect(response).to redirect_to("/party/sign_in") }
       end
 
       context "only sign out party" do
       before { signin_lawyer }
       before { signin_party }
-      subject! { delete "/parties/sign_out" }
+      subject! { delete "/party/sign_out" }
 
       it { expect(get "/lawyer").to eq(200) }
-      it { expect(get "/parties").to eq(302) }
+      it { expect(get "/party").to eq(302) }
     end
     end
   end

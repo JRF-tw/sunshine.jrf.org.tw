@@ -1,4 +1,4 @@
-class Parties::PasswordsController < Devise::PasswordsController
+class Party::PasswordsController < Devise::PasswordsController
   include CrudConcern
 
   prepend_before_filter :require_no_authentication, except: [:send_reset_password_sms]
@@ -24,19 +24,19 @@ class Parties::PasswordsController < Devise::PasswordsController
     context = Party::SendResetPasswordSmsContext.new(party_params)
     #TODO refactory
     if context.perform
-      redirect_to parties_profile_path, flash: { success: "已寄送重設密碼簡訊" }
+      redirect_to party_profile_path, flash: { success: "已寄送重設密碼簡訊" }
     else
-      redirect_to parties_profile_path, flash: { error: "#{context.error_messages.join(", ")}" }
+      redirect_to party_profile_path, flash: { error: "#{context.error_messages.join(", ")}" }
     end
   end
 
   private
 
   def after_sign_in_path_for(resource)
-    parties_root_path
+    party_root_path
   end
 
   def after_resetting_password_path_for(resource)
-    parties_root_path
+    party_root_path
   end
 end

@@ -1,4 +1,4 @@
-class Parties::SessionsController < Devise::SessionsController
+class Party::SessionsController < Devise::SessionsController
   layout 'party'
 
   # POST /resource/sign_in
@@ -14,7 +14,7 @@ class Parties::SessionsController < Devise::SessionsController
   private
 
   def after_sign_in_path_for(resource)
-    parties_profile_path
+    party_profile_path
   end
 
   def after_sign_out_path_for(resource_or_scope)

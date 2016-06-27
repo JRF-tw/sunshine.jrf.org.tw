@@ -1,4 +1,4 @@
-class Parties::BaseController < ApplicationController
+class Party::BaseController < ApplicationController
   layout 'party'
   before_action :authenticate_party!
   before_action :set_phone?
@@ -16,9 +16,9 @@ class Parties::BaseController < ApplicationController
   def update_email
     context = Party::ChangeEmailContext.new(current_party)
     if context.perform(params[:party])
-      redirect_to parties_profile_path, flash: { success: "email已修改" }
+      redirect_to party_profile_path, flash: { success: "email已修改" }
     else
-      redirect_to parties_edit_email_path, flash: { error: "#{context.error_messages.join(", ")}" }
+      redirect_to party_edit_email_path, flash: { error: "#{context.error_messages.join(", ")}" }
     end
   end
 
@@ -26,7 +26,7 @@ class Parties::BaseController < ApplicationController
   private
 
   def set_phone?
-    redirect_to new_parties_phone_path unless current_party.phone_number.present?
+    redirect_to new_party_phone_path unless current_party.phone_number.present?
   end
 
 end

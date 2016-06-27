@@ -1,6 +1,6 @@
 | 更改手機號碼
 
-= simple_form_for current_party, url: parties_phone_path, method: :put do |f|
+= simple_form_for current_party, url: party_phone_path, method: :put do |f|
   = f.input :phone_number
   .form-actions
     = f.submit "寄送驗證碼", class: "btn btn-primary"

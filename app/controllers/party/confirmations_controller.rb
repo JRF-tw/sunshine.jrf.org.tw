@@ -1,4 +1,4 @@
-class Parties::ConfirmationsController < Devise::ConfirmationsController
+class Party::ConfirmationsController < Devise::ConfirmationsController
 
   before_action :redirect_new_to_sign_in, only: [:new]
 
@@ -17,16 +17,16 @@ class Parties::ConfirmationsController < Devise::ConfirmationsController
   protected
 
   def redirect_new_to_sign_in
-    redirect_to new_parties_session_path
+    redirect_to new_party_session_path
   end
 
   def after_resending_confirmation_instructions_path_for(resource_name)
-    parties_profile_path
+    party_profile_path
   end
 
   def after_confirmation_path_for(resource_name, resource)
     if signed_in?(resource_name)
-      parties_profile_path
+      party_profile_path
     else
       new_session_path(resource_name)
     end

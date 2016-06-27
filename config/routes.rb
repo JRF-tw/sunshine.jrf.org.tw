@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   devise_for :users
 
 
-  devise_for :parties, controllers: { registrations: 'parties/registrations', sessions: 'parties/sessions', passwords: 'parties/passwords', confirmations: 'parties/confirmations' }
+  devise_for :party, controllers: { registrations: 'party/registrations', sessions: 'party/sessions', passwords: 'party/passwords', confirmations: 'party/confirmations' }
   devise_for :bystanders, controllers: { registrations: 'bystanders/registrations', sessions: 'bystanders/sessions', passwords: 'bystanders/passwords', confirmations: 'bystanders/confirmations'}
   devise_for :lawyer, controllers: { registrations: 'lawyer/registrations', sessions: 'lawyer/sessions', passwords: 'lawyer/passwords', confirmations: 'lawyer/confirmations'}
   devise_scope :lawyer do
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   end
 
   devise_scope :party do
-    post "/parties/password/send_reset_password_sms", to:"parties/passwords#send_reset_password_sms"
+    post "/party/password/send_reset_password_sms", to:"party/passwords#send_reset_password_sms"
   end
 
 
@@ -58,7 +58,7 @@ Rails.application.routes.draw do
     resources :scores, only: [:index]
   end
 
-  namespace :parties do
+  namespace :party do
     root to: "base#index"
     get "profile", to: "base#profile"
     get "edit-email", to: "base#edit_email"

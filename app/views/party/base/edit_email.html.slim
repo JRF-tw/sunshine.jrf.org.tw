@@ -2,7 +2,7 @@
   .widget-title
     h5 當事人更改email
   .widget-content.nopadding
-    = simple_form_for(current_party, as: :party, url:  parties_update_email_path, method: :put ) do |f|
+    = simple_form_for(current_party, as: :party, url:  party_update_email_path, method: :put ) do |f|
       .form-inputs
         = f.input :email, required: true, autofocus: true, label: "電子信箱"
 
@@ -14,4 +14,4 @@
         = f.button :submit, "送出"
     div = link_to "重寄認證信", party_confirmation_path(party: { email: current_party.email }), method: :post if current_party.pending_reconfirmation?
 
-    div = link_to "回到當事人資訊頁面", parties_profile_path
+    div = link_to "回到當事人資訊頁面", party_profile_path

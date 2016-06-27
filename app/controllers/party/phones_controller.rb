@@ -1,4 +1,4 @@
-class Parties::PhonesController < Parties::BaseController
+class Party::PhonesController < Party::BaseController
   before_action :set_phone?, only: []
   before_action :can_verify?, only: [:verify, :verifing, :resend_verify_sms]
 
@@ -9,7 +9,7 @@ class Parties::PhonesController < Parties::BaseController
   def create
     context = Party::SetPhoneContext.new(current_party)
     if context.perform(party_params)
-      redirect_to verify_parties_phone_path, flash: { success: "已寄出簡訊認證碼" }
+      redirect_to verify_party_phone_path, flash: { success: "已寄出簡訊認證碼" }
     else
       flash[:error] = context.error_messages.join(", ")
       render "new"
@@ -22,7 +22,7 @@ class Parties::PhonesController < Parties::BaseController
   def update
     context = Party::SetPhoneContext.new(current_party)
     if context.perform(party_params)
-      redirect_to verify_parties_phone_path, flash: { success: "已寄出簡訊認證碼" }
+      redirect_to verify_party_phone_path, flash: { success: "已寄出簡訊認證碼" }
     else
       flash[:error] = context.error_messages.join(", ")
       render "edit"
@@ -36,9 +36,9 @@ class Parties::PhonesController < Parties::BaseController
   def verifing
     context = Party::VerifyPhoneContext.new(current_party)
     if context.perform(party_params)
-      redirect_to parties_profile_path, flash: { success: "已驗證成功" }
+      redirect_to party_profile_path, flash: { success: "已驗證成功" }
     elsif context.errors.include?(:retry_verify_count_out_range)
-      redirect_to edit_Parties_phone_path, flash: { error: "#{context.error_messages.join(", ")}" }
+      redirect_to edit_Party_phone_path, flash: { error: "#{context.error_messages.join(", ")}" }
     else
       flash[:error] = context.error_messages.join(", ")
       render "verify"
@@ -48,9 +48,9 @@ class Parties::PhonesController < Parties::BaseController
   def resend
     context = Party::ResendPhoneVerifySmsContext.new(current_party)
     if context.perform
-      redirect_to verify_parties_phone_path, flash: { success: "已重新寄送簡訊" }
+      redirect_to verify_party_phone_path, flash: { success: "已重新寄送簡訊" }
     else
-      redirect_to verify_parties_phone_path, flash: { error: "#{context.error_messages.join(", ")}" }
+      redirect_to verify_party_phone_path, flash: { error: "#{context.error_messages.join(", ")}" }
     end
   end
 
@@ -61,6 +61,6 @@ class Parties::PhonesController < Parties::BaseController
   end
 
   def can_verify?
-    redirect_to edit_parties_phone_path, flash: { error: "請先設定手機號碼" } unless current_party.phone_varify_code.value
+    redirect_to edit_party_phone_path, flash: { error: "請先設定手機號碼" } unless current_party.phone_varify_code.value
   end
 end

@@ -26,7 +26,7 @@ module RequestClient
   def signin_party(party = nil)
     party ||= FactoryGirl.create(:party)
     data =
-    post "/parties/sign_in", party: { identify_number: party.identify_number, password: party.password }
+    post "/party/sign_in", party: { identify_number: party.identify_number, password: party.password }
     @current_party = party if response.status == 302
   end
 
