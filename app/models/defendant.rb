@@ -2,28 +2,27 @@
 #
 # Table name: defendants
 #
-#  id                       :integer          not null, primary key
-#  name                     :string           not null
-#  identify_number          :string           not null
-#  phone_number             :string
-#  encrypted_password       :string           default(""), not null
-#  reset_password_token     :string
-#  reset_password_sent_at   :datetime
-#  remember_created_at      :datetime
-#  sign_in_count            :integer          default(0), not null
-#  current_sign_in_at       :datetime
-#  last_sign_in_at          :datetime
-#  current_sign_in_ip       :string
-#  last_sign_in_ip          :string
-#  created_at               :datetime         not null
-#  updated_at               :datetime         not null
-#  email                    :string
-#  unconfirmed_email        :string
-#  confirmed_at             :datetime
-#  confirmation_token       :string
-#  confirmation_sent_at     :datetime
-#  imposter                 :boolean          default(FALSE)
-#  imposter_identify_number :string
+#  id                     :integer          not null, primary key
+#  name                   :string           not null
+#  identify_number        :string           not null
+#  phone_number           :string
+#  encrypted_password     :string           default(""), not null
+#  reset_password_token   :string
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  sign_in_count          :integer          default(0), not null
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :string
+#  last_sign_in_ip        :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  email                  :string
+#  unconfirmed_email      :string
+#  confirmed_at           :datetime
+#  confirmation_token     :string
+#  confirmation_sent_at   :datetime
+#  phone_confirmed_at     :datetime
 #
 
 class Defendant < ActiveRecord::Base
@@ -59,8 +58,16 @@ class Defendant < ActiveRecord::Base
     false
   end
 
-  def unconfirm!
-    update_attributes(confirmed_at: nil)
+  def phone_confirm!
+    update_attributes(phone_confirmed_at: Time.now)
+  end
+
+  def phone_unconfirm!
+    update_attributes(phone_confirmed_at: nil)
+  end
+
+  def phone_confirmed?
+    !!phone_confirmed_at
   end
 
   def set_reset_password_token

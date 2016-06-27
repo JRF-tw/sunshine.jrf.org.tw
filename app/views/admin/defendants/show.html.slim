@@ -11,6 +11,12 @@
         td 電話號碼
         td= @defendant.phone_number
       tr
+        td 待驗證電話號碼
+        td= @defendant.unconfirmed_phone.value
+      tr
+        td 電話號碼驗證狀態
+        td= @defendant.phone_confirmed? ? "已驗證" : "尚未驗證"
+      tr
         td email
         td= @defendant.email
       tr

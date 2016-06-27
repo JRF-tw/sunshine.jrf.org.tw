@@ -50,3 +50,4 @@ dump.rdb
 # app/assets/javascripts/global.js
 
 public/uploads
+.byebug_history

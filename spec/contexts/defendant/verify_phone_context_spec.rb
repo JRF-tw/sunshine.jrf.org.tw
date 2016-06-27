@@ -38,10 +38,10 @@ describe Defendant::VerifyPhoneContext do
         it { expect(defendant.unconfirmed_phone.value).to be_nil }
       end
 
-      context "confirmed" do
+      context "phone_confirmed?" do
         before { subject.perform(params) }
 
-        it { expect(defendant.confirmed?).to be_truthy }
+        it { expect(defendant.phone_confirmed?).to be_truthy }
       end
 
       context "reset_data" do

@@ -58,7 +58,7 @@ class Defendant::SetPhoneContext < BaseContext
   end
 
   def set_unconfirm
-    @defendant.unconfirm!
+    @defendant.phone_unconfirm!
   end
 
   def build_message
@@ -74,4 +74,3 @@ class Defendant::SetPhoneContext < BaseContext
     @defendant.sms_sent_count.increment
   end
 end
-
