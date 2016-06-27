@@ -1,4 +1,4 @@
-class Lawyers::ConfirmationsController < Devise::ConfirmationsController
+class Lawyer::ConfirmationsController < Devise::ConfirmationsController
   include CrudConcern
   layout 'lawyer'
 

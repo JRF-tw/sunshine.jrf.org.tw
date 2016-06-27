@@ -1,4 +1,4 @@
-class Lawyers::PasswordsController < Devise::PasswordsController
+class Lawyer::PasswordsController < Devise::PasswordsController
   include CrudConcern
   layout 'lawyer'
 
@@ -44,7 +44,7 @@ class Lawyers::PasswordsController < Devise::PasswordsController
   def send_reset_password_mail
     context = Lawyer::SendSetPasswordEmailContext.new(current_lawyer)
     context.perform
-    redirect_as_success(lawyers_profile_path, "律師 - #{current_lawyer.name} 重設密碼信件已寄出")
+    redirect_as_success(lawyer_profile_path, "律師 - #{current_lawyer.name} 重設密碼信件已寄出")
   end
 
   protected

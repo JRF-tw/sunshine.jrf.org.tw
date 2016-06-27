@@ -1,4 +1,4 @@
-class Lawyers::RegistrationsController < Devise::RegistrationsController
+class Lawyer::RegistrationsController < Devise::RegistrationsController
   include CrudConcern
   before_action :configure_permitted_parameters, if: :devise_controller?
   layout 'lawyer'
@@ -15,9 +15,9 @@ class Lawyers::RegistrationsController < Devise::RegistrationsController
       redirect_as_fail(new_lawyer_registration_path, context.error_messages.join(", "))
     end
   end
-  
+
   protected
-  
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << :name
   end

@@ -64,7 +64,7 @@ RSpec.describe Parties::SessionsController, type: :request do
       before { signin_party }
       subject! { delete "/parties/sign_out" }
 
-      it { expect(get "/lawyers").to eq(200) }
+      it { expect(get "/lawyer").to eq(200) }
       it { expect(get "/parties").to eq(302) }
     end
     end

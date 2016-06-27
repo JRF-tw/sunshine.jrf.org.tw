@@ -6,7 +6,7 @@ RSpec.describe Bystanders::SessionsController, :type => :request do
   describe "#create" do
     context "success" do
       before { post "/bystanders/sign_in", bystander: { email: bystander.email, password: "123123123" } }
-      
+
       it { expect(bystander.reload.last_sign_in_at).to be_present }
       it { expect(response).to redirect_to("/bystanders") }
     end
@@ -30,7 +30,7 @@ RSpec.describe Bystanders::SessionsController, :type => :request do
     context "success" do
       before { signin_bystander }
       subject { delete "/bystanders/sign_out" }
-      
+
       it { expect(subject).to redirect_to("/bystanders") }
     end
 
@@ -39,8 +39,8 @@ RSpec.describe Bystanders::SessionsController, :type => :request do
       before { signin_lawyer }
       subject! { delete "/bystanders/sign_out" }
 
-      it { expect(get "/lawyers").to eq(200) }
-      it { expect(get "/bystanders").to eq(302) } 
+      it { expect(get "/lawyer").to eq(200) }
+      it { expect(get "/bystanders").to eq(302) }
     end
   end
 

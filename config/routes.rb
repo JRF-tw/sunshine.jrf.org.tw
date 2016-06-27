@@ -8,10 +8,10 @@ Rails.application.routes.draw do
 
   devise_for :parties, controllers: { registrations: 'parties/registrations', sessions: 'parties/sessions', passwords: 'parties/passwords', confirmations: 'parties/confirmations' }
   devise_for :bystanders, controllers: { registrations: 'bystanders/registrations', sessions: 'bystanders/sessions', passwords: 'bystanders/passwords', confirmations: 'bystanders/confirmations'}
-  devise_for :lawyers, controllers: { registrations: 'lawyers/registrations', sessions: 'lawyers/sessions', passwords: 'lawyers/passwords', confirmations: 'lawyers/confirmations'}
+  devise_for :lawyer, controllers: { registrations: 'lawyer/registrations', sessions: 'lawyer/sessions', passwords: 'lawyer/passwords', confirmations: 'lawyer/confirmations'}
   devise_scope :lawyer do
-    patch '/lawyers/confirm', to: 'lawyers/confirmations#confirm', as: :lawyers_confirm
-    post '/lawyers/password/send_reset_password_mail', to: 'lawyers/passwords#send_reset_password_mail'
+    patch '/lawyer/confirm', to: 'lawyer/confirmations#confirm', as: :lawyer_confirm
+    post '/lawyer/password/send_reset_password_mail', to: 'lawyer/passwords#send_reset_password_mail'
   end
 
   devise_scope :bystander do
@@ -49,7 +49,7 @@ Rails.application.routes.draw do
     get "profile", to: "base#profile"
   end
 
-  namespace :lawyers do
+  namespace :lawyer do
     root to: "base#index"
     get "profile", to: "base#profile"
     get "edit-profile", to: "base#edit_profile"

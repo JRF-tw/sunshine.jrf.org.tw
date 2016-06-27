@@ -4,7 +4,7 @@
     h5 ="律師: #{resource.name} 帳號信箱: #{resource.email}"
   .widget-content.nopadding
 
-    = simple_form_for(resource, as: resource_name, url: lawyers_confirm_path, method: :patch ) do |f|
+    = simple_form_for(resource, as: resource_name, url: lawyer_confirm_path, method: :patch ) do |f|
       = f.error_notification
       .form-group
         label.control-label 密碼
