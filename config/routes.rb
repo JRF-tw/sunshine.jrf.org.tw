@@ -52,10 +52,8 @@ Rails.application.routes.draw do
 
   namespace :lawyer do
     root to: "base#index"
-    get "profile", to: "base#profile"
-    get "edit-profile", to: "base#edit_profile"
-    post "update_profile", to: "base#update_profile"
     resource :appeal, only: [:new]
+    resource :profile, only: [:show, :edit, :update]
   end
 
   namespace :parties do

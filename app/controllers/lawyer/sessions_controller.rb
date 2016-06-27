@@ -6,7 +6,7 @@ class Lawyer::SessionsController < Devise::SessionsController
     self.resource = warden.authenticate!(auth_options)
     if resource.need_update_info?
       flash[:notice] = "請更新完整資料"
-      redirect_to lawyer_edit_profile_path
+      redirect_to edit_lawyer_profile_path
     else
       set_flash_message(:notice, :signed_in) if is_flashing_format?
       sign_in(resource_name, resource)

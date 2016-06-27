@@ -3,7 +3,7 @@
     h5 律師更改個人資訊
   .widget-content.nopadding
 
-    = simple_form_for(current_lawyer, as: :lawyer, url:  lawyer_update_profile_path, method: :post ) do |f|
+    = simple_form_for(current_lawyer, as: :lawyer, url:  lawyer_profile_path, method: :put ) do |f|
       .form-group
         label.control-label
         = f.input :current
