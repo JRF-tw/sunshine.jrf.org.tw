@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   root to: "base#index", only: [:show]
   get '/robots.txt', to: "base#robots", defaults: { format: "text" }
+  get '/who-are-you', to: "base#who_are_you"
 
   get "judges", to: "profiles#judges", as: :judges
   get "prosecutors", to: "profiles#prosecutors", as: :prosecutors
@@ -54,6 +55,7 @@ Rails.application.routes.draw do
     get "profile", to: "base#profile"
     get "edit-profile", to: "base#edit_profile"
     post "update_profile", to: "base#update_profile"
+    resource :appeal, only: [:new]
   end
 
   namespace :parties do

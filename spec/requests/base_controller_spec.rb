@@ -7,6 +7,11 @@ RSpec.describe BaseController, :type => :request do
     expect(response_meta_title).to be_present
   end
 
+  describe "#who_are_you" do
+    before { get "/who-are-you" }
+    it { expect(response).to be_success }
+  end
+
   it "GET /robots.txt" do
     get "/robots.txt"
     expect(response).to be_success
