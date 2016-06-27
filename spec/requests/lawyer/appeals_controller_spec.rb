@@ -6,5 +6,4 @@ RSpec.describe Lawyer::AppealsController, type: :request do
     before { get "/lawyer/appeal/new" }
     it { expect(response).to be_success }
   end
-
 end
