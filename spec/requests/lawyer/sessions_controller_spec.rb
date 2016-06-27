@@ -8,7 +8,7 @@ RSpec.describe Lawyer::SessionsController, type: :request do
     context "need update profile" do
       subject! { post "/lawyer/sign_in",  lawyer: { email: lawyer.email, password: "00000000" } }
 
-      it { expect(response.body).to redirect_to("/lawyer/edit-profile") }
+      it { expect(response.body).to redirect_to("/lawyer/profile/edit") }
     end
 
     context "profile ok" do
