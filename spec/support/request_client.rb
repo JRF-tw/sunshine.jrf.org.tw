@@ -5,7 +5,7 @@ module RequestClient
   end
 
   def signout_bystander
-    delete "/bystanders/sign_out", {}, {'HTTP_REFERER' => 'http://www.example.com/bystanders'}
+    delete "/bystander/sign_out", {}, {'HTTP_REFERER' => 'http://www.example.com/bystanders'}
     @current_bystander = nil
   end
 
@@ -19,7 +19,7 @@ module RequestClient
   def signin_bystander(bystander = nil)
     bystander ||= FactoryGirl.create(:bystander)
     date =
-    post "/bystanders/sign_in", bystander: { email: bystander.email, password: "123123123" }
+    post "/bystander/sign_in", bystander: { email: bystander.email, password: "123123123" }
     @current_bystander = bystander if response.status == 302
   end
 

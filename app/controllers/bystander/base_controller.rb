@@ -1,6 +1,6 @@
-class Bystanders::BaseController  < ApplicationController
+class Bystander::BaseController  < ApplicationController
   include CrudConcern
-  
+
   before_action :authenticate_bystander!
 
   layout 'bystander'

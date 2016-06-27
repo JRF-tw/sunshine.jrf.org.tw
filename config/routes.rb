@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
 
   devise_for :party, controllers: { registrations: 'party/registrations', sessions: 'party/sessions', passwords: 'party/passwords', confirmations: 'party/confirmations' }
-  devise_for :bystanders, controllers: { registrations: 'bystanders/registrations', sessions: 'bystanders/sessions', passwords: 'bystanders/passwords', confirmations: 'bystanders/confirmations'}
+  devise_for :bystander, controllers: { registrations: 'bystander/registrations', sessions: 'bystander/sessions', passwords: 'bystander/passwords', confirmations: 'bystander/confirmations'}
   devise_for :lawyer, controllers: { registrations: 'lawyer/registrations', sessions: 'lawyer/sessions', passwords: 'lawyer/passwords', confirmations: 'lawyer/confirmations'}
   devise_scope :lawyer do
     patch '/lawyer/confirm', to: 'lawyer/confirmations#confirm', as: :lawyer_confirm
@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   devise_scope :bystander do
-    post '/bystanders/password/send_reset_password_mail', to: 'bystanders/passwords#send_reset_password_mail'
+    post '/bystander/password/send_reset_password_mail', to: 'bystander/passwords#send_reset_password_mail'
   end
 
   devise_scope :party do
@@ -45,7 +45,7 @@ Rails.application.routes.draw do
     resources :punishments
   end
 
-  namespace :bystanders do
+  namespace :bystander do
     root to: "base#index"
     get "profile", to: "base#profile"
   end

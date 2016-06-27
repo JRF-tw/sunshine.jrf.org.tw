@@ -1,4 +1,4 @@
-class Bystanders::RegistrationsController < Devise::RegistrationsController
+class Bystander::RegistrationsController < Devise::RegistrationsController
   include CrudConcern
 
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -6,7 +6,7 @@ class Bystanders::RegistrationsController < Devise::RegistrationsController
   def update
     context = Bystander::ChangeEmailContext.new(current_bystander)
     prev_unconfirmed_email = current_bystander.unconfirmed_email if current_bystander.respond_to?(:unconfirmed_email)
-    
+
     if context.perform(params)
       set_flash_message :notice, :update_needs_confirmation
       sign_in :bystander, current_bystander, bypass: true
@@ -29,7 +29,7 @@ class Bystanders::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_update_path_for(resource)
-    bystanders_root_path
+    bystander_root_path
   end
-  
+
 end
