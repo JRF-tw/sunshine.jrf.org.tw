@@ -60,6 +60,7 @@ Rails.application.routes.draw do
   end
 
   resources :scores, only: [:index]
+  resources :judges, only: [:show]
 
   resources :searchs, path: "search" do
     collection do
