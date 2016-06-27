@@ -48,6 +48,7 @@ Rails.application.routes.draw do
   namespace :bystander do
     root to: "base#index"
     resource :profile, only: [:show, :edit]
+    resource :email, only: [:edit]
   end
 
   namespace :lawyer do
