@@ -47,7 +47,7 @@ Rails.application.routes.draw do
 
   namespace :bystander do
     root to: "base#index"
-    get "profile", to: "base#profile"
+    resource :profile, only: [:show, :edit]
   end
 
   namespace :lawyer do
