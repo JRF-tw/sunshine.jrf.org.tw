@@ -6,4 +6,8 @@ class Bystander::ScoresController < Bystander::BaseController
   def edit
 
   end
+
+  def chose_type
+
+  end
 end

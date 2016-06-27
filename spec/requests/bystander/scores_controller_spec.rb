@@ -12,4 +12,9 @@ RSpec.describe Bystander::ScoresController, type: :request do
     subject!{ get "/bystander/scores/xxxx/edit" }
     it { expect(response).to be_success }
   end
+
+  describe "#chose_type" do
+    subject!{ get "/bystander/score/chose-type" }
+    it { expect(response).to be_success }
+  end
 end

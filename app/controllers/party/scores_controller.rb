@@ -6,4 +6,8 @@ class Party::ScoresController < Party::BaseController
   def edit
 
   end
+
+  def chose_type
+
+  end
 end

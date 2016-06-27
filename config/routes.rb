@@ -34,6 +34,9 @@ Rails.application.routes.draw do
     resource :profile, only: [:show, :edit]
     resource :email, only: [:edit]
     resources :scores, only: [:index, :edit]
+    resource :score do
+      get "chose-type", to: "scores#chose_type"
+    end
     resources :stories, only: [] do
       member do
         resource :subscribe, only: [:create]
@@ -47,6 +50,9 @@ Rails.application.routes.draw do
     resource :profile, only: [:show, :edit, :update]
     resource :email, only: [:edit]
     resources :scores, only: [:index, :edit]
+    resource :score do
+      get "chose-type", to: "scores#chose_type"
+    end
     resources :stories, only: [] do
       member do
         resource :subscribe, only: [:create]
@@ -67,6 +73,9 @@ Rails.application.routes.draw do
       end
     end
     resources :scores, only: [:index, :edit]
+    resource :score do
+      get "chose-type", to: "scores#chose_type"
+    end
     resources :stories, only: [] do
       member do
         resource :subscribe, only: [:create]

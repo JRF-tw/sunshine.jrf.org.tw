@@ -12,4 +12,9 @@ RSpec.describe Lawyer::ScoresController, type: :request do
     subject!{ get "/lawyer/scores/xxxx/edit" }
     it { expect(response).to be_success }
   end
+
+  describe "#chose_type" do
+    subject!{ get "/lawyer/score/chose-type" }
+    it { expect(response).to be_success }
+  end
 end
