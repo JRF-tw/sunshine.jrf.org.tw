@@ -33,7 +33,7 @@ Rails.application.routes.draw do
     root to: "base#index"
     resource :profile, only: [:show, :edit]
     resource :email, only: [:edit]
-    resources :scores, only: [:index]
+    resources :scores, only: [:index, :edit]
   end
 
   namespace :lawyer do
@@ -41,7 +41,7 @@ Rails.application.routes.draw do
     resource :appeal, only: [:new]
     resource :profile, only: [:show, :edit, :update]
     resource :email, only: [:edit]
-    resources :scores, only: [:index]
+    resources :scores, only: [:index, :edit]
   end
 
   namespace :party do
@@ -56,7 +56,7 @@ Rails.application.routes.draw do
         put :resend
       end
     end
-    resources :scores, only: [:index]
+    resources :scores, only: [:index, :edit]
   end
 
   resources :searchs, path: "search" do
