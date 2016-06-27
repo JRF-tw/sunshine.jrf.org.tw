@@ -34,6 +34,11 @@ Rails.application.routes.draw do
     resource :profile, only: [:show, :edit]
     resource :email, only: [:edit]
     resources :scores, only: [:index, :edit]
+    resources :stories, only: [] do
+      member do
+        resource :subscribe, only: [:create]
+      end
+    end
   end
 
   namespace :lawyer do
@@ -42,6 +47,11 @@ Rails.application.routes.draw do
     resource :profile, only: [:show, :edit, :update]
     resource :email, only: [:edit]
     resources :scores, only: [:index, :edit]
+    resources :stories, only: [] do
+      member do
+        resource :subscribe, only: [:create]
+      end
+    end
   end
 
   namespace :party do
@@ -57,6 +67,11 @@ Rails.application.routes.draw do
       end
     end
     resources :scores, only: [:index, :edit]
+    resources :stories, only: [] do
+      member do
+        resource :subscribe, only: [:create]
+      end
+    end
   end
 
   resources :scores, only: [:index]
