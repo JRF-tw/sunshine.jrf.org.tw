@@ -37,7 +37,7 @@ RSpec.describe Lawyer::SessionsController, type: :request do
       before { signin_bystander }
       subject! { delete "/lawyer/sign_out" }
 
-      it { expect(get "/bystanders/edit").to eq(200) }
+      it { expect(get "/bystander/edit").to eq(200) }
       # TODO
       # it { expect(get "/lawyer/profile").to eq(302) }
     end

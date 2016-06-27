@@ -4,11 +4,11 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
 
   devise_for :users
-
-
   devise_for :party, controllers: { registrations: 'party/registrations', sessions: 'party/sessions', passwords: 'party/passwords', confirmations: 'party/confirmations' }
   devise_for :bystander, controllers: { registrations: 'bystander/registrations', sessions: 'bystander/sessions', passwords: 'bystander/passwords', confirmations: 'bystander/confirmations'}
   devise_for :lawyer, controllers: { registrations: 'lawyer/registrations', sessions: 'lawyer/sessions', passwords: 'lawyer/passwords', confirmations: 'lawyer/confirmations'}
+
+  # custom devise scope
   devise_scope :lawyer do
     patch '/lawyer/confirm', to: 'lawyer/confirmations#confirm', as: :lawyer_confirm
     post '/lawyer/password/send_reset_password_mail', to: 'lawyer/passwords#send_reset_password_mail'
@@ -22,28 +22,12 @@ Rails.application.routes.draw do
     post "/party/password/send_reset_password_sms", to:"party/passwords#send_reset_password_sms"
   end
 
-
+  # f2e
   root to: "base#index", only: [:show]
-  get '/robots.txt', to: "base#robots", defaults: { format: "text" }
   get '/who-are-you', to: "base#who_are_you"
-
+  get '/robots.txt', to: "base#robots", defaults: { format: "text" }
   get "judges", to: "profiles#judges", as: :judges
   get "prosecutors", to: "profiles#prosecutors", as: :prosecutors
-
-  resources :searchs, path: "search" do
-    collection do
-      get :judges
-      get :prosecutors
-    end
-  end
-  get "about", to: "base#about", as: :about
-  resources :suits do
-    resources :procedures
-  end
-  resources :profiles do
-    resources :awards
-    resources :punishments
-  end
 
   namespace :bystander do
     root to: "base#index"
@@ -73,6 +57,23 @@ Rails.application.routes.draw do
       end
     end
     resources :scores, only: [:index]
+  end
+
+  resources :searchs, path: "search" do
+    collection do
+      get :judges
+      get :prosecutors
+    end
+  end
+
+  get "about", to: "base#about", as: :about
+  resources :suits do
+    resources :procedures
+  end
+
+  resources :profiles do
+    resources :awards
+    resources :punishments
   end
 
   namespace :api, defaults: { format: 'json' } do
