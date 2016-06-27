@@ -2,7 +2,7 @@
   .widget-title
     h5 當事人更改email
   .widget-content.nopadding
-    = simple_form_for(current_party, as: :party, url:  party_update_email_path, method: :put ) do |f|
+    = simple_form_for(current_party, as: :party, url:  party_email_path, method: :put ) do |f|
       .form-inputs
         = f.input :email, required: true, autofocus: true, label: "電子信箱"
 

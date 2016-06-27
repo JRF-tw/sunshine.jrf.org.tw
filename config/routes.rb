@@ -62,8 +62,7 @@ Rails.application.routes.draw do
     root to: "base#index"
     resource :profile, only: [:show, :edit]
     resource :appeal, only: [:new]
-    get "edit-email", to: "base#edit_email"
-    put "update-email", to: "base#update_email"
+    resource :email, only: [:edit, :update]
     resource :phone, only: [:new, :create, :edit, :update] do
       collection do
         get :verify
