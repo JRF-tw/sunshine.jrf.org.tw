@@ -169,11 +169,7 @@ Rails.application.routes.draw do
         get :download_file
       end
     end
-    resources :bystanders do
-      collection do
-        get :download_file
-      end
-    end
+    resources :bystanders, only: [:show, :index]
     resources :parties do
       member do
         put :set_to_imposter

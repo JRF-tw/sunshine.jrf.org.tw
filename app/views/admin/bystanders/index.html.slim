@@ -1,5 +1,5 @@
 - content_for :btns do
-  = link_to "下載 excel 檔", download_file_admin_bystanders_path(format: :xlsx), :class => "btn btn-success"
+  = link_to "下載 excel 檔", admin_bystanders_path(params.slice(:q).merge(format: :xlsx)), :class => "btn btn-success"
 = search_form_for @search, :url => admin_bystanders_path, :wrapper => :admin, :html => { :class => "form-horizontal" } do |f|
   .well
     fieldset

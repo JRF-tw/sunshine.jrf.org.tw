@@ -4,22 +4,20 @@ class Admin::BystandersController < Admin::BaseController
 
   def index
     @search = Bystander.all.ransack(params[:q])
-    @bystanders = @search.result.page(params[:page]).per(20)
-    @@bystanders_for_download = Bystander.all.ransack(params[:q]).result
-    @admin_page_title = "觀察員列表"
-    add_crumb @admin_page_title, "#"
+    @bystanders = @search.result
+    respond_to do |format| 
+      format.html {
+        @admin_page_title = "觀察員列表"
+        add_crumb @admin_page_title, "#"
+        @bystanders = @bystanders.page(params[:page]).per(20)
+      }
+      format.xlsx {render xlsx: 'download_file',filename: "旁觀者.xlsx"}
+    end
   end
 
   def show
     @admin_page_title = "觀察員檔案 - #{bystander.name} 的詳細資料"
     add_crumb @admin_page_title, "#"
-  end
-
-  def download_file
-    @bystanders = @@bystanders_for_download.present? ? @@bystanders_for_download : Bystander.all
-    respond_to do |format| 
-      format.xlsx {render xlsx: 'download_file',filename: "旁觀者.xlsx"}
-    end
   end
 
   private
