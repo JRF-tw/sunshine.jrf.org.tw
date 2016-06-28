@@ -5,6 +5,7 @@ class Admin::BystandersController < Admin::BaseController
   def index
     @search = Bystander.all.ransack(params[:q])
     @bystanders = @search.result.page(params[:page]).per(20)
+    @@bystanders_for_download = Bystander.all.ransack(params[:q]).result
     @admin_page_title = "觀察員列表"
     add_crumb @admin_page_title, "#"
   end
@@ -15,7 +16,7 @@ class Admin::BystandersController < Admin::BaseController
   end
 
   def download_file
-    @bystanders = Bystander.all
+    @bystanders = @@bystanders_for_download
     respond_to do |format| 
       format.xlsx {render xlsx: 'download_file',filename: "旁觀者.xlsx"}
     end

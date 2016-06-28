@@ -1,3 +1,5 @@
+- content_for :btns do
+  = link_to "下載 excel 檔", download_file_admin_bystanders_path(format: :xlsx), :class => "btn btn-success"
 = search_form_for @search, :url => admin_bystanders_path, :wrapper => :admin, :html => { :class => "form-horizontal" } do |f|
   .well
     fieldset
@@ -25,7 +27,6 @@
       = f.submit :value => "搜尋", :class => "btn btn-primary"
       = " "
       = link_to "清空搜尋結果", admin_bystanders_path, :class => "btn btn-default"
-      = link_to "下載 excel 檔", download_file_admin_bystanders_path(format: :xlsx), :class => "btn btn-default"
 = admin_widget_box "觀察員列表 : 搜尋結果為 #{@search.result.count} 筆", icon: :pencil do
   .dataTables_wrapper
     div
