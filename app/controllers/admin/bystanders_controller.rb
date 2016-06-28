@@ -16,7 +16,7 @@ class Admin::BystandersController < Admin::BaseController
   end
 
   def download_file
-    @bystanders = @@bystanders_for_download
+    @bystanders = @@bystanders_for_download.present? ? @@bystanders_for_download : Bystander.all
     respond_to do |format| 
       format.xlsx {render xlsx: 'download_file',filename: "旁觀者.xlsx"}
     end
