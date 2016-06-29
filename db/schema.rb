@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160627041701) do
+ActiveRecord::Schema.define(version: 20160629081809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -515,6 +515,22 @@ ActiveRecord::Schema.define(version: 20160627041701) do
   add_index "story_relations", ["story_id", "people_id"], name: "index_story_relations_on_story_id_and_people_id", using: :btree
   add_index "story_relations", ["story_id", "people_type"], name: "index_story_relations_on_story_id_and_people_type", using: :btree
   add_index "story_relations", ["story_id"], name: "index_story_relations_on_story_id", using: :btree
+
+  create_table "story_subscriptions", force: :cascade do |t|
+    t.integer  "story_id"
+    t.integer  "subscriber_id"
+    t.string   "subscriber_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "story_subscriptions", ["story_id", "subscriber_id", "subscriber_type"], name: "story_subscriptions_full_index", unique: true, using: :btree
+  add_index "story_subscriptions", ["story_id", "subscriber_id"], name: "index_story_subscriptions_on_story_id_and_subscriber_id", using: :btree
+  add_index "story_subscriptions", ["story_id", "subscriber_type"], name: "index_story_subscriptions_on_story_id_and_subscriber_type", using: :btree
+  add_index "story_subscriptions", ["story_id"], name: "index_story_subscriptions_on_story_id", using: :btree
+  add_index "story_subscriptions", ["subscriber_id", "subscriber_type"], name: "index_story_subscriptions_on_subscriber_id_and_subscriber_type", using: :btree
+  add_index "story_subscriptions", ["subscriber_id"], name: "index_story_subscriptions_on_subscriber_id", using: :btree
+  add_index "story_subscriptions", ["subscriber_type"], name: "index_story_subscriptions_on_subscriber_type", using: :btree
 
   create_table "suit_banners", force: :cascade do |t|
     t.string   "pic_l"
