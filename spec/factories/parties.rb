@@ -39,6 +39,10 @@ FactoryGirl.define do
     trait :with_unconfirmed_email do
       unconfirmed_email "aron1122@gmail.com"
     end
+
+    trait :already_confirmed do
+      confirmed_at Time.now
+    end
   end
 
   factory :party_for_create, class: Party do
