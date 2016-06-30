@@ -34,6 +34,11 @@
             label.control-label= f.label :imposter_true
             .controls= f.select :imposter_true,
             collect_for_boolean, include_blank: "請選擇"
+        .span6
+          .control-group
+            label.control-label= f.label :phone_confirmed_at_not_null
+            .controls= f.select :phone_confirmed_at_not_null,
+            collect_for_boolean, include_blank: "請選擇"
     hr
     .form-actions
       = f.submit :value => "搜尋", :class => "btn btn-primary"
