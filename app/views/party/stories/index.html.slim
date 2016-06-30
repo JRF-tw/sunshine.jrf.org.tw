@@ -30,9 +30,7 @@ h2 案件列表
           td= story.adjudge_date
 
           td
-            - unless current_party.story_subscriptions.find_by_story_id(story.id)
-              = link_to "訂閱案件", party_subscribe_path(story), method: :post, class: "btn btn-mini" 
-            - else
-              = link_to "取消訂閱", party_subscribe_path(story), method: :delete, class: "btn btn-mini"
+            = link_to "訂閱案件", party_subscribe_path(story), method: :post, class: "btn btn-mini" unless current_party.story_subscriptions.find_by_story_id(story.id)
+              
   .ui-toolbar.ui-widget-header
       = paginate @stories
