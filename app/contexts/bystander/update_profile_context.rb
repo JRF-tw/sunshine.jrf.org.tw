@@ -1,6 +1,7 @@
 class Bystander::UpdateProfileContext < BaseContext
   PERMITS = [:name, :phone_number, :school, :department_level, :student_number].freeze
 
+  before_perform :parse_phone_number
   before_perform :assign_value
 
   def initialize(bystander)
@@ -16,6 +17,10 @@ class Bystander::UpdateProfileContext < BaseContext
   end
 
   private
+
+  def parse_phone_number
+    @params = @params.except!(:phone_number) unless @params[:phone_number].present?
+  end
 
   def assign_value
     @bystander.assign_attributes(@params)
