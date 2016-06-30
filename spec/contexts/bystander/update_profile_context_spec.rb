@@ -3,8 +3,8 @@ require 'rails_helper'
 describe Bystander::UpdateProfileContext do
   let!(:bystander) { FactoryGirl.create :bystander }
   let!(:context) { described_class.new(bystander) }
-  context "success" do
 
+  context "success" do
     let!(:params){ { phone_number: "0911111111" } }
     subject { described_class.new(bystander).perform(params) }
 

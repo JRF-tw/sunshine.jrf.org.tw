@@ -79,7 +79,7 @@ Rails.application.routes.draw do
   end
 
   namespace :party do
-    resource :profile, only: [:show, :edit]
+    resource :profile, only: [:show, :edit, :update]
     resource :appeal, only: [:new]
     resource :email, only: [:edit, :update]
     resource :phone, only: [:new, :create, :edit, :update] do
