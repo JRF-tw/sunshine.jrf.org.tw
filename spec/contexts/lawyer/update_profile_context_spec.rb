@@ -5,7 +5,7 @@ describe Lawyer::UpdateProfileContext do
   let!(:context) { described_class.new(lawyer) }
   context "success" do
 
-    let!(:params){ { current: "律師事務所" } }
+    let!(:params){ { phone_number: "0911111111" } }
     subject { described_class.new(lawyer).perform(params) }
 
     it { expect(subject).to be_truthy }
