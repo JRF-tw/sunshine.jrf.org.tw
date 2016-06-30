@@ -39,7 +39,7 @@ class Lawyer < ActiveRecord::Base
   mount_uploader :avatar, ProfileAvatarUploader
 
   validates :phone_number, uniqueness: true, format:{ with: /\A(0)(9)([0-9]{8})\z/ }, allow_nil: true
-  # validates :office_number, uniqueness: true, format:{ with: /0\d{1,2}-?(\d{6,8})(#\d{1,5}){0,1}/ }, allow_nil: true
+  validates :office_number, uniqueness: true, format:{ with: /0\d{1,2}-?(\d{6,8})(#\d{1,5}){0,1}/ }, allow_nil: true
 
   def need_update_info?
     ## TODO 確認何謂個人資訊不足
