@@ -33,9 +33,9 @@ FactoryGirl.define do
   factory :party do
     sequence(:name) { |n| "當事人 - #{n}" }
     password "12321313213"
-    sequence(:identify_number) { |_n| "A#{rand(100_000_000..299_999_999)}" }
-    sequence(:phone_number) { |_n| "09#{rand(1..99_999_999).to_s.rjust(8, "0")}" }
-
+    sequence(:identify_number) { |n| "A#{ rand(100000000..299999999) }" }
+    sequence(:phone_number) { |n| "09#{ rand(1..99999999).to_s.rjust(8, '0') }" }
+    sequence(:email) { |n| "#{n}aaoo@gmail.com" }
     trait :with_unconfirmed_email do
       unconfirmed_email "aron1122@gmail.com"
     end

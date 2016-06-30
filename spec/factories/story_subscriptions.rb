@@ -17,7 +17,7 @@ FactoryGirl.define do
   end
 
   factory :story_subscription_with_party, class: StorySubscription do
-    story { FactoryGirl.create :story }
+    story { FactoryGirl.create :story, :with_schedule }
     subscriber { FactoryGirl.create :party }
   end
 
