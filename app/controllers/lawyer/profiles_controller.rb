@@ -10,7 +10,7 @@ class Lawyer::ProfilesController < Lawyer::BaseController
     if context.perform(params[:lawyer])
       redirect_to lawyer_profile_path, flash: { success: "個人資訊已修改" }
     else
-      render :back, flash: { notice: context.error_messages.join(", ") }
+      redirect_to :back, flash: { notice: context.error_messages.join(", ") }
     end
   end
 end

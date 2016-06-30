@@ -1,4 +1,5 @@
 class Bystander::RegistrationsController < Devise::RegistrationsController
+  layout 'bystander'
   include CrudConcern
 
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -29,7 +30,7 @@ class Bystander::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_update_path_for(resource)
-    bystander_root_path
+    bystander_profile_path
   end
 
 end

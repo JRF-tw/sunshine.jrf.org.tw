@@ -30,7 +30,6 @@ Rails.application.routes.draw do
   get "prosecutors", to: "profiles#prosecutors", as: :prosecutors
 
   namespace :bystander do
-    root to: "base#index"
     resource :profile, only: [:show, :edit]
     resource :email, only: [:edit]
     resources :scores, only: [:index, :edit]
@@ -55,7 +54,6 @@ Rails.application.routes.draw do
   end
 
   namespace :lawyer do
-    root to: "base#index"
     resource :appeal, only: [:new]
     resource :profile, only: [:show, :edit, :update]
     resource :email, only: [:edit]
@@ -81,7 +79,6 @@ Rails.application.routes.draw do
   end
 
   namespace :party do
-    root to: "base#index"
     resource :profile, only: [:show, :edit]
     resource :appeal, only: [:new]
     resource :email, only: [:edit, :update]
