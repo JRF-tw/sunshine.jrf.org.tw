@@ -9,11 +9,17 @@ html
   body class="#{yield :body_classes}"
     .page-wrapper class='base-page-wrapper'
       - if current_lawyer
-        = "律師 #{current_lawyer.name} | "
+        = link_to("律師 #{current_lawyer.name}", lawyer_profile_path)
+        = ' | '
+        = link_to('修改Email', edit_lawyer_email_path)
+        = ' | '
+        = link_to('修改個人資訊', edit_lawyer_profile_path)
+        = ' | '
         = link_to('登出', destroy_lawyer_session_path, :method => :delete)
       - else
         = link_to('註冊', new_lawyer_registration_path)
         = link_to('登入', new_session_path(:lawyer))
+      hr
       - flash.each do |k, message|
         div class= "alert fade in alert-#{k}"
           a.close data-dismiss="alert" href="#"

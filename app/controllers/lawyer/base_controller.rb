@@ -4,10 +4,6 @@ class Lawyer::BaseController < ApplicationController
   layout 'lawyer'
   before_action :authenticate_lawyer!, except: :index
   # before_action :check_profile!, except: [:profile, :edit_profile, :update_profile]
-
-  def index
-  end
-
   # private
   # 其他action可能會用到
   # def check_profile!

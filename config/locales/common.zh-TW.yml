@@ -16,6 +16,7 @@ zh-TW:
       banner: "首頁橫幅"
       suit_banner: "司法案例面面觀橫幅"
       party: "當事人"
+      bystander: "旁觀者"
     attributes:
       court:
         court_type: "類型"
@@ -24,6 +25,12 @@ zh-TW:
         weight: "顯示權重"
         is_hidden: "隱藏"
         scrap_name: "爬蟲名稱"
+      bystander:
+        name: "姓名"
+        phone_number: "手機號碼"
+        school: "學校"
+        department_level: "系級"
+        student_number: "學號"
       profile:
         name: "姓名"
         current: "現職"

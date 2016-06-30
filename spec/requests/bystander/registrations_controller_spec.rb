@@ -9,7 +9,7 @@ RSpec.describe Bystander::RegistrationsController, :type => :request do
 
     context "success" do
       subject { put "/bystander", bystander: { email: "h2312@gmail.com", current_password: "123123123"} }
-      it { expect(subject).to redirect_to("/bystander")}
+      it { expect(subject).to redirect_to("/bystander/profile")}
       it { expect{ subject }.to change { bystander.reload.unconfirmed_email } }
     end
 

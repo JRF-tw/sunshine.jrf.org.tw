@@ -3,9 +3,6 @@ class Party::BaseController < ApplicationController
   before_action :authenticate_party!
   before_action :set_phone?
 
-  def index
-  end
-
   private
 
   def set_phone?
