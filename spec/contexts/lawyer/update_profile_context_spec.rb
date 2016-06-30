@@ -9,6 +9,6 @@ describe Lawyer::UpdateProfileContext do
     subject { described_class.new(lawyer).perform(params) }
 
     it { expect(subject).to be_truthy }
-    it { expect { subject }.to change { lawyer.reload.current } }
+    it { expect { subject }.to change { lawyer.reload.phone_number } }
   end
 end

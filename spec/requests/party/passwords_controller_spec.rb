@@ -14,7 +14,7 @@ RSpec.describe Party::RegistrationsController, type: :request do
       before { signin_party(party) }
       subject! { get "/party/password/new" }
 
-      it { expect(response).to redirect_to("/party") }
+      it { expect(response).to redirect_to("/party/profile") }
     end
   end
 

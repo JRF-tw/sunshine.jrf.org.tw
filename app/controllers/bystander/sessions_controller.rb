@@ -12,7 +12,7 @@ class Bystander::SessionsController < Devise::SessionsController
   private
 
   def after_sign_out_path_for(resource_or_scope)
-    bystander_profile_path
+    new_bystander_session_path
   end
 
 end

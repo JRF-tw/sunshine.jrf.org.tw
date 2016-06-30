@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   get "prosecutors", to: "profiles#prosecutors", as: :prosecutors
 
   namespace :bystander do
-    resource :profile, only: [:show, :edit]
+    resource :profile, only: [:show, :edit, :update]
     resource :email, only: [:edit]
     resources :scores, only: [:index, :edit]
     resource :score do

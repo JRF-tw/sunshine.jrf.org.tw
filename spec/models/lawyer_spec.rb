@@ -16,8 +16,8 @@ RSpec.describe Lawyer  do
     end
 
     describe "#need_update_info?" do
-      subject { lawyer.update_attributes(phone_number: "0911111111") }
-      it { expect{ subject }.to change { lawyer.reload.need_update_info? }.from(true).to(false) }
+      subject { lawyer.update_attributes(phone_number: nil) }
+      it { expect{ subject }.to change { lawyer.reload.need_update_info? }.from(false).to(true) }
     end
   end
 end

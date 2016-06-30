@@ -6,6 +6,7 @@ RSpec.describe Lawyer::SessionsController, type: :request do
     let!(:lawyer) { FactoryGirl.create :lawyer, :with_password_and_confirmed, password: "00000000" }
 
     context "need update profile" do
+      before { lawyer.update_attributes(phone_number: nil) }
       subject! { post "/lawyer/sign_in",  lawyer: { email: lawyer.email, password: "00000000" } }
 
       it { expect(response.body).to redirect_to("/lawyer/profile/edit") }
@@ -16,12 +17,6 @@ RSpec.describe Lawyer::SessionsController, type: :request do
       subject! { post "/lawyer/sign_in",  lawyer: { email: lawyer.email, password: "00000000" } }
 
       it { expect(response).to redirect_to("/lawyer/profile") }
-    end
-
-    context "root should not change" do
-      before { signin_lawyer }
-
-      it { expect(get "/").to render_template("base/index") }
     end
   end
 

@@ -14,7 +14,7 @@ RSpec.describe Bystander::ProfilesController, type: :request do
   end
 
   describe "#update" do
-    subject!{ put "/bystander/profile", bystander: { phone_number: "0911111111" } }
+    subject!{ put "/bystander/profile", bystander: { phone_number: "0922222222" } }
     it { expect(response).to redirect_to("/bystander/profile") }
   end
 end
