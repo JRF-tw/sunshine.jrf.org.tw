@@ -9,7 +9,7 @@ class StorySubscriptionDeleteContext < BaseContext
   def perform(subscriber)
     @subscriber = subscriber
     run_callbacks :perform do 
-      add_error(:data_create_fail, @story_subscription.errors.full_messages.join("\n")) unless @story_subscription.destroy
+      add_error(:data_delete_fail, @story_subscription.errors.full_messages.join("\n")) unless @story_subscription.destroy
       true
     end
   end
