@@ -3,13 +3,7 @@ div 當事人個人資訊頁
 div = "姓名: #{current_party.name}"
 div = "身分證字號: #{current_party.identify_number}"
 div = "手機號碼: #{current_party.phone_number}"
-div = link_to "更改手機號碼", edit_party_phone_path
-div
-  = "email: #{current_party.email}"
-  | &nbsp;
-  = link_to "更改信箱", edit_party_email_path
-  | &nbsp;
-
+div = "email: #{current_party.email}"
 div
   - if current_party.unconfirmed_email
     p = "目前等待驗證中信箱: #{current_party.unconfirmed_email}"

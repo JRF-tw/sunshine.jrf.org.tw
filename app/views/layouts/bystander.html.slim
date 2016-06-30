@@ -9,7 +9,7 @@ html
   body class="#{yield :body_classes}"
     .page-wrapper class="base-page-wrapper"
       - if current_bystander
-        = "觀察員 #{current_bystander.name}"
+        = link_to("觀察員 #{current_bystander.name}", bystander_profile_path)
         = " | "
         = link_to('修改Email', edit_bystander_registration_path)
         = ' | '
@@ -19,6 +19,7 @@ html
       - else
         = link_to('註冊', new_bystander_registration_path)
         = link_to('登入', new_session_path(:bystander))
+      hr
       - flash.each do |k, message|
         div class= "alert fade in alert-#{k}"
           a.close data-dismiss="alert" href="#"
