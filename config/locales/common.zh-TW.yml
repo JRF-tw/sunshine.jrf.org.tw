@@ -309,3 +309,4 @@ zh-TW:
         current_sign_in_at_gteq: "最後一次登入日期搜尋"
         created_at_gteq: "註冊日期搜尋"
         imposter_true: "是否為冒用者"
+        phone_confirmed_at_not_null: "是否已通過手機驗證"
