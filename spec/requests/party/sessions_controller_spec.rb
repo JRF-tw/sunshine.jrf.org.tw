@@ -65,7 +65,6 @@ RSpec.describe Party::SessionsController, type: :request do
       subject! { delete "/party/sign_out" }
 
       it { expect(get "/lawyer/profile").to eq(200) }
-      # TODO trickybug
       it { expect(get "/party/profile").to eq(302) }
     end
     end

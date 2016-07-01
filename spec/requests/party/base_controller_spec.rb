@@ -6,7 +6,6 @@ RSpec.describe Party::BaseController, type: :request do
       before { signin_party.update_attributes(phone_number: nil) }
       subject!{ get "/party/profile" }
 
-      # TODO trickybug
       it { expect(response).to redirect_to("/party/phone/new") }
     end
   end
