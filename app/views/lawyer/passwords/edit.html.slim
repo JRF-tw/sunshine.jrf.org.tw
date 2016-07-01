@@ -1,5 +1,5 @@
 h2 律師更改密碼
-
+div = "律師 #{@lawyer_name}(#{@lawyer_email})"
 = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
   = f.error_notification
 

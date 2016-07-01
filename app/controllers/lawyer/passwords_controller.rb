@@ -2,42 +2,34 @@ class Lawyer::PasswordsController < Devise::PasswordsController
   include CrudConcern
   layout 'lawyer'
 
-  prepend_before_filter :require_no_authentication, except: [:edit, :send_reset_password_mail]
+  prepend_before_filter :require_no_authentication, except: [:edit, :update, :send_reset_password_mail]
 
   # POST /resource/password
   def create
-    self.resource = resource_class.send_reset_password_instructions(resource_params)
-    if resource.confirmed?
-      yield resource if block_given?
-
+    @lawyer = Lawyer.find_by_email(resource_params[:email])
+    if @lawyer && @lawyer.confirmed?
+      self.resource = resource_class.send_reset_password_instructions(resource_params)
       if successfully_sent?(resource)
         respond_with({}, location: after_sending_reset_password_instructions_path_for(resource_name))
       else
         respond_with(resource)
       end
-    else
+    elsif @lawyer && !@lawyer.confirmed?
       redirect_to :back, flash: { notice: "該帳號尚未註冊" }
+    else
+      redirect_to :back, flash: { notice: "無此律師帳號" }
     end
   end
 
-  # PUT /resource/password
-  def update
-    self.resource = resource_class.reset_password_by_token(resource_params)
-    yield resource if block_given?
-
-    if resource.errors.empty?
-      resource.unlock_access! if unlockable?(resource)
-      if Devise.sign_in_after_reset_password
-        flash_message = resource.active_for_authentication? ? :updated : :updated_not_active
-        set_flash_message(:notice, flash_message) if is_flashing_format?
-        # sign_in(resource_name, resource)
-      else
-        set_flash_message(:notice, :updated_not_active) if is_flashing_format?
-      end
-      respond_with resource, location: after_resetting_password_path_for(resource)
+  def edit
+    if current_lawyer && Lawyer.with_reset_password_token(params[:reset_password_token]) != current_lawyer
+      redirect_as_fail(lawyer_profile_path, "你僅能修改本人的帳號")
     else
+      self.resource = resource_class.new
       set_minimum_password_length
-      respond_with resource
+      resource.reset_password_token = params[:reset_password_token]
+      @lawyer_name = Lawyer.with_reset_password_token(params[:reset_password_token]).name
+      @lawyer_email = Lawyer.with_reset_password_token(params[:reset_password_token]).email
     end
   end
 
@@ -52,5 +44,6 @@ class Lawyer::PasswordsController < Devise::PasswordsController
   def after_resetting_password_path_for(resource)
     new_lawyer_session_path
   end
+
 end
 
