@@ -27,8 +27,14 @@ RSpec.describe Admin::BystandersController do
     let!(:bystander) { FactoryGirl.create :bystander }
 
     context "success" do
-      before { get "/admin/bystanders/download_file", format: :xlsx }
-      it { expect(response).to be_success }
+      subject { get "/admin/bystanders", format: :xlsx }
+      it { expect(subject).to be(200) }
+    end
+
+    context "after search success" do
+      before { get "/admin/bystanders", q: { name_cont: bystander.name } }
+      subject { get "/admin/bystanders", format: :xlsx }
+      it { expect(subject).to be(200) }
     end
   end
 end

@@ -123,7 +123,6 @@ ActiveRecord::Schema.define(version: 20160627041701) do
   add_index "bystanders", ["confirmation_token"], name: "index_bystanders_on_confirmation_token", unique: true, using: :btree
   add_index "bystanders", ["email"], name: "index_bystanders_on_email", unique: true, using: :btree
   add_index "bystanders", ["reset_password_token"], name: "index_bystanders_on_reset_password_token", unique: true, using: :btree
-  add_index "bystanders", ["school"], name: "index_bystanders_on_school", using: :btree
 
   create_table "careers", force: :cascade do |t|
     t.integer  "profile_id"
@@ -328,14 +327,13 @@ ActiveRecord::Schema.define(version: 20160627041701) do
     t.datetime "confirmed_at"
     t.string   "confirmation_token"
     t.datetime "confirmation_sent_at"
-    t.datetime "phone_confirmed_at"
     t.boolean  "imposter",                 default: false
     t.string   "imposter_identify_number"
+    t.datetime "phone_confirmed_at"
   end
 
   add_index "parties", ["confirmation_token"], name: "index_parties_on_confirmation_token", unique: true, using: :btree
   add_index "parties", ["email"], name: "index_parties_on_email", unique: true, using: :btree
-  add_index "parties", ["imposter"], name: "index_parties_on_imposter", using: :btree
   add_index "parties", ["reset_password_token"], name: "index_parties_on_reset_password_token", unique: true, using: :btree
 
   create_table "procedures", force: :cascade do |t|
@@ -489,12 +487,12 @@ ActiveRecord::Schema.define(version: 20160627041701) do
     t.integer  "number"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+    t.date     "adjudge_date"
+    t.boolean  "is_adjudge",       default: false
     t.text     "party_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
-    t.boolean  "is_adjudge",       default: false
-    t.date     "adjudge_date"
   end
 
   add_index "stories", ["adjudge_date"], name: "index_stories_on_adjudge_date", using: :btree
@@ -619,11 +617,11 @@ ActiveRecord::Schema.define(version: 20160627041701) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.string   "file"
-    t.boolean  "is_judgment",      default: false
     t.text     "party_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
+    t.boolean  "is_judgment",      default: false
     t.date     "adjudge_date"
     t.integer  "main_judge_id"
     t.string   "main_judge_name"
