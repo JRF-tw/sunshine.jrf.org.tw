@@ -4,9 +4,14 @@
       tr
         td 姓名
         td= @party.name
-      tr
-        td 身分證字號
-        td= @party.identify_number
+      - if @party.imposter
+        tr
+          td 冒用身分證字號
+          td= @party.imposter_identify_number
+      - else 
+        tr
+          td 身分證字號
+          td= @party.identify_number
       tr
         td 電話號碼
         td= @party.phone_number
