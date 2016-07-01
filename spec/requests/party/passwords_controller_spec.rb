@@ -34,6 +34,30 @@ RSpec.describe Party::RegistrationsController, type: :request do
     end
   end
 
+  describe "#edit" do
+    let!(:party) { FactoryGirl.create :party }
+    let(:token) { party.send_reset_password_instructions }
+    context "success with sign in" do
+      before { signin_party(party) }
+      subject { get "/party/password/edit", reset_password_token: token }
+
+      it { expect(subject).to eq (200) }
+    end
+
+    context "success without sign in" do
+      subject { get "/party/password/edit", reset_password_token: token }
+
+      it { expect(subject).to eq (200) }
+    end
+
+    context "fail with sign in other party" do
+      before { signin_party }
+      subject! { get "/party/password/edit", reset_password_token: token }
+  
+      it { expect(subject).to eq (302) }
+    end
+  end
+
   describe "#send_reset_password_sms" do
     before { signin_party }
     context "success" do
