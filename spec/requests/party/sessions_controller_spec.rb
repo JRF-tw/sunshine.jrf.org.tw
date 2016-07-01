@@ -66,7 +66,7 @@ RSpec.describe Party::SessionsController, type: :request do
 
       it { expect(get "/lawyer/profile").to eq(200) }
       # TODO trickybug
-      # it { expect(get "/party/profile").to eq(302) }
+      it { expect(get "/party/profile").to eq(302) }
     end
     end
   end

@@ -41,7 +41,7 @@ RSpec.describe Bystander::SessionsController, :type => :request do
 
       it { expect(get "/lawyer/profile").to eq(200) }
       # TODO trickybug
-      # it { expect(get "/bystander/profile").to eq(302) }
+      it { expect(get "/bystander/profile").to eq(302) }
     end
   end
 

@@ -32,3 +32,8 @@ class ApplicationController < ActionController::Base
   end
 
 end
+
+require 'base_controller'
+require "party/base_controller"
+require "bystander/base_controller"
+require "lawyer/base_controller"

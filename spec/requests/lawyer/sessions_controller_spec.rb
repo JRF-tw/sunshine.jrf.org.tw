@@ -34,7 +34,7 @@ RSpec.describe Lawyer::SessionsController, type: :request do
 
       it { expect(get "/bystander/edit").to eq(200) }
       # TODO trickybug
-      # it { expect(get "/lawyer/profile").to eq(302) }
+      it { expect(get "/lawyer/profile").to eq(302) }
     end
   end
 
