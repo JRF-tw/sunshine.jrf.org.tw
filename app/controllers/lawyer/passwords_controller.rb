@@ -28,8 +28,7 @@ class Lawyer::PasswordsController < Devise::PasswordsController
       self.resource = resource_class.new
       set_minimum_password_length
       resource.reset_password_token = params[:reset_password_token]
-      @lawyer_name = Lawyer.with_reset_password_token(params[:reset_password_token]).name
-      @lawyer_email = Lawyer.with_reset_password_token(params[:reset_password_token]).email
+      @lawyer_by_token = Lawyer.with_reset_password_token(params[:reset_password_token])
     end
   end
 

@@ -11,8 +11,7 @@ class Bystander::PasswordsController < Devise::PasswordsController
       self.resource = resource_class.new
       set_minimum_password_length
       resource.reset_password_token = params[:reset_password_token]
-      @bystander_name = Bystander.with_reset_password_token(params[:reset_password_token]).name
-      @bystander_email = Bystander.with_reset_password_token(params[:reset_password_token]).email
+      @bystander_by_token = Bystander.with_reset_password_token(params[:reset_password_token])
     end
   end
 

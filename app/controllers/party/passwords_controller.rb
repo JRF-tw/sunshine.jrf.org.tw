@@ -27,8 +27,7 @@ class Party::PasswordsController < Devise::PasswordsController
       self.resource = resource_class.new
       set_minimum_password_length
       resource.reset_password_token = params[:reset_password_token]
-      @party_email = Party.with_reset_password_token(params[:reset_password_token]).email
-      @party_phone_number = Party.with_reset_password_token(params[:reset_password_token]).phone_number
+      @party_by_token = Party.with_reset_password_token(params[:reset_password_token])
     end
   end
 
