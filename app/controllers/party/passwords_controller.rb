@@ -1,7 +1,7 @@
 class Party::PasswordsController < Devise::PasswordsController
   include CrudConcern
 
-  prepend_before_filter :require_no_authentication, except: [:send_reset_password_sms]
+  prepend_before_filter :require_no_authentication, except: [:edit, :update, :send_reset_password_sms]
   layout 'party'
 
   # POST /resource/password
@@ -16,6 +16,18 @@ class Party::PasswordsController < Devise::PasswordsController
       self.resource = resource_class.new(params)
       flash[:notice] = context.error_messages.join(", ")
       render "new"
+    end
+  end
+
+  # GET /resource/password/edit?reset_password_token=abcdef
+  def edit
+    if current_party && Party.with_reset_password_token(params[:reset_password_token]) != current_party
+      redirect_as_fail(party_profile_path, "你僅能修改本人的帳號")
+    else
+      self.resource = resource_class.new
+      set_minimum_password_length
+      resource.reset_password_token = params[:reset_password_token]
+      @party_by_token = Party.with_reset_password_token(params[:reset_password_token])
     end
   end
 
@@ -39,4 +51,5 @@ class Party::PasswordsController < Devise::PasswordsController
   def after_resetting_password_path_for(resource)
     party_profile_path
   end
+
 end

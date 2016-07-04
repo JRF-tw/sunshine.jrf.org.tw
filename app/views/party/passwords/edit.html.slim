@@ -1,5 +1,5 @@
-h2 重設當事人密碼
-
+h2 當事人更改密碼
+div = "當事人 #{@party_by_token.name}(#{@party_by_token.phone_number})"
 = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
   = f.error_notification
 

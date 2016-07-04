@@ -16,19 +16,44 @@ RSpec.describe Lawyer::PasswordsController, type: :request do
       subject! { post "/lawyer/password", { lawyer: params }, { 'HTTP_REFERER' => '/lawyer/passwords/new' } }
 
       it { expect(response).to redirect_to("/lawyer/passwords/new") }
+      it { expect{ subject }.not_to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
     end
 
     context "email confirmed" do
       let!(:lawyer) { FactoryGirl.create :lawyer, :with_password_and_confirmed }
       let!(:params){ { email: lawyer.email } }
       subject { post "/lawyer/password", { lawyer: params }, { 'HTTP_REFERER' => '/lawyer/passwords/new' } }
-
+  
       it { expect{ subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
 
       context "redirect sign_in" do
         before { subject }
         it { expect(response).to redirect_to("/lawyer/sign_in") }
       end
+    end
+  end
+
+  describe "#edit" do
+    let!(:lawyer) { FactoryGirl.create :lawyer }
+    let(:token) { lawyer.send_reset_password_instructions }
+    context "success with sign in" do
+      before { signin_lawyer(lawyer) }
+      subject { get "/lawyer/password/edit", reset_password_token: token }
+
+      it { expect(subject).to eq (200) }
+    end
+
+    context "success without sign in" do
+      subject { get "/lawyer/password/edit", reset_password_token: token }
+
+      it { expect(subject).to eq (200) }
+    end
+
+    context "fail with sign in other lawyer" do
+      before { signin_lawyer }
+      subject! { get "/lawyer/password/edit", reset_password_token: token }
+  
+      it { expect(subject).to eq (302) }
     end
   end
 
