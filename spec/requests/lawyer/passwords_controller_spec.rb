@@ -1,30 +1,30 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Lawyer::PasswordsController, type: :request do
 
   describe "create" do
     context "email unexist" do
-      let!(:params){ { email: "xxxx@gmail.com" } }
-      subject! { post "/lawyer/password", { lawyer: params }, { 'HTTP_REFERER' => '/lawyer/passwords/new' } }
+      let!(:params) { { email: "xxxx@gmail.com" } }
+      subject! { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/passwords/new" }
 
       it { expect(response).to redirect_to("/lawyer/passwords/new") }
     end
 
     context "email unconfirmed" do
       let!(:lawyer) { FactoryGirl.create :lawyer }
-      let!(:params){ { email: lawyer.email } }
-      subject! { post "/lawyer/password", { lawyer: params }, { 'HTTP_REFERER' => '/lawyer/passwords/new' } }
+      let!(:params) { { email: lawyer.email } }
+      subject! { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/passwords/new" }
 
       it { expect(response).to redirect_to("/lawyer/passwords/new") }
-      it { expect{ subject }.not_to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
+      it { expect { subject }.not_to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
     end
 
     context "email confirmed" do
       let!(:lawyer) { FactoryGirl.create :lawyer, :with_password_and_confirmed }
-      let!(:params){ { email: lawyer.email } }
-      subject { post "/lawyer/password", { lawyer: params }, { 'HTTP_REFERER' => '/lawyer/passwords/new' } }
-  
-      it { expect{ subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
+      let!(:params) { { email: lawyer.email } }
+      subject { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/passwords/new" }
+
+      it { expect { subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
 
       context "redirect sign_in" do
         before { subject }
@@ -40,20 +40,20 @@ RSpec.describe Lawyer::PasswordsController, type: :request do
       before { signin_lawyer(lawyer) }
       subject { get "/lawyer/password/edit", reset_password_token: token }
 
-      it { expect(subject).to eq (200) }
+      it { expect(subject).to eq 200 }
     end
 
     context "success without sign in" do
       subject { get "/lawyer/password/edit", reset_password_token: token }
 
-      it { expect(subject).to eq (200) }
+      it { expect(subject).to eq 200 }
     end
 
     context "fail with sign in other lawyer" do
       before { signin_lawyer }
       subject! { get "/lawyer/password/edit", reset_password_token: token }
-  
-      it { expect(subject).to eq (302) }
+
+      it { expect(subject).to eq 302 }
     end
   end
 

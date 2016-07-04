@@ -17,8 +17,8 @@
 class Admin::Court < ::Court
   has_many :judgments, class_name: "Admin::Judgment"
 
-  validates_presence_of :court_type, :full_name
-  validates_uniqueness_of :full_name, :name
+  validates :court_type, :full_name, presence: true
+  validates :full_name, :name, uniqueness: true
 
   def self.get_courts
     where(court_type: "法院")

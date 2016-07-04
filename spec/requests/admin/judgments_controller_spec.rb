@@ -1,10 +1,10 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Admin::JudgmentsController do
-  before{ signin_user }
+  before { signin_user }
 
   describe "already had a judgment" do
-    let(:judgment){ FactoryGirl.create :judgment }
+    let(:judgment) { FactoryGirl.create :judgment }
 
     it "GET /admin/judgments" do
       get "/admin/judgments"
@@ -22,9 +22,9 @@ RSpec.describe Admin::JudgmentsController do
     end
 
     it "PUT /admin/judgments/123" do
-      expect{
+      expect {
         put "/admin/judgments/#{judgment.id}", admin_judgment: { judge_no: "haha" }
-      }.to change{ judgment.reload.judge_no }.to("haha")
+      }.to change { judgment.reload.judge_no }.to("haha")
       expect(response).to be_redirect
     end
 
@@ -36,11 +36,11 @@ RSpec.describe Admin::JudgmentsController do
 
   it "POST /admin/judgments" do
     FactoryGirl.create :court
-    admin_judgment = { :court_id => Court.last.id, :judge_no => "foo", :judge_date_in_tw => "103/8/8" }
-    expect{
+    admin_judgment = { court_id: Court.last.id, judge_no: "foo", judge_date_in_tw: "103/8/8" }
+    expect {
       post "/admin/judgments", admin_judgment: admin_judgment
-    }.to change{ Judgment.count }.by(1)
+    }.to change { Judgment.count }.by(1)
     expect(response).to be_redirect
-    expect( Judgment.last.judge_date.year ).to eq 2014
+    expect(Judgment.last.judge_date.year).to eq 2014
   end
 end

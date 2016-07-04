@@ -1,12 +1,12 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Admin::AwardsController do
-  let!(:profile){ FactoryGirl.create :profile }
+  let!(:profile) { FactoryGirl.create :profile }
 
-  before{ signin_user }
+  before { signin_user }
 
   describe "already had a award" do
-    let!(:award){ FactoryGirl.create :award, profile: profile }
+    let!(:award) { FactoryGirl.create :award, profile: profile }
 
     it "GET /admin/profiles/profile.id/awards" do
       get "/admin/profiles/#{profile.id}/awards"
@@ -24,9 +24,9 @@ RSpec.describe Admin::AwardsController do
     end
 
     it "PUT /admin/profiles/profile.id/awards/123" do
-      expect{
+      expect {
         put "/admin/profiles/#{profile.id}/awards/#{award.id}", admin_award: { award_type: "keke" }
-      }.to change{ award.reload.award_type }.to("keke")
+      }.to change { award.reload.award_type }.to("keke")
       expect(response).to be_redirect
     end
 
@@ -37,9 +37,9 @@ RSpec.describe Admin::AwardsController do
   end
 
   it "POST /admin/profiles/profile.id/awards" do
-    expect{
+    expect {
       post "/admin/profiles/#{profile.id}/awards", admin_award: FactoryGirl.attributes_for(:award)
-    }.to change{ Award.count }.by(1)
+    }.to change { Award.count }.by(1)
     expect(response).to be_redirect
   end
 end

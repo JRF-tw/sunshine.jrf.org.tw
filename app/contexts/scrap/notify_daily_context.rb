@@ -1,5 +1,5 @@
 class Scrap::NotifyDailyContext < BaseContext
-  SCRAP_MODELS = { court: "法院", judge: "法官", verdict: "判決書", schedule: "庭期表" }
+  SCRAP_MODELS = { court: "法院", judge: "法官", verdict: "判決書", schedule: "庭期表" }.freeze
 
   after_perform :cleanup_redis_date
 
@@ -15,10 +15,11 @@ class Scrap::NotifyDailyContext < BaseContext
   private
 
   def parse_message(model)
+    class_object = Object.const_get(model.camelize)
     interval = Redis::Value.new("daily_scrap_#{model}_intervel").value
     count = Redis::Counter.new("daily_scrap_#{model}_count").value
     if interval
-      message = "\n#{ SCRAP_MODELS[model.to_sym] }爬蟲報告 :\n今日爬取時間參數 : #{ interval }\n今日爬取總數 : #{ count } 筆\n資料庫目前總數 : #{ eval("#{ model.camelize }.count") } 筆"
+      message = "\n#{SCRAP_MODELS[model.to_sym]}爬蟲報告 :\n今日爬取時間參數 : #{interval}\n今日爬取總數 : #{count} 筆\n資料庫目前總數 : #{class_object.count} 筆"
       return message
     else
       return nil

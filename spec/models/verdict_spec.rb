@@ -1,17 +1,17 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Verdict do
-  let(:verdict){ FactoryGirl.create :verdict }
+  let(:verdict) { FactoryGirl.create :verdict }
 
   describe "FactoryGirl" do
     context "normalize" do
-      subject!{ verdict }
+      subject! { verdict }
       it { expect(subject).not_to be_new_record }
     end
 
     context "with_main_judge" do
-      let(:verdict){ FactoryGirl.create :verdict, :with_main_judge }
-      subject!{ verdict }
+      let(:verdict) { FactoryGirl.create :verdict, :with_main_judge }
+      subject! { verdict }
       it { expect(subject).not_to be_new_record }
     end
   end

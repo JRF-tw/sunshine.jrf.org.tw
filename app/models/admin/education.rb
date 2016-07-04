@@ -16,7 +16,7 @@
 #
 
 class Admin::Education < ::Education
-	belongs_to :profile, class_name: "Admin::Profile"
-  
-  validates_presence_of :profile_id, :title
+  belongs_to :profile, class_name: "Admin::Profile"
+
+  validates :profile_id, :title, presence: true
 end

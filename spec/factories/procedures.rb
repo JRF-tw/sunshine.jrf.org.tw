@@ -35,7 +35,7 @@ FactoryGirl.define do
     title "bar"
     procedure_unit "haha"
     procedure_content "hoho"
-    procedure_date Date.today
+    procedure_date Time.zone.today
   end
 
 end

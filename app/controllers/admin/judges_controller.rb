@@ -24,7 +24,7 @@
 
 class Admin::JudgesController < Admin::BaseController
   before_action :judge
-  before_action(except: [:index]){ add_crumb("法官列表", admin_judges_path) }
+  before_action(except: [:index]) { add_crumb("法官列表", admin_judges_path) }
 
   def index
     @search = Judge.all.ransack(params[:q])
@@ -49,36 +49,36 @@ class Admin::JudgesController < Admin::BaseController
   end
 
   def create
-    context =  Admin::JudgeCreateContext.new(params)
+    context = Admin::JudgeCreateContext.new(params)
     if @judge = context.perform
-      redirect_as_success(admin_judges_path,  "法官 - #{judge.name} 已新增")
+      redirect_as_success(admin_judges_path, "法官 - #{judge.name} 已新增")
     else
       @admin_page_title = "新增法官"
       add_crumb @admin_page_title, "#"
       render_as_fail(:new, context.error_messages)
-    end  
+    end
   end
 
   def update
-    context =  Admin::JudgeUpdateContext.new(@judge)
+    context = Admin::JudgeUpdateContext.new(@judge)
     if context.perform(params)
       redirect_as_success(admin_judges_path, "法官 - #{judge.name} 已修改")
     else
       @admin_page_title = "編輯法官 - #{judge.name}"
       add_crumb @admin_page_title, "#"
-      render_as_fail(:edit, context.error_messages) 
+      render_as_fail(:edit, context.error_messages)
     end
   end
 
   def destroy
-    context =  Admin::JudgeDeleteContext.new(@judge)
+    context = Admin::JudgeDeleteContext.new(@judge)
     if context.perform
       redirect_as_success(admin_judges_path, "法官 - #{judge.name} 已刪除")
     else
       redirect_to :back, flash: { error: context.error_messages.join(", ") }
     end
-  end 
-  
+  end
+
   private
 
   def judge

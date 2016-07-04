@@ -26,4 +26,3 @@ class Bystander::UpdateProfileContext < BaseContext
     @bystander.assign_attributes(@params)
   end
 end
-

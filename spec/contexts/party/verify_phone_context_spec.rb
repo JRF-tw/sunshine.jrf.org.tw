@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Party::VerifyPhoneContext do
   let!(:unconfirmed_phone) { "0911111111" }

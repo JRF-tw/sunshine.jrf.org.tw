@@ -1,11 +1,11 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Lawyer::FindByConfirmationTokenContext do
   let!(:lawyer) { FactoryGirl.create :lawyer }
 
   describe "perform" do
     context "success" do
-      subject { described_class.new(lawyer: { confirmation_token: lawyer.confirmation_token } ) }
+      subject { described_class.new(lawyer: { confirmation_token: lawyer.confirmation_token }) }
       it { expect(subject.perform).to eq(lawyer) }
     end
 

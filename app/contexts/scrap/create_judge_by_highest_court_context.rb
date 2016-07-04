@@ -4,7 +4,7 @@ module Scrap
     before_perform  :find_judge_by_court
     before_perform  :build_judge
     before_perform  :new_record_or_not
-    after_perform  :notify
+    after_perform :notify
 
     def initialize(court, name)
       @court = court
@@ -37,7 +37,7 @@ module Scrap
     end
 
     def notify
-      SlackService.notify_verdict_alert_async("最高法院法官已新增 : #{@judge.name} 法官, #{SlackService.render_link("http://#{Setting.host + admin_judge_path(@judge) }", "點我查看")}") if @is_new_record
+      SlackService.notify_verdict_alert_async("最高法院法官已新增 : #{@judge.name} 法官, #{SlackService.render_link("http://#{Setting.host + admin_judge_path(@judge)}", "點我查看")}") if @is_new_record
     end
   end
 end

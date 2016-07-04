@@ -24,7 +24,7 @@ FactoryGirl.define do
     end
     award_type "嘉獎一次"
     unit "司法院"
-    publish_at Date.today
+    publish_at Time.zone.today
   end
 
 end

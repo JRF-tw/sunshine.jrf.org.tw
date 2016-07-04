@@ -25,7 +25,7 @@
 
 class Admin::UsersController < Admin::BaseController
   before_action :user
-  before_action(except: [:index]){ add_crumb("後台使用者列表", admin_users_path) }
+  before_action(except: [:index]) { add_crumb("後台使用者列表", admin_users_path) }
 
   def index
     @users = User.all.page(params[:page]).per(10)

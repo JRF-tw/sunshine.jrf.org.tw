@@ -20,8 +20,8 @@
 #
 
 class Admin::StoriesController < Admin::BaseController
-  before_action :story, :except => [:index]
-  before_action(except: [:index]){ add_crumb("案件列表", admin_stories_path) }
+  before_action :story, except: [:index]
+  before_action(except: [:index]) { add_crumb("案件列表", admin_stories_path) }
 
   def index
     @search = Story.all.newest.ransack(params[:q])

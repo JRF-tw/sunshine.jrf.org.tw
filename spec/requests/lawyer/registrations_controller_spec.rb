@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Lawyer::RegistrationsController, type: :request do
 
@@ -18,7 +18,7 @@ RSpec.describe Lawyer::RegistrationsController, type: :request do
 
     context "empty params" do
       let!(:lawyer) { FactoryGirl.create :lawyer }
-      before { post "/lawyer",  lawyer: { name: "", email: ""} }
+      before { post "/lawyer",  lawyer: { name: "", email: "" } }
 
       it { expect(subject).to redirect_to("/lawyer/sign_up") }
     end

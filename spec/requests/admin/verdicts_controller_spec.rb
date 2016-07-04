@@ -1,7 +1,7 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Admin::VerdictsController do
-  before{ signin_user }
+  before { signin_user }
 
   describe "#index" do
     let!(:verdict) { FactoryGirl.create :verdict, :with_main_judge }
@@ -12,17 +12,17 @@ RSpec.describe Admin::VerdictsController do
     end
 
     context "search the adjudge_date" do
-      before { get "/admin/verdicts", q: { adjudge_date_eq: verdict.adjudge_date} }
+      before { get "/admin/verdicts", q: { adjudge_date_eq: verdict.adjudge_date } }
       it { expect(response.body).to match(verdict.story.court.full_name) }
     end
 
     context "search the main_judge_name" do
-      before { get "/admin/verdicts", q: { main_judge_id_eq: verdict.main_judge.id} }
+      before { get "/admin/verdicts", q: { main_judge_id_eq: verdict.main_judge.id } }
       it { expect(response.body).to match(verdict.main_judge.name) }
     end
 
     context "search unexist_judges_names" do
-      let!(:verdict1) { FactoryGirl.create :verdict, judges_names: ["xxxx"]  }
+      let!(:verdict1) { FactoryGirl.create :verdict, judges_names: ["xxxx"] }
       before { get "/admin/verdicts", q: { unexist_judges_names: 1 } }
       it { expect(response.body).to match(verdict.story.court.full_name) }
       it { expect(response.body).not_to match(verdict1.judges_names.first) }

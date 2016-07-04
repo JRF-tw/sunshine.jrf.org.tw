@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Lawyer::SessionsController, type: :request do
 
@@ -7,14 +7,14 @@ RSpec.describe Lawyer::SessionsController, type: :request do
 
     context "need update profile" do
       before { lawyer.update_attributes(phone_number: nil) }
-      subject! { post "/lawyer/sign_in",  lawyer: { email: lawyer.email, password: "00000000" } }
+      subject! { post "/lawyer/sign_in", lawyer: { email: lawyer.email, password: "00000000" } }
 
       it { expect(response.body).to redirect_to("/lawyer/profile/edit") }
     end
 
     context "profile ok" do
       before { lawyer.update_attributes(current: "律師事務所") }
-      subject! { post "/lawyer/sign_in",  lawyer: { email: lawyer.email, password: "00000000" } }
+      subject! { post "/lawyer/sign_in", lawyer: { email: lawyer.email, password: "00000000" } }
 
       it { expect(response).to redirect_to("/lawyer/profile") }
     end
@@ -32,8 +32,8 @@ RSpec.describe Lawyer::SessionsController, type: :request do
       before { signin_bystander }
       subject! { delete "/lawyer/sign_out" }
 
-      it { expect(get "/bystander/edit").to eq(200) }
-      it { expect(get "/lawyer/profile").to eq(302) }
+      it { expect(get("/bystander/edit")).to eq(200) }
+      it { expect(get("/lawyer/profile")).to eq(302) }
     end
   end
 

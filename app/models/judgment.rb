@@ -34,5 +34,5 @@ class Judgment < ActiveRecord::Base
   has_many :judgment_prosecutors, dependent: :destroy
   has_many :prosecutors, through: :judgment_prosecutors
 
-  scope :newest, ->{ order("id DESC") }
+  scope :newest, -> { order("id DESC") }
 end

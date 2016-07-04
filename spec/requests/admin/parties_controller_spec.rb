@@ -1,7 +1,7 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Admin::PartiesController do
-  before{ signin_user }
+  before { signin_user }
   let!(:party) { FactoryGirl.create :party }
 
   describe "#index" do
@@ -26,7 +26,7 @@ RSpec.describe Admin::PartiesController do
   describe "#set_to_imposter" do
     context "success" do
       before { put "/admin/parties/#{party.id}/set_to_imposter" }
-      it { expect(response).to redirect_to("/admin/parties")}
+      it { expect(response).to redirect_to("/admin/parties") }
     end
   end
 end

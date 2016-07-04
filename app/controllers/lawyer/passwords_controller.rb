@@ -1,8 +1,8 @@
 class Lawyer::PasswordsController < Devise::PasswordsController
   include CrudConcern
-  layout 'lawyer'
+  layout "lawyer"
 
-  prepend_before_filter :require_no_authentication, except: [:edit, :update, :send_reset_password_mail]
+  prepend_before_action :require_no_authentication, except: [:edit, :update, :send_reset_password_mail]
 
   # POST /resource/password
   def create
@@ -40,9 +40,8 @@ class Lawyer::PasswordsController < Devise::PasswordsController
 
   protected
 
-  def after_resetting_password_path_for(resource)
+  def after_resetting_password_path_for(_resource)
     new_lawyer_session_path
   end
 
 end
-

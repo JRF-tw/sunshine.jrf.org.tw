@@ -1,5 +1,5 @@
 class Party::BaseController < ApplicationController
-  layout 'party'
+  layout "party"
   before_action :authenticate_party!
   before_action :set_phone?
 

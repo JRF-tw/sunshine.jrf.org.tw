@@ -33,11 +33,11 @@ class Party < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable, :async, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
-  devise authentication_keys: [ :identify_number ]
+  devise authentication_keys: [:identify_number]
 
   validates :name, presence: true
   validates :identify_number, presence: true, uniqueness: true, format: { with: /\A[A-Z]{1}[1-2]{1}[0-9]{8}\z/, message: "身分證字號格式不符(英文字母請大寫)" }
-  validates :phone_number, uniqueness: true, format:{ with: /\A(0)(9)([0-9]{8})\z/ }, allow_nil: true
+  validates :phone_number, uniqueness: true, format: { with: /\A(0)(9)([0-9]{8})\z/ }, allow_nil: true
 
   has_many :story_relations, as: :people
   has_many :verdict_relations, as: :person
@@ -46,7 +46,7 @@ class Party < ActiveRecord::Base
   value :unconfirmed_phone, expiration: 1.hour
   value :phone_varify_code, expiration: 1.hour
   counter :retry_verify_count, expiration: 1.hour
-  counter :sms_sent_count, expiration: 5.minute
+  counter :sms_sent_count, expiration: 5.minutes
 
   def email_required?
     false
@@ -69,14 +69,14 @@ class Party < ActiveRecord::Base
   end
 
   def phone_confirmed?
-    !!phone_confirmed_at
+    phone_confirmed_at.present?
   end
 
   def set_reset_password_token
     raw, enc = Devise.token_generator.generate(self.class, :reset_password_token)
     self.reset_password_token   = enc
     self.reset_password_sent_at = Time.now.utc
-    self.save(validate: false)
+    save(validate: false)
     raw
   end
 end

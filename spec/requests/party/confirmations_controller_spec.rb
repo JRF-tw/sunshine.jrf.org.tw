@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Party::ConfirmationsController, type: :request do
   let!(:party) { FactoryGirl.create :party, confirmation_token: "imtoken" }
@@ -20,7 +20,7 @@ RSpec.describe Party::ConfirmationsController, type: :request do
 
     context "invalidate token" do
       subject { get "/party/confirmation", confirmation_token: "wwwwwww" }
-      it { expect(subject).to redirect_to("/party/sign_in")  }
+      it { expect(subject).to redirect_to("/party/sign_in") }
 
       it { expect { subject }.not_to change { Party.last.confirmed? } }
     end
@@ -28,7 +28,7 @@ RSpec.describe Party::ConfirmationsController, type: :request do
 
   describe "#create" do
     context "success" do
-      let!(:party) { FactoryGirl.create :party, :with_unconfirmed_email}
+      let!(:party) { FactoryGirl.create :party, :with_unconfirmed_email }
       before { post "/party/confirmation", party: { email: party.unconfirmed_email } }
 
       it { expect(response).to redirect_to("/party/profile") }

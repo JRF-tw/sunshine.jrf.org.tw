@@ -22,7 +22,7 @@ class Scrap::ImportJudgeContext < BaseContext
   def parse_import_data
     @row_data = @data_string.split(",")
     @chamber_name = @row_data[0].strip
-    @court_name = @chamber_name.match("分院") ? "#{@chamber_name.split("分院")[0]}分院" : "#{@chamber_name.split("法院")[0]}法院"
+    @court_name = @chamber_name =~ /分院/ ? "#{@chamber_name.split("分院")[0]}分院" : "#{@chamber_name.split("法院")[0]}法院"
     @branch_name = @row_data[1].strip
     @judge_name = @row_data[2].gsub("法官", "").squish
   rescue => e
@@ -30,7 +30,7 @@ class Scrap::ImportJudgeContext < BaseContext
   end
 
   def find_court
-    @court = Court.get_courts.select{ |c| c.scrap_name.gsub(" ", "") == @court_name }.last
+    @court = Court.get_courts.select { |c| c.scrap_name.delete(" ") == @court_name }.last
     return add_error(:data_not_found, "court not found") unless @court
   end
 
@@ -43,7 +43,7 @@ class Scrap::ImportJudgeContext < BaseContext
   end
 
   def record_import_daily_branch
-    Redis::List.new('daily_import_branch_ids') << @branch.id
+    Redis::List.new("daily_import_branch_ids") << @branch.id
   end
 
   def record_count_to_daily_notify

@@ -9,10 +9,10 @@
 #  updated_at  :datetime
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe JudgmentProsecutor, type: :model do
-  
+
   it "has_many :judgment_judges, dependent: :destroy" do
     judgment_prosecutor = FactoryGirl.create :judgment_prosecutor
     expect(JudgmentProsecutor.count).to eq(1)
@@ -20,5 +20,5 @@ RSpec.describe JudgmentProsecutor, type: :model do
     judgment.destroy
     expect(JudgmentProsecutor.count).to be_zero
   end
-  
+
 end

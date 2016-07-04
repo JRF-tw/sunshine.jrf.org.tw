@@ -32,10 +32,10 @@
 #  updated_at       :datetime
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Punishment, type: :model do
-  let!(:punishment){ FactoryGirl.create :punishment }
+  let!(:punishment) { FactoryGirl.create :punishment }
 
   it "FactoryGirl" do
     expect(punishment).not_to be_new_record
@@ -49,7 +49,7 @@ RSpec.describe Punishment, type: :model do
   end
 
   it "#punishments_count counter cache" do
-    profile = FactoryGirl.create :profile 
+    profile = FactoryGirl.create :profile
     Admin::Punishment.create decision_unit: "foofoo", profile_id: profile.id
     profile.reload
     expect(profile.punishments_count).to eq(1)

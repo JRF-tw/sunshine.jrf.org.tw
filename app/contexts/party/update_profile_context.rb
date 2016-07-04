@@ -21,4 +21,3 @@ class Party::UpdateProfileContext < BaseContext
     @party.assign_attributes(@params)
   end
 end
-

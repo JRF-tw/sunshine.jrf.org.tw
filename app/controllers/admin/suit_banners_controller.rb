@@ -18,7 +18,7 @@
 
 class Admin::SuitBannersController < Admin::BaseController
   before_action :suit_banner
-  before_action(except: [:index]){ add_crumb("司法案例面面觀 banner 列表", admin_suit_banners_path) }
+  before_action(except: [:index]) { add_crumb("司法案例面面觀 banner 列表", admin_suit_banners_path) }
 
   def index
     @suit_banners = SuitBanner.all.order_by_weight.page(params[:page]).per(10)
@@ -38,10 +38,10 @@ class Admin::SuitBannersController < Admin::BaseController
 
   def create
     if suit_banner.save
-        respond_to do |f|
-          f.html { redirect_to admin_suit_banners_path, flash: { success: "司法案例面面觀 banner 已新增" } }
-          f.js { render }
-        end
+      respond_to do |f|
+        f.html { redirect_to admin_suit_banners_path, flash: { success: "司法案例面面觀 banner 已新增" } }
+        f.js { render }
+      end
     else
       respond_to do |f|
         f.html {

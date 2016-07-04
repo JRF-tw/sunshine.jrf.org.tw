@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Admin::JudgeDeleteContext do
   let(:judge) { FactoryGirl.create(:judge) }
@@ -9,5 +9,5 @@ describe Admin::JudgeDeleteContext do
       it { expect { subject.perform }.to change { Judge.count }.by(-1) }
     end
   end
-    
+
 end

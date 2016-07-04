@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   include MetaTagHelper
   include CharacterConversion
 
-  before_filter :http_auth_for_staging
+  before_action :http_auth_for_staging
 
   layout :layout_by_resource
 
@@ -21,19 +21,19 @@ class ApplicationController < ActionController::Base
 
   def layout_by_resource
     if devise_controller? && resource_name == :user
-      'admin'
+      "admin"
     elsif devise_controller? && resource_name == :bystander
-      'bystander'
+      "bystander"
     end
   end
 
   def not_found
-    raise ActionController::RoutingError.new('Not Found')
+    raise ActionController::RoutingError, "Not Found"
   end
 
 end
 
-require 'base_controller'
+require "base_controller"
 require "party/base_controller"
 require "bystander/base_controller"
 require "lawyer/base_controller"

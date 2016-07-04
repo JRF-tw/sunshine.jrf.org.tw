@@ -1,5 +1,5 @@
 class Scrap::ParseSchedulesContext < BaseContext
-  SCHEDULE_INFO_URI = "http://csdi.judicial.gov.tw/abbs/wkw/WHD3A02.jsp"
+  SCHEDULE_INFO_URI = "http://csdi.judicial.gov.tw/abbs/wkw/WHD3A02.jsp".freeze
 
   before_perform :scrap_schedule
   before_perform :parse_schedule_info
@@ -35,7 +35,7 @@ class Scrap::ParseSchedulesContext < BaseContext
     data = { pageNow: @current_page, sql_conction: sql, pageTotal: @page_total, pageSize: 15, rowStart: 1 }
     sleep @sleep_time_interval
     response_data = Mechanize.new.get(SCHEDULE_INFO_URI, data)
-    @data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
+    @data = Nokogiri::HTML(Iconv.new("UTF-8//IGNORE", "Big5").iconv(response_data.body))
   end
 
   def parse_schedule_info
@@ -44,15 +44,15 @@ class Scrap::ParseSchedulesContext < BaseContext
     scope.length.times.each do |index|
       # first row is table desc
       next if index == 0
-      row_data = scope[index].css('td')
+      row_data = scope[index].css("td")
       hash = {
-          story_type: row_data[1].text.strip,
-          year: row_data[2].text.strip.to_i,
-          word_type: row_data[3].text.strip,
-          number: row_data[4].text.squish,
-          date: convert_scrap_time(row_data[5].text.strip),
-          branch_name: row_data[8].text.strip,
-          is_adjudge: row_data[9].text.strip.match("宣判").present?
+        story_type: row_data[1].text.strip,
+        year: row_data[2].text.strip.to_i,
+        word_type: row_data[3].text.strip,
+        number: row_data[4].text.squish,
+        date: convert_scrap_time(row_data[5].text.strip),
+        branch_name: row_data[8].text.strip,
+        is_adjudge: row_data[9].text.strip.match("宣判").present?
       }
       @hash_array << hash
     end
@@ -61,6 +61,6 @@ class Scrap::ParseSchedulesContext < BaseContext
   def convert_scrap_time(date_string)
     split_array = date_string.split("/").map(&:to_i)
     year = split_array[0] + 1911
-    return Date.new(year, split_array[1], split_array[2])
+    Date.new(year, split_array[1], split_array[2])
   end
 end

@@ -17,11 +17,11 @@
 
 class Education < ActiveRecord::Base
   include HiddenOrNot
-	include TaiwanAge
+  include TaiwanAge
   tw_age_columns :start_at, :end_at
 
   belongs_to :profile
 
-  scope :newest, ->{ order("id DESC") }
-  scope :order_by_end_at, ->{ order("end_at DESC, id DESC") }
+  scope :newest, -> { order("id DESC") }
+  scope :order_by_end_at, -> { order("end_at DESC, id DESC") }
 end

@@ -30,23 +30,23 @@ class Suit < ActiveRecord::Base
   has_many :prosecutors, through: :suit_prosecutors
   has_many :procedures, dependent: :destroy
 
-  scope :newest, ->{ order("id DESC") }
+  scope :newest, -> { order("id DESC") }
 
-  STATE = ["處理中", "未受懲處", "已懲處"]
+  STATE = ["處理中", "未受懲處", "已懲處"].freeze
 
   def related_suits
-    judge_ids = self.judges.map(&:id)
-    prosecutor_ids = self.prosecutors.map(&:id)
-    suit_ids = (SuitJudge.where(profile_id: judge_ids).map(&:suit_id) + SuitProsecutor.where(profile_id: prosecutor_ids).map(&:suit_id)).uniq - [self.id]
+    judge_ids = judges.map(&:id)
+    prosecutor_ids = prosecutors.map(&:id)
+    suit_ids = (SuitJudge.where(profile_id: judge_ids).map(&:suit_id) + SuitProsecutor.where(profile_id: prosecutor_ids).map(&:suit_id)).uniq - [id]
     Suit.where(id: suit_ids)
   end
 
   def procedures_by_person
-    profile_ids = self.procedures.shown.map(&:profile_id)
+    profile_ids = procedures.shown.map(&:profile_id)
     people = Profile.where(id: profile_ids)
     arr = []
     people.each do |person|
-      arr << person.procedures.where(suit_id: self.id).flow_by_procedure_date
+      arr << person.procedures.where(suit_id: id).flow_by_procedure_date
     end
     arr
   end
@@ -59,11 +59,11 @@ class Suit < ActiveRecord::Base
     end
 
     def front_like_search(search_word, combination = "or")
-      search_word.keep_if {|k, v| v.present? }
+      search_word.keep_if { |_k, v| v.present? }
       if search_word.present?
-        where_str = search_word.map { |k, i| "\"#{self.table_name}\".\"#{k}\" like :#{k}" }.join(" #{combination} ")
-        a_search_word = search_word.inject({}) { |hh, (k, v)| hh[k.to_sym] = "%#{v}%"; hh }
-        relation = self.where([where_str, a_search_word])
+        where_str = search_word.map { |k, _i| "\"#{table_name}\".\"#{k}\" like :#{k}" }.join(" #{combination} ")
+        a_search_word = search_word.each_with_object({}) { |array, hash| hash[array.first.to_sym] = "%#{array.last}%" }
+        relation = where([where_str, a_search_word])
       else
         relation = all
       end

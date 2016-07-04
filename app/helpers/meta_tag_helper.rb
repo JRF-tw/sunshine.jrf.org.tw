@@ -12,15 +12,15 @@ module MetaTagHelper
       type: data[:og_type] || default_meta[:og_type]
     }
     data[:fb] = {
-      :app_id => default_meta[:fb_app_id],
-      :admins => default_meta[:fb_admin_ids]
+      app_id: default_meta[:fb_app_id],
+      admins: default_meta[:fb_admin_ids]
     }
     data[:og][:image] = data[:image] if data[:image]
     set_meta_tags(data.merge(
-      reverse: default_meta[:reverse], 
-      separator: default_meta[:separator], 
-      canonical: url,
-      viewport: default_meta[:viewport]
+                    reverse: default_meta[:reverse],
+                    separator: default_meta[:separator],
+                    canonical: url,
+                    viewport: default_meta[:viewport]
     ))
   end
 
@@ -34,7 +34,6 @@ module MetaTagHelper
       separator: " | ",
       reverse: true,
       og_type: "website",
-      site: "司法陽光網"
-    }
+      site: "司法陽光網" }
   end
 end

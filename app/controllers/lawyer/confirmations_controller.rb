@@ -1,6 +1,6 @@
 class Lawyer::ConfirmationsController < Devise::ConfirmationsController
   include CrudConcern
-  layout 'lawyer'
+  layout "lawyer"
 
   before_action :redirect_new_to_sign_in, only: [:new]
   before_action :find_lawyer
@@ -18,7 +18,7 @@ class Lawyer::ConfirmationsController < Devise::ConfirmationsController
       redirect_to new_lawyer_session_path
     else
       flash.now[:error] = context.error_messages.join(", ") if context.error_messages
-      render :action => 'show'
+      render action: "show"
     end
   end
 

@@ -1,12 +1,12 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Admin::PunishmentsController do
-  let!(:profile){ FactoryGirl.create :profile }
+  let!(:profile) { FactoryGirl.create :profile }
 
-  before{ signin_user }
+  before { signin_user }
 
   describe "already had a punishment" do
-    let!(:punishment){ FactoryGirl.create :punishment, profile: profile }
+    let!(:punishment) { FactoryGirl.create :punishment, profile: profile }
 
     it "GET /admin/profiles/profile.id/punishments" do
       get "/admin/profiles/#{profile.id}/punishments"
@@ -24,9 +24,9 @@ RSpec.describe Admin::PunishmentsController do
     end
 
     it "PUT /admin/profiles/profile.id/punishments/123" do
-      expect{
+      expect {
         put "/admin/profiles/#{profile.id}/punishments/#{punishment.id}", admin_punishment: { punish_type: "haha" }
-      }.to change{ punishment.reload.punish_type }.to("haha")
+      }.to change { punishment.reload.punish_type }.to("haha")
       expect(response).to be_redirect
     end
 
@@ -37,9 +37,9 @@ RSpec.describe Admin::PunishmentsController do
   end
 
   it "POST /admin/profiles/profile.id/punishments" do
-    expect{
+    expect {
       post "/admin/profiles/#{profile.id}/punishments", admin_punishment: FactoryGirl.attributes_for(:punishment)
-    }.to change{ Punishment.count }.by(1)
+    }.to change { Punishment.count }.by(1)
     expect(response).to be_redirect
   end
 end

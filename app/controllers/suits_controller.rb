@@ -24,7 +24,7 @@ class SuitsController < BaseController
       title: "司法案例面面觀",
       description: "不適任的法官、檢察官狀況有哪些？看看幾個案例，認識不適任的法官、檢察官！",
       keywords: "不適任法官,不適任檢察官,司法案例面面觀,司法恐龍,恐龍法官,恐龍檢察官",
-      image: ActionController::Base.helpers.asset_path('hero-suits-index-M.png')
+      image: ActionController::Base.helpers.asset_path("hero-suits-index-M.png")
     )
   end
 

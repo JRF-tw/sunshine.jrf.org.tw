@@ -28,7 +28,7 @@ module Search
     end
 
     def find_judges
-      @judges = @branches.map{ |b| b.judge }.uniq
+      @judges = @branches.map(&:judge).uniq
     end
   end
 end

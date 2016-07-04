@@ -23,7 +23,7 @@
 
 class Admin::JudgmentsController < Admin::BaseController
   before_action :judgment
-  before_action(except: [:index]){ add_crumb("重要判決列表", admin_judgments_path) }
+  before_action(except: [:index]) { add_crumb("重要判決列表", admin_judgments_path) }
 
   def index
     @judgments = Judgment.all.newest.page(params[:page]).per(10)
@@ -43,10 +43,10 @@ class Admin::JudgmentsController < Admin::BaseController
 
   def create
     if judgment.save
-        respond_to do |f|
-          f.html { redirect_to admin_judgments_path, flash: { success: "重要判決已新增" } }
-          f.js { render }
-        end
+      respond_to do |f|
+        f.html { redirect_to admin_judgments_path, flash: { success: "重要判決已新增" } }
+        f.js { render }
+      end
     else
       respond_to do |f|
         f.html {

@@ -1,10 +1,10 @@
 class Admin::BaseController < ApplicationController
   include CrudConcern
 
-  layout 'admin'
-  before_filter :authenticate_user!
-  before_filter :authenticate_admin_user!
-  before_filter do
+  layout "admin"
+  before_action :authenticate_user!
+  before_action :authenticate_admin_user!
+  before_action do
     add_crumb "首頁", admin_root_path
   end
 

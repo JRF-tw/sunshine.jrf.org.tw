@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Lawyer::ConfirmationsController, type: :request do
   let!(:lawyer) { FactoryGirl.create :lawyer }

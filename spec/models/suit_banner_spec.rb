@@ -16,10 +16,10 @@
 #  updated_at :datetime
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe SuitBanner, type: :model do
-  let!(:suit_banner){ FactoryGirl.create :suit_banner }
+  let!(:suit_banner) { FactoryGirl.create :suit_banner }
 
   it "FactoryGirl" do
     expect(suit_banner).not_to be_new_record

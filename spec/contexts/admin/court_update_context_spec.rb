@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Admin::CourtUpdateContext do
   let!(:court) { FactoryGirl.create :court }
@@ -6,9 +6,9 @@ describe Admin::CourtUpdateContext do
   subject { described_class.new(court) }
 
   describe "#perform" do
-    context "success" do	
-      it { expect { subject.perform(params) }.to change { court.full_name }.to eq(params[:full_name]) }	
+    context "success" do
+      it { expect { subject.perform(params) }.to change { court.full_name }.to eq(params[:full_name]) }
     end
   end
-    
-end  
+
+end

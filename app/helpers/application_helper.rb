@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def class_of_suits
-    if (params[:controller] == "suits")
+    if params[:controller] == "suits"
       return "active"
     else
       return nil
@@ -33,7 +33,7 @@ module ApplicationHelper
   end
 
   def class_of_searchs
-    if (params[:controller] == "searchs")
+    if params[:controller] == "searchs"
       return "active"
     else
       return nil
@@ -49,7 +49,7 @@ module ApplicationHelper
   end
 
   def simple_text(text)
-    sanitize(text, tags: []).gsub(/\n/, '<br>').html_safe
+    safe_join([sanitize(text, tags: []).gsub(/\n/, "<br>")], "")
   end
 
   def render_punishment_decision_unit(punishment)
@@ -63,7 +63,7 @@ module ApplicationHelper
   end
 
   def render_punishment_cell(punishment)
-    hash = Hash.new
+    hash = {}
     if punishment.decision_unit == "公懲會"
       hash = {
         "議決日期": punishment.relevant_date.present? ? punishment.relevant_date : nil,
@@ -132,16 +132,16 @@ module ApplicationHelper
         "結    果": punishment.punish.present? ? punishment.punish : nil
       }
     end
-    hash.delete_if { |k, v| v == nil }
+    hash.delete_if { |_k, v| v.nil? }
     hash
   end
 
   def collection_for_courts
-    Court.get_courts.order_by_weight.map{ |c| c.full_name }.unshift("全部法院")
+    Court.get_courts.order_by_weight.map(&:full_name).unshift("全部法院")
   end
 
   def collection_for_prosecutors
-    Court.prosecutors.order_by_weight.map{ |c| c.full_name }.unshift("全部檢察署")
+    Court.prosecutors.order_by_weight.map(&:full_name).unshift("全部檢察署")
   end
 
   def collection_state_for_suits
@@ -150,7 +150,7 @@ module ApplicationHelper
 
   def active_for_search_group_cell(param, active = nil)
     param = "全部" if param.blank?
-    (param == active.to_s) || (active.nil? && param.blank?) ?  "active" : ""
+    (param == active.to_s) || (active.nil? && param.blank?) ? "active" : ""
   end
 
   def render_career_content(career)
@@ -165,13 +165,13 @@ module ApplicationHelper
     arr = []
     arr << render_punishment_decision_unit(punishment) if punishment.decision_unit.present?
     if punishment.punish.present?
-      arr << summary_text(punishment.punish , 20)
+      arr << summary_text(punishment.punish, 20)
     elsif punishment.decision_result.present?
-      arr << summary_text(punishment.decision_result , 20)
+      arr << summary_text(punishment.decision_result, 20)
     elsif punishment.punish_type.present?
-      arr << summary_text(punishment.punish_type , 20)
+      arr << summary_text(punishment.punish_type, 20)
     end
-    return arr.join(" ")
+    arr.join(" ")
   end
 
   def collect_for_story_types
@@ -187,7 +187,7 @@ module ApplicationHelper
   end
 
   def collect_for_courts
-    Court.get_courts.map{ |c| [c.full_name, c.id] }
+    Court.get_courts.map { |c| [c.full_name, c.id] }
   end
 
   def collect_for_judges_name
@@ -216,4 +216,3 @@ module ApplicationHelper
     [["有", 1], ["無", 0]]
   end
 end
-

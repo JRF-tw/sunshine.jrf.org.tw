@@ -14,7 +14,7 @@ class Admin::LawyerUpdateContext < BaseContext
     run_callbacks :perform do
       return add_error(:data_update_fail, @lawyer.errors.full_messages.join("\n")) unless @lawyer.save
       true
-    end 
+    end
   end
 
   private
@@ -30,4 +30,4 @@ class Admin::LawyerUpdateContext < BaseContext
   def skip_confirmation_mail
     @lawyer.skip_confirmation_notification!
   end
-end 
+end

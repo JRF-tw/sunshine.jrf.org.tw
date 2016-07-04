@@ -27,4 +27,3 @@ class Lawyer::UpdateProfileContext < BaseContext
     @lawyer.assign_attributes(@params)
   end
 end
-

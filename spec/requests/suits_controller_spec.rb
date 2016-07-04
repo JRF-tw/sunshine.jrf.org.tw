@@ -1,9 +1,9 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe SuitsController, :type => :request do
-  let!(:suit){ FactoryGirl.create :suit }
-  let!(:procedure){ FactoryGirl.create :procedure, suit: suit }
-  
+RSpec.describe SuitsController, type: :request do
+  let!(:suit) { FactoryGirl.create :suit }
+  let!(:procedure) { FactoryGirl.create :procedure, suit: suit }
+
   it "GET /suits" do
     get "/suits"
     expect(response).to be_success

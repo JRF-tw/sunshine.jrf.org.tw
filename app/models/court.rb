@@ -30,9 +30,9 @@ class Court < ActiveRecord::Base
     where(court_type: "檢察署")
   end
 
-  scope :newest, ->{ order("id DESC") }
-  scope :order_by_weight, ->{ order("weight DESC, id DESC") }
-  scope :with_codes, ->{ where.not(code: nil) }
+  scope :newest, -> { order("id DESC") }
+  scope :order_by_weight, -> { order("weight DESC, id DESC") }
+  scope :with_codes, -> { where.not(code: nil) }
 
   class << self
     def collect_codes

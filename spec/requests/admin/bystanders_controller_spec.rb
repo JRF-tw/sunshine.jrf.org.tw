@@ -1,7 +1,7 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Admin::BystandersController do
-  before{ signin_user }
+  before { signin_user }
   let!(:bystander) { FactoryGirl.create :bystander }
 
   describe "#index" do

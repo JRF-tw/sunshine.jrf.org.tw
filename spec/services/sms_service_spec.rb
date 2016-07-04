@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe SmsService do
   let!(:phone) { "0911111111" }
@@ -6,7 +6,7 @@ describe SmsService do
 
   describe "#initialize" do
     subject { described_class.new(phone) }
-    it { expect(subject.phone).to eq("+886911111111")}
+    it { expect(subject.phone).to eq("+886911111111") }
   end
 
   describe "#send_by_slack" do

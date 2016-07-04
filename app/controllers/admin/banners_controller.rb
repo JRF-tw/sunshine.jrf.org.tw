@@ -14,7 +14,7 @@
 
 class Admin::BannersController < Admin::BaseController
   before_action :banner
-  before_action(except: [:index]){ add_crumb("首頁橫幅列表", admin_banners_path) }
+  before_action(except: [:index]) { add_crumb("首頁橫幅列表", admin_banners_path) }
 
   def index
     @banners = Banner.all.order_by_weight.page(params[:page]).per(10)
@@ -34,10 +34,10 @@ class Admin::BannersController < Admin::BaseController
 
   def create
     if banner.save
-        respond_to do |f|
-          f.html { redirect_to admin_banners_path, flash: { success: "首頁橫幅已新增" } }
-          f.js { render }
-        end
+      respond_to do |f|
+        f.html { redirect_to admin_banners_path, flash: { success: "首頁橫幅已新增" } }
+        f.js { render }
+      end
     else
       respond_to do |f|
         f.html {

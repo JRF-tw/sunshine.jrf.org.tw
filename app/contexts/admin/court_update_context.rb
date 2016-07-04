@@ -12,7 +12,7 @@ class Admin::CourtUpdateContext < BaseContext
     run_callbacks :perform do
       return add_error(:data_update_fail, @court.errors.full_messages.join("\n")) unless @court.save
       true
-    end	
+    end
   end
 
   private
@@ -20,4 +20,4 @@ class Admin::CourtUpdateContext < BaseContext
   def assign_value
     @court.assign_attributes @params
   end
-end	
+end

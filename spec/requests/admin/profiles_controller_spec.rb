@@ -1,10 +1,10 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Admin::ProfilesController do
-  before{ signin_user }
+  before { signin_user }
 
   describe "already had a profile" do
-    let!(:profile){ FactoryGirl.create :profile, name: "Dahlia", current: "法官" }
+    let!(:profile) { FactoryGirl.create :profile, name: "Dahlia", current: "法官" }
 
     it "GET /admin/profiles" do
       get "/admin/profiles"
@@ -22,9 +22,9 @@ RSpec.describe Admin::ProfilesController do
     end
 
     it "PUT /admin/profiles/123" do
-      expect{
+      expect {
         put "/admin/profiles/#{profile.id}", admin_profile: { name: "haha" }
-      }.to change{ profile.reload.name }.to("haha")
+      }.to change { profile.reload.name }.to("haha")
       expect(response).to be_redirect
     end
 
@@ -34,25 +34,25 @@ RSpec.describe Admin::ProfilesController do
     end
 
     context "ransack" do
-      let!(:hidden_profile){ FactoryGirl.create :profile, name: "Mars", current: "檢察官", is_hidden: true }
-      let!(:unactive_profile){ FactoryGirl.create :profile, name: "Billy", current: "檢察官", is_active: false }
+      let!(:hidden_profile) { FactoryGirl.create :profile, name: "Mars", current: "檢察官", is_hidden: true }
+      let!(:unactive_profile) { FactoryGirl.create :profile, name: "Billy", current: "檢察官", is_active: false }
       it "is_active_true" do
-        get "/admin/profiles", { q: { is_active_true: true } }
+        get "/admin/profiles", q: { is_active_true: true }
         expect(response.body).not_to match(unactive_profile.name)
       end
 
       it "is_hidden_true" do
-        get "/admin/profiles", { q: { is_hidden_true: true } }
+        get "/admin/profiles", q: { is_hidden_true: true }
         expect(response.body).to match(hidden_profile.name)
       end
 
       it "name_cont" do
-        get "/admin/profiles", { q: { name_cont: "Da" } }
+        get "/admin/profiles", q: { name_cont: "Da" }
         expect(response.body).to match(profile.name)
       end
 
       it "current_eq" do
-        get "/admin/profiles", { q: { current_eq: "法官" } }
+        get "/admin/profiles", q: { current_eq: "法官" }
         expect(response.body).to match(profile.name)
         expect(response.body).not_to match(unactive_profile.name)
         expect(response.body).not_to match(hidden_profile.name)
@@ -61,9 +61,9 @@ RSpec.describe Admin::ProfilesController do
   end
 
   it "POST /admin/profiles" do
-    expect{
+    expect {
       post "/admin/profiles", admin_profile: FactoryGirl.attributes_for(:profile)
-    }.to change{ Profile.count }.by(1)
+    }.to change { Profile.count }.by(1)
     expect(response).to be_redirect
   end
 end

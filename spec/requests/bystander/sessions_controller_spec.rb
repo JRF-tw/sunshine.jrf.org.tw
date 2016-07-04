@@ -1,6 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe Bystander::SessionsController, :type => :request do
+RSpec.describe Bystander::SessionsController, type: :request do
   let!(:bystander) { FactoryGirl.create :bystander }
 
   describe "#create" do
@@ -22,7 +22,7 @@ RSpec.describe Bystander::SessionsController, :type => :request do
     context "root should not change" do
       before { signin_bystander }
 
-      it { expect(get "/").to render_template("base/index") }
+      it { expect(get("/")).to render_template("base/index") }
     end
   end
 
@@ -39,8 +39,8 @@ RSpec.describe Bystander::SessionsController, :type => :request do
       before { signin_lawyer }
       subject! { delete "/bystander/sign_out" }
 
-      it { expect(get "/lawyer/profile").to eq(200) }
-      it { expect(get "/bystander/profile").to eq(302) }
+      it { expect(get("/lawyer/profile")).to eq(200) }
+      it { expect(get("/bystander/profile")).to eq(302) }
     end
   end
 

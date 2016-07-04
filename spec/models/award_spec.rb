@@ -16,10 +16,10 @@
 #  updated_at  :datetime
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Award, type: :model do
-  let!(:award){ FactoryGirl.create :award }
+  let!(:award) { FactoryGirl.create :award }
 
   it "FactoryGirl" do
     expect(award).not_to be_new_record

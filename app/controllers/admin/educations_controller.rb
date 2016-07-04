@@ -17,9 +17,9 @@
 
 class Admin::EducationsController < Admin::BaseController
   before_action :education
-  before_action{ add_crumb("個人檔案列表", admin_profiles_path) }
-  before_action{ add_crumb("#{@profile.name}的個人檔案", admin_profile_path(@profile)) }
-  before_action(except: [:index]){ add_crumb("#{@profile.name}的學經歷列表", admin_profile_educations_path(@profile)) }
+  before_action { add_crumb("個人檔案列表", admin_profiles_path) }
+  before_action { add_crumb("#{@profile.name}的個人檔案", admin_profile_path(@profile)) }
+  before_action(except: [:index]) { add_crumb("#{@profile.name}的學經歷列表", admin_profile_educations_path(@profile)) }
 
   def index
     @educations = @profile.educations.all.newest.page(params[:page]).per(10)
@@ -39,10 +39,10 @@ class Admin::EducationsController < Admin::BaseController
 
   def create
     if education.save
-        respond_to do |f|
-          f.html { redirect_to admin_profile_educations_path(@profile), flash: { success: "#{@profile.name}的學經歷 - #{education.title} 已新增" } }
-          f.js { render }
-        end
+      respond_to do |f|
+        f.html { redirect_to admin_profile_educations_path(@profile), flash: { success: "#{@profile.name}的學經歷 - #{education.title} 已新增" } }
+        f.js { render }
+      end
     else
       respond_to do |f|
         f.html {

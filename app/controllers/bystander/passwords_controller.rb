@@ -1,8 +1,8 @@
 class Bystander::PasswordsController < Devise::PasswordsController
-  layout 'bystander'
+  layout "bystander"
 
   include CrudConcern
-  prepend_before_filter :require_no_authentication, except: [:edit, :update, :send_reset_password_mail]
+  prepend_before_action :require_no_authentication, except: [:edit, :update, :send_reset_password_mail]
 
   def edit
     if current_bystander && Bystander.with_reset_password_token(params[:reset_password_token]) != current_bystander
@@ -21,11 +21,10 @@ class Bystander::PasswordsController < Devise::PasswordsController
     redirect_as_success(bystander_profile_path, "觀察者 - #{current_bystander.name} 重設密碼信件已寄出")
   end
 
-protected
+  protected
 
-  def after_sign_in_path_for(resource_or_scope)
+  def after_sign_in_path_for(_resource_or_scope)
     bystander_profile_path
   end
 
 end
-

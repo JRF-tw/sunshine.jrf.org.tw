@@ -1,12 +1,12 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Admin::ArticlesController do
-  let!(:profile){ FactoryGirl.create :profile }
+  let!(:profile) { FactoryGirl.create :profile }
 
-  before{ signin_user }
+  before { signin_user }
 
   describe "already had a article" do
-    let!(:article){ FactoryGirl.create :article, profile: profile }
+    let!(:article) { FactoryGirl.create :article, profile: profile }
 
     it "GET /admin/profiles/profile.id/articles" do
       get "/admin/profiles/#{profile.id}/articles"
@@ -24,9 +24,9 @@ RSpec.describe Admin::ArticlesController do
     end
 
     it "PUT /admin/profiles/profile.id/articles/123" do
-      expect{
+      expect {
         put "/admin/profiles/#{profile.id}/articles/#{article.id}", admin_article: { article_type: "haha" }
-      }.to change{ article.reload.article_type }.to("haha")
+      }.to change { article.reload.article_type }.to("haha")
       expect(response).to be_redirect
     end
 
@@ -40,10 +40,10 @@ RSpec.describe Admin::ArticlesController do
     attrs = FactoryGirl.attributes_for(:article)
     attrs.delete :paper_publish_at
     attrs[:paper_publish_at_in_tw] = "104/9/10"
-    expect{
+    expect {
       post "/admin/profiles/#{profile.id}/articles", admin_article: attrs
-    }.to change{ Article.count }.by(1)
+    }.to change { Article.count }.by(1)
     expect(response).to be_redirect
-    expect( Article.last.paper_publish_at_in_tw ).to eq "104/9/10"
+    expect(Article.last.paper_publish_at_in_tw).to eq "104/9/10"
   end
 end

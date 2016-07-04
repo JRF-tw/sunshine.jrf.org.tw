@@ -1,15 +1,15 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Party::SchedulesController, type: :request do
   before { signin_party }
 
   describe "#new" do
-    subject!{ get "/party/score/schedules/new" }
+    subject! { get "/party/score/schedules/new" }
     it { expect(response).to be_success }
   end
 
   describe "#verify" do
-    subject!{ post "/party/score/schedules/verify" }
+    subject! { post "/party/score/schedules/verify" }
     it { expect(response).to be_redirect }
   end
 end

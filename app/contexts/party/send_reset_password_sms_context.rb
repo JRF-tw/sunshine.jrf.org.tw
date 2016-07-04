@@ -43,4 +43,3 @@ class Party::SendResetPasswordSmsContext < BaseContext
     SmsService.send_async(@party.phone_number, @message)
   end
 end
-

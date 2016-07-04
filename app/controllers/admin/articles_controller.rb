@@ -29,9 +29,9 @@
 
 class Admin::ArticlesController < Admin::BaseController
   before_action :article
-  before_action{ add_crumb("個人檔案列表", admin_profiles_path) }
-  before_action{ add_crumb("#{@profile.name}的個人檔案", admin_profile_path(@profile)) }
-  before_action(except: [:index]){ add_crumb("#{@profile.name}的發表言論列表", admin_profile_articles_path(@profile)) }
+  before_action { add_crumb("個人檔案列表", admin_profiles_path) }
+  before_action { add_crumb("#{@profile.name}的個人檔案", admin_profile_path(@profile)) }
+  before_action(except: [:index]) { add_crumb("#{@profile.name}的發表言論列表", admin_profile_articles_path(@profile)) }
 
   def index
     @articles = @profile.articles.all.newest.page(params[:page]).per(10)
@@ -51,10 +51,10 @@ class Admin::ArticlesController < Admin::BaseController
 
   def create
     if article.save
-        respond_to do |f|
-          f.html { redirect_to admin_profile_articles_path(@profile), flash: { success: "#{@profile.name}的發表言論 - 已新增" } }
-          f.js { render }
-        end
+      respond_to do |f|
+        f.html { redirect_to admin_profile_articles_path(@profile), flash: { success: "#{@profile.name}的發表言論 - 已新增" } }
+        f.js { render }
+      end
     else
       respond_to do |f|
         f.html {

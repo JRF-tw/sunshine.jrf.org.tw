@@ -1,7 +1,7 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Party, type: :model do
-  let(:party){ FactoryGirl.create :party }
+  let(:party) { FactoryGirl.create :party }
   it "FactoryGirl" do
     expect(party).not_to be_new_record
   end
@@ -43,11 +43,11 @@ RSpec.describe Party, type: :model do
 
   describe "#phone_unconfirm!" do
     before { party.phone_confirm! }
-    it { expect{ party.phone_unconfirm! }.to change { party.phone_confirmed? } }
+    it { expect { party.phone_unconfirm! }.to change { party.phone_confirmed? } }
   end
 
   describe "#phone_confirm!" do
-    it { expect{ party.phone_confirm! }.to change { party.phone_confirmed? } }
+    it { expect { party.phone_confirm! }.to change { party.phone_confirmed? } }
   end
 
   describe "#phone_confirmed?" do

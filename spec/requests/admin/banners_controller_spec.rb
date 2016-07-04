@@ -1,10 +1,10 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Admin::BannersController do
-  before{ signin_user }
+  before { signin_user }
 
   describe "already had a banner" do
-    let(:banner){ FactoryGirl.create :banner }
+    let(:banner) { FactoryGirl.create :banner }
 
     it "GET /admin/banners" do
       get "/admin/banners"
@@ -22,9 +22,9 @@ RSpec.describe Admin::BannersController do
     end
 
     it "PUT /admin/banners/123" do
-      expect{
+      expect {
         put "/admin/banners/#{banner.id}", admin_banner: { weight: 2 }
-      }.to change{ banner.reload.weight }.to(2)
+      }.to change { banner.reload.weight }.to(2)
       expect(response).to be_redirect
     end
 
@@ -35,9 +35,9 @@ RSpec.describe Admin::BannersController do
   end
 
   it "POST /admin/banners" do
-    expect{
+    expect {
       post "/admin/banners", admin_banner: FactoryGirl.attributes_for(:banner)
-    }.to change{ Banner.count }.by(1)
+    }.to change { Banner.count }.by(1)
     expect(response).to be_redirect
   end
 end

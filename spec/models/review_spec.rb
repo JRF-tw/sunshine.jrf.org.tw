@@ -17,10 +17,10 @@
 #  updated_at :datetime
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Review, type: :model do
-  let!(:review){ FactoryGirl.create :review }
+  let!(:review) { FactoryGirl.create :review }
 
   it "FactoryGirl" do
     expect(review).not_to be_new_record

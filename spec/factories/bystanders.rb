@@ -28,8 +28,8 @@
 
 FactoryGirl.define do
   factory :bystander do
-    sequence(:name) { |n| "bystander-#{n}"}
-    sequence(:email) { |n| "bystander-#{n}@test.com"}
+    sequence(:name) { |n| "bystander-#{n}" }
+    sequence(:email) { |n| "bystander-#{n}@test.com" }
     password "123123123"
     confirmed_at Time.now
 
@@ -40,7 +40,7 @@ FactoryGirl.define do
 
   factory :bystander_without_validate, class: Bystander do
     name "不理不理左衛門"
-    sequence(:email) { |n| "bystander_without_prove-#{n}@test.com"}
+    sequence(:email) { |n| "bystander_without_prove-#{n}@test.com" }
     password "123123123"
     confirmation_token "token"
   end

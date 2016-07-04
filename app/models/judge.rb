@@ -24,7 +24,7 @@
 
 class Judge < ActiveRecord::Base
   has_many :branches
-  has_many :current_branches, ->{ where(missed: false) }, class_name: "Branch"
+  has_many :current_branches, -> { where(missed: false) }, class_name: "Branch"
   has_many :main_judge_stories, class_name: "Story", foreign_key: "main_judge_id"
   has_many :main_judge_verdicts, class_name: "Verdict", foreign_key: "main_judge_id"
   belongs_to :court, foreign_key: :current_court_id

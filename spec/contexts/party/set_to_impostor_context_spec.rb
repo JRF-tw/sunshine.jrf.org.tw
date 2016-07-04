@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Party::SetToImpostorContext do
   let!(:party) { FactoryGirl.create :party, identify_number: "A225271722", name: "我愛羅" }
