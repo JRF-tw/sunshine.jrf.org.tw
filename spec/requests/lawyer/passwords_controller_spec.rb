@@ -1,11 +1,11 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Lawyer::PasswordsController, type: :request do
 
   describe "create" do
     context "email unexist" do
       let!(:params) { { email: "xxxx@gmail.com" } }
-      subject! { post "/lawyer/password", { lawyer: params }, 'HTTP_REFERER' => '/lawyer/passwords/new' }
+      subject! { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/passwords/new" }
 
       it { expect(response).to redirect_to("/lawyer/passwords/new") }
     end
@@ -13,7 +13,7 @@ RSpec.describe Lawyer::PasswordsController, type: :request do
     context "email unconfirmed" do
       let!(:lawyer) { FactoryGirl.create :lawyer }
       let!(:params) { { email: lawyer.email } }
-      subject! { post "/lawyer/password", { lawyer: params }, 'HTTP_REFERER' => '/lawyer/passwords/new' }
+      subject! { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/passwords/new" }
 
       it { expect(response).to redirect_to("/lawyer/passwords/new") }
       it { expect { subject }.not_to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
@@ -22,7 +22,7 @@ RSpec.describe Lawyer::PasswordsController, type: :request do
     context "email confirmed" do
       let!(:lawyer) { FactoryGirl.create :lawyer, :with_password_and_confirmed }
       let!(:params) { { email: lawyer.email } }
-      subject { post "/lawyer/password", { lawyer: params }, 'HTTP_REFERER' => '/lawyer/passwords/new' }
+      subject { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/passwords/new" }
 
       it { expect { subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
 

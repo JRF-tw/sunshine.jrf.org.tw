@@ -1,5 +1,5 @@
 class Lawyer::SessionsController < Devise::SessionsController
-  layout 'lawyer'
+  layout "lawyer"
 
   # POST /resource/sign_in
   def create

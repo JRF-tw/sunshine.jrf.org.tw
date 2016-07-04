@@ -26,7 +26,7 @@
 #  updated_at       :datetime
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Article, type: :model do
   let!(:article) { FactoryGirl.create :article }

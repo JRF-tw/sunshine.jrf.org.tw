@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Admin::JudgeCreateContext do
   let(:params) { attributes_for(:judge) }

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Scrap::UploadVerdictContext, type: :model do
   let!(:content) { "測試上傳內容" }

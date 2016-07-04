@@ -13,8 +13,8 @@ class Scrap::GetSchedulesPagesByStoryTypeContext < BaseContext
   def initialize(court_code, story_type, start_date, end_date)
     @start_date = start_date
     @end_date = end_date
-    @start_date_format = "#{@start_date.strftime("%Y").to_i - 1911}#{@start_date.strftime('%m%d')}"
-    @end_date_format = "#{@end_date.strftime("%Y").to_i - 1911}#{@end_date.strftime('%m%d')}"
+    @start_date_format = "#{@start_date.strftime("%Y").to_i - 1911}#{@start_date.strftime("%m%d")}"
+    @end_date_format = "#{@end_date.strftime("%Y").to_i - 1911}#{@end_date.strftime("%m%d")}"
     @court_code = court_code
     @story_type = story_type
     @sleep_time_interval = rand(1..2)
@@ -36,9 +36,9 @@ class Scrap::GetSchedulesPagesByStoryTypeContext < BaseContext
     data = { sql_conction: sql }
     sleep @sleep_time_interval
     response_data = Mechanize.new.get(SCHEDULE_INFO_URI, data)
-    response_data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
-    @page_total = if response_data.css('table')[2].css('tr')[0].text =~ /合計件數/
-                    response_data.css('table')[2].css('tr')[0].text.match(/\d+/)[0].to_i / PAGE_PER + 1
+    response_data = Nokogiri::HTML(Iconv.new("UTF-8//IGNORE", "Big5").iconv(response_data.body))
+    @page_total = if response_data.css("table")[2].css("tr")[0].text =~ /合計件數/
+                    response_data.css("table")[2].css("tr")[0].text.match(/\d+/)[0].to_i / PAGE_PER + 1
                   else
                     0
                   end

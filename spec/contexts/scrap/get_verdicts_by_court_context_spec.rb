@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Scrap::GetVerdictsByCourtContext, type: :model do
   let!(:court) { FactoryGirl.create :court, code: "TPH" }

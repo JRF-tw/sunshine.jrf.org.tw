@@ -57,10 +57,12 @@ Style/Semicolon:
   AllowAsExpressionSeparator: true
 
 Style/StringLiterals:
-  Enabled: false
+  EnforcedStyle: double_quotes
+  Enabled: true
 
 Style/StringLiteralsInInterpolation:
-  Enabled: false
+  EnforcedStyle: double_quotes
+  Enabled: true
 
 Style/ClassAndModuleChildren:
   Enabled: false

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Party, type: :model do
   let(:party) { FactoryGirl.create :party }

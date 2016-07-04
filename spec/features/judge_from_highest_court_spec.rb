@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe "從最高法院的判決書中爬取審判長法官，並且檢查建立之", type: :context do
 

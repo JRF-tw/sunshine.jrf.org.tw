@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Search::JudgeByCourtAndBranchContext do
   let!(:court) { FactoryGirl.create :court, full_name: "測試法院" }

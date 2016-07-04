@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe PunishmentsController, type: :request do
   let!(:profile) { FactoryGirl.create :profile }

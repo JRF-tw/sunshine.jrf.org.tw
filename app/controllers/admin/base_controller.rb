@@ -1,7 +1,7 @@
 class Admin::BaseController < ApplicationController
   include CrudConcern
 
-  layout 'admin'
+  layout "admin"
   before_action :authenticate_user!
   before_action :authenticate_admin_user!
   before_action do

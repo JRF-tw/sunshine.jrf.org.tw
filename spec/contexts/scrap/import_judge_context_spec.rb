@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Scrap::ImportJudgeContext, type: :model do
   let!(:court) { FactoryGirl.create :court, code: "TPH", scrap_name: "臺灣高等法院" }
@@ -10,8 +10,8 @@ RSpec.describe Scrap::ImportJudgeContext, type: :model do
     context "success" do
       it { expect(subject.name).to eq("匡偉") }
       it { expect(subject.court).to eq(court) }
-      it { expect(subject.branches.last.name).to eq('乙') }
-      it { expect(subject.branches.last.chamber_name).to eq('臺灣高等法院民事庭') }
+      it { expect(subject.branches.last.name).to eq("乙") }
+      it { expect(subject.branches.last.chamber_name).to eq("臺灣高等法院民事庭") }
       it { expect { subject }.to change { Judge.count }.by(1) }
     end
 
@@ -39,12 +39,12 @@ RSpec.describe Scrap::ImportJudgeContext, type: :model do
     end
 
     context "record_import_daily_branch" do
-      let(:record_object) { Redis::List.new('daily_import_branch_ids') }
+      let(:record_object) { Redis::List.new("daily_import_branch_ids") }
       it { expect { subject }.to change { record_object.values.count } }
     end
 
     context "record_import_daily_branch" do
-      let(:record_object) { Redis::List.new('daily_import_branch_ids') }
+      let(:record_object) { Redis::List.new("daily_import_branch_ids") }
       it { expect { subject }.to change { record_object.values.count } }
     end
   end

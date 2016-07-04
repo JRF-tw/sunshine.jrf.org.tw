@@ -11,7 +11,7 @@ class Admin::BystandersController < Admin::BaseController
         add_crumb @admin_page_title, "#"
         @bystanders = @bystanders.page(params[:page]).per(20)
       }
-      format.xlsx { render xlsx: 'download_file', filename: "旁觀者.xlsx" }
+      format.xlsx { render xlsx: "download_file", filename: "旁觀者.xlsx" }
     end
   end
 

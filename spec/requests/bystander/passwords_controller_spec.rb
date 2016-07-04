@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Bystander::PasswordsController, type: :request do
   let!(:bystander) { FactoryGirl.create :bystander }

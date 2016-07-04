@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Judge do
   let(:judge) { FactoryGirl.create :judge }

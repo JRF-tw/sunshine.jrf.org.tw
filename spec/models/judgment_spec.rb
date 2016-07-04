@@ -20,7 +20,7 @@
 #  updated_at         :datetime
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Judgment, type: :model do
   let!(:judgment) { FactoryGirl.create :judgment }

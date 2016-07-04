@@ -49,7 +49,7 @@ class Party::SetPhoneContext < BaseContext
   end
 
   def generate_verify_code
-    @verify_code = rand(1..9999).to_s.rjust(4, '0')
+    @verify_code = rand(1..9999).to_s.rjust(4, "0")
   end
 
   def assign_value

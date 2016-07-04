@@ -24,7 +24,7 @@ class SmsService
 
   def send_by_twilio(text)
     # TODO: change from number
-    Twilio::REST::Client.new(Setting.twilio.sid, Setting.twilio.token).account.messages.create(from: '+xxxxxxxxxxxx',
+    Twilio::REST::Client.new(Setting.twilio.sid, Setting.twilio.token).account.messages.create(from: "+xxxxxxxxxxxx",
                                                                                                to:   phone,
                                                                                                body: format_text(text))
   end

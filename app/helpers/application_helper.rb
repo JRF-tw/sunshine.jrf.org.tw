@@ -49,7 +49,7 @@ module ApplicationHelper
   end
 
   def simple_text(text)
-    safe_join([sanitize(text, tags: []).gsub(/\n/, '<br>')], "")
+    safe_join([sanitize(text, tags: []).gsub(/\n/, "<br>")], "")
   end
 
   def render_punishment_decision_unit(punishment)

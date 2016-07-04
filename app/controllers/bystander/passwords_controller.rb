@@ -1,5 +1,5 @@
 class Bystander::PasswordsController < Devise::PasswordsController
-  layout 'bystander'
+  layout "bystander"
 
   include CrudConcern
   prepend_before_action :require_no_authentication, except: [:edit, :update, :send_reset_password_mail]

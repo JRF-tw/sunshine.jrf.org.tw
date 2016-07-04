@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Party::SendResetPasswordSmsContext do
   let!(:party) { FactoryGirl.create :party }

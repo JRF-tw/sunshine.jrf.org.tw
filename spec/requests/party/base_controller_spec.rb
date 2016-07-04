@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Party::BaseController, type: :request do
   describe "#set_phone?" do

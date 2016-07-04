@@ -16,7 +16,7 @@
 #  updated_at   :datetime
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe License, type: :model do
   let!(:license) { FactoryGirl.create :license }

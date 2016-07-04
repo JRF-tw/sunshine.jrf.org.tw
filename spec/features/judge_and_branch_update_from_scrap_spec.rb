@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe "從爬蟲資料中更新股別分表", type: :context do
   let!(:court) { FactoryGirl.create :court, code: "TPH", scrap_name: "臺灣高等法院" }

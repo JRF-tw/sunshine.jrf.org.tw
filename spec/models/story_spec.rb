@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Story do
   let(:story) { FactoryGirl.create :story }

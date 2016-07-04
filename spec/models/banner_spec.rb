@@ -12,7 +12,7 @@
 #  updated_at :datetime
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Banner, type: :model do
   let!(:banner) { FactoryGirl.create :banner }

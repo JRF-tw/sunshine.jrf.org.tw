@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Scrap::NotifyDailyContext, type: :model do
   let!(:court) { FactoryGirl.create :court, code: "TPH", scrap_name: "臺灣高等法院" }

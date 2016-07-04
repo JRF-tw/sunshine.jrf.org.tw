@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Bystander::UpdateProfileContext do
   let!(:bystander) { FactoryGirl.create :bystander }

@@ -1,7 +1,7 @@
 module Webmock
   def webmock_all!
     stub_request(:get, "https://google.com/api.json")
-      .to_return(headers: { 'Content-Type' => 'application/json' }, body: '{ "ok": true }')
+      .to_return(headers: { "Content-Type" => "application/json" }, body: '{ "ok": true }')
 
     stub_request(:post, /http:\/\/csdi\.judicial\.gov\.tw\/abbs\/wkw\/WHD3A01\.jsp/)
       .with(body: { "court" => "TPH" })

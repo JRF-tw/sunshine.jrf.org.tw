@@ -41,17 +41,17 @@ class Admin::Career < ::Career
     if (is_hidden == false) && (newest_career == self)
       if new_assign_court.present?
         profile.update_column :current_court, new_assign_court
-        if ['法官', '檢察官'].include? new_assign_judicial
+        if ["法官", "檢察官"].include? new_assign_judicial
           profile.update_column :current, new_assign_judicial
         else
-          profile.update_column :current, '其他'
+          profile.update_column :current, "其他"
         end
       elsif new_unit.present?
         profile.update_column :current_court, new_unit
-        if ['法官', '檢察官'].include? new_title
+        if ["法官", "檢察官"].include? new_title
           profile.update_column :current, new_title
         else
-          profile.update_column :current, '其他'
+          profile.update_column :current, "其他"
         end
       end
     end

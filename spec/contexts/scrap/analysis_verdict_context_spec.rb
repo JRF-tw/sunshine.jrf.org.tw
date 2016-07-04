@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Scrap::AnalysisVerdictContext, type: :model do
   let!(:verdict_word) { "測試裁判字別" }

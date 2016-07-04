@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe StoryRelation, type: :model do
   describe "FactoryGirl" do

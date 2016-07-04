@@ -188,7 +188,7 @@ namespace :dev do
       content = text.sample
       suit_no = (1000..1200).to_a.sample
       state = Suit::STATE.sample
-      keyword = keywords.sample((1..3).to_a.sample).join(',')
+      keyword = keywords.sample((1..3).to_a.sample).join(",")
       file = File.open "#{Rails.root}/spec/fixtures/suit_pic/case-#{i + 1}.jpg"
       suit = Admin::Suit.create!(title: t, state: state, suit_no: suit_no, summary: summary, content: content, pic: file, keyword: keyword, is_hidden: false)
       judge_ids.each do |j|

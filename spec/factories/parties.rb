@@ -34,7 +34,7 @@ FactoryGirl.define do
     sequence(:name) { |n| "當事人 - #{n}" }
     password "12321313213"
     sequence(:identify_number) { |_n| "A#{rand(100_000_000..299_999_999)}" }
-    sequence(:phone_number) { |_n| "09#{rand(1..99_999_999).to_s.rjust(8, '0')}" }
+    sequence(:phone_number) { |_n| "09#{rand(1..99_999_999).to_s.rjust(8, "0")}" }
 
     trait :with_unconfirmed_email do
       unconfirmed_email "aron1122@gmail.com"
@@ -46,6 +46,6 @@ FactoryGirl.define do
     password "12321313213"
     password_confirmation "12321313213"
     sequence(:identify_number) { |_n| "A#{rand(100_000_000..299_999_999)}" }
-    sequence(:phone_number) { |_n| "09#{rand(1..99_999_999).to_s.rjust(8, '0')}" }
+    sequence(:phone_number) { |_n| "09#{rand(1..99_999_999).to_s.rjust(8, "0")}" }
   end
 end

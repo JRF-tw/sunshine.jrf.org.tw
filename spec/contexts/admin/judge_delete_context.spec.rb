@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Admin::JudgeDeleteContext do
   let(:judge) { FactoryGirl.create(:judge) }

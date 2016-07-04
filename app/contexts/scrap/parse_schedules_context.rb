@@ -35,7 +35,7 @@ class Scrap::ParseSchedulesContext < BaseContext
     data = { pageNow: @current_page, sql_conction: sql, pageTotal: @page_total, pageSize: 15, rowStart: 1 }
     sleep @sleep_time_interval
     response_data = Mechanize.new.get(SCHEDULE_INFO_URI, data)
-    @data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
+    @data = Nokogiri::HTML(Iconv.new("UTF-8//IGNORE", "Big5").iconv(response_data.body))
   end
 
   def parse_schedule_info
@@ -44,7 +44,7 @@ class Scrap::ParseSchedulesContext < BaseContext
     scope.length.times.each do |index|
       # first row is table desc
       next if index == 0
-      row_data = scope[index].css('td')
+      row_data = scope[index].css("td")
       hash = {
         story_type: row_data[1].text.strip,
         year: row_data[2].text.strip.to_i,

@@ -1,6 +1,6 @@
 class Lawyer::PasswordsController < Devise::PasswordsController
   include CrudConcern
-  layout 'lawyer'
+  layout "lawyer"
 
   prepend_before_action :require_no_authentication, except: [:edit, :update, :send_reset_password_mail]
 

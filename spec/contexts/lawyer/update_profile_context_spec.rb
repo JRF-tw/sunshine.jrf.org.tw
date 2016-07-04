@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Lawyer::UpdateProfileContext do
   let!(:lawyer) { FactoryGirl.create :lawyer }

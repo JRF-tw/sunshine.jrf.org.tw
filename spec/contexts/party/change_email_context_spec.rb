@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Party::ChangeEmailContext do
   let!(:party) { FactoryGirl.create :party, unconfirmed_email: "hh@gmail.com" }

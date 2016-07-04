@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe "爬蟲更新法院資料的機制", type: :request do
   context "爬蟲抓到資料(包含法院代號和法院名稱)" do

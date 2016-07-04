@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe StoryRelationCreateContext do
   let!(:story) { FactoryGirl.create :story, party_names: ["party"], lawyer_names: ["lawyer"], judges_names: ["judge"] }

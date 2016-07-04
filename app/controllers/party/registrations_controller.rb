@@ -1,5 +1,5 @@
 class Party::RegistrationsController < Devise::RegistrationsController
-  layout 'party'
+  layout "party"
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   # POST /resource

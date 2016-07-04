@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Admin::CourtCreateContext do
   let(:params) { attributes_for(:court_for_params) }

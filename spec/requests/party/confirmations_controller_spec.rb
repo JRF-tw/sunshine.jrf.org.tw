@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Party::ConfirmationsController, type: :request do
   let!(:party) { FactoryGirl.create :party, confirmation_token: "imtoken" }

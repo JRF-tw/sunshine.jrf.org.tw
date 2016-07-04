@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Party::RegistrationsController, type: :request do
   let!(:party) { FactoryGirl.create :party }
@@ -28,7 +28,7 @@ RSpec.describe Party::RegistrationsController, type: :request do
 
     context "failed" do
       let!(:params) { { identify_number: party.identify_number, phone_number: "12312312" } }
-      subject! { post "/party/password", { party: params }, 'HTTP_REFERER' => 'http://www.example.com/party/new' }
+      subject! { post "/party/password", { party: params }, "HTTP_REFERER" => "http://www.example.com/party/new" }
 
       it { expect(response).to be_success }
     end

@@ -1,5 +1,5 @@
 class Bystander::SessionsController < Devise::SessionsController
-  layout 'bystander'
+  layout "bystander"
 
   def create
     self.resource = warden.authenticate!(auth_options)

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Branch do
   let(:branch) { FactoryGirl.create :branch }

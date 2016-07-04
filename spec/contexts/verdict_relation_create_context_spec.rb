@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe VerdictRelationCreateContext do
   let!(:court) { FactoryGirl.create :court }

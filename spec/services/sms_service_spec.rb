@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe SmsService do
   let!(:phone) { "0911111111" }

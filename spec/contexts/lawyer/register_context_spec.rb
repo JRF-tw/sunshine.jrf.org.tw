@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Lawyer::RegisterContext do
   let!(:lawyer) { FactoryGirl.create :lawyer }
@@ -22,7 +22,7 @@ describe Lawyer::RegisterContext do
     end
 
     context "lawyer not found" do
-      subject { described_class.new(lawyer: { name: "阿英阿紅", email: 'a@example.com' }) }
+      subject { described_class.new(lawyer: { name: "阿英阿紅", email: "a@example.com" }) }
       it { expect { subject.perform }.to change { subject.errors[:lawyer_not_found] } }
     end
 

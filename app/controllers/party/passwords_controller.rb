@@ -2,7 +2,7 @@ class Party::PasswordsController < Devise::PasswordsController
   include CrudConcern
 
   prepend_before_action :require_no_authentication, except: [:edit, :update, :send_reset_password_sms]
-  layout 'party'
+  layout "party"
 
   # POST /resource/password
   def create

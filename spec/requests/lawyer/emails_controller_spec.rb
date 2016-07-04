@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Lawyer::EmailsController, type: :request do
   before { signin_lawyer }

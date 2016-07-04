@@ -1,5 +1,5 @@
 class Bystander::ConfirmationsController < Devise::ConfirmationsController
-  layout 'bystander'
+  layout "bystander"
 
   before_action :redirect_new_to_sign_in, only: [:new]
 

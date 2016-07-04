@@ -43,7 +43,7 @@ class Scrap::ImportJudgeContext < BaseContext
   end
 
   def record_import_daily_branch
-    Redis::List.new('daily_import_branch_ids') << @branch.id
+    Redis::List.new("daily_import_branch_ids") << @branch.id
   end
 
   def record_count_to_daily_notify

@@ -1,7 +1,7 @@
 class Lawyer::RegistrationsController < Devise::RegistrationsController
   include CrudConcern
   before_action :configure_permitted_parameters, if: :devise_controller?
-  layout 'lawyer'
+  layout "lawyer"
 
   def create
     context = Lawyer::RegisterContext.new(params)

@@ -5,7 +5,7 @@ module RequestClient
   end
 
   def signout_bystander
-    delete "/bystander/sign_out", {}, 'HTTP_REFERER' => 'http://www.example.com/bystanders'
+    delete "/bystander/sign_out", {}, "HTTP_REFERER" => "http://www.example.com/bystanders"
     @current_bystander = nil
   end
 

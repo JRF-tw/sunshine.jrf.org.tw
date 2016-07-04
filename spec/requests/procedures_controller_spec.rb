@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ProceduresController, type: :request do
   let!(:suit) { FactoryGirl.create :suit }

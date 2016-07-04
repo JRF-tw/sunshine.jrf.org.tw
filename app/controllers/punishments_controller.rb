@@ -43,7 +43,7 @@ class PunishmentsController < BaseController
       title: "#{@profile.name}的懲處相關紀錄",
       description: "#{@profile.name}懲處紀錄。",
       keywords: "#{@profile.name}懲處紀錄,#{@profile.name}",
-      image: ActionController::Base.helpers.asset_path('hero-profiles-show-M.png')
+      image: ActionController::Base.helpers.asset_path("hero-profiles-show-M.png")
     )
   end
 
@@ -56,7 +56,7 @@ class PunishmentsController < BaseController
       title: "#{@profile.name}的懲處紀錄內容",
       description: "#{@profile.name}懲處內容。",
       keywords: "#{@profile.name}懲處內容,#{@profile.name}",
-      image: ActionController::Base.helpers.asset_path('hero-profiles-show-M.png')
+      image: ActionController::Base.helpers.asset_path("hero-profiles-show-M.png")
     )
   end
 

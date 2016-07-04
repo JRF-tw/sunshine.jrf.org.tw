@@ -1,5 +1,5 @@
 class Party::SessionsController < Devise::SessionsController
-  layout 'party'
+  layout "party"
 
   # POST /resource/sign_in
   def create

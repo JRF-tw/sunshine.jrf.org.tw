@@ -1,5 +1,5 @@
 class Bystander::RegistrationsController < Devise::RegistrationsController
-  layout 'bystander'
+  layout "bystander"
   include CrudConcern
 
   before_action :configure_permitted_parameters, if: :devise_controller?
