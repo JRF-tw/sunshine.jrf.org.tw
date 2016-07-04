@@ -1,7 +1,7 @@
 class Party::PasswordsController < Devise::PasswordsController
   include CrudConcern
 
-  prepend_before_filter :require_no_authentication, except: [:edit, :update, :send_reset_password_sms]
+  prepend_before_action :require_no_authentication, except: [:edit, :update, :send_reset_password_sms]
   layout 'party'
 
   # POST /resource/password
@@ -11,8 +11,7 @@ class Party::PasswordsController < Devise::PasswordsController
       redirect_to new_session_path(:party), flash: { success: "已寄送簡訊" }
     else
       # for build resource
-      params = self.resource_params.inject({}){ |params,(k,v)| params[k.to_sym] = v; params }
-
+      params = resource_params.each_with_object({}) { |array, hash| hash[array.first.to_sym] = array.last }
       self.resource = resource_class.new(params)
       flash[:notice] = context.error_messages.join(", ")
       render "new"
@@ -34,21 +33,21 @@ class Party::PasswordsController < Devise::PasswordsController
   def send_reset_password_sms
     party_params = { identify_number: current_party.identify_number, phone_number: current_party.phone_number }
     context = Party::SendResetPasswordSmsContext.new(party_params)
-    #TODO refactory
+    # TODO: refactory
     if context.perform
       redirect_to party_profile_path, flash: { success: "已寄送重設密碼簡訊" }
     else
-      redirect_to party_profile_path, flash: { error: "#{context.error_messages.join(", ")}" }
+      redirect_to party_profile_path, flash: { error: context.error_messages.join(", ").to_s }
     end
   end
 
   private
 
-  def after_sign_in_path_for(resource)
+  def after_sign_in_path_for(_resource)
     party_profile_path
   end
 
-  def after_resetting_password_path_for(resource)
+  def after_resetting_password_path_for(_resource)
     party_profile_path
   end
 

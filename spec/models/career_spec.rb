@@ -29,7 +29,7 @@
 require 'rails_helper'
 
 RSpec.describe Career, type: :model do
-  let!(:career){ FactoryGirl.create :career }
+  let!(:career) { FactoryGirl.create :career }
 
   it "FactoryGirl" do
     expect(career).not_to be_new_record

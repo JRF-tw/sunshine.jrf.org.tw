@@ -35,7 +35,7 @@
 #
 
 class PunishmentsController < BaseController
-	before_action :get_instances
+  before_action :get_instances
 
   def index
     @punishments = @punishments.shown.page(params[:page]).per(12)
@@ -48,7 +48,7 @@ class PunishmentsController < BaseController
   end
 
   def show
-  	@punishment = @profile.punishments.find(params[:id])
+    @punishment = @profile.punishments.find(params[:id])
     if @punishment.is_hidden?
       not_found
     end
@@ -63,7 +63,7 @@ class PunishmentsController < BaseController
   private
 
   def get_instances
-  	@profile = Profile.find(params[:profile_id])
+    @profile = Profile.find(params[:profile_id])
     if @profile.is_hidden?
       not_found
     end

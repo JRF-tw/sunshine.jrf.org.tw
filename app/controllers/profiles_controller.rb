@@ -64,7 +64,7 @@ class ProfilesController < BaseController
     description << "現任#{@profile.current}" if @profile.current.present?
     image = @profile.avatar.present? ? @profile.avatar.L_540.url : nil
     set_meta(
-      title: "#{@profile.name}",
+      title: @profile.name.to_s,
       description: description.join(""),
       keywords: "#{@profile.name},#{@profile.current}",
       image: image

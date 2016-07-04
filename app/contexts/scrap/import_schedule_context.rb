@@ -20,7 +20,7 @@ class Scrap::ImportScheduleContext < BaseContext
   def perform(hash)
     @hash = hash
     run_callbacks :perform do
-      @schedule = @story.schedules.find_or_create_by(court: @court, branch_name: @branch_name, date: @date, branch_judge: @main_judge )
+      @schedule = @story.schedules.find_or_create_by(court: @court, branch_name: @branch_name, date: @date, branch_judge: @main_judge)
     end
   end
 

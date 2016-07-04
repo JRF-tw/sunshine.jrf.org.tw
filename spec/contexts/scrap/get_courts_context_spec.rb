@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe Scrap::GetCourtsContext, :type => :model do
+RSpec.describe Scrap::GetCourtsContext, type: :model do
 
   describe "#perform" do
     context "success" do
-      subject{ described_class.new.perform }
-      it { expect{ subject }.to change_sidekiq_jobs_size_of(Scrap::ImportCourtContext, :perform) }
+      subject { described_class.new.perform }
+      it { expect { subject }.to change_sidekiq_jobs_size_of(Scrap::ImportCourtContext, :perform) }
     end
 
     context "check_db_data_and_notify" do
@@ -13,10 +13,10 @@ RSpec.describe Scrap::GetCourtsContext, :type => :model do
     end
 
     context "notify daily report" do
-      before{ described_class.new.perform }
-      subject{ Scrap::NotifyDailyContext.new.perform }
+      before { described_class.new.perform }
+      subject { Scrap::NotifyDailyContext.new.perform }
 
-      it { expect{ subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      it { expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
     end
   end
 end

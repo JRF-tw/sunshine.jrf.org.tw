@@ -14,7 +14,7 @@
 require 'rails_helper'
 
 RSpec.describe Court, type: :model do
-  let!(:court){ FactoryGirl.create :court }
+  let!(:court) { FactoryGirl.create :court }
 
   it "FactoryGirl" do
     expect(court).not_to be_new_record

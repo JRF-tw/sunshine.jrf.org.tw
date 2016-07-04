@@ -9,9 +9,9 @@ describe "從最高法院的判決書中爬取審判長法官，並且檢查建�
     let!(:orginal_data) { File.open("#{Rails.root}/spec/fixtures/scrap_data/highest_verdict.htm") }
     let!(:verdict_content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/highest_verdict_content.txt") }
     let!(:verdict_word) { "105,台上,1159" }
-    let!(:verdict_publish_date) { Date.today }
+    let!(:verdict_publish_date) { Time.zone.today }
     let!(:verdict_stroy_type) { "刑事" }
-    subject{ Scrap::ImportVerdictContext.new(court, orginal_data, verdict_content, verdict_word, verdict_publish_date, verdict_stroy_type).perform }
+    subject { Scrap::ImportVerdictContext.new(court, orginal_data, verdict_content, verdict_word, verdict_publish_date, verdict_stroy_type).perform }
 
     context "最高法院的法官列表中，姓名已存在" do
       let!(:judge) { FactoryGirl.create :judge, name: "陳宗鎮", court: court }
@@ -20,13 +20,13 @@ describe "從最高法院的判決書中爬取審判長法官，並且檢查建�
         let!(:judge1) { FactoryGirl.create :judge, name: "陳宗鎮", court: court1 }
 
         it "不建立新法官" do
-          expect { subject }.not_to change{ Judge.count }
+          expect { subject }.not_to change { Judge.count }
         end
       end
 
       context "其他法院的法官列表中，姓名不存在" do
         it "不建立新法官" do
-          expect { subject }.not_to change{ Judge.count }
+          expect { subject }.not_to change { Judge.count }
         end
       end
     end
@@ -36,7 +36,7 @@ describe "從最高法院的判決書中爬取審判長法官，並且檢查建�
         let!(:judge1) { FactoryGirl.create :judge, name: "陳宗鎮", court: court1 }
 
         it "建立新法官" do
-          expect { subject }.to change{ Judge.count }
+          expect { subject }.to change { Judge.count }
         end
 
         it "新法官隸屬最高法院" do
@@ -47,7 +47,7 @@ describe "從最高法院的判決書中爬取審判長法官，並且檢查建�
 
       context "其他法院的法官列表中，姓名不存在" do
         it "建立新法官" do
-          expect { subject }.to change{ Judge.count }
+          expect { subject }.to change { Judge.count }
         end
 
         it "新法官隸屬最高法院" do
@@ -62,9 +62,9 @@ describe "從最高法院的判決書中爬取審判長法官，並且檢查建�
     let!(:orginal_data) { File.open("#{Rails.root}/spec/fixtures/scrap_data/judgment.html") }
     let!(:verdict_content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/judgment_content.txt") }
     let!(:verdict_word) { "105,上易緝,2" }
-    let!(:verdict_publish_date) { Date.today }
+    let!(:verdict_publish_date) { Time.zone.today }
     let!(:verdict_stroy_type) { "刑事" }
-    subject{ Scrap::ImportVerdictContext.new(court1, orginal_data, verdict_content, verdict_word, verdict_publish_date, verdict_stroy_type).perform }
+    subject { Scrap::ImportVerdictContext.new(court1, orginal_data, verdict_content, verdict_word, verdict_publish_date, verdict_stroy_type).perform }
 
     context "最高法院的法官列表中，姓名已存在" do
       let!(:judge) { FactoryGirl.create :judge, name: "施俊堯", court: court }
@@ -73,13 +73,13 @@ describe "從最高法院的判決書中爬取審判長法官，並且檢查建�
         let!(:judge) { FactoryGirl.create :judge, name: "施俊堯", court: court1 }
 
         it "不建立新法官" do
-          expect { subject }.not_to change{ Judge.count }
+          expect { subject }.not_to change { Judge.count }
         end
       end
 
       context "其他法院的法官列表中，姓名不存在" do
         it "不建立新法官" do
-          expect { subject }.not_to change{ Judge.count }
+          expect { subject }.not_to change { Judge.count }
         end
       end
     end
@@ -89,13 +89,13 @@ describe "從最高法院的判決書中爬取審判長法官，並且檢查建�
         let!(:judge) { FactoryGirl.create :judge, name: "施俊堯", court: court1 }
 
         it "不建立新法官" do
-          expect { subject }.not_to change{ Judge.count }
+          expect { subject }.not_to change { Judge.count }
         end
       end
 
       context "其他法院的法官列表中，姓名不存在" do
         it "不建立新法官" do
-          expect { subject }.not_to change{ Judge.count }
+          expect { subject }.not_to change { Judge.count }
         end
       end
     end

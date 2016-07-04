@@ -1,6 +1,5 @@
 class Bystander::SchedulesController < Bystander::BaseController
   def new
-
   end
 
   def verify

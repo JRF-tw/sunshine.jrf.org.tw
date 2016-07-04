@@ -1,7 +1,7 @@
 class Scrap::GetSchedulesStoryTypesByCourtContext < BaseContext
-  COURT_INFO_URI = "http://csdi.judicial.gov.tw/abbs/wkw/WHD3A01.jsp"
+  COURT_INFO_URI = "http://csdi.judicial.gov.tw/abbs/wkw/WHD3A01.jsp".freeze
 
-  before_perform  :get_story_types_by_court
+  before_perform :get_story_types_by_court
 
   class << self
     def perform(court_code, start_date, end_date)
@@ -31,6 +31,6 @@ class Scrap::GetSchedulesStoryTypesByCourtContext < BaseContext
     sleep @sleep_time_interval
     response_data = Mechanize.new.post(COURT_INFO_URI, data)
     response_data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
-    @story_types = response_data.css("input[type='radio']").map{ |r| r.attribute('value').value }
+    @story_types = response_data.css("input[type='radio']").map { |r| r.attribute('value').value }
   end
 end

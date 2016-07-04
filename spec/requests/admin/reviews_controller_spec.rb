@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Admin::ReviewsController do
-  let!(:profile){ FactoryGirl.create :profile }
+  let!(:profile) { FactoryGirl.create :profile }
 
-  before{ signin_user }
+  before { signin_user }
 
   describe "already had a review" do
-    let!(:review){ FactoryGirl.create :review, profile: profile }
+    let!(:review) { FactoryGirl.create :review, profile: profile }
 
     it "GET /admin/profiles/profile.id/reviews" do
       get "/admin/profiles/#{profile.id}/reviews"
@@ -24,9 +24,9 @@ RSpec.describe Admin::ReviewsController do
     end
 
     it "PUT /admin/profiles/profile.id/reviews/123" do
-      expect{
+      expect {
         put "/admin/profiles/#{profile.id}/reviews/#{review.id}", admin_review: { name: "haha" }
-      }.to change{ review.reload.name }.to("haha")
+      }.to change { review.reload.name }.to("haha")
       expect(response).to be_redirect
     end
 
@@ -37,9 +37,9 @@ RSpec.describe Admin::ReviewsController do
   end
 
   it "POST /admin/profiles/profile.id/reviews" do
-    expect{
+    expect {
       post "/admin/profiles/#{profile.id}/reviews", admin_review: FactoryGirl.attributes_for(:review)
-    }.to change{ Review.count }.by(1)
+    }.to change { Review.count }.by(1)
     expect(response).to be_redirect
   end
 end

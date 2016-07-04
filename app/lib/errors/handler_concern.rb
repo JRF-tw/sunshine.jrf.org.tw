@@ -11,7 +11,7 @@ module Errors::HandlerConcern
 
   def has_error?
     return false unless @errors
-    @errors.size > 0
+    !@errors.empty?
   end
 
   protected
@@ -25,6 +25,6 @@ module Errors::HandlerConcern
   end
 
   def raise_error!(key, data = {})
-    fail ::Errors::Exception.new(key, data)
+    raise ::Errors::Exception.new(key, data)
   end
 end

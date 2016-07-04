@@ -12,7 +12,7 @@ class Admin::JudgeUpdateContext < BaseContext
     run_callbacks :perform do
       return add_error(:data_update_fail, @judge.errors.full_messages.join("\n")) unless @judge.save
       true
-    end 
+    end
   end
 
   private
@@ -20,4 +20,4 @@ class Admin::JudgeUpdateContext < BaseContext
   def assign_value
     @judge.assign_attributes @params
   end
-end 
+end

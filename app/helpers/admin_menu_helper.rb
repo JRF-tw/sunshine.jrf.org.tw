@@ -37,7 +37,7 @@ module AdminMenuHelper
       menus.each do |label, item|
         html << render_admin_menu_item(label, item)
       end
-      raw html.join
+      safe_join(html, "")
     end
   end
 
@@ -47,14 +47,14 @@ module AdminMenuHelper
     html = []
     html << link_to(item[:submenu] ? "#" : item[:url]) do
       tmp = []
-      tmp << content_tag(:i, class: "icon icon-#{item[:icon]}"){ "" } if item[:icon]
+      tmp << content_tag(:i, class: "icon icon-#{item[:icon]}") { "" } if item[:icon]
       tmp << label
-      raw tmp.join
+      safe_join(tmp, "")
     end
     html << render_admin_menu(item[:submenu]) if item[:submenu]
     actived = item[:match] ? request.original_url =~ item[:match] : false
     content_tag(:li, class: "#{item[:submenu] ? "submenu " : ""}#{actived ? "active open" : ""}") do
-      raw html.join
+      safe_join(html, "")
     end
   end
 end

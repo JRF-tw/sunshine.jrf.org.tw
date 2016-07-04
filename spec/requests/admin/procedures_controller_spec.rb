@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Admin::ProceduresController do
-  let!(:suit){ FactoryGirl.create :suit }
+  let!(:suit) { FactoryGirl.create :suit }
 
-  before{ signin_user }
+  before { signin_user }
 
   describe "already had a procedure" do
-    let!(:procedure){ FactoryGirl.create :procedure, suit: suit }
+    let!(:procedure) { FactoryGirl.create :procedure, suit: suit }
 
     it "GET /admin/suits/suit.id/procedures" do
       get "/admin/suits/#{suit.id}/procedures"
@@ -24,9 +24,9 @@ RSpec.describe Admin::ProceduresController do
     end
 
     it "PUT /admin/suits/suit.id/procedures/123" do
-      expect{
+      expect {
         put "/admin/suits/#{suit.id}/procedures/#{procedure.id}", admin_procedure: { title: "haha" }
-      }.to change{ procedure.reload.title }.to("haha")
+      }.to change { procedure.reload.title }.to("haha")
       expect(response).to be_redirect
     end
 
@@ -38,10 +38,10 @@ RSpec.describe Admin::ProceduresController do
 
   it "POST /admin/suits/suit.id/procedures" do
     suit_judge = FactoryGirl.create :suit_judge
-    admin_procedure = { suit_id: suit_judge.suit_id, profile_id: suit_judge.profile_id, unit: "foo", title: "bar", procedure_unit: "haha", procedure_content: "hoho", procedure_date: Date.today }
-    expect{
+    admin_procedure = { suit_id: suit_judge.suit_id, profile_id: suit_judge.profile_id, unit: "foo", title: "bar", procedure_unit: "haha", procedure_content: "hoho", procedure_date: Time.zone.today }
+    expect {
       post "/admin/suits/#{suit_judge.suit_id}/procedures", admin_procedure: admin_procedure
-    }.to change{ Procedure.count }.by(1)
+    }.to change { Procedure.count }.by(1)
     expect(response).to be_redirect
   end
 end

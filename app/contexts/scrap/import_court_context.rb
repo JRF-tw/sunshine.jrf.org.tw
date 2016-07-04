@@ -1,5 +1,5 @@
 class Scrap::ImportCourtContext < BaseContext
-  SCRAP_URI = "http://jirs.judicial.gov.tw/FJUD/FJUDQRY01_1.aspx"
+  SCRAP_URI = "http://jirs.judicial.gov.tw/FJUD/FJUDQRY01_1.aspx".freeze
   before_perform  :check_data
   before_perform  :tricky_court_data
   before_perform  :find_court
@@ -40,7 +40,7 @@ class Scrap::ImportCourtContext < BaseContext
   end
 
   def find_court
-    @court = Court.find_by(code: @code) || Court.find_by(scrap_name: @scrap_name) || Court.find_by(full_name: @scrap_name.gsub(" ", ""))
+    @court = Court.find_by(code: @code) || Court.find_by(scrap_name: @scrap_name) || Court.find_by(full_name: @scrap_name.delete(" "))
   end
 
   def build_court
@@ -72,7 +72,7 @@ class Scrap::ImportCourtContext < BaseContext
   end
 
   def notify_diff_fullname
-    SlackService.notify_court_alert_async("法院全名與爬蟲不符合 :\n爬蟲名稱 : #{ @scrap_name }\n資料庫名稱 : #{ @court.full_name }") if @court.full_name != @scrap_name
+    SlackService.notify_court_alert_async("法院全名與爬蟲不符合 :\n爬蟲名稱 : #{@scrap_name}\n資料庫名稱 : #{@court.full_name}") if @court.full_name != @scrap_name
   end
 
   def record_count_to_daily_notify

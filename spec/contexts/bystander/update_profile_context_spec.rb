@@ -5,7 +5,7 @@ describe Bystander::UpdateProfileContext do
   let!(:context) { described_class.new(bystander) }
 
   context "success" do
-    let!(:params){ { phone_number: "0911111111" } }
+    let!(:params) { { phone_number: "0911111111" } }
     subject { described_class.new(bystander).perform(params) }
 
     it { expect(subject).to be_truthy }
@@ -13,7 +13,7 @@ describe Bystander::UpdateProfileContext do
   end
 
   describe "#parse_phone_number" do
-    let!(:params){ { phone_number: "" } }
+    let!(:params) { { phone_number: "" } }
     subject { described_class.new(bystander).perform(params) }
 
     it { expect(subject).to be_truthy }

@@ -1,6 +1,5 @@
 class Lawyer::SchedulesController < Lawyer::BaseController
   def new
-
   end
 
   def verify

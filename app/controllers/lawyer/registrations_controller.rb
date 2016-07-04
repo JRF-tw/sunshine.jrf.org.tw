@@ -22,7 +22,7 @@ class Lawyer::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.for(:sign_up) << :name
   end
 
-  def after_inactive_sign_up_path_for(resource)
+  def after_inactive_sign_up_path_for(_resource)
     new_lawyer_session_path
   end
 

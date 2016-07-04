@@ -1,4 +1,4 @@
-class Bystander::BaseController  < ApplicationController
+class Bystander::BaseController < ApplicationController
   layout 'bystander'
   include CrudConcern
 

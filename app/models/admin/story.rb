@@ -21,5 +21,4 @@
 
 class Admin::Story < ::Story
 
-end 
-  
+end

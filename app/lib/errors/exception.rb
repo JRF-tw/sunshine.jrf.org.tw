@@ -1,4 +1,4 @@
-class Errors::Exception < ::Exception
+class Errors::Exception < RuntimeError
   attr_accessor :key, :info
 
   def initialize(key, info = {})

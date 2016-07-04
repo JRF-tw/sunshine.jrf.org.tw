@@ -4,7 +4,7 @@ RSpec.describe Lawyer::SubscribesController, type: :request do
   before { signin_lawyer }
 
   describe "#create" do
-    subject!{ post "/lawyer/stories/xxxx/subscribe" }
+    subject! { post "/lawyer/stories/xxxx/subscribe" }
     it { expect(response).to be_redirect }
   end
 end

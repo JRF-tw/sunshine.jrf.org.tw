@@ -21,7 +21,7 @@ class Party::SetPhoneContext < BaseContext
     @params = permit_params(params[:party] || params, PERMITS)
 
     run_callbacks :perform do
-      return add_error(:data_create_fail, "#{@party.errors.full_messages.join(",")}") unless @party.save
+      return add_error(:data_create_fail, @party.errors.full_messages.join(",").to_s) unless @party.save
       true
     end
   end
@@ -33,7 +33,7 @@ class Party::SetPhoneContext < BaseContext
   end
 
   def check_phone_format
-    return add_error(:data_update_fail, "手機號碼格式錯誤") unless @params[:phone_number].match(/\A(0)(9)([0-9]{8})\z/)
+    return add_error(:data_update_fail, "手機號碼格式錯誤") unless @params[:phone_number] =~ /\A(0)(9)([0-9]{8})\z/
   end
 
   def check_unexist_phone_number
@@ -41,7 +41,7 @@ class Party::SetPhoneContext < BaseContext
   end
 
   def check_unexist_unconfirmed_phone
-    return add_error(:data_update_fail, "該手機號碼正等待驗證中") if (Party.all.map{ |n| n if n.unconfirmed_phone.value == @params[:phone_number] }).compact.present?
+    return add_error(:data_update_fail, "該手機號碼正等待驗證中") if (Party.all.map { |n| n if n.unconfirmed_phone.value == @params[:phone_number] }).compact.present?
   end
 
   def check_sms_send_count

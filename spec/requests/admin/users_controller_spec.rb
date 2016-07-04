@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Admin::UsersController do
-  before{ signin_user }
+  before { signin_user }
 
   it "GET /admin/users" do
     get "/admin/users"
@@ -25,37 +25,37 @@ RSpec.describe Admin::UsersController do
 
   context "POST /admin/users" do
     it "success" do
-      expect{
+      expect {
         post "/admin/users", user: FactoryGirl.attributes_for(:creating_user)
-      }.to change{ User.count }.by(1)
+      }.to change { User.count }.by(1)
       expect(response).to be_redirect
     end
     it "fail" do
-      expect{
+      expect {
         post "/admin/users", user: FactoryGirl.attributes_for(:creating_user).merge(email: "")
-      }.not_to change{ User.count }
+      }.not_to change { User.count }
       expect(response).not_to be_redirect
     end
   end
 
   context "PUT /admin/users/123" do
     it "success" do
-      expect{
+      expect {
         put "/admin/users/#{current_user.id}", user: { name: "Venus" }
-      }.to change{ current_user.reload.name }.to("Venus")
+      }.to change { current_user.reload.name }.to("Venus")
       expect(response).to be_redirect
     end
     it "fail" do
-      expect{
+      expect {
         put "/admin/users/#{current_user.id}", user: { email: "" }
-      }.not_to change{ current_user.reload.name }
+      }.not_to change { current_user.reload.name }
       expect(response).not_to be_redirect
     end
   end
 
   it "DELETE /admin/users/123" do
-    expect{
+    expect {
       delete "/admin/users/#{current_user.id}"
-    }.to change{ User.count }.to(0)
+    }.to change { User.count }.to(0)
   end
 end

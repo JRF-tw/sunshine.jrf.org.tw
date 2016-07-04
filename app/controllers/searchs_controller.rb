@@ -10,7 +10,7 @@ class SearchsController < BaseController
 
   def suits
     get_params_utf8(['q', 'state'])
-    @suit = Suit.shown.find_state(params_utf8[:state]).front_like_search({title: params_utf8[:q], summary: params_utf8[:q], content: params_utf8[:q], keyword: params_utf8[:q]}).page(params[:page]).per(12)
+    @suit = Suit.shown.find_state(params_utf8[:state]).front_like_search(title: params_utf8[:q], summary: params_utf8[:q], content: params_utf8[:q], keyword: params_utf8[:q]).page(params[:page]).per(12)
     set_meta(
       title: "案例搜尋結果",
       description: "案例搜尋結果，快來看看有哪些案例！",
@@ -21,7 +21,7 @@ class SearchsController < BaseController
 
   def judges
     get_params_utf8(['q', 'judge'])
-    @people = Profile.judges.shown.find_current_court(params_utf8[:judge]).front_like_search({ :name => params_utf8[:q] }).order_by_name.page(params[:page]).per(12)
+    @people = Profile.judges.shown.find_current_court(params_utf8[:judge]).front_like_search(name: params_utf8[:q]).order_by_name.page(params[:page]).per(12)
     set_meta(
       title: "法官搜尋結果",
       description: "法官搜尋結果，快來看看有哪些法官資料！",
@@ -32,7 +32,7 @@ class SearchsController < BaseController
 
   def prosecutors
     get_params_utf8(['q', 'prosecutor'])
-    @people = Profile.prosecutors.shown.find_current_court(params_utf8[:prosecutor]).front_like_search({ :name => params_utf8[:q] }).order_by_name.page(params[:page]).per(12)
+    @people = Profile.prosecutors.shown.find_current_court(params_utf8[:prosecutor]).front_like_search(name: params_utf8[:q]).order_by_name.page(params[:page]).per(12)
     set_meta(
       title: "檢察官搜尋結果",
       description: "檢察官搜尋結果，快來看看有哪些檢察官資料！",

@@ -19,9 +19,9 @@
 
 class Admin::AwardsController < Admin::BaseController
   before_action :award
-  before_action{ add_crumb("個人檔案列表", admin_profiles_path) }
-  before_action{ add_crumb("#{@profile.name}的個人檔案", admin_profile_path(@profile)) }
-  before_action(except: [:index]){ add_crumb("#{@profile.name}的獎勵紀錄列表", admin_profile_awards_path(@profile)) }
+  before_action { add_crumb("個人檔案列表", admin_profiles_path) }
+  before_action { add_crumb("#{@profile.name}的個人檔案", admin_profile_path(@profile)) }
+  before_action(except: [:index]) { add_crumb("#{@profile.name}的獎勵紀錄列表", admin_profile_awards_path(@profile)) }
 
   def index
     @awards = @profile.awards.all.newest.page(params[:page]).per(10)
@@ -41,10 +41,10 @@ class Admin::AwardsController < Admin::BaseController
 
   def create
     if award.save
-        respond_to do |f|
-          f.html { redirect_to admin_profile_awards_path(@profile), flash: { success: "#{@profile.name}的獎勵紀錄 - 已新增" } }
-          f.js { render }
-        end
+      respond_to do |f|
+        f.html { redirect_to admin_profile_awards_path(@profile), flash: { success: "#{@profile.name}的獎勵紀錄 - 已新增" } }
+        f.js { render }
+      end
     else
       respond_to do |f|
         f.html {

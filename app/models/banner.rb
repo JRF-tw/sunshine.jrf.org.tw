@@ -18,5 +18,5 @@ class Banner < ActiveRecord::Base
   mount_uploader :pic_m, BannerPicMUploader
   mount_uploader :pic_s, BannerPicSUploader
 
-  scope :order_by_weight, ->{ order("weight DESC, id DESC") }
+  scope :order_by_weight, -> { order("weight DESC, id DESC") }
 end

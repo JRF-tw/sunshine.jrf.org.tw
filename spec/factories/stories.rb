@@ -32,7 +32,7 @@ FactoryGirl.define do
       after(:create) do |story|
         FactoryGirl.create :schedule, story: story
       end
-    end 
+    end
   end
 
 end

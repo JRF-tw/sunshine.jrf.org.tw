@@ -19,15 +19,15 @@
 #
 
 class Review < ActiveRecord::Base
-	mount_uploader :file, FileUploader
-	
+  mount_uploader :file, FileUploader
+
   include HiddenOrNot
-	include TaiwanAge
+  include TaiwanAge
   tw_age_columns :publish_at
 
   belongs_to :profile
 
-  scope :newest, ->{ order("id DESC") }
-  scope :order_by_publish_at, ->{ order("publish_at DESC, id DESC") }
-  scope :had_title, -> { where.not(:title => nil) }
+  scope :newest, -> { order("id DESC") }
+  scope :order_by_publish_at, -> { order("publish_at DESC, id DESC") }
+  scope :had_title, -> { where.not(title: nil) }
 end

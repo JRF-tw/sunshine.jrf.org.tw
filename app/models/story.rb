@@ -31,7 +31,7 @@ class Story < ActiveRecord::Base
   serialize :judges_names, Array
   serialize :prosecutor_names, Array
 
-  scope :newest, ->{ order("id DESC") }
+  scope :newest, -> { order("id DESC") }
 
   def identity
     "#{year}-#{word_type}-#{number}"

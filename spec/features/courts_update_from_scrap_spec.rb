@@ -4,10 +4,10 @@ describe "爬蟲更新法院資料的機制", type: :request do
   context "爬蟲抓到資料(包含法院代號和法院名稱)" do
     context "爬蟲的法院代號、資料庫沒有" do
       let(:data_hash) { { scrap_name: "爬蟲名稱", code: "法院代碼" } }
-      subject{ Scrap::ImportCourtContext.new(data_hash).perform }
+      subject { Scrap::ImportCourtContext.new(data_hash).perform }
 
       it "新增至資料庫" do
-        expect{ subject }.to change { Court.count }
+        expect { subject }.to change { Court.count }
       end
 
       it "新資料的爬蟲名稱和抓到的名稱一樣" do
@@ -26,7 +26,7 @@ describe "爬蟲更新法院資料的機制", type: :request do
     context "爬蟲的法院代號、資料庫有" do
       let(:data_hash) { { scrap_name: "爬蟲名稱", code: "法院代碼" } }
       let!(:court) { FactoryGirl.create(:court, code: "法院代碼") }
-      subject{ Scrap::ImportCourtContext.new(data_hash).perform }
+      subject { Scrap::ImportCourtContext.new(data_hash).perform }
 
       it "更新該筆資料的爬蟲名稱" do
         expect(subject.scrap_name).to eq(data_hash[:scrap_name])
@@ -40,7 +40,7 @@ describe "爬蟲更新法院資料的機制", type: :request do
         end
 
         it "做 slack 通知" do
-          expect{ subject }.to change_sidekiq_jobs_size_of(SlackService, :notify)
+          expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify)
         end
       end
 
@@ -52,7 +52,7 @@ describe "爬蟲更新法院資料的機制", type: :request do
         end
 
         it "不做 slack 通知" do
-          expect{ subject }.not_to change_sidekiq_jobs_size_of(SlackService, :notify)
+          expect { subject }.not_to change_sidekiq_jobs_size_of(SlackService, :notify)
         end
       end
     end
@@ -65,7 +65,7 @@ describe "爬蟲更新法院資料的機制", type: :request do
       it "該筆資料不會有任何名稱上的變動(本來就不會有, 因為根本沒資料匯入)"
 
       it "該筆資料會進行 slack 通知" do
-        expect{ subject }.to change_sidekiq_jobs_size_of(SlackService, :notify).by(2)
+        expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify).by(2)
       end
     end
   end
@@ -75,7 +75,7 @@ describe "爬蟲更新法院資料的機制", type: :request do
     subject { put "/admin/courts/#{court.id}", admin_court: { scrap_name: "haha" } }
 
     it "無法更新爬蟲名稱" do
-      expect { subject }.not_to change{ court.reload.scrap_name }
+      expect { subject }.not_to change { court.reload.scrap_name }
     end
   end
 end

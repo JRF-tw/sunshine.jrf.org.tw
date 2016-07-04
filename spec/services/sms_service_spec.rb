@@ -6,7 +6,7 @@ describe SmsService do
 
   describe "#initialize" do
     subject { described_class.new(phone) }
-    it { expect(subject.phone).to eq("+886911111111")}
+    it { expect(subject.phone).to eq("+886911111111") }
   end
 
   describe "#send_by_slack" do

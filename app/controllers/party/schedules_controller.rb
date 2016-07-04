@@ -1,6 +1,5 @@
 class Party::SchedulesController < Party::BaseController
   def new
-
   end
 
   def verify

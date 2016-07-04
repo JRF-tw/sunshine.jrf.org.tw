@@ -48,8 +48,8 @@ class Scrap::ImportVerdictContext < BaseContext
 
   def find_main_judge
     branches = @court.branches.current.where("chamber_name LIKE ? ", "%#{@stroy_type}%")
-    main_judges = branches.map{ |a| a.judge if a.judge.name == @analysis_context.main_judge_name }.compact.uniq
-    @main_judge = main_judges.count == 1 ?  main_judges.last : nil
+    main_judges = branches.map { |a| a.judge if a.judge.name == @analysis_context.main_judge_name }.compact.uniq
+    @main_judge = main_judges.count == 1 ? main_judges.last : nil
 
     unless main_judges.count == 1
       SlackService.notify_analysis_async("判決書關聯主審法官失敗 : 找到多位法官, 或者找不到任何法官\n 判決書類別 : #{@stroy_type}, 法官姓名 : #{@analysis_context.main_judge_name}, 法院 : #{@court.scrap_name}")
@@ -98,8 +98,8 @@ class Scrap::ImportVerdictContext < BaseContext
 
   def update_adjudge_date
     return unless @analysis_context.is_judgment?
-    @story.update_attributes(adjudge_date: Date.today) unless @story.adjudge_date
-    @verdict.update_attributes(adjudge_date: Date.today)
+    @story.update_attributes(adjudge_date: Time.zone.today) unless @story.adjudge_date
+    @verdict.update_attributes(adjudge_date: Time.zone.today)
   end
 
   def create_relation_for_lawyer

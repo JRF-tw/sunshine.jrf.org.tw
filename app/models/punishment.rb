@@ -36,13 +36,13 @@
 
 class Punishment < ActiveRecord::Base
   include HiddenOrNot
-	include TaiwanAge
+  include TaiwanAge
   tw_age_columns :relevant_date
 
   belongs_to :profile
 
-  scope :newest, ->{ order("id DESC") }
-  scope :order_by_relevant_date, ->{ order("relevant_date DESC, id DESC") }
-  scope :had_reason, -> { where.not(:reason => nil) }
+  scope :newest, -> { order("id DESC") }
+  scope :order_by_relevant_date, -> { order("relevant_date DESC, id DESC") }
+  scope :had_reason, -> { where.not(reason: nil) }
 
 end

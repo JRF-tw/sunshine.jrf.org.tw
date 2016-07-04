@@ -1,8 +1,8 @@
 class Scrap::GetSchedulesPagesByStoryTypeContext < BaseContext
-  SCHEDULE_INFO_URI = "http://csdi.judicial.gov.tw/abbs/wkw/WHD3A02.jsp"
+  SCHEDULE_INFO_URI = "http://csdi.judicial.gov.tw/abbs/wkw/WHD3A02.jsp".freeze
   PAGE_PER = 15
 
-  before_perform  :page_total_by_story_type_and_court_code
+  before_perform :page_total_by_story_type_and_court_code
 
   class << self
     def perform(court_code, story_type, start_date, end_date)
@@ -37,11 +37,10 @@ class Scrap::GetSchedulesPagesByStoryTypeContext < BaseContext
     sleep @sleep_time_interval
     response_data = Mechanize.new.get(SCHEDULE_INFO_URI, data)
     response_data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
-    if response_data.css('table')[2].css('tr')[0].text.match("合計件數")
-      @page_total = (response_data.css('table')[2].css('tr')[0].text.match(/\d+/)[0].to_i) / PAGE_PER + 1
-    else
-      @page_total = 0
-    end
-
+    @page_total = if response_data.css('table')[2].css('tr')[0].text =~ /合計件數/
+                    response_data.css('table')[2].css('tr')[0].text.match(/\d+/)[0].to_i / PAGE_PER + 1
+                  else
+                    0
+                  end
   end
 end

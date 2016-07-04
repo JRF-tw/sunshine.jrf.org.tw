@@ -6,7 +6,7 @@ class Bystander::RegistrationsController < Devise::RegistrationsController
 
   def update
     context = Bystander::ChangeEmailContext.new(current_bystander)
-    prev_unconfirmed_email = current_bystander.unconfirmed_email if current_bystander.respond_to?(:unconfirmed_email)
+    # prev_unconfirmed_email = current_bystander.unconfirmed_email if current_bystander.respond_to?(:unconfirmed_email)
 
     if context.perform(params)
       set_flash_message :notice, :update_needs_confirmation
@@ -21,7 +21,7 @@ class Bystander::RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  def after_inactive_sign_up_path_for(resource)
+  def after_inactive_sign_up_path_for(_resource)
     new_session_path(:bystander)
   end
 
@@ -29,7 +29,7 @@ class Bystander::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.for(:sign_up) << :name
   end
 
-  def after_update_path_for(resource)
+  def after_update_path_for(_resource)
     bystander_profile_path
   end
 

@@ -23,14 +23,14 @@
 require 'rails_helper'
 
 RSpec.describe Judgment, type: :model do
-  let!(:judgment){ FactoryGirl.create :judgment }
+  let!(:judgment) { FactoryGirl.create :judgment }
 
   it "FactoryGirl" do
     expect(judgment).not_to be_new_record
   end
 
   it "Admin::Judgment validate#at_least_has_a_no" do
-    judgment2 = Admin::Judgment.create :court_id => judgment.court_id
+    judgment2 = Admin::Judgment.create court_id: judgment.court_id
     expect(judgment2.save).to be_falsey
     judgment2.court_no = "baabaa"
     expect(judgment2.save).to be_truthy

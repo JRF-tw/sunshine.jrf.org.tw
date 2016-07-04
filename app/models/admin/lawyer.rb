@@ -30,7 +30,7 @@
 #
 
 class Admin::Lawyer < ::Lawyer
-  validates_presence_of :name
+  validates :name, presence: true
   mount_uploader :avatar, ProfileAvatarUploader
 
 end

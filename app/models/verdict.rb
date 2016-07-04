@@ -28,11 +28,11 @@ class Verdict < ActiveRecord::Base
   belongs_to :story
   belongs_to :main_judge, class_name: "Judge", foreign_key: :main_judge_id
 
-  scope :newest, ->{ order("id DESC") }
+  scope :newest, -> { order("id DESC") }
 
   class << self
-    def ransackable_scopes(auth_object = nil)
-      [ :unexist_party_names, :unexist_lawyer_names, :unexist_judges_names, :unexist_prosecutor_names ]
+    def ransackable_scopes(_auth_object = nil)
+      [:unexist_party_names, :unexist_lawyer_names, :unexist_judges_names, :unexist_prosecutor_names]
     end
 
     def unexist_party_names

@@ -20,15 +20,15 @@ RSpec.describe Party::RegistrationsController, type: :request do
 
   describe "#create" do
     context "success" do
-      let!(:params){ { identify_number: party.identify_number, phone_number: party.phone_number } }
+      let!(:params) { { identify_number: party.identify_number, phone_number: party.phone_number } }
       subject! { post "/party/password", party: params }
 
       it { expect(response).to redirect_to("/party/sign_in") }
     end
 
     context "failed" do
-      let!(:params){ { identify_number: party.identify_number, phone_number: "12312312" } }
-      subject! { post "/party/password", { party: params }, {'HTTP_REFERER' => 'http://www.example.com/party/new'} }
+      let!(:params) { { identify_number: party.identify_number, phone_number: "12312312" } }
+      subject! { post "/party/password", { party: params }, 'HTTP_REFERER' => 'http://www.example.com/party/new' }
 
       it { expect(response).to be_success }
     end
@@ -41,20 +41,20 @@ RSpec.describe Party::RegistrationsController, type: :request do
       before { signin_party(party) }
       subject { get "/party/password/edit", reset_password_token: token }
 
-      it { expect(subject).to eq (200) }
+      it { expect(subject).to eq 200 }
     end
 
     context "success without sign in" do
       subject { get "/party/password/edit", reset_password_token: token }
 
-      it { expect(subject).to eq (200) }
+      it { expect(subject).to eq 200 }
     end
 
     context "fail with sign in other party" do
       before { signin_party }
       subject! { get "/party/password/edit", reset_password_token: token }
-  
-      it { expect(subject).to eq (302) }
+
+      it { expect(subject).to eq 302 }
     end
   end
 

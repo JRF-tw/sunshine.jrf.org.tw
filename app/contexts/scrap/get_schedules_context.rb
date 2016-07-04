@@ -23,6 +23,6 @@ class Scrap::GetSchedulesContext < BaseContext
   private
 
   def record_intervel_to_daily_notify
-    Redis::Value.new("daily_scrap_schedule_intervel").value = "#{@start_date.to_s} ~ #{@end_date.to_s}"
+    Redis::Value.new("daily_scrap_schedule_intervel").value = "#{@start_date} ~ #{@end_date}"
   end
 end

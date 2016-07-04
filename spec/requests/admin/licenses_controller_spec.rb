@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Admin::LicensesController do
-  let!(:profile){ FactoryGirl.create :profile }
+  let!(:profile) { FactoryGirl.create :profile }
 
-  before{ signin_user }
+  before { signin_user }
 
   describe "already had a license" do
-    let!(:license){ FactoryGirl.create :license, profile: profile }
+    let!(:license) { FactoryGirl.create :license, profile: profile }
 
     it "GET /admin/profiles/profile.id/licenses" do
       get "/admin/profiles/#{profile.id}/licenses"
@@ -24,9 +24,9 @@ RSpec.describe Admin::LicensesController do
     end
 
     it "PUT /admin/profiles/profile.id/licenses/123" do
-      expect{
+      expect {
         put "/admin/profiles/#{profile.id}/licenses/#{license.id}", admin_license: { license_type: "keke" }
-      }.to change{ license.reload.license_type }.to("keke")
+      }.to change { license.reload.license_type }.to("keke")
       expect(response).to be_redirect
     end
 
@@ -37,9 +37,9 @@ RSpec.describe Admin::LicensesController do
   end
 
   it "POST /admin/profiles/profile.id/licenses" do
-    expect{
+    expect {
       post "/admin/profiles/#{profile.id}/licenses", admin_license: FactoryGirl.attributes_for(:license)
-    }.to change{ License.count }.by(1)
+    }.to change { License.count }.by(1)
     expect(response).to be_redirect
   end
 end

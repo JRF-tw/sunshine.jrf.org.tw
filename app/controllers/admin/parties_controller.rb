@@ -1,6 +1,6 @@
 class Admin::PartiesController < Admin::BaseController
   before_action :party
-  before_action(except: [:index]){ add_crumb("當事人列表", admin_parties_path) }
+  before_action(except: [:index]) { add_crumb("當事人列表", admin_parties_path) }
 
   def index
     @search = Party.all.ransack(params[:q])
@@ -29,5 +29,3 @@ class Admin::PartiesController < Admin::BaseController
     @party ||= params[:id] ? Party.find(params[:id]) : Party.new
   end
 end
-
-

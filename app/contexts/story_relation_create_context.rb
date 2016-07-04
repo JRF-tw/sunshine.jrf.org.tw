@@ -34,7 +34,8 @@ class StoryRelationCreateContext < BaseContext
   end
 
   def find_people
-    @scoped = eval("#{@people_type}.where(name: \"#{@people_name}\")")
+    class_object = Object.const_get(@people_type)
+    @scoped = class_object.where(name: @people_name)
     @people = @scoped.first
   end
 

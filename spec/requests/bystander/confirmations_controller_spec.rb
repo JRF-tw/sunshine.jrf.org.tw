@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Bystander::ConfirmationsController, :type => :request do
-  before { post "/bystander", bystander: { name: "Curry", email: "h2312@gmail.com", password: "55667788", password_confirmation: "55667788"} }
+RSpec.describe Bystander::ConfirmationsController, type: :request do
+  before { post "/bystander", bystander: { name: "Curry", email: "h2312@gmail.com", password: "55667788", password_confirmation: "55667788" } }
 
   describe "bystander confirm" do
     context "first confirm" do
@@ -34,7 +34,7 @@ RSpec.describe Bystander::ConfirmationsController, :type => :request do
 
   describe "#create" do
     context "success" do
-      let!(:bystander) { FactoryGirl.create :bystander, :with_unconfirmed_email}
+      let!(:bystander) { FactoryGirl.create :bystander, :with_unconfirmed_email }
       subject { post "/bystander/confirmation", bystander: { email: bystander.email } }
 
       it { expect(subject).to redirect_to("/bystander/edit") }

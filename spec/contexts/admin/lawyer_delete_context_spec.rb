@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Admin::LawyerDeleteContext do
 
   context "success" do
-    let!(:lawyer) {FactoryGirl.create :lawyer}
+    let!(:lawyer) { FactoryGirl.create :lawyer }
     subject { described_class.new(lawyer) }
     it { expect { subject.perform }.to change { Lawyer.count }.by(-1) }
   end

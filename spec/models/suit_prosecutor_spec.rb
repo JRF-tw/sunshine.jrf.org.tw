@@ -12,7 +12,7 @@
 require 'rails_helper'
 
 RSpec.describe SuitProsecutor, type: :model do
-  
+
   it "has_many :suit_prosecutors, dependent: :destroy" do
     suit_prosecutor = FactoryGirl.create :suit_prosecutor
     expect(SuitProsecutor.count).to eq(1)

@@ -15,7 +15,7 @@ describe "從爬蟲資料中更新股別分表", type: :context do
       end
     end
     context "不同法院下有有相同姓名的法官、但同法院下則沒有" do
-      let!(:judge) { FactoryGirl.create :judge, name: "匡偉"}
+      let!(:judge) { FactoryGirl.create :judge, name: "匡偉" }
 
       it "會新增法官" do
         expect { subject }.to change { Judge.count }
@@ -96,7 +96,7 @@ describe "從爬蟲資料中更新股別分表", type: :context do
         let(:data_string) { "臺灣高等法院民事庭,丙,A　法官,黃千鶴,2415" }
 
         it "不會新增股別" do
-          expect{ subject }.not_to change { Branch.count}
+          expect { subject }.not_to change { Branch.count }
         end
 
         before { subject }

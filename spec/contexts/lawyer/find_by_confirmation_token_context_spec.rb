@@ -5,7 +5,7 @@ describe Lawyer::FindByConfirmationTokenContext do
 
   describe "perform" do
     context "success" do
-      subject { described_class.new(lawyer: { confirmation_token: lawyer.confirmation_token } ) }
+      subject { described_class.new(lawyer: { confirmation_token: lawyer.confirmation_token }) }
       it { expect(subject.perform).to eq(lawyer) }
     end
 

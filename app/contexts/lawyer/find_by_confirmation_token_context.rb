@@ -3,7 +3,6 @@ class Lawyer::FindByConfirmationTokenContext < BaseContext
 
   before_perform :find_lawyer
 
-
   def initialize(params)
     @params = permit_params(params[:lawyer] || params, PERMITS)
   end

@@ -18,8 +18,8 @@
 #  is_hidden  :boolean
 #
 
-class Admin::Review < ::Review	
+class Admin::Review < ::Review
   belongs_to :profile, class_name: "Admin::Profile"
 
-  validates_presence_of :profile_id, :name, :title
+  validates :profile_id, :name, :title, presence: true
 end

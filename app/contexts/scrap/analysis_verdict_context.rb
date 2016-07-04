@@ -6,13 +6,13 @@ class Scrap::AnalysisVerdictContext < BaseContext
   end
 
   def is_judgment?
-    return @verdict_content.split.first.match(/判決/).present?
+    @verdict_content.split.first.match(/判決/).present?
   end
 
   def main_judge_name
     matched = @verdict_content.match(/審判長法\s*官\s*([\p{Word}\w\s\S]*?)\n/)
     if matched
-      return matched[1].squish.gsub("\r", "").gsub(" ", "")
+      return matched[1].squish.delete("\r").delete(" ")
     else
       SlackService.notify_analysis_async("裁判字號 : #{@verdict_word}, 取得 審判長法官 資訊為空") if is_judgment?
       return nil
@@ -22,7 +22,7 @@ class Scrap::AnalysisVerdictContext < BaseContext
   def judges_names
     matched = @verdict_content.match(/^\s*法\s*官\s+([\p{Word}\w\s\S]*?)\n/)
     if matched
-      return @verdict_content.scan(/^\s*法\s*官\s+([\p{Word}\w\s\S]*?)\n/).map { |i| i[0].squish.gsub("\r", "").gsub(" ", "") }
+      return @verdict_content.scan(/^\s*法\s*官\s+([\p{Word}\w\s\S]*?)\n/).map { |i| i[0].squish.delete("\r").delete(" ") }
     else
       SlackService.notify_analysis_async("裁判字號 : #{@verdict_word}, 取得 法官 資訊為空") if is_judgment?
       return []
@@ -55,7 +55,7 @@ class Scrap::AnalysisVerdictContext < BaseContext
     if matched_mutiple_type
       parties = @verdict_content.squish.scan(/\n\s*被\s+告\s+([\p{Word}\w\s\S]+?)\n\s*[\s男\s|\s女\s|上|訴訟|法定|選任|指定|輔\s+佐\s+人]/).map { |i| i[0] }
       parties = parties.join("\n")
-      parties = parties.split(/\n+/).map { |i| i.strip }
+      parties = parties.split(/\n+/).map(&:strip)
       return parties.uniq
     elsif matched
       return @verdict_content.squish.scan(/被\s+告\s+(\p{Word}+)/).map { |i| i[0] }

@@ -10,7 +10,7 @@ describe Lawyer::ShowSetPasswordContext do
     end
 
     context "empty lawyer" do
-      subject { described_class.new() }
+      subject { described_class.new }
       it { expect { subject.perform }.to change { subject.errors[:lawyer_not_found] } }
     end
 

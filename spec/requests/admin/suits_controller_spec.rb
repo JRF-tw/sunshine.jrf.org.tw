@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Admin::SuitsController do
-  before{ signin_user }
+  before { signin_user }
 
   describe "already had a suit" do
-    let(:suit){ FactoryGirl.create :suit }
+    let(:suit) { FactoryGirl.create :suit }
 
     it "GET /admin/suits" do
       get "/admin/suits"
@@ -27,9 +27,9 @@ RSpec.describe Admin::SuitsController do
     end
 
     it "PUT /admin/suits/123" do
-      expect{
-        put "/admin/suits/#{suit.id}", admin_suit: { suit_no: 34567 }
-      }.to change{ suit.reload.suit_no }.to(34567)
+      expect {
+        put "/admin/suits/#{suit.id}", admin_suit: { suit_no: 34_567 }
+      }.to change { suit.reload.suit_no }.to(34_567)
       expect(response).to be_redirect
     end
 
@@ -42,16 +42,16 @@ RSpec.describe Admin::SuitsController do
       put "/admin/suits/#{suit.id}", admin_suit: { is_hidden: false }
       expect(suit.reload.is_hidden).to be_truthy
       FactoryGirl.create :procedure, suit: suit
-      expect{
-          put "/admin/suits/#{suit.id}", admin_suit: { is_hidden: false }
-        }.to change{ suit.reload.is_hidden }.to(false)
+      expect {
+        put "/admin/suits/#{suit.id}", admin_suit: { is_hidden: false }
+      }.to change { suit.reload.is_hidden }.to(false)
     end
   end
 
   it "POST /admin/suits" do
-    expect{
+    expect {
       post "/admin/suits", admin_suit: FactoryGirl.attributes_for(:suit)
-    }.to change{ Suit.count }.by(1)
+    }.to change { Suit.count }.by(1)
     expect(response).to be_redirect
   end
 end

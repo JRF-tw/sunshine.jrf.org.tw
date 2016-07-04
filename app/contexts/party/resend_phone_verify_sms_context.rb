@@ -39,4 +39,3 @@ class Party::ResendPhoneVerifySmsContext < BaseContext
     @party.sms_sent_count.increment
   end
 end
-

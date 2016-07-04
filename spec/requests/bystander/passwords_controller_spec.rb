@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Bystander::PasswordsController, :type => :request do
+RSpec.describe Bystander::PasswordsController, type: :request do
   let!(:bystander) { FactoryGirl.create :bystander }
   let(:token) { bystander.send_reset_password_instructions }
 
@@ -12,7 +12,7 @@ RSpec.describe Bystander::PasswordsController, :type => :request do
       it { expect(response).to redirect_to("/bystander/profile") }
       it "sign in with updated password" do
         signout_bystander
-        expect { subject }.to change{ bystander.reload.current_sign_in_at }
+        expect { subject }.to change { bystander.reload.current_sign_in_at }
       end
     end
   end
@@ -22,20 +22,20 @@ RSpec.describe Bystander::PasswordsController, :type => :request do
       before { signin_bystander(bystander) }
       subject { get "/bystander/password/edit", reset_password_token: token }
 
-      it { expect(subject).to eq (200) }
+      it { expect(subject).to eq 200 }
     end
 
     context "success without sign in" do
       subject { get "/bystander/password/edit", reset_password_token: token }
 
-      it { expect(subject).to eq (200) }
+      it { expect(subject).to eq 200 }
     end
 
     context "fail with sign in other bystander" do
       before { signin_bystander }
       subject! { get "/bystander/password/edit", reset_password_token: token }
-  
-      it { expect(subject).to eq (302) }
+
+      it { expect(subject).to eq 302 }
     end
   end
 

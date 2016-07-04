@@ -8,9 +8,9 @@ class Party::ConfirmationsController < Devise::ConfirmationsController
 
     if resource.errors.empty?
       set_flash_message(:notice, :confirmed) if is_flashing_format?
-      respond_with_navigational(resource){ redirect_to after_confirmation_path_for(resource_name, resource) }
+      respond_with_navigational(resource) { redirect_to after_confirmation_path_for(resource_name, resource) }
     else
-      respond_with_navigational(resource.errors, status: :unprocessable_entity){ redirect_to new_party_session_path}
+      respond_with_navigational(resource.errors, status: :unprocessable_entity) { redirect_to new_party_session_path }
     end
   end
 
@@ -20,11 +20,11 @@ class Party::ConfirmationsController < Devise::ConfirmationsController
     redirect_to new_party_session_path
   end
 
-  def after_resending_confirmation_instructions_path_for(resource_name)
+  def after_resending_confirmation_instructions_path_for(_resource_name)
     party_profile_path
   end
 
-  def after_confirmation_path_for(resource_name, resource)
+  def after_confirmation_path_for(resource_name, _resource)
     if signed_in?(resource_name)
       party_profile_path
     else

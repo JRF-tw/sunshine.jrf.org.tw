@@ -49,7 +49,7 @@ class Admin::Profile < ::Profile
     "檢察官",
     "大法官",
     "其他"
-  ]
+  ].freeze
 
-  validates_presence_of :name, :current
+  validates :name, :current, presence: true
 end

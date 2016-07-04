@@ -18,7 +18,7 @@
 
 class Admin::SuitsController < Admin::BaseController
   before_action :suit
-  before_action(except: [:index]){ add_crumb("評鑑資料-案例列表", admin_suits_path) }
+  before_action(except: [:index]) { add_crumb("評鑑資料-案例列表", admin_suits_path) }
 
   def index
     @suits = Suit.all.newest.page(params[:page]).per(10)
@@ -45,10 +45,10 @@ class Admin::SuitsController < Admin::BaseController
 
   def create
     if suit.save
-        respond_to do |f|
-          f.html { redirect_to admin_suits_path, flash: { success: "評鑑資料-案例已新增" } }
-          f.js { render }
-        end
+      respond_to do |f|
+        f.html { redirect_to admin_suits_path, flash: { success: "評鑑資料-案例已新增" } }
+        f.js { render }
+      end
     else
       respond_to do |f|
         f.html {
@@ -71,7 +71,7 @@ class Admin::SuitsController < Admin::BaseController
         state = "success"
         msg = "評鑑資料-案例已更新"
       end
-      redirect_to admin_suits_path, flash: { "#{state}": "#{msg}" }
+      redirect_to admin_suits_path, flash: { "#{state}": msg.to_s }
     else
       @admin_page_title = "編輯評鑑資料-案例"
       add_crumb @admin_page_title, "#"

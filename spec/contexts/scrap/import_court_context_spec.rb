@@ -1,33 +1,32 @@
 require 'rails_helper'
 
-RSpec.describe Scrap::ImportCourtContext, :type => :model do
+RSpec.describe Scrap::ImportCourtContext, type: :model do
 
   describe "#perform" do
     let(:data_hash) { { scrap_name: "xxx", code: "TTT" } }
-    subject{ described_class.new(data_hash).perform }
+    subject { described_class.new(data_hash).perform }
 
     context "find court" do
       context "code match" do
         let!(:court) { FactoryGirl.create(:court, code: "TTT") }
-        it { expect{ subject }.not_to change { Court.count } }
+        it { expect { subject }.not_to change { Court.count } }
       end
 
       context "scrap_name match" do
         let!(:court) { FactoryGirl.create(:court, scrap_name: "xxx") }
-        it { expect{ subject }.not_to change { Court.count } }
+        it { expect { subject }.not_to change { Court.count } }
       end
 
       context "trip scrap_name match full_name" do
         let!(:court) { FactoryGirl.create(:court, full_name: "xxx") }
         let(:data_hash) { { scrap_name: "x x  x", code: "TTT" } }
-        it { expect{ subject }.not_to change { Court.count } }
+        it { expect { subject }.not_to change { Court.count } }
       end
     end
 
     context "create court" do
-      it { expect{ subject }.to change { Court.count }.by(1) }
+      it { expect { subject }.to change { Court.count }.by(1) }
     end
-
 
     context "update_name" do
       context "exist" do

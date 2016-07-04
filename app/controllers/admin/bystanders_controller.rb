@@ -1,17 +1,17 @@
 class Admin::BystandersController < Admin::BaseController
   before_action :bystander
-  before_action(except: [:index]){ add_crumb("觀察員列表", admin_bystanders_path) }
+  before_action(except: [:index]) { add_crumb("觀察員列表", admin_bystanders_path) }
 
   def index
     @search = Bystander.all.ransack(params[:q])
     @bystanders = @search.result
-    respond_to do |format| 
+    respond_to do |format|
       format.html {
         @admin_page_title = "觀察員列表"
         add_crumb @admin_page_title, "#"
         @bystanders = @bystanders.page(params[:page]).per(20)
       }
-      format.xlsx {render xlsx: 'download_file',filename: "旁觀者.xlsx"}
+      format.xlsx { render xlsx: 'download_file', filename: "旁觀者.xlsx" }
     end
   end
 

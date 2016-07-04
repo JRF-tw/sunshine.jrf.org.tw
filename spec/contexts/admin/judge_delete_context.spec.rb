@@ -9,5 +9,5 @@ describe Admin::JudgeDeleteContext do
       it { expect { subject.perform }.to change { Judge.count }.by(-1) }
     end
   end
-    
+
 end

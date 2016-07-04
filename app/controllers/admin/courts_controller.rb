@@ -16,7 +16,7 @@
 
 class Admin::CourtsController < Admin::BaseController
   before_action :court
-  before_action(except: [:index]){ add_crumb("法院 / 檢察署列表", admin_courts_path) }
+  before_action(except: [:index]) { add_crumb("法院 / 檢察署列表", admin_courts_path) }
 
   def index
     @search = Court.all.newest.ransack(params[:q])
@@ -28,7 +28,7 @@ class Admin::CourtsController < Admin::BaseController
   def show
     @admin_page_title = "法院 - #{@court.full_name}"
     add_crumb @admin_page_title, "#"
-  end    
+  end
 
   def new
     @admin_page_title = "新增法院 / 檢察署"
@@ -51,7 +51,7 @@ class Admin::CourtsController < Admin::BaseController
       @court = context.court
       respond_to do |f|
         f.html {
-          new()
+          new
           render_as_fail(:new, context.error_messages)
         }
         f.js { render }
@@ -60,16 +60,16 @@ class Admin::CourtsController < Admin::BaseController
   end
 
   def update
-    context =  Admin::CourtUpdateContext.new(@court)
+    context = Admin::CourtUpdateContext.new(@court)
     if context.perform(params)
       redirect_as_success(admin_courts_path, "法院 / 檢察署 - #{court.name} 已修改")
     else
-      render_as_fail(:edit, context.error_messages) 
+      render_as_fail(:edit, context.error_messages)
     end
   end
 
   def destroy
-    context =  Admin::CourtDeleteContext.new(@court)
+    context = Admin::CourtDeleteContext.new(@court)
     if context.perform
       redirect_as_success(admin_courts_path, "法院 / 檢察署 - #{court.name} 已刪除")
     else
@@ -82,5 +82,5 @@ class Admin::CourtsController < Admin::BaseController
   def court
     @court ||= params[:id] ? Admin::Court.find(params[:id]) : Admin::Court.new
   end
-  
+
 end

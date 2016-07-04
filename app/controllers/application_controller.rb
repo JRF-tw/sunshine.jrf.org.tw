@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   include MetaTagHelper
   include CharacterConversion
 
-  before_filter :http_auth_for_staging
+  before_action :http_auth_for_staging
 
   layout :layout_by_resource
 
@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
   end
 
   def not_found
-    raise ActionController::RoutingError.new('Not Found')
+    raise ActionController::RoutingError, 'Not Found'
   end
 
 end

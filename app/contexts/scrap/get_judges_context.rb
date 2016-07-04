@@ -1,5 +1,5 @@
 class Scrap::GetJudgesContext < BaseContext
-  EXCEL_URL = "http://csdi.judicial.gov.tw/abbs/wkw/WHD3A01_DOWNLOADCVS.jsp?court="
+  EXCEL_URL = "http://csdi.judicial.gov.tw/abbs/wkw/WHD3A01_DOWNLOADCVS.jsp?court=".freeze
 
   before_perform  :get_remote_csv_data
   after_perform   :get_diff_import_daily_branch
@@ -37,7 +37,7 @@ class Scrap::GetJudgesContext < BaseContext
   def notify_diff_info
     @diff_branch_ids.each do |d|
       branch = Branch.find(d)
-      SlackService.notify_branch_alert_async("該股別不再目前爬蟲資料內 :\n法院名稱 : #{ branch.court.full_name }\n名稱 : #{ branch.name }\n 法庭名稱 : #{ branch.chamber_name }")
+      SlackService.notify_branch_alert_async("該股別不再目前爬蟲資料內 :\n法院名稱 : #{branch.court.full_name}\n名稱 : #{branch.name}\n 法庭名稱 : #{branch.chamber_name}")
     end
   end
 
@@ -47,6 +47,6 @@ class Scrap::GetJudgesContext < BaseContext
   end
 
   def record_intervel_to_daily_notify
-    Redis::Value.new("daily_scrap_judge_intervel").value = "#{Date.today.to_s} ~ #{Date.today.to_s}"
+    Redis::Value.new("daily_scrap_judge_intervel").value = "#{Time.zone.today} ~ #{Time.zone.today}"
   end
 end

@@ -37,13 +37,14 @@ class VerdictRelationCreateContext < BaseContext
   end
 
   def find_person
-    @scoped = eval("#{@person_type}.where(name: \"#{@person_name}\")")
+    class_object = Object.const_get(@person_type)
+    @scoped = class_object.where(name: @person_name)
     @person = @scoped.first
   end
 
   def find_judge_person
     branches = @court.branches.current.where("chamber_name LIKE ? ", "%#{@story.story_type}%")
-    @scoped = branches.map{ |a| a.judge if a.judge.name == @person_name }.compact.uniq
+    @scoped = branches.map { |a| a.judge if a.judge.name == @person_name }.compact.uniq
     @person = @scoped.first
   end
 
