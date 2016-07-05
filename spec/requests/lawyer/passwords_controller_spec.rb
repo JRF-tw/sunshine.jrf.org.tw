@@ -12,11 +12,11 @@ RSpec.describe Lawyer::PasswordsController, type: :request do
 
     context "email unconfirmed" do
       let!(:lawyer) { FactoryGirl.create :lawyer }
-      let!(:params){ { email: lawyer.email } }
-      subject { post "/lawyer/password", { lawyer: params }, { "HTTP_REFERER" => "/lawyer/passwords/new" } }
+      let!(:params) { { email: lawyer.email } }
+      subject { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/passwords/new" }
 
       it { expect(subject).to redirect_to("/lawyer/passwords/new") }
-      it { expect{ subject }.not_to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
+      it { expect { subject }.not_to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
     end
 
     context "email confirmed" do
@@ -54,7 +54,7 @@ RSpec.describe Lawyer::PasswordsController, type: :request do
   end
 
   describe "#update" do
-    let!(:lawyer) { FactoryGirl.create :lawyer , :with_password_and_confirmed}
+    let!(:lawyer) { FactoryGirl.create :lawyer, :with_password_and_confirmed }
     let(:token) { lawyer.send_reset_password_instructions }
     context "success with login" do
       before { signin_lawyer(lawyer) }

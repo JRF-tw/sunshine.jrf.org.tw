@@ -29,12 +29,12 @@ class Lawyer::PasswordsController < Devise::PasswordsController
       resource.unlock_access! if unlockable?(resource)
       if Devise.sign_in_after_reset_password
         flash_message = resource.active_for_authentication? ? :updated : :updated_not_active
-        set_flash_message(:notice, flash_message) if is_flashing_format?
+        set_flash_message(:notice, flash_message)
         sign_in(resource_name, resource) unless current_lawyer
       else
-        set_flash_message(:notice, :updated_not_active) if is_flashing_format?
+        set_flash_message(:notice, :updated_not_active)
       end
-      respond_with resource, location: after_resetting_password_path_for(resource)
+      respond_with resource, location: after_resetting_password_path
     else
       set_minimum_password_length
       respond_with resource
@@ -60,7 +60,7 @@ class Lawyer::PasswordsController < Devise::PasswordsController
 
   protected
 
-  def after_resetting_password_path_for(resource)
+  def after_resetting_password_path
     lawyer_profile_path
   end
 
