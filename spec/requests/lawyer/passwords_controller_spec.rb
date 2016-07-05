@@ -12,11 +12,11 @@ RSpec.describe Lawyer::PasswordsController, type: :request do
 
     context "email unconfirmed" do
       let!(:lawyer) { FactoryGirl.create :lawyer }
-      let!(:params) { { email: lawyer.email } }
-      subject! { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/passwords/new" }
+      let!(:params){ { email: lawyer.email } }
+      subject { post "/lawyer/password", { lawyer: params }, { "HTTP_REFERER" => "/lawyer/passwords/new" } }
 
-      it { expect(response).to redirect_to("/lawyer/passwords/new") }
-      it { expect { subject }.not_to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
+      it { expect(subject).to redirect_to("/lawyer/passwords/new") }
+      it { expect{ subject }.not_to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
     end
 
     context "email confirmed" do
@@ -25,11 +25,7 @@ RSpec.describe Lawyer::PasswordsController, type: :request do
       subject { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/passwords/new" }
 
       it { expect { subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
-
-      context "redirect sign_in" do
-        before { subject }
-        it { expect(response).to redirect_to("/lawyer/sign_in") }
-      end
+      it { expect(subject).to redirect_to("/lawyer/sign_in") }
     end
   end
 
@@ -58,16 +54,21 @@ RSpec.describe Lawyer::PasswordsController, type: :request do
   end
 
   describe "#update" do
-    let!(:lawyer) { FactoryGirl.create :lawyer }
-    let!(:token) { lawyer.send_reset_password_instructions }
-    subject { put "/lawyer/password", lawyer: { password: "55667788", password_confirmation: "55667788", reset_password_token: token } }
+    let!(:lawyer) { FactoryGirl.create :lawyer , :with_password_and_confirmed}
+    let(:token) { lawyer.send_reset_password_instructions }
+    context "success with login" do
+      before { signin_lawyer(lawyer) }
+      subject! { put "/lawyer/password", lawyer: { password: "55667788", password_confirmation: "55667788", reset_password_token: token } }
 
-    it { expect { subject }.not_to change { lawyer.reload.current_sign_in_at } }
-    it { expect { subject }.to change { lawyer.reload.encrypted_password } }
+      it { expect(response).to redirect_to("/lawyer/profile") }
+      it { expect(flash[:notice]).to eq("您的密碼已被修改，下次登入時請使用新密碼登入。") }
+    end
 
-    context "redirect_to login" do
-      before { subject }
-      it { expect(response).to redirect_to("/lawyer/sign_in") }
+    context "success without login" do
+      subject! { put "/lawyer/password", lawyer: { password: "55667788", password_confirmation: "55667788", reset_password_token: token } }
+
+      it { expect(response).to redirect_to("/lawyer/profile") }
+      it { expect(flash[:notice]).to eq("您的密碼已被修改，下次登入時請使用新密碼登入。") }
     end
   end
 

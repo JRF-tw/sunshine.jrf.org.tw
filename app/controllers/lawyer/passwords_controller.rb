@@ -60,8 +60,8 @@ class Lawyer::PasswordsController < Devise::PasswordsController
 
   protected
 
-  def after_resetting_password_path_for(_resource)
-    new_lawyer_session_path
+  def after_resetting_password_path_for(resource)
+    lawyer_profile_path
   end
 
 end
