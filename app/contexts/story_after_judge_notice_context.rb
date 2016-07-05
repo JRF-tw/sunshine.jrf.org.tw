@@ -1,4 +1,4 @@
-class OpenCourtNotifyContext < BaseContext
+class StoryAfterJudgeNoticeContext < BaseContext
 
   def initialize(story)
     @story = story
@@ -9,7 +9,7 @@ class OpenCourtNotifyContext < BaseContext
       @story.story_subscriptions.each do |story_subscription|
         subscriber = story_subscription.subscriber
         subscriber_type = subscriber.class.name
-        eval("#{subscriber_type}Mailer.delay.open_court_notice(#{@story.id},#{subscriber.id})")
+        eval("#{subscriber_type}Mailer.delay.story_after_judge_notice(#{@story.id},#{subscriber.id})")
       end
     end
   end

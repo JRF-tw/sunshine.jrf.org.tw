@@ -1,6 +1,6 @@
 class StorySubscriptionCreateContext < BaseContext
 
-  before_perform :check_party_confirm
+  before_perform :check_party_confirmed
   before_perform :build_data
 
   def initialize(story)
@@ -13,13 +13,13 @@ class StorySubscriptionCreateContext < BaseContext
       if @story_subscription.save
         @story_subscription
       else
-        add_error(:data_create_fail, @story_subscription.errors.full_messages.join("\n"))
+        add_error(:story_subscriber_failed, @story_subscription.errors.full_messages.join("\n"))
       end
     end
   end
 
-  def check_party_confirm
-    add_error(:data_create_fail, "訂閱案件前請先完成驗證") if @subscriber.class == Party && !@subscriber.confirmed?
+  def check_party_confirmed
+    add_error(:story_subscriber_valid_failed, "訂閱案件前請先完成驗證") if @subscriber.class == Party && !@subscriber.confirmed?
   end
 
   def build_data

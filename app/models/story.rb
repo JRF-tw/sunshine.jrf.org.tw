@@ -23,7 +23,7 @@ class Story < ActiveRecord::Base
   has_many :schedules
   has_many :verdicts
   has_many :story_relations
-  has_many :story_subscriptions
+  has_many :story_subscriptions, dependent: :destroy
   belongs_to :main_judge, class_name: "Judge", foreign_key: "main_judge_id"
   belongs_to :court
 

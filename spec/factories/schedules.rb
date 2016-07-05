@@ -22,6 +22,14 @@ FactoryGirl.define do
     trait :with_branch_judge do
       branch_judge { FactoryGirl.create :judge }
     end
+
+    trait :date_is_tomorrow do
+      date { Date.tomorrow }
+    end
+
+    trait :date_is_yesterday do
+      date { Date.yesterday }
+    end
   end
 
 end

@@ -2,13 +2,13 @@ require 'rails_helper'
 
 describe StorySubscriptionCreateContext do
 
-  let!(:story) { FactoryGirl.create :story}
+  let!(:story) { FactoryGirl.create :story }
   
   subject { described_class.new(story) }
 
   describe "party subscribe" do
     context "success" do
-      let(:party) { FactoryGirl.create :party, :already_confirmed}
+      let(:party) { FactoryGirl.create :party, :already_confirmed }
       it { expect{ subject.perform(party) }.to change { StorySubscription.count }.by(1) }
     end
 

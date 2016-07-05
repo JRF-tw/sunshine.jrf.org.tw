@@ -11,7 +11,9 @@ class Errors::Code
     lawyer_exist: 400,
     send_email_fail: 400,
     email_conflict: 400,
-    retry_verify_count_out_range: 400
+    retry_verify_count_out_range: 400,
+    story_subscriber_failed: 400,
+    story_subscriber_valid_failed: 400
   }.freeze
 
   class << self

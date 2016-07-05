@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe CloseCourtNotifyContext do
+describe StoryBeforeJudgeNoticeContext do
   let!(:story_subscription_with_party) { FactoryGirl.create :story_subscription_with_party }
   let!(:story) { Story.last }
   let!(:party) { Party.last }
@@ -11,5 +11,3 @@ describe CloseCourtNotifyContext do
   end
 
 end
-
-

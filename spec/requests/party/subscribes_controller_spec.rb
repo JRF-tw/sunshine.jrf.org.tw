@@ -1,6 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Party::SubscribesController, type: :request do
+
   let!(:party) { FactoryGirl.create :party, :already_confirmed }
   before { signin_party(party) }
   let!(:story) { FactoryGirl.create :story }

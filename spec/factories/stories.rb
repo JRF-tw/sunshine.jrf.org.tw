@@ -28,11 +28,18 @@ FactoryGirl.define do
     court { FactoryGirl.create :court }
     main_judge { FactoryGirl.create :judge }
 
-    trait :with_schedule do
+    trait :with_schedule_date_tomorrow do
       after(:create) do |story|
-        FactoryGirl.create :schedule, story: story
+        FactoryGirl.create :schedule, :date_is_tomorrow, story: story
       end
     end
+
+    trait :with_schedule_date_yesterday do
+      after(:create) do |story|
+        FactoryGirl.create :schedule, :date_is_yesterday, story: story
+      end
+    end
+
   end
 
 end

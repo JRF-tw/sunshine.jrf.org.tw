@@ -13,4 +13,6 @@
 class StorySubscription < ActiveRecord::Base
   belongs_to :story
   belongs_to :subscriber, polymorphic: true
+
+  validates :story_id, uniqueness: { scope: [:subscriber_id, :subscriber_type] }
 end

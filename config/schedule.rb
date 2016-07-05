@@ -52,7 +52,12 @@ every 1.day, :at => '6:00 am' do
   runner "Scrap::NotifyDailyContext.new.perform"
 end
 
-# notify subscriber
+# notify subscriber before judge
 every 1.day, :at => '7:00 am' do
-  runner "Crontab::SubscribeStoryNotifyContext.new(#{Date.today}).perform"
+  runner "Crontab::SubscribeStoryBeforeJudgeNotifyContext.new(#{Date.today}).perform"
+end
+
+# notify subscriber after judge
+every 1.day, :at => '7:00 am' do
+  runner "Crontab::SubscribeStoryAfterJudgeNotifyContext.new(#{Date.today}).perform"
 end

@@ -40,7 +40,7 @@ class Party < ActiveRecord::Base
   validates :phone_number, uniqueness: true, format: { with: /\A(0)(9)([0-9]{8})\z/ }, allow_nil: true
 
   has_many :story_relations, as: :people
-  has_many :story_subscriptions, as: :subscriber
+  has_many :story_subscriptions, as: :subscriber, dependent: :destroy
   has_many :verdict_relations, as: :person
 
   include Redis::Objects
