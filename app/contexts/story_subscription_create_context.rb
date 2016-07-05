@@ -9,7 +9,7 @@ class StorySubscriptionCreateContext < BaseContext
 
   def perform(subscriber)
     @subscriber = subscriber
-    run_callbacks :perform do 
+    run_callbacks :perform do
       if @story_subscription.save
         @story_subscription
       else
@@ -25,6 +25,5 @@ class StorySubscriptionCreateContext < BaseContext
   def build_data
     @story_subscription = @story.story_subscriptions.new(subscriber: @subscriber, story: @story)
   end
-
 
 end

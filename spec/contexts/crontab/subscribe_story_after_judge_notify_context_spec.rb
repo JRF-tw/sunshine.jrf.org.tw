@@ -5,13 +5,13 @@ describe Crontab::SubscribeStoryAfterJudgeNotifyContext do
 
   describe "#perform" do
     context "send after judge notify" do
-      subject { described_class.new(Date.today) }
-      it { expect{ subject.perform }.to change_sidekiq_jobs_size_of(Sidekiq::Extensions::DelayedMailer) }
+      subject { described_class.new(Time.zone.today) }
+      it { expect { subject.perform }.to change_sidekiq_jobs_size_of(Sidekiq::Extensions::DelayedMailer) }
     end
 
     context "find after judge story" do
-      subject { described_class.new(Date.today) }
-      it { expect(subject.perform.first.schedules.last.date).to eq(Date.yesterday) }
+      subject { described_class.new(Time.zone.today) }
+      it { expect(subject.perform.first.schedules.last.date).to eq(Time.zone.yesterday) }
     end
   end
 

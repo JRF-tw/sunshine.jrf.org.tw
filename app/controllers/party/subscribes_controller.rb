@@ -7,7 +7,7 @@ class Party::SubscribesController < Party::BaseController
     if context.perform(current_party)
       redirect_to party_stories_path, flash: { success: "案件#{@story.identity} 已訂閱" }
     else
-      redirect_to party_stories_path, flash: { error: "#{context.error_messages.join(", ")}" }
+      redirect_to party_stories_path, flash: { error: context.error_messages.join(", ").to_s }
     end
   end
 
@@ -16,7 +16,7 @@ class Party::SubscribesController < Party::BaseController
     if context.perform(current_party)
       redirect_to party_stories_path, flash: { success: "案件#{@story.identity} 已取消訂閱" }
     else
-      redirect_to party_stories_path, flash: { error: "#{context.error_messages.join(", ")}" }
+      redirect_to party_stories_path, flash: { error: context.error_messages.join(", ").to_s }
     end
   end
 

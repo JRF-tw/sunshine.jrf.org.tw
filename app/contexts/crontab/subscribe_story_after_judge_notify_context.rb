@@ -1,4 +1,4 @@
-class  Crontab::SubscribeStoryAfterJudgeNotifyContext < BaseContext
+class Crontab::SubscribeStoryAfterJudgeNotifyContext < BaseContext
 
   before_perform :find_after_judge_story
 
@@ -19,8 +19,7 @@ class  Crontab::SubscribeStoryAfterJudgeNotifyContext < BaseContext
 
   def find_after_judge_story
     @close_court_story = []
-    Schedule.where(date: @date.yesterday).each { |schedule| @close_court_story  << schedule.story }
+    Schedule.where(date: @date.yesterday).each { |schedule| @close_court_story << schedule.story }
   end
 
 end
-
