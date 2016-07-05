@@ -11,7 +11,6 @@ class Crontab::SubscribeStoryAfterJudgeNotifyContext < BaseContext
       @close_court_story.each do |story|
         StoryAfterJudgeNoticeContext.new(story).perform
       end
-
     end
   end
 

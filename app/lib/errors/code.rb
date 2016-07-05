@@ -13,7 +13,7 @@ class Errors::Code
     email_conflict: 400,
     retry_verify_count_out_range: 400,
     story_subscriber_failed: 400,
-    story_subscriber_valid_failed: 400
+    story_subscriber_valid_failed: 401
   }.freeze
 
   class << self
