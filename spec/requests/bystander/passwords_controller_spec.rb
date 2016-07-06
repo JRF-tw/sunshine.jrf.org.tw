@@ -5,15 +5,19 @@ RSpec.describe Bystander::PasswordsController, type: :request do
   let(:token) { bystander.send_reset_password_instructions }
 
   describe "#update" do
-    context "success" do
-      before { put "/bystander/password", bystander: { password: "55667788", password_confirmation: "55667788", reset_password_token: token } }
-      subject { post "/bystander/sign_in", bystander: { email: bystander.email, password: "55667788" } }
+    context "success with login" do
+      before { signin_bystander(bystander) }
+      subject! { put "/bystander/password", bystander: { password: "55667788", password_confirmation: "55667788", reset_password_token: token } }
 
       it { expect(response).to redirect_to("/bystander/profile") }
-      it "sign in with updated password" do
-        signout_bystander
-        expect { subject }.to change { bystander.reload.current_sign_in_at }
-      end
+      it { expect(flash[:notice]).to eq("您的密碼已被修改，下次登入時請使用新密碼登入。") }
+    end
+
+    context "success without login" do
+      subject! { put "/bystander/password", bystander: { password: "55667788", password_confirmation: "55667788", reset_password_token: token } }
+
+      it { expect(response).to redirect_to("/bystander/profile") }
+      it { expect(flash[:notice]).to eq("您的密碼已被修改，下次登入時請使用新密碼登入。") }
     end
   end
 
