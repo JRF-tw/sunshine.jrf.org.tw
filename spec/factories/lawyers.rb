@@ -43,8 +43,7 @@ FactoryGirl.define do
       password "123123123"
     end
 
-    trait :with_password_and_confirmed do
-      password "123123123"
+    trait :with_confirmed do
       confirmed_at Time.now
     end
 

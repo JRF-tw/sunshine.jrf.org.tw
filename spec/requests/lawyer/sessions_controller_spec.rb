@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Lawyer::SessionsController, type: :request do
 
   describe "#create" do
-    let!(:lawyer) { FactoryGirl.create :lawyer, :with_password_and_confirmed, password: "00000000" }
+    let!(:lawyer) { FactoryGirl.create :lawyer, :with_password, :with_confirmed, password: "00000000" }
 
     context "need update profile" do
       before { lawyer.update_attributes(phone_number: nil) }
@@ -16,7 +16,7 @@ RSpec.describe Lawyer::SessionsController, type: :request do
       before { lawyer.update_attributes(current: "律師事務所") }
       subject! { post "/lawyer/sign_in", lawyer: { email: lawyer.email, password: "00000000" } }
 
-      it { expect(response).to redirect_to("/lawyer/profile") }
+      it { expect(response).to redirect_to("/lawyer/scores") }
     end
   end
 

@@ -24,7 +24,7 @@ RSpec.describe Lawyer::RegistrationsController, type: :request do
     end
 
     context "lawyer already active" do
-      let!(:lawyer) { FactoryGirl.create :lawyer, :with_password_and_confirmed }
+      let!(:lawyer) { FactoryGirl.create :lawyer, :with_password, :with_confirmed }
       before { post "/lawyer",  lawyer: { name: lawyer.name, email: lawyer.email } }
 
       it { expect(response).to redirect_to("/lawyer/sign_in") }
