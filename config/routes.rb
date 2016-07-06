@@ -55,7 +55,7 @@ Rails.application.routes.draw do
   namespace :lawyer do
     resource :appeal, only: [:new]
     resource :profile, only: [:show, :edit, :update]
-    resource :email, only: [:edit]
+    resource :email, only: [:edit, :update]
     resources :scores, only: [:index, :edit]
     resource :score do
       get "chose-type", to: "scores#chose_type"

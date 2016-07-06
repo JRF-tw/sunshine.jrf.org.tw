@@ -57,6 +57,10 @@ FactoryGirl.define do
         FactoryGirl.create :verdict_relation, person: lawyer, verdict: FactoryGirl.create(:verdict)
       end
     end
+
+    trait :with_unconfirmed_email do
+      unconfirmed_email "test@gmail.com"
+    end
   end
 
   factory :empty_name_for_lawyer, class: Lawyer do
