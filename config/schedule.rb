@@ -28,7 +28,7 @@ if @environment == "production"
 end
 
 # scrap courts
-every 7.day, at: "1:00 am" do
+every 7.days, at: "1:00 am" do
   runner "Scrap::GetCourtsContext.delay.perform"
 end
 
@@ -54,10 +54,10 @@ end
 
 # notify subscriber before judge
 every 1.day, at: "7:00 am" do
-  runner "Crontab::SubscribeStoryBeforeJudgeNotifyContext.new(#{Date.today}).perform"
+  runner "Crontab::SubscribeStoryBeforeJudgeNotifyContext.new(#{Time.zone.today}).perform"
 end
 
 # notify subscriber after judge
 every 1.day, at: "7:00 am" do
-  runner "Crontab::SubscribeStoryAfterJudgeNotifyContext.new(#{Date.today}).perform"
+  runner "Crontab::SubscribeStoryAfterJudgeNotifyContext.new(#{Time.zone.today}).perform"
 end

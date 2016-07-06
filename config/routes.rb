@@ -1,20 +1,20 @@
-require 'sidekiq/web'
+require "sidekiq/web"
 Rails.application.routes.draw do
-  mount RedactorRails::Engine => '/redactor_rails'
-  mount Sidekiq::Web => '/sidekiq'
+  mount RedactorRails::Engine => "/redactor_rails"
+  mount Sidekiq::Web => "/sidekiq"
 
   devise_for :users
-  devise_for :party, controllers: { registrations: 'party/registrations', sessions: 'party/sessions', passwords: 'party/passwords', confirmations: 'party/confirmations' }
-  devise_for :court_observer, path: "observer", controllers: { registrations: 'observer/registrations', sessions: 'observer/sessions', passwords: 'observer/passwords', confirmations: 'observer/confirmations'}
-  devise_for :lawyer, controllers: { registrations: 'lawyer/registrations', sessions: 'lawyer/sessions', passwords: 'lawyer/passwords', confirmations: 'lawyer/confirmations'}
+  devise_for :party, controllers: { registrations: "party/registrations", sessions: "party/sessions", passwords: "party/passwords", confirmations: "party/confirmations" }
+  devise_for :court_observer, path: "observer", controllers: { registrations: "observer/registrations", sessions: "observer/sessions", passwords: "observer/passwords", confirmations: "observer/confirmations" }
+  devise_for :lawyer, controllers: { registrations: "lawyer/registrations", sessions: "lawyer/sessions", passwords: "lawyer/passwords", confirmations: "lawyer/confirmations" }
 
   # custom devise scope
   devise_scope :lawyer do
-    post '/lawyer/password/send_reset_password_mail', to: 'lawyer/passwords#send_reset_password_mail'
+    post "/lawyer/password/send_reset_password_mail", to: "lawyer/passwords#send_reset_password_mail"
   end
 
   devise_scope :court_observer do
-    post '/observer/password/send_reset_password_mail', to: 'observer/passwords#send_reset_password_mail'
+    post "/observer/password/send_reset_password_mail", to: "observer/passwords#send_reset_password_mail"
   end
 
   devise_scope :party do
@@ -23,8 +23,8 @@ Rails.application.routes.draw do
 
   # f2e
   root to: "base#index", only: [:show]
-  get '/who-are-you', to: "base#who_are_you"
-  get '/robots.txt', to: "base#robots", defaults: { format: "text" }
+  get "/who-are-you", to: "base#who_are_you"
+  get "/robots.txt", to: "base#robots", defaults: { format: "text" }
   get "judges", to: "profiles#judges", as: :judges
   get "prosecutors", to: "profiles#prosecutors", as: :prosecutors
 
@@ -129,7 +129,7 @@ Rails.application.routes.draw do
     resources :punishments
   end
 
-  namespace :api, defaults: { format: 'json' } do
+  namespace :api, defaults: { format: "json" } do
     resources :profiles, only: [:show, :index]
     get "judges", to: "profiles#judges", as: :judges
     get "prosecutors", to: "profiles#prosecutors", as: :prosecutors
