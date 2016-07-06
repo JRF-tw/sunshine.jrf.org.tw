@@ -5,17 +5,17 @@ module RequestClient
   end
 
   def signout_bystander
-    delete "/bystander/sign_out", {}, "HTTP_REFERER" => "http://www.example.com/bystanders"
+    delete "/bystander/sign_out", {}, "HTTP_REFERER" => "http://www.example.com/bystander/profile"
     @current_bystander = nil
   end
 
   def signout_party
-    delete "/party/sign_out", {}, "HTTP_REFERER" => "http://www.example.com/partys"
+    delete "/party/sign_out", {}, "HTTP_REFERER" => "http://www.example.com/party/profile"
     @current_party = nil
   end
 
   def signout_lawyer
-    delete "/lawyer/sign_out", {}, "HTTP_REFERER" => "http://www.example.com/lawyers"
+    delete "/lawyer/sign_out", {}, "HTTP_REFERER" => "http://www.example.com/lawyer/profile"
     @current_lawyer = nil
   end
 
