@@ -59,10 +59,10 @@ class Lawyer < ActiveRecord::Base
   end
 
   def set_confirmation_token
-    if self.confirmation_token && !confirmation_period_expired?
-      @raw_confirmation_token = self.confirmation_token
+    if confirmation_token && !confirmation_period_expired?
+      @raw_confirmation_token = confirmation_token
     else
-      raw, _ = Devise.token_generator.generate(self.class, :confirmation_token)
+      raw, = Devise.token_generator.generate(self.class, :confirmation_token)
       self.confirmation_token = @raw_confirmation_token = raw
       self.confirmation_sent_at = Time.now.utc
     end

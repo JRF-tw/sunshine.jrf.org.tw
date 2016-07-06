@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Lawyer::EmailsController, type: :request do
-before { signin_lawyer }
+  before { signin_lawyer }
 
   describe "#edit" do
     before { get "/lawyer/email/edit" }

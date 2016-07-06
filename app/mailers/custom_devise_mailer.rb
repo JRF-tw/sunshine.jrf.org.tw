@@ -7,6 +7,6 @@ class CustomDeviseMailer < Devise::Mailer
   def send_confirm_mail(resource, token)
     @resource = resource
     @token = token
-    mail(to: @resource.email, from: Setting.mailer.default_sender, :subject => "律師登入設定密碼")
+    mail(to: @resource.email, from: Setting.mailer.default_sender, subject: "律師登入設定密碼")
   end
 end

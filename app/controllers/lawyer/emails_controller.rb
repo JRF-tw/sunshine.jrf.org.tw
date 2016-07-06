@@ -1,7 +1,6 @@
 class Lawyer::EmailsController < Lawyer::BaseController
 
   def edit
-
   end
 
   def update
