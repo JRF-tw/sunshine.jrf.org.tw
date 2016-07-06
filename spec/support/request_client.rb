@@ -4,9 +4,9 @@ module RequestClient
     @current_user = nil
   end
 
-  def signout_bystander
-    delete "/bystander/sign_out", {}, "HTTP_REFERER" => "http://www.example.com/bystander/profile"
-    @current_bystander = nil
+  def signout_court_observer
+    delete "/observer/sign_out", {}, "HTTP_REFERER" => "http://www.example.com/observer/profile"
+    @current_court_observer = nil
   end
 
   def signout_party
@@ -25,10 +25,10 @@ module RequestClient
     @current_user = user if response.status == 302
   end
 
-  def signin_bystander(bystander = nil)
-    bystander ||= FactoryGirl.create(:bystander)
-    post "/bystander/sign_in", bystander: { email: bystander.email, password: bystander.password }
-    @current_bystander = bystander if response.status == 302
+  def signin_court_observer(court_observer = nil)
+    court_observer ||= FactoryGirl.create(:court_observer)
+    post "/observer/sign_in", court_observer: { email: court_observer.email, password: court_observer.password }
+    @current_court_observer = court_observer if response.status == 302
   end
 
   def signin_party(party = nil)
@@ -47,8 +47,8 @@ module RequestClient
     @current_user
   end
 
-  def current_bystander
-    @current_bystander
+  def current_court_observer
+    @current_court_observer
   end
 
   def current_party

@@ -1,0 +1,22 @@
+.widget-box
+  .widget-title
+    h5 觀察員註冊
+  .widget-content.nopadding
+    = simple_form_for(resource, as: resource_name, url: court_observer_registration_path) do |f|
+      = f.error_notification
+      .form-group
+        label.control-label 姓名
+        = f.input :name, required: true, autofocus: true, :label => false
+      .form-group
+        label.control-label Email
+        = f.input :email, required: true, :label => false
+      .form-group
+        label.control-label 密碼
+        = f.input :password, required: true, :label => false
+        label.control-label 密碼確認
+        = f.input :password_confirmation, required: true, :label => false
+
+      .form-actions
+        input.btn.btn-primary type="submit" value="註冊"
+
+  = render "devise/shared/links"

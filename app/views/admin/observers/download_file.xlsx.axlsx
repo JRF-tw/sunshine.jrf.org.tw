@@ -1,0 +1,7 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "court_observers") do |sheet|
+  sheet.add_row ["id", "姓名", "學校","系級","email"]
+  @court_observers.each do |court_observer|
+    sheet.add_row [court_observer.id, court_observer.name, court_observer.school, court_observer.department_level, court_observer.email]
+  end
+end

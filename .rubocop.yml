@@ -1,7 +1,11 @@
 AllCops:
   Exclude:
     - bin/**/*
-    - config/**/*
+    - config/*/*
+    - config/application.rb
+    - config/boot.rb
+    - config/deploy.rb
+    - config/environment.rb
     - db/**/*
     - log/**/*
     - public/**/*

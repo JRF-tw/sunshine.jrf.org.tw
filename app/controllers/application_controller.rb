@@ -22,8 +22,8 @@ class ApplicationController < ActionController::Base
   def layout_by_resource
     if devise_controller? && resource_name == :user
       "admin"
-    elsif devise_controller? && resource_name == :bystander
-      "bystander"
+    elsif devise_controller? && resource_name == :court_observer
+      "observer"
     end
   end
 
@@ -35,5 +35,5 @@ end
 
 require "base_controller"
 require "party/base_controller"
-require "bystander/base_controller"
+require "observer/base_controller"
 require "lawyer/base_controller"

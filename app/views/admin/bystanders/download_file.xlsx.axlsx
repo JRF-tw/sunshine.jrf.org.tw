@@ -1,7 +1,0 @@
-wb = xlsx_package.workbook
-wb.add_worksheet(name: "bystanders") do |sheet|
-  sheet.add_row ["id", "姓名", "學校","系級","email"]
-  @bystanders.each do |bystander|
-    sheet.add_row [bystander.id, bystander.name, bystander.school, bystander.department_level, bystander.email]
-  end
-end
