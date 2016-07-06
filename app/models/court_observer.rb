@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: observers
+# Table name: court_observers
 #
 #  id                     :integer          not null, primary key
 #  name                   :string           not null
