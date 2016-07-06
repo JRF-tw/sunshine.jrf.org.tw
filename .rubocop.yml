@@ -6,6 +6,7 @@ AllCops:
     - config/boot.rb
     - config/deploy.rb
     - config/environment.rb
+    - config/schedule.rb
     - db/**/*
     - log/**/*
     - public/**/*
