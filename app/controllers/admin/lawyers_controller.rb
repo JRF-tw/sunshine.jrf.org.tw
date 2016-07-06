@@ -79,7 +79,7 @@ class Admin::LawyersController < Admin::BaseController
     if context.perform
       redirect_as_success(admin_lawyers_path, "律師 - #{lawyer.name} 已刪除")
     else
-      redirect_to :back, flash: { error: context.error_messages.join(", ") }
+      redirect_to :back, flash: { error: context.error_messages }
     end
   end
 

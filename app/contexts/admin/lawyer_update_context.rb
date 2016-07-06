@@ -12,7 +12,7 @@ class Admin::LawyerUpdateContext < BaseContext
   def perform(params)
     @params = permit_params(params[:admin_lawyer] || params[:lawyer] || params, PERMITS)
     run_callbacks :perform do
-      return add_error(:data_update_fail, @lawyer.errors.full_messages.join("\n")) unless @lawyer.save
+      return add_error(:data_update_fail, @lawyer.errors.full_messages) unless @lawyer.save
       true
     end
   end

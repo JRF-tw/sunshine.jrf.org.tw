@@ -12,7 +12,7 @@ class Admin::JudgeCreateContext < BaseContext
       if @judge.save
         @judge
       else
-        add_error(:data_create_fail, @judge.errors.full_messages.join("\n"))
+        add_error(:data_create_fail, @judge.errors.full_messages)
       end
     end
   end

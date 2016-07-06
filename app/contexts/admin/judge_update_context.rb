@@ -10,7 +10,7 @@ class Admin::JudgeUpdateContext < BaseContext
   def perform(params)
     @params = permit_params(params[:admin_judge] || params, PERMITS)
     run_callbacks :perform do
-      return add_error(:data_update_fail, @judge.errors.full_messages.join("\n")) unless @judge.save
+      return add_error(:data_update_fail, @judge.errors.full_messages) unless @judge.save
       true
     end
   end

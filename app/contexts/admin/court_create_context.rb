@@ -13,7 +13,7 @@ class Admin::CourtCreateContext < BaseContext
       if @court.save
         @court
       else
-        add_error(:data_create_fail, @court.errors.full_messages.join("\n"))
+        add_error(:data_create_fail, @court.errors.full_messages)
       end
     end
   end
