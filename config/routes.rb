@@ -10,7 +10,6 @@ Rails.application.routes.draw do
 
   # custom devise scope
   devise_scope :lawyer do
-    patch '/lawyer/confirm', to: 'lawyer/confirmations#confirm', as: :lawyer_confirm
     post '/lawyer/password/send_reset_password_mail', to: 'lawyer/passwords#send_reset_password_mail'
   end
 

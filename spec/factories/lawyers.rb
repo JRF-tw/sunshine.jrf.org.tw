@@ -39,6 +39,10 @@ FactoryGirl.define do
       avatar File.open "#{Rails.root}/spec/fixtures/person_avatar/people-1.jpg"
     end
 
+    trait :with_password do
+      password "123123123"
+    end
+
     trait :with_password_and_confirmed do
       password "123123123"
       confirmed_at Time.now

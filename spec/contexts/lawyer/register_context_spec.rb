@@ -7,7 +7,7 @@ describe Lawyer::RegisterContext do
     context "success" do
       subject { described_class.new(lawyer: { name: lawyer.name, email: lawyer.email }) }
       it { expect { subject.perform }.not_to change { subject.errors } }
-      it { expect { subject.perform }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
+      it { expect { subject.perform }.to change_sidekiq_jobs_size_of(CustomDeviseMailer, :send_confirm_mail) }
     end
 
     context "empty email" do
