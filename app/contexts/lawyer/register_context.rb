@@ -4,6 +4,8 @@ class Lawyer::RegisterContext < BaseContext
   before_perform :check_lawyer_params
   before_perform :find_lawyer_by_params
   before_perform :check_lawyer_not_active
+  after_perform :generate_token
+  after_perform :send_confirm_mail
 
   def initialize(params)
     @params = permit_params(params[:lawyer] || params, PERMITS)
@@ -11,7 +13,6 @@ class Lawyer::RegisterContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      return add_error(:send_email_fail, "認證信寄送失敗") unless @lawyer.send_confirmation_instructions
       @lawyer
     end
   end
@@ -32,6 +33,14 @@ class Lawyer::RegisterContext < BaseContext
 
   def check_lawyer_not_active
     return add_error(:lawyer_exist, "已經註冊 請直接登入") if @lawyer.confirmed?
+  end
+
+  def generate_token
+    @token = @lawyer.set_confirmation_token
+  end
+
+  def send_confirm_mail
+    CustomDeviseMailer.delay.send_confirm_mail(@lawyer, @token)
   end
 
 end

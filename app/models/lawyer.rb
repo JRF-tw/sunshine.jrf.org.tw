@@ -50,4 +50,21 @@ class Lawyer < ActiveRecord::Base
     super if confirmed?
   end
 
+  def set_reset_password_token
+    raw, enc = Devise.token_generator.generate(self.class, :reset_password_token)
+    self.reset_password_token   = enc
+    self.reset_password_sent_at = Time.now.utc
+    save(validate: false)
+    raw
+  end
+
+  def set_confirmation_token
+    if confirmation_token && !confirmation_period_expired?
+      @raw_confirmation_token = confirmation_token
+    else
+      raw, = Devise.token_generator.generate(self.class, :confirmation_token)
+      self.confirmation_token = @raw_confirmation_token = raw
+      self.confirmation_sent_at = Time.now.utc
+    end
+  end
 end

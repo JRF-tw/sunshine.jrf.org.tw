@@ -10,7 +10,6 @@ Rails.application.routes.draw do
 
   # custom devise scope
   devise_scope :lawyer do
-    patch '/lawyer/confirm', to: 'lawyer/confirmations#confirm', as: :lawyer_confirm
     post '/lawyer/password/send_reset_password_mail', to: 'lawyer/passwords#send_reset_password_mail'
   end
 
@@ -56,7 +55,7 @@ Rails.application.routes.draw do
   namespace :lawyer do
     resource :appeal, only: [:new]
     resource :profile, only: [:show, :edit, :update]
-    resource :email, only: [:edit]
+    resource :email, only: [:edit, :update]
     resources :scores, only: [:index, :edit]
     resource :score do
       get "chose-type", to: "scores#chose_type"
