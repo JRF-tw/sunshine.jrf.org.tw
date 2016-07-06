@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160629081809) do
+ActiveRecord::Schema.define(version: 20160706092730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,34 +96,6 @@ ActiveRecord::Schema.define(version: 20160629081809) do
   add_index "branches", ["missed"], name: "index_branches_on_missed", using: :btree
   add_index "branches", ["name"], name: "index_branches_on_name", using: :btree
 
-  create_table "bystanders", force: :cascade do |t|
-    t.string   "name",                                null: false
-    t.string   "email",                               null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "phone_number"
-    t.string   "school"
-    t.string   "student_number"
-    t.string   "department_level"
-  end
-
-  add_index "bystanders", ["confirmation_token"], name: "index_bystanders_on_confirmation_token", unique: true, using: :btree
-  add_index "bystanders", ["email"], name: "index_bystanders_on_email", unique: true, using: :btree
-  add_index "bystanders", ["reset_password_token"], name: "index_bystanders_on_reset_password_token", unique: true, using: :btree
-
   create_table "careers", force: :cascade do |t|
     t.integer  "profile_id"
     t.string   "career_type"
@@ -151,6 +123,35 @@ ActiveRecord::Schema.define(version: 20160629081809) do
 
   add_index "careers", ["is_hidden"], name: "index_careers_on_is_hidden", using: :btree
   add_index "careers", ["profile_id"], name: "index_careers_on_profile_id", using: :btree
+
+  create_table "court_observers", force: :cascade do |t|
+    t.string   "name",                                null: false
+    t.string   "email",                               null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "phone_number"
+    t.string   "school"
+    t.string   "student_number"
+    t.string   "department_level"
+  end
+
+  add_index "court_observers", ["confirmation_token"], name: "index_court_observers_on_confirmation_token", unique: true, using: :btree
+  add_index "court_observers", ["email"], name: "index_court_observers_on_email", unique: true, using: :btree
+  add_index "court_observers", ["reset_password_token"], name: "index_court_observers_on_reset_password_token", unique: true, using: :btree
+  add_index "court_observers", ["school"], name: "index_court_observers_on_school", using: :btree
 
   create_table "courts", force: :cascade do |t|
     t.string   "court_type"
@@ -327,13 +328,14 @@ ActiveRecord::Schema.define(version: 20160629081809) do
     t.datetime "confirmed_at"
     t.string   "confirmation_token"
     t.datetime "confirmation_sent_at"
+    t.datetime "phone_confirmed_at"
     t.boolean  "imposter",                 default: false
     t.string   "imposter_identify_number"
-    t.datetime "phone_confirmed_at"
   end
 
   add_index "parties", ["confirmation_token"], name: "index_parties_on_confirmation_token", unique: true, using: :btree
   add_index "parties", ["email"], name: "index_parties_on_email", unique: true, using: :btree
+  add_index "parties", ["imposter"], name: "index_parties_on_imposter", using: :btree
   add_index "parties", ["reset_password_token"], name: "index_parties_on_reset_password_token", unique: true, using: :btree
 
   create_table "procedures", force: :cascade do |t|
@@ -487,12 +489,12 @@ ActiveRecord::Schema.define(version: 20160629081809) do
     t.integer  "number"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
-    t.date     "adjudge_date"
-    t.boolean  "is_adjudge",       default: false
     t.text     "party_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
+    t.boolean  "is_adjudge",       default: false
+    t.date     "adjudge_date"
   end
 
   add_index "stories", ["adjudge_date"], name: "index_stories_on_adjudge_date", using: :btree
@@ -633,11 +635,11 @@ ActiveRecord::Schema.define(version: 20160629081809) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.string   "file"
+    t.boolean  "is_judgment",      default: false
     t.text     "party_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
-    t.boolean  "is_judgment",      default: false
     t.date     "adjudge_date"
     t.integer  "main_judge_id"
     t.string   "main_judge_name"
