@@ -19,7 +19,7 @@ class Admin::PartiesController < Admin::BaseController
     if context.perform
       redirect_to admin_parties_path, flash: { success: "當事人 #{@party.name} 已設定為冒用者" }
     else
-      redirect_to admin_parties_path, flash: { error: context.error_messages.join(", ") }
+      redirect_to admin_parties_path, flash: { error: context.error_messages }
     end
   end
 

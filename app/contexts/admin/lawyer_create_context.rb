@@ -11,7 +11,7 @@ class Admin::LawyerCreateContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      return add_error(:data_create_fail, @lawyer.errors.full_messages.join("\n")) unless @lawyer.save
+      return add_error(:data_create_fail, @lawyer.errors.full_messages) unless @lawyer.save
       @lawyer
     end
   end

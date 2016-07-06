@@ -1,0 +1,6 @@
+- flash.each do |k, message|
+  - message = message.is_a?(Array) ? message.flatten.uniq : [message]
+  - message.flatten.uniq.each do |m|
+    div class= "alert fade in alert-#{k}"
+      a.close data-dismiss="alert" href="#"
+      = m
