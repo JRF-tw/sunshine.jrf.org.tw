@@ -15,7 +15,7 @@ describe Admin::LawyerDeleteContext do
   end
 
   context "already confirmed" do
-    let!(:lawyer) { FactoryGirl.create :lawyer, :with_password_and_confirmed }
+    let!(:lawyer) { FactoryGirl.create :lawyer, :with_password, :with_confirmed }
     subject { described_class.new(lawyer) }
 
     it { expect { subject.perform }.not_to change { Lawyer.count } }
