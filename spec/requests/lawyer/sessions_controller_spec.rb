@@ -29,10 +29,10 @@ RSpec.describe Lawyer::SessionsController, type: :request do
 
     context "only sign out lawyer" do
       before { signin_lawyer }
-      before { signin_bystander }
+      before { signin_court_observer }
       subject! { delete "/lawyer/sign_out" }
 
-      it { expect(get("/bystander/edit")).to eq(200) }
+      it { expect(get("/observer/edit")).to eq(200) }
       it { expect(get("/lawyer/profile")).to eq(302) }
     end
   end

@@ -1,0 +1,19 @@
+h2 = "觀察者資料更改"
+
+= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :email, required: true, autofocus: true, label: "電子信箱"
+
+    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+      p = "目前等待驗證中信箱: #{resource.unconfirmed_email}"
+    = f.input :current_password, hint: "請輸入密碼以完成修改", required: true, label: "密碼"
+
+
+  .form-actions
+    = f.button :submit, "送出"
+
+
+= link_to "回到上一頁", :back
+div = link_to "重寄認證信", observer_confirmation_path(court_observer: { email: resource.email }), method: :post if resource.pending_reconfirmation?

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   devise_for :party, controllers: { registrations: 'party/registrations', sessions: 'party/sessions', passwords: 'party/passwords', confirmations: 'party/confirmations' }
-  devise_for :bystander, controllers: { registrations: 'bystander/registrations', sessions: 'bystander/sessions', passwords: 'bystander/passwords', confirmations: 'bystander/confirmations'}
+  devise_for :court_observer, path: "observer", controllers: { registrations: 'observer/registrations', sessions: 'observer/sessions', passwords: 'observer/passwords', confirmations: 'observer/confirmations'}
   devise_for :lawyer, controllers: { registrations: 'lawyer/registrations', sessions: 'lawyer/sessions', passwords: 'lawyer/passwords', confirmations: 'lawyer/confirmations'}
 
   # custom devise scope
@@ -13,8 +13,8 @@ Rails.application.routes.draw do
     post '/lawyer/password/send_reset_password_mail', to: 'lawyer/passwords#send_reset_password_mail'
   end
 
-  devise_scope :bystander do
-    post '/bystander/password/send_reset_password_mail', to: 'bystander/passwords#send_reset_password_mail'
+  devise_scope :court_observer do
+    post '/observer/password/send_reset_password_mail', to: 'observer/passwords#send_reset_password_mail'
   end
 
   devise_scope :party do
@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   get "judges", to: "profiles#judges", as: :judges
   get "prosecutors", to: "profiles#prosecutors", as: :prosecutors
 
-  namespace :bystander do
+  namespace :observer do
     resource :profile, only: [:show, :edit, :update]
     resource :email, only: [:edit]
     resources :scores, only: [:index, :edit]
@@ -168,7 +168,7 @@ Rails.application.routes.draw do
         get :download_file
       end
     end
-    resources :bystanders, only: [:show, :index]
+    resources :observers, only: [:show, :index]
     resources :parties do
       member do
         put :set_to_imposter
