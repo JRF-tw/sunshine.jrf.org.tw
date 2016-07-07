@@ -10,7 +10,7 @@ class Lawyer::RegisterContext < BaseContext
 
   def initialize(params)
     @params = permit_params(params[:lawyer] || params, PERMITS)
-    @params[:policy_agreement] = 1 if params[:policy_agreement]
+    @params[:policy_agreement] = true if params[:policy_agreement]
   end
 
   def perform
