@@ -151,6 +151,7 @@ ActiveRecord::Schema.define(version: 20160706092730) do
   add_index "court_observers", ["confirmation_token"], name: "index_court_observers_on_confirmation_token", unique: true, using: :btree
   add_index "court_observers", ["email"], name: "index_court_observers_on_email", unique: true, using: :btree
   add_index "court_observers", ["reset_password_token"], name: "index_court_observers_on_reset_password_token", unique: true, using: :btree
+  add_index "court_observers", ["school"], name: "index_court_observers_on_school", using: :btree
 
   create_table "courts", force: :cascade do |t|
     t.string   "court_type"
@@ -334,6 +335,7 @@ ActiveRecord::Schema.define(version: 20160706092730) do
 
   add_index "parties", ["confirmation_token"], name: "index_parties_on_confirmation_token", unique: true, using: :btree
   add_index "parties", ["email"], name: "index_parties_on_email", unique: true, using: :btree
+  add_index "parties", ["imposter"], name: "index_parties_on_imposter", using: :btree
   add_index "parties", ["reset_password_token"], name: "index_parties_on_reset_password_token", unique: true, using: :btree
 
   create_table "procedures", force: :cascade do |t|
