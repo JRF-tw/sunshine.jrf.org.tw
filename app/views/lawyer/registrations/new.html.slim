@@ -12,5 +12,9 @@
         label.control-label email
         = f.input :email, required: true, :label => false
 
+      .form-group
+        = check_box_tag :policy_agreement
+        label.control-label= label_tag "我已詳細閱讀服務條款和隱私權保護政策"
+
       .form-actions
         input.btn.btn-primary type="submit" value="註冊"

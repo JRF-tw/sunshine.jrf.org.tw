@@ -1,6 +1,6 @@
 .widget-box
   .widget-title
-    h5 旁觀者登入
+    h5 律師登入
   .widget-content.nopadding
     = simple_form_for(resource, as: resource_name, :url => session_path(resource_name)) do |f|
       .form-group
@@ -13,4 +13,4 @@
 
       .form-actions
         input.btn.btn-primary type="submit" value="登入"
-        = link_to "註冊", new_court_observer_registration_path , class: "btn btn-default"
+        = link_to "註冊", new_lawyer_registration_path, class: "btn btn-default"
