@@ -1,4 +1,6 @@
 class Lawyer::ProfilesController < Lawyer::BaseController
+  layout "lawyer"
+
   def show
   end
 
