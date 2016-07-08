@@ -10,7 +10,7 @@ class Lawyer::RegisterContext < BaseContext
 
   def initialize(params)
     @params = permit_params(params[:lawyer] || params, PERMITS)
-    @params[:policy_agreement] = true if params[:policy_agreement]
+    @params[:policy_agreement] = true if params[:policy_agreement] == "1"
   end
 
   def perform
@@ -34,7 +34,7 @@ class Lawyer::RegisterContext < BaseContext
 
   def find_lawyer_by_params
     @lawyer = Lawyer.find_by(name: @params[:name], email: @params[:email])
-    return add_error(:lawyer_not_found, %(查無此律師資料 請改以人工管道註冊 <a href="/lawyer/appeal/new">點此註冊</a>)) unless @lawyer
+    return add_error(:lawyer_not_found, "查無此律師資料 請改以人工管道註冊 <a href='/lawyer/appeal/new'>點此註冊</a>") unless @lawyer
   end
 
   def check_lawyer_not_active
