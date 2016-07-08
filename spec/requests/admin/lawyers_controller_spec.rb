@@ -28,9 +28,12 @@ RSpec.describe Admin::LawyersController do
   describe "#update" do
     context "update success" do
       subject { put "/admin/lawyers/#{lawyer.id}", admin_lawyer: { name: "阿里不打" } }
-      it do
-        expect { subject }.to change { lawyer.reload.name }.to("阿里不打")
-        expect(response).to redirect_to("/admin/lawyers")
+      context "change name" do
+        it { expect { subject }.to change { lawyer.reload.name }.to("阿里不打") }
+      end
+
+      context "redirect to index" do
+        it { expect(subject).to redirect_to("/admin/lawyers") }
       end
     end
   end
@@ -38,9 +41,12 @@ RSpec.describe Admin::LawyersController do
   describe "#delete" do
     context "delete success" do
       subject { delete "/admin/lawyers/#{lawyer.id}" }
-      it do
-        expect { subject }.to change { Lawyer.count }.by(-1)
-        expect(response).to redirect_to("/admin/lawyers")
+      context "delete lawyer" do
+        it { expect { subject }.to change { Lawyer.count }.by(-1) }
+      end
+
+      context "redirect to index" do
+        it { expect(subject).to redirect_to("/admin/lawyers") }
       end
     end
   end
@@ -48,25 +54,31 @@ RSpec.describe Admin::LawyersController do
   describe "#create" do
     context "create success" do
       subject { post "/admin/lawyers", admin_lawyer: { name: "火焰巴拉", email: "aron@example.com" } }
-      it do
-        expect { subject }.to change { Lawyer.count }.by(1)
-        expect(response).to redirect_to("/admin/lawyers/#{Lawyer.last.id}")
+      context "create lawyer" do
+        it { expect { subject }.to change { Lawyer.count }.by(1) }
+      end
+
+      context "redirect to show" do
+        it { expect(subject).to redirect_to("/admin/lawyers/#{Lawyer.last.id}") }
       end
     end
 
     context "create success with empty contact number" do
       subject { post "/admin/lawyers", admin_lawyer: { name: "火焰巴拉", email: "aron@example.com", phone_number: "", office_number: "" } }
-      it do
-        expect { subject }.to change { Lawyer.count }.by(1)
-        expect(response).to redirect_to("/admin/lawyers/#{Lawyer.last.id}")
+      context "create lawyer" do
+        it { expect { subject }.to change { Lawyer.count }.by(1) }
+      end
+
+      context "redirect to show" do
+        it { expect(subject).to redirect_to("/admin/lawyers/#{Lawyer.last.id}") }
       end
     end
   end
 
   describe "send_reset_password_mail" do
     context "success" do
-      subject! { post "/admin/lawyers/#{lawyer.id}/send_reset_password_mail" }
-      it { expect(response).to redirect_to("/admin/lawyers") }
+      subject { post "/admin/lawyers/#{lawyer.id}/send_reset_password_mail" }
+      it { expect(subject).to redirect_to("/admin/lawyers") }
     end
   end
 

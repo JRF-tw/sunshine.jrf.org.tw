@@ -43,7 +43,6 @@ class Lawyer::PasswordsController < Devise::PasswordsController
 
   def edit
     lawyer_by_token = Lawyer.with_reset_password_token(params[:reset_password_token])
-
     if lawyer_by_token.nil?
       redirect_as_fail(invalid_edit_path, "無效的驗證連結")
     elsif current_lawyer && lawyer_by_token != current_lawyer
