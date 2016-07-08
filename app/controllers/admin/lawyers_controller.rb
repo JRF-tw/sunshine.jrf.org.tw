@@ -58,7 +58,7 @@ class Admin::LawyersController < Admin::BaseController
   def create
     context =  Admin::LawyerCreateContext.new(params)
     if @lawyer = context.perform
-      redirect_as_success(admin_lawyers_path, "律師 - #{lawyer.name} 已新增")
+      redirect_as_success(admin_lawyer_path(@lawyer), "律師 - #{lawyer.name} 已新增")
     else
       @lawyer = context.lawyer
       render_as_fail(:new, context.error_messages)

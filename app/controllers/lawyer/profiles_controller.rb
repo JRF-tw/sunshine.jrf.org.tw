@@ -1,4 +1,8 @@
 class Lawyer::ProfilesController < Lawyer::BaseController
+  layout "lawyer"
+
+  # TODO: Layout render error
+
   def show
   end
 
