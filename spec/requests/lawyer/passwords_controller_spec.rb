@@ -15,10 +15,8 @@ RSpec.describe Lawyer::PasswordsController, type: :request do
       let!(:params) { { email: lawyer.email } }
       subject { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/passwords/new" }
 
-      it do
-        expect { subject }.not_to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq)
-        expect(response).to redirect_to("/lawyer/passwords/new")
-      end
+      it { expect { subject }.not_to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
+      it { expect(subject).to redirect_to("/lawyer/passwords/new") }
     end
 
     context "email confirmed" do
@@ -26,10 +24,8 @@ RSpec.describe Lawyer::PasswordsController, type: :request do
       let!(:params) { { email: lawyer.email } }
       subject { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/passwords/new" }
 
-      it do
-        expect { subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq)
-        expect(response).to redirect_to("/lawyer/sign_in")
-      end
+      it { expect { subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
+      it { expect(subject).to redirect_to("/lawyer/sign_in") }
     end
   end
 
