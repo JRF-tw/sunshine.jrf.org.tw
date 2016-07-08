@@ -7,7 +7,7 @@ describe "登入", type: :request do
     subject { post "/lawyer/sign_in", lawyer: { email: lawyer.email, password: lawyer.password } }
 
     it "導到個人評鑑紀錄頁" do
-      expect(subject).to redirect_to("/lawyer/scores")
+      expect(subject).to redirect_to("/lawyer")
     end
   end
 

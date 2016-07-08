@@ -29,9 +29,10 @@ Rails.application.routes.draw do
   get "prosecutors", to: "profiles#prosecutors", as: :prosecutors
 
   namespace :observer do
+    root to: "scores#index"
     resource :profile, only: [:show, :edit, :update]
     resource :email, only: [:edit]
-    resources :scores, only: [:index, :edit]
+    resources :scores, only: [:edit, :show]
     resource :score do
       get "chose-type", to: "scores#chose_type"
       resource :schedules, only: [:new] do
@@ -53,10 +54,11 @@ Rails.application.routes.draw do
   end
 
   namespace :lawyer do
+    root to: "scores#index"
     resource :appeal, only: [:new]
     resource :profile, only: [:show, :edit, :update]
     resource :email, only: [:edit, :update]
-    resources :scores, only: [:index, :edit]
+    resources :scores, only: [:edit, :show]
     resource :score do
       get "chose-type", to: "scores#chose_type"
       resource :schedules, only: [:new] do
@@ -78,6 +80,7 @@ Rails.application.routes.draw do
   end
 
   namespace :party do
+    root to: "scores#index"
     resource :profile, only: [:show, :edit, :update]
     resource :appeal, only: [:new]
     resource :email, only: [:edit, :update]
@@ -88,7 +91,7 @@ Rails.application.routes.draw do
         put :resend
       end
     end
-    resources :scores, only: [:index, :edit]
+    resources :scores, only: [:edit, :show]
     resource :score do
       get "chose-type", to: "scores#chose_type"
       resource :schedules, only: [:new] do

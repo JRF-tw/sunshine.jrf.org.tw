@@ -16,7 +16,7 @@ RSpec.describe Lawyer::SessionsController, type: :request do
       before { lawyer.update_attributes(current: "律師事務所") }
       subject! { post "/lawyer/sign_in", lawyer: { email: lawyer.email, password: "00000000" } }
 
-      it { expect(response).to redirect_to("/lawyer/scores") }
+      it { expect(response).to redirect_to("/lawyer") }
     end
   end
 

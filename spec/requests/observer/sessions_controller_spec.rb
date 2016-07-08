@@ -8,7 +8,7 @@ RSpec.describe Observer::SessionsController, type: :request do
       before { post "/observer/sign_in", court_observer: { email: court_observer.email, password: "123123123" } }
 
       it { expect(court_observer.reload.last_sign_in_at).to be_present }
-      it { expect(response).to redirect_to("/observer/profile") }
+      it { expect(response).to redirect_to("/observer") }
     end
 
     context "without validate email" do
