@@ -12,6 +12,11 @@ RSpec.describe BaseController, type: :request do
     it { expect(response).to be_success }
   end
 
+  describe "#who_are_you" do
+    before { get "/score-intro" }
+    it { expect(response).to be_success }
+  end
+
   it "GET /robots.txt" do
     get "/robots.txt"
     expect(response).to be_success

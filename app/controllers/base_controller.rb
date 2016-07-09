@@ -22,4 +22,10 @@ class BaseController < ApplicationController
       image: ActionController::Base.helpers.asset_path("hero-base-about-M.png")
     )
   end
+
+  def who_are_you
+  end
+
+  def score_intro
+  end
 end
