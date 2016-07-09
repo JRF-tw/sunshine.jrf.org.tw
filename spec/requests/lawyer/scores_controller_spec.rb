@@ -4,7 +4,12 @@ RSpec.describe Lawyer::ScoresController, type: :request do
   before { signin_lawyer }
 
   describe "#index" do
-    subject! { get "/lawyer/scores" }
+    subject! { get "/lawyer" }
+    it { expect(response).to be_success }
+  end
+
+  describe "#show" do
+    subject! { get "/lawyer/scores/xxxxx" }
     it { expect(response).to be_success }
   end
 

@@ -9,6 +9,11 @@ RSpec.describe Observer::SchedulesController, type: :request do
     it { expect(response).to be_success }
   end
 
+  describe "#rule" do
+    subject! { get "/observer/score/schedules/rule" }
+    it { expect(response).to be_success }
+  end
+
   describe "#verify" do
     subject! { post "/observer/score/schedules/verify" }
     it { expect(response).to be_redirect }

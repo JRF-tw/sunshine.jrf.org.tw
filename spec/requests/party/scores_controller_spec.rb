@@ -4,7 +4,12 @@ RSpec.describe Party::ScoresController, type: :request do
   before { signin_party }
 
   describe "#index" do
-    subject! { get "/party/scores" }
+    subject! { get "/party" }
+    it { expect(response).to be_success }
+  end
+
+  describe "#show" do
+    subject! { get "/party/scores/xxxxx" }
     it { expect(response).to be_success }
   end
 

@@ -4,7 +4,12 @@ RSpec.describe Observer::ScoresController, type: :request do
   before { signin_court_observer }
 
   describe "#index" do
-    subject! { get "/observer/scores" }
+    subject! { get "/observer" }
+    it { expect(response).to be_success }
+  end
+
+  describe "#show" do
+    subject! { get "/observer/scores/xxxxx" }
     it { expect(response).to be_success }
   end
 

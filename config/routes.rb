@@ -24,23 +24,27 @@ Rails.application.routes.draw do
   # f2e
   root to: "base#index", only: [:show]
   get "/who-are-you", to: "base#who_are_you"
+  get "/score-intro", to: "base#score_intro"
   get "/robots.txt", to: "base#robots", defaults: { format: "text" }
   get "judges", to: "profiles#judges", as: :judges
   get "prosecutors", to: "profiles#prosecutors", as: :prosecutors
 
   namespace :observer do
+    root to: "scores#index"
     resource :profile, only: [:show, :edit, :update]
     resource :email, only: [:edit]
-    resources :scores, only: [:index, :edit]
+    resources :scores, only: [:edit, :show]
     resource :score do
       get "chose-type", to: "scores#chose_type"
       resource :schedules, only: [:new] do
         collection do
+          get :rule
           post :verify
         end
       end
       resource :verdicts, only: [:new] do
         collection do
+          get :rule
           post :verify
         end
       end
@@ -53,19 +57,22 @@ Rails.application.routes.draw do
   end
 
   namespace :lawyer do
+    root to: "scores#index"
     resource :appeal, only: [:new]
     resource :profile, only: [:show, :edit, :update]
     resource :email, only: [:edit, :update]
-    resources :scores, only: [:index, :edit]
+    resources :scores, only: [:edit, :show]
     resource :score do
       get "chose-type", to: "scores#chose_type"
       resource :schedules, only: [:new] do
         collection do
+          get :rule
           post :verify
         end
       end
       resource :verdicts, only: [:new] do
         collection do
+          get :rule
           post :verify
         end
       end
@@ -78,6 +85,7 @@ Rails.application.routes.draw do
   end
 
   namespace :party do
+    root to: "scores#index"
     resource :profile, only: [:show, :edit, :update]
     resource :appeal, only: [:new]
     resource :email, only: [:edit, :update]
@@ -88,16 +96,18 @@ Rails.application.routes.draw do
         put :resend
       end
     end
-    resources :scores, only: [:index, :edit]
+    resources :scores, only: [:edit, :show]
     resource :score do
       get "chose-type", to: "scores#chose_type"
       resource :schedules, only: [:new] do
         collection do
+          get :rule
           post :verify
         end
       end
       resource :verdicts, only: [:new] do
         collection do
+          get :rule
           post :verify
         end
       end
