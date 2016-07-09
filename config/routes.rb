@@ -37,11 +37,13 @@ Rails.application.routes.draw do
       get "chose-type", to: "scores#chose_type"
       resource :schedules, only: [:new] do
         collection do
+          get :rule
           post :verify
         end
       end
       resource :verdicts, only: [:new] do
         collection do
+          get :rule
           post :verify
         end
       end
@@ -63,11 +65,13 @@ Rails.application.routes.draw do
       get "chose-type", to: "scores#chose_type"
       resource :schedules, only: [:new] do
         collection do
+          get :rule
           post :verify
         end
       end
       resource :verdicts, only: [:new] do
         collection do
+          get :rule
           post :verify
         end
       end
@@ -96,11 +100,13 @@ Rails.application.routes.draw do
       get "chose-type", to: "scores#chose_type"
       resource :schedules, only: [:new] do
         collection do
+          get :rule
           post :verify
         end
       end
       resource :verdicts, only: [:new] do
         collection do
+          get :rule
           post :verify
         end
       end

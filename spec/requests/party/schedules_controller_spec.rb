@@ -8,6 +8,11 @@ RSpec.describe Party::SchedulesController, type: :request do
     it { expect(response).to be_success }
   end
 
+  describe "#rule" do
+    subject! { get "/party/score/schedules/rule" }
+    it { expect(response).to be_success }
+  end
+
   describe "#verify" do
     subject! { post "/party/score/schedules/verify" }
     it { expect(response).to be_redirect }
