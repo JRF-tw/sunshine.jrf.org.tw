@@ -9,8 +9,8 @@ class StoryBeforeJudgeNoticeContext < BaseContext
       @story.story_subscriptions.each do |story_subscription|
         subscriber = story_subscription.subscriber
         subscriber_type = subscriber.class.name
-        klass = Kernel.const_get("#{subscriber_type}Mailer")
-        klass.delay.send("story_after_judge_notice(#{@story.id}, #{subscriber.id})")
+        mailer_class = "#{subscriber_type}Mailer".constantize
+        mailer_class.delay.send("story_after_judge_notice", @story.id, subscriber.id)
       end
     end
   end
