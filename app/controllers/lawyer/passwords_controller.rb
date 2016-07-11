@@ -69,7 +69,7 @@ class Lawyer::PasswordsController < Devise::PasswordsController
   end
 
   def after_resetting_password_path
-    lawyer_profile_path
+    lawyer_root_path
   end
 
 end
