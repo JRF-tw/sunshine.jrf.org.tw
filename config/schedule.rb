@@ -53,11 +53,11 @@ every 1.day, at: "6:00 am" do
 end
 
 # notify subscriber before judge
-every 1.day, at: "7:00 am" do
+every 1.day, at: "4:00 pm" do
   runner "Crontab::SubscribeStoryBeforeJudgeNotifyContext.new(Date.today).perform"
 end
 
 # notify subscriber after judge
-every 1.day, at: "7:00 am" do
+every 1.day, at: "4:00 pm" do
   runner "Crontab::SubscribeStoryAfterJudgeNotifyContext.new(Date.today).perform"
 end
