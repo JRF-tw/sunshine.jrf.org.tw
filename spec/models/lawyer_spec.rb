@@ -20,4 +20,11 @@ RSpec.describe Lawyer do
       it { expect { subject }.to change { lawyer.reload.need_update_info? }.from(false).to(true) }
     end
   end
+
+  context "devise async" do
+    context "create not send confirm email" do
+      subject { lawyer }
+      it { expect{ subject }.not_to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
+    end
+  end
 end
