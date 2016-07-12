@@ -17,6 +17,8 @@
 #  prosecutor_names :text
 #  is_adjudge       :boolean          default(FALSE)
 #  adjudge_date     :date
+#  pronounce_date   :date
+#  is_pronounce     :boolean          default(FALSE)
 #
 
 class Admin::StoriesController < Admin::BaseController

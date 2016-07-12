@@ -55,6 +55,10 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
         it { expect(subject.story.main_judge).to be_present }
       end
 
+      context "sync is pronounce to story" do
+        it { expect(subject.story.is_pronounce).to be_truthy }
+      end
+
       context "sync is adjudge to story" do
         it { expect(subject.story.is_adjudge).to be_truthy }
       end
@@ -70,6 +74,18 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
         before { subject.story.update_attributes(adjudge_date: Time.zone.today - 1.day) }
 
         it { expect { subject }.not_to change { subject.story.adjudge_date } }
+      end
+    end
+
+    context "update pronounce_date" do
+      context "story unexist pronounce_date" do
+        it { expect(subject.story.pronounce_date).to be_truthy }
+      end
+
+      context "story exist pronounce_date" do
+        before { subject.story.update_attributes(pronounce_date: Time.zone.today - 1.day) }
+
+        it { expect { subject }.not_to change { subject.story.pronounce_date } }
       end
     end
 

@@ -8,6 +8,7 @@ class Scrap::ImportVerdictContext < BaseContext
   after_perform   :upload_file
   after_perform   :update_data_to_story
   after_perform   :update_adjudge_date
+  after_perform   :update_pronounce_date
   after_perform   :create_relation_for_lawyer
   after_perform   :create_relation_for_judge
   after_perform   :create_relation_for_main_judge
@@ -92,7 +93,8 @@ class Scrap::ImportVerdictContext < BaseContext
     @story.assign_attributes(lawyer_names: (@story.lawyer_names + @verdict.lawyer_names).uniq)
     @story.assign_attributes(party_names: (@story.party_names + @verdict.party_names).uniq)
     @story.assign_attributes(main_judge: @main_judge) if @main_judge
-    @story.assign_attributes(is_adjudge: @verdict.is_judgment?) if @verdict.is_judgment? && !@story.is_adjudge
+    @story.assign_attributes(is_adjudge: @verdict.is_judgment?) if @verdict.is_judgment?
+    @story.assign_attributes(is_pronounce: @verdict.is_judgment?) if @verdict.is_judgment? && !@story.is_pronounce
     @story.save
   end
 
@@ -100,6 +102,11 @@ class Scrap::ImportVerdictContext < BaseContext
     return unless @analysis_context.is_judgment?
     @story.update_attributes(adjudge_date: Time.zone.today) unless @story.adjudge_date
     @verdict.update_attributes(adjudge_date: Time.zone.today)
+  end
+
+  def update_pronounce_date
+    return unless @analysis_context.is_judgment?
+    @story.update_attributes(pronounce_date: Time.zone.today) unless @story.pronounce_date
   end
 
   def create_relation_for_lawyer

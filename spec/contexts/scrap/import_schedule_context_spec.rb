@@ -6,7 +6,7 @@ RSpec.describe Scrap::ImportScheduleContext, type: :model do
   let!(:branch) { FactoryGirl.create :branch, court: court, judge: judge, name: "平" }
 
   describe "#perform" do
-    let(:hash_data) { { story_type: "民事", year: 105, word_type: "聲", number: "485", date: Time.zone.today, branch_name: "平", is_adjudge: false } }
+    let(:hash_data) { { story_type: "民事", year: 105, word_type: "聲", number: "485", date: Time.zone.today, branch_name: "平", is_pronounce: false } }
     subject { described_class.new(court.code).perform(hash_data) }
 
     context "success" do
@@ -43,24 +43,24 @@ RSpec.describe Scrap::ImportScheduleContext, type: :model do
       it { expect { subject }.to change { Story.count } }
     end
 
-    context "update story is_adjudge" do
-      let(:adjudged_data) { hash_data.merge(is_adjudge: true) }
+    context "update story is_pronounce" do
+      let(:adjudged_data) { hash_data.merge(is_pronounce: true) }
       subject { described_class.new(court.code).perform(adjudged_data) }
-      it { expect(subject.story.is_adjudge).to be_truthy }
+      it { expect(subject.story.is_pronounce).to be_truthy }
     end
 
-    context "update story adjudge date" do
-      let(:adjudged_data) { hash_data.merge(is_adjudge: true, date: Time.zone.today) }
-      subject { described_class.new(court.code).perform(adjudged_data) }
+    context "update story pronounce date" do
+      let(:pronounce_date) { hash_data.merge(is_pronounce: true, date: Time.zone.today) }
+      subject { described_class.new(court.code).perform(pronounce_date) }
 
-      context "adjudge_date nil" do
-        it { expect(subject.story.adjudge_date).to be_truthy }
+      context "pronounce_date nil" do
+        it { expect(subject.story.pronounce_date).to be_truthy }
       end
 
-      context "adjudge_date exist" do
-        before { described_class.new(court.code).perform(adjudged_data) }
+      context "pronounce_date exist" do
+        before { described_class.new(court.code).perform(pronounce_date) }
 
-        it { expect { subject }.not_to change { subject.story.adjudge_date } }
+        it { expect { subject }.not_to change { subject.story.pronounce_date } }
       end
     end
   end

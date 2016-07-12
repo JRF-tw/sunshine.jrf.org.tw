@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160706092730) do
+ActiveRecord::Schema.define(version: 20160712043140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "postgis"
   enable_extension "hstore"
+  enable_extension "postgis"
 
   create_table "articles", force: :cascade do |t|
     t.integer  "profile_id"
@@ -489,18 +489,22 @@ ActiveRecord::Schema.define(version: 20160706092730) do
     t.integer  "number"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
-    t.date     "adjudge_date"
-    t.boolean  "is_adjudge",       default: false
     t.text     "party_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
+    t.boolean  "is_adjudge",       default: false
+    t.date     "adjudge_date"
+    t.date     "pronounce_date"
+    t.boolean  "is_pronounce",     default: false
   end
 
   add_index "stories", ["adjudge_date"], name: "index_stories_on_adjudge_date", using: :btree
   add_index "stories", ["court_id"], name: "index_stories_on_court_id", using: :btree
   add_index "stories", ["is_adjudge"], name: "index_stories_on_is_adjudge", using: :btree
+  add_index "stories", ["is_pronounce"], name: "index_stories_on_is_pronounce", using: :btree
   add_index "stories", ["main_judge_id"], name: "index_stories_on_main_judge_id", using: :btree
+  add_index "stories", ["pronounce_date"], name: "index_stories_on_pronounce_date", using: :btree
 
   create_table "story_relations", force: :cascade do |t|
     t.integer  "story_id"

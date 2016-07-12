@@ -3,8 +3,8 @@ class Scrap::ImportScheduleContext < BaseContext
   before_perform  :build_data
   before_perform  :get_main_judge
   before_perform  :find_or_create_story
-  after_perform   :update_story_is_adjudge
-  after_perform   :update_story_adjudge_date
+  after_perform   :update_story_is_pronounce
+  after_perform   :update_story_pronounce_date
   after_perform   :record_count_to_daily_notify
 
   class << self
@@ -31,7 +31,7 @@ class Scrap::ImportScheduleContext < BaseContext
   end
 
   def build_data
-    @is_adjudge   = @hash[:is_adjudge]
+    @is_pronounce = @hash[:is_pronounce]
     @story_type   = @hash[:story_type]
     @year         = @hash[:year]
     @word_type    = @hash[:word_type]
@@ -51,13 +51,13 @@ class Scrap::ImportScheduleContext < BaseContext
     @story = @court.stories.find_or_create_by(story_type: @story_type, year: @year, word_type: @word_type, number: @number)
   end
 
-  def update_story_is_adjudge
-    @story.update_attributes(is_adjudge: @is_adjudge) if @is_adjudge
+  def update_story_is_pronounce
+    @story.update_attributes(is_pronounce: @is_pronounce) if @is_pronounce
   end
 
-  def update_story_adjudge_date
-    unless @story.adjudge_date
-      @story.update_attributes(adjudge_date: @date) if @is_adjudge
+  def update_story_pronounce_date
+    unless @story.pronounce_date
+      @story.update_attributes(pronounce_date: @date) if @is_pronounce
     end
   end
 
