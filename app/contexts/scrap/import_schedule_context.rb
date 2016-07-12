@@ -31,7 +31,7 @@ class Scrap::ImportScheduleContext < BaseContext
   end
 
   def build_data
-    @is_pronounce   = @hash[:is_pronounce]
+    @is_pronounce = @hash[:is_pronounce]
     @story_type   = @hash[:story_type]
     @year         = @hash[:year]
     @word_type    = @hash[:word_type]
