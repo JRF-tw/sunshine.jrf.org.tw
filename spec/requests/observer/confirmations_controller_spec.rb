@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Observer::ConfirmationsController, type: :request do
-  before { post "/observer", court_observer: { name: "Curry", email: "h2312@gmail.com", password: "55667788", password_confirmation: "55667788" } }
+  before { post "/observer", court_observer: { name: "Curry", email: "h2312@gmail.com", password: "55667788", password_confirmation: "55667788" }, policy_agreement: "1" }
 
   describe "observer confirm" do
     context "first confirm" do
