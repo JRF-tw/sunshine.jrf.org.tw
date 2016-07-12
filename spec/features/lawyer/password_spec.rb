@@ -4,11 +4,10 @@ describe "密碼設定頁", type: :request do
   context "成功載入頁面" do
     let!(:lawyer) { FactoryGirl.create :lawyer, :with_confirmed, :with_password, name: "火焰律師", email: "firelawyer@gmail.com" }
     let(:token) { lawyer.send_reset_password_instructions }
-    subject { get "/lawyer/password/edit", reset_password_token: token }
 
     context "有登入" do
       before { signin_lawyer(lawyer) }
-      before { subject }
+      subject! { get "/lawyer/password/edit", reset_password_token: token }
 
       it "應顯示該律師的email和姓名" do
         expect(response.body).to match("火焰律師")
@@ -17,7 +16,7 @@ describe "密碼設定頁", type: :request do
     end
 
     context "沒登入" do
-      before { subject }
+      subject! { get "/lawyer/password/edit", reset_password_token: token }
 
       it "應顯示該律師的email和姓名" do
         expect(response.body).to match("火焰律師")
@@ -133,8 +132,8 @@ describe "密碼設定頁", type: :request do
       let!(:lawyer) { FactoryGirl.create :lawyer, :with_confirmed, :with_password, email: "firewizard@gmail.com" }
 
       context "email 空白" do
-        subject! { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/password/new" }
         let!(:params) { { email: "" } }
+        subject! { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/password/new" }
 
         it "顯示查無此律師帳號" do
           follow_redirect!
@@ -143,8 +142,8 @@ describe "密碼設定頁", type: :request do
       end
 
       context "email 格式不符" do
-        subject! { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/password/new" }
         let!(:params) { { email: "firewizar" } }
+        subject! { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/password/new" }
 
         it "顯示查無此律師帳號" do
           follow_redirect!
@@ -153,8 +152,8 @@ describe "密碼設定頁", type: :request do
       end
 
       context "email 不存在" do
-        subject! { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/password/new" }
         let!(:params) { { email: "icewizard@gmail.com" } }
+        subject! { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/password/new" }
 
         it "顯示查無此律師帳號" do
           follow_redirect!
@@ -167,7 +166,7 @@ describe "密碼設定頁", type: :request do
         subject! { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/password/new" }
         let!(:params) { { email: "windwizard@gmail.com" } }
 
-        it "顯示查無此律師帳號" do
+        it "顯示該帳號尚未註冊" do
           follow_redirect!
           expect(response.body).to match("該帳號尚未註冊")
         end
