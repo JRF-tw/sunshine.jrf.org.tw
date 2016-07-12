@@ -7,7 +7,7 @@ class Observer::EmailsController < Observer::BaseController
     context = CourtObserver::ChangeEmailContext.new(current_court_observer)
     if context.perform(params)
       flash[:notice] = "需要重新驗證新的Email"
-      redirect_to observer_profile_url
+      redirect_to observer_profile_path
     else
       flash.now[:error] = context.error_messages.join(", ")
       render :edit

@@ -36,6 +36,7 @@ class CourtObserver::RegisterCheckContext < BaseContext
     if @observer && @observer.confirmed?
       return add_error(:observer_exist, "您已經註冊請直接登入")
     elsif @observer
+      @observer.send_confirmation_instructions
       return add_error(:observer_exist, "此email已經註冊 驗證信已發送到您的信箱 請點擊連結驗證後登入")
     end
   end

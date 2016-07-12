@@ -98,7 +98,7 @@ describe "觀察者帳號相關", type: :request do
       end
 
       context "email 已存在，但未驗證" do
-        let(:court_observer_without_validate) { FactoryGirl.create :court_observer_without_validate }
+        let!(:court_observer_without_validate) { FactoryGirl.create :court_observer_without_validate }
         subject { post "/observer", court_observer: { name: "阿怪", email: court_observer_without_validate.email, password: "123123123", password_confirmation: "123123123" }, policy_agreement: "1" }
 
         it "發送驗證信" do
