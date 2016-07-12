@@ -24,7 +24,7 @@ RSpec.describe Lawyer do
   context "devise async" do
     context "create not send confirm email" do
       subject { lawyer }
-      it { expect{ subject }.not_to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
+      it { expect { subject }.not_to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
     end
   end
 end
