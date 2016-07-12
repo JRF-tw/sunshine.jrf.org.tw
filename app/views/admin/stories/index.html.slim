@@ -61,9 +61,9 @@
           th = sort_link(@search, :number, '案號')
           th = sort_link(@search, :story_type, '案件類別')
           th = sort_link(@search, :main_judge_name, '所屬法官')
-          th = sort_link(@search, :is_adjudge, '是否已宣判')
+          th = sort_link(@search, :is_pronounce, '是否已宣判')
+          th = sort_link(@search, :is_adjudge, '是否已判決')
           th 是否有判決書
-          th = sort_link(@search, :adjudge_date, '判決日期')
           th 操作
       tbody
         - @stories.each do |story|
@@ -79,7 +79,6 @@
             td = story.is_adjudge ? "已判決" : "尚未判決"
             td
               = link_to "是", admin_verdict_path(story.judgment_verdict) if story.judgment_verdict
-            td= story.adjudge_date
 
             td
               = link_to "詳細資料", admin_story_path(story), class: "btn btn-mini"
