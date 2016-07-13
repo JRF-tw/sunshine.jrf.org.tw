@@ -174,7 +174,7 @@ describe "密碼設定頁", type: :request do
     end
 
     context "重設密碼頁" do
-      it "(和註冊的密碼設定同一頁，所以不用再重複測試)" do
+      xit "(和註冊的密碼設定同一頁，所以不用再重複測試)" do
       end
     end
   end
@@ -185,12 +185,11 @@ describe "密碼設定頁", type: :request do
       before { signin_lawyer(lawyer) }
 
       context "新的 email 為別人正在驗證中的 email ，也可以成功送出" do
-        let!(:lawyer_unconfirmed) { FactoryGirl.create :lawyer, :with_password, email: "windwizard@gmail.com" }
-        subject { put "/lawyer/email", lawyer: { email: "windwizard@gmail.com", current_password: "123123123" } }
+        let!(:lawyer_with_unconfirmed_email) { FactoryGirl.create :lawyer, unconfirmed_email: "556677@gmail.com" }
+        subject { put "/lawyer/email", lawyer: { email: lawyer_with_unconfirmed_email.unconfirmed_email, current_password: "123123123" } }
 
-        it "" do
-          pending "詢問後補上"
-          raise
+        it "成功送出" do
+          expect { subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq)
         end
       end
 
@@ -292,15 +291,25 @@ describe "密碼設定頁", type: :request do
       end
 
       context "其他情境" do
-        before { signin_lawyer(lawyer) }
-        subject! { put "/lawyer/email", lawyer: { email: "", current_password: "123123123" } }
+        context "律師A與B 有相同的待驗證email, A點完驗證連結之後 B才點驗證連結" do
+          let!(:lawyer_A) { signin_lawyer }
+          before { put "/lawyer/email", lawyer: { email: "new@gmail.com", current_password: "123123123" } }
+          before { signout_lawyer }
+          let!(:lawyer_B) { signin_lawyer }
+          before { put "/lawyer/email", lawyer: { email: "new@gmail.com", current_password: "123123123" } }
+          before { signout_lawyer }
+          before { get "/lawyer/confirmation", confirmation_token: lawyer_A.reload.confirmation_token }
+          subject { get "/lawyer/confirmation", confirmation_token: lawyer_B.confirmation_token }
 
-        it "" do
-          pending "詢問後補上"
-          raise
+          it "律師A 的email 置換成功" do
+            expect(lawyer_A.reload.email).to eq("new@gmail.com")
+          end
+
+          it "律師B 的email 置換失敗" do
+            expect { subject }.not_to change { lawyer_B.email }
+          end
         end
       end
     end
   end
-
 end
