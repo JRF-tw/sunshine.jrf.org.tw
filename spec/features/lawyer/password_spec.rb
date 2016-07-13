@@ -292,17 +292,13 @@ describe "密碼設定頁", type: :request do
 
       context "其他情境" do
         context "律師A與B 有相同的待驗證email, A點完驗證連結之後 B才點驗證連結" do
-          let!(:lawyer_A) { signin_lawyer }
-          before { put "/lawyer/email", lawyer: { email: "new@gmail.com", current_password: "123123123" } }
-          before { signout_lawyer }
-          let!(:lawyer_B) { signin_lawyer }
-          before { put "/lawyer/email", lawyer: { email: "new@gmail.com", current_password: "123123123" } }
-          before { signout_lawyer }
+          let!(:lawyer_A) { init_lawyer_with_unconfirm_email("ggyy@gmail.com") }
+          let!(:lawyer_B) { init_lawyer_with_unconfirm_email("ggyy@gmail.com") }
           before { get "/lawyer/confirmation", confirmation_token: lawyer_A.reload.confirmation_token }
           subject { get "/lawyer/confirmation", confirmation_token: lawyer_B.confirmation_token }
 
           it "律師A 的email 置換成功" do
-            expect(lawyer_A.reload.email).to eq("new@gmail.com")
+            expect(lawyer_A.reload.email).to eq("ggyy@gmail.com")
           end
 
           it "律師B 的email 置換失敗" do
