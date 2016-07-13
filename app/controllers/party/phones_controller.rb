@@ -36,7 +36,7 @@ class Party::PhonesController < Party::BaseController
     if context.perform(party_params)
       redirect_to party_profile_path, flash: { success: "已驗證成功" }
     elsif context.errors.include?(:retry_verify_count_out_range)
-      redirect_to edit_Party_phone_path, flash: { error: context.error_messages.join(", ").to_s }
+      redirect_to edit_party_phone_path, flash: { error: context.error_messages.join(", ").to_s }
     else
       flash[:error] = context.error_messages.join(", ")
       render "verify"

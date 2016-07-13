@@ -75,4 +75,12 @@ module RequestClient
     @lawyer
   end
 
+  def init_party_with_unconfirm_phone_number(phone_number)
+    party = FactoryGirl.create(:party)
+    signin_party(party)
+    post "/party/phone", party: { phone_number: phone_number }
+    signout_party
+    party
+  end
+
 end
