@@ -11,6 +11,7 @@ class Errors::Code
     lawyer_not_found: 400,
     lawyer_exist: 400,
     observer_exist: 400,
+    party_exist: 400,
     send_email_fail: 400,
     email_conflict: 400,
     without_policy_agreement: 400,
