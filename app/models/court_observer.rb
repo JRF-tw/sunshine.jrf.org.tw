@@ -30,6 +30,7 @@
 class CourtObserver < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+  has_many :schedule_scores, as: :schedule_rater
   devise :database_authenticatable, :registerable, :async, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 

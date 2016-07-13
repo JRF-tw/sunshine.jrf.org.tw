@@ -330,9 +330,9 @@ ActiveRecord::Schema.define(version: 20160804042232) do
     t.datetime "confirmed_at"
     t.string   "confirmation_token"
     t.datetime "confirmation_sent_at"
+    t.datetime "phone_confirmed_at"
     t.boolean  "imposter",                 default: false
     t.string   "imposter_identify_number"
-    t.datetime "phone_confirmed_at"
   end
 
   add_index "parties", ["confirmation_token"], name: "index_parties_on_confirmation_token", unique: true, using: :btree
@@ -461,6 +461,25 @@ ActiveRecord::Schema.define(version: 20160804042232) do
 
   add_index "reviews", ["is_hidden"], name: "index_reviews_on_is_hidden", using: :btree
   add_index "reviews", ["profile_id"], name: "index_reviews_on_profile_id", using: :btree
+
+  create_table "schedule_scores", force: :cascade do |t|
+    t.integer  "schedule_id"
+    t.integer  "judge_id"
+    t.integer  "schedule_rater_id"
+    t.string   "schedule_rater_type"
+    t.integer  "rating_score"
+    t.integer  "command_score"
+    t.integer  "attitude_score"
+    t.hstore   "data"
+    t.boolean  "appeal_judge",        default: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  add_index "schedule_scores", ["appeal_judge"], name: "index_schedule_scores_on_appeal_judge", using: :btree
+  add_index "schedule_scores", ["judge_id", "schedule_rater_id"], name: "index_schedule_scores_on_judge_id_and_schedule_rater_id", using: :btree
+  add_index "schedule_scores", ["judge_id"], name: "index_schedule_scores_on_judge_id", using: :btree
+  add_index "schedule_scores", ["schedule_id"], name: "index_schedule_scores_on_schedule_id", using: :btree
 
   create_table "schedules", force: :cascade do |t|
     t.integer  "story_id"
@@ -640,11 +659,11 @@ ActiveRecord::Schema.define(version: 20160804042232) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.string   "file"
+    t.boolean  "is_judgment",      default: false
     t.text     "party_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
-    t.boolean  "is_judgment",      default: false
     t.date     "adjudge_date"
     t.integer  "main_judge_id"
     t.string   "main_judge_name"
