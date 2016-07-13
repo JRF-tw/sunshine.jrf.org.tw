@@ -350,12 +350,11 @@ describe "觀察者帳號相關", type: :request do
       before { signin_court_observer(court_observer) }
 
       context "新的 email 為別人正在驗證中的 email ，也可以成功送出" do
-        let!(:court_observer_without_validate) { FactoryGirl.create :court_observer_without_validate }
-        subject { put "/observer/email", court_observer: { email: court_observer.email, current_password: "123123123" } }
+        let!(:court_observer_with_unconfirmed_email) { FactoryGirl.create :court_observer_without_validate, unconfirmed_email: "5566@gmail.com" }
+        subject { put "/observer/email", court_observer: { email: court_observer_with_unconfirmed_email.unconfirmed_email, current_password: "123123123" } }
 
-        it "" do
-          pending "詢問後補上"
-          raise
+        it "成功送出" do
+          expect { subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq)
         end
       end
 
@@ -457,12 +456,23 @@ describe "觀察者帳號相關", type: :request do
       end
 
       context "其他情境" do
-        before { signin_court_observer(court_observer) }
-        subject! { put "/observer/email", court_observer: { email: "", current_password: "123123123" } }
+        context "觀察者A與B 有相同的待驗證email, A點完驗證連結之後 B才點驗證連結" do
+          let!(:court_observer_A) { signin_court_observer }
+          before { put "/observer/email", court_observer: { email: "new@gmail.com", current_password: "123123123" } }
+          before { signout_court_observer }
+          let!(:court_observer_B) { signin_court_observer }
+          before { put "/observer/email", court_observer: { email: "new@gmail.com", current_password: "123123123" } }
+          before { signout_court_observer }
+          before { get "/observer/confirmation", confirmation_token: court_observer_A.reload.confirmation_token }
+          subject { get "/observer/confirmation", confirmation_token: court_observer_B.confirmation_token }
 
-        it "" do
-          pending "詢問後補上"
-          raise
+          it "觀察者A 的email 置換成功" do
+            expect(court_observer_A.reload.email).to eq("new@gmail.com")
+          end
+
+          it "觀察者B 的email 置換失敗" do
+            expect { subject }.not_to change { court_observer_B.email }
+          end
         end
       end
     end
