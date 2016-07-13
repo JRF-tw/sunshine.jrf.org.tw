@@ -457,17 +457,13 @@ describe "觀察者帳號相關", type: :request do
 
       context "其他情境" do
         context "觀察者A與B 有相同的待驗證email, A點完驗證連結之後 B才點驗證連結" do
-          let!(:court_observer_A) { signin_court_observer }
-          before { put "/observer/email", court_observer: { email: "new@gmail.com", current_password: "123123123" } }
-          before { signout_court_observer }
-          let!(:court_observer_B) { signin_court_observer }
-          before { put "/observer/email", court_observer: { email: "new@gmail.com", current_password: "123123123" } }
-          before { signout_court_observer }
+          let!(:court_observer_A) { init_observer_with_unconfirm_email("ggyy@gmail.com") }
+          let!(:court_observer_B) { init_observer_with_unconfirm_email("ggyy@gmail.com") }
           before { get "/observer/confirmation", confirmation_token: court_observer_A.reload.confirmation_token }
-          subject { get "/observer/confirmation", confirmation_token: court_observer_B.confirmation_token }
+          subject! { get "/observer/confirmation", confirmation_token: court_observer_B.confirmation_token }
 
           it "觀察者A 的email 置換成功" do
-            expect(court_observer_A.reload.email).to eq("new@gmail.com")
+            expect(court_observer_A.reload.email).to eq("ggyy@gmail.com")
           end
 
           it "觀察者B 的email 置換失敗" do
