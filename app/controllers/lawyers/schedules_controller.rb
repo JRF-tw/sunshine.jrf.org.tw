@@ -6,7 +6,10 @@ class Lawyers::SchedulesController < Lawyers::BaseController
   def new
   end
 
-  def check_info
+  def rule
+  end
+
+  def checked_info
     context = Lawyer::CheckScheduleScoreInfoContext.new(current_lawyer)
     if context.perform(schedule_score_params)
       @status = "checked_info"
@@ -16,7 +19,7 @@ class Lawyers::SchedulesController < Lawyers::BaseController
     end
   end
 
-  def check_date
+  def checked_date
     context = Lawyer::CheckScheduleScoreDateContext.new(current_lawyer)
     context.perform(schedule_score_params)
     if context.has_error?
@@ -28,7 +31,7 @@ class Lawyers::SchedulesController < Lawyers::BaseController
     end
   end
 
-  def check_judge
+  def checked_judge
     context = Lawyer::CheckScheduleScoreJudgeContext.new(current_lawyer)
     if context.perform(schedule_score_params)
       @status = "checked_judge"

@@ -50,6 +50,7 @@ class Party < ActiveRecord::Base
   value :phone_varify_code, expiration: 1.hour
   counter :retry_verify_count, expiration: 1.hour
   counter :sms_sent_count, expiration: 5.minutes
+  counter :score_report_schedule_real_date
 
   def email_required?
     false

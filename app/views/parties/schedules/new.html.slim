@@ -1,1 +1,14 @@
 = "當事人評鑑庭期開庭頁"
+
+- unless @status
+  = render "input_info"
+
+- if @status == "checked_info"
+  = render "input_date"
+
+- if @status == "checked_date"
+  = render "input_judge"
+
+- if @status == "checked_judge"
+  = render "start_score"
+
