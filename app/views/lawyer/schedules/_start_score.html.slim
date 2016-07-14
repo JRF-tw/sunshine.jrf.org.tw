@@ -1,0 +1,54 @@
+= simple_form_for(@schedule_score, as: :schedule_score, url: lawyer_score_schedules_path, html: { method: :post }) do |f|
+      .form-group
+        label.control-label
+        .controls = f.input :court_id, as: :hidden
+      .form-group
+        label.control-label
+        .controls = f.input :year, as: :hidden
+      .form-group
+        label.control-label
+        .controls = f.input :word_type, as: :hidden
+      .form-group
+        label.control-label
+        .controls = f.input :number, as: :hidden
+      .form-group
+        label.control-label
+        .controls = f.input :date, as: :hidden
+      .form-group
+        label.control-label
+        .controls = f.input :confirmed_realdate, as: :hidden
+      .form-group
+        label.control-label
+        .controls = f.input :judge_name, as: :hidden
+      .form-group
+        label.control-label
+        .controls = "法院名稱 : #{Court.find(@schedule_score.court_id).full_name}"
+      .form-group
+        label.control-label
+        .controls = "年度 : #{@schedule_score.year}"
+      .form-group
+        label.control-label
+        .controls = "字號 : #{@schedule_score.word_type}"
+      .form-group
+        label.control-label
+        .controls = "案號 : #{@schedule_score.number}"
+      .form-group
+        label.control-label
+        .controls = "開庭時間 : #{@schedule_score.date}"
+      .form-group
+        label.control-label
+        .controls = "法官姓名 : #{@schedule_score.judge_name}"
+      .form-group
+        label.control-label
+        .controls = f.input :command_score, label: "訴訟指揮度評分", input_html: { min: "1", max: "5" }
+      .form-group
+        label.control-label
+        .controls = f.input :attitude_score, label: "開庭態度度評分", input_html: { min: "1", max: "5" }
+      .form-group
+        label.control-label
+        .controls = f.input :note, as: :text, label: false, hint: "請填寫註記"
+      .form-group
+        label.control-label
+        .controls = f.input :appeal_judge, as: :boolean, label: "我要申訴法官"
+      .form-actions
+        input.btn.btn-primary type="submit" value="下一步"

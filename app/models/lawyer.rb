@@ -46,6 +46,9 @@ class Lawyer < ActiveRecord::Base
 
   before_create :skip_confirmation_notification
 
+  include Redis::Objects
+  counter :score_report_schedule_real_date
+
   def need_update_info?
     ## TODO need_update_info definition logic
     !phone_number

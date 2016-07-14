@@ -12,9 +12,4 @@ RSpec.describe Lawyers::SchedulesController, type: :request do
     subject! { get "/lawyer/score/schedules/rule" }
     it { expect(response).to be_success }
   end
-
-  describe "#verify" do
-    subject! { post "/lawyer/score/schedules/verify" }
-    it { expect(response).to be_redirect }
-  end
 end

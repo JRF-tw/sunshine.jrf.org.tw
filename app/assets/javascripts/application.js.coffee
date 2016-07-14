@@ -10,6 +10,7 @@
 # Bower components
 #= require jquery-throttle-debounce/jquery.ba-throttle-debounce
 #= require slick-carousel
+#= require datetimepicker
 
 # Pull compiled from /public/assets/javascripts
 #= require global

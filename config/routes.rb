@@ -62,12 +62,15 @@ Rails.application.routes.draw do
     resource :appeal, only: [:new]
     resource :profile, only: [:show, :edit, :update]
     resource :email, only: [:edit, :update]
-    resources :scores, only: [:edit, :show]
+    resources :scores, only: [:index, :edit, :show]
     resource :score do
       get "chose-type", to: "scores#chose_type"
-      resource :schedules, only: [:new] do
+      resource :schedules, only: [:new, :create] do
         collection do
           get :rule
+          post :check_info
+          post :check_date
+          post :check_judge
           post :verify
         end
       end

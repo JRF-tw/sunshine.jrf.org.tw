@@ -1,5 +1,6 @@
 class Lawyers::ScoresController < Lawyers::BaseController
   def index
+    @schedule_scores = current_lawyer.schedule_scores
   end
 
   def show
