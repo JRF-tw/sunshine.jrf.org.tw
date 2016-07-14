@@ -51,6 +51,7 @@ class Party < ActiveRecord::Base
   counter :retry_verify_count, expiration: 1.hour
   counter :sms_sent_count, expiration: 5.minutes
   counter :score_report_schedule_real_date
+  counter :schedule_scored_count
 
   def email_required?
     false

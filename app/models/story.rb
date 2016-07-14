@@ -36,6 +36,10 @@ class Story < ActiveRecord::Base
 
   scope :newest, -> { order("id DESC") }
 
+  include Redis::Objects
+  counter :schedule_scored_count
+
+
   def identity
     "#{year}-#{word_type}-#{number}"
   end

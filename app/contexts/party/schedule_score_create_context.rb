@@ -1,5 +1,7 @@
 class Party::ScheduleScoreCreateContext < BaseContext
   PERMITS = [:court_id, :year, :word_type, :number, :date, :confirmed_realdate, :judge_name, :rating_score, :note, :appeal_judge].freeze
+  STORY_SCORED_COUNT = 3
+  PARTY_SCORED_COUNT = 3
 
   # before_perform :can_not_score
   before_perform :check_rating_score
@@ -8,6 +10,8 @@ class Party::ScheduleScoreCreateContext < BaseContext
   before_perform :check_judge
   before_perform :build_schedule_score
   before_perform :assign_attribute
+  after_perform  :record_story_schedule_scored_count
+  after_perform  :record_party_schedule_scored_count
 
   def initialize(party)
     @party = party
@@ -49,5 +53,13 @@ class Party::ScheduleScoreCreateContext < BaseContext
 
   def assign_attribute
     @schedule_score.assign_attributes(schedule: @schedule, judge: @judge)
+  end
+
+  def record_story_schedule_scored_count
+    SlackService.notify_scored_time_alert("案件編號 #{@story.id} 已超過被評鑑最大值") if @story.schedule_scored_count.increment >= STORY_SCORED_COUNT
+  end
+
+  def record_party_schedule_scored_count
+    SlackService.notify_scored_time_alert("當事人 #{@party.name} 已超過評鑑案件最大值") if @party.schedule_scored_count.increment >= PARTY_SCORED_COUNT
   end
 end

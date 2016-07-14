@@ -49,6 +49,10 @@ class SlackService
       delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook)
     end
 
+    def notify_scored_time_alert(message, channel: "#notify-developer", name: "notify", icon_url: DEFAULT_ICON_URL, webhook: nil)
+      delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook)
+    end
+
     def render_link(link, message = nil)
       message ||= link
       "<#{link}|#{message}>"

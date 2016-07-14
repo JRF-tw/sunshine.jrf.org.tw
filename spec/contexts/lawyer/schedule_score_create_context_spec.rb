@@ -42,5 +42,15 @@ describe Lawyer::ScheduleScoreCreateContext do
       before { params[:judge_name] = judge2.name }
       it { expect(subject).to be_falsey }
     end
+
+    context "story over max scored count" do
+      before { story.schedule_scored_count.value = 2 }
+      it { expect{ subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+    end
+
+    context "lawyer over max scored count" do
+      before { lawyer.schedule_scored_count.value = 2 }
+      it { expect{ subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+    end
   end
 end
