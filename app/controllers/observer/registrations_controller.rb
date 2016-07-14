@@ -3,6 +3,7 @@ class Observer::RegistrationsController < Devise::RegistrationsController
   include CrudConcern
 
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :check_registration, only: [:create]
 
   def update
     context = CourtObserver::ChangeEmailContext.new(current_court_observer)
@@ -19,6 +20,19 @@ class Observer::RegistrationsController < Devise::RegistrationsController
   end
 
   protected
+
+  def check_registration
+    build_resource(sign_up_params)
+    context = CourtObserver::RegisterCheckContext.new(params)
+    context.perform
+    if context.errors[:observer_exist]
+      flash[:error] = context.error_messages.join(", ")
+      redirect_to new_court_observer_session_path
+    elsif context.errors.any?
+      flash[:error] = context.error_messages.join(", ")
+      render "new"
+    end
+  end
 
   def after_inactive_sign_up_path_for(_resource)
     new_session_path(:court_observer)

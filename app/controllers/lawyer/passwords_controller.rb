@@ -37,6 +37,7 @@ class Lawyer::PasswordsController < Devise::PasswordsController
       respond_with resource, location: after_resetting_password_path
     else
       set_minimum_password_length
+      @lawyer_by_token = resource
       respond_with resource
     end
   end

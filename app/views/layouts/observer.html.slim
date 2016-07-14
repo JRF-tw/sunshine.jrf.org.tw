@@ -11,7 +11,7 @@ html
       - if current_court_observer
         = link_to("觀察員 #{current_court_observer.name}", observer_profile_path)
         = " | "
-        = link_to('修改Email', edit_court_observer_registration_path)
+        = link_to('修改Email', edit_observer_email_path)
         = ' | '
         = link_to('修改個人資訊', edit_observer_profile_path)
         = ' | '

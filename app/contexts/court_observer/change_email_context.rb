@@ -1,7 +1,6 @@
 class CourtObserver::ChangeEmailContext < BaseContext
   PERMITS = [:email, :current_password].freeze
 
-  before_perform :check_email_not_use
   before_perform :check_email_different
 
   def initialize(court_observer)
@@ -17,10 +16,6 @@ class CourtObserver::ChangeEmailContext < BaseContext
   end
 
   private
-
-  def check_email_not_use
-    return add_error(:email_conflict, "email 已經被使用") if CourtObserver.pluck(:unconfirmed_email).include?(@params["email"])
-  end
 
   def check_email_different
     return add_error(:email_conflict, "email 不可與原本相同") if @params["email"] == @court_observer.email

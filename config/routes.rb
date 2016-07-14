@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   namespace :observer do
     root to: "scores#index"
     resource :profile, only: [:show, :edit, :update]
-    resource :email, only: [:edit]
+    resource :email, only: [:edit, :update]
     resources :scores, only: [:edit, :show]
     resource :score do
       get "chose-type", to: "scores#chose_type"

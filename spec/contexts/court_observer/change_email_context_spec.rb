@@ -23,7 +23,7 @@ describe CourtObserver::ChangeEmailContext do
       let(:params) { { email: court_observer2.unconfirmed_email, current_password: "123123123" } }
       subject { described_class.new(court_observer) }
 
-      it { expect { subject.perform(params) }.not_to change { court_observer.reload.unconfirmed_email } }
+      it { expect { subject.perform(params) }.to change { court_observer.reload.unconfirmed_email } }
     end
 
     context "empty password" do
