@@ -62,7 +62,7 @@ module RequestClient
   def init_observer_with_unconfirm_email(email)
     @observer = FactoryGirl.create(:court_observer)
     signin_court_observer(@observer)
-    put "/observer/email", court_observer: { email: email, current_password: "123123123" }
+    put "/observer/email", court_observer: { email: email, current_password: @observer.password }
     signout_court_observer
     @observer
   end
