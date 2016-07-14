@@ -8,6 +8,7 @@ class Errors::Code
     data_not_found: 400,
     date_blank: 400,
     password_invalid: 400,
+    without_verify: 400,
     lawyer_not_found: 400,
     lawyer_exist: 400,
     observer_exist: 400,

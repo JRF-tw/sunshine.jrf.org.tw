@@ -327,8 +327,9 @@ describe "當事人帳戶相關", type: :request do
         before { current_party.phone_varify_code = "1111" }
         subject! { put "/party/phone/verifing", party: { phone_varify_code: "1111" } }
 
-        xit "轉跳到登入頁，並跳出「註冊成功」訊息" do
-          expect(response).to redirect_to("/party/profile")
+        it "轉跳到評鑑記錄頁，並跳出「註冊成功」訊息" do
+          expect(response).to redirect_to("/party")
+          expect(flash[:success]).to eq("已驗證成功")
         end
       end
 
@@ -365,15 +366,237 @@ describe "當事人帳戶相關", type: :request do
 
         context "已超過可驗證的期限" do
           before { current_party.phone_varify_code = "1111" }
+          before { current_party.phone_varify_code = nil }
+          subject! { put "/party/phone/verifing", party: { phone_varify_code: "1111" } }
+
+          it "提示重設手機號碼" do
+            expect(flash[:error]).to match("請先設定手機號碼")
+          end
         end
       end
     end
   end
 
   context "忘記密碼" do
+    let!(:party) { FactoryGirl.create :party }
+
+    context "成功送出" do
+      let!(:params) { { identify_number: party.identify_number, phone_number: party.phone_number } }
+      subject { post "/party/password", party: params }
+
+      it "發送重設密碼簡訊" do
+        expect { subject }.to change_sidekiq_jobs_size_of(SmsService, :send_to)
+      end
+
+      it "回到登入頁" do
+        expect(subject).to redirect_to("/party/sign_in")
+      end
+    end
+
+    context "失敗送出" do
+      context "超過簡訊發送限制" do
+        let!(:params) { { identify_number: party.identify_number, phone_number: party.phone_number } }
+        before { post "/party/password", party: params }
+        before { post "/party/password", party: params }
+        before { post "/party/password", party: params }
+
+        it "連續發送 2 次後，達限制上限" do
+          expect(response.body).to match("五分鐘內只能寄送兩次簡訊")
+        end
+      end
+
+      context "手機號碼未驗證" do
+        let!(:party_with_unconfirm_phone_number) { init_party_with_unconfirm_phone_number("0911828181") }
+        before { post "/party/password", party: { identify_number: party_with_unconfirm_phone_number.identify_number, phone_number: "0911828181" } }
+
+        it "顯示錯誤訊息，並提示可進行人工申訴" do
+          expect(response.body).to match("手機號碼尚未驗證 <a href='/party/appeal/new'>人工申訴</a>")
+        end
+      end
+
+      context "驗證錯誤" do
+        context "手機號碼存在，ID 不存在" do
+          before { post "/party/password", party: { identify_number: "F123456789", phone_number: party.phone_number } }
+
+          it "顯示無此當事人資訊" do
+            expect(response.body).to match("沒有此當事人資訊")
+          end
+        end
+
+        context "手機號碼不存在，ID 存在" do
+          before { post "/party/password", party: { identify_number: party.identify_number, phone_number: "0911111111" } }
+
+          it "顯示手機號碼錯誤" do
+            expect(response.body).to match("手機號碼輸入錯誤")
+          end
+        end
+
+        context "手機號碼不存在，ID 不存在" do
+          before { post "/party/password", party: { identify_number: "F123456789", phone_number: "0911111111" } }
+
+          it "顯示無此當事人資訊" do
+            expect(response.body).to match("沒有此當事人資訊")
+          end
+        end
+      end
+
+      context "輸入內容錯誤" do
+        context "ID空白" do
+          before { post "/party/password", party: { identify_number: "", phone_number: party.phone_number } }
+
+          it "顯示無此當事人資訊" do
+            expect(response.body).to match("沒有此當事人資訊")
+          end
+        end
+
+        context "手機號碼空白" do
+          before { post "/party/password", party: { identify_number: party.identify_number, phone_number: "" } }
+
+          it "顯示手機號碼錯誤" do
+            expect(response.body).to match("手機號碼輸入錯誤")
+          end
+        end
+
+        context "ID + 手機號碼皆空白" do
+          before { post "/party/password", party: { identify_number: "", phone_number: "" } }
+
+          it "顯示無此當事人資訊" do
+            expect(response.body).to match("沒有此當事人資訊")
+          end
+        end
+      end
+    end
   end
 
   context "密碼設定頁" do
+    context "成功載入頁面" do
+      let!(:party) { FactoryGirl.create :party }
+      let(:token) { party.send_reset_password_instructions }
+
+      context "有登入" do
+        before { signin_party(party) }
+        subject! { get "/party/password/edit", reset_password_token: token }
+
+        it "應顯示該當事人的姓名和ID" do
+          expect(response.body).to match(party.name)
+          expect(response.body).to match(party.identify_number)
+        end
+      end
+
+      context "沒登入" do
+        subject! { get "/party/password/edit", reset_password_token: token }
+
+        it "應顯示該當事人的姓名和ID" do
+          expect(response.body).to match(party.name)
+          expect(response.body).to match(party.identify_number)
+        end
+      end
+    end
+
+    context "失敗載入頁面" do
+      let!(:party) { FactoryGirl.create :party }
+      let(:token) { party.send_reset_password_instructions }
+
+      context "條件" do
+        context "token 不正確" do
+          subject! { get "/party/password/edit", reset_password_token: "wrong token" }
+
+          it "顯示 token 錯誤" do
+            expect(flash[:error]).to eq("無效的驗證連結")
+          end
+        end
+
+        context "token 正確 但登入者非本人" do
+          before { signin_party }
+          subject! { get "/party/password/edit", reset_password_token: token }
+
+          it "顯示使用者錯誤" do
+            expect(flash[:error]).to eq("你僅能修改本人的帳號")
+          end
+        end
+      end
+
+      context "有登入時，轉跳至個人資料編輯頁" do
+        before { signin_party }
+        subject! { get "/party/password/edit", reset_password_token: token }
+
+        it "轉跳至個人資料編輯頁" do
+          expect(response).to redirect_to("/party/profile")
+        end
+      end
+
+      context "沒登入時，轉跳至登入頁" do
+        subject! { get "/party/password/edit", reset_password_token: "wrong token" }
+
+        it "轉跳至當事人登入頁" do
+          expect(response).to redirect_to("/party/sign_in")
+        end
+      end
+    end
+
+    context "成功設定" do
+      let!(:party) { FactoryGirl.create :party }
+      let(:token) { party.send_reset_password_instructions }
+      subject { put "/party/password", party: { password: "11111111", password_confirmation: "11111111", reset_password_token: token } }
+
+      it "沒登入時自動登入" do
+        expect { subject }.to change { party.reload.current_sign_in_at }
+      end
+
+      it "有登入時，成功更改密碼" do
+        expect { subject }.to change { party.reload.encrypted_password }
+      end
+
+      context "若手機尚未驗證，則會自動轉跳到手機驗證頁" do
+        let!(:party_without_phone_unmber) { FactoryGirl.create :party, phone_number: nil }
+        let(:token) { party_without_phone_unmber.send_reset_password_instructions }
+        subject! { put "/party/password", party: { password: "11111111", password_confirmation: "11111111", reset_password_token: token } }
+
+        it "轉跳到手機驗證頁" do
+          follow_redirect!
+          expect(response).to redirect_to("/party/phone/new")
+        end
+      end
+
+      context "若手機已驗證，則會轉跳到評鑑記錄頁" do
+        let!(:party) { FactoryGirl.create :party }
+        let(:token) { party.send_reset_password_instructions }
+        subject! { put "/party/password", party: { password: "11111111", password_confirmation: "11111111", reset_password_token: token } }
+
+        it "轉跳評鑑紀錄頁" do
+          expect(response).to redirect_to("/party")
+        end
+      end
+    end
+
+    context "失敗設定" do
+      let!(:party) { FactoryGirl.create :party }
+      let(:token) { party.send_reset_password_instructions }
+
+      context "密碼空白" do
+        subject! { put "/party/password", party: { password: "", password_confirmation: "", reset_password_token: token } }
+
+        it "顯示不可為空" do
+          expect(response.body).to match("不能是空白字元")
+        end
+      end
+
+      context "密碼長度過短" do
+        subject! { put "/party/password", party: { password: "11", password_confirmation: "11", reset_password_token: token } }
+
+        it "顯示密碼過短" do
+          expect(response.body).to match("過短（最短是 8 個字）")
+        end
+      end
+
+      context "密碼兩次不一致" do
+        subject! { put "/party/password", party: { password: "11111111", password_confirmation: "33333333", reset_password_token: token } }
+
+        it "顯示不可為空" do
+          expect(response.body).to match("兩次輸入須一致")
+        end
+      end
+    end
   end
 
   context "更改 email" do

@@ -51,7 +51,7 @@ RSpec.describe Party::PhonesController, type: :request do
 
     context "success" do
       subject! { put "/party/phone/verifing", party: { phone_varify_code: "1111" } }
-      it { expect(response).to redirect_to("/party/profile") }
+      it { expect(response).to redirect_to("/party") }
     end
   end
 

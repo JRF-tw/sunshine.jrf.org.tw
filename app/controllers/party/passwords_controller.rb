@@ -20,8 +20,11 @@ class Party::PasswordsController < Devise::PasswordsController
 
   # GET /resource/password/edit?reset_password_token=abcdef
   def edit
-    if current_party && Party.with_reset_password_token(params[:reset_password_token]) != current_party
-      redirect_as_fail(party_profile_path, "你僅能修改本人的帳號")
+    party_by_token = Party.with_reset_password_token(params[:reset_password_token])
+    if party_by_token.nil?
+      redirect_as_fail(invalid_edit_path, "無效的驗證連結")
+    elsif current_party && party_by_token != current_party
+      redirect_as_fail(invalid_edit_path, "你僅能修改本人的帳號")
     else
       self.resource = resource_class.new
       set_minimum_password_length
@@ -46,6 +49,7 @@ class Party::PasswordsController < Devise::PasswordsController
       respond_with resource, location: after_resetting_password_path_for(resource)
     else
       set_minimum_password_length
+      @party_by_token = resource
       respond_with resource
     end
   end
@@ -63,12 +67,16 @@ class Party::PasswordsController < Devise::PasswordsController
 
   private
 
+  def invalid_edit_path
+    current_party ? party_profile_path : new_party_session_path
+  end
+
   def after_sign_in_path_for(_resource)
-    party_profile_path
+    party_root_path
   end
 
   def after_resetting_password_path_for(_resource)
-    party_profile_path
+    party_root_path
   end
 
 end
