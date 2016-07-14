@@ -40,10 +40,10 @@
         .controls = "法官姓名 : #{@schedule_score.judge_name}"
       .form-group
         label.control-label
-        .controls = f.input :command_score, label: "訴訟指揮度評分", input_html: { min: "1", max: "5" }
+        .controls = f.input :command_score, label: "訴訟指揮評分", input_html: { min: "1", max: "5" }
       .form-group
         label.control-label
-        .controls = f.input :attitude_score, label: "開庭態度度評分", input_html: { min: "1", max: "5" }
+        .controls = f.input :attitude_score, label: "開庭態度評分", input_html: { min: "1", max: "5" }
       .form-group
         label.control-label
         .controls = f.input :note, as: :text, label: false, hint: "請填寫註記"

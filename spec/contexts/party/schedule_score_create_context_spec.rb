@@ -7,7 +7,7 @@ describe Party::ScheduleScoreCreateContext do
   let!(:schedule) { FactoryGirl.create :schedule, story: story }
   let!(:judge) { FactoryGirl.create :judge, court: court }
   let!(:judge2) { FactoryGirl.create :judge }
-  let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, date: schedule.date, confirmed_realdate: false, judge_name: judge.name, command_score: 1, attitude_score: 1, note: "xxxxx", appeal_judge: false } }
+  let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, date: schedule.date, confirmed_realdate: false, judge_name: judge.name, rating_score: 1, note: "xxxxx", appeal_judge: false } }
 
   describe "#perform" do
     subject { described_class.new(party).perform(params) }
@@ -23,13 +23,8 @@ describe Party::ScheduleScoreCreateContext do
       end
     end
 
-    context "command_score empty" do
-      before { params[:command_score] = "" }
-      it { expect(subject).to be_falsey }
-    end
-
-    context "attitude_score empty" do
-      before { params[:attitude_score] = "" }
+    context "rating_score empty" do
+      before { params[:rating_score] = "" }
       it { expect(subject).to be_falsey }
     end
 

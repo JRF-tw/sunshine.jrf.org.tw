@@ -1,9 +1,8 @@
 class Party::ScheduleScoreCreateContext < BaseContext
-  PERMITS = [:court_id, :year, :word_type, :number, :date, :confirmed_realdate, :judge_name, :command_score, :attitude_score, :note, :appeal_judge].freeze
+  PERMITS = [:court_id, :year, :word_type, :number, :date, :confirmed_realdate, :judge_name, :rating_score, :note, :appeal_judge].freeze
 
   # before_perform :can_not_score
-  before_perform :check_command_score
-  before_perform :check_attitude_score
+  before_perform :check_rating_score
   before_perform :check_story
   before_perform :check_schedule
   before_perform :check_judge
@@ -28,12 +27,8 @@ class Party::ScheduleScoreCreateContext < BaseContext
     # TODO : Block user
   end
 
-  def check_command_score
-    return add_error(:date_blank, "訴訟指揮分數為必填") unless @params[:command_score].present?
-  end
-
-  def check_attitude_score
-    return add_error(:date_blank, "開庭態度分數為必填") unless @params[:attitude_score].present?
+  def check_rating_score
+    return add_error(:date_blank, "開庭態度分數為必填") unless @params[:rating_score].present?
   end
 
   def check_story
