@@ -112,7 +112,7 @@ Rails.application.routes.draw do
         end
       end
     end
-    resources :stories, only: [:index] do
+    resources :stories do
       member do
         resource :subscribe, only: [:create, :destroy]
       end

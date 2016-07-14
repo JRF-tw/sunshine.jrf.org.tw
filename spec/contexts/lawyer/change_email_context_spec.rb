@@ -23,7 +23,7 @@ describe Lawyer::ChangeEmailContext do
       let(:params) { { email: lawyer2.unconfirmed_email, current_password: "123123123" } }
       subject { described_class.new(lawyer) }
 
-      it { expect { subject.perform(params) }.not_to change { lawyer.reload.unconfirmed_email } }
+      it { expect { subject.perform(params) }.to change { lawyer.reload.unconfirmed_email } }
     end
 
     context "empty password" do
