@@ -39,7 +39,6 @@ class Story < ActiveRecord::Base
   include Redis::Objects
   counter :schedule_scored_count
 
-
   def identity
     "#{year}-#{word_type}-#{number}"
   end
