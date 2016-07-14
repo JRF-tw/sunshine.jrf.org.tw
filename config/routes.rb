@@ -34,13 +34,15 @@ Rails.application.routes.draw do
     root to: "scores#index"
     resource :profile, only: [:show, :edit, :update]
     resource :email, only: [:edit, :update]
-    resources :scores, only: [:edit, :show]
+    resources :scores, only: [:index, :edit, :show]
     resource :score do
       get "chose-type", to: "scores#chose_type"
-      resource :schedules, only: [:new] do
+      resource :schedules, only: [:new, :create] do
         collection do
           get :rule
-          post :verify
+          post :checked_info
+          post :checked_date
+          post :checked_judge
         end
       end
       resource :verdicts, only: [:new] do

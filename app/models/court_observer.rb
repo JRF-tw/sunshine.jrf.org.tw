@@ -35,4 +35,7 @@ class CourtObserver < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :phone_number, uniqueness: true, format: { with: /\A(0)(9)([0-9]{8})\z/ }, allow_nil: true
+
+  include Redis::Objects
+  counter :score_report_schedule_real_date
 end
