@@ -70,7 +70,7 @@ module RequestClient
   def init_lawyer_with_unconfirm_email(email)
     @lawyer = FactoryGirl.create(:lawyer, :with_password, :with_confirmed)
     signin_lawyer(@lawyer)
-    put "/lawyer/email", lawyer: { email: email, current_password: "123123123" }
+    put "/lawyer/email", lawyer: { email: email, current_password: @lawyer.password }
     signout_lawyer
     @lawyer
   end
