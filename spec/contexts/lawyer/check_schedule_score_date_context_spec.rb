@@ -3,7 +3,7 @@ require "rails_helper"
 describe Lawyer::CheckScheduleScoreDateContext do
   let!(:lawyer) { FactoryGirl.create :lawyer }
   let!(:court) { FactoryGirl.create :court }
-  let!(:story) { FactoryGirl.create :story, court: court}
+  let!(:story) { FactoryGirl.create :story, court: court }
   let!(:schedule) { FactoryGirl.create :schedule, story: story }
   let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, date: schedule.date, confirmed_realdate: false } }
 
@@ -25,7 +25,7 @@ describe Lawyer::CheckScheduleScoreDateContext do
     end
 
     context "date in future" do
-      before { params[:date] = Time.zone.today + 1.days }
+      before { params[:date] = Time.zone.today + 1.day }
       it { expect(subject).to be_falsey }
     end
 
@@ -35,12 +35,12 @@ describe Lawyer::CheckScheduleScoreDateContext do
     end
 
     context "schedule not found" do
-      before { params[:date] = schedule.date - 1.days }
+      before { params[:date] = schedule.date - 1.day }
       it { expect(subject).to be_falsey }
     end
 
     context "schedule not found" do
-      before { params[:date] = schedule.date - 1.days }
+      before { params[:date] = schedule.date - 1.day }
       it { expect(subject).to be_falsey }
     end
 
@@ -63,7 +63,7 @@ describe Lawyer::CheckScheduleScoreDateContext do
       before { params[:date] = schedule.date - 20.days }
       before { lawyer.score_report_schedule_real_date.value = 4 }
 
-      it { expect{ subject }.to change { lawyer.score_report_schedule_real_date.value } }
+      it { expect { subject }.to change { lawyer.score_report_schedule_real_date.value } }
       it { expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
     end
   end

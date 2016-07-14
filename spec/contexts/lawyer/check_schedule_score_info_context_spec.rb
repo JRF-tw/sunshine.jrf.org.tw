@@ -3,7 +3,7 @@ require "rails_helper"
 describe Lawyer::CheckScheduleScoreInfoContext do
   let!(:lawyer) { FactoryGirl.create :lawyer }
   let!(:court) { FactoryGirl.create :court }
-  let!(:story) { FactoryGirl.create :story, court: court}
+  let!(:story) { FactoryGirl.create :story, court: court }
   let!(:schedule) { FactoryGirl.create :schedule, story: story }
   let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number } }
 
@@ -46,12 +46,12 @@ describe Lawyer::CheckScheduleScoreInfoContext do
       end
 
       context "yesterday pronounced " do
-        before { story.update_attributes(pronounce_date: Time.zone.today - 1.days) }
+        before { story.update_attributes(pronounce_date: Time.zone.today - 1.day) }
         it { expect(subject).to be_falsey }
       end
 
       context "will pronounced " do
-        before { story.update_attributes(pronounce_date: Time.zone.today + 1.days) }
+        before { story.update_attributes(pronounce_date: Time.zone.today + 1.day) }
         it { expect(subject).to be_truthy }
       end
     end

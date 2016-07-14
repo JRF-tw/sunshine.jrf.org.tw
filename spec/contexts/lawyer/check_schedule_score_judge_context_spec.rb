@@ -3,7 +3,7 @@ require "rails_helper"
 describe Lawyer::CheckScheduleScoreJudgeContext do
   let!(:lawyer) { FactoryGirl.create :lawyer }
   let!(:court) { FactoryGirl.create :court }
-  let!(:story) { FactoryGirl.create :story, court: court}
+  let!(:story) { FactoryGirl.create :story, court: court }
   let!(:schedule) { FactoryGirl.create :schedule, story: story }
   let!(:judge) { FactoryGirl.create :judge, court: court }
   let!(:judge2) { FactoryGirl.create :judge }

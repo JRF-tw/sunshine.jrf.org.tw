@@ -3,7 +3,7 @@ require "rails_helper"
 describe Lawyer::ScheduleScoreCreateContext do
   let!(:lawyer) { FactoryGirl.create :lawyer }
   let!(:court) { FactoryGirl.create :court }
-  let!(:story) { FactoryGirl.create :story, court: court}
+  let!(:story) { FactoryGirl.create :story, court: court }
   let!(:schedule) { FactoryGirl.create :schedule, story: story }
   let!(:judge) { FactoryGirl.create :judge, court: court }
   let!(:judge2) { FactoryGirl.create :judge }
@@ -15,7 +15,7 @@ describe Lawyer::ScheduleScoreCreateContext do
     context "success" do
       it { expect(subject).to be_truthy }
       it { expect(subject.schedule_rater).to eq(lawyer) }
-      it { expect{ subject }.to change { ScheduleScore.count } }
+      it { expect { subject }.to change { ScheduleScore.count } }
 
       context "assign_attribute" do
         it { expect(subject.schedule).to eq(schedule) }
