@@ -18,7 +18,7 @@ class Lawyer::CheckScheduleScoreDateContext < BaseContext
   def perform(params)
     @params = permit_params(params[:schedule_score] || params, PERMITS)
     run_callbacks :perform do
-      @schedule
+      @schedule || true
     end
   end
 
@@ -33,7 +33,7 @@ class Lawyer::CheckScheduleScoreDateContext < BaseContext
   end
 
   def future_date
-    return add_error(:invalid_date, "開期日期不能為未來時間") if @params[:date].to_date >= Time.zone.today
+    return add_error(:invalid_date, "開期日期不能為未來時間") if @params[:date].to_date > Time.zone.today
   end
 
   def find_story

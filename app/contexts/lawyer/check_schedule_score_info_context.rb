@@ -1,13 +1,13 @@
 class Lawyer::CheckScheduleScoreInfoContext < BaseContext
   PERMITS = [:court_id, :year, :word_type, :number].freeze
 
-  before_perform :check_auth
   before_perform :check_court_id
   before_perform :check_year
   before_perform :check_word_type
   before_perform :check_number
   before_perform :find_story
   before_perform :can_score, if: :story_has_pronounce_date?
+  before_perform :story_already_adjudge
 
   def initialize(lawyer)
     @lawyer = lawyer
@@ -21,10 +21,6 @@ class Lawyer::CheckScheduleScoreInfoContext < BaseContext
   end
 
   private
-
-  def check_auth
-    return add_error(:auth_failed, "已超過可評鑑時間") unless @lawyer
-  end
 
   def check_court_id
     @court = Court.find(@params[:court_id]) if @params[:court_id].present?
@@ -52,7 +48,7 @@ class Lawyer::CheckScheduleScoreInfoContext < BaseContext
   end
 
   def can_score
-    return add_error(:out_score_intervel, "案件已宣判, 並且超過可評鑑開庭時間範圍") if Time.zone.today > @story.pronounce_date
+    return add_error(:out_score_intervel, "案件已宣判, 無法評鑑") if Time.zone.today > @story.pronounce_date
   end
 
   def story_already_adjudge
