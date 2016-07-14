@@ -29,6 +29,6 @@ class Lawyer::CheckScheduleScoreJudgeContext < BaseContext
   end
 
   def check_judge_in_correct_court
-    return add_error(:data_not_found, "法官不存在該法院") if @judge.current_court_id !=  @params[:court_id].to_i
+    return add_error(:data_not_found, "法官不存在該法院") if @judge.current_court_id != @params[:court_id].to_i
   end
 end

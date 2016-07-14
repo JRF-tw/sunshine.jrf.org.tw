@@ -1,7 +1,7 @@
 class Lawyer::CheckScheduleScoreDateContext < BaseContext
   PERMITS = [:court_id, :year, :word_type, :number, :date, :confirmed_realdate].freeze
-  ScoreIntervel = 14
-  MaxReportTime = 5
+  SCORE_INTERVEL = 14
+  MAX_REPORT_TIME = 5
 
   before_perform :check_date
   before_perform :future_date
@@ -46,8 +46,8 @@ class Lawyer::CheckScheduleScoreDateContext < BaseContext
   end
 
   def valid_score_intervel
-    range = (@schedule.date..@schedule.date + ScoreIntervel)
-    return add_error(:out_score_intervel, "已超過可評鑑時間") unless range === Time.zone.today
+    range = (@schedule.date..@schedule.date + SCORE_INTERVEL)
+    return add_error(:out_score_intervel, "已超過可評鑑時間") unless range.include?(Time.zone.today)
   end
 
   def record_report_time
@@ -55,7 +55,7 @@ class Lawyer::CheckScheduleScoreDateContext < BaseContext
   end
 
   def alert!
-    if @lawyer.score_report_schedule_real_date.value >= MaxReportTime
+    if @lawyer.score_report_schedule_real_date.value >= MAX_REPORT_TIME
       SlackService.user_report_schedule_date_over_range_async("律師 : #{@lawyer.name} 已超過回報庭期真實開庭日期次數")
     end
   end

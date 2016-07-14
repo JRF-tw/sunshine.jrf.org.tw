@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ScheduleScore do
   let(:schedule_score) { FactoryGirl.create :schedule_score }
