@@ -65,8 +65,8 @@ describe "當事人帳戶相關", type: :request do
         context "ID空白" do
           subject! { post "/party/sign_in", party: { identify_number: "", password: party.password } }
 
-          xit "TODO 修正提示訊息" do
-            expect(response.body).to match("信箱或密碼是無效的")
+          it "TODO 修正提示訊息" do
+            expect(response.body).to match("身分證或密碼是無效的。")
           end
         end
 
@@ -81,8 +81,8 @@ describe "當事人帳戶相關", type: :request do
         context "ID正確+密碼錯誤" do
           subject! { post "/party/sign_in", party: { identify_number: party.identify_number, password: "WRONG-password" } }
 
-          xit "TODO 修正提示訊息" do
-            expect(response.body).to match("信箱或密碼是無效的")
+          it "TODO 修正提示訊息" do
+            expect(response.body).to match("身分證或密碼是無效的。")
           end
         end
       end
