@@ -18,7 +18,7 @@ class Lawyer::CheckScheduleScoreDateContext < BaseContext
   def perform(params)
     @params = permit_params(params[:schedule_score] || params, PERMITS)
     run_callbacks :perform do
-      @schedule || true
+      @schedule
     end
   end
 

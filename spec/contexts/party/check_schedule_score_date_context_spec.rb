@@ -56,7 +56,7 @@ describe Party::CheckScheduleScoreDateContext do
 
     context "diff date" do
       before { params[:date] = schedule.date - 20.days }
-      it { expect(subject).to be_truthy }
+      it { expect(subject).to be_nil }
     end
 
     context "should alert slack over MAX_REPORT_TIME " do
