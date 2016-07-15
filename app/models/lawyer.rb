@@ -34,6 +34,7 @@ class Lawyer < ActiveRecord::Base
   has_many :verdict_relations, as: :person
   has_many :story_subscriptions, as: :subscriber, dependent: :destroy
   has_many :schedule_scores, as: :schedule_rater
+  has_many :verdict_scores, as: :verdict_rater
 
   devise :database_authenticatable, :registerable, :async, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable

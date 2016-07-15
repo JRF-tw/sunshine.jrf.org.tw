@@ -654,6 +654,26 @@ ActiveRecord::Schema.define(version: 20160804042232) do
   add_index "verdict_relations", ["verdict_id", "person_type"], name: "index_verdict_relations_on_verdict_id_and_person_type", using: :btree
   add_index "verdict_relations", ["verdict_id"], name: "index_verdict_relations_on_verdict_id", using: :btree
 
+  create_table "verdict_scores", force: :cascade do |t|
+    t.integer  "verdict_id"
+    t.integer  "judge_id"
+    t.integer  "verdict_rater_id"
+    t.string   "verdict_rater_type"
+    t.integer  "quality_score"
+    t.integer  "rating_score"
+    t.hstore   "data"
+    t.boolean  "appeal_judge"
+    t.integer  "status"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "verdict_scores", ["appeal_judge"], name: "index_verdict_scores_on_appeal_judge", using: :btree
+  add_index "verdict_scores", ["judge_id"], name: "index_verdict_scores_on_judge_id", using: :btree
+  add_index "verdict_scores", ["status"], name: "index_verdict_scores_on_status", using: :btree
+  add_index "verdict_scores", ["verdict_id"], name: "index_verdict_scores_on_verdict_id", using: :btree
+  add_index "verdict_scores", ["verdict_rater_id", "verdict_rater_type"], name: "index_verdict_scores_on_verdict_rater_id_and_verdict_rater_type", using: :btree
+
   create_table "verdicts", force: :cascade do |t|
     t.integer  "story_id"
     t.datetime "created_at",                       null: false

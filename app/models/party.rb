@@ -31,6 +31,7 @@ class Party < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable and :omniauthable
   has_many :schedule_scores, as: :schedule_rater
+  has_many :verdict_scores, as: :verdict_rater
 
   devise :database_authenticatable, :registerable, :async, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
