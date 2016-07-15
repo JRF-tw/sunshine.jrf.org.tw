@@ -37,7 +37,7 @@ describe Party::ChangeEmailContext do
       let!(:party2) { FactoryGirl.create :party, unconfirmed_email: "55667788@gmail.com" }
       let(:params) { { email: party2.unconfirmed_email, current_password: "12321313213" } }
 
-      it { expect { subject.perform(params) }.not_to change { party.reload.unconfirmed_email } }
+      it { expect { subject.perform(params) }.to change { party.reload.unconfirmed_email } }
     end
   end
 

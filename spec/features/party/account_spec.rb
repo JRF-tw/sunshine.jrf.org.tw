@@ -600,9 +600,297 @@ describe "當事人帳戶相關", type: :request do
   end
 
   context "更改 email" do
+    let!(:party) { FactoryGirl.create :party }
+
+    context "成功送出" do
+      before { signin_party(party) }
+
+      context "新的 email 為別人正在驗證中的 email ，也可以成功送出" do
+        let!(:party_with_unconfirmed_email) { FactoryGirl.create :party, unconfirmed_email: "556677@gmail.com" }
+        subject { put "/party/email", party: { email: party_with_unconfirmed_email.unconfirmed_email, current_password: "12321313213" } }
+
+        it "成功送出" do
+          expect { subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq)
+        end
+      end
+
+      context "發送信件" do
+        subject { put "/party/email", party: { email: "5566@gmail.com", current_password: "12321313213" } }
+
+        it "成功送出" do
+          expect { subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq)
+        end
+      end
+
+      context "內容連結點擊後成功換置新的 email" do
+        before { put "/party/email", party: { email: "windwizard@gmail.com", current_password: "12321313213" } }
+        subject! { get "/party/confirmation", confirmation_token: party.reload.confirmation_token }
+
+        it "成功更新email" do
+          expect(party.reload.email).to eq("windwizard@gmail.com")
+        end
+      end
+    end
+
+    context "失敗送出" do
+      context "內容錯誤" do
+        before { signin_party(party) }
+
+        context "新 email 空白" do
+          subject! { put "/party/email", party: { email: "", current_password: "12321313213" } }
+
+          it "顯示不可為空" do
+            expect(response.body).to match("email 不可為空")
+          end
+        end
+
+        context "新 email 格式不符" do
+          subject! { put "/party/email", party: { email: "4554", current_password: "12321313213" } }
+
+          xit "email 格式錯誤" do
+            expect(response.body).to match("是無效的")
+          end
+        end
+
+        context "密碼驗證錯誤" do
+          subject! { put "/party/email", party: { email: "ggyy@gmail.com", current_password: "33333333" } }
+
+          it "顯示密碼無效" do
+            expect(response.body).to match("是無效的")
+          end
+        end
+
+        context "密碼驗證空白" do
+          subject! { put "/party/email", party: { email: "ggyy@gmail.com", current_password: "" } }
+
+          it "顯示不可為空" do
+            expect(response.body).to match("不能是空白字元")
+          end
+        end
+      end
+
+      context "email 已經被使用" do
+        context "新 email 是別人的email" do
+          let!(:party2) { FactoryGirl.create :party, email: "ggyy@gmail.com" }
+          before { signin_party(party) }
+          subject! { put "/party/email", party: { email: party2.email, current_password: "12321313213" } }
+
+          it "顯示已經被使用" do
+            expect(response.body).to match("email 已經被使用")
+          end
+        end
+
+        context "新 email 跟原本的一樣" do
+          before { signin_party(party) }
+          subject! { put "/party/email", party: { email: party.email, current_password: "12321313213" } }
+
+          it "顯示不可與原本相同" do
+            expect(response.body).to match("email 不可與原本相同")
+          end
+        end
+      end
+
+      context "其他情境" do
+        context "當事人A與B 有相同的待驗證email, A點完驗證連結之後 B才點驗證連結" do
+          let!(:party_A) { init_party_with_unconfirm_email("ggyy@gmail.com") }
+          let!(:party_B) { init_party_with_unconfirm_email("ggyy@gmail.com") }
+          before { get "/party/confirmation", confirmation_token: party_A.reload.confirmation_token }
+          subject { get "/party/confirmation", confirmation_token: party_B.confirmation_token }
+
+          it "當事人A 的email 置換成功" do
+            expect(party_A.reload.email).to eq("ggyy@gmail.com")
+          end
+
+          it "當事人B 的email 置換失敗" do
+            expect { subject }.not_to change { party_B.email }
+          end
+        end
+      end
+    end
   end
 
   context "當事人更改手機號碼" do
+    context "手機號碼輸入頁" do
+      context "成功送出" do
+        before { signin_party }
+        subject { put "/party/phone", party: { phone_number: "0911111111" } }
+
+        it "轉跳至認證碼輸入頁" do
+          expect(subject).to redirect_to("/party/phone/verify")
+        end
+
+        it "發送簡訊" do
+          expect { subject }.to change_sidekiq_jobs_size_of(SmsService, :send_to)
+        end
+      end
+
+      context "失敗送出" do
+        let!(:party) { FactoryGirl.create :party }
+
+        context "該手機號碼已被別人驗證" do
+          before { signin_party }
+          subject! { put "/party/phone", party: { phone_number: party.phone_number } }
+
+          it "提示號碼已經被使用" do
+            expect(response.body).to match("該手機號碼已註冊")
+          end
+        end
+
+        context "該手機號碼正在被別人驗證中" do
+          before { init_party_with_unconfirm_phone_number("0911111111") }
+          before { signin_party }
+          subject! { put "/party/phone", party: { phone_number: "0911111111" } }
+
+          it "提示號碼已經被使用" do
+            expect(response.body).to match("該手機號碼正等待驗證中")
+          end
+        end
+
+        context "該手機號碼跟原本的一樣" do
+          before { signin_party(party) }
+          subject! { put "/party/phone", party: { phone_number: party.phone_number } }
+
+          it "提示號碼已經被使用" do
+            expect(response.body).to match("該手機號碼已註冊")
+          end
+        end
+
+        context "目前已超過簡訊發送限制" do
+          context "連續成功送出更改手機號碼的認證簡訊（每次都不同號碼），使其達到上限" do
+            before { signin_party }
+            before { put "/party/phone", party: { phone_number: "0911111111" } }
+            before { put "/party/phone", party: { phone_number: "0911111112" } }
+            before { put "/party/phone", party: { phone_number: "0911111113" } }
+
+            it "提示五分鐘只能寄送兩次" do
+              expect(response.body).to match("五分鐘內只能寄送兩次簡訊")
+            end
+          end
+
+          context "連續發送忘記密碼簡訊，使其達到上限" do
+            let!(:params) { { identify_number: party.identify_number, phone_number: party.phone_number } }
+            before { post "/party/password", party: params }
+            before { post "/party/password", party: params }
+            before { post "/party/password", party: params }
+
+            it "連續發送 2 次後，達限制上限" do
+              expect(response.body).to match("五分鐘內只能寄送兩次簡訊")
+            end
+          end
+
+          context "連續發送忘記密碼和更改手機號碼簡訊，使其達到上限" do
+            before { post "/party/password", party: { identify_number: party.identify_number, phone_number: party.phone_number } }
+            before { signin_party(party) }
+            before { put "/party/phone", party: { phone_number: "0911111111" } }
+            before { put "/party/phone", party: { phone_number: "0911111112" } }
+
+            it "提示五分鐘只能寄送兩次" do
+              expect(response.body).to match("五分鐘內只能寄送兩次簡訊")
+            end
+          end
+        end
+
+        context "號碼格式不符" do
+          before { signin_party }
+
+          context "空白" do
+            subject! { put "/party/phone", party: { phone_number: "" } }
+
+            it "提示手機號碼不可為空" do
+              expect(response.body).to match("手機號碼為必填欄位")
+            end
+          end
+
+          context "過長" do
+            subject! { put "/party/phone", party: { phone_number: "091111111111" } }
+
+            it "提示手機號碼格式不符" do
+              expect(response.body).to match("手機號碼格式錯誤")
+            end
+          end
+
+          context "過短" do
+            subject! { put "/party/phone", party: { phone_number: "0911" } }
+
+            it "提示手機號碼格式不符" do
+              expect(response.body).to match("手機號碼格式錯誤")
+            end
+          end
+
+          context "非09開頭" do
+            subject! { put "/party/phone", party: { phone_number: "0811111111" } }
+
+            it "提示手機號碼格式不符" do
+              expect(response.body).to match("手機號碼格式錯誤")
+            end
+          end
+
+          context "非全數字" do
+            subject! { put "/party/phone", party: { phone_number: "091111a111" } }
+
+            it "提示手機號碼格式不符" do
+              expect(response.body).to match("手機號碼格式錯誤")
+            end
+          end
+        end
+      end
+    end
+
+    context "認證碼輸入頁" do
+      before { signin_party }
+
+      context "成功驗證" do
+        before { current_party.phone_varify_code = "1111" }
+        subject! { put "/party/phone/verifing", party: { phone_varify_code: "1111" } }
+
+        it "轉跳到評鑑記錄頁，並跳出「註冊成功」訊息" do
+          expect(response).to redirect_to("/party")
+          expect(flash[:success]).to eq("已驗證成功")
+        end
+      end
+
+      context "失敗驗證" do
+        context "驗證碼空白" do
+          before { current_party.phone_varify_code = "1111" }
+          subject! { put "/party/phone/verifing", party: { phone_varify_code: "" } }
+
+          it "提示驗證碼輸入錯誤" do
+            expect(response.body).to match("驗證碼輸入錯誤")
+          end
+        end
+
+        context "驗證碼錯誤" do
+          before { current_party.phone_varify_code = "1111" }
+          subject! { put "/party/phone/verifing", party: { phone_varify_code: "2222" } }
+
+          it "提示驗證碼輸入錯誤" do
+            expect(response.body).to match("驗證碼輸入錯誤")
+          end
+        end
+
+        context "驗證碼輸入錯誤太多次" do
+          before { current_party.phone_varify_code = "1111" }
+          before { put "/party/phone/verifing", party: { phone_varify_code: "" } }
+          before { put "/party/phone/verifing", party: { phone_varify_code: "" } }
+          before { put "/party/phone/verifing", party: { phone_varify_code: "" } }
+          before { put "/party/phone/verifing", party: { phone_varify_code: "" } }
+
+          it "重新導向到修改手機號碼頁面" do
+            expect(response).to redirect_to("/party/phone/edit")
+          end
+        end
+
+        context "已超過可驗證的期限" do
+          before { current_party.phone_varify_code = "1111" }
+          before { current_party.phone_varify_code = nil }
+          subject! { put "/party/phone/verifing", party: { phone_varify_code: "1111" } }
+
+          it "提示重設手機號碼" do
+            expect(flash[:error]).to match("請先設定手機號碼")
+          end
+        end
+      end
+    end
   end
 
   context "人工申訴表單" do

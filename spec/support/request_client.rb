@@ -75,6 +75,14 @@ module RequestClient
     @lawyer
   end
 
+  def init_party_with_unconfirm_email(email)
+    @party = FactoryGirl.create(:party)
+    signin_party(@party)
+    put "/party/email", party: { email: email, current_password: @party.password }
+    signout_party
+    @party
+  end
+
   def init_party_with_unconfirm_phone_number(phone_number)
     party = FactoryGirl.create(:party)
     signin_party(party)
