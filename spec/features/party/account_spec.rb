@@ -837,57 +837,22 @@ describe "當事人帳戶相關", type: :request do
     end
 
     context "認證碼輸入頁" do
-      before { signin_party }
-
-      context "成功驗證" do
-        before { current_party.phone_varify_code = "1111" }
-        subject! { put "/party/phone/verifing", party: { phone_varify_code: "1111" } }
-
-        it "轉跳到評鑑記錄頁，並跳出「註冊成功」訊息" do
-          expect(response).to redirect_to("/party")
-          expect(flash[:success]).to eq("已驗證成功")
-        end
+      let(:party) { FactoryGirl.create :party }
+      before { signin_party(party) }
+      context "在當事人手機驗證流程已測過" do
       end
 
-      context "失敗驗證" do
-        context "驗證碼空白" do
-          before { current_party.phone_varify_code = "1111" }
-          subject! { put "/party/phone/verifing", party: { phone_varify_code: "" } }
+      context "成功驗證" do
+        before { put "/party/phone", party: { phone_number: "0911111111" } }
+        subject { put "/party/phone/verifing", party: { phone_varify_code: party.phone_varify_code.value } }
 
-          it "提示驗證碼輸入錯誤" do
-            expect(response.body).to match("驗證碼輸入錯誤")
-          end
+        it "確實更改了當事人的手機號碼" do
+          expect { subject }.to change { party.reload.phone_number }
+          expect(response).to redirect_to("/party")
         end
 
-        context "驗證碼錯誤" do
-          before { current_party.phone_varify_code = "1111" }
-          subject! { put "/party/phone/verifing", party: { phone_varify_code: "2222" } }
-
-          it "提示驗證碼輸入錯誤" do
-            expect(response.body).to match("驗證碼輸入錯誤")
-          end
-        end
-
-        context "驗證碼輸入錯誤太多次" do
-          before { current_party.phone_varify_code = "1111" }
-          before { put "/party/phone/verifing", party: { phone_varify_code: "" } }
-          before { put "/party/phone/verifing", party: { phone_varify_code: "" } }
-          before { put "/party/phone/verifing", party: { phone_varify_code: "" } }
-          before { put "/party/phone/verifing", party: { phone_varify_code: "" } }
-
-          it "重新導向到修改手機號碼頁面" do
-            expect(response).to redirect_to("/party/phone/edit")
-          end
-        end
-
-        context "已超過可驗證的期限" do
-          before { current_party.phone_varify_code = "1111" }
-          before { current_party.phone_varify_code = nil }
-          subject! { put "/party/phone/verifing", party: { phone_varify_code: "1111" } }
-
-          it "提示重設手機號碼" do
-            expect(flash[:error]).to match("請先設定手機號碼")
-          end
+        it "清空驗證中的手機號碼" do
+          expect { subject }.to change { current_party.unconfirmed_phone.value }
         end
       end
     end
