@@ -4,7 +4,7 @@ describe "當事人帳戶相關", type: :request do
   context "登入" do
     context "成功登入" do
       context "email未填仍可正常登入" do
-        let!(:party) { FactoryGirl.create :party, email: "" }
+        let!(:party) { FactoryGirl.create :party, email: nil }
         subject { post "/party/sign_in", party: { identify_number: party.identify_number, password: party.password } }
 
         it "導到個人評鑑紀錄頁" do
@@ -647,8 +647,8 @@ describe "當事人帳戶相關", type: :request do
         context "新 email 格式不符" do
           subject! { put "/party/email", party: { email: "4554", current_password: "12321313213" } }
 
-          xit "email 格式錯誤" do
-            expect(response.body).to match("是無效的")
+          it "email 格式錯誤" do
+            expect(flash[:error]).to eq("無效的 email")
           end
         end
 
