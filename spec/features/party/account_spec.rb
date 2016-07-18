@@ -254,7 +254,7 @@ describe "當事人帳戶相關", type: :request do
         end
 
         context "該手機號碼正在被別人驗證中" do
-          before { init_party_with_unconfirm_phone_number("0911111111") }
+          before { party_with_unconfirm_phone_number_init("0911111111") }
           before { signin_party }
           subject! { post "/party/phone", party: { phone_number: "0911111111" } }
 
@@ -264,7 +264,7 @@ describe "當事人帳戶相關", type: :request do
         end
 
         context "連續發送 n 次後，使目前已超過簡訊發送限制" do
-          let!(:party_with_sms_send_count) { init_party_with_sms_send_count(2) }
+          let!(:party_with_sms_send_count) { party_with_sms_send_count_init(2) }
           before { signin_party(party_with_sms_send_count) }
           subject! { post "/party/phone", party: { phone_number: "0911111113" } }
 
@@ -323,7 +323,7 @@ describe "當事人帳戶相關", type: :request do
       before { signin_party }
 
       context "成功驗證" do
-        before { generate_phone_varify_code_for_party(current_party) }
+        before { party_generate_phone_varify_code(current_party) }
         subject! { put "/party/phone/verifing", party: { phone_varify_code: current_party.phone_varify_code.value } }
 
         it "轉跳到評鑑記錄頁，並跳出「註冊成功」訊息" do
@@ -334,7 +334,7 @@ describe "當事人帳戶相關", type: :request do
 
       context "失敗驗證" do
         context "驗證碼空白" do
-          before { generate_phone_varify_code_for_party(current_party) }
+          before { party_generate_phone_varify_code(current_party) }
           subject! { put "/party/phone/verifing", party: { phone_varify_code: "" } }
 
           it "提示驗證碼輸入錯誤" do
@@ -343,7 +343,7 @@ describe "當事人帳戶相關", type: :request do
         end
 
         context "驗證碼錯誤" do
-          before { generate_phone_varify_code_for_party(current_party, "3333") }
+          before { party_generate_phone_varify_code(current_party, "3333") }
           subject! { put "/party/phone/verifing", party: { phone_varify_code: "2222" } }
 
           it "提示驗證碼輸入錯誤" do
@@ -352,8 +352,8 @@ describe "當事人帳戶相關", type: :request do
         end
 
         context "驗證碼輸入錯誤太多次" do
-          before { generate_phone_varify_code_for_party(current_party) }
-          before { 3.times.each { put "/party/phone/verifing", party: { phone_varify_code: "" } } }
+          before { party_generate_phone_varify_code(current_party) }
+          before { party_verifing_error_times(3) }
           subject! { put "/party/phone/verifing", party: { phone_varify_code: "" } }
 
           it "重新導向到修改手機號碼頁面" do
@@ -391,7 +391,7 @@ describe "當事人帳戶相關", type: :request do
 
     context "失敗送出" do
       context "超過簡訊發送限制" do
-        let!(:party_with_sms_send_count) { init_party_with_sms_send_count(2) }
+        let!(:party_with_sms_send_count) { party_with_sms_send_count_init(2) }
         let!(:params) { { identify_number: party_with_sms_send_count.identify_number, phone_number: party_with_sms_send_count.phone_number } }
         subject! { post "/party/password", party: params }
 
@@ -401,7 +401,7 @@ describe "當事人帳戶相關", type: :request do
       end
 
       context "手機號碼未驗證" do
-        let!(:party_with_unconfirm_phone_number) { init_party_with_unconfirm_phone_number("0911828181") }
+        let!(:party_with_unconfirm_phone_number) { party_with_unconfirm_phone_number_init("0911828181") }
         subject! { post "/party/password", party: { identify_number: party_with_unconfirm_phone_number.identify_number, phone_number: "0911828181" } }
 
         it "顯示錯誤訊息，並提示可進行人工申訴" do
@@ -687,8 +687,8 @@ describe "當事人帳戶相關", type: :request do
 
       context "其他情境" do
         context "當事人A與B 有相同的待驗證email, A點完驗證連結之後 B才點驗證連結" do
-          let!(:party_A) { init_party_with_unconfirm_email("ggyy@gmail.com") }
-          let!(:party_B) { init_party_with_unconfirm_email("ggyy@gmail.com") }
+          let!(:party_A) { party_with_unconfirm_email_init("ggyy@gmail.com") }
+          let!(:party_B) { party_with_unconfirm_email_init("ggyy@gmail.com") }
           before { get "/party/confirmation", confirmation_token: party_A.reload.confirmation_token }
           subject { get "/party/confirmation", confirmation_token: party_B.confirmation_token }
 
@@ -732,7 +732,7 @@ describe "當事人帳戶相關", type: :request do
         end
 
         context "該手機號碼正在被別人驗證中" do
-          before { init_party_with_unconfirm_phone_number("0911111111") }
+          before { party_with_unconfirm_phone_number_init("0911111111") }
           before { signin_party }
           subject! { put "/party/phone", party: { phone_number: "0911111111" } }
 
@@ -753,9 +753,7 @@ describe "當事人帳戶相關", type: :request do
         context "目前已超過簡訊發送限制" do
           context "連續成功送出更改手機號碼的認證簡訊（每次都不同號碼），使其達到上限" do
             before { signin_party }
-            before { put "/party/phone", party: { phone_number: "0911111111" } }
-            before { put "/party/phone", party: { phone_number: "0911111112" } }
-            before { put "/party/phone", party: { phone_number: "0911111113" } }
+            before { party_chang_phone_number_times(3) }
 
             it "提示五分鐘只能寄送兩次" do
               expect(response.body).to match("五分鐘內只能寄送兩次簡訊")
@@ -763,7 +761,7 @@ describe "當事人帳戶相關", type: :request do
           end
 
           context "連續發送忘記密碼簡訊，使其達到上限" do
-            let!(:party_with_sms_send_count) { init_party_with_sms_send_count(2) }
+            let!(:party_with_sms_send_count) { party_with_sms_send_count_init(2) }
             let!(:params) { { identify_number: party_with_sms_send_count.identify_number, phone_number: party_with_sms_send_count.phone_number } }
             subject! { post "/party/password", party: params }
 

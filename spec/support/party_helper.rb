@@ -15,7 +15,7 @@ module PartyHelper
     @current_party
   end
 
-  def init_party_with_unconfirm_email(email)
+  def party_with_unconfirm_email_init(email)
     @party = FactoryGirl.create(:party)
     signin_party(@party)
     put "/party/email", party: { email: email, current_password: @party.password }
@@ -23,7 +23,7 @@ module PartyHelper
     @party
   end
 
-  def init_party_with_unconfirm_phone_number(phone_number)
+  def party_with_unconfirm_phone_number_init(phone_number)
     party = FactoryGirl.create(:party)
     signin_party(party)
     post "/party/phone", party: { phone_number: phone_number }
@@ -31,15 +31,23 @@ module PartyHelper
     party
   end
 
-  def init_party_with_sms_send_count(counts)
+  def party_with_sms_send_count_init(counts)
     party = FactoryGirl.create(:party)
     party.sms_sent_count.value = counts
     party
   end
 
-  def generate_phone_varify_code_for_party(party, code = nil)
+  def party_generate_phone_varify_code(party, code = nil)
     party.phone_varify_code.value = code ? code.to_s : rand(1000..9999).to_s
     party.save
+  end
+
+  def party_chang_phone_number_times(times)
+    times.times { put "/party/phone", party: { phone_number: "09" + rand(10_000_000..99_999_999).to_s } }
+  end
+
+  def party_verifing_error_times(times)
+    times.times { put "/party/phone/verifing", party: { phone_varify_code: "" } }
   end
 
 end

@@ -292,8 +292,8 @@ describe "密碼設定頁", type: :request do
 
       context "其他情境" do
         context "律師A與B 有相同的待驗證email, A點完驗證連結之後 B才點驗證連結" do
-          let!(:lawyer_A) { init_lawyer_with_unconfirm_email("ggyy@gmail.com") }
-          let!(:lawyer_B) { init_lawyer_with_unconfirm_email("ggyy@gmail.com") }
+          let!(:lawyer_A) { lawyer_with_unconfirm_email_init("ggyy@gmail.com") }
+          let!(:lawyer_B) { lawyer_with_unconfirm_email_init("ggyy@gmail.com") }
           before { get "/lawyer/confirmation", confirmation_token: lawyer_A.reload.confirmation_token }
           subject { get "/lawyer/confirmation", confirmation_token: lawyer_B.confirmation_token }
 

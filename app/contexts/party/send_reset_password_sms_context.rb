@@ -2,6 +2,7 @@ class Party::SendResetPasswordSmsContext < BaseContext
   include Rails.application.routes.url_helpers
 
   PERMITS = [:identify_number, :phone_number].freeze
+  SENDINGLIMIT = 2
 
   before_perform  :find_party
   before_perform  :check_phone_number_verified
@@ -14,7 +15,6 @@ class Party::SendResetPasswordSmsContext < BaseContext
 
   def initialize(params)
     @params = permit_params(params[:party] || params, PERMITS)
-    @sms_send_limit = 2
   end
 
   def perform
@@ -57,7 +57,7 @@ class Party::SendResetPasswordSmsContext < BaseContext
   end
 
   def check_sms_send_count
-    return add_error(:data_update_fail, "五分鐘內只能寄送兩次簡訊") if @party.sms_sent_count.value >= @sms_send_limit
+    return add_error(:data_update_fail, "五分鐘內只能寄送兩次簡訊") if @party.sms_sent_count.value >= SENDINGLIMIT
   end
 
   def record_sms_count

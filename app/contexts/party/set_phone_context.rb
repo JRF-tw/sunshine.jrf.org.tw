@@ -1,5 +1,6 @@
 class Party::SetPhoneContext < BaseContext
   PERMITS = [:phone_number].freeze
+  SENDINGLIMIT = 2
 
   before_perform  :check_phone
   before_perform  :check_phone_format
@@ -16,7 +17,6 @@ class Party::SetPhoneContext < BaseContext
 
   def initialize(party)
     @party = party
-    @sms_send_limit = 2
   end
 
   def perform(params)
@@ -51,7 +51,7 @@ class Party::SetPhoneContext < BaseContext
   end
 
   def check_sms_send_count
-    return add_error(:data_update_fail, "五分鐘內只能寄送兩次簡訊") if @party.sms_sent_count.value >= @sms_send_limit
+    return add_error(:data_update_fail, "五分鐘內只能寄送兩次簡訊") if @party.sms_sent_count.value >= SENDINGLIMIT
   end
 
   def generate_verify_code
