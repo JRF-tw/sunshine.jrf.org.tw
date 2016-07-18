@@ -4,7 +4,8 @@ class Party::SendResetPasswordSmsContext < BaseContext
   PERMITS = [:identify_number, :phone_number].freeze
 
   before_perform  :find_party
-  before_perform  :check_phone_number_exist_and_verified
+  before_perform  :check_phone_number_verified
+  before_perform  :check_phone_number_exist
   before_perform  :check_sms_send_count
   before_perform  :generate_reset_password_token
   before_perform  :build_message
@@ -13,6 +14,7 @@ class Party::SendResetPasswordSmsContext < BaseContext
 
   def initialize(params)
     @params = permit_params(params[:party] || params, PERMITS)
+    @sms_send_limit = 2
   end
 
   def perform
@@ -29,8 +31,11 @@ class Party::SendResetPasswordSmsContext < BaseContext
     return add_error(:data_not_found, "沒有此當事人資訊") unless @party
   end
 
-  def check_phone_number_exist_and_verified
+  def check_phone_number_verified
     return add_error(:without_verify, "手機號碼尚未驗證 <a href='/party/appeal/new'>人工申訴</a>") if @params[:phone_number] == @party.unconfirmed_phone.value
+  end
+
+  def check_phone_number_exist
     return add_error(:data_not_found, "手機號碼輸入錯誤") unless @party.phone_number == @params[:phone_number]
   end
 
@@ -52,7 +57,7 @@ class Party::SendResetPasswordSmsContext < BaseContext
   end
 
   def check_sms_send_count
-    return add_error(:data_update_fail, "五分鐘內只能寄送兩次簡訊") if @party.sms_sent_count.value >= 2
+    return add_error(:data_update_fail, "五分鐘內只能寄送兩次簡訊") if @party.sms_sent_count.value >= @sms_send_limit
   end
 
   def record_sms_count

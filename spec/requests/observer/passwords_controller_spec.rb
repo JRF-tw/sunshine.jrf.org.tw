@@ -37,7 +37,7 @@ RSpec.describe Observer::PasswordsController, type: :request do
 
     context "fail with sign in other court_observer" do
       before { signin_court_observer }
-      subject! { get "/observer/password/edit", reset_password_token: token }
+      subject { get "/observer/password/edit", reset_password_token: token }
 
       it { expect(subject).to eq 302 }
     end

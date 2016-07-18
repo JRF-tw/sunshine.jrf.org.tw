@@ -23,10 +23,10 @@ class CourtObserver::RegisterCheckContext < BaseContext
   end
 
   def check_observer_params_exist
-    add_error(:date_blank, "姓名 不可為空白字元") if @params[:name].blank?
-    add_error(:date_blank, "email 不可為空白字元") if @params[:email].blank?
-    add_error(:date_blank, "密碼 不可為空白字元") if @params[:password].blank?
-    add_error(:date_blank, "密碼確認 不可為空白字元") if @params[:password_confirmation].blank?
+    add_error(:data_blank, "姓名 不可為空白字元") if @params[:name].blank?
+    add_error(:data_blank, "email 不可為空白字元") if @params[:email].blank?
+    add_error(:data_blank, "密碼 不可為空白字元") if @params[:password].blank?
+    add_error(:data_blank, "密碼確認 不可為空白字元") if @params[:password_confirmation].blank?
 
     return false if errors.present?
   end

@@ -65,7 +65,7 @@ describe "當事人帳戶相關", type: :request do
         context "ID空白" do
           subject! { post "/party/sign_in", party: { identify_number: "", password: party.password } }
 
-          it "TODO 修正提示訊息" do
+          it "提示身分證或密碼無效" do
             expect(response.body).to match("身分證或密碼是無效的。")
           end
         end
@@ -81,7 +81,7 @@ describe "當事人帳戶相關", type: :request do
         context "ID正確+密碼錯誤" do
           subject! { post "/party/sign_in", party: { identify_number: party.identify_number, password: "WRONG-password" } }
 
-          it "TODO 修正提示訊息" do
+          it "提示身分證或密碼無效" do
             expect(response.body).to match("身分證或密碼是無效的。")
           end
         end
@@ -166,7 +166,7 @@ describe "當事人帳戶相關", type: :request do
         end
 
         context "ID 不合法" do
-          subject! { post "/party", party: { name: "老夫子", identify_number: "f122121211", password: "00000000", password_confirmation: "00000000" }, policy_agreement: "1" }
+          subject! { post "/party", party: { name: "老夫子", identify_number: "F332212121", password: "00000000", password_confirmation: "00000000" }, policy_agreement: "1" }
 
           it "提示身分證字號格式不符" do
             expect(response.body).to match("身分證字號格式不符")
@@ -264,10 +264,9 @@ describe "當事人帳戶相關", type: :request do
         end
 
         context "連續發送 n 次後，使目前已超過簡訊發送限制" do
-          before { signin_party }
-          before { post "/party/phone", party: { phone_number: "0911111111" } }
-          before { post "/party/phone", party: { phone_number: "0911111112" } }
-          before { post "/party/phone", party: { phone_number: "0911111113" } }
+          let!(:party_with_sms_send_count) { init_party_with_sms_send_count(2) }
+          before { signin_party(party_with_sms_send_count) }
+          subject! { post "/party/phone", party: { phone_number: "0911111113" } }
 
           it "提示五分鐘只能寄送兩次" do
             expect(response.body).to match("五分鐘內只能寄送兩次簡訊")
@@ -324,8 +323,8 @@ describe "當事人帳戶相關", type: :request do
       before { signin_party }
 
       context "成功驗證" do
-        before { current_party.phone_varify_code = "1111" }
-        subject! { put "/party/phone/verifing", party: { phone_varify_code: "1111" } }
+        before { generate_phone_varify_code_for_party(current_party) }
+        subject! { put "/party/phone/verifing", party: { phone_varify_code: current_party.phone_varify_code.value } }
 
         it "轉跳到評鑑記錄頁，並跳出「註冊成功」訊息" do
           expect(response).to redirect_to("/party")
@@ -335,7 +334,7 @@ describe "當事人帳戶相關", type: :request do
 
       context "失敗驗證" do
         context "驗證碼空白" do
-          before { current_party.phone_varify_code = "1111" }
+          before { generate_phone_varify_code_for_party(current_party) }
           subject! { put "/party/phone/verifing", party: { phone_varify_code: "" } }
 
           it "提示驗證碼輸入錯誤" do
@@ -344,7 +343,7 @@ describe "當事人帳戶相關", type: :request do
         end
 
         context "驗證碼錯誤" do
-          before { current_party.phone_varify_code = "1111" }
+          before { generate_phone_varify_code_for_party(current_party, "3333") }
           subject! { put "/party/phone/verifing", party: { phone_varify_code: "2222" } }
 
           it "提示驗證碼輸入錯誤" do
@@ -353,11 +352,9 @@ describe "當事人帳戶相關", type: :request do
         end
 
         context "驗證碼輸入錯誤太多次" do
-          before { current_party.phone_varify_code = "1111" }
-          before { put "/party/phone/verifing", party: { phone_varify_code: "" } }
-          before { put "/party/phone/verifing", party: { phone_varify_code: "" } }
-          before { put "/party/phone/verifing", party: { phone_varify_code: "" } }
-          before { put "/party/phone/verifing", party: { phone_varify_code: "" } }
+          before { generate_phone_varify_code_for_party(current_party) }
+          before { 3.times.each { put "/party/phone/verifing", party: { phone_varify_code: "" } } }
+          subject! { put "/party/phone/verifing", party: { phone_varify_code: "" } }
 
           it "重新導向到修改手機號碼頁面" do
             expect(response).to redirect_to("/party/phone/edit")
@@ -365,8 +362,7 @@ describe "當事人帳戶相關", type: :request do
         end
 
         context "已超過可驗證的期限" do
-          before { current_party.phone_varify_code = "1111" }
-          before { current_party.phone_varify_code = nil }
+          before { current_party.phone_varify_code.value = nil }
           subject! { put "/party/phone/verifing", party: { phone_varify_code: "1111" } }
 
           it "提示重設手機號碼" do
@@ -395,10 +391,9 @@ describe "當事人帳戶相關", type: :request do
 
     context "失敗送出" do
       context "超過簡訊發送限制" do
-        let!(:params) { { identify_number: party.identify_number, phone_number: party.phone_number } }
-        before { post "/party/password", party: params }
-        before { post "/party/password", party: params }
-        before { post "/party/password", party: params }
+        let!(:party_with_sms_send_count) { init_party_with_sms_send_count(2) }
+        let!(:params) { { identify_number: party_with_sms_send_count.identify_number, phone_number: party_with_sms_send_count.phone_number } }
+        subject! { post "/party/password", party: params }
 
         it "連續發送 2 次後，達限制上限" do
           expect(response.body).to match("五分鐘內只能寄送兩次簡訊")
@@ -407,7 +402,7 @@ describe "當事人帳戶相關", type: :request do
 
       context "手機號碼未驗證" do
         let!(:party_with_unconfirm_phone_number) { init_party_with_unconfirm_phone_number("0911828181") }
-        before { post "/party/password", party: { identify_number: party_with_unconfirm_phone_number.identify_number, phone_number: "0911828181" } }
+        subject! { post "/party/password", party: { identify_number: party_with_unconfirm_phone_number.identify_number, phone_number: "0911828181" } }
 
         it "顯示錯誤訊息，並提示可進行人工申訴" do
           expect(response.body).to match("手機號碼尚未驗證 <a href='/party/appeal/new'>人工申訴</a>")
@@ -416,7 +411,7 @@ describe "當事人帳戶相關", type: :request do
 
       context "驗證錯誤" do
         context "手機號碼存在，ID 不存在" do
-          before { post "/party/password", party: { identify_number: "F123456789", phone_number: party.phone_number } }
+          subject! { post "/party/password", party: { identify_number: "F123456789", phone_number: party.phone_number } }
 
           it "顯示無此當事人資訊" do
             expect(response.body).to match("沒有此當事人資訊")
@@ -424,7 +419,7 @@ describe "當事人帳戶相關", type: :request do
         end
 
         context "手機號碼不存在，ID 存在" do
-          before { post "/party/password", party: { identify_number: party.identify_number, phone_number: "0911111111" } }
+          subject! { post "/party/password", party: { identify_number: party.identify_number, phone_number: "0911111111" } }
 
           it "顯示手機號碼錯誤" do
             expect(response.body).to match("手機號碼輸入錯誤")
@@ -432,7 +427,7 @@ describe "當事人帳戶相關", type: :request do
         end
 
         context "手機號碼不存在，ID 不存在" do
-          before { post "/party/password", party: { identify_number: "F123456789", phone_number: "0911111111" } }
+          subject! { post "/party/password", party: { identify_number: "F123456789", phone_number: "0911111111" } }
 
           it "顯示無此當事人資訊" do
             expect(response.body).to match("沒有此當事人資訊")
@@ -442,7 +437,7 @@ describe "當事人帳戶相關", type: :request do
 
       context "輸入內容錯誤" do
         context "ID空白" do
-          before { post "/party/password", party: { identify_number: "", phone_number: party.phone_number } }
+          subject! { post "/party/password", party: { identify_number: "", phone_number: party.phone_number } }
 
           it "顯示無此當事人資訊" do
             expect(response.body).to match("沒有此當事人資訊")
@@ -450,7 +445,7 @@ describe "當事人帳戶相關", type: :request do
         end
 
         context "手機號碼空白" do
-          before { post "/party/password", party: { identify_number: party.identify_number, phone_number: "" } }
+          subject! { post "/party/password", party: { identify_number: party.identify_number, phone_number: "" } }
 
           it "顯示手機號碼錯誤" do
             expect(response.body).to match("手機號碼輸入錯誤")
@@ -458,7 +453,7 @@ describe "當事人帳戶相關", type: :request do
         end
 
         context "ID + 手機號碼皆空白" do
-          before { post "/party/password", party: { identify_number: "", phone_number: "" } }
+          subject! { post "/party/password", party: { identify_number: "", phone_number: "" } }
 
           it "顯示無此當事人資訊" do
             expect(response.body).to match("沒有此當事人資訊")
@@ -751,7 +746,7 @@ describe "當事人帳戶相關", type: :request do
           subject! { put "/party/phone", party: { phone_number: party.phone_number } }
 
           it "提示號碼已經被使用" do
-            expect(response.body).to match("該手機號碼已註冊")
+            expect(response.body).to match("手機號碼不可與原本相同")
           end
         end
 
@@ -768,10 +763,9 @@ describe "當事人帳戶相關", type: :request do
           end
 
           context "連續發送忘記密碼簡訊，使其達到上限" do
-            let!(:params) { { identify_number: party.identify_number, phone_number: party.phone_number } }
-            before { post "/party/password", party: params }
-            before { post "/party/password", party: params }
-            before { post "/party/password", party: params }
+            let!(:party_with_sms_send_count) { init_party_with_sms_send_count(2) }
+            let!(:params) { { identify_number: party_with_sms_send_count.identify_number, phone_number: party_with_sms_send_count.phone_number } }
+            subject! { post "/party/password", party: params }
 
             it "連續發送 2 次後，達限制上限" do
               expect(response.body).to match("五分鐘內只能寄送兩次簡訊")
@@ -782,7 +776,7 @@ describe "當事人帳戶相關", type: :request do
             before { post "/party/password", party: { identify_number: party.identify_number, phone_number: party.phone_number } }
             before { signin_party(party) }
             before { put "/party/phone", party: { phone_number: "0911111111" } }
-            before { put "/party/phone", party: { phone_number: "0911111112" } }
+            subject! { put "/party/phone", party: { phone_number: "0911111112" } }
 
             it "提示五分鐘只能寄送兩次" do
               expect(response.body).to match("五分鐘內只能寄送兩次簡訊")

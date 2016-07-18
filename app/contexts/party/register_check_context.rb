@@ -23,17 +23,17 @@ class Party::RegisterCheckContext < BaseContext
   end
 
   def check_party_params_exist
-    add_error(:date_blank, "姓名 不可為空白字元") if @params[:name].blank?
-    add_error(:date_blank, "身分證字號 不可為空白字元") if @params[:identify_number].blank?
-    add_error(:date_blank, "密碼 不可為空白字元") if @params[:password].blank?
-    add_error(:date_blank, "密碼確認 不可為空白字元") if @params[:password_confirmation].blank?
+    add_error(:data_blank, "姓名 不可為空白字元") if @params[:name].blank?
+    add_error(:data_blank, "身分證字號 不可為空白字元") if @params[:identify_number].blank?
+    add_error(:data_blank, "密碼 不可為空白字元") if @params[:password].blank?
+    add_error(:data_blank, "密碼確認 不可為空白字元") if @params[:password_confirmation].blank?
 
     return false if errors.present?
   end
 
   def check_party_not_used
     if Party.pluck(:identify_number).include?(@params[:identify_number])
-      add_error(:party_exist, "此身分證字號已經被使用 <a href='/party/appeal/new'>人工申訴連結</a>")
+      add_error(:party_exist, "此身分證字號已經被使用 <a href='#{new_party_appeal_path}'>人工申訴連結</a>")
     end
   end
 

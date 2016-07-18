@@ -5,7 +5,7 @@ RSpec.describe Observer::SessionsController, type: :request do
 
   describe "#create" do
     context "success" do
-      before { post "/observer/sign_in", court_observer: { email: court_observer.email, password: "123123123" } }
+      subject! { post "/observer/sign_in", court_observer: { email: court_observer.email, password: "123123123" } }
 
       it { expect(court_observer.reload.last_sign_in_at).to be_present }
       it { expect(response).to redirect_to("/observer") }
@@ -13,14 +13,14 @@ RSpec.describe Observer::SessionsController, type: :request do
 
     context "without validate email" do
       let!(:court_observer_without_validate) { FactoryGirl.create :court_observer_without_validate }
-      before { post "/observer/sign_in", court_observer: { email: court_observer_without_validate.email, password: court_observer_without_validate.password } }
+      subject! { post "/observer/sign_in", court_observer: { email: court_observer_without_validate.email, password: court_observer_without_validate.password } }
 
       it { expect(court_observer_without_validate.reload.last_sign_in_at).to be_nil }
       it { expect(response).to redirect_to("/observer/sign_in") }
     end
 
     context "root should not change" do
-      before { signin_court_observer }
+      subject! { signin_court_observer }
 
       it { expect(get("/")).to render_template("base/index") }
     end

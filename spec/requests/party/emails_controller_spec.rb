@@ -17,12 +17,10 @@ RSpec.describe Party::EmailsController, type: :request do
     end
 
     context "wrong password" do
-      subject { put "/party/email", party: { email: "5566@gmail.com", current_password: "" } }
+      subject! { put "/party/email", party: { email: "5566@gmail.com", current_password: "" } }
 
-      it {
-        expect { subject }.not_to change { current_party }
-        expect(response.body).not_to match("目前等待驗證中信箱")
-      }
+      it { expect(current_party.email).not_to eq("5566@gmail.com") }
+      it { expect(response.body).not_to match("目前等待驗證中信箱") }
     end
   end
 end

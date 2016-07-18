@@ -6,7 +6,7 @@ class Errors::Code
     data_update_fail: 400,
     data_delete_fail: 400,
     data_not_found: 400,
-    date_blank: 400,
+    data_blank: 400,
     password_invalid: 400,
     without_verify: 400,
     lawyer_not_found: 400,

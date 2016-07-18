@@ -43,16 +43,15 @@ class Lawyer::PasswordsController < Devise::PasswordsController
   end
 
   def edit
-    lawyer_by_token = Lawyer.with_reset_password_token(params[:reset_password_token])
-    if lawyer_by_token.nil?
+    @lawyer_by_token = Lawyer.with_reset_password_token(params[:reset_password_token])
+    if @lawyer_by_token.nil?
       redirect_as_fail(invalid_edit_path, "無效的驗證連結")
-    elsif current_lawyer && lawyer_by_token != current_lawyer
+    elsif current_lawyer && @lawyer_by_token != current_lawyer
       redirect_as_fail(invalid_edit_path, "你僅能修改本人的帳號")
     else
       self.resource = resource_class.new
       set_minimum_password_length
       resource.reset_password_token = params[:reset_password_token]
-      @lawyer_by_token = Lawyer.with_reset_password_token(params[:reset_password_token])
     end
   end
 
