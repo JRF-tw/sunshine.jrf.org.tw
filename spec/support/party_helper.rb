@@ -15,7 +15,7 @@ module PartyHelper
     @current_party
   end
 
-  def party_with_unconfirm_email_init(email)
+  def party_with_unconfirm_email(email)
     @party = FactoryGirl.create(:party)
     signin_party(@party)
     put "/party/email", party: { email: email, current_password: @party.password }
@@ -23,7 +23,7 @@ module PartyHelper
     @party
   end
 
-  def party_with_unconfirm_phone_number_init(phone_number)
+  def party_with_unconfirm_phone_number(phone_number)
     party = FactoryGirl.create(:party)
     signin_party(party)
     post "/party/phone", party: { phone_number: phone_number }
@@ -31,7 +31,7 @@ module PartyHelper
     party
   end
 
-  def party_with_sms_send_count_init(counts)
+  def party_with_sms_send_count(counts)
     party = FactoryGirl.create(:party)
     party.sms_sent_count.value = counts
     party

@@ -254,7 +254,7 @@ describe "當事人帳戶相關", type: :request do
         end
 
         context "該手機號碼正在被別人驗證中" do
-          before { party_with_unconfirm_phone_number_init("0911111111") }
+          before { party_with_unconfirm_phone_number("0911111111") }
           before { signin_party }
           subject! { post "/party/phone", party: { phone_number: "0911111111" } }
 
@@ -264,8 +264,8 @@ describe "當事人帳戶相關", type: :request do
         end
 
         context "連續發送 n 次後，使目前已超過簡訊發送限制" do
-          let!(:party_with_sms_send_count) { party_with_sms_send_count_init(2) }
-          before { signin_party(party_with_sms_send_count) }
+          let!(:party) { party_with_sms_send_count(2) }
+          before { signin_party(party) }
           subject! { post "/party/phone", party: { phone_number: "0911111113" } }
 
           it "提示五分鐘只能寄送兩次" do
@@ -391,8 +391,8 @@ describe "當事人帳戶相關", type: :request do
 
     context "失敗送出" do
       context "超過簡訊發送限制" do
-        let!(:party_with_sms_send_count) { party_with_sms_send_count_init(2) }
-        let!(:params) { { identify_number: party_with_sms_send_count.identify_number, phone_number: party_with_sms_send_count.phone_number } }
+        let!(:party) { party_with_sms_send_count(2) }
+        let!(:params) { { identify_number: party.identify_number, phone_number: party.phone_number } }
         subject! { post "/party/password", party: params }
 
         it "連續發送 2 次後，達限制上限" do
@@ -401,8 +401,8 @@ describe "當事人帳戶相關", type: :request do
       end
 
       context "手機號碼未驗證" do
-        let!(:party_with_unconfirm_phone_number) { party_with_unconfirm_phone_number_init("0911828181") }
-        subject! { post "/party/password", party: { identify_number: party_with_unconfirm_phone_number.identify_number, phone_number: "0911828181" } }
+        let!(:party) { party_with_unconfirm_phone_number("0911828181") }
+        subject! { post "/party/password", party: { identify_number: party.identify_number, phone_number: "0911828181" } }
 
         it "顯示錯誤訊息，並提示可進行人工申訴" do
           expect(response.body).to match("手機號碼尚未驗證 <a href='/party/appeal/new'>人工申訴</a>")
@@ -687,8 +687,8 @@ describe "當事人帳戶相關", type: :request do
 
       context "其他情境" do
         context "當事人A與B 有相同的待驗證email, A點完驗證連結之後 B才點驗證連結" do
-          let!(:party_A) { party_with_unconfirm_email_init("ggyy@gmail.com") }
-          let!(:party_B) { party_with_unconfirm_email_init("ggyy@gmail.com") }
+          let!(:party_A) { party_with_unconfirm_email("ggyy@gmail.com") }
+          let!(:party_B) { party_with_unconfirm_email("ggyy@gmail.com") }
           before { get "/party/confirmation", confirmation_token: party_A.reload.confirmation_token }
           subject { get "/party/confirmation", confirmation_token: party_B.confirmation_token }
 
@@ -732,7 +732,7 @@ describe "當事人帳戶相關", type: :request do
         end
 
         context "該手機號碼正在被別人驗證中" do
-          before { party_with_unconfirm_phone_number_init("0911111111") }
+          before { party_with_unconfirm_phone_number("0911111111") }
           before { signin_party }
           subject! { put "/party/phone", party: { phone_number: "0911111111" } }
 
@@ -761,8 +761,8 @@ describe "當事人帳戶相關", type: :request do
           end
 
           context "連續發送忘記密碼簡訊，使其達到上限" do
-            let!(:party_with_sms_send_count) { party_with_sms_send_count_init(2) }
-            let!(:params) { { identify_number: party_with_sms_send_count.identify_number, phone_number: party_with_sms_send_count.phone_number } }
+            let!(:party) { party_with_sms_send_count(2) }
+            let!(:params) { { identify_number: party.identify_number, phone_number: party.phone_number } }
             subject! { post "/party/password", party: params }
 
             it "連續發送 2 次後，達限制上限" do
