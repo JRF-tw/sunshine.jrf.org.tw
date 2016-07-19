@@ -43,6 +43,9 @@ Style/AndOr:
 Style/Documentation:
   Enabled: false
 
+Style/FileName:
+  Enabled: false
+
 Style/EmptyLinesAroundBlockBody:
   Enabled: false
 
