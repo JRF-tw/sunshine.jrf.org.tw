@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "登入", type: :request do
+describe "律師登入", type: :request do
   let!(:lawyer) { FactoryGirl.create :lawyer, :with_password, :with_confirmed }
 
   context "成功登入" do
@@ -54,7 +54,5 @@ describe "登入", type: :request do
         expect(response.body).to match(lawyer.email)
       end
     end
-
   end
-
 end

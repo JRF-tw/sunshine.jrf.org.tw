@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe "註冊", type: :request do
+describe "律師註冊", type: :request do
   context "成功註冊" do
     let!(:lawyer) { FactoryGirl.create :lawyer }
     subject { post "/lawyer", lawyer: { name: lawyer.name, email: lawyer.email }, policy_agreement: "1" }
@@ -112,5 +112,4 @@ describe "註冊", type: :request do
       end
     end
   end
-
 end
