@@ -113,8 +113,8 @@ describe "觀察者更改email", type: :request do
 
     context "其他情境" do
       context "觀察者A與B 有相同的待驗證email, A點完驗證連結之後 B才點驗證連結" do
-        let!(:court_observer_A) { init_observer_with_unconfirm_email("ggyy@gmail.com") }
-        let!(:court_observer_B) { init_observer_with_unconfirm_email("ggyy@gmail.com") }
+        let!(:court_observer_A) { observer_with_unconfirm_email("ggyy@gmail.com") }
+        let!(:court_observer_B) { observer_with_unconfirm_email("ggyy@gmail.com") }
         before { get "/observer/confirmation", confirmation_token: court_observer_A.reload.confirmation_token }
         subject! { get "/observer/confirmation", confirmation_token: court_observer_B.confirmation_token }
 

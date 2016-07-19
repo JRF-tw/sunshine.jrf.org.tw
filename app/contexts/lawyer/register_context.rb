@@ -26,8 +26,8 @@ class Lawyer::RegisterContext < BaseContext
   end
 
   def check_lawyer_params
-    add_error(:date_blank, "姓名不可為空白字元") if @params[:name].blank?
-    add_error(:date_blank, "email不可為空白字元") if @params[:email].blank?
+    add_error(:data_blank, "姓名不可為空白字元") if @params[:name].blank?
+    add_error(:data_blank, "email不可為空白字元") if @params[:email].blank?
 
     return false if errors.present?
   end

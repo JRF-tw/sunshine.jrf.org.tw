@@ -1,8 +1,10 @@
 class Party::SetPhoneContext < BaseContext
   PERMITS = [:phone_number].freeze
+  SENDINGLIMIT = 2
 
   before_perform  :check_phone
   before_perform  :check_phone_format
+  before_perform  :check_phone_not_the_same
   before_perform  :check_unexist_phone_number
   before_perform  :check_unexist_unconfirmed_phone
   before_perform  :check_sms_send_count
@@ -36,6 +38,10 @@ class Party::SetPhoneContext < BaseContext
     return add_error(:data_update_fail, "手機號碼格式錯誤") unless @params[:phone_number] =~ /\A(0)(9)([0-9]{8})\z/
   end
 
+  def check_phone_not_the_same
+    return add_error(:data_update_fail, "手機號碼不可與原本相同") if @party.phone_number == @params[:phone_number]
+  end
+
   def check_unexist_phone_number
     return add_error(:data_update_fail, "該手機號碼已註冊") if Party.pluck(:phone_number).include?(@params[:phone_number])
   end
@@ -45,7 +51,7 @@ class Party::SetPhoneContext < BaseContext
   end
 
   def check_sms_send_count
-    return add_error(:data_update_fail, "五分鐘內只能寄送兩次簡訊") if @party.sms_sent_count.value >= 2
+    return add_error(:data_update_fail, "五分鐘內只能寄送兩次簡訊") if @party.sms_sent_count.value >= SENDINGLIMIT
   end
 
   def generate_verify_code
@@ -73,4 +79,5 @@ class Party::SetPhoneContext < BaseContext
   def increment_sms_count
     @party.sms_sent_count.increment
   end
+
 end

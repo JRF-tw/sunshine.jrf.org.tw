@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 20160712043140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
   enable_extension "postgis"
+  enable_extension "hstore"
 
   create_table "articles", force: :cascade do |t|
     t.integer  "profile_id"
@@ -489,12 +489,12 @@ ActiveRecord::Schema.define(version: 20160712043140) do
     t.integer  "number"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+    t.date     "adjudge_date"
+    t.boolean  "is_adjudge",       default: false
     t.text     "party_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
-    t.boolean  "is_adjudge",       default: false
-    t.date     "adjudge_date"
     t.date     "pronounce_date"
     t.boolean  "is_pronounce",     default: false
   end

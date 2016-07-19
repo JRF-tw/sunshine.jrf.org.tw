@@ -249,6 +249,7 @@ zh-TW:
         identify_number: "身分證字號"
         phone_number: "手機號碼"
         password: "密碼"
+        password_confirmation: "密碼確認"
   ransack:
     attributes:
       profile:

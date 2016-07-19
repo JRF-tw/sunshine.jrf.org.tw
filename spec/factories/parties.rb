@@ -26,7 +26,6 @@
 #  imposter                 :boolean          default(FALSE)
 #  imposter_identify_number :string
 #
-
 #
 
 FactoryGirl.define do

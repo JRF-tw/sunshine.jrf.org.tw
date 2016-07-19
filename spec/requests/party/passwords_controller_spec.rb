@@ -14,7 +14,7 @@ RSpec.describe Party::RegistrationsController, type: :request do
       before { signin_party(party) }
       subject! { get "/party/password/new" }
 
-      it { expect(response).to redirect_to("/party/profile") }
+      it { expect(response).to redirect_to("/party") }
     end
   end
 
@@ -65,14 +65,14 @@ RSpec.describe Party::RegistrationsController, type: :request do
       before { signin_party(party) }
       subject! { put "/party/password", party: { password: "55667788", password_confirmation: "55667788", reset_password_token: token } }
 
-      it { expect(response).to redirect_to("/party/profile") }
+      it { expect(response).to redirect_to("/party") }
       it { expect(flash[:notice]).to eq("您的密碼已被修改，下次登入時請使用新密碼登入。") }
     end
 
     context "success without login" do
       subject! { put "/party/password", party: { password: "55667788", password_confirmation: "55667788", reset_password_token: token } }
 
-      it { expect(response).to redirect_to("/party/profile") }
+      it { expect(response).to redirect_to("/party") }
       it { expect(flash[:notice]).to eq("您的密碼已被修改，下次登入時請使用新密碼登入。") }
     end
   end

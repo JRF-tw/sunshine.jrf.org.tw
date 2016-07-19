@@ -5,10 +5,13 @@ class Party::EmailsController < Party::BaseController
 
   def update
     context = Party::ChangeEmailContext.new(current_party)
-    if context.perform(params[:party])
-      redirect_to party_profile_path, flash: { success: "email已修改" }
+    if context.perform(params)
+      flash[:notice] = "需要重新驗證新的Email"
+      redirect_to party_profile_path
     else
-      redirect_to edit_party_email_path, flash: { error: context.error_messages.join(", ").to_s }
+      flash.now[:error] = context.error_messages.join(", ")
+      render :edit
     end
   end
+
 end

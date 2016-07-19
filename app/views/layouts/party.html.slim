@@ -27,6 +27,6 @@ html
       - flash.each do |k, message|
         div class= "alert fade in alert-#{k}"
           a.close data-dismiss="alert" href="#"
-          = message
+          = raw(message)
 
       main.main role='main' = yield

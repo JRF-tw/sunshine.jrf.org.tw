@@ -9,6 +9,8 @@ zh-TW:
       already_confirmed: "已經驗證，請直接登入。"
       need_set_password: "請設定密碼"
     failure:
+      party:
+        invalid: "身分證或密碼是無效的。"
       already_authenticated: "您已經登入。"
       inactive: "您的帳號尚未被啟用。"
       invalid: "信箱或密碼是無效的。"

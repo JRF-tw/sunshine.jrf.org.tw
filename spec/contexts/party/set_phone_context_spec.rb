@@ -21,6 +21,12 @@ describe Party::SetPhoneContext do
       it { expect(subject.perform(params)).to be_falsey }
     end
 
+    context "check_phone_not_the_same" do
+      let!(:party1) { FactoryGirl.create :party }
+      let!(:params) { { phone_number: party.phone_number } }
+      it { expect(subject.perform(params)).to be_falsey }
+    end
+
     context "check_unexist_unconfirmed_phone" do
       let!(:party1) { FactoryGirl.create :party }
       before { party1.unconfirmed_phone = params[:phone_number] }

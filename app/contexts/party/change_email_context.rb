@@ -14,7 +14,7 @@ class Party::ChangeEmailContext < BaseContext
   def perform(params)
     @params = permit_params(params[:party] || params, PERMITS)
     run_callbacks :perform do
-      return add_error(:data_update_fail, "密碼錯誤") unless @party.update_with_password(@params)
+      return add_error(:data_update_fail, "無效的 email") unless @party.update_with_password(@params)
       true
     end
   end
@@ -30,7 +30,7 @@ class Party::ChangeEmailContext < BaseContext
   end
 
   def check_email_unique
-    return add_error(:email_conflict, "email 已經被使用") if Party.pluck(:email).include?(@params["email"]) || Party.pluck(:unconfirmed_email).include?(@params["email"])
+    return add_error(:email_conflict, "email 已經被使用") if Party.pluck(:email).include?(@params["email"])
   end
 
   def transfer_email_to_unconfirmed_email
