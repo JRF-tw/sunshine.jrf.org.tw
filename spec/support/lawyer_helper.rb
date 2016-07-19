@@ -15,7 +15,7 @@ module LawyerHelper
     @current_lawyer
   end
 
-  def lawyer_with_unconfirm_email_init(email)
+  def lawyer_with_unconfirm_email(email)
     @lawyer = FactoryGirl.create(:lawyer, :with_password, :with_confirmed)
     signin_lawyer(@lawyer)
     put "/lawyer/email", lawyer: { email: email, current_password: @lawyer.password }

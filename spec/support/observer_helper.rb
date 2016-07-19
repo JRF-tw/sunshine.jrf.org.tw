@@ -15,7 +15,7 @@ module ObserverHelper
     @current_court_observer
   end
 
-  def observer_with_unconfirm_email_init(email)
+  def observer_with_unconfirm_email(email)
     @observer = FactoryGirl.create(:court_observer)
     signin_court_observer(@observer)
     put "/observer/email", court_observer: { email: email, current_password: @observer.password }
