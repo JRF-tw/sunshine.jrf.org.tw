@@ -5,8 +5,8 @@ describe "律師後台 刪除律師", type: :request do
   let!(:lawyer) { FactoryGirl.create :lawyer }
 
   context "已經設定密碼的律師無法刪除" do
-    before { lawyer.confirm! }
-    subject { delete "/admin/lawyers/#{lawyer.id}", {}, "HTTP_REFERER" => "/admin/lawyers" }
+    let!(:lawyer_with_password) { create :lawyer, :with_password }
+    subject { delete "/admin/lawyers/#{lawyer_with_password.id}", {}, "HTTP_REFERER" => "/admin/lawyers" }
 
     it "刪除失敗" do
       expect { subject }.not_to change { Lawyer.count }
