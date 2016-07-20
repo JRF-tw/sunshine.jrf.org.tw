@@ -1,7 +1,5 @@
 class Lawyer::ScheduleScoreCreateContext < BaseContext
   PERMITS = [:court_id, :year, :word_type, :number, :date, :confirmed_realdate, :judge_name, :command_score, :attitude_score, :note, :appeal_judge].freeze
-  STORY_SCORED_COUNT = 3
-  LAWYER_SCORED_COUNT = 3
 
   # before_perform :can_not_score
   before_perform :check_command_score
@@ -11,8 +9,8 @@ class Lawyer::ScheduleScoreCreateContext < BaseContext
   before_perform :check_judge
   before_perform :build_schedule_score
   before_perform :assign_attribute
-  after_perform  :record_story_schedule_scored_count
-  after_perform  :record_lawyer_schedule_scored_count
+  after_perform  :alert_story_by_lawyer_scored_count
+  after_perform  :alert_lawyer_scored_story_count
 
   def initialize(lawyer)
     @lawyer = lawyer
@@ -60,11 +58,19 @@ class Lawyer::ScheduleScoreCreateContext < BaseContext
     @schedule_score.assign_attributes(schedule: @schedule, judge: @judge, story: @story)
   end
 
-  def record_story_schedule_scored_count
-    SlackService.notify_scored_time_alert("案件編號 #{@story.id} 已超過被評鑑最大值") if @story.schedule_scored_count.increment >= STORY_SCORED_COUNT
+  # TODO : alert need refactory, performance issue
+
+  def alert_story_by_lawyer_scored_count
+    schedule_scorer_ids = Story.includes(:schedule_scores).find(@story.id).schedule_scores.where(schedule_rater_type: "Lawyer").map(&:schedule_rater_id)
+    verdict_scorer_ids = Story.includes(:schedule_scores).find(@story.id).verdict_scores.where(verdict_rater_type: "Lawyer").map(&:verdict_rater_id)
+    total_count = (schedule_scorer_ids + verdict_scorer_ids).uniq.count
+    SlackService.notify_scored_time_alert("案件編號 #{@story.id} 同一案件，參與評鑑的「律師人數」超過 #{Story::MAX_LAWYER_SCORED_COUNT} 人") if total_count > Story::MAX_LAWYER_SCORED_COUNT
   end
 
-  def record_lawyer_schedule_scored_count
-    SlackService.notify_scored_time_alert("律師 #{@lawyer.name} 已超過評鑑案件最大值") if @lawyer.schedule_scored_count.increment >= LAWYER_SCORED_COUNT
+  def alert_lawyer_scored_story_count
+    schedule_scored_ids = ScheduleScore.where(schedule_rater: @lawyer).map(&:story_id)
+    verdict_scored_ids = VerdictScore.where(verdict_rater: @lawyer).map(&:story_id)
+    total_count = (schedule_scored_ids + verdict_scored_ids).uniq.count
+    SlackService.notify_scored_time_alert("律師 #{@lawyer.name} 已評鑑超過超過 #{Lawyer::MAX_SCORED_COUNT}") if total_count > Lawyer::MAX_SCORED_COUNT
   end
 end

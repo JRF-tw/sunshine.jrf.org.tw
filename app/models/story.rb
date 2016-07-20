@@ -39,8 +39,11 @@ class Story < ActiveRecord::Base
   scope :newest, -> { order("id DESC") }
 
   include Redis::Objects
-  counter :schedule_scored_count
-  counter :verdict_scored_count
+  counter :lawyer_scored_count
+  counter :party_scored_count
+
+  MAX_PARTY_SCORED_COUNT = 3
+  MAX_LAWYER_SCORED_COUNT = 5
 
   def identity
     "#{year}-#{word_type}-#{number}"

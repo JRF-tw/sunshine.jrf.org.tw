@@ -12,9 +12,4 @@ RSpec.describe Observers::VerdictsController, type: :request do
     subject! { get "/observer/score/verdicts/rule" }
     it { expect(response).to be_success }
   end
-
-  describe "#verify" do
-    subject! { post "/observer/score/verdicts/verify" }
-    it { expect(response).to be_redirect }
-  end
 end

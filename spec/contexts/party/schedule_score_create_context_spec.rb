@@ -38,13 +38,15 @@ describe Party::ScheduleScoreCreateContext do
       it { expect(subject).to be_falsey }
     end
 
-    context "story over max scored count" do
-      before { story.schedule_scored_count.value = 2 }
+    describe "#alert_story_by_party_scored_count" do
+      before { create_list :verdict_score, 1, :by_party, story: story }
+      before { create_list :schedule_score, 2, :by_party, story: story }
       it { expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
     end
 
-    context "party over max scored count" do
-      before { party.schedule_scored_count.value = 2 }
+    describe "#alert_party_scored_story_count" do
+      before { create_list :verdict_score, 1, verdict_rater: party }
+      before { create_list :schedule_score, 1, schedule_rater: party }
       it { expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
     end
   end

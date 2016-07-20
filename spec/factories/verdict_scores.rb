@@ -21,6 +21,10 @@ FactoryGirl.define do
     story { FactoryGirl.create :story }
     judge { FactoryGirl.create :judge }
     verdict_rater { FactoryGirl.create :lawyer }
+
+    trait :by_party do
+      verdict_rater { FactoryGirl.create :party }
+    end
   end
 
 end

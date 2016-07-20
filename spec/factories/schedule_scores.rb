@@ -22,6 +22,10 @@ FactoryGirl.define do
     schedule { FactoryGirl.create :schedule, story: story }
     judge { FactoryGirl.create :judge }
     schedule_rater { FactoryGirl.create :lawyer }
+
+    trait :by_party do
+      schedule_rater { FactoryGirl.create :party }
+    end
   end
 
 end
