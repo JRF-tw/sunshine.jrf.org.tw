@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Scrap::ImportBranchContext, type: :model do
-  let!(:court) { FactoryGirl.create(:court) }
-  let!(:judge) { FactoryGirl.create(:judge, court: court) }
+  let!(:court) { create(:court) }
+  let!(:judge) { create(:judge, court: court) }
 
   describe "#perform" do
     let!(:chamber_name) { "少年法庭" }

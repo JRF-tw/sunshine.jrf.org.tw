@@ -25,7 +25,7 @@ describe "觀察者註冊", type: :request do
     end
 
     context "email已存在，且已驗證" do
-      let!(:court_observer) { FactoryGirl.create :court_observer }
+      let!(:court_observer) { create :court_observer }
       subject { post "/observer", court_observer: { name: "阿怪", email: court_observer.email, password: "123123123", password_confirmation: "123123123" }, policy_agreement: "1" }
 
       it "轉跳至登入頁" do
@@ -35,7 +35,7 @@ describe "觀察者註冊", type: :request do
     end
 
     context "email 已存在，但未驗證" do
-      let!(:court_observer_without_validate) { FactoryGirl.create :court_observer_without_validate }
+      let!(:court_observer_without_validate) { create :court_observer_without_validate }
       subject { post "/observer", court_observer: { name: "阿怪", email: court_observer_without_validate.email, password: "123123123", password_confirmation: "123123123" }, policy_agreement: "1" }
 
       it "發送驗證信" do

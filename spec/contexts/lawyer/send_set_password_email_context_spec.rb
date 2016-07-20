@@ -4,7 +4,7 @@ describe Lawyer::SendSetPasswordEmailContext do
 
   describe "perform" do
     context "success" do
-      let!(:lawyer) { FactoryGirl.create :lawyer }
+      let!(:lawyer) { create :lawyer }
       subject { described_class.new(lawyer) }
 
       it { expect { subject.perform }.not_to change { subject.errors } }

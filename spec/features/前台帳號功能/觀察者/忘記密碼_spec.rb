@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "觀察者忘記密碼", type: :request do
   context "成功送出" do
-    let!(:court_observer) { FactoryGirl.create :court_observer }
+    let!(:court_observer) { create :court_observer }
     subject { post "/observer/password", court_observer: { email: court_observer.email } }
 
     it "發送重設密碼信" do
@@ -15,7 +15,7 @@ describe "觀察者忘記密碼", type: :request do
   end
 
   context "失敗送出" do
-    let!(:court_observer) { FactoryGirl.create :court_observer }
+    let!(:court_observer) { create :court_observer }
 
     context "email 空白" do
       subject! { post "/observer/password", court_observer: { email: "" } }
@@ -42,7 +42,7 @@ describe "觀察者忘記密碼", type: :request do
     end
 
     context "該帳號存在，但是尚未完成註冊" do
-      let(:court_observer_without_validate) { FactoryGirl.create :court_observer_without_validate }
+      let(:court_observer_without_validate) { create :court_observer_without_validate }
       subject! { post "/observer/password", court_observer: { email: court_observer_without_validate.email } }
 
       it "提示該帳號尚未認證" do

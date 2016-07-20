@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Party::UpdateProfileContext do
-  let!(:party) { FactoryGirl.create :party }
+  let!(:party) { create :party }
   let!(:context) { described_class.new(party) }
 
   context "success" do

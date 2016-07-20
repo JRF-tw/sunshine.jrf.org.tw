@@ -2,11 +2,11 @@ require "rails_helper"
 
 describe "觀察者更改email", type: :request do
   context "成功送出" do
-    let!(:court_observer) { FactoryGirl.create :court_observer, name: "丁丁觀察者", email: "dingding@gmail.com" }
+    let!(:court_observer) { create :court_observer, name: "丁丁觀察者", email: "dingding@gmail.com" }
     before { signin_court_observer(court_observer) }
 
     context "新的 email 為別人正在驗證中的 email ，也可以成功送出" do
-      let!(:court_observer_with_unconfirmed_email) { FactoryGirl.create :court_observer_without_validate, unconfirmed_email: "5566@gmail.com" }
+      let!(:court_observer_with_unconfirmed_email) { create :court_observer_without_validate, unconfirmed_email: "5566@gmail.com" }
       subject { put "/observer/email", court_observer: { email: court_observer_with_unconfirmed_email.unconfirmed_email, current_password: "123123123" } }
 
       it "成功送出" do
@@ -49,7 +49,7 @@ describe "觀察者更改email", type: :request do
   end
 
   context "失敗送出" do
-    let!(:court_observer) { FactoryGirl.create :court_observer, name: "丁丁觀察者", email: "dingding@gmail.com" }
+    let!(:court_observer) { create :court_observer, name: "丁丁觀察者", email: "dingding@gmail.com" }
 
     context "內容錯誤" do
       context "新email空白" do
@@ -91,7 +91,7 @@ describe "觀察者更改email", type: :request do
 
     context "email 已被使用" do
       before { signin_court_observer(court_observer) }
-      let!(:court_observer2) { FactoryGirl.create :court_observer, email: "windwizard@gmail.com" }
+      let!(:court_observer2) { create :court_observer, email: "windwizard@gmail.com" }
       subject! { put "/observer/email", court_observer: { email: "windwizard@gmail.com", current_password: "123123123" } }
 
       context "新 email 是別人的 email" do

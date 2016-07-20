@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Admin::CourtUpdateContext do
-  let!(:court) { FactoryGirl.create :court }
+  let!(:court) { create :court }
   let(:params) { attributes_for(:court_for_params) }
   subject { described_class.new(court) }
 

@@ -21,7 +21,7 @@
 FactoryGirl.define do
   factory :review do
     profile do
-      FactoryGirl.create :profile
+      create :profile
     end
     name "foo"
     title "bar"

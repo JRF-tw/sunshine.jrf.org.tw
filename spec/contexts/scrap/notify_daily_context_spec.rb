@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Scrap::NotifyDailyContext, type: :model do
-  let!(:court) { FactoryGirl.create :court, code: "TPH", scrap_name: "臺灣高等法院" }
+  let!(:court) { create :court, code: "TPH", scrap_name: "臺灣高等法院" }
 
   describe "#perform" do
     let!(:interval_object) { Redis::Value.new("daily_scrap_court_intervel") }

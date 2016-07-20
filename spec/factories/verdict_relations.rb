@@ -12,8 +12,8 @@
 
 FactoryGirl.define do
   factory :verdict_relation do
-    verdict { FactoryGirl.create :verdict }
-    person { FactoryGirl.create :judge }
+    verdict { create :verdict }
+    person { create :judge }
   end
 
 end

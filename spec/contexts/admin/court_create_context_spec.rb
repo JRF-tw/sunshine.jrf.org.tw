@@ -9,7 +9,7 @@ describe Admin::CourtCreateContext do
   end
 
   context "aleady has the same name" do
-    let!(:court) { FactoryGirl.create :court_for_params }
+    let!(:court) { create :court_for_params }
     subject { described_class.new(params) }
     it { expect { subject.perform }.not_to change { Court.count } }
   end

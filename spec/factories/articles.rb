@@ -30,7 +30,7 @@
 FactoryGirl.define do
   factory :article do
     profile do
-      FactoryGirl.create :profile
+      create :profile
     end
     article_type "專書"
     publish_year "1986"

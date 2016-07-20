@@ -1,9 +1,9 @@
 require "rails_helper"
 
 RSpec.describe Scrap::ImportVerdictContext, type: :model do
-  let!(:court) { FactoryGirl.create :court, code: "TPH", full_name: "臺灣高等法院" }
-  let!(:judge) { FactoryGirl.create :judge, name: "施俊堯" }
-  let!(:branch) { FactoryGirl.create :branch, court: court, judge: judge, chamber_name: "臺灣高等法院刑事庭", name: "丙" }
+  let!(:court) { create :court, code: "TPH", full_name: "臺灣高等法院" }
+  let!(:judge) { create :judge, name: "施俊堯" }
+  let!(:branch) { create :branch, court: court, judge: judge, chamber_name: "臺灣高等法院刑事庭", name: "丙" }
   let!(:orginal_data) { Mechanize.new.get(Scrap::ParseVerdictContext::VERDICT_URI).body.force_encoding("UTF-8") }
   let!(:content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/judgment_content.txt") }
   let!(:word) { "105,上易緝,2" }
@@ -91,19 +91,19 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
 
     context "create relations" do
       context "verdict_relations" do
-        let!(:judge1) { FactoryGirl.create :judge, name: "李麗珠" }
-        let!(:lawyer) { FactoryGirl.create :lawyer, name: "陳圈圈" }
-        let!(:party) { FactoryGirl.create :party, name: "張坤樹" }
-        let!(:branch1) { FactoryGirl.create :branch, court: court, judge: judge1, chamber_name: "臺灣高等法院刑事庭" }
+        let!(:judge1) { create :judge, name: "李麗珠" }
+        let!(:lawyer) { create :lawyer, name: "陳圈圈" }
+        let!(:party) { create :party, name: "張坤樹" }
+        let!(:branch1) { create :branch, court: court, judge: judge1, chamber_name: "臺灣高等法院刑事庭" }
 
         it { expect { subject }.to change { VerdictRelation.count }.by(3) }
       end
 
       context "story_relations" do
-        let!(:judge1) { FactoryGirl.create :judge, name: "李麗珠" }
-        let!(:lawyer) { FactoryGirl.create :lawyer, name: "陳圈圈" }
-        let!(:party) { FactoryGirl.create :party, name: "張坤樹" }
-        let!(:branch1) { FactoryGirl.create :branch, court: court, judge: judge1, chamber_name: "臺灣高等法院刑事庭" }
+        let!(:judge1) { create :judge, name: "李麗珠" }
+        let!(:lawyer) { create :lawyer, name: "陳圈圈" }
+        let!(:party) { create :party, name: "張坤樹" }
+        let!(:branch1) { create :branch, court: court, judge: judge1, chamber_name: "臺灣高等法院刑事庭" }
 
         it { expect { subject }.to change { StoryRelation.count }.by(4) }
       end

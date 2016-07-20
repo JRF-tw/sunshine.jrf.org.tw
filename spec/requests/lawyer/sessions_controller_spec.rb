@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Lawyer::SessionsController, type: :request do
 
   describe "#create" do
-    let!(:lawyer) { FactoryGirl.create :lawyer, :with_password, :with_confirmed, password: "00000000" }
+    let!(:lawyer) { create :lawyer, :with_password, :with_confirmed, password: "00000000" }
 
     context "need update profile" do
       before { lawyer.update_attributes(phone_number: nil) }

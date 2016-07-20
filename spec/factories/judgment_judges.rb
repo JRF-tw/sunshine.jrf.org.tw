@@ -12,10 +12,10 @@
 FactoryGirl.define do
   factory :judgment_judge do
     judge do
-      FactoryGirl.create :judge_profile
+      create :judge_profile
     end
     judgment do
-      FactoryGirl.create :judgment
+      create :judgment
     end
   end
 

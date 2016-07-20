@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Admin::JudgeUpdateContext do
-  let!(:judge) { FactoryGirl.create :judge }
+  let!(:judge) { create :judge }
   let(:params) { attributes_for(:judge_for_params) }
   subject { described_class.new(judge) }
 

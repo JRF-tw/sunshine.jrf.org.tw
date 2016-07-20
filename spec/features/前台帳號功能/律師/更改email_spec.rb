@@ -2,11 +2,11 @@ require "rails_helper"
 
 describe "律師更改email", type: :request do
   context "成功送出" do
-    let!(:lawyer) { FactoryGirl.create :lawyer, :with_confirmed, :with_password }
+    let!(:lawyer) { create :lawyer, :with_confirmed, :with_password }
     before { signin_lawyer(lawyer) }
 
     context "新的 email 為別人正在驗證中的 email ，也可以成功送出" do
-      let!(:lawyer_with_unconfirmed_email) { FactoryGirl.create :lawyer, unconfirmed_email: "556677@gmail.com" }
+      let!(:lawyer_with_unconfirmed_email) { create :lawyer, unconfirmed_email: "556677@gmail.com" }
       subject { put "/lawyer/email", lawyer: { email: lawyer_with_unconfirmed_email.unconfirmed_email, current_password: "123123123" } }
 
       it "成功送出" do
@@ -49,7 +49,7 @@ describe "律師更改email", type: :request do
   end
 
   context "失敗送出" do
-    let!(:lawyer) { FactoryGirl.create :lawyer, :with_confirmed, :with_password }
+    let!(:lawyer) { create :lawyer, :with_confirmed, :with_password }
 
     context "內容錯誤" do
       context "新email空白" do
@@ -91,7 +91,7 @@ describe "律師更改email", type: :request do
 
     context "email 已被使用" do
       before { signin_lawyer(lawyer) }
-      let!(:lawyer2) { FactoryGirl.create :lawyer, :with_confirmed, :with_password, email: "windwizard@gmail.com" }
+      let!(:lawyer2) { create :lawyer, :with_confirmed, :with_password, email: "windwizard@gmail.com" }
       subject! { put "/lawyer/email", lawyer: { email: "windwizard@gmail.com", current_password: "123123123" } }
 
       context "新 email 是別人的 email" do

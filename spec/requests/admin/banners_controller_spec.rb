@@ -4,7 +4,7 @@ RSpec.describe Admin::BannersController do
   before { signin_user }
 
   describe "already had a banner" do
-    let(:banner) { FactoryGirl.create :banner }
+    let(:banner) { create :banner }
 
     it "GET /admin/banners" do
       get "/admin/banners"

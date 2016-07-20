@@ -1,12 +1,12 @@
 require "rails_helper"
 
 RSpec.describe Admin::AwardsController do
-  let!(:profile) { FactoryGirl.create :profile }
+  let!(:profile) { create :profile }
 
   before { signin_user }
 
   describe "already had a award" do
-    let!(:award) { FactoryGirl.create :award, profile: profile }
+    let!(:award) { create :award, profile: profile }
 
     it "GET /admin/profiles/profile.id/awards" do
       get "/admin/profiles/#{profile.id}/awards"

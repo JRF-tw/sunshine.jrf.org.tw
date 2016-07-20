@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Observer::SessionsController, type: :request do
-  let!(:court_observer) { FactoryGirl.create :court_observer }
+  let!(:court_observer) { create :court_observer }
 
   describe "#create" do
     context "success" do
@@ -12,7 +12,7 @@ RSpec.describe Observer::SessionsController, type: :request do
     end
 
     context "without validate email" do
-      let!(:court_observer_without_validate) { FactoryGirl.create :court_observer_without_validate }
+      let!(:court_observer_without_validate) { create :court_observer_without_validate }
       subject! { post "/observer/sign_in", court_observer: { email: court_observer_without_validate.email, password: court_observer_without_validate.password } }
 
       it { expect(court_observer_without_validate.reload.last_sign_in_at).to be_nil }

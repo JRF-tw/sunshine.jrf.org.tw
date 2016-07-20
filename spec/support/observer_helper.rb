@@ -1,7 +1,7 @@
 module ObserverHelper
 
   def signin_court_observer(court_observer = nil)
-    court_observer ||= FactoryGirl.create(:court_observer)
+    court_observer ||= create(:court_observer)
     post "/observer/sign_in", court_observer: { email: court_observer.email, password: court_observer.password }
     @current_court_observer = court_observer if response.status == 302
   end
@@ -16,7 +16,7 @@ module ObserverHelper
   end
 
   def observer_with_unconfirm_email(email)
-    @observer = FactoryGirl.create(:court_observer)
+    @observer = create(:court_observer)
     signin_court_observer(@observer)
     put "/observer/email", court_observer: { email: email, current_password: @observer.password }
     signout_court_observer

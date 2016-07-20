@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Observer::PasswordsController, type: :request do
-  let!(:court_observer) { FactoryGirl.create :court_observer }
+  let!(:court_observer) { create :court_observer }
   let(:token) { court_observer.send_reset_password_instructions }
 
   describe "#update" do

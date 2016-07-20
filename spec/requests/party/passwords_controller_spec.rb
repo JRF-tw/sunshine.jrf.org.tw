@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Party::RegistrationsController, type: :request do
-  let!(:party) { FactoryGirl.create :party }
+  let!(:party) { create :party }
 
   describe "#new" do
     context "success" do
@@ -35,7 +35,7 @@ RSpec.describe Party::RegistrationsController, type: :request do
   end
 
   describe "#edit" do
-    let!(:party) { FactoryGirl.create :party }
+    let!(:party) { create :party }
     let(:token) { party.send_reset_password_instructions }
     context "success with sign in" do
       before { signin_party(party) }

@@ -2,8 +2,8 @@ require "rails_helper"
 
 RSpec.describe Scrap::CreateJudgeByHighestCourtContext, type: :model do
   describe "#perform" do
-    let!(:court) { FactoryGirl.create :court, code: "TPS", scrap_name: "最高法院" }
-    let!(:court1) { FactoryGirl.create :court, code: "TPX", scrap_name: "OOOOOOO" }
+    let!(:court) { create :court, code: "TPS", scrap_name: "最高法院" }
+    let!(:court1) { create :court, code: "TPX", scrap_name: "OOOOOOO" }
     let!(:name) { "xxx" }
     subject { described_class.new(court, name).perform }
 
@@ -21,7 +21,7 @@ RSpec.describe Scrap::CreateJudgeByHighestCourtContext, type: :model do
     end
 
     context "already has judge" do
-      let!(:judge) { FactoryGirl.create :judge, name: "xxx", court: court }
+      let!(:judge) { create :judge, name: "xxx", court: court }
 
       it { expect { subject }.not_to change { Judge.count } }
     end
@@ -36,7 +36,7 @@ RSpec.describe Scrap::CreateJudgeByHighestCourtContext, type: :model do
       end
 
       context "new record" do
-        let!(:judge) { FactoryGirl.create :judge, name: "xxx", court: court }
+        let!(:judge) { create :judge, name: "xxx", court: court }
         it { expect { subject }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
       end
     end

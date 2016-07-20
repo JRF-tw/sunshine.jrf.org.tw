@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Admin::LawyerUpdateContext do
-  let!(:lawyer) { FactoryGirl.create :lawyer }
+  let!(:lawyer) { create :lawyer }
   subject { described_class.new(lawyer) }
 
   context "success" do

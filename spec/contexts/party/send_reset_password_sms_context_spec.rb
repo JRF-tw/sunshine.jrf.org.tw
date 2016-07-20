@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Party::SendResetPasswordSmsContext do
-  let!(:party) { FactoryGirl.create :party }
+  let!(:party) { create :party }
   subject { described_class.new(params) }
 
   context "success" do

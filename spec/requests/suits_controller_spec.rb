@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe SuitsController, type: :request do
-  let!(:suit) { FactoryGirl.create :suit }
-  let!(:procedure) { FactoryGirl.create :procedure, suit: suit }
+  let!(:suit) { create :suit }
+  let!(:procedure) { create :procedure, suit: suit }
 
   it "GET /suits" do
     get "/suits"

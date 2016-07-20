@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe CourtObserver::UpdateProfileContext do
-  let!(:court_observer) { FactoryGirl.create :court_observer }
+  let!(:court_observer) { create :court_observer }
   let!(:context) { described_class.new(court_observer) }
 
   context "success" do

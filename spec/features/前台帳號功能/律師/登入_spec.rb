@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "律師登入", type: :request do
-  let!(:lawyer) { FactoryGirl.create :lawyer, :with_password, :with_confirmed }
+  let!(:lawyer) { create :lawyer, :with_password, :with_confirmed }
 
   context "成功登入" do
     subject { post "/lawyer/sign_in", lawyer: { email: lawyer.email, password: lawyer.password } }
@@ -20,7 +20,7 @@ describe "律師登入", type: :request do
     end
 
     context "email 密碼皆正確，但該帳號尚未設定密碼" do
-      let!(:lawyer_without_confirmed) { FactoryGirl.create :lawyer, :with_password }
+      let!(:lawyer_without_confirmed) { create :lawyer, :with_password }
       before { post "/lawyer/sign_in", lawyer: { email: lawyer_without_confirmed.email, password: lawyer_without_confirmed.password } }
       it "顯示 您的帳號需需要經過驗證後，才能繼續。" do
         expect(flash[:alert]).to eq("您的帳號需需要經過驗證後，才能繼續。")

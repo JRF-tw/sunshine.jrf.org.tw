@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Admin::ObserversController do
   before { signin_user }
-  let!(:court_observer) { FactoryGirl.create :court_observer }
+  let!(:court_observer) { create :court_observer }
 
   describe "#index" do
     context "render success" do
@@ -24,7 +24,7 @@ RSpec.describe Admin::ObserversController do
   end
 
   describe "#download_file" do
-    let!(:court_observer) { FactoryGirl.create :court_observer }
+    let!(:court_observer) { create :court_observer }
 
     context "success" do
       subject { get "/admin/observers", format: :xlsx }

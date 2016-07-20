@@ -1,12 +1,12 @@
 require "rails_helper"
 
 RSpec.describe Admin::PunishmentsController do
-  let!(:profile) { FactoryGirl.create :profile }
+  let!(:profile) { create :profile }
 
   before { signin_user }
 
   describe "already had a punishment" do
-    let!(:punishment) { FactoryGirl.create :punishment, profile: profile }
+    let!(:punishment) { create :punishment, profile: profile }
 
     it "GET /admin/profiles/profile.id/punishments" do
       get "/admin/profiles/#{profile.id}/punishments"

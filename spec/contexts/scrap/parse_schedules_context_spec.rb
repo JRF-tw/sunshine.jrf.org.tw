@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Scrap::ParseSchedulesContext, type: :model do
-  let!(:court) { FactoryGirl.create :court, code: "TPH" }
+  let!(:court) { create :court, code: "TPH" }
   let!(:story_type) { "V" }
   let!(:current_page) { "1" }
   let!(:page_total) { 17 }

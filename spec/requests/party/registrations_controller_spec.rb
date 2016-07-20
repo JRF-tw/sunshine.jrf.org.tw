@@ -45,7 +45,7 @@ RSpec.describe Party::RegistrationsController, type: :request do
     end
 
     context "identify_number exist" do
-      let!(:party) { FactoryGirl.create :party }
+      let!(:party) { create :party }
       let!(:params) { attributes_for(:party_for_create).merge(identify_number: party.identify_number) }
       subject { post "/party", party: params, policy_agreement: "1" }
 
@@ -53,7 +53,7 @@ RSpec.describe Party::RegistrationsController, type: :request do
     end
 
     context "password caheck failed" do
-      let!(:party) { FactoryGirl.create :party }
+      let!(:party) { create :party }
       let!(:params) { attributes_for(:party_for_create).merge(password_confirmation: "wrong_password") }
       subject { post "/party", party: params, policy_agreement: "1" }
 

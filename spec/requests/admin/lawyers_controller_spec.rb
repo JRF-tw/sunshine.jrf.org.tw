@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Admin::LawyersController do
   before { signin_user }
-  let!(:lawyer) { FactoryGirl.create :lawyer }
+  let!(:lawyer) { create :lawyer }
 
   describe "#index" do
     context "render success" do

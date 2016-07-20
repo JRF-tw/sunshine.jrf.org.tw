@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Lawyer::RegisterContext do
-  let!(:lawyer) { FactoryGirl.create :lawyer }
+  let!(:lawyer) { create :lawyer }
 
   describe "perform" do
     context "success" do

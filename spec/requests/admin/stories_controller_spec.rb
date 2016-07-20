@@ -2,9 +2,9 @@ require "rails_helper"
 
 RSpec.describe Admin::StoriesController do
   before { signin_user }
-  let(:court) { FactoryGirl.create :court, full_name: "不理不理法院" }
-  let!(:story) { FactoryGirl.create :story, story_type: "邢事", year: 1990, word_type: "火箭", number: 100, is_adjudge: true }
-  let!(:story1) { FactoryGirl.create :story, story_type: "民事", year: 1990, word_type: "隊", number: 100, is_adjudge: true, court: court, adjudge_date: Time.now }
+  let(:court) { create :court, full_name: "不理不理法院" }
+  let!(:story) { create :story, story_type: "邢事", year: 1990, word_type: "火箭", number: 100, is_adjudge: true }
+  let!(:story1) { create :story, story_type: "民事", year: 1990, word_type: "隊", number: 100, is_adjudge: true, court: court, adjudge_date: Time.now }
 
   describe "#index" do
     context "search the story_type of stories" do

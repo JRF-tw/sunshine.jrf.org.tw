@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Lawyer::ConfirmationsController, type: :request do
-  let!(:lawyer) { FactoryGirl.create :lawyer }
+  let!(:lawyer) { create :lawyer }
 
   describe "#show" do
     context "validate token" do
@@ -12,7 +12,7 @@ RSpec.describe Lawyer::ConfirmationsController, type: :request do
       end
 
       context "only confirm" do
-        let!(:lawyer) { FactoryGirl.create :lawyer, :with_password }
+        let!(:lawyer) { create :lawyer, :with_password }
         subject! { get "/lawyer/confirmation", confirmation_token: lawyer.confirmation_token }
 
         it { expect(response).to redirect_to("/lawyer/sign_in") }

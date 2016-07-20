@@ -4,7 +4,7 @@ RSpec.describe Admin::SuitsController do
   before { signin_user }
 
   describe "already had a suit" do
-    let(:suit) { FactoryGirl.create :suit }
+    let(:suit) { create :suit }
 
     it "GET /admin/suits" do
       get "/admin/suits"
@@ -41,7 +41,7 @@ RSpec.describe Admin::SuitsController do
     it "before_save :check_procedure_count" do
       put "/admin/suits/#{suit.id}", admin_suit: { is_hidden: false }
       expect(suit.reload.is_hidden).to be_truthy
-      FactoryGirl.create :procedure, suit: suit
+      create :procedure, suit: suit
       expect {
         put "/admin/suits/#{suit.id}", admin_suit: { is_hidden: false }
       }.to change { suit.reload.is_hidden }.to(false)

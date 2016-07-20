@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "律師註冊", type: :request do
   context "成功註冊" do
-    let!(:lawyer) { FactoryGirl.create :lawyer }
+    let!(:lawyer) { create :lawyer }
     subject { post "/lawyer", lawyer: { name: lawyer.name, email: lawyer.email }, policy_agreement: "1" }
 
     it "發送密碼設定信" do
@@ -26,7 +26,7 @@ describe "律師註冊", type: :request do
     end
 
     context "姓名 + email 存在於公會資料" do
-      let!(:lawyer_with_confirmed) { FactoryGirl.create :lawyer, :with_password, :with_confirmed }
+      let!(:lawyer_with_confirmed) { create :lawyer, :with_password, :with_confirmed }
       subject { post "/lawyer", lawyer: { name: lawyer_with_confirmed.name, email: lawyer_with_confirmed.email }, policy_agreement: "1" }
 
       it "該律師已設定密碼" do
@@ -36,7 +36,7 @@ describe "律師註冊", type: :request do
     end
 
     context "姓名+email 不存在於公會資料" do
-      let!(:lawyer) { FactoryGirl.create :lawyer }
+      let!(:lawyer) { create :lawyer }
       subject! { post "/lawyer", lawyer: { name: "胖虎", email: "KingOfKid@gmail.com" }, policy_agreement: "1" }
 
       context "轉跳頁面的錯誤訊息應顯示人工審核的連結" do
@@ -74,7 +74,7 @@ describe "律師註冊", type: :request do
     end
 
     context "沒有勾選「我已詳細閱讀服務條款和隱私權保護政策」" do
-      let!(:lawyer) { FactoryGirl.create :lawyer }
+      let!(:lawyer) { create :lawyer }
       subject! { post "/lawyer", lawyer: { name: lawyer.name, email: lawyer.email } }
 
       it "顯示未勾選同意條款" do
