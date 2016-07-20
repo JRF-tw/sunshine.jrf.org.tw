@@ -29,7 +29,7 @@ class CourtObserver::CheckScheduleScoreDateContext < BaseContext
   end
 
   def check_date
-    return add_error(:date_blank, "開庭日期為必填") unless @params[:date].present?
+    return add_error(:data_blank, "開庭日期為必填") unless @params[:date].present?
   end
 
   def future_date

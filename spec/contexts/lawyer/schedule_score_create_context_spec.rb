@@ -1,12 +1,12 @@
 require "rails_helper"
 
 describe Lawyer::ScheduleScoreCreateContext do
-  let!(:lawyer) { FactoryGirl.create :lawyer }
-  let!(:court) { FactoryGirl.create :court }
-  let!(:story) { FactoryGirl.create :story, court: court }
-  let!(:schedule) { FactoryGirl.create :schedule, story: story }
-  let!(:judge) { FactoryGirl.create :judge, court: court }
-  let!(:judge2) { FactoryGirl.create :judge }
+  let!(:lawyer) { create :lawyer }
+  let!(:court) { create :court }
+  let!(:story) { create :story, court: court }
+  let!(:schedule) { create :schedule, story: story }
+  let!(:judge) { create :judge, court: court }
+  let!(:judge2) { create :judge }
   let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, date: schedule.date, confirmed_realdate: false, judge_name: judge.name, command_score: 1, attitude_score: 1, note: "xxxxx", appeal_judge: false } }
 
   describe "#perform" do

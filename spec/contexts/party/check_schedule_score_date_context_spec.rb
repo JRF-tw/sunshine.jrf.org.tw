@@ -1,10 +1,10 @@
 require "rails_helper"
 
 describe Party::CheckScheduleScoreDateContext do
-  let!(:party) { FactoryGirl.create :party }
-  let!(:court) { FactoryGirl.create :court }
-  let!(:story) { FactoryGirl.create :story, court: court }
-  let!(:schedule) { FactoryGirl.create :schedule, story: story }
+  let!(:party) { create :party }
+  let!(:court) { create :court }
+  let!(:story) { create :story, court: court }
+  let!(:schedule) { create :schedule, story: story }
   let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, date: schedule.date, confirmed_realdate: false } }
 
   describe "#perform" do

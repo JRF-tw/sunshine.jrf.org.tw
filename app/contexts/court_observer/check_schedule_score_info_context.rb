@@ -28,15 +28,15 @@ class CourtObserver::CheckScheduleScoreInfoContext < BaseContext
   end
 
   def check_year
-    return add_error(:date_blank, "年份不能為空") unless @params[:year].present?
+    return add_error(:data_blank, "年份不能為空") unless @params[:year].present?
   end
 
   def check_word_type
-    return add_error(:date_blank, "字號不能為空") unless @params[:word_type].present?
+    return add_error(:data_blank, "字號不能為空") unless @params[:word_type].present?
   end
 
   def check_number
-    return add_error(:date_blank, "案號不能為空") unless @params[:number].present?
+    return add_error(:data_blank, "案號不能為空") unless @params[:number].present?
   end
 
   def find_story

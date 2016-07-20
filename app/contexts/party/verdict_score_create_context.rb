@@ -32,7 +32,7 @@ class Party::VerdictScoreCreateContext < BaseContext
   end
 
   def check_rating_score
-    return add_error(:date_blank, "裁判滿意度為必填") unless @params[:rating_score].present?
+    return add_error(:data_blank, "裁判滿意度為必填") unless @params[:rating_score].present?
   end
 
   def check_story

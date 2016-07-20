@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe VerdictScore do
-  let(:verdict_score) { FactoryGirl.create :verdict_score }
+  let(:verdict_score) { create :verdict_score }
 
   describe "FactoryGirl" do
     context "normalize" do

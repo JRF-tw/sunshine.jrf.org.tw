@@ -33,11 +33,11 @@ class Lawyer::ScheduleScoreCreateContext < BaseContext
   end
 
   def check_command_score
-    return add_error(:date_blank, "訴訟指揮分數為必填") unless @params[:command_score].present?
+    return add_error(:data_blank, "訴訟指揮分數為必填") unless @params[:command_score].present?
   end
 
   def check_attitude_score
-    return add_error(:date_blank, "開庭態度分數為必填") unless @params[:attitude_score].present?
+    return add_error(:data_blank, "開庭態度分數為必填") unless @params[:attitude_score].present?
   end
 
   def check_story

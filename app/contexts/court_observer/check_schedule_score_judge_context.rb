@@ -19,7 +19,7 @@ class CourtObserver::CheckScheduleScoreJudgeContext < BaseContext
   private
 
   def check_judge_name
-    return add_error(:date_blank, "法官姓名不能為空") unless @params[:judge_name].present?
+    return add_error(:data_blank, "法官姓名不能為空") unless @params[:judge_name].present?
   end
 
   def find_judge

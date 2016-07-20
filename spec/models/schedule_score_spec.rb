@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe ScheduleScore do
-  let(:schedule_score) { FactoryGirl.create :schedule_score }
+  let(:schedule_score) { create :schedule_score }
 
   describe "FactoryGirl" do
     context "normalize" do

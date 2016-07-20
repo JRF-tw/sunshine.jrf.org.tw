@@ -32,7 +32,7 @@ class Lawyer::VerdictScoreCreateContext < BaseContext
   end
 
   def check_quality_score
-    return add_error(:date_blank, "裁判品質為必填") unless @params[:quality_score].present?
+    return add_error(:data_blank, "裁判品質為必填") unless @params[:quality_score].present?
   end
 
   def check_story
