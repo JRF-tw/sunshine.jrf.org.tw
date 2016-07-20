@@ -69,11 +69,6 @@ class Parties::SchedulesController < Parties::BaseController
     end
   end
 
-  def continue
-    @status = "checked_date"
-    render_as_success(:new)
-  end
-
   private
 
   def schedule_score_params

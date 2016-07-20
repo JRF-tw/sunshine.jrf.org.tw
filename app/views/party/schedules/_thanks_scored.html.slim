@@ -1,7 +1,7 @@
 br
 = "感謝您的評鑑"
 br
-= simple_form_for(@schedule_score, as: :schedule_score, url: continue_party_score_schedules_path, html: { method: :post }) do |f|
+= simple_form_for(@schedule_score, as: :schedule_score, url: checked_date_party_score_schedules_path, html: { method: :post }) do |f|
   .form-group
     label.control-label
     .controls = f.input :court_id, as: :hidden
@@ -23,4 +23,4 @@ br
   .form-actions
     input.btn.btn-primary type="submit" value="繼續評鑑同一次開庭法官"
 br
-= link_to "回到評鑑紀錄頁", lawyer_scores_path
+= link_to "回到評鑑紀錄頁", party_scores_path
