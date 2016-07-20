@@ -1,11 +1,11 @@
-class Lawyer::VerdictScoreCheckJudgeContext < BaseContext
+class Party::VerdictScoreCheckJudgeContext < BaseContext
   PERMITS = [:court_id, :year, :word_type, :number, :judge_name].freeze
 
   before_perform :check_story
   before_perform :valid_judge_name, if: :has_judgment?
 
-  def initialize(lawyer)
-    @lawyer = lawyer
+  def initialize(party)
+    @party = party
   end
 
   def perform(params)
@@ -18,7 +18,7 @@ class Lawyer::VerdictScoreCheckJudgeContext < BaseContext
   private
 
   def check_story
-    @story = Lawyer::VerdictScoreCheckInfoContext.new(@lawyer).perform(@params)
+    @story = Party::VerdictScoreCheckInfoContext.new(@party).perform(@params)
   end
 
   def has_judgment?

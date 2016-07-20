@@ -204,7 +204,7 @@ module ApplicationHelper
     User::GENDER_TYPES
   end
 
-  def collect_for_judgement_type
+  def collect_for_judgment_type
     [["是", true], ["否 (為裁決)", false]]
   end
 

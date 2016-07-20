@@ -1,20 +1,20 @@
-class Lawyer::VerdictScoreCreateContext < BaseContext
-  PERMITS = [:court_id, :year, :word_type, :number, :judge_name, :quality_score, :note, :appeal_judge].freeze
+class Party::VerdictScoreCreateContext < BaseContext
+  PERMITS = [:court_id, :year, :word_type, :number, :judge_name, :rating_score, :note, :appeal_judge].freeze
   STORY_SCORED_COUNT = 3
-  LAWYER_SCORED_COUNT = 3
+  PARTY_SCORED_COUNT = 3
 
   # before_perform :can_not_score
-  before_perform :check_quality_score
+  before_perform :check_rating_score
   before_perform :check_story
   before_perform :check_judge
   before_perform :build_verdict_score
   before_perform :find_judgment
   before_perform :assign_attribute
   after_perform  :record_story_verdict_scored_count
-  after_perform  :record_lawyer_verdict_scored_count
+  after_perform  :record_party_verdict_scored_count
 
-  def initialize(lawyer)
-    @lawyer = lawyer
+  def initialize(party)
+    @party = party
   end
 
   def perform(params)
@@ -31,20 +31,20 @@ class Lawyer::VerdictScoreCreateContext < BaseContext
     # TODO : Block user
   end
 
-  def check_quality_score
-    return add_error(:date_blank, "裁判品質為必填") unless @params[:quality_score].present?
+  def check_rating_score
+    return add_error(:date_blank, "裁判滿意度為必填") unless @params[:rating_score].present?
   end
 
   def check_story
-    @story = Lawyer::VerdictScoreCheckInfoContext.new(@lawyer).perform(@params)
+    @story = Party::VerdictScoreCheckInfoContext.new(@party).perform(@params)
   end
 
   def check_judge
-    Lawyer::VerdictScoreCheckJudgeContext.new(@lawyer).perform(@params)
+    @judgment = Party::VerdictScoreCheckJudgeContext.new(@party).perform(@params)
   end
 
   def build_verdict_score
-    @verdict_score = @lawyer.verdict_scores.new(@params)
+    @verdict_score = @party.verdict_scores.new(@params)
   end
 
   def find_judgment
@@ -59,7 +59,7 @@ class Lawyer::VerdictScoreCreateContext < BaseContext
     SlackService.notify_scored_time_alert("案件編號 #{@story.id} 已超過被評鑑最大值") if @story.verdict_scored_count.increment >= STORY_SCORED_COUNT
   end
 
-  def record_lawyer_verdict_scored_count
-    SlackService.notify_scored_time_alert("律師 #{@lawyer.name} 已超過評鑑判決最大值") if @lawyer.verdict_scored_count.increment >= LAWYER_SCORED_COUNT
+  def record_party_verdict_scored_count
+    SlackService.notify_scored_time_alert("律師 #{@party.name} 已超過評鑑判決最大值") if @party.verdict_scored_count.increment >= PARTY_SCORED_COUNT
   end
 end

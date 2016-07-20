@@ -1,4 +1,4 @@
-class Lawyer::VerdictScoreCheckInfoContext < BaseContext
+class Party::VerdictScoreCheckInfoContext < BaseContext
   PERMITS = [:court_id, :year, :word_type, :number].freeze
   SCORE_INTERVEL = 90.days
 
@@ -10,8 +10,8 @@ class Lawyer::VerdictScoreCheckInfoContext < BaseContext
   before_perform :story_has_pronounce_date
   before_perform :valid_score_intervel
 
-  def initialize(lawyer)
-    @lawyer = lawyer
+  def initialize(party)
+    @party = party
   end
 
   def perform(params)

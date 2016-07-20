@@ -1,4 +1,4 @@
-= simple_form_for(@verdict_score, as: :verdict_score, url: checked_judge_lawyer_score_verdicts_path, html: { method: :post }) do |f|
+= simple_form_for(@verdict_score, as: :verdict_score, url: party_score_verdicts_path, html: { method: :post }) do |f|
       .form-group
         label.control-label
         .controls = f.input :court_id, as: :hidden
@@ -13,6 +13,9 @@
         .controls = f.input :number, as: :hidden
       .form-group
         label.control-label
+        .controls = f.input :judge_name, as: :hidden
+      .form-group
+        label.control-label
         .controls = "法院名稱 : #{Court.find(@verdict_score.court_id).full_name}"
       .form-group
         label.control-label
@@ -25,6 +28,15 @@
         .controls = "案號 : #{@verdict_score.number}"
       .form-group
         label.control-label
-        .controls = f.input :judge_name, label: "法官姓名", value: @story.judgment_verdict.try(:last)
+        .controls = "法官姓名 : #{@verdict_score.judge_name}"
+      .form-group
+        label.control-label
+        .controls = f.input :rating_score, label: "裁判滿意度評分", input_html: { min: "1", max: "5" }
+      .form-group
+        label.control-label
+        .controls = f.input :note, as: :text, label: false, hint: "請填寫註記"
+      .form-group
+        label.control-label
+        .controls = f.input :appeal_judge, as: :boolean, label: "我要申訴法官"
       .form-actions
         input.btn.btn-primary type="submit" value="下一步"
