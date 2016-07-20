@@ -48,6 +48,6 @@ class CourtObserver::ScheduleScoreCreateContext < BaseContext
   end
 
   def assign_attribute
-    @schedule_score.assign_attributes(schedule: @schedule, judge: @judge)
+    @schedule_score.assign_attributes(schedule: @schedule, judge: @judge, story: @story)
   end
 end

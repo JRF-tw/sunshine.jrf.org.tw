@@ -18,7 +18,8 @@
 
 FactoryGirl.define do
   factory :schedule_score do
-    schedule { FactoryGirl.create :schedule }
+    story { FactoryGirl.create :story }
+    schedule { FactoryGirl.create :schedule, story: story }
     judge { FactoryGirl.create :judge }
     schedule_rater { FactoryGirl.create :lawyer }
   end

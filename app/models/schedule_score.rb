@@ -18,6 +18,7 @@
 
 class ScheduleScore < ActiveRecord::Base
   belongs_to :schedule
+  belongs_to :story
   belongs_to :judge
   belongs_to :schedule_rater, polymorphic: true
 

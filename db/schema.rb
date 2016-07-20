@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 20160804042232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
   enable_extension "postgis"
+  enable_extension "hstore"
 
   create_table "articles", force: :cascade do |t|
     t.integer  "profile_id"
@@ -330,9 +330,9 @@ ActiveRecord::Schema.define(version: 20160804042232) do
     t.datetime "confirmed_at"
     t.string   "confirmation_token"
     t.datetime "confirmation_sent_at"
+    t.datetime "phone_confirmed_at"
     t.boolean  "imposter",                 default: false
     t.string   "imposter_identify_number"
-    t.datetime "phone_confirmed_at"
   end
 
   add_index "parties", ["confirmation_token"], name: "index_parties_on_confirmation_token", unique: true, using: :btree
@@ -474,12 +474,14 @@ ActiveRecord::Schema.define(version: 20160804042232) do
     t.boolean  "appeal_judge",        default: false
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.integer  "story_id"
   end
 
   add_index "schedule_scores", ["appeal_judge"], name: "index_schedule_scores_on_appeal_judge", using: :btree
   add_index "schedule_scores", ["judge_id", "schedule_rater_id"], name: "index_schedule_scores_on_judge_id_and_schedule_rater_id", using: :btree
   add_index "schedule_scores", ["judge_id"], name: "index_schedule_scores_on_judge_id", using: :btree
   add_index "schedule_scores", ["schedule_id"], name: "index_schedule_scores_on_schedule_id", using: :btree
+  add_index "schedule_scores", ["story_id"], name: "index_schedule_scores_on_story_id", using: :btree
 
   create_table "schedules", force: :cascade do |t|
     t.integer  "story_id"
@@ -509,12 +511,12 @@ ActiveRecord::Schema.define(version: 20160804042232) do
     t.integer  "number"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
-    t.date     "adjudge_date"
-    t.boolean  "is_adjudge",       default: false
     t.text     "party_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
+    t.boolean  "is_adjudge",       default: false
+    t.date     "adjudge_date"
     t.date     "pronounce_date"
     t.boolean  "is_pronounce",     default: false
   end
@@ -679,11 +681,11 @@ ActiveRecord::Schema.define(version: 20160804042232) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.string   "file"
+    t.boolean  "is_judgment",      default: false
     t.text     "party_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
-    t.boolean  "is_judgment",      default: false
     t.date     "adjudge_date"
     t.integer  "main_judge_id"
     t.string   "main_judge_name"
