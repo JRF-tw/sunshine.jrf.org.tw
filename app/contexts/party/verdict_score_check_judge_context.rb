@@ -26,7 +26,7 @@ class Party::VerdictScoreCheckJudgeContext < BaseContext
   end
 
   def valid_judge_name
-    @judgment = @story.judgment_verdict.try(:last)
-    return add_error(:verdict_subscriber_valid_failed, "法官姓名錯誤") if @judgment.main_judge_name != @params[:judge_name]
+    @judgment = @story.judgment_verdict
+    return add_error(:verdict_score_valid_failed, "法官姓名錯誤") if @judgment.main_judge_name != @params[:judge_name]
   end
 end

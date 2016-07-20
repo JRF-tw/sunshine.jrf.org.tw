@@ -48,7 +48,7 @@ class Party::VerdictScoreCreateContext < BaseContext
   end
 
   def find_judgment
-    @judgment = @story.judgment_verdict.try(:last)
+    @judgment = @story.judgment_verdict
   end
 
   def assign_attribute

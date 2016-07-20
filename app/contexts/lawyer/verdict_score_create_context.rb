@@ -8,7 +8,6 @@ class Lawyer::VerdictScoreCreateContext < BaseContext
   before_perform :check_story
   before_perform :check_judge
   before_perform :build_verdict_score
-  before_perform :find_judgment
   before_perform :assign_attribute
   after_perform  :record_story_verdict_scored_count
   after_perform  :record_lawyer_verdict_scored_count
@@ -40,19 +39,15 @@ class Lawyer::VerdictScoreCreateContext < BaseContext
   end
 
   def check_judge
-    Lawyer::VerdictScoreCheckJudgeContext.new(@lawyer).perform(@params)
+    @judge = Lawyer::VerdictScoreCheckJudgeContext.new(@lawyer).perform(@params)
   end
 
   def build_verdict_score
     @verdict_score = @lawyer.verdict_scores.new(@params)
   end
 
-  def find_judgment
-    @judgment = @story.judgment_verdict.try(:last)
-  end
-
   def assign_attribute
-    @verdict_score.assign_attributes(story: @story, judge: @judgment ? @judgment.main_judge : nil)
+    @verdict_score.assign_attributes(story: @story, judge: @judge)
   end
 
   def record_story_verdict_scored_count

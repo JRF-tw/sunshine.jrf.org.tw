@@ -45,7 +45,7 @@ class Lawyer::VerdictScoreCheckInfoContext < BaseContext
   end
 
   def story_has_pronounce_date
-    return add_error(:verdict_subscriber_valid_failed, "案件尚未宣判") unless @story.pronounce_date.present?
+    return add_error(:verdict_score_valid_failed, "案件尚未宣判") unless @story.pronounce_date.present?
   end
 
   def valid_score_intervel
