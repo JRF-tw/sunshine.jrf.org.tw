@@ -1,13 +1,13 @@
 require "rails_helper"
 
 describe "當事人更改email", type: :request do
-  let!(:party) { FactoryGirl.create :party }
+  let!(:party) { create :party }
 
   context "成功送出" do
     before { signin_party(party) }
 
     context "新的 email 為別人正在驗證中的 email ，也可以成功送出" do
-      let!(:party_with_unconfirmed_email) { FactoryGirl.create :party, unconfirmed_email: "556677@gmail.com" }
+      let!(:party_with_unconfirmed_email) { create :party, unconfirmed_email: "556677@gmail.com" }
       subject { put "/party/email", party: { email: party_with_unconfirmed_email.unconfirmed_email, current_password: "12321313213" } }
 
       it "成功送出" do
@@ -72,7 +72,7 @@ describe "當事人更改email", type: :request do
 
     context "email 已經被使用" do
       context "新 email 是別人的email" do
-        let!(:party2) { FactoryGirl.create :party, email: "ggyy@gmail.com" }
+        let!(:party2) { create :party, email: "ggyy@gmail.com" }
         before { signin_party(party) }
         subject! { put "/party/email", party: { email: party2.email, current_password: "12321313213" } }
 

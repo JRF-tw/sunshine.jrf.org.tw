@@ -1,12 +1,12 @@
 require "rails_helper"
 
 RSpec.describe Admin::EducationsController do
-  let!(:profile) { FactoryGirl.create :profile }
+  let!(:profile) { create :profile }
 
   before { signin_user }
 
   describe "already had a education" do
-    let!(:education) { FactoryGirl.create :education, profile: profile }
+    let!(:education) { create :education, profile: profile }
 
     it "GET /admin/profiles/profile.id/educations" do
       get "/admin/profiles/#{profile.id}/educations"

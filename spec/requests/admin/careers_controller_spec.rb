@@ -1,12 +1,12 @@
 require "rails_helper"
 
 RSpec.describe Admin::CareersController do
-  let!(:profile) { FactoryGirl.create :profile }
+  let!(:profile) { create :profile }
 
   before { signin_user }
 
   describe "already had a career" do
-    let!(:career) { FactoryGirl.create :career, profile: profile }
+    let!(:career) { create :career, profile: profile }
 
     it "GET /admin/profiles/profile.id/careers" do
       get "/admin/profiles/#{profile.id}/careers"

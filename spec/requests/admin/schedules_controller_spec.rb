@@ -4,7 +4,7 @@ RSpec.describe Admin::SchedulesController do
   before { signin_user }
 
   describe "#index" do
-    let!(:schedule) { FactoryGirl.create :schedule }
+    let!(:schedule) { create :schedule }
 
     context "search the branch_name of schedules" do
       before { get "/admin/schedules", q: { branch_name: schedule.branch_name } }
@@ -28,7 +28,7 @@ RSpec.describe Admin::SchedulesController do
   end
 
   describe "#show" do
-    let!(:schedule) { FactoryGirl.create :schedule }
+    let!(:schedule) { create :schedule }
     before { get "/admin/schedules/#{schedule.id}" }
     it { expect(response).to be_success }
   end

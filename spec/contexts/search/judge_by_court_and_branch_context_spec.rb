@@ -1,9 +1,9 @@
 require "rails_helper"
 
 describe Search::JudgeByCourtAndBranchContext do
-  let!(:court) { FactoryGirl.create :court, full_name: "測試法院" }
-  let!(:judge) { FactoryGirl.create :judge, name: "測試法官" }
-  let!(:branch) { FactoryGirl.create :branch, name: "測試股別1", court: court, judge: judge }
+  let!(:court) { create :court, full_name: "測試法院" }
+  let!(:judge) { create :judge, name: "測試法官" }
+  let!(:branch) { create :branch, name: "測試股別1", court: court, judge: judge }
 
   describe "#perform" do
     subject { described_class.new(court.full_name, branch.name) }

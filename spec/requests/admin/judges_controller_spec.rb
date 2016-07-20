@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Admin::JudgesController do
   before { signin_user }
-  let!(:judge) { FactoryGirl.create :judge }
+  let!(:judge) { create :judge }
 
   describe "#index" do
     context "render success" do

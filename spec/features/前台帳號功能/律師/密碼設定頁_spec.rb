@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "律師密碼設定頁", type: :request do
   context "成功載入頁面" do
-    let!(:lawyer) { FactoryGirl.create :lawyer, :with_confirmed, :with_password, name: "火焰律師", email: "firelawyer@gmail.com" }
+    let!(:lawyer) { create :lawyer, :with_confirmed, :with_password, name: "火焰律師", email: "firelawyer@gmail.com" }
     let(:token) { lawyer.send_reset_password_instructions }
 
     context "有登入" do
@@ -26,7 +26,7 @@ describe "律師密碼設定頁", type: :request do
   end
 
   context "失敗載入頁面" do
-    let!(:lawyer) { FactoryGirl.create :lawyer, :with_confirmed, :with_password }
+    let!(:lawyer) { create :lawyer, :with_confirmed, :with_password }
     let(:token) { lawyer.send_reset_password_instructions }
 
     context "條件" do
@@ -66,7 +66,7 @@ describe "律師密碼設定頁", type: :request do
   end
 
   context "失敗設定" do
-    let!(:lawyer) { FactoryGirl.create :lawyer, :with_confirmed, :with_password }
+    let!(:lawyer) { create :lawyer, :with_confirmed, :with_password }
     let(:token) { lawyer.send_reset_password_instructions }
 
     context "密碼空白" do
@@ -96,7 +96,7 @@ describe "律師密碼設定頁", type: :request do
   end
 
   context "成功設定" do
-    let!(:lawyer) { FactoryGirl.create :lawyer, :with_password }
+    let!(:lawyer) { create :lawyer, :with_password }
     let(:token) { lawyer.send_reset_password_instructions }
     subject { put "/lawyer/password", lawyer: { password: "11111111", password_confirmation: "11111111", reset_password_token: token } }
 

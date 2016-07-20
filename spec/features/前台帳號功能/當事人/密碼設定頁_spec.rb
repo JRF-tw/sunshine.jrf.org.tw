@@ -3,7 +3,7 @@ require "rails_helper"
 describe "當事人密碼設定頁", type: :request do
   context "密碼設定頁" do
     context "成功載入頁面" do
-      let!(:party) { FactoryGirl.create :party }
+      let!(:party) { create :party }
       let(:token) { party.send_reset_password_instructions }
 
       context "有登入" do
@@ -27,7 +27,7 @@ describe "當事人密碼設定頁", type: :request do
     end
 
     context "失敗載入頁面" do
-      let!(:party) { FactoryGirl.create :party }
+      let!(:party) { create :party }
       let(:token) { party.send_reset_password_instructions }
 
       context "條件" do
@@ -68,7 +68,7 @@ describe "當事人密碼設定頁", type: :request do
     end
 
     context "成功設定" do
-      let!(:party) { FactoryGirl.create :party }
+      let!(:party) { create :party }
       let(:token) { party.send_reset_password_instructions }
       subject { put "/party/password", party: { password: "11111111", password_confirmation: "11111111", reset_password_token: token } }
 
@@ -81,7 +81,7 @@ describe "當事人密碼設定頁", type: :request do
       end
 
       context "若手機尚未驗證，則會自動轉跳到手機驗證頁" do
-        let!(:party_without_phone_unmber) { FactoryGirl.create :party, phone_number: nil }
+        let!(:party_without_phone_unmber) { create :party, phone_number: nil }
         let(:token) { party_without_phone_unmber.send_reset_password_instructions }
         subject! { put "/party/password", party: { password: "11111111", password_confirmation: "11111111", reset_password_token: token } }
 
@@ -92,7 +92,7 @@ describe "當事人密碼設定頁", type: :request do
       end
 
       context "若手機已驗證，則會轉跳到評鑑記錄頁" do
-        let!(:party) { FactoryGirl.create :party }
+        let!(:party) { create :party }
         let(:token) { party.send_reset_password_instructions }
         subject! { put "/party/password", party: { password: "11111111", password_confirmation: "11111111", reset_password_token: token } }
 
@@ -103,7 +103,7 @@ describe "當事人密碼設定頁", type: :request do
     end
 
     context "失敗設定" do
-      let!(:party) { FactoryGirl.create :party }
+      let!(:party) { create :party }
       let(:token) { party.send_reset_password_instructions }
 
       context "密碼空白" do

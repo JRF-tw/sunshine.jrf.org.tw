@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Party::ResendPhoneVerifySmsContext do
-  let!(:party) { FactoryGirl.create :party }
+  let!(:party) { create :party }
   before { party.phone_varify_code = "1111" }
   before { party.unconfirmed_phone = "0911111111" }
 

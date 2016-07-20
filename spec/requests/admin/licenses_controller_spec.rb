@@ -1,12 +1,12 @@
 require "rails_helper"
 
 RSpec.describe Admin::LicensesController do
-  let!(:profile) { FactoryGirl.create :profile }
+  let!(:profile) { create :profile }
 
   before { signin_user }
 
   describe "already had a license" do
-    let!(:license) { FactoryGirl.create :license, profile: profile }
+    let!(:license) { create :license, profile: profile }
 
     it "GET /admin/profiles/profile.id/licenses" do
       get "/admin/profiles/#{profile.id}/licenses"

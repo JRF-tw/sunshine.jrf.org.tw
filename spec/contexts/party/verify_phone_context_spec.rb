@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe Party::VerifyPhoneContext do
   let!(:unconfirmed_phone) { "0911111111" }
-  let!(:party) { FactoryGirl.create :party }
+  let!(:party) { create :party }
   let!(:params) { { phone_varify_code: "1111" } }
   before { party.phone_varify_code = "1111" }
   before { party.unconfirmed_phone = unconfirmed_phone }

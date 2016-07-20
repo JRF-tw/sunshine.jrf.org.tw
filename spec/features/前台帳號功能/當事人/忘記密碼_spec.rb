@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "當事人忘記密碼", type: :request do
   context "忘記密碼" do
-    let!(:party) { FactoryGirl.create :party }
+    let!(:party) { create :party }
 
     context "成功送出" do
       let!(:params) { { identify_number: party.identify_number, phone_number: party.phone_number } }

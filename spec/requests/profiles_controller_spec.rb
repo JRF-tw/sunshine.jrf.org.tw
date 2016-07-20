@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe ProfilesController, type: :request do
-  let!(:profile) { FactoryGirl.create :profile }
+  let!(:profile) { create :profile }
 
   it "GET /profiles" do
     get "/profiles"

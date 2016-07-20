@@ -27,18 +27,18 @@ FactoryGirl.define do
     year { rand(70..105) }
     word_type "聲"
     number { rand(100..999) }
-    court { FactoryGirl.create :court }
-    main_judge { FactoryGirl.create :judge }
+    court { create :court }
+    main_judge { create :judge }
 
     trait :with_schedule_date_tomorrow do
       after(:create) do |story|
-        FactoryGirl.create :schedule, :date_is_tomorrow, story: story
+        create :schedule, :date_is_tomorrow, story: story
       end
     end
 
     trait :with_schedule_date_yesterday do
       after(:create) do |story|
-        FactoryGirl.create :schedule, :date_is_yesterday, story: story
+        create :schedule, :date_is_yesterday, story: story
       end
     end
 

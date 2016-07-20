@@ -11,7 +11,7 @@ RSpec.describe Lawyer::PasswordsController, type: :request do
     end
 
     context "email unconfirmed" do
-      let!(:lawyer) { FactoryGirl.create :lawyer }
+      let!(:lawyer) { create :lawyer }
       let!(:params) { { email: lawyer.email } }
       subject { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/password/new" }
 
@@ -20,7 +20,7 @@ RSpec.describe Lawyer::PasswordsController, type: :request do
     end
 
     context "email confirmed" do
-      let!(:lawyer) { FactoryGirl.create :lawyer, :with_password, :with_confirmed }
+      let!(:lawyer) { create :lawyer, :with_password, :with_confirmed }
       let!(:params) { { email: lawyer.email } }
       subject { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/password/new" }
 
@@ -30,7 +30,7 @@ RSpec.describe Lawyer::PasswordsController, type: :request do
   end
 
   describe "#edit" do
-    let!(:lawyer) { FactoryGirl.create :lawyer, :with_confirmed, :with_password }
+    let!(:lawyer) { create :lawyer, :with_confirmed, :with_password }
     let(:token) { lawyer.send_reset_password_instructions }
     context "success with sign in" do
       before { signin_lawyer(lawyer) }
@@ -71,7 +71,7 @@ RSpec.describe Lawyer::PasswordsController, type: :request do
   end
 
   describe "#update" do
-    let!(:lawyer) { FactoryGirl.create :lawyer, :with_password, :with_confirmed }
+    let!(:lawyer) { create :lawyer, :with_password, :with_confirmed }
     let(:token) { lawyer.send_reset_password_instructions }
     context "success with login" do
       before { signin_lawyer(lawyer) }

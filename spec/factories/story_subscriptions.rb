@@ -12,15 +12,15 @@
 
 FactoryGirl.define do
   factory :story_subscription_with_party, class: StorySubscription do
-    story { FactoryGirl.create :story }
-    subscriber { FactoryGirl.create :party }
+    story { create :story }
+    subscriber { create :party }
 
     trait :schedule_tomorrow do
-      story { FactoryGirl.create :story, :with_schedule_date_tomorrow }
+      story { create :story, :with_schedule_date_tomorrow }
     end
 
     trait :schedule_yesterday do
-      story { FactoryGirl.create :story, :with_schedule_date_yesterday }
+      story { create :story, :with_schedule_date_yesterday }
     end
   end
 

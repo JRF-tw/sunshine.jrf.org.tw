@@ -1,12 +1,12 @@
 require "rails_helper"
 
 RSpec.describe Admin::ArticlesController do
-  let!(:profile) { FactoryGirl.create :profile }
+  let!(:profile) { create :profile }
 
   before { signin_user }
 
   describe "already had a article" do
-    let!(:article) { FactoryGirl.create :article, profile: profile }
+    let!(:article) { create :article, profile: profile }
 
     it "GET /admin/profiles/profile.id/articles" do
       get "/admin/profiles/#{profile.id}/articles"

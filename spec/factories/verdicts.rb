@@ -20,14 +20,14 @@
 
 FactoryGirl.define do
   factory :verdict do
-    story { FactoryGirl.create(:story) }
+    story { create(:story) }
 
     trait :with_file do
       file { File.open("#{Rails.root}/spec/fixtures/scrap_data/judgment.html") }
     end
 
     trait :with_main_judge do
-      main_judge { FactoryGirl.create :judge }
+      main_judge { create :judge }
     end
   end
 

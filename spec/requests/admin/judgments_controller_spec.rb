@@ -4,7 +4,7 @@ RSpec.describe Admin::JudgmentsController do
   before { signin_user }
 
   describe "already had a judgment" do
-    let(:judgment) { FactoryGirl.create :judgment }
+    let(:judgment) { create :judgment }
 
     it "GET /admin/judgments" do
       get "/admin/judgments"
@@ -35,7 +35,7 @@ RSpec.describe Admin::JudgmentsController do
   end
 
   it "POST /admin/judgments" do
-    FactoryGirl.create :court
+    create :court
     admin_judgment = { court_id: Court.last.id, judge_no: "foo", judge_date_in_tw: "103/8/8" }
     expect {
       post "/admin/judgments", admin_judgment: admin_judgment

@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "律師忘記密碼", type: :request do
   context "成功送出" do
-    let!(:lawyer) { FactoryGirl.create :lawyer, :with_confirmed, :with_password, email: "firewizard@gmail.com" }
+    let!(:lawyer) { create :lawyer, :with_confirmed, :with_password, email: "firewizard@gmail.com" }
     let!(:params) { { email: "firewizard@gmail.com" } }
     subject { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/password/new" }
 
@@ -12,7 +12,7 @@ describe "律師忘記密碼", type: :request do
   end
 
   context "失敗送出" do
-    let!(:lawyer) { FactoryGirl.create :lawyer, :with_confirmed, :with_password, email: "firewizard@gmail.com" }
+    let!(:lawyer) { create :lawyer, :with_confirmed, :with_password, email: "firewizard@gmail.com" }
 
     context "email 空白" do
       let!(:params) { { email: "" } }
@@ -45,7 +45,7 @@ describe "律師忘記密碼", type: :request do
     end
 
     context "該帳號存在，但是尚未完成註冊" do
-      let!(:lawyer_unconfirmed) { FactoryGirl.create :lawyer, :with_password, email: "windwizard@gmail.com" }
+      let!(:lawyer_unconfirmed) { create :lawyer, :with_password, email: "windwizard@gmail.com" }
       subject! { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/password/new" }
       let!(:params) { { email: "windwizard@gmail.com" } }
 

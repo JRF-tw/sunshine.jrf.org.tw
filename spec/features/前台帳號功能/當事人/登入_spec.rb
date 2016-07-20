@@ -3,7 +3,7 @@ require "rails_helper"
 describe "當事人登入", type: :request do
   context "成功登入" do
     context "email未填仍可正常登入" do
-      let!(:party) { FactoryGirl.create :party, email: nil }
+      let!(:party) { create :party, email: nil }
       subject { post "/party/sign_in", party: { identify_number: party.identify_number, password: party.password } }
 
       it "導到個人評鑑紀錄頁" do
@@ -12,7 +12,7 @@ describe "當事人登入", type: :request do
     end
 
     context "email驗證中仍可正常登入" do
-      let!(:party) { FactoryGirl.create :party, :with_unconfirmed_email }
+      let!(:party) { create :party, :with_unconfirmed_email }
       subject { post "/party/sign_in", party: { identify_number: party.identify_number, password: party.password } }
 
       it "導到個人評鑑紀錄頁" do
@@ -21,7 +21,7 @@ describe "當事人登入", type: :request do
     end
 
     context "email已驗證仍可正常登入" do
-      let!(:party) { FactoryGirl.create :party, :already_confirmed }
+      let!(:party) { create :party, :already_confirmed }
       subject { post "/party/sign_in", party: { identify_number: party.identify_number, password: party.password } }
 
       it "導到個人評鑑紀錄頁" do
@@ -32,7 +32,7 @@ describe "當事人登入", type: :request do
 
   context "失敗登入" do
     context "手機未完成驗證" do
-      let!(:party) { FactoryGirl.create :party, phone_number: nil }
+      let!(:party) { create :party, phone_number: nil }
       subject! { post "/party/sign_in", party: { identify_number: party.identify_number, password: party.password } }
 
       it "導到手機驗證流程" do
@@ -42,7 +42,7 @@ describe "當事人登入", type: :request do
     end
 
     context "ID不存在" do
-      let!(:party) { FactoryGirl.create :party }
+      let!(:party) { create :party }
       subject! { post "/party/sign_in", party: { identify_number: "F123333333", password: party.password } }
 
       it "提示輸入的資訊無效" do
@@ -51,7 +51,7 @@ describe "當事人登入", type: :request do
     end
 
     context "內容輸入錯誤" do
-      let!(:party) { FactoryGirl.create :party }
+      let!(:party) { create :party }
 
       context "ID格式不符" do
         subject! { post "/party/sign_in", party: { identify_number: "FFFFF", password: party.password } }

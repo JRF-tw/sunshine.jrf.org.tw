@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Branch do
-  let(:branch) { FactoryGirl.create :branch }
+  let(:branch) { create :branch }
 
   describe "FactoryGirl" do
     describe "normalize" do

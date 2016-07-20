@@ -1,12 +1,12 @@
 require "rails_helper"
 
 RSpec.describe Admin::ReviewsController do
-  let!(:profile) { FactoryGirl.create :profile }
+  let!(:profile) { create :profile }
 
   before { signin_user }
 
   describe "already had a review" do
-    let!(:review) { FactoryGirl.create :review, profile: profile }
+    let!(:review) { create :review, profile: profile }
 
     it "GET /admin/profiles/profile.id/reviews" do
       get "/admin/profiles/#{profile.id}/reviews"

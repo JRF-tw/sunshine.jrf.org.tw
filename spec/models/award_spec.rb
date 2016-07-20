@@ -19,7 +19,7 @@
 require "rails_helper"
 
 RSpec.describe Award, type: :model do
-  let!(:award) { FactoryGirl.create :award }
+  let!(:award) { create :award }
 
   it "FactoryGirl" do
     expect(award).not_to be_new_record

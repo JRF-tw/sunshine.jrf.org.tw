@@ -15,7 +15,7 @@
 require "rails_helper"
 
 RSpec.describe Banner, type: :model do
-  let!(:banner) { FactoryGirl.create :banner }
+  let!(:banner) { create :banner }
 
   it "FactoryGirl" do
     expect(banner).not_to be_new_record

@@ -16,7 +16,7 @@ describe "當事人更改手機號碼", type: :request do
     end
 
     context "失敗送出" do
-      let!(:party) { FactoryGirl.create :party }
+      let!(:party) { create :party }
 
       context "該手機號碼已被別人驗證" do
         before { signin_party }
@@ -125,7 +125,7 @@ describe "當事人更改手機號碼", type: :request do
   end
 
   context "認證碼輸入頁" do
-    let(:party) { FactoryGirl.create :party }
+    let(:party) { create :party }
     before { signin_party(party) }
     context "在當事人手機驗證流程已測過" do
     end

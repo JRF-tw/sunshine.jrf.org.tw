@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Party::SessionsController, type: :request do
 
   describe "#create" do
-    let!(:party) { FactoryGirl.create :party }
+    let!(:party) { create :party }
 
     xit "check phone varify"
 

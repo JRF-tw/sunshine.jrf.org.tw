@@ -29,7 +29,7 @@
 require "rails_helper"
 
 RSpec.describe Article, type: :model do
-  let!(:article) { FactoryGirl.create :article }
+  let!(:article) { create :article }
 
   it "FactoryGirl" do
     expect(article).not_to be_new_record

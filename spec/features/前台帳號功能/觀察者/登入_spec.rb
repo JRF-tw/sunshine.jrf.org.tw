@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "觀察者登入", type: :request do
-  let!(:court_observer) { FactoryGirl.create :court_observer }
+  let!(:court_observer) { create :court_observer }
 
   context "成功登入" do
     before { post "/observer/sign_in", court_observer: { email: court_observer.email, password: "123123123" } }

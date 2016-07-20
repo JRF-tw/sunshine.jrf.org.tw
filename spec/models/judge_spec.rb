@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Judge do
-  let(:judge) { FactoryGirl.create :judge }
+  let(:judge) { create :judge }
 
   describe "FactoryGirl" do
     describe "normalize" do
@@ -10,7 +10,7 @@ RSpec.describe Judge do
     end
 
     describe "with_avatar" do
-      let(:judge) { FactoryGirl.create :judge, :with_avatar }
+      let(:judge) { create :judge, :with_avatar }
       subject! { judge }
       it { expect(judge.avatar).to be_present }
     end

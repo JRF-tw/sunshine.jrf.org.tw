@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Crontab::SubscribeStoryBeforeJudgeNotifyContext do
-  let!(:story_subscription_with_party) { FactoryGirl.create :story_subscription_with_party, :schedule_tomorrow }
+  let!(:story_subscription_with_party) { create :story_subscription_with_party, :schedule_tomorrow }
 
   describe "#perform" do
     context "send before judge notify" do

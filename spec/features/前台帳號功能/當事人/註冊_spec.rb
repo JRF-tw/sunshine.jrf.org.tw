@@ -26,7 +26,7 @@ describe "當事人註冊", type: :request do
       end
 
       context "ID 已註冊過" do
-        let!(:party) { FactoryGirl.create :party, identify_number: "F122121211" }
+        let!(:party) { create :party, identify_number: "F122121211" }
         subject! { post "/party", party: { name: "老夫子", identify_number: "F122121211", password: "123123123", password_confirmation: "123123123" }, policy_agreement: "1" }
 
         it "轉跳頁面的錯誤訊息應顯示人工申訴的連結" do

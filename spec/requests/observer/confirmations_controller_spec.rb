@@ -34,7 +34,7 @@ RSpec.describe Observer::ConfirmationsController, type: :request do
 
   describe "#create" do
     context "success" do
-      let!(:court_observer) { FactoryGirl.create :court_observer, :with_unconfirmed_email }
+      let!(:court_observer) { create :court_observer, :with_unconfirmed_email }
       subject { post "/observer/confirmation", court_observer: { email: court_observer.email } }
 
       it { expect(subject).to redirect_to("/observer/edit") }

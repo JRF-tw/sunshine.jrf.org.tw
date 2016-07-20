@@ -1,12 +1,12 @@
 require "rails_helper"
 
 RSpec.describe Admin::ProceduresController do
-  let!(:suit) { FactoryGirl.create :suit }
+  let!(:suit) { create :suit }
 
   before { signin_user }
 
   describe "already had a procedure" do
-    let!(:procedure) { FactoryGirl.create :procedure, suit: suit }
+    let!(:procedure) { create :procedure, suit: suit }
 
     it "GET /admin/suits/suit.id/procedures" do
       get "/admin/suits/#{suit.id}/procedures"
@@ -37,7 +37,7 @@ RSpec.describe Admin::ProceduresController do
   end
 
   it "POST /admin/suits/suit.id/procedures" do
-    suit_judge = FactoryGirl.create :suit_judge
+    suit_judge = create :suit_judge
     admin_procedure = { suit_id: suit_judge.suit_id, profile_id: suit_judge.profile_id, unit: "foo", title: "bar", procedure_unit: "haha", procedure_content: "hoho", procedure_date: Time.zone.today }
     expect {
       post "/admin/suits/#{suit_judge.suit_id}/procedures", admin_procedure: admin_procedure

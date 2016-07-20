@@ -26,10 +26,10 @@
 FactoryGirl.define do
   factory :procedure do
     profile do
-      FactoryGirl.create :profile
+      create :profile
     end
     suit do
-      FactoryGirl.create :suit
+      create :suit
     end
     unit "foo"
     title "bar"

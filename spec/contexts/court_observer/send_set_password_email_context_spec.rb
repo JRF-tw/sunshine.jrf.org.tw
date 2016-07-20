@@ -4,7 +4,7 @@ describe CourtObserver::SendSetPasswordEmailContext do
 
   describe "perform" do
     context "success" do
-      let!(:court_observer) { FactoryGirl.create :court_observer }
+      let!(:court_observer) { create :court_observer }
       subject { described_class.new(court_observer) }
 
       it { expect { subject.perform }.not_to change { subject.errors } }

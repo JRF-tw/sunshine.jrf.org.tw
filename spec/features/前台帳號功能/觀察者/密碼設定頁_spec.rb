@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "觀察者密碼設定頁", type: :request do
   context "成功載入頁面" do
-    let!(:court_observer) { FactoryGirl.create :court_observer, name: "丁丁觀察者", email: "dingding@gmail.com" }
+    let!(:court_observer) { create :court_observer, name: "丁丁觀察者", email: "dingding@gmail.com" }
     let(:token) { court_observer.send_reset_password_instructions }
 
     context "有登入" do
@@ -26,7 +26,7 @@ describe "觀察者密碼設定頁", type: :request do
   end
 
   context "失敗載入頁面" do
-    let!(:court_observer) { FactoryGirl.create :court_observer, name: "丁丁觀察者", email: "dingding@gmail.com" }
+    let!(:court_observer) { create :court_observer, name: "丁丁觀察者", email: "dingding@gmail.com" }
     let(:token) { court_observer.send_reset_password_instructions }
 
     context "條件" do
@@ -66,7 +66,7 @@ describe "觀察者密碼設定頁", type: :request do
   end
 
   context "成功設定" do
-    let!(:court_observer) { FactoryGirl.create :court_observer, name: "丁丁觀察者", email: "dingding@gmail.com" }
+    let!(:court_observer) { create :court_observer, name: "丁丁觀察者", email: "dingding@gmail.com" }
     let(:token) { court_observer.send_reset_password_instructions }
     subject { put "/observer/password", court_observer: { password: "11111111", password_confirmation: "11111111", reset_password_token: token } }
 
@@ -84,7 +84,7 @@ describe "觀察者密碼設定頁", type: :request do
   end
 
   context "失敗設定" do
-    let!(:court_observer) { FactoryGirl.create :court_observer, name: "丁丁觀察者", email: "dingding@gmail.com" }
+    let!(:court_observer) { create :court_observer, name: "丁丁觀察者", email: "dingding@gmail.com" }
     let(:token) { court_observer.send_reset_password_instructions }
 
     context "密碼空白" do

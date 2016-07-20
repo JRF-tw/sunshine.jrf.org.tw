@@ -19,7 +19,7 @@ describe "當事人手機驗證流程", type: :request do
       context "失敗送出" do
         context "該手機號碼已被別人驗證" do
           before { signin_party }
-          let!(:party) { FactoryGirl.create :party, phone_number: "0911111111" }
+          let!(:party) { create :party, phone_number: "0911111111" }
           subject! { post "/party/phone", party: { phone_number: "0911111111" } }
 
           it "提示號碼已經被使用" do

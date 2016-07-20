@@ -2,9 +2,9 @@ require "rails_helper"
 
 RSpec.describe Party::SubscribesController, type: :request do
 
-  let!(:party) { FactoryGirl.create :party, :already_confirmed }
+  let!(:party) { create :party, :already_confirmed }
   before { signin_party(party) }
-  let!(:story) { FactoryGirl.create :story }
+  let!(:story) { create :story }
 
   describe "#create" do
     subject! { post "/party/stories/#{story.id}/subscribe" }

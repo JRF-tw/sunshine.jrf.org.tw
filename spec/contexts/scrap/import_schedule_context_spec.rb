@@ -1,9 +1,9 @@
 require "rails_helper"
 
 RSpec.describe Scrap::ImportScheduleContext, type: :model do
-  let!(:court) { FactoryGirl.create :court, code: "TPH" }
-  let!(:judge) { FactoryGirl.create :judge, court: court }
-  let!(:branch) { FactoryGirl.create :branch, court: court, judge: judge, name: "平" }
+  let!(:court) { create :court, code: "TPH" }
+  let!(:judge) { create :judge, court: court }
+  let!(:branch) { create :branch, court: court, judge: judge, name: "平" }
 
   describe "#perform" do
     let(:hash_data) { { story_type: "民事", year: 105, word_type: "聲", number: "485", date: Time.zone.today, branch_name: "平", is_pronounce: false } }
@@ -23,8 +23,8 @@ RSpec.describe Scrap::ImportScheduleContext, type: :model do
       end
 
       context "mutiple branche" do
-        let!(:judge1) { FactoryGirl.create :judge, court: court }
-        let!(:branch1) { FactoryGirl.create :branch, court: court, judge: judge1, name: "平", chamber_name: "xxx法院民事庭" }
+        let!(:judge1) { create :judge, court: court }
+        let!(:branch1) { create :branch, court: court, judge: judge1, name: "平", chamber_name: "xxx法院民事庭" }
         it { expect(subject.branch_judge).to eq(judge1) }
       end
 

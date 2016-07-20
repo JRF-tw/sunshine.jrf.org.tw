@@ -33,7 +33,7 @@ namespace :dev do
   task fake_users: :environment do
     User.destroy_all
     email = "admin@jrf.org.tw"
-    User.find_by(email: email) || FactoryGirl.create(:user, email: email, password: "P@ssw0rd", admin: true)
+    User.find_by(email: email) || create(:user, email: email, password: "P@ssw0rd", admin: true)
   end
 
   task fake_courts: :environment do

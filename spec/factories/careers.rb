@@ -30,7 +30,7 @@
 FactoryGirl.define do
   factory :career do
     profile do
-      FactoryGirl.create :profile
+      create :profile
     end
     career_type "調派"
     publish_at Time.zone.today

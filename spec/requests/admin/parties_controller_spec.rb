@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Admin::PartiesController do
   before { signin_user }
-  let!(:party) { FactoryGirl.create :party }
+  let!(:party) { create :party }
 
   describe "#index" do
     context "render success" do

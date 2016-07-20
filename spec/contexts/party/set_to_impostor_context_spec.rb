@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Party::SetToImpostorContext do
-  let!(:party) { FactoryGirl.create :party, identify_number: "A225271722", name: "我愛羅" }
+  let!(:party) { create :party, identify_number: "A225271722", name: "我愛羅" }
   subject { described_class.new(party) }
 
   describe "#perform" do

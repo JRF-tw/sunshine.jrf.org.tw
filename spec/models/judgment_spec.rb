@@ -23,7 +23,7 @@
 require "rails_helper"
 
 RSpec.describe Judgment, type: :model do
-  let!(:judgment) { FactoryGirl.create :judgment }
+  let!(:judgment) { create :judgment }
 
   it "FactoryGirl" do
     expect(judgment).not_to be_new_record
@@ -37,7 +37,7 @@ RSpec.describe Judgment, type: :model do
   end
 
   it "has_many :judges" do
-    judgment_judge = FactoryGirl.create :judgment_judge
+    judgment_judge = create :judgment_judge
     judgment = judgment_judge.judgment
     expect(judgment.judges.last.current.to_s).to eq("法官")
   end

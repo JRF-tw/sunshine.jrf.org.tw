@@ -4,7 +4,7 @@ RSpec.describe Admin::ProfilesController do
   before { signin_user }
 
   describe "already had a profile" do
-    let!(:profile) { FactoryGirl.create :profile, name: "Dahlia", current: "法官" }
+    let!(:profile) { create :profile, name: "Dahlia", current: "法官" }
 
     it "GET /admin/profiles" do
       get "/admin/profiles"
@@ -34,8 +34,8 @@ RSpec.describe Admin::ProfilesController do
     end
 
     context "ransack" do
-      let!(:hidden_profile) { FactoryGirl.create :profile, name: "Mars", current: "檢察官", is_hidden: true }
-      let!(:unactive_profile) { FactoryGirl.create :profile, name: "Billy", current: "檢察官", is_active: false }
+      let!(:hidden_profile) { create :profile, name: "Mars", current: "檢察官", is_hidden: true }
+      let!(:unactive_profile) { create :profile, name: "Billy", current: "檢察官", is_active: false }
       it "is_active_true" do
         get "/admin/profiles", q: { is_active_true: true }
         expect(response.body).not_to match(unactive_profile.name)

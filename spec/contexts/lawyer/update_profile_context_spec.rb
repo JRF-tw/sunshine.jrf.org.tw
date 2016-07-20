@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe Lawyer::UpdateProfileContext do
-  let!(:lawyer) { FactoryGirl.create :lawyer }
+  let!(:lawyer) { create :lawyer }
   let!(:context) { described_class.new(lawyer) }
 
   context "success" do

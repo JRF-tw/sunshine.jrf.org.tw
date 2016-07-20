@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe CourtObserver::ChangeEmailContext do
-  let!(:court_observer) { FactoryGirl.create :court_observer }
+  let!(:court_observer) { create :court_observer }
 
   describe "perform" do
     context "success" do
@@ -19,7 +19,7 @@ describe CourtObserver::ChangeEmailContext do
     end
 
     context "update other's unconfirmed_email" do
-      let!(:court_observer2) { FactoryGirl.create :court_observer, :with_unconfirmed_email }
+      let!(:court_observer2) { create :court_observer, :with_unconfirmed_email }
       let(:params) { { email: court_observer2.unconfirmed_email, current_password: "123123123" } }
       subject { described_class.new(court_observer) }
 
