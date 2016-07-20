@@ -18,8 +18,8 @@
 
 class VerdictScore < ActiveRecord::Base
   validates :verdict_rater_type, presence: true
-  validates :verdict_rater_id, presence: true
-  validates :story_id, uniqueness: { scope: :verdict_rater_id }
+  validates :verdict_rater_id, presence: true, uniqueness: { scope: :judge_id }
+  validates :story_id, presence: true
   validates :judge_id, presence: true
   store_accessor :data, :court_id, :year, :word_type, :number, :judge_name, :note
 

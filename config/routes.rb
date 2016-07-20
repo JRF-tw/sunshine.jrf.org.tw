@@ -49,7 +49,6 @@ Rails.application.routes.draw do
       resource :verdicts, only: [:new] do
         collection do
           get :rule
-          post :verify
         end
       end
     end
@@ -82,6 +81,7 @@ Rails.application.routes.draw do
           get :rule
           post :checked_info
           post :checked_judge
+          post :continue
         end
       end
     end
@@ -121,6 +121,7 @@ Rails.application.routes.draw do
           get :rule
           post :checked_info
           post :checked_judge
+          post :continue
         end
       end
     end
