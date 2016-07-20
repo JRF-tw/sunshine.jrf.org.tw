@@ -45,11 +45,17 @@ class Lawyers::SchedulesController < Lawyers::BaseController
   def create
     context = Lawyer::ScheduleScoreCreateContext.new(current_lawyer)
     if context.perform(schedule_score_params)
-      redirect_as_success(lawyer_scores_path, "評鑑已成功建立")
+      @status = "thanks_scored"
+      render_as_success(:new)
     else
       @status = "checked_judge"
       render_as_fail(:new, context.error_messages.join(","))
     end
+  end
+
+  def continue
+    @status = "checked_date"
+    render_as_success(:new)
   end
 
   private

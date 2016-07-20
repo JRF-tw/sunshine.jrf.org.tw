@@ -43,6 +43,7 @@ Rails.application.routes.draw do
           post :checked_info
           post :checked_date
           post :checked_judge
+          post :continue
         end
       end
       resource :verdicts, only: [:new] do
@@ -73,6 +74,7 @@ Rails.application.routes.draw do
           post :checked_info
           post :checked_date
           post :checked_judge
+          post :continue
         end
       end
       resource :verdicts, only: [:new, :create] do
@@ -111,6 +113,7 @@ Rails.application.routes.draw do
           post :checked_info
           post :checked_date
           post :checked_judge
+          post :continue
         end
       end
       resource :verdicts, only: [:new, :create] do
