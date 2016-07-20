@@ -25,6 +25,6 @@
         .controls = "案號 : #{@verdict_score.number}"
       .form-group
         label.control-label
-        .controls = f.input :judge_name, label: "法官姓名", value: @story.judgment_verdict.try(:main_judge_name)
+        .controls = f.input :judge_name, label: "法官姓名"
       .form-actions
         input.btn.btn-primary type="submit" value="下一步"

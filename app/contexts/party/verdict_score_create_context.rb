@@ -40,7 +40,7 @@ class Party::VerdictScoreCreateContext < BaseContext
   end
 
   def check_judge
-    @judgment = Party::VerdictScoreCheckJudgeContext.new(@party).perform(@params)
+    @judge = Party::VerdictScoreCheckJudgeContext.new(@party).perform(@params)
   end
 
   def build_verdict_score
@@ -52,7 +52,7 @@ class Party::VerdictScoreCreateContext < BaseContext
   end
 
   def assign_attribute
-    @verdict_score.assign_attributes(story: @story, judge: @judgment ? @judgment.main_judge : nil)
+    @verdict_score.assign_attributes(story: @story, judge: @judge)
   end
 
   def record_story_verdict_scored_count
