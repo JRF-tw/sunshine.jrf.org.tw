@@ -62,7 +62,7 @@ RSpec.describe Admin::ProfilesController do
 
   it "POST /admin/profiles" do
     expect {
-      post "/admin/profiles", admin_profile: FactoryGirl.attributes_for(:profile)
+      post "/admin/profiles", admin_profile: attributes_for(:profile)
     }.to change { Profile.count }.by(1)
     expect(response).to be_redirect
   end

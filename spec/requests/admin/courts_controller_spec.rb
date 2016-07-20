@@ -59,7 +59,7 @@ RSpec.describe Admin::CourtsController do
   end
 
   describe "#create" do
-    subject { post "/admin/courts", admin_court: FactoryGirl.attributes_for(:court) }
+    subject { post "/admin/courts", admin_court: attributes_for(:court) }
     it { expect { subject }.to change { Court.count }.by(1) }
     it { expect(response).to be_redirect }
   end

@@ -50,7 +50,7 @@ RSpec.describe Admin::SuitsController do
 
   it "POST /admin/suits" do
     expect {
-      post "/admin/suits", admin_suit: FactoryGirl.attributes_for(:suit)
+      post "/admin/suits", admin_suit: attributes_for(:suit)
     }.to change { Suit.count }.by(1)
     expect(response).to be_redirect
   end
