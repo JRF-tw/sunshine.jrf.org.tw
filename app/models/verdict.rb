@@ -25,7 +25,6 @@ class Verdict < ActiveRecord::Base
   serialize :judges_names, Array
   serialize :prosecutor_names, Array
   has_many :verdict_relations
-  has_many :verdict_scores
   belongs_to :story
   belongs_to :main_judge, class_name: "Judge", foreign_key: :main_judge_id
 

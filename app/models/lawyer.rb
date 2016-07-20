@@ -50,6 +50,7 @@ class Lawyer < ActiveRecord::Base
   include Redis::Objects
   counter :score_report_schedule_real_date
   counter :schedule_scored_count
+  counter :verdict_scored_count
 
   def need_update_info?
     ## TODO need_update_info definition logic

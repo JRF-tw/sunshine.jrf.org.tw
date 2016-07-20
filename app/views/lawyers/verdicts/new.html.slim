@@ -1,1 +1,10 @@
-= "律師評鑑判決書"
+= "律師評鑑判決"
+- unless @status
+  = render "input_info"
+
+- if @status == "checked_info"
+  = render "input_judge"
+
+- if @status == "checked_judge"
+  = render "start_score"
+

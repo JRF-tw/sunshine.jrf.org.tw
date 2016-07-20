@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 20160804042232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "postgis"
   enable_extension "hstore"
+  enable_extension "postgis"
 
   create_table "articles", force: :cascade do |t|
     t.integer  "profile_id"
@@ -330,9 +330,9 @@ ActiveRecord::Schema.define(version: 20160804042232) do
     t.datetime "confirmed_at"
     t.string   "confirmation_token"
     t.datetime "confirmation_sent_at"
-    t.datetime "phone_confirmed_at"
     t.boolean  "imposter",                 default: false
     t.string   "imposter_identify_number"
+    t.datetime "phone_confirmed_at"
   end
 
   add_index "parties", ["confirmation_token"], name: "index_parties_on_confirmation_token", unique: true, using: :btree
@@ -655,7 +655,7 @@ ActiveRecord::Schema.define(version: 20160804042232) do
   add_index "verdict_relations", ["verdict_id"], name: "index_verdict_relations_on_verdict_id", using: :btree
 
   create_table "verdict_scores", force: :cascade do |t|
-    t.integer  "verdict_id"
+    t.integer  "story_id"
     t.integer  "judge_id"
     t.integer  "verdict_rater_id"
     t.string   "verdict_rater_type"
@@ -671,7 +671,7 @@ ActiveRecord::Schema.define(version: 20160804042232) do
   add_index "verdict_scores", ["appeal_judge"], name: "index_verdict_scores_on_appeal_judge", using: :btree
   add_index "verdict_scores", ["judge_id"], name: "index_verdict_scores_on_judge_id", using: :btree
   add_index "verdict_scores", ["status"], name: "index_verdict_scores_on_status", using: :btree
-  add_index "verdict_scores", ["verdict_id"], name: "index_verdict_scores_on_verdict_id", using: :btree
+  add_index "verdict_scores", ["story_id"], name: "index_verdict_scores_on_story_id", using: :btree
   add_index "verdict_scores", ["verdict_rater_id", "verdict_rater_type"], name: "index_verdict_scores_on_verdict_rater_id_and_verdict_rater_type", using: :btree
 
   create_table "verdicts", force: :cascade do |t|
@@ -679,11 +679,11 @@ ActiveRecord::Schema.define(version: 20160804042232) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.string   "file"
-    t.boolean  "is_judgment",      default: false
     t.text     "party_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
+    t.boolean  "is_judgment",      default: false
     t.date     "adjudge_date"
     t.integer  "main_judge_id"
     t.string   "main_judge_name"

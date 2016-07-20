@@ -19,6 +19,8 @@ class Errors::Code
     retry_verify_count_out_range: 400,
     story_subscriber_failed: 400,
     story_subscriber_valid_failed: 401,
+    verdict_subscriber_failed: 400,
+    verdict_subscriber_valid_failed: 401,
     out_score_intervel: 400,
     auth_failed: 401,
     invalid_date: 401

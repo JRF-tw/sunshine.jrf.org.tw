@@ -75,10 +75,11 @@ Rails.application.routes.draw do
           post :checked_judge
         end
       end
-      resource :verdicts, only: [:new] do
+      resource :verdicts, only: [:new, :create] do
         collection do
           get :rule
-          post :verify
+          post :checked_info
+          post :checked_judge
         end
       end
     end

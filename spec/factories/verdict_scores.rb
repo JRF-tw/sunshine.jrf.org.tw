@@ -18,7 +18,7 @@
 
 FactoryGirl.define do
   factory :verdict_score do
-    verdict { FactoryGirl.create :verdict }
+    story { FactoryGirl.create :story }
     judge { FactoryGirl.create :judge }
     verdict_rater { FactoryGirl.create :lawyer }
   end

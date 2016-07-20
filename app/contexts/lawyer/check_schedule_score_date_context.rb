@@ -1,6 +1,6 @@
 class Lawyer::CheckScheduleScoreDateContext < BaseContext
   PERMITS = [:court_id, :year, :word_type, :number, :date, :confirmed_realdate].freeze
-  SCORE_INTERVEL = 14
+  SCORE_INTERVEL = 14.days
   MAX_REPORT_TIME = 5
 
   before_perform :check_date

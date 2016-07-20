@@ -5,7 +5,7 @@ RSpec.describe Observers::VerdictsController, type: :request do
 
   describe "#new" do
     subject! { get "/observer/score/verdicts/new" }
-    it { expect(response).to be_success }
+    it { expect(response.status).to eq(404) }
   end
 
   describe "#rule" do
