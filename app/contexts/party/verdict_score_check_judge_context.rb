@@ -2,6 +2,7 @@ class Party::VerdictScoreCheckJudgeContext < BaseContext
   PERMITS = [:court_id, :year, :word_type, :number, :judge_name].freeze
 
   before_perform :check_story
+  before_perform :check_judge_name
   before_perform :find_judge_in_court, unless: :has_judgment?
   before_perform :find_judge_by_verdict, if: :has_judgment?
   before_perform :valid_judge_correct, if: :has_judgment?
@@ -21,6 +22,10 @@ class Party::VerdictScoreCheckJudgeContext < BaseContext
 
   def check_story
     @story = Party::VerdictScoreCheckInfoContext.new(@party).perform(@params)
+  end
+
+  def check_judge_name
+    return add_error(:verdict_score_valid_failed, "法官為必填") unless @params[:judge_name].present?
   end
 
   def has_judgment?

@@ -15,8 +15,9 @@ describe Party::VerdictScoreCheckJudgeContext do
       it { expect(subject).to be_truthy }
     end
 
-    context "has judgment" do
-      let!(:verdict) { create :verdict, story: story, main_judge: judge }
+    context "empty judge_name" do
+      before { params[:judge_name] = "" }
+      it { expect(subject).to be_falsey }
     end
 
     context "no judgment" do
