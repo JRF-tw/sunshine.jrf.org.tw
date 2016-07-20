@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe VerdictScore do
   let(:verdict_score) { FactoryGirl.create :verdict_score }
