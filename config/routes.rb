@@ -37,7 +37,7 @@ Rails.application.routes.draw do
     resources :scores, only: [:index, :edit, :show]
     resource :score do
       get "chose-type", to: "scores#chose_type"
-      resource :schedules, only: [:new, :create] do
+      resources :schedules, only: [:new, :create, :edit, :update] do
         collection do
           get :rule
           post :checked_info
@@ -66,7 +66,7 @@ Rails.application.routes.draw do
     resources :scores, only: [:index, :edit, :show]
     resource :score do
       get "chose-type", to: "scores#chose_type"
-      resource :schedules, only: [:new, :create] do
+      resources :schedules, only: [:new, :create, :edit, :update] do
         collection do
           get :rule
           post :checked_info
@@ -74,7 +74,7 @@ Rails.application.routes.draw do
           post :checked_judge
         end
       end
-      resource :verdicts, only: [:new, :create] do
+      resource :verdicts, only: [:new, :create, :edit, :update] do
         collection do
           get :rule
           post :checked_info
@@ -104,7 +104,7 @@ Rails.application.routes.draw do
     resources :scores, only: [:index, :edit, :show]
     resource :score do
       get "chose-type", to: "scores#chose_type"
-      resource :schedules, only: [:new, :create] do
+      resources :schedules, only: [:new, :create, :edit, :update] do
         collection do
           get :rule
           post :checked_info
@@ -112,7 +112,7 @@ Rails.application.routes.draw do
           post :checked_judge
         end
       end
-      resource :verdicts, only: [:new, :create] do
+      resources :verdicts, only: [:new, :create, :edit, :update] do
         collection do
           get :rule
           post :checked_info
