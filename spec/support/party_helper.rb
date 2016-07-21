@@ -54,7 +54,6 @@ module PartyHelper
     party = create(:party, :already_confirmed)
     story = create(:story, :with_schedule_date_today)
     StorySubscriptionCreateContext.new(story).perform(party)
-
     party
   end
 
