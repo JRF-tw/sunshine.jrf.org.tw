@@ -36,6 +36,12 @@ FactoryGirl.define do
       end
     end
 
+    trait :with_schedule_date_today do
+      after(:create) do |story|
+        FactoryGirl.create :schedule, story: story
+      end
+    end
+
     trait :with_schedule_date_yesterday do
       after(:create) do |story|
         create :schedule, :date_is_yesterday, story: story

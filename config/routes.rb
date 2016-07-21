@@ -1,4 +1,5 @@
 require "sidekiq/web"
+require "sidetiq/web"
 Rails.application.routes.draw do
   mount RedactorRails::Engine => "/redactor_rails"
   mount Sidekiq::Web => "/sidekiq"

@@ -35,6 +35,7 @@ gem "select2-rails"
 # background jobs
 gem "sidekiq"
 gem "sinatra", ">= 1.3.0", require: nil
+gem "sidetiq"
 gem "sidekiq-limit_fetch"
 gem "whenever"
 
@@ -89,6 +90,7 @@ end
 group :development, :test do
   gem "rspec"
   gem "rspec-rails"
+  gem "timecop"
   gem "factory_girl_rails"
   gem "byebug"
   gem "rubocop", require: false
