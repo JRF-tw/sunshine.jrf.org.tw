@@ -7,7 +7,7 @@ class Lawyer::VerdictScoreCheckInfoContext < BaseContext
   before_perform :check_word_type
   before_perform :check_number
   before_perform :find_story
-  before_perform :story_has_pronounce_date
+  before_perform :story_not_adjudge
   before_perform :valid_score_intervel
 
   def initialize(lawyer)
@@ -44,8 +44,8 @@ class Lawyer::VerdictScoreCheckInfoContext < BaseContext
     return add_error(:data_not_found, "案件不存在") unless @story = Story.where(@params).last
   end
 
-  def story_has_pronounce_date
-    return add_error(:verdict_score_valid_failed, "案件尚未宣判") unless @story.pronounce_date.present?
+  def story_not_adjudge
+    return add_error(:verdict_score_valid_failed, "尚未抓到判決書") unless @story.is_adjudge?
   end
 
   def valid_score_intervel

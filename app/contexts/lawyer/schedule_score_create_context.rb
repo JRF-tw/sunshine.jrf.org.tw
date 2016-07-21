@@ -35,7 +35,8 @@ class Lawyer::ScheduleScoreCreateContext < BaseContext
   end
 
   def check_attitude_score
-    return add_error(:data_blank, "開庭態度分數為必填") unless @params[:attitude_score].present?
+    # TODO : check score type attitude_score & rating_score
+    return add_error(:data_blank, "開庭滿意度分數為必填") unless @params[:attitude_score].present?
   end
 
   def check_story

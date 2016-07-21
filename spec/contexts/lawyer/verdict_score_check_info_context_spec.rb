@@ -38,14 +38,14 @@ describe Lawyer::VerdictScoreCheckInfoContext do
       it { expect(subject).to be_falsey }
     end
 
-    context "story has pronounce date" do
-      context "pronounced " do
-        before { story.update_attributes(pronounce_date: Time.zone.today) }
+    context "story not adjudge" do
+      context "adjudge " do
+        before { story.update_attributes(is_adjudge: true) }
         it { expect(subject).to be_truthy }
       end
 
-      context "not pronounced " do
-        before { story.update_attributes(pronounce_date: nil) }
+      context "not adjudge" do
+        before { story.update_attributes(is_adjudge: false) }
         it { expect(subject).to be_falsey }
       end
     end
