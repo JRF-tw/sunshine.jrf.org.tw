@@ -10,7 +10,7 @@ class StoryBeforeJudgeNoticeContext < BaseContext
         subscriber = story_subscription.subscriber
         subscriber_type = subscriber.class.name
         mailer_class = "#{subscriber_type}Mailer".constantize
-        mailer_class.delay.public_send("story_before_judge_notice", @story.id, subscriber.id)
+        mailer_class.delay.story_before_judge_notice(@story.id, subscriber.id)
       end
     end
   end
