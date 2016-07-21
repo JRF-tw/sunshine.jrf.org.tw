@@ -59,5 +59,8 @@ describe "觀察者登入", type: :request do
         expect(response.body).to match("keepthis@gmail.com")
       end
     end
+
+    context "尚未通過 email 驗證" do
+    end
   end
 end

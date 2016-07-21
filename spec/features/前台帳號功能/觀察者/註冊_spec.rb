@@ -114,4 +114,19 @@ describe "觀察者註冊", type: :request do
       end
     end
   end
+
+  context "點擊認證信連結" do
+    context "成功驗證" do
+      it "轉跳至評鑑記錄頁"
+      it "帳號狀態改為已驗證"
+    end
+
+    context "失敗驗證" do
+      it "轉跳至登入頁"
+      it "token 不正確"
+      it "帳號已驗證"
+      it "目前登入的帳號非驗證連結本人"
+    end
+  end
+
 end
