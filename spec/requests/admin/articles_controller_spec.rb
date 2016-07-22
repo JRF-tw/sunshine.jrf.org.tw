@@ -37,7 +37,7 @@ RSpec.describe Admin::ArticlesController do
   end
 
   it "POST /admin/profiles/profile.id/articles" do
-    attrs = FactoryGirl.attributes_for(:article)
+    attrs = attributes_for(:article)
     attrs.delete :paper_publish_at
     attrs[:paper_publish_at_in_tw] = "104/9/10"
     expect {

@@ -38,7 +38,7 @@ RSpec.describe Admin::CareersController do
 
   it "POST /admin/profiles/profile.id/careers" do
     expect {
-      post "/admin/profiles/#{profile.id}/careers", admin_career: FactoryGirl.attributes_for(:career)
+      post "/admin/profiles/#{profile.id}/careers", admin_career: attributes_for(:career)
     }.to change { Career.count }.by(1)
     expect(response).to be_redirect
   end

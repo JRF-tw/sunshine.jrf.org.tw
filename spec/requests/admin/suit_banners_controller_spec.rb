@@ -36,7 +36,7 @@ RSpec.describe Admin::SuitBannersController do
 
   it "POST /admin/suit_banners" do
     expect {
-      post "/admin/suit_banners", admin_suit_banner: FactoryGirl.attributes_for(:suit_banner)
+      post "/admin/suit_banners", admin_suit_banner: attributes_for(:suit_banner)
     }.to change { SuitBanner.count }.by(1)
     expect(response).to be_redirect
   end
