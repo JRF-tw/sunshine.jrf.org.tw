@@ -1,6 +1,7 @@
 class Admin::LawyerDeleteContext < BaseContext
   before_perform :check_verdict_empty
   before_perform :check_confirm
+  before_perform :check_password
 
   def initialize(lawyer)
     @lawyer = lawyer
@@ -18,5 +19,9 @@ class Admin::LawyerDeleteContext < BaseContext
 
   def check_confirm
     return add_error(:data_delete_fail, "該律師已經註冊") if @lawyer.confirmed?
+  end
+
+  def check_password
+    return add_error(:data_delete_fail, "該律師已設定密碼") if @lawyer.encrypted_password.present?
   end
 end
