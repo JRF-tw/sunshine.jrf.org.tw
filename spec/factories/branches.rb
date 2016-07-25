@@ -16,8 +16,8 @@ FactoryGirl.define do
   factory :branch do
     sequence(:name) { |n| "branch_name-#{n}" }
     sequence(:chamber_name) { |n| "chamber_name-#{n}" }
-    judge { FactoryGirl.create :judge }
-    court { FactoryGirl.create :court }
+    judge { create :judge }
+    court { create :court }
   end
 
 end

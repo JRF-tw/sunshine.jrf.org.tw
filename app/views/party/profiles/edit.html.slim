@@ -1,0 +1,13 @@
+= "當事人個人資訊編輯頁"
+
+= simple_form_for(current_party, as: :party, url:  party_profile_path, method: :put ) do |f|
+  .form-inputs
+    = f.input :name
+    = f.input :identify_number, disabled: true, required: false
+    = f.input :phone_number, disabled: true, required: false
+    = link_to "更改phone", edit_party_phone_path
+    = f.input :email, disabled: true, required: false
+    = link_to "更改Email", edit_party_email_path
+
+  .form-actions
+    input.btn.btn-primary type="submit" value="更新個人資訊"

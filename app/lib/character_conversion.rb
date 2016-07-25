@@ -4,7 +4,7 @@ module CharacterConversion
   def get_params_utf8(keys = {})
     self.params_utf8 = {}
     keys.each do |k|
-      self.params_utf8[k.to_sym] = params[k.to_sym].present? ? char_force_utf8(params[k.to_sym]) : nil
+      params_utf8[k.to_sym] = params[k.to_sym].present? ? char_force_utf8(params[k.to_sym]) : nil
     end
     params_utf8
   end

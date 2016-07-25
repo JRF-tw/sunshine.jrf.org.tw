@@ -12,10 +12,10 @@
 FactoryGirl.define do
   factory :suit_prosecutor do
     prosecutor do
-      FactoryGirl.create :prosecutor_profile
+      create :prosecutor_profile
     end
     suit do
-      FactoryGirl.create :suit
+      create :suit
     end
   end
 

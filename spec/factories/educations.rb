@@ -18,8 +18,8 @@
 FactoryGirl.define do
   factory :education do
     profile do
-      FactoryGirl.create :profile
+      create :profile
     end
-    title 'foo'
+    title "foo"
   end
 end

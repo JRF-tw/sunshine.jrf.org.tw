@@ -12,8 +12,8 @@ module AdminMenuHelper
       "用戶管理": {
         submenu: {
           "後台使用者管理": { url: admin_users_path, match: /\/admin\/users/ },
-          "觀察員管理": { url: admin_bystanders_path, match: /\/admin\/bystanders/ },
-          "當事人管理": { url: admin_defendants_path, match: /\/admin\/defendants/ },
+          "觀察員管理": { url: admin_observers_path, match: /\/admin\/observers/ },
+          "當事人管理": { url: admin_parties_path, match: /\/admin\/parties/ },
           "律師管理": { url: admin_lawyers_path, match: /\/admin\/lawyers/ }
         }
       },
@@ -24,7 +24,7 @@ module AdminMenuHelper
       "判決書管理": { url: admin_verdicts_path, match: /\/admin\/verdicts/ },
       "重要判決管理": { url: admin_judgments_path, match: /\/admin\/judgments/ },
       "個人檔案管理": { url: admin_profiles_path, match: /\/admin\/profiles/ },
-      "評鑑資料-案例管理": { url: admin_suits_path, match: /\/admin\/suits/ },     
+      "評鑑資料-案例管理": { url: admin_suits_path, match: /\/admin\/suits/ },
       "首頁橫幅管理": { url: admin_banners_path, match: /\/admin\/banners/ },
       "司法案例面面觀橫幅管理": { url: admin_suit_banners_path, match: /\/admin\/suit_banners/ }
     }
@@ -37,7 +37,7 @@ module AdminMenuHelper
       menus.each do |label, item|
         html << render_admin_menu_item(label, item)
       end
-      raw html.join
+      safe_join(html, "")
     end
   end
 
@@ -47,14 +47,14 @@ module AdminMenuHelper
     html = []
     html << link_to(item[:submenu] ? "#" : item[:url]) do
       tmp = []
-      tmp << content_tag(:i, class: "icon icon-#{item[:icon]}"){ "" } if item[:icon]
+      tmp << content_tag(:i, class: "icon icon-#{item[:icon]}") { "" } if item[:icon]
       tmp << label
-      raw tmp.join
+      safe_join(tmp, "")
     end
     html << render_admin_menu(item[:submenu]) if item[:submenu]
     actived = item[:match] ? request.original_url =~ item[:match] : false
     content_tag(:li, class: "#{item[:submenu] ? "submenu " : ""}#{actived ? "active open" : ""}") do
-      raw html.join
+      safe_join(html, "")
     end
   end
 end

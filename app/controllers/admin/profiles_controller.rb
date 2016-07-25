@@ -27,7 +27,7 @@
 
 class Admin::ProfilesController < Admin::BaseController
   before_action :profile
-  before_action(except: [:index]){ add_crumb("個人檔案列表", admin_profiles_path) }
+  before_action(except: [:index]) { add_crumb("個人檔案列表", admin_profiles_path) }
 
   def index
     @search = Profile.all.newest.ransack(params[:q])
@@ -53,10 +53,10 @@ class Admin::ProfilesController < Admin::BaseController
 
   def create
     if profile.save
-        respond_to do |f|
-          f.html { redirect_to admin_profile_path(profile), flash: { success: "個人檔案 - #{profile.name} 已新增" } }
-          f.js { render }
-        end
+      respond_to do |f|
+        f.html { redirect_to admin_profile_path(profile), flash: { success: "個人檔案 - #{profile.name} 已新增" } }
+        f.js { render }
+      end
     else
       respond_to do |f|
         f.html {

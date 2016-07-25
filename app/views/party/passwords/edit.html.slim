@@ -1,0 +1,14 @@
+h2 當事人更改密碼
+div = "當事人 #{@party_by_token.name}(#{@party_by_token.identify_number})"
+= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+  = f.error_notification
+
+  = f.input :reset_password_token, as: :hidden
+  = f.full_error :reset_password_token
+
+  .form-inputs
+    = f.input :password, label: "新密碼", required: true, autofocus: true
+    = f.input :password_confirmation, label: "確認密碼", required: true
+
+  .form-actions
+    = f.button :submit, "重設我的密碼"

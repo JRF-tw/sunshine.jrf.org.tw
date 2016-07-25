@@ -26,10 +26,10 @@
 #  updated_at          :datetime
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Career, type: :model do
-  let!(:career){ FactoryGirl.create :career }
+  let!(:career) { create :career }
 
   it "FactoryGirl" do
     expect(career).not_to be_new_record

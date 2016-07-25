@@ -13,9 +13,9 @@
 #
 
 class Admin::SchedulesController < Admin::BaseController
-  before_action :schedule   
-  before_action :find_story_by_ransack_search, :only => [:index]
-  before_action(except: [:index]){ add_crumb("庭期列表", admin_schedules_path) }
+  before_action :schedule
+  before_action :find_story_by_ransack_search, only: [:index]
+  before_action(except: [:index]) { add_crumb("庭期列表", admin_schedules_path) }
 
   def index
     @search = Schedule.all.newest.ransack(params[:q])
@@ -30,7 +30,7 @@ class Admin::SchedulesController < Admin::BaseController
   end
 
   private
-  
+
   def find_story_by_ransack_search
     return @story = Story.find(params[:q][:story_id_eq]) if params[:q].try { |q| q.include?(:story_id_eq) }
   end

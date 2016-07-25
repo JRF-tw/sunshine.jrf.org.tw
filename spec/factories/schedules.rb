@@ -16,11 +16,19 @@ FactoryGirl.define do
   factory :schedule do
     branch_name "股別名稱"
     date { Date.current }
-    court { FactoryGirl.create :court }
-    story { FactoryGirl.create :story }
+    court { create :court }
+    story { create :story }
 
     trait :with_branch_judge do
-      branch_judge { FactoryGirl.create :judge }
+      branch_judge { create :judge }
+    end
+
+    trait :date_is_tomorrow do
+      date { Date.tomorrow }
+    end
+
+    trait :date_is_yesterday do
+      date { Date.yesterday }
     end
   end
 

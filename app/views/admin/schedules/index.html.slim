@@ -31,22 +31,22 @@
     table.table.table-bordered.table-striped.table-hover
       thead
         tr
-          th= sort_link(@search, :id, "#")
-          th= sort_link(@search, :court_full_name, "開庭法院")
+          th = sort_link(@search, :id, "#")
+          th = sort_link(@search, :court_full_name, "開庭法院")
           th 股別法官
           th 案件
-          th= sort_link(@search, :branch_name, "股別名稱")
-          th= sort_link(@search, :date, "開庭時間")
+          th = sort_link(@search, :branch_name, "股別名稱")
+          th = sort_link(@search, :date, "開庭時間")
           th
       tbody
         - @schedules.each do |schedule|
           tr
-            td= schedule.id
-            td= link_to "#{schedule.court.full_name}", admin_court_path(schedule.court)
-            td= link_to schedule.branch_judge.name, admin_judge_path(schedule.branch_judge) if schedule.branch_judge
-            td= link_to "#{schedule.story.identity}", admin_story_path(schedule.story)
-            td= schedule.branch_name
-            td= schedule.date
-            td= link_to "詳細資料", admin_schedule_path(schedule), class: "btn btn-mini"
+            td = schedule.id
+            td = link_to "#{schedule.court.full_name}", admin_court_path(schedule.court)
+            td = link_to schedule.branch_judge.name, admin_judge_path(schedule.branch_judge) if schedule.branch_judge
+            td = link_to "#{schedule.story.identity}", admin_story_path(schedule.story)
+            td = schedule.branch_name
+            td = schedule.date
+            td = link_to "詳細資料", admin_schedule_path(schedule), class: "btn btn-mini"
     .ui-toolbar.ui-widget-header
       = paginate @schedules, theme: :admin

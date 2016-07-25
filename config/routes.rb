@@ -1,27 +1,127 @@
-require 'sidekiq/web'
+require "sidekiq/web"
+require "sidetiq/web"
 Rails.application.routes.draw do
-  mount RedactorRails::Engine => '/redactor_rails'
-  mount Sidekiq::Web => '/sidekiq'
+  mount RedactorRails::Engine => "/redactor_rails"
+  mount Sidekiq::Web => "/sidekiq"
 
   devise_for :users
+  devise_for :party, controllers: { registrations: "party/registrations", sessions: "party/sessions", passwords: "party/passwords", confirmations: "party/confirmations" }
+  devise_for :court_observer, path: "observer", controllers: { registrations: "observer/registrations", sessions: "observer/sessions", passwords: "observer/passwords", confirmations: "observer/confirmations" }
+  devise_for :lawyer, controllers: { registrations: "lawyer/registrations", sessions: "lawyer/sessions", passwords: "lawyer/passwords", confirmations: "lawyer/confirmations" }
 
-  devise_for :defendants, controllers: { registrations: 'defendants/registrations', sessions: 'defendants/sessions', passwords: 'defendants/passwords' }
-  devise_for :bystanders, controllers: { registrations: 'bystander/registrations', sessions: 'bystander/sessions', passwords: 'bystander/passwords', confirmations: 'bystander/confirmations'}
-  devise_for :lawyers, controllers: { registrations: 'lawyers/registrations', sessions: 'lawyers/sessions', passwords: 'lawyers/passwords', confirmations: 'lawyers/confirmations'}
-
-  authenticated :bystander do
-    root to: "bystanders#index",  as: :bystander_root
+  # custom devise scope
+  devise_scope :lawyer do
+    post "/lawyer/password/send_reset_password_mail", to: "lawyer/passwords#send_reset_password_mail"
   end
 
-  authenticated :lawyer do
-    root to: "lawyers/base#index",  as: :lawyer_root
+  devise_scope :court_observer do
+    post "/observer/password/send_reset_password_mail", to: "observer/passwords#send_reset_password_mail"
   end
 
+  devise_scope :party do
+    post "/party/password/send_reset_password_sms", to: "party/passwords#send_reset_password_sms"
+  end
+
+  # f2e
   root to: "base#index", only: [:show]
-  get '/robots.txt', to: "base#robots", defaults: { format: "text" }
-
+  get "/who-are-you", to: "base#who_are_you"
+  get "/score-intro", to: "base#score_intro"
+  get "/robots.txt", to: "base#robots", defaults: { format: "text" }
   get "judges", to: "profiles#judges", as: :judges
   get "prosecutors", to: "profiles#prosecutors", as: :prosecutors
+
+  namespace :observer do
+    root to: "scores#index"
+    resource :profile, only: [:show, :edit, :update]
+    resource :email, only: [:edit, :update]
+    resources :scores, only: [:edit, :show]
+    resource :score do
+      get "chose-type", to: "scores#chose_type"
+      resource :schedules, only: [:new] do
+        collection do
+          get :rule
+          post :verify
+        end
+      end
+      resource :verdicts, only: [:new] do
+        collection do
+          get :rule
+          post :verify
+        end
+      end
+    end
+    resources :stories, only: [] do
+      member do
+        resource :subscribe, only: [:create]
+      end
+    end
+  end
+
+  namespace :lawyer do
+    root to: "scores#index"
+    resource :appeal, only: [:new]
+    resource :profile, only: [:show, :edit, :update]
+    resource :email, only: [:edit, :update]
+    resources :scores, only: [:edit, :show]
+    resource :score do
+      get "chose-type", to: "scores#chose_type"
+      resource :schedules, only: [:new] do
+        collection do
+          get :rule
+          post :verify
+        end
+      end
+      resource :verdicts, only: [:new] do
+        collection do
+          get :rule
+          post :verify
+        end
+      end
+    end
+    resources :stories, only: [] do
+      member do
+        resource :subscribe, only: [:create]
+      end
+    end
+  end
+
+  namespace :party do
+    root to: "scores#index"
+    resource :profile, only: [:show, :edit, :update]
+    resource :appeal, only: [:new]
+    resource :email, only: [:edit, :update]
+    resource :phone, only: [:new, :create, :edit, :update] do
+      collection do
+        get :verify
+        put :verifing
+        put :resend
+      end
+    end
+    resources :scores, only: [:edit, :show]
+    resource :score do
+      get "chose-type", to: "scores#chose_type"
+      resource :schedules, only: [:new] do
+        collection do
+          get :rule
+          post :verify
+        end
+      end
+      resource :verdicts, only: [:new] do
+        collection do
+          get :rule
+          post :verify
+        end
+      end
+    end
+    resources :stories do
+      member do
+        resource :subscribe, only: [:create, :destroy]
+      end
+    end
+  end
+
+  resources :scores, only: [:index]
+  resources :judges, only: [:show]
 
   resources :searchs, path: "search" do
     collection do
@@ -29,33 +129,18 @@ Rails.application.routes.draw do
       get :prosecutors
     end
   end
+
   get "about", to: "base#about", as: :about
   resources :suits do
     resources :procedures
   end
+
   resources :profiles do
     resources :awards
     resources :punishments
   end
 
-  resources :bystanders
-
-  devise_scope :lawyer do
-    patch '/lawyers/confirm' => 'lawyers/confirmations#confirm', as: :lawyers_confirm
-  end
-
-  namespace :lawyers do
-    root to: "base#index"
-    get "profile", to: "base#profile"
-    get "edit-profile", to: "base#edit_profile"
-    post "update_profile", to: "base#update_profile"
-  end
-
-  namespace :defendants do
-    root to: "base#index"
-  end
-
-  namespace :api, defaults: { format: 'json' } do
+  namespace :api, defaults: { format: "json" } do
     resources :profiles, only: [:show, :index]
     get "judges", to: "profiles#judges", as: :judges
     get "prosecutors", to: "profiles#prosecutors", as: :prosecutors
@@ -84,13 +169,22 @@ Rails.application.routes.draw do
     resources :stories
     resources :schedules
     resources :judges
-    resources :lawyers
+    resources :lawyers do
+      member do
+        post :send_reset_password_mail
+      end
+    end
     resources :verdicts do
       member do
         get :download_file
       end
     end
-    resources :bystanders, only: [:index, :show]
-    resources :defendants, only: [:index, :show]
+    resources :observers, only: [:show, :index]
+    resources :parties do
+      member do
+        put :set_to_imposter
+      end
+    end
+
   end
 end

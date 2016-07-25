@@ -26,16 +26,16 @@
 FactoryGirl.define do
   factory :procedure do
     profile do
-      FactoryGirl.create :profile
+      create :profile
     end
     suit do
-      FactoryGirl.create :suit
+      create :suit
     end
     unit "foo"
     title "bar"
     procedure_unit "haha"
     procedure_content "hoho"
-    procedure_date Date.today
+    procedure_date Time.zone.today
   end
 
 end

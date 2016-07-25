@@ -37,9 +37,9 @@
 FactoryGirl.define do
   factory :punishment do
     profile do
-      FactoryGirl.create :profile
+      create :profile
     end
-    decision_unit 'foo'
+    decision_unit "foo"
   end
 
 end

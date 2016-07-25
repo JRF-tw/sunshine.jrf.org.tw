@@ -8,7 +8,8 @@ class BaseUploader < CarrierWave::Uploader::Base
 
   # Choose what kind of storage to use for this uploader:
   # storage :file
-  storage (Rails.env.test? || Rails.env.development?) ? :file : :fog
+  use_file = Rails.env.test? || Rails.env.development?
+  storage use_file ? :file : :fog
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -20,7 +21,6 @@ class BaseUploader < CarrierWave::Uploader::Base
     model_class = model.class.to_s.underscore.split("/").last
     "uploads/#{model_class}/#{mounted_as}/#{id_partition(model)}"
   end
-
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url
@@ -71,8 +71,6 @@ class BaseUploader < CarrierWave::Uploader::Base
       ("%09d" % id).scan(/\d{3}/).join("/")
     when String
       id.scan(/.{3}/).first(3).join("/")
-    else
-      nil
     end
   end
 

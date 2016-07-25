@@ -1,6 +1,6 @@
 class Scrap::ParseVerdictContext < BaseContext
-  RESULT_URI = "http://jirs.judicial.gov.tw/FJUD/FJUDQRY02_1.aspx"
-  VERDICT_URI = "http://jirs.judicial.gov.tw/FJUD/FJUDQRY03_1.aspx"
+  RESULT_URI = "http://jirs.judicial.gov.tw/FJUD/FJUDQRY02_1.aspx".freeze
+  VERDICT_URI = "http://jirs.judicial.gov.tw/FJUD/FJUDQRY03_1.aspx".freeze
 
   before_perform :get_verdict_data
   before_perform :parse_orginal_data
@@ -22,7 +22,7 @@ class Scrap::ParseVerdictContext < BaseContext
     @type = type
     @start_date = start_date
     @end_date = end_date
-    @sleep_time_interval = rand(1)
+    @sleep_time_interval = rand(1..2)
   end
 
   def perform

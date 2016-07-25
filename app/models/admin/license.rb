@@ -17,8 +17,8 @@
 #  is_hidden    :boolean
 #
 
-class Admin::License < ::License  
+class Admin::License < ::License
   belongs_to :profile, class_name: "Admin::Profile"
 
-  validates_presence_of :profile_id, :license_type, :unit, :title
+  validates :profile_id, :license_type, :unit, :title, presence: true
 end

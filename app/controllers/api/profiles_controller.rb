@@ -12,7 +12,7 @@ class Api::ProfilesController < BaseController
       @profiles_count = Profile.shown.count
     else
       @profiles = Profile.includes(:punishments, :awards, :careers, :educations, :licenses).shown.order_by_name.ransack(ransack_params).result(distinct: true)
-        .offset(params[:offset]).limit(limit)
+                         .offset(params[:offset]).limit(limit)
       @profiles_count = Profile.ransack(ransack_params).result(distinct: true).shown.count
     end
     respond_with(@profiles, @profiles_count)
@@ -35,7 +35,7 @@ class Api::ProfilesController < BaseController
       @profiles_count = Profile.judges.shown.count
     else
       @profiles = Profile.includes(:punishments, :awards, :careers, :educations, :licenses).judges.shown.order_by_name.ransack(ransack_params).result(distinct: true)
-        .offset(params[:offset]).limit(limit)
+                         .offset(params[:offset]).limit(limit)
       @profiles_count = Profile.ransack(ransack_params).result(distinct: true).judges.shown.count
     end
     respond_with(@profiles, @profiles_count)
@@ -51,7 +51,7 @@ class Api::ProfilesController < BaseController
       @profiles_count = Profile.prosecutors.shown.count
     else
       @profiles = Profile.includes(:punishments, :awards, :careers, :educations, :licenses).prosecutors.shown.order_by_name.ransack(ransack_params).result(distinct: true)
-        .offset(params[:offset]).limit(limit)
+                         .offset(params[:offset]).limit(limit)
       @profiles_count = Profile.ransack(ransack_params).result(distinct: true).prosecutors.shown.count
     end
     respond_with(@profiles, @profiles_count)

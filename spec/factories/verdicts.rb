@@ -8,7 +8,7 @@
 #  updated_at       :datetime         not null
 #  file             :string
 #  is_judgment      :boolean          default(FALSE)
-#  defendant_names  :text
+#  party_names      :text
 #  lawyer_names     :text
 #  judges_names     :text
 #  prosecutor_names :text
@@ -20,14 +20,14 @@
 
 FactoryGirl.define do
   factory :verdict do
-    story { FactoryGirl.create(:story) }
+    story { create(:story) }
 
     trait :with_file do
       file { File.open("#{Rails.root}/spec/fixtures/scrap_data/judgment.html") }
     end
 
     trait :with_main_judge do
-      main_judge { FactoryGirl.create :judge }
+      main_judge { create :judge }
     end
   end
 

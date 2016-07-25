@@ -1,8 +1,8 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe ProfilesController, :type => :request do
-  let!(:profile){ FactoryGirl.create :profile }
-  
+RSpec.describe ProfilesController, type: :request do
+  let!(:profile) { create :profile }
+
   it "GET /profiles" do
     get "/profiles"
     expect(response).to be_success

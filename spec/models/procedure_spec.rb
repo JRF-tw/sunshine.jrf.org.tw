@@ -22,12 +22,12 @@
 #  updated_at        :datetime
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Procedure, type: :model do
-  
+
   it "has_many :procedures, dependent: :destroy" do
-    procedure = FactoryGirl.create :procedure
+    procedure = create :procedure
     expect(Procedure.count).to eq(1)
     suit = procedure.suit
     suit.destroy

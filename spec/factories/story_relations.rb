@@ -12,7 +12,7 @@
 
 FactoryGirl.define do
   factory :story_relation do
-    story { FactoryGirl.create :story }
-    people { FactoryGirl.create :judge }
+    story { create :story }
+    people { create :judge }
   end
 end

@@ -36,9 +36,9 @@
 
 class Admin::PunishmentsController < Admin::BaseController
   before_action :punishment
-  before_action{ add_crumb("個人檔案列表", admin_profiles_path) }
-  before_action{ add_crumb("#{@profile.name}的個人檔案", admin_profile_path(@profile)) }
-  before_action(except: [:index]){ add_crumb("#{@profile.name}的懲處紀錄列表", admin_profile_punishments_path(@profile)) }
+  before_action { add_crumb("個人檔案列表", admin_profiles_path) }
+  before_action { add_crumb("#{@profile.name}的個人檔案", admin_profile_path(@profile)) }
+  before_action(except: [:index]) { add_crumb("#{@profile.name}的懲處紀錄列表", admin_profile_punishments_path(@profile)) }
 
   def index
     @punishments = @profile.punishments.all.newest.page(params[:page]).per(10)
@@ -58,10 +58,10 @@ class Admin::PunishmentsController < Admin::BaseController
 
   def create
     if punishment.save
-        respond_to do |f|
-          f.html { redirect_to admin_profile_punishments_path(@profile), flash: { success: "#{@profile.name}的懲處紀錄 - 已新增" } }
-          f.js { render }
-        end
+      respond_to do |f|
+        f.html { redirect_to admin_profile_punishments_path(@profile), flash: { success: "#{@profile.name}的懲處紀錄 - 已新增" } }
+        f.js { render }
+      end
     else
       respond_to do |f|
         f.html {

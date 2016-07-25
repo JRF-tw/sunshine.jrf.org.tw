@@ -19,11 +19,11 @@
 
 class License < ActiveRecord::Base
   include HiddenOrNot
-	include TaiwanAge
+  include TaiwanAge
   tw_age_columns :publish_at
-  
+
   belongs_to :profile
 
-  scope :newest, ->{ order("id DESC") }
-  scope :order_by_publish_at, ->{ order("publish_at DESC, id DESC") }
+  scope :newest, -> { order("id DESC") }
+  scope :order_by_publish_at, -> { order("publish_at DESC, id DESC") }
 end

@@ -1,44 +1,43 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe Scrap::ImportCourtContext, :type => :model do
+RSpec.describe Scrap::ImportCourtContext, type: :model do
 
   describe "#perform" do
     let(:data_hash) { { scrap_name: "xxx", code: "TTT" } }
-    subject{ described_class.new(data_hash).perform }
+    subject { described_class.new(data_hash).perform }
 
     context "find court" do
       context "code match" do
-        let!(:court) { FactoryGirl.create(:court, code: "TTT") }
-        it { expect{ subject }.not_to change { Court.count } }
+        let!(:court) { create(:court, code: "TTT") }
+        it { expect { subject }.not_to change { Court.count } }
       end
 
       context "scrap_name match" do
-        let!(:court) { FactoryGirl.create(:court, scrap_name: "xxx") }
-        it { expect{ subject }.not_to change { Court.count } }
+        let!(:court) { create(:court, scrap_name: "xxx") }
+        it { expect { subject }.not_to change { Court.count } }
       end
 
       context "trip scrap_name match full_name" do
-        let!(:court) { FactoryGirl.create(:court, full_name: "xxx") }
+        let!(:court) { create(:court, full_name: "xxx") }
         let(:data_hash) { { scrap_name: "x x  x", code: "TTT" } }
-        it { expect{ subject }.not_to change { Court.count } }
+        it { expect { subject }.not_to change { Court.count } }
       end
     end
 
     context "create court" do
-      it { expect{ subject }.to change { Court.count }.by(1) }
+      it { expect { subject }.to change { Court.count }.by(1) }
     end
-
 
     context "update_name" do
       context "exist" do
-        let!(:court) { FactoryGirl.create(:court, code: "TTT") }
+        let!(:court) { create(:court, code: "TTT") }
         before { subject }
 
         it { expect(court.name).not_to eq(data_hash[:scrap_name]) }
       end
 
       context "unexist" do
-        let!(:court) { FactoryGirl.create(:court, name: nil, code: "TTT") }
+        let!(:court) { create(:court, name: nil, code: "TTT") }
         before { subject }
 
         it { expect(court.reload.name).to eq(data_hash[:scrap_name]) }
@@ -47,14 +46,14 @@ RSpec.describe Scrap::ImportCourtContext, :type => :model do
 
     context "update_full_name" do
       context "exist" do
-        let!(:court) { FactoryGirl.create(:court, code: "TTT") }
+        let!(:court) { create(:court, code: "TTT") }
         before { subject }
 
         it { expect(court.reload.full_name).not_to eq(data_hash[:scrap_name]) }
       end
 
       context "unexist" do
-        let!(:court) { FactoryGirl.create(:court, full_name: nil, code: "TTT") }
+        let!(:court) { create(:court, full_name: nil, code: "TTT") }
         before { subject }
 
         it { expect(court.reload.full_name).to eq(data_hash[:scrap_name]) }
@@ -62,14 +61,14 @@ RSpec.describe Scrap::ImportCourtContext, :type => :model do
     end
 
     context "update_scrap_name" do
-      let!(:court) { FactoryGirl.create(:court, scrap_name: "blablabla", code: "TTT") }
+      let!(:court) { create(:court, scrap_name: "blablabla", code: "TTT") }
       before { subject }
 
       it { expect(court.reload.scrap_name).to eq(data_hash[:scrap_name]) }
     end
 
     context "update_code" do
-      let!(:court) { FactoryGirl.create(:court, scrap_name: "xxx", code: "ABC") }
+      let!(:court) { create(:court, scrap_name: "xxx", code: "ABC") }
       before { subject }
 
       it { expect(court.reload.code).to eq(data_hash[:code]) }

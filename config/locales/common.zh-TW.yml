@@ -15,7 +15,8 @@ zh-TW:
       procedure: "評鑑資料-案例處理經過"
       banner: "首頁橫幅"
       suit_banner: "司法案例面面觀橫幅"
-      defendant: "當事人"
+      party: "當事人"
+      court_observer: "旁觀者"
     attributes:
       court:
         court_type: "類型"
@@ -24,6 +25,12 @@ zh-TW:
         weight: "顯示權重"
         is_hidden: "隱藏"
         scrap_name: "爬蟲名稱"
+      court_observer:
+        name: "姓名"
+        phone_number: "手機號碼"
+        school: "學校"
+        department_level: "系級"
+        student_number: "學號"
       profile:
         name: "姓名"
         current: "現職"
@@ -61,10 +68,13 @@ zh-TW:
         is_hidden: "隱藏"
       lawyer:
         name: "姓名"
+        password: "密碼"
         current: "現職"
         avatar: "頭像"
         gender: "性別"
         birth_year: "出生年"
+        phone_number: "手機"
+        office_number: "事務所電話"
         memo: "備註"
       education:
         title: "學經歷"
@@ -233,12 +243,13 @@ zh-TW:
         content: "內文"
         weight: "權重"
         is_hidden: "隱藏"
-      defendant:
+      party:
         id: "流水號"
         name: "姓名"
         identify_number: "身分證字號"
         phone_number: "手機號碼"
         password: "密碼"
+        password_confirmation: "密碼確認"
   ransack:
     attributes:
       profile:
@@ -266,7 +277,7 @@ zh-TW:
         content_cont: "內容包含"
         adjudge_date_eq: "宣判日期"
         main_judge_id_eq: "審判長法官"
-        unexist_defendant_names: "當事人為空值"
+        unexist_party_names: "當事人為空值"
         unexist_lawyer_names: "律師為空值"
         unexist_judges_names: "陪審法官為空值"
         unexist_prosecutor_names: "檢察官為空值"
@@ -285,13 +296,18 @@ zh-TW:
       lawyer:
         name_cont: "姓名包含"
         current_cont: "現職包含"
-      bystander:
+        email_cont: "email包含"
+      court_observer:
         name_cont: "姓名包含"
         email_cont: "EmaiL包含"
-      defendant:
+        school_cont: "學校包含"
+        department_level_cont: "系級包含"
+      party:
         name_cont: "姓名包含"
-  devise:
-    registrations:
-      bystander:
-        email_conflict: "e-mail 並未更改"
-
+        current_sign_in_ip_cont: "最後一次登入ip包含"
+        identify_number_cont: "身分證字號包含"
+        phone_number_cont: "電話號碼包含"
+        current_sign_in_at_gteq: "最後一次登入日期搜尋"
+        created_at_gteq: "註冊日期搜尋"
+        imposter_true: "是否為冒用者"
+        phone_confirmed_at_not_null: "是否已通過手機驗證"

@@ -25,9 +25,9 @@
 
 class Admin::ProceduresController < Admin::BaseController
   before_action :procedure
-  before_action{ add_crumb("評鑑資料 - 案例列表", admin_suits_path) }
-  before_action{ add_crumb("#{@suit.title}的評鑑資料 - 案例", admin_suit_path(@suit)) }
-  before_action(except: [:index]){ add_crumb("#{@suit.title}的案例處理經過列表", admin_suit_procedures_path(@suit)) }
+  before_action { add_crumb("評鑑資料 - 案例列表", admin_suits_path) }
+  before_action { add_crumb("#{@suit.title}的評鑑資料 - 案例", admin_suit_path(@suit)) }
+  before_action(except: [:index]) { add_crumb("#{@suit.title}的案例處理經過列表", admin_suit_procedures_path(@suit)) }
 
   def index
     @procedures = @suit.procedures.all.newest.page(params[:page]).per(10)
@@ -47,10 +47,10 @@ class Admin::ProceduresController < Admin::BaseController
 
   def create
     if procedure.save
-        respond_to do |f|
-          f.html { redirect_to admin_suit_procedures_path(@suit), flash: { success: "#{@suit.title}的案例處理經過 - 已新增" } }
-          f.js { render }
-        end
+      respond_to do |f|
+        f.html { redirect_to admin_suit_procedures_path(@suit), flash: { success: "#{@suit.title}的案例處理經過 - 已新增" } }
+        f.js { render }
+      end
     else
       respond_to do |f|
         f.html {

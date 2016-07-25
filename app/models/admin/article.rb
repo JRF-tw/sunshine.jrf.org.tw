@@ -29,8 +29,8 @@
 
 class Admin::Article < ::Article
   belongs_to :profile, class_name: "Admin::Profile"
-  
-  validates_presence_of :profile_id, :article_type
+
+  validates :profile_id, :article_type, presence: true
   validate :validate_publish_date
 
   ARTICLE_TYPES = [
@@ -42,7 +42,7 @@ class Admin::Article < ::Article
     "碩博士論文",
     "報告",
     "其他"
-  ]
+  ].freeze
 
   private
 

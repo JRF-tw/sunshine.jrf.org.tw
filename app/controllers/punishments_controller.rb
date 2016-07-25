@@ -35,7 +35,7 @@
 #
 
 class PunishmentsController < BaseController
-	before_action :get_instances
+  before_action :get_instances
 
   def index
     @punishments = @punishments.shown.page(params[:page]).per(12)
@@ -43,12 +43,12 @@ class PunishmentsController < BaseController
       title: "#{@profile.name}的懲處相關紀錄",
       description: "#{@profile.name}懲處紀錄。",
       keywords: "#{@profile.name}懲處紀錄,#{@profile.name}",
-      image: ActionController::Base.helpers.asset_path('hero-profiles-show-M.png')
+      image: ActionController::Base.helpers.asset_path("hero-profiles-show-M.png")
     )
   end
 
   def show
-  	@punishment = @profile.punishments.find(params[:id])
+    @punishment = @profile.punishments.find(params[:id])
     if @punishment.is_hidden?
       not_found
     end
@@ -56,14 +56,14 @@ class PunishmentsController < BaseController
       title: "#{@profile.name}的懲處紀錄內容",
       description: "#{@profile.name}懲處內容。",
       keywords: "#{@profile.name}懲處內容,#{@profile.name}",
-      image: ActionController::Base.helpers.asset_path('hero-profiles-show-M.png')
+      image: ActionController::Base.helpers.asset_path("hero-profiles-show-M.png")
     )
   end
 
   private
 
   def get_instances
-  	@profile = Profile.find(params[:profile_id])
+    @profile = Profile.find(params[:profile_id])
     if @profile.is_hidden?
       not_found
     end

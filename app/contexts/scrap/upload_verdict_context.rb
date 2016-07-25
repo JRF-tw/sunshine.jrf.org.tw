@@ -20,7 +20,7 @@ class Scrap::UploadVerdictContext < BaseContext
   private
 
   def bulid_tempfile
-    @file = Tempfile.new("verdict", "#{Rails.root.to_s}/tmp/")
+    @file = Tempfile.new("verdict", "#{Rails.root}/tmp/")
     @file.write(@content)
     @file.rewind
     @file.close

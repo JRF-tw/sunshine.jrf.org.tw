@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   devise :async
 
-  GENDER_TYPES = ["男", "女", "其他"]
+  GENDER_TYPES = ["男", "女", "其他"].freeze
 
-  ACTIVE_TYPES = ["在職", "未在職"]
+  ACTIVE_TYPES = ["在職", "未在職"].freeze
 end

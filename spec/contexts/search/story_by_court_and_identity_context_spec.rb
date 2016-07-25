@@ -1,8 +1,8 @@
-require 'rails_helper'
+require "rails_helper"
 
 describe Search::StoryByCourtAndIdentityContext do
-  let!(:court) { FactoryGirl.create :court, full_name: "測試法院" }
-  let!(:story) { FactoryGirl.create :story, court: court, year: 105, word_type: "聲", number: 111 }
+  let!(:court) { create :court, full_name: "測試法院" }
+  let!(:story) { create :story, court: court, year: 105, word_type: "聲", number: 111 }
 
   describe "#perform" do
     subject { described_class.new(court.full_name, story.year, story.word_type, story.number) }

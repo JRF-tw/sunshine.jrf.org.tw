@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Admin::BaseController do
   it ".authenticate_user!" do
@@ -8,13 +8,13 @@ RSpec.describe Admin::BaseController do
 
   context ".authenticate_admin_user!" do
     it "success" do
-      signin_user(FactoryGirl.create(:admin_user))
+      signin_user(create(:admin_user))
       get "/admin"
       expect(response).to be_success
     end
 
     it "not admin" do
-      signin_user(FactoryGirl.create(:user))
+      signin_user(create(:user))
       get "/admin"
       expect(response).not_to be_success
     end

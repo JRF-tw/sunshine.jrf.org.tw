@@ -8,10 +8,11 @@ class Scrap::ImportVerdictContext < BaseContext
   after_perform   :upload_file
   after_perform   :update_data_to_story
   after_perform   :update_adjudge_date
+  after_perform   :update_pronounce_date
   after_perform   :create_relation_for_lawyer
   after_perform   :create_relation_for_judge
   after_perform   :create_relation_for_main_judge
-  after_perform   :create_relation_for_defendant
+  after_perform   :create_relation_for_party
   after_perform   :record_count_to_daily_notify
 
   class << self
@@ -48,8 +49,8 @@ class Scrap::ImportVerdictContext < BaseContext
 
   def find_main_judge
     branches = @court.branches.current.where("chamber_name LIKE ? ", "%#{@stroy_type}%")
-    main_judges = branches.map{ |a| a.judge if a.judge.name == @analysis_context.main_judge_name }.compact.uniq
-    @main_judge = main_judges.count == 1 ?  main_judges.last : nil
+    main_judges = branches.map { |a| a.judge if a.judge.name == @analysis_context.main_judge_name }.compact.uniq
+    @main_judge = main_judges.count == 1 ? main_judges.last : nil
 
     unless main_judges.count == 1
       SlackService.notify_analysis_async("判決書關聯主審法官失敗 : 找到多位法官, 或者找不到任何法官\n 判決書類別 : #{@stroy_type}, 法官姓名 : #{@analysis_context.main_judge_name}, 法院 : #{@court.scrap_name}")
@@ -74,7 +75,7 @@ class Scrap::ImportVerdictContext < BaseContext
       judges_names: @analysis_context.judges_names,
       prosecutor_names: @analysis_context.prosecutor_names,
       lawyer_names: @analysis_context.lawyer_names,
-      defendant_names: @analysis_context.defendant_names
+      party_names: @analysis_context.party_names
     )
   end
 
@@ -90,36 +91,35 @@ class Scrap::ImportVerdictContext < BaseContext
     @story.assign_attributes(judges_names: (@story.judges_names + @verdict.judges_names).uniq)
     @story.assign_attributes(prosecutor_names: (@story.prosecutor_names + @verdict.prosecutor_names).uniq)
     @story.assign_attributes(lawyer_names: (@story.lawyer_names + @verdict.lawyer_names).uniq)
-    @story.assign_attributes(defendant_names: (@story.defendant_names + @verdict.defendant_names).uniq)
+    @story.assign_attributes(party_names: (@story.party_names + @verdict.party_names).uniq)
     @story.assign_attributes(main_judge: @main_judge) if @main_judge
-    @story.assign_attributes(is_adjudge: @verdict.is_judgment?) if @verdict.is_judgment? && !@story.is_adjudge
+    @story.assign_attributes(is_adjudge: @verdict.is_judgment?) if @verdict.is_judgment?
+    @story.assign_attributes(is_pronounce: @verdict.is_judgment?) if @verdict.is_judgment? && !@story.is_pronounce
     @story.save
   end
 
   def update_adjudge_date
     return unless @analysis_context.is_judgment?
-    @story.update_attributes(adjudge_date: Date.today) unless @story.adjudge_date
-    @verdict.update_attributes(adjudge_date: Date.today)
+    @story.update_attributes(adjudge_date: Time.zone.today) unless @story.adjudge_date
+    @verdict.update_attributes(adjudge_date: Time.zone.today)
+  end
+
+  def update_pronounce_date
+    return unless @analysis_context.is_judgment?
+    @story.update_attributes(pronounce_date: Time.zone.today) unless @story.pronounce_date
   end
 
   def create_relation_for_lawyer
     @verdict.lawyer_names.each do |name|
-      lawyers = Lawyer.where(name: name)
-      if lawyers.count == 1
-        @verdict.lawyer_verdicts.create(lawyer: lawyers.first)
-        StoryRelationCreateContext.new(@story).perform(name)
-      end
+      VerdictRelationCreateContext.new(@verdict).perform(name)
+      StoryRelationCreateContext.new(@story).perform(name)
     end
   end
 
   def create_relation_for_judge
     @verdict.judges_names.each do |name|
-      branches = @court.branches.current.where("chamber_name LIKE ? ", "%#{@stroy_type}%")
-      judges = branches.map{ |a| a.judge if a.judge.name == name }.compact.uniq
-      if judges.count == 1
-        @verdict.judge_verdicts.create(judge: judges.first)
-        StoryRelationCreateContext.new(@story).perform(name)
-      end
+      VerdictRelationCreateContext.new(@verdict).perform(name)
+      StoryRelationCreateContext.new(@story).perform(name)
     end
   end
 
@@ -127,13 +127,10 @@ class Scrap::ImportVerdictContext < BaseContext
     StoryRelationCreateContext.new(@story).perform(@verdict.main_judge.name) if @verdict.main_judge
   end
 
-  def create_relation_for_defendant
-    @verdict.defendant_names.each do |name|
-      defendants = Defendant.where(name: name)
-      if defendants.count == 1
-        @verdict.defendant_verdicts.create(defendant: defendants.first)
-        StoryRelationCreateContext.new(@story).perform(name)
-      end
+  def create_relation_for_party
+    @verdict.party_names.each do |name|
+      VerdictRelationCreateContext.new(@verdict).perform(name)
+      StoryRelationCreateContext.new(@story).perform(name)
     end
   end
 

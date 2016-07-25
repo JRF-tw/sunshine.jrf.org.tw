@@ -9,12 +9,12 @@
 #  updated_at :datetime
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe SuitJudge, type: :model do
-  
+
   it "has_many :suit_judges, dependent: :destroy" do
-    suit_judge = FactoryGirl.create :suit_judge
+    suit_judge = create :suit_judge
     expect(SuitJudge.count).to eq(1)
     judge = suit_judge.judge
     judge.destroy

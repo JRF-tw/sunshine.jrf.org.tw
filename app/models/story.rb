@@ -11,27 +11,30 @@
 #  number           :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
-#  defendant_names  :text
+#  party_names      :text
 #  lawyer_names     :text
 #  judges_names     :text
 #  prosecutor_names :text
 #  is_adjudge       :boolean          default(FALSE)
 #  adjudge_date     :date
+#  pronounce_date   :date
+#  is_pronounce     :boolean          default(FALSE)
 #
 
 class Story < ActiveRecord::Base
   has_many :schedules
   has_many :verdicts
   has_many :story_relations
+  has_many :story_subscriptions, dependent: :destroy
   belongs_to :main_judge, class_name: "Judge", foreign_key: "main_judge_id"
   belongs_to :court
 
-  serialize :defendant_names, Array
+  serialize :party_names, Array
   serialize :lawyer_names, Array
   serialize :judges_names, Array
   serialize :prosecutor_names, Array
 
-  scope :newest, ->{ order("id DESC") }
+  scope :newest, -> { order("id DESC") }
 
   def identity
     "#{year}-#{word_type}-#{number}"
@@ -49,7 +52,7 @@ class Story < ActiveRecord::Base
     story_relations.where(people_type: "Lawyer")
   end
 
-  def by_relation_defendants
-    story_relations.where(people_type: "Defendant")
+  def by_relation_parties
+    story_relations.where(people_type: "Party")
   end
 end

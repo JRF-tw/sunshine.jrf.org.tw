@@ -1,17 +1,27 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe BaseController, :type => :request do
+RSpec.describe BaseController, type: :request do
   it "GET /" do
     get "/"
     expect(response).to be_success
     expect(response_meta_title).to be_present
   end
 
+  describe "#who_are_you" do
+    before { get "/who-are-you" }
+    it { expect(response).to be_success }
+  end
+
+  describe "#who_are_you" do
+    before { get "/score-intro" }
+    it { expect(response).to be_success }
+  end
+
   it "GET /robots.txt" do
     get "/robots.txt"
     expect(response).to be_success
     expect(response.body).not_to match("<html")
-    expect{
+    expect {
       get "/robots"
     }.to raise_error(ActionController::RoutingError)
   end

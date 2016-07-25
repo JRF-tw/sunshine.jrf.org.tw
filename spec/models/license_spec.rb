@@ -16,10 +16,10 @@
 #  updated_at   :datetime
 #
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe License, type: :model do
-  let!(:license){ FactoryGirl.create :license }
+  let!(:license) { create :license }
 
   it "FactoryGirl" do
     expect(license).not_to be_new_record

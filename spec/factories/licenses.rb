@@ -20,7 +20,7 @@
 FactoryGirl.define do
   factory :license do
     profile do
-      FactoryGirl.create :profile
+      create :profile
     end
     license_type "haha"
     unit "foo"

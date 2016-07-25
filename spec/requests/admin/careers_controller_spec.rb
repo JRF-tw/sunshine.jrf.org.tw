@@ -1,12 +1,12 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Admin::CareersController do
-  let!(:profile){ FactoryGirl.create :profile }
+  let!(:profile) { create :profile }
 
-  before{ signin_user }
+  before { signin_user }
 
   describe "already had a career" do
-    let!(:career){ FactoryGirl.create :career, profile: profile }
+    let!(:career) { create :career, profile: profile }
 
     it "GET /admin/profiles/profile.id/careers" do
       get "/admin/profiles/#{profile.id}/careers"
@@ -24,9 +24,9 @@ RSpec.describe Admin::CareersController do
     end
 
     it "PUT /admin/profiles/profile.id/careers/123" do
-      expect{
+      expect {
         put "/admin/profiles/#{profile.id}/careers/#{career.id}", admin_career: { career_type: "haha" }
-      }.to change{ career.reload.career_type }.to("haha")
+      }.to change { career.reload.career_type }.to("haha")
       expect(response).to be_redirect
     end
 
@@ -37,9 +37,9 @@ RSpec.describe Admin::CareersController do
   end
 
   it "POST /admin/profiles/profile.id/careers" do
-    expect{
+    expect {
       post "/admin/profiles/#{profile.id}/careers", admin_career: FactoryGirl.attributes_for(:career)
-    }.to change{ Career.count }.by(1)
+    }.to change { Career.count }.by(1)
     expect(response).to be_redirect
   end
 end

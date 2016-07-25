@@ -22,7 +22,7 @@ class StoryRelationCreateContext < BaseContext
   private
 
   def find_people_type
-    @people_type = "Defendant" if @story.defendant_names.include?(@people_name)
+    @people_type = "Party" if @story.party_names.include?(@people_name)
     @people_type = "Lawyer" if @story.lawyer_names.include?(@people_name)
     @people_type = "Judge" if @story.judges_names.include?(@people_name)
 
@@ -34,7 +34,8 @@ class StoryRelationCreateContext < BaseContext
   end
 
   def find_people
-    @scoped = eval("#{@people_type}.where(name: \"#{@people_name}\")")
+    class_object = Object.const_get(@people_type)
+    @scoped = class_object.where(name: @people_name)
     @people = @scoped.first
   end
 

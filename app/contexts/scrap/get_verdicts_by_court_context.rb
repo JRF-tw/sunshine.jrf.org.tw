@@ -1,5 +1,5 @@
 class Scrap::GetVerdictsByCourtContext < BaseContext
-  INDEX_URI = "http://jirs.judicial.gov.tw/FJUD/FJUDQRY01_1.aspx"
+  INDEX_URI = "http://jirs.judicial.gov.tw/FJUD/FJUDQRY01_1.aspx".freeze
 
   before_perform :get_story_types
 
@@ -28,6 +28,6 @@ class Scrap::GetVerdictsByCourtContext < BaseContext
   def get_story_types
     response_data = Mechanize.new.get(INDEX_URI)
     response_data = Nokogiri::HTML(response_data.body)
-    @story_types = response_data.css("input[type='radio']").map{ |row| row.attribute("value").value }.uniq
+    @story_types = response_data.css("input[type='radio']").map { |row| row.attribute("value").value }.uniq
   end
 end

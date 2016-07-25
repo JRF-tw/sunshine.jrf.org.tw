@@ -12,5 +12,5 @@
 class SuitProsecutor < ActiveRecord::Base
   belongs_to :suit
   belongs_to :prosecutor, class_name: "Profile", foreign_key: :profile_id
-  validates_uniqueness_of :suit_id, scope: [:profile_id]
+  validates :suit_id, uniqueness: { scope: [:profile_id] }
 end
