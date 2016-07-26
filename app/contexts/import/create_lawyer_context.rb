@@ -2,7 +2,8 @@ class Import::CreateLawyerContext < BaseContext
   before_perform  :check_email_not_exist
   before_perform  :check_has_name_and_email
   before_perform  :phone_format_check
-  before_perform  :define_phone_type
+  before_perform  :assign_phone_number, if: :is_phone?
+  before_perform  :assign_office_number, unless: :is_phone?
   before_perform  :build_lawyer
 
   def initialize(lawyer_data)
@@ -31,12 +32,16 @@ class Import::CreateLawyerContext < BaseContext
     @lawyer_data[:phone] = "0" + @lawyer_data[:phone] if @lawyer_data[:phone].present? && @lawyer_data[:phone][0] != "0"
   end
 
-  def define_phone_type
-    if @lawyer_data[:phone][0, 2] == "09"
-      @lawyer_data[:phone_number] = @lawyer_data.delete(:phone)
-    else
-      @lawyer_data[:office_number] = @lawyer_data.delete(:phone)
-    end
+  def is_phone?
+    @lawyer_data[:phone] && @lawyer_data[:phone][0, 2] == "09"
+  end
+
+  def assign_phone_number
+    @lawyer_data[:phone_number] = @lawyer_data.delete(:phone)
+  end
+
+  def assign_office_number
+    @lawyer_data[:office_number] = @lawyer_data.delete(:phone)
   end
 
   def build_lawyer

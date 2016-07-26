@@ -1,8 +1,8 @@
 require "rails_helper"
 
 describe Import::GetLawyerContext do
-  let(:lawyer_data) { SmarterCSV.process("spec/fixtures/lawyers.csv") }
-  subject { described_class.new(lawyer_data).perform }
+  let(:lawyer_url) { "http://gist.githubusercontent.com/Aronyu127/raw/lawyer.csv/" }
+  subject { described_class.new(lawyer_url).perform }
 
   describe "#perform" do
     context "import four lawyers" do

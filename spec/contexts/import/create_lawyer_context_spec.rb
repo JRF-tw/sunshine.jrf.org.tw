@@ -32,10 +32,10 @@ describe Import::CreateLawyerContext do
     end
 
     context "transfer phone to office_number" do
-      let!(:lawyer_data) { { name: "孔令則", phone: 33_381_841, email: "hello88@gmail.com" } }
+      let!(:lawyer_data) { { name: "孔令則", phone: "0227810088,510", email: "hello88@gmail.com" } }
       before { subject }
 
-      it { expect(Lawyer.last.office_number).to eq("033381841") }
+      it { expect(Lawyer.last.office_number).to eq("0227810088,510") }
     end
 
     context "transfer phone to phone_number" do
