@@ -25,7 +25,7 @@ module Webmock
     stub_request(:get, /http:\/\/jirs\.judicial\.gov\.tw\/FJUD\/FJUDQRY03_1\.aspx/)
       .to_return(status: 200, body: File.read("#{Rails.root}/spec/fixtures/scrap_data/judgment.html"))
 
-    stub_request(:get, /http:\/\/gist\.githubusercontent\.com\/Aronyu127\/raw\/lawyer.csv/)
+    stub_request(:get, /http:\/\/gist\.githubusercontent\.com\/raw\/lawyer.csv/)
       .to_return(status: 200, body: File.read("#{Rails.root}/spec/fixtures/lawyers.csv"))
   end
 end
