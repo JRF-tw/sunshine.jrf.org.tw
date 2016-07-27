@@ -51,7 +51,7 @@ Rails.application.routes.draw do
         end
       end
     end
-    resources :stories, only: [] do
+    resources :stories, only: [:index, :show] do
       member do
         resource :subscribe, only: [:create]
       end
@@ -63,7 +63,6 @@ Rails.application.routes.draw do
     resource :appeal, only: [:new]
     resource :profile, only: [:show, :edit, :update]
     resource :email, only: [:edit, :update]
-    resources :scores, only: [:index, :edit, :show]
     resource :score do
       get "chose-type", to: "scores#chose_type"
       resources :schedules, only: [:new, :create, :edit, :update] do
@@ -74,7 +73,7 @@ Rails.application.routes.draw do
           post :checked_judge
         end
       end
-      resource :verdicts, only: [:new, :create, :edit, :update] do
+      resources :verdicts, only: [:new, :create, :edit, :update] do
         collection do
           get :rule
           post :checked_info

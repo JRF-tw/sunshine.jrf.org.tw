@@ -1,12 +1,25 @@
 class Lawyers::SchedulesController < Lawyers::BaseController
   layout "lawyer"
   include CrudConcern
-  before_action :schedule_score
+  before_action :schedule_score, except: [:edit, :update]
+  before_action :find_schedule_score, only: [:edit, :update]
+
+  def rule
+  end
 
   def new
   end
 
-  def rule
+  def edit
+  end
+
+  def update
+    context = Lawyer::ScheduleScoreUpdateContext.new(current_lawyer, @schedule_score)
+    if context.perform(schedule_score_params)
+      redirect_as_success(lawyer_story_path(@schedule_score.story), "更新成功")
+    else
+      render_as_fail(:edit, context.error_messages.join(","))
+    end
   end
 
   def checked_info
@@ -56,10 +69,14 @@ class Lawyers::SchedulesController < Lawyers::BaseController
   private
 
   def schedule_score_params
-    params.fetch(:schedule_score, {}).permit(:court_id, :year, :word_type, :number, :date, :confirmed_realdate, :judge_name, :rating_score, :note, :appeal_judge)
+    params.fetch(:schedule_score, {}).permit(:id, :court_id, :year, :word_type, :number, :date, :confirmed_realdate, :judge_name, :command_score, :attitude_score, :note, :appeal_judge)
   end
 
   def schedule_score
     @schedule_score = ScheduleScore.new(schedule_score_params)
+  end
+
+  def find_schedule_score
+    @schedule_score = current_lawyer.schedule_scores.find(params[:id])
   end
 end
