@@ -16,7 +16,7 @@
     .controls = "法官姓名 : #{@verdict_score.judge_name}"
   .form-group
     label.control-label
-    .controls = f.input :quality_score, label: "裁判品質評分", input_html: { min: "1", max: "5" }
+    .controls = f.input :rating_score, label: "裁判滿意度評分", input_html: { min: "1", max: "5" }
   .form-group
     label.control-label
     .controls = f.input :note, as: :text, label: false, hint: "請填寫註記"

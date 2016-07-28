@@ -1,7 +1,5 @@
 class Party::ScheduleScoreCreateContext < BaseContext
   PERMITS = [:court_id, :year, :word_type, :number, :date, :confirmed_realdate, :judge_name, :rating_score, :note, :appeal_judge].freeze
-  STORY_SCORED_COUNT = 3
-  PARTY_SCORED_COUNT = 3
 
   # before_perform :can_not_score
   before_perform :check_rating_score

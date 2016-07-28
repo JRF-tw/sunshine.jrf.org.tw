@@ -31,10 +31,9 @@ Rails.application.routes.draw do
   get "prosecutors", to: "profiles#prosecutors", as: :prosecutors
 
   namespace :observers, path: "/observer", as: "observer" do
-    root to: "scores#index"
+    root to: "stories#index"
     resource :profile, only: [:show, :edit, :update]
     resource :email, only: [:edit, :update]
-    resources :scores, only: [:index, :edit, :show]
     resource :score do
       get "chose-type", to: "scores#chose_type"
       resources :schedules, only: [:new, :create, :edit, :update] do
@@ -101,7 +100,6 @@ Rails.application.routes.draw do
         put :resend
       end
     end
-    resources :scores, only: [:index, :edit, :show]
     resource :score do
       get "chose-type", to: "scores#chose_type"
       resources :schedules, only: [:new, :create, :edit, :update] do
@@ -115,12 +113,13 @@ Rails.application.routes.draw do
       resources :verdicts, only: [:new, :create, :edit, :update] do
         collection do
           get :rule
+          get :thanks_scored
           post :checked_info
           post :checked_judge
         end
       end
     end
-    resources :stories do
+    resources :stories, only: [:index, :show] do
       member do
         resource :subscribe, only: [:create, :destroy]
       end

@@ -52,6 +52,6 @@ class Party::CheckScheduleScoreInfoContext < BaseContext
   end
 
   def story_already_adjudge
-    return add_error(:out_score_intervel, "已有判決書, 不可評鑑開庭") if @story.is_adjudge
+    return add_error(:out_score_intervel, "已有判決書, 不可評鑑開庭") if @story.adjudge_date.present?
   end
 end

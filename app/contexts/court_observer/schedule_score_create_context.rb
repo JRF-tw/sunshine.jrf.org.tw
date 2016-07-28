@@ -32,7 +32,9 @@ class CourtObserver::ScheduleScoreCreateContext < BaseContext
   end
 
   def check_story
-    @story = CourtObserver::CheckScheduleScoreInfoContext.new(@court_observer).perform(@params)
+    context = CourtObserver::CheckScheduleScoreInfoContext.new(@court_observer)
+    @story = context.perform(@params)
+    return add_error(:data_blank, context.error_messages.join(",")) unless @story
   end
 
   def check_schedule

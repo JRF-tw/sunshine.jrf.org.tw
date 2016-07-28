@@ -31,7 +31,7 @@ class Lawyers::SchedulesController < Lawyers::BaseController
       @status = "checked_info"
       render_as_success(:new)
     else
-      render_as_fail(:edit, context.error_messages.join(","))
+      render_as_fail(:new, context.error_messages.join(","))
     end
   end
 
@@ -81,6 +81,7 @@ class Lawyers::SchedulesController < Lawyers::BaseController
 
   def find_schedule_score
     @schedule_score = current_lawyer.schedule_scores.find(params[:id])
+    redirect_as_fail(lawyer_stories_path, "沒有該評鑑紀錄") unless @schedule_score
   end
 
   def story_adjudged?
