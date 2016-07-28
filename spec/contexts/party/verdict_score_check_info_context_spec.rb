@@ -40,12 +40,12 @@ describe Party::VerdictScoreCheckInfoContext do
 
     context "story not adjudge" do
       context "adjudge " do
-        before { story.update_attributes(is_adjudge: true) }
+        before { story.update_attributes(adjudge_date: Time.zone.today) }
         it { expect(subject).to be_truthy }
       end
 
       context "not adjudge" do
-        before { story.update_attributes(is_adjudge: false) }
+        before { story.update_attributes(adjudge_date: nil) }
         it { expect(subject).to be_falsey }
       end
     end

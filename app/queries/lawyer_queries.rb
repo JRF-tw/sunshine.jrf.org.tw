@@ -21,14 +21,14 @@ class LawyerQueries
     scores
   end
 
-  def pending_schedule_scores(story)
+  def pending_score_schedules(story)
     schedule_ids = story.schedules.map(&:id)
-    schedules = Schedule.where(id: schedule_ids)
+    scored_schedule_ids = @lawyer.schedule_scores.map(&:schedule_id).uniq
+    schedules = Schedule.where(id: schedule_ids - scored_schedule_ids)
     schedules
   end
 
-  def pending_verdict_score(story)
-    verdict_ids = @lawyer.verdict_scores.where(story: story)
-    verdict_ids.present? ? [] : Verdict.where(id: story.judgment_verdict.id)
+  def pending_score_verdict(story)
+    Verdict.find(story.judgment_verdict)
   end
 end

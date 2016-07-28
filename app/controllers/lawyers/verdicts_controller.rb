@@ -33,7 +33,7 @@ class Lawyers::VerdictsController < Lawyers::BaseController
       @status = "checked_info"
       render_as_success(:new)
     else
-      redirect_as_fail(lawyer_stories_path, context.error_messages.join(","))
+      render_as_fail(:new, context.error_messages.join(","))
     end
   end
 
@@ -43,7 +43,8 @@ class Lawyers::VerdictsController < Lawyers::BaseController
       @status = "checked_judge"
       render_as_success(:new)
     else
-      redirect_as_fail(lawyer_stories_path, context.error_messages.join(","))
+      @status = "checked_info"
+      render_as_fail(:new, context.error_messages.join(","))
     end
   end
 
@@ -52,7 +53,8 @@ class Lawyers::VerdictsController < Lawyers::BaseController
     if context.perform(verdict_score_params)
       redirect_as_success(thanks_scored_lawyer_score_verdicts_path, "評鑑已新增")
     else
-      redirect_as_fail(lawyer_stories_path, context.error_messages.join(","))
+      @status = "checked_judge"
+      render_as_fail(:new, context.error_messages.join(","))
     end
   end
 

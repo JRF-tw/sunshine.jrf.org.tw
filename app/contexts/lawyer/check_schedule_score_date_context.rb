@@ -7,7 +7,7 @@ class Lawyer::CheckScheduleScoreDateContext < BaseContext
   before_perform :future_date
   before_perform :find_story, unless: :report_realdate?
   before_perform :find_schedule, unless: :report_realdate?
-  before_perform :valid_score_intervel, unless: :report_realdate?
+  before_perform :valid_score_intervel
   after_perform :record_report_time, if: :report_realdate?
   after_perform :alert!, if: :report_realdate?
 
@@ -46,7 +46,7 @@ class Lawyer::CheckScheduleScoreDateContext < BaseContext
   end
 
   def valid_score_intervel
-    range = (@schedule.date..@schedule.date + SCORE_INTERVEL)
+    range = (@params[:date].to_date..@params[:date].to_date + SCORE_INTERVEL)
     return add_error(:out_score_intervel, "已超過可評鑑時間") unless range.include?(Time.zone.today)
   end
 

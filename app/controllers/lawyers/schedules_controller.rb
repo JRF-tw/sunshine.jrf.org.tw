@@ -17,8 +17,10 @@ class Lawyers::SchedulesController < Lawyers::BaseController
   def update
     context = Lawyer::ScheduleScoreUpdateContext.new(current_lawyer, @schedule_score)
     if context.perform(schedule_score_params)
-      redirect_as_success(lawyer_story_path(@schedule_score.story), "更新成功")
+      @status = "thanks_scored"
+      render_as_success(:new)
     else
+      context.errors
       render_as_fail(:edit, context.error_messages.join(","))
     end
   end
@@ -29,7 +31,7 @@ class Lawyers::SchedulesController < Lawyers::BaseController
       @status = "checked_info"
       render_as_success(:new)
     else
-      redirect_as_fail(lawyer_stories_path, context.error_messages.join(","))
+      render_as_fail(:edit, context.error_messages.join(","))
     end
   end
 
@@ -37,7 +39,8 @@ class Lawyers::SchedulesController < Lawyers::BaseController
     context = Lawyer::CheckScheduleScoreDateContext.new(current_lawyer)
     context.perform(schedule_score_params)
     if context.has_error?
-      redirect_as_fail(lawyer_stories_path, context.error_messages.join(","))
+      @status = "checked_info"
+      render_as_fail(:new, context.error_messages.join(","))
     else
       @status = "checked_date"
       render_as_success(:new)
@@ -50,7 +53,8 @@ class Lawyers::SchedulesController < Lawyers::BaseController
       @status = "checked_judge"
       render_as_success(:new)
     else
-      redirect_as_fail(lawyer_stories_path, context.error_messages.join(","))
+      @status = "checked_date"
+      render_as_fail(:new, context.error_messages.join(","))
     end
   end
 
@@ -60,7 +64,8 @@ class Lawyers::SchedulesController < Lawyers::BaseController
       @status = "thanks_scored"
       render_as_success(:new)
     else
-      redirect_as_fail(lawyer_stories_path, context.error_messages.join(","))
+      @status = "checked_judge"
+      render_as_fail(:new, context.error_messages.join(","))
     end
   end
 

@@ -55,12 +55,12 @@ describe Party::CheckScheduleScoreDateContext do
     before { params[:confirmed_realdate] = "true" }
 
     context "diff date" do
-      before { params[:date] = schedule.date - 20.days }
+      before { params[:date] = schedule.date - 14.days }
       it { expect(subject).to be_nil }
     end
 
     context "should alert slack over MAX_REPORT_TIME " do
-      before { params[:date] = schedule.date - 20.days }
+      before { params[:date] = schedule.date - 14.days }
       before { party.score_report_schedule_real_date.value = 4 }
 
       it { expect { subject }.to change { party.score_report_schedule_real_date.value } }

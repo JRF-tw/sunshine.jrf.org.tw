@@ -45,7 +45,7 @@ class Party::VerdictScoreCheckInfoContext < BaseContext
   end
 
   def story_not_adjudge
-    return add_error(:verdict_score_valid_failed, "尚未抓到判決書") unless @story.is_adjudge?
+    return add_error(:verdict_score_valid_failed, "尚未抓到判決書") unless @story.adjudge_date.present?
   end
 
   def valid_score_intervel
