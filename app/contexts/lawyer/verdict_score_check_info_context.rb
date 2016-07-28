@@ -9,6 +9,7 @@ class Lawyer::VerdictScoreCheckInfoContext < BaseContext
   before_perform :find_story
   before_perform :story_not_adjudge
   before_perform :valid_score_intervel
+  before_perform :already_scored
 
   def initialize(lawyer)
     @lawyer = lawyer
@@ -45,11 +46,15 @@ class Lawyer::VerdictScoreCheckInfoContext < BaseContext
   end
 
   def story_not_adjudge
-    return add_error(:verdict_score_valid_failed, "尚未抓到判決書") unless @story.is_adjudge?
+    return add_error(:verdict_score_valid_failed, "尚未抓到判決書") unless @story.adjudge_date.present?
   end
 
   def valid_score_intervel
     range = (@story.adjudge_date..@story.adjudge_date + SCORE_INTERVEL)
     return add_error(:out_score_intervel, "已超過可評鑑時間") unless range.include?(Time.zone.today)
+  end
+
+  def already_scored
+    return add_error(:out_score_intervel, "判決已評鑑") if @lawyer.verdict_scores.where(story: @story).count > 0
   end
 end

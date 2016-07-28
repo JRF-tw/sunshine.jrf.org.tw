@@ -76,6 +76,7 @@ Rails.application.routes.draw do
       resources :verdicts, only: [:new, :create, :edit, :update] do
         collection do
           get :rule
+          get :thanks_scored
           post :checked_info
           post :checked_judge
         end

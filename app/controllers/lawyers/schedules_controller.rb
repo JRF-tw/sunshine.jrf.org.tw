@@ -3,6 +3,7 @@ class Lawyers::SchedulesController < Lawyers::BaseController
   include CrudConcern
   before_action :schedule_score, except: [:edit, :update]
   before_action :find_schedule_score, only: [:edit, :update]
+  before_action :story_adjudged?, only: [:edit, :update]
 
   def rule
   end
@@ -28,7 +29,7 @@ class Lawyers::SchedulesController < Lawyers::BaseController
       @status = "checked_info"
       render_as_success(:new)
     else
-      render_as_fail(:new, context.error_messages.join(","))
+      redirect_as_fail(lawyer_stories_path, context.error_messages.join(","))
     end
   end
 
@@ -36,8 +37,7 @@ class Lawyers::SchedulesController < Lawyers::BaseController
     context = Lawyer::CheckScheduleScoreDateContext.new(current_lawyer)
     context.perform(schedule_score_params)
     if context.has_error?
-      @status = "checked_info"
-      render_as_fail(:new, context.error_messages.join(","))
+      redirect_as_fail(lawyer_stories_path, context.error_messages.join(","))
     else
       @status = "checked_date"
       render_as_success(:new)
@@ -50,8 +50,7 @@ class Lawyers::SchedulesController < Lawyers::BaseController
       @status = "checked_judge"
       render_as_success(:new)
     else
-      @status = "checked_date"
-      render_as_fail(:new, context.error_messages.join(","))
+      redirect_as_fail(lawyer_stories_path, context.error_messages.join(","))
     end
   end
 
@@ -61,8 +60,7 @@ class Lawyers::SchedulesController < Lawyers::BaseController
       @status = "thanks_scored"
       render_as_success(:new)
     else
-      @status = "checked_judge"
-      render_as_fail(:new, context.error_messages.join(","))
+      redirect_as_fail(lawyer_stories_path, context.error_messages.join(","))
     end
   end
 
@@ -78,5 +76,9 @@ class Lawyers::SchedulesController < Lawyers::BaseController
 
   def find_schedule_score
     @schedule_score = current_lawyer.schedule_scores.find(params[:id])
+  end
+
+  def story_adjudged?
+    redirect_as_fail(lawyer_stories_path, "案件已判決") if @schedule_score.story.adjudge_date.present?
   end
 end

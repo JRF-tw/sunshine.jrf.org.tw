@@ -40,7 +40,9 @@ class Lawyer::ScheduleScoreCreateContext < BaseContext
   end
 
   def check_story
-    @story = Lawyer::CheckScheduleScoreInfoContext.new(@lawyer).perform(@params)
+    context = Lawyer::CheckScheduleScoreInfoContext.new(@lawyer)
+    @story = context.perform(@params)
+    return add_error(:data_blank, context.error_messages.join(",")) unless @story
   end
 
   def check_schedule
