@@ -76,7 +76,7 @@ describe "新增編輯評鑑 - 開庭評鑑", type: :request do
         end
 
         context "已抓到判決書" do
-          before { story.update_attributes(is_adjudge: true) }
+          before { story.update_attributes(adjudge_date: Time.zone.today) }
           let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number } }
           subject! { post "/lawyer/score/schedules/checked_info", schedule_score: params }
 
@@ -249,7 +249,7 @@ describe "新增編輯評鑑 - 開庭評鑑", type: :request do
         subject! { post "/lawyer/score/schedules/checked_judge", schedule_score: params }
 
         it "顯示錯誤訊息" do
-          expect(response).to be_success
+          expect(response).to be_redirect
           expect(flash[:error]).to match("法官姓名不能為空")
         end
       end
@@ -259,7 +259,7 @@ describe "新增編輯評鑑 - 開庭評鑑", type: :request do
         subject! { post "/lawyer/score/schedules/checked_judge", schedule_score: params }
 
         it "顯示錯誤訊息" do
-          expect(response).to be_success
+          expect(response).to be_redirect
           expect(flash[:error]).to match("法官不存在該法院")
         end
       end
@@ -271,7 +271,7 @@ describe "新增編輯評鑑 - 開庭評鑑", type: :request do
         subject! { post "/lawyer/score/schedules/checked_judge", schedule_score: params }
 
         it "顯示錯誤訊息" do
-          expect(response).to be_success
+          expect(response).to be_redirect
           expect(flash[:error]).to match("沒有該位法官")
         end
       end

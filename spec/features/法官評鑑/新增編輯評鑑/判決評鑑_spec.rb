@@ -64,7 +64,7 @@ describe "新增編輯評鑑 - 判決評鑑", type: :request do
       end
 
       context "尚未抓到判決書" do
-        before { story.update_attributes(is_adjudge: false) }
+        before { story.update_attributes(adjudge_date: nil) }
         subject! { post "/lawyer/score/verdicts/checked_info", verdict_score: params }
 
         it "顯示錯誤訊息" do
@@ -144,7 +144,8 @@ describe "新增編輯評鑑 - 判決評鑑", type: :request do
 
         it "跳到感謝頁面" do
           subject
-          expect(response).to be_success
+          expect(response).to be_redirect
+          follow_redirect!
           expect(response.body).to match("感謝您的評鑑")
         end
 

@@ -53,7 +53,7 @@ describe "案件狀態和開庭、判決評鑑與否", type: :request do
   end
 
   context "Given 案件有宣判日，且宣判日在過去，但尚無判決日（尚未抓到判決書）" do
-    before { story.update_attributes(pronounce_date: Time.zone.today - 1.days) }
+    before { story.update_attributes(pronounce_date: Time.zone.today - 1.day) }
 
     context "When 到新增開庭評鑑頁面時" do
       let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number } }
@@ -100,7 +100,7 @@ describe "案件狀態和開庭、判決評鑑與否", type: :request do
       subject { post "/lawyer/score/schedules", schedule_score: params }
 
       it "Then 結果會失敗" do
-        expect{ subject }.not_to change{ lawyer.schedule_scores.count }
+        expect { subject }.not_to change { lawyer.schedule_scores.count }
       end
     end
 
@@ -110,7 +110,7 @@ describe "案件狀態和開庭、判決評鑑與否", type: :request do
       subject { put "/lawyer/score/schedules/#{schedule_score.id}", schedule_score: params }
 
       it "Then 結果會失敗" do
-        expect{ subject }.not_to change{ schedule_score.command_score }
+        expect { subject }.not_to change { schedule_score.command_score }
       end
     end
 
@@ -158,7 +158,7 @@ describe "案件狀態和開庭、判決評鑑與否", type: :request do
       subject { post "/lawyer/score/verdicts", verdict_score: params }
 
       it "Then 結果失敗" do
-        expect{ subject }.not_to change { lawyer.verdict_scores.count }
+        expect { subject }.not_to change { lawyer.verdict_scores.count }
       end
     end
 
@@ -203,14 +203,14 @@ describe "案件狀態和開庭、判決評鑑與否", type: :request do
       subject { post "/lawyer/score/verdicts", verdict_score: params }
 
       it "Then 結果失敗" do
-        expect{ subject }.not_to change { lawyer.verdict_scores.count }
+        expect { subject }.not_to change { lawyer.verdict_scores.count }
       end
     end
 
     xit "When 到編輯判決評鑑頁面時" do
       # subject! { get "/lawyer/score/verdicts/#{verdict_score.id}/edit" }
 
-      # it "Then 頁面成功讀取" do
+      # it "" do
       #   expect(response).to be_success
       # end
     end
@@ -219,13 +219,12 @@ describe "案件狀態和開庭、判決評鑑與否", type: :request do
       # let!(:params) { { quality_score: 2 } }
       # subject! { put "/lawyer/score/verdicts/#{verdict_score.id}", verdict_score: params }
 
-      # it "Then 轉跳至感謝頁面" do
+      # it "" do
       #   expect(response).to be_redirect
       #   follow_redirect!
-      #   expect(response.body).to match("感謝您的評鑑")
+      #   expect(response.body).to match("")
       # end
-
-      # it "Then 資料成功更新" do
+      # it "" do
       #   expect(verdict_score.reload.quality_score).to eq(2)
       # end
     end
@@ -250,7 +249,7 @@ describe "案件狀態和開庭、判決評鑑與否", type: :request do
       subject { post "/lawyer/score/verdicts", verdict_score: params }
 
       it "Then 結果失敗" do
-        expect{ subject }.not_to change { lawyer.verdict_scores.count }
+        expect { subject }.not_to change { lawyer.verdict_scores.count }
       end
     end
 
