@@ -8,7 +8,6 @@ gem "redis"
 gem "redis-objects", require: "redis/objects"
 gem "redis-namespace"
 
-
 gem "dalli"
 gem "connection_pool"
 
