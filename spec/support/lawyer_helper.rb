@@ -23,4 +23,11 @@ module LawyerHelper
     @lawyer
   end
 
+  def lawyer_subscribe_story_date_today
+    lawyer = create(:lawyer, :with_confirmed, :with_password)
+    story = create(:story, :with_schedule_date_today)
+    StorySubscriptionCreateContext.new(story).perform(lawyer)
+    lawyer
+  end
+
 end

@@ -1,0 +1,6 @@
+p = "律師 #{@lawyer.name}(#{@lawyer.email})"
+
+p = "您訂閱的案件#{@story.identity}將於明日開庭"  
+
+
+div = link_to "取消訂閱", lawyer_subscribe_url(@story), method: :delete, class: "btn btn-mini"

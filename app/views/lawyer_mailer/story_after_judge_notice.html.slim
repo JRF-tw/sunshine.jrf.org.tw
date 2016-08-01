@@ -1,0 +1,10 @@
+p = "律師 #{@lawyer.name}(#{@lawyer.email})"
+
+p = "您訂閱的案件#{@story.identity}已於昨日開庭完畢"
+
+p 請您於以下連結進行評鑑
+
+p = link_to "評鑑開庭流程", new_lawyer_score_schedules_url
+
+
+div = link_to "取消訂閱", lawyer_subscribe_url(@story), method: :delete, class: "btn btn-mini"
