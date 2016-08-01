@@ -38,7 +38,7 @@ RSpec.describe Admin::ReviewsController do
 
   it "POST /admin/profiles/profile.id/reviews" do
     expect {
-      post "/admin/profiles/#{profile.id}/reviews", admin_review: FactoryGirl.attributes_for(:review)
+      post "/admin/profiles/#{profile.id}/reviews", admin_review: attributes_for(:review)
     }.to change { Review.count }.by(1)
     expect(response).to be_redirect
   end

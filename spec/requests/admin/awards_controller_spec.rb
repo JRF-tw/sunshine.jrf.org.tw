@@ -38,7 +38,7 @@ RSpec.describe Admin::AwardsController do
 
   it "POST /admin/profiles/profile.id/awards" do
     expect {
-      post "/admin/profiles/#{profile.id}/awards", admin_award: FactoryGirl.attributes_for(:award)
+      post "/admin/profiles/#{profile.id}/awards", admin_award: attributes_for(:award)
     }.to change { Award.count }.by(1)
     expect(response).to be_redirect
   end

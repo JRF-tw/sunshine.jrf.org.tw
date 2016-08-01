@@ -26,13 +26,13 @@ RSpec.describe Admin::UsersController do
   context "POST /admin/users" do
     it "success" do
       expect {
-        post "/admin/users", user: FactoryGirl.attributes_for(:creating_user)
+        post "/admin/users", user: attributes_for(:creating_user)
       }.to change { User.count }.by(1)
       expect(response).to be_redirect
     end
     it "fail" do
       expect {
-        post "/admin/users", user: FactoryGirl.attributes_for(:creating_user).merge(email: "")
+        post "/admin/users", user: attributes_for(:creating_user).merge(email: "")
       }.not_to change { User.count }
       expect(response).not_to be_redirect
     end

@@ -38,7 +38,7 @@ RSpec.describe Admin::LicensesController do
 
   it "POST /admin/profiles/profile.id/licenses" do
     expect {
-      post "/admin/profiles/#{profile.id}/licenses", admin_license: FactoryGirl.attributes_for(:license)
+      post "/admin/profiles/#{profile.id}/licenses", admin_license: attributes_for(:license)
     }.to change { License.count }.by(1)
     expect(response).to be_redirect
   end

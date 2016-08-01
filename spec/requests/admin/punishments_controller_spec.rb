@@ -38,7 +38,7 @@ RSpec.describe Admin::PunishmentsController do
 
   it "POST /admin/profiles/profile.id/punishments" do
     expect {
-      post "/admin/profiles/#{profile.id}/punishments", admin_punishment: FactoryGirl.attributes_for(:punishment)
+      post "/admin/profiles/#{profile.id}/punishments", admin_punishment: attributes_for(:punishment)
     }.to change { Punishment.count }.by(1)
     expect(response).to be_redirect
   end
