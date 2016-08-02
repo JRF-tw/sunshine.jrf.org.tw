@@ -1,7 +1,7 @@
 class StorySubscriptionCreateContext < BaseContext
 
-  before_perform :check_party_confirmed
-  before_perform :check_lawyer_registered
+  before_perform :check_party_confirmed, if: :is_party?
+  before_perform :check_lawyer_registered, if: :is_lawyer?
   before_perform :build_data
 
   def initialize(story)
@@ -19,14 +19,20 @@ class StorySubscriptionCreateContext < BaseContext
     end
   end
 
+  def is_party?
+    @subscriber.class == Party
+  end
+
+  def is_lawyer?
+    @subscriber.class == Lawyer
+  end
+
   def check_party_confirmed
-    add_error(:story_subscriber_valid_failed, "訂閱案件前請先完成驗證") if @subscriber.class == Party && !@subscriber.confirmed?
+    add_error(:story_subscriber_valid_failed, "訂閱案件前請先完成驗證") unless @subscriber.confirmed?
   end
 
   def check_lawyer_registered
-    if @subscriber.class == Lawyer
-      add_error(:story_subscriber_valid_failed, "訂閱案件前請先註冊與設定密碼") unless @subscriber.confirmed? && @subscriber.password.present?
-    end
+    add_error(:story_subscriber_valid_failed, "訂閱案件前請先註冊與設定密碼") unless @subscriber.confirmed? && @subscriber.password.present?
   end
 
   def build_data
