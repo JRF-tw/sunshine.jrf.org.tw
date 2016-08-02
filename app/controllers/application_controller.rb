@@ -34,6 +34,3 @@ class ApplicationController < ActionController::Base
 end
 
 require "base_controller"
-require "parties/base_controller"
-require "observers/base_controller"
-require "lawyers/base_controller"
