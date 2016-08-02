@@ -1,6 +1,35 @@
 require "rails_helper"
 
 describe "律師案件通知", type: :request do
+  context "可訂閱與否" do
+    let(:story) { create(:story) }
+    let(:context) { StorySubscriptionCreateContext.new(story) }
+
+    context "Given 有設定密碼 (即已註冊)" do
+      let!(:lawyer) { create(:lawyer, :with_password, :with_confirmed) }
+
+      context "When 訂閱案件" do
+        subject { context.perform(lawyer) }
+
+        it "Then 可以訂閱" do
+          expect { subject }.to change { StorySubscription.count }.by(1)
+        end
+      end
+    end
+
+    context "Given 尚未註冊" do
+      let!(:lawyer) { create(:lawyer, :with_password) }
+
+      context "When 訂閱案件" do
+        subject { context.perform(lawyer) }
+
+        it "Then 訂閱失敗" do
+          expect { subject }.not_to change { StorySubscription.count }
+        end
+      end
+    end
+  end
+
   context "已訂閱的案件" do
     let!(:lawyer) { lawyer_subscribe_story_date_today }
 
