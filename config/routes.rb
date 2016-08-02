@@ -5,21 +5,21 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => "/sidekiq"
 
   devise_for :users
-  devise_for :party, controllers: { registrations: "party/registrations", sessions: "party/sessions", passwords: "party/passwords", confirmations: "party/confirmations" }
-  devise_for :court_observer, path: "observer", controllers: { registrations: "observer/registrations", sessions: "observer/sessions", passwords: "observer/passwords", confirmations: "observer/confirmations" }
-  devise_for :lawyer, controllers: { registrations: "lawyer/registrations", sessions: "lawyer/sessions", passwords: "lawyer/passwords", confirmations: "lawyer/confirmations" }
+  devise_for :party, controllers: { registrations: "parties/registrations", sessions: "parties/sessions", passwords: "parties/passwords", confirmations: "parties/confirmations" }
+  devise_for :court_observer, path: "observer", controllers: { registrations: "observers/registrations", sessions: "observers/sessions", passwords: "observers/passwords", confirmations: "observers/confirmations" }
+  devise_for :lawyer, controllers: { registrations: "lawyers/registrations", sessions: "lawyers/sessions", passwords: "lawyers/passwords", confirmations: "lawyers/confirmations" }
 
   # custom devise scope
   devise_scope :lawyer do
-    post "/lawyer/password/send_reset_password_mail", to: "lawyer/passwords#send_reset_password_mail"
+    post "/lawyer/password/send_reset_password_mail", to: "lawyers/passwords#send_reset_password_mail"
   end
 
   devise_scope :court_observer do
-    post "/observer/password/send_reset_password_mail", to: "observer/passwords#send_reset_password_mail"
+    post "/observer/password/send_reset_password_mail", to: "observers/passwords#send_reset_password_mail"
   end
 
   devise_scope :party do
-    post "/party/password/send_reset_password_sms", to: "party/passwords#send_reset_password_sms"
+    post "/party/password/send_reset_password_sms", to: "parties/passwords#send_reset_password_sms"
   end
 
   # f2e
@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   get "judges", to: "profiles#judges", as: :judges
   get "prosecutors", to: "profiles#prosecutors", as: :prosecutors
 
-  namespace :observer do
+  namespace :observers, path: "/observer", as: "observer" do
     root to: "scores#index"
     resource :profile, only: [:show, :edit, :update]
     resource :email, only: [:edit, :update]
@@ -57,7 +57,7 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :lawyer do
+  namespace :lawyers, path: "/lawyer", as: "lawyer" do
     root to: "scores#index"
     resource :appeal, only: [:new]
     resource :profile, only: [:show, :edit, :update]
@@ -85,7 +85,7 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :party do
+  namespace :parties, path: "/party", as: "party" do
     root to: "scores#index"
     resource :profile, only: [:show, :edit, :update]
     resource :appeal, only: [:new]

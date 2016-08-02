@@ -50,7 +50,7 @@ describe "律師註冊", type: :request do
 
         it "顯示查無此律師" do
           expect(flash[:error]).to eq("查無此律師資料 請改以人工管道註冊 <a href='/lawyer/appeal/new'>點此註冊</a>")
-          expect(response).to render_template("lawyer/registrations/new")
+          expect(response).to render_template("lawyers/registrations/new")
         end
       end
 
@@ -59,7 +59,7 @@ describe "律師註冊", type: :request do
 
         it "顯示查無此律師" do
           expect(flash[:error]).to eq("查無此律師資料 請改以人工管道註冊 <a href='/lawyer/appeal/new'>點此註冊</a>")
-          expect(response).to render_template("lawyer/registrations/new")
+          expect(response).to render_template("lawyers/registrations/new")
         end
       end
 
@@ -68,7 +68,7 @@ describe "律師註冊", type: :request do
 
         it "顯示查無此律師" do
           expect(flash[:error]).to eq("查無此律師資料 請改以人工管道註冊 <a href='/lawyer/appeal/new'>點此註冊</a>")
-          expect(response).to render_template("lawyer/registrations/new")
+          expect(response).to render_template("lawyers/registrations/new")
         end
       end
     end
@@ -79,7 +79,7 @@ describe "律師註冊", type: :request do
 
       it "顯示未勾選同意條款" do
         expect(flash[:error]).to eq("您尚未勾選同意條款")
-        expect(response).to render_template("lawyer/registrations/new")
+        expect(response).to render_template("lawyers/registrations/new")
       end
     end
 
@@ -89,7 +89,7 @@ describe "律師註冊", type: :request do
 
         it "顯示格式錯誤訊息" do
           expect(flash[:error]).to eq("姓名不可為空白字元")
-          expect(response).to render_template("lawyer/registrations/new")
+          expect(response).to render_template("lawyers/registrations/new")
         end
       end
 
@@ -98,7 +98,7 @@ describe "律師註冊", type: :request do
 
         it "顯示查無此律師" do
           expect(flash[:error]).to eq("查無此律師資料 請改以人工管道註冊 <a href='/lawyer/appeal/new'>點此註冊</a>")
-          expect(response).to render_template("lawyer/registrations/new")
+          expect(response).to render_template("lawyers/registrations/new")
         end
       end
 
@@ -107,7 +107,7 @@ describe "律師註冊", type: :request do
 
         it "顯示格式錯誤訊息" do
           expect(flash[:error]).to eq("email不可為空白字元")
-          expect(response).to render_template("lawyer/registrations/new")
+          expect(response).to render_template("lawyers/registrations/new")
         end
       end
     end
