@@ -32,5 +32,3 @@ class ApplicationController < ActionController::Base
   end
 
 end
-
-require "base_controller"
