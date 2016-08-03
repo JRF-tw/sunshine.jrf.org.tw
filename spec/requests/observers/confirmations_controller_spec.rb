@@ -7,7 +7,7 @@ RSpec.describe Observers::ConfirmationsController, type: :request do
     context "first confirm" do
       subject { get "/observer/confirmation", confirmation_token: CourtObserver.last.confirmation_token }
 
-      it { expect(subject).to redirect_to("/observer/sign_in") }
+      it { expect(subject).to redirect_to("/observer") }
       it { expect { subject }.to change { CourtObserver.last.confirmed_at } }
     end
 

@@ -37,6 +37,10 @@ FactoryGirl.define do
     trait :with_unconfirmed_email do
       unconfirmed_email "aron1122@gmail.com"
     end
+
+    trait :without_confirm do
+      confirmed_at nil
+    end
   end
 
   factory :court_observer_without_validate, class: CourtObserver do
