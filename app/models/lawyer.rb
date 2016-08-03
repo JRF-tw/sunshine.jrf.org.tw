@@ -32,6 +32,7 @@
 class Lawyer < ActiveRecord::Base
   has_many :story_relations, as: :people
   has_many :verdict_relations, as: :person
+  has_many :story_subscriptions, as: :subscriber, dependent: :destroy
   devise :database_authenticatable, :registerable, :async, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 

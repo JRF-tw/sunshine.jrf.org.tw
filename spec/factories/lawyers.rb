@@ -44,7 +44,7 @@ FactoryGirl.define do
     end
 
     trait :with_confirmed do
-      confirmed_at Time.now
+      after(:create, &:confirm)
     end
 
     trait :with_gender do

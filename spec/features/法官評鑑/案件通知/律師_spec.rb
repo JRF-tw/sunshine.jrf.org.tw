@@ -1,37 +1,37 @@
 require "rails_helper"
 
-describe "當事人案件通知", type: :request do
+describe "律師案件通知", type: :request do
   context "可訂閱與否" do
     let(:story) { create(:story) }
-    let(:context) { Party::StorySubscriptionCreateContext.new(story) }
+    let(:context) { Lawyer::StorySubscriptionCreateContext.new(story) }
 
-    context "有通過email驗證" do
-      let!(:party) { create(:party, :already_confirmed) }
+    context "Given 有設定密碼 (即已註冊)" do
+      let!(:lawyer) { create(:lawyer, :with_password, :with_confirmed) }
 
-      it "可以訂閱" do
-        expect { context.perform(party) }.to change { StorySubscription.count }.by(1)
+      context "When 訂閱案件" do
+        subject { context.perform(lawyer) }
+
+        it "Then 可以訂閱" do
+          expect { subject }.to change { StorySubscription.count }.by(1)
+        end
       end
     end
 
-    context "沒有通過驗證的email 但有正在驗證中的email" do
-      let!(:party) { create(:party, :with_unconfirmed_email) }
+    context "Given 尚未註冊" do
+      let!(:lawyer) { create(:lawyer, :with_password) }
 
-      it "不可訂閱" do
-        expect { context.perform(party) }.not_to change { StorySubscription.count }
-      end
-    end
+      context "When 訂閱案件" do
+        subject { context.perform(lawyer) }
 
-    context "沒有通過驗證的email 也沒有正在驗證中的email" do
-      let!(:party) { create(:party) }
-
-      it "不可訂閱" do
-        expect { context.perform(party) }.not_to change { StorySubscription.count }
+        it "Then 訂閱失敗" do
+          expect { subject }.not_to change { StorySubscription.count }
+        end
       end
     end
   end
 
   context "已訂閱的案件" do
-    let!(:party) { party_subscribe_story_date_today }
+    let!(:lawyer) { lawyer_subscribe_story_date_today }
 
     context "開庭前「一天」會進行 email 開庭通知" do
       before { Timecop.freeze(Time.zone.today - 1) }
@@ -55,9 +55,9 @@ describe "當事人案件通知", type: :request do
   end
 
   context "取消訂閱" do
-    let!(:party) { party_subscribe_story_date_today }
+    let!(:lawyer) { lawyer_subscribe_story_date_today }
     context "案件已訂閱" do
-      before { StorySubscriptionDeleteContext.new(Story.last).perform(party) }
+      before { StorySubscriptionDeleteContext.new(Story.last).perform(lawyer) }
 
       it "成功取消" do
         expect(StorySubscription.count).to eq(0)
@@ -85,9 +85,9 @@ describe "當事人案件通知", type: :request do
     end
 
     context "案件未訂閱" do
-      let!(:party) { create(:party, :already_confirmed) }
+      let!(:lawyer) { create(:lawyer, :with_confirmed, :with_password) }
       let!(:story) { create(:story, :with_schedule_date_today) }
-      subject { StorySubscriptionDeleteContext.new(story).perform(party) }
+      subject { StorySubscriptionDeleteContext.new(story).perform(lawyer) }
 
       it "不變" do
         expect { subject }.not_to change { StorySubscription.count }

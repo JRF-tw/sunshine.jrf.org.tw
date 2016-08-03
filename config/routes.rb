@@ -80,7 +80,7 @@ Rails.application.routes.draw do
     end
     resources :stories, only: [] do
       member do
-        resource :subscribe, only: [:create]
+        resource :subscribe, only: [:create, :destroy]
       end
     end
   end
