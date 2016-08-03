@@ -3,7 +3,7 @@ require "rails_helper"
 describe "律師案件通知", type: :request do
   context "可訂閱與否" do
     let(:story) { create(:story) }
-    let(:context) { StorySubscriptionCreateContext.new(story) }
+    let(:context) { Lawyer::StorySubscriptionCreateContext.new(story) }
 
     context "Given 有設定密碼 (即已註冊)" do
       let!(:lawyer) { create(:lawyer, :with_password, :with_confirmed) }
