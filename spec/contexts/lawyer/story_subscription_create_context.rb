@@ -2,18 +2,25 @@ require "rails_helper"
 
 describe Lawyer::StorySubscriptionCreateContext do
   let!(:story) { create :story }
-  subject { described_class.new(story) }
+  let!(:context) { described_class.new(story) }
 
   context "lawyer subscribe" do
     context "success" do
       let(:lawyer) { create :lawyer, :with_confirmed, :with_password }
-      it { expect { subject.perform(lawyer) }.to change { StorySubscription.count }.by(1) }
+      before { context.perform(lawyer) }
+      subject { StorySubscription.last }
+
+      it { expect(subject.subscriber).to eq(lawyer) }
     end
 
     context "lawyer not registered" do
       let(:lawyer) { create :lawyer }
-      it { expect { subject.perform(lawyer) }.not_to change { StorySubscription.count } }
+      it { expect { context.perform(lawyer) }.not_to change { StorySubscription.count } }
+    end
+
+    context "lawyer not set password" do
+      let(:lawyer) { create :lawyer, :with_confirmed }
+      it { expect { context.perform(lawyer) }.not_to change { StorySubscription.count } }
     end
   end
-
 end

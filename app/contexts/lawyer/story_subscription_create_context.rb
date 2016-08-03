@@ -1,6 +1,7 @@
 class Lawyer::StorySubscriptionCreateContext < BaseContext
 
-  before_perform :check_registered
+  before_perform :check_confirmed
+  before_perform :check_set_password
   before_perform :build_data
 
   def initialize(story)
@@ -18,8 +19,12 @@ class Lawyer::StorySubscriptionCreateContext < BaseContext
     end
   end
 
-  def check_registered
-    return add_error(:story_subscriber_valid_failed, "訂閱案件前請先註冊與設定密碼") unless @lawyer.confirmed? && @lawyer.encrypted_password.present?
+  def check_confirmed
+    return add_error(:story_subscriber_valid_failed, "訂閱案件前請先註冊") unless @lawyer.confirmed?
+  end
+
+  def check_set_password
+    return add_error(:story_subscriber_valid_failed, "訂閱案件前請先設定密碼") unless @lawyer.encrypted_password.present?
   end
 
   def build_data
