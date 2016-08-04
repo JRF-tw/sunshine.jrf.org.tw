@@ -3,7 +3,7 @@ class Observers::ConfirmationsController < Devise::ConfirmationsController
   include CrudConcern
 
   before_action :check_observer, only: [:show]
-  before_action :check_first_time_confirm_email, only: [:show]
+  before_action :check_first_time_confirm, only: [:show]
   before_action :redirect_new_to_sign_in, only: [:new]
 
   def show
@@ -39,7 +39,7 @@ class Observers::ConfirmationsController < Devise::ConfirmationsController
     redirect_as_fail(observer_root_path, "你僅能修改本人的帳號") if current_court_observer && current_court_observer != @observer_by_token
   end
 
-  def check_first_time_confirm_email
-    @first_time_confirm = @observer_by_token && @observer_by_token.unconfirmed_email.nil?
+  def check_first_time_confirm
+    @first_time_confirm = @observer_by_token.unconfirmed_email.nil? if @observer_by_token
   end
 end

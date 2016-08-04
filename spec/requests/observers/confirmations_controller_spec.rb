@@ -11,6 +11,9 @@ RSpec.describe Observers::ConfirmationsController, type: :request do
       it { expect { subject }.to change { CourtObserver.last.confirmed_at } }
     end
 
+    context "change email confirm (feature spec 已測)" do
+    end
+
     context "already confirmed" do
       before { get "/observer/confirmation", confirmation_token: CourtObserver.last.confirmation_token }
       subject { get "/observer/confirmation", confirmation_token: CourtObserver.last.confirmation_token }
