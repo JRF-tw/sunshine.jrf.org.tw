@@ -27,9 +27,8 @@ describe "開庭評鑑案件輸入", type: :request do
     context "When 完整輸入該案件資料" do
       subject! { post "/lawyer/score/schedules/checked_info", schedule_score: params }
 
-      xit "Then 轉跳至個人評鑑記錄頁，並且顯示錯誤訊息" do
-        # TODO : check render or redirect
-        # expect(response).to redirect_to("/lawyer/stories")
+      it "Then 顯示前頁內容 + 錯誤訊息" do
+        expect(response).to be_success
         expect(flash[:error]).to match("案件已宣判")
       end
     end
@@ -41,9 +40,8 @@ describe "開庭評鑑案件輸入", type: :request do
     context "When 完整輸入該案件資料" do
       subject! { post "/lawyer/score/schedules/checked_info", schedule_score: params }
 
-      xit "Then 轉跳至個人評鑑記錄頁，並且顯示錯誤訊息" do
-        # TODO : check render or redirect
-        # expect(response).to redirect_to("/lawyer/stories")
+      it "Then 顯示前頁內容 + 錯誤訊息" do
+        expect(response).to be_success
         expect(flash[:error]).to match("已有判決書")
       end
     end
@@ -68,9 +66,8 @@ describe "開庭評鑑案件輸入", type: :request do
       before { params[:word_type] = "xxx" }
       subject! { post "/lawyer/score/schedules/checked_info", schedule_score: params }
 
-      xit "Then 轉跳至個人評鑑記錄頁，並且顯示錯誤訊息" do
-        # TODO : check render or redirect
-        # expect(response).to redirect_to("/lawyer/stories")
+      it "Then 顯示前頁內容 + 錯誤訊息" do
+        expect(response).to be_success
         expect(flash[:error]).to match("案件不存在")
       end
     end
@@ -79,9 +76,8 @@ describe "開庭評鑑案件輸入", type: :request do
       before { params[:year] = "" }
       subject! { post "/lawyer/score/schedules/checked_info", schedule_score: params }
 
-      xit "Then 轉跳至個人評鑑記錄頁，並且顯示錯誤訊息" do
-        # TODO : check render or redirect
-        # expect(response).to redirect_to("/lawyer/stories")
+      it "Then 顯示前頁內容 + 錯誤訊息" do
+        expect(response).to be_success
         expect(flash[:error]).to match("年份不能為空")
       end
     end

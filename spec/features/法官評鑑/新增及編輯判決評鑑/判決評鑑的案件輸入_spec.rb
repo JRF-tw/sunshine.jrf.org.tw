@@ -20,6 +20,7 @@ describe "開庭評鑑案件輸入", type: :request do
         expect(response.body).to match(story.number.to_s)
       end
     end
+
     context "When 輸入不存在的案件資訊" do
       before { params[:word_type] = "xxxx" }
       subject! { post "/lawyer/score/verdicts/checked_info", verdict_score: params }

@@ -39,7 +39,7 @@ describe "法官評鑑 - 評鑑紀錄", type: :request do
       end
     end
 
-    context "When 到該案件評鑑記錄頁" do
+    context "When 到任一案件評鑑記錄頁" do
       subject! { get "/lawyer/stories/#{story.id}" }
 
       it "Then 頁面成功讀取" do

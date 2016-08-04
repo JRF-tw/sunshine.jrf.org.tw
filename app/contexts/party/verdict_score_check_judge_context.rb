@@ -3,9 +3,9 @@ class Party::VerdictScoreCheckJudgeContext < BaseContext
 
   before_perform :check_story
   before_perform :check_judge_name
-  before_perform :find_judge_in_court, unless: :has_judgment?
-  before_perform :find_judge_by_verdict, if: :has_judgment?
-  before_perform :valid_judge_correct, if: :has_judgment?
+  before_perform :find_judge_in_court
+  before_perform :find_judge_by_verdict
+  before_perform :valid_judge_correct
 
   def initialize(party)
     @party = party
@@ -28,10 +28,6 @@ class Party::VerdictScoreCheckJudgeContext < BaseContext
     return add_error(:verdict_score_valid_failed, "法官為必填") unless @params[:judge_name].present?
   end
 
-  def has_judgment?
-    @story.judgment_verdict
-  end
-
   def find_judge_in_court
     # TODO : need check same name issue
     @judge = Court.find(@params[:court_id]).judges.where(name: @params[:judge_name]).try(:last)
@@ -39,7 +35,7 @@ class Party::VerdictScoreCheckJudgeContext < BaseContext
   end
 
   def find_judge_by_verdict
-    @judge = @story.judgment_verdict.main_judge
+    @judge = @story.judgment_verdict.main_judge if @story.judgment_verdict
     return add_error(:data_not_found, "判決書沒有主審法官") unless @judge
   end
 

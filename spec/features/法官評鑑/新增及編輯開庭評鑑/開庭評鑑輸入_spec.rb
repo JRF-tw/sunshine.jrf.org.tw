@@ -20,7 +20,7 @@ describe "開庭評鑑輸入", type: :request do
       end
     end
 
-    context "When 送出星星數未填的資料（律師必填開庭滿意度兩者）" do
+    context "When 送出星星數未填的資料（律師必填開庭滿意度）" do
       before { params[:attitude_score] = "" }
       subject! { post "/lawyer/score/schedules", schedule_score: params }
 

@@ -41,7 +41,7 @@ describe "使用者視角的評鑑後人數通知", type: :request do
         end
       end
 
-      context "When 當事人新增舊案件的開庭評鑑" do
+      context "When 當事人新增舊案件的判決評鑑" do
         let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, judge_name: judge.name, rating_score: 1, note: "xxxxx", appeal_judge: false } }
         subject { post "/party/score/verdicts", verdict_score: params }
 
@@ -87,7 +87,7 @@ describe "使用者視角的評鑑後人數通知", type: :request do
         end
       end
 
-      context "When 律師新增舊案件的開庭評鑑" do
+      context "When 律師新增舊案件的判決評鑑" do
         let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, judge_name: judge.name, quality_score: 1, note: "xxxxx", appeal_judge: false } }
         subject { post "/lawyer/score/verdicts", verdict_score: params }
 
