@@ -24,6 +24,7 @@
 #  school                 :string
 #  student_number         :string
 #  department_level       :string
+#  last_scored_at         :date
 #
 
 class CourtObserver < ActiveRecord::Base

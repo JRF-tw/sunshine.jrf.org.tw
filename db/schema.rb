@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160712043140) do
+ActiveRecord::Schema.define(version: 20160804042232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -146,10 +146,12 @@ ActiveRecord::Schema.define(version: 20160712043140) do
     t.string   "school"
     t.string   "student_number"
     t.string   "department_level"
+    t.date     "last_scored_at"
   end
 
   add_index "court_observers", ["confirmation_token"], name: "index_court_observers_on_confirmation_token", unique: true, using: :btree
   add_index "court_observers", ["email"], name: "index_court_observers_on_email", unique: true, using: :btree
+  add_index "court_observers", ["last_scored_at"], name: "index_court_observers_on_last_scored_at", using: :btree
   add_index "court_observers", ["reset_password_token"], name: "index_court_observers_on_reset_password_token", unique: true, using: :btree
   add_index "court_observers", ["school"], name: "index_court_observers_on_school", using: :btree
 
@@ -334,7 +336,6 @@ ActiveRecord::Schema.define(version: 20160712043140) do
   end
 
   add_index "parties", ["confirmation_token"], name: "index_parties_on_confirmation_token", unique: true, using: :btree
-  add_index "parties", ["email"], name: "index_parties_on_email", unique: true, using: :btree
   add_index "parties", ["imposter"], name: "index_parties_on_imposter", using: :btree
   add_index "parties", ["reset_password_token"], name: "index_parties_on_reset_password_token", unique: true, using: :btree
 
