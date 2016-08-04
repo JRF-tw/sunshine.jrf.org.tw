@@ -22,6 +22,12 @@
           .control-group
             label.control-label= f.label :department_level_cont
             .controls= f.search_field :department_level_cont
+      .row
+        .span6
+            .control-group#datepicker
+              label.control-label= f.label :last_scored_at_gteq
+              .controls= f.search_field :last_scored_at_gteq, placeholder: "起始時間，非必填"
+              .controls= f.search_field :last_scored_at_lteq, placeholder: "結束時間，非必填"
     hr
     .form-actions
       = f.submit :value => "搜尋", :class => "btn btn-primary"
