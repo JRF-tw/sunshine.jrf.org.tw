@@ -10,14 +10,9 @@ class Observers::ConfirmationsController < Devise::ConfirmationsController
     self.resource = resource_class.confirm_by_token(params[:confirmation_token])
     yield resource if block_given?
     if resource.errors.empty?
-      if @first_time_confirm
-        set_flash_message(:notice, :confirmed) if is_flashing_format?
-        sign_in(resource_name, resource)
-        respond_with_navigational(resource) { redirect_to observer_root_path }
-      else
-        set_flash_message(:notice, :confirmed) if is_flashing_format?
-        respond_with_navigational(resource) { redirect_to new_court_observer_session_path }
-      end
+      sign_in(resource_name, resource) if @first_time_confirm
+      set_flash_message(:notice, :confirmed) if is_flashing_format?
+      respond_with_navigational(resource) { redirect_to after_confirmation_path_for }
     else
       set_flash_message(:notice, :already_confirmed) if resource.unconfirmed_email.nil? && resource.confirmation_token == params[:confirmation_token]
       respond_with_navigational(resource.errors, status: :unprocessable_entity) { redirect_to new_court_observer_session_path }
@@ -41,5 +36,13 @@ class Observers::ConfirmationsController < Devise::ConfirmationsController
 
   def check_first_time_confirm
     @first_time_confirm = @observer_by_token.unconfirmed_email.nil? if @observer_by_token
+  end
+
+  def after_confirmation_path_for
+    if signed_in?(:court_observer)
+      observer_root_path
+    else
+      new_session_path(:court_observer)
+    end
   end
 end
