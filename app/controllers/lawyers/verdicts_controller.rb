@@ -69,7 +69,11 @@ class Lawyers::VerdictsController < Lawyers::BaseController
   end
 
   def find_verdict_score
-    @verdict_score = current_lawyer.verdict_scores.find(params[:id]) rescue nil
+    @verdict_score = begin
+                       current_lawyer.verdict_scores.find(params[:id])
+                     rescue
+                       nil
+                     end
     redirect_as_fail(lawyer_root_path, "沒有該評鑑紀錄") unless @verdict_score
   end
 

@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe CourtObserverQueries do
   let!(:court_observer) { create :court_observer }
-  let!(:story){ create :story }
+  let!(:story) { create :story }
   let!(:schedule_score) { create :schedule_score, schedule_rater: court_observer, story: story }
   let!(:query) { described_class.new(court_observer) }
 

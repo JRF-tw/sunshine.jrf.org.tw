@@ -1,7 +1,7 @@
 = simple_form_for(@schedule_score, as: :schedule_score, url: lawyer_score_schedule_path(@schedule_score), html: { method: :put }) do |f|
   .form-group
     label.control-label
-    .controls = "法院名稱 : #{Court.find(@schedule_score.court_id).full_name}"
+    .controls = "法院名稱 : #{get_court_fullname(@schedule_score.court_id)}"
   .form-group
     label.control-label
     .controls = "年度 : #{@schedule_score.year}"

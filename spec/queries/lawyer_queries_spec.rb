@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe LawyerQueries do
   let!(:lawyer) { create :lawyer }
-  let!(:story){ create :story }
+  let!(:story) { create :story }
   let!(:query) { described_class.new(lawyer) }
 
   describe "#get_stories" do

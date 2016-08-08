@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe PartyQueries do
   let!(:party) { create :party }
-  let!(:story){ create :story }
+  let!(:story) { create :story }
   let!(:query) { described_class.new(party) }
 
   describe "#get_stories" do

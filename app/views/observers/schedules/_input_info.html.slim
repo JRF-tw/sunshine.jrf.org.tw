@@ -1,7 +1,7 @@
 = simple_form_for(@schedule_score, as: :schedule_score, url: checked_info_observer_score_schedules_path, html: { method: :post }) do |f|
     .form-group
       label.control-label
-      .controls = f.input :court_id, as: :select, collection: Court.get_courts.map { |c| [c.full_name, c.id] }, include_blank: "請選擇法院", label: "選擇法院"
+      .controls = f.input :court_id, as: :select, collection: collect_for_courts, include_blank: "請選擇法院", label: "選擇法院"
     .form-group
       label.control-label
       .controls = f.input :year, label: "年度"
