@@ -4,6 +4,24 @@ class Parties::RegistrationsController < Devise::RegistrationsController
   before_action :check_registration, only: [:create]
   # POST /resource
 
+  def new
+    build_resource({})
+    set_minimum_password_length
+    yield resource if block_given?
+    respond_with resource
+  end
+
+  def check_identify_number
+    context = Party::IdentifyNumberCheckContext.new(params)
+    @party = context.perform
+    if @party
+      @identify_number_not_used = true
+    else
+      flash[:error] = context.error_messages.join(", ")
+    end
+    render :new
+  end
+
   protected
 
   def check_registration
@@ -11,6 +29,7 @@ class Parties::RegistrationsController < Devise::RegistrationsController
     unless context.perform
       build_resource(sign_up_params)
       flash[:error] = context.error_messages.join(", ")
+      @identify_number_not_used = true
       render "new"
     end
   end

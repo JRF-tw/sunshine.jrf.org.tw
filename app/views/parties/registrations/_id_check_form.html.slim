@@ -1,0 +1,13 @@
+= simple_form_for(:party, as: resource_name, url:  party_registrations_check_identify_number_path, method: :post ) do |f|
+  .form-group
+    label.control-label 姓名
+    = f.input :name, required: true, autofocus: true, :label => false
+  .form-group
+    label.control-label 身分證字號
+    = f.input :identify_number, required: true, :label => false
+
+  .form-group
+    = check_box_tag :policy_agreement
+    label.control-label = label_tag "我已詳細閱讀服務條款和隱私權保護政策"
+  .form-actions
+    input.btn.btn-primary type="submit" value="下一步"

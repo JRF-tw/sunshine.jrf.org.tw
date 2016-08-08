@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   devise_scope :party do
     post "/party/password/send_reset_password_sms", to: "parties/passwords#send_reset_password_sms"
+    post "/party/registrations/check_identify_number", to: "parties/registrations#check_identify_number"
   end
 
   # f2e
