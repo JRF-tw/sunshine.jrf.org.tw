@@ -6,7 +6,8 @@ class PartyQueries
   def get_stories
     story_relations_ids = @party.story_relations.map(&:story_id)
     verdict_scores_story_ids = @party.verdict_scores.map(&:story_id)
-    story_ids = (story_relations_ids + verdict_scores_story_ids).uniq
+    schedule_scores_story_ids = @party.schedule_scores.map(&:story_id)
+    story_ids = (story_relations_ids + verdict_scores_story_ids + schedule_scores_story_ids).uniq
     stories = Story.where(id: story_ids)
     stories
   end
