@@ -16,7 +16,7 @@ class Parties::StoriesController < Parties::BaseController
 
   def find_story
     # TODO: security issue
-    @story = Story.find(params[:id])
+    @story = Story.find(params[:id]) rescue nil
     redirect_as_fail(party_stories_path, "找不到該案件") unless @story
   end
 

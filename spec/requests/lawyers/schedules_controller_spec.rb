@@ -2,10 +2,10 @@ require "rails_helper"
 
 RSpec.describe Lawyers::SchedulesController, type: :request do
   let!(:lawyer) { create :lawyer, :with_password, :with_confirmed }
+  let!(:court) { create :court }
   before { signin_lawyer(lawyer) }
 
   context "score flow" do
-    let!(:court) { create :court }
     let!(:story) { create :story, court: court }
     let!(:schedule) { create :schedule, story: story }
     let!(:judge) { create :judge, court: court }
@@ -46,6 +46,21 @@ RSpec.describe Lawyers::SchedulesController, type: :request do
 
   describe "#rule" do
     subject! { get "/lawyer/score/schedules/rule" }
+    it { expect(response).to be_success }
+  end
+
+  describe "#edit" do
+    let!(:schedule_score) { create :schedule_score, schedule_rater: lawyer, court_id: court.id }
+    subject! { get "/lawyer/score/schedules/#{schedule_score.id}/edit" }
+
+    it { expect(response).to be_success }
+  end
+
+  describe "#update" do
+    let!(:schedule_score) { create :schedule_score, schedule_rater: lawyer, court_id: court.id }
+    let!(:params) { { command_score: 1, attitude_score: 1, note: "xxxxx", appeal_judge: false } }
+    subject! { put "/lawyer/score/schedules/#{schedule_score.id}", schedule_score: params }
+
     it { expect(response).to be_success }
   end
 end

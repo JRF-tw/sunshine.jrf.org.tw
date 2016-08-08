@@ -21,7 +21,9 @@ class Party::VerdictScoreCheckJudgeContext < BaseContext
   private
 
   def check_story
-    @story = Party::VerdictScoreCheckInfoContext.new(@party).perform(@params)
+    context = Party::VerdictScoreCheckInfoContext.new(@party)
+    @story = context.perform(@params)
+    return add_error(:data_blank, context.error_messages.join(",")) unless @story
   end
 
   def check_judge_name

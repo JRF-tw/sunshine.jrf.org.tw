@@ -21,7 +21,9 @@ class Lawyer::VerdictScoreCheckJudgeContext < BaseContext
   private
 
   def check_story
-    @story = Lawyer::VerdictScoreCheckInfoContext.new(@lawyer).perform(@params)
+    context = Lawyer::VerdictScoreCheckInfoContext.new(@lawyer)
+    @story = context.perform(@params)
+    return add_error(:data_blank, context.error_messages.join(",")) unless @story
   end
 
   def check_judge_name

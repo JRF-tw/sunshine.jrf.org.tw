@@ -29,6 +29,6 @@ class LawyerQueries
   end
 
   def pending_score_verdict(story)
-    Verdict.find(story.judgment_verdict)
+    story.judgment_verdict ? Verdict.find(story.judgment_verdict.id) : nil
   end
 end
