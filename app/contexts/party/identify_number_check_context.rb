@@ -30,14 +30,13 @@ class Party::IdentifyNumberCheckContext < BaseContext
     return add_error(:data_invalid, "身分證字號格式不符(英文字母請大寫)") unless @params[:identify_number][/\A[A-Z]{1}[1-2]{1}[0-9]{8}\z/]
   end
 
-  def check_agree_policy
-    return add_error(:without_policy_agreement, "您尚未勾選同意條款") unless @params[:policy_agreement]
-  end
-
   def check_party_not_used
     if Party.pluck(:identify_number).include?(@params[:identify_number])
       return add_error(:party_exist, "此身分證字號已經被使用 <a href='#{new_party_appeal_path}'>人工申訴連結</a>")
     end
   end
 
+  def check_agree_policy
+    return add_error(:without_policy_agreement, "您尚未勾選同意條款") unless @params[:policy_agreement]
+  end
 end

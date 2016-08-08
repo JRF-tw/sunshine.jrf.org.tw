@@ -4,13 +4,6 @@ class Parties::RegistrationsController < Devise::RegistrationsController
   before_action :check_registration, only: [:create]
   # POST /resource
 
-  def new
-    build_resource({})
-    set_minimum_password_length
-    yield resource if block_given?
-    respond_with resource
-  end
-
   def check_identify_number
     context = Party::IdentifyNumberCheckContext.new(params)
     @party = context.perform
