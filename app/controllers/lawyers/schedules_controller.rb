@@ -15,7 +15,7 @@ class Lawyers::SchedulesController < Lawyers::BaseController
   end
 
   def update
-    context = Lawyer::ScheduleScoreUpdateContext.new(current_lawyer, @schedule_score)
+    context = Lawyer::ScheduleScoreUpdateContext.new(@schedule_score)
     if context.perform(schedule_score_params)
       @status = "thanks_scored"
       render_as_success(:new)

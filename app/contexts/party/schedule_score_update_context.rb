@@ -4,8 +4,7 @@ class Party::ScheduleScoreUpdateContext < BaseContext
   before_perform :check_rating_score
   before_perform :assign_attribute
 
-  def initialize(party, schedule_score)
-    @party = party
+  def initialize(schedule_score)
     @schedule_score = schedule_score
   end
 

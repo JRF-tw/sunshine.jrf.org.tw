@@ -4,8 +4,7 @@ class CourtObserver::ScheduleScoreUpdateContext < BaseContext
   before_perform :check_rating_score
   before_perform :assign_attribute
 
-  def initialize(court_observer, schedule_score)
-    @court_observer = court_observer
+  def initialize(schedule_score)
     @schedule_score = schedule_score
   end
 

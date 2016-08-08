@@ -18,7 +18,7 @@ class Parties::VerdictsController < Parties::BaseController
   end
 
   def update
-    context = Party::VerdictScoreUpdateContext.new(current_party, @verdict_score)
+    context = Party::VerdictScoreUpdateContext.new(@verdict_score)
     if context.perform(verdict_score_params)
       redirect_as_success(thanks_scored_party_score_verdicts_path, "評鑑已更新")
     else

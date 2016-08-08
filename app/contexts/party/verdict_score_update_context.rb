@@ -4,8 +4,7 @@ class Party::VerdictScoreUpdateContext < BaseContext
   before_perform :check_rating_score
   before_perform :assign_attribute
 
-  def initialize(party, verdict_score)
-    @party = party
+  def initialize(verdict_score)
     @verdict_score = verdict_score
   end
 

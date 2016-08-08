@@ -4,8 +4,7 @@ class Lawyer::VerdictScoreUpdateContext < BaseContext
   before_perform :check_quality_score
   before_perform :assign_attribute
 
-  def initialize(lawyer, verdict_score)
-    @lawyer = lawyer
+  def initialize(verdict_score)
     @verdict_score = verdict_score
   end
 

@@ -15,7 +15,7 @@ class Observers::SchedulesController < Observers::BaseController
   end
 
   def update
-    context = CourtObserver::ScheduleScoreUpdateContext.new(current_court_observer, @schedule_score)
+    context = CourtObserver::ScheduleScoreUpdateContext.new(@schedule_score)
     if context.perform(schedule_score_params)
       @status = "thanks_scored"
       render_as_success(:new)

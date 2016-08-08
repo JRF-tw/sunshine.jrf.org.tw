@@ -5,8 +5,7 @@ class Lawyer::ScheduleScoreUpdateContext < BaseContext
   before_perform :check_attitude_score
   before_perform :assign_attribute
 
-  def initialize(lawyer, schedule_score)
-    @lawyer = lawyer
+  def initialize(schedule_score)
     @schedule_score = schedule_score
   end
 
