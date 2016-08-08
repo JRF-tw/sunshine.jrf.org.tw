@@ -1,0 +1,33 @@
+= simple_form_for(@schedule_score, as: :schedule_score, url: checked_date_lawyer_score_schedules_path, html: { method: :post }) do |f|
+    .form-group
+      label.control-label
+      .controls = f.input :court_id, as: :hidden
+    .form-group
+      label.control-label
+      .controls = f.input :year, as: :hidden
+    .form-group
+      label.control-label
+      .controls = f.input :word_type, as: :hidden
+    .form-group
+      label.control-label
+      .controls = f.input :number, as: :hidden
+    .form-group
+      label.control-label
+      .controls = "法院名稱 : #{get_court_fullname(@schedule_score.court_id)}"
+    .form-group
+      label.control-label
+      .controls = "年度 : #{@schedule_score.year}"
+    .form-group
+      label.control-label
+      .controls = "字號 : #{@schedule_score.word_type}"
+    .form-group
+      label.control-label
+      .controls = "案號 : #{@schedule_score.number}"
+    .form-group#datepicker
+      label.control-label
+      .controls = f.input :date, label: "開庭時間"
+    .form-group
+      label.control-label
+      .controls = f.input :confirmed_realdate, as: :boolean, label: "確認此日期為實際開庭日期"
+    .form-actions
+      input.btn.btn-primary type="submit" value="下一步"

@@ -24,7 +24,7 @@
 
 FactoryGirl.define do
   factory :judge do
-    name "Raptor Judge"
+    sequence(:name) { |n| "Raptor Judge-#{n}" }
     court { create :court }
     trait :with_avatar do
       avatar File.open "#{Rails.root}/spec/fixtures/person_avatar/people-1.jpg"

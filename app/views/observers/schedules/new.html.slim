@@ -1,1 +1,15 @@
 = "旁觀者評鑑開庭流程"
+- unless @status
+  = render "input_info"
+
+- if @status == "checked_info"
+  = render "input_date"
+
+- if @status == "checked_date"
+  = render "input_judge"
+
+- if @status == "checked_judge"
+  = render "start_score"
+
+- if @status == "thanks_scored"
+  = render "thanks_scored"

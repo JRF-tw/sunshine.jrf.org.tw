@@ -48,6 +48,16 @@ FactoryGirl.define do
       end
     end
 
+    trait :pronounced do
+      pronounce_date Time.zone.today
+      is_pronounce true
+    end
+
+    trait :adjudged do
+      adjudge_date Time.zone.today
+      is_adjudge true
+    end
+
   end
 
 end

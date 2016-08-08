@@ -1,0 +1,27 @@
+= simple_form_for(@verdict_score, as: :verdict_score, url: lawyer_score_verdict_path(@verdict_score), html: { method: :put }) do |f|
+  .form-group
+    label.control-label
+    .controls = "法院名稱 : #{Court.find(@verdict_score.court_id).full_name}"
+  .form-group
+    label.control-label
+    .controls = "年度 : #{@verdict_score.year}"
+  .form-group
+    label.control-label
+    .controls = "字號 : #{@verdict_score.word_type}"
+  .form-group
+    label.control-label
+    .controls = "案號 : #{@verdict_score.number}"
+  .form-group
+    label.control-label
+    .controls = "法官姓名 : #{@verdict_score.judge_name}"
+  .form-group
+    label.control-label
+    .controls = f.input :rating_score, label: "裁判滿意度評分", input_html: { min: "1", max: "5" }
+  .form-group
+    label.control-label
+    .controls = f.input :note, as: :text, label: false, hint: "請填寫註記"
+  .form-group
+    label.control-label
+    .controls = f.input :appeal_judge, as: :boolean, label: "我要申訴法官"
+  .form-actions
+    input.btn.btn-primary type="submit" value="更新評鑑"

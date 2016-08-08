@@ -26,6 +26,8 @@ class Story < ActiveRecord::Base
   has_many :verdicts
   has_many :story_relations
   has_many :story_subscriptions, dependent: :destroy
+  has_many :verdict_scores
+  has_many :schedule_scores
   belongs_to :main_judge, class_name: "Judge", foreign_key: "main_judge_id"
   belongs_to :court
 
@@ -35,6 +37,13 @@ class Story < ActiveRecord::Base
   serialize :prosecutor_names, Array
 
   scope :newest, -> { order("id DESC") }
+
+  include Redis::Objects
+  counter :lawyer_scored_count
+  counter :party_scored_count
+
+  MAX_PARTY_SCORED_COUNT = 3
+  MAX_LAWYER_SCORED_COUNT = 5
 
   def identity
     "#{year}-#{word_type}-#{number}"
