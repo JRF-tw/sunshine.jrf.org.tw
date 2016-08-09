@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160804042232) do
+ActiveRecord::Schema.define(version: 20160809080913) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "postgis"
   enable_extension "hstore"
+  enable_extension "postgis"
 
   create_table "articles", force: :cascade do |t|
     t.integer  "profile_id"
@@ -330,12 +330,13 @@ ActiveRecord::Schema.define(version: 20160804042232) do
     t.datetime "confirmed_at"
     t.string   "confirmation_token"
     t.datetime "confirmation_sent_at"
-    t.datetime "phone_confirmed_at"
     t.boolean  "imposter",                 default: false
     t.string   "imposter_identify_number"
+    t.datetime "phone_confirmed_at"
   end
 
   add_index "parties", ["confirmation_token"], name: "index_parties_on_confirmation_token", unique: true, using: :btree
+  add_index "parties", ["email"], name: "index_parties_on_email", unique: true, using: :btree
   add_index "parties", ["imposter"], name: "index_parties_on_imposter", using: :btree
   add_index "parties", ["reset_password_token"], name: "index_parties_on_reset_password_token", unique: true, using: :btree
 
@@ -681,11 +682,11 @@ ActiveRecord::Schema.define(version: 20160804042232) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.string   "file"
-    t.boolean  "is_judgment",      default: false
     t.text     "party_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
+    t.boolean  "is_judgment",      default: false
     t.date     "adjudge_date"
     t.integer  "main_judge_id"
     t.string   "main_judge_name"

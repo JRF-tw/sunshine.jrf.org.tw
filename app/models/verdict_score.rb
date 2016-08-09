@@ -3,7 +3,7 @@
 # Table name: verdict_scores
 #
 #  id                 :integer          not null, primary key
-#  verdict_id         :integer
+#  story_id           :integer
 #  judge_id           :integer
 #  verdict_rater_id   :integer
 #  verdict_rater_type :string

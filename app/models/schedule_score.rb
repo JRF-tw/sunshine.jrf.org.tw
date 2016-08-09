@@ -14,6 +14,7 @@
 #  appeal_judge        :boolean          default(FALSE)
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  story_id            :integer
 #
 
 class ScheduleScore < ActiveRecord::Base
