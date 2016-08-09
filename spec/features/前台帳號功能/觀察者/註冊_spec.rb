@@ -114,4 +114,63 @@ describe "觀察者註冊", type: :request do
       end
     end
   end
+
+  context "點擊認證信連結" do
+    before { post "/observer", court_observer: { name: "Curry", email: "h2312@gmail.com", password: "55667788", password_confirmation: "55667788" }, policy_agreement: "1" }
+    let(:observer) { CourtObserver.first }
+
+    context "成功驗證" do
+      subject { get "/observer/confirmation", confirmation_token: observer.confirmation_token }
+
+      it "轉跳至評鑑記錄頁" do
+        expect(subject).to redirect_to("/observer")
+      end
+      it "帳號狀態改為已驗證" do
+        expect { subject }.to change { observer.reload.confirmed_at }
+      end
+    end
+
+    context "失敗驗證" do
+      before { post "/observer", court_observer: { name: "Curry", email: "h2312@gmail.com", password: "55667788", password_confirmation: "55667788" }, policy_agreement: "1" }
+
+      context "token 不正確" do
+        subject { get "/observer/confirmation", confirmation_token: "jijijijijiji" }
+
+        it "驗證失敗" do
+          expect { subject }.not_to change { observer.reload.confirmed_at }
+        end
+
+        it "轉跳至登入頁" do
+          expect(subject).to redirect_to("/observer/sign_in")
+        end
+      end
+
+      context "帳號已驗證" do
+        before { observer.confirm }
+        subject { get "/observer/confirmation", confirmation_token: observer.confirmation_token }
+
+        it "驗證失敗" do
+          expect { subject }.not_to change { observer.reload.confirmed_at }
+        end
+
+        it "轉跳至登入頁" do
+          expect(subject).to redirect_to("/observer/sign_in")
+        end
+      end
+
+      context "有其他觀察者登入的情況下，點擊驗證連結" do
+        before { signin_court_observer }
+        subject { get "/observer/confirmation", confirmation_token: observer.confirmation_token }
+
+        it "驗證失敗" do
+          expect { subject }.not_to change { observer.reload.confirmed_at }
+        end
+
+        it "導向個人評鑑頁面" do
+          expect(subject).to redirect_to("/observer")
+        end
+      end
+    end
+  end
+
 end

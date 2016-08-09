@@ -46,6 +46,15 @@ describe "觀察者更改email", type: :request do
         expect { subject }.to change { court_observer.reload.current_sign_in_at }
       end
     end
+
+    context "已登入時  驗證email" do
+      before { put "/observer/email", court_observer: { email: "windwizard@gmail.com", current_password: "123123123" } }
+      subject { get "/observer/confirmation", confirmation_token: court_observer.reload.confirmation_token }
+
+      it "導向個人評鑑頁面" do
+        expect(subject).to redirect_to("/observer")
+      end
+    end
   end
 
   context "失敗送出" do
