@@ -19,7 +19,7 @@ class Scrap::GetSchedulesStoryTypesByCourtContext < BaseContext
   def perform
     run_callbacks :perform do
       @story_types.each do |story_type|
-        Scrap::GetSchedulesPagesByStoryTypeContext.delay.perform(@court_code, story_type, @start_date, @end_date)
+        Scrap::GetSchedulesPagesByStoryTypeContext.delay(retry: 3).perform(@court_code, story_type, @start_date, @end_date)
       end
     end
   end

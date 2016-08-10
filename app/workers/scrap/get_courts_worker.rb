@@ -1,13 +1,13 @@
-class SubscriberAfterJudgeNoticeWorker
+class Scrap::GetCourtsWorker
   include Sidekiq::Worker
   include Sidetiq::Schedulable
   sidekiq_options retry: 3
 
   recurrence backfill: true do
-    daily.hour_of_day(7)
+    weekly.day(:monday).hour_of_day(1)
   end
 
   def perform
-    Crontab::SubscribeStoryAfterJudgeNotifyContext.new(Time.zone.today).perform
+    Scrap::GetCourtsContext.delay(retry: 3).perform
   end
 end
