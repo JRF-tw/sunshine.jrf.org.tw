@@ -2,6 +2,6 @@
   .widget-title
     h5 當事人註冊
   .widget-content.nopadding
-    = render partial: 'id_check_form' unless @identify_number_not_used
-    = render partial: 'form' if @identify_number_not_used
+    = render partial: 'identify_number_check_form' unless @checked
+    = render partial: 'form' if @checked
 

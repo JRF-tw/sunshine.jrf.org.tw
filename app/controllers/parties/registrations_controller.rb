@@ -6,9 +6,9 @@ class Parties::RegistrationsController < Devise::RegistrationsController
 
   def check_identify_number
     context = Party::IdentifyNumberCheckContext.new(params)
-    @party = context.perform
-    if @party
-      @identify_number_not_used = true
+    if @party = context.perform
+      @checked = true
+      flash.clear
     else
       flash[:error] = context.error_messages.join(", ")
     end
@@ -22,7 +22,7 @@ class Parties::RegistrationsController < Devise::RegistrationsController
     unless context.perform
       build_resource(sign_up_params)
       flash[:error] = context.error_messages.join(", ")
-      @identify_number_not_used = true
+      @checked = true
       render "new"
     end
   end

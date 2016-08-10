@@ -1,7 +1,7 @@
 class Party::RegisterCheckContext < BaseContext
   PERMITS = [:name, :identify_number, :password, :password_confirmation].freeze
 
-  before_perform :check_by_id_context
+  before_perform :check_params_data
   before_perform :check_party_params_exist
   before_perform :check_password_valid
 
@@ -18,7 +18,7 @@ class Party::RegisterCheckContext < BaseContext
 
   private
 
-  def check_by_id_context
+  def check_params_data
     context = Party::IdentifyNumberCheckContext.new(@params)
     return add_error(:data_invalid, context.error_messages.join(", ")) unless context.perform
   end

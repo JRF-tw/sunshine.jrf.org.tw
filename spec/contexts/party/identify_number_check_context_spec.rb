@@ -15,7 +15,20 @@ describe Party::IdentifyNumberCheckContext do
         it { expect(subject.perform).to be_falsey }
       end
 
-      context "other context already test on register_check_context" do
+      context "id exist" do
+        let!(:party) { create(:party) }
+        let!(:params) { { party: { name: "老夫子", identify_number: party.identify_number, password: "22222222", password_confirmation: "11111111" } } }
+        it { expect(subject.perform).to be_falsey }
+      end
+
+      context "id empty" do
+        let!(:params) { { party: { name: "老夫子", identify_number: "", password: "22222222", password_confirmation: "11111111" } } }
+        it { expect(subject.perform).to be_falsey }
+      end
+
+      context "name empty" do
+        let!(:params) { { party: { name: "", identify_number: "F122121211", password: "22222222", password_confirmation: "11111111" } } }
+        it { expect(subject.perform).to be_falsey }
       end
     end
   end
