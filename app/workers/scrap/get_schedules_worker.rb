@@ -8,6 +8,6 @@ class Scrap::GetSchedulesWorker
   end
 
   def perform
-    Scrap::GetSchedulesContext.delay.perform
+    Scrap::GetSchedulesContext.delay(retry: 3).perform
   end
 end

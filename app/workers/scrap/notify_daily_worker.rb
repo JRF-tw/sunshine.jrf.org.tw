@@ -8,6 +8,6 @@ class Scrap::NotifyDailyWorker
   end
 
   def perform
-    Scrap::NotifyDailyContext.delay.perform
+    Scrap::NotifyDailyContext.delay(retry: 3).perform
   end
 end

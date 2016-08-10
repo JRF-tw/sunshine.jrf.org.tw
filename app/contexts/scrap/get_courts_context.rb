@@ -13,7 +13,7 @@ class Scrap::GetCourtsContext < BaseContext
   def perform
     run_callbacks :perform do
       @scrap_data.each do |court_data|
-        Scrap::ImportCourtContext.delay.perform(court_data)
+        Scrap::ImportCourtContext.delay(retry: 3).perform(court_data)
       end
     end
   end

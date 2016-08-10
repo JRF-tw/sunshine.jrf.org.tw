@@ -19,7 +19,7 @@ class Scrap::GetVerdictsContext < BaseContext
   def perform
     run_callbacks :perform do
       @courts.each do |court|
-        Scrap::GetVerdictsByCourtContext.delay.perform(court, @start_date, @end_date)
+        Scrap::GetVerdictsByCourtContext.delay(retry: 3).perform(court, @start_date, @end_date)
       end
     end
   end

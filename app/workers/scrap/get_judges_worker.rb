@@ -8,6 +8,6 @@ class Scrap::GetJudgesWorker
   end
 
   def perform
-    Scrap::GetJudgesContext.delay.perform
+    Scrap::GetJudgesContext.delay(retry: 3).perform
   end
 end

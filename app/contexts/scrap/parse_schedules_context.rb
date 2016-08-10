@@ -23,7 +23,7 @@ class Scrap::ParseSchedulesContext < BaseContext
   def perform
     run_callbacks :perform do
       @hash_array.each do |hash|
-        Scrap::ImportScheduleContext.delay.perform(@court_code, hash)
+        Scrap::ImportScheduleContext.delay(retry: 3).perform(@court_code, hash)
       end
     end
   end
