@@ -58,7 +58,7 @@ Rails.application.routes.draw do
   end
 
   namespace :lawyers, path: "/lawyer", as: "lawyer" do
-    root to: "scores#index"
+    root to: "stories#index"
     resource :appeal, only: [:new]
     resource :profile, only: [:show, :edit, :update]
     resource :email, only: [:edit, :update]
@@ -89,7 +89,7 @@ Rails.application.routes.draw do
   end
 
   namespace :parties, path: "/party", as: "party" do
-    root to: "scores#index"
+    root to: "stories#index"
     resource :profile, only: [:show, :edit, :update]
     resource :appeal, only: [:new]
     resource :email, only: [:edit, :update]
