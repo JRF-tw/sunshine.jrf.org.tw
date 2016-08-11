@@ -4,7 +4,7 @@ describe "法官評鑑 - 評鑑紀錄", type: :request do
   let!(:lawyer) { create :lawyer, :with_password, :with_confirmed }
   let!(:court) { create :court }
   let!(:judge) { create :judge, court: court }
-  let!(:story) { create :story }
+  let!(:story) { create :story, :adjudged }
   let!(:verdict) { create :verdict, story: story, is_judgment: true }
 
   before { signin_lawyer(lawyer) }
@@ -64,7 +64,7 @@ describe "法官評鑑 - 評鑑紀錄", type: :request do
       end
 
       it "Then 已評鑑的開庭評鑑，會出現在「已評鑑」區塊內" do
-        expect(response.body).to match("編輯開庭評鑑")
+        expect(response.body).to match("編輯評鑑")
       end
     end
   end
@@ -77,7 +77,7 @@ describe "法官評鑑 - 評鑑紀錄", type: :request do
       subject! { get "/lawyer/stories/#{story.id}" }
 
       it "Then 「已評鑑」區塊內出現判決評鑑的編輯項目" do
-        expect(response.body).to match("編輯判決評鑑")
+        expect(response.body).to match("編輯評鑑")
       end
     end
   end
@@ -90,7 +90,7 @@ describe "法官評鑑 - 評鑑紀錄", type: :request do
       subject! { get "/lawyer/stories/#{story.id}" }
 
       it "Then 「已評鑑」區塊內出現判決評鑑的編輯項目（進去到編輯頁後才會 redirect ，已測試）" do
-        expect(response.body).to match("編輯判決評鑑")
+        expect(response.body).to match("編輯評鑑")
       end
     end
   end
@@ -109,7 +109,7 @@ describe "法官評鑑 - 評鑑紀錄", type: :request do
       end
 
       it "Then 開庭評鑑記錄，會出現在「已評鑑」區塊內" do
-        expect(response.body).to match("編輯開庭評鑑")
+        expect(response.body).to match("編輯評鑑")
       end
     end
   end

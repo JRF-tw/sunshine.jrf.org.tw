@@ -52,9 +52,8 @@ class PartyQueries
     schedule_scores_array = []
     court_code = story.court.code
     @party.schedule_scores.where(story: story).each do |schedule_score|
-      date = schedule_score.schedule.date
       ss_hash = schedule_score.as_json
-      ss_hash["date"] = date
+      ss_hash["date"] = schedule_score.schedule.date
       ss_hash["court_code"] = court_code
       schedule_scores_array << ss_hash
     end
