@@ -11,14 +11,14 @@ br
     = link_to "新增開庭評鑑", checked_info_party_score_schedules_path(schedule_score: { court_id: @story.court_id, year: @story.year, word_type: @story.word_type, number: @story.number}), method: :post
 - else
   br
-  = @pending_score_verdict.story.adjudge_date
-  = " | "
-  = @pending_score_verdict.story.court.code
-  = " | "
-  = link_to "新增判決評鑑", checked_info_party_score_verdicts_path(verdict_score: { court_id: @story.court_id, year: @story.year, word_type: @story.word_type, number: @story.number}), method: :post
+  / = @pending_score_verdict.story.adjudge_date
+  / = " | "
+  / = @pending_score_verdict.story.court.code
+  / = " | "
+  / = link_to "新增判決評鑑", checked_info_party_score_verdicts_path(verdict_score: { court_id: @story.court_id, year: @story.year, word_type: @story.word_type, number: @story.number}), method: :post
 
 br
-= "已評鑑開庭紀錄"
+= "已評鑑"
 - @schedule_score.each do |ss|
   br
   = ss.story.adjudge_date
@@ -28,8 +28,7 @@ br
   = ss.judge_name
   = " | "
   = link_to "編輯開庭評鑑", edit_party_score_schedule_path(ss)
-br
-= "已評鑑判決紀錄"
+
 - @verdict_score.each do |vs|
   br
   = vs.story.adjudge_date
