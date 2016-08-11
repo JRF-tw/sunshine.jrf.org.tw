@@ -36,7 +36,6 @@ Rails.application.routes.draw do
     resource :profile, only: [:show, :edit, :update]
     resource :email, only: [:edit, :update]
     resource :score do
-      get "chose-type", to: "scores#chose_type"
       resources :schedules, only: [:new, :create, :edit, :update] do
         collection do
           get :rule
@@ -64,7 +63,6 @@ Rails.application.routes.draw do
     resource :profile, only: [:show, :edit, :update]
     resource :email, only: [:edit, :update]
     resource :score do
-      get "chose-type", to: "scores#chose_type"
       resources :schedules, only: [:new, :create, :edit, :update] do
         collection do
           get :rule
@@ -102,7 +100,6 @@ Rails.application.routes.draw do
       end
     end
     resource :score do
-      get "chose-type", to: "scores#chose_type"
       resources :schedules, only: [:new, :create, :edit, :update] do
         collection do
           get :rule
