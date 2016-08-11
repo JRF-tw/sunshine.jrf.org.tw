@@ -29,7 +29,7 @@ RSpec.describe LawyerQueries do
 
   describe "#get_verdict_score" do
     let!(:verdict_score) { create :verdict_score, verdict_rater: lawyer, story: story }
-    it { expect(query.get_verdict_score(story).include?(verdict_score)).to be_truthy }
+    it { expect(query.get_verdict_score(story)).to eq(verdict_score) }
   end
 
   describe "#pending_score_schedules" do

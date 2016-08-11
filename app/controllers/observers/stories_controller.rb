@@ -25,6 +25,7 @@ class Observers::StoriesController < Observers::BaseController
 
   def has_score?
     @schedule_score = ::CourtObserverQueries.new(current_court_observer).get_schedule_score(@story)
-    redirect_as_fail(observer_stories_path, "尚未有評鑑紀錄") unless @schedule_score.present?
+    @schedule_score_sorted = @schedule_score.includes(:schedule).order("schedules.date")
+    redirect_as_fail(observer_stories_path, "尚未有評鑑紀錄") unless @schedule_score_sorted.present?
   end
 end
