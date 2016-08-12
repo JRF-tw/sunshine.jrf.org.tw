@@ -28,5 +28,8 @@ br
   = " | "
   = ss["data"]["judge_name"] if ss["data"]
   = " | "
-  = link_to "編輯評鑑", edit_party_score_schedule_path(ss["id"])
+  - if ss["schedule_score"]
+    = link_to "編輯評鑑", edit_party_score_schedule_path(ss["id"])
+  - else 
+    = link_to "編輯評鑑", edit_party_score_verdict_path(ss["id"])
 

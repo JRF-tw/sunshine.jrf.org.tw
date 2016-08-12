@@ -49,6 +49,7 @@ class LawyerQueries
       ss_hash = schedule_score.as_json
       ss_hash["date"] = schedule_score.schedule.date
       ss_hash["court_code"] = court_code
+      ss_hash["schedule_score"] = true
       schedule_scores_array << ss_hash
     end
     schedule_scores_array
@@ -59,6 +60,7 @@ class LawyerQueries
       vs_hash = verdict_score.as_json
       vs_hash["date"] = verdict_score.story.adjudge_date
       vs_hash["court_code"] = story.court.code
+      vs_hash["verdict_score"] = true
       [] << vs_hash
     end
   end

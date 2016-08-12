@@ -53,4 +53,28 @@ RSpec.describe PartyQueries do
       it { expect(query.pending_score_verdict(story)).to eq(verdict) }
     end
   end
+
+  describe "#get_scores_hash" do
+    context "have schedule_scores" do
+      let!(:schedule_score) { create :schedule_score, schedule_rater: party, story: story }
+      let(:date) { schedule_score.schedule.date }
+      let(:court_code) { story.court.code }
+
+      it { expect(query.get_scores_hash(story).first.is_a?(Hash)).to be_truthy }
+      it { expect(query.get_scores_hash(story).first["date"]).to eq(date) }
+      it { expect(query.get_scores_hash(story).first["court_code"]).to eq(court_code) }
+      it { expect(query.get_scores_hash(story).first["schedule_score"]).to be_truthy }
+    end
+
+    context "have verdict_scores" do
+      let!(:verdict_score) { create :verdict_score, verdict_rater: party, story: story }
+      let(:date) { verdict_score.story.adjudge_date }
+      let(:court_code) { story.court.code }
+
+      it { expect(query.get_scores_hash(story).first.is_a?(Hash)).to be_truthy }
+      it { expect(query.get_scores_hash(story).first["date"]).to eq(date) }
+      it { expect(query.get_scores_hash(story).first["court_code"]).to eq(court_code) }
+      it { expect(query.get_scores_hash(story).first["verdict_score"]).to be_truthy }
+    end
+  end
 end
