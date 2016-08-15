@@ -61,6 +61,11 @@ gem "axlsx_rails"
 # gem 'bcrypt', '~> 3.1.7'
 
 group :development do
+	# Gems for Front-end development
+	gem 'guard-livereload', '~>2.5.2', require: false
+	gem 'rack-livereload'
+	gem 'dotenv-rails'
+
   # capistrano
   gem "capistrano-rails"
   gem "capistrano-rvm"

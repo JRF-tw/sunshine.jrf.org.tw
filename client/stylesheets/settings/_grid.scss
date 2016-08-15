@@ -1,0 +1,42 @@
+//  Grid settings
+//  =============
+
+$layout-base: (
+  gutters: 1/5,
+  column-width: scut-rem(100),
+  // gutter-position: inside-static,
+  debug: (
+    // image: show,
+  ),
+  use-custom: (
+    clearfix: true,
+    rem: false,
+  ),
+);
+
+// {{ Element twick points }}
+
+// {{ Device layouts }}
+$susy-media: (
+  'mobile': '(max-width: 414px)',
+  'tablet-portrait': '(max-width: 768px) and (orientation: portrait)',
+  'tablet-landscape': '(max-width: 1024px) and (orientation: landscape)',
+  'tablet': '(min-width: 768px)',
+  'tablet-portrait-min': '(min-width: 768px) and (orientation: portrait)',
+  'tablet-landscape-min': '(min-width: 768px) and (orientation: landscape)',
+  'desktop': '(min-width: 1440px)'
+);
+$tablet: (
+  query: map-get($susy-media, tablet),
+  layout: 9 .5
+);
+$tablet-columns: susy-get(columns, map-get($tablet, layout));
+$desktop: (
+  query: map-get($susy-media, desktop),
+  layout: 14 1.5 split
+);
+$desktop-columns: susy-get(columns, map-get($desktop, layout));
+$desktop-grid-padding: scut-rem(15);
+
+//  {{ Layers ------ }}
+$layers: ();

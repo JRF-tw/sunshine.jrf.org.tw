@@ -1,0 +1,78 @@
+// {{Sass mixins --------}}
+@function n() { @return unquote("*"); }
+
+@function r($times: 1) { @return $rhythm-gap * $times; }
+
+@mixin susy($map) {
+  +susy-breakpoint(map-get($map, query), map-get($map, layout)) {
+    @content;
+  }
+}
+
+@mixin reverse-hide-visually() {
+  border: 0;
+  clip: auto;
+  overflow: hidden;
+  padding: 0;
+  position: static;
+  height: auto;
+  width: auto;
+}
+
+@mixin share-breakpoints($map, $cssprop: content) {
+  $description: '';
+
+  @each $property, $value in $map {
+    @if $description !=  '' {
+      $description: $description + ' | ';
+    }
+    
+    $description: $description + $property +': '+ inspect($value);
+  }
+
+  display: none;
+  #{$cssprop}:  $description;
+}
+
+@mixin toggle-fade() {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .2s ease 0s, visibility .2s ease .2s;
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+}
+
+@mixin toggle-show() {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .2s ease 0s, visibility .2s ease .2s;
+  overflow: hidden;
+  height: 0;
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+    overflow: auto;
+    height: auto;
+  }  
+}
+
+@mixin show() {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+  height: auto;  
+}
+
+@mixin input-placeholder() {
+  &::-webkit-input-placeholder, 
+  &::-moz-placeholder,
+  &:-ms-input-placeholder { @content; }
+}
+
+@mixin debug($color: #fff rgba(tomato, .3)) {
+  color: $color
+}

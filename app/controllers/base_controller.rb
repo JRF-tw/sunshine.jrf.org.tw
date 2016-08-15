@@ -1,4 +1,5 @@
 class BaseController < ApplicationController
+  layout 'classic', except: [:who_are_you, :score_intro]
 
   def index
     @banners = Banner.shown.order_by_weight

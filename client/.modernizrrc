@@ -1,0 +1,10 @@
+minify: false
+
+options:
+  - setClasses
+  # - testAllProps
+  # - mq
+
+feature-detects:
+  # - svg
+  # - video

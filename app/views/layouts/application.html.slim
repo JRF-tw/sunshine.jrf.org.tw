@@ -19,8 +19,11 @@ html
     link href="/favicon.ico" rel="shortcut icon"
     = display_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'priority', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
+
+    - if ENV['F2E_DEV']
+      = javascript_include_tag 'http://localhost:8080/assets/javascripts/webpack_bundle.js', 'data-turbolinks-track' => true
+
     = csrf_meta_tags
 
     = render partial: 'components/svgs'
@@ -32,7 +35,5 @@ html
       main.main role='main' = yield
       
     = render partial: 'components/main_footer'
-
-    = render partial: 'components/to_top_button'
 
     = render partial: 'partial/gtm'
