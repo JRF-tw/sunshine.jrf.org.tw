@@ -1,0 +1,436 @@
+Run options: include {:focus=>true}
+
+All examples were filtered out; ignoring {:focus=>true}
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <title>RSpec results</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Expires" content="-1" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <style type="text/css">
+  body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    font-size: 80%;
+  }
+  </style>
+  <script type="text/javascript">
+    // <![CDATA[
+
+function addClass(element_id, classname) {
+  document.getElementById(element_id).className += (" " + classname);
+}
+
+function removeClass(element_id, classname) {
+  var elem = document.getElementById(element_id);
+  var classlist = elem.className.replace(classname,'');
+  elem.className = classlist;
+}
+
+function moveProgressBar(percentDone) {
+  document.getElementById("rspec-header").style.width = percentDone +"%";
+}
+
+function makeRed(element_id) {
+  removeClass(element_id, 'passed');
+  removeClass(element_id, 'not_implemented');
+  addClass(element_id,'failed');
+}
+
+function makeYellow(element_id) {
+  var elem = document.getElementById(element_id);
+  if (elem.className.indexOf("failed") == -1) {  // class doesn't includes failed
+    if (elem.className.indexOf("not_implemented") == -1) { // class doesn't include not_implemented
+      removeClass(element_id, 'passed');
+      addClass(element_id,'not_implemented');
+    }
+  }
+}
+
+function apply_filters() {
+  var passed_filter = document.getElementById('passed_checkbox').checked;
+  var failed_filter = document.getElementById('failed_checkbox').checked;
+  var pending_filter = document.getElementById('pending_checkbox').checked;
+
+  assign_display_style("example passed", passed_filter);
+  assign_display_style("example failed", failed_filter);
+  assign_display_style("example not_implemented", pending_filter);
+
+  assign_display_style_for_group("example_group passed", passed_filter);
+  assign_display_style_for_group("example_group not_implemented", pending_filter, pending_filter || passed_filter);
+  assign_display_style_for_group("example_group failed", failed_filter, failed_filter || pending_filter || passed_filter);
+}
+
+function get_display_style(display_flag) {
+  var style_mode = 'none';
+  if (display_flag == true) {
+    style_mode = 'block';
+  }
+  return style_mode;
+}
+
+function assign_display_style(classname, display_flag) {
+  var style_mode = get_display_style(display_flag);
+  var elems = document.getElementsByClassName(classname)
+  for (var i=0; i<elems.length;i++) {
+    elems[i].style.display = style_mode;
+  }
+}
+
+function assign_display_style_for_group(classname, display_flag, subgroup_flag) {
+  var display_style_mode = get_display_style(display_flag);
+  var subgroup_style_mode = get_display_style(subgroup_flag);
+  var elems = document.getElementsByClassName(classname)
+  for (var i=0; i<elems.length;i++) {
+    var style_mode = display_style_mode;
+    if ((display_flag != subgroup_flag) && (elems[i].getElementsByTagName('dt')[0].innerHTML.indexOf(", ") != -1)) {
+      elems[i].style.display = subgroup_style_mode;
+    } else {
+      elems[i].style.display = display_style_mode;
+    }
+  }
+}
+
+    // ]]>
+  </script>
+  <style type="text/css">
+#rspec-header {
+  background: #65C400; color: #fff; height: 4em;
+}
+
+.rspec-report h1 {
+  margin: 0px 10px 0px 10px;
+  padding: 10px;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+  font-size: 1.8em;
+  position: absolute;
+}
+
+#label {
+  float:left;
+}
+
+#display-filters {
+  float:left;
+  padding: 28px 0 0 40%;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+}
+
+#summary {
+  float:right;
+  padding: 5px 10px;
+  font-family: "Lucida Grande", Helvetica, sans-serif;
+  text-align: right;
+}
+
+#summary p {
+  margin: 0 0 0 2px;
+}
+
+#summary #totals {
+  font-size: 1.2em;
+}
+
+.example_group {
+  margin: 0 10px 5px;
+  background: #fff;
+}
+
+dl {
+  margin: 0; padding: 0 0 5px;
+  font: normal 11px "Lucida Grande", Helvetica, sans-serif;
+}
+
+dt {
+  padding: 3px;
+  background: #65C400;
+  color: #fff;
+  font-weight: bold;
+}
+
+dd {
+  margin: 5px 0 5px 5px;
+  padding: 3px 3px 3px 18px;
+}
+
+dd .duration {
+  padding-left: 5px;
+  text-align: right;
+  right: 0px;
+  float:right;
+}
+
+dd.example.passed {
+  border-left: 5px solid #65C400;
+  border-bottom: 1px solid #65C400;
+  background: #DBFFB4; color: #3D7700;
+}
+
+dd.example.not_implemented {
+  border-left: 5px solid #FAF834;
+  border-bottom: 1px solid #FAF834;
+  background: #FCFB98; color: #131313;
+}
+
+dd.example.pending_fixed {
+  border-left: 5px solid #0000C2;
+  border-bottom: 1px solid #0000C2;
+  color: #0000C2; background: #D3FBFF;
+}
+
+dd.example.failed {
+  border-left: 5px solid #C20000;
+  border-bottom: 1px solid #C20000;
+  color: #C20000; background: #FFFBD3;
+}
+
+
+dt.not_implemented {
+  color: #000000; background: #FAF834;
+}
+
+dt.pending_fixed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+dt.failed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+
+#rspec-header.not_implemented {
+  color: #000000; background: #FAF834;
+}
+
+#rspec-header.pending_fixed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+#rspec-header.failed {
+  color: #FFFFFF; background: #C40D0D;
+}
+
+
+.backtrace {
+  color: #000;
+  font-size: 12px;
+}
+
+a {
+  color: #BE5C00;
+}
+
+/* Ruby code, style similar to vibrant ink */
+.ruby {
+  font-size: 12px;
+  font-family: monospace;
+  color: white;
+  background-color: black;
+  padding: 0.1em 0 0.2em 0;
+}
+
+.ruby .keyword { color: #FF6600; }
+.ruby .constant { color: #339999; }
+.ruby .attribute { color: white; }
+.ruby .global { color: white; }
+.ruby .module { color: white; }
+.ruby .class { color: white; }
+.ruby .string { color: #66FF00; }
+.ruby .ident { color: white; }
+.ruby .method { color: #FFCC00; }
+.ruby .number { color: white; }
+.ruby .char { color: white; }
+.ruby .comment { color: #9933CC; }
+.ruby .symbol { color: white; }
+.ruby .regex { color: #44B4CC; }
+.ruby .punct { color: white; }
+.ruby .escape { color: white; }
+.ruby .interp { color: white; }
+.ruby .expr { color: white; }
+
+.ruby .offending { background-color: gray; }
+.ruby .linenum {
+  width: 75px;
+  padding: 0.1em 1em 0.2em 0;
+  color: #000000;
+  background-color: #FFFBD3;
+}
+
+  </style>
+</head>
+<body>
+<div class="rspec-report">
+
+<div id="rspec-header">
+  <div id="label">
+    <h1>RSpec Code Examples</h1>
+  </div>
+
+  <div id="display-filters">
+    <input id="passed_checkbox"  name="passed_checkbox"  type="checkbox" checked="checked" onchange="apply_filters()" value="1" /> <label for="passed_checkbox">Passed</label>
+    <input id="failed_checkbox"  name="failed_checkbox"  type="checkbox" checked="checked" onchange="apply_filters()" value="2" /> <label for="failed_checkbox">Failed</label>
+    <input id="pending_checkbox" name="pending_checkbox" type="checkbox" checked="checked" onchange="apply_filters()" value="3" /> <label for="pending_checkbox">Pending</label>
+  </div>
+
+  <div id="summary">
+    <p id="totals">&#160;</p>
+    <p id="duration">&#160;</p>
+  </div>
+</div>
+
+
+<div class="results">
+<div id="div_group_1" class="example_group passed">
+  <dl style="margin-left: 0px;">
+  <dt id="example_group_1" class="passed">Feature: 該律師為了完成註冊，第一次設定密碼</dt>
+  </dl>
+</div>
+<div id="div_group_2" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_2" class="passed">Feature: 完成密碼設定後，註冊狀態改為已認證</dt>
+  </dl>
+</div>
+<div id="div_group_3" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_3" class="passed">Scenario: 該律師尚未通過認證</dt>
+  </dl>
+</div>
+<div id="div_group_4" class="example_group passed">
+  <dl style="margin-left: 45px;">
+  <dt id="example_group_4" class="passed">Given 該律師已收到密碼設定信件誒, 且前往密碼設定頁</dt>
+  </dl>
+</div>
+<div id="div_group_5" class="example_group passed">
+  <dl style="margin-left: 60px;">
+  <dt id="example_group_5" class="passed">When 正確輸入完密碼後送出</dt>
+    <script type="text/javascript">moveProgressBar('16.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">Then 該律師註冊狀態改為已認證</span><span class='duration'>2.13239s</span></dd>
+  </dl>
+</div>
+<div id="div_group_6" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_6" class="passed">Scenario: 該律師已通過認證</dt>
+  </dl>
+</div>
+<div id="div_group_7" class="example_group passed">
+  <dl style="margin-left: 45px;">
+  <dt id="example_group_7" class="passed">Given 該律師已收到密碼設定信件, 設定該律師為通過認證, 在未登入狀態下前往密碼設定頁</dt>
+  </dl>
+</div>
+<div id="div_group_8" class="example_group passed">
+  <dl style="margin-left: 60px;">
+  <dt id="example_group_8" class="passed">When 正確輸入完密碼後送出</dt>
+    <script type="text/javascript">makeRed('rspec-header');</script>
+    <script type="text/javascript">makeRed('div_group_8');</script>
+    <script type="text/javascript">makeRed('example_group_8');</script>
+    <script type="text/javascript">moveProgressBar('33.3');</script>
+    <dd class="example failed">
+      <span class="failed_spec_name">Then 密碼更改失敗</span>
+      <span class="duration">0.32103s</span>
+      <div class="failure" id="failure_1">
+        <div class="message"><pre>expected &quot;/lawyer&quot; to match &quot;/lawyer/sign_in&quot;</pre></div>
+        <div class="backtrace"><pre>./spec/features/前台帳號功能/律師/第一次設定密碼_spec.rb:83:in `block (6 levels) in &lt;top (required)&gt;&#39;</pre></div>
+    <pre class="ruby"><code><span class="linenum">81</span>          <span class="constant">Then</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">密碼更改失敗</span><span class="delimiter">&quot;</span></span> <span class="keyword">do</span>
+<span class="linenum">82</span>            <span class="comment"># if hidden, raise erroe</span>
+<span class="offending"><span class="linenum">83</span>            expect(current_path).to match(new_lawyer_session_path)</span>
+<span class="linenum">84</span>            expect(page).to have_content(<span class="string"><span class="delimiter">&quot;</span><span class="content">密碼更改失敗</span><span class="delimiter">&quot;</span></span>)
+<span class="linenum">85</span>            expect(lawyer.reload.confirmed?).to be_falsey</code></pre>
+      </div>
+    </dd>
+  </dl>
+</div>
+<div id="div_group_9" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_9" class="passed">Feature: 密碼設定頁要顯示 律師姓名 和 Email</dt>
+  </dl>
+</div>
+<div id="div_group_10" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_10" class="passed">Given 該律師已收到密碼設定信件</dt>
+  </dl>
+</div>
+<div id="div_group_11" class="example_group passed">
+  <dl style="margin-left: 45px;">
+  <dt id="example_group_11" class="passed">When 前往該律師的密碼設定頁</dt>
+    <script type="text/javascript">moveProgressBar('50.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">Then 頁面成功讀取且顯示該 律師姓名 和 Email</span><span class='duration'>0.29592s</span></dd>
+  </dl>
+</div>
+<div id="div_group_12" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_12" class="passed">Feature: 成功設定密碼，使用新密碼可登入</dt>
+  </dl>
+</div>
+<div id="div_group_13" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_13" class="passed">Given 該律師完成了第一次密碼設定</dt>
+  </dl>
+</div>
+<div id="div_group_14" class="example_group passed">
+  <dl style="margin-left: 45px;">
+  <dt id="example_group_14" class="passed">When 使用新密碼登入</dt>
+    <script type="text/javascript">moveProgressBar('66.6');</script>
+    <dd class="example passed"><span class="passed_spec_name">Then 登入成功</span><span class='duration'>0.55765s</span></dd>
+  </dl>
+</div>
+<div id="div_group_15" class="example_group passed">
+  <dl style="margin-left: 15px;">
+  <dt id="example_group_15" class="passed">Feature: 有律師登入的狀態下，就無法進入設定密碼頁</dt>
+  </dl>
+</div>
+<div id="div_group_16" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_16" class="passed">Scenario: 該律師已登入（已通過認證)</dt>
+  </dl>
+</div>
+<div id="div_group_17" class="example_group passed">
+  <dl style="margin-left: 45px;">
+  <dt id="example_group_17" class="passed">Given 該律師已認證+登入</dt>
+  </dl>
+</div>
+<div id="div_group_18" class="example_group passed">
+  <dl style="margin-left: 60px;">
+  <dt id="example_group_18" class="passed">When 前往該律師的密碼設定頁</dt>
+    <script type="text/javascript">moveProgressBar('83.3');</script>
+    <dd class="example passed"><span class="passed_spec_name">Then 頁面轉跳</span><span class='duration'>0.37842s</span></dd>
+  </dl>
+</div>
+<div id="div_group_19" class="example_group passed">
+  <dl style="margin-left: 30px;">
+  <dt id="example_group_19" class="passed">Scenario: 已登入律師B</dt>
+  </dl>
+</div>
+<div id="div_group_20" class="example_group passed">
+  <dl style="margin-left: 45px;">
+  <dt id="example_group_20" class="passed">Given 該律師已收到密碼設定信件, 且律師B已認證+登入</dt>
+  </dl>
+</div>
+<div id="div_group_21" class="example_group passed">
+  <dl style="margin-left: 60px;">
+  <dt id="example_group_21" class="passed">When 前往該律師的密碼設定頁</dt>
+    <script type="text/javascript">moveProgressBar('100.0');</script>
+    <dd class="example passed"><span class="passed_spec_name">Then 頁面轉跳</span><span class='duration'>0.43792s</span></dd>
+  </dl>
+</div>
+
+Top 6 slowest examples (4.12 seconds, 92.9% of total time):
+  Feature: 該律師為了完成註冊，第一次設定密碼 Feature: 完成密碼設定後，註冊狀態改為已認證 Scenario: 該律師尚未通過認證 Given 該律師已收到密碼設定信件誒, 且前往密碼設定頁 When 正確輸入完密碼後送出 Then 該律師註冊狀態改為已認證
+    2.13 seconds ./spec/features/前台帳號功能/律師/第一次設定密碼_spec.rb:64
+  Feature: 該律師為了完成註冊，第一次設定密碼 Feature: 成功設定密碼，使用新密碼可登入 Given 該律師完成了第一次密碼設定 When 使用新密碼登入 Then 登入成功
+    0.55765 seconds ./spec/features/前台帳號功能/律師/第一次設定密碼_spec.rb:100
+  Feature: 該律師為了完成註冊，第一次設定密碼 Feature: 有律師登入的狀態下，就無法進入設定密碼頁 Scenario: 已登入律師B Given 該律師已收到密碼設定信件, 且律師B已認證+登入 When 前往該律師的密碼設定頁 Then 頁面轉跳
+    0.43792 seconds ./spec/features/前台帳號功能/律師/第一次設定密碼_spec.rb:34
+  Feature: 該律師為了完成註冊，第一次設定密碼 Feature: 有律師登入的狀態下，就無法進入設定密碼頁 Scenario: 該律師已登入（已通過認證) Given 該律師已認證+登入 When 前往該律師的密碼設定頁 Then 頁面轉跳
+    0.37842 seconds ./spec/features/前台帳號功能/律師/第一次設定密碼_spec.rb:15
+  Feature: 該律師為了完成註冊，第一次設定密碼 Feature: 完成密碼設定後，註冊狀態改為已認證 Scenario: 該律師已通過認證 Given 該律師已收到密碼設定信件, 設定該律師為通過認證, 在未登入狀態下前往密碼設定頁 When 正確輸入完密碼後送出 Then 密碼更改失敗
+    0.32103 seconds ./spec/features/前台帳號功能/律師/第一次設定密碼_spec.rb:81
+  Feature: 該律師為了完成註冊，第一次設定密碼 Feature: 密碼設定頁要顯示 律師姓名 和 Email Given 該律師已收到密碼設定信件 When 前往該律師的密碼設定頁 Then 頁面成功讀取且顯示該 律師姓名 和 Email
+    0.29592 seconds ./spec/features/前台帳號功能/律師/第一次設定密碼_spec.rb:49
+<script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>4.43828 seconds</strong>";</script>
+<script type="text/javascript">document.getElementById('totals').innerHTML = "6 examples, 1 failure";</script>
+</div>
+</div>
+</body>
+</html>
