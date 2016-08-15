@@ -65,6 +65,7 @@ RSpec.configure do |config|
 
   config.before(:each){ webmock_all! }
   config.before(:each){ sidekiq_reset! }
+  config.before(:each){ Redis.new(Setting.redis).flushall }
 
   Dir[Rails.root.join("spec/config/**/*.rb")].each { |f| require f }
 end
