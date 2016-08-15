@@ -23,6 +23,6 @@ class Admin::LawyerUpdateContext < BaseContext
   end
 
   def confirm_email
-    @lawyer.confirm! if @lawyer.unconfirmed_email.present?
+    @lawyer.confirm if @lawyer.unconfirmed_email.present?
   end
 end
