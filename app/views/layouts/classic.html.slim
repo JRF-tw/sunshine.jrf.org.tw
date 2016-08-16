@@ -27,11 +27,11 @@ html
   
   body class="#{yield :body_classes}"
     .page-wrapper class="#{'base-page-wrapper' if is_base_index}"
-      = render partial: 'components/main_header' unless is_base_index
+      = render partial: 'components/classic_header' unless is_base_index
         
       main.main role='main' = yield
       
-    = render partial: 'components/main_footer'
+    = render partial: 'components/classic_footer'
 
     = render partial: 'components/to_top_button'
 

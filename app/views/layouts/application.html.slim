@@ -13,6 +13,8 @@ html
     = csrf_meta_tags
   
   body class=(yield :body_classes)
+    = render 'components/main_header'
+
     .page-wrapper        
       main role='main'
 
