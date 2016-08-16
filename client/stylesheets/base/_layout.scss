@@ -4,3 +4,10 @@
   @include susy($tablet) { @include container();}
   @include susy($desktop) { @include container(); }
 }
+
+.container--wide {
+  @include container();
+  max-width: none;
+  padding: n() r(2);
+  @include susy($tablet) { padding: n() r(4); }
+}
