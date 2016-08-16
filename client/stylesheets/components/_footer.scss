@@ -1,0 +1,61 @@
+// {{ Footer }}
+$color: $text-secondary;
+
+.main-footer {
+  color: $color #fff;
+
+  hr {
+    display: none;
+    margin: r(2) auto;
+    border-color: $divider-gray;
+    border-width: 1px 0 0 0;
+    @include susy($tablet) {
+      display: block;
+      width: 100%;
+    }
+  }
+}
+
+.main-footer__wrapper {
+  padding: r(2) n();
+  @include susy($tablet) {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
+  @include susy-media($footer-copy-twick) { padding-top: r(3); }
+}
+
+.main-footer__heading {
+  margin: 0 n() r(2);
+  text: 400 ms(1);
+  @include susy($tablet) {
+    order: 5;
+    margin-bottom: 0;
+    text-align: right;
+  }
+
+  .text { color: $color !important; }
+}
+
+.main-footer__contact {
+  @include susy($tablet) {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+  }
+  address {
+    margin-bottom: r(2);
+    font-style: normal;
+  }
+}
+
+.main-footer__info {
+  @include susy($tablet) { text-align: right; }
+}
+
+.main-footer__copy {
+  display: none;
+  font-size: ms(-1);
+  @include susy-media($footer-copy-twick) { display: block; }
+}

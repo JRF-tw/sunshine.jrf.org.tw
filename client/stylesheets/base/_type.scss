@@ -1,0 +1,11 @@
+// {{ Links }}
+a {
+  text-decoration: none;
+  @include scut-color-swap($link-color, $link-hover-color);
+}
+
+// {{ Selection style }}
+::selection {
+  text-shadow: none;
+  background-color: $gray-lighter;
+}
