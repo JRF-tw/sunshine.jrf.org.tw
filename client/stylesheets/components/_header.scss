@@ -32,8 +32,8 @@
     margin-left: auto; 
   } 
 
-  .cells { @include scut-list-inline(r(3)); }
   .cell {
+    margin-left: r(3);
     text: $text-secondary-dark ms(1);
   }
 }

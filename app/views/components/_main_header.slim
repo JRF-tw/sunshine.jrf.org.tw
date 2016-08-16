@@ -5,10 +5,9 @@ header.main-header
       p.slogan 揭開司法的神秘面紗
 
     nav.main-header__nav
-      ul.cells
-        li = link_to '認識法官', judges_path, class: "cell"
-        li = link_to '認識檢察官', prosecutors_path, class: "cell"
-        li = link_to '評鑑法官', who_are_you_path, class: "cell"
-        li = link_to '我想找', searchs_path, class: "cell"
-        li = link_to '關於我們', about_path, class: "cell"
-        li = link_to '回報錯誤', 'https://jrf.neticrm.tw/civicrm/profile/create?gid=49&reset=1', class: "cell", target: "_blank"
+      = link_to '認識法官', judges_path, class: "cell"
+      = link_to '認識檢察官', prosecutors_path, class: "cell"
+      = link_to '評鑑法官', who_are_you_path, class: "cell"
+      = link_to '我想找', searchs_path, class: "cell"
+      = link_to '關於我們', about_path, class: "cell"
+      = link_to '回報錯誤', 'https://jrf.neticrm.tw/civicrm/profile/create?gid=49&reset=1', class: "cell", target: "_blank"
