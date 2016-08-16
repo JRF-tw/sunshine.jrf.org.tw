@@ -10,4 +10,10 @@ module TemplateHelper
     concat content_tag :dt, key.to_s, class: "term"
     content_tag :dd, value.to_s, class: "desc"
   end
+
+  def inline_svg(icon)
+    content_tag :svg, class: "#{icon} icon" do
+      tag :use, "xlink:href" => "##{icon}"
+    end
+  end  
 end
