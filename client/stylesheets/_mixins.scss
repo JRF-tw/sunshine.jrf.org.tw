@@ -4,7 +4,7 @@
 @function r($times: 1) { @return $rhythm-gap * $times; }
 
 @mixin susy($map) {
-  +susy-breakpoint(map-get($map, query), map-get($map, layout)) {
+  @include susy-breakpoint(map-get($map, query), map-get($map, layout)) {
     @content;
   }
 }

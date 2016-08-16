@@ -1,7 +1,7 @@
 //  Grid settings
 //  =============
 
-$layout-base: (
+$susy: (
   gutters: 1/5,
   column-width: scut-rem(100),
   // gutter-position: inside-static,
@@ -13,8 +13,6 @@ $layout-base: (
     rem: false,
   ),
 );
-
-// {{ Element twick points }}
 
 // {{ Device layouts }}
 $susy-media: (
@@ -37,6 +35,9 @@ $desktop: (
 );
 $desktop-columns: susy-get(columns, map-get($desktop, layout));
 $desktop-grid-padding: scut-rem(15);
+
+// {{ Element twick points }}
+$footer-copy-twick: 880px;
 
 //  {{ Layers ------ }}
 $layers: ();
