@@ -16,7 +16,15 @@ $gray-lighter:  tint($gray-base, 93.5%) !default;
 //  Texts
 //  -----
 
-$text-color: $gray-dark;
+$text-primary:   rgba(#000, .87);
+$text-secondary: rgba(#000, .54);
+$text-disabled:  rgba(#000, .38);
+
+$text-primary-dark:   #fff;
+$text-secondary-dark: rgba(#fff, .7);
+$text-disabled-dark:  rgba(#fff, .5);
+
+$text-color: $text-primary;
 
 //  Pallete
 //  -----------
@@ -39,3 +47,7 @@ $link-visited-color:   $gray-dark !default;
 //  NProgress
 //  ---------
 $nprogress-color:    $primary;
+
+//  Component colors
+//  ----------------
+$divider-gray: rgba(#000, .12);

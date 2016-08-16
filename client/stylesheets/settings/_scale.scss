@@ -2,7 +2,7 @@
 //  ===================================
 
 $base-font-size:   14px;
-$ideal-font-size:  22px;
+// $ideal-font-size:  16px;
 // $base-line-height: ms(1, $base-font-size);
 
 $rhythm-unit: "rem";
@@ -11,7 +11,7 @@ $rem-with-px-fallback: false;
 
 $scut-rem-base: scut-strip-unit($base-font-size);
 
-$ms-base:          $base-font-size, $ideal-font-size;
-$ms-ratio:         $golden;
+$ms-base:          $base-font-size;
+$ms-ratio:         $minor-third;
 
 // {{ Component size }}
