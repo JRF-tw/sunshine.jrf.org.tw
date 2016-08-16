@@ -17,6 +17,7 @@
   "scripts": {
     "start": "foreman start -f Procfile.f2e",
     "rails": "foreman start -f Procfile",
+    "update": "gulp update",
     "deploy": "gulp deploy",
     "check": "rubocop --auto-correct",
     "rebase": "bundle install && foreman start -f Procfile.migrate && foreman start -f Procfile.test",

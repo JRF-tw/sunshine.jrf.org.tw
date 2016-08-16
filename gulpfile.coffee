@@ -44,11 +44,13 @@ gulp.task 'resolve-url', ->
 # 確認所在 branch
 current_branch = require('git-branch').sync()
 
-gulp.task 'deploy', shell.task [
+gulp.task 'update', shell.task [
   'npm run build'
   'git add -A'
-  'git commit -m "update assets"'
-  'git push'
+  'git commit -m "update assets"'  
+]
+
+gulp.task 'deploy', shell.task [
   "cap staging deploy BR=#{current_branch}"
 ]
 
