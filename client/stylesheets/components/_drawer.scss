@@ -1,0 +1,39 @@
+.drawer-toggle {
+  @include Normalize();
+  padding: r(2);
+  position: fixed r(1) n() n() 0;
+  z-index: index($layers, drawer-toggle);
+  @include susy($tablet) { @include Hidden(); }
+
+  .icon { size: r(3); }
+}
+.drawer {
+  display: flex;
+  flex-flow: column nowrap;
+  position: fixed 0 n() 0 0;
+  width: 304px;
+  z-index: index($layers, drawer);
+  transition: transform .3s ease 0s;
+  transform: translate3D(-120%, 0, 0);
+  &.active { transform: translate3D(0, 0, 0); }  
+  @include susy($tablet) { @include Hidden(); }
+}
+.drawer__nav {
+  flex: 1;
+  padding: r(2);
+  background-color: $white;
+  box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.18),
+              0px 16px 16px 0px rgba(0,0,0,0.24);
+  .cell {
+    display: block;
+    color: $text-secondary;
+    & + .cell { margin-top: r(2); }
+  }
+}
+.drawer-mask {
+  position: fixed 0 0 0 0;
+  z-index: index($layers, drawer-mask);
+  background-color: $mask-gray;
+  @include toggle-fade();
+  @include susy($tablet) { @include Hidden(); }  
+}

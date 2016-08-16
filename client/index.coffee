@@ -5,13 +5,13 @@ require "stylesheets"
 require "modernizr"
 
 # Require Lazysizes
-require "lazysizes/plugins/custommedia/ls.custommedia"
-require "lazysizes/plugins/respimg/ls.respimg"
-require "lazysizes"
+# require "lazysizes/plugins/custommedia/ls.custommedia"
+# require "lazysizes/plugins/respimg/ls.respimg"
+# require "lazysizes"
+
 # Require Custom Modules
-# EX:
-# { MainMenu } = require "./modules/sidebar"
-Modal = require "./modules/modal"
+# Modal = require "./modules/modal"
+Toggle = require './modules/toggle'
 
 # Require entry modules
 # EX:
@@ -22,12 +22,4 @@ sprites = require.context "icons", off
 sprites.keys().forEach sprites
 
 $(document).on "page:change", ->
-  # Async apply Typekit
-  `
-  try{Typekit.load({ async: true });}catch(e){}
-  `
-
-  # EX:
-  # new MainMenu()
-  # new HomeBanners()
-  # new HomeCover()
+  new Toggle '.switch'  

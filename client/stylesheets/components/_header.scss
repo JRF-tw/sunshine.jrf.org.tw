@@ -1,4 +1,7 @@
-.main-header { z-index: index($layers, header); }
+.main-header {
+  position: fixed 0 0 n() 0;
+  z-index: index($layers, header);
+}
 .main-header__wrapper {
   display: flex;
   align-items: center;

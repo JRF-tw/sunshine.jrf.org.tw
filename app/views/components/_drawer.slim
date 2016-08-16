@@ -1,0 +1,8 @@
+button.drawer-toggle.switch type='button' data-switch-on=['#drawer', '#drawer-mask']
+  = inline_svg 'menu'
+
+#drawer.drawer
+  nav.drawer__nav
+    = render 'components/nav_cells'
+
+#drawer-mask.drawer-mask.switch data-switch-off=['#drawer', '#drawer-mask']

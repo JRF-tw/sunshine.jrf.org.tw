@@ -19,7 +19,10 @@ body {
   background-color: $gray;
 }
 
-.page-wrapper { flex: 1; }
+.page-wrapper {
+  flex: 1;
+  min-height: r(20);
+}
 
 main[role="main"] {}
 
