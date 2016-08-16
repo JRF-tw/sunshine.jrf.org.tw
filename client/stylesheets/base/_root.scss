@@ -5,7 +5,7 @@
 
 html {
   font-family: $base-font-family;
-  text: $text-color 1.5 $base-font-size;
+  text: 400 $text-color 1.5 $base-font-size;
   -webkit-font-smoothing: antialiased;
   &:after { @include share-breakpoints($susy-media); }
 }
@@ -15,6 +15,8 @@ body {
   flex-flow: column nowrap;
   background-color: #fff;
   min-height: 100vh;
+  // for debuging
+  background-color: $gray;
 }
 
 .page-wrapper { flex: 1; }

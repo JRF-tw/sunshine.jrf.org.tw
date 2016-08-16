@@ -1,39 +1,38 @@
 footer.main-footer
-  .main-footer__wrapper
-    section.container
-      h6.main-footer__heading
-        = link_to 'http://www.jrf.org.tw/', target: '_blank' do
-          | 財團法人民間司法改革基金會#{tag :br}
-          | Judicial Reform Foundation
+  section.container
+    h6.main-footer__heading
+      = link_to 'http://www.jrf.org.tw/', target: '_blank', class: 'text' do
+        | 財團法人民間司法改革基金會#{tag :br}
+        | Judicial Reform Foundation
 
-      .main-footer__contact
-        address
-          | 104-56 台北市中山區松江路90巷3號7樓#{tag :br}
-          | Fl.7, No.3, Lane 90, Song-Chiang Rd., Taipei City 10456, Taiwan
+    .main-footer__contact
+      address
+        | 104-56 台北市中山區松江路90巷3號7樓#{tag :br}
+        | Fl.7, No.3, Lane 90, Song-Chiang Rd., Taipei City 10456, Taiwan
 
-        ul.list.list--unstyled
-          li 若本網站資料有任何錯誤或侵權之內容，敬請#{link_to '點選此處', 'https://jrf.neticrm.tw/civicrm/profile/create?gid=49&reset=1', target: '_blank', class: 'license-link'}填寫回報表單。
-          li 若您想支持本站繼續運作，歡迎#{link_to '捐款支持', 'https://www.jrf.org.tw/donate', target: '_blank', class: 'license-link'}。
+      ul.list.list--unstyled
+        li 若本網站資料有任何錯誤或侵權之內容，敬請#{link_to '點選此處', 'https://jrf.neticrm.tw/civicrm/profile/create?gid=49&reset=1', target: '_blank', class: 'license-link'}填寫回報表單。
+        li 若您想支持本站繼續運作，歡迎#{link_to '捐款支持', 'https://www.jrf.org.tw/donate', target: '_blank', class: 'license-link'}。
 
-      ul.main-footer__info.list--unstyled
-        li 會務洽詢 TEL：#{link_to '02-2523-1178', 'tel:0225231178'}
-        li 傳真 FAX：#{link_to '02-2531-9373', 'fax:0225319373'}
-        li 會務洽詢 Email：#{mail_to 'contact@jrf.org.tw', 'contact@jrf.org.tw'}
-        li 案件申訴 TEL：#{link_to '02-2542-1958', 'tel:0225421958'}
-        li （週一~週五 14:00~17:30，來會須先電話預約）
-        li 案件申訴 Email：#{mail_to 'case@jrf.org.tw', 'case@jrf.org.tw'}
+    ul.main-footer__info.list--unstyled
+      li 會務洽詢 TEL：#{link_to '02-2523-1178', 'tel:0225231178'}
+      li 傳真 FAX：#{link_to '02-2531-9373', 'fax:0225319373'}
+      li 會務洽詢 Email：#{mail_to 'contact@jrf.org.tw', 'contact@jrf.org.tw'}
+      li 案件申訴 TEL：#{link_to '02-2542-1958', 'tel:0225421958'}
+      li （週一~週五 14:00~17:30，來會須先電話預約）
+      li 案件申訴 Email：#{mail_to 'case@jrf.org.tw', 'case@jrf.org.tw'}
 
-      hr
+    hr
 
-      small.main-footer__copy
-        | 本網站資料拋棄著作權，以
-        = link_to '公眾領域貢獻宣告（CC0）', 'http://creativecommons.tw/cc0', target: '_blank', class: 'license-link'
-        | 釋出，
-        = link_to '本網站程式碼', 'https://github.com/jrf-tw/sunshine.jrf.org.tw', target: '_blank'
-        | 以
-        = link_to 'MIT授權條款', 'https://github.com/jrf-tw/sunshine.jrf.org.tw/blob/master/LICENSE', target: '_blank'
-        | 釋出。
-        br
-        | 本網站資料係取自於#{link_to '總統府', 'http://www.president.gov.tw/', target: '_blank'}、#{link_to '司法院', 'http://www.judicial.gov.tw/', target: '_blank'}、#{link_to '監察院', 'http://www.cy.gov.tw/', target: '_blank'}、#{link_to '法務部', 'http://www.moj.gov.tw/', target: '_blank'}公開資料，及
-        = link_to 'g0v零時政府', 'http://g0v.tw/', target: '_blank'
-        | 公開資料與公開新聞資料。
+    small.main-footer__copy
+      | 本網站資料拋棄著作權，以
+      = link_to '公眾領域貢獻宣告（CC0）', 'http://creativecommons.tw/cc0', target: '_blank', class: 'license-link'
+      | 釋出，
+      = link_to '本網站程式碼', 'https://github.com/jrf-tw/sunshine.jrf.org.tw', target: '_blank'
+      | 以
+      = link_to 'MIT授權條款', 'https://github.com/jrf-tw/sunshine.jrf.org.tw/blob/master/LICENSE', target: '_blank'
+      | 釋出。
+      br
+      | 本網站資料係取自於#{link_to '總統府', 'http://www.president.gov.tw/', target: '_blank'}、#{link_to '司法院', 'http://www.judicial.gov.tw/', target: '_blank'}、#{link_to '監察院', 'http://www.cy.gov.tw/', target: '_blank'}、#{link_to '法務部', 'http://www.moj.gov.tw/', target: '_blank'}公開資料，及
+      = link_to 'g0v零時政府', 'http://g0v.tw/', target: '_blank'
+      | 公開資料與公開新聞資料。

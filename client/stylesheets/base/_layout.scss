@@ -1,1 +1,6 @@
 // {{Container -----}}
+.container {
+  @include container();
+  @include susy($tablet) { @include container();}
+  @include susy($desktop) { @include container(); }
+}
