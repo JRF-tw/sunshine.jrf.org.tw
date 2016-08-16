@@ -91,6 +91,7 @@ module.exports = (env) ->
       require("autoprefixer")(
         browsers: [
           'last 2 versions'
+          'last 3 Safari versions'
           'Android 4.3'
         ]
       )
