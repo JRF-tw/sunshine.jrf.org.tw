@@ -40,4 +40,9 @@ $desktop-grid-padding: scut-rem(15);
 $footer-copy-twick: 880px;
 
 //  {{ Layers ------ }}
-$layers: ();
+$layers: (
+  base,
+  header,
+  modal,
+  drawer
+);

@@ -1,0 +1,39 @@
+.main-header { z-index: index($layers, header); }
+.main-header__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: r(9);
+  @include susy($tablet) {
+    justify-content: space-between;
+    height: r(10);
+  }
+}
+.main-header__logo {
+  .icon {
+    @extend %scut-image-replace;
+    margin: 0;
+    size: r(14) r(5); // 106x40
+    background: url('white-logo.svg') 50% 50% / contain no-repeat;
+  }
+  .slogan {
+    display: none;
+    @include susy($tablet) {
+      display: block;
+      margin: 0;
+      text: $text-secondary-dark center ms(-1);
+    }
+  }
+}
+.main-header__nav {
+  display: none;
+  @include susy($tablet) {
+    display: block;
+    margin-left: auto; 
+  } 
+
+  .cells { @include scut-list-inline(r(3)); }
+  .cell {
+    text: $text-secondary-dark ms(1);
+  }
+}

@@ -8,3 +8,4 @@ require 'magnific-popup/dist/magnific-popup.css'
 
 require 'components/_list.scss'
 require 'components/_footer.scss'
+require 'components/_header.scss'
