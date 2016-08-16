@@ -15,8 +15,9 @@ body {
   flex-flow: column nowrap;
   background-color: #fff;
   min-height: 100vh;
-  // justify-content: space-between;
 }
+
+.page-wrapper { flex: 1; }
 
 main[role="main"] {}
 
