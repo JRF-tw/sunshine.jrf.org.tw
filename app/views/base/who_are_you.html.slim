@@ -1,1 +1,20 @@
-= "選擇角色"
+- content_for :body_classes do
+  | who-are-you
+
+section.character-selector
+  h2.character-selector__heading 請選擇角色
+
+  = link_to 'party/sign_in',
+    class: 'character-selector__cell--party' do
+    .text 當事人
+    = inline_svg 'avatar-party'
+
+  = link_to 'lawyer/sign_in',
+    class: 'character-selector__cell--lawyer' do
+    .text 律師
+    = inline_svg 'avatar-lawyer'
+
+  = link_to 'observer/sign_in',
+    class: 'character-selector__cell--observer' do
+    .text 法庭觀察者
+    = inline_svg 'avatar-observer'

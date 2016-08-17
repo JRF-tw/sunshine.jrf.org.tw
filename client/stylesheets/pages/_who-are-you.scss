@@ -1,0 +1,5 @@
+.who-are-you {
+  background: url('bg--who-are-you-960.jpg') 50% 0% / cover no-repeat;
+  @include susy($tablet) { background-image: url('bg--who-are-you-1920.jpg');
+   }
+}
