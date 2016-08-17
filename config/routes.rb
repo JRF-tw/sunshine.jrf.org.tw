@@ -189,6 +189,7 @@ Rails.application.routes.draw do
     resources :parties do
       member do
         put :set_to_imposter
+        get :stories
       end
     end
 
