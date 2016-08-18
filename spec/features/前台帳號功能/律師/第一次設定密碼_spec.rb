@@ -22,7 +22,6 @@ feature "該律師為了完成註冊，第一次設定密碼", type: :feature do
 
     Scenario "已登入律師B" do
       Given "該律師已收到密碼設定信件, 且律師B已認證+登入" do
-        # already send in top
         let(:lawyer_b_data) { { name: "ABC", phone: 33_381_841, email: "aaabbbccc@hotmail.com" } }
         let!(:lawyer_b) { capybara_register_lawyer(lawyer_b_data) }
         before { capybara_setting_password_lawyer(lawyer_b, password: "11111111") }
@@ -42,7 +41,6 @@ feature "該律師為了完成註冊，第一次設定密碼", type: :feature do
 
   feature "密碼設定頁要顯示 律師姓名 和 Email" do
     Given "該律師已收到密碼設定信件" do
-      # already send in top
       When "前往該律師的密碼設定頁" do
         before { visit(edit_lawyer_password_path(reset_password_token: reset_password_token)) }
 
@@ -62,27 +60,9 @@ feature "該律師為了完成註冊，第一次設定密碼", type: :feature do
         When "正確輸入完密碼後送出" do
           before { capybara_submit_password_lawyer(password: "123123123") }
           Then "該律師註冊狀態改為已認證" do
-            # if hidden, raise erroe
             expect(current_path).to match(lawyer_root_path)
             expect(page).to have_content("您的密碼已被修改")
             expect(lawyer.reload.confirmed?).to be_truthy
-          end
-        end
-      end
-    end
-
-    Scenario "該律師已通過認證" do
-      Given "該律師已收到密碼設定信件, 設定該律師為通過認證, 在未登入狀態下前往密碼設定頁" do
-        # already send in top
-        before { lawyer.confirm }
-        before { visit(edit_lawyer_password_path(reset_password_token: reset_password_token)) }
-        When "正確輸入完密碼後送出" do
-          before { capybara_submit_password_lawyer(password: "123123123") }
-          Then "密碼更改失敗" do
-            # if hidden, raise erroe
-            # expect(current_path).to match(new_lawyer_session_path)
-            # expect(page).to have_content("")
-            # expect(lawyer.reload.confirmed?).to be_falsey
           end
         end
       end
