@@ -13,7 +13,7 @@
     "url": "https://github.com/5fpro/jrf-sunny/issues"
   },
   "homepage": "https://github.com/5fpro/jrf-sunny#readme",
-  "publicPath": "/assets",
+  "publicPath": "/assets/",
   "scripts": {
     "start": "foreman start -f Procfile.f2e",
     "rails": "foreman start -f Procfile",

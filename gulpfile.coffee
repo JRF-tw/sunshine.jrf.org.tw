@@ -27,8 +27,7 @@ gulp.task 'resolve-url', ->
 
   replace_assets_path = (_full, $1) -> "asset-url('#{$1}')"
   
-  gulp.src path.join("app/assets", "stylesheets/webpack_bundle.(css|scss)")
-
+  gulp.src path.join("app/assets", "stylesheets/webpack_bundle.+(css|scss)")
       .pipe notify.handleError replace(assets_pattern, replace_assets_path)
       .pipe notify.handleError replace(sourcemap_pattern, "")
       .pipe gulp.dest path.join("app/assets", "stylesheets")
