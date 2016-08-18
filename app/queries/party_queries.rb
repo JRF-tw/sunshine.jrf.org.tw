@@ -12,6 +12,12 @@ class PartyQueries
     stories
   end
 
+  def get_relate_stories
+    stories = []
+    @party.story_relations.each { |sr| stories << sr.story }
+    stories
+  end
+
   def get_schedule_score(story)
     scores = @party.schedule_scores.where(story: story)
     scores

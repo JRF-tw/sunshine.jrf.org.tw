@@ -1,0 +1,35 @@
+= admin_widget_box "#{@party.name}參與案件列表", icon: :th do
+  table.table.table-bordered.table-striped.table-hover
+    thead
+      tr
+        th id
+        th 所屬法院
+        th 年度
+        th 字別
+        th 案號
+        th 案件類別
+        th 所屬法官
+        th 是否已宣判
+        th 是否已判決
+        th 是否有判決書
+        th 操作
+    tbody
+      - @stories.each do |story|
+        tr
+          td = story.id
+          td = link_to "#{story.court.full_name}", admin_court_path(story.court)
+          td = story.year
+          td = story.word_type
+          td = story.number
+          td = story.story_type
+          td = link_to "#{story.main_judge.name}", admin_judge_path(story.main_judge) if story.main_judge
+          td = story.is_pronounce ? "已宣判" : "尚未宣判"
+          td = story.is_adjudge ? "已判決" : "尚未判決"
+          td
+            = link_to "是", admin_verdict_path(story.judgment_verdict) if story.judgment_verdict
+
+          td
+            = link_to "詳細資料", admin_story_path(story), class: "btn btn-mini"
+            | &nbsp;
+            = link_to "庭期列表", admin_schedules_path(q: { "story_id_eq" => story.id } ), class: "btn btn-mini"
+            | &nbsp;
