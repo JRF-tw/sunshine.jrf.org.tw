@@ -32,6 +32,11 @@ RSpec.describe PartyQueries do
     it { expect(query.get_verdict_score(story).include?(verdict_score)).to be_truthy }
   end
 
+  describe "#get_relate_stories" do
+    let!(:story_relation) { create :story_relation, people: party, story: story }
+    it { expect(query.get_relate_stories.include?(story_relation.story)).to be_truthy }
+  end
+
   describe "#pending_score_schedules" do
     before { create_list :schedule, 3, story: story }
 
