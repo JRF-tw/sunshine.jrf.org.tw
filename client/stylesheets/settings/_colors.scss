@@ -31,16 +31,36 @@ $text-color: $text-primary;
 //  Pallete
 //  -----------
 
+$accent:  #00bcd4;
 $primary: shade(#428bca, 6.5%);
 $success: #5cb85c;
 $info:    #5bc0dc;
 $warning: #f0ad4e;
 $danger:  #d9534f;
 
+// Party
+$red-dark:  #d32f2f;
+$red:       #f44336;
+$red-light: #ffcdd2;
+
+// Lawyer
+$yellow-dark:  #ffa000;
+$yellow:       #ffc107;
+$yellow-light: #ffec83;
+
+// Observer
+$green-dark:  #00796b;
+$green:       #009688;
+$green-light: #b2dfdb;
+
+$black:     #212121;
+$gray-dark: #727272;
+$gray:      #b6b6b6;
+
 //  Links
 //  -----
 
-$link-color:           $primary !default;
+$link-color:           $accent !default;
 $link-hover-color:     shade($link-color, 15%) !default;
 $link-focus-color:     $gray-dark !default;
 $link-active-color:    $gray-dark !default;
