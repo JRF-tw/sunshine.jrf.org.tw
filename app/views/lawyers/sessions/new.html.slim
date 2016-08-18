@@ -18,6 +18,6 @@
         = f.input_field :remember_me, inline_label: "記住我", as: :boolean if devise_mapping.rememberable?
 
       .form-actions
-        = f.button :button, "登入", class: "raised-button"
+        .form-group.text-center = f.button :button, "登入", class: "raised-button--large"
 
-        = link_to "註冊", new_lawyer_registration_path, class: "flat-button"
+        .text-center = link_to "註冊", new_lawyer_registration_path, class: "flat-button--large"

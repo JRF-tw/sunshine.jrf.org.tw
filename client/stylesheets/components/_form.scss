@@ -1,9 +1,5 @@
 $input-rhythm: r(1);
 
-.simple_form {
-  text: ms(1);
-}
-
 .form-group {
   margin-bottom: r(2);
   padding-top: r(1);
@@ -76,7 +72,7 @@ $input-rhythm: r(1);
     content: "";
     display: inline-block;
     border: 2px solid $divider-gray;
-    border-radius: 3px;
+    border-radius: 2px;
     size: 18px;
     background-color: #fff;
     position: relative 3px n() n() n();

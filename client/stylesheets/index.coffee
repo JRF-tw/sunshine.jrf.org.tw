@@ -13,5 +13,6 @@ require 'components/_drawer.scss'
 require 'components/_billboard.scss'
 require 'components/_card.scss'
 require 'components/_form.scss'
+require 'components/_button.scss'
 
 require 'pages/_who-are-you.scss'
