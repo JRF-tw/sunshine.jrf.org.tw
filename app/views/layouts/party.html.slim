@@ -1,32 +1,9 @@
-doctype 5
-html
-  head
-    = display_meta_tags
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
-    = csrf_meta_tags
+- content_for :body_classes do
+  | party
 
-  body class="#{yield :body_classes}"
-    .page-wrapper class='base-page-wrapper'
-      - if current_party
-        = link_to("當事人 #{current_party.name}", party_profile_path)
-        = ' | '
-        = link_to('修改Email', edit_party_email_path)
-        = ' | '
-        = link_to('修改手機號碼', edit_party_phone_path)
-        = ' | '
-        = link_to('修改個人資訊', edit_party_profile_path)
-        = ' | '
-        = link_to('個人評鑑紀錄頁', party_root_path)
-        = ' | '
-        = link_to('登出', destroy_party_session_path, method: :delete)
-      - else
-        = link_to('註冊', new_party_registration_path)
-        = link_to('登入', new_session_path(:party))
-      hr
-      - flash.each do |k, message|
-        div class= "alert fade in alert-#{k}"
-          a.close data-dismiss="alert" href="#"
-          = raw(message)
+- content_for :yield do
+  = render 'components/billboard', character: 'party'
 
-      main.main role='main' = yield
+  = yield
+
+= render template: 'layouts/application'

@@ -15,10 +15,12 @@ html
   body class=(yield :body_classes)
     = render 'components/main_header'
 
-    .page-wrapper        
-      main role='main'
+    .page-wrapper
+      = render 'components/alert'
 
-        = yield
+      main role='main'
+        
+        = content_for?(:yield) ? yield(:yield) : yield
       
     = render 'components/main_footer'
     = render 'components/drawer'

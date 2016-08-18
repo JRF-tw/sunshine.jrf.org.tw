@@ -1,28 +1,9 @@
-doctype 5
-html
-  head
-    = display_meta_tags
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
-    = csrf_meta_tags
+- content_for :body_classes do
+  | observer
 
-  body class="#{yield :body_classes}"
-    .page-wrapper class="base-page-wrapper"
-      - if current_court_observer
-        = link_to("觀察員 #{current_court_observer.name}", observer_profile_path)
-        = " | "
-        = link_to('修改Email', edit_observer_email_path)
-        = ' | '
-        = link_to('修改個人資訊', edit_observer_profile_path)
-        = ' | '
-        = link_to('登出', destroy_court_observer_session_path, method: :delete)
-      - else
-        = link_to('註冊', new_court_observer_registration_path)
-        = link_to('登入', new_session_path(:court_observer))
-      hr
-      - flash.each do |k, message|
-        div class= "alert fade in alert-#{k}"
-          a.close data-dismiss="alert" href="#"
-          = message
+- content_for :yield do
+  = render 'components/billboard', character: 'observer'
 
-      main.main role='main' = yield
+  = yield
+
+= render template: 'layouts/application'

@@ -1,0 +1,4 @@
+- flash.each do |k, message|
+  div class= "alert fade in alert-#{k}"
+    a.close data-dismiss="alert" href="#"
+    = raw(message)
