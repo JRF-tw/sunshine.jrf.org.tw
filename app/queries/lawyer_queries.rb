@@ -33,16 +33,16 @@ class LawyerQueries
     story.judgment_verdict ? Verdict.find(story.judgment_verdict.id) : nil
   end
 
-  def get_scores_json(story, sort_by: "date")
+  def get_scores_array(story, sort_by: "date")
     scores_array = []
-    scores_array += schedule_scores_data_json(story) if schedule_scores_data_json(story)
-    scores_array += verdict_score_data_json(story) if verdict_score_data_json(story)
+    scores_array += schedule_scores_data_array(story) if schedule_scores_data_array(story)
+    scores_array += verdict_score_data_array(story) if verdict_score_data_array(story)
     scores_array.sort_by { |k| k[sort_by] }
   end
 
   private
 
-  def schedule_scores_data_json(story)
+  def schedule_scores_data_array(story)
     schedule_scores_array = []
     court_code = story.court.code
     @lawyer.schedule_scores.where(story: story).each do |schedule_score|
@@ -55,7 +55,7 @@ class LawyerQueries
     schedule_scores_array
   end
 
-  def verdict_score_data_json(story)
+  def verdict_score_data_array(story)
     if verdict_score = @lawyer.verdict_scores.find_by_story_id(story.id)
       vs_hash = verdict_score.as_json
       vs_hash["date"] = verdict_score.story.adjudge_date

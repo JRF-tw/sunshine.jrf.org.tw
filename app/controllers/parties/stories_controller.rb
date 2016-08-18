@@ -25,7 +25,7 @@ class Parties::StoriesController < Parties::BaseController
   end
 
   def has_score?
-    @scores_sorted = ::PartyQueries.new(current_party).get_scores_json(@story, sort_by: "date")
+    @scores_sorted = ::PartyQueries.new(current_party).get_scores_array(@story, sort_by: "date")
     redirect_as_fail(party_stories_path, "尚未有評鑑紀錄") unless @scores_sorted.present?
   end
 end
