@@ -22,7 +22,6 @@ RSpec.describe Parties::RegistrationsController, type: :request do
     context "success" do
       let!(:params) { { identify_number: party.identify_number, phone_number: party.phone_number } }
       subject! { post "/party/password", party: params }
-
       it { expect(response).to redirect_to("/party/sign_in") }
     end
 

@@ -3,6 +3,7 @@ ENV["RAILS_ENV"] ||= 'test'
 require 'spec_helper'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+require 'capybara/rails'
 require 'webmock/rspec'
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -19,6 +20,9 @@ require 'webmock/rspec'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
+
+WebMock.disable_net_connect!(allow_localhost: true)
+
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 # Checks for pending migrations before tests are run.
@@ -32,7 +36,8 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+
+  # config.use_transactional_fixtures = true  # set to database_cleaner.rb
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
@@ -60,4 +65,7 @@ RSpec.configure do |config|
 
   config.before(:each){ webmock_all! }
   config.before(:each){ sidekiq_reset! }
+  config.before(:each){ Redis.new(Setting.redis).flushall }
+
+  Dir[Rails.root.join("spec/config/**/*.rb")].each { |f| require f }
 end

@@ -5,8 +5,8 @@ class Lawyer::RegisterContext < BaseContext
   before_perform :find_lawyer_by_params
   before_perform :check_lawyer_not_active
   before_perform :check_agree_policy
-  after_perform :generate_token
-  after_perform :send_confirm_mail
+  after_perform :generate_reset_password_token
+  after_perform :send_setting_password_mail
 
   def initialize(params)
     @params = permit_params(params[:lawyer] || params, PERMITS)
@@ -41,12 +41,12 @@ class Lawyer::RegisterContext < BaseContext
     return add_error(:lawyer_exist, "已經註冊 請直接登入") if @lawyer.confirmed?
   end
 
-  def generate_token
-    @token = @lawyer.set_confirmation_token
+  def generate_reset_password_token
+    @token = @lawyer.set_reset_password_token
   end
 
-  def send_confirm_mail
-    CustomDeviseMailer.delay.send_confirm_mail(@lawyer, @token)
+  def send_setting_password_mail
+    CustomDeviseMailer.delay.send_setting_password_mail(@lawyer, @token)
   end
 
 end

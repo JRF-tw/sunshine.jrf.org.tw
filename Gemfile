@@ -101,8 +101,12 @@ group :development, :test do
 end
 
 group :test do
+  gem "launchy"
+  gem "capybara"
+  gem "capybara-webkit"
   gem "webmock"
   gem "test_after_commit"
+  gem "database_cleaner"
 end
 
 group :doc do

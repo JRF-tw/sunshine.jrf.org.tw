@@ -29,5 +29,4 @@ module LawyerHelper
     Lawyer::StorySubscriptionCreateContext.new(story).perform(lawyer)
     lawyer
   end
-
 end
