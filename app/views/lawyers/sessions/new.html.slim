@@ -14,7 +14,7 @@
         = inline_svg "key"
         = link_to "忘記密碼", new_password_path(resource_name), class: "forgot-password"
       
-      .form-group
+      .form-group.squish-before
         = f.input_field :remember_me, inline_label: "記住我", as: :boolean if devise_mapping.rememberable?
 
       .form-actions
