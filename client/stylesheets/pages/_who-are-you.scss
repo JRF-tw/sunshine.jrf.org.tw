@@ -71,6 +71,7 @@ body.who-are-you {
     @include scut-center-transform();
     size: 70%;
     stroke: currentColor;
+    stroke-width: 2px;
     transition: stroke .3s ease 0s;
   }
 }
