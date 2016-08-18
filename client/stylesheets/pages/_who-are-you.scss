@@ -1,5 +1,57 @@
-.who-are-you {
-  background: url('bg--who-are-you-960.jpg') 50% 0% / cover no-repeat;
-  @include susy($tablet) { background-image: url('bg--who-are-you-1920.jpg');
-   }
+body.who-are-you {
+  $gradients: (
+    linear-gradient(to top, rgba(0,0,0,0) 52%, rgba(0,0,0,.8) 100%) 50% 0 no-repeat,
+    linear-gradient(to top, rgba(0,0,0,.3), rgba(0,0,0,.3)) 50% 0 no-repeat
+  );
+  $bg: url('bg--who-are-you-960.jpg') 50% 0% / cover no-repeat;
+  $bg-lg: url('bg--who-are-you-1920.jpg') 50% 0% / cover no-repeat;
+  background: $gradients, $bg;
+  @include susy($tablet) { background: $gradients, $bg-lg; }
+}
+
+.character-selector {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding: r(10) r(5);
+}
+.character-selector__heading {
+  text: 400 center $white ms(3);
+  width: 100%;
+  margin-bottom: r(9);
+}
+
+%character-selector__cell {
+  $size: 40%;
+  display: inline-block;
+  size: $size 0;
+  padding-top: $size;
+  border-radius: 50%;
+  position: relative;
+  z-index: index($layers, base);
+
+  .text {
+    text: center ms(1);
+    width: 100%;
+    color: $white;
+    bottom: r(-4);
+    @include scut-center-transform(x);
+  }
+  .icon {
+    @include scut-center-transform();
+    size: 70%;
+  }
+}
+.character-selector__cell--party {
+  @extend %character-selector__cell;
+  background-color: $avatar-red;
+}
+.character-selector__cell--lawyer {
+  @extend %character-selector__cell;
+  background-color: $avatar-black;
+}
+.character-selector__cell--observer {
+  @extend %character-selector__cell;
+  background-color: $avatar-green;
+  margin: r(5) auto;
 }
