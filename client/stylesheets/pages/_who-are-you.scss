@@ -32,21 +32,34 @@ body.who-are-you {
 %character-selector__cell {
   $size: 40%;
   display: inline-block;
+  color: $white;
   size: $size 0;
   padding-top: $size;
   border-radius: 50%;
   position: relative;
   z-index: index($layers, base);
+  transition: background-image .3s ease 0s,
+              color .3s ease 0s;
   @include susy-media($character-selector-twick) {
     $size: 185px;
     width: $size;
     padding-top: $size;
   }
+  &:hover::before { size: 200px; }
+  &::before {
+    display: block;
+    content: "";
+    size: 0;
+    border-radius: 50%;
+    background-color: #fff;
+    pointer-events: none;
+    transition: width .3s ease 0s, height .3s ease 0s;
+    @include scut-center-transform();
+  }
 
   .text {
     text: center ms(1);
     width: 100%;
-    color: $white;
     bottom: r(-4);
     @include scut-center-transform(x);
     @include susy-media($character-selector-twick) {
@@ -57,11 +70,14 @@ body.who-are-you {
   .icon {
     @include scut-center-transform();
     size: 70%;
+    stroke: currentColor;
+    transition: stroke .3s ease 0s;
   }
 }
 .character-selector__cell--party {
   @extend %character-selector__cell;
   background-color: $avatar-red;
+  &:hover { color: $avatar-red; }
 
   .icon {
     @include susy-media($character-selector-twick) {
@@ -73,6 +89,7 @@ body.who-are-you {
 .character-selector__cell--lawyer {
   @extend %character-selector__cell;
   background-color: $avatar-black;
+  &:hover { color: $avatar-black; }
 
   .icon {
     @include susy-media($character-selector-twick) {
@@ -85,6 +102,7 @@ body.who-are-you {
   @extend %character-selector__cell;
   background-color: $avatar-green;
   margin: r(5) auto;
+  &:hover { color: $avatar-black; }  
   @include susy-media($character-selector-twick) {
     margin: 0;
 

@@ -3,11 +3,11 @@
   <g id="圖層_2" data-name="圖層 2">
     <g id="Layer_4" data-name="Layer 4">
       <g>
-        <circle cx="33.59" cy="28.75" r="27.75" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 2px"/>
-        <circle cx="109.48" cy="28.75" r="27.75" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 2px"/>
-        <path d="M56.84,20.75s14.5-7.25,29,0" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 2px"/>
-        <path d="M133,20.68s7.37-1.82,7.87,0" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 2px"/>
-        <path d="M8.84,20.68s-7.37-1.82-7.87,0" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 2px"/>
+        <circle cx="33.59" cy="28.75" r="27.75" style="fill: none;stroke: none;stroke-miterlimit: 10;stroke-width: 2px"/>
+        <circle cx="109.48" cy="28.75" r="27.75" style="fill: none;stroke: none;stroke-miterlimit: 10;stroke-width: 2px"/>
+        <path d="M56.84,20.75s14.5-7.25,29,0" style="fill: none;stroke: none;stroke-miterlimit: 10;stroke-width: 2px"/>
+        <path d="M133,20.68s7.37-1.82,7.87,0" style="fill: none;stroke: none;stroke-miterlimit: 10;stroke-width: 2px"/>
+        <path d="M8.84,20.68s-7.37-1.82-7.87,0" style="fill: none;stroke: none;stroke-miterlimit: 10;stroke-width: 2px"/>
       </g>
     </g>
   </g>

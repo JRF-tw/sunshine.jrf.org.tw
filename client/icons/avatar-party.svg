@@ -3,10 +3,10 @@
   <g id="圖層_2" data-name="圖層 2">
     <g id="Layer_4" data-name="Layer 4">
       <g>
-        <path d="M57.53,93.47s12.3-14.59,12.3-17.75,3.08-25.25,0-33.25c-1.26-3.27-12-2-12-2L52,56S36.19,58.69,30.19,81.75" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 2px"/>
-        <line x1="30.34" y1="3.47" x2="30.34" y2="44.47" style="fill: none;stroke: #fff;stroke-miterlimit: 10"/>
-        <line x1="43.34" y1="3.47" x2="43.34" y2="44.47" style="fill: none;stroke: #fff;stroke-miterlimit: 10"/>
-        <path d="M57.71,41s.82-17.19-1-28.5c-.86-5.31-6.8-8.26-13.49-9.41-7.78-4.38-12.75-.51-13.37,0h-.07c-7.33,1.39-11,3.55-11.93,7.38-.66,2.79-.92,26.73-1,36.55,0-4.2,0-22.22,0-25.31,0-4.56-6.24-2.89-7.85-1-7.76,9.1-8,47-8,47l9.06,23.73" style="fill: none;stroke: #fff;stroke-miterlimit: 10;stroke-width: 2px"/>
+        <path d="M57.53,93.47s12.3-14.59,12.3-17.75,3.08-25.25,0-33.25c-1.26-3.27-12-2-12-2L52,56S36.19,58.69,30.19,81.75" style="fill: none;stroke: none;stroke-miterlimit: 10;stroke-width: 2px"/>
+        <line x1="30.34" y1="3.47" x2="30.34" y2="44.47" style="fill: none;stroke: none;stroke-miterlimit: 10"/>
+        <line x1="43.34" y1="3.47" x2="43.34" y2="44.47" style="fill: none;stroke: none;stroke-miterlimit: 10"/>
+        <path d="M57.71,41s.82-17.19-1-28.5c-.86-5.31-6.8-8.26-13.49-9.41-7.78-4.38-12.75-.51-13.37,0h-.07c-7.33,1.39-11,3.55-11.93,7.38-.66,2.79-.92,26.73-1,36.55,0-4.2,0-22.22,0-25.31,0-4.56-6.24-2.89-7.85-1-7.76,9.1-8,47-8,47l9.06,23.73" style="fill: none;stroke: none;stroke-miterlimit: 10;stroke-width: 2px"/>
       </g>
     </g>
   </g>
