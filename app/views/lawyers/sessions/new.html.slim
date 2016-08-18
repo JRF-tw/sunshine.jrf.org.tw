@@ -1,7 +1,7 @@
-.widget-box
-  .widget-title
-    h5 律師登入
-  .widget-content.nopadding
+.container
+  .card
+    h2.card__heading 律師登入
+    
     = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
       .form-group
         label.control-label Email

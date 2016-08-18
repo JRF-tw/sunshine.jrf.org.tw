@@ -25,7 +25,7 @@ body {
   }
 }
 
-main[role="main"] {}
+main[role="main"] { padding-bottom: r(10); }
 
 // Turbolinks
 html.turbolinks-progress-bar::before {background-color: $nprogress-color !important;}

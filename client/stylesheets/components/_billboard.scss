@@ -2,7 +2,7 @@ $character-gradients: (
   (name: 'lawyer',
    gradients: linear-gradient(to bottom,
                               rgba(255,236,179,0) 12%,
-                              rgba(255,193,9,.6) 60%,
+                              rgba(255,193,9,.6) 80%,
                               #FFC109 99%)),
   (name: 'party',
    gradients: linear-gradient(to bottom,
@@ -16,7 +16,13 @@ $character-gradients: (
                               #019688 92%))
 );
 
-.billboard { padding-top: (3/4*100%); }
+.billboard {
+  padding-top: 300px;
+  margin-bottom: r(-22);
+  @include susy($tablet) {
+    margin-bottom: r(-6);
+  }
+}
 
 @each $character in $character-gradients {
   $gradients: (
