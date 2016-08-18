@@ -39,10 +39,5 @@ module Capybara
       click_link "登出"
       save_page
     end
-
-    def scr
-      save_and_open_screenshot
-    end
   end
 end
-
