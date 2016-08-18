@@ -1,5 +1,6 @@
 .card {
   margin: 0 r(2);
+  padding: 0 r(2) r(2);
   background: $white;
   box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.12), 0px 8px 8px 0px rgba(0,0,0,0.24);
   border-radius: $global-radius;
@@ -9,8 +10,10 @@
     margin: 0 auto;
     max-width: $card-max;
   }
+  @include susy($tablet) { padding-top: r(2); }
 }
 .card__heading {
+  margin: 0 r(-2) r(2);
   text: center $white ms(2) r(7);
   background-color: $accent;
   @include susy($tablet) {

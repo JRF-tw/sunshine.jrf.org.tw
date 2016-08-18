@@ -1,0 +1,60 @@
+$input-rhythm: r(1);
+
+.simple_form {
+  text: ms(1);
+}
+
+.form-group {
+  margin-bottom: r(2);
+  padding-top: r(1);
+  position: relative;
+  &.addon-forgot-password {
+    padding-right: 5em;
+    &::before {
+      content: "";
+      display: block;
+      size: 100% 1px;
+      background-color: $divider-gray;
+      position: absolute n() 0 0 0;
+    }
+
+    input { border-bottom: none; }
+  }
+}
+
+#{$all-text-inputs} {
+  display: block;
+  padding: $input-rhythm 0;
+  width: 100%;
+  line-height: 1.25;
+  border: none;
+  border-bottom: 1px solid $divider-gray;
+  box-shadow: none;
+  outline: none;
+  &:focus, &:active {
+    + .control-label::before { transform: scaleX(1); }
+  }
+}
+
+.control-label {
+  text: $gray 1.25;
+  position: absolute ($input-rhythm * 2) 0 0 0;
+  transition: all .3s ease 0s;
+  &::before {
+    content: "";
+    display: block;
+    size: 100% 1px;
+    background-color: $accent;
+    position: absolute n() 0 0 0;
+    transform: scaleX(0);
+    transition: transform .3s ease 0s;
+  }
+  .is-focused & {
+    text: $text-secondary ms(-1);
+    top: 0;
+  }
+}
+
+abbr[title="required"] { display: none; }
+
+.forgot-password { position: absolute ($input-rhythm * 2) 0 n() n(); }
