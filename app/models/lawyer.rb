@@ -59,7 +59,7 @@ class Lawyer < ActiveRecord::Base
   end
 
   def password_required?
-    super if confirmed?
+    super if confirmed? || reset_password_token
   end
 
   def set_reset_password_token

@@ -89,6 +89,24 @@ RSpec.describe Lawyers::PasswordsController, type: :request do
     end
   end
 
+  describe "#update for forst setting" do
+    let!(:lawyer_data) { { name: "孔令則", phone: 33_381_841, email: "kungls@hotmail.com" } }
+    let!(:lawyer) { Import::CreateLawyerContext.new(lawyer_data).perform }
+    let(:token) { lawyer.set_reset_password_token }
+
+    context "empty password should render form error" do
+      subject! { put "/lawyer/password", lawyer: { password: "", password_confirmation: "", reset_password_token: token } }
+
+      it { expect(response).to be_success }
+    end
+
+    context "password unconfirmed should render form error" do
+      subject! { put "/lawyer/password", lawyer: { password: "55667788", password_confirmation: "aaaaaaaaa", reset_password_token: token } }
+
+      it { expect(response).to be_success }
+    end
+  end
+
   describe "#send_reset_password_mail" do
     before { signin_lawyer }
     subject! { post "/lawyer/password/send_reset_password_mail" }
