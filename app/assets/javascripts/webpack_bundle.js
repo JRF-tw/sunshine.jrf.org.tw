@@ -71,11 +71,11 @@
 
 	__webpack_require__(1);
 
-	__webpack_require__(11);
+	__webpack_require__(12);
 
-	Toggle = __webpack_require__(12);
+	Toggle = __webpack_require__(13);
 
-	sprites = __webpack_require__(13);
+	sprites = __webpack_require__(14);
 
 	sprites.keys().forEach(sprites);
 
@@ -106,6 +106,8 @@
 
 	__webpack_require__(10);
 
+	__webpack_require__(11);
+
 
 /***/ },
 /* 2 */
@@ -131,6 +133,8 @@
 /* 10 */
 2,
 /* 11 */
+2,
+/* 12 */
 /***/ function(module, exports) {
 
 	;(function(window){
@@ -390,7 +394,7 @@
 	})(window);
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports) {
 
 	var Toggle;
@@ -450,11 +454,14 @@
 
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./menu.svg": 14
+		"./avatar-lawyer.svg": 15,
+		"./avatar-observer.svg": 19,
+		"./avatar-party.svg": 20,
+		"./menu.svg": 21
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -467,25 +474,25 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 13;
+	webpackContext.id = 14;
 
-
-/***/ },
-/* 14 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	var sprite = __webpack_require__(15);
-	var image = "<symbol viewBox=\"0 0 18 12\" id=\"menu\" ><title>menu</title><path d=\"M0 12h18v-2H0v2zm0-5h18V5H0v2zm0-7v2h18V0H0z\" fill=\"#FFF\" fill-rule=\"evenodd\"/></symbol>";
-	module.exports = sprite.add(image, "menu");
 
 /***/ },
 /* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
+	
+	var sprite = __webpack_require__(16);
+	var image = "<symbol viewBox=\"0 0 183.08 70.95\" id=\"avatar-lawyer\" ><title>&#x8CC7;&#x7522; 4</title><g fill=\"none\" data-name=\"Layer 4\"><path d=\"M29.88 15.19s24 26.25 24 29.25v24.5M153.88 15.19s-24 26.25-24 29.25v24.5\"/><path d=\"M.27 20.94l24.11-6.66V9.94s-.91-2.15 3.52-3.14S53.75 1 56.51 1c3.76 0 30.57 34.94 30.3 39.38-.16 2.61-.09 30.56-.09 30.56M182.81 20.94l-24.43-6.66V9.94s1.23-2.15-3.2-3.14S129.48 1 126.72 1C123 1 96.23 35.94 96.5 40.38c.16 2.61 0 30.56 0 30.56\"/></g></symbol>";
+	module.exports = sprite.add(image, "avatar-lawyer");
+
+/***/ },
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var Sprite, globalSprite, inject_sprite;
 
-	Sprite = __webpack_require__(16);
+	Sprite = __webpack_require__(17);
 
 	globalSprite = new Sprite();
 
@@ -501,10 +508,10 @@
 
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Sniffr = __webpack_require__(17);
+	var Sniffr = __webpack_require__(18);
 
 	/**
 	 * List of SVG attributes to fix url target in them
@@ -765,7 +772,7 @@
 
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports) {
 
 	(function(host) {
@@ -887,6 +894,33 @@
 	  }
 	})(this);
 
+
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	var sprite = __webpack_require__(16);
+	var image = "<symbol viewBox=\"0 0 141.8 57.5\" id=\"avatar-observer\" ><title>&#x8CC7;&#x7522; 5</title><g fill=\"none\" data-name=\"Layer 4\"><circle cx=\"33.59\" cy=\"28.75\" r=\"27.75\"/><circle cx=\"109.48\" cy=\"28.75\" r=\"27.75\"/><path d=\"M56.84 20.75s14.5-7.25 29 0M133 20.68s7.37-1.82 7.87 0M8.84 20.68s-7.37-1.82-7.87 0\"/></g></symbol>";
+	module.exports = sprite.add(image, "avatar-observer");
+
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	var sprite = __webpack_require__(16);
+	var image = "<symbol viewBox=\"0 0 72.21 94.12\" id=\"avatar-party\" ><title>&#x8CC7;&#x7522; 3</title><g fill=\"none\" data-name=\"Layer 4\"><path d=\"M57.53 93.47s12.3-14.59 12.3-17.75 3.08-25.25 0-33.25c-1.26-3.27-12-2-12-2L52 56s-15.81 2.69-21.81 25.75M30.34 3.47v41M43.34 3.47v41\"/><path d=\"M57.71 41s.82-17.19-1-28.5c-.86-5.31-6.8-8.26-13.49-9.41-7.78-4.38-12.75-.51-13.37 0h-.07c-7.33 1.39-11 3.55-11.93 7.38-.66 2.79-.92 26.73-1 36.55V21.71c0-4.56-6.24-2.89-7.85-1-7.76 9.1-8 47-8 47l9.06 23.73\"/></g></symbol>";
+	module.exports = sprite.add(image, "avatar-party");
+
+/***/ },
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	var sprite = __webpack_require__(16);
+	var image = "<symbol viewBox=\"0 0 18 12\" id=\"menu\" ><title>menu</title><path d=\"M0 12h18v-2H0v2zm0-5h18V5H0v2zm0-7v2h18V0H0z\" fill=\"#FFF\" fill-rule=\"evenodd\"/></symbol>";
+	module.exports = sprite.add(image, "menu");
 
 /***/ }
 /******/ ])));

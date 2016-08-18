@@ -1,0 +1,115 @@
+body.who-are-you {
+  $gradients: (
+    linear-gradient(to top, rgba(0,0,0,0) 52%, rgba(0,0,0,.8) 100%) 50% 0 no-repeat,
+    linear-gradient(to top, rgba(0,0,0,.3), rgba(0,0,0,.3)) 50% 0 no-repeat
+  );
+  $bg: url('bg--who-are-you-960.jpg') 50% 0% / cover no-repeat;
+  $bg-lg: url('bg--who-are-you-1920.jpg') 50% 0% / cover no-repeat;
+  background: $gradients, $bg;
+  @include susy($tablet) { background: $gradients, $bg-lg; }
+}
+
+.character-selector {
+  padding: r(12) 0 0;
+  @include susy-media($character-selector-twick) {
+    max-width: 784px !important;
+  }
+}
+.character-selector__wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding: r(14) r(5);
+}
+.character-selector__heading {
+  text: 400 center $white ms(3);
+  width: 100%;
+  @include susy-media($character-selector-twick) {
+    font-size: ms(5);
+  }
+}
+
+%character-selector__cell {
+  $size: 40%;
+  display: inline-block;
+  color: $white;
+  size: $size 0;
+  padding-top: $size;
+  border-radius: 50%;
+  position: relative;
+  z-index: index($layers, base);
+  transition: background-image .3s ease 0s,
+              color .3s ease 0s;
+  @include susy-media($character-selector-twick) {
+    $size: 185px;
+    width: $size;
+    padding-top: $size;
+  }
+  &:hover::before { size: 200px; }
+  &::before {
+    display: block;
+    content: "";
+    size: 0;
+    border-radius: 50%;
+    background-color: #fff;
+    pointer-events: none;
+    transition: width .3s ease 0s, height .3s ease 0s;
+    @include scut-center-transform();
+  }
+
+  .text {
+    text: center ms(1);
+    width: 100%;
+    bottom: r(-4);
+    @include scut-center-transform(x);
+    @include susy-media($character-selector-twick) {
+      top: r(6); bottom: auto;
+      font-size: ms(4);
+    }
+  }
+  .icon {
+    @include scut-center-transform();
+    size: 70%;
+    stroke: currentColor;
+    stroke-width: 2px;
+    transition: stroke .3s ease 0s;
+  }
+}
+.character-selector__cell--party {
+  @extend %character-selector__cell;
+  background-color: $avatar-red;
+  &:hover { color: $avatar-red; }
+
+  .icon {
+    @include susy-media($character-selector-twick) {
+      size: 30%;
+      top: 65%;
+    }
+  }
+}
+.character-selector__cell--lawyer {
+  @extend %character-selector__cell;
+  background-color: $avatar-black;
+  &:hover { color: $avatar-black; }
+
+  .icon {
+    @include susy-media($character-selector-twick) {
+      size: 60%;
+      top: 65%;
+    }
+  }
+}
+.character-selector__cell--observer {
+  @extend %character-selector__cell;
+  background-color: $avatar-green;
+  margin: r(5) auto;
+  &:hover { color: $avatar-black; }  
+  @include susy-media($character-selector-twick) {
+    margin: 0;
+
+    .icon {
+      size: 60%;
+      top: 65%;
+    }
+  }
+}
