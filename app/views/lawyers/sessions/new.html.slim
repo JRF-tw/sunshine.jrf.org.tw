@@ -6,12 +6,12 @@
       .form-group.addon-prefix
         = f.input_field :email, autofocus: true
         = f.label :email
-        /= inline_svg "profile"
+        = inline_svg "profile"
       
       .form-group.addon-prefix.addon-forgot-password
         = f.input_field :password
         = f.label :password
-        /= inline_svg "key"
+        = inline_svg "key"
         = link_to "忘記密碼", new_password_path(resource_name), class: "forgot-password"
       
       .form-group

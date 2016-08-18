@@ -20,6 +20,19 @@ $input-rhythm: r(1);
 
     input { border-bottom: none; }
   }
+  &.addon-prefix {
+    &.is-focused label { opacity: 0; }
+    
+    input { padding-left: r(3); }
+
+    label { padding-left: r(3); }
+
+    .icon {
+      size: 18px;
+      fill: $text-secondary;
+      position: absolute ($input-rhythm * 2) n() n() 0;
+    }
+  }
 }
 
 #{$all-text-inputs} {

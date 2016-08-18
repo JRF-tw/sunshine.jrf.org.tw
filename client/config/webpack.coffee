@@ -15,6 +15,9 @@ config =
       cleanupIDs: on
       removeComments: on
       removeDesc: on
+      removeAttrs:
+        attrs: ['fill']
+      removeDimensions: on
     ]
 
 module.exports = (env) ->
