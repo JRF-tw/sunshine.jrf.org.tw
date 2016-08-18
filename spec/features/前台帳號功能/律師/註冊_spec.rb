@@ -6,7 +6,7 @@ describe "律師註冊", type: :request do
     subject { post "/lawyer", lawyer: { name: lawyer.name, email: lawyer.email }, policy_agreement: "1" }
 
     it "發送密碼設定信" do
-      expect { subject }.to change_sidekiq_jobs_size_of(CustomDeviseMailer, :send_confirm_mail)
+      expect { subject }.to change_sidekiq_jobs_size_of(CustomDeviseMailer, :send_setting_password_mail)
     end
 
     it "跳轉到登入頁，並跳出註冊成功訊息" do
