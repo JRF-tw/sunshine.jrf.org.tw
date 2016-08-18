@@ -39,11 +39,11 @@ class PartyQueries
     story.judgment_verdict ? Verdict.find(story.judgment_verdict.id) : nil
   end
 
-  def get_scores_hash(story)
+  def get_scores_json(story, sort_by: "date")
     scores_array = []
     scores_array += schedule_scores_data_json(story) if schedule_scores_data_json(story)
     scores_array += verdict_score_data_json(story) if verdict_score_data_json(story)
-    scores_array
+    scores_array.sort_by { |k| k[sort_by] }
   end
 
   private
