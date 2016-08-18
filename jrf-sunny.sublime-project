@@ -7,7 +7,8 @@
       "folder_include_patterns": [
         "config",
         "public",
-        "environments"
+        "environments",
+        "initializers"
       ]
     },{
       "name": "Controller",
