@@ -1,17 +1,35 @@
-@mixin apply-background($gradients) {
-  $shadow-gradient: linear-gradient(to top, rgba(0,0,0,0) 52%, rgba(0,0,0,.8) 100%) 50% 0 no-repeat;
+$character-gradients: (
+  (name: 'lawyer',
+   gradients: linear-gradient(to bottom,
+                              rgba(255,236,179,0) 12%,
+                              rgba(255,193,9,.6) 60%,
+                              #FFC109 99%)),
+  (name: 'party',
+   gradients: linear-gradient(to bottom,
+                              rgba(255,205,210,0) 12%,
+                              rgba(243,66,54,.6) 69%,
+                              #F44336 94%)),
+  (name: 'observer',
+   gradients: linear-gradient(to bottom,
+                              rgba(178,223,219,0) 12%,
+                              rgba(0,150,136,.6) 68%,
+                              #019688 92%))
+);
+
+.billboard { padding-top: (3/4*100%); }
+
+@each $character in $character-gradients {
+  $gradients: (
+    map-get($character, gradients),
+    linear-gradient(to top, rgba(255,255,255,0.00) 0%,
+                            rgba(44,44,44,0.50) 77%,
+                            rgba(0,0,0,0.50) 100%)
+  );
   $bg: url('bg--who-are-you-960.jpg') 50% 0% / cover no-repeat;
   $bg-lg: url('bg--who-are-you-1920.jpg') 50% 0% / cover no-repeat;
 
-  background: $shadow-gradient, $gradients, $bg;
-  @include susy($tablet) { background: $shadow-gradient, $gradients, $bg-lg; }
-}
-
-.billboard { padding-top: (3/4*100%); }
-.billboard--lawyer {
-  $gradients: linear-gradient(to bottom,
-                              rgba(255,236,179,0.00) 12%,
-                              rgba(255,193,9,0.60) 60%,
-                              #FFC109 99%);
-  @include apply-background($gradients);
+  .billboard--#{map-get($character, name)} {
+    background: $gradients, $bg;
+    @include susy($tablet) { background: $gradients, $bg-lg; }    
+  }  
 }
