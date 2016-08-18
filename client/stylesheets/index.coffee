@@ -10,5 +10,6 @@ require 'components/_list.scss'
 require 'components/_footer.scss'
 require 'components/_header.scss'
 require 'components/_drawer.scss'
+require 'components/_billboard.scss'
 
 require 'pages/_who-are-you.scss'
