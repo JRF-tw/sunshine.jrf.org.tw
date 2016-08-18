@@ -15,7 +15,7 @@ html
   body class=(yield :body_classes)
     = render 'components/main_header'
 
-    .page-wrapper
+    .page-wrapper class=(yield :wrapper_classes)
       = render 'components/alert'
 
       main role='main'
