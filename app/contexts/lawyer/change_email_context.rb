@@ -3,7 +3,9 @@ class Lawyer::ChangeEmailContext < BaseContext
 
   before_perform :check_email_valid
   before_perform :check_email_different
-  before_perform :check_email_uniqe
+  before_perform :check_email_unique
+  before_perform :generate_confirmation_token
+  after_perform :send_reconfirmation_email
 
   def initialize(lawyer)
     @lawyer = lawyer
@@ -27,8 +29,16 @@ class Lawyer::ChangeEmailContext < BaseContext
     return add_error(:email_conflict, "email 不可與原本相同") if @params["email"] == @lawyer.email
   end
 
-  def check_email_uniqe
+  def check_email_unique
     return add_error(:lawyer_exist, "email 已經被使用") if Lawyer.pluck(:email).include?(@params[:email])
+  end
+
+  def generate_confirmation_token
+    @token = @lawyer.confirmation_token
+  end
+
+  def send_reconfirmation_email
+    CustomDeviseMailer.delay.resend_confirmation_instructions(@lawyer, @token)
   end
 
 end

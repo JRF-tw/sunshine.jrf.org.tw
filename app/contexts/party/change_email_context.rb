@@ -37,8 +37,16 @@ class Party::ChangeEmailContext < BaseContext
     @params["unconfirmed_email"] = @params.delete("email")
   end
 
+  def generate_confirmation_token
+    @token = @party.confirmation_token
+  end
+
   def send_confirmation_email
-    @party.send_confirmation_instructions
+    if @token
+      CustomDeviseMailer.delay.resend_confirmation_instructions(@party, @token)
+    else
+      @party.send_confirmation_instructions
+    end
   end
 
 end

@@ -219,4 +219,15 @@ module ApplicationHelper
   def get_court_fullname(court_id)
     Court.find(court_id).full_name
   end
+
+  def get_name_by_role(role)
+    case role.class
+    when Lawyer
+      "律師"
+    when Party
+      "當事人"
+    when CourtObserver
+      "旁聽者"
+    end
+  end
 end

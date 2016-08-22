@@ -4,6 +4,7 @@ class Lawyers::EmailsController < Lawyers::BaseController
   end
 
   def update
+    current_lawyer.skip_reconfirmation!
     context = Lawyer::ChangeEmailContext.new(current_lawyer)
     if context.perform(params)
       flash[:notice] = "需要重新驗證新的Email"
