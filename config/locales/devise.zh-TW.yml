@@ -22,9 +22,9 @@ zh-TW:
       unconfirmed: "您的帳號需需要經過驗證後，才能繼續。"
     mailer:
       confirmation_instructions:
-        subject: "帳號驗證步驟"
+        subject: "認證您的電子郵件信箱"
       reset_password_instructions:
-        subject: "密碼重設步驟"
+        subject: "重設您在司法陽光網的密碼"
       unlock_instructions:
         subject: "帳號解鎖步驟"
     omniauth_callbacks:

@@ -1,6 +1,6 @@
-p = "律師 #{@lawyer.name}(#{@lawyer.email})"
+p = "您於司法陽光網訂閱#{@court_wording}，該案即將於#{@date.year}年#{@date.mon}月#{@date.mday}日xx點XX分於台北市地方法院#{@story.story_type}第XX庭開庭，請記得寫上您的行事曆喔！"
 
-p = "您訂閱的案件#{@story.identity}將於明日開庭"  
+p = link_to "點我放入Google 行事曆", "#"
 
+p = "感謝您使用司法陽光網的案件訂閱服務！若您不想再訂閱此案，#{link_to "請點此", lawyer_subscribe_url(@story), method: :delete, class: "btn btn-mini"}。".html_safe
 
-div = link_to "取消訂閱", lawyer_subscribe_url(@story), method: :delete, class: "btn btn-mini"
