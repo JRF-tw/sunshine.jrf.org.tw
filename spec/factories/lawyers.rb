@@ -60,6 +60,10 @@ FactoryGirl.define do
     trait :with_unconfirmed_email do
       unconfirmed_email "test@gmail.com"
     end
+
+    trait :with_confirmation_token do
+      confirmation_token "totoken"
+    end
   end
 
   factory :empty_name_for_lawyer, class: Lawyer do

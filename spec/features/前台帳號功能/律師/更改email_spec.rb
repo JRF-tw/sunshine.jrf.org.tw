@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "律師更改email", type: :request do
   context "成功送出" do
-    let!(:lawyer) { create :lawyer, :with_confirmed, :with_password }
+    let!(:lawyer) { create :lawyer, :with_confirmed, :with_password, :with_confirmation_token }
     before { signin_lawyer(lawyer) }
 
     context "新的 email 為別人正在驗證中的 email ，也可以成功送出" do
@@ -10,7 +10,7 @@ describe "律師更改email", type: :request do
       subject { put "/lawyer/email", lawyer: { email: lawyer_with_unconfirmed_email.unconfirmed_email, current_password: "123123123" } }
 
       it "成功送出" do
-        expect { subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq)
+        expect { subject }.to change_sidekiq_jobs_size_of(CustomDeviseMailer, :resend_confirmation_instructions)
       end
     end
 
@@ -19,7 +19,7 @@ describe "律師更改email", type: :request do
       before { signin_lawyer(lawyer) }
 
       it "成功發送" do
-        expect { subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq)
+        expect { subject }.to change_sidekiq_jobs_size_of(CustomDeviseMailer, :resend_confirmation_instructions)
       end
     end
 

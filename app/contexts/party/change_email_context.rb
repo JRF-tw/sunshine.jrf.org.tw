@@ -5,6 +5,7 @@ class Party::ChangeEmailContext < BaseContext
   before_perform :check_email_different
   before_perform :check_email_unique
   before_perform :transfer_email_to_unconfirmed_email
+  after_perform :generate_confirmation_token
   after_perform :send_confirmation_email
 
   def initialize(party)

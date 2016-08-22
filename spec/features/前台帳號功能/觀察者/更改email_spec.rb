@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "觀察者更改email", type: :request do
   context "成功送出" do
-    let!(:court_observer) { create :court_observer, name: "丁丁觀察者", email: "dingding@gmail.com" }
+    let!(:court_observer) { create :court_observer, :with_confirmation_token, name: "丁丁觀察者", email: "dingding@gmail.com" }
     before { signin_court_observer(court_observer) }
 
     context "新的 email 為別人正在驗證中的 email ，也可以成功送出" do
@@ -10,16 +10,16 @@ describe "觀察者更改email", type: :request do
       subject { put "/observer/email", court_observer: { email: court_observer_with_unconfirmed_email.unconfirmed_email, current_password: "123123123" } }
 
       it "成功送出" do
-        expect { subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq)
+        expect { subject }.to change_sidekiq_jobs_size_of(CustomDeviseMailer, :resend_confirmation_instructions)
       end
     end
 
     context "發送信件" do
-      subject { put "/observer/email", court_observer: { email: "windwizard@gmail.com", current_password: "123123123" } }
       before { signin_court_observer(court_observer) }
+      subject { put "/observer/email", court_observer: { email: "windwizard@gmail.com", current_password: "123123123" } }
 
       it "成功發送" do
-        expect { subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq)
+        expect { subject }.to change_sidekiq_jobs_size_of(CustomDeviseMailer, :resend_confirmation_instructions)
       end
     end
 

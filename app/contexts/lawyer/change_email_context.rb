@@ -4,7 +4,7 @@ class Lawyer::ChangeEmailContext < BaseContext
   before_perform :check_email_valid
   before_perform :check_email_different
   before_perform :check_email_unique
-  before_perform :generate_confirmation_token
+  after_perform :generate_confirmation_token
   after_perform :send_reconfirmation_email
 
   def initialize(lawyer)

@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "當事人更改email", type: :request do
-  let!(:party) { create :party }
+  let!(:party) { create :party, :with_confirmation_token }
 
   context "成功送出" do
     before { signin_party(party) }
@@ -11,7 +11,7 @@ describe "當事人更改email", type: :request do
       subject { put "/party/email", party: { email: party_with_unconfirmed_email.unconfirmed_email, current_password: "12321313213" } }
 
       it "成功送出" do
-        expect { subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq)
+        expect { subject }.to change_sidekiq_jobs_size_of(CustomDeviseMailer, :resend_confirmation_instructions)
       end
     end
 
@@ -19,7 +19,7 @@ describe "當事人更改email", type: :request do
       subject { put "/party/email", party: { email: "5566@gmail.com", current_password: "12321313213" } }
 
       it "成功送出" do
-        expect { subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq)
+        expect { subject }.to change_sidekiq_jobs_size_of(CustomDeviseMailer, :resend_confirmation_instructions)
       end
     end
 
