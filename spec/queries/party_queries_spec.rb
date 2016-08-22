@@ -29,7 +29,7 @@ RSpec.describe PartyQueries do
 
   describe "#get_verdict_score" do
     let!(:verdict_score) { create :verdict_score, verdict_rater: party, story: story }
-    it { expect(query.get_verdict_score(story).include?(verdict_score)).to be_truthy }
+    it { expect(query.get_verdict_score(story)).to eq(verdict_score) }
   end
 
   describe "#get_relate_stories" do
@@ -51,6 +51,38 @@ RSpec.describe PartyQueries do
     context "story get judgment_verdict" do
       let!(:verdict) { create :verdict, story: story, is_judgment: true }
       it { expect(query.pending_score_verdict(story)).to eq(verdict) }
+    end
+  end
+
+  describe "#get_scores_array" do
+    context "have schedule_scores" do
+      let!(:schedule_score) { create :schedule_score, schedule_rater: party, story: story }
+      let(:date) { schedule_score.schedule.date }
+      let(:court_code) { story.court.code }
+
+      it { expect(query.get_scores_array(story).first.is_a?(Hash)).to be_truthy }
+      it { expect(query.get_scores_array(story).first["date"]).to eq(date) }
+      it { expect(query.get_scores_array(story).first["court_code"]).to eq(court_code) }
+      it { expect(query.get_scores_array(story).first["schedule_score"]).to be_truthy }
+    end
+
+    context "have verdict_scores" do
+      let!(:verdict_score) { create :verdict_score, verdict_rater: party, story: story }
+      let(:date) { verdict_score.story.adjudge_date }
+      let(:court_code) { story.court.code }
+
+      it { expect(query.get_scores_array(story).first.is_a?(Hash)).to be_truthy }
+      it { expect(query.get_scores_array(story).first["date"]).to eq(date) }
+      it { expect(query.get_scores_array(story).first["court_code"]).to eq(court_code) }
+      it { expect(query.get_scores_array(story).first["verdict_score"]).to be_truthy }
+    end
+
+    context "sorted by date" do
+      let!(:yesterday_judge_story) { create(:story, :adjudged_yesterday) }
+      let!(:verdict_score) { create :verdict_score, verdict_rater: party, story: yesterday_judge_story }
+      let!(:schedule_score) { create :schedule_score, schedule_rater: party, story: yesterday_judge_story }
+
+      it { expect(query.get_scores_array(yesterday_judge_story, sort_by: "date").first["date"]).to eq(verdict_score.story.adjudge_date) }
     end
   end
 end

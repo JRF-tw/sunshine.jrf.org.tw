@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   devise_scope :party do
     post "/party/password/send_reset_password_sms", to: "parties/passwords#send_reset_password_sms"
+    post "/party/registrations/check_identify_number", to: "parties/registrations#check_identify_number"
   end
 
   # f2e
@@ -35,7 +36,6 @@ Rails.application.routes.draw do
     resource :profile, only: [:show, :edit, :update]
     resource :email, only: [:edit, :update]
     resource :score do
-      get "chose-type", to: "scores#chose_type"
       resources :schedules, only: [:new, :create, :edit, :update] do
         collection do
           get :rule
@@ -63,7 +63,6 @@ Rails.application.routes.draw do
     resource :profile, only: [:show, :edit, :update]
     resource :email, only: [:edit, :update]
     resource :score do
-      get "chose-type", to: "scores#chose_type"
       resources :schedules, only: [:new, :create, :edit, :update] do
         collection do
           get :rule
@@ -101,7 +100,6 @@ Rails.application.routes.draw do
       end
     end
     resource :score do
-      get "chose-type", to: "scores#chose_type"
       resources :schedules, only: [:new, :create, :edit, :update] do
         collection do
           get :rule

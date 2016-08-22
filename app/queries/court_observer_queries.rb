@@ -11,7 +11,7 @@ class CourtObserverQueries
 
   def get_schedule_score(story)
     scores = @court_observer.schedule_scores.where(story: story)
-    scores
+    scores.includes(:schedule).order("schedules.date")
   end
 
   def pending_score_schedules(story)

@@ -58,6 +58,11 @@ FactoryGirl.define do
       is_adjudge true
     end
 
+    trait :adjudged_yesterday do
+      adjudge_date Time.zone.yesterday
+      is_adjudge true
+    end
+
   end
 
 end

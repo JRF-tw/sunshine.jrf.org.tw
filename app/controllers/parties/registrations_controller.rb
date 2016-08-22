@@ -4,6 +4,17 @@ class Parties::RegistrationsController < Devise::RegistrationsController
   before_action :check_registration, only: [:create]
   # POST /resource
 
+  def check_identify_number
+    context = Party::IdentifyNumberCheckContext.new(params)
+    if @party = context.perform
+      @checked = true
+      flash.clear
+    else
+      flash[:error] = context.error_messages.join(", ")
+    end
+    render :new
+  end
+
   protected
 
   def check_registration
@@ -11,6 +22,7 @@ class Parties::RegistrationsController < Devise::RegistrationsController
     unless context.perform
       build_resource(sign_up_params)
       flash[:error] = context.error_messages.join(", ")
+      @checked = true
       render "new"
     end
   end

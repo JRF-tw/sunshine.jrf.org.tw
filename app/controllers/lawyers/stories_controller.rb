@@ -25,8 +25,7 @@ class Lawyers::StoriesController < Lawyers::BaseController
   end
 
   def has_score?
-    @verdict_score = ::LawyerQueries.new(current_lawyer).get_verdict_score(@story)
-    @schedule_score = ::LawyerQueries.new(current_lawyer).get_schedule_score(@story)
-    redirect_as_fail(lawyer_root_path, "尚未有評鑑紀錄") unless @verdict_score.present? || @schedule_score.present?
+    @scores_sorted = ::LawyerQueries.new(current_lawyer).get_scores_array(@story, sort_by: "date")
+    redirect_as_fail(party_stories_path, "尚未有評鑑紀錄") unless @scores_sorted.present?
   end
 end

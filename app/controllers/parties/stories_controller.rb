@@ -25,8 +25,7 @@ class Parties::StoriesController < Parties::BaseController
   end
 
   def has_score?
-    @verdict_score = ::PartyQueries.new(current_party).get_verdict_score(@story)
-    @schedule_score = ::PartyQueries.new(current_party).get_schedule_score(@story)
-    redirect_as_fail(party_stories_path, "尚未有評鑑紀錄") unless @verdict_score.present? || @schedule_score.present?
+    @scores_sorted = ::PartyQueries.new(current_party).get_scores_array(@story, sort_by: "date")
+    redirect_as_fail(party_stories_path, "尚未有評鑑紀錄") unless @scores_sorted.present?
   end
 end
