@@ -4,6 +4,7 @@ class Lawyer::ChangeEmailContext < BaseContext
   before_perform :check_email_valid
   before_perform :check_email_different
   before_perform :check_email_unique
+  before_perform :skip_devise_confirmation_notification
   after_perform :generate_confirmation_token
   after_perform :send_reconfirmation_email
 
@@ -33,8 +34,14 @@ class Lawyer::ChangeEmailContext < BaseContext
     return add_error(:lawyer_exist, "email 已經被使用") if Lawyer.pluck(:email).include?(@params[:email])
   end
 
+  def skip_devise_confirmation_notification
+    @lawyer.skip_confirmation_notification!
+  end
+
   def generate_confirmation_token
-    @token = @lawyer.confirmation_token
+    @lawyer.confirmation_token = @token = Devise.token_generator.generate(@lawyer.class, :confirmation_token)[0]
+    @lawyer.confirmation_sent_at = Time.zone.now
+    @lawyer.save
   end
 
   def send_reconfirmation_email
