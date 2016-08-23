@@ -53,7 +53,7 @@
               | &nbsp;
               = link_to "編輯", edit_admin_lawyer_path(lawyer), class: "btn btn-mini btn-success"
               | &nbsp;
-              = link_to "刪除", admin_lawyer_path(lawyer), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除該律師檔案 - #{lawyer.name}？"
+              = link_to "刪除", admin_lawyer_path(lawyer, redirect_to: request.fullpath), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除該律師檔案 - #{lawyer.name}？"
               | &nbsp;
               = link_to "發送密碼設定信", send_reset_password_mail_admin_lawyer_path(lawyer), class: "btn btn-mini", method: :post
     .ui-toolbar.ui-widget-header

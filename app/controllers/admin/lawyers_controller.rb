@@ -77,7 +77,7 @@ class Admin::LawyersController < Admin::BaseController
   def destroy
     context = Admin::LawyerDeleteContext.new(@lawyer)
     if context.perform
-      redirect_as_success(:back, "律師 - #{lawyer.name} 已刪除")
+      redirect_as_success(admin_lawyers_path, "律師 - #{lawyer.name} 已刪除")
     else
       redirect_to :back, flash: { error: context.error_messages }
     end

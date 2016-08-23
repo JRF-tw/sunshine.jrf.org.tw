@@ -36,7 +36,7 @@ RSpec.describe Admin::LawyersController do
 
   describe "#delete" do
     context "delete success" do
-      subject { delete "/admin/lawyers/#{lawyer.id}", {}, "HTTP_REFERER" => "/admin/lawyers" }
+      subject { delete "/admin/lawyers/#{lawyer.id}" }
 
       it { expect { subject }.to change { Lawyer.count }.by(-1) }
       it { expect(subject).to redirect_to("/admin/lawyers") }
