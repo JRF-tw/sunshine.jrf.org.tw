@@ -3,6 +3,21 @@ require "rails_helper"
 RSpec.describe Observers::SessionsController, type: :request do
   let!(:court_observer) { create :court_observer }
 
+  context "#new" do
+    context "already sign_in" do
+      before { signin_court_observer }
+      subject! { get("/observer/sign_in") }
+
+      it { expect(response).to redirect_to("/observer") }
+    end
+
+    context "non sign_in" do
+      subject! { get("/observer/sign_in") }
+
+      it { expect(response).to be_success }
+    end
+  end
+
   describe "#create" do
     context "success" do
       subject! { post "/observer/sign_in", court_observer: { email: court_observer.email, password: "123123123" } }
