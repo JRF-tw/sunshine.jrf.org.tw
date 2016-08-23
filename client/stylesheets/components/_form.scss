@@ -19,7 +19,7 @@ $input-rhythm: r(1);
   }
   &.addon-prefix {
     &.is-focused .control-label,
-    .input:-webkit-autofill + .control-label { opacity: 0; }
+    .input:-webkit-autofill + .control-label { color: $white; }
     
     .input { padding-left: r(3); }
 
