@@ -20,22 +20,26 @@ $character-gradients: (
   padding-top: 300px;
   margin-bottom: r(-22);
   @include susy($tablet) {
-    margin-bottom: r(-6);
+    margin-bottom: r(-7);
+    padding-top: 380px;
   }
 }
 
 @each $character in $character-gradients {
+  $c-gradient: map-get($character, gradients);
   $gradients: (
-    map-get($character, gradients),
-    linear-gradient(to top, rgba(255,255,255,0.00) 0%,
-                            rgba(44,44,44,0.50) 77%,
-                            rgba(0,0,0,0.50) 100%)
+    linear-gradient(to top, rgba(255,255,255,0) 0%,
+                            rgba(44,44,44,.5) 77%,
+                            rgba(0,0,0,.5) 100%),
+    linear-gradient(to top, rgba(0,0,0,.5) 0%,
+                            rgba(0,0,0,.1) 15%,
+                            rgba(0,0,0,0) 30%)
   );
   $bg: url('bg--who-are-you-960.jpg') 50% 0% / cover no-repeat;
   $bg-lg: url('bg--who-are-you-1920.jpg') 50% 0% / cover no-repeat;
 
   .billboard--#{map-get($character, name)} {
-    background: $gradients, $bg;
+    background: $c-gradient, $gradients, $bg;
     @include susy($tablet) { background: $gradients, $bg-lg; }    
   }  
 }
