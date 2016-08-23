@@ -88,6 +88,7 @@ $input-rhythm: r(1);
     background: url(checked.svg) 50% 50% / contain no-repeat;
     border-color: $accent;
   }
+  &:focus::after { border-color: $accent; }
 }
 
 abbr[title="required"] { display: none; }
