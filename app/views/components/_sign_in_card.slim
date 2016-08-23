@@ -1,3 +1,5 @@
+- use_identify_number = use_identify_number ? true : false
+
 .container
   .card
     h2.card__heading
@@ -5,8 +7,14 @@
     
     = simple_form_for(resource, as: resource_name, url: session_path(resource_name), defaults: {input_html: {class: "input"}}) do |f|
       .form-group.addon-prefix
-        = f.input_field :email, autofocus: true
-        = f.label :email
+        - if use_identify_number
+          = f.input_field :identify_number, autofocus: true
+          = f.label :identify_number
+        
+        - else
+          = f.input_field :email, autofocus: true
+          = f.label :email
+        
         = inline_svg "profile"
       
       .form-group.addon-prefix.addon-forgot-password
@@ -15,10 +23,14 @@
         = inline_svg "key"
         = link_to "忘記密碼", new_password_path(resource_name), class: "forgot-password"
       
-      .form-group.squish-before
-        = f.input_field :remember_me, inline_label: "記住我", as: :boolean if devise_mapping.rememberable?
+      - unless use_identify_number
+        .form-group.squish-before
+          = f.input_field :remember_me, inline_label: "記住我", as: :boolean if devise_mapping.rememberable?
 
       .form-actions
+        - if use_identify_number
+          br
+          
         .form-group.text-center = f.button :button, "登入", class: "raised-button--large"
 
         .text-center = link_to "註冊", signup, class: "flat-button--large"

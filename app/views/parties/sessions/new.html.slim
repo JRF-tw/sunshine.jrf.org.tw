@@ -1,16 +1,5 @@
-.widget-box
-  .widget-title
-    h5 當事人登入
-  .widget-content.nopadding
-    = simple_form_for(resource, as: resource_name, :url => session_path(resource_name)) do |f|
-      .form-group
-        label.control-label 身分證字號
-        = f.input :identify_number, required: false, autofocus: true, :label => false
-      .form-group
-        label.control-label 密碼
-        = f.input :password, required: false, :label => false, :hint => link_to("忘記密碼", new_password_path(resource_name))
-        = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
-
-      .form-actions
-        input.btn.btn-primary type="submit" value="登入"
-        = link_to "註冊", new_party_registration_path , class: "btn btn-default"
+= render 'components/sign_in_card',
+  heading: '當事人登入',
+  resource: resource,
+  signup: new_party_registration_path,
+  use_identify_number: true
