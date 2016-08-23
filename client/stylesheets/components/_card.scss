@@ -19,6 +19,7 @@
   @include susy($tablet) {
     text: ms(5) 1.5;
     background-color: transparent;
+    width: 100%;
     top: r(-20);
     @include scut-center-transform(x);
   }
