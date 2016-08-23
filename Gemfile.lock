@@ -367,6 +367,8 @@ GEM
     kgio (2.10.0)
     launchy (2.4.3)
       addressable (~> 2.3)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     libv8 (3.16.14.13)
     listen (3.0.5)
       rb-fsevent (>= 0.9.3)
@@ -674,6 +676,7 @@ DEPENDENCIES
   jquery-ui-rails
   kaminari
   launchy
+  letter_opener
   mechanize
   meta-tags
   mini_magick
