@@ -3,7 +3,7 @@
 
 $susy: (
   gutters: 1/5,
-  column-width: scut-rem(100),
+  column-width: ms(11),
   // gutter-position: inside-static,
   debug: (
     // image: show,
@@ -26,12 +26,12 @@ $susy-media: (
 );
 $tablet: (
   query: map-get($susy-media, tablet),
-  layout: 9 .5
+  layout: 9
 );
 $tablet-columns: susy-get(columns, map-get($tablet, layout));
 $desktop: (
   query: map-get($susy-media, desktop),
-  layout: 14 1.5 split
+  layout: 12 split
 );
 $desktop-columns: susy-get(columns, map-get($desktop, layout));
 $desktop-grid-padding: scut-rem(15);
