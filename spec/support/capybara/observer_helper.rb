@@ -25,8 +25,9 @@ module Capybara
     end
 
     def capybara_confirm_observer(email)
-      observer = CourtObserver.find_by(email: email)
-      visit(court_observer_confirmation_path(confirmation_token: observer.confirmation_token))
+      perform_sidekiq_job(fetch_sidekiq_last_job)
+      open_email(email)
+      current_email.click_link "Confirm my account"
       save_page
     end
 
