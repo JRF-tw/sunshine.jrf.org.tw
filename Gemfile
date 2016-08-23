@@ -104,7 +104,7 @@ group :test do
   gem "launchy"
   gem "capybara"
   gem "capybara-webkit"
-  gem 'capybara-email'
+  gem "capybara-email"
   gem "webmock"
   gem "test_after_commit"
   gem "database_cleaner"
