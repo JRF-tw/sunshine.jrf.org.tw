@@ -66,6 +66,6 @@ class Story < ActiveRecord::Base
   end
 
   def court_wording
-    "#{self.court.full_name}#{self.year}年#{self.word_type}字第#{self.number}號"
+    "#{court.full_name}#{year}年#{word_type}字第#{number}號"
   end
 end
