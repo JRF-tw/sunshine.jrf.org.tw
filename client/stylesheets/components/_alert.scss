@@ -20,6 +20,11 @@ $alert-types: (
   @include susy($tablet) {
     top: r(-10);
   }
+  a {
+    color: $white;
+    @include scut-link-bb;
+    &:hover { border-bottom: none; }
+  }
 }
 @each $type in $alert-types {
   .alert--#{map-get($type, name)} { background-color: map-get($type, color);}
