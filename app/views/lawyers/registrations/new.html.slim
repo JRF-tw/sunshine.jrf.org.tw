@@ -3,8 +3,6 @@
     h2.card__heading 律師註冊
 
     = simple_form_for(resource, as: resource_name, url:  lawyer_registration_path, method: :post, defaults: {input_html: {class: "input"}}) do |f|
-      = f.error_notification
-
       .form-group
         = f.input_field :name, required: true, autofocus: true
         = f.label :name

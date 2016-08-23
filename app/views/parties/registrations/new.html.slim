@@ -1,7 +1,6 @@
-.widget-box
-  .widget-title
-    h5 當事人註冊
-  .widget-content.nopadding
+.container
+  .card
+    h2.card__heading 當事人註冊
+
     = render partial: 'identify_number_check_form' unless @checked
     = render partial: 'form' if @checked
-

@@ -3,8 +3,6 @@
     h2.card__heading 觀察員註冊
 
     = simple_form_for(resource, as: resource_name, url: court_observer_registration_path) do |f|
-      = f.error_notification
-
       .form-group
         = f.input_field :name, required: true, autofocus: true
         = f.label :name
