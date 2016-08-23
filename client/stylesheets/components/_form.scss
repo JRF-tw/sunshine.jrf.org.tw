@@ -15,14 +15,15 @@ $input-rhythm: r(1);
       position: absolute n() 0 0 0;
     }
 
-    input { border-bottom: none; }
+    .input { border-bottom: none; }
   }
   &.addon-prefix {
-    &.is-focused label { opacity: 0; }
+    &.is-focused .control-label,
+    .input:-webkit-autofill + .control-label { opacity: 0; }
     
-    input { padding-left: r(3); }
+    .input { padding-left: r(3); }
 
-    label { padding-left: r(3); }
+    .control-label { padding-left: r(3); }
 
     .icon {
       size: 18px;
@@ -44,6 +45,11 @@ $input-rhythm: r(1);
   &:focus, &:active {
     + .control-label::before { transform: scaleX(1); }
   }
+  &:-webkit-autofill {
+    background-color: transparent !important;
+    box-shadow: 0 0 0 100px $white inset;
+    -webkit-text-fill-color: $text-secondary;
+  }
 }
 
 .control-label {
@@ -59,7 +65,8 @@ $input-rhythm: r(1);
     transform: scaleX(0);
     transition: transform .3s ease 0s;
   }
-  .is-focused & {
+  .is-focused &,
+  .input:-webkit-autofill + & {
     text: $text-secondary ms(-1);
     top: 0;
   }
