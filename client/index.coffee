@@ -11,8 +11,8 @@ require "modernizr"
 
 # Require Custom Modules
 # Modal = require "./modules/modal"
-Toggle       = require './modules/toggle'
-{TextInput}  = require './modules/form'
+{Toggle, Dismiss} = require './modules/toggle'
+{TextInput}       = require './modules/form'
 
 # Require entry modules
 # EX:
@@ -24,4 +24,5 @@ sprites.keys().forEach sprites
 
 $(document).on "page:change", ->
   new Toggle '.switch'
+  new Dismiss('[data-dismiss]').init()
   new TextInput()

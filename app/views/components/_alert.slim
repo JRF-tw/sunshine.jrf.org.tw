@@ -1,4 +1,7 @@
-- flash.each do |k, message|
-  div class= "alert fade in alert-#{k}"
-    a.close data-dismiss="alert" href="#"
-    = raw(message)
+.billboard__alert
+  - flash.each do |k, message|
+    .alert class="alert--#{k}"
+      = raw(message)
+      
+      button.alert__close data-dismiss="alert" type="button"
+        = inline_svg "close"

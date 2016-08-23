@@ -1,0 +1,37 @@
+$alert-types: (
+  (name: 'notice', color: $warning),
+  (name: 'success', color: $accent),
+  (name: 'error', color: $danger),
+  (name: 'alert', color: $danger),
+);
+
+.billboard__alert {
+  margin: 0 auto;
+  max-width: $card-max;
+}
+
+.alert {
+  width: 100%;
+  padding: r(1) r(5) r(1) r(2);
+  position: relative r(-26) n() n() n();
+  text: bold $text-primary-dark;
+  border-radius: $global-radius;
+  box-shadow: 0px 0px 2px 0px rgba(0,0,0,.12), 0px 2px 2px 0px rgba(0,0,0,.24);
+  @include susy($tablet) {
+    top: r(-10);
+  }
+}
+@each $type in $alert-types {
+  .alert--#{map-get($type, name)} { background-color: map-get($type, color);}
+}
+.alert__close {
+  @include Normalize();
+  color: $white;
+  fill: currentColor;
+  right: r(2);
+  @include scut-center-transform(y);
+  .icon {
+    size: ms(-2);
+    margin-top: -2px;
+  }
+}

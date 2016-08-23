@@ -16,8 +16,6 @@ html
     = render 'components/main_header'
 
     .page-wrapper class=(yield :wrapper_classes)
-      = render 'components/alert'
-
       main role='main'
         
         = content_for?(:yield) ? yield(:yield) : yield
