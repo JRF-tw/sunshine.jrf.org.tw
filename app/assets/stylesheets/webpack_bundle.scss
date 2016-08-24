@@ -588,6 +588,22 @@ body {
   min-height: 160px;
 }
 
+.page-wrapper.lawyer {
+  background-color: #ffc107;
+}
+
+.page-wrapper.party {
+  background-color: #f44336;
+}
+
+.page-wrapper.observer {
+  background-color: #009688;
+}
+
+main[role="main"] {
+  padding-bottom: 80px;
+}
+
 html.turbolinks-progress-bar::before {
   background-color: #3e82bd !important;
 }
@@ -634,7 +650,7 @@ img[data-sizes="auto"]:not(.slick-slide) {
 */
 
 .container {
-  max-width: 32.85714rem;
+  max-width: 478.4px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -647,7 +663,7 @@ img[data-sizes="auto"]:not(.slick-slide) {
 
 @media (min-width: 768px) {
   .container {
-    max-width: 92.85714rem;
+    max-width: 1102.4px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -661,7 +677,7 @@ img[data-sizes="auto"]:not(.slick-slide) {
 
 @media (min-width: 1440px) {
   .container {
-    max-width: 250rem;
+    max-width: 1497.6px;
     margin-left: auto;
     margin-right: auto;
   }
@@ -674,7 +690,7 @@ img[data-sizes="auto"]:not(.slick-slide) {
 }
 
 .container--wide {
-  max-width: 32.85714rem;
+  max-width: 478.4px;
   margin-left: auto;
   margin-right: auto;
   max-width: none;
@@ -704,12 +720,12 @@ img[data-sizes="auto"]:not(.slick-slide) {
 
 a {
   text-decoration: none;
-  color: #3e82bd;
+  color: #00bcd4;
 }
 
 a:hover,
 a:focus {
-  color: #356fa1;
+  color: #00a0b4;
 }
 
 ::-moz-selection {
@@ -1333,6 +1349,7 @@ img.mfp-img {
   left: 0;
   position: fixed;
   width: 304px;
+  max-width: 80%;
   z-index: 5;
   -webkit-transition: -webkit-transform .3s ease 0s;
   transition: -webkit-transform .3s ease 0s;
@@ -1399,6 +1416,492 @@ img.mfp-img {
     display: none !important;
     visibility: hidden;
   }
+}
+
+/*
+* Scut, a collection of Sass utilities
+* to ease and improve our implementations of common style-code patterns.
+* v1.4.0
+* Docs at http://davidtheclark.github.io/scut
+*/
+
+.billboard {
+  padding-top: 300px;
+  margin-bottom: -176px;
+}
+
+@media (min-width: 768px) {
+  .billboard {
+    margin-bottom: -56px;
+    padding-top: 380px;
+  }
+}
+
+.billboard--lawyer {
+  background: -webkit-linear-gradient(top, rgba(255, 236, 179, 0) 12%, rgba(255, 193, 9, 0.6) 80%, #FFC109 99%), -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, rgba(44, 44, 44, 0.5) 77%, rgba(0, 0, 0, 0.5) 100%), -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.1) 15%, transparent 30%), asset-url('bg--who-are-you-960.jpg') 50% 0%/cover no-repeat;
+  background: linear-gradient(to bottom, rgba(255, 236, 179, 0) 12%, rgba(255, 193, 9, 0.6) 80%, #FFC109 99%), linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(44, 44, 44, 0.5) 77%, rgba(0, 0, 0, 0.5) 100%), linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.1) 15%, transparent 30%), asset-url('bg--who-are-you-960.jpg') 50% 0%/cover no-repeat;
+}
+
+@media (min-width: 768px) {
+  .billboard--lawyer {
+    background: -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, rgba(44, 44, 44, 0.5) 77%, rgba(0, 0, 0, 0.5) 100%), -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.1) 15%, transparent 30%), asset-url('bg--who-are-you-1920.jpg') 50% 0%/cover no-repeat;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(44, 44, 44, 0.5) 77%, rgba(0, 0, 0, 0.5) 100%), linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.1) 15%, transparent 30%), asset-url('bg--who-are-you-1920.jpg') 50% 0%/cover no-repeat;
+  }
+}
+
+.billboard--party {
+  background: -webkit-linear-gradient(top, rgba(255, 205, 210, 0) 12%, rgba(243, 66, 54, 0.6) 69%, #F44336 94%), -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, rgba(44, 44, 44, 0.5) 77%, rgba(0, 0, 0, 0.5) 100%), -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.1) 15%, transparent 30%), asset-url('bg--who-are-you-960.jpg') 50% 0%/cover no-repeat;
+  background: linear-gradient(to bottom, rgba(255, 205, 210, 0) 12%, rgba(243, 66, 54, 0.6) 69%, #F44336 94%), linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(44, 44, 44, 0.5) 77%, rgba(0, 0, 0, 0.5) 100%), linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.1) 15%, transparent 30%), asset-url('bg--who-are-you-960.jpg') 50% 0%/cover no-repeat;
+}
+
+@media (min-width: 768px) {
+  .billboard--party {
+    background: -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, rgba(44, 44, 44, 0.5) 77%, rgba(0, 0, 0, 0.5) 100%), -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.1) 15%, transparent 30%), asset-url('bg--who-are-you-1920.jpg') 50% 0%/cover no-repeat;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(44, 44, 44, 0.5) 77%, rgba(0, 0, 0, 0.5) 100%), linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.1) 15%, transparent 30%), asset-url('bg--who-are-you-1920.jpg') 50% 0%/cover no-repeat;
+  }
+}
+
+.billboard--observer {
+  background: -webkit-linear-gradient(top, rgba(178, 223, 219, 0) 12%, rgba(0, 150, 136, 0.6) 68%, #019688 92%), -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, rgba(44, 44, 44, 0.5) 77%, rgba(0, 0, 0, 0.5) 100%), -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.1) 15%, transparent 30%), asset-url('bg--who-are-you-960.jpg') 50% 0%/cover no-repeat;
+  background: linear-gradient(to bottom, rgba(178, 223, 219, 0) 12%, rgba(0, 150, 136, 0.6) 68%, #019688 92%), linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(44, 44, 44, 0.5) 77%, rgba(0, 0, 0, 0.5) 100%), linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.1) 15%, transparent 30%), asset-url('bg--who-are-you-960.jpg') 50% 0%/cover no-repeat;
+}
+
+@media (min-width: 768px) {
+  .billboard--observer {
+    background: -webkit-linear-gradient(bottom, rgba(255, 255, 255, 0) 0%, rgba(44, 44, 44, 0.5) 77%, rgba(0, 0, 0, 0.5) 100%), -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.1) 15%, transparent 30%), asset-url('bg--who-are-you-1920.jpg') 50% 0%/cover no-repeat;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(44, 44, 44, 0.5) 77%, rgba(0, 0, 0, 0.5) 100%), linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.1) 15%, transparent 30%), asset-url('bg--who-are-you-1920.jpg') 50% 0%/cover no-repeat;
+  }
+}
+
+/*
+* Scut, a collection of Sass utilities
+* to ease and improve our implementations of common style-code patterns.
+* v1.4.0
+* Docs at http://davidtheclark.github.io/scut
+*/
+
+.card {
+  margin: 0 16px;
+  padding: 0 16px 16px;
+  background: #fff;
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.12), 0px 8px 8px 0px rgba(0, 0, 0, 0.24);
+  border-radius: 3px;
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 360px) {
+  .card {
+    margin: 0 auto;
+    max-width: 328px;
+  }
+}
+
+@media (min-width: 768px) {
+  .card {
+    padding-top: 16px;
+  }
+}
+
+.card__heading {
+  margin: 0 -16px 16px;
+  text-align: center;
+  color: #fff;
+  font-size: 20px;
+  line-height: 56px;
+  background-color: #00bcd4;
+}
+
+@media (min-width: 768px) {
+  .card__heading {
+    font-size: 35px;
+    line-height: 1.5;
+    background-color: transparent;
+    width: 100%;
+    top: -160px;
+    position: absolute;
+    left: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+}
+
+/*
+* Scut, a collection of Sass utilities
+* to ease and improve our implementations of common style-code patterns.
+* v1.4.0
+* Docs at http://davidtheclark.github.io/scut
+*/
+
+.form-group {
+  margin-bottom: 16px;
+  padding-top: 8px;
+  position: relative;
+}
+
+.form-group.squish-before {
+  margin-top: -8px;
+}
+
+.form-group.addon-forgot-password {
+  padding-right: 5em;
+}
+
+.form-group.addon-forgot-password::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.12);
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+}
+
+.form-group.addon-forgot-password input {
+  border-bottom: none;
+}
+
+.form-group.addon-prefix.is-focused .control-label,
+.form-group.addon-prefix input:-webkit-autofill + .control-label {
+  color: #fff;
+}
+
+.form-group.addon-prefix input {
+  padding-left: 24px;
+}
+
+.form-group.addon-prefix .control-label {
+  padding-left: 24px;
+}
+
+.form-group.addon-prefix .icon {
+  width: 18px;
+  height: 18px;
+  fill: rgba(0, 0, 0, 0.54);
+  top: 16px;
+  left: 0;
+  position: absolute;
+}
+
+input[type="color"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"],
+input:not([type]),
+textarea {
+  display: block;
+  padding: 8px 0;
+  width: 100%;
+  line-height: 1.25;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  box-shadow: none;
+  outline: none;
+}
+
+input[type="color"]:focus + .control-label::before,
+input[type="color"]:active + .control-label::before,
+input[type="date"]:focus + .control-label::before,
+input[type="date"]:active + .control-label::before,
+input[type="datetime"]:focus + .control-label::before,
+input[type="datetime"]:active + .control-label::before,
+input[type="datetime-local"]:focus + .control-label::before,
+input[type="datetime-local"]:active + .control-label::before,
+input[type="email"]:focus + .control-label::before,
+input[type="email"]:active + .control-label::before,
+input[type="month"]:focus + .control-label::before,
+input[type="month"]:active + .control-label::before,
+input[type="number"]:focus + .control-label::before,
+input[type="number"]:active + .control-label::before,
+input[type="password"]:focus + .control-label::before,
+input[type="password"]:active + .control-label::before,
+input[type="search"]:focus + .control-label::before,
+input[type="search"]:active + .control-label::before,
+input[type="tel"]:focus + .control-label::before,
+input[type="tel"]:active + .control-label::before,
+input[type="text"]:focus + .control-label::before,
+input[type="text"]:active + .control-label::before,
+input[type="time"]:focus + .control-label::before,
+input[type="time"]:active + .control-label::before,
+input[type="url"]:focus + .control-label::before,
+input[type="url"]:active + .control-label::before,
+input[type="week"]:focus + .control-label::before,
+input[type="week"]:active + .control-label::before,
+input:not([type]):focus + .control-label::before,
+input:not([type]):active + .control-label::before,
+textarea:focus + .control-label::before,
+textarea:active + .control-label::before {
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+}
+
+input[type="color"]:-webkit-autofill,
+input[type="date"]:-webkit-autofill,
+input[type="datetime"]:-webkit-autofill,
+input[type="datetime-local"]:-webkit-autofill,
+input[type="email"]:-webkit-autofill,
+input[type="month"]:-webkit-autofill,
+input[type="number"]:-webkit-autofill,
+input[type="password"]:-webkit-autofill,
+input[type="search"]:-webkit-autofill,
+input[type="tel"]:-webkit-autofill,
+input[type="text"]:-webkit-autofill,
+input[type="time"]:-webkit-autofill,
+input[type="url"]:-webkit-autofill,
+input[type="week"]:-webkit-autofill,
+input:not([type]):-webkit-autofill,
+textarea:-webkit-autofill {
+  background-color: transparent !important;
+  box-shadow: 0 0 0 100px #fff inset;
+  -webkit-text-fill-color: rgba(0, 0, 0, 0.54);
+}
+
+.control-label {
+  color: #b6b6b6;
+  line-height: 1.25;
+  top: 16px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  -webkit-transition: all .3s ease 0s;
+  transition: all .3s ease 0s;
+}
+
+.control-label::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: #00bcd4;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+  -webkit-transition: -webkit-transform .3s ease 0s;
+  transition: -webkit-transform .3s ease 0s;
+  transition: transform .3s ease 0s;
+  transition: transform .3s ease 0s, -webkit-transform .3s ease 0s;
+}
+
+.is-focused .control-label,
+input:-webkit-autofill + .control-label,
+input[value] + .control-label,
+input:focus + .control-label {
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 12px;
+  top: 0;
+}
+
+[type="checkbox"] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: none;
+  outline: none;
+  background: none transparent;
+  padding: 0;
+  margin-right: 4px;
+}
+
+[type="checkbox"]::after {
+  content: "";
+  display: inline-block;
+  border: 2px solid rgba(0, 0, 0, 0.12);
+  border-radius: 2px;
+  width: 18px;
+  height: 18px;
+  background-color: #fff;
+  top: 3px;
+  position: relative;
+}
+
+[type="checkbox"]:checked::after {
+  background: asset-url('checked.svg') 50% 50%/contain no-repeat;
+  border-color: #00bcd4;
+}
+
+[type="checkbox"]:focus::after {
+  border-color: #00bcd4;
+}
+
+abbr[title="required"] {
+  display: none;
+}
+
+.forgot-password {
+  top: 16px;
+  right: 0;
+  position: absolute;
+}
+
+/*
+* Scut, a collection of Sass utilities
+* to ease and improve our implementations of common style-code patterns.
+* v1.4.0
+* Docs at http://davidtheclark.github.io/scut
+*/
+
+.raised-button,
+.raised-button--large,
+.flat-button,
+.flat-button--large {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: none;
+  outline: none;
+  background: none transparent;
+  padding: 0;
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 2px;
+}
+
+.raised-button:focus,
+.raised-button--large:focus,
+.flat-button:focus,
+.flat-button--large:focus {
+  outline-width: 3px;
+  outline-style: solid;
+  outline-color: rgba(0, 188, 212, 0.3);
+  -webkit-transition: all ease .3s 0s;
+  transition: all ease .3s 0s;
+}
+
+.raised-button,
+.raised-button--large {
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+  background-color: #00bcd4;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.24);
+  position: relative;
+}
+
+.raised-button:active,
+.raised-button--large:active {
+  background-color: #0096aa;
+}
+
+.raised-button--large {
+  padding-right: 40px;
+  padding-left: 40px;
+}
+
+.flat-button,
+.flat-button--large {
+  font-weight: 700;
+  text-align: center;
+  min-width: 64px;
+  color: #00bcd4 !important;
+}
+
+.flat-button:hover,
+.flat-button--large:hover {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.flat-button--large {
+  padding-right: 40px;
+  padding-left: 40px;
+}
+
+/*
+* Scut, a collection of Sass utilities
+* to ease and improve our implementations of common style-code patterns.
+* v1.4.0
+* Docs at http://davidtheclark.github.io/scut
+*/
+
+.billboard__alert {
+  margin: 0 auto;
+  max-width: 328px;
+}
+
+.alert {
+  width: 100%;
+  padding: 8px 40px 8px 16px;
+  top: -208px;
+  position: relative;
+  font-weight: 700;
+  color: #fff;
+  border-radius: 3px;
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.24);
+}
+
+@media (min-width: 768px) {
+  .alert {
+    top: -80px;
+  }
+}
+
+.alert a {
+  color: #fff;
+  text-decoration: none;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+
+.alert a:hover {
+  border-bottom: none;
+}
+
+.alert--notice {
+  background-color: #f0ad4e;
+}
+
+.alert--success {
+  background-color: #00bcd4;
+}
+
+.alert--error {
+  background-color: #d9534f;
+}
+
+.alert--alert {
+  background-color: #d9534f;
+}
+
+.alert__close {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: none;
+  outline: none;
+  background: none transparent;
+  padding: 0;
+  color: #fff;
+  fill: currentColor;
+  right: 16px;
+  position: absolute;
+  top: 50%;
+  margin-top: auto;
+  margin-bottom: auto;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.alert__close .icon {
+  width: 10px;
+  height: 10px;
+  margin-top: -2px;
 }
 
 /*
