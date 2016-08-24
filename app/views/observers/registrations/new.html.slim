@@ -4,19 +4,19 @@
 
     = simple_form_for(resource, as: resource_name, url: court_observer_registration_path) do |f|
       .form-group
-        = f.input :name, required: true, autofocus: true, label: false
+        = f.input_field :name, required: true, autofocus: true
         = f.label :name
 
       .form-group
-        = f.input :email, required: true, label: false
+        = f.input_field :email, required: true
         = f.label :email
 
       .form-group
-        = f.input :password, required: true, label: false
+        = f.input_field :password, required: true
         = f.label :password
 
       .form-group
-        = f.input :password_confirmation, required: true, label: false
+        = f.input_field :password_confirmation, required: true
         = f.label :password_confirmation
 
       .form-group

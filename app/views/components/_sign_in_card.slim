@@ -8,17 +8,17 @@
     = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
       .form-group.addon-prefix
         - if use_identify_number
-          = f.input :identify_number, autofocus: true, label: false
+          = f.input_field :identify_number, autofocus: true
           = f.label :identify_number
         
         - else
-          = f.input :email, autofocus: true, label: false
+          = f.input_field :email, autofocus: true
           = f.label :email
         
         = inline_svg "profile"
       
       .form-group.addon-prefix.addon-forgot-password
-        = f.input :password, label: false
+        = f.input_field :password
         = f.label :password
         = inline_svg "key"
         = link_to "忘記密碼", new_password_path(resource_name), class: "forgot-password"

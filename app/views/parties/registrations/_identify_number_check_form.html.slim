@@ -1,10 +1,10 @@
 = simple_form_for(:party, as: resource_name, url:  party_registrations_check_identify_number_path, method: :post ) do |f|
   .form-group
-    = f.input :name, required: true, autofocus: true, label: false
+    = f.input_field :name, required: true, autofocus: true
     = f.label :name
   
   .form-group
-    = f.input :identify_number, required: true, label: false
+    = f.input_field :identify_number, required: true
     = f.label :identify_number
   
   .form-group
