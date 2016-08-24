@@ -18,3 +18,19 @@
     color: $text-secondary;
   }
 }
+
+.user-info-actions {
+  padding-top: r(1);
+  position: relative;
+  
+  .between {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .offcanvas {
+    width: r(20);
+    bottom: r(-9);
+    @include scut-center-transform(x);
+  }
+}
