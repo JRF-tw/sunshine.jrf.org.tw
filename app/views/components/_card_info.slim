@@ -1,0 +1,20 @@
+.card__info
+  .title
+    - case type
+    - when 'lawyer'
+      | 律師
+    - when 'party'
+      | 當事人
+    - when 'observer'
+      | 法庭觀察者
+
+  .info = "#{name} | #{username}"
+
+  .avatar
+    - case type
+    - when 'lawyer'
+      = inline_svg 'avatar-lawyer'
+    - when 'party'
+      = inline_svg 'avatar-party'
+    - when 'observer'
+      = inline_svg 'avatar-observer'
