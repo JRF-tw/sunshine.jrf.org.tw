@@ -2,16 +2,10 @@
   .card
     h2.card__heading 律師註冊
 
-    = simple_form_for(resource, as: resource_name, url:  lawyer_registration_path, method: :post) do |f|
-      = f.error_notification
+    = simple_form_for(resource, as: resource_name, url:  lawyer_registration_path, method: :post, wrapper: :md) do |f|
+      = f.input :name, required: true, autofocus: true
 
-      .form-group
-        = f.input_field :name, required: true, autofocus: true
-        = f.label :name
-
-      .form-group
-        = f.input_field :email, required: true
-        = f.label :email
+      = f.input :email, required: true
 
       .form-group
         = check_box_tag :policy_agreement

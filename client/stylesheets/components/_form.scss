@@ -1,7 +1,9 @@
 $input-rhythm: r(1);
+$error-rhythm: r(3);
 
 .form-group {
-  margin-bottom: r(2);
+  $bottom-gap: r(2);
+  margin-bottom: $bottom-gap;
   padding-top: r(1);
   position: relative;
   &.squish-before { margin-top: r(-1); }
@@ -31,6 +33,7 @@ $input-rhythm: r(1);
       position: absolute ($input-rhythm * 2) n() n() 0;
     }
   }
+  &.has-error { margin-bottom: $bottom-gap + $error-rhythm; }
 }
 
 #{$all-text-inputs} {
@@ -96,3 +99,9 @@ $input-rhythm: r(1);
 abbr[title="required"] { display: none; }
 
 .forgot-password { position: absolute ($input-rhythm * 2) 0 n() n(); }
+
+.help-block {
+  margin: 0;
+  color: $danger;
+  position: absolute n() n() (- $error-rhythm) n();
+}
