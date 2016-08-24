@@ -1,7 +1,7 @@
 class Party::ChangeEmailContext < BaseContext
   PERMITS = [:email, :current_password].freeze
 
-  before_perform :check_email_not_empty
+  before_perform :check_email_valid
   before_perform :check_email_different
   before_perform :check_email_unique
   before_perform :transfer_email_to_unconfirmed_email
@@ -21,8 +21,8 @@ class Party::ChangeEmailContext < BaseContext
 
   private
 
-  def check_email_not_empty
-    return add_error(:email_conflict, "email 不可為空") if @params["email"] == ""
+  def check_email_valid
+    return add_error(:data_invalid, "email 的格式是無效的") unless @params[:email][/\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i]
   end
 
   def check_email_different
