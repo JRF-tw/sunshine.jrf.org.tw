@@ -10,6 +10,7 @@ ActionMailer::Base.default_url_options = { host: Setting.host, port: 8000 }
 Capybara::Webkit.configure(&:allow_unknown_urls)
 
 RSpec.configure do |config|
+  config.include Capybara::CommonHelper, type: :feature
   config.include Capybara::LawyerHelper, type: :feature
   config.include Capybara::ObserverHelper, type: :feature
 end
