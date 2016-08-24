@@ -1587,6 +1587,10 @@ img.mfp-img {
   position: absolute;
 }
 
+.form-group.has-error {
+  margin-bottom: 40px;
+}
+
 input[type="color"],
 input[type="date"],
 input[type="datetime"],
@@ -1748,6 +1752,13 @@ abbr[title="required"] {
 .forgot-password {
   top: 16px;
   right: 0;
+  position: absolute;
+}
+
+.help-block {
+  margin: 0;
+  color: #d9534f;
+  bottom: -24px;
   position: absolute;
 }
 
