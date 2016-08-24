@@ -1,0 +1,107 @@
+$input-rhythm: r(1);
+$error-rhythm: r(3);
+
+.form-group {
+  $bottom-gap: r(2);
+  margin-bottom: $bottom-gap;
+  padding-top: r(1);
+  position: relative;
+  &.squish-before { margin-top: r(-1); }
+  &.addon-forgot-password {
+    padding-right: 5em;
+    &::before {
+      content: "";
+      display: block;
+      size: 100% 1px;
+      background-color: $divider-gray;
+      position: absolute n() 0 0 0;
+    }
+
+    input { border-bottom: none; }
+  }
+  &.addon-prefix {
+    &.is-focused .control-label,
+    input:-webkit-autofill + .control-label { color: $white; }
+    
+    input { padding-left: r(3); }
+
+    .control-label { padding-left: r(3); }
+
+    .icon {
+      size: 18px;
+      fill: $text-secondary;
+      position: absolute ($input-rhythm * 2) n() n() 0;
+    }
+  }
+  &.has-error { margin-bottom: $bottom-gap + $error-rhythm; }
+}
+
+#{$all-text-inputs} {
+  display: block;
+  padding: $input-rhythm 0;
+  width: 100%;
+  line-height: 1.25;
+  border: none;
+  border-bottom: 1px solid $divider-gray;
+  box-shadow: none;
+  outline: none;
+  &:focus, &:active {
+    + .control-label::before { transform: scaleX(1); }
+  }
+  &:-webkit-autofill {
+    background-color: transparent !important;
+    box-shadow: 0 0 0 100px $white inset;
+    -webkit-text-fill-color: $text-secondary;
+  }
+}
+
+.control-label {
+  text: $gray 1.25;
+  position: absolute ($input-rhythm * 2) 0 0 0;
+  transition: all .3s ease 0s;
+  &::before {
+    content: "";
+    display: block;
+    size: 100% 1px;
+    background-color: $accent;
+    position: absolute n() 0 0 0;
+    transform: scaleX(0);
+    transition: transform .3s ease 0s;
+  }
+  .is-focused &,
+  input:-webkit-autofill + &,
+  input[value] + &,
+  input:focus + & {
+    text: $text-secondary ms(-1);
+    top: 0;
+  }
+}
+
+[type="checkbox"] {
+  @include Normalize();
+  margin-right: r(.5);
+  &::after {
+    content: "";
+    display: inline-block;
+    border: 2px solid $divider-gray;
+    border-radius: 2px;
+    size: 18px;
+    background-color: #fff;
+    position: relative 3px n() n() n();
+  }
+  &:checked::after {
+    background: url(checked.svg) 50% 50% / contain no-repeat;
+    border-color: $accent;
+  }
+  &:focus::after { border-color: $accent; }
+}
+
+abbr[title="required"] { display: none; }
+
+.forgot-password { position: absolute ($input-rhythm * 2) 0 n() n(); }
+
+.help-block {
+  margin: 0;
+  color: $danger;
+  position: absolute n() n() (- $error-rhythm) n();
+}

@@ -1,20 +1,17 @@
-.widget-box
-  .widget-title
-    h5 律師註冊
-  .widget-content.nopadding
+.container
+  .card
+    h2.card__heading 律師註冊
 
-    = simple_form_for(resource, as: resource_name, url:  lawyer_registration_path, method: :post ) do |f|
-      = f.error_notification
-      .form-group
-        label.control-label 姓名
-        = f.input :name, required: true, autofocus: true, label: false
-      .form-group
-        label.control-label email
-        = f.input :email, required: true, label: false
+    = simple_form_for(resource, as: resource_name, url:  lawyer_registration_path, method: :post, wrapper: :md) do |f|
+      = f.input :name, required: true, autofocus: true
+
+      = f.input :email, required: true
 
       .form-group
         = check_box_tag :policy_agreement
-        label.control-label = label_tag "我已詳細閱讀服務條款和隱私權保護政策"
+        = label_tag :policy_agreement, "我已詳細閱讀服務條款和隱私權保護政策"
 
       .form-actions
-        input.btn.btn-primary type="submit" value="註冊"
+        .form-group.text-center = f.button :button, "註冊", class: "raised-button--large"
+
+        .text-center = link_to "登入", new_session_path(resource_name), class: "flat-button--large"

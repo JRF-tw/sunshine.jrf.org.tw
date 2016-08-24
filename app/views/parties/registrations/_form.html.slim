@@ -1,14 +1,10 @@
-= simple_form_for(@party, as: resource_name, url:  party_registration_path, method: :post ) do |f|
-  .form-group
-    = f.hidden_field :name, required: true, autofocus: true, label: false
-  .form-group
-    = f.hidden_field :identify_number, required: true, label: false
-  .form-group
-    label.control-label 密碼
-    = f.input :password, required: true, label: false
-  .form-group
-    label.control-label 密碼確認
-    = f.input :password_confirmation, required: true, label: false
+= simple_form_for(@party, as: resource_name, url:  party_registration_path, method: :post, wrapper: :md) do |f|
+  = f.hidden_field :name, required: true, label: false
+  = f.hidden_field :identify_number, required: true, label: false
+
+  = f.input :password, required: true
+
+  = f.input :password_confirmation, required: true
 
   .form-actions
-    input.btn.btn-primary type="submit" value="註冊"
+    .form-group.text-center = f.button :button, "註冊", class: "raised-button--large"

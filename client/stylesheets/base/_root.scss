@@ -20,9 +20,12 @@ body {
 .page-wrapper {
   flex: 1;
   min-height: r(20);
+  @each $character in 'lawyer', 'party', 'observer' {
+    &.#{$character} { background-color: theme($character); }
+  }
 }
 
-main[role="main"] {}
+main[role="main"] { padding-bottom: r(10); }
 
 // Turbolinks
 html.turbolinks-progress-bar::before {background-color: $nprogress-color !important;}

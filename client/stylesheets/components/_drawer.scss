@@ -11,7 +11,7 @@
   display: flex;
   flex-flow: column nowrap;
   position: fixed 0 n() 0 0;
-  width: 304px;
+  width: 304px; max-width: 80%;
   z-index: index($layers, drawer);
   transition: transform .3s ease 0s;
   transform: translate3D(-120%, 0, 0);

@@ -3,6 +3,12 @@
 
 @function r($times: 1) { @return $rhythm-gap * $times; }
 
+@function theme($character) {
+  @if $character == 'party' { @return $red; }
+  @if $character == 'lawyer' { @return $yellow; }
+  @if $character == 'observer' { @return $green; }
+}
+
 @mixin susy($map) {
   @include susy-breakpoint(map-get($map, query), map-get($map, layout)) {
     @content;
@@ -57,7 +63,7 @@
     transition-delay: 0s;
     overflow: auto;
     height: auto;
-  }  
+  }
 }
 
 @mixin show() {

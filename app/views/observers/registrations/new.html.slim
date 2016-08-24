@@ -1,26 +1,21 @@
-.widget-box
-  .widget-title
-    h5 觀察員註冊
-  .widget-content.nopadding
-    = simple_form_for(resource, as: resource_name, url: court_observer_registration_path) do |f|
-      = f.error_notification
-      .form-group
-        label.control-label 姓名
-        = f.input :name, required: true, autofocus: true, label: false
-      .form-group
-        label.control-label Email
-        = f.input :email, required: true, label: false
-      .form-group
-        label.control-label 密碼
-        = f.input :password, required: true, label: false
-        label.control-label 密碼確認
-        = f.input :password_confirmation, required: true, label: false
+.container
+  .card
+    h2.card__heading 觀察員註冊
+
+    = simple_form_for(resource, as: resource_name, url: court_observer_registration_path, wrapper: :md) do |f|
+      = f.input :name, required: true, autofocus: true
+
+      = f.input :email, required: true
+
+      = f.input :password, required: true
+
+      = f.input :password_confirmation, required: true
 
       .form-group
-          = check_box_tag :policy_agreement
-          label.control-label = label_tag "我已詳細閱讀服務條款和隱私權保護政策"
-
+        = check_box_tag :policy_agreement
+        = label_tag :policy_agreement, "我已詳細閱讀服務條款和隱私權保護政策"
+      
       .form-actions
-        input.btn.btn-primary type="submit" value="註冊"
+        .form-group.text-center = f.button :button, "註冊", class: "raised-button--large"
 
-  = render "devise/shared/links"
+        .text-center = link_to "登入", new_session_path(resource_name), class: "flat-button--large"
