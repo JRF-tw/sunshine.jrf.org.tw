@@ -5,7 +5,7 @@
     h2.card__heading
       = heading
     
-    = simple_form_for(resource, as: resource_name, url: session_path(resource_name), defaults: {input_html: {class: "input"}}) do |f|
+    = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
       .form-group.addon-prefix
         - if use_identify_number
           = f.input_field :identify_number, autofocus: true
