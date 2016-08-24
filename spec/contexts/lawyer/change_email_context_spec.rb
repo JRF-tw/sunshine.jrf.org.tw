@@ -16,7 +16,7 @@ describe Lawyer::ChangeEmailContext do
       subject { described_class.new(lawyer) }
 
       it { expect { subject.perform(params) }.not_to change { lawyer.reload.unconfirmed_email } }
-      it { expect { subject.perform(params) }.to change { subject.errors } }
+      it { expect { subject.perform(params) }.to change { subject.errors[:data_invalid] } }
     end
 
     context "update the same email" do
@@ -24,7 +24,7 @@ describe Lawyer::ChangeEmailContext do
       subject { described_class.new(lawyer) }
 
       it { expect { subject.perform(params) }.not_to change { lawyer.reload.unconfirmed_email } }
-      it { expect { subject.perform(params) }.to change { subject.errors } }
+      it { expect { subject.perform(params) }.to change { subject.errors[:email_conflict] } }
     end
 
     context "update other's email" do
@@ -33,7 +33,7 @@ describe Lawyer::ChangeEmailContext do
       subject { described_class.new(lawyer) }
 
       it { expect { subject.perform(params) }.not_to change { lawyer.reload.unconfirmed_email } }
-      it { expect { subject.perform(params) }.to change { subject.errors } }
+      it { expect { subject.perform(params) }.to change { subject.errors[:lawyer_exist] } }
     end
 
     context "update other's unconfirmed_email" do

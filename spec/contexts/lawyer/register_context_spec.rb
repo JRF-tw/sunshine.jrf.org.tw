@@ -12,7 +12,7 @@ describe Lawyer::RegisterContext do
 
     context "without policy agreement" do
       subject { described_class.new(lawyer: { name: lawyer.name, email: lawyer.email }) }
-      it { expect { subject.perform }.to change { subject.errors } }
+      it { expect { subject.perform }.to change { subject.errors[:without_policy_agreement] } }
       it { expect { subject.perform }.not_to change_sidekiq_jobs_size_of(CustomDeviseMailer, :send_setting_password_mail) }
     end
 
@@ -47,7 +47,6 @@ describe Lawyer::RegisterContext do
     context "generate reset password token" do
       subject { described_class.new(lawyer: { name: lawyer.name, email: lawyer.email }, policy_agreement: "1") }
       it { expect { subject.perform }.to change { [lawyer.reload.reset_password_token, lawyer.reload.reset_password_sent_at] } }
-      # it { expect { subject.perform }.to change { lawyer.reload.reset_password_sent_at } }
     end
   end
 

@@ -14,16 +14,21 @@ describe Party::ChangeEmailContext do
     context "email already exist" do
       let!(:party2) { create :party, email: "55667788@gmail.com" }
       let(:params) { { email: party2.email, current_password: "12321313213" } }
+
       it { expect { subject.perform(params) }.not_to change { party.reload.unconfirmed_email } }
+      it { expect { subject.perform(params) }.to change { subject.errors[:party_exist] } }
     end
 
     context "empty email" do
       let(:params) { { email: "", current_password: "12321313213" } }
+
       it { expect { subject.perform(params) }.not_to change { party.reload.unconfirmed_email } }
+      it { expect { subject.perform(params) }.to change { subject.errors[:data_invalid] } }
     end
 
     context "empty password" do
       let(:params) { { email: "h2312@gmail.com", current_password: "" } }
+
       it { expect { subject.perform(params) }.not_to change { party.reload.unconfirmed_email } }
     end
 
@@ -38,6 +43,7 @@ describe Party::ChangeEmailContext do
       let(:params) { { email: party.email, current_password: "12321313213" } }
 
       it { expect { subject.perform(params) }.not_to change { party.reload.unconfirmed_email } }
+      it { expect { subject.perform(params) }.to change { subject.errors[:email_conflict] } }
     end
 
     context "update other's unconfirmed_email" do

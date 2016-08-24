@@ -30,7 +30,7 @@ class Party::ChangeEmailContext < BaseContext
   end
 
   def check_email_unique
-    return add_error(:email_conflict, "email 已經被使用") if Party.pluck(:email).include?(@params["email"])
+    return add_error(:party_exist, "email 已經被使用") if Party.pluck(:email).include?(@params["email"])
   end
 
   def transfer_email_to_unconfirmed_email

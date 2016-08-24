@@ -28,7 +28,7 @@ class Lawyer::ChangeEmailContext < BaseContext
   end
 
   def check_email_uniqe
-    return add_error(:data_invalid, "email 已經被使用") if Lawyer.pluck(:email).include?(@params[:email])
+    return add_error(:lawyer_exist, "email 已經被使用") if Lawyer.pluck(:email).include?(@params[:email])
   end
 
 end

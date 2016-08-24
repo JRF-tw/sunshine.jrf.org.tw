@@ -28,7 +28,7 @@ class CourtObserver::ChangeEmailContext < BaseContext
   end
 
   def check_email_uniqe
-    return add_error(:data_invalid, "email 已經被使用") if CourtObserver.pluck(:email).include?(@params[:email])
+    return add_error(:observer_exist, "email 已經被使用") if CourtObserver.pluck(:email).include?(@params[:email])
   end
 
 end
