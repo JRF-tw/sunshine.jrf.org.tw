@@ -3,8 +3,10 @@ class TextInput
     $('input').on 'focus', (e) =>
       @focus e.currentTarget
     .on 'blur', (e) =>
-      if $(e.currentTarget).val().length > 0 then return
-      else @blur e.currentTarget
+      if $(e.currentTarget).val().length > 0
+        @focus e.currentTarget
+      else
+        @blur e.currentTarget
 
   focus: (el) ->
     $(el).parent().addClass 'is-focused'
