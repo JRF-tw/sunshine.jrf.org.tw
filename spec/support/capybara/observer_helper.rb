@@ -35,10 +35,5 @@ module Capybara
       click_button "登入"
       save_page
     end
-
-    def capybara_sign_out_observer
-      click_link "登出"
-      save_page
-    end
   end
 end
