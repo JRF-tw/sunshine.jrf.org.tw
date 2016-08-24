@@ -37,3 +37,15 @@
   @extend .flat-button;
   padding: n() r(5);
 }
+
+.flat-button--addons {
+  font-weight: bold;
+  
+  .icon {
+    size: 16px;
+    fill: currentColor;
+    position: relative -1px n() n() n();
+    &:first-child { margin-right: r(1); }
+    &:last-child { margin-left: r(1); }
+  }
+}

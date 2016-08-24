@@ -1,0 +1,20 @@
+.user-info {
+  position: relative;
+  margin-bottom: r(1);
+}
+.user-info__action { position: absolute 2px 0 n() n(); }
+.user-info__content {
+  padding: 0 r(2);
+  background: rgba(0,0,0,.01);
+  border: 1px solid #F2F2F2;
+}
+
+.list--user-info {
+  $dt-width: r(9);
+  @include scut-key-val('', 0, ($dt-width + r(1)), r(2));
+
+  .term {
+    width: $dt-width;
+    color: $text-secondary;
+  }
+}
