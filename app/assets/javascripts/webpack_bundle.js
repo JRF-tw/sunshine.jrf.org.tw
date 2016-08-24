@@ -73,18 +73,32 @@
 
 	__webpack_require__(17);
 
-	ref = __webpack_require__(18), Toggle = ref.Toggle, Dismiss = ref.Dismiss;
+	__webpack_require__(18);
 
-	TextInput = __webpack_require__(19).TextInput;
+	ref = __webpack_require__(19), Toggle = ref.Toggle, Dismiss = ref.Dismiss;
 
-	sprites = __webpack_require__(20);
+	TextInput = __webpack_require__(20).TextInput;
+
+	sprites = __webpack_require__(21);
 
 	sprites.keys().forEach(sprites);
 
 	$(document).on("page:change", function() {
+	  var $main_header;
 	  new Toggle('.switch');
 	  new Dismiss('[data-dismiss]').init();
-	  return new TextInput();
+	  new TextInput();
+	  $main_header = $('#main-header');
+	  return $('.card__heading').waypoint({
+	    handler: function(direction) {
+	      if (direction === 'down') {
+	        return $main_header.addClass('has-background');
+	      } else {
+	        return $main_header.removeClass('has-background');
+	      }
+	    },
+	    offset: $main_header.height()
+	  });
 	});
 
 
@@ -421,6 +435,660 @@
 /* 18 */
 /***/ function(module, exports) {
 
+	/*!
+	Waypoints - 4.0.0
+	Copyright © 2011-2015 Caleb Troughton
+	Licensed under the MIT license.
+	https://github.com/imakewebthings/waypoints/blog/master/licenses.txt
+	*/
+	(function() {
+	  'use strict'
+
+	  var keyCounter = 0
+	  var allWaypoints = {}
+
+	  /* http://imakewebthings.com/waypoints/api/waypoint */
+	  function Waypoint(options) {
+	    if (!options) {
+	      throw new Error('No options passed to Waypoint constructor')
+	    }
+	    if (!options.element) {
+	      throw new Error('No element option passed to Waypoint constructor')
+	    }
+	    if (!options.handler) {
+	      throw new Error('No handler option passed to Waypoint constructor')
+	    }
+
+	    this.key = 'waypoint-' + keyCounter
+	    this.options = Waypoint.Adapter.extend({}, Waypoint.defaults, options)
+	    this.element = this.options.element
+	    this.adapter = new Waypoint.Adapter(this.element)
+	    this.callback = options.handler
+	    this.axis = this.options.horizontal ? 'horizontal' : 'vertical'
+	    this.enabled = this.options.enabled
+	    this.triggerPoint = null
+	    this.group = Waypoint.Group.findOrCreate({
+	      name: this.options.group,
+	      axis: this.axis
+	    })
+	    this.context = Waypoint.Context.findOrCreateByElement(this.options.context)
+
+	    if (Waypoint.offsetAliases[this.options.offset]) {
+	      this.options.offset = Waypoint.offsetAliases[this.options.offset]
+	    }
+	    this.group.add(this)
+	    this.context.add(this)
+	    allWaypoints[this.key] = this
+	    keyCounter += 1
+	  }
+
+	  /* Private */
+	  Waypoint.prototype.queueTrigger = function(direction) {
+	    this.group.queueTrigger(this, direction)
+	  }
+
+	  /* Private */
+	  Waypoint.prototype.trigger = function(args) {
+	    if (!this.enabled) {
+	      return
+	    }
+	    if (this.callback) {
+	      this.callback.apply(this, args)
+	    }
+	  }
+
+	  /* Public */
+	  /* http://imakewebthings.com/waypoints/api/destroy */
+	  Waypoint.prototype.destroy = function() {
+	    this.context.remove(this)
+	    this.group.remove(this)
+	    delete allWaypoints[this.key]
+	  }
+
+	  /* Public */
+	  /* http://imakewebthings.com/waypoints/api/disable */
+	  Waypoint.prototype.disable = function() {
+	    this.enabled = false
+	    return this
+	  }
+
+	  /* Public */
+	  /* http://imakewebthings.com/waypoints/api/enable */
+	  Waypoint.prototype.enable = function() {
+	    this.context.refresh()
+	    this.enabled = true
+	    return this
+	  }
+
+	  /* Public */
+	  /* http://imakewebthings.com/waypoints/api/next */
+	  Waypoint.prototype.next = function() {
+	    return this.group.next(this)
+	  }
+
+	  /* Public */
+	  /* http://imakewebthings.com/waypoints/api/previous */
+	  Waypoint.prototype.previous = function() {
+	    return this.group.previous(this)
+	  }
+
+	  /* Private */
+	  Waypoint.invokeAll = function(method) {
+	    var allWaypointsArray = []
+	    for (var waypointKey in allWaypoints) {
+	      allWaypointsArray.push(allWaypoints[waypointKey])
+	    }
+	    for (var i = 0, end = allWaypointsArray.length; i < end; i++) {
+	      allWaypointsArray[i][method]()
+	    }
+	  }
+
+	  /* Public */
+	  /* http://imakewebthings.com/waypoints/api/destroy-all */
+	  Waypoint.destroyAll = function() {
+	    Waypoint.invokeAll('destroy')
+	  }
+
+	  /* Public */
+	  /* http://imakewebthings.com/waypoints/api/disable-all */
+	  Waypoint.disableAll = function() {
+	    Waypoint.invokeAll('disable')
+	  }
+
+	  /* Public */
+	  /* http://imakewebthings.com/waypoints/api/enable-all */
+	  Waypoint.enableAll = function() {
+	    Waypoint.invokeAll('enable')
+	  }
+
+	  /* Public */
+	  /* http://imakewebthings.com/waypoints/api/refresh-all */
+	  Waypoint.refreshAll = function() {
+	    Waypoint.Context.refreshAll()
+	  }
+
+	  /* Public */
+	  /* http://imakewebthings.com/waypoints/api/viewport-height */
+	  Waypoint.viewportHeight = function() {
+	    return window.innerHeight || document.documentElement.clientHeight
+	  }
+
+	  /* Public */
+	  /* http://imakewebthings.com/waypoints/api/viewport-width */
+	  Waypoint.viewportWidth = function() {
+	    return document.documentElement.clientWidth
+	  }
+
+	  Waypoint.adapters = []
+
+	  Waypoint.defaults = {
+	    context: window,
+	    continuous: true,
+	    enabled: true,
+	    group: 'default',
+	    horizontal: false,
+	    offset: 0
+	  }
+
+	  Waypoint.offsetAliases = {
+	    'bottom-in-view': function() {
+	      return this.context.innerHeight() - this.adapter.outerHeight()
+	    },
+	    'right-in-view': function() {
+	      return this.context.innerWidth() - this.adapter.outerWidth()
+	    }
+	  }
+
+	  window.Waypoint = Waypoint
+	}())
+	;(function() {
+	  'use strict'
+
+	  function requestAnimationFrameShim(callback) {
+	    window.setTimeout(callback, 1000 / 60)
+	  }
+
+	  var keyCounter = 0
+	  var contexts = {}
+	  var Waypoint = window.Waypoint
+	  var oldWindowLoad = window.onload
+
+	  /* http://imakewebthings.com/waypoints/api/context */
+	  function Context(element) {
+	    this.element = element
+	    this.Adapter = Waypoint.Adapter
+	    this.adapter = new this.Adapter(element)
+	    this.key = 'waypoint-context-' + keyCounter
+	    this.didScroll = false
+	    this.didResize = false
+	    this.oldScroll = {
+	      x: this.adapter.scrollLeft(),
+	      y: this.adapter.scrollTop()
+	    }
+	    this.waypoints = {
+	      vertical: {},
+	      horizontal: {}
+	    }
+
+	    element.waypointContextKey = this.key
+	    contexts[element.waypointContextKey] = this
+	    keyCounter += 1
+
+	    this.createThrottledScrollHandler()
+	    this.createThrottledResizeHandler()
+	  }
+
+	  /* Private */
+	  Context.prototype.add = function(waypoint) {
+	    var axis = waypoint.options.horizontal ? 'horizontal' : 'vertical'
+	    this.waypoints[axis][waypoint.key] = waypoint
+	    this.refresh()
+	  }
+
+	  /* Private */
+	  Context.prototype.checkEmpty = function() {
+	    var horizontalEmpty = this.Adapter.isEmptyObject(this.waypoints.horizontal)
+	    var verticalEmpty = this.Adapter.isEmptyObject(this.waypoints.vertical)
+	    if (horizontalEmpty && verticalEmpty) {
+	      this.adapter.off('.waypoints')
+	      delete contexts[this.key]
+	    }
+	  }
+
+	  /* Private */
+	  Context.prototype.createThrottledResizeHandler = function() {
+	    var self = this
+
+	    function resizeHandler() {
+	      self.handleResize()
+	      self.didResize = false
+	    }
+
+	    this.adapter.on('resize.waypoints', function() {
+	      if (!self.didResize) {
+	        self.didResize = true
+	        Waypoint.requestAnimationFrame(resizeHandler)
+	      }
+	    })
+	  }
+
+	  /* Private */
+	  Context.prototype.createThrottledScrollHandler = function() {
+	    var self = this
+	    function scrollHandler() {
+	      self.handleScroll()
+	      self.didScroll = false
+	    }
+
+	    this.adapter.on('scroll.waypoints', function() {
+	      if (!self.didScroll || Waypoint.isTouch) {
+	        self.didScroll = true
+	        Waypoint.requestAnimationFrame(scrollHandler)
+	      }
+	    })
+	  }
+
+	  /* Private */
+	  Context.prototype.handleResize = function() {
+	    Waypoint.Context.refreshAll()
+	  }
+
+	  /* Private */
+	  Context.prototype.handleScroll = function() {
+	    var triggeredGroups = {}
+	    var axes = {
+	      horizontal: {
+	        newScroll: this.adapter.scrollLeft(),
+	        oldScroll: this.oldScroll.x,
+	        forward: 'right',
+	        backward: 'left'
+	      },
+	      vertical: {
+	        newScroll: this.adapter.scrollTop(),
+	        oldScroll: this.oldScroll.y,
+	        forward: 'down',
+	        backward: 'up'
+	      }
+	    }
+
+	    for (var axisKey in axes) {
+	      var axis = axes[axisKey]
+	      var isForward = axis.newScroll > axis.oldScroll
+	      var direction = isForward ? axis.forward : axis.backward
+
+	      for (var waypointKey in this.waypoints[axisKey]) {
+	        var waypoint = this.waypoints[axisKey][waypointKey]
+	        var wasBeforeTriggerPoint = axis.oldScroll < waypoint.triggerPoint
+	        var nowAfterTriggerPoint = axis.newScroll >= waypoint.triggerPoint
+	        var crossedForward = wasBeforeTriggerPoint && nowAfterTriggerPoint
+	        var crossedBackward = !wasBeforeTriggerPoint && !nowAfterTriggerPoint
+	        if (crossedForward || crossedBackward) {
+	          waypoint.queueTrigger(direction)
+	          triggeredGroups[waypoint.group.id] = waypoint.group
+	        }
+	      }
+	    }
+
+	    for (var groupKey in triggeredGroups) {
+	      triggeredGroups[groupKey].flushTriggers()
+	    }
+
+	    this.oldScroll = {
+	      x: axes.horizontal.newScroll,
+	      y: axes.vertical.newScroll
+	    }
+	  }
+
+	  /* Private */
+	  Context.prototype.innerHeight = function() {
+	    /*eslint-disable eqeqeq */
+	    if (this.element == this.element.window) {
+	      return Waypoint.viewportHeight()
+	    }
+	    /*eslint-enable eqeqeq */
+	    return this.adapter.innerHeight()
+	  }
+
+	  /* Private */
+	  Context.prototype.remove = function(waypoint) {
+	    delete this.waypoints[waypoint.axis][waypoint.key]
+	    this.checkEmpty()
+	  }
+
+	  /* Private */
+	  Context.prototype.innerWidth = function() {
+	    /*eslint-disable eqeqeq */
+	    if (this.element == this.element.window) {
+	      return Waypoint.viewportWidth()
+	    }
+	    /*eslint-enable eqeqeq */
+	    return this.adapter.innerWidth()
+	  }
+
+	  /* Public */
+	  /* http://imakewebthings.com/waypoints/api/context-destroy */
+	  Context.prototype.destroy = function() {
+	    var allWaypoints = []
+	    for (var axis in this.waypoints) {
+	      for (var waypointKey in this.waypoints[axis]) {
+	        allWaypoints.push(this.waypoints[axis][waypointKey])
+	      }
+	    }
+	    for (var i = 0, end = allWaypoints.length; i < end; i++) {
+	      allWaypoints[i].destroy()
+	    }
+	  }
+
+	  /* Public */
+	  /* http://imakewebthings.com/waypoints/api/context-refresh */
+	  Context.prototype.refresh = function() {
+	    /*eslint-disable eqeqeq */
+	    var isWindow = this.element == this.element.window
+	    /*eslint-enable eqeqeq */
+	    var contextOffset = isWindow ? undefined : this.adapter.offset()
+	    var triggeredGroups = {}
+	    var axes
+
+	    this.handleScroll()
+	    axes = {
+	      horizontal: {
+	        contextOffset: isWindow ? 0 : contextOffset.left,
+	        contextScroll: isWindow ? 0 : this.oldScroll.x,
+	        contextDimension: this.innerWidth(),
+	        oldScroll: this.oldScroll.x,
+	        forward: 'right',
+	        backward: 'left',
+	        offsetProp: 'left'
+	      },
+	      vertical: {
+	        contextOffset: isWindow ? 0 : contextOffset.top,
+	        contextScroll: isWindow ? 0 : this.oldScroll.y,
+	        contextDimension: this.innerHeight(),
+	        oldScroll: this.oldScroll.y,
+	        forward: 'down',
+	        backward: 'up',
+	        offsetProp: 'top'
+	      }
+	    }
+
+	    for (var axisKey in axes) {
+	      var axis = axes[axisKey]
+	      for (var waypointKey in this.waypoints[axisKey]) {
+	        var waypoint = this.waypoints[axisKey][waypointKey]
+	        var adjustment = waypoint.options.offset
+	        var oldTriggerPoint = waypoint.triggerPoint
+	        var elementOffset = 0
+	        var freshWaypoint = oldTriggerPoint == null
+	        var contextModifier, wasBeforeScroll, nowAfterScroll
+	        var triggeredBackward, triggeredForward
+
+	        if (waypoint.element !== waypoint.element.window) {
+	          elementOffset = waypoint.adapter.offset()[axis.offsetProp]
+	        }
+
+	        if (typeof adjustment === 'function') {
+	          adjustment = adjustment.apply(waypoint)
+	        }
+	        else if (typeof adjustment === 'string') {
+	          adjustment = parseFloat(adjustment)
+	          if (waypoint.options.offset.indexOf('%') > - 1) {
+	            adjustment = Math.ceil(axis.contextDimension * adjustment / 100)
+	          }
+	        }
+
+	        contextModifier = axis.contextScroll - axis.contextOffset
+	        waypoint.triggerPoint = elementOffset + contextModifier - adjustment
+	        wasBeforeScroll = oldTriggerPoint < axis.oldScroll
+	        nowAfterScroll = waypoint.triggerPoint >= axis.oldScroll
+	        triggeredBackward = wasBeforeScroll && nowAfterScroll
+	        triggeredForward = !wasBeforeScroll && !nowAfterScroll
+
+	        if (!freshWaypoint && triggeredBackward) {
+	          waypoint.queueTrigger(axis.backward)
+	          triggeredGroups[waypoint.group.id] = waypoint.group
+	        }
+	        else if (!freshWaypoint && triggeredForward) {
+	          waypoint.queueTrigger(axis.forward)
+	          triggeredGroups[waypoint.group.id] = waypoint.group
+	        }
+	        else if (freshWaypoint && axis.oldScroll >= waypoint.triggerPoint) {
+	          waypoint.queueTrigger(axis.forward)
+	          triggeredGroups[waypoint.group.id] = waypoint.group
+	        }
+	      }
+	    }
+
+	    Waypoint.requestAnimationFrame(function() {
+	      for (var groupKey in triggeredGroups) {
+	        triggeredGroups[groupKey].flushTriggers()
+	      }
+	    })
+
+	    return this
+	  }
+
+	  /* Private */
+	  Context.findOrCreateByElement = function(element) {
+	    return Context.findByElement(element) || new Context(element)
+	  }
+
+	  /* Private */
+	  Context.refreshAll = function() {
+	    for (var contextId in contexts) {
+	      contexts[contextId].refresh()
+	    }
+	  }
+
+	  /* Public */
+	  /* http://imakewebthings.com/waypoints/api/context-find-by-element */
+	  Context.findByElement = function(element) {
+	    return contexts[element.waypointContextKey]
+	  }
+
+	  window.onload = function() {
+	    if (oldWindowLoad) {
+	      oldWindowLoad()
+	    }
+	    Context.refreshAll()
+	  }
+
+	  Waypoint.requestAnimationFrame = function(callback) {
+	    var requestFn = window.requestAnimationFrame ||
+	      window.mozRequestAnimationFrame ||
+	      window.webkitRequestAnimationFrame ||
+	      requestAnimationFrameShim
+	    requestFn.call(window, callback)
+	  }
+	  Waypoint.Context = Context
+	}())
+	;(function() {
+	  'use strict'
+
+	  function byTriggerPoint(a, b) {
+	    return a.triggerPoint - b.triggerPoint
+	  }
+
+	  function byReverseTriggerPoint(a, b) {
+	    return b.triggerPoint - a.triggerPoint
+	  }
+
+	  var groups = {
+	    vertical: {},
+	    horizontal: {}
+	  }
+	  var Waypoint = window.Waypoint
+
+	  /* http://imakewebthings.com/waypoints/api/group */
+	  function Group(options) {
+	    this.name = options.name
+	    this.axis = options.axis
+	    this.id = this.name + '-' + this.axis
+	    this.waypoints = []
+	    this.clearTriggerQueues()
+	    groups[this.axis][this.name] = this
+	  }
+
+	  /* Private */
+	  Group.prototype.add = function(waypoint) {
+	    this.waypoints.push(waypoint)
+	  }
+
+	  /* Private */
+	  Group.prototype.clearTriggerQueues = function() {
+	    this.triggerQueues = {
+	      up: [],
+	      down: [],
+	      left: [],
+	      right: []
+	    }
+	  }
+
+	  /* Private */
+	  Group.prototype.flushTriggers = function() {
+	    for (var direction in this.triggerQueues) {
+	      var waypoints = this.triggerQueues[direction]
+	      var reverse = direction === 'up' || direction === 'left'
+	      waypoints.sort(reverse ? byReverseTriggerPoint : byTriggerPoint)
+	      for (var i = 0, end = waypoints.length; i < end; i += 1) {
+	        var waypoint = waypoints[i]
+	        if (waypoint.options.continuous || i === waypoints.length - 1) {
+	          waypoint.trigger([direction])
+	        }
+	      }
+	    }
+	    this.clearTriggerQueues()
+	  }
+
+	  /* Private */
+	  Group.prototype.next = function(waypoint) {
+	    this.waypoints.sort(byTriggerPoint)
+	    var index = Waypoint.Adapter.inArray(waypoint, this.waypoints)
+	    var isLast = index === this.waypoints.length - 1
+	    return isLast ? null : this.waypoints[index + 1]
+	  }
+
+	  /* Private */
+	  Group.prototype.previous = function(waypoint) {
+	    this.waypoints.sort(byTriggerPoint)
+	    var index = Waypoint.Adapter.inArray(waypoint, this.waypoints)
+	    return index ? this.waypoints[index - 1] : null
+	  }
+
+	  /* Private */
+	  Group.prototype.queueTrigger = function(waypoint, direction) {
+	    this.triggerQueues[direction].push(waypoint)
+	  }
+
+	  /* Private */
+	  Group.prototype.remove = function(waypoint) {
+	    var index = Waypoint.Adapter.inArray(waypoint, this.waypoints)
+	    if (index > -1) {
+	      this.waypoints.splice(index, 1)
+	    }
+	  }
+
+	  /* Public */
+	  /* http://imakewebthings.com/waypoints/api/first */
+	  Group.prototype.first = function() {
+	    return this.waypoints[0]
+	  }
+
+	  /* Public */
+	  /* http://imakewebthings.com/waypoints/api/last */
+	  Group.prototype.last = function() {
+	    return this.waypoints[this.waypoints.length - 1]
+	  }
+
+	  /* Private */
+	  Group.findOrCreate = function(options) {
+	    return groups[options.axis][options.name] || new Group(options)
+	  }
+
+	  Waypoint.Group = Group
+	}())
+	;(function() {
+	  'use strict'
+
+	  var $ = window.jQuery
+	  var Waypoint = window.Waypoint
+
+	  function JQueryAdapter(element) {
+	    this.$element = $(element)
+	  }
+
+	  $.each([
+	    'innerHeight',
+	    'innerWidth',
+	    'off',
+	    'offset',
+	    'on',
+	    'outerHeight',
+	    'outerWidth',
+	    'scrollLeft',
+	    'scrollTop'
+	  ], function(i, method) {
+	    JQueryAdapter.prototype[method] = function() {
+	      var args = Array.prototype.slice.call(arguments)
+	      return this.$element[method].apply(this.$element, args)
+	    }
+	  })
+
+	  $.each([
+	    'extend',
+	    'inArray',
+	    'isEmptyObject'
+	  ], function(i, method) {
+	    JQueryAdapter[method] = $[method]
+	  })
+
+	  Waypoint.adapters.push({
+	    name: 'jquery',
+	    Adapter: JQueryAdapter
+	  })
+	  Waypoint.Adapter = JQueryAdapter
+	}())
+	;(function() {
+	  'use strict'
+
+	  var Waypoint = window.Waypoint
+
+	  function createExtension(framework) {
+	    return function() {
+	      var waypoints = []
+	      var overrides = arguments[0]
+
+	      if (framework.isFunction(arguments[0])) {
+	        overrides = framework.extend({}, arguments[1])
+	        overrides.handler = arguments[0]
+	      }
+
+	      this.each(function() {
+	        var options = framework.extend({}, overrides, {
+	          element: this
+	        })
+	        if (typeof options.context === 'string') {
+	          options.context = framework(this).closest(options.context)[0]
+	        }
+	        waypoints.push(new Waypoint(options))
+	      })
+
+	      return waypoints
+	    }
+	  }
+
+	  if (window.jQuery) {
+	    window.jQuery.fn.waypoint = createExtension(window.jQuery)
+	  }
+	  if (window.Zepto) {
+	    window.Zepto.fn.waypoint = createExtension(window.Zepto)
+	  }
+	}())
+	;
+
+/***/ },
+/* 19 */
+/***/ function(module, exports) {
+
 	var Dismiss, Toggle;
 
 	Toggle = (function() {
@@ -501,7 +1169,7 @@
 
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports) {
 
 	var TextInput;
@@ -541,17 +1209,17 @@
 
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./avatar-lawyer.svg": 21,
-		"./avatar-observer.svg": 25,
-		"./avatar-party.svg": 26,
-		"./close.svg": 27,
-		"./key.svg": 28,
-		"./menu.svg": 29,
-		"./profile.svg": 30
+		"./avatar-lawyer.svg": 22,
+		"./avatar-observer.svg": 26,
+		"./avatar-party.svg": 27,
+		"./close.svg": 28,
+		"./key.svg": 29,
+		"./menu.svg": 30,
+		"./profile.svg": 31
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -564,25 +1232,25 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 20;
+	webpackContext.id = 21;
 
-
-/***/ },
-/* 21 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	var sprite = __webpack_require__(22);
-	var image = "<symbol viewBox=\"0 0 183.08 70.95\" id=\"avatar-lawyer\" ><title>&#x8CC7;&#x7522; 4</title><g fill=\"none\" data-name=\"Layer 4\"><path d=\"M29.88 15.19s24 26.25 24 29.25v24.5M153.88 15.19s-24 26.25-24 29.25v24.5\"/><path d=\"M.27 20.94l24.11-6.66V9.94s-.91-2.15 3.52-3.14S53.75 1 56.51 1c3.76 0 30.57 34.94 30.3 39.38-.16 2.61-.09 30.56-.09 30.56M182.81 20.94l-24.43-6.66V9.94s1.23-2.15-3.2-3.14S129.48 1 126.72 1C123 1 96.23 35.94 96.5 40.38c.16 2.61 0 30.56 0 30.56\"/></g></symbol>";
-	module.exports = sprite.add(image, "avatar-lawyer");
 
 /***/ },
 /* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
+	
+	var sprite = __webpack_require__(23);
+	var image = "<symbol viewBox=\"0 0 183.08 70.95\" id=\"avatar-lawyer\" ><title>&#x8CC7;&#x7522; 4</title><g fill=\"none\" data-name=\"Layer 4\"><path d=\"M29.88 15.19s24 26.25 24 29.25v24.5M153.88 15.19s-24 26.25-24 29.25v24.5\"/><path d=\"M.27 20.94l24.11-6.66V9.94s-.91-2.15 3.52-3.14S53.75 1 56.51 1c3.76 0 30.57 34.94 30.3 39.38-.16 2.61-.09 30.56-.09 30.56M182.81 20.94l-24.43-6.66V9.94s1.23-2.15-3.2-3.14S129.48 1 126.72 1C123 1 96.23 35.94 96.5 40.38c.16 2.61 0 30.56 0 30.56\"/></g></symbol>";
+	module.exports = sprite.add(image, "avatar-lawyer");
+
+/***/ },
+/* 23 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var Sprite, globalSprite, inject_sprite;
 
-	Sprite = __webpack_require__(23);
+	Sprite = __webpack_require__(24);
 
 	globalSprite = new Sprite();
 
@@ -598,10 +1266,10 @@
 
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Sniffr = __webpack_require__(24);
+	var Sniffr = __webpack_require__(25);
 
 	/**
 	 * List of SVG attributes to fix url target in them
@@ -862,7 +1530,7 @@
 
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports) {
 
 	(function(host) {
@@ -986,56 +1654,56 @@
 
 
 /***/ },
-/* 25 */
-/***/ function(module, exports, __webpack_require__) {
-
-	
-	var sprite = __webpack_require__(22);
-	var image = "<symbol viewBox=\"0 0 141.8 57.5\" id=\"avatar-observer\" ><title>&#x8CC7;&#x7522; 5</title><g fill=\"none\" data-name=\"Layer 4\"><circle cx=\"33.59\" cy=\"28.75\" r=\"27.75\"/><circle cx=\"109.48\" cy=\"28.75\" r=\"27.75\"/><path d=\"M56.84 20.75s14.5-7.25 29 0M133 20.68s7.37-1.82 7.87 0M8.84 20.68s-7.37-1.82-7.87 0\"/></g></symbol>";
-	module.exports = sprite.add(image, "avatar-observer");
-
-/***/ },
 /* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(22);
-	var image = "<symbol viewBox=\"0 0 72.21 94.12\" id=\"avatar-party\" ><title>&#x8CC7;&#x7522; 3</title><g fill=\"none\" data-name=\"Layer 4\"><path d=\"M57.53 93.47s12.3-14.59 12.3-17.75 3.08-25.25 0-33.25c-1.26-3.27-12-2-12-2L52 56s-15.81 2.69-21.81 25.75M30.34 3.47v41M43.34 3.47v41\"/><path d=\"M57.71 41s.82-17.19-1-28.5c-.86-5.31-6.8-8.26-13.49-9.41-7.78-4.38-12.75-.51-13.37 0h-.07c-7.33 1.39-11 3.55-11.93 7.38-.66 2.79-.92 26.73-1 36.55V21.71c0-4.56-6.24-2.89-7.85-1-7.76 9.1-8 47-8 47l9.06 23.73\"/></g></symbol>";
-	module.exports = sprite.add(image, "avatar-party");
+	var sprite = __webpack_require__(23);
+	var image = "<symbol viewBox=\"0 0 141.8 57.5\" id=\"avatar-observer\" ><title>&#x8CC7;&#x7522; 5</title><g fill=\"none\" data-name=\"Layer 4\"><circle cx=\"33.59\" cy=\"28.75\" r=\"27.75\"/><circle cx=\"109.48\" cy=\"28.75\" r=\"27.75\"/><path d=\"M56.84 20.75s14.5-7.25 29 0M133 20.68s7.37-1.82 7.87 0M8.84 20.68s-7.37-1.82-7.87 0\"/></g></symbol>";
+	module.exports = sprite.add(image, "avatar-observer");
 
 /***/ },
 /* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(22);
-	var image = "<symbol viewBox=\"0 0 8 8\" id=\"close\" ><title>icons/close</title><path d=\"M8 .805L4.805 4 8 7.195 7.195 8 4 4.805.805 8 0 7.195 3.195 4 0 .805.805 0 4 3.195 7.195 0z\" fill-rule=\"evenodd\"/></symbol>";
-	module.exports = sprite.add(image, "close");
+	var sprite = __webpack_require__(23);
+	var image = "<symbol viewBox=\"0 0 72.21 94.12\" id=\"avatar-party\" ><title>&#x8CC7;&#x7522; 3</title><g fill=\"none\" data-name=\"Layer 4\"><path d=\"M57.53 93.47s12.3-14.59 12.3-17.75 3.08-25.25 0-33.25c-1.26-3.27-12-2-12-2L52 56s-15.81 2.69-21.81 25.75M30.34 3.47v41M43.34 3.47v41\"/><path d=\"M57.71 41s.82-17.19-1-28.5c-.86-5.31-6.8-8.26-13.49-9.41-7.78-4.38-12.75-.51-13.37 0h-.07c-7.33 1.39-11 3.55-11.93 7.38-.66 2.79-.92 26.73-1 36.55V21.71c0-4.56-6.24-2.89-7.85-1-7.76 9.1-8 47-8 47l9.06 23.73\"/></g></symbol>";
+	module.exports = sprite.add(image, "avatar-party");
 
 /***/ },
 /* 28 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(22);
-	var image = "<symbol viewBox=\"0 0 17 16\" id=\"key\" ><title>icon/key</title><g fill-rule=\"evenodd\"><path d=\"M7.564 7.349c.06 0 .121-.02.17-.062l5.83-4.961-.34-.376-5.83 4.96a.245.245 0 0 0-.024.353.26.26 0 0 0 .194.086z\"/><path d=\"M5.248 16c3.164 0 5.055-2.415 5.055-4.75 0-.673-.166-1.415-.411-1.896l2.33-1.13A.25.25 0 0 0 12.363 8V6h1.545l.058-.003c.343-.022.446-.128.457-.497v-2h1.546c.066 0 .112.007.143.011.062.01.179.027.28-.06.104-.09.1-.204.095-.305-.001-.036-.003-.083-.003-.146V.735A.747.747 0 0 0 15.728 0h-1.996a.776.776 0 0 0-.5.182L6.44 5.962c-.334-.065-.84-.15-1.191-.15C2.354 5.813 0 8.098 0 10.907 0 13.714 2.354 16 5.248 16zm0-9.688c.258 0 .7.06 1.213.164a.26.26 0 0 0 .223-.056L13.572.559a.249.249 0 0 1 .16-.059h1.996c.134 0 .242.105.242.235V3h-1.803a.254.254 0 0 0-.258.25V5.5h-1.803a.254.254 0 0 0-.258.25v2.096l-2.433 1.18a.252.252 0 0 0-.135.165.244.244 0 0 0 .041.205c.227.304.467 1.057.467 1.854 0 2.089-1.698 4.25-4.54 4.25-2.61 0-4.733-2.061-4.733-4.594 0-2.533 2.124-4.594 4.733-4.594z\"/><path d=\"M4.379 13.5c.994 0 1.803-.785 1.803-1.75S5.373 10 4.379 10c-.994 0-1.803.785-1.803 1.75s.809 1.75 1.803 1.75zm0-3c.71 0 1.288.561 1.288 1.25S5.089 13 4.379 13c-.71 0-1.288-.561-1.288-1.25s.578-1.25 1.288-1.25z\"/></g></symbol>";
-	module.exports = sprite.add(image, "key");
+	var sprite = __webpack_require__(23);
+	var image = "<symbol viewBox=\"0 0 8 8\" id=\"close\" ><title>icons/close</title><path d=\"M8 .805L4.805 4 8 7.195 7.195 8 4 4.805.805 8 0 7.195 3.195 4 0 .805.805 0 4 3.195 7.195 0z\" fill-rule=\"evenodd\"/></symbol>";
+	module.exports = sprite.add(image, "close");
 
 /***/ },
 /* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(22);
-	var image = "<symbol viewBox=\"0 0 18 12\" id=\"menu\" ><title>menu</title><path d=\"M0 12h18v-2H0v2zm0-5h18V5H0v2zm0-7v2h18V0H0z\" fill=\"#FFF\" fill-rule=\"evenodd\"/></symbol>";
-	module.exports = sprite.add(image, "menu");
+	var sprite = __webpack_require__(23);
+	var image = "<symbol viewBox=\"0 0 17 16\" id=\"key\" ><title>icon/key</title><g fill-rule=\"evenodd\"><path d=\"M7.564 7.349c.06 0 .121-.02.17-.062l5.83-4.961-.34-.376-5.83 4.96a.245.245 0 0 0-.024.353.26.26 0 0 0 .194.086z\"/><path d=\"M5.248 16c3.164 0 5.055-2.415 5.055-4.75 0-.673-.166-1.415-.411-1.896l2.33-1.13A.25.25 0 0 0 12.363 8V6h1.545l.058-.003c.343-.022.446-.128.457-.497v-2h1.546c.066 0 .112.007.143.011.062.01.179.027.28-.06.104-.09.1-.204.095-.305-.001-.036-.003-.083-.003-.146V.735A.747.747 0 0 0 15.728 0h-1.996a.776.776 0 0 0-.5.182L6.44 5.962c-.334-.065-.84-.15-1.191-.15C2.354 5.813 0 8.098 0 10.907 0 13.714 2.354 16 5.248 16zm0-9.688c.258 0 .7.06 1.213.164a.26.26 0 0 0 .223-.056L13.572.559a.249.249 0 0 1 .16-.059h1.996c.134 0 .242.105.242.235V3h-1.803a.254.254 0 0 0-.258.25V5.5h-1.803a.254.254 0 0 0-.258.25v2.096l-2.433 1.18a.252.252 0 0 0-.135.165.244.244 0 0 0 .041.205c.227.304.467 1.057.467 1.854 0 2.089-1.698 4.25-4.54 4.25-2.61 0-4.733-2.061-4.733-4.594 0-2.533 2.124-4.594 4.733-4.594z\"/><path d=\"M4.379 13.5c.994 0 1.803-.785 1.803-1.75S5.373 10 4.379 10c-.994 0-1.803.785-1.803 1.75s.809 1.75 1.803 1.75zm0-3c.71 0 1.288.561 1.288 1.25S5.089 13 4.379 13c-.71 0-1.288-.561-1.288-1.25s.578-1.25 1.288-1.25z\"/></g></symbol>";
+	module.exports = sprite.add(image, "key");
 
 /***/ },
 /* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(22);
+	var sprite = __webpack_require__(23);
+	var image = "<symbol viewBox=\"0 0 18 12\" id=\"menu\" ><title>menu</title><path d=\"M0 12h18v-2H0v2zm0-5h18V5H0v2zm0-7v2h18V0H0z\" fill=\"#FFF\" fill-rule=\"evenodd\"/></symbol>";
+	module.exports = sprite.add(image, "menu");
+
+/***/ },
+/* 31 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	var sprite = __webpack_require__(23);
 	var image = "<symbol viewBox=\"0 0 18 16\" id=\"profile\" ><title>icon/profile</title><path d=\"M.187 15.992a.253.253 0 0 0 .308-.177c.519-1.922 2.627-2.42 3.887-2.718.316-.074.565-.133.727-.203 1.435-.618 1.903-1.614 2.043-2.34a.25.25 0 0 0-.083-.236c-.747-.64-1.378-1.602-1.776-2.709a.246.246 0 0 0-.051-.085c-.527-.568-.829-1.169-.829-1.647 0-.28.106-.467.346-.609a.25.25 0 0 0 .122-.204C4.992 2.517 6.819.512 9.061.5l.053.003c2.252.031 4.068 2.08 4.133 4.663a.248.248 0 0 0 .09.184c.157.133.23.3.23.529 0 .4-.214.893-.604 1.386a.26.26 0 0 0-.042.079c-.403 1.268-1.126 2.388-1.984 3.073a.25.25 0 0 0-.09.241c.14.726.609 1.72 2.044 2.34.17.073.433.13.767.202 1.247.268 3.335.717 3.847 2.616a.252.252 0 0 0 .486-.13c-.591-2.194-2.956-2.702-4.226-2.975-.295-.064-.55-.118-.673-.172-.937-.404-1.514-1.02-1.718-1.833.87-.742 1.597-1.886 2.013-3.17.442-.57.685-1.156.685-1.658 0-.334-.109-.613-.324-.831C13.628 2.243 11.614.036 9.114 0L9.04 0C6.585.013 4.563 2.162 4.386 4.916c-.315.23-.475.552-.475.962 0 .591.336 1.299.926 1.948.408 1.112 1.04 2.088 1.791 2.772-.203.816-.78 1.434-1.72 1.838-.12.053-.362.11-.642.176-1.28.302-3.661.865-4.257 3.074a.25.25 0 0 0 .178.306z\" fill-rule=\"evenodd\"/></symbol>";
 	module.exports = sprite.add(image, "profile");
 

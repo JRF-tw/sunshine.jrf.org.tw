@@ -36,7 +36,8 @@
     "sass-toolkit": "^2.10.0",
     "scut": "^1.4.0",
     "slick-carousel": "^1.6.0",
-    "susy": "^2.2.12"
+    "susy": "^2.2.12",
+    "waypoints": "^4.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",

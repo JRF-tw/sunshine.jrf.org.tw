@@ -1236,6 +1236,23 @@ img.mfp-img {
   left: 0;
   position: fixed;
   z-index: 2;
+  -webkit-transition: background-color .3s ease 0s;
+  transition: background-color .3s ease 0s;
+}
+
+.main-header.has-background.lawyer {
+  background-color: #ffa000;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+}
+
+.main-header.has-background.party {
+  background-color: #d32f2f;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+}
+
+.main-header.has-background.observer {
+  background-color: #00796b;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
 }
 
 .main-header__wrapper {

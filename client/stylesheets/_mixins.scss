@@ -3,10 +3,19 @@
 
 @function r($times: 1) { @return $rhythm-gap * $times; }
 
-@function theme($character) {
-  @if $character == 'party' { @return $red; }
-  @if $character == 'lawyer' { @return $yellow; }
-  @if $character == 'observer' { @return $green; }
+@function theme($character, $accent: false) {
+  @if $character == 'party' {
+    @if $accent == true { @return $red-dark; }
+    @else { @return $red; }
+  }
+  @if $character == 'lawyer' {
+    @if $accent == true { @return $yellow-dark; }
+    @else { @return $yellow; }
+  }
+  @if $character == 'observer' {
+    @if $accent == true { @return $green-dark; }
+    @else { @return $green; }
+  }
 }
 
 @mixin susy($map) {

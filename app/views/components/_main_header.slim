@@ -1,4 +1,6 @@
-header.main-header
+- classes = classes ? classes : ""
+
+header.main-header#main-header class=classes
   .main-header__wrapper.container--wide
     = link_to '/', class: "main-header__logo"
       h1.icon 司法陽光網
