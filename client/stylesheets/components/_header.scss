@@ -1,6 +1,13 @@
 .main-header {
   position: fixed 0 0 n() 0;
   z-index: index($layers, header);
+  transition: background-color .3s ease 0s;
+  @each $character in 'lawyer', 'party', 'observer' {
+    &.has-background.#{$character} {
+      background-color: theme($character, true);
+      box-shadow: 0 2px 5px 0 rgba(0,0,0,.3);
+    }
+  }
 }
 .main-header__wrapper {
   display: flex;
