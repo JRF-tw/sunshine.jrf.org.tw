@@ -1183,7 +1183,7 @@
 	    })(this)).on('blur', (function(_this) {
 	      return function(e) {
 	        if ($(e.currentTarget).val().length > 0) {
-
+	          return _this.focus(e.currentTarget);
 	        } else {
 	          return _this.blur(e.currentTarget);
 	        }
