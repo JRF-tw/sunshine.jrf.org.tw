@@ -40,8 +40,8 @@ describe "當事人更改email", type: :request do
       context "新 email 空白" do
         subject! { put "/party/email", party: { email: "", current_password: "12321313213" } }
 
-        it "顯示不可為空" do
-          expect(response.body).to match("email 不可為空")
+        it "顯示格式錯誤" do
+          expect(response.body).to match("email 的格式是無效的")
         end
       end
 
@@ -49,7 +49,7 @@ describe "當事人更改email", type: :request do
         subject! { put "/party/email", party: { email: "4554", current_password: "12321313213" } }
 
         it "email 格式錯誤" do
-          expect(flash[:error]).to eq("無效的 email")
+          expect(flash[:error]).to eq("email 的格式是無效的")
         end
       end
 

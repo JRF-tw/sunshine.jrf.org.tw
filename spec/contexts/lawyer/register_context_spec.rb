@@ -16,6 +16,12 @@ describe Lawyer::RegisterContext do
       it { expect { subject.perform }.not_to change_sidekiq_jobs_size_of(CustomDeviseMailer, :send_setting_password_mail) }
     end
 
+    context "invalid email" do
+      subject { described_class.new(lawyer: { name: lawyer.name, email: "gg33" }, policy_agreement: "1") }
+      it { expect { subject.perform }.to change { subject.errors[:data_invalid] } }
+      it { expect { subject.perform }.not_to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
+    end
+
     context "empty email" do
       subject { described_class.new(lawyer: { name: lawyer.name }, policy_agreement: "1") }
       it { expect { subject.perform }.to change { subject.errors[:data_blank] } }

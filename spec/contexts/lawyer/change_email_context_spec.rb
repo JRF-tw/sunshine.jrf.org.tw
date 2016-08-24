@@ -11,11 +11,29 @@ describe Lawyer::ChangeEmailContext do
       it { expect { subject.perform(params) }.to change { lawyer.reload.unconfirmed_email } }
     end
 
+    context "update the invalid email" do
+      let(:params) { { email: "h2312", current_password: "123123123" } }
+      subject { described_class.new(lawyer) }
+
+      it { expect { subject.perform(params) }.not_to change { lawyer.reload.unconfirmed_email } }
+      it { expect { subject.perform(params) }.to change { subject.errors } }
+    end
+
     context "update the same email" do
       let(:params) { { email: lawyer.email, current_password: "123123123" } }
       subject { described_class.new(lawyer) }
 
       it { expect { subject.perform(params) }.not_to change { lawyer.reload.unconfirmed_email } }
+      it { expect { subject.perform(params) }.to change { subject.errors } }
+    end
+
+    context "update other's email" do
+      let!(:lawyer2) { create :lawyer }
+      let(:params) { { email: lawyer2.email, current_password: "123123123" } }
+      subject { described_class.new(lawyer) }
+
+      it { expect { subject.perform(params) }.not_to change { lawyer.reload.unconfirmed_email } }
+      it { expect { subject.perform(params) }.to change { subject.errors } }
     end
 
     context "update other's unconfirmed_email" do

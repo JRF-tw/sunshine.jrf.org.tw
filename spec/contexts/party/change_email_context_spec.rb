@@ -27,6 +27,13 @@ describe Party::ChangeEmailContext do
       it { expect { subject.perform(params) }.not_to change { party.reload.unconfirmed_email } }
     end
 
+    context "update invalid email" do
+      let(:params) { { email: "5566ee", current_password: "12321313213" } }
+
+      it { expect { subject.perform(params) }.not_to change { party.reload.unconfirmed_email } }
+      it { expect { subject.perform(params) }.to change { subject.errors[:data_invalid] } }
+    end
+
     context "update the same email" do
       let(:params) { { email: party.email, current_password: "12321313213" } }
 
