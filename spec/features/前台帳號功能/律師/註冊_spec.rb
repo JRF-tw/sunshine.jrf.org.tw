@@ -96,8 +96,8 @@ describe "律師註冊", type: :request do
       context "email 格式不符" do
         subject! { post "/lawyer", lawyer: { name: "胖虎", email: "55566" }, policy_agreement: "1" }
 
-        it "顯示查無此律師" do
-          expect(flash[:error]).to eq("查無此律師資料 請改以人工管道註冊 <a href='/lawyer/appeal/new'>點此註冊</a>")
+        it "顯示email 的格式無效" do
+          expect(flash[:error]).to eq("email 的格式是無效的")
           expect(response).to render_template("lawyers/registrations/new")
         end
       end

@@ -2,6 +2,7 @@ class Lawyer::RegisterContext < BaseContext
   PERMITS = [:name, :email].freeze
 
   before_perform :check_lawyer_params
+  before_perform :check_email_valid
   before_perform :find_lawyer_by_params
   before_perform :check_lawyer_not_active
   before_perform :check_agree_policy
@@ -30,6 +31,10 @@ class Lawyer::RegisterContext < BaseContext
     add_error(:data_blank, "email不可為空白字元") if @params[:email].blank?
 
     return false if errors.present?
+  end
+
+  def check_email_valid
+    return add_error(:data_invalid, "email 的格式是無效的") unless @params[:email][/\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i]
   end
 
   def find_lawyer_by_params

@@ -66,7 +66,7 @@ describe "觀察者更改email", type: :request do
         subject! { put "/observer/email", court_observer: { email: "", current_password: "123123123" } }
 
         it "顯示錯誤提示" do
-          expect(response.body).to match("不能是空白字元")
+          expect(response.body).to match("email 的格式是無效的")
         end
       end
 
@@ -107,7 +107,7 @@ describe "觀察者更改email", type: :request do
         subject! { put "/observer/email", court_observer: { email: court_observer2.email, current_password: "123123123" } }
 
         it "提示已經被使用" do
-          expect(response.body).to match("已經被使用")
+          expect(response.body).to match("email 已經被使用")
         end
       end
 
@@ -115,7 +115,7 @@ describe "觀察者更改email", type: :request do
         subject! { put "/observer/email", court_observer: { email: court_observer.email, current_password: "123123123" } }
 
         it "提示不可與原本相同" do
-          expect(response.body).to match("不可與原本相同")
+          expect(response.body).to match("email 不可與原本相同")
         end
       end
     end

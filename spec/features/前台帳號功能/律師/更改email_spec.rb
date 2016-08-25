@@ -57,7 +57,7 @@ describe "律師更改email", type: :request do
         subject! { put "/lawyer/email", lawyer: { email: "", current_password: "123123123" } }
 
         it "顯示錯誤提示" do
-          expect(response.body).to match("不能是空白字元")
+          expect(response.body).to match("email 的格式是無效的")
         end
       end
 
@@ -106,7 +106,7 @@ describe "律師更改email", type: :request do
         subject! { put "/lawyer/email", lawyer: { email: lawyer.email, current_password: "123123123" } }
 
         it "提示不可與原本相同" do
-          expect(response.body).to match("不可與原本相同")
+          expect(response.body).to match("email 不可與原本相同")
         end
       end
     end

@@ -93,7 +93,7 @@ describe "觀察者註冊", type: :request do
         subject! { post "/observer", court_observer: { name: "阿怪", email: "h2312@gmail.com", password: "11111111", password_confirmation: "22222222" }, policy_agreement: "1" }
 
         it "提示密碼與密碼確認須一致" do
-          expect(response.body).to match("兩次輸入須一致")
+          expect(response.body).to match("密碼 需與密碼確認相同")
         end
       end
 
@@ -101,7 +101,7 @@ describe "觀察者註冊", type: :request do
         subject! { post "/observer", court_observer: { name: "阿怪", email: "h2312@gmail.com", password: "11", password_confirmation: "11" }, policy_agreement: "1" }
 
         it "提示密碼過短" do
-          expect(response.body).to match("過短（最短是 8 個字）")
+          expect(response.body).to match("密碼 不得小於八個字元")
         end
       end
 
