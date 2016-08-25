@@ -1,6 +1,8 @@
-.container
-  .card
-    h2.card__heading 當事人註冊
+= render layout: 'components/card', locals: {\
+  heading: '當事人註冊',
+  type: 'party',
+  name: @party.name,
+  username: @party.identify_number}
 
-    = render partial: 'identify_number_check_form' unless @checked
-    = render partial: 'form' if @checked
+  = render partial: 'identify_number_check_form' unless @checked
+  = render partial: 'form' if @checked
