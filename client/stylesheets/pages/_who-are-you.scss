@@ -45,7 +45,7 @@ body.who-are-you {
     width: $size;
     padding-top: $size;
   }
-  &:hover::before { size: 200px; }
+  &:hover::before { size: 100%; }
   &::before {
     display: block;
     content: "";
@@ -61,6 +61,7 @@ body.who-are-you {
     text: center ms(1);
     width: 100%;
     bottom: r(-4);
+    color: $white;
     @include scut-center-transform(x);
     @include susy-media($character-selector-twick) {
       top: r(6); bottom: auto;
@@ -80,8 +81,9 @@ body.who-are-you {
   background-color: $avatar-red;
   &:hover { color: $avatar-red; }
 
-  .icon {
-    @include susy-media($character-selector-twick) {
+  @include susy-media($character-selector-twick) {
+    &:hover .text { color: $avatar-red; }
+    .icon {
       size: 30%;
       top: 65%;
     }
@@ -92,8 +94,9 @@ body.who-are-you {
   background-color: $avatar-black;
   &:hover { color: $avatar-black; }
 
-  .icon {
-    @include susy-media($character-selector-twick) {
+  @include susy-media($character-selector-twick) {
+    &:hover .text { color: $avatar-black; }
+    .icon {
       size: 60%;
       top: 65%;
     }
@@ -106,6 +109,7 @@ body.who-are-you {
   &:hover { color: $avatar-black; }  
   @include susy-media($character-selector-twick) {
     margin: 0;
+    &:hover .text { color: $avatar-black; }  
 
     .icon {
       size: 60%;
