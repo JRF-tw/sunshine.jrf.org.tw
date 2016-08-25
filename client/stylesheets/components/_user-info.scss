@@ -9,6 +9,7 @@
   padding: 0 r(2);
   background: rgba(0,0,0,.01);
   border: 1px solid #F2F2F2;
+  clear: fix;
 }
 
 .user-info-wrapper {
@@ -27,6 +28,7 @@
     width: $dt-width;
     color: $text-secondary;
   }
+  .desc:empty { height: round($base-font-size * 1.5); }
 }
 
 .user-info-actions {

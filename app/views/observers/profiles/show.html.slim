@@ -1,16 +1,13 @@
-div 觀察者個人資訊頁
+= render layout: 'components/user_info_card'
 
-div = "姓名: #{current_court_observer.name}"
-div = "學校: #{current_court_observer.school}"
-div = "系級: #{current_court_observer.department_level}"
-div = "學號: #{current_court_observer.student_number}"
-div = "手機號碼: #{current_court_observer.phone_number}"
-div = "email: #{current_court_observer.email}"
+  = render layout: 'components/user_info',
+    locals: {title: '註冊帳號', path: '/observer/email/edit'}
+    = kv_cell 'Email', current_court_observer.email
+    = kv_cell '密碼', link_to('重設密碼', '#link', method: :post)
 
-div
-  - if current_court_observer.unconfirmed_email
-    p = "目前等待驗證中信箱: #{current_court_observer.unconfirmed_email}"
-
-div
-  = link_to "發送密碼設定信", observer_password_send_reset_password_mail_path, method: :post, class: "btn btn-mini"
-div = link_to '我要捐款', 'https://www.jrf.org.tw/donate'
+  = render layout: 'components/user_info',
+    locals: {title: '個人基本資料', path: '/observer/profile/edit'}
+    = kv_cell '姓名', current_court_observer.name
+    = kv_cell '手機', current_court_observer.phone_number
+    = kv_cell '學校', current_court_observer.school
+    = kv_cell '系級', current_court_observer.department_level
