@@ -46,4 +46,10 @@
     margin-left: r(3);
     text: $text-secondary-dark ms(1);
   }
+
+  .icon {
+    size: 17px;
+    fill: currentColor;
+    position: relative -1px n() n() n();
+  }
 }

@@ -1,4 +1,15 @@
-- classes = classes ? classes : ""
+ruby:
+  classes = classes ? classes : ""
+
+  if current_lawyer
+    sign_out = destroy_lawyer_session_path
+  elsif current_party
+    sign_out = destroy_party_session_path
+  elsif current_court_observer
+    sign_out = destroy_court_observer_session_path
+  else
+    sign_out = false
+  end
 
 header.main-header#main-header class=classes
   .main-header__wrapper.container--wide
@@ -8,3 +19,7 @@ header.main-header#main-header class=classes
 
     nav.main-header__nav
       = render 'components/nav_cells'
+
+      - if sign_out
+        = link_to sign_out, method: :delete, class: 'cell' do
+          = inline_svg 'exit'
