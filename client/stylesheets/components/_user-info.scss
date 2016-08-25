@@ -10,7 +10,7 @@
 }
 
 .list--user-info {
-  $dt-width: r(9);
+  $dt-width: r(10);
   @include scut-key-val('', 0, ($dt-width + r(1)), r(2));
 
   .term {

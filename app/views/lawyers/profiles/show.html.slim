@@ -1,22 +1,19 @@
-.container
-  .card.card--wide.has-info
-    h2.card__heading 使用者資訊
+= render layout: 'components/user_info_card',
+  locals: {\
+    heading: '使用者資訊',
+    type: 'lawyer',
+    name: current_lawyer.name,
+    username: current_lawyer.email\
+  }
 
-    = render 'components/card_info', type: 'lawyer',
-      name: current_lawyer.name, username: current_lawyer.email
+  = render layout: 'components/user_info',
+    locals: {title: '註冊帳號', path: '/lawyer/email/edit'}
+    = kv_cell 'Email', current_lawyer.email
+    = kv_cell '密碼', link_to('重設密碼',
+      lawyer_password_send_reset_password_mail_path, method: :post)
 
-    = render layout: 'components/user_info',
-      locals: {title: '註冊帳號', path: '/lawyer/email/edit'}
-      dl.list--user-info
-        = kv_cell 'Email', current_lawyer.email
-        = kv_cell '密碼', link_to('重設密碼',
-          lawyer_password_send_reset_password_mail_path, method: :post)
-
-    = render layout: 'components/user_info',
-      locals: {title: '個人基本資料', path: '/lawyer/profile/edit'}
-      dl.list--user-info
-        = kv_cell '姓名', current_lawyer.name
-        = kv_cell '手機', current_lawyer.phone_number
-        = kv_cell '事務所電話', current_lawyer.office_number
-
-    = render 'components/user_info_actions'
+  = render layout: 'components/user_info',
+    locals: {title: '個人基本資料', path: '/lawyer/profile/edit'}
+    = kv_cell '姓名', current_lawyer.name
+    = kv_cell '手機', current_lawyer.phone_number
+    = kv_cell '事務所電話', current_lawyer.office_number
