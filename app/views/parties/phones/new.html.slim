@@ -1,6 +1,11 @@
-| 註冊後設定手機號碼
+= render layout: 'components/card', locals: { heading: '輸入手機號碼' }
+  = simple_form_for current_party,
+    url: party_phone_path,
+    method: :post,
+    wrapper: :md do |f|
+    
+    = f.input :phone_number
 
-= simple_form_for current_party, url: party_phone_path, method: :post do |f|
-  = f.input :phone_number
-  .form-actions
-    = f.submit "寄送驗證碼", class: "btn btn-primary"
+    .form-actions
+      .text-center
+        = f.button :button, '寄送驗證碼', class: 'raised-button--large'
