@@ -18,6 +18,17 @@
     }
   }
 }
+.card--wide {
+  @include susy($tablet) {
+    width: 90%;
+    max-width: container($tablet-columns);
+
+    .avatar .icon {
+      size: 80px 50px;
+      stroke-width: 4px;
+    }
+  }
+}
 .card__heading {
   margin: 0 r(-2) r(2);
   text: center $white ms(2) r(7);
@@ -39,21 +50,21 @@
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: flex-start;
+  position: relative;
   border-bottom: 1px solid $divider-gray;
 
   .title {
-    order: 1;
     font-size: ms(1);
   }
 
   .info {
-    order: 3;
     width: 100%;
     color: $text-secondary;
   }
 
   .avatar {
-    order: 2;
+    position: absolute 0 0 n() n();
+    z-index: index($layers, base);
   }
 
   .icon {

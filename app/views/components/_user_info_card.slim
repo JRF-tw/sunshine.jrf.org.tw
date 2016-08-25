@@ -5,6 +5,7 @@
     = render 'components/card_info', type: type,
       name: name, username: username
 
-    = yield
+    .user-info-wrapper
+      = yield
 
     = render 'components/user_info_actions'
