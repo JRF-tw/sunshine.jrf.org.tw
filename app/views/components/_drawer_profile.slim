@@ -8,7 +8,7 @@ ruby:
     sign_out = destroy_party_session_path
     type     = 'party'
     title    = current_party.name
-    info     = current_party.email
+    info     = current_party.identify_number
   elsif current_court_observer
     sign_out = destroy_court_observer_session_path
     type     = 'observer'
