@@ -34,7 +34,11 @@ Rails.application.routes.draw do
   namespace :court_observers, path: "/observer", as: "court_observer" do
     root to: "stories#index"
     resource :profile, only: [:show, :edit, :update]
-    resource :email, only: [:edit, :update]
+    resource :email, only: [:edit, :update] do
+      collection do
+        get :resend_confirmation_mail
+      end
+    end
     resource :score do
       resources :schedules, only: [:new, :create, :edit, :update] do
         collection do
@@ -91,7 +95,11 @@ Rails.application.routes.draw do
     root to: "stories#index"
     resource :profile, only: [:show, :edit, :update]
     resource :appeal, only: [:new]
-    resource :email, only: [:edit, :update]
+    resource :email, only: [:edit, :update] do
+      collection do
+        get :resend_confirmation_mail
+      end
+    end
     resource :phone, only: [:new, :create, :edit, :update] do
       collection do
         get :verify

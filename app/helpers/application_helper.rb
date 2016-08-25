@@ -221,12 +221,12 @@ module ApplicationHelper
   end
 
   def get_name_by_role(role)
-    case role.class
-    when Lawyer
+    case role.class.name
+    when "Lawyer"
       "律師"
-    when Party
+    when "Party"
       "當事人"
-    when CourtObserver
+    when "CourtObserver"
       "旁聽者"
     end
   end
