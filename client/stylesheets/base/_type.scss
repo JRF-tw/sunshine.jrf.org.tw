@@ -9,3 +9,6 @@ a {
   text-shadow: none;
   background-color: $gray-lighter;
 }
+
+// {{ Inline helpers }}
+.helper--error { color: $danger; }
