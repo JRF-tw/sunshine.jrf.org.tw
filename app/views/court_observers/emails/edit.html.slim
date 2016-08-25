@@ -1,0 +1,16 @@
+h2 = "觀察者修改email"
+
+= simple_form_for current_court_observer, as: :court_observer, url: court_observer_email_path, method: :put do |f|
+  = f.error_notification
+  .form-inputs
+    = f.input :email, required: true, label: "電子信箱"
+    - if f.object.unconfirmed_email
+      p = "目前等待驗證中信箱: #{f.object.unconfirmed_email}"
+    = f.input :current_password, hint: "請輸入密碼以完成修改", required: true, label: "密碼"
+  .form-actions
+    = f.button :submit, "送出"
+
+
+= link_to "回到上一頁", :back
+div = link_to "重寄認證信", court_observer_confirmation_path(court_observer: { email: current_court_observer.email }), method: :post if current_court_observer.unconfirmed_email
+
