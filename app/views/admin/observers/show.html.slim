@@ -8,6 +8,9 @@
         td email
         td = @court_observer.email
       tr
+        td 是否已訂閱電子報
+        td = @court_observer.subscribe_edm? ? "已訂閱" : "未訂閱"
+      tr
         td 學校
         td = @court_observer.school
       tr
