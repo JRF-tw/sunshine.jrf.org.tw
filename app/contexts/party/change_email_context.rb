@@ -14,7 +14,7 @@ class Party::ChangeEmailContext < BaseContext
   def perform(params)
     @params = permit_params(params[:party] || params, PERMITS)
     run_callbacks :perform do
-      return add_error(:data_update_fail, "無效的 email") unless @party.update_with_password(@params)
+      return add_error(:data_update_fail, "密碼錯誤") unless @party.update_with_password(@params)
       true
     end
   end
