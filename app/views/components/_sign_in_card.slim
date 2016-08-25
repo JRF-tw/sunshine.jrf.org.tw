@@ -29,7 +29,7 @@
       .form-group.squish-before
         = f.input_field :remember_me, inline_label: "記住我", as: :boolean if devise_mapping.rememberable?
 
-      .form-actions
-        .form-group.text-center = f.button :button, "登入", class: "raised-button--large"
-
-        .text-center = link_to "註冊", signup, class: "flat-button--large"
+      = render 'components/form_actions',
+        f: f,
+        submit_text: '登入',
+        link: { text: '註冊', href: signup }

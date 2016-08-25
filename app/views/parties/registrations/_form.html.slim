@@ -5,6 +5,7 @@
   = f.input :password, required: true
 
   = f.input :password_confirmation, required: true
-
-  .form-actions
-    .form-group.text-center = f.button :button, "註冊", class: "raised-button--large"
+  
+  = render 'components/form_actions',
+    f: f,
+    submit_text: '註冊'

@@ -6,6 +6,7 @@
     
     = f.input :phone_varify_code, input_html: { value: nil }, label: "認證碼"
     
-    .form-actions.text-center
-      = f.button :button, "認證", class: 'raised-button--large'
-      = link_to "重新輸入手機號碼", edit_party_phone_path, class: 'flat-button--large'
+    = render 'components/form_actions',
+      f: f,
+      submit_text: '認證',
+      link: { text: '重新輸入手機號碼', href: 'edit_party_phone_path' }

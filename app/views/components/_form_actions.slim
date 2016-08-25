@@ -1,0 +1,9 @@
+- link = link ? link : false
+
+.form-actions
+  .text-center
+    = f.button :button, submit_text, class: "raised-button--large"
+
+  - if link
+    .text-center
+      = link_to link[:text], link[:href], class: "flat-button--large"
