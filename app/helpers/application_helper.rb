@@ -230,4 +230,9 @@ module ApplicationHelper
       "旁觀者"
     end
   end
+
+  def render_html(text)
+    text = simple_format(text, {}, wrapper_tag: 'div')
+    raw text
+  end
 end
