@@ -6,6 +6,6 @@
     
     = f.input :phone_number
 
-    .form-actions
-      .text-center
-        = f.button :button, '寄送驗證碼', class: 'raised-button--large'
+    = render 'components/form_actions',
+      f: f,
+      submit: '寄送驗證碼'

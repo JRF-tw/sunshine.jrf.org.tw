@@ -1,21 +1,16 @@
-.container
-  .card
-    h2.card__heading 觀察員註冊
+= render layout: 'components/card', locals: { heading: '觀察員註冊' }
+  = simple_form_for(resource, as: resource_name, url: court_observer_registration_path, wrapper: :md) do |f|
+    = f.input :name, required: true, autofocus: true
 
-    = simple_form_for(resource, as: resource_name, url: court_observer_registration_path, wrapper: :md) do |f|
-      = f.input :name, required: true, autofocus: true
+    = f.input :email, required: true
 
-      = f.input :email, required: true
+    = f.input :password, required: true
 
-      = f.input :password, required: true
+    = f.input :password_confirmation, required: true
 
-      = f.input :password_confirmation, required: true
+    = render 'components/policy_checkbox'
 
-      .form-group
-        = check_box_tag :policy_agreement
-        = label_tag :policy_agreement, "我已詳細閱讀服務條款和隱私權保護政策"
-      
-      .form-actions
-        .form-group.text-center = f.button :button, "註冊", class: "raised-button--large"
-
-        .text-center = link_to "登入", new_session_path(resource_name), class: "flat-button--large"
+    = render 'components/form_actions',
+      f: f,
+      submit: '註冊',
+      link: { text: '登入', href: new_session_path(resource_name) }
