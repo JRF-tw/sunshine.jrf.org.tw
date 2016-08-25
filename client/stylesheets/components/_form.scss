@@ -36,7 +36,13 @@ $error-rhythm: r(3);
   &.has-error { margin-bottom: $bottom-gap + $error-rhythm; }
 }
 
-.form-actions { padding: r(1) n(); }
+.form-actions {
+  padding: r(1) n();
+
+  .flat-button--large {
+    margin: r(2) n() r(-1);
+  }
+}
 
 #{$all-text-inputs} {
   display: block;
