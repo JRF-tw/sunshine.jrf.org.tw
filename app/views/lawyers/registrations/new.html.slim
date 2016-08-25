@@ -1,6 +1,6 @@
 = render layout: 'components/card', locals: {heading: '律師註冊'}
   = simple_form_for(resource, as: resource_name, url:  lawyer_registration_path, method: :post, wrapper: :md) do |f|
-    = f.input :name, required: true, autofocus: true
+    = f.input :name, required: true
 
     = f.input :email, required: true
 

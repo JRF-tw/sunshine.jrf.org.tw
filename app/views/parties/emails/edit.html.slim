@@ -3,7 +3,7 @@ h5 = "當事人更改email"
 = simple_form_for(current_party, as: :party, url:  party_email_path, method: :put ) do |f|
   = f.error_notification
   .form-inputs
-    = f.input :email, required: true, autofocus: true, label: "電子信箱"
+    = f.input :email, required: true, label: "電子信箱"
     - if current_party.reload.unconfirmed_email
       p = "目前等待驗證中信箱: #{current_party.reload.unconfirmed_email}"
     = f.input :current_password, hint: "請輸入密碼以完成修改", required: true, label: "密碼", value: ""

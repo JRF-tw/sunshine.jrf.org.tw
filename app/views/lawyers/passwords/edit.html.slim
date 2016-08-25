@@ -7,7 +7,7 @@ div = "律師 #{@lawyer_by_token.name}(#{@lawyer_by_token.email})" if @lawyer_by
   = f.full_error :reset_password_token
 
   .form-inputs
-    = f.input :password, label: "新密碼", required: true, autofocus: true, hint: ("最少為#{@minimum_password_length}字元" if @minimum_password_length)
+    = f.input :password, label: "新密碼", required: true, hint: ("最少為#{@minimum_password_length}字元" if @minimum_password_length)
     = f.input :password_confirmation, label: "新密碼確認", required: true
 
   .form-actions

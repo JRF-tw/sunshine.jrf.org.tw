@@ -4,12 +4,12 @@
   = simple_form_for(resource, as: resource_name, url: session_path(resource_name), wrapper: :md) do |f|
     .form-group.addon-prefix
       - if use_identify_number
-        = f.input_field :identify_number, autofocus: true
+        = f.input_field :identify_number
         = f.label :identify_number
         = f.error :identify_number
       
       - else
-        = f.input_field :email, autofocus: true
+        = f.input_field :email
         = f.label :email
         = f.error :email
       
