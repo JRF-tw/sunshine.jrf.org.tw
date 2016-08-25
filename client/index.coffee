@@ -36,4 +36,4 @@ $(document).on "page:change", ->
         $main_header.addClass 'has-background'
       else
         $main_header.removeClass 'has-background'
-    offset: $main_header.height()
+    offset: -> $main_header.height()
