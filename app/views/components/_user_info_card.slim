@@ -1,11 +1,15 @@
-.container
-  .card.card--wide.has-info
-    h2.card__heading = heading
+- wide = wide ? wide : false
 
-    = render 'components/card_info', type: type,
-      name: name, username: username
+= render layout: 'components/card',
+  locals: {\
+    heading: heading,
+    wide: wide,
+    type: type,
+    name: name,
+    username: username\
+  }
 
-    .user-info-wrapper
-      = yield
+  .user-info-wrapper
+    = yield
 
-    = render 'components/user_info_actions'
+  = render 'components/user_info_actions'

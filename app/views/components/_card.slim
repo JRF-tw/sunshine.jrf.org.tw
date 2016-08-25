@@ -1,0 +1,14 @@
+- wide = wide ? wide : false
+
+.container
+  .card class="
+    #{wide ? 'card--wide' : ''}
+    #{type ? 'has-info' : ''}
+  "
+    h2.card__heading = heading
+
+    - if type
+      = render 'components/card_info', type: type,
+        name: name, username: username
+
+    = yield
