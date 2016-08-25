@@ -97,7 +97,9 @@
 	        return $main_header.removeClass('has-background');
 	      }
 	    },
-	    offset: $main_header.height()
+	    offset: function() {
+	      return $main_header.height();
+	    }
 	  });
 	});
 
@@ -1221,10 +1223,11 @@
 		"./avatar-observer.svg": 27,
 		"./avatar-party.svg": 28,
 		"./close.svg": 29,
-		"./key.svg": 30,
-		"./menu.svg": 31,
-		"./pencil.svg": 32,
-		"./profile.svg": 33
+		"./exit.svg": 30,
+		"./key.svg": 31,
+		"./menu.svg": 32,
+		"./pencil.svg": 33,
+		"./profile.svg": 34
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -1691,11 +1694,20 @@
 
 	
 	var sprite = __webpack_require__(24);
+	var image = "<symbol viewBox=\"0 0 16 16\" id=\"exit\" ><title>icon exit</title><path d=\"M14.208 0c.473 0 .89.18 1.25.542.361.36.542.777.542 1.25v12.416c0 .473-.18.89-.542 1.25-.36.361-.777.542-1.25.542H1.792c-.5 0-.924-.18-1.271-.542-.347-.36-.521-.777-.521-1.25v-3.541h1.792v3.541h12.416V1.792H1.792v3.541H0V1.792c0-.473.174-.89.52-1.25C.869.18 1.293 0 1.793 0h12.416zM6.292 11.738l2.291-2.355H0V7.617h8.583L6.292 5.262 7.542 4 12 8.5 7.542 13l-1.25-1.262z\" fill-rule=\"evenodd\" fill-opacity=\".87\"/></symbol>";
+	module.exports = sprite.add(image, "exit");
+
+/***/ },
+/* 31 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	var sprite = __webpack_require__(24);
 	var image = "<symbol viewBox=\"0 0 17 16\" id=\"key\" ><title>icon/key</title><g fill-rule=\"evenodd\"><path d=\"M7.564 7.349c.06 0 .121-.02.17-.062l5.83-4.961-.34-.376-5.83 4.96a.245.245 0 0 0-.024.353.26.26 0 0 0 .194.086z\"/><path d=\"M5.248 16c3.164 0 5.055-2.415 5.055-4.75 0-.673-.166-1.415-.411-1.896l2.33-1.13A.25.25 0 0 0 12.363 8V6h1.545l.058-.003c.343-.022.446-.128.457-.497v-2h1.546c.066 0 .112.007.143.011.062.01.179.027.28-.06.104-.09.1-.204.095-.305-.001-.036-.003-.083-.003-.146V.735A.747.747 0 0 0 15.728 0h-1.996a.776.776 0 0 0-.5.182L6.44 5.962c-.334-.065-.84-.15-1.191-.15C2.354 5.813 0 8.098 0 10.907 0 13.714 2.354 16 5.248 16zm0-9.688c.258 0 .7.06 1.213.164a.26.26 0 0 0 .223-.056L13.572.559a.249.249 0 0 1 .16-.059h1.996c.134 0 .242.105.242.235V3h-1.803a.254.254 0 0 0-.258.25V5.5h-1.803a.254.254 0 0 0-.258.25v2.096l-2.433 1.18a.252.252 0 0 0-.135.165.244.244 0 0 0 .041.205c.227.304.467 1.057.467 1.854 0 2.089-1.698 4.25-4.54 4.25-2.61 0-4.733-2.061-4.733-4.594 0-2.533 2.124-4.594 4.733-4.594z\"/><path d=\"M4.379 13.5c.994 0 1.803-.785 1.803-1.75S5.373 10 4.379 10c-.994 0-1.803.785-1.803 1.75s.809 1.75 1.803 1.75zm0-3c.71 0 1.288.561 1.288 1.25S5.089 13 4.379 13c-.71 0-1.288-.561-1.288-1.25s.578-1.25 1.288-1.25z\"/></g></symbol>";
 	module.exports = sprite.add(image, "key");
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -1704,7 +1716,7 @@
 	module.exports = sprite.add(image, "menu");
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -1713,7 +1725,7 @@
 	module.exports = sprite.add(image, "pencil");
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	

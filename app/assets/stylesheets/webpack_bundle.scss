@@ -738,6 +738,10 @@ a:focus {
   background-color: #eeeeee;
 }
 
+.helper--error {
+  color: #d9534f;
+}
+
 
 .mfp-bg {
   top: 0;
@@ -1319,6 +1323,14 @@ img.mfp-img {
   font-size: 17px;
 }
 
+.main-header__nav .icon {
+  width: 17px;
+  height: 17px;
+  fill: currentColor;
+  top: -1px;
+  position: relative;
+}
+
 /*
 * Scut, a collection of Sass utilities
 * to ease and improve our implementations of common style-code patterns.
@@ -1386,6 +1398,57 @@ img.mfp-img {
     display: none !important;
     visibility: hidden;
   }
+}
+
+.drawer__profile {
+  padding: 16px 82px 16px 16px;
+  position: relative;
+  color: #fff;
+}
+
+.drawer__profile.lawyer {
+  background-color: #ffa000;
+}
+
+.drawer__profile.party {
+  background-color: #d32f2f;
+}
+
+.drawer__profile.observer {
+  background-color: #00796b;
+}
+
+.drawer__profile .avatar {
+  stroke: #fff;
+  stroke-width: 8px;
+}
+
+.drawer__profile .avatar .icon {
+  width: 24px;
+  height: 24px;
+}
+
+.drawer__profile .title,
+.drawer__profile .info {
+  margin-top: 8px;
+}
+
+.drawer__profile .action {
+  display: inline-block;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  fill: #fff;
+}
+
+.drawer__profile .action .icon {
+  right: 16px;
+  bottom: 16px;
+  position: absolute;
+  width: 16px;
+  height: 16px;
 }
 
 .drawer__nav {
@@ -1613,6 +1676,10 @@ img.mfp-img {
   height: 25px;
 }
 
+.card__info .avatar-party {
+  stroke-width: 6px;
+}
+
 /*
 * Scut, a collection of Sass utilities
 * to ease and improve our implementations of common style-code patterns.
@@ -1674,6 +1741,16 @@ img.mfp-img {
 
 .form-group.has-error {
   margin-bottom: 40px;
+}
+
+.form-actions {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.form-actions .flat-button--large {
+  margin-top: 16px;
+  margin-bottom: -8px;
 }
 
 input[type="color"],
@@ -2054,6 +2131,12 @@ abbr[title="required"] {
   position: absolute;
 }
 
+.user-info__content:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
 .user-info__content {
   padding: 0 16px;
   background: rgba(0, 0, 0, 0.01);
@@ -2094,6 +2177,10 @@ abbr[title="required"] {
 .list--user-info .term {
   width: 80px;
   color: rgba(0, 0, 0, 0.54);
+}
+
+.list--user-info .desc:empty {
+  height: 21px;
 }
 
 .user-info-actions {
@@ -2254,8 +2341,8 @@ body.who-are-you {
 .character-selector__cell--party:hover::before,
 .character-selector__cell--lawyer:hover::before,
 .character-selector__cell--observer:hover::before {
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  height: 100%;
 }
 
 .character-selector__cell--party::before,
@@ -2288,6 +2375,7 @@ body.who-are-you {
   font-size: 17px;
   width: 100%;
   bottom: -32px;
+  color: #fff;
   position: absolute;
   left: 50%;
   margin-left: auto;
@@ -2335,6 +2423,10 @@ body.who-are-you {
 }
 
 @media (min-width: 694px) {
+  .character-selector__cell--party:hover .text {
+    color: #F04B40;
+  }
+
   .character-selector__cell--party .icon {
     width: 30%;
     height: 30%;
@@ -2351,6 +2443,10 @@ body.who-are-you {
 }
 
 @media (min-width: 694px) {
+  .character-selector__cell--lawyer:hover .text {
+    color: #262626;
+  }
+
   .character-selector__cell--lawyer .icon {
     width: 60%;
     height: 60%;
@@ -2370,6 +2466,10 @@ body.who-are-you {
 @media (min-width: 694px) {
   .character-selector__cell--observer {
     margin: 0;
+  }
+
+  .character-selector__cell--observer:hover .text {
+    color: #262626;
   }
 
   .character-selector__cell--observer .icon {
