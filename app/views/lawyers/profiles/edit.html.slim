@@ -1,14 +1,8 @@
-.container
-  .card.has-info
-    h2.card__heading 個人基本資料
+= render layout: 'components/card', locals: { heading: '個人基本資料' }
+  = simple_form_for(current_lawyer, as: :lawyer, url:  lawyer_profile_path, method: :put, wrapper: :md) do |f|
+    = f.input :name
+    = f.input :phone_number, input_html: { type: "tel" }
+    = f.input :office_number, input_html: { type: "tel" }
 
-    = render 'components/card_info', type: 'lawyer',
-      name: current_lawyer.name, username: current_lawyer.email
-
-    = simple_form_for(current_lawyer, as: :lawyer, url:  lawyer_profile_path, method: :put, wrapper: :md) do |f|
-      = f.input :name
-      = f.input :phone_number, input_html: { type: "tel" }
-      = f.input :office_number, input_html: { type: "tel" }
-
-      .form-actions.text-center
-        = f.button :button, "確定更新", class: "raised-button"
+    = render 'components/form_actions',
+      f: f, submit: '確定更新'
