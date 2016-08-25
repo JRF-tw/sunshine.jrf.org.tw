@@ -39,8 +39,9 @@ defaults: &defaults
   disqus:
     id: ""
   twilio:
-    sid: "xxxxxxx"
-    token: "abcabc"
+    sid: "AC4d17f69a678c9ffaf4b190e92a340896"
+    token: "xxxxxx"
+    phone_number: "+18443293046"
 
 development:
   <<: *defaults

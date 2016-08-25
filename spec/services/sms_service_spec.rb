@@ -17,6 +17,11 @@ describe SmsService do
     end
   end
 
-  # describe "#send_by_twilio" do
-  # end
+  describe "#send_by_twilio" do
+    context "success " do
+      subject { described_class.new(phone).send_by_twilio(text) }
+
+      it { expect(subject).to be_truthy }
+    end
+  end
 end

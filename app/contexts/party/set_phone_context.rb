@@ -69,7 +69,7 @@ class Party::SetPhoneContext < BaseContext
 
   def build_message
     link = verify_party_phone_url(host: Setting.host)
-    @message = "當事人手機驗證簡訊 發送至 #{@party.unconfirmed_phone.value}: 認證碼 : #{@party.phone_varify_code.value}, #{SlackService.render_link(link, "認證手機網址")}"
+    @message = "當事人手機驗證簡訊 發送至 #{@party.unconfirmed_phone.value}: 認證碼 : #{@party.phone_varify_code.value}, #{link}"
   end
 
   def send_sms

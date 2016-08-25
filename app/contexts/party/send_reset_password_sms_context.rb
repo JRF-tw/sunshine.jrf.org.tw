@@ -49,7 +49,7 @@ class Party::SendResetPasswordSmsContext < BaseContext
 
   def build_message
     link = edit_party_password_url(reset_password_token: @token, host: Setting.host)
-    @message = "當事人密碼重設信件 發送至 #{@party.phone_number}: #{SlackService.render_link(link, "重設密碼網址")}"
+    @message = "當事人密碼重設簡訊 發送至 #{@party.phone_number}: #{link}"
   end
 
   def send_sms
