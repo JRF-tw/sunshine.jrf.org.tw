@@ -2,11 +2,12 @@ require "rails_helper"
 
 describe Party::ChangeEmailContext do
   let!(:party) { create :party, unconfirmed_email: "hh@gmail.com" }
+  let!(:new_email) { "h2312@gmail.com" }
   subject { described_class.new(party) }
 
   describe "perform" do
     context "success" do
-      let(:params) { { email: "h2312@gmail.com", current_password: "12321313213" } }
+      let(:params) { { email: new_email, current_password: "12321313213" } }
 
       it { expect { subject.perform(params) }.to change { party.reload.unconfirmed_email } }
     end
@@ -27,13 +28,13 @@ describe Party::ChangeEmailContext do
     end
 
     context "empty password" do
-      let(:params) { { email: "h2312@gmail.com", current_password: "" } }
+      let(:params) { { email: new_email, current_password: "" } }
 
       it { expect { subject.perform(params) }.not_to change { party.reload.unconfirmed_email } }
     end
 
     context "empty wrong password" do
-      let(:params) { { email: "h2312@gmail.com", current_password: "5566nice" } }
+      let(:params) { { email: new_email, current_password: "5566nice" } }
 
       it { expect { subject.perform(params) }.not_to change { party.reload.unconfirmed_email } }
       it { expect { subject.perform(params) }.to change { subject.errors[:data_update_fail] } }
