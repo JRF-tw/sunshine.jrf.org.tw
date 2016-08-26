@@ -44,9 +44,8 @@ class Party::ChangeEmailContext < BaseContext
   end
 
   def generate_confirmation_token
-    @party.confirmation_token = @token = Devise.token_generator.generate(@party.class, :confirmation_token)[0]
-    @party.confirmation_sent_at = Time.zone.now
-    @party.save
+    token = Devise.token_generator.generate(@party.class, :confirmation_token)[0]
+    @party.update_attributes(confirmation_sent_at: Time.zone.now, confirmation_token: token)
   end
 
   def first_time_send_confirmation_email
@@ -54,7 +53,7 @@ class Party::ChangeEmailContext < BaseContext
   end
 
   def resend_confirmation_email
-    CustomDeviseMailer.delay.resend_confirmation_instructions(@party, @token)
+    CustomDeviseMailer.delay.resend_confirmation_instructions(@party)
   end
 
 end

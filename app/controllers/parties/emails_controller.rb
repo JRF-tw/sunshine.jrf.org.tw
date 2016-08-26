@@ -16,7 +16,7 @@ class Parties::EmailsController < Parties::BaseController
 
   def resend_confirmation_mail
     flash[:notice] = "您將在幾分鐘後收到一封電子郵件，內有驗證帳號的步驟說明"
-    CustomDeviseMailer.delay.resend_confirmation_instructions(current_party, current_party.confirmation_token)
+    CustomDeviseMailer.delay.resend_confirmation_instructions(current_party)
     redirect_to court_observer_profile_path
   end
 end

@@ -39,13 +39,12 @@ class Lawyer::ChangeEmailContext < BaseContext
   end
 
   def generate_confirmation_token
-    @lawyer.confirmation_token = @token = Devise.token_generator.generate(@lawyer.class, :confirmation_token)[0]
-    @lawyer.confirmation_sent_at = Time.zone.now
-    @lawyer.save
+    token = Devise.token_generator.generate(@lawyer.class, :confirmation_token)[0]
+    @lawyer.update_attributes(confirmation_sent_at: Time.zone.now, confirmation_token: token)
   end
 
   def send_reconfirmation_email
-    CustomDeviseMailer.delay.resend_confirmation_instructions(@lawyer, @token)
+    CustomDeviseMailer.delay.resend_confirmation_instructions(@lawyer)
   end
 
 end

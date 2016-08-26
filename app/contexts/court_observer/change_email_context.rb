@@ -39,12 +39,11 @@ class CourtObserver::ChangeEmailContext < BaseContext
   end
 
   def generate_confirmation_token
-    @court_observer.confirmation_token = @token = Devise.token_generator.generate(@court_observer.class, :confirmation_token)[0]
-    @court_observer.confirmation_sent_at = Time.zone.now
-    @court_observer.save
+    token = Devise.token_generator.generate(@court_observer.class, :confirmation_token)[0]
+    @court_observer.update_attributes(confirmation_sent_at: Time.zone.now, confirmation_token: token)
   end
 
   def send_reconfirmation_email
-    CustomDeviseMailer.delay.resend_confirmation_instructions(@court_observer, @token)
+    CustomDeviseMailer.delay.resend_confirmation_instructions(@court_observer)
   end
 end

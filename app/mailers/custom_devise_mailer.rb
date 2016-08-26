@@ -10,9 +10,9 @@ class CustomDeviseMailer < Devise::Mailer
     mail(to: @resource.email, from: Setting.mailer.default_sender, subject: "設定您在司法陽光網的密碼")
   end
 
-  def resend_confirmation_instructions(resource, token)
+  def resend_confirmation_instructions(resource)
     @resource = resource
-    @token = token
+    @token = @resource.confirmation_token
     mail(to: @resource.unconfirmed_email, from: Setting.mailer.default_sender, subject: "更改您在司法陽光網的電子郵件信箱")
   end
 end

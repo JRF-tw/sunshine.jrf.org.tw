@@ -12,8 +12,8 @@ RSpec.describe CustomDeviseMailer, type: :mailer do
   end
 
   context "#resend_confirmation_instructions" do
-    let!(:party) { create :party, :with_unconfirmed_email, confirmation_token: "5566" }
-    let(:mail) { described_class.resend_confirmation_instructions(party, "5566").deliver_now }
+    let!(:party) { create :party, :with_unconfirmed_email, :with_confirmation_token }
+    let(:mail) { described_class.resend_confirmation_instructions(party).deliver_now }
     it { expect(mail.subject).to eq("更改您在司法陽光網的電子郵件信箱") }
     it { expect(mail.to).to eq([party.unconfirmed_email]) }
   end
