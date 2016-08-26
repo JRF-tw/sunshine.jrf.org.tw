@@ -82,9 +82,11 @@ $error-rhythm: r(3);
   .is-focused &,
   input:-webkit-autofill + &,
   input[value] + &,
-  input:focus + & {
+  input:focus + &,
+  select + & {
     text: $text-secondary ms(-1);
     top: 0;
+    pointer-events: none;
   }
 }
 
@@ -105,6 +107,13 @@ $error-rhythm: r(3);
     border-color: $accent;
   }
   &:focus::after { border-color: $accent; }
+}
+
+select {
+  @include Select;
+  size: 100% 34px;
+  outline: none;
+  &:focus + .control-label::before { transform: scaleX(1); }
 }
 
 abbr[title="required"] { display: none; }

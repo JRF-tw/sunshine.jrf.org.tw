@@ -1,5 +1,5 @@
 = render layout: 'components/card',
-  locals: { heading: '個人資訊編輯頁', type: 'party' }
+  locals: { heading: '個人基本資料', type: 'party' }
 
   = simple_form_for current_party, as: :party,
     url:  party_profile_path, method: :put, wrapper: :md do |f|
