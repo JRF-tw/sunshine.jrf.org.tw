@@ -1,12 +1,20 @@
 ruby:
+  type    = type ? type : false
   classes = classes ? classes : ""
 
-  if current_lawyer
-    sign_out = destroy_lawyer_session_path
-  elsif current_party
-    sign_out = destroy_party_session_path
-  elsif current_court_observer
-    sign_out = destroy_court_observer_session_path
+  case type
+  when 'lawyer'
+    if current_lawyer
+      sign_out = destroy_lawyer_session_path
+    end
+  when 'party'
+    if current_party
+      sign_out = destroy_party_session_path
+    end
+  when 'observer'
+    if current_court_observer
+      sign_out = destroy_court_observer_session_path
+    end
   else
     sign_out = false
   end

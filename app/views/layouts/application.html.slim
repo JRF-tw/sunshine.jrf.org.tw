@@ -13,7 +13,9 @@ html
     = csrf_meta_tags
   
   body class=(yield :body_classes)
-    = render 'components/main_header', classes: (yield :header_classes)
+    = render 'components/main_header',
+      classes: yield(:header_classes),
+      type: yield(:character_type)
 
     .page-wrapper class=(yield :wrapper_classes)
       main role='main'
@@ -21,4 +23,4 @@ html
         = content_for?(:yield) ? yield(:yield) : yield
       
     = render 'components/main_footer'
-    = render 'components/drawer'
+    = render 'components/drawer', type: yield(:character_type)
