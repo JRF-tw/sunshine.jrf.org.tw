@@ -80,7 +80,7 @@ feature "該律師為了完成註冊，第一次設定密碼", type: :feature, j
         Then "登入成功" do
           expect(current_path).to match(lawyer_root_path)
           expect(page).to have_content("請更新完整資料")
-          expect(page).to have_button("更新個人資訊")
+          expect(page).to have_button("確定更新")
         end
       end
     end
