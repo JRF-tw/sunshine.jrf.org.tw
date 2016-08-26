@@ -1,6 +1,6 @@
-p = "您於司法陽光網訂閱#{@court_wording}，該案即將於#{@date.year}年#{@date.mon}月#{@date.mday}日xx點XX分於台北市地方法院#{@story.story_type}第XX庭開庭，請記得寫上您的行事曆喔！"
+p = "您於司法陽光網訂閱#{@story.detail_info}，該案即將於#{@date.year}年#{@date.mon}月#{@date.mday}日xx點XX分於台北市地方法院#{@story.story_type}第XX庭開庭，請記得寫上您的行事曆喔！"
 
-p = link_to "點我放入Google 行事曆", "#"
+p = link_to "點我放入Google 行事曆", "https://www.google.com/calendar/render?action=TEMPLATE&trp=true&sf=true&output=xml&dates=#{@date.strftime("%Y%m%d")}T000000Z/#{@date.strftime("%Y%m%d")}T020000Z&text=#{@story.detail_info}案件開庭"
 
 p = "感謝您使用司法陽光網的案件訂閱服務！若您不想再訂閱此案，#{link_to "請點此", party_subscribe_url(@story), method: :delete, class: "btn btn-mini"}。".html_safe
 

@@ -5,8 +5,9 @@ class Party::ChangeEmailContext < BaseContext
   before_perform :check_email_different
   before_perform :check_email_unique
   before_perform :transfer_email_to_unconfirmed_email
-  after_perform :generate_confirmation_token
-  after_perform :send_confirmation_email
+  after_perform :generate_confirmation_token, if: :already_confirmed?
+  after_perform :resend_confirmation_email, if: :already_confirmed?
+  after_perform :first_time_send_confirmation_email, unless: :already_confirmed?
 
   def initialize(party)
     @party = party
@@ -38,20 +39,22 @@ class Party::ChangeEmailContext < BaseContext
     @params["unconfirmed_email"] = @params.delete("email")
   end
 
-  def generate_confirmation_token
-    if @party.confirmation_token
-      @party.confirmation_token = @token = Devise.token_generator.generate(@party.class, :confirmation_token)[0]
-      @party.confirmation_sent_at = Time.zone.now
-      @party.save
-    end
+  def already_confirmed?
+    @party.confirmation_token.present?
   end
 
-  def send_confirmation_email
-    if @token
-      CustomDeviseMailer.delay.resend_confirmation_instructions(@party, @token)
-    else
-      @party.send_confirmation_instructions
-    end
+  def generate_confirmation_token
+    @party.confirmation_token = @token = Devise.token_generator.generate(@party.class, :confirmation_token)[0]
+    @party.confirmation_sent_at = Time.zone.now
+    @party.save
+  end
+
+  def first_time_send_confirmation_email
+    @party.send_confirmation_instructions
+  end
+
+  def resend_confirmation_email
+    CustomDeviseMailer.delay.resend_confirmation_instructions(@party, @token)
   end
 
 end
