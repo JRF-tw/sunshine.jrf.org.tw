@@ -4,12 +4,12 @@
 
   = simple_form_for current_lawyer, as: :lawyer,
     url: lawyer_email_path, method: :put, wrapper: :md do |f|
-    .form-group
+    .form-group class=('has-error' if f.object.unconfirmed_email)
       = f.input_field :email, required: true
       = f.label :email
       = f.error :email
       - if f.object.unconfirmed_email
-        span.helper--error
+        .helper-block
           = "目前等待驗證中信箱：#{f.object.unconfirmed_email}"
 
     = f.input :current_password, required: true, value: ""
