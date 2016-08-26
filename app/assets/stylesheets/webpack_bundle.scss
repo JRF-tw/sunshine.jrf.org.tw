@@ -738,6 +738,10 @@ a:focus {
   background-color: #eeeeee;
 }
 
+.helper--error {
+  color: #d9534f;
+}
+
 
 .mfp-bg {
   top: 0;
@@ -1319,6 +1323,14 @@ img.mfp-img {
   font-size: 17px;
 }
 
+.main-header__nav .icon {
+  width: 17px;
+  height: 17px;
+  fill: currentColor;
+  top: -1px;
+  position: relative;
+}
+
 /*
 * Scut, a collection of Sass utilities
 * to ease and improve our implementations of common style-code patterns.
@@ -1386,6 +1398,57 @@ img.mfp-img {
     display: none !important;
     visibility: hidden;
   }
+}
+
+.drawer__profile {
+  padding: 16px 82px 16px 16px;
+  position: relative;
+  color: #fff;
+}
+
+.drawer__profile.lawyer {
+  background-color: #ffa000;
+}
+
+.drawer__profile.party {
+  background-color: #d32f2f;
+}
+
+.drawer__profile.observer {
+  background-color: #00796b;
+}
+
+.drawer__profile .avatar {
+  stroke: #fff;
+  stroke-width: 8px;
+}
+
+.drawer__profile .avatar .icon {
+  width: 24px;
+  height: 24px;
+}
+
+.drawer__profile .title,
+.drawer__profile .info {
+  margin-top: 8px;
+}
+
+.drawer__profile .action {
+  display: inline-block;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  fill: #fff;
+}
+
+.drawer__profile .action .icon {
+  right: 16px;
+  bottom: 16px;
+  position: absolute;
+  width: 16px;
+  height: 16px;
 }
 
 .drawer__nav {
@@ -1518,6 +1581,25 @@ img.mfp-img {
   .card {
     padding-top: 16px;
   }
+
+  .card.has-info {
+    top: -24px;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@media (min-width: 768px) {
+  .card--wide {
+    width: 90%;
+    max-width: 1102.4px;
+  }
+
+  .card--wide .avatar .icon {
+    width: 80px;
+    height: 50px;
+    stroke-width: 4px;
+  }
 }
 
 .card__heading {
@@ -1543,6 +1625,59 @@ img.mfp-img {
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
   }
+
+  .has-info .card__heading {
+    top: -136px;
+  }
+}
+
+.card__info {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.card__info .title {
+  font-size: 17px;
+}
+
+.card__info .info {
+  width: 100%;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.card__info .avatar {
+  top: 0;
+  right: 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.card__info .icon {
+  stroke: #ABABAB;
+  stroke-width: 10px;
+  width: 30px;
+  height: 25px;
+}
+
+.card__info .avatar-party {
+  stroke-width: 6px;
 }
 
 /*
@@ -1608,6 +1743,16 @@ img.mfp-img {
   margin-bottom: 40px;
 }
 
+.form-actions {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.form-actions .flat-button--large {
+  margin-top: 16px;
+  margin-bottom: -8px;
+}
+
 input[type="color"],
 input[type="date"],
 input[type="datetime"],
@@ -1635,37 +1780,37 @@ textarea {
 }
 
 input[type="color"]:focus + .control-label::before,
-input[type="color"]:active + .control-label::before,
+input[type="color"]:not(:disabled):active + .control-label::before,
 input[type="date"]:focus + .control-label::before,
-input[type="date"]:active + .control-label::before,
+input[type="date"]:not(:disabled):active + .control-label::before,
 input[type="datetime"]:focus + .control-label::before,
-input[type="datetime"]:active + .control-label::before,
+input[type="datetime"]:not(:disabled):active + .control-label::before,
 input[type="datetime-local"]:focus + .control-label::before,
-input[type="datetime-local"]:active + .control-label::before,
+input[type="datetime-local"]:not(:disabled):active + .control-label::before,
 input[type="email"]:focus + .control-label::before,
-input[type="email"]:active + .control-label::before,
+input[type="email"]:not(:disabled):active + .control-label::before,
 input[type="month"]:focus + .control-label::before,
-input[type="month"]:active + .control-label::before,
+input[type="month"]:not(:disabled):active + .control-label::before,
 input[type="number"]:focus + .control-label::before,
-input[type="number"]:active + .control-label::before,
+input[type="number"]:not(:disabled):active + .control-label::before,
 input[type="password"]:focus + .control-label::before,
-input[type="password"]:active + .control-label::before,
+input[type="password"]:not(:disabled):active + .control-label::before,
 input[type="search"]:focus + .control-label::before,
-input[type="search"]:active + .control-label::before,
+input[type="search"]:not(:disabled):active + .control-label::before,
 input[type="tel"]:focus + .control-label::before,
-input[type="tel"]:active + .control-label::before,
+input[type="tel"]:not(:disabled):active + .control-label::before,
 input[type="text"]:focus + .control-label::before,
-input[type="text"]:active + .control-label::before,
+input[type="text"]:not(:disabled):active + .control-label::before,
 input[type="time"]:focus + .control-label::before,
-input[type="time"]:active + .control-label::before,
+input[type="time"]:not(:disabled):active + .control-label::before,
 input[type="url"]:focus + .control-label::before,
-input[type="url"]:active + .control-label::before,
+input[type="url"]:not(:disabled):active + .control-label::before,
 input[type="week"]:focus + .control-label::before,
-input[type="week"]:active + .control-label::before,
+input[type="week"]:not(:disabled):active + .control-label::before,
 input:not([type]):focus + .control-label::before,
-input:not([type]):active + .control-label::before,
+input:not([type]):not(:disabled):active + .control-label::before,
 textarea:focus + .control-label::before,
-textarea:active + .control-label::before {
+textarea:not(:disabled):active + .control-label::before {
   -webkit-transform: scaleX(1);
           transform: scaleX(1);
 }
@@ -1691,6 +1836,25 @@ textarea:-webkit-autofill {
   -webkit-text-fill-color: rgba(0, 0, 0, 0.54);
 }
 
+input[type="color"]:disabled,
+input[type="date"]:disabled,
+input[type="datetime"]:disabled,
+input[type="datetime-local"]:disabled,
+input[type="email"]:disabled,
+input[type="month"]:disabled,
+input[type="number"]:disabled,
+input[type="password"]:disabled,
+input[type="search"]:disabled,
+input[type="tel"]:disabled,
+input[type="text"]:disabled,
+input[type="time"]:disabled,
+input[type="url"]:disabled,
+input[type="week"]:disabled,
+input:not([type]):disabled,
+textarea:disabled {
+  color: rgba(0, 0, 0, 0.38);
+}
+
 .control-label {
   color: #b6b6b6;
   line-height: 1.25;
@@ -1701,6 +1865,10 @@ textarea:-webkit-autofill {
   position: absolute;
   -webkit-transition: all .3s ease 0s;
   transition: all .3s ease 0s;
+}
+
+.control-label.disabled {
+  color: rgba(0, 0, 0, 0.38) !important;
 }
 
 .control-label::before {
@@ -1823,8 +1991,14 @@ abbr[title="required"] {
   position: relative;
 }
 
+.raised-button:hover,
+.raised-button--large:hover {
+  color: #fff;
+}
+
 .raised-button:active,
 .raised-button--large:active {
+  color: #fff;
   background-color: #0096aa;
 }
 
@@ -1849,6 +2023,26 @@ abbr[title="required"] {
 .flat-button--large {
   padding-right: 40px;
   padding-left: 40px;
+}
+
+.flat-button--addons {
+  font-weight: 700;
+}
+
+.flat-button--addons .icon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+  top: -1px;
+  position: relative;
+}
+
+.flat-button--addons .icon:first-child {
+  margin-right: 8px;
+}
+
+.flat-button--addons .icon:last-child {
+  margin-left: 8px;
 }
 
 /*
@@ -1939,6 +2133,159 @@ abbr[title="required"] {
 * Docs at http://davidtheclark.github.io/scut
 */
 
+.user-info {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 768px) {
+  .user-info {
+    width: 49.15254%;
+  }
+}
+
+.user-info__title {
+  margin-top: 0;
+}
+
+.user-info__action {
+  top: 2px;
+  right: 0;
+  position: absolute;
+}
+
+.user-info__content:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.user-info__content {
+  padding: 0 16px;
+  background: rgba(0, 0, 0, 0.01);
+  border: 1px solid #F2F2F2;
+}
+
+@media (min-width: 768px) {
+  .user-info-wrapper {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+
+.list--user-info > dt {
+  clear: both;
+  float: left;
+}
+
+.list--user-info > dt:after {
+  content: "";
+  margin-right: 0;
+}
+
+.list--user-info > dd {
+  margin-left: 88px;
+  margin-bottom: 16px;
+}
+
+.list--user-info .term {
+  width: 80px;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.list--user-info .desc:empty {
+  height: 21px;
+}
+
+.user-info-actions {
+  padding-top: 8px;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .user-info-actions {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: end;
+    -webkit-align-items: flex-end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+    padding-top: 40px;
+  }
+}
+
+.user-info-actions .between {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+@media (min-width: 768px) {
+  .user-info-actions .between {
+    -webkit-box-ordinal-group: 3;
+    -webkit-order: 2;
+        -ms-flex-order: 2;
+            order: 2;
+    margin-left: auto;
+  }
+
+  .user-info-actions .between .raised-button {
+    margin-left: 16px;
+  }
+}
+
+.user-info-actions .offcanvas {
+  width: 160px;
+  bottom: -72px;
+  position: absolute;
+  left: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+@media (min-width: 768px) {
+  .user-info-actions .offcanvas {
+    -webkit-box-ordinal-group: 2;
+    -webkit-order: 1;
+        -ms-flex-order: 1;
+            order: 1;
+    margin-left: 0;
+    width: auto;
+    -webkit-transform: none;
+            transform: none;
+    position: static;
+  }
+}
+
+/*
+* Scut, a collection of Sass utilities
+* to ease and improve our implementations of common style-code patterns.
+* v1.4.0
+* Docs at http://davidtheclark.github.io/scut
+*/
+
 body.who-are-you {
   background: -webkit-linear-gradient(bottom, transparent 52%, rgba(0, 0, 0, 0.8) 100%) 50% 0 no-repeat, -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)) 50% 0 no-repeat, asset-url('bg--who-are-you-960.jpg') 50% 0%/cover no-repeat;
   background: linear-gradient(to top, transparent 52%, rgba(0, 0, 0, 0.8) 100%) 50% 0 no-repeat, linear-gradient(to top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)) 50% 0 no-repeat, asset-url('bg--who-are-you-960.jpg') 50% 0%/cover no-repeat;
@@ -2017,8 +2364,8 @@ body.who-are-you {
 .character-selector__cell--party:hover::before,
 .character-selector__cell--lawyer:hover::before,
 .character-selector__cell--observer:hover::before {
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  height: 100%;
 }
 
 .character-selector__cell--party::before,
@@ -2051,6 +2398,7 @@ body.who-are-you {
   font-size: 17px;
   width: 100%;
   bottom: -32px;
+  color: #fff;
   position: absolute;
   left: 50%;
   margin-left: auto;
@@ -2098,6 +2446,10 @@ body.who-are-you {
 }
 
 @media (min-width: 694px) {
+  .character-selector__cell--party:hover .text {
+    color: #F04B40;
+  }
+
   .character-selector__cell--party .icon {
     width: 30%;
     height: 30%;
@@ -2114,6 +2466,10 @@ body.who-are-you {
 }
 
 @media (min-width: 694px) {
+  .character-selector__cell--lawyer:hover .text {
+    color: #262626;
+  }
+
   .character-selector__cell--lawyer .icon {
     width: 60%;
     height: 60%;
@@ -2133,6 +2489,10 @@ body.who-are-you {
 @media (min-width: 694px) {
   .character-selector__cell--observer {
     margin: 0;
+  }
+
+  .character-selector__cell--observer:hover .text {
+    color: #262626;
   }
 
   .character-selector__cell--observer .icon {

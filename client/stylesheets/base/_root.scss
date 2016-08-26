@@ -20,8 +20,8 @@ body {
 .page-wrapper {
   flex: 1;
   min-height: r(20);
-  @each $character in 'lawyer', 'party', 'observer' {
-    &.#{$character} { background-color: theme($character); }
+  @each $type in $characters {
+    &.#{$type} { background-color: theme($type); }
   }
 }
 

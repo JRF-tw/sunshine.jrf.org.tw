@@ -36,6 +36,14 @@ $error-rhythm: r(3);
   &.has-error { margin-bottom: $bottom-gap + $error-rhythm; }
 }
 
+.form-actions {
+  padding: r(1) n();
+
+  .flat-button--large {
+    margin: r(2) n() r(-1);
+  }
+}
+
 #{$all-text-inputs} {
   display: block;
   padding: $input-rhythm 0;
@@ -45,7 +53,8 @@ $error-rhythm: r(3);
   border-bottom: 1px solid $divider-gray;
   box-shadow: none;
   outline: none;
-  &:focus, &:active {
+  &:focus,
+  &:not(:disabled):active {
     + .control-label::before { transform: scaleX(1); }
   }
   &:-webkit-autofill {
@@ -53,12 +62,14 @@ $error-rhythm: r(3);
     box-shadow: 0 0 0 100px $white inset;
     -webkit-text-fill-color: $text-secondary;
   }
+  &:disabled { color: $text-disabled; }
 }
 
 .control-label {
   text: $gray 1.25;
   position: absolute ($input-rhythm * 2) 0 0 0;
   transition: all .3s ease 0s;
+  &.disabled { color: $text-disabled !important; }
   &::before {
     content: "";
     display: block;

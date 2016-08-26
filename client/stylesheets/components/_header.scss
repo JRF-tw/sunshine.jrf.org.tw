@@ -2,9 +2,9 @@
   position: fixed 0 0 n() 0;
   z-index: index($layers, header);
   transition: background-color .3s ease 0s;
-  @each $character in 'lawyer', 'party', 'observer' {
-    &.has-background.#{$character} {
-      background-color: theme($character, true);
+  @each $type in $characters {
+    &.has-background.#{$type} {
+      background-color: theme($type, true);
       box-shadow: 0 2px 5px 0 rgba(0,0,0,.3);
     }
   }
@@ -45,5 +45,11 @@
   .cell {
     margin-left: r(3);
     text: $text-secondary-dark ms(1);
+  }
+
+  .icon {
+    size: 17px;
+    fill: currentColor;
+    position: relative -1px n() n() n();
   }
 }

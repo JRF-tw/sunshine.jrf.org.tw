@@ -4,7 +4,7 @@ h2 = "觀察者資料更改"
   = f.error_notification
 
   .form-inputs
-    = f.input :email, required: true, autofocus: true, label: "電子信箱"
+    = f.input :email, required: true, label: "電子信箱"
 
     - if devise_mapping.confirmable? && resource.pending_reconfirmation?
       p = "目前等待驗證中信箱: #{resource.unconfirmed_email}"

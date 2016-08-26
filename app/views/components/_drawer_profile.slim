@@ -1,0 +1,31 @@
+ruby:
+  if current_lawyer
+    sign_out = destroy_lawyer_session_path
+    type     = 'lawyer'
+    title    = current_lawyer.name
+    info     = current_lawyer.email
+  elsif current_party
+    sign_out = destroy_party_session_path
+    type     = 'party'
+    title    = current_party.name
+    info     = current_party.identify_number
+  elsif current_court_observer
+    sign_out = destroy_court_observer_session_path
+    type     = 'observer'
+    title    = current_court_observer.name
+    info     = current_court_observer.email
+  else
+    type     = false
+  end
+
+- if type
+  .drawer__profile class=type
+    .avatar
+      = inline_svg "avatar-#{type}"
+
+    .title = title
+
+    .info  = info
+
+    = link_to sign_out, method: :delete, class: 'action' do
+      = inline_svg 'exit'

@@ -15,5 +15,6 @@ require 'components/_card.scss'
 require 'components/_form.scss'
 require 'components/_button.scss'
 require 'components/_alert.scss'
+require 'components/_user-info.scss'
 
 require 'pages/_who-are-you.scss'

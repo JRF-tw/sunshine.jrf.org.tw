@@ -19,7 +19,8 @@
   box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12),
               0px 2px 2px 0px rgba(0,0,0,0.24);
   position: relative;
-  &:active { background-color: shade($accent, 20%); }
+  &:hover { color: $white; }
+  &:active { color: $white shade($accent, 20%); }
 }
 .raised-button--large {
   @extend .raised-button;
@@ -36,4 +37,16 @@
 .flat-button--large {
   @extend .flat-button;
   padding: n() r(5);
+}
+
+.flat-button--addons {
+  font-weight: bold;
+  
+  .icon {
+    size: 16px;
+    fill: currentColor;
+    position: relative -1px n() n() n();
+    &:first-child { margin-right: r(1); }
+    &:last-child { margin-left: r(1); }
+  }
 }

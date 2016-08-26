@@ -1,0 +1,11 @@
+= render layout: 'components/card',
+  locals: {\
+    heading: '使用者資訊',
+    info: true,
+    wide: true\
+  }
+
+  .user-info-wrapper
+    = yield
+
+  = render 'components/user_info_actions'

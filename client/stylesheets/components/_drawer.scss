@@ -18,6 +18,34 @@
   &.active { transform: translate3D(0, 0, 0); }  
   @include susy($tablet) { @include Hidden(); }
 }
+.drawer__profile {
+  $pad: r(2);
+  padding: $pad ($pad*2 + 50px) $pad $pad;
+  position: relative;
+  color: $text-primary-dark;
+  @each $type in $characters {
+    &.#{$type} { background-color: theme($type, true); }
+  }
+
+  .avatar {
+    stroke: $text-primary-dark;
+    stroke-width: 8px;
+    .icon { size: 24px; }
+  }
+
+  .title, .info { margin-top: r(1); }
+  
+  .action {
+    display: inline-block;
+    position: absolute n() 0 0 n();
+    size: 50px;
+    fill: $text-primary-dark;
+    .icon {
+      position: absolute n() $pad $pad n();
+      size: 16px;
+    }
+  }
+}
 .drawer__nav {
   flex: 1;
   padding: r(2);

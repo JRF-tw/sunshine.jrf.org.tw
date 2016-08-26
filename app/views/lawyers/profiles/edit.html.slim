@@ -1,12 +1,8 @@
-    = "律師更改個人資訊"
+= render layout: 'components/card', locals: { heading: '個人基本資料', info: true }
+  = simple_form_for(current_lawyer, as: :lawyer, url:  lawyer_profile_path, method: :put, wrapper: :md) do |f|
+    = f.input :name
+    = f.input :phone_number, input_html: { type: "tel" }
+    = f.input :office_number, input_html: { type: "tel" }
 
-    = simple_form_for(current_lawyer, as: :lawyer, url:  lawyer_profile_path, method: :put ) do |f|
-      .form-inputs
-        = f.input :email, input_html: { disabled: true }, required: false
-        = link_to "更改Email", edit_lawyer_email_path
-        = f.input :name
-        = f.input :phone_number, input_html: { type: "tel" }
-        = f.input :office_number, input_html: { type: "tel" }
-
-      .form-actions
-        input.btn.btn-primary type="submit" value="更新個人資訊"
+    = render 'components/form_actions',
+      f: f, submit: '確定更新'
