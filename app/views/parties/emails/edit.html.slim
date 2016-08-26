@@ -1,14 +1,17 @@
-h5 = "當事人更改email"
+= render layout: 'components/card', locals: {\
+  heading: '更改 Email',
+  info: true}
 
-= simple_form_for(current_party, as: :party, url:  party_email_path, method: :put ) do |f|
-  = f.error_notification
-  .form-inputs
-    = f.input :email, required: true, label: "電子信箱"
-    - if current_party.reload.unconfirmed_email
-      p = "目前等待驗證中信箱: #{current_party.reload.unconfirmed_email}"
-    = f.input :current_password, hint: "請輸入密碼以完成修改", required: true, label: "密碼", value: ""
-  .form-actions
-    = f.button :submit, "送出"
+  = simple_form_for current_party, as: :party,
+    url: party_email_path, method: :put, wrapper: :md do |f|
+    .form-group class=('has-error' if f.object.unconfirmed_email)
+      = f.input_field :email, required: true
+      = f.label :email, label: '新 Email'
+      = f.error :email
+      - if current_party.reload.unconfirmed_email
+        .helper-block
+          = "目前等待驗證中信箱：#{current_party.reload.unconfirmed_email}"
 
-= link_to "回到上一頁", :back
-div = link_to "重寄認證信", party_confirmation_path(party: { email: current_party.email }), method: :post if current_party.pending_reconfirmation?
+    = f.input :current_password, required: true, value: "", label: '密碼'
+
+    = render 'components/form_actions', f: f, submit: '送出'
