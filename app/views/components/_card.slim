@@ -9,8 +9,8 @@ ruby:
     username = current_lawyer.email
   when 'party'
     title    = '當事人'
-    name     = name ? name : current_party.name
-    username = username ? username : current_party.identify_number
+    name     = current_party ? current_party.name : name
+    username = current_party ? current_party.identify_number : username
   when 'observer'
     title    = '法庭觀察者'
     name     = current_court_observer.name
