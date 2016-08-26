@@ -41,6 +41,10 @@ FactoryGirl.define do
     trait :without_confirm do
       confirmed_at nil
     end
+
+    trait :with_confirmation_token do
+      confirmation_token "totoken"
+    end
   end
 
   factory :court_observer_without_validate, class: CourtObserver do

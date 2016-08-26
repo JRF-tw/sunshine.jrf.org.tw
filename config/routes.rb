@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => "/sidekiq"
 
   devise_for :users
-  devise_for :party, controllers: { registrations: "parties/registrations", sessions: "parties/sessions", passwords: "parties/passwords", confirmations: "parties/confirmations" }
-  devise_for :court_observer, path: "observer", controllers: { registrations: "observers/registrations", sessions: "observers/sessions", passwords: "observers/passwords", confirmations: "observers/confirmations" }
-  devise_for :lawyer, controllers: { registrations: "lawyers/registrations", sessions: "lawyers/sessions", passwords: "lawyers/passwords", confirmations: "lawyers/confirmations" }
+  devise_for :parties, path: "party", controllers: { registrations: "parties/registrations", sessions: "parties/sessions", passwords: "parties/passwords", confirmations: "parties/confirmations" }
+  devise_for :court_observers, path: "observer", controllers: { registrations: "court_observers/registrations", sessions: "court_observers/sessions", passwords: "court_observers/passwords", confirmations: "court_observers/confirmations" }
+  devise_for :lawyers, path: "lawyer", controllers: { registrations: "lawyers/registrations", sessions: "lawyers/sessions", passwords: "lawyers/passwords", confirmations: "lawyers/confirmations" }
 
   # custom devise scope
   devise_scope :lawyer do
@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
 
   devise_scope :court_observer do
-    post "/observer/password/send_reset_password_mail", to: "observers/passwords#send_reset_password_mail"
+    post "/observer/password/send_reset_password_mail", to: "court_observers/passwords#send_reset_password_mail"
   end
 
   devise_scope :party do
@@ -31,10 +31,14 @@ Rails.application.routes.draw do
   get "judges", to: "profiles#judges", as: :judges
   get "prosecutors", to: "profiles#prosecutors", as: :prosecutors
 
-  namespace :observers, path: "/observer", as: "observer" do
+  namespace :court_observers, path: "/observer", as: "court_observer" do
     root to: "stories#index"
     resource :profile, only: [:show, :edit, :update]
-    resource :email, only: [:edit, :update]
+    resource :email, only: [:edit, :update] do
+      collection do
+        post :resend_confirmation_mail
+      end
+    end
     resource :score do
       resources :schedules, only: [:new, :create, :edit, :update] do
         collection do
@@ -91,7 +95,11 @@ Rails.application.routes.draw do
     root to: "stories#index"
     resource :profile, only: [:show, :edit, :update]
     resource :appeal, only: [:new]
-    resource :email, only: [:edit, :update]
+    resource :email, only: [:edit, :update] do
+      collection do
+        post :resend_confirmation_mail
+      end
+    end
     resource :phone, only: [:new, :create, :edit, :update] do
       collection do
         get :verify

@@ -64,4 +64,8 @@ class Story < ActiveRecord::Base
   def by_relation_parties
     story_relations.where(people_type: "Party")
   end
+
+  def detail_info
+    "#{court.full_name}#{year}年#{word_type}字第#{number}號"
+  end
 end

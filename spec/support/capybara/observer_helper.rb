@@ -27,7 +27,7 @@ module Capybara
     def capybara_confirm_observer(email)
       perform_sidekiq_job(fetch_sidekiq_last_job)
       open_email(email)
-      current_email.click_link "Confirm my account"
+      current_email.click_link "認證連結"
       save_page
     end
 

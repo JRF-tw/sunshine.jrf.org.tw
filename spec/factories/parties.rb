@@ -42,6 +42,10 @@ FactoryGirl.define do
     trait :already_confirmed do
       confirmed_at Time.now
     end
+
+    trait :with_confirmation_token do
+      confirmation_token "2grgr212fd"
+    end
   end
 
   factory :party_for_create, class: Party do
