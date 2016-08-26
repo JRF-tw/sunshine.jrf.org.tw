@@ -10,7 +10,7 @@ RSpec.describe CourtObservers::EmailsController, type: :request do
   end
 
   describe "#resend_confirmation_mail" do
-    subject { get "/observer/email/resend_confirmation_mail" }
+    subject { post "/observer/email/resend_confirmation_mail" }
 
     it { expect { subject }.to change_sidekiq_jobs_size_of(CustomDeviseMailer, :resend_confirmation_instructions) }
   end

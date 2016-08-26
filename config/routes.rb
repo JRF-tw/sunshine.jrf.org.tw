@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     resource :profile, only: [:show, :edit, :update]
     resource :email, only: [:edit, :update] do
       collection do
-        get :resend_confirmation_mail
+        post :resend_confirmation_mail
       end
     end
     resource :score do
@@ -97,7 +97,7 @@ Rails.application.routes.draw do
     resource :appeal, only: [:new]
     resource :email, only: [:edit, :update] do
       collection do
-        get :resend_confirmation_mail
+        post :resend_confirmation_mail
       end
     end
     resource :phone, only: [:new, :create, :edit, :update] do

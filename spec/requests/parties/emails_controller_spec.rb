@@ -27,7 +27,7 @@ RSpec.describe Parties::EmailsController, type: :request do
   describe "#resend_confirmation_mail" do
     let!(:party) { create :party, :with_unconfirmed_email, :with_confirmation_token }
     before { signin_party(party) }
-    subject { get "/party/email/resend_confirmation_mail" }
+    subject { post "/party/email/resend_confirmation_mail" }
 
     it { expect { subject }.to change_sidekiq_jobs_size_of(CustomDeviseMailer, :resend_confirmation_instructions) }
   end
