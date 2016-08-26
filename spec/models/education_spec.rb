@@ -4,14 +4,15 @@
 #
 #  id         :integer          not null, primary key
 #  profile_id :integer
-#  title      :string(255)
+#  title      :string
 #  content    :text
 #  start_at   :date
 #  end_at     :date
-#  source     :string(255)
+#  source     :text
 #  memo       :text
 #  created_at :datetime
 #  updated_at :datetime
+#  is_hidden  :boolean
 #
 
 require "rails_helper"

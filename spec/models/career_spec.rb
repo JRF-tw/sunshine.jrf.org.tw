@@ -4,26 +4,27 @@
 #
 #  id                  :integer          not null, primary key
 #  profile_id          :integer
-#  career_type         :string(255)
-#  old_unit            :string(255)
-#  old_title           :string(255)
-#  old_assign_court    :string(255)
-#  old_assign_judicial :string(255)
-#  old_pt              :string(255)
-#  new_unit            :string(255)
-#  new_title           :string(255)
-#  new_assign_court    :string(255)
-#  new_assign_judicial :string(255)
-#  new_pt              :string(255)
+#  career_type         :string
+#  old_unit            :string
+#  old_title           :string
+#  old_assign_court    :string
+#  old_assign_judicial :string
+#  old_pt              :string
+#  new_unit            :string
+#  new_title           :string
+#  new_assign_court    :string
+#  new_assign_judicial :string
+#  new_pt              :string
 #  start_at            :date
 #  end_at              :date
 #  publish_at          :date
 #  source              :text
-#  source_link         :string(255)
+#  source_link         :text
 #  origin_desc         :text
 #  memo                :text
 #  created_at          :datetime
 #  updated_at          :datetime
+#  is_hidden           :boolean
 #
 
 require "rails_helper"

@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: verdict_scores
+#
+#  id                 :integer          not null, primary key
+#  story_id           :integer
+#  judge_id           :integer
+#  verdict_rater_id   :integer
+#  verdict_rater_type :string
+#  quality_score      :integer
+#  rating_score       :integer
+#  data               :hstore
+#  appeal_judge       :boolean
+#  status             :integer
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#
+
 require "rails_helper"
 
 RSpec.describe VerdictScore do

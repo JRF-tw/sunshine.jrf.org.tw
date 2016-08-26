@@ -5,21 +5,22 @@
 #  id                :integer          not null, primary key
 #  profile_id        :integer
 #  suit_id           :integer
-#  unit              :string(255)
-#  title             :string(255)
-#  procedure_unit    :string(255)
+#  unit              :string
+#  title             :string
+#  procedure_unit    :string
 #  procedure_content :text
 #  procedure_result  :text
-#  procedure_no      :string(255)
+#  procedure_no      :string
 #  procedure_date    :date
 #  suit_no           :integer
 #  source            :text
-#  source_link       :string(255)
-#  punish_link       :string(255)
-#  file              :string(255)
+#  source_link       :text
+#  punish_link       :string
+#  file              :string
 #  memo              :text
 #  created_at        :datetime
 #  updated_at        :datetime
+#  is_hidden         :boolean
 #
 
 require "rails_helper"

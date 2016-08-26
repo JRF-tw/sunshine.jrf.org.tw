@@ -22,10 +22,10 @@
 #  confirmed_at             :datetime
 #  confirmation_token       :string
 #  confirmation_sent_at     :datetime
-#  phone_confirmed_at       :datetime
 #  imposter                 :boolean          default(FALSE)
 #  imposter_identify_number :string
-#
+#  phone_confirmed_at       :datetime
+#  subscribe_edm            :boolean          default(FALSE)
 #
 
 FactoryGirl.define do

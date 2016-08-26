@@ -27,6 +27,7 @@
 #  unconfirmed_email      :string
 #  phone_number           :string
 #  office_number          :string
+#  subscribe_edm          :boolean          default(FALSE)
 #
 
 class Lawyer < ActiveRecord::Base
