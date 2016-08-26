@@ -1,4 +1,4 @@
-= render layout: 'components/card', locals: { heading: '個人基本資料' }
+= render layout: 'components/card', locals: { heading: '個人基本資料', info: true }
   = simple_form_for(current_lawyer, as: :lawyer, url:  lawyer_profile_path, method: :put, wrapper: :md) do |f|
     = f.input :name
     = f.input :phone_number, input_html: { type: "tel" }

@@ -5,8 +5,9 @@
 - else
   = render layout: 'components/card', locals: {\
     heading: '當事人註冊',
+    info: true,
     type: 'party',
     title: '當事人',
     name: @party.name,
-    info: @party.identify_number}
+    username: @party.identify_number}
     = render partial: 'form'

@@ -1,36 +1,37 @@
 ruby:
   wide = wide ? wide : false
+  info = info ? info : false
 
   if current_lawyer
     type     = 'lawyer'
     title    = '律師'
     name     = current_lawyer.name
-    info     = current_lawyer.email
+    username = current_lawyer.email
   elsif current_party
     type     = 'party'
     title    = '當事人'
     name     = current_party.name
-    info     = current_party.identify_number
+    username = current_party.identify_number
   elsif current_court_observer
     type     = 'observer'
     title    = '法庭觀察者'
     name     = current_court_observer.name
-    info     = current_court_observer.email
+    username = current_court_observer.email
   else
   end  
 
 .container
   .card class="
     #{wide ? 'card--wide' : ''}
-    #{type ? 'has-info' : ''}
+    #{info ? 'has-info' : ''}
   "
     h2.card__heading = heading
 
-    - if type
+    - if info
       .card__info
         .title = title
 
-        .info = "#{name} | #{info}"
+        .info = "#{name} | #{username}"
 
         .avatar
           = inline_svg "avatar-#{type}"
