@@ -1780,37 +1780,37 @@ textarea {
 }
 
 input[type="color"]:focus + .control-label::before,
-input[type="color"]:active + .control-label::before,
+input[type="color"]:not(:disabled):active + .control-label::before,
 input[type="date"]:focus + .control-label::before,
-input[type="date"]:active + .control-label::before,
+input[type="date"]:not(:disabled):active + .control-label::before,
 input[type="datetime"]:focus + .control-label::before,
-input[type="datetime"]:active + .control-label::before,
+input[type="datetime"]:not(:disabled):active + .control-label::before,
 input[type="datetime-local"]:focus + .control-label::before,
-input[type="datetime-local"]:active + .control-label::before,
+input[type="datetime-local"]:not(:disabled):active + .control-label::before,
 input[type="email"]:focus + .control-label::before,
-input[type="email"]:active + .control-label::before,
+input[type="email"]:not(:disabled):active + .control-label::before,
 input[type="month"]:focus + .control-label::before,
-input[type="month"]:active + .control-label::before,
+input[type="month"]:not(:disabled):active + .control-label::before,
 input[type="number"]:focus + .control-label::before,
-input[type="number"]:active + .control-label::before,
+input[type="number"]:not(:disabled):active + .control-label::before,
 input[type="password"]:focus + .control-label::before,
-input[type="password"]:active + .control-label::before,
+input[type="password"]:not(:disabled):active + .control-label::before,
 input[type="search"]:focus + .control-label::before,
-input[type="search"]:active + .control-label::before,
+input[type="search"]:not(:disabled):active + .control-label::before,
 input[type="tel"]:focus + .control-label::before,
-input[type="tel"]:active + .control-label::before,
+input[type="tel"]:not(:disabled):active + .control-label::before,
 input[type="text"]:focus + .control-label::before,
-input[type="text"]:active + .control-label::before,
+input[type="text"]:not(:disabled):active + .control-label::before,
 input[type="time"]:focus + .control-label::before,
-input[type="time"]:active + .control-label::before,
+input[type="time"]:not(:disabled):active + .control-label::before,
 input[type="url"]:focus + .control-label::before,
-input[type="url"]:active + .control-label::before,
+input[type="url"]:not(:disabled):active + .control-label::before,
 input[type="week"]:focus + .control-label::before,
-input[type="week"]:active + .control-label::before,
+input[type="week"]:not(:disabled):active + .control-label::before,
 input:not([type]):focus + .control-label::before,
-input:not([type]):active + .control-label::before,
+input:not([type]):not(:disabled):active + .control-label::before,
 textarea:focus + .control-label::before,
-textarea:active + .control-label::before {
+textarea:not(:disabled):active + .control-label::before {
   -webkit-transform: scaleX(1);
           transform: scaleX(1);
 }
@@ -1836,6 +1836,25 @@ textarea:-webkit-autofill {
   -webkit-text-fill-color: rgba(0, 0, 0, 0.54);
 }
 
+input[type="color"]:disabled,
+input[type="date"]:disabled,
+input[type="datetime"]:disabled,
+input[type="datetime-local"]:disabled,
+input[type="email"]:disabled,
+input[type="month"]:disabled,
+input[type="number"]:disabled,
+input[type="password"]:disabled,
+input[type="search"]:disabled,
+input[type="tel"]:disabled,
+input[type="text"]:disabled,
+input[type="time"]:disabled,
+input[type="url"]:disabled,
+input[type="week"]:disabled,
+input:not([type]):disabled,
+textarea:disabled {
+  color: rgba(0, 0, 0, 0.38);
+}
+
 .control-label {
   color: #b6b6b6;
   line-height: 1.25;
@@ -1846,6 +1865,10 @@ textarea:-webkit-autofill {
   position: absolute;
   -webkit-transition: all .3s ease 0s;
   transition: all .3s ease 0s;
+}
+
+.control-label.disabled {
+  color: rgba(0, 0, 0, 0.38) !important;
 }
 
 .control-label::before {
