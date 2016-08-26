@@ -227,7 +227,7 @@ module ApplicationHelper
     when "Party"
       "當事人"
     when "CourtObserver"
-      "旁聽者"
+      "旁觀者"
     end
   end
 end
