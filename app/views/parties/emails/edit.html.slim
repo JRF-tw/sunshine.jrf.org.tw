@@ -1,6 +1,6 @@
 = render layout: 'components/card', locals: {\
   heading: '更改 Email',
-  info: true}
+  type: 'party'}
 
   = simple_form_for current_party, as: :party,
     url: party_email_path, method: :put, wrapper: :md do |f|

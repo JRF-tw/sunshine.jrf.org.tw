@@ -1,6 +1,6 @@
 = render layout: 'components/card', locals: {\
   heading: '更改 Email',
-  info: true}
+  type: 'lawyer'}
 
   = simple_form_for current_lawyer, as: :lawyer,
     url: lawyer_email_path, method: :put, wrapper: :md do |f|

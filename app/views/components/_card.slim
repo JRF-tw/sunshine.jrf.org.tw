@@ -1,19 +1,17 @@
 ruby:
   wide = wide ? wide : false
-  info = info ? info : false
+  type = type ? type : false
 
-  if current_lawyer
-    type     = 'lawyer'
+  case type
+  when 'lawyer'
     title    = '律師'
     name     = current_lawyer.name
     username = current_lawyer.email
-  elsif current_party
-    type     = 'party'
+  when 'party'
     title    = '當事人'
-    name     = current_party.name
-    username = current_party.identify_number
-  elsif current_court_observer
-    type     = 'observer'
+    name     = current_party ? current_party.name : name
+    username = current_party ? current_party.identify_number : username
+  when 'observer'
     title    = '法庭觀察者'
     name     = current_court_observer.name
     username = current_court_observer.email
@@ -23,11 +21,11 @@ ruby:
 .container
   .card class="
     #{wide ? 'card--wide' : ''}
-    #{info ? 'has-info' : ''}
+    #{type ? 'has-info' : ''}
   "
     h2.card__heading = heading
 
-    - if info
+    - if type
       .card__info
         .title = title
 
