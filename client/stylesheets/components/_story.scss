@@ -19,16 +19,18 @@
   border: 1px solid $divider-gray;
   border-radius: 50%;
   text: center $link-color;
+  fill: currentColor;  
+  transition: all .3s ease 0s;
   @include susy($tablet) {
     $size: 160px;
     width: $size;
     padding-top: $size;
-    &:hover,
-    &.active {
+    &:hover, &.active {
       color: $white;
       &::before { transform: none; }
     }
   }
+  &:focus { border-color: $link-color; }
   &::before {
     content: "";
     display: block;
@@ -51,7 +53,6 @@
     @include susy($tablet) {
       display: block;
       size: 56px;
-      fill: currentColor;
       margin-bottom: r(2);
     }
   }
@@ -65,8 +66,8 @@
 .story-collapse {
   margin: r(2) r(-2) n();
   padding-top: r(3);
-  position: relative;
   text-align: center;
+  position: relative;
   background-image: linear-gradient(to bottom, #019CB0 0%, #00BCD4 100%);  
   &::before {
     $size: 17px;
@@ -74,7 +75,7 @@
     top: - round($size/2);
     @include scut-triangle(up, $size, #019CB0);
     @include scut-center-transform(x);
-  }
+  }  
 }
 .story-collapse__button-wrapper {
   display: inline-flex;

@@ -5,8 +5,8 @@
         = inline_svg 'user'
         .text 個人資訊
 
-    = button_tag class: 'story-button',
-      type: 'button', id: 'story-collapse-toggle'
+    = button_tag class: 'story-button', type: 'button',
+      id: 'story-collapse-toggle', 'data-collapse' => '#story-collapse'
       .wrapper
         = inline_svg 'star'
         .text 我要評鑑

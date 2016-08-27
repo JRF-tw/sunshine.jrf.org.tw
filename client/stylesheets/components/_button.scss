@@ -54,4 +54,5 @@
   @extend %base;
   text: $white center bold;
   border: 2px solid $white;
+  @include scut-selected { color: $link-color $white; }
 }
