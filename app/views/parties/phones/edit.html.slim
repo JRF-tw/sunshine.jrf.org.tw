@@ -3,6 +3,7 @@
     url: party_phone_path, method: :put, wrapper: :md do |f|
     .form-group 請輸入您的新手機號碼
 
-    = f.input :phone_number
+    = f.input :phone_number, label: '舊手機號碼', disabled: true
+    = f.input :phone_number, label: '新手機號碼', input_html: { value: '' }
 
     = render 'components/form_actions', f: f, submit: '送出'

@@ -14,4 +14,9 @@
 
     = f.input :current_password, required: true, value: "", label: '密碼'
 
-    = render 'components/form_actions', f: f, submit: '送出'
+    = render layout: 'components/form_actions', locals: { f: f, submit: '送出' }
+      - if current_lawyer.unconfirmed_email
+        .text-center
+          = link_to "重寄認證信",
+            lawyer_confirmation_path(lawyer: { email: current_lawyer.email }),
+            method: :post, class: "flat-button--large"

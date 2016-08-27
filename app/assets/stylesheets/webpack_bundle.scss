@@ -2487,7 +2487,7 @@ abbr[title="required"] {
 
 .story-collapse {
   margin: 16px -16px -16px;
-  padding-top: 24px;
+  padding: 24px;
   text-align: center;
   position: relative;
   background-image: -webkit-linear-gradient(top, #019CB0 0%, #00BCD4 100%);
@@ -2514,42 +2514,8 @@ abbr[title="required"] {
   transform: translateX(-50%);
 }
 
-.story-collapse__button-wrapper {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-flex-flow: column nowrap;
-      -ms-flex-flow: column nowrap;
-          flex-flow: column nowrap;
-  -webkit-box-align: end;
-  -webkit-align-items: flex-end;
-      -ms-flex-align: end;
-          align-items: flex-end;
-}
-
-.story-collapse__button-wrapper + .story-collapse__button-wrapper {
+.story-collapse .ghost-button + .ghost-button {
   margin-left: 32px;
-}
-
-.story-collapse__button-wrapper .hint {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  border: none;
-  outline: none;
-  background: none transparent;
-  padding: 0;
-  width: 45px;
-  height: 45px;
-  text-align: right;
-}
-
-.story-collapse__button-wrapper .icon {
-  width: 12px;
-  height: 12px;
-  fill: #fff;
-  vertical-align: top;
 }
 
 .story-list {

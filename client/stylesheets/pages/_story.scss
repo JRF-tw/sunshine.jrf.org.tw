@@ -85,7 +85,7 @@
 
 .story-collapse {
   margin: r(2) r(-2) r(-2);
-  padding-top: r(3);
+  padding: r(3);
   text-align: center;
   position: relative;
   background-image: linear-gradient(to bottom, #019CB0 0%, #00BCD4 100%);  
@@ -95,24 +95,9 @@
     top: - round($size/2);
     @include scut-triangle(up, $size, #019CB0);
     @include scut-center-transform(x);
-  }  
-}
-.story-collapse__button-wrapper {
-  display: inline-flex;
-  flex-flow: column nowrap;
-  align-items: flex-end;
-  & + & { margin-left: r(4); }
+  }
 
-  .hint {
-    @include Normalize();
-    size: 45px;
-    text-align: right;
-  }
-  .icon {
-    size: 12px;
-    fill: $white;
-    vertical-align: top;
-  }
+  .ghost-button + .ghost-button { margin-left: r(4); }
 }
 
 .story-list { margin: n() r(-2); }

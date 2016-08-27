@@ -12,4 +12,9 @@
       
       = f.input :current_password, required: true, label: "密碼"
     
-    = render 'components/form_actions', f: f, submit: '送出'
+    = render layout: 'components/form_actions', locals: { f: f, submit: '送出' }
+      - if current_court_observer.unconfirmed_email
+        .text-center
+          = link_to "重寄認證信",
+            resend_confirmation_mail_court_observer_email_path,
+            method: :post, class: "flat-button--large"
