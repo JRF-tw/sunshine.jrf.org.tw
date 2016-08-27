@@ -1,0 +1,44 @@
+.story-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: r(2) n();
+  @include susy($tablet) {
+    padding: n() r(2);
+  }
+}
+
+.story-button {
+  $gutter: 1.5;
+  @include Normalize();
+  width: span(3 of 9 $gutter);
+  padding-top: span(3 of 9 $gutter);
+  position: relative;
+  border: 1px solid $divider-gray;
+  border-radius: 50%;
+  text: center $link-color;
+  @include susy($tablet) {
+    $size: 160px;
+    width: $size;
+    padding-top: $size;
+  }
+
+  .wrapper {
+    @include scut-center-transform();
+  }
+  
+  .icon {
+    display: none;
+    @include susy($tablet) {
+      display: block;
+      size: 56px;
+      fill: currentColor;
+      margin-bottom: r(2);
+    }
+  }
+
+  .text {
+    width: 100%;
+    text: bold currentColor;
+  }
+}
