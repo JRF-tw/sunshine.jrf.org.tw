@@ -38,7 +38,6 @@
   @extend .flat-button;
   padding: n() r(5);
 }
-
 .flat-button--addons {
   font-weight: bold;
   
@@ -49,4 +48,12 @@
     &:first-child { margin-right: r(1); }
     &:last-child { margin-left: r(1); }
   }
+}
+
+.ghost-button {
+  @extend %base;
+  text: $white center bold;
+  border: 2px solid $white;
+  transition: all .3s ease 0s;
+  @include scut-selected { color: $link-color $white; }
 }

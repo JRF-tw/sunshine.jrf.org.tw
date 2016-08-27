@@ -1,0 +1,48 @@
+= render layout: 'components/card', locals: { heading: "評鑑紀錄", wide: true }
+  .story-buttons
+    = link_to profile, class: 'story-button'
+      .wrapper
+        = inline_svg 'user'
+        .text 個人資訊
+
+    = button_tag class: 'story-button', type: 'button',
+      id: 'story-collapse-toggle', 'data-collapse' => '#story-collapse'
+      .wrapper
+        = inline_svg 'star'
+        .text 我要評鑑
+
+    = link_to scores, class: 'story-button'
+      .wrapper
+        = inline_svg 'chart'
+        .text 評鑑報表
+  
+  #story-collapse.story-collapse
+    = yield
+
+  - if stories.length > 0
+    section.story-list
+      h3.story-list__heading 已評鑑紀錄及待評鑑案件
+
+      table.story-list__table
+        thead
+          tr
+            th 年度-字號-案號
+            th 法院代碼
+            th 是否已宣判
+            th
+
+        tbody
+          - stories.each do |s|
+            tr
+              td = "#{s.year}-#{s.word_type}-#{s.number}"
+              td = s.court.code
+              td = s.is_pronounce ? "已宣判" : "未宣判"
+              td
+                - case type
+                - when 'lawyer'
+                  = link_to inline_svg('forwards'), lawyer_story_path(s)
+                - when 'party'
+                  = link_to inline_svg('forwards'), party_story_path(s)
+                - when 'observer'
+                  = link_to inline_svg('forwards'), court_observer_story_path(s)
+                  

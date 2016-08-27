@@ -1,21 +1,7 @@
-= "當事人個人評鑑紀錄頁"
-br
-= link_to "個人資訊頁", party_profile_path
-br
-= link_to "我要評鑑", "#"
-br
-= render partial: 'chose_type'
-br
-= link_to "最新評鑑報表", scores_path
-br
-- @stories.each do |s|
-  = "#{s.year}-#{s.word_type}-#{s.number}"
-  = " | "
-  = "#{ s.court.code }"
-  = " | "
-  = s.is_pronounce ? "已宣判" : "未宣判"
-  = " | "
-  = link_to "進入單一案件評鑑紀錄頁", party_story_path(s)
-  br
-
-
+= render layout: 'components/stories_card', locals: {\
+  profile: party_profile_path,
+  scores:  scores_path,
+  stories: @stories,
+  type:    'party'\
+}
+  = render partial: 'chose_type'

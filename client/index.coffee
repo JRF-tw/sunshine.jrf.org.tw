@@ -18,7 +18,7 @@ require 'waypoints/lib/jquery.waypoints'
 
 # Require entry modules
 # EX:
-# { HomeBanners, HomeCover } = require "./entry/home"
+StoryCollapse = require "./entry/stories"
 
 # Inject SVG Sprite
 sprites = require.context "icons", off
@@ -28,7 +28,9 @@ $(document).on "page:change", ->
   new Toggle '.switch'
   new Dismiss('[data-dismiss]').init()
   new TextInput()
+  new StoryCollapse '#story-collapse-toggle'
 
+  # Stuck Header
   $main_header = $('#main-header')
   $('.card__heading').waypoint
     handler: (direction) ->
