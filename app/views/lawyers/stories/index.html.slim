@@ -19,39 +19,23 @@
   #story-collapse.story-collapse
     = render partial: 'chose_type'
 
-  section.story-list
-    h3.story-list__heading 已評鑑紀錄及待評鑑案件
+  - if @stories.length > 0
+    section.story-list
+      h3.story-list__heading 已評鑑紀錄及待評鑑案件
 
-    table.story-list__table
-      thead
-        tr
-          th 年度-字號-案號
-          th 法院代碼
-          th 是否已宣判
-          th
+      table.story-list__table
+        thead
+          tr
+            th 年度-字號-案號
+            th 法院代碼
+            th 是否已宣判
+            th
 
-      tbody
-        tr
-          td 105-簡-74
-          td TPA
-          td 未判決
-          td
-            = link_to inline_svg('forwards'), '#'
-        tr
-          td 105-簡-74
-          td TPA
-          td 未判決
-          td
-            = link_to inline_svg('forwards'), '#'
-
-- @stories.each do |s|
-  = "#{s.year}-#{s.word_type}-#{s.number}"
-  = " | "
-  = "#{ s.court.code }"
-  = " | "
-  = s.is_pronounce ? "已宣判" : "未宣判"
-  = " | "
-  = link_to "進入單一案件評鑑紀錄頁", lawyer_story_path(s)
-  br
-
-
+        tbody
+          - @stories.each do |s|
+            tr
+              td = "#{s.year}-#{s.word_type}-#{s.number}"
+              td = s.court.code
+              td = s.is_pronounce ? "已宣判" : "未宣判"
+              td
+                = link_to inline_svg('forwards'), lawyer_story_path(s)

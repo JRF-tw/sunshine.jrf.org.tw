@@ -84,7 +84,7 @@
 }
 
 .story-collapse {
-  margin: r(2) r(-2) n();
+  margin: r(2) r(-2) r(-2);
   padding-top: r(3);
   text-align: center;
   position: relative;
@@ -118,7 +118,7 @@
 .story-list { margin: n() r(-2); }
 .story-list__heading {
   padding: r(1) r(2);
-  margin: 0 n();
+  margin-bottom: 0;
   text: $white ms(1);
   background-color: $accent;
   @include susy($tablet) {
