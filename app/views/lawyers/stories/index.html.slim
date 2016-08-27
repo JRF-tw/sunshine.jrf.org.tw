@@ -1,9 +1,17 @@
 = render layout: 'components/card', locals: { heading: "評鑑紀錄", wide: true }
   .story-buttons
-    = link_to "個人資訊頁", lawyer_profile_path, class: 'story-button'
-    = button_tag "我要評鑑", class: 'story-button',
+    = link_to lawyer_profile_path, class: 'story-button'
+      = inline_svg 'user'
+      .text 個人資訊頁
+
+    = button_tag class: 'story-button',
       type: 'button'
-    = link_to "評鑑報表", scores_path, class: 'story-button'
+      = inline_svg 'star'
+      .text 我要評鑑
+
+    = link_to scores_path, class: 'story-button'
+      = inline_svg 'chart'
+      .text 評鑑報表
   
   #story-collapse.story-collapse
     = render partial: 'chose_type'
