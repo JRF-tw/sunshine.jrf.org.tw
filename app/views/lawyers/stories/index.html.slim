@@ -1,13 +1,31 @@
-= "律師個人評鑑紀錄頁"
-br
-= link_to "個人資訊頁", lawyer_profile_path
-br
-= link_to "我要評鑑", "#"
-br
-= render partial: 'chose_type'
-br
-= link_to "最新評鑑報表", scores_path
-br
+= render layout: 'components/card', locals: { heading: "評鑑紀錄", wide: true }
+  .story-buttons
+    = link_to "個人資訊頁", lawyer_profile_path, class: 'story-button'
+    = button_tag "我要評鑑", class: 'story-button',
+      type: 'button'
+    = link_to "評鑑報表", scores_path, class: 'story-button'
+  
+  #story-collapse.story-collapse
+    = render partial: 'chose_type'
+
+  section.story-list
+    h3.story-list__heading 已評鑑紀錄及待評鑑案件
+
+    table.story-list__table
+      thead
+        tr
+          th 年度-字號-案號
+          th 法院代碼
+          th 是否已宣判
+
+      tbody
+        tr
+          td 105-簡-74
+          td TPA
+          td 未判決
+          td
+            = link_to inline_svg('forwards'), '#'
+
 - @stories.each do |s|
   = "#{s.year}-#{s.word_type}-#{s.number}"
   = " | "
