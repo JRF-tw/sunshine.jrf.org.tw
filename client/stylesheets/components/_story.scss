@@ -61,3 +61,35 @@
     text: bold currentColor;
   }
 }
+
+.story-collapse {
+  margin: r(2) r(-2) n();
+  padding-top: r(3);
+  position: relative;
+  text-align: center;
+  background-image: linear-gradient(to bottom, #019CB0 0%, #00BCD4 100%);  
+  &::before {
+    $size: 17px;
+    content: "";
+    top: - round($size/2);
+    @include scut-triangle(up, $size, #019CB0);
+    @include scut-center-transform(x);
+  }
+}
+.story-collapse__button-wrapper {
+  display: inline-flex;
+  flex-flow: column nowrap;
+  align-items: flex-end;
+  & + & { margin-left: r(4); }
+
+  .hint {
+    @include Normalize();
+    size: 45px;
+    text-align: right;
+  }
+  .icon {
+    size: 12px;
+    fill: $white;
+    vertical-align: top;
+  }
+}
