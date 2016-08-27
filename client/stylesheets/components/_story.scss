@@ -5,15 +5,17 @@
   padding: r(2) n();
   @include susy($tablet) {
     padding: n() r(2);
+    justify-content: space-around;
   }
 }
 
 .story-button {
-  $gutter: 1.5;
+  $size: span(3 of 9 1.5);
   @include Normalize();
-  width: span(3 of 9 $gutter);
-  padding-top: span(3 of 9 $gutter);
+  width: $size;
+  padding-top: $size;
   position: relative;
+  overflow: hidden;
   border: 1px solid $divider-gray;
   border-radius: 50%;
   text: center $link-color;
@@ -21,10 +23,27 @@
     $size: 160px;
     width: $size;
     padding-top: $size;
+    &:hover,
+    &.active {
+      color: $white;
+      &::before { transform: none; }
+    }
+  }
+  &::before {
+    content: "";
+    display: block;
+    size: 100%;
+    background-color: $link-color;
+    position: absolute 0 n() n() 0;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: all .3s ease 0s;
   }
 
   .wrapper {
     @include scut-center-transform();
+    width: 100%;
+    @include susy($tablet) { width: auto; }
   }
   
   .icon {
