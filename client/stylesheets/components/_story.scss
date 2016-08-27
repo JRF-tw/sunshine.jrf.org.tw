@@ -6,6 +6,9 @@
   @include susy($tablet) {
     padding: n() r(2);
     justify-content: space-around;
+    &.extracted {
+      justify-content: center;
+    }
   }
 }
 
@@ -20,14 +23,27 @@
   border-radius: 50%;
   text: center $link-color;
   fill: currentColor;  
-  transition: all .3s ease 0s;
+  transition: all .3s ease-in-out 0s;
   @include susy($tablet) {
     $size: 160px;
     width: $size;
     padding-top: $size;
-    &:hover, &.active {
+    &:hover {
       color: $white;
       &::before { transform: none; }
+    }
+    .extracted & {
+      $size: 86px;
+      width: $size;
+      padding-top: $size;
+      margin: n() r(1);
+
+      .icon {
+        size: 0;
+        margin-bottom: 0;
+      }
+
+      .wrapper { width: 100%; }
     }
   }
   &:focus { border-color: $link-color; }
@@ -39,7 +55,11 @@
     position: absolute 0 n() n() 0;
     border-radius: 50%;
     transform: scale(0);
-    transition: all .3s ease 0s;
+    transition: all .3s ease-in-out 0s;
+  }
+  &.active {
+    color: $white;
+    &::before { transform: none; }
   }
 
   .wrapper {

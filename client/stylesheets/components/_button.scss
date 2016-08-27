@@ -54,5 +54,6 @@
   @extend %base;
   text: $white center bold;
   border: 2px solid $white;
+  transition: all .3s ease 0s;
   @include scut-selected { color: $link-color $white; }
 }
