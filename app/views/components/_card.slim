@@ -5,16 +5,16 @@ ruby:
   case type
   when 'lawyer'
     title    = '律師'
-    name     = current_lawyer.name
-    username = current_lawyer.email
+    name     = current_lawyer ? current_lawyer.name : name
+    username = current_lawyer ? current_lawyer.email : email
   when 'party'
     title    = '當事人'
     name     = current_party ? current_party.name : name
-    username = current_party ? current_party.identify_number : username
+    username = current_party ? current_party.identify_number : identify_number
   when 'observer'
     title    = '法庭觀察者'
-    name     = current_court_observer.name
-    username = current_court_observer.email
+    name     = current_court_observer ? current_court_observer.name : name
+    username = current_court_observer ? current_court_observer.email : email
   else
   end  
 
