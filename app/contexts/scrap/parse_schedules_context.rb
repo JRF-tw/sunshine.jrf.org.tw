@@ -66,6 +66,6 @@ class Scrap::ParseSchedulesContext < BaseContext
 
     hours = (time_string[0] + time_string[1]).to_i
     minutes = (time_string[2] + time_string[3]).to_i
-    DateTime.new(year, split_date[1], split_date[2], hours, minutes, 0, '+8')
+    DateTime.new(year, split_date[1], split_date[2], hours, minutes, 0, "+8")
   end
 end

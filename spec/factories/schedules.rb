@@ -18,6 +18,8 @@ FactoryGirl.define do
   factory :schedule do
     branch_name "股別名稱"
     start_on { Date.current }
+    start_at { Date.current }
+    courtroom "鋼鐵教廷"
     court { create :court }
     story { create :story }
 
