@@ -1,15 +1,25 @@
-= "當事人評鑑庭期開庭頁"
-- unless @status
-  = render "input_info"
+- max_steps = 4
 
-- if @status == "checked_info"
-  = render "input_date"
+= render layout: 'components/card', locals: {\
+  heading: '評鑑開庭', wide: (true if @status)\
+}
 
-- if @status == "checked_date"
-  = render "input_judge"
+  - case @status
 
-- if @status == "checked_judge"
-  = render "start_score"
+  - when 'checked_info'
+    = render 'input_date'
 
-- if @status == "thanks_scored"
-  = render "thanks_scored"
+  - when 'checked_date'
+    = render 'input_judge'
+
+  - when 'checked_judge'
+    = render 'start_score'
+
+  - when 'thanks_scored'
+    = render 'thanks_scored'
+  
+  - else
+    = render 'components/input_score_info',
+      step_text: '選擇法院/案號', step_count: 1, max_steps: max_steps,
+      form_for: @schedule_score,
+      form_url: checked_info_party_score_schedules_path
