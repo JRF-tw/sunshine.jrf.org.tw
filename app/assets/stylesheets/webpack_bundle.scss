@@ -1629,6 +1629,10 @@ img.mfp-img {
   .has-info .card__heading {
     top: -136px;
   }
+
+  .card__heading + .card__message {
+    margin-top: 0;
+  }
 }
 
 .card__info {
@@ -1739,7 +1743,8 @@ img.mfp-img {
   position: absolute;
 }
 
-.form-group.has-error {
+.form-group.has-error,
+.form-group.has-hint {
   margin-bottom: 40px;
 }
 
@@ -1967,11 +1972,21 @@ abbr[title="required"] {
   position: absolute;
 }
 
-.help-block {
+.help-block--error,
+.help-block--hint {
   margin: 0;
   color: #d9534f;
+  font-weight: 700;
   bottom: -24px;
   position: absolute;
+}
+
+.help-block--hint {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.has-error .help-block--hint {
+  display: none;
 }
 
 /*
