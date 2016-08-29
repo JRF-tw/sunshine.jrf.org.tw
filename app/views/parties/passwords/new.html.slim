@@ -1,9 +1,1 @@
-h2 當事人忘記密碼
-= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
-  = f.error_notification
-  .form-inputs
-    = f.input :identify_number, required: true
-  .form-inputs
-    = f.input :phone_number, required: true
-  .form-actions
-    = f.button :submit, "寄送認證簡訊"
+= render 'components/forgot_password_card', type: 'party', resource: resource
