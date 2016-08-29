@@ -2345,6 +2345,53 @@ abbr[title="required"] {
 * Docs at http://davidtheclark.github.io/scut
 */
 
+.step-meter {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+  -webkit-align-items: flex-end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  margin: 32px auto 40px;
+}
+
+.step-meter__heading {
+  color: rgba(0, 0, 0, 0.54);
+  font-weight: 400;
+  text-align: center;
+  margin: 0 auto 24px;
+  width: 100%;
+}
+
+.step-meter__count {
+  width: 32px;
+  height: 1px;
+  margin-right: 2px;
+  margin-left: 2px;
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.step-meter__count.active {
+  height: 2px;
+  background-color: #00bcd4;
+}
+
+/*
+* Scut, a collection of Sass utilities
+* to ease and improve our implementations of common style-code patterns.
+* v1.4.0
+* Docs at http://davidtheclark.github.io/scut
+*/
+
 .story-buttons {
   display: -webkit-box;
   display: -webkit-flex;
@@ -2863,5 +2910,16 @@ body.who-are-you {
     height: 60%;
     top: 65%;
   }
+}
+
+/*
+* Scut, a collection of Sass utilities
+* to ease and improve our implementations of common style-code patterns.
+* v1.4.0
+* Docs at http://davidtheclark.github.io/scut
+*/
+
+.form--score .form-actions {
+  text-align: right;
 }
 
