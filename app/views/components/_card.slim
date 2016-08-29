@@ -10,7 +10,7 @@ ruby:
   when 'party'
     title    = '當事人'
     name     = current_party ? current_party.name : name
-    username = current_party ? current_party.identify_number : username
+    username = current_party ? current_party.identify_number : identify_number
   when 'observer'
     title    = '法庭觀察者'
     name     = current_court_observer ? current_court_observer.name : name
