@@ -1,0 +1,21 @@
+.step-meter {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: flex-end;
+  margin: r(4) auto r(5);
+}
+.step-meter__heading {
+  text: $text-secondary 400 center;
+  margin: 0 auto r(3);
+  width: 100%;
+}
+.step-meter__count {
+  size: 32px 1px;
+  margin: n() 2px;
+  background-color: $divider-gray;
+  &.active {
+    height: 2px;
+    background-color: $accent;
+  }
+}
