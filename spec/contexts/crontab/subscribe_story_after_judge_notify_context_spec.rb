@@ -11,7 +11,7 @@ describe Crontab::SubscribeStoryAfterJudgeNotifyContext do
 
     context "find after judge story" do
       subject { described_class.new(Time.zone.today) }
-      it { expect(subject.perform.first.schedules.last.date).to eq(Time.zone.yesterday) }
+      it { expect(subject.perform.first.schedules.last.start_on).to eq(Time.zone.yesterday) }
     end
   end
 

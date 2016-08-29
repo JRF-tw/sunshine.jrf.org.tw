@@ -105,7 +105,7 @@ describe "法官評鑑 - 評鑑紀錄", type: :request do
 
       it "Then 庭期表依日期的每一次開庭新增項目都會出現在「待評鑑」" do
         expect(response.body).to match("新增開庭評鑑")
-        expect(response.body).to match(schedule1.date.to_s)
+        expect(response.body).to match(schedule1.start_on.to_s)
       end
 
       it "Then 開庭評鑑記錄，會出現在「已評鑑」區塊內" do

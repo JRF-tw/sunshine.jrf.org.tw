@@ -3,7 +3,7 @@ class PartyMailer < ApplicationMailer
     @story = Story.find(story_id)
     @party = Party.find(party_id)
     @subject = @story.detail_info + "開庭通知"
-    @date = @story.schedules.last.date
+    @date = @story.schedules.last.start_on
     mail(to: @party.email, subject: @subject)
   end
 
