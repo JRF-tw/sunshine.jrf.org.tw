@@ -1,0 +1,9 @@
+- link = link ? link : false
+
+.form-actions
+  - if link
+    = link_to link[:text], link[:href], class: "flat-button"
+
+  = f.button :button, submit, class: "raised-button"
+
+  = yield

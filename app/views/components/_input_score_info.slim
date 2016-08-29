@@ -1,0 +1,13 @@
+= render 'components/step_meter', text: step_text, count: step_count, max: max_steps
+
+= simple_form_for form_for, as: :schedule_score, url: form_url,
+  wrapper: :md, html: { method: :post, class: 'form--score' } do |f|
+
+  = f.input :court_id, as: :select,
+    collection: collect_for_courts, include_blank: "請選擇法院",
+    label: "法院"
+  = f.input :year, label: "年度"
+  = f.input :word_type, label: "字號"
+  = f.input :number, label: "案號"
+  
+  = render 'components/score_form_actions', f: f, submit: '下一步'

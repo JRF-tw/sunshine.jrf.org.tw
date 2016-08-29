@@ -20,3 +20,4 @@ require 'components/_step-meter.scss'
 
 require 'pages/_story.scss'
 require 'pages/_who-are-you.scss'
+require 'pages/_score.scss'
