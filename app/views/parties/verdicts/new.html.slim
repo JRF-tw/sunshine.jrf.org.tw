@@ -1,9 +1,20 @@
-= "當事人判決評鑑"
-- unless @status
-  = render "input_info"
+- max_steps = 3
 
-- if @status == "checked_info"
-  = render "input_judge"
+= render layout: 'components/card', locals: {\
+  heading: '評鑑判決', wide: (true if @status)\
+}
 
-- if @status == "checked_judge"
-  = render "start_score"
+  - case @status
+
+  - when 'checked_info'
+    = render 'input_judge'
+
+  - when 'checked_judge'
+    = render 'start_score'
+  
+  - else
+    = render 'components/input_score_info',
+      step_text: '選擇法院/案號', step_count: 1, max_steps: max_steps,
+      as: :verdict_score,
+      form_for: @verdict_score,
+      form_url: checked_info_party_score_verdicts_path
