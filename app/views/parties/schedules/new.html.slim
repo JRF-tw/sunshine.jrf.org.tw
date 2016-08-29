@@ -21,5 +21,6 @@
   - else
     = render 'components/input_score_info',
       step_text: '選擇法院/案號', step_count: 1, max_steps: max_steps,
+      as: :schedule_score,
       form_for: @schedule_score,
       form_url: checked_info_party_score_schedules_path
