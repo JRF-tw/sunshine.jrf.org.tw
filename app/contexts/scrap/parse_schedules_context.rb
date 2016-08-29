@@ -50,7 +50,9 @@ class Scrap::ParseSchedulesContext < BaseContext
         year: row_data[2].text.strip.to_i,
         word_type: row_data[3].text.strip,
         number: row_data[4].text.squish,
-        date: convert_scrap_time(row_data[5].text.strip),
+        start_at: convert_scrap_time(row_data[5].text.strip, row_data[6].text.strip),
+        start_on: convert_scrap_time(row_data[5].text.strip, row_data[6].text.strip).to_date,
+        courtroom: row_data[7].text.strip,
         branch_name: row_data[8].text.strip,
         is_pronounce: row_data[9].text.strip.match("宣判").present?
       }
@@ -58,9 +60,12 @@ class Scrap::ParseSchedulesContext < BaseContext
     end
   end
 
-  def convert_scrap_time(date_string)
-    split_array = date_string.split("/").map(&:to_i)
-    year = split_array[0] + 1911
-    Date.new(year, split_array[1], split_array[2])
+  def convert_scrap_time(date_string, time_string)
+    split_date = date_string.split("/").map(&:to_i)
+    year = split_date[0] + 1911
+
+    hours = (time_string[0] + time_string[1]).to_i
+    minutes = (time_string[2] + time_string[3]).to_i
+    DateTime.new(year, split_date[1], split_date[2], hours, minutes, 0, '+8')
   end
 end

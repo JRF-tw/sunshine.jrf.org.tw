@@ -20,7 +20,7 @@ class Scrap::ImportScheduleContext < BaseContext
   def perform(hash)
     @hash = hash
     run_callbacks :perform do
-      @schedule = @story.schedules.find_or_create_by(court: @court, branch_name: @branch_name, date: @date, branch_judge: @main_judge)
+      @schedule = @story.schedules.find_or_create_by(court: @court, branch_name: @branch_name, start_on: @start_on, branch_judge: @main_judge, courtroom: @courtroom)
     end
   end
 
@@ -36,8 +36,10 @@ class Scrap::ImportScheduleContext < BaseContext
     @year         = @hash[:year]
     @word_type    = @hash[:word_type]
     @number       = @hash[:number]
-    @date         = @hash[:date]
+    @start_on     = @hash[:start_on]
+    @start_at     = @hash[:start_at]
     @branch_name  = @hash[:branch_name]
+    @courtroom    = @hash[:courtroom]
   end
 
   def get_main_judge
@@ -57,7 +59,7 @@ class Scrap::ImportScheduleContext < BaseContext
 
   def update_story_pronounce_date
     unless @story.pronounce_date
-      @story.update_attributes(pronounce_date: @date) if @is_pronounce
+      @story.update_attributes(pronounce_date: @start_on) if @is_pronounce
     end
   end
 
