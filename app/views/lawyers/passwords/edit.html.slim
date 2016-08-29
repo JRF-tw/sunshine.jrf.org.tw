@@ -1,15 +1,17 @@
-h2 律師設定密碼
-div = "律師 #{@lawyer_by_token.name}(#{@lawyer_by_token.email})" if @lawyer_by_token
-= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
-  = f.error_notification
+= render layout: 'components/card', locals: {\
+  heading: '設定密碼', type: 'lawyer',
+  name: @lawyer_by_token.name,
+  email: @lawyer_by_token.email\
+}
+  = simple_form_for resource, as: resource_name,
+    url: password_path(resource_name), html: { method: :put },
+    wrapper: :md do |f|
+    
+    = f.input :reset_password_token, as: :hidden
 
-  = f.input :reset_password_token, as: :hidden
-  = f.full_error :reset_password_token
-
-  .form-inputs
-    = f.input :password, label: "新密碼", required: true, hint: ("最少為#{@minimum_password_length}字元" if @minimum_password_length)
+    = f.input :password, label: "新密碼", required: true,
+      hint: ("最少為#{@minimum_password_length}字元" if @minimum_password_length),
+      wrapper_html: {class: 'has-hint'}
     = f.input :password_confirmation, label: "新密碼確認", required: true
 
-  .form-actions
-    = f.button :submit, "送出"
-
+    = render 'components/form_actions', f: f, submit: '送出'
