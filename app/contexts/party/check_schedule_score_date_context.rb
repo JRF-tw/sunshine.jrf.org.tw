@@ -42,7 +42,7 @@ class Party::CheckScheduleScoreDateContext < BaseContext
   end
 
   def find_schedule
-    return add_error(:data_not_found, "庭期比對失敗") unless @schedule = @story.schedules.where(start_on: @params[:date]).last
+    return add_error(:data_not_found, "庭期比對失敗") unless @schedule = @story.schedules.find_by_start_on(@params[:date])
   end
 
   def valid_score_intervel
