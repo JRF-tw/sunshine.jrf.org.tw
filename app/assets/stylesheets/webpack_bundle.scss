@@ -637,6 +637,10 @@ img[data-sizes="auto"]:not(.slick-slide) {
   text-align: center;
 }
 
+.text-right {
+  text-align: right;
+}
+
 .hidden {
   display: none !important;
   visibility: hidden;
@@ -1962,6 +1966,10 @@ select:focus + .control-label::before {
           transform: scaleX(1);
 }
 
+select:disabled {
+  color: rgba(0, 0, 0, 0.54);
+}
+
 abbr[title="required"] {
   display: none;
 }
@@ -2383,6 +2391,75 @@ abbr[title="required"] {
 .step-meter__count.active {
   height: 2px;
   background-color: #00bcd4;
+}
+
+/*
+* Scut, a collection of Sass utilities
+* to ease and improve our implementations of common style-code patterns.
+* v1.4.0
+* Docs at http://davidtheclark.github.io/scut
+*/
+
+.ui-datepicker .ui-datepicker-next,
+.ui-datepicker .ui-datepicker-prev {
+  top: 2px;
+  border-radius: 3px !important;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.ui-datepicker.ui-widget-content {
+  padding: 8px 8px 3px;
+  border: none;
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.12), 0px 8px 8px 0px rgba(0, 0, 0, 0.24);
+}
+
+.ui-datepicker.ui-corner-all {
+  border-radius: 3px !important;
+}
+
+.ui-datepicker .ui-widget-header {
+  background: none transparent;
+  border: none;
+}
+
+.ui-datepicker .ui-datepicker-title {
+  color: rgba(0, 0, 0, 0.54);
+  font-weight: 400;
+}
+
+.ui-datepicker .ui-state-default {
+  text-align: center;
+  border: none;
+  background: none transparent;
+}
+
+.ui-datepicker .ui-state-default:hover {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.ui-datepicker .ui-state-highlight {
+  color: #fff;
+  background-color: #00bcd4;
+  border-radius: 3px;
+}
+
+.ui-datepicker .ui-state-highlight.ui-state-hover {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.ui-datepicker .ui-state-hover {
+  border: none;
+  background: none rgba(0, 0, 0, 0.12);
+  border-radius: 3px !important;
+}
+
+.ui-datepicker .ui-datepicker-next {
+  right: 4px;
+}
+
+.ui-datepicker .ui-datepicker-prev {
+  left: 4px;
 }
 
 /*
@@ -2919,7 +2996,54 @@ body.who-are-you {
 * Docs at http://davidtheclark.github.io/scut
 */
 
-.form--score .form-actions {
-  text-align: right;
+@media (min-width: 768px) {
+  .form--score {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    padding-right: 32px;
+    padding-bottom: 16px;
+    padding-left: 32px;
+  }
+}
+
+.form--score__preview {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .form--score__preview {
+    display: block;
+    padding-right: 48px;
+    width: 50%;
+  }
+}
+
+@media (min-width: 768px) {
+  .form--score__editor {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: column nowrap;
+        -ms-flex-flow: column nowrap;
+            flex-flow: column nowrap;
+    padding-left: 48px;
+    width: 50%;
+    border-left: 1px solid rgba(0, 0, 0, 0.12);
+  }
+
+  .form--score__editor .form-actions {
+    margin-top: auto;
+  }
+
+  .form--score__editor .form-actions .flat-button {
+    margin-right: 8px;
+  }
 }
 
