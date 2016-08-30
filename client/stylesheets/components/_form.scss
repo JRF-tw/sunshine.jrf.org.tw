@@ -115,6 +115,7 @@ select {
   size: 100% 34px;
   outline: none;
   &:focus + .control-label::before { transform: scaleX(1); }
+  &:disabled { color: $text-secondary; }
 }
 
 abbr[title="required"] { display: none; }

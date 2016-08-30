@@ -1,3 +1,30 @@
 .form--score {
-  .form-actions { text-align: right; }
+  @include susy($tablet) {
+    display: flex;
+    justify-content: space-between;
+    padding: n() r(4) r(2);
+  }
+}
+.form--score__preview {
+  display: none;
+  @include susy($tablet) {
+    display: block;
+    padding-right: r(6);
+    width: 50%;
+  }
+}
+.form--score__editor {
+  @include susy($tablet) {
+    display: flex;
+    flex-flow: column nowrap;
+    padding-left: r(6);
+    width: 50%;
+    border-left: 1px solid $divider-gray;
+
+    .form-actions {
+      margin-top: auto;
+
+      .flat-button { margin-right: r(1); }
+    }
+  }
 }
