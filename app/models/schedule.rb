@@ -21,4 +21,5 @@ class Schedule < ActiveRecord::Base
   has_many :schedule_scores
 
   scope :newest, -> { order("id DESC") }
+  scope :on_day, ->(day) { where(start_on: day) }
 end
