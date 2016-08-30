@@ -2,16 +2,18 @@
 #
 # Table name: suits
 #
-#  id         :integer          not null, primary key
-#  title      :string(255)
-#  summary    :text
-#  content    :text
-#  state      :string(255)
-#  pic        :string(255)
-#  suit_no    :integer
-#  keyword    :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  id              :integer          not null, primary key
+#  title           :string
+#  summary         :text
+#  content         :text
+#  state           :string
+#  pic             :string
+#  suit_no         :integer
+#  keyword         :string
+#  created_at      :datetime
+#  updated_at      :datetime
+#  is_hidden       :boolean
+#  procedure_count :integer          default(0)
 #
 
 require "rails_helper"

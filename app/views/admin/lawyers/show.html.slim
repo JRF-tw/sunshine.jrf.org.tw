@@ -10,13 +10,16 @@
     tbody
       tr
         td 姓名
-        td= @lawyer.name
+        td = @lawyer.name
       tr
         td email
-        td= @lawyer.email
+        td = @lawyer.email
+      tr
+        td 是否已訂閱電子報
+        td = @lawyer.subscribe_edm? ? "已訂閱" : "未訂閱"
       tr
         td 現職
-        td= @lawyer.current
+        td = @lawyer.current
       tr
         td 手機
         td = @lawyer.phone_number
@@ -37,7 +40,7 @@
           = "民國#{@lawyer.birth_year}年"
       tr
         td 狀態
-        td= @lawyer.confirmed? ? "已註冊" : "未註冊"
+        td = @lawyer.confirmed? ? "已註冊" : "未註冊"
       tr
         td 備註
-        td= @lawyer.memo
+        td = @lawyer.memo

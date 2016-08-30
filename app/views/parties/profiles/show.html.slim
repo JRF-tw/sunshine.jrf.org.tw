@@ -15,3 +15,6 @@
     locals: {title: '個人基本資料', path: '/party/profile/edit'}
     = kv_cell '姓名', current_party.name
     = kv_cell '身分證字號', current_party.identify_number
+
+.js-subscribe-edm
+  = render partial: "parties/edms/subscribe_edm"

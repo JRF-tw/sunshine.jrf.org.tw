@@ -17,8 +17,8 @@
 FactoryGirl.define do
   factory :court do
     court_type "法院"
-    full_name "‎臺灣新北地方法院"
-    name "‎新北地院"
+    sequence(:full_name) { |n| "測試法院-#{n}" }
+    sequence(:name) { |n| "測試地院-#{n}" }
     code "TPK"
     sequence(:scrap_name) { |n| "faker-court-#{n}" }
   end

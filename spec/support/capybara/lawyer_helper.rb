@@ -1,12 +1,5 @@
 module Capybara
   module LawyerHelper
-    def lawyer_subscribe_story_date_today
-      lawyer = create(:lawyer, :with_confirmed, :with_password)
-      story = create(:story, :with_schedule_date_today)
-      Lawyer::StorySubscriptionCreateContext.new(story).perform(lawyer)
-      lawyer
-    end
-
     def capybara_register_lawyer(lawyer_data = nil)
       lawyer_data ||= { name: "孔令則", phone: 33_381_841, email: "kungls@hotmail.com" }
       lawyer = Import::CreateLawyerContext.new(lawyer_data).perform
@@ -25,7 +18,7 @@ module Capybara
         fill_in "lawyer_password", with: password
       end
       click_button "登入"
-      @current_lawyer
+      lawyer
     end
 
     def capybara_submit_password_lawyer(password:)

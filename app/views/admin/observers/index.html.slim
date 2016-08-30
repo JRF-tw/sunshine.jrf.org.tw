@@ -1,33 +1,38 @@
 - content_for :btns do
-  = link_to "下載 excel 檔", admin_observers_path(params.slice(:q).merge(format: :xlsx)), :class => "btn btn-success"
-= search_form_for @search, :url => admin_observers_path, :wrapper => :admin, :html => { :class => "form-horizontal" } do |f|
+  = link_to "下載 excel 檔", admin_observers_path(params.slice(:q).merge(format: :xlsx)), class: "btn btn-success"
+= search_form_for @search, url: admin_observers_path, wrapper: :admin, html: { class: "form-horizontal" } do |f|
   .well
     fieldset
       legend 搜尋
       .row
         .span6
           .control-group
-            label.control-label= f.label :name_cont
-            .controls= f.search_field :name_cont
+            label.control-label = f.label :name_cont
+            .controls = f.search_field :name_cont
         .span6
           .control-group
-            label.control-label= f.label :email_cont
-            .controls= f.search_field :email_cont
+            label.control-label = f.label :email_cont
+            .controls = f.search_field :email_cont
       .row
         .span6
           .control-group
-            label.control-label= f.label :school_cont
-            .controls= f.search_field :school_cont
+            label.control-label = f.label :school_cont
+            .controls = f.search_field :school_cont
         .span6
           .control-group
-            label.control-label= f.label :department_level_cont
-            .controls= f.search_field :department_level_cont
+            label.control-label = f.label :department_level_cont
+            .controls = f.search_field :department_level_cont
       .row
         .span6
             .control-group#datepicker
-              label.control-label= f.label :last_scored_at_gteq
-              .controls= f.search_field :last_scored_at_gteq, placeholder: "起始時間，非必填"
-              .controls= f.search_field :last_scored_at_lteq, placeholder: "結束時間，非必填"
+              label.control-label = f.label :last_scored_at_gteq
+              .controls = f.search_field :last_scored_at_gteq, placeholder: "起始時間，非必填"
+              .controls = f.search_field :last_scored_at_lteq, placeholder: "結束時間，非必填"
+        .span6
+          .control-group
+            label.control-label = f.label :subscribe_edm_true
+            .controls = f.select :subscribe_edm_true,
+            collect_for_boolean, include_blank: "請選擇"
     hr
     .form-actions
       = f.submit :value => "搜尋", :class => "btn btn-primary"
@@ -45,17 +50,19 @@
           th 學校
           th 系級
           th Email
+          th 是否訂閱電子報
           th 學校
           th 操作
       tbody
         - @court_observers.each do |court_observer|
           tr
-            td= court_observer.id
-            td= court_observer.name
-            td= court_observer.school
-            td= court_observer.department_level
-            td= court_observer.email
-            td= court_observer.school
+            td = court_observer.id
+            td = court_observer.name
+            td = court_observer.school
+            td = court_observer.department_level
+            td = court_observer.email
+            td = court_observer.subscribe_edm? ? "已訂閱" : "未訂閱"
+            td = court_observer.school
             td
               = link_to "詳細資料", admin_observer_path(court_observer), class: "btn btn-mini"
               = " "
