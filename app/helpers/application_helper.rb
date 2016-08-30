@@ -232,7 +232,7 @@ module ApplicationHelper
   end
 
   def render_html(text)
-    text = simple_format(text, {}, wrapper_tag: 'div')
-    raw text
+    text = simple_format(text, {}, wrapper_tag: "div")
+    safe_join([text], "")
   end
 end

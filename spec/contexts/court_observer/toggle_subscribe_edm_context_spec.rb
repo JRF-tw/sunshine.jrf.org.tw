@@ -7,12 +7,12 @@ describe CourtObserver::ToggleSubscribeEdmContext do
   context "perform" do
     context "success" do
       it { expect(subject.perform).to be_truthy }
-      it { expect{ subject.perform }.to change { court_observer.reload.subscribe_edm } }
+      it { expect { subject.perform }.to change { court_observer.reload.subscribe_edm } }
     end
 
     context "toggle to false" do
       before { subject.perform }
-      it { expect{ subject.perform }.to change { court_observer.reload.subscribe_edm }.from(true).to(false) }
+      it { expect { subject.perform }.to change { court_observer.reload.subscribe_edm }.from(true).to(false) }
     end
   end
 end

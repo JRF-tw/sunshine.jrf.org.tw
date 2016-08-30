@@ -16,7 +16,7 @@ class Party::ToggleSubscribeEdmContext < BaseContext
   private
 
   def check_confirm
-    return add_error(:data_update_fail, "訂閱失敗 : 尚未驗證Email") unless (@party.confirmed? || @party.subscribe_edm)
+    return add_error(:data_update_fail, "訂閱失敗 : 尚未驗證Email") unless @party.confirmed? || @party.subscribe_edm
   end
 
   def assign_value
