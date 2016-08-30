@@ -41,6 +41,9 @@ $(document).on "page:change", ->
         $main_header.removeClass 'has-background'
     offset: -> $main_header.height()
 
+  # Let cached input value trigger 'is-focus'
+  $('.form-control:not([autofocus])').trigger 'blur'
+
   # Datepicker
   $("input.datepicker").each (input) ->
     $(@).datepicker

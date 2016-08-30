@@ -55,8 +55,7 @@ $error-rhythm: r(3);
   box-shadow: none;
   outline: none;
   &:focus,
-  &:not(:disabled):active, 
-  &:not(:readonly):active {
+  &:not(:disabled):active {
     + .control-label::before { transform: scaleX(1); }
   }
   &:-webkit-autofill {
@@ -72,8 +71,7 @@ $error-rhythm: r(3);
   text: $gray 1.25;
   position: absolute ($input-rhythm * 2) 0 0 0;
   transition: all .3s ease 0s;
-  &.disabled,
-  .readonly & { color: $text-disabled !important; }
+  &.disabled { color: $text-disabled !important; }
   &::before {
     content: "";
     display: block;
@@ -82,6 +80,10 @@ $error-rhythm: r(3);
     position: absolute n() 0 0 0;
     transform: scaleX(0);
     transition: transform .3s ease 0s;
+  }
+  .readonly & {
+    color: $text-disabled !important;
+    &::before { opacity: 0; }
   }
   .is-focused &,
   input:-webkit-autofill + &,
