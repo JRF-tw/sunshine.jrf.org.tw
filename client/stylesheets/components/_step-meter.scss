@@ -14,8 +14,12 @@
   size: 32px 1px;
   margin: n() 2px;
   background-color: $divider-gray;
-  &.active {
+  &.active,
+  &.current {
     height: 2px;
     background-color: $accent;
+  }
+  &.current {
+    animation: bounceIn 1.5s ease 0s both;
   }
 }

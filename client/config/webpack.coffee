@@ -42,7 +42,10 @@ module.exports = (env) ->
         "../img/loading.gif": "webui-popover/img/loading.gif"
     
     entry:
-      main: './index.coffee'        
+      main: [
+        'animate-css-webpack!./config/animate-css.js'
+        './index.coffee'
+      ]
     
     output:
       path: path_to.assets

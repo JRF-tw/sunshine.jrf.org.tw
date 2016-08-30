@@ -2,4 +2,13 @@
   h3.step-meter__heading = text
 
   - 1.upto max do |i|
-    .step-meter__count class=('active' if i <= count)
+    ruby:
+      class_name = if i < count
+        'active'
+      elsif i == count
+        'current'
+      else
+        ''
+      end
+    
+    .step-meter__count class=class_name
