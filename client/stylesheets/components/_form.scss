@@ -104,7 +104,7 @@ $error-rhythm: r(3);
     border-radius: 2px;
     size: 18px;
     background-color: #fff;
-    position: relative 3px n() n() n();
+    position: relative 4px n() n() n();
   }
   &:checked::after {
     background: url(checked.svg) 50% 50% / contain no-repeat;

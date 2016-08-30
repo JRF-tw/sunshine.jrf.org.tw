@@ -37,7 +37,8 @@
     "scut": "^1.4.0",
     "slick-carousel": "^1.6.0",
     "susy": "^2.2.12",
-    "waypoints": "^4.0.0"
+    "waypoints": "^4.0.0",
+    "webui-popover": "^1.2.13"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",

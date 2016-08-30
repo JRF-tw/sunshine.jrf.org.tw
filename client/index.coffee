@@ -10,6 +10,7 @@ require "modernizr"
 # require "lazysizes"
 
 require 'waypoints/lib/jquery.waypoints'
+require 'webui-popover/dist/jquery.webui-popover.js'
 
 # Require Custom Modules
 # Modal = require "./modules/modal"
@@ -46,6 +47,5 @@ $(document).on "page:change", ->
       dateFormat: "yy-mm-dd"
       altField: $(@).next()
 
-    # If you use i18n-js you can set the locale like that
-    # $(this).datepicker "option", $.datepicker.regional[I18n.currentLocale()];
-
+  # Popover
+  $('.popover-trigger').webuiPopover()

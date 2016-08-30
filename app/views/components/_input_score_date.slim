@@ -17,7 +17,12 @@
     
     .form-group
       = check_box_tag :confirmed_realdate
-      = label_tag :confirmed_realdate, "確認此日期為實際開庭日期"
+      = label_tag :confirmed_realdate do
+        | 確認此日期為實際開庭日期
+        = link_to '#', class: 'popover-trigger',
+          'data-content' => '更改庭期規則',
+          'data-placement' => 'top' do
+          = inline_svg 'info'
 
     = render 'components/score_form_actions', f: f,
       submit: '下一步',
