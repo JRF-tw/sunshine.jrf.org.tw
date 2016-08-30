@@ -1,7 +1,18 @@
+ruby:
+  case type
+  when 'lawyer'
+    story_page = '/lawyer/stories'
+  when 'party'
+    story_page = '/party/stories'
+  else
+    story_page = '/observer/stories'
+  end
+
+
 .user-info-actions
   .between
     = link_to '我要捐款', 'https://www.jrf.org.tw/donate', class: 'raised-button'
     = link_to '訂閱電子報', '#link', class: 'raised-button'
 
   .offcanvas
-    = link_to '返回個人評鑑紀錄頁', '/lawyer/stories', class: 'raised-button'
+    = link_to '返回個人評鑑紀錄頁', story_page, class: 'raised-button'
