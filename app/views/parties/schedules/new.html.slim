@@ -7,11 +7,12 @@
   - case @status
 
   - when 'checked_info'
-    = render 'input_date',
+    = render 'components/input_score_date',
       step_text: '輸入開庭日期', step_count: 2, max_steps: max_steps,
       form_for: @schedule_score,
       as: :schedule_score,
-      form_url: checked_date_party_score_schedules_path
+      form_url: checked_date_party_score_schedules_path,
+      prev_url: '#link'
 
   - when 'checked_date'
     = render 'input_judge'
