@@ -55,7 +55,8 @@ $error-rhythm: r(3);
   box-shadow: none;
   outline: none;
   &:focus,
-  &:not(:disabled):active {
+  &:not(:disabled):active, 
+  &:not(:readonly):active {
     + .control-label::before { transform: scaleX(1); }
   }
   &:-webkit-autofill {
@@ -63,14 +64,16 @@ $error-rhythm: r(3);
     box-shadow: 0 0 0 100px $white inset;
     -webkit-text-fill-color: $text-secondary;
   }
-  &:disabled { color: $text-disabled; }
+  &:disabled,
+  &.readonly { color: $text-disabled; }
 }
 
 .control-label {
   text: $gray 1.25;
   position: absolute ($input-rhythm * 2) 0 0 0;
   transition: all .3s ease 0s;
-  &.disabled { color: $text-disabled !important; }
+  &.disabled,
+  .readonly & { color: $text-disabled !important; }
   &::before {
     content: "";
     display: block;
@@ -115,7 +118,7 @@ select {
   size: 100% 34px;
   outline: none;
   &:focus + .control-label::before { transform: scaleX(1); }
-  &:disabled { color: $text-secondary; }
+  &:disabled { color: $text-disabled; }
 }
 
 abbr[title="required"] { display: none; }

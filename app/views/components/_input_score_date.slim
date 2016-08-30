@@ -2,14 +2,15 @@
 
 = simple_form_for form_for, as: as, url: form_url,
   html: { method: :post, class: 'form--score' }, wrapper: :md do |f|
+  = f.input :court_id, as: :hidden
 
   .form--score__preview
     = f.input :court_id, as: :select,
       collection: collect_for_courts, include_blank: "請選擇法院",
       label: "法院", disabled: true
-    = f.input :year, label: '年度', disabled: true
-    = f.input :word_type, label: '字號', disabled: true
-    = f.input :number, label: '案號', disabled: true
+    = f.input :year, label: '年度', readonly: true
+    = f.input :word_type, label: '字號', readonly: true
+    = f.input :number, label: '案號', readonly: true
 
   .form--score__editor
     = f.input :date, as: :datepicker, label: "開庭時間"
