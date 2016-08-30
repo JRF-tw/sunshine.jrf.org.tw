@@ -1,33 +1,27 @@
-= simple_form_for(@schedule_score, as: :schedule_score, url: checked_date_party_score_schedules_path, html: { method: :post }) do |f|
+= render 'components/step_meter', text: step_text, count: step_count, max: max_steps
+
+= simple_form_for form_for, as: as, url: form_url,
+  html: { method: :post, class: 'form--score' }, wrapper: :md do |f|
+  / = f.input :court_id, as: :hidden
+  / = f.input :year, as: :hidden
+  / = f.input :word_type, as: :hidden
+  / = f.input :number, as: :hidden
+
+  .form--score__preview
+    = f.input :court_id, as: :select,
+      collection: collect_for_courts, include_blank: "請選擇法院",
+      label: "法院", disabled: true
+    = f.input :year, label: '年度', disabled: true
+    = f.input :word_type, label: '字號', disabled: true
+    = f.input :number, label: '案號', disabled: true
+
+  .form--score__editor
+    = f.input :date, as: :datepicker, label: "開庭時間"
+    
     .form-group
-      label.control-label
-      .controls = f.input :court_id, as: :hidden
-    .form-group
-      label.control-label
-      .controls = f.input :year, as: :hidden
-    .form-group
-      label.control-label
-      .controls = f.input :word_type, as: :hidden
-    .form-group
-      label.control-label
-      .controls = f.input :number, as: :hidden
-    .form-group
-      label.control-label
-      .controls = "法院名稱 : #{get_court_fullname(@schedule_score.court_id)}"
-    .form-group
-      label.control-label
-      .controls = "年度 : #{@schedule_score.year}"
-    .form-group
-      label.control-label
-      .controls = "字號 : #{@schedule_score.word_type}"
-    .form-group
-      label.control-label
-      .controls = "案號 : #{@schedule_score.number}"
-    .form-group#datepicker
-      label.control-label
-      .controls = f.input :date, label: "開庭時間"
-    .form-group
-      label.control-label
-      .controls = f.input :confirmed_realdate, as: :boolean, label: "確認此日期為實際開庭日期"
-    .form-actions
-      input.btn.btn-primary type="submit" value="下一步"
+      = check_box_tag :confirmed_realdate
+      = label_tag :confirmed_realdate, "確認此日期為實際開庭日期"
+
+    = render 'components/score_form_actions', f: f,
+      submit: '下一步',
+      link: { text: '上一步', href: '#link' }
