@@ -46,6 +46,7 @@ $(document).on "page:change", ->
     $(@).datepicker
       dateFormat: "yy-mm-dd"
       altField: $(@).next()
+      onClose: -> $(@).trigger 'blur'
 
   # Popover
   $('.popover-trigger').webuiPopover()
