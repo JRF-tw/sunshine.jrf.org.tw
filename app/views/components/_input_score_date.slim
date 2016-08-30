@@ -13,7 +13,7 @@
     = f.input :number, label: '案號', readonly: true
 
   .form--score__editor
-    = f.input :date, as: :datepicker, label: "開庭時間"
+    = f.input :date, label: "開庭時間", input_html: { class: 'datepicker' }
     
     .form-group
       = check_box_tag :confirmed_realdate
