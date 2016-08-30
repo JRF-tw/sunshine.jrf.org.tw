@@ -39,3 +39,13 @@ $(document).on "page:change", ->
       else
         $main_header.removeClass 'has-background'
     offset: -> $main_header.height()
+
+  # Datepicker
+  $("input.datepicker").each (input) ->
+    $(@).datepicker
+      dateFormat: "yy-mm-dd"
+      altField: $(@).next()
+
+    # If you use i18n-js you can set the locale like that
+    # $(this).datepicker "option", $.datepicker.regional[I18n.currentLocale()];
+

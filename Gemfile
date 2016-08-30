@@ -30,6 +30,7 @@ gem "turbolinks"
 gem "asset_sync"
 gem "chosen-rails", "~> 1.2.0"
 gem "select2-rails"
+gem "simple-form-datepicker"
 
 # background jobs
 gem "sidekiq"
