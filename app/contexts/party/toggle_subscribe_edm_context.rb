@@ -1,4 +1,5 @@
 class Party::ToggleSubscribeEdmContext < BaseContext
+  before_perform :check_email
   before_perform :check_confirm
   before_perform :assign_value
 
@@ -15,8 +16,12 @@ class Party::ToggleSubscribeEdmContext < BaseContext
 
   private
 
+  def check_email
+    return add_error(:data_update_fail, "訂閱失敗 : 尚未驗證Email") unless @party.confirmed?
+  end
+
   def check_confirm
-    return add_error(:data_update_fail, "訂閱失敗 : 尚未驗證Email") unless @party.confirmed? || @party.subscribe_edm
+    return add_error(:data_update_fail, "訂閱失敗 : Email未填寫") unless @party.email.present?
   end
 
   def assign_value

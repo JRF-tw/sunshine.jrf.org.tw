@@ -13,4 +13,5 @@ RSpec.configure do |config|
   config.include Capybara::CommonHelper, type: :feature
   config.include Capybara::LawyerHelper, type: :feature
   config.include Capybara::ObserverHelper, type: :feature
+  config.include Capybara::PartyHelper, type: :feature
 end
