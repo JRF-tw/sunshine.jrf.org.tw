@@ -3,6 +3,7 @@
 = simple_form_for form_for, as: as, url: form_url,
   html: { method: :post, class: 'form--score' }, wrapper: :md do |f|
   = f.input :court_id, as: :hidden
+  = f.input :confirmed_realdate, as: :hidden
 
   .form--score__preview
     = f.input :court_id, as: :select,
@@ -11,19 +12,11 @@
     = f.input :year, label: '年度', readonly: true
     = f.input :word_type, label: '字號', readonly: true
     = f.input :number, label: '案號', readonly: true
+    = f.input :date, label: '開庭日期', readonly: true
 
   .form--score__editor
-    = f.input :date, label: "選擇開庭日期", input_html: { class: 'datepicker' }
+    = f.input :judge_name, label: "法官姓名"
     
-    .form-group
-      = check_box_tag :confirmed_realdate
-      = label_tag :confirmed_realdate do
-        | 確認此日期為實際開庭日期
-        = link_to '#', class: 'popover-trigger',
-          'data-content' => '更改庭期規則',
-          'data-placement' => 'top' do
-          = inline_svg 'info'
-
     = render 'components/score_form_actions', f: f,
       submit: '下一步',
       link: { text: '上一步', href: prev_url }
