@@ -2,10 +2,6 @@
 
 = simple_form_for form_for, as: as, url: form_url,
   html: { method: :post, class: 'form--score' }, wrapper: :md do |f|
-  / = f.input :court_id, as: :hidden
-  / = f.input :year, as: :hidden
-  / = f.input :word_type, as: :hidden
-  / = f.input :number, as: :hidden
 
   .form--score__preview
     = f.input :court_id, as: :select,

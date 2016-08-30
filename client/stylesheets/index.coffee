@@ -17,6 +17,7 @@ require 'components/_button.scss'
 require 'components/_alert.scss'
 require 'components/_user-info.scss'
 require 'components/_step-meter.scss'
+require 'components/_date-picker.scss'
 
 require 'pages/_story.scss'
 require 'pages/_who-are-you.scss'
