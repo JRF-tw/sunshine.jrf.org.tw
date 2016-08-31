@@ -6,16 +6,20 @@
 #  story_id        :integer
 #  court_id        :integer
 #  branch_name     :string
-#  date            :date
+#  start_on        :date
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  branch_judge_id :integer
+#  courtroom       :string
+#  start_at        :datetime
 #
 
 FactoryGirl.define do
   factory :schedule do
     branch_name "股別名稱"
-    date { Date.current }
+    start_on { Date.current }
+    start_at { Date.current }
+    courtroom "鋼鐵教廷"
     court { create :court }
     story { create :story }
 
@@ -24,11 +28,11 @@ FactoryGirl.define do
     end
 
     trait :date_is_tomorrow do
-      date { Date.tomorrow }
+      start_on { Date.tomorrow }
     end
 
     trait :date_is_yesterday do
-      date { Date.yesterday }
+      start_on { Date.yesterday }
     end
   end
 

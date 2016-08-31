@@ -29,4 +29,9 @@ RSpec.describe Schedule do
       it { expect(subject).not_to be_new_record }
     end
   end
+
+  describe "#on_day" do
+    let!(:schedule_date_tomorrow) { create :schedule, :date_is_tomorrow }
+    it { expect(Schedule.on_day(Date.tomorrow).last).to eq(schedule_date_tomorrow) }
+  end
 end

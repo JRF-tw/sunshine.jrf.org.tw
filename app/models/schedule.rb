@@ -6,10 +6,12 @@
 #  story_id        :integer
 #  court_id        :integer
 #  branch_name     :string
-#  date            :date
+#  start_on        :date
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  branch_judge_id :integer
+#  courtroom       :string
+#  start_at        :datetime
 #
 
 class Schedule < ActiveRecord::Base
@@ -19,4 +21,5 @@ class Schedule < ActiveRecord::Base
   has_many :schedule_scores
 
   scope :newest, -> { order("id DESC") }
+  scope :on_day, ->(day) { where(start_on: day) }
 end

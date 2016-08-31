@@ -4,7 +4,7 @@ br
 - unless @story.adjudge_date.present?
   - @pending_score_schedules.each do |pss|
     br
-    = pss.date
+    = pss.start_on
     = " | "
     = pss.court.code
     = " | "

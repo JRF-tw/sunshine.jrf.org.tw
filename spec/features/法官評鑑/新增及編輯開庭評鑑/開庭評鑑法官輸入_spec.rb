@@ -7,7 +7,7 @@ describe "開庭評鑑法官輸入", type: :request do
   let!(:schedule) { create :schedule, story: story }
   let!(:judge) { create :judge, court: court }
   let!(:judge2) { create :judge }
-  let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, date: schedule.date, confirmed_realdate: false, judge_name: judge.name } }
+  let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, date: schedule.start_on, confirmed_realdate: false, judge_name: judge.name } }
   before { signin_lawyer(lawyer) }
 
   context "Given 案件無宣判日" do

@@ -5,7 +5,7 @@ describe Lawyer::CheckScheduleScoreDateContext do
   let!(:court) { create :court }
   let!(:story) { create :story, court: court }
   let!(:schedule) { create :schedule, story: story }
-  let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, date: schedule.date, confirmed_realdate: false } }
+  let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, date: schedule.start_on, confirmed_realdate: false } }
 
   describe "#perform" do
     subject { described_class.new(lawyer).perform(params) }
@@ -35,17 +35,17 @@ describe Lawyer::CheckScheduleScoreDateContext do
     end
 
     context "schedule not found" do
-      before { params[:date] = schedule.date - 1.day }
+      before { params[:date] = schedule.start_on - 1.day }
       it { expect(subject).to be_falsey }
     end
 
     context "schedule not found" do
-      before { params[:date] = schedule.date - 1.day }
+      before { params[:date] = schedule.start_on - 1.day }
       it { expect(subject).to be_falsey }
     end
 
     context "not in score time intervel" do
-      before { schedule.update_attributes(date: Time.zone.today - 15.days) }
+      before { schedule.update_attributes(start_on: Time.zone.today - 15.days) }
       it { expect(subject).to be_falsey }
     end
   end
@@ -55,12 +55,12 @@ describe Lawyer::CheckScheduleScoreDateContext do
     before { params[:confirmed_realdate] = "true" }
 
     context "diff date" do
-      before { params[:date] = schedule.date - 14.days }
+      before { params[:date] = schedule.start_on - 14.days }
       it { expect(subject).to be_nil }
     end
 
     context "should alert slack over MAX_REPORT_TIME " do
-      before { params[:date] = schedule.date - 14.days }
+      before { params[:date] = schedule.start_on - 14.days }
       before { lawyer.score_report_schedule_real_date.value = 4 }
 
       it { expect { subject }.to change { lawyer.score_report_schedule_real_date.value } }

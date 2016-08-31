@@ -57,7 +57,7 @@ RSpec.describe PartyQueries do
   describe "#get_scores_array" do
     context "have schedule_scores" do
       let!(:schedule_score) { create :schedule_score, schedule_rater: party, story: story }
-      let(:date) { schedule_score.schedule.date }
+      let(:date) { schedule_score.schedule.start_on }
       let(:court_code) { story.court.code }
 
       it { expect(query.get_scores_array(story).first.is_a?(Hash)).to be_truthy }

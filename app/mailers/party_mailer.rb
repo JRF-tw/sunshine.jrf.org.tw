@@ -2,8 +2,9 @@ class PartyMailer < ApplicationMailer
   def story_before_judge_notice(story_id, party_id)
     @story = Story.find(story_id)
     @party = Party.find(party_id)
+    @remind_story_before_judge = MailerPresenters.new.remind_story_before_judge(@story)
+    @google_calendar_link = MailerPresenters.new.google_calendar_link(@story)
     @subject = @story.detail_info + "開庭通知"
-    @date = @story.schedules.last.date
     mail(to: @party.email, subject: @subject)
   end
 
