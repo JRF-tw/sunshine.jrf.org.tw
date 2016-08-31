@@ -28,3 +28,53 @@
     }
   }
 }
+
+.form-group--score {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin-bottom: r(2);
+  position: relative;
+  
+  [type='radio'] {
+    @include Normalize();
+    display: inline-block;
+    height: 55px;
+    flex: 1;
+    border: 1px solid transparent;
+    @for $i from 1 through 10 {
+      $value: $i * 0.5;
+      $calc_value: if(str-length('#{$value}') < 3, '#{$value}.0', $value);
+      &[value='#{$calc_value}']:checked ~ .form-group--score__stars {
+        @for $j from 0 through floor($value) {
+          .star-full:nth-child(#{$j}) { animation: bounceIn .5s ease-in-out 0s both; }
+        }
+        @for $k from 0 through round($value) {
+          .star-half:nth-child(#{$k}) { animation: bounceIn .5s ease-in-out 0s both; }
+        }
+      }
+    }
+  }
+}
+.form-group--score__label {
+  display: block;
+  margin-bottom: r(1);
+  width: 100%;
+}
+.form-group--score__stars {
+  @include debug();
+  position: absolute r(5) 0 n() 0;
+  pointer-events: none;
+
+  .stars-wrapper {
+    display: flex;
+    justify-content: space-around;
+    position: absolute 0 0 n() 0;
+  }
+
+  .icon {
+    size: 34px;
+  }
+
+  .star-full, .star-half {opacity: 0;}
+}

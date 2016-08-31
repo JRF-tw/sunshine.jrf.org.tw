@@ -1,0 +1,31 @@
+= render 'components/step_meter', text: step_text, count: step_count, max: max_steps
+
+= simple_form_for form_for, as: as, url: form_url,
+  html: { method: :post, class: 'form--score' }, wrapper: :md do |f|
+  = f.input :court_id, as: :hidden
+  = f.input :confirmed_realdate, as: :hidden unless as == :verdict_score
+
+  .form--score__preview
+    = f.input :court_id, as: :select,
+      collection: collect_for_courts, include_blank: "請選擇法院",
+      label: "法院", disabled: true
+    = f.input :year, label: '年度', readonly: true
+    = f.input :word_type, label: '字號', readonly: true
+    = f.input :number, label: '案號', readonly: true
+    = f.input :date, label: '開庭日期', readonly: true unless as == :verdict_score
+    = f.input :judge_name, label: "法官姓名", readonly: true
+
+  .form--score__editor
+    = render 'components/input_score', f: f,
+      label: '訴訟指揮評分', options: :command_score
+    = render 'components/input_score', f: f,
+      label: '開庭態度評分', options: :attitude_score
+
+    = f.input :note, as: :text, label: false, placeholder: '法官表現特別好或特別壞的註記'
+    
+    .form-group
+      = check_box_tag :appeal_judge
+      = label_tag :appeal_judge, '我要申訴法官'
+      p.checkbox-pre 案件申訴電話：#{link_to '02-2542-1958', 'tel:+886225421958'}
+    
+    = render 'components/score_form_actions', f: f, submit: '送出評鑑', final: true
