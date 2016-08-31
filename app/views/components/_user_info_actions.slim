@@ -2,17 +2,24 @@ ruby:
   case type
   when 'lawyer'
     story_page = '/lawyer/stories'
+    character  = current_lawyer
+    subscribe_path = toggle_subscribe_lawyer_edm_path(format: :js)
   when 'party'
     story_page = '/party/stories'
+    character  = current_party
+    subscribe_path = toggle_subscribe_party_edm_path(format: :js)
   else
     story_page = '/observer/stories'
+    character  = current_court_observer
+    subscribe_path = toggle_subscribe_court_observer_edm_path(format: :js)
   end
 
 
 .user-info-actions
   .between
     = link_to '我要捐款', 'https://www.jrf.org.tw/donate', class: 'raised-button'
-    = link_to '訂閱電子報', '#link', class: 'raised-button'
-
+    = render  'components/subscribe_edm',
+      character: character, subscribe_path: subscribe_path
+  
   .offcanvas
     = link_to '返回個人評鑑紀錄頁', story_page, class: 'raised-button'
