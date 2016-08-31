@@ -20,12 +20,14 @@
       prev_url: '#link'
 
   - when 'checked_judge'
-    = render 'components/input_score_start',
+    = render layout: 'components/input_score_start', locals: {\
       step_text: '開庭流程評鑑', step_count: 4, max_steps: max_steps,
       form_for: @schedule_score,
       as: :schedule_score,
-      form_url: court_observer_score_schedules_path,
-      type: 'observer'
+      form_url: court_observer_score_schedules_path\
+    } do |f|
+      = render 'components/input_score', f: f,
+        label: '開庭滿意度評分', options: :rating_score
 
   - when 'thanks_scored'
     = render 'thanks_scored'

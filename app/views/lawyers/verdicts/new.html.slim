@@ -1,11 +1,8 @@
-- max_steps = 3
-
-= render layout: 'components/card', locals: {\
-  heading: '評鑑判決', wide: (true if @status)\
-}
+= render layout: 'components/score_card',
+  locals: { status: @status, type: 'verdict' }
+  - max_steps = 3
 
   - case @status
-
   - when 'checked_info'
     = render 'components/input_score_judge',
       step_text: '輸入法官姓名', step_count: 2, max_steps: max_steps,
@@ -15,7 +12,14 @@
       prev_url: '#link'
 
   - when 'checked_judge'
-    = render 'start_score'
+    = render layout: 'components/input_score_start', locals: {\
+      step_text: '開庭流程評鑑', step_count: 4, max_steps: max_steps,
+      form_for: @verdict_score,
+      as: :verdict_score,
+      form_url: lawyer_score_verdicts_path\
+    } do |f|
+      = render 'components/input_score', f: f,
+        label: '裁判品質評分', options: :quality_score
   
   - else
     = render 'components/input_score_info',
