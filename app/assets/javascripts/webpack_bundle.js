@@ -478,14 +478,29 @@
 
 	sprites.keys().forEach(sprites);
 
+	new TextInput();
+
+	new StoryCollapse('#story-collapse-toggle');
+
+	new Toggle('.switch');
+
+	new Dismiss('[data-dismiss]');
+
 	$(document).on("page:change", function() {
 	  var $main_header;
-	  new Toggle('.switch');
-	  new Dismiss('[data-dismiss]').init();
-	  new TextInput();
-	  new StoryCollapse('#story-collapse-toggle');
+	  $('input.form-control:not([autofocus], :hidden)').trigger('blur');
+	  $("input.datepicker").each(function(input) {
+	    return $(this).datepicker({
+	      dateFormat: "yy-mm-dd",
+	      altField: $(this).next(),
+	      onClose: function() {
+	        return $(this).trigger('blur');
+	      }
+	    });
+	  });
+	  $('.popover-trigger').webuiPopover();
 	  $main_header = $('#main-header');
-	  $('.card__heading').waypoint({
+	  return $('.card__heading').waypoint({
 	    handler: function(direction) {
 	      if (direction === 'down') {
 	        return $main_header.addClass('has-background');
@@ -497,17 +512,6 @@
 	      return $main_header.height();
 	    }
 	  });
-	  $('.form-control:not([autofocus])').trigger('blur');
-	  $("input.datepicker").each(function(input) {
-	    return $(this).datepicker({
-	      dateFormat: "yy-mm-dd",
-	      altField: $(this).next(),
-	      onClose: function() {
-	        return $(this).trigger('blur');
-	      }
-	    });
-	  });
-	  return $('.popover-trigger').webuiPopover();
 	});
 
 
@@ -2639,7 +2643,7 @@
 	Toggle = (function() {
 	  function Toggle(query) {
 	    this.query = query;
-	    $(this.query).on('click', (function(_this) {
+	    $(document).on('click', this.query, (function(_this) {
 	      return function(e) {
 	        var $this, off_targets, on_targets;
 	        $this = $(e.currentTarget);
@@ -2690,10 +2694,7 @@
 	Dismiss = (function() {
 	  function Dismiss(query) {
 	    this.query = query;
-	  }
-
-	  Dismiss.prototype.init = function() {
-	    return $(this.query).on('click', function(e) {
+	    $(document).on('click', this.query, function(e) {
 	      var $this;
 	      $this = $(this);
 	      switch ($this.data('dismiss')) {
@@ -2701,7 +2702,7 @@
 	          return $this.parent().slideUp();
 	      }
 	    });
-	  };
+	  }
 
 	  return Dismiss;
 
@@ -2721,11 +2722,11 @@
 
 	TextInput = (function() {
 	  function TextInput() {
-	    $('input').on('focus', (function(_this) {
+	    $(document).on('focus', 'input.form-control, .text.form-control', (function(_this) {
 	      return function(e) {
 	        return _this.focus(e.currentTarget);
 	      };
-	    })(this)).on('blur', (function(_this) {
+	    })(this)).on('blur', 'input.form-control, .text.form-control', (function(_this) {
 	      return function(e) {
 	        if ($(e.currentTarget).val().length > 0) {
 	          return _this.focus(e.currentTarget);
@@ -2761,17 +2762,21 @@
 
 	Collapse = (function() {
 	  function Collapse(query) {
-	    var $toggle, $toggle_target, $toggle_wrapper;
 	    this.query = query;
-	    $toggle = $(this.query);
-	    $toggle_wrapper = $toggle.parent();
-	    $toggle_target = $($toggle.data('collapse'));
-	    $toggle_target.hide();
-	    $toggle.on('click', function(e) {
-	      $toggle.toggleClass('active');
-	      $toggle_wrapper.toggleClass('extracted');
-	      return $toggle_target.slideToggle(300);
-	    });
+	    $(document).on('page:change', (function(_this) {
+	      return function() {
+	        _this.toggle = $(_this.query);
+	        _this.toggle_wrapper = _this.toggle.parent();
+	        return _this.toggle_target = $(_this.toggle.data('collapse'));
+	      };
+	    })(this));
+	    $(document).on('click', this.query, (function(_this) {
+	      return function(e) {
+	        _this.toggle.toggleClass('active');
+	        _this.toggle_wrapper.toggleClass('extracted');
+	        return _this.toggle_target.slideToggle(300);
+	      };
+	    })(this));
 	  }
 
 	  return Collapse;
@@ -2798,8 +2803,11 @@
 		"./menu.svg": 51,
 		"./pencil.svg": 52,
 		"./profile.svg": 53,
-		"./star.svg": 54,
-		"./user.svg": 55
+		"./star-full.svg": 54,
+		"./star-half.svg": 55,
+		"./star-o.svg": 56,
+		"./star.svg": 57,
+		"./user.svg": 58
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -3338,11 +3346,38 @@
 
 	
 	var sprite = __webpack_require__(40);
+	var image = "<symbol viewBox=\"0 0 34 32\" id=\"star-full\" ><title>icon star copy</title><defs><radialGradient cy=\"0%\" fx=\"50%\" fy=\"0%\" r=\"100%\" id=\"star-full_a\"><stop stop-color=\"#FFC109\" offset=\"0%\"/><stop stop-color=\"#FFA000\" offset=\"100%\"/></radialGradient></defs><path d=\"M59 25.679L48.465 32l2.793-11.852L42 12.168l12.211-1.027L59 0l4.789 11.14L76 12.169l-9.258 7.98L69.535 32z\" transform=\"translate(-42)\" fill=\"url(#star-full_a)\" fill-rule=\"evenodd\"/></symbol>";
+	module.exports = sprite.add(image, "star-full");
+
+/***/ },
+/* 55 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	var sprite = __webpack_require__(40);
+	var image = "<symbol viewBox=\"0 0 34 32\" id=\"star-half\" ><title>icon star half</title><defs><radialGradient cy=\"0%\" fx=\"50%\" fy=\"0%\" r=\"100%\" id=\"star-half_a\"><stop stop-color=\"#FFC109\" offset=\"0%\"/><stop stop-color=\"#FFA000\" offset=\"100%\"/></radialGradient></defs><path d=\"M101 22.542l6.385 3.862-1.676-7.172 5.667-4.887-7.503-.63L101 6.935v15.606zm17-10.325l-9.258 7.96L111.535 32 101 25.695 90.465 32l2.793-11.823L84 12.217l12.211-1.025L101 0l4.789 11.192L118 12.217z\" transform=\"translate(-84)\" fill=\"url(#star-half_a)\" fill-rule=\"evenodd\"/></symbol>";
+	module.exports = sprite.add(image, "star-half");
+
+/***/ },
+/* 56 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	var sprite = __webpack_require__(40);
+	var image = "<symbol viewBox=\"0 0 34 32\" id=\"star-o\" ><title>icon star-o</title><path d=\"M17 22.598l6.385 3.792-1.676-7.19 5.667-4.899-7.503-.632L17 6.874l-2.873 6.795-7.503.632 5.667 4.899-1.676 7.19L17 22.598zm17-10.43l-9.258 7.98L27.535 32 17 25.679 6.465 32l2.793-11.852L0 12.168l12.211-1.027L17 0l4.789 11.14L34 12.169z\" fill=\"#B7B6B6\" fill-rule=\"evenodd\"/></symbol>";
+	module.exports = sprite.add(image, "star-o");
+
+/***/ },
+/* 57 */
+/***/ function(module, exports, __webpack_require__) {
+
+	
+	var sprite = __webpack_require__(40);
 	var image = "<symbol viewBox=\"0 0 60 56\" id=\"star\" ><title>icon/star</title><path d=\"M30 44.938L11.408 56l4.93-20.74L0 21.293l21.55-1.798L30 0l8.45 19.496L60 21.294 43.662 35.259 48.592 56z\" fill-rule=\"evenodd\"/></symbol>";
 	module.exports = sprite.add(image, "star");
 
 /***/ },
-/* 55 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
