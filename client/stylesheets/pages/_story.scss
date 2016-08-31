@@ -85,7 +85,7 @@
 
 .story-collapse {
   display: none;
-  margin: r(2) r(-2) r(-2);
+  margin: r(2) r(-2) (r(-2) - 1px);
   padding: r(3);
   text-align: center;
   position: relative;
