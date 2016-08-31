@@ -1,9 +1,11 @@
-- link = link ? link : false
+ruby:
+  link  = link  ? link  : false
+  final = final ? final : false
 
-.form-actions.text-right
+.form-actions class=(final ? 'text-center' : 'text-right')
   - if link
     = link_to link[:text], link[:href], class: "flat-button"
 
-  = f.button :button, submit, class: "raised-button"
+  = f.button :button, submit, class:(final ? "raised-button--large" : "raised-button")
 
   = yield

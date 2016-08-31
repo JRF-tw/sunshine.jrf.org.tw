@@ -98,7 +98,7 @@ $error-rhythm: r(3);
 
 [type="checkbox"] {
   @include Normalize();
-  margin-right: r(.5);
+  margin-right: r(1);
   &::after {
     content: "";
     display: inline-block;
@@ -137,4 +137,9 @@ abbr[title="required"] { display: none; }
   @extend .help-block--error;
   color: $text-secondary;
   .has-error & { display: none; }
+}
+
+.checkbox-pre {
+  padding-left: 26px;
+  margin-top: r(1);
 }
