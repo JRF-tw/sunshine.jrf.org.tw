@@ -27,7 +27,8 @@
       step_text: '開庭流程評鑑', step_count: 4, max_steps: max_steps,
       form_for: @schedule_score,
       as: :schedule_score,
-      form_url: lawyer_score_schedules_path
+      form_url: lawyer_score_schedules_path,
+      type: 'lawyer'
 
   - when 'thanks_scored'
     = render 'thanks_scored'

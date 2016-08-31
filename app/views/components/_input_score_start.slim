@@ -16,10 +16,14 @@
     = f.input :judge_name, label: "法官姓名", readonly: true
 
   .form--score__editor
-    = render 'components/input_score', f: f,
-      label: '訴訟指揮評分', options: :command_score
-    = render 'components/input_score', f: f,
-      label: '開庭態度評分', options: :attitude_score
+    - if type == 'lawyer'
+      = render 'components/input_score', f: f,
+        label: '訴訟指揮評分', options: :command_score
+      = render 'components/input_score', f: f,
+        label: '開庭態度評分', options: :attitude_score
+    - else
+      = render 'components/input_score', f: f,
+        label: '開庭滿意度評分', options: :rating_score
 
     = f.input :note, as: :text, label: false, placeholder: '法官表現特別好或特別壞的註記'
     
