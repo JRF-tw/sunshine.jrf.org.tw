@@ -18,8 +18,10 @@ ruby:
 .user-info-actions
   .between
     = link_to '我要捐款', 'https://www.jrf.org.tw/donate', class: 'raised-button'
-    = render  'components/subscribe_edm',
-      character: character, subscribe_path: subscribe_path
+    
+    span.js-subscribe-edm
+      = render  'components/subscribe_edm',
+        character: character, subscribe_path: subscribe_path
   
   .offcanvas
     = link_to '返回個人評鑑紀錄頁', story_page, class: 'raised-button'
