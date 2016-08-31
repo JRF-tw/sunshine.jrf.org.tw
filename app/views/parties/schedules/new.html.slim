@@ -1,11 +1,8 @@
-- max_steps = 4
-
-= render layout: 'components/card', locals: {\
-  heading: '評鑑開庭', wide: (true if @status)\
-}
+= render layout: 'components/score_card',
+  locals: { status: @status, type: 'schedule' }
+  - max_steps = 4
 
   - case @status
-
   - when 'checked_info'
     = render 'components/input_score_date',
       step_text: '輸入開庭日期', step_count: 2, max_steps: max_steps,
@@ -16,7 +13,7 @@
 
   - when 'checked_date'
     = render 'components/input_score_judge',
-      step_text: '輸入開庭日期', step_count: 3, max_steps: max_steps,
+      step_text: '輸入法官姓名', step_count: 3, max_steps: max_steps,
       form_for: @schedule_score,
       as: :schedule_score,
       form_url: checked_judge_party_score_schedules_path,
