@@ -7,7 +7,12 @@
   - case @status
 
   - when 'checked_info'
-    = render 'input_judge'
+    = render 'components/input_score_judge',
+      step_text: '輸入法官姓名', step_count: 2, max_steps: max_steps,
+      as: :verdict_score,
+      form_for: @verdict_score,
+      form_url: checked_judge_party_score_verdicts_path,
+      prev_url: '#link'
 
   - when 'checked_judge'
     = render 'start_score'
