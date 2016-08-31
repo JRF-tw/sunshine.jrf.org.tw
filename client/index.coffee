@@ -16,33 +16,23 @@ require 'webui-popover/dist/jquery.webui-popover.js'
 # Modal = require "./modules/modal"
 {Toggle, Dismiss} = require './modules/toggle'
 {TextInput}       = require './modules/form'
+StoryCollapse     = require "./modules/stories"
 
 # Require entry modules
 # EX:
-StoryCollapse = require "./entry/stories"
 
 # Inject SVG Sprite
 sprites = require.context "icons", off
 sprites.keys().forEach sprites
 
+new TextInput()
+new StoryCollapse '#story-collapse-toggle'
+new Toggle '.switch'
+new Dismiss '[data-dismiss]'
+
 $(document).on "page:change", ->
-  new Toggle '.switch'
-  new Dismiss('[data-dismiss]').init()
-  new TextInput()
-  new StoryCollapse '#story-collapse-toggle'
-
-  # Stuck Header
-  $main_header = $('#main-header')
-  $('.card__heading').waypoint
-    handler: (direction) ->
-      if direction is 'down'
-        $main_header.addClass 'has-background'
-      else
-        $main_header.removeClass 'has-background'
-    offset: -> $main_header.height()
-
   # Let cached input value trigger 'is-focus'
-  $('.form-control:not([autofocus])').trigger 'blur'
+  $('input.form-control:not([autofocus], :hidden)').trigger 'blur'
 
   # Datepicker
   $("input.datepicker").each (input) ->
@@ -53,3 +43,13 @@ $(document).on "page:change", ->
 
   # Popover
   $('.popover-trigger').webuiPopover()
+
+  # Stuck Header
+  $main_header = $('#main-header')
+  $('.card__heading').waypoint
+    handler: (direction) ->
+      if direction is 'down'
+        $main_header.addClass 'has-background'
+      else
+        $main_header.removeClass 'has-background'
+    offset: -> $main_header.height()
