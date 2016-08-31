@@ -279,7 +279,7 @@ namespace :dev do
     Story.all.each do |story|
       story.court.schedules.create!(
         branch_name: ["信", "愛", "美", "德"].sample,
-        date: rand(5).years.ago,
+        start_on: rand(5).years.ago,
         story: story
       )
     end
@@ -295,7 +295,7 @@ namespace :dev do
     puts "該庭期案件字號 = #{schedule.story.word_type}"
     puts "該庭期案件案號 = #{schedule.story.number}"
     puts "該庭期隸屬法院 = #{schedule.court.full_name}"
-    puts "該庭期開庭日期 = #{schedule.date}"
+    puts "該庭期開庭日期 = #{schedule.start_on}"
     puts "該庭期隸屬股別法官名稱 = #{schedule.branch_judge.name}"
   end
 
