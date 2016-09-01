@@ -16,7 +16,7 @@ describe "法官評鑑 - 新增及編輯開庭評鑑 - 開庭評鑑法官輸入"
 
       it "Then 進入評鑑頁" do
         expect(response).to be_success
-        expect(response.body).to match("請填寫註記")
+        expect(response.body).to match("送出評鑑")
       end
     end
 
