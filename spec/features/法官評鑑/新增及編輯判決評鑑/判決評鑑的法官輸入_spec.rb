@@ -1,5 +1,5 @@
 require "rails_helper"
-describe "開庭評鑑法官輸入", type: :request do
+describe "法官評鑑 - 新增及編輯判決評鑑 - 判決評鑑的法官輸入", type: :request do
   let!(:lawyer) { create :lawyer, :with_password, :with_confirmed }
   let!(:court) { create :court }
   let!(:story) { create :story, court: court }
@@ -48,6 +48,7 @@ describe "開庭評鑑法官輸入", type: :request do
 
       it "Then 顯示法官輸入頁，保留原先輸入的法官姓名，並且錯誤訊息" do
         expect(response).to be_success
+        expect(response.body).to match(params[:judge_name])
         expect(flash[:error]).to match("法官不存在")
       end
     end

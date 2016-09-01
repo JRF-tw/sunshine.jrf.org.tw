@@ -1,5 +1,5 @@
 require "rails_helper"
-describe "案件視角的評鑑後人數通知", type: :request do
+describe "法官評鑑 - 評鑑後資料統計與通知 - 案件視角的評鑑後人數通知", type: :request do
   let!(:court) { create :court }
   let!(:story) { create :story, court: court }
   let!(:schedule) { create :schedule, story: story }
@@ -15,7 +15,7 @@ describe "案件視角的評鑑後人數通知", type: :request do
       subject { post "/party/score/schedules", schedule_score: params }
 
       context "When 新的當事人新增開庭評鑑" do
-        it "發送 Slack 通知" do
+        it "Then 發送 Slack 通知" do
           expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify)
         end
       end
@@ -23,7 +23,7 @@ describe "案件視角的評鑑後人數通知", type: :request do
       context "When 已評鑑過的當事人新增開庭評鑑" do
         before { create :schedule_score, schedule_rater: party, story: story }
 
-        it "不發送 Slack 通知" do
+        it "Then 不發送 Slack 通知" do
           expect { subject }.not_to change_sidekiq_jobs_size_of(SlackService, :notify)
         end
       end
@@ -37,7 +37,7 @@ describe "案件視角的評鑑後人數通知", type: :request do
       context "When 新的當事人新增判決評鑑" do
         subject { post "/party/score/verdicts", verdict_score: params }
 
-        it "發送 Slack 通知" do
+        it "Then 發送 Slack 通知" do
           expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify)
         end
       end
@@ -46,7 +46,7 @@ describe "案件視角的評鑑後人數通知", type: :request do
         before { create :verdict_score, verdict_rater: party, story: story }
         subject { post "/party/score/verdicts", verdict_score: params }
 
-        it "不發送 Slack 通知" do
+        it "Then 不發送 Slack 通知" do
           expect { subject }.not_to change_sidekiq_jobs_size_of(SlackService, :notify)
         end
       end
@@ -64,7 +64,7 @@ describe "案件視角的評鑑後人數通知", type: :request do
       context "When 新的律師新增開庭評鑑" do
         subject { post "/lawyer/score/schedules", schedule_score: params }
 
-        it "發送 Slack 通知" do
+        it "Then 發送 Slack 通知" do
           expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify)
         end
       end
@@ -72,7 +72,7 @@ describe "案件視角的評鑑後人數通知", type: :request do
       context "When 已評鑑過的律師新增開庭評鑑" do
         before { create :schedule_score, schedule_rater: lawyer, story: story }
 
-        it "不發送 Slack 通知" do
+        it "Then 不發送 Slack 通知" do
           expect { subject }.not_to change_sidekiq_jobs_size_of(SlackService, :notify)
         end
       end
@@ -87,7 +87,7 @@ describe "案件視角的評鑑後人數通知", type: :request do
         before { create_list :verdict_score, 5, story: story }
         subject { post "/lawyer/score/verdicts", verdict_score: params }
 
-        it "發送 Slack 通知" do
+        it "Then 發送 Slack 通知" do
           expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify)
         end
       end
@@ -96,7 +96,7 @@ describe "案件視角的評鑑後人數通知", type: :request do
         before { create :verdict_score, verdict_rater: lawyer, story: story }
         subject { post "/lawyer/score/verdicts", verdict_score: params }
 
-        it "不發送 Slack 通知" do
+        it "Then 不發送 Slack 通知" do
           expect { subject }.not_to change_sidekiq_jobs_size_of(SlackService, :notify)
         end
       end

@@ -1,5 +1,5 @@
 require "rails_helper"
-describe "開庭評鑑開庭日期輸入", type: :request do
+describe "法官評鑑 - 新增及編輯開庭評鑑 - 開庭評鑑開庭日期輸入", type: :request do
   let!(:lawyer) { create :lawyer, :with_password, :with_confirmed }
   let!(:lawyer) { create :lawyer, :with_password, :with_confirmed }
   let!(:lawyer) { create :lawyer, :with_password, :with_confirmed }

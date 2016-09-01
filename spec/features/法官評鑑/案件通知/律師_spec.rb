@@ -11,7 +11,7 @@ describe "律師案件通知", type: :request do
       context "When 訂閱案件" do
         subject { context.perform(lawyer) }
 
-        it "Then 可以訂閱" do
+        it "Then 訂閱成功" do
           expect { subject }.to change { StorySubscription.count }.by(1)
         end
       end

@@ -1,5 +1,5 @@
 require "rails_helper"
-describe "開庭評鑑案件輸入", type: :request do
+describe "法官評鑑 - 新增及編輯判決評鑑 - 判決評鑑的案件輸入", type: :request do
   let!(:lawyer) { create :lawyer, :with_password, :with_confirmed }
   let!(:court) { create :court }
   let!(:story) { create :story, court: court }
@@ -12,7 +12,7 @@ describe "開庭評鑑案件輸入", type: :request do
     context "When 輸入完整案件資訊" do
       subject! { post "/lawyer/score/verdicts/checked_info", verdict_score: params }
 
-      it "Then 跳轉至輸入開庭日期頁，並顯示此筆案件的法院+年度+字號+案號" do
+      it "Then 跳轉至輸入法官姓名頁，並顯示此筆案件的法院+年度+字號+案號" do
         expect(response).to be_success
         expect(response.body).to match(story.court.full_name)
         expect(response.body).to match(story.year.to_s)
