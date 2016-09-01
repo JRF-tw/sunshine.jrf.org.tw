@@ -1,5 +1,5 @@
 require "rails_helper"
-describe "開庭評鑑法官輸入", type: :request do
+describe "判決評鑑法官輸入", type: :request do
   let!(:lawyer) { create :lawyer, :with_password, :with_confirmed }
   let!(:court) { create :court }
   let!(:story) { create :story, court: court }
