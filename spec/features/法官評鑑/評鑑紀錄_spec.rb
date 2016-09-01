@@ -42,7 +42,7 @@ describe "法官評鑑 - 評鑑紀錄", type: :request do
     context "When 到任一案件評鑑記錄頁" do
       subject! { get "/lawyer/stories/#{story.id}" }
 
-      it "Then 頁面成功讀取" do
+      it "Then 轉跳回個人評鑑記錄頁" do
         expect(response).to be_redirect
       end
     end
