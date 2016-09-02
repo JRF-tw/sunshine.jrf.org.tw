@@ -1,0 +1,12 @@
+section.story-list
+  h3.story-list__heading = heading
+
+  table.story-list__table
+    thead
+      tr
+        - ths.each do |th|
+          th = th
+        th
+
+    tbody
+      = yield              

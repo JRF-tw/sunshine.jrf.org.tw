@@ -116,7 +116,7 @@
   width: 100%;
   text-align: left;
   
-  thead { color: $white $accent; }
+  thead { color: $text-secondary-dark $accent; }
   
   td, th {
     &:first-child { padding-left: r(2); }

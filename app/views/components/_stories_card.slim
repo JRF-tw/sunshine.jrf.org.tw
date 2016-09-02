@@ -20,29 +20,21 @@
     = yield
 
   - if stories.length > 0
-    section.story-list
-      h3.story-list__heading 已評鑑紀錄及待評鑑案件
-
-      table.story-list__table
-        thead
-          tr
-            th 年度-字號-案號
-            th 法院代碼
-            th 是否已宣判
-            th
-
-        tbody
-          - stories.each do |s|
-            tr
-              td = "#{s.year}-#{s.word_type}-#{s.number}"
-              td = s.court.code
-              td = s.is_pronounce ? "已宣判" : "未宣判"
-              td
-                - case type
-                - when 'lawyer'
-                  = link_to inline_svg('forwards'), lawyer_story_path(s)
-                - when 'party'
-                  = link_to inline_svg('forwards'), party_story_path(s)
-                - when 'observer'
-                  = link_to inline_svg('forwards'), court_observer_story_path(s)
+    = render layout: 'components/story_table', locals: {\
+      heading: '已評鑑紀錄及待評鑑案件',
+      ths: ['年度-字號-案號', '法院代碼', '是否已宣判']\
+    }
+      - stories.each do |s|
+        tr
+          td = "#{s.year}-#{s.word_type}-#{s.number}"
+          td = s.court.code
+          td = s.is_pronounce ? "已宣判" : "未宣判"
+          td
+            - case type
+            - when 'lawyer'
+              = link_to inline_svg('forwards'), lawyer_story_path(s)
+            - when 'party'
+              = link_to inline_svg('forwards'), party_story_path(s)
+            - when 'observer'
+              = link_to inline_svg('forwards'), court_observer_story_path(s)
                   
