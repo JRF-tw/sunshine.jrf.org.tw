@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: r(2) n();
+  padding: r(2) n() r(3);
   @include susy($tablet) {
     padding: n() r(2);
     justify-content: space-around;
@@ -85,7 +85,7 @@
 
 .story-collapse {
   display: none;
-  margin: r(2) r(-2) (r(-2) - 1px);
+  margin: r(2) r(-2) n();
   padding: r(3);
   text-align: center;
   position: relative;
@@ -101,22 +101,78 @@
   .ghost-button + .ghost-button { margin-left: r(4); }
 }
 
+.story-lists {
+  margin-top: r(-2);
+  @include susy($tablet) {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin-top: r(-4) + 2px;
+    position: relative;
+    background: linear-gradient(to bottom,
+                                $accent,
+                                $accent (r(9) - 2px),
+                                transparent (r(9) - 2px),
+                                transparent);
+    &::before {
+      content: "";
+      display: block;
+      width: 1px;
+      background-color: $divider-gray;
+      top: r(9);
+      bottom: r(9);
+      @include scut-center-transform(x);
+    }
+  }
+}
+.story-lists__left {
+  @include susy($tablet) {
+    width: 50%;
+    padding-right: r(2);
+  }
+}
+.story-lists__right {
+  @include susy($tablet) {
+    width: 50%;
+    padding-left: r(2);
+  }
+}
+.story-lists__bottom {
+  text-align: center;
+  padding: r(3) n() r(1);
+  border-top: 1px solid $divider-gray;
+  @include susy($tablet) {
+    width: 100%;
+  }
+}
+
 .story-list { margin: n() r(-2); }
 .story-list__heading {
   padding: r(1) r(2);
-  margin-bottom: 0;
+  margin: 0 n();
   text: $white ms(1);
   background-color: $accent;
   @include susy($tablet) {
     padding: n() r(3);
+
+    .story-lists__left & { border-top-left-radius: $global-radius; }
+    .story-lists__right & { border-top-right-radius: $global-radius; }
+  }
+
+  .icon {
+    size: 16px;
+    fill: currentColor;
+    position: relative -2px n() n() n();
   }
 }
 .story-list__table {
   margin-bottom: r(-2);
   width: 100%;
   text-align: left;
+
+  .story-lists & { margin-bottom: 0; }
   
-  thead { color: $white $accent; }
+  thead { color: $text-secondary-dark $accent; }
   
   td, th {
     &:first-child { padding-left: r(2); }

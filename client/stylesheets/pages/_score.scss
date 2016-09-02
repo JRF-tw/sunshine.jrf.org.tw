@@ -76,5 +76,9 @@
     size: 34px;
   }
 
-  .star-full, .star-half {opacity: 0;}
+  .star-full, .star-half {
+    opacity: 0;
+    fill: url(#radialGradient-star);
+  }
+  .star-o { fill: $divider-gray; }
 }

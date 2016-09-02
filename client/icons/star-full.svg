@@ -9,7 +9,7 @@
             <stop stop-color="#FFA000" offset="100%"></stop>
         </radialGradient>
     </defs>
-    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    <g id="Symbols" stroke="none" stroke-width="1" fill-rule="evenodd">
         <g id="List/ranking-stars" transform="translate(-42.000000, 0.000000)" fill="url(#radialGradient-1)">
             <polygon id="icon-star-copy" points="59 25.6790123 48.4647887 32 51.258216 20.1481481 42 12.1679012 54.2112676 11.1407407 59 -3.59306549e-15 63.7887324 11.1407407 76 12.1679012 66.741784 20.1481481 69.5352113 32"></polygon>
         </g>

@@ -1,7 +1,11 @@
+ruby:
+  submit = submit ? submit : '送出評鑑'
+  method = method ? method : :post
+
 = render 'components/step_meter', text: step_text, count: step_count, max: max_steps
 
 = simple_form_for form_for, as: as, url: form_url,
-  html: { method: :post, class: 'form--score' }, wrapper: :md do |f|
+  html: { method: method, class: 'form--score' }, wrapper: :md do |f|
   = f.input :court_id, as: :hidden
   = f.input :confirmed_realdate, as: :hidden unless as == :verdict_score
 
@@ -25,4 +29,4 @@
       = label_tag :appeal_judge, '我要申訴法官'
       p.checkbox-pre 案件申訴電話：#{link_to '02-2542-1958', 'tel:+886225421958'}
     
-    = render 'components/score_form_actions', f: f, submit: '送出評鑑', final: true
+    = render 'components/score_form_actions', f: f, submit: submit, final: true
