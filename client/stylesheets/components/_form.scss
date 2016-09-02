@@ -53,6 +53,10 @@ $error-rhythm: r(3);
 
 .form-actions {
   padding: r(1) n();
+  &--space-between {
+    display: flex;
+    justify-content: space-between;
+  }
 
   .flat-button--large {
     margin: r(2) n() r(-1);

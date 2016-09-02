@@ -6,5 +6,5 @@ ruby:
   end
 
 = render layout: 'components/card',
-  locals: { heading: heading, wide: (true if status) }
+  locals: { heading: heading, wide: (true if status && status != 'thanks_scored') }
   = yield

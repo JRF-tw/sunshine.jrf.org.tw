@@ -32,7 +32,11 @@
         label: '開庭態度評分', options: :attitude_score
 
   - when 'thanks_scored'
-    = render 'thanks_scored'
+    = render layout: 'components/schedule_thanks_scored', locals: {\
+      form_url: checked_date_lawyer_score_schedules_path,
+      path_to_root: lawyer_root_path\
+    }
+      = '這邊可以放每個不同角色特有的 code'
 
   - else
     = render 'components/input_score_info',
