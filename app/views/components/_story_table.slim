@@ -1,5 +1,10 @@
+- star = star ? star : false
+
 section.story-list
-  h3.story-list__heading = heading
+  h3.story-list__heading
+    => inline_svg 'star-o' if star == 'hollow'
+    => inline_svg 'star' if star == 'full'
+    = heading
 
   table.story-list__table
     thead
