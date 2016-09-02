@@ -10,25 +10,39 @@ require "modernizr"
 # require "lazysizes"
 
 require 'waypoints/lib/jquery.waypoints'
+require 'webui-popover/dist/jquery.webui-popover.js'
 
 # Require Custom Modules
 # Modal = require "./modules/modal"
 {Toggle, Dismiss} = require './modules/toggle'
 {TextInput}       = require './modules/form'
+StoryCollapse     = require "./modules/stories"
 
 # Require entry modules
 # EX:
-StoryCollapse = require "./entry/stories"
 
 # Inject SVG Sprite
 sprites = require.context "icons", off
 sprites.keys().forEach sprites
 
+new TextInput()
+new StoryCollapse '#story-collapse-toggle'
+new Toggle '.switch'
+new Dismiss '[data-dismiss]'
+
 $(document).on "page:change", ->
-  new Toggle '.switch'
-  new Dismiss('[data-dismiss]').init()
-  new TextInput()
-  new StoryCollapse '#story-collapse-toggle'
+  # Let cached input value trigger 'is-focus'
+  $('input.form-control:not([autofocus], :hidden)').trigger 'blur'
+
+  # Datepicker
+  $("input.datepicker").each (input) ->
+    $(@).datepicker
+      dateFormat: "yy-mm-dd"
+      altField: $(@).next()
+      onClose: -> $(@).trigger 'blur'
+
+  # Popover
+  $('.popover-trigger').webuiPopover()
 
   # Stuck Header
   $main_header = $('#main-header')

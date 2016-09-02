@@ -1,1 +1,3 @@
-= link_to current_court_observer.subscribe_edm? ? "取消訂閱電子報" : "訂閱電子報" , toggle_subscribe_court_observer_edm_path(format: :js), remote: true, method: :post
+= render  'components/subscribe_edm',
+  character: current_court_observer,
+  subscribe_path: toggle_subscribe_court_observer_edm_path(format: :js)

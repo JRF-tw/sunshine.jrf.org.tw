@@ -28,6 +28,7 @@
     "postbuild": "gulp resolve-url"
   },
   "dependencies": {
+    "animate.css": "^3.5.1",
     "lazysizes": "^2.0.0",
     "magnific-popup": "^1.1.0",
     "modernizr": "^3.3.1",
@@ -37,9 +38,11 @@
     "scut": "^1.4.0",
     "slick-carousel": "^1.6.0",
     "susy": "^2.2.12",
-    "waypoints": "^4.0.0"
+    "waypoints": "^4.0.0",
+    "webui-popover": "^1.2.13"
   },
   "devDependencies": {
+    "animate-css-webpack": "^3.5.6",
     "autoprefixer": "^6.4.0",
     "coffee-loader": "^0.7.2",
     "coffee-script": "^1.10.0",

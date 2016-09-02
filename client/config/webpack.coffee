@@ -39,9 +39,13 @@ module.exports = (env) ->
         "~susy":    "susy/sass/susy"
         "~scut":    "scut/dist/scut"
         "smooth-scroll":  "smooth-scroll/dist/js/smooth-scroll.js"        
+        "../img/loading.gif": "webui-popover/img/loading.gif"
     
     entry:
-      main: './index.coffee'        
+      main: [
+        'animate-css-webpack!./config/animate-css.js'
+        './index.coffee'
+      ]
     
     output:
       path: path_to.assets
@@ -69,7 +73,10 @@ module.exports = (env) ->
         ]
       ,
         test: /\.(png|jpe?g|gif)$/i
-        include: path_to.images
+        include: [
+          path_to.images
+          path.resolve(path_to.root, '../node_modules/webui-popover/img')
+        ]
         loaders: [
           "file?name=images/[name].[ext]"
           "img?progressive=true"

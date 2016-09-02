@@ -1,8 +1,8 @@
 class TextInput
   constructor: () ->
-    $('input').on 'focus', (e) =>
+    $(document).on 'focus', 'input.form-control, .text.form-control', (e) =>
       @focus e.currentTarget
-    .on 'blur', (e) =>
+    .on 'blur', 'input.form-control, .text.form-control', (e) =>
       if $(e.currentTarget).val().length > 0
         @focus e.currentTarget
       else

@@ -1,11 +1,25 @@
 $input-rhythm: r(1);
 $error-rhythm: r(3);
 
+%control-border-bottom {
+  content: "";
+  display: block;
+  size: 100% 1px;
+  background-color: $accent;
+  position: absolute n() 0 0 0;
+  transform: scaleX(0);
+  transition: transform .3s ease 0s;  
+}
+
 .form-group {
   $bottom-gap: r(2);
   margin-bottom: $bottom-gap;
   padding-top: r(1);
   position: relative;
+  &.text {
+    &::before { @extend %control-border-bottom; }
+    &.is-focused::before { transform: scaleX(1); }
+  }
   &.squish-before { margin-top: r(-1); }
   &.addon-forgot-password {
     padding-right: 5em;
@@ -39,6 +53,10 @@ $error-rhythm: r(3);
 
 .form-actions {
   padding: r(1) n();
+  &--space-between {
+    display: flex;
+    justify-content: space-between;
+  }
 
   .flat-button--large {
     margin: r(2) n() r(-1);
@@ -54,6 +72,7 @@ $error-rhythm: r(3);
   border-bottom: 1px solid $divider-gray;
   box-shadow: none;
   outline: none;
+  @include input-placeholder { color: $text-secondary; }
   &:focus,
   &:not(:disabled):active {
     + .control-label::before { transform: scaleX(1); }
@@ -63,7 +82,8 @@ $error-rhythm: r(3);
     box-shadow: 0 0 0 100px $white inset;
     -webkit-text-fill-color: $text-secondary;
   }
-  &:disabled { color: $text-disabled; }
+  &:disabled,
+  &.readonly { color: $text-disabled; }
 }
 
 .control-label {
@@ -71,14 +91,10 @@ $error-rhythm: r(3);
   position: absolute ($input-rhythm * 2) 0 0 0;
   transition: all .3s ease 0s;
   &.disabled { color: $text-disabled !important; }
-  &::before {
-    content: "";
-    display: block;
-    size: 100% 1px;
-    background-color: $accent;
-    position: absolute n() 0 0 0;
-    transform: scaleX(0);
-    transition: transform .3s ease 0s;
+  &::before { @extend %control-border-bottom; }
+  .readonly & {
+    color: $text-disabled !important;
+    &::before { opacity: 0; }
   }
   .is-focused &,
   input:-webkit-autofill + &,
@@ -93,7 +109,7 @@ $error-rhythm: r(3);
 
 [type="checkbox"] {
   @include Normalize();
-  margin-right: r(.5);
+  margin-right: r(1);
   &::after {
     content: "";
     display: inline-block;
@@ -101,7 +117,7 @@ $error-rhythm: r(3);
     border-radius: 2px;
     size: 18px;
     background-color: #fff;
-    position: relative 3px n() n() n();
+    position: relative 4px n() n() n();
   }
   &:checked::after {
     background: url(checked.svg) 50% 50% / contain no-repeat;
@@ -115,6 +131,7 @@ select {
   size: 100% 34px;
   outline: none;
   &:focus + .control-label::before { transform: scaleX(1); }
+  &:disabled { color: $text-disabled; }
 }
 
 abbr[title="required"] { display: none; }
@@ -131,4 +148,9 @@ abbr[title="required"] { display: none; }
   @extend .help-block--error;
   color: $text-secondary;
   .has-error & { display: none; }
+}
+
+.checkbox-pre {
+  padding-left: 26px;
+  margin-top: r(1);
 }
