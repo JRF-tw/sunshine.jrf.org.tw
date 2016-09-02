@@ -75,12 +75,12 @@ ruby:
                   = link_to edit_score_schedule,
                     class: 'flat-button--addons' do
                     => inline_svg 'pencil'
-                    | 修改開庭評鑑
+                    | 編輯評鑑
                 - else 
                   = link_to edit_score_verdict,
                     class: 'flat-button--addons' do
                     => inline_svg 'pencil'
-                    | 修改判決評鑑
+                    | 編輯評鑑
 
         - else
           - @schedule_score_sorted.each do |ss|
@@ -92,7 +92,7 @@ ruby:
                 = link_to edit_court_observer_score_schedule_path(ss),
                   class: 'flat-button--addons' do
                   => inline_svg 'pencil'
-                  | 修改開庭評鑑
+                  | 編輯評鑑
 
     .story-lists__bottom
       = link_to '返回個人評鑑紀錄頁', story_page, class: 'raised-button'
