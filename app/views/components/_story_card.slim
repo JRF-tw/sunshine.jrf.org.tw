@@ -1,0 +1,98 @@
+ruby:
+  score = {\
+    court_id: @story.court_id,
+    year: @story.year,
+    word_type: @story.word_type,
+    number: @story.number\
+  }
+
+  case type
+  when 'lawyer'
+    add_score_schedule = checked_info_lawyer_score_schedules_path(schedule_score: score)
+    add_score_verdict = checked_info_lawyer_score_verdicts_path(verdict_score: score)
+    story_page = '/lawyer/stories'    
+  when 'party'
+    add_score_schedule = checked_info_party_score_schedules_path(schedule_score: score)
+    add_score_verdict = checked_info_party_score_verdicts_path(verdict_score: score)
+    story_page = '/party/stories'    
+  when 'observer'
+    add_score_schedule = checked_info_court_observer_score_schedules_path(schedule_score: score)
+    story_page = '/observer/stories'    
+  else
+  end
+
+= render layout: 'components/card', locals: {\
+  heading: heading, wide: true\
+}
+  .story-lists
+    .story-lists__left
+      = render layout: 'components/story_table', locals: {\
+        heading: '待評鑑', star: 'hollow',
+        ths: ['開庭/宣判日期', '法院代碼']\
+      }
+        - unless @story.adjudge_date.present?
+          - @pending_score_schedules.each do |pss|
+            tr
+              td = pss.start_on
+              td = pss.court.code
+              td = link_to add_score_schedule,
+                method: :post, class: 'flat-button--addons' do
+                  => inline_svg 'plus-circle-o'
+                  | 新增開庭評鑑
+        - else
+          - if @pending_score_verdict
+            tr
+              td = @pending_score_verdict.story.adjudge_date
+              td = @pending_score_verdict.story.court.code
+              td = link_to add_score_verdict,
+                method: :post, class: 'flat-button--addons' do
+                  => inline_svg 'plus-circle-o'
+                  | 新增判決評鑑
+
+    .story-lists__right
+      = render layout: 'components/story_table', locals: {\
+        heading: '已評鑑', star: 'full',
+        ths: ['開庭/宣判日期', '法院代碼', '評鑑法官']\
+      }
+        - unless type == 'observer'
+          - @scores_sorted.each do |ss|
+            ruby:
+              case type
+              when 'lawyer'
+                edit_score_schedule = edit_lawyer_score_schedule_path(ss["id"])
+                edit_score_verdict  = edit_lawyer_score_verdict_path(ss["id"])
+              when 'party'
+                edit_score_schedule = edit_party_score_schedule_path(ss["id"])
+                edit_score_verdict  = edit_party_score_verdict_path(ss["id"])
+              else
+              end
+            tr
+              td = ss["date"]
+              td = ss["court_code"]
+              td = ss["data"]["judge_name"] if ss["data"]
+              td
+                - if ss["schedule_score"]
+                  = link_to edit_score_schedule,
+                    class: 'flat-button--addons' do
+                    => inline_svg 'pencil'
+                    | 修改開庭評鑑
+                - else 
+                  = link_to edit_score_verdict,
+                    class: 'flat-button--addons' do
+                    => inline_svg 'pencil'
+                    | 修改判決評鑑
+
+        - else
+          - @schedule_score_sorted.each do |ss|
+            tr
+              td = ss.story.adjudge_date
+              td = ss.story.court.code
+              td = ss.judge_name
+              td
+                = link_to edit_court_observer_score_schedule_path(ss),
+                  class: 'flat-button--addons' do
+                  => inline_svg 'pencil'
+                  | 修改開庭評鑑
+
+    .story-lists__bottom
+      = link_to '返回個人評鑑紀錄頁', story_page, class: 'raised-button'
