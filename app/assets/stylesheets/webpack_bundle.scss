@@ -1760,6 +1760,17 @@ a:focus {
   padding-bottom: 8px;
 }
 
+.form-actions--space-between {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
 .form-actions .flat-button--large {
   margin-top: 16px;
   margin-bottom: -8px;
