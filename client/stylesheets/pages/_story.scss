@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: r(2) n();
+  padding: r(2) n() r(3);
   @include susy($tablet) {
     padding: n() r(2);
     justify-content: space-around;
@@ -85,7 +85,7 @@
 
 .story-collapse {
   display: none;
-  margin: r(2) r(-2) (r(-2) - 1px);
+  margin: r(2) r(-2) n();
   padding: r(3);
   text-align: center;
   position: relative;
@@ -104,11 +104,17 @@
 .story-list { margin: n() r(-2); }
 .story-list__heading {
   padding: r(1) r(2);
-  margin-bottom: 0;
+  margin: 0 n();
   text: $white ms(1);
   background-color: $accent;
   @include susy($tablet) {
     padding: n() r(3);
+  }
+
+  .icon {
+    size: 16px;
+    fill: currentColor;
+    position: relative -2px n() n() n();
   }
 }
 .story-list__table {
