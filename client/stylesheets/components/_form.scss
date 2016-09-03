@@ -34,7 +34,7 @@ $error-rhythm: r(3);
     input { border-bottom: none; }
   }
   &.addon-prefix {
-    &.is-focused .control-label,
+    &.is-focused .control-label { color: $white; }
     input:-webkit-autofill + .control-label { color: $white; }
     
     input { padding-left: r(3); }
@@ -72,20 +72,27 @@ $error-rhythm: r(3);
   border-bottom: 1px solid $divider-gray;
   box-shadow: none;
   outline: none;
-  @include input-placeholder { color: $text-secondary; }
   &:focus,
   &:not(:disabled):active {
     + .control-label::before { transform: scaleX(1); }
   }
-  &:-webkit-autofill {
-    background-color: transparent !important;
-    box-shadow: 0 0 0 100px $white inset;
-    -webkit-text-fill-color: $text-secondary;
-  }
   &:disabled,
   &.readonly { color: $text-disabled; }
 }
+input, textarea {
+  @include input-placeholder { color: $text-secondary; }
+}
+input:-webkit-autofill {
+  background-color: transparent !important;
+  box-shadow: 0 0 0 100px $white inset;
+  -webkit-text-fill-color: $text-secondary;
+}
 
+@mixin active-control-label {
+  text: $text-secondary ms(-1);
+  top: 0;
+  pointer-events: none;
+}
 .control-label {
   text: $gray 1.25;
   position: absolute ($input-rhythm * 2) 0 0 0;
@@ -97,15 +104,11 @@ $error-rhythm: r(3);
     &::before { opacity: 0; }
   }
   .is-focused &,
-  input:-webkit-autofill + &,
   input[value] + &,
   input:focus + &,
-  select + & {
-    text: $text-secondary ms(-1);
-    top: 0;
-    pointer-events: none;
-  }
+  select + & { @include active-control-label; }
 }
+input:-webkit-autofill + .control-label { @include active-control-label; }
 
 [type="checkbox"] {
   @include Normalize();

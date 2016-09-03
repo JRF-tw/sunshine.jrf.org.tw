@@ -4,19 +4,19 @@
   = simple_form_for(resource, as: resource_name, url: session_path(resource_name), wrapper: :md) do |f|
     .form-group.addon-prefix
       - if use_identify_number
-        = f.input_field :identify_number
+        = f.input_field :identify_number, class: 'form-control'
         = f.label :identify_number
         = f.error :identify_number
       
       - else
-        = f.input_field :email
+        = f.input_field :email, class: 'form-control'
         = f.label :email
         = f.error :email
       
       = inline_svg "profile"
     
     .form-group.addon-prefix.addon-forgot-password
-      = f.input_field :password
+      = f.input_field :password, class: 'form-control'
       = f.label :password
       = f.error :password
       = inline_svg "key"
