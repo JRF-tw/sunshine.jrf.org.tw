@@ -16,9 +16,7 @@
   $size: span(3 of 9 1.5);
   @include Normalize();
   width: $size;
-  padding-top: $size;
-  position: relative;
-  overflow: hidden;
+  display: block;
   border: 1px solid $divider-gray;
   border-radius: 50%;
   text: center $link-color;
@@ -27,15 +25,13 @@
   @include susy($tablet) {
     $size: 160px;
     width: $size;
-    padding-top: $size;
     &:hover {
       color: $white;
-      &::before { transform: none; }
+      .ir-wrapper::before { transform: none; }
     }
     .extracted & {
       $size: 86px;
       width: $size;
-      padding-top: $size;
       margin: n() r(1);
 
       .icon {
@@ -43,26 +39,32 @@
         margin-bottom: 0;
       }
 
-      .wrapper { width: 100%; }
+      .content-wrapper { width: 100%; }
     }
   }
   &:focus { border-color: $link-color; }
-  &::before {
-    content: "";
-    display: block;
-    size: 100%;
-    background-color: $link-color;
-    position: absolute 0 n() n() 0;
-    border-radius: 50%;
-    transform: scale(0);
-    transition: all .3s ease-in-out 0s;
-  }
   &.active {
     color: $white;
-    &::before { transform: none; }
+    .ir-wrapper::before { transform: none; }
   }
 
-  .wrapper {
+  .ir-wrapper {
+    padding-top: 100%;
+    position: relative;
+    overflow: hidden;
+    &::before {
+      content: "";
+      display: block;
+      size: 100%;
+      background-color: $link-color;
+      position: absolute 0 n() n() 0;
+      border-radius: 50%;
+      transform: scale(0);
+      transition: all .3s ease-in-out 0s;
+    }
+  }
+
+  .content-wrapper {
     @include scut-center-transform();
     width: 100%;
     @include susy($tablet) { width: auto; }

@@ -7,15 +7,18 @@ section.character-selector.container
   .character-selector__wrapper
     = link_to 'party/sign_in',
       class: 'character-selector__cell--party' do
-      .text 當事人
-      = inline_svg 'avatar-party'
+      .ir-wrapper
+        .text 當事人
+        = inline_svg 'avatar-party'
 
     = link_to 'lawyer/sign_in',
       class: 'character-selector__cell--lawyer' do
-      .text 律師
-      = inline_svg 'avatar-lawyer'
+      .ir-wrapper
+        .text 律師
+        = inline_svg 'avatar-lawyer'
 
     = link_to 'observer/sign_in',
       class: 'character-selector__cell--observer' do
-      .text 法庭觀察者
-      = inline_svg 'avatar-observer'
+      .ir-wrapper
+        .text 法庭觀察者
+        = inline_svg 'avatar-observer'

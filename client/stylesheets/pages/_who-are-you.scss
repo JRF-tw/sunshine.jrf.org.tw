@@ -34,27 +34,28 @@ body.who-are-you {
   display: inline-block;
   color: $white;
   size: $size 0;
-  padding-top: $size;
-  border-radius: 50%;
-  position: relative;
-  z-index: index($layers, base);
   transition: background-image .3s ease 0s,
               color .3s ease 0s;
-  @include susy-media($character-selector-twick) {
-    $size: 185px;
-    width: $size;
-    padding-top: $size;
-  }
-  &:hover::before { size: 100%; }
-  &::before {
-    display: block;
-    content: "";
-    size: 0;
+  @include susy-media($character-selector-twick) { width: 185px; }
+  
+  &:hover .ir-wrapper::before { size: 100%; }
+  
+  .ir-wrapper {
+    padding-top: 100%;
+    position: relative;
+    z-index: index($layers, base);    
+    background-color: inherit;
     border-radius: 50%;
-    background-color: #fff;
-    pointer-events: none;
-    transition: width .3s ease 0s, height .3s ease 0s;
-    @include scut-center-transform();
+    &::before {
+      display: block;
+      content: "";
+      size: 0;
+      border-radius: 50%;
+      background-color: #fff;
+      pointer-events: none;
+      transition: width .3s ease 0s, height .3s ease 0s;
+      @include scut-center-transform();
+    }
   }
 
   .text {
@@ -105,7 +106,7 @@ body.who-are-you {
 .character-selector__cell--observer {
   @extend %character-selector__cell;
   background-color: $avatar-green;
-  margin: r(5) auto;
+  margin: r(25) auto r(5);
   &:hover { color: $avatar-black; }  
   @include susy-media($character-selector-twick) {
     margin: 0;
