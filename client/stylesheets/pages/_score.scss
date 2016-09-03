@@ -42,6 +42,7 @@
     height: 55px;
     flex: 1;
     border: 1px solid transparent;
+    opacity: 0;
     @for $i from 1 through 10 {
       $value: $i * 0.5;
       $calc_value: if(str-length('#{$value}') < 3, '#{$value}.0', $value);
