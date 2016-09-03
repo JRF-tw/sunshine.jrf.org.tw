@@ -112,6 +112,7 @@ input:-webkit-autofill + .control-label { @include active-control-label; }
 
 [type="checkbox"] {
   @include Normalize();
+  size: 18px;
   margin-right: r(1);
   &::after {
     content: "";
