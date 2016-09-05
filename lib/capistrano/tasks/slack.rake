@@ -1,10 +1,10 @@
 namespace :load do
   task :defaults do
-    set :slack_team,         -> { "your_team_name" }
-    set :slack_webhook,      -> { "12341234" }
-    set :slack_icon_url,     -> { "https://slack-assets2.s3-us-west-2.amazonaws.com/5504/img/emoji/1f680.png" }
-    set :slack_channel,      -> { "#general" }
-    set :slack_username,     -> { "myapp" }
+    set :slack_team,         -> { "jrf-5fpro" }
+    set :slack_webhook,      -> { "https://hooks.slack.com/services/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" }
+    set :slack_icon_url,     -> { "https://s3-us-west-2.amazonaws.com/slack-files2/avatars/2016-09-02/75648551252_215e9a0aac6d54c11e63_48.png" }
+    set :slack_channel,      -> { "#deploy" }
+    set :slack_username,     -> { "deploy" }
     set :slack_run_starting, -> { true }
     set :slack_run_finished, -> { true }
     set :slack_run_failed,   -> { true }
