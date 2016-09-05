@@ -7,8 +7,8 @@
 #  judge_id           :integer
 #  verdict_rater_id   :integer
 #  verdict_rater_type :string
-#  quality_score      :integer
-#  rating_score       :integer
+#  quality_score      :float
+#  rating_score       :float
 #  data               :hstore
 #  appeal_judge       :boolean
 #  status             :integer

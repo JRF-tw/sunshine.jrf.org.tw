@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20160829035239) do
+ActiveRecord::Schema.define(version: 20160905095026) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -475,9 +474,9 @@ ActiveRecord::Schema.define(version: 20160829035239) do
     t.integer  "judge_id"
     t.integer  "schedule_rater_id"
     t.string   "schedule_rater_type"
-    t.integer  "rating_score"
-    t.integer  "command_score"
-    t.integer  "attitude_score"
+    t.float    "rating_score"
+    t.float    "command_score"
+    t.float    "attitude_score"
     t.hstore   "data"
     t.boolean  "appeal_judge",        default: false
     t.datetime "created_at",                          null: false
@@ -499,8 +498,8 @@ ActiveRecord::Schema.define(version: 20160829035239) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.integer  "branch_judge_id"
-    t.datetime "start_at"
     t.string   "courtroom"
+    t.datetime "start_at"
   end
 
   add_index "schedules", ["branch_judge_id", "court_id", "story_id"], name: "index_schedules_on_branch_judge_id_and_court_id_and_story_id", using: :btree
@@ -673,8 +672,8 @@ ActiveRecord::Schema.define(version: 20160829035239) do
     t.integer  "judge_id"
     t.integer  "verdict_rater_id"
     t.string   "verdict_rater_type"
-    t.integer  "quality_score"
-    t.integer  "rating_score"
+    t.float    "quality_score"
+    t.float    "rating_score"
     t.hstore   "data"
     t.boolean  "appeal_judge"
     t.integer  "status"

@@ -7,9 +7,9 @@
 #  judge_id            :integer
 #  schedule_rater_id   :integer
 #  schedule_rater_type :string
-#  rating_score        :integer
-#  command_score       :integer
-#  attitude_score      :integer
+#  rating_score        :float
+#  command_score       :float
+#  attitude_score      :float
 #  data                :hstore
 #  appeal_judge        :boolean          default(FALSE)
 #  created_at          :datetime         not null
