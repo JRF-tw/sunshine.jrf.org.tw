@@ -33,4 +33,4 @@ require "capistrano/sidekiq"
 require "whenever/capistrano"
 require "rollbar/capistrano3"
 require "capistrano/sitemap_generator"
-require 'slackistrano/capistrano'
+require "slackistrano/capistrano"
