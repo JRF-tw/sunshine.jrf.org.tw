@@ -30,7 +30,7 @@ class LawyerQueries
   end
 
   def pending_score_verdict(story)
-    story.judgment_verdict ? Verdict.find(story.judgment_verdict.id) : nil
+    !get_verdict_score(story) && story.judgment_verdict ? Verdict.find(story.judgment_verdict.id) : nil
   end
 
   def get_scores_array(story, sort_by: "date")

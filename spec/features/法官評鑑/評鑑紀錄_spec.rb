@@ -79,6 +79,10 @@ describe "法官評鑑 - 評鑑紀錄", type: :request do
       it "Then 「已評鑑」區塊內出現判決評鑑的編輯項目" do
         expect(response.body).to match("編輯評鑑")
       end
+
+      it "Then 「待評鑑」區塊內不會出現判決評鑑的新增" do
+        expect(response.body).not_to match("新增判決評鑑")
+      end
     end
   end
 

@@ -47,6 +47,11 @@ RSpec.describe LawyerQueries do
       let!(:verdict) { create :verdict, story: story, is_judgment: true }
       it { expect(query.pending_score_verdict(story)).to eq(verdict) }
     end
+
+    context "story already scored" do
+      let!(:verdict_score) { create :verdict_score, verdict_rater: lawyer, story: story }
+      it { expect(query.pending_score_verdict(story)).to be_nil }
+    end
   end
 
   describe "#get_scores_array" do
