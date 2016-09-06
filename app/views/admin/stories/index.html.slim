@@ -10,9 +10,9 @@
             collect_for_boolean, include_blank: "請選擇"
         .span6
           .control-group
-            label.control-label= f.label :verdicts_is_judgment_eq
-            .controls= f.select :verdicts_is_judgment_eq,
-            collect_for_boolean, include_blank: "請選擇"
+            label.control-label= f.label :already_adjudged
+            .controls= f.select :already_adjudged,
+            collect_for_adjudge, include_blank: "請選擇"
       .row
         .span6
           .control-group

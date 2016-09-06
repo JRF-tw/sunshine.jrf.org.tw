@@ -270,7 +270,7 @@ zh-TW:
         main_judge_name_cont: "主審法官姓名包含"
         court_full_name_eq: "法院名稱"
         is_adjudge_eq: "是否已宣判"
-        verdicts_is_judgment_eq: "是否有判決書"
+        already_adjudged: "是否有判決書"
         adjudge_date_eq: "宣判日期"
       verdict:
         story_court_full_name_eq: "判決法院"

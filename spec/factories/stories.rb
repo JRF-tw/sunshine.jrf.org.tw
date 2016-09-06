@@ -58,6 +58,12 @@ FactoryGirl.define do
       is_adjudge true
     end
 
+    trait :with_adjugde_verdict do
+      after(:create) do |story|
+        create :verdict, is_judgment: true, story: story
+      end
+    end
+
     trait :adjudged_yesterday do
       adjudge_date Time.zone.yesterday
       is_adjudge true
