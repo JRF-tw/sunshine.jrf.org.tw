@@ -4,7 +4,7 @@ ruby:
 
 .form-actions class=(final ? 'text-center' : 'text-right')
   - if link
-    = link_to link[:text], link[:href], class: "flat-button"
+    = link_to link[:text], link[:href], class: "flat-button", method: link[:method]
 
   = f.button :button, submit, class:(final ? "raised-button--large" : "raised-button")
 
