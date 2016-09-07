@@ -6,9 +6,8 @@ RSpec.describe Parties::SubscribesController, type: :request do
   before { signin_party(party) }
   let!(:story) { create :story }
 
-  describe "#create" do
-    subject! { post "/party/stories/#{story.id}/subscribe" }
-    it { expect(response).to be_redirect }
+  describe "#toggle" do
+    subject! { post "/party/stories/#{story.id}/subscribe/toggle.js" }
     it { expect(StorySubscription.count).to eq(1) }
   end
 

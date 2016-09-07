@@ -92,7 +92,11 @@ Rails.application.routes.draw do
     end
     resources :stories, only: [:index, :show] do
       member do
-        resource :subscribe, only: [:toggle]
+        resource :subscribe, only: [:destroy] do
+          collection do
+            post :toggle
+          end
+        end
       end
     end
   end
@@ -136,7 +140,11 @@ Rails.application.routes.draw do
     end
     resources :stories, only: [:index, :show] do
       member do
-        resource :subscribe, only: [:toggle]
+        resource :subscribe, only: [:destroy] do
+          collection do
+            post :toggle
+          end
+        end
       end
     end
   end

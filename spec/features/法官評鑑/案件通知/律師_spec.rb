@@ -87,7 +87,7 @@ describe "律師案件通知", type: :request do
     context "案件未訂閱" do
       let!(:lawyer) { create(:lawyer, :with_confirmed, :with_password) }
       let!(:story) { create(:story, :with_schedule_date_today) }
-      subject { StorySubscriptionDeleteContext.new(story).perform(lawyer) }
+      subject {StorySubscriptionDeleteContext.new(story).perform(lawyer) }
 
       it "不變" do
         expect { subject }.not_to change { StorySubscription.count }

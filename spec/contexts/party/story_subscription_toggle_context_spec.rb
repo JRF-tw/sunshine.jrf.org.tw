@@ -2,18 +2,25 @@ require "rails_helper"
 
 describe Party::StorySubscriptionToggleContext do
   let!(:story) { create :story }
-  subject { described_class.new(story) }
+  let(:party) { create :party, :already_confirmed }
+  let!(:context) { described_class.new(story) }
 
   context "party subscribe" do
-    context "success" do
-      let(:party) { create :party, :already_confirmed }
-      it { expect { subject.perform(party) }.to change { StorySubscription.count }.by(1) }
-    end
+    subject { context.perform(party) }
+    it { expect { subject }.to change { StorySubscription.count }.by(1) }
+  end
 
-    context "party not confirmed" do
-      let(:party) { create :party }
-      it { expect { subject.perform(party) }.not_to change { StorySubscription.count } }
-    end
+  context "party unsubscribe" do
+    let!(:story_subscribe) { create :story_subscription, story: story, subscriber: party }
+    subject { context.perform(party) }
+
+    it { expect{ subject }.to change { StorySubscription.count }.from(1).to(0) }
+  end
+
+  context "party not confirmed" do
+    let(:party) { create :party }
+    subject { context.perform(party) }
+    it { expect { subject }.not_to change { StorySubscription.count } }
   end
 
 end

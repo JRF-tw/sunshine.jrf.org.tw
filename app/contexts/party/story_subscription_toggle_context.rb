@@ -1,6 +1,7 @@
 class Party::StorySubscriptionToggleContext < BaseContext
 
   before_perform :check_confirmed
+  before_perform :find_story_subscription
   before_perform :build_data
 
   def initialize(story)
@@ -10,7 +11,7 @@ class Party::StorySubscriptionToggleContext < BaseContext
   def perform(party)
     @party = party
     run_callbacks :perform do
-      if @story_subscription.save
+      if @story_subscription.new_record? ? @story_subscription.save : @story_subscription.destroy
         @story_subscription
       else
         add_error(:story_subscriber_failed, @story_subscription.errors.full_messages.join("\n"))
@@ -19,11 +20,15 @@ class Party::StorySubscriptionToggleContext < BaseContext
   end
 
   def check_confirmed
-    return add_error(:story_subscriber_valid_failed, "訂閱案件前請先完成驗證") unless @party.confirmed?
+    return add_error(:story_subscriber_valid_failed, "請先完成驗證") unless @party.confirmed?
+  end
+
+  def find_story_subscription
+    @story_subscription = @party.story_subscriptions.find_by(story_id: @story.id)
   end
 
   def build_data
-    @story_subscription = @story.story_subscriptions.new(subscriber: @party, story: @story)
+    @story_subscription = @story.story_subscriptions.new(subscriber: @party) unless @story_subscription
   end
 
 end
