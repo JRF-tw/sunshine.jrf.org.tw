@@ -60,7 +60,7 @@ class CourtObservers::SchedulesController < CourtObservers::BaseController
 
   def create
     context = CourtObserver::ScheduleScoreCreateContext.new(current_court_observer)
-    if context.perform(schedule_score_params)
+    if @record = context.perform(schedule_score_params)
       @status = "thanks_scored"
       render_as_success(:new)
     else

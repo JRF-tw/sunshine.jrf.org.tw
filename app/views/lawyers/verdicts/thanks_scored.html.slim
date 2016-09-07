@@ -1,4 +1,7 @@
 = render layout: 'components/card', locals: { heading: '感謝您的評鑑！' }
+  = check_box_tag :subscribe_edm, toggle_subscribe_lawyer_edm_path(format: :js), current_lawyer.subscribe_edm, class: "js-subscribe-edm"
+  = label_tag "subscribe_edm", "是否同意訂閱電子報？"
+
   .text-center
     = link_to "回到評鑑紀錄頁", lawyer_root_path, class: 'raised-button'
-    
+
