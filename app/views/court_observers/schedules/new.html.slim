@@ -9,7 +9,9 @@
       form_for: @schedule_score,
       as: :schedule_score,
       form_url: checked_date_court_observer_score_schedules_path,
-      prev_url: '#link'
+      prev_url: new_court_observer_score_schedule_path(schedule_score: params[:schedule_score]),
+      prev_url_method: :get
+
 
   - when 'checked_date'
     = render 'components/input_score_judge',
@@ -17,7 +19,8 @@
       form_for: @schedule_score,
       as: :schedule_score,
       form_url: checked_judge_court_observer_score_schedules_path,
-      prev_url: '#link'
+      prev_url: checked_info_court_observer_score_schedules_path(schedule_score: params[:schedule_score]),
+      prev_url_method: :post
 
   - when 'checked_judge'
     = render layout: 'components/input_score_start', locals: {\
@@ -35,7 +38,7 @@
       path_to_root: court_observer_stories_path\
     }
       = '這邊可以放每個不同角色特有的 code'
-  
+
   - else
     = render 'components/input_score_info',
       step_text: '選擇法院/案號', step_count: 1, max_steps: max_steps,

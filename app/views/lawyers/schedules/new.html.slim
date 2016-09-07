@@ -1,7 +1,7 @@
 = render layout: 'components/score_card',
   locals: { status: @status, type: 'schedule' }
   - max_steps = 4
-  
+
   - case @status
   - when 'checked_info'
     = render 'components/input_score_date',
@@ -9,7 +9,8 @@
       form_for: @schedule_score,
       as: :schedule_score,
       form_url: checked_date_lawyer_score_schedules_path,
-      prev_url: '#link'
+      prev_url: new_lawyer_score_schedule_path(schedule_score: params[:schedule_score]),
+      prev_url_method: :get
 
   - when 'checked_date'
     = render 'components/input_score_judge',
@@ -17,7 +18,8 @@
       form_for: @schedule_score,
       as: :schedule_score,
       form_url: checked_judge_lawyer_score_schedules_path,
-      prev_url: '#link'
+      prev_url: checked_info_lawyer_score_schedules_path(schedule_score: params[:schedule_score]),
+      prev_url_method: :post
 
   - when 'checked_judge'
     = render layout: 'components/input_score_start', locals: {\
