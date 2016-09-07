@@ -1,5 +1,5 @@
 class Parties::SubscribesController < Parties::BaseController
-  before_action :find_story, only: [:toggle]
+  before_action :find_story, only: [:toggle, :destroy]
 
   def toggle
     Party::StorySubscriptionToggleContext.new(@story).perform(current_party)

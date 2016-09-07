@@ -1,5 +1,5 @@
 class Lawyers::SubscribesController < Lawyers::BaseController
-  before_action :find_story, only: [:destroy, :toggle]
+  before_action :find_story, only: [:toggle, :destroy]
 
   def toggle
     Lawyer::StorySubscriptionToggleContext.new(@story).perform(current_lawyer)

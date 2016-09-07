@@ -16,7 +16,7 @@ describe Lawyer::StorySubscriptionToggleContext do
     let!(:story_subscribe) { create :story_subscription, story: story, subscriber: lawyer }
     subject { context.perform(lawyer) }
 
-    it { expect{ subject }.to change { StorySubscription.count }.from(1).to(0) }
+    it { expect { subject }.to change { StorySubscription.count }.from(1).to(0) }
   end
 
   context "lawyer not registered" do

@@ -12,7 +12,7 @@ RSpec.describe Parties::SubscribesController, type: :request do
   end
 
   describe "#delete" do
-    before { post "/party/stories/#{story.id}/subscribe" }
+    before { post "/party/stories/#{story.id}/subscribe/toggle.js" }
     subject! { delete "/party/stories/#{story.id}/subscribe" }
     it { expect(response).to be_redirect }
     it { expect(StorySubscription.count).to eq(0) }

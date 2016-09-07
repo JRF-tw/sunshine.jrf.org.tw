@@ -12,7 +12,7 @@ RSpec.describe Lawyers::SubscribesController, type: :request do
   end
 
   describe "#delete" do
-    before { post "/lawyer/stories/#{story.id}/subscribe" }
+    before { post "/lawyer/stories/#{story.id}/subscribe/toggle.js" }
     subject! { delete "/lawyer/stories/#{story.id}/subscribe" }
     it { expect(response).to be_redirect }
     it { expect(StorySubscription.count).to eq(0) }
