@@ -212,8 +212,8 @@ module ApplicationHelper
     [["是", true], ["否", false]]
   end
 
-  def collect_for_adjudge
-    [["是"], ["否"]]
+  def collect_for_adjudgement
+    [["是", "yes"], ["否", "no"]]
   end
 
   def collect_for_main_judge_present

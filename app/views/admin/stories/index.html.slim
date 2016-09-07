@@ -5,14 +5,14 @@
       .row
         .span6
           .control-group
-            label.control-label= f.label :is_adjudge_eq
-            .controls= f.select :is_adjudge_eq,
+            label.control-label= f.label :is_pronounce_eq
+            .controls= f.select :is_pronounce_eq,
             collect_for_boolean, include_blank: "請選擇"
         .span6
           .control-group
-            label.control-label= f.label :already_adjudged
-            .controls= f.select :already_adjudged,
-            collect_for_adjudge, include_blank: "請選擇"
+            label.control-label= f.label :have_adjudgement
+            .controls= f.select :have_adjudgement,
+            collect_for_adjudgement, include_blank: "請選擇"
       .row
         .span6
           .control-group
