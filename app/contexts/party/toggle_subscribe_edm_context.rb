@@ -9,7 +9,6 @@ class Party::ToggleSubscribeEdmContext < BaseContext
 
   def perform
     run_callbacks :perform do
-
       return add_error(:data_update_fail, "訂閱失敗") unless @party.save
       true
     end
