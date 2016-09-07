@@ -68,4 +68,19 @@ class Story < ActiveRecord::Base
   def detail_info
     "#{court.full_name}#{year}年#{word_type}字第#{number}號"
   end
+
+  class << self
+    def ransackable_scopes(_auth_object = nil)
+      [:have_adjudgement]
+    end
+
+    def have_adjudgement(status)
+      adjudged_story_ids = Story.joins(:verdicts).where("Verdicts.is_judgment = ?", true).pluck(:id)
+      if status == "yes"
+        where(id: adjudged_story_ids)
+      elsif status == "no"
+        where.not(id: adjudged_story_ids)
+      end
+    end
+  end
 end
