@@ -16,7 +16,7 @@
     = f.input :date, label: "選擇開庭日期", input_html: { class: 'datepicker' }
 
     .form-group
-      = f.input_field :confirmed_realdate, as: :boolean
+      = f.input_field :confirmed_realdate, as: :boolean, boolean_style: :inline
       = label_tag :confirmed_realdate do
         | 確認此日期為實際開庭日期
         = link_to '#', class: 'popover-trigger',
