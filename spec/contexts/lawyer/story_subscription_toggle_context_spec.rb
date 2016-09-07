@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Lawyer::StorySubscriptionCreateContext do
+describe Lawyer::StorySubscriptionToggleContext do
   let!(:story) { create :story }
   let!(:context) { described_class.new(story) }
 

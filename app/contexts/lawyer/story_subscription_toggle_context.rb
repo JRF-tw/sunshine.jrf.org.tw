@@ -1,4 +1,4 @@
-class Lawyer::StorySubscriptionCreateContext < BaseContext
+class Lawyer::StorySubscriptionToggleContext < BaseContext
 
   before_perform :check_confirmed
   before_perform :check_set_password

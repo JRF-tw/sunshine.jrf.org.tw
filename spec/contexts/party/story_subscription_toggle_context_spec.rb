@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Party::StorySubscriptionCreateContext do
+describe Party::StorySubscriptionToggleContext do
   let!(:story) { create :story }
   subject { described_class.new(story) }
 

@@ -1,4 +1,4 @@
-class Party::StorySubscriptionCreateContext < BaseContext
+class Party::StorySubscriptionToggleContext < BaseContext
 
   before_perform :check_confirmed
   before_perform :build_data
