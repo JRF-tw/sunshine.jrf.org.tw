@@ -55,6 +55,6 @@ class Party::VerdictScoreCheckInfoContext < BaseContext
   end
 
   def already_scored
-    return add_error(:verdict_score_exist) if @party.verdict_scores.where(story: @story).count > 0
+    return add_error(:verdict_score_found) if @party.verdict_scores.where(story: @story).count > 0
   end
 end

@@ -172,7 +172,7 @@ zh-TW:
       subscriber_without_email: "訂閱失敗 : Email未填寫"
       subscriber_email_not_confirm: "訂閱失敗 : 尚未驗證Email"
       quality_score_blank: "裁判品質為必填"
-      verdict_score_exist: "判決已評鑑"
+      verdict_score_found: "判決已評鑑"
       verdict_score_not_found: "尚未抓到判決書"
       verdict_judge_name_error: "判決書比對法官名稱錯誤"
       wrong_password: "密碼錯誤"

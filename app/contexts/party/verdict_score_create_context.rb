@@ -20,7 +20,7 @@ class Party::VerdictScoreCreateContext < BaseContext
   def perform(params)
     @params = permit_params(params[:verdict_score] || params, PERMITS)
     run_callbacks :perform do
-      return add_error(:verdict_score_exist) unless @verdict_score.save
+      return add_error(:verdict_score_found) unless @verdict_score.save
       @verdict_score
     end
   end

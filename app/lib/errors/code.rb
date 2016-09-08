@@ -88,7 +88,7 @@ class Errors::Code
     quality_score_blank: 400,
     verdict_score_valid_failed: 401,
     verdict_score_not_found: 400,
-    verdict_score_exist: 400,
+    verdict_score_found: 400,
     verdict_judge_name_error: 400,
     without_policy_agreement: 400,
     word_type_blank: 400,

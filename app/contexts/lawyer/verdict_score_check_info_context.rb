@@ -55,6 +55,6 @@ class Lawyer::VerdictScoreCheckInfoContext < BaseContext
   end
 
   def already_scored
-    return add_error(:verdict_score_exist) if @lawyer.verdict_scores.where(story: @story).count > 0
+    return add_error(:verdict_score_found) if @lawyer.verdict_scores.where(story: @story).count > 0
   end
 end
