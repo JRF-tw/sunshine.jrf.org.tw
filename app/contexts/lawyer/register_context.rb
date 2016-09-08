@@ -34,7 +34,7 @@ class Lawyer::RegisterContext < BaseContext
   end
 
   def check_email_valid
-    return add_error(:email_invalid) unless @params[:email][/\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i]
+    return add_error(:email_pattern_invalid) unless @params[:email][/\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i]
   end
 
   def find_lawyer_by_params

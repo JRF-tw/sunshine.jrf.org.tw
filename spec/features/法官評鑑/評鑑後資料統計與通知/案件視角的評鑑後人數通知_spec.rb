@@ -6,7 +6,7 @@ describe "法官評鑑 - 評鑑後資料統計與通知 - 案件視角的評鑑�
   let!(:judge) { create :judge, court: court }
 
   context "當事人" do
-    let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, date: schedule.start_on, confirmed_realdate: false, judge_name: judge.name, rating_score: 1, note: "xxxxx", appeal_judge: false } }
+    let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, start_on: schedule.start_on, confirmed_realdate: false, judge_name: judge.name, rating_score: 1, note: "xxxxx", appeal_judge: false } }
     let!(:party) { create :party }
     before { signin_party(party) }
 
@@ -58,7 +58,7 @@ describe "法官評鑑 - 評鑑後資料統計與通知 - 案件視角的評鑑�
     before { signin_lawyer(lawyer) }
 
     context "Given 案件正進行開庭評鑑中，已評鑑的律師人數達 5 人" do
-      let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, date: schedule.start_on, confirmed_realdate: false, judge_name: judge.name, command_score: 1, attitude_score: 1, note: "xxxxx", appeal_judge: false } }
+      let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, start_on: schedule.start_on, confirmed_realdate: false, judge_name: judge.name, command_score: 1, attitude_score: 1, note: "xxxxx", appeal_judge: false } }
       before { create_list :schedule_score, 5, story: story }
 
       context "When 新的律師新增開庭評鑑" do

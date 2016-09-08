@@ -18,7 +18,7 @@ describe Lawyer::RegisterContext do
 
     context "invalid email" do
       subject { described_class.new(lawyer: { name: lawyer.name, email: "gg33" }, policy_agreement: "1") }
-      it { expect { subject.perform }.to change { subject.errors[:email_invalid] } }
+      it { expect { subject.perform }.to change { subject.errors[:email_pattern_invalid] } }
       it { expect { subject.perform }.not_to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
     end
 

@@ -16,7 +16,7 @@ describe Lawyer::ChangeEmailContext do
       let(:params) { { email: "h2312", current_password: "123123123" } }
 
       it { expect { subject.perform(params) }.not_to change { lawyer.reload.unconfirmed_email } }
-      it { expect { subject.perform(params) }.to change { subject.errors[:email_invalid] } }
+      it { expect { subject.perform(params) }.to change { subject.errors[:email_pattern_invalid] } }
     end
 
     context "update the same email" do

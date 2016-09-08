@@ -49,7 +49,7 @@ describe CourtObserver::RegisterCheckContext do
         let(:params) { { court_observer: { name: "老夫子", email: "dddd", password: "22222222", password_confirmation: "22222222" }, policy_agreement: "1" } }
 
         it { expect(subject.perform).to be_falsey }
-        it { expect { subject.perform }.to change { subject.errors[:email_invalid] } }
+        it { expect { subject.perform }.to change { subject.errors[:email_pattern_invalid] } }
       end
 
       context "without policy agreement" do

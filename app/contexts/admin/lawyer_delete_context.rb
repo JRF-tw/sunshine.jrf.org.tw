@@ -14,7 +14,7 @@ class Admin::LawyerDeleteContext < BaseContext
   end
 
   def check_verdict_empty
-    return add_error(:lawyer_have_judgement) if @lawyer.verdict_relations.present?
+    return add_error(:lawyer_has_verdict) if @lawyer.verdict_relations.present?
   end
 
   def check_confirm

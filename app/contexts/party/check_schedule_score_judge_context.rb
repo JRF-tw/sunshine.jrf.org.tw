@@ -1,5 +1,5 @@
 class Party::CheckScheduleScoreJudgeContext < BaseContext
-  PERMITS = [:court_id, :year, :word_type, :number, :date, :confirmed_realdate, :judge_name].freeze
+  PERMITS = [:court_id, :year, :word_type, :number, :start_on, :confirmed_realdate, :judge_name].freeze
 
   before_perform :check_judge_name
   before_perform :find_judge

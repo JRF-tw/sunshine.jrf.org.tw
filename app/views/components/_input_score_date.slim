@@ -13,7 +13,7 @@
     = f.input :number, label: '案號', readonly: true
 
   .form--score__editor
-    = f.input :date, label: "選擇開庭日期", input_html: { class: 'datepicker' }
+    = f.input :start_on, label: "選擇開庭日期", input_html: { class: 'datepicker' }
 
     .form-group
       = f.input_field :confirmed_realdate, as: :boolean, boolean_style: :inline

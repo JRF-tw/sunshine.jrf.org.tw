@@ -23,21 +23,21 @@ RSpec.describe Parties::SchedulesController, type: :request do
     end
 
     describe "#checked_date" do
-      let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, date: schedule.start_on, confirmed_realdate: false } }
+      let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, start_on: schedule.start_on, confirmed_realdate: false } }
       subject! { post "/party/score/schedules/checked_date", schedule_score: params }
       it { expect(response).to be_success }
       it { expect(flash[:error]).to be_nil }
     end
 
     describe "#checked_judge" do
-      let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, date: schedule.start_on, confirmed_realdate: false, judge_name: judge.name } }
+      let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, start_on: schedule.start_on, confirmed_realdate: false, judge_name: judge.name } }
       subject! { post "/party/score/schedules/checked_judge", schedule_score: params }
       it { expect(response).to be_success }
       it { expect(flash[:error]).to be_nil }
     end
 
     describe "#create" do
-      let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, date: schedule.start_on, confirmed_realdate: false, judge_name: judge.name, rating_score: 1, note: "xxxxx", appeal_judge: false } }
+      let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, start_on: schedule.start_on, confirmed_realdate: false, judge_name: judge.name, rating_score: 1, note: "xxxxx", appeal_judge: false } }
       subject! { post "/party/score/schedules", schedule_score: params }
       it { expect(response).to be_success }
       it { expect(flash[:error]).to be_nil }

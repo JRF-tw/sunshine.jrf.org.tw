@@ -18,7 +18,7 @@ describe CourtObserver::ChangeEmailContext do
       subject { described_class.new(court_observer) }
 
       it { expect { subject.perform(params) }.not_to change { court_observer.reload.unconfirmed_email } }
-      it { expect { subject.perform(params) }.to change { subject.errors[:email_invalid] } }
+      it { expect { subject.perform(params) }.to change { subject.errors[:email_pattern_invalid] } }
     end
 
     context "update the same email" do
