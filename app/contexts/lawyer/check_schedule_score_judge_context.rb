@@ -19,16 +19,16 @@ class Lawyer::CheckScheduleScoreJudgeContext < BaseContext
   private
 
   def check_judge_name
-    return add_error(:data_blank, "法官姓名不能為空") unless @params[:judge_name].present?
+    return add_error(:judge_name_blank) unless @params[:judge_name].present?
   end
 
   def find_judge
     # TODO : need check same name issue
     @judge = Judge.where(name: @params[:judge_name]).last
-    return add_error(:data_not_found, "沒有該位法官") unless @judge
+    return add_error(:judge_not_exist) unless @judge
   end
 
   def check_judge_in_correct_court
-    return add_error(:data_not_found, "法官不存在該法院") if @judge.current_court_id != @params[:court_id].to_i
+    return add_error(:wrong_court_for_judge) if @judge.current_court_id != @params[:court_id].to_i
   end
 end

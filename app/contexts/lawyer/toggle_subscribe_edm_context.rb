@@ -7,7 +7,7 @@ class Lawyer::ToggleSubscribeEdmContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      return add_error(:data_update_fail, "訂閱失敗") unless @lawyer.save
+      return add_error(:subscribe_fail) unless @lawyer.save
       true
     end
   end

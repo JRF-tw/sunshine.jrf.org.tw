@@ -21,7 +21,7 @@ class Lawyer::ScheduleScoreCreateContext < BaseContext
   def perform(params)
     @params = permit_params(params[:schedule_score] || params, PERMITS)
     run_callbacks :perform do
-      return add_error(:data_create_fail, "開庭已經評論") unless @schedule_score.save
+      return add_error(:court_already_judged) unless @schedule_score.save
       @schedule_score
     end
   end
@@ -33,12 +33,12 @@ class Lawyer::ScheduleScoreCreateContext < BaseContext
   end
 
   def check_command_score
-    return add_error(:data_blank, "訴訟指揮分數為必填") unless @params[:command_score].present?
+    return add_error(:command_score_blank) unless @params[:command_score].present?
   end
 
   def check_attitude_score
     # TODO : check score type attitude_score & rating_score
-    return add_error(:data_blank, "開庭滿意度分數為必填") unless @params[:attitude_score].present?
+    return add_error(:court_rating_score_blank) unless @params[:attitude_score].present?
   end
 
   def check_story

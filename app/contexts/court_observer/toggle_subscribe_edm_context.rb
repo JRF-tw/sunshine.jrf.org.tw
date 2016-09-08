@@ -7,7 +7,7 @@ class CourtObserver::ToggleSubscribeEdmContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      return add_error(:data_update_fail, "訂閱失敗") unless @court_observer.save
+      return add_error(:subscribe_fail) unless @court_observer.save
       true
     end
   end

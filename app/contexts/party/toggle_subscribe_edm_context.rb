@@ -9,7 +9,7 @@ class Party::ToggleSubscribeEdmContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      return add_error(:data_update_fail, "訂閱失敗") unless @party.save
+      return add_error(:subscribe_fail) unless @party.save
       true
     end
   end
@@ -17,11 +17,11 @@ class Party::ToggleSubscribeEdmContext < BaseContext
   private
 
   def check_email
-    return add_error(:data_update_fail, "訂閱失敗 : 尚未驗證Email") unless @party.confirmed?
+    return add_error(:subscriber_email_not_confirm) unless @party.confirmed?
   end
 
   def check_confirm
-    return add_error(:data_update_fail, "訂閱失敗 : Email未填寫") unless @party.email.present?
+    return add_error(:subscriber_without_email) unless @party.email.present?
   end
 
   def assign_value

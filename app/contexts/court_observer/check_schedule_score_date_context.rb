@@ -29,25 +29,25 @@ class CourtObserver::CheckScheduleScoreDateContext < BaseContext
   end
 
   def check_date
-    return add_error(:data_blank, "開庭日期為必填") unless @params[:date].present?
+    return add_error(:open_court_date_blank) unless @params[:date].present?
   end
 
   def future_date
-    return add_error(:invalid_date, "開期日期不能為未來時間") if @params[:date].to_date > Time.zone.today
+    return add_error(:invalid_date) if @params[:date].to_date > Time.zone.today
   end
 
   def find_story
     stroy_params = @params.except(:date, :confirmed_realdate)
-    return add_error(:data_not_found, "案件不存在") unless @story = Story.where(stroy_params).last
+    return add_error(:story_not_exist) unless @story = Story.where(stroy_params).last
   end
 
   def find_schedule
-    return add_error(:data_not_found, "庭期比對失敗") unless @schedule = @story.schedules.on_day(@params[:date]).last
+    return add_error(:wrong_schedule) unless @schedule = @story.schedules.on_day(@params[:date]).last
   end
 
   def valid_score_intervel
     range = (@params[:date].to_date..@params[:date].to_date + SCORE_INTERVEL)
-    return add_error(:out_score_intervel, "已超過可評鑑時間") unless range.include?(Time.zone.today)
+    return add_error(:out_score_intervel) unless range.include?(Time.zone.today)
   end
 
   def record_report_time

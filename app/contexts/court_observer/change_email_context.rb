@@ -15,7 +15,7 @@ class CourtObserver::ChangeEmailContext < BaseContext
   def perform(params)
     @params = permit_params(params[:court_observer] || params, PERMITS)
     run_callbacks :perform do
-      return add_error(:data_update_fail, "密碼錯誤") unless @court_observer.update_with_password(@params)
+      return add_error(:wrong_password, "密碼錯誤") unless @court_observer.update_with_password(@params)
       true
     end
   end
@@ -23,15 +23,15 @@ class CourtObserver::ChangeEmailContext < BaseContext
   private
 
   def check_email_valid
-    return add_error(:data_invalid, "email 的格式是無效的") unless @params[:email][/\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i]
+    return add_error(:email_invalid) unless @params[:email][/\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i]
   end
 
   def check_email_different
-    return add_error(:email_conflict, "email 不可與原本相同") if @params["email"] == @court_observer.email
+    return add_error(:email_conflict) if @params["email"] == @court_observer.email
   end
 
   def check_email_unique
-    return add_error(:observer_exist, "email 已經被使用") if CourtObserver.pluck(:email).include?(@params[:email])
+    return add_error(:email_exist) if CourtObserver.pluck(:email).include?(@params[:email])
   end
 
   def skip_devise_confirmation_notification

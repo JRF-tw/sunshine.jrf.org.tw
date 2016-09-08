@@ -31,27 +31,27 @@ class Party::SetPhoneContext < BaseContext
   private
 
   def check_phone
-    return add_error(:data_update_fail, "手機號碼為必填欄位") unless @params[:phone_number].present?
+    return add_error(:phone_number_blank) unless @params[:phone_number].present?
   end
 
   def check_phone_format
-    return add_error(:data_update_fail, "手機號碼格式錯誤") unless @params[:phone_number] =~ /\A(0)(9)([0-9]{8})\z/
+    return add_error(:invalid_phone_number) unless @params[:phone_number] =~ /\A(0)(9)([0-9]{8})\z/
   end
 
   def check_phone_not_the_same
-    return add_error(:data_update_fail, "手機號碼不可與原本相同") if @party.phone_number == @params[:phone_number]
+    return add_error(:phone_number_conflict) if @party.phone_number == @params[:phone_number]
   end
 
   def check_unexist_phone_number
-    return add_error(:data_update_fail, "該手機號碼已註冊") if Party.pluck(:phone_number).include?(@params[:phone_number])
+    return add_error(:phone_number_exist) if Party.pluck(:phone_number).include?(@params[:phone_number])
   end
 
   def check_unexist_unconfirmed_phone
-    return add_error(:data_update_fail, "該手機號碼正等待驗證中") if (Party.all.map { |n| n if n.unconfirmed_phone.value == @params[:phone_number] }).compact.present?
+    return add_error(:phone_number_confirming) if (Party.all.map { |n| n if n.unconfirmed_phone.value == @params[:phone_number] }).compact.present?
   end
 
   def check_sms_send_count
-    return add_error(:data_update_fail, "五分鐘內只能寄送兩次簡訊") if @party.sms_sent_count.value >= SENDINGLIMIT
+    return add_error(:send_sms_too_frequent) if @party.sms_sent_count.value >= SENDINGLIMIT
   end
 
   def generate_verify_code

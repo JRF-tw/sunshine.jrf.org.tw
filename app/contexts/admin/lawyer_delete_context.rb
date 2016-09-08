@@ -14,14 +14,14 @@ class Admin::LawyerDeleteContext < BaseContext
   end
 
   def check_verdict_empty
-    return add_error(:data_delete_fail, "該律師已有判決書") if @lawyer.verdict_relations.present?
+    return add_error(:lawyer_have_judgement) if @lawyer.verdict_relations.present?
   end
 
   def check_confirm
-    return add_error(:data_delete_fail, "該律師已經註冊") if @lawyer.confirmed?
+    return add_error(:lawyer_already_register) if @lawyer.confirmed?
   end
 
   def check_password
-    return add_error(:data_delete_fail, "該律師已設定密碼") if @lawyer.encrypted_password.present?
+    return add_error(:lawyer_have_password) if @lawyer.encrypted_password.present?
   end
 end
