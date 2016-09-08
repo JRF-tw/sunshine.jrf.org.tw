@@ -19,7 +19,7 @@ class Party::ScheduleScoreUpdateContext < BaseContext
   private
 
   def check_rating_score
-    return add_error(:court_rating_score_blank) unless @params[:rating_score].present?
+    return add_error(:schedule_rating_score_blank) unless @params[:rating_score].present?
   end
 
   def assign_attribute

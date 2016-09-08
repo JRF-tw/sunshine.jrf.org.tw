@@ -25,7 +25,7 @@ class Lawyer::CheckScheduleScoreJudgeContext < BaseContext
   def find_judge
     # TODO : need check same name issue
     @judge = Judge.where(name: @params[:judge_name]).last
-    return add_error(:judge_not_exist) unless @judge
+    return add_error(:judge_not_found) unless @judge
   end
 
   def check_judge_in_correct_court

@@ -20,7 +20,7 @@ class Party::ScheduleScoreCreateContext < BaseContext
   def perform(params)
     @params = permit_params(params[:schedule_score] || params, PERMITS)
     run_callbacks :perform do
-      return add_error(:court_already_judged) unless @schedule_score.save
+      return add_error(:judge_already_scored) unless @schedule_score.save
       @schedule_score
     end
   end
@@ -32,7 +32,7 @@ class Party::ScheduleScoreCreateContext < BaseContext
   end
 
   def check_rating_score
-    return add_error(:court_rating_score_blank) unless @params[:rating_score].present?
+    return add_error(:schedule_rating_score_blank) unless @params[:rating_score].present?
   end
 
   def check_story

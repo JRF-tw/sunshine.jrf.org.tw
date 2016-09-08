@@ -33,16 +33,16 @@ class Lawyer::CheckScheduleScoreDateContext < BaseContext
   end
 
   def future_date
-    return add_error(:invalid_date) if @params[:start_on].to_date > Time.zone.today
+    return add_error(:start_on_invalid) if @params[:start_on].to_date > Time.zone.today
   end
 
   def find_story
     stroy_params = @params.except(:start_on, :confirmed_realdate)
-    return add_error(:story_not_exist) unless @story = Story.where(stroy_params).last
+    return add_error(:story_not_found) unless @story = Story.where(stroy_params).last
   end
 
   def find_schedule
-    return add_error(:wrong_schedule) unless @schedule = @story.schedules.on_day(@params[:start_on]).last
+    return add_error(:schedule_not_found) unless @schedule = @story.schedules.on_day(@params[:start_on]).last
   end
 
   def valid_score_intervel

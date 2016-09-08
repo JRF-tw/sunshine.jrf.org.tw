@@ -22,7 +22,7 @@ class Lawyer::StorySubscriptionToggleContext < BaseContext
   private
 
   def check_confirmed
-    return add_error(:subscriber_not_sign_up) unless @lawyer.confirmed?
+    return add_error(:need_sign_up) unless @lawyer.confirmed?
   end
 
   def check_set_password

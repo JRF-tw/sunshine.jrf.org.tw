@@ -15,7 +15,7 @@ class CourtObserver::ChangeEmailContext < BaseContext
   def perform(params)
     @params = permit_params(params[:court_observer] || params, PERMITS)
     run_callbacks :perform do
-      return add_error(:wrong_password, "密碼錯誤") unless @court_observer.update_with_password(@params)
+      return add_error(:wrong_password) unless @court_observer.update_with_password(@params)
       true
     end
   end

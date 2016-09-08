@@ -21,7 +21,7 @@ class Lawyer::ScheduleScoreCreateContext < BaseContext
   def perform(params)
     @params = permit_params(params[:schedule_score] || params, PERMITS)
     run_callbacks :perform do
-      return add_error(:court_already_judged) unless @schedule_score.save
+      return add_error(:judge_already_scored) unless @schedule_score.save
       @schedule_score
     end
   end
@@ -38,7 +38,7 @@ class Lawyer::ScheduleScoreCreateContext < BaseContext
 
   def check_attitude_score
     # TODO : check score type attitude_score & rating_score
-    return add_error(:court_rating_score_blank) unless @params[:attitude_score].present?
+    return add_error(:schedule_rating_score_blank) unless @params[:attitude_score].present?
   end
 
   def check_story

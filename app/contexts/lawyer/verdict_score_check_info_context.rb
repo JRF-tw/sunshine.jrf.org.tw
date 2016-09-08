@@ -26,7 +26,7 @@ class Lawyer::VerdictScoreCheckInfoContext < BaseContext
 
   def check_court_id
     @court = Court.find(@params[:court_id]) if @params[:court_id].present?
-    return add_error(:court_not_exist) unless @court
+    return add_error(:court_not_found) unless @court
   end
 
   def check_year
@@ -42,11 +42,11 @@ class Lawyer::VerdictScoreCheckInfoContext < BaseContext
   end
 
   def find_story
-    return add_error(:story_not_exist) unless @story = Story.where(@params).last
+    return add_error(:story_not_found) unless @story = Story.where(@params).last
   end
 
   def story_not_adjudge
-    return add_error(:verdict_score_not_find) unless @story.adjudge_date.present?
+    return add_error(:verdict_score_not_found) unless @story.adjudge_date.present?
   end
 
   def valid_score_intervel

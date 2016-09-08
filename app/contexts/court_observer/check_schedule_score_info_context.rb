@@ -24,7 +24,7 @@ class CourtObserver::CheckScheduleScoreInfoContext < BaseContext
 
   def check_court_id
     @court = Court.find(@params[:court_id]) if @params[:court_id].present?
-    return add_error(:court_not_exist) unless @court
+    return add_error(:court_not_found) unless @court
   end
 
   def check_year
@@ -40,7 +40,7 @@ class CourtObserver::CheckScheduleScoreInfoContext < BaseContext
   end
 
   def find_story
-    return add_error(:story_not_exist) unless @story = Story.where(@params).last
+    return add_error(:story_not_found) unless @story = Story.where(@params).last
   end
 
   def story_has_pronounce_date?

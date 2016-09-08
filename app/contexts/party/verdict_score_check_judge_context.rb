@@ -33,7 +33,7 @@ class Party::VerdictScoreCheckJudgeContext < BaseContext
   def find_judge_in_court
     # TODO : need check same name issue
     @judge = Court.find(@params[:court_id]).judges.where(name: @params[:judge_name]).try(:last)
-    return add_error(:judge_not_exist) unless @judge
+    return add_error(:judge_not_found) unless @judge
   end
 
   def find_judge_by_verdict
