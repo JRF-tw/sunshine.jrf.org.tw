@@ -13,7 +13,7 @@ class Scrap::ImportBranchContext < BaseContext
     @chamber_name = chamber_name
     @branch_name = branch_name
     run_callbacks :perform do
-      return add_error(:data_create_fail, "branch find_or_create fail") unless @branch.save
+      return add_error(:scrap_branch_create_fail) unless @branch.save
       @branch
     end
   end
