@@ -1,14 +1,8 @@
 class Parties::SubscribesController < Parties::BaseController
+  before_action :find_story, only: [:toggle, :destroy]
 
-  before_action :find_story, only: [:create, :destroy]
-
-  def create
-    context = Party::StorySubscriptionCreateContext.new(@story)
-    if context.perform(current_party)
-      redirect_to party_root_path, flash: { success: "案件#{@story.identity} 已訂閱" }
-    else
-      redirect_to party_root_path, flash: { error: context.error_messages.join(", ").to_s }
-    end
+  def toggle
+    Party::StorySubscriptionToggleContext.new(@story).perform(current_party)
   end
 
   def destroy

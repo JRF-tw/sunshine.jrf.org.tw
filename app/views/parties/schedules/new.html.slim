@@ -36,7 +36,12 @@
       form_url: checked_date_party_score_schedules_path,
       path_to_root: party_stories_path\
     }
-      = '這邊可以放每個不同角色特有的 code'
+      / = '這邊可以放每個不同角色特有的 code'
+      = check_box_tag :subscribe_story, toggle_party_subscribe_path(@record.story, format: :js), already_subscribed_story?(current_party, @record.story), class: "js-subscribe-story"
+      = label_tag "subscribe_story", "是否同意我們在下一次開庭或判決書公布時用email通知您？"
+    p
+      = check_box_tag :subscribe_edm, toggle_subscribe_party_edm_path, current_party.subscribe_edm, class: "js-subscribe-edm"
+      = label_tag "subscribe_edm", "是否同意訂閱電子報？"
 
   - else
     = render 'components/input_score_info',

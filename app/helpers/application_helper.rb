@@ -239,4 +239,8 @@ module ApplicationHelper
     text = simple_format(text, {}, wrapper_tag: "div")
     safe_join([text], "")
   end
+
+  def already_subscribed_story?(role, story)
+    role.story_subscriptions.find_by(story_id: story.id).present?
+  end
 end

@@ -6,14 +6,13 @@ RSpec.describe Lawyers::SubscribesController, type: :request do
   before { signin_lawyer(lawyer) }
   let!(:story) { create :story }
 
-  describe "#create" do
-    subject! { post "/lawyer/stories/#{story.id}/subscribe" }
-    it { expect(response).to be_redirect }
+  describe "#toggle" do
+    subject! { post "/lawyer/stories/#{story.id}/subscribe/toggle.js" }
     it { expect(StorySubscription.count).to eq(1) }
   end
 
   describe "#delete" do
-    before { post "/lawyer/stories/#{story.id}/subscribe" }
+    before { post "/lawyer/stories/#{story.id}/subscribe/toggle.js" }
     subject! { delete "/lawyer/stories/#{story.id}/subscribe" }
     it { expect(response).to be_redirect }
     it { expect(StorySubscription.count).to eq(0) }

@@ -16,7 +16,7 @@ class Lawyers::SchedulesController < Lawyers::BaseController
 
   def update
     context = Lawyer::ScheduleScoreUpdateContext.new(@schedule_score)
-    if context.perform(schedule_score_params)
+    if @record = context.perform(schedule_score_params)
       @status = "thanks_scored"
       render_as_success(:new)
     else
@@ -60,7 +60,7 @@ class Lawyers::SchedulesController < Lawyers::BaseController
 
   def create
     context = Lawyer::ScheduleScoreCreateContext.new(current_lawyer)
-    if context.perform(schedule_score_params)
+    if @record = context.perform(schedule_score_params)
       @status = "thanks_scored"
       render_as_success(:new)
     else

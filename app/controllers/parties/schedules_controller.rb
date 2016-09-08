@@ -16,7 +16,7 @@ class Parties::SchedulesController < Parties::BaseController
 
   def update
     context = Party::ScheduleScoreUpdateContext.new(@schedule_score)
-    if context.perform(schedule_score_params)
+    if @record = context.perform(schedule_score_params)
       @status = "thanks_scored"
       render_as_success(:new)
     else
@@ -60,7 +60,7 @@ class Parties::SchedulesController < Parties::BaseController
 
   def create
     context = Party::ScheduleScoreCreateContext.new(current_party)
-    if context.perform(schedule_score_params)
+    if @record = context.perform(schedule_score_params)
       @status = "thanks_scored"
       render_as_success(:new)
     else

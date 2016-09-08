@@ -3,7 +3,7 @@ require "rails_helper"
 describe "當事人案件通知", type: :request do
   context "可訂閱與否" do
     let(:story) { create(:story) }
-    let(:context) { Party::StorySubscriptionCreateContext.new(story) }
+    let(:context) { Party::StorySubscriptionToggleContext.new(story) }
 
     context "有通過email驗證" do
       let!(:party) { create(:party, :already_confirmed) }

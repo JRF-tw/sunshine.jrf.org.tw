@@ -20,7 +20,7 @@ class Lawyers::VerdictsController < Lawyers::BaseController
 
   def update
     context = Lawyer::VerdictScoreUpdateContext.new(@verdict_score)
-    if context.perform(verdict_score_params)
+    if @record = context.perform(verdict_score_params)
       redirect_as_success(thanks_scored_lawyer_score_verdicts_path, "評鑑已更新")
     else
       render_as_fail(:edit, context.error_messages.join(","))

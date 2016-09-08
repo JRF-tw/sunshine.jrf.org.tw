@@ -11,6 +11,11 @@
 #
 
 FactoryGirl.define do
+  factory :story_subscription do
+    story { create :story }
+    subscriber { create :lawyer }
+  end
+
   factory :story_subscription_with_party, class: StorySubscription do
     story { create :story }
     subscriber { create :party }
