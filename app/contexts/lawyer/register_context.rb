@@ -27,7 +27,7 @@ class Lawyer::RegisterContext < BaseContext
   end
 
   def check_lawyer_params
-    add_error(:number_blank) if @params[:name].blank?
+    add_error(:name_blank) if @params[:name].blank?
     add_error(:email_blank) if @params[:email].blank?
 
     return false if errors.present?

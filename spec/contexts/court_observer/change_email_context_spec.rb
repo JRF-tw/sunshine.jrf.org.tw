@@ -18,7 +18,7 @@ describe CourtObserver::ChangeEmailContext do
       subject { described_class.new(court_observer) }
 
       it { expect { subject.perform(params) }.not_to change { court_observer.reload.unconfirmed_email } }
-      it { expect { subject.perform(params) }.to change { subject.errors[:data_invalid] } }
+      it { expect { subject.perform(params) }.to change { subject.errors[:email_invalid] } }
     end
 
     context "update the same email" do
@@ -35,7 +35,7 @@ describe CourtObserver::ChangeEmailContext do
       subject { described_class.new(court_observer) }
 
       it { expect { subject.perform(params) }.not_to change { court_observer.reload.unconfirmed_email } }
-      it { expect { subject.perform(params) }.to change { subject.errors[:observer_exist] } }
+      it { expect { subject.perform(params) }.to change { subject.errors[:email_exist] } }
     end
 
     context "update other's unconfirmed_email" do
@@ -51,7 +51,7 @@ describe CourtObserver::ChangeEmailContext do
       subject { described_class.new(court_observer) }
 
       it { expect { subject.perform(params) }.not_to change { court_observer.reload.unconfirmed_email } }
-      it { expect { subject.perform(params) }.to change { subject.errors[:data_update_fail] } }
+      it { expect { subject.perform(params) }.to change { subject.errors[:wrong_password] } }
     end
 
     context "wrong password" do
@@ -59,7 +59,7 @@ describe CourtObserver::ChangeEmailContext do
       subject { described_class.new(court_observer) }
 
       it { expect { subject.perform(params) }.not_to change { court_observer.reload.unconfirmed_email } }
-      it { expect { subject.perform(params) }.to change { subject.errors[:data_update_fail] } }
+      it { expect { subject.perform(params) }.to change { subject.errors[:wrong_password] } }
     end
   end
 

@@ -88,7 +88,7 @@ describe "律師註冊", type: :request do
         subject! { post "/lawyer", lawyer: { name: "", email: "bigtiger@gmail.com" }, policy_agreement: "1" }
 
         it "顯示格式錯誤訊息" do
-          expect(flash[:error]).to eq("姓名不可為空白字元")
+          expect(flash[:error]).to eq("姓名 不可為空白字元")
           expect(response).to render_template("lawyers/registrations/new")
         end
       end
@@ -106,7 +106,7 @@ describe "律師註冊", type: :request do
         subject! { post "/lawyer", lawyer: { name: "胖虎", email: "" }, policy_agreement: "1" }
 
         it "顯示格式錯誤訊息" do
-          expect(flash[:error]).to eq("email不可為空白字元")
+          expect(flash[:error]).to eq("email 不可為空白字元")
           expect(response).to render_template("lawyers/registrations/new")
         end
       end

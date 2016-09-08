@@ -38,11 +38,13 @@ class Errors::Code
     lawyer_have_judgement: 400,
     main_judge_not_exist: 400,
     number_blank: 400,
+    name_blank: 400,
     open_court_date_blank: 400,
     out_score_intervel: 400,
     observer_already_confirm: 400,
     observer_already_sign_up: 400,
     party_exist: 400,
+    party_exist_manual_check: 400,
     party_without_phone_number: 401,
     party_not_found: 400,
     password_invalid: 400,
@@ -93,6 +95,7 @@ class Errors::Code
     wrong_verify_code: 400,
     wrong_password: 400,
     wrong_court_for_judge: 400,
+    wrong_schedule: 400,
     year_blank: 400
   }.freeze
 

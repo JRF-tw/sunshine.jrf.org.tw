@@ -28,13 +28,13 @@ describe CourtObserver::RegisterCheckContext do
       context "password too short" do
         let!(:params) { { court_observer: { name: "老夫子", email: "hh5566@gmail.com", password: "1111", password_confirmation: "1111" }, policy_agreement: "1" } }
         it { expect(subject.perform).to be_falsey }
-        it { expect { subject.perform }.to change { subject.errors[:data_invalid] } }
+        it { expect { subject.perform }.to change { subject.errors[:password_less_than_minimum] } }
       end
 
       context "password different" do
         let!(:params) { { court_observer: { name: "老夫子", email: "hh5566@gmail.com", password: "22222222", password_confirmation: "11111111" }, policy_agreement: "1" } }
         it { expect(subject.perform).to be_falsey }
-        it { expect { subject.perform }.to change { subject.errors[:data_invalid] } }
+        it { expect { subject.perform }.to change { subject.errors[:password_not_match_confirmation] } }
       end
 
       context "use other's email" do
@@ -42,14 +42,14 @@ describe CourtObserver::RegisterCheckContext do
         let(:params) { { court_observer: { name: "老夫子", email: court_observer.email, password: "22222222", password_confirmation: "22222222" }, policy_agreement: "1" } }
 
         it { expect(subject.perform).to be_falsey }
-        it { expect { subject.perform }.to change { subject.errors[:observer_exist] } }
+        it { expect { subject.perform }.to change { subject.errors[:observer_already_confirm] } }
       end
 
       context "use invalid email" do
         let(:params) { { court_observer: { name: "老夫子", email: "dddd", password: "22222222", password_confirmation: "22222222" }, policy_agreement: "1" } }
 
         it { expect(subject.perform).to be_falsey }
-        it { expect { subject.perform }.to change { subject.errors[:data_invalid] } }
+        it { expect { subject.perform }.to change { subject.errors[:email_invalid] } }
       end
 
       context "without policy agreement" do

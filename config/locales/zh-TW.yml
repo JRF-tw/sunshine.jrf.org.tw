@@ -112,7 +112,7 @@ zh-TW:
       identify_number_invalid: "身分證字號格式不符(英文字母請大寫)"
       judge_create_fail: "法官建立失敗"
       judge_name_blank: "法官姓名不能為空"
-      judge_not_exist: "法官不存在"
+      judge_not_exist: "沒有該位法官"
       judge_rating_score_blank: "裁判滿意度為必填"
       lawyer_create_fail: "律師建立失敗"
       lawyer_data_lack: "律師資料不足"

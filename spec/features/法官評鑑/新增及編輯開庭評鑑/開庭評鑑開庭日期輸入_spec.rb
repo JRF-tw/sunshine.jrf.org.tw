@@ -45,7 +45,7 @@ describe "法官評鑑 - 新增及編輯開庭評鑑 - 開庭評鑑開庭日期�
 
       it "Then 顯示開庭日期輸入頁，保留原先輸入的日期，並顯示錯誤訊息" do
         expect(response).to be_success
-        expect(flash[:error]).to match("開期日期不能為未來時間")
+        expect(flash[:error]).to match("開庭日期不能為未來時間")
         expect(response.body).to match(story.court.full_name)
         expect(response.body).to match(story.year.to_s)
         expect(response.body).to match(story.word_type)

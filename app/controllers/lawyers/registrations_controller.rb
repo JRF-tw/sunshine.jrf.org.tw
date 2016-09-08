@@ -10,7 +10,7 @@ class Lawyers::RegistrationsController < Devise::RegistrationsController
     if @lawyer
       set_flash_message :notice, :"signed_up_but_#{@lawyer.inactive_message}" if is_flashing_format?
       respond_with resource, location: after_inactive_sign_up_path_for(resource)
-    elsif context.errors[:lawyer_exist]
+    elsif context.errors[:lawyer_exist_please_sign_in]
       redirect_as_fail(new_lawyer_session_path, context.error_messages.join(", "))
     else
       flash[:error] = context.error_messages.join(", ")
