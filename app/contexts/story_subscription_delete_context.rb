@@ -16,7 +16,7 @@ class StorySubscriptionDeleteContext < BaseContext
 
   def find_story_subscription
     @story_subscription = @subscriber.story_subscriptions.find_by_story_id(@story.id)
-    return add_error(:data_not_found, "無此訂閱資料") unless @story_subscription
+    return add_error(:story_subscription_not_found) unless @story_subscription
   end
 
 end
