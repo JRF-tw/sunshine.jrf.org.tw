@@ -10,19 +10,20 @@
   = f.input :date, as: :hidden
   = f.input :confirmed_realdate, as: :hidden
 
-  = render 'components/toggle_list_cell',
-    toggle_for: :subscribe_story,
-    toggle_checked: already_subscribed_story?(current_user, @record.story),
-    toggle_url: toggle_subscribe_story_path,
-    toggle_text: '是否同意我們在下一次開庭或判決書公布時用email通知您？'\
-    if toggle_subscribe_story_path
+  ul.toggle-list
+    = render 'components/toggle_list_cell',
+      toggle_for: :subscribe_story,
+      toggle_checked: already_subscribed_story?(current_user, @record.story),
+      toggle_url: toggle_subscribe_story_path,
+      toggle_text: '是否同意我們在下一次開庭或判決書公布時用email通知您？'\
+      if toggle_subscribe_story_path
 
-  = render 'components/toggle_list_cell',
-    toggle_for: :subscribe_edm,
-    toggle_checked: current_user.subscribe_edm,
-    toggle_url: toggle_subscribe_edm_path,
-    toggle_text: '是否同意訂閱電子報？'\
-    if toggle_subscribe_edm_path
+    = render 'components/toggle_list_cell',
+      toggle_for: :subscribe_edm,
+      toggle_checked: current_user.subscribe_edm,
+      toggle_url: toggle_subscribe_edm_path,
+      toggle_text: '是否同意訂閱電子報？'\
+      if toggle_subscribe_edm_path
 
   = yield
 

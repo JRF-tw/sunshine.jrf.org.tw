@@ -1,9 +1,10 @@
 = render layout: 'components/card', locals: { heading: '感謝您的評鑑！' }
-  = render 'components/toggle_list_cell',
-    toggle_for: :subscribe_edm,
-    toggle_checked: current_party.subscribe_edm,
-    toggle_url: toggle_subscribe_party_edm_path(format: :js),
-    toggle_text: '是否同意訂閱電子報？'  
+  ul.toggle-list
+    = render 'components/toggle_list_cell',
+      toggle_for: :subscribe_edm,
+      toggle_checked: current_party.subscribe_edm,
+      toggle_url: toggle_subscribe_party_edm_path(format: :js),
+      toggle_text: '是否同意訂閱電子報？'  
 
   .text-center
     = link_to "回到評鑑紀錄頁", party_stories_path, class: 'raised-button'

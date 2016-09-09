@@ -1,1 +1,12 @@
 .list--unstyled { @extend %scut-list-unstyled; }
+
+.toggle-list {
+  @extend %scut-list-unstyled;
+  padding-bottom: r(2);
+}
+.toggle-list__cell {
+  $indent: 26px;
+  margin-bottom: r(2);
+  padding-left: $indent;
+  text-indent: - $indent;
+}
