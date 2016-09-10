@@ -16,7 +16,8 @@ require 'webui-popover/dist/jquery.webui-popover.js'
 # Modal = require "./modules/modal"
 {Toggle, Dismiss} = require './modules/toggle'
 {TextInput}       = require './modules/form'
-StoryCollapse     = require "./modules/stories"
+StoryCollapse     = require './modules/stories'
+Rules             = require './modules/rules'
 
 # Require entry modules
 # EX:
@@ -29,6 +30,7 @@ new TextInput()
 new StoryCollapse '#story-collapse-toggle'
 new Toggle '.switch'
 new Dismiss '[data-dismiss]'
+new Rules()
 
 $(document).on "page:change", ->
   # Let cached input value trigger 'is-focus'
