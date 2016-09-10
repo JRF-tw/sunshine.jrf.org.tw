@@ -6,5 +6,7 @@
       toggle_url: toggle_subscribe_party_edm_path(format: :js),
       toggle_text: '是否同意訂閱電子報？'  
 
+  = render 'components/wrapped_donate_button'
+
   .text-center
     = link_to "回到評鑑紀錄頁", party_stories_path, class: 'raised-button'
