@@ -2,10 +2,13 @@
   position: fixed 0 0 n() 0;
   z-index: index($layers, header);
   transition: background-color .3s ease 0s;
-  @each $type in $characters {
-    &.has-background.#{$type} {
-      background-color: theme($type, true);
-      box-shadow: 0 2px 5px 0 rgba(0,0,0,.3);
+  &.has-background {
+    background-color: theme('', true);
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.3);
+    @each $type in $characters {
+      &.#{$type} {
+        background-color: theme($type, true);
+      }
     }
   }
 }

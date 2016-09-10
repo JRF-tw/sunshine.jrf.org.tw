@@ -48,8 +48,10 @@ $(document).on "page:change", ->
 
   # Stuck Header
   Waypoint.destroyAll()
+
   $main_header = $('#main-header')
-  $('.card__heading').waypoint
+  
+  $('.card__heading, .character-selector__heading').waypoint
     handler: (direction) ->
       if direction is 'down'
         $main_header.addClass 'has-background'
