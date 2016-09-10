@@ -1,6 +1,7 @@
 ruby:
   wide = wide ? wide : false
   type = type ? type : false
+  attrs = attrs ? attrs : {}
 
   case type
   when 'lawyer'
@@ -19,10 +20,7 @@ ruby:
   end  
 
 .container
-  .card class="
-    #{wide ? 'card--wide' : ''}
-    #{type ? 'has-info' : ''}
-  "
+  .card *attrs class=[(wide ? 'card--wide' : ''), (type ? 'has-info' : '')]
     h2.card__heading = heading
 
     - if type

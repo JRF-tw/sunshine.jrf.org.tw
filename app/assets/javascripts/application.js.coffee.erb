@@ -11,19 +11,3 @@
 #= require turbolinks
 
 <% require_asset "webpack_bundle" unless ENV["F2E_DEV"] %>
-
-$ ->
-  $('.js-subscribe-story').change ->
-    subscribe_story_link = $('.js-subscribe-story').val()
-    $.ajax
-      url: subscribe_story_link
-      type: 'POST'
-    return
-
-$ ->
-  $('.js-subscribe-edm').change ->
-    subscribe_edm_link = $('.js-subscribe-edm').val()
-    $.ajax
-      url: subscribe_edm_link
-      type: 'POST'
-    return

@@ -34,16 +34,15 @@
         label: '開庭態度評分', options: :attitude_score
 
   - when 'thanks_scored'
-    = render layout: 'components/schedule_thanks_scored', locals: {\
+    = render partial: 'components/schedule_thanks_scored', locals: {\
       form_url: checked_date_lawyer_score_schedules_path,
-      path_to_root: lawyer_root_path\
+      path_to_root: lawyer_root_path,
+      current_user: current_lawyer,
+      toggle_subscribe_story_path: \
+      toggle_lawyer_subscribe_path(@record.story, format: :js),
+      toggle_subscribe_edm_path: \
+      toggle_subscribe_lawyer_edm_path(format: :js)\
     }
-      / = '這邊可以放每個不同角色特有的 code'
-      = check_box_tag :subscribe_story, toggle_lawyer_subscribe_path(@record.story, format: :js), already_subscribed_story?(current_lawyer, @record.story), class: "js-subscribe-story"
-      = label_tag "subscribe_story", "是否同意我們在下一次開庭或判決書公布時用email通知您？"
-    p
-      = check_box_tag :subscribe_edm, toggle_subscribe_lawyer_edm_path(format: :js), current_lawyer.subscribe_edm, class: "js-subscribe-edm"
-      = label_tag "subscribe_edm", "是否同意訂閱電子報？"
 
   - else
     = render 'components/input_score_info',

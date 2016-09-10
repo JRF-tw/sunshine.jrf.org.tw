@@ -1083,11 +1083,22 @@ a:focus {
 * Docs at http://davidtheclark.github.io/scut
 */
 
-.list--unstyled {
+.list--unstyled,
+.toggle-list {
   list-style-type: none;
   padding-left: 0;
   margin-top: 0;
   margin-bottom: 0;
+}
+
+.toggle-list {
+  padding-bottom: 16px;
+}
+
+.toggle-list__cell {
+  margin-bottom: 16px;
+  padding-left: 26px;
+  text-indent: -26px;
 }
 
 /*
@@ -1227,19 +1238,21 @@ a:focus {
   transition: background-color .3s ease 0s;
 }
 
+.main-header.has-background {
+  background-color: #5D4037;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+}
+
 .main-header.has-background.lawyer {
   background-color: #ffa000;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
 }
 
 .main-header.has-background.party {
   background-color: #d32f2f;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
 }
 
 .main-header.has-background.observer {
   background-color: #00796b;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
 }
 
 .main-header__wrapper {
@@ -1585,6 +1598,17 @@ a:focus {
   }
 }
 
+.card--flex {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: column nowrap;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  height: 50vh;
+}
+
 .card__heading {
   margin: 0 -16px 16px;
   text-align: center;
@@ -1665,6 +1689,32 @@ a:focus {
 
 .card__info .avatar-party {
   stroke-width: 6px;
+}
+
+.card__rule {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  overflow: auto;
+  background-image: -webkit-linear-gradient(top, #fff 30%, rgba(255, 255, 255, 0)), -webkit-linear-gradient(bottom, #fff 30%, rgba(255, 255, 255, 0)), -webkit-radial-gradient(50% 0%, farthest-side, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0)), -webkit-radial-gradient(50% 100%, farthest-side, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+  background-image: linear-gradient(to bottom, #fff 30%, rgba(255, 255, 255, 0)), linear-gradient(to top, #fff 30%, rgba(255, 255, 255, 0)), radial-gradient(farthest-side at 50% 0%, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0)), radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0));
+  background-repeat: no-repeat;
+  background-position: 50% 0%, 50% 101%, 50% 0%, 50% 100%;
+  background-size: 100% 40px, 100% 40px, 100% 10px, 100% 10px;
+  background-attachment: local, local, scroll, scroll;
+}
+
+.card__rule > p:first-child {
+  margin-top: 0;
+}
+
+.card__rule > p:last-child {
+  margin-bottom: 0;
+}
+
+.card__actions {
+  padding-top: 16px;
 }
 
 /*

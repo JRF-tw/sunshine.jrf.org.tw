@@ -7,14 +7,15 @@
   @if $character == 'party' {
     @if $accent == true { @return $red-dark; }
     @else { @return $red; }
-  }
-  @if $character == 'lawyer' {
+  } @else if $character == 'lawyer' {
     @if $accent == true { @return $yellow-dark; }
     @else { @return $yellow; }
-  }
-  @if $character == 'observer' {
+  } @else if $character == 'observer' {
     @if $accent == true { @return $green-dark; }
     @else { @return $green; }
+  } @else {
+    @if $accent == true { @return $brown-dark; }
+    @else { @return $brown; }    
   }
 }
 

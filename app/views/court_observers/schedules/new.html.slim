@@ -33,13 +33,13 @@
         label: '開庭滿意度評分', options: :rating_score
 
   - when 'thanks_scored'
-    = render layout: 'components/schedule_thanks_scored', locals: {\
+    = render partial: 'components/schedule_thanks_scored', locals: {\
       form_url: checked_date_court_observer_score_schedules_path,
-      path_to_root: court_observer_stories_path\
+      path_to_root: court_observer_stories_path,
+      current_user: current_court_observer,
+      toggle_subscribe_edm_path: \
+      toggle_subscribe_court_observer_edm_path(format: :js)\
     }
-      / = '這邊可以放每個不同角色特有的 code'
-      = check_box_tag :subscribe_edm, toggle_subscribe_court_observer_edm_path(format: :js), current_court_observer.subscribe_edm, class: "js-subscribe-edm"
-      = label_tag "subscribe_edm", "是否同意訂閱電子報？"
 
   - else
     = render 'components/input_score_info',

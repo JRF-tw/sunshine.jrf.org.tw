@@ -25,8 +25,11 @@ ruby:
     = f.input :note, as: :text, label: false, placeholder: '法官表現特別好或特別壞的註記'
     
     .form-group
-      = check_box_tag :appeal_judge
-      = label_tag :appeal_judge, '我要申訴法官'
-      p.checkbox-pre 案件申訴電話：#{link_to '02-2542-1958', 'tel:+886225421958'}
+      ul.toggle-list
+        li.toggle-list__cell
+          = f.input_field :appeal_judge, as: :boolean, boolean_style: :inline
+          = f.label :appeal_judge do
+            | 我要申訴法官#{tag :br}
+              案件申訴電話：#{link_to '02-2542-1958', 'tel:+886225421958'}
     
     = render 'components/score_form_actions', f: f, submit: submit, final: true
