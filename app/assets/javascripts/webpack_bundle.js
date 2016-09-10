@@ -503,8 +503,9 @@
 	    });
 	  });
 	  $('.popover-trigger').webuiPopover();
+	  Waypoint.destroyAll();
 	  $main_header = $('#main-header');
-	  return $('.card__heading').waypoint({
+	  return $('.card__heading, .character-selector__heading').waypoint({
 	    handler: function(direction) {
 	      if (direction === 'down') {
 	        return $main_header.addClass('has-background');
