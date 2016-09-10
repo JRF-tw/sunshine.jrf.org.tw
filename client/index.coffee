@@ -47,6 +47,7 @@ $(document).on "page:change", ->
   $('.popover-trigger').webuiPopover()
 
   # Stuck Header
+  Waypoint.destroyAll()
   $main_header = $('#main-header')
   $('.card__heading').waypoint
     handler: (direction) ->
