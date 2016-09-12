@@ -27,5 +27,11 @@ RSpec.describe CourtObservers::StoriesController, type: :request do
       subject! { get "/observer/stories/#{story.id}" }
       it { expect(response).to be_success }
     end
+
+    context "story without schedule" do
+      let!(:schedule_score) { create :schedule_score, schedule_rater: court_observer, story: story, data: { start_on: "2016-09-13" } }
+      subject! { get "/observer/stories/#{story.id}" }
+      it { expect(response.body).to match("2016-09-13") }
+    end
   end
 end
