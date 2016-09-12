@@ -26,35 +26,35 @@ class Lawyer::VerdictScoreCheckInfoContext < BaseContext
 
   def check_court_id
     @court = Court.find(@params[:court_id]) if @params[:court_id].present?
-    return add_error(:data_not_found, "選擇法院不存在") unless @court
+    return add_error(:court_not_found) unless @court
   end
 
   def check_year
-    return add_error(:data_blank, "年份不能為空") unless @params[:year].present?
+    return add_error(:year_blank) unless @params[:year].present?
   end
 
   def check_word_type
-    return add_error(:data_blank, "字號不能為空") unless @params[:word_type].present?
+    return add_error(:word_type_blank) unless @params[:word_type].present?
   end
 
   def check_number
-    return add_error(:data_blank, "案號不能為空") unless @params[:number].present?
+    return add_error(:number_blank) unless @params[:number].present?
   end
 
   def find_story
-    return add_error(:data_not_found, "案件不存在") unless @story = Story.where(@params).last
+    return add_error(:story_not_found) unless @story = Story.where(@params).last
   end
 
   def story_not_adjudge
-    return add_error(:verdict_score_valid_failed, "尚未抓到判決書") unless @story.adjudge_date.present?
+    return add_error(:verdict_score_not_found) unless @story.adjudge_date.present?
   end
 
   def valid_score_intervel
     range = (@story.adjudge_date..@story.adjudge_date + SCORE_INTERVEL)
-    return add_error(:out_score_intervel, "已超過可評鑑時間") unless range.include?(Time.zone.today)
+    return add_error(:out_score_intervel) unless range.include?(Time.zone.today)
   end
 
   def already_scored
-    return add_error(:out_score_intervel, "判決已評鑑") if @lawyer.verdict_scores.where(story: @story).count > 0
+    return add_error(:verdict_score_found) if @lawyer.verdict_scores.where(story: @story).count > 0
   end
 end

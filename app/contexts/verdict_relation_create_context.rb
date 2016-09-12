@@ -29,7 +29,7 @@ class VerdictRelationCreateContext < BaseContext
     @person_type = "Lawyer" if @verdict.lawyer_names.include?(@person_name)
     @person_type = "Judge" if @verdict.judges_names.include?(@person_name)
     # @person_type = "Prosecutor" if @verdict.prosecutor_names.include?(@person_name)
-    add_error(:data_create_fail, "案件內沒有該人名紀錄") unless @person_type
+    add_error(:story_without_people_name) unless @person_type
   end
 
   def is_judge?
@@ -49,7 +49,7 @@ class VerdictRelationCreateContext < BaseContext
   end
 
   def check_scoped
-    add_error(:data_create_fail, "取得 多位或沒有 相同姓名的人") unless @scoped.count == 1
+    add_error(:people_name_error) unless @scoped.count == 1
   end
 
   def build_data

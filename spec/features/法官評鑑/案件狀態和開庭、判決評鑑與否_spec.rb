@@ -100,7 +100,7 @@ describe "法官評鑑 - 案件狀態和開庭、判決評鑑與否", type: :req
     end
 
     context "When  送出新增開庭評鑑資料時" do
-      let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, date: schedule.start_on, confirmed_realdate: false, judge_name: judge.name, command_score: 1, attitude_score: 1, note: "xxxxx", appeal_judge: false } }
+      let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, start_on: schedule.start_on, confirmed_realdate: false, judge_name: judge.name, command_score: 1, attitude_score: 1, note: "xxxxx", appeal_judge: false } }
       subject { post "/lawyer/score/schedules", schedule_score: params }
 
       it "Then 結果會失敗" do

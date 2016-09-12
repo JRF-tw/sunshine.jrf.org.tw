@@ -30,7 +30,7 @@ class StoryRelationCreateContext < BaseContext
       @people_type = "Judge" if @story.main_judge.name == @people_name
     end
     # @people_type = "Prosecutor" if @story.prosecutor_names.include?(@people_name)
-    add_error(:data_create_fail, "案件內沒有該人名紀錄") unless @people_type
+    add_error(:story_without_people_name) unless @people_type
   end
 
   def find_people
@@ -40,7 +40,7 @@ class StoryRelationCreateContext < BaseContext
   end
 
   def check_scoped
-    add_error(:data_create_fail, "取得 多位或沒有 相同姓名的人") unless @scoped.count == 1
+    add_error(:people_name_error) unless @scoped.count == 1
   end
 
   def build_data

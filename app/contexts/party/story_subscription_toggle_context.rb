@@ -20,7 +20,7 @@ class Party::StorySubscriptionToggleContext < BaseContext
   end
 
   def check_confirmed
-    return add_error(:story_subscriber_valid_failed, "請先完成驗證") unless @party.confirmed?
+    return add_error(:subscriber_not_confirm) unless @party.confirmed?
   end
 
   def find_story_subscription

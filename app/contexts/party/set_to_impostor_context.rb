@@ -9,7 +9,7 @@ class Party::SetToImpostorContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      return add_error(:data_update_fail, "未能設置為冒用者") unless @party.save(validate: false)
+      return add_error(:impostor_set_fail) unless @party.save(validate: false)
       true
     end
   end

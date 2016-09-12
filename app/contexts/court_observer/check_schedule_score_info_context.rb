@@ -24,23 +24,23 @@ class CourtObserver::CheckScheduleScoreInfoContext < BaseContext
 
   def check_court_id
     @court = Court.find(@params[:court_id]) if @params[:court_id].present?
-    return add_error(:data_not_found, "選擇法院不存在") unless @court
+    return add_error(:court_not_found) unless @court
   end
 
   def check_year
-    return add_error(:data_blank, "年份不能為空") unless @params[:year].present?
+    return add_error(:year_blank) unless @params[:year].present?
   end
 
   def check_word_type
-    return add_error(:data_blank, "字號不能為空") unless @params[:word_type].present?
+    return add_error(:word_type_blank) unless @params[:word_type].present?
   end
 
   def check_number
-    return add_error(:data_blank, "案號不能為空") unless @params[:number].present?
+    return add_error(:number_blank) unless @params[:number].present?
   end
 
   def find_story
-    return add_error(:data_not_found, "案件不存在") unless @story = Story.where(@params).last
+    return add_error(:story_not_found) unless @story = Story.where(@params).last
   end
 
   def story_has_pronounce_date?
@@ -48,10 +48,10 @@ class CourtObserver::CheckScheduleScoreInfoContext < BaseContext
   end
 
   def can_score
-    return add_error(:out_score_intervel, "案件已宣判, 無法評鑑") if Time.zone.today > @story.pronounce_date
+    return add_error(:story_already_pronounced) if Time.zone.today > @story.pronounce_date
   end
 
   def story_already_adjudge
-    return add_error(:out_score_intervel, "已有判決書, 不可評鑑開庭") if @story.adjudge_date.present?
+    return add_error(:story_already_have_judgement) if @story.adjudge_date.present?
   end
 end

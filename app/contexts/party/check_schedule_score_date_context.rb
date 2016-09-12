@@ -1,5 +1,5 @@
 class Party::CheckScheduleScoreDateContext < BaseContext
-  PERMITS = [:court_id, :year, :word_type, :number, :date, :confirmed_realdate].freeze
+  PERMITS = [:court_id, :year, :word_type, :number, :start_on, :confirmed_realdate].freeze
   SCORE_INTERVEL = 14.days
   MAX_REPORT_TIME = 5
 
@@ -29,25 +29,25 @@ class Party::CheckScheduleScoreDateContext < BaseContext
   end
 
   def check_date
-    return add_error(:data_blank, "開庭日期為必填") unless @params[:date].present?
+    return add_error(:start_on_blank) unless @params[:start_on].present?
   end
 
   def future_date
-    return add_error(:invalid_date, "開期日期不能為未來時間") if @params[:date].to_date > Time.zone.today
+    return add_error(:start_on_invalid) if @params[:start_on].to_date > Time.zone.today
   end
 
   def find_story
-    stroy_params = @params.except(:date, :confirmed_realdate)
-    return add_error(:data_not_found, "案件不存在") unless @story = Story.where(stroy_params).last
+    stroy_params = @params.except(:start_on, :confirmed_realdate)
+    return add_error(:story_not_found) unless @story = Story.where(stroy_params).last
   end
 
   def find_schedule
-    return add_error(:data_not_found, "庭期比對失敗") unless @schedule = @story.schedules.on_day(@params[:date]).last
+    return add_error(:schedule_not_found) unless @schedule = @story.schedules.on_day(@params[:start_on]).last
   end
 
   def valid_score_intervel
-    range = (@params[:date].to_date..@params[:date].to_date + SCORE_INTERVEL)
-    return add_error(:out_score_intervel, "已超過可評鑑時間") unless range.include?(Time.zone.today)
+    range = (@params[:start_on].to_date..@params[:start_on].to_date + SCORE_INTERVEL)
+    return add_error(:out_score_intervel) unless range.include?(Time.zone.today)
   end
 
   def record_report_time

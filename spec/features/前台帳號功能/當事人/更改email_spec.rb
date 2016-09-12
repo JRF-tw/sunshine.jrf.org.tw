@@ -77,7 +77,7 @@ describe "當事人更改email", type: :request do
         subject! { put "/party/email", party: { email: party2.email, current_password: "12321313213" } }
 
         it "顯示已經被使用" do
-          expect(response.body).to match("email 已經被使用")
+          expect(response.body).to match("email 已被使用")
         end
       end
 

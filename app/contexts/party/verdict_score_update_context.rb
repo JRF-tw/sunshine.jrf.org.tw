@@ -11,7 +11,7 @@ class Party::VerdictScoreUpdateContext < BaseContext
   def perform(params)
     @params = permit_params(params[:verdict_score] || params, PERMITS)
     run_callbacks :perform do
-      return add_error(:data_update_fail, "更新失敗") unless @verdict_score.save
+      return add_error(:data_update_fail) unless @verdict_score.save
       @verdict_score
     end
   end
@@ -19,7 +19,7 @@ class Party::VerdictScoreUpdateContext < BaseContext
   private
 
   def check_rating_score
-    return add_error(:data_blank, "裁判滿意度為必填") unless @params[:rating_score].present?
+    return add_error(:judge_rating_score_blank) unless @params[:rating_score].present?
   end
 
   def assign_attribute

@@ -12,7 +12,7 @@ class Scrap::ImportJudgeContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      return add_error(:data_create_fail, "judge find_or_create fail") unless @judge.save
+      return add_error(:scrap_judge_create_fail) unless @judge.save
       @judge
     end
   end
@@ -31,7 +31,7 @@ class Scrap::ImportJudgeContext < BaseContext
 
   def find_court
     @court = Court.get_courts.select { |c| c.scrap_name.delete(" ") == @court_name }.last
-    return add_error(:data_not_found, "court not found") unless @court
+    return add_error(:scrap_court_not_found) unless @court
   end
 
   def build_judge

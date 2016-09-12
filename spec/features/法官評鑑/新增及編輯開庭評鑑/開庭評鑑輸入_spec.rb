@@ -6,7 +6,7 @@ describe "法官評鑑 - 新增及編輯開庭評鑑 - 開庭評鑑輸入", type
   let!(:story) { create :story, court: court }
   let!(:schedule) { create :schedule, story: story }
   let!(:judge) { create :judge, court: court }
-  let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, date: schedule.start_on, confirmed_realdate: false, judge_name: judge.name, command_score: 1, attitude_score: 1, note: "xxxxx", appeal_judge: false } }
+  let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, start_on: schedule.start_on, confirmed_realdate: false, judge_name: judge.name, command_score: 1, attitude_score: 1, note: "xxxxx", appeal_judge: false } }
   before { signin_lawyer(lawyer) }
 
   context "Given 案件無宣判日，且為新增評鑑" do

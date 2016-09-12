@@ -16,7 +16,7 @@ describe Lawyer::ChangeEmailContext do
       let(:params) { { email: "h2312", current_password: "123123123" } }
 
       it { expect { subject.perform(params) }.not_to change { lawyer.reload.unconfirmed_email } }
-      it { expect { subject.perform(params) }.to change { subject.errors[:data_invalid] } }
+      it { expect { subject.perform(params) }.to change { subject.errors[:email_pattern_invalid] } }
     end
 
     context "update the same email" do
@@ -31,7 +31,7 @@ describe Lawyer::ChangeEmailContext do
       let(:params) { { email: lawyer2.email, current_password: "123123123" } }
 
       it { expect { subject.perform(params) }.not_to change { lawyer.reload.unconfirmed_email } }
-      it { expect { subject.perform(params) }.to change { subject.errors[:lawyer_exist] } }
+      it { expect { subject.perform(params) }.to change { subject.errors[:email_exist] } }
     end
 
     context "update other's unconfirmed_email" do
@@ -45,14 +45,14 @@ describe Lawyer::ChangeEmailContext do
       let(:params) { { email: new_email, current_password: "" } }
 
       it { expect { subject.perform(params) }.not_to change { lawyer.reload.unconfirmed_email } }
-      it { expect { subject.perform(params) }.to change { subject.errors[:data_update_fail] } }
+      it { expect { subject.perform(params) }.to change { subject.errors[:wrong_password] } }
     end
 
     context "empty wrong password" do
       let(:params) { { email: new_email, current_password: "55665566" } }
 
       it { expect { subject.perform(params) }.not_to change { lawyer.reload.unconfirmed_email } }
-      it { expect { subject.perform(params) }.to change { subject.errors[:data_update_fail] } }
+      it { expect { subject.perform(params) }.to change { subject.errors[:wrong_password] } }
     end
 
   end

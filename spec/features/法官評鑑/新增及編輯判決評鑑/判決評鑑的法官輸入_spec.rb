@@ -28,7 +28,7 @@ describe "法官評鑑 - 新增及編輯判決評鑑 - 判決評鑑的法官輸�
 
       it "Then 顯示法官輸入頁，和錯誤訊息" do
         expect(response).to be_success
-        expect(flash[:error]).to match("法官為必填")
+        expect(flash[:error]).to match("法官姓名不能為空")
       end
     end
 
@@ -49,7 +49,7 @@ describe "法官評鑑 - 新增及編輯判決評鑑 - 判決評鑑的法官輸�
       it "Then 顯示法官輸入頁，保留原先輸入的法官姓名，並且錯誤訊息" do
         expect(response).to be_success
         expect(response.body).to match(params[:judge_name])
-        expect(flash[:error]).to match("法官不存在")
+        expect(flash[:error]).to match("沒有該位法官")
       end
     end
   end

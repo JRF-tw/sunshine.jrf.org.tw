@@ -22,11 +22,11 @@ class Lawyer::StorySubscriptionToggleContext < BaseContext
   private
 
   def check_confirmed
-    return add_error(:story_subscriber_valid_failed, "請先註冊") unless @lawyer.confirmed?
+    return add_error(:need_sign_up) unless @lawyer.confirmed?
   end
 
   def check_set_password
-    return add_error(:story_subscriber_valid_failed, "請先設定密碼") unless @lawyer.encrypted_password.present?
+    return add_error(:subscriber_without_password) unless @lawyer.encrypted_password.present?
   end
 
   def find_story_subscription

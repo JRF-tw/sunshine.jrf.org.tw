@@ -1,5 +1,5 @@
 class CourtObserver::ScheduleScoreCreateContext < BaseContext
-  PERMITS = [:court_id, :year, :word_type, :number, :date, :confirmed_realdate, :judge_name, :rating_score, :note, :appeal_judge].freeze
+  PERMITS = [:court_id, :year, :word_type, :number, :start_on, :confirmed_realdate, :judge_name, :rating_score, :note, :appeal_judge].freeze
 
   # before_perform :can_not_score
   before_perform :check_rating_score
@@ -16,7 +16,7 @@ class CourtObserver::ScheduleScoreCreateContext < BaseContext
   def perform(params)
     @params = permit_params(params[:schedule_score] || params, PERMITS)
     run_callbacks :perform do
-      return add_error(:data_create_fail, "開庭已經評論") unless @schedule_score.save
+      return add_error(:judge_already_scored) unless @schedule_score.save
       @schedule_score
     end
   end
@@ -28,7 +28,7 @@ class CourtObserver::ScheduleScoreCreateContext < BaseContext
   end
 
   def check_rating_score
-    return add_error(:data_blank, "開庭滿意度分數為必填") unless @params[:rating_score].present?
+    return add_error(:schedule_rating_score_blank) unless @params[:rating_score].present?
   end
 
   def check_story

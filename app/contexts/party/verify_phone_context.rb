@@ -34,9 +34,9 @@ class Party::VerifyPhoneContext < BaseContext
   def reset_data_out_retry_range
     if @party.retry_verify_count.value >= 3
       reset_data
-      return add_error(:retry_verify_count_out_range, "驗證碼輸入錯誤超過三次, 請重新設定手機號碼")
+      return add_error(:retry_verify_count_out_range)
     else
-      return add_error(:data_update_fail, "驗證碼輸入錯誤")
+      return add_error(:wrong_verify_code)
     end
   end
 

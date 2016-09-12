@@ -25,7 +25,7 @@ class CourtObservers::RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
     context = CourtObserver::RegisterCheckContext.new(params)
     context.perform
-    if context.errors[:observer_exist]
+    if context.errors[:observer_already_confirm] || context.errors[:observer_already_sign_up]
       flash[:error] = context.error_messages.join(", ")
       redirect_to new_court_observer_session_path
     elsif context.errors.any?

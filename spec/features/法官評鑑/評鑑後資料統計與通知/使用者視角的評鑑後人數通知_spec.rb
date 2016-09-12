@@ -14,7 +14,7 @@ describe "法官評鑑 - 評鑑後資料統計與通知 - 使用者視角的評�
       before { create_list :schedule_score, 2, schedule_rater: party }
 
       context "When 當事人新增新案件的開庭評鑑" do
-        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, date: schedule.start_on, confirmed_realdate: false, judge_name: judge.name, rating_score: 1, note: "xxxxx", appeal_judge: false } }
+        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, start_on: schedule.start_on, confirmed_realdate: false, judge_name: judge.name, rating_score: 1, note: "xxxxx", appeal_judge: false } }
         subject { post "/party/score/schedules", schedule_score: params }
 
         it "Then 發送 Slack 通知" do
@@ -33,7 +33,7 @@ describe "法官評鑑 - 評鑑後資料統計與通知 - 使用者視角的評�
       end
 
       context "When 當事人新增舊案件的開庭評鑑" do
-        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, date: schedule.start_on, confirmed_realdate: false, judge_name: judge.name, rating_score: 1, note: "xxxxx", appeal_judge: false } }
+        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, start_on: schedule.start_on, confirmed_realdate: false, judge_name: judge.name, rating_score: 1, note: "xxxxx", appeal_judge: false } }
         before { create :schedule_score, schedule_rater: party, story: story }
         subject { post "/party/score/schedules", schedule_score: params }
 
@@ -61,7 +61,7 @@ describe "法官評鑑 - 評鑑後資料統計與通知 - 使用者視角的評�
       before { create_list :schedule_score, 5, schedule_rater: lawyer }
 
       context "When 律師新增新案件的開庭評鑑" do
-        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, date: schedule.start_on, confirmed_realdate: false, judge_name: judge.name, command_score: 1, attitude_score: 1, note: "xxxxx", appeal_judge: false } }
+        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, start_on: schedule.start_on, confirmed_realdate: false, judge_name: judge.name, command_score: 1, attitude_score: 1, note: "xxxxx", appeal_judge: false } }
         subject { post "/lawyer/score/schedules", schedule_score: params }
 
         it "Then 發送 Slack 通知" do
@@ -80,7 +80,7 @@ describe "法官評鑑 - 評鑑後資料統計與通知 - 使用者視角的評�
       end
 
       context "When 律師新增舊案件的開庭評鑑" do
-        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, date: schedule.start_on, confirmed_realdate: false, judge_name: judge.name, command_score: 1, attitude_score: 1, note: "xxxxx", appeal_judge: false } }
+        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, start_on: schedule.start_on, confirmed_realdate: false, judge_name: judge.name, command_score: 1, attitude_score: 1, note: "xxxxx", appeal_judge: false } }
         before { create :schedule_score, schedule_rater: lawyer, story: story }
         subject { post "/lawyer/score/schedules", schedule_score: params }
 

@@ -21,22 +21,22 @@ class Party::IdentifyNumberCheckContext < BaseContext
   private
 
   def check_params_valid
-    add_error(:data_blank, "姓名 不可為空白字元") if @params[:name].blank?
-    add_error(:data_blank, "身分證字號 不可為空白字元") if @params[:identify_number].blank?
+    add_error(:name_blank) if @params[:name].blank?
+    add_error(:identify_number_blank) if @params[:identify_number].blank?
     return false if errors.present?
   end
 
   def check_identify_number_pattern
-    return add_error(:data_invalid, "身分證字號格式不符(英文字母請大寫)") unless @params[:identify_number][/\A[A-Z]{1}[1-2]{1}[0-9]{8}\z/]
+    return add_error(:identify_number_invalid) unless @params[:identify_number][/\A[A-Z]{1}[1-2]{1}[0-9]{8}\z/]
   end
 
   def check_identify_number_not_used
     if Party.pluck(:identify_number).include?(@params[:identify_number])
-      return add_error(:party_exist, "此身分證字號已經被使用 <a href='#{new_party_appeal_path}'>人工申訴連結</a>")
+      return add_error(:party_exist_manual_check)
     end
   end
 
   def check_agree_policy
-    return add_error(:without_policy_agreement, "您尚未勾選同意條款") unless @params[:policy_agreement]
+    return add_error(:without_policy_agreement) unless @params[:policy_agreement]
   end
 end
