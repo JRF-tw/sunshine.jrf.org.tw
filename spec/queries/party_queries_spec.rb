@@ -71,6 +71,13 @@ RSpec.describe PartyQueries do
       it { expect(query.get_scores_array(story).first["schedule_score"]).to be_truthy }
     end
 
+    context "get schedule_scores date if without schedule" do
+      let!(:schedule_score) { create :schedule_score, :without_schedule, schedule_rater: party, story: story, data: { start_on: "2016-09-01" } }
+
+      it { expect(query.get_scores_array(story).first.is_a?(Hash)).to be_truthy }
+      it { expect(query.get_scores_array(story).first["date"]).to eq("2016-09-01") }
+    end
+
     context "have verdict_scores" do
       let!(:verdict_score) { create :verdict_score, verdict_rater: party, story: story }
       let(:date) { verdict_score.story.adjudge_date }

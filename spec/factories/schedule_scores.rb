@@ -27,6 +27,10 @@ FactoryGirl.define do
     trait :by_party do
       schedule_rater { FactoryGirl.create :party }
     end
+
+    trait :without_schedule do
+      schedule nil
+    end
   end
 
 end
