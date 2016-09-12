@@ -85,7 +85,7 @@ ruby:
         - else
           - @schedule_score_sorted.each do |ss|
             tr
-              td = ss.story.adjudge_date
+              td = ss.start_on
               td = ss.story.court.code
               td = ss.judge_name
               td
