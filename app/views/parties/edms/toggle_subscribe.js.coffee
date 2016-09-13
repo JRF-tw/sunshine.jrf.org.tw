@@ -1,9 +1,9 @@
-form = $(".js-subscribe-edm")
+link_dom = $(".js-subscribe-edm")
 error_dom = $(".billboard__alert")
 checkbox_dom = $("input[name=subscribe_edm]")
 
-if form.length
-  form.html('<%= raw render(partial: "parties/edms/subscribe_edm") %>')
+if link_dom.length
+  link_dom.html('<%= raw render(partial: "parties/edms/subscribe_edm") %>')
 
 <% if @error_messages %>
 error_dom.html("")
