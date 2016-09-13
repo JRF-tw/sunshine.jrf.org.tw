@@ -40,7 +40,7 @@ feature "當事人可以訂閱以及取消電子報", type: :feature, js: true d
         before { find(".js-subscribe-edm").find("a").click }
 
         Then "訂閱失敗" do
-          expect(find(".js-subscribe-edm")).to have_content("尚未驗證Email")
+          expect(find(".billboard__alert")).to have_content("尚未驗證Email")
         end
       end
     end
@@ -55,7 +55,7 @@ feature "當事人可以訂閱以及取消電子報", type: :feature, js: true d
         before { find(".js-subscribe-edm").find("a").click }
 
         Then "訂閱失敗" do
-          expect(find(".js-subscribe-edm")).to have_content("Email未填寫")
+          expect(find(".billboard__alert")).to have_content("Email未填寫")
         end
       end
     end
