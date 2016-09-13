@@ -61,8 +61,8 @@ RSpec.describe PartyQueries do
 
   describe "#get_scores_array" do
     context "have schedule_scores" do
-      let!(:schedule_score) { create :schedule_score, schedule_rater: party, story: story }
-      let(:date) { schedule_score.schedule.start_on }
+      let!(:schedule_score) { create :schedule_score, schedule_rater: party, story: story, data: { start_on: "2016-09-01" } }
+      let(:date) { "2016-09-01" }
       let(:court_code) { story.court.code }
 
       it { expect(query.get_scores_array(story).first.is_a?(Hash)).to be_truthy }
@@ -71,9 +71,16 @@ RSpec.describe PartyQueries do
       it { expect(query.get_scores_array(story).first["schedule_score"]).to be_truthy }
     end
 
+    context "get schedule_scores date if without schedule" do
+      let!(:schedule_score) { create :schedule_score, :without_schedule, schedule_rater: party, story: story, data: { start_on: "2016-09-01" } }
+
+      it { expect(query.get_scores_array(story).first.is_a?(Hash)).to be_truthy }
+      it { expect(query.get_scores_array(story).first["date"]).to eq("2016-09-01") }
+    end
+
     context "have verdict_scores" do
       let!(:verdict_score) { create :verdict_score, verdict_rater: party, story: story }
-      let(:date) { verdict_score.story.adjudge_date }
+      let(:date) { verdict_score.story.adjudge_date.to_s }
       let(:court_code) { story.court.code }
 
       it { expect(query.get_scores_array(story).first.is_a?(Hash)).to be_truthy }
@@ -85,9 +92,9 @@ RSpec.describe PartyQueries do
     context "sorted by date" do
       let!(:yesterday_judge_story) { create(:story, :adjudged_yesterday) }
       let!(:verdict_score) { create :verdict_score, verdict_rater: party, story: yesterday_judge_story }
-      let!(:schedule_score) { create :schedule_score, schedule_rater: party, story: yesterday_judge_story }
+      let!(:schedule_score) { create :schedule_score, :with_start_on, schedule_rater: party, story: yesterday_judge_story }
 
-      it { expect(query.get_scores_array(yesterday_judge_story, sort_by: "date").first["date"]).to eq(verdict_score.story.adjudge_date) }
+      it { expect(query.get_scores_array(yesterday_judge_story, sort_by: "date").first["date"]).to eq(verdict_score.story.adjudge_date.to_s) }
     end
   end
 end

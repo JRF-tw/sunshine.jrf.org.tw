@@ -9,9 +9,17 @@ class CourtObserverQueries
     stories
   end
 
-  def get_schedule_score(story)
-    scores = @court_observer.schedule_scores.where(story: story)
-    scores.includes(:schedule).order("schedules.start_on")
+  def get_schedule_scores_array(story, sort_by: "date")
+    schedule_scores_array = []
+    court_code = story.court.code
+    @court_observer.schedule_scores.where(story: story).each do |schedule_score|
+      ss_hash = schedule_score.as_json
+      ss_hash["date"] = schedule_score.start_on
+      ss_hash["court_code"] = court_code
+      ss_hash["schedule_score"] = true
+      schedule_scores_array << ss_hash
+    end
+    schedule_scores_array.sort_by { |k| k[sort_by] }
   end
 
   def pending_score_schedules(story)

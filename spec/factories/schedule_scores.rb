@@ -23,9 +23,19 @@ FactoryGirl.define do
     schedule { FactoryGirl.create :schedule, story: story }
     judge { FactoryGirl.create :judge }
     schedule_rater { FactoryGirl.create :lawyer }
-
     trait :by_party do
       schedule_rater { FactoryGirl.create :party }
+    end
+
+    trait :without_schedule do
+      schedule nil
+    end
+
+    trait :with_start_on do
+      after(:create) do |schedule_score|
+        schedule_score.start_on = Schedule.last.start_on
+        schedule_score.save
+      end
     end
   end
 

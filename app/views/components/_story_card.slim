@@ -54,42 +54,31 @@ ruby:
         heading: '已評鑑', star: 'full',
         ths: ['開庭/宣判日期', '法院代碼', '評鑑法官']\
       }
-        - unless type == 'observer'
-          - @scores_sorted.each do |ss|
-            ruby:
-              case type
-              when 'lawyer'
-                edit_score_schedule = edit_lawyer_score_schedule_path(ss["id"])
-                edit_score_verdict  = edit_lawyer_score_verdict_path(ss["id"])
-              when 'party'
-                edit_score_schedule = edit_party_score_schedule_path(ss["id"])
-                edit_score_verdict  = edit_party_score_verdict_path(ss["id"])
-              else
-              end
-            tr
-              td = ss["date"]
-              td = ss["court_code"]
-              td = ss["data"]["judge_name"] if ss["data"]
-              td
-                - if ss["schedule_score"]
-                  = link_to edit_score_schedule,
-                    class: 'flat-button--addons' do
-                    => inline_svg 'pencil'
-                    | 編輯評鑑
-                - else 
-                  = link_to edit_score_verdict,
-                    class: 'flat-button--addons' do
-                    => inline_svg 'pencil'
-                    | 編輯評鑑
-
-        - else
-          - @schedule_score_sorted.each do |ss|
-            tr
-              td = ss.story.adjudge_date
-              td = ss.story.court.code
-              td = ss.judge_name
-              td
-                = link_to edit_court_observer_score_schedule_path(ss),
+        - @scores_sorted.each do |ss|
+          ruby:
+            case type
+            when 'lawyer'
+              edit_score_schedule = edit_lawyer_score_schedule_path(ss["id"])
+              edit_score_verdict  = edit_lawyer_score_verdict_path(ss["id"])
+            when 'party'
+              edit_score_schedule = edit_party_score_schedule_path(ss["id"])
+              edit_score_verdict  = edit_party_score_verdict_path(ss["id"])
+            when 'observer'
+              edit_score_schedule = edit_court_observer_score_schedule_path(ss["id"])
+            else
+            end
+          tr
+            td = ss["date"]
+            td = ss["court_code"]
+            td = ss["data"]["judge_name"] if ss["data"]
+            td
+              - if ss["schedule_score"]
+                = link_to edit_score_schedule,
+                  class: 'flat-button--addons' do
+                  => inline_svg 'pencil'
+                  | 編輯評鑑
+              - else 
+                = link_to edit_score_verdict,
                   class: 'flat-button--addons' do
                   => inline_svg 'pencil'
                   | 編輯評鑑
