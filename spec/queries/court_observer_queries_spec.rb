@@ -12,8 +12,24 @@ RSpec.describe CourtObserverQueries do
     end
   end
 
-  describe "#get_schedule_score" do
-    it { expect(query.get_schedule_score(story).include?(schedule_score)).to be_truthy }
+  describe "#get_schedule_scores_array" do
+    context "have schedule_scores" do
+      let!(:schedule_score) { create :schedule_score, :with_start_on, schedule_rater: court_observer, story: story }
+      let(:date) { schedule_score.schedule.start_on }
+      let(:court_code) { story.court.code }
+
+      it { expect(query.get_schedule_scores_array(story).first.is_a?(Hash)).to be_truthy }
+      it { expect(query.get_schedule_scores_array(story).first["date"]).to eq(date.to_s) }
+      it { expect(query.get_schedule_scores_array(story).first["court_code"]).to eq(court_code) }
+      it { expect(query.get_schedule_scores_array(story).first["schedule_score"]).to be_truthy }
+    end
+
+    context "get schedule_scores date if without schedule" do
+      let!(:schedule_score) { create :schedule_score, :without_schedule, schedule_rater: court_observer, story: story, data: { start_on: "2016-09-01" } }
+
+      it { expect(query.get_schedule_scores_array(story).first.is_a?(Hash)).to be_truthy }
+      it { expect(query.get_schedule_scores_array(story).first["date"]).to eq("2016-09-01") }
+    end
   end
 
   describe "#pending_score_schedules" do
