@@ -18,7 +18,7 @@ class SmsService
   end
 
   def send_by_slack(text)
-    SlackService.fake_party_reset_password_notify_async(text)
+    SlackService.notify_sms_alert_async(text)
   end
 
   def send_by_twilio(text)

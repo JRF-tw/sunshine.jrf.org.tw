@@ -1,7 +1,7 @@
 class SlackService
   WEBHOOK = "https://hooks.slack.com/services/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".freeze
   DEFAULT_ICON_URL = "http://i.imgur.com/kwu9VJF.jpg".freeze
-  DISABLED_ENV = ["staging"].freeze
+  DISABLED_ENV = ["staging", "development"].freeze
 
   class << self
     def notify(message, channel: "#general", name: "slack-robot", icon_url: DEFAULT_ICON_URL, webhook: nil)
@@ -41,8 +41,8 @@ class SlackService
       delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook) unless DISABLED_ENV.include?(Rails.env)
     end
 
-    def fake_party_reset_password_notify_async(message, channel: "#notify-developer", name: "notify", icon_url: DEFAULT_ICON_URL, webhook: nil)
-      delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook)
+    def notify_sms_alert_async(message, channel: "#notify-sms", name: "notify", icon_url: DEFAULT_ICON_URL, webhook: nil)
+      delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook) if DISABLED_ENV.include?(Rails.env)
     end
 
     def user_report_schedule_date_over_range_async(message, channel: "#notify-developer", name: "notify", icon_url: DEFAULT_ICON_URL, webhook: nil)
