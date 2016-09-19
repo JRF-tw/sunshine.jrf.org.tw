@@ -22,7 +22,7 @@ describe Party::ResendPhoneVerifySmsContext do
 
     context "success" do
       it { expect(subject.perform).to be_truthy }
-      it { expect { subject.perform }.to change_sidekiq_jobs_size_of(SmsService, :send_to) }
+      it { expect { subject.perform }.to change_sidekiq_jobs_size_of(SmsService, :send_sms) }
       it { expect { subject.perform }.to change { party.sms_sent_count.value } }
     end
   end
