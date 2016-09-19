@@ -9,7 +9,7 @@ describe "當事人忘記密碼", type: :request do
       subject { post "/party/password", party: params }
 
       it "發送重設密碼簡訊" do
-        expect { subject }.to change_sidekiq_jobs_size_of(SmsService, :send_to)
+        expect { subject }.to change_sidekiq_jobs_size_of(SmsService, :send_sms)
       end
 
       it "回到登入頁" do

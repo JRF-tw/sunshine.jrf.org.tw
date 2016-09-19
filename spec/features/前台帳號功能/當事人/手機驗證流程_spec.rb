@@ -12,7 +12,7 @@ describe "當事人手機驗證流程", type: :request do
         end
 
         it "發送簡訊" do
-          expect { subject }.to change_sidekiq_jobs_size_of(SmsService, :send_to)
+          expect { subject }.to change_sidekiq_jobs_size_of(SmsService, :send_sms)
         end
       end
 

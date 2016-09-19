@@ -41,7 +41,7 @@ describe Party::SetPhoneContext do
 
     context "success" do
       it { expect { subject.perform(params) }.to change { party.sms_sent_count.value } }
-      it { expect { subject.perform(params) }.to change_sidekiq_jobs_size_of(SmsService, :send_to) }
+      it { expect { subject.perform(params) }.to change_sidekiq_jobs_size_of(SmsService, :send_sms) }
 
       context "assign_value" do
         before { subject.perform(params) }
