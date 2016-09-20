@@ -5,24 +5,28 @@ RSpec.describe Lawyers::PasswordsController, type: :request do
   describe "create" do
     context "email unexist" do
       let!(:params) { { email: "xxxx@gmail.com" } }
-      subject! { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/password/new" }
+      subject! { post "/lawyer/password", lawyer: params }
 
-      it { expect(response).to redirect_to("/lawyer/password/new") }
+      it { expect(response).to be_success }
+      it { expect(response.body).to match(params[:email]) }
     end
 
     context "email unconfirmed" do
       let!(:lawyer) { create :lawyer }
       let!(:params) { { email: lawyer.email } }
-      subject { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/password/new" }
+      subject { post "/lawyer/password", lawyer: params }
 
       it { expect { subject }.not_to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
-      it { expect(subject).to redirect_to("/lawyer/password/new") }
+      context "retain input email" do
+        before { subject }
+        it { expect(response.body).to match(params[:email]) }
+      end
     end
 
     context "email confirmed" do
       let!(:lawyer) { create :lawyer, :with_password, :with_confirmed }
       let!(:params) { { email: lawyer.email } }
-      subject { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/password/new" }
+      subject { post "/lawyer/password", lawyer: params }
 
       it { expect { subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
       it { expect(subject).to redirect_to("/lawyer/sign_in") }
