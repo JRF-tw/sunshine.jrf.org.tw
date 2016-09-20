@@ -4,7 +4,7 @@
     method: :put,
     wrapper: :md do |f|
 
-    = f.input :phone_number, disabled: true, input_html: { value: current_party.unconfirmed_phone.value }
+    = f.input :unconfirmed_phone, disabled: true, input_html: { value: current_party.unconfirmed_phone.value }, label: '電話號碼'
     = f.input :phone_varify_code, input_html: { value: nil }, label: "認證碼"
 
     = render 'components/form_actions',
