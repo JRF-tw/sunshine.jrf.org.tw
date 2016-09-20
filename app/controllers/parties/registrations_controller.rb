@@ -11,6 +11,7 @@ class Parties::RegistrationsController < Devise::RegistrationsController
       flash.clear
     else
       flash[:error] = context.error_messages.join(", ")
+      build_resource(name: params[:party][:name], identify_number: params[:party][:identify_number])
     end
     render :new
   end
