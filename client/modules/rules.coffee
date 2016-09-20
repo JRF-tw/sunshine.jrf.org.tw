@@ -16,8 +16,7 @@ class Rules
 
   check_cookie: (e, type) ->
     e.preventDefault()
-
-    role = window.location.pathname.replace /^\//, ''
+    role = $(e.target).data 'role'
 
     if Cookies.get("#{role}_has_seen_#{type}_rules")
       Turbolinks.visit e.target.href
@@ -26,9 +25,7 @@ class Rules
 
   set_cookie_and_go: (e, type) ->
     e.preventDefault()
-
-    role = window.location.pathname.match(/\/[^\/]+/gi)[0]
-                                   .replace /^\//, ''
+    role = $(e.target).data 'role'
 
     Cookies.set "#{role}_has_seen_#{type}_rules", true, { expires: 7 }
     Turbolinks.visit e.target.href
