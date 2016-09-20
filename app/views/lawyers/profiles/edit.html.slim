@@ -5,4 +5,5 @@
     = f.input :office_number, input_html: { type: "tel" }
 
     = render 'components/form_actions',
-      f: f, submit: '確定更新'
+      f: f, submit: '確定更新',
+      link: { text: '取消', href: lawyer_profile_path }
