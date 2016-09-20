@@ -4,20 +4,22 @@
 
   = simple_form_for current_party, as: :party,
     url: party_email_path, method: :put, wrapper: :md do |f|
-
-    - if current_party.reload.unconfirmed_email
-      p = "目前等待驗證中信箱：#{current_party.reload.unconfirmed_email}"
     
     .form-group class=('has-error' if f.object.unconfirmed_email)
       = f.input_field :email, required: true
       = f.label :email, label: '新 Email'
       = f.error :email
+      - if f.object.unconfirmed_email
+        .helper-block
+          = "目前等待驗證中信箱：#{current_party.reload.unconfirmed_email}"
 
     = f.input :current_password, required: true, value: "", label: '密碼'
 
-    = render layout: 'components/form_actions', locals: { f: f, submit: '送出' }
-      - if current_party.pending_reconfirmation?
-        .text-center
-          = link_to "重寄認證信",
-            party_confirmation_path(party: { email: current_party.email }),
-            method: :post, class: "flat-button--large"
+    - if f.object.unconfirmed_email
+      p.text-center style='margin-bottom: 8px'
+        = link_to "重寄認證信",
+          party_confirmation_path(party: { email: current_party.email }),
+          method: :post, class: "flat-button"
+    
+    = render 'components/form_actions', f: f, submit: '送出',
+      link: { text: '取消', href: party_profile_path }
