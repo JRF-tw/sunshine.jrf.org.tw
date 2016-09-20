@@ -9,6 +9,7 @@ class Parties::EmailsController < Parties::BaseController
       flash[:notice] = "需要重新驗證新的Email"
       redirect_to party_profile_path
     else
+      current_party.assign_attributes(email: params[:party][:email])
       flash.now[:error] = context.error_messages.join(", ")
       render :edit
     end

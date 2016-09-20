@@ -9,6 +9,7 @@ class Lawyers::EmailsController < Lawyers::BaseController
       flash[:notice] = "需要重新驗證新的Email"
       redirect_to lawyer_profile_path
     else
+      current_lawyer.assign_attributes(email: params[:lawyer][:email])
       flash.now[:error] = context.error_messages.join(", ")
       render :edit
     end

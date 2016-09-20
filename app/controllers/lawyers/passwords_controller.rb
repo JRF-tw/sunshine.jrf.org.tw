@@ -14,10 +14,10 @@ class Lawyers::PasswordsController < Devise::PasswordsController
       else
         respond_with(resource)
       end
-    elsif @lawyer && !@lawyer.confirmed?
-      redirect_to :back, flash: { notice: "該帳號尚未註冊" }
     else
-      redirect_to :back, flash: { notice: "無此律師帳號" }
+      flash.now[:error] = @lawyer && !@lawyer.confirmed? ? "該帳號尚未註冊" : "無此律師帳號"
+      self.resource = resource_class.new(email: params[:lawyer][:email])
+      render :new
     end
   end
 

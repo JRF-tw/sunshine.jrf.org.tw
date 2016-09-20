@@ -10,6 +10,7 @@ class CourtObservers::EmailsController < CourtObservers::BaseController
       flash[:notice] = "需要重新驗證新的Email"
       redirect_to court_observer_profile_path
     else
+      current_court_observer.assign_attributes(email: params[:court_observer][:email])
       flash.now[:error] = context.error_messages.join(", ")
       render :edit
     end

@@ -4,7 +4,7 @@
     .form-group 請輸入您的新手機號碼
 
     = f.input :phone_number, label: '舊手機號碼', disabled: true
-    = f.input :phone_number, label: '新手機號碼', input_html: { value: '' }
+    = f.input :phone_number, label: '新手機號碼'
 
     = render 'components/form_actions', f: f, submit: '送出',
       link: { text: '取消', href: party_profile_path }
