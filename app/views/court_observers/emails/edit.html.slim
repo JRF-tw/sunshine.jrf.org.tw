@@ -9,13 +9,13 @@
       = f.input_field :email, required: true
       = f.label :email, label: "新 Email"
       = f.error :email
-      - if f.object.unconfirmed_email
+      - if current_court_observer.unconfirmed_email
         .help-block--error
           = "目前等待驗證中信箱: #{f.object.unconfirmed_email}"
       
       = f.input :current_password, required: true, label: "密碼"
     
-    - if f.object.unconfirmed_email
+    - if current_court_observer.unconfirmed_email
       p.text-center style='margin-bottom: 8px'
         = link_to "重寄認證信",
           resend_confirmation_mail_court_observer_email_path,
