@@ -1,10 +1,8 @@
 = render layout: 'components/card', locals: { heading: '感謝您的評鑑！' }
   ul.toggle-list
-    = render 'components/toggle_list_cell',
-      toggle_for: :subscribe_edm,
-      toggle_checked: current_party.subscribe_edm,
-      toggle_url: toggle_subscribe_party_edm_path(format: :js),
-      toggle_text: '是否同意訂閱電子報？'  
+    = link_to "訂閱電子報", "https://jrf.neticrm.tw/civicrm/profile/create?gid=12&reset=1",
+      class: 'raised-button',
+      target: "_blank"
 
   = render 'components/wrapped_donate_button'
 

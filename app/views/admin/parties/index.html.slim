@@ -39,12 +39,6 @@
             label.control-label = f.label :phone_confirmed_at_not_null
             .controls = f.select :phone_confirmed_at_not_null,
             collect_for_boolean, include_blank: "請選擇"
-      .row
-        .span6
-          .control-group
-            label.control-label = f.label :subscribe_edm_true
-            .controls = f.select :subscribe_edm_true,
-            collect_for_boolean, include_blank: "請選擇"
     hr
     .form-actions
       = f.submit :value => "搜尋", :class => "btn btn-primary"
@@ -61,7 +55,6 @@
           th 姓名
           th 身分證字號
           th email
-          th 是否訂閱電子報
           th 電話號碼及驗證狀態
           th 註冊日期
           th 最後一次登入日期及ip

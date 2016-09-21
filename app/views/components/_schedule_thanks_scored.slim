@@ -1,5 +1,4 @@
 - toggle_subscribe_story_path = toggle_subscribe_story_path ? toggle_subscribe_story_path : false
-- toggle_subscribe_edm_path = toggle_subscribe_edm_path ? toggle_subscribe_edm_path : false
 
 = simple_form_for @schedule_score, as: :schedule_score,
   url: form_url, html: { method: :post }, wrapper: :md do |f|
@@ -18,12 +17,9 @@
       toggle_text: '是否同意我們在下一次開庭或判決書公布時用email通知您？'\
       if toggle_subscribe_story_path
 
-    = render 'components/toggle_list_cell',
-      toggle_for: :subscribe_edm,
-      toggle_checked: current_user.subscribe_edm,
-      toggle_url: toggle_subscribe_edm_path,
-      toggle_text: '是否同意訂閱電子報？'\
-      if toggle_subscribe_edm_path
+    = link_to "訂閱電子報", "https://jrf.neticrm.tw/civicrm/profile/create?gid=12&reset=1",
+      class: 'raised-button',
+      target: "_blank"
 
   = render 'components/wrapped_donate_button'
 
