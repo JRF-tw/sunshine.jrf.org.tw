@@ -11,14 +11,14 @@
       = f.error :email
       - if current_party.unconfirmed_email
         .help-block--error
-          = "等待驗證中信箱：#{@party.unconfirmed_email}"
+          = "等待驗證中信箱：#{current_party.unconfirmed_email}"
 
     = f.input :current_password, required: true, value: "", label: '密碼'
 
     - if current_party.unconfirmed_email
       p.text-center style='margin-bottom: 8px'
         = link_to "重寄認證信",
-          party_confirmation_path(party: { email: @party.email }),
+          party_confirmation_path(party: { email: current_party.email }),
           method: :post, class: "flat-button"
     
     = render 'components/form_actions', f: f, submit: '送出',
