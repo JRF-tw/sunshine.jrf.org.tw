@@ -21,11 +21,11 @@ class Parties::StoriesController < Parties::BaseController
              rescue
                nil
              end
-    redirect_as_fail(party_stories_path, "找不到該案件") unless @story
+    redirect_as_fail(party_root_path, "找不到該案件") unless @story
   end
 
   def has_score?
     @scores_sorted = ::PartyQueries.new(current_party).get_scores_array(@story, sort_by: "date")
-    redirect_as_fail(party_stories_path, "尚未有評鑑紀錄") unless @scores_sorted.present?
+    redirect_as_fail(party_root_path, "尚未有評鑑紀錄") unless @scores_sorted.present?
   end
 end

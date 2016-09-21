@@ -20,11 +20,11 @@ class CourtObservers::StoriesController < CourtObservers::BaseController
              rescue
                nil
              end
-    redirect_as_fail(court_observer_stories_path, "找不到該案件") unless @story
+    redirect_as_fail(court_observer_root_path, "找不到該案件") unless @story
   end
 
   def has_score?
     @scores_sorted = ::CourtObserverQueries.new(current_court_observer).get_schedule_scores_array(@story)
-    redirect_as_fail(court_observer_stories_path, "尚未有評鑑紀錄") unless @scores_sorted.present?
+    redirect_as_fail(court_observer_root_path, "尚未有評鑑紀錄") unless @scores_sorted.present?
   end
 end
