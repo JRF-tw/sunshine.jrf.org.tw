@@ -6,7 +6,7 @@
     url: party_email_path, method: :put, wrapper: :md do |f|
     
     .form-group class=('has-error' if f.object.unconfirmed_email)
-      = f.input_field :email, required: true
+      = f.input_field :email, required: true, class: 'form-control'
       = f.label :email, label: '新 Email'
       = f.error :email
       - if f.object.unconfirmed_email
