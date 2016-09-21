@@ -4,8 +4,8 @@ RSpec.describe CourtObservers::StoriesController, type: :request do
   let!(:court_observer) { create :court_observer }
   before { signin_court_observer(court_observer) }
 
-  describe "#index" do
-    subject! { get "/observer/stories" }
+  describe "#index root_path" do
+    subject! { get "/observer" }
     it { expect(response).to be_success }
   end
 

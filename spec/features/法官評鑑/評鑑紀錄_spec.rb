@@ -14,7 +14,7 @@ describe "法官評鑑 - 評鑑紀錄", type: :request do
     let!(:verdict_score) { create :verdict_score, verdict_rater: lawyer, judge: judge, story: story }
 
     context "When 到個人評鑑記錄頁" do
-      subject! { get "/lawyer/stories" }
+      subject! { get "/lawyer" }
 
       it "Then 頁面成功讀取" do
         expect(response).to be_success
@@ -32,7 +32,7 @@ describe "法官評鑑 - 評鑑紀錄", type: :request do
 
   context "Given 無評鑑資料" do
     context "When 到個人評鑑記錄頁" do
-      subject! { get "/lawyer/stories" }
+      subject! { get "/lawyer" }
 
       it "Then 頁面成功讀取" do
         expect(response).to be_success

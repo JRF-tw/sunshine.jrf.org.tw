@@ -4,8 +4,8 @@ RSpec.describe Lawyers::StoriesController, type: :request do
   let!(:lawyer) { create :lawyer, :with_password, :with_confirmed }
   before { signin_lawyer(lawyer) }
 
-  describe "#index" do
-    subject! { get "/lawyer/stories" }
+  describe "#index root_path" do
+    subject! { get "/lawyer" }
     it { expect(response).to be_success }
   end
 
