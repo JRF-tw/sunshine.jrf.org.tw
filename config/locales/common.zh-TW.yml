@@ -297,14 +297,12 @@ zh-TW:
         name_cont: "姓名包含"
         current_cont: "現職包含"
         email_cont: "email包含"
-        subscribe_edm_true: "是否訂閱電子報"
       court_observer:
         name_cont: "姓名包含"
         email_cont: "EmaiL包含"
         school_cont: "學校包含"
         department_level_cont: "系級包含"
         last_scored_at_gteq: "最後評鑑時間"
-        subscribe_edm_true: "是否訂閱電子報"
       party:
         name_cont: "姓名包含"
         current_sign_in_ip_cont: "最後一次登入ip包含"
@@ -314,4 +312,3 @@ zh-TW:
         created_at_gteq: "註冊日期搜尋"
         imposter_true: "是否為冒用者"
         phone_confirmed_at_not_null: "是否已通過手機驗證"
-        subscribe_edm_true: "是否訂閱電子報"

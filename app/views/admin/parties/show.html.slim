@@ -25,9 +25,6 @@
         td email
         td = @party.email
       tr
-        td 是否已訂閱電子報
-        td = @party.subscribe_edm? ? "已訂閱" : "未訂閱"
-      tr
         td 最後一次登入時間
         td = @party.current_sign_in_at
       tr

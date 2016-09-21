@@ -28,11 +28,6 @@
               label.control-label = f.label :last_scored_at_gteq
               .controls = f.search_field :last_scored_at_gteq, placeholder: "起始時間，非必填"
               .controls = f.search_field :last_scored_at_lteq, placeholder: "結束時間，非必填"
-        .span6
-          .control-group
-            label.control-label = f.label :subscribe_edm_true
-            .controls = f.select :subscribe_edm_true,
-            collect_for_boolean, include_blank: "請選擇"
     hr
     .form-actions
       = f.submit :value => "搜尋", :class => "btn btn-primary"
@@ -50,7 +45,6 @@
           th 學校
           th 系級
           th Email
-          th 是否訂閱電子報
           th 學校
           th 操作
       tbody
@@ -61,7 +55,6 @@
             td = court_observer.school
             td = court_observer.department_level
             td = court_observer.email
-            td = court_observer.subscribe_edm? ? "已訂閱" : "未訂閱"
             td = court_observer.school
             td
               = link_to "詳細資料", admin_observer_path(court_observer), class: "btn btn-mini"

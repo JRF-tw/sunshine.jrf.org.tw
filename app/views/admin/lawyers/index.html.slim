@@ -16,11 +16,6 @@
           .control-group
             label.control-label = f.label :email_cont
             .controls = f.search_field :email_cont
-        .span6
-          .control-group
-            label.control-label = f.label :subscribe_edm_true
-            .controls = f.select :subscribe_edm_true,
-            collect_for_boolean, include_blank: "請選擇"
 
     hr
     .form-actions
@@ -38,7 +33,6 @@
           th #
           th 名稱
           th email
-          th 是否訂閱電子報
           th 性別
           th 現職
           th 狀態
@@ -50,7 +44,6 @@
             td = lawyer.id
             td = lawyer.name
             td = lawyer.email
-            td = lawyer.subscribe_edm? ? "已訂閱" : "未訂閱"
             td = lawyer.gender
             td = lawyer.current
             td = lawyer.confirmed? ? "已註冊" : "未註冊"
