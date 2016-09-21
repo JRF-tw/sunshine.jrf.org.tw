@@ -2,7 +2,7 @@
   heading: '更改 Email',
   type: 'lawyer'}
 
-  = simple_form_for current_lawyer, as: :lawyer,
+  = simple_form_for @lawyer, as: :lawyer,
     url: lawyer_email_path, method: :put, wrapper: :md do |f|
     
     .form-group class=('has-error' if f.object.unconfirmed_email)
@@ -18,7 +18,7 @@
     - if f.object.unconfirmed_email
       p.text-center style='margin-bottom: 8px'
         = link_to "重寄認證信",
-          lawyer_confirmation_path(lawyer: { email: current_lawyer.email }),
+          lawyer_confirmation_path(lawyer: { email: @lawyer.email }),
           method: :post, class: "flat-button"
 
     = render 'components/form_actions', f: f, submit: '送出',

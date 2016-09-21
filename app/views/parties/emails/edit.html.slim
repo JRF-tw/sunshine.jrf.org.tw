@@ -2,23 +2,24 @@
   heading: '更改 Email',
   type: 'party'}
 
-  = simple_form_for current_party, as: :party,
+  = simple_form_for @party, as: :party,
     url: party_email_path, method: :put, wrapper: :md do |f|
     
     .form-group class=('has-error' if f.object.unconfirmed_email)
       = f.input_field :email, required: true, class: 'form-control'
       = f.label :email, label: '新 Email'
       = f.error :email
+
       - if f.object.unconfirmed_email
         .help-block--error
-          = "等待驗證中信箱：#{current_party.reload.unconfirmed_email}"
+          = "等待驗證中信箱：#{@party.reload.unconfirmed_email}"
 
     = f.input :current_password, required: true, value: "", label: '密碼'
 
     - if f.object.unconfirmed_email
       p.text-center style='margin-bottom: 8px'
         = link_to "重寄認證信",
-          party_confirmation_path(party: { email: current_party.email }),
+          party_confirmation_path(party: { email: @party.email }),
           method: :post, class: "flat-button"
     
     = render 'components/form_actions', f: f, submit: '送出',

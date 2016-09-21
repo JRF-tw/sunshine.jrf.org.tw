@@ -10,8 +10,8 @@ class Parties::PhonesController < Parties::BaseController
     if context.perform(party_params)
       redirect_to verify_party_phone_path, flash: { success: "已寄出簡訊認證碼" }
     else
+      @input_phone_number = party_params[:unconfirmed_phone] || current_party.phone_number
       flash[:error] = context.error_messages.join(", ")
-      current_party.assign_attributes(phone_number: params[:party][:phone_number])
       render "new"
     end
   end
@@ -24,8 +24,8 @@ class Parties::PhonesController < Parties::BaseController
     if context.perform(party_params)
       redirect_to verify_party_phone_path, flash: { success: "已寄出簡訊認證碼" }
     else
+      @input_phone_number = party_params[:unconfirmed_phone] || current_party.phone_number
       flash[:error] = context.error_messages.join(", ")
-      current_party.assign_attributes(phone_number: params[:party][:phone_number])
       render "edit"
     end
   end
@@ -40,7 +40,7 @@ class Parties::PhonesController < Parties::BaseController
     elsif context.errors.include?(:retry_verify_count_out_range)
       redirect_to edit_party_phone_path, flash: { error: context.error_messages.join(", ").to_s }
     else
-      @phone_varify_code = params[:party][:phone_varify_code]
+      @phone_varify_code = party_params[:phone_varify_code]
       flash[:error] = context.error_messages.join(", ")
       render "verify"
     end
@@ -58,7 +58,7 @@ class Parties::PhonesController < Parties::BaseController
   private
 
   def party_params
-    params.fetch(:party, {}).permit(:phone_number, :phone_varify_code)
+    params.fetch(:party, {}).permit(:unconfirmed_phone, :phone_varify_code)
   end
 
   def can_verify?

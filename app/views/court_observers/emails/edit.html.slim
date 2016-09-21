@@ -2,7 +2,7 @@
   heading: '更改 Email',
   type: 'observer'}
   
-  = simple_form_for current_court_observer, as: :court_observer,
+  = simple_form_for @court_observer, as: :court_observer,
     url: court_observer_email_path, method: :put, wrapper: :md do |f|
     
     .form-group class=('has-error' if f.object.unconfirmed_email)
