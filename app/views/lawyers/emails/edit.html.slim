@@ -4,19 +4,22 @@
 
   = simple_form_for current_lawyer, as: :lawyer,
     url: lawyer_email_path, method: :put, wrapper: :md do |f|
+    
     .form-group class=('has-error' if f.object.unconfirmed_email)
       = f.input_field :email, required: true
       = f.label :email, label: '新 Email'
       = f.error :email
       - if f.object.unconfirmed_email
-        .helper-block
+        .help-block--error
           = "目前等待驗證中信箱：#{f.object.unconfirmed_email}"
 
     = f.input :current_password, required: true, value: "", label: '密碼'
 
-    = render layout: 'components/form_actions', locals: { f: f, submit: '送出' }
-      - if current_lawyer.unconfirmed_email
-        .text-center
-          = link_to "重寄認證信",
-            lawyer_confirmation_path(lawyer: { email: current_lawyer.email }),
-            method: :post, class: "flat-button--large"
+    - if f.object.unconfirmed_email
+      p.text-center style='margin-bottom: 8px'
+        = link_to "重寄認證信",
+          lawyer_confirmation_path(lawyer: { email: current_lawyer.email }),
+          method: :post, class: "flat-button"
+
+    = render 'components/form_actions', f: f, submit: '送出',
+      link: { text: '取消', href: lawyer_profile_path }

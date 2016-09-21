@@ -32,10 +32,7 @@ new Toggle '.switch'
 new Dismiss '[data-dismiss]'
 new Rules()
 
-$(document).on "page:change", ->
-  # Let cached input value trigger 'is-focus'
-  $('input.form-control:not([autofocus], :hidden)').trigger 'blur'
-
+$(document).on 'ready page:load', ->
   # Datepicker
   $("input.datepicker").each (input) ->
     $(@).datepicker
@@ -45,6 +42,10 @@ $(document).on "page:change", ->
 
   # Popover
   $('.popover-trigger').webuiPopover()
+
+$(document).on "page:change", ->
+  # Let cached input value trigger 'is-focus'
+  $('input.form-control:not([autofocus], :hidden)').trigger 'blur'
 
   # Stuck Header
   Waypoint.destroyAll()

@@ -8,4 +8,6 @@
     = f.input :department_level, as: :select, collection: ["101", "102"], include_blank: "請選擇"
     = f.input :student_number
 
-    = render 'components/form_actions', f: f, submit: '確定更新'
+    = render 'components/form_actions', f: f, submit: '確定更新',
+      link: { text: '取消', href: court_observer_profile_path }
+ 
