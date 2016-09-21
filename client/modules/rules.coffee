@@ -21,7 +21,7 @@ class Rules
     if Cookies.get("#{role}_has_seen_#{type}_rules")
       Turbolinks.visit e.target.href
     else
-      Turbolinks.visit "/#{role}/score/#{type}s/rule"      
+      Turbolinks.visit "/#{role}/score/#{type}s/rule"
 
   set_cookie_and_go: (e, type) ->
     e.preventDefault()
