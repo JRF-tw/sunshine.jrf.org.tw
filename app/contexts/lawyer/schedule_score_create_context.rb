@@ -44,15 +44,19 @@ class Lawyer::ScheduleScoreCreateContext < BaseContext
   def check_story
     context = Lawyer::CheckScheduleScoreInfoContext.new(@lawyer)
     @story = context.perform(@params)
-    return add_error(:data_blank, context.error_messages.join(",")) unless @story
+    return add_error(:story_not_found, context.error_messages.join(",")) unless @story
   end
 
   def check_schedule
-    @schedule = Lawyer::CheckScheduleScoreDateContext.new(@lawyer).perform(@params)
+    context = Lawyer::CheckScheduleScoreDateContext.new(@lawyer)
+    @schedule = context.perform(@params)
+    return add_error(:schedule_not_found, context.error_messages.join(",")) if context.has_error?
   end
 
   def check_judge
-    @judge = Lawyer::CheckScheduleScoreJudgeContext.new(@lawyer).perform(@params)
+    context = Lawyer::CheckScheduleScoreJudgeContext.new(@lawyer)
+    @judge = context.perform(@params)
+    return add_error(:judge_not_found, context.error_messages.join(",")) unless @judge
   end
 
   def build_schedule_score

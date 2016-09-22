@@ -34,15 +34,19 @@ class CourtObserver::ScheduleScoreCreateContext < BaseContext
   def check_story
     context = CourtObserver::CheckScheduleScoreInfoContext.new(@court_observer)
     @story = context.perform(@params)
-    return add_error(:data_blank, context.error_messages.join(",")) unless @story
+    return add_error(:story_not_found, context.error_messages.join(",")) unless @story
   end
 
   def check_schedule
-    @schedule = CourtObserver::CheckScheduleScoreDateContext.new(@court_observer).perform(@params)
+    context = CourtObserver::CheckScheduleScoreDateContext.new(@court_observer)
+    @schedule = context.perform(@params)
+    return add_error(:schedule_not_found, context.error_messages.join(",")) if context.has_error?
   end
 
   def check_judge
-    @judge = CourtObserver::CheckScheduleScoreJudgeContext.new(@court_observer).perform(@params)
+    context = CourtObserver::CheckScheduleScoreJudgeContext.new(@court_observer)
+    @judge = context.perform(@params)
+    return add_error(:judge_not_found, context.error_messages.join(",")) unless @judge
   end
 
   def build_schedule_score
