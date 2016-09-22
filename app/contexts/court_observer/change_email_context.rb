@@ -15,39 +15,28 @@ class CourtObserver::ChangeEmailContext < BaseContext
   def perform(params)
     @params = permit_params(params[:court_observer] || params, PERMITS)
     run_callbacks :perform do
-      unless @court_observer.update_with_password(@params)
-        assign_email
-        return add_error(:wrong_password)
-      end
+      return add_error_and_assign_email(:wrong_password) unless @court_observer.update_with_password(@params)
       true
     end
   end
 
   private
 
-  def assign_email
+  def add_error_and_assign_email(error_key)
     @court_observer.assign_attributes(email: @params[:email])
+    add_error(error_key.to_sym)
   end
 
   def check_email_valid
-    unless @params[:email][/\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i]
-      assign_email
-      return add_error(:email_pattern_invalid)
-    end
+    return add_error_and_assign_email(:email_pattern_invalid) unless @params[:email][/\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i]
   end
 
   def check_email_different
-    if @params["email"] == @court_observer.email
-      assign_email
-      return add_error(:email_conflict)
-    end
+    return add_error_and_assign_email(:email_conflict) if @params["email"] == @court_observer.email
   end
 
   def check_email_unique
-    if CourtObserver.pluck(:email).include?(@params[:email])
-      assign_email
-      return add_error(:email_exist)
-    end
+    return add_error_and_assign_email(:email_exist) if CourtObserver.pluck(:email).include?(@params[:email])
   end
 
   def skip_devise_confirmation_notification

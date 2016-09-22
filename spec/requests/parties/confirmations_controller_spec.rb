@@ -27,17 +27,24 @@ RSpec.describe Parties::ConfirmationsController, type: :request do
   end
 
   describe "#create" do
-    let(:party_with_confirmed_email) { signin_party(party_with_unconfirm_email) }
+    let!(:party) { signin_party(party_with_unconfirm_email("5566@gmail.com")) }
     subject { post "/party/confirmation", party: { email: party.email } }
 
-    context "success send mail" do
+    context "send mail success" do
       it { expect { subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
     end
 
-    context "success render" do
+    context "redirect success" do
       before { subject }
       it { expect(flash[:notice]).to eq("您將在幾分鐘後收到一封電子郵件，內有驗證帳號的步驟說明。") }
-      it { expect(response).to be_redirect }
+      it { expect(response).to redirect_to("/party/profile") }
+    end
+
+    context "link can update email" do
+      before { subject }
+      before { get "/party/confirmation", confirmation_token: party.reload.confirmation_token }
+
+      it { expect(party.reload.email).to eq("5566@gmail.com") }
     end
   end
 

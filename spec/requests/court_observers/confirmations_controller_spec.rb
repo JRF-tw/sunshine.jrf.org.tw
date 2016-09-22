@@ -36,12 +36,24 @@ RSpec.describe CourtObservers::ConfirmationsController, type: :request do
   end
 
   describe "#create" do
-    context "success" do
-      let!(:court_observer) { create :court_observer, :with_unconfirmed_email }
-      subject { post "/observer/confirmation", court_observer: { email: court_observer.email } }
+    let!(:court_observer) { signin_court_observer(observer_with_unconfirm_email("5566@gmail.com")) }
+    subject { post "/observer/confirmation", court_observer: { email: court_observer.email } }
 
-      it { expect(subject).to redirect_to("/observer/edit") }
+    context "send mail success" do
       it { expect { subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq) }
+    end
+
+    context "redirect success" do
+      before { subject }
+      it { expect(flash[:notice]).to eq("您將在幾分鐘後收到一封電子郵件，內有驗證帳號的步驟說明。") }
+      it { expect(response).to redirect_to("/observer/profile") }
+    end
+
+    context "link can update email" do
+      before { subject }
+      before { get "/observer/confirmation", confirmation_token: court_observer.reload.confirmation_token }
+
+      it { expect(court_observer.reload.email).to eq("5566@gmail.com") }
     end
   end
 end

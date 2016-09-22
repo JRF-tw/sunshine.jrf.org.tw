@@ -16,6 +16,6 @@ class Lawyers::EmailsController < Lawyers::BaseController
   end
 
   def find_lawyer
-    @lawyer || @lawyer = Lawyer.find(current_lawyer.id)
+    @lawyer ||= Lawyer.find(current_lawyer.id)
   end
 end

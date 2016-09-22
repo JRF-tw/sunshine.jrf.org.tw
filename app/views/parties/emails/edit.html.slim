@@ -5,7 +5,7 @@
   = simple_form_for @party, as: :party,
     url: party_email_path, method: :put, wrapper: :md do |f|
     
-    .form-group class=('has-error' if f.object.unconfirmed_email)
+    .form-group class=('has-error' if current_party.unconfirmed_email)
       = f.input_field :email, required: true, class: 'form-control'
       = f.label :email, label: '新 Email'
       = f.error :email

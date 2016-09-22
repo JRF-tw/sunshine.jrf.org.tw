@@ -23,6 +23,6 @@ class Parties::EmailsController < Parties::BaseController
   end
 
   def find_party
-    @party || @party = Party.find(current_party.id)
+    @party ||= Party.find(current_party.id)
   end
 end

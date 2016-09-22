@@ -26,7 +26,7 @@ class CourtObservers::ConfirmationsController < Devise::ConfirmationsController
   end
 
   def after_resending_confirmation_instructions_path_for(_resource_name)
-    edit_court_observer_registration_path
+    court_observer_profile_path
   end
 
   def check_observer

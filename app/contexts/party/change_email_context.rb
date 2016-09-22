@@ -26,29 +26,21 @@ class Party::ChangeEmailContext < BaseContext
 
   private
 
-  def assign_email
+  def add_error_and_assign_email(error_key)
     @party.assign_attributes(email: @params[:email])
+    add_error(error_key.to_sym)
   end
 
   def check_email_valid
-    unless @params[:email][/\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i]
-      assign_email
-      return add_error(:email_pattern_invalid)
-    end
+    return add_error_and_assign_email(:email_pattern_invalid) unless @params[:email][/\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i]
   end
 
   def check_email_different
-    if @params["email"] == @party.email
-      assign_email
-      return add_error(:email_conflict)
-    end
+    return add_error_and_assign_email(:email_conflict) if @params["email"] == @party.email
   end
 
   def check_email_unique
-    if Party.pluck(:email).include?(@params["email"])
-      assign_email
-      return add_error(:email_exist)
-    end
+    return add_error_and_assign_email(:email_exist) if Party.pluck(:email).include?(@params["email"])
   end
 
   def transfer_email_to_unconfirmed_email

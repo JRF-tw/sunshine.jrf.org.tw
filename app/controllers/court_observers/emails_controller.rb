@@ -23,6 +23,6 @@ class CourtObservers::EmailsController < CourtObservers::BaseController
   end
 
   def find_court_observer
-    @court_observer || @court_observer = CourtObserver.find(current_court_observer.id)
+    @court_observer ||= CourtObserver.find(current_court_observer.id)
   end
 end
