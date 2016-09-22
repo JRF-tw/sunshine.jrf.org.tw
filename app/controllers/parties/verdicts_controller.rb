@@ -69,11 +69,11 @@ class Parties::VerdictsController < Parties::BaseController
 
   def find_verdict_score
     @verdict_score = current_party.verdict_scores.find(params[:id])
-    redirect_as_fail(party_stories_path, "沒有該評鑑紀錄") unless @verdict_score
+    redirect_as_fail(party_root_path, "沒有該評鑑紀錄") unless @verdict_score
   end
 
   def story_can_score?
     range = (@verdict_score.story.adjudge_date..@verdict_score.story.adjudge_date + Party::VerdictScoreCheckInfoContext::SCORE_INTERVEL)
-    redirect_as_fail(party_stories_path, "案件已超過可評鑑判決時間") unless range.include?(Time.zone.today)
+    redirect_as_fail(party_root_path, "案件已超過可評鑑判決時間") unless range.include?(Time.zone.today)
   end
 end

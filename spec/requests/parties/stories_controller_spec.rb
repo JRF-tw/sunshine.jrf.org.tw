@@ -4,8 +4,8 @@ RSpec.describe Parties::StoriesController, type: :request do
   let!(:party) { create :party, :already_confirmed }
   before { signin_party(party) }
 
-  describe "#index" do
-    subject! { get "/party/stories" }
+  describe "#index root_path" do
+    subject! { get "/party" }
     it { expect(response).to be_success }
   end
 

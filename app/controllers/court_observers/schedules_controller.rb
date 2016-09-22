@@ -81,10 +81,10 @@ class CourtObservers::SchedulesController < CourtObservers::BaseController
 
   def find_schedule_score
     @schedule_score = current_court_observer.schedule_scores.find(params[:id])
-    redirect_as_fail(court_observer_stories_path, "沒有該評鑑紀錄") unless @schedule_score
+    redirect_as_fail(court_observer_root_path, "沒有該評鑑紀錄") unless @schedule_score
   end
 
   def story_adjudged?
-    redirect_as_fail(court_observer_stories_path, "案件已判決") if @schedule_score.story.adjudge_date.present?
+    redirect_as_fail(court_observer_root_path, "案件已判決") if @schedule_score.story.adjudge_date.present?
   end
 end
