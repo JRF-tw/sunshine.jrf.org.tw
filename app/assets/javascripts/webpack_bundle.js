@@ -490,9 +490,7 @@
 
 	new Rules();
 
-	$(document).on("page:change", function() {
-	  var $main_header;
-	  $('input.form-control:not([autofocus], :hidden)').trigger('blur');
+	$(document).on('ready page:load', function() {
 	  $("input.datepicker").each(function(input) {
 	    return $(this).datepicker({
 	      dateFormat: "yy-mm-dd",
@@ -502,7 +500,12 @@
 	      }
 	    });
 	  });
-	  $('.popover-trigger').webuiPopover();
+	  return $('.popover-trigger').webuiPopover();
+	});
+
+	$(document).on("page:change", function() {
+	  var $main_header;
+	  $('input.form-control:not([autofocus], :hidden)').trigger('blur');
 	  Waypoint.destroyAll();
 	  $main_header = $('#main-header');
 	  return $('.card__heading, .character-selector__heading').waypoint({
@@ -2826,7 +2829,7 @@
 	  Rules.prototype.check_cookie = function(e, type) {
 	    var role;
 	    e.preventDefault();
-	    role = window.location.pathname.replace(/^\//, '');
+	    role = $(e.target).data('role');
 	    if (Cookies.get(role + "_has_seen_" + type + "_rules")) {
 	      return Turbolinks.visit(e.target.href);
 	    } else {
@@ -2837,7 +2840,7 @@
 	  Rules.prototype.set_cookie_and_go = function(e, type) {
 	    var role;
 	    e.preventDefault();
-	    role = window.location.pathname.match(/\/[^\/]+/gi)[0].replace(/^\//, '');
+	    role = $(e.target).data('role');
 	    Cookies.set(role + "_has_seen_" + type + "_rules", true, {
 	      expires: 7
 	    });
