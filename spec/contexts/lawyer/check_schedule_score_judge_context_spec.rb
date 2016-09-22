@@ -26,8 +26,18 @@ describe Lawyer::CheckScheduleScoreJudgeContext do
       it { expect(subject).to be_falsey }
     end
 
+    context "can't found schedule" do
+      before { params[:year] = "xxx" }
+      it { expect(subject).to be_falsey }
+    end
+
     context "judge not in in court" do
       before { params[:judge_name] = judge2.name }
+      it { expect(subject).to be_falsey }
+    end
+
+    context "check judge already scored" do
+      before { create :schedule_score, story: story, schedule: schedule, judge: judge, schedule_rater: lawyer }
       it { expect(subject).to be_falsey }
     end
   end

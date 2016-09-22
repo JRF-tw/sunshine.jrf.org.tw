@@ -38,15 +38,19 @@ class Party::ScheduleScoreCreateContext < BaseContext
   def check_story
     context = Party::CheckScheduleScoreInfoContext.new(@party)
     @story = context.perform(@params)
-    return add_error(:data_blank, context.error_messages.join(",")) unless @story
+    return add_error(:story_not_found, context.error_messages.join(",")) unless @story
   end
 
   def check_schedule
-    @schedule = Party::CheckScheduleScoreDateContext.new(@party).perform(@params)
+    context = Party::CheckScheduleScoreDateContext.new(@party)
+    @schedule = context.perform(@params)
+    return add_error(:schedule_not_found, context.error_messages.join(",")) if context.has_error?
   end
 
   def check_judge
-    @judge = Party::CheckScheduleScoreJudgeContext.new(@party).perform(@params)
+    context = Party::CheckScheduleScoreJudgeContext.new(@party)
+    @judge = context.perform(@params)
+    return add_error(:judge_not_found, context.error_messages.join(",")) unless @judge
   end
 
   def build_schedule_score
