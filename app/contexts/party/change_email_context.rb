@@ -16,23 +16,28 @@ class Party::ChangeEmailContext < BaseContext
   def perform(params)
     @params = permit_params(params[:party] || params, PERMITS)
     run_callbacks :perform do
-      return add_error(:wrong_password) unless @party.update_with_password(@params)
+      return add_error_and_assign_email(:wrong_password, @params[:unconfirmed_email]) unless @party.update_with_password(@params)
       true
     end
   end
 
   private
 
+  def add_error_and_assign_email(error_key, email)
+    @party.assign_attributes(email: email)
+    add_error(error_key.to_sym)
+  end
+
   def check_email_valid
-    return add_error(:email_pattern_invalid) unless @params[:email][/\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i]
+    return add_error_and_assign_email(:email_pattern_invalid, @params[:email]) unless @params[:email][/\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i]
   end
 
   def check_email_different
-    return add_error(:email_conflict) if @params["email"] == @party.email
+    return add_error_and_assign_email(:email_conflict, @params[:email]) if @params["email"] == @party.email
   end
 
   def check_email_unique
-    return add_error(:email_exist) if Party.pluck(:email).include?(@params["email"])
+    return add_error_and_assign_email(:email_exist, @params[:email]) if Party.pluck(:email).include?(@params["email"])
   end
 
   def transfer_email_to_unconfirmed_email

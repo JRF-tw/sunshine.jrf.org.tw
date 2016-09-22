@@ -9,6 +9,22 @@ RSpec.describe CourtObservers::EmailsController, type: :request do
     it { expect(response).to be_success }
   end
 
+  describe "#update" do
+    before { signin_court_observer }
+    context "success" do
+      subject { put "/observer/email", court_observer: { email: "5566@gmail.com", current_password: "123123123" } }
+      it { expect { subject }.to change_sidekiq_jobs_size_of(Sidekiq::Extensions::DelayedMailer) }
+      it { expect(subject).to redirect_to("/observer/profile") }
+    end
+
+    context "wrong password" do
+      subject! { put "/observer/email", court_observer: { email: "5566@gmail.com", current_password: "" } }
+
+      it { expect(current_court_observer.email).not_to eq("5566@gmail.com") }
+      it { expect(response.body).to match("5566@gmail.com") }
+    end
+  end
+
   describe "#resend_confirmation_mail" do
     subject { post "/observer/email/resend_confirmation_mail" }
 

@@ -3,8 +3,8 @@ class Lawyers::ConfirmationsController < Devise::ConfirmationsController
   layout "lawyer"
 
   before_action :redirect_new_to_sign_in, only: [:new]
-  before_action :find_lawyer
-  before_action :find_token
+  before_action :find_lawyer, expect: [:create]
+  before_action :find_token, expect: [:create]
 
   def show
     self.resource = resource_class.confirm_by_token(params[:confirmation_token])
@@ -34,6 +34,10 @@ class Lawyers::ConfirmationsController < Devise::ConfirmationsController
 
   def redirect_new_to_sign_in
     redirect_to new_lawyer_session_path
+  end
+
+  def after_resending_confirmation_instructions_path_for(_resource_name)
+    lawyer_profile_path
   end
 
   def after_confirmation_path_for(resource_name, _resource)

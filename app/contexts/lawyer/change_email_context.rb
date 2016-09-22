@@ -15,23 +15,28 @@ class Lawyer::ChangeEmailContext < BaseContext
   def perform(params)
     @params = permit_params(params[:lawyer] || params, PERMITS)
     run_callbacks :perform do
-      return add_error(:wrong_password) unless @lawyer.update_with_password(@params)
+      return add_error_and_assign_email(:wrong_password) unless @lawyer.update_with_password(@params)
       true
     end
   end
 
   private
 
+  def add_error_and_assign_email(error_key)
+    @lawyer.assign_attributes(email: @params[:email])
+    add_error(error_key.to_sym)
+  end
+
   def check_email_valid
-    return add_error(:email_pattern_invalid) unless @params[:email][/\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i]
+    return add_error_and_assign_email(:email_pattern_invalid) unless @params[:email][/\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i]
   end
 
   def check_email_different
-    return add_error(:email_conflict) if @params["email"] == @lawyer.email
+    return add_error_and_assign_email(:email_conflict) if @params["email"] == @lawyer.email
   end
 
   def check_email_unique
-    return add_error(:email_exist) if Lawyer.pluck(:email).include?(@params[:email])
+    return add_error_and_assign_email(:email_exist) if Lawyer.pluck(:email).include?(@params[:email])
   end
 
   def skip_devise_confirmation_notification

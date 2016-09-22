@@ -1,5 +1,5 @@
 class Party::SetPhoneContext < BaseContext
-  PERMITS = [:phone_number].freeze
+  PERMITS = [:unconfirmed_phone].freeze
   SENDINGLIMIT = 2
 
   before_perform  :check_phone
@@ -31,23 +31,23 @@ class Party::SetPhoneContext < BaseContext
   private
 
   def check_phone
-    return add_error(:phone_number_blank) unless @params[:phone_number].present?
+    return add_error(:phone_number_blank) unless @params[:unconfirmed_phone].present?
   end
 
   def check_phone_format
-    return add_error(:invalid_phone_number) unless @params[:phone_number] =~ /\A(0)(9)([0-9]{8})\z/
+    return add_error(:invalid_phone_number) unless @params[:unconfirmed_phone] =~ /\A(0)(9)([0-9]{8})\z/
   end
 
   def check_phone_not_the_same
-    return add_error(:phone_number_conflict) if @party.phone_number == @params[:phone_number]
+    return add_error(:phone_number_conflict) if @party.phone_number == @params[:unconfirmed_phone]
   end
 
   def check_unexist_phone_number
-    return add_error(:phone_number_exist) if Party.pluck(:phone_number).include?(@params[:phone_number])
+    return add_error(:phone_number_exist) if Party.pluck(:phone_number).include?(@params[:unconfirmed_phone])
   end
 
   def check_unexist_unconfirmed_phone
-    return add_error(:phone_number_confirming) if (Party.all.map { |n| n if n.unconfirmed_phone.value == @params[:phone_number] }).compact.present?
+    return add_error(:phone_number_confirming) if (Party.all.map { |n| n if n.unconfirmed_phone.value == @params[:unconfirmed_phone] }).compact.present?
   end
 
   def check_sms_send_count
@@ -59,7 +59,7 @@ class Party::SetPhoneContext < BaseContext
   end
 
   def assign_value
-    @party.unconfirmed_phone = @params[:phone_number]
+    @party.unconfirmed_phone = @params[:unconfirmed_phone]
     @party.phone_varify_code = @verify_code
   end
 

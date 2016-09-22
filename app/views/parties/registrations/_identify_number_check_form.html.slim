@@ -1,4 +1,4 @@
-= simple_form_for(:party, as: resource_name, url:  party_registrations_check_identify_number_path, method: :post, wrapper: :md) do |f|
+= simple_form_for(resource, as: resource_name, url:  party_registrations_check_identify_number_path, method: :post, wrapper: :md) do |f|
   = f.input :name, required: true, label: '中文全名'
 
   = f.input :identify_number, required: true, label: '身份證字號'

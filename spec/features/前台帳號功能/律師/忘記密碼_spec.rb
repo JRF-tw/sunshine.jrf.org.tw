@@ -19,7 +19,6 @@ describe "律師忘記密碼", type: :request do
       subject! { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/password/new" }
 
       it "顯示查無此律師帳號" do
-        follow_redirect!
         expect(response.body).to match("無此律師帳號")
       end
     end
@@ -29,7 +28,6 @@ describe "律師忘記密碼", type: :request do
       subject! { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/password/new" }
 
       it "顯示查無此律師帳號" do
-        follow_redirect!
         expect(response.body).to match("無此律師帳號")
       end
     end
@@ -39,7 +37,6 @@ describe "律師忘記密碼", type: :request do
       subject! { post "/lawyer/password", { lawyer: params }, "HTTP_REFERER" => "/lawyer/password/new" }
 
       it "顯示查無此律師帳號" do
-        follow_redirect!
         expect(response.body).to match("無此律師帳號")
       end
     end
@@ -50,7 +47,6 @@ describe "律師忘記密碼", type: :request do
       let!(:params) { { email: "windwizard@gmail.com" } }
 
       it "顯示該帳號尚未註冊" do
-        follow_redirect!
         expect(response.body).to match("該帳號尚未註冊")
       end
     end

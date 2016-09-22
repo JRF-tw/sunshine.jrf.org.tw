@@ -28,6 +28,10 @@ RSpec.describe Parties::RegistrationsController, type: :request do
       subject { post "/party", party: params, policy_agreement: "1" }
 
       it { expect { subject }.not_to change { Party.count } }
+      context "retain identify_number" do
+        before { subject }
+        it { expect(response.body).to match(params[:identify_number]) }
+      end
     end
 
     context "identify_number length != 10" do
@@ -42,6 +46,10 @@ RSpec.describe Parties::RegistrationsController, type: :request do
       subject { post "/party", party: params, policy_agreement: "1" }
 
       it { expect { subject }.not_to change { Party.count } }
+      context "retain name" do
+        before { subject }
+        it { expect(response.body).to match(params[:name]) }
+      end
     end
 
     context "identify_number exist" do
@@ -50,6 +58,11 @@ RSpec.describe Parties::RegistrationsController, type: :request do
       subject { post "/party", party: params, policy_agreement: "1" }
 
       it { expect { subject }.not_to change { Party.count } }
+      context "retain identify_number and name" do
+        before { subject }
+        it { expect(response.body).to match(params[:identify_number]) }
+        it { expect(response.body).to match(params[:name]) }
+      end
     end
 
     context "password caheck failed" do

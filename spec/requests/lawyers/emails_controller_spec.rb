@@ -17,9 +17,11 @@ RSpec.describe Lawyers::EmailsController, type: :request do
     end
 
     context "wrong password" do
-      subject { put "/lawyer/email", lawyer: { email: "test@gmail.com", current_password: "" } }
+      subject! { put "/lawyer/email", lawyer: { email: "test@gmail.com", current_password: "" } }
 
       it { expect(current_lawyer.email).not_to eq("test@gmail.com") }
+      it { expect(response).to be_success }
+      it { expect(response.body).to match("test@gmail.com") }
       it { expect(response.body).not_to match("目前等待驗證中信箱") }
     end
   end

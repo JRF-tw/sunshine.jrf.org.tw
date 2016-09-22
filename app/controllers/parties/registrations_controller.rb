@@ -10,6 +10,7 @@ class Parties::RegistrationsController < Devise::RegistrationsController
       @checked = true
       flash.clear
     else
+      build_resource(sign_up_params)
       flash[:error] = context.error_messages.join(", ")
     end
     render :new
