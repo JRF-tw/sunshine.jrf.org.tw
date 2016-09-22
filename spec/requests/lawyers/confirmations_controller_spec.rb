@@ -40,11 +40,5 @@ RSpec.describe Lawyers::ConfirmationsController, type: :request do
       it { expect(response).to redirect_to("/lawyer/profile") }
     end
 
-    context "link can update email" do
-      before { subject }
-      before { get "/lawyer/confirmation", confirmation_token: lawyer.reload.confirmation_token }
-
-      it { expect(lawyer.reload.email).to eq("5566@gmail.com") }
-    end
   end
 end

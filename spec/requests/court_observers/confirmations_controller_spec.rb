@@ -49,11 +49,5 @@ RSpec.describe CourtObservers::ConfirmationsController, type: :request do
       it { expect(response).to redirect_to("/observer/profile") }
     end
 
-    context "link can update email" do
-      before { subject }
-      before { get "/observer/confirmation", confirmation_token: court_observer.reload.confirmation_token }
-
-      it { expect(court_observer.reload.email).to eq("5566@gmail.com") }
-    end
   end
 end

@@ -39,13 +39,6 @@ RSpec.describe Parties::ConfirmationsController, type: :request do
       it { expect(flash[:notice]).to eq("您將在幾分鐘後收到一封電子郵件，內有驗證帳號的步驟說明。") }
       it { expect(response).to redirect_to("/party/profile") }
     end
-
-    context "link can update email" do
-      before { subject }
-      before { get "/party/confirmation", confirmation_token: party.reload.confirmation_token }
-
-      it { expect(party.reload.email).to eq("5566@gmail.com") }
-    end
   end
 
 end
