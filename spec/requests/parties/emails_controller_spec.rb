@@ -30,5 +30,11 @@ RSpec.describe Parties::EmailsController, type: :request do
     subject { post "/party/email/resend_confirmation_mail" }
 
     it { expect { subject }.to change_sidekiq_jobs_size_of(CustomDeviseMailer, :resend_confirmation_instructions) }
+
+    context "redirect success" do
+      before { subject }
+      it { expect(flash[:notice]).to eq("您將在幾分鐘後收到一封電子郵件，內有驗證帳號的步驟說明。") }
+      it { expect(response).to redirect_to("/party/profile") }
+    end
   end
 end
