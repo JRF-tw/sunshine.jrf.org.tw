@@ -6,7 +6,7 @@ $error-rhythm: r(3);
   display: block;
   size: 100% 1px;
   background-color: $accent;
-  position: absolute (r(5) + 1px) 0 n() 0;
+  position: absolute n() 0 0 0;
   transform: scaleX(0);
   transition: transform .3s ease 0s;  
 }
@@ -17,10 +17,7 @@ $error-rhythm: r(3);
   padding-top: r(1);
   position: relative;
   &.text {
-    &::before {
-      @extend %control-border-bottom;
-      top: auto; bottom: 0;
-    }
+    &::before { @extend %control-border-bottom; }
     &.is-focused::before { transform: scaleX(1); }
   }
   &.squish-before { margin-top: r(-1); }
@@ -48,6 +45,11 @@ $error-rhythm: r(3);
       size: 18px;
       fill: $text-secondary;
       position: absolute ($input-rhythm * 2) n() n() 0;
+    }
+  }
+  &.has-error {
+    .control-label::before {
+      top: r(5) + 1px; bottom: auto;
     }
   }
 }
