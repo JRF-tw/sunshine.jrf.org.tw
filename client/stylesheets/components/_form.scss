@@ -6,7 +6,7 @@ $error-rhythm: r(3);
   display: block;
   size: 100% 1px;
   background-color: $accent;
-  position: absolute n() 0 0 0;
+  position: absolute (r(5) + 1px) 0 n() 0;
   transform: scaleX(0);
   transition: transform .3s ease 0s;  
 }
@@ -17,7 +17,10 @@ $error-rhythm: r(3);
   padding-top: r(1);
   position: relative;
   &.text {
-    &::before { @extend %control-border-bottom; }
+    &::before {
+      @extend %control-border-bottom;
+      top: auto; bottom: 0;
+    }
     &.is-focused::before { transform: scaleX(1); }
   }
   &.squish-before { margin-top: r(-1); }
@@ -47,8 +50,6 @@ $error-rhythm: r(3);
       position: absolute ($input-rhythm * 2) n() n() 0;
     }
   }
-  &.has-error,
-  &.has-hint { margin-bottom: $bottom-gap + $error-rhythm; }
 }
 
 .form-actions {
@@ -143,10 +144,9 @@ abbr[title="required"] { display: none; }
 .forgot-password { position: absolute ($input-rhythm * 2) 0 n() n(); }
 
 .help-block--error {
-  margin: 0;
+  margin: r(1) 0;
   color: $danger;
   font-weight: bold;
-  position: absolute n() n() (- $error-rhythm) n();
 }
 .help-block--hint {
   @extend .help-block--error;
