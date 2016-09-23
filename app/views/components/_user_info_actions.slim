@@ -1,17 +1,14 @@
 ruby:
   case type
   when 'lawyer'
-    story_page = '/lawyer/stories'
+    story_page = '/lawyer'
     character  = current_lawyer
-    subscribe_path = toggle_subscribe_lawyer_edm_path(format: :js)
   when 'party'
-    story_page = '/party/stories'
+    story_page = '/party'
     character  = current_party
-    subscribe_path = toggle_subscribe_party_edm_path(format: :js)
   else
-    story_page = '/observer/stories'
+    story_page = '/observer'
     character  = current_court_observer
-    subscribe_path = toggle_subscribe_court_observer_edm_path(format: :js)
   end
 
 
