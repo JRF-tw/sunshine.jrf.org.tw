@@ -1803,9 +1803,9 @@ a:focus {
   position: absolute;
 }
 
-.form-group.has-error,
-.form-group.has-hint {
-  margin-bottom: 40px;
+.form-group.has-error .control-label::before {
+  top: 41px;
+  bottom: auto;
 }
 
 .form-actions {
@@ -1827,6 +1827,10 @@ a:focus {
 .form-actions .flat-button--large {
   margin-top: 16px;
   margin-bottom: -8px;
+}
+
+.form-actions .flat-button + .raised-button {
+  margin-left: 8px;
 }
 
 input[type="color"],
@@ -2057,11 +2061,9 @@ abbr[title="required"] {
 
 .help-block--error,
 .help-block--hint {
-  margin: 0;
+  margin: 8px 0;
   color: #d9534f;
   font-weight: 700;
-  bottom: -24px;
-  position: absolute;
 }
 
 .help-block--hint {
@@ -3242,10 +3244,6 @@ body.who-are-you {
   .form--score__editor .form-actions {
     margin-top: auto;
   }
-}
-
-.form--score__editor .flat-button {
-  margin-right: 8px;
 }
 
 .form-group--score {
