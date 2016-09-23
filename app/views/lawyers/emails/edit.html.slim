@@ -18,7 +18,7 @@
     - if current_lawyer.unconfirmed_email
       p.text-center style='margin-bottom: 8px'
         = link_to "重寄認證信",
-          lawyer_confirmation_path(lawyer: { email: current_lawyer.email }),
+          resend_confirmation_mail_lawyer_email_path,
           method: :post, class: "flat-button"
 
     = render 'components/form_actions', f: f, submit: '送出',

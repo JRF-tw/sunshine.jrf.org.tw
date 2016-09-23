@@ -71,7 +71,11 @@ Rails.application.routes.draw do
     end
     resource :appeal, only: [:new]
     resource :profile, only: [:show, :edit, :update]
-    resource :email, only: [:edit, :update]
+    resource :email, only: [:edit, :update] do
+      collection do
+        post :resend_confirmation_mail
+      end
+    end
     resource :score do
       resources :schedules, only: [:new, :create, :edit, :update] do
         collection do
