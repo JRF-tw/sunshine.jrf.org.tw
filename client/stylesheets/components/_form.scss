@@ -62,6 +62,8 @@ $error-rhythm: r(3);
   .flat-button--large {
     margin: r(2) n() r(-1);
   }
+
+  .flat-button + .raised-button { margin-left: r(1); }
 }
 
 #{$all-text-inputs} {

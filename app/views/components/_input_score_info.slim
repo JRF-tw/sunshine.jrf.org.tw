@@ -10,4 +10,5 @@
   = f.input :word_type, label: "字號"
   = f.input :number, label: "案號"
   
-  = render 'components/score_form_actions', f: f, submit: '下一步'
+  = render 'components/score_form_actions', f: f, submit: '下一步',
+    link: { text: '返回評鑑紀錄頁', href: cancel_path }
