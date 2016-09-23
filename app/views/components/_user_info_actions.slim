@@ -19,9 +19,9 @@ ruby:
   .between
     = link_to '我要捐款', 'https://www.jrf.org.tw/donate', class: 'raised-button'
     
-    span.js-subscribe-edm
-      = render  'components/subscribe_edm',
-        character: character, subscribe_path: subscribe_path
-  
+    = link_to "訂閱電子報",
+      "https://jrf.neticrm.tw/civicrm/profile/create?gid=12&reset=1",
+      class: 'raised-button', target: "_blank"
+      
   .offcanvas
     = link_to '返回個人評鑑紀錄頁', story_page, class: 'raised-button'
