@@ -8,14 +8,14 @@ RSpec.describe Parties::PhonesController, type: :request do
     it { expect(response).to be_success }
   end
 
-  describe '#create' do
-    context 'success' do
-      subject! { post '/party/phone', party: { unconfirmed_phone: '0911111111' } }
-      it { expect(response).to redirect_to('/party/phone/verify') }
+  describe "#create" do
+    context "success" do
+      subject! { post "/party/phone", party_phone_form_object: { unconfirmed_phone: "0911111111" } }
+      it { expect(response).to redirect_to("/party/phone/verify") }
     end
 
-    context 'failed' do
-      subject! { post '/party/phone', party: { unconfirmed_phone: '0101' } }
+    context "failed" do
+      subject! { post "/party/phone", party_phone_form_object: { unconfirmed_phone: "0101" } }
       it { expect(response).to be_success }
       it { expect(response.body).to match('0101') }
     end
@@ -26,14 +26,14 @@ RSpec.describe Parties::PhonesController, type: :request do
     it { expect(response).to be_success }
   end
 
-  describe '#update' do
-    context 'success' do
-      subject! { put '/party/phone', party: { unconfirmed_phone: '0911111111' } }
-      it { expect(response).to redirect_to('/party/phone/verify') }
+  describe "#update" do
+    context "success" do
+      subject! { put "/party/phone", party_phone_form_object: { unconfirmed_phone: "0911111111" } }
+      it { expect(response).to redirect_to("/party/phone/verify") }
     end
 
-    context 'failed' do
-      subject! { put '/party/phone', party: { unconfirmed_phone: '0101' } }
+    context "failed" do
+      subject! { put "/party/phone", party_phone_form_object: { unconfirmed_phone: "0101" } }
       it { expect(response).to be_success }
       it { expect(response.body).to match('0101') }
     end
@@ -51,13 +51,13 @@ RSpec.describe Parties::PhonesController, type: :request do
   describe '#verifing' do
     before { current_party.phone_varify_code = '1111' }
 
-    context 'success' do
-      subject! { put '/party/phone/verifing', party: { phone_varify_code: '1111' } }
-      it { expect(response).to redirect_to('/party') }
+    context "success" do
+      subject! { put "/party/phone/verifing", party_phone_form_object: { phone_varify_code: "1111" } }
+      it { expect(response).to redirect_to("/party") }
     end
 
-    context 'fail' do
-      subject! { put '/party/phone/verifing', party: { phone_varify_code: '1234' } }
+    context "fail" do
+      subject! { put "/party/phone/verifing", party_phone_form_object: { phone_varify_code: "1234" } }
       it { expect(response).to be_success }
       it { expect(response.body).to match('1234') }
     end
