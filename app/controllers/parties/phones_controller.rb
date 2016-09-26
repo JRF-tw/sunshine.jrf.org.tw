@@ -1,7 +1,7 @@
 class Parties::PhonesController < Parties::BaseController
   before_action :set_phone?, only: []
   before_action :can_verify?, only: [:verify, :verifing, :resend_verify_sms]
-
+  before_action :create_form_object, except: [:resend]
   def new
     # meta
     set_meta(
@@ -36,9 +36,14 @@ class Parties::PhonesController < Parties::BaseController
     if context.perform(party_params)
       redirect_to verify_party_phone_path, flash: { success: '已寄出簡訊認證碼' }
     else
+<<<<<<< 748a78506e38a2f7c317376eaf711ffa64e64962
       @input_phone_number = party_params[:unconfirmed_phone] || current_party.phone_number
       flash[:error] = context.error_messages.join(', ')
       render 'edit'
+=======
+      flash[:error] = context.error_messages.join(", ")
+      render "edit"
+>>>>>>> 新增 當事人 form object
     end
   end
 
@@ -58,9 +63,8 @@ class Parties::PhonesController < Parties::BaseController
     elsif context.errors.include?(:retry_verify_count_out_range)
       redirect_to edit_party_phone_path, flash: { error: context.error_messages.join(', ').to_s }
     else
-      @phone_varify_code = party_params[:phone_varify_code]
-      flash[:error] = context.error_messages.join(', ')
-      render 'verify'
+      flash[:error] = context.error_messages.join(", ")
+      render "verify"
     end
   end
 
@@ -76,7 +80,11 @@ class Parties::PhonesController < Parties::BaseController
   private
 
   def party_params
-    params.fetch(:party, {}).permit(:unconfirmed_phone, :phone_varify_code)
+    params.fetch(:party_phone_form_object, {}).permit(:unconfirmed_phone, :phone_varify_code)
+  end
+
+  def create_form_object
+    @party_phone_form = PartyPhoneFormObject.new(current_party, party_params)
   end
 
   def can_verify?
