@@ -1,13 +1,10 @@
-= content_for :body_classes do
-  = 'bg-yellow'
-
 = render partial: 'components/hero', locals: {\
     heading: '認識法官',
     description: '決定當事人一生的法官，究竟有什麼紀錄？帶您來看看！'\
   }
 
-section.container
-    = render partial: 'components/avatar_list', locals: { people: @judges }
+section.offcanvas-card-wrapper.container--wide
+  = render partial: 'components/avatar_list', locals: { people: @judges, type: 'judge' }
 
-    = paginate @judges, theme: 'www'
-    | （依姓名部首排序）
+  = paginate @judges, theme: 'www'
+  | （依姓名部首排序）

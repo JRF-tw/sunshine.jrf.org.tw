@@ -32,7 +32,7 @@ $character-gradients: (
   &.billboard--profiles-judges { background-position: 0 50% }
 }
 .billboard__heading {
-  text: center $white ms(2);
+  text: center $white ms(3);
   @include susy($tablet) {
     font-size: ms(5);
   }
