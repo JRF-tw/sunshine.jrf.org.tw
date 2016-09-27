@@ -1,5 +1,5 @@
 class BaseController < ApplicationController
-  layout "classic", except: [:who_are_you, :score_intro, :judges]
+  layout "classic", except: [:who_are_you, :score_intro, :judges, :about]
 
   # rescue_from ActiveRecord::RecordNotFound, with: :render_404
   rescue_from ActionController::RoutingError, with: :render_404
