@@ -2,7 +2,7 @@ ul.list--avatar
   - if people.present?
     - people.each do |person|
       li.list--avatar__cell
-        = render partial: 'components/avatar', locals: { person: person }
+        = render partial: 'components/avatar', locals: { person: person, type: type }
   - else
     / # TODO 請設計一下『查無資料』的情況
     = "查無資料"
