@@ -58,7 +58,9 @@ $(document).on "page:change", ->
 
   $main_header = $('#main-header')
   
-  $('.card__heading, .character-selector__heading').waypoint
+  $('.card__heading,
+     .character-selector__heading,
+     .billboard__heading').waypoint
     handler: (direction) ->
       if direction is 'down'
         $main_header.addClass 'has-background'
