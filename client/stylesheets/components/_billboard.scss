@@ -44,6 +44,7 @@ $character-gradients: (
   color: #bababa;
   background-color: rgba(0,0,0,.55);
   border-radius: $global-radius;
+  @include susy($tablet) { font-size: ms(1); }
 
   &:empty { display: none }
 }
