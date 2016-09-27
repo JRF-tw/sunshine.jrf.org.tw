@@ -1,3 +1,5 @@
+.offcanvas-card-wrapper { margin-top: r(-8); }
+
 .card {
   margin: 0 r(2);
   padding: 0 r(2) r(2);
@@ -40,8 +42,6 @@
   }
 
   & > p { margin-top: 0; }
-
-  .billboard + .container & { margin-top: r(-8); }
 }
 .card--flex {
   display: flex;
