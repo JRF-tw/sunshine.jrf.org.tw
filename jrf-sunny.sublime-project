@@ -28,6 +28,9 @@
       "name": "F2E",
       "path": "client"
     },{
+      "name": "Gulp",
+      "path": "gulp"
+    },{
       "name": "Build assets",
       "path": "app/assets",
       "file_exclude_patterns": [
