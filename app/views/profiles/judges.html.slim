@@ -6,8 +6,7 @@
     description: '決定當事人一生的法官，究竟有什麼紀錄？帶您來看看！'\
   }
 
-section.section-rhythm.cf
-  .container
+section.container
     = render partial: 'components/avatar_list', locals: { people: @judges }
 
     = paginate @judges, theme: 'www'
