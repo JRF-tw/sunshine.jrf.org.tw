@@ -30,7 +30,10 @@
     &.active { background-color: $link-color; }
   }
   
-  .name { margin-bottom: 0; }
+  .name {
+    margin-bottom: 0;
+    font-size: ms(4);
+  }
   .job { margin: 0; }
 }
 
