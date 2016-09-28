@@ -113,3 +113,24 @@
 .card__actions {
   padding-top: r(2);
 }
+
+.card--tape {
+  @include Card();
+  margin: r(3) n() r(5);
+  background-color: $white;
+}
+.card--tape__heading {
+  margin: 0 0 r(-3);
+  text: center ms(2) $white;
+
+  .text {
+    display: inline-block;
+    padding: r(1) r(3);
+    position: relative r(-3) n() n() n();
+    background-color: $accent;
+    border-radius: $global-radius;
+  }
+}
+.card--tape__content {
+  padding: r(2);
+}
