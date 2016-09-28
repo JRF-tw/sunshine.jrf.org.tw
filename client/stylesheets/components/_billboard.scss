@@ -29,7 +29,8 @@ $character-gradients: (
   margin-bottom: r(2);
   background-size: cover;
   
-  &.billboard--profiles-judges { background-position: 0 50% }
+  &.billboard--profiles-judges { background-position: 0 50%; }
+  &.billboard--profiles-show   { padding-top: r(20); }
 }
 .billboard__heading {
   text: center $white ms(3);
