@@ -1,27 +1,51 @@
-.container.section-rhythm
-  .profiles
-    - if @educations.present?
-      section.profile
-        h3.section-heading--gray 學經歷
+article.profile
+  .container
+    section.profile__avatar
+      .image-wrapper
+        = render partial: 'components/avatar_pic', locals: { person: @profile }
 
-        ul.list--unstyled.list
-          - @educations.each do |education|
-            li= education.title
+      .text-wrapper
+        h2.name= person.name
+        p.job= person.current
 
-    - if @careers.present?
-      section.profile
-        h3.section-heading--gray 職務經歷
+    section.profile__info
+      ul.list--profile
+        - if @profile.is_active
+          li.cell= "在職"
+        - else
+          li.cell= "不在職"
+        - if @profile.gender.present?
+          li.cell= "性別：#{@profile.gender}"
+        - if @profile.birth_year.present?
+          li.cell= "出生年份：#{year_in_bc(@profile.birth_year)}"
+        - if @profile.stage.present?
+          - stage = @profile.stage == 0 ? "不明" : "第#{@profile.stage}期"
+          li.cell= "司訓期別：#{stage}"
+          li.cell.break= "#{@profile.current_court} #{@profile.current}"
 
-        dl.kv-year-job.list
-          - @careers.each do |career|
-            dt= career.publish_at.to_s(:year).to_i
-            dd= render_career_content(career)
+    section.profile__resumes
+      - if @educations.present?
+        section.resume
+          h3.section-heading--gray 學經歷
 
-    - if @licenses.present?
-      section.profile
-        h3.section-heading--gray 專業證書
+          ul.list--unstyled.list
+            - @educations.each do |education|
+              li= education.title
 
-        dl.kv-yymmdd-license.list
-          - @licenses.each do |license|
-            dt= license.publish_at
-            dd= license.license_type
+      - if @careers.present?
+        section.resume
+          h3.section-heading--gray 職務經歷
+
+          dl.kv-year-job.list
+            - @careers.each do |career|
+              dt= career.publish_at.to_s(:year).to_i
+              dd= render_career_content(career)
+
+      - if @licenses.present?
+        section.resume
+          h3.section-heading--gray 專業證書
+
+          dl.kv-yymmdd-license.list
+            - @licenses.each do |license|
+              dt= license.publish_at
+              dd= license.license_type

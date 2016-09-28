@@ -1,5 +1,5 @@
-= render partial: 'components/profile_hero', locals: { person: @profile }
+= render partial: 'components/profile_hero'
 
-= render partial: 'profiles'
+= render partial: 'profiles', locals: { person: @profile }
 
 = render partial: 'components/related_records'
