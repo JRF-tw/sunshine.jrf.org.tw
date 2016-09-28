@@ -8,3 +8,34 @@ ruby:
   data-bgset="#{m_size_path} 1000w, #{l_size_path} 2000w"
   data-sizes="auto"
 ]
+.profile
+  .container
+    section.profile__avatar
+      .image-wrapper
+        = render partial: 'components/avatar_pic', locals: { person: @profile }
+
+      .text-wrapper
+        small.active-label class=(@profile.is_active ? 'active' : '')
+          = @profile.is_active ? '在職': '不在職'
+        h2.name= person.name
+        p.job
+          - if @profile.current_court
+            = "#{@profile.current_court} #{person.current}"
+          - else
+            = person.current
+
+    section.profile__info
+      ul.list--profile-info
+        - if @profile.gender.present?
+          li.cell
+            .term 性別
+            .desc= @profile.gender
+        - if @profile.birth_year.present?
+          li.cell
+            .term 出生年份
+            .desc= year_in_bc(@profile.birth_year)
+        - if @profile.stage.present?
+          - stage = @profile.stage == 0 ? "不明" : "第#{@profile.stage}期"
+          li.cell
+            .term 司訓期別
+            .desc= stage

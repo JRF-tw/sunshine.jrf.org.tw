@@ -1,0 +1,49 @@
+.profile {
+  margin-top: r(-2);
+  background-color: $white;
+}
+.profile__avatar {
+  text-align: center;
+
+  .image-wrapper {
+    $size: r(20);
+    display: inline-block;
+    width: $size;
+    position: relative (- $size / 2) n() n() n();
+    margin-bottom: - $size / 2;
+    background-color: $white;
+    border: 2px solid $white;
+    border-radius: $size/2;
+    overflow: hidden;
+    z-index: index($layers, base);
+  }
+
+  .text-wrapper { margin-top: r(-3); }
+
+  .active-label {
+    display: inline-block;
+    padding: 0 r(1);
+    color: $white $gray;
+    border-radius: $global-radius;
+    position: relative;
+    z-index: index($layers, profile-label);
+    &.active { background-color: $link-color; }
+  }
+  
+  .name { margin-bottom: 0; }
+  .job { margin: 0; }
+}
+
+.list--profile-info {
+  @extend %scut-list-unstyled;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  .cell {
+    text: center $text-secondary;
+    padding: r(2) 0;
+    width: r(10);
+  }
+  .desc {text: bold;}
+}
