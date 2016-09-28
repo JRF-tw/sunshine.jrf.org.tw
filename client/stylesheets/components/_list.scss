@@ -1,5 +1,12 @@
 .list--unstyled { @extend %scut-list-unstyled; }
 
+.list--dot {
+  @include scut-list-custom { color: $accent; }
+  margin: 0;
+
+  li { padding-left: r(1); }
+}
+
 .toggle-list {
   @extend %scut-list-unstyled;
   padding-bottom: r(2);

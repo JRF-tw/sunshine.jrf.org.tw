@@ -1,26 +1,34 @@
-section.resumes
+section.resumes.container
   - if @educations.present?
-    section.resume
-      h3.section-heading--gray 學經歷
+    section.card--tape.resume
+      h3.card--tape__heading
+        .text 學經歷
 
-      ul.list--unstyled.list
-        - @educations.each do |education|
-          li= education.title
+      .card--tape__content
+        ul.list--dot.list
+          - @educations.each do |education|
+            li= education.title
 
   - if @careers.present?
-    section.resume
-      h3.section-heading--gray 職務經歷
+    section.card--tape.resume
+      h3.card--tape__heading
+        .text 職務經歷
 
-      dl.kv-year-job.list
-        - @careers.each do |career|
-          dt= career.publish_at.to_s(:year).to_i
-          dd= render_career_content(career)
+      .card--tape__content
+        ul.list--dot.list
+          - @careers.each do |career|
+            li
+              => career.publish_at.to_s(:year).to_i
+              = render_career_content(career)
 
   - if @licenses.present?
-    section.resume
-      h3.section-heading--gray 專業證書
+    section.card--tape.resume
+      h3.card--tape__heading
+        .text 專業證書
 
-      dl.kv-yymmdd-license.list
-        - @licenses.each do |license|
-          dt= license.publish_at
-          dd= license.license_type
+      .card--tape__content
+        ul.list--dot.list
+          - @licenses.each do |license|
+            li
+              => license.publish_at
+              = license.license_type

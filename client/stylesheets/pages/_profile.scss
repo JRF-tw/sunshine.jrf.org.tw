@@ -50,3 +50,26 @@
   }
   .desc {text: bold;}
 }
+
+.resumes {
+  display: flex;
+  flex-flow: column nowrap;
+  padding: r(4) r(2);
+  @include susy($tablet) {
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
+}
+.resume {
+  flex: 1;
+  font-size: ms(1);
+  @include susy($tablet) {
+    flex: 1 45%;
+    margin: n() r(2);
+
+    .card--tape__content { padding: r(3) r(4); }
+  }
+  @include susy($desktop) {
+    flex: 1 0 0;
+  }
+}
