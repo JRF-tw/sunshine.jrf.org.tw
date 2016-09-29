@@ -8,6 +8,18 @@ class CourtObservers::SchedulesController < CourtObservers::BaseController
   def rule
   end
 
+  def new
+  end
+
+  def create
+    context = CourtObserver::ScheduleScoreCreateContext.new(current_court_observer)
+    if @record = context.perform(schedule_score_params)
+      render_as_success(:thanks_scored)
+    else
+      redirect_as_fail(new_court_observer_score_schedule_path(schedule_score: schedule_score_params), context.error_messages.join(","))
+    end
+  end
+
   def edit
   end
 
@@ -39,10 +51,10 @@ class CourtObservers::SchedulesController < CourtObservers::BaseController
   def check_date
     context = CourtObserver::CheckScheduleScoreDateContext.new(current_court_observer)
     context.perform(schedule_score_params)
-    unless context.has_error?
-      redirect_as_success(input_judge_court_observer_score_schedules_path(schedule_score: schedule_score_params))
-    else
+    if context.has_error?
       redirect_as_fail(input_date_court_observer_score_schedules_path(schedule_score: schedule_score_params), context.error_messages.join(","))
+    else
+      redirect_as_success(input_judge_court_observer_score_schedules_path(schedule_score: schedule_score_params))
     end
   end
 
@@ -55,18 +67,6 @@ class CourtObservers::SchedulesController < CourtObservers::BaseController
       redirect_as_success(new_court_observer_score_schedule_path(schedule_score: schedule_score_params))
     else
       redirect_as_fail(input_judge_court_observer_score_schedules_path(schedule_score: schedule_score_params), context.error_messages.join(","))
-    end
-  end
-
-  def new
-  end
-
-  def create
-    context = CourtObserver::ScheduleScoreCreateContext.new(current_court_observer)
-    if @record = context.perform(schedule_score_params)
-      render_as_success(:thanks_scored)
-    else
-      redirect_as_fail(new_court_observer_score_schedule_path(schedule_score: schedule_score_params), context.error_messages.join(","))
     end
   end
 

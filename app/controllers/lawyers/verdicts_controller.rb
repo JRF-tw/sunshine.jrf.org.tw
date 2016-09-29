@@ -28,7 +28,6 @@ class Lawyers::VerdictsController < Lawyers::BaseController
   end
 
   def input_info
-
   end
 
   def check_info
@@ -41,7 +40,6 @@ class Lawyers::VerdictsController < Lawyers::BaseController
   end
 
   def input_judge
-
   end
 
   def check_judge

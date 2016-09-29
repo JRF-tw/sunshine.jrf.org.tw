@@ -8,6 +8,18 @@ class Lawyers::SchedulesController < Lawyers::BaseController
   def rule
   end
 
+  def new
+  end
+
+  def create
+    context = Lawyer::ScheduleScoreCreateContext.new(current_lawyer)
+    if @record = context.perform(schedule_score_params)
+      render_as_success(:thanks_scored)
+    else
+      redirect_as_fail(new_lawyer_score_schedule_path(schedule_score: schedule_score_params), context.error_messages.join(","))
+    end
+  end
+
   def edit
   end
 
@@ -22,7 +34,6 @@ class Lawyers::SchedulesController < Lawyers::BaseController
   end
 
   def input_info
-
   end
 
   def check_info
@@ -35,21 +46,19 @@ class Lawyers::SchedulesController < Lawyers::BaseController
   end
 
   def input_date
-
   end
 
   def check_date
     context = Lawyer::CheckScheduleScoreDateContext.new(current_lawyer)
     context.perform(schedule_score_params)
-    unless context.has_error?
-      redirect_as_success(input_judge_lawyer_score_schedules_path(schedule_score: schedule_score_params))
-    else
+    if context.has_error?
       redirect_as_fail(input_date_lawyer_score_schedules_path(schedule_score: schedule_score_params), context.error_messages.join(","))
+    else
+      redirect_as_success(input_judge_lawyer_score_schedules_path(schedule_score: schedule_score_params))
     end
   end
 
   def input_judge
-
   end
 
   def check_judge
@@ -61,21 +70,7 @@ class Lawyers::SchedulesController < Lawyers::BaseController
     end
   end
 
-  def new
-
-  end
-
-  def create
-    context = Lawyer::ScheduleScoreCreateContext.new(current_lawyer)
-    if @record = context.perform(schedule_score_params)
-      render_as_success(:thanks_scored)
-    else
-      redirect_as_fail(new_lawyer_score_schedule_path(schedule_score: schedule_score_params), context.error_messages.join(","))
-    end
-  end
-
   def thanks_scored
-
   end
 
   private

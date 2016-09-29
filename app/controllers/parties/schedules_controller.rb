@@ -11,6 +11,15 @@ class Parties::SchedulesController < Parties::BaseController
   def new
   end
 
+  def create
+    context = Party::ScheduleScoreCreateContext.new(current_party)
+    if @record = context.perform(schedule_score_params)
+      render_as_success(:thanks_scored)
+    else
+      redirect_as_fail(new_party_score_schedule_path(schedule_score: schedule_score_params), context.error_messages.join(","))
+    end
+  end
+
   def edit
   end
 
@@ -42,10 +51,10 @@ class Parties::SchedulesController < Parties::BaseController
   def check_date
     context = Party::CheckScheduleScoreDateContext.new(current_party)
     context.perform(schedule_score_params)
-    unless context.has_error?
-      redirect_as_success(input_judge_party_score_schedules_path(schedule_score: schedule_score_params))
-    else
+    if context.has_error?
       redirect_as_fail(input_date_party_score_schedules_path(schedule_score: schedule_score_params), context.error_messages.join(","))
+    else
+      redirect_as_success(input_judge_party_score_schedules_path(schedule_score: schedule_score_params))
     end
   end
 
@@ -58,18 +67,6 @@ class Parties::SchedulesController < Parties::BaseController
       redirect_as_success(new_party_score_schedule_path(schedule_score: schedule_score_params))
     else
       redirect_as_fail(input_judge_party_score_schedules_path(schedule_score: schedule_score_params), context.error_messages.join(","))
-    end
-  end
-
-  def new
-  end
-
-  def create
-    context = Party::ScheduleScoreCreateContext.new(current_party)
-    if @record = context.perform(schedule_score_params)
-      render_as_success(:thanks_scored)
-    else
-      redirect_as_fail(new_party_score_schedule_path(schedule_score: schedule_score_params), context.error_messages.join(","))
     end
   end
 
