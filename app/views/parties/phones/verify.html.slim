@@ -1,5 +1,5 @@
 = render layout: 'components/card', locals: {heading: '輸入驗證碼'}
-  = simple_form_for @party_phone_form,
+  = simple_form_for @verify_form,
     url: verifing_party_phone_url,
     method: :put,
     wrapper: :md do |f|

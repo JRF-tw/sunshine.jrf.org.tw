@@ -1,5 +1,5 @@
 = render layout: 'components/card', locals: { heading: '輸入手機號碼' }
-  = simple_form_for @party_phone_form,
+  = simple_form_for @phone_form,
     url: party_phone_path,
     method: :post,
     wrapper: :md do |f|
