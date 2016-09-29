@@ -1,6 +1,7 @@
 class CourtObservers::ConfirmationsController < Devise::ConfirmationsController
   layout "observer"
   include CrudConcern
+  include MetaTagHelper
 
   before_action :check_observer, only: [:show]
   before_action :check_first_time_confirm, only: [:show]

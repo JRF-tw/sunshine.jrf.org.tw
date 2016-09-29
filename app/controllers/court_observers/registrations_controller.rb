@@ -5,6 +5,16 @@ class CourtObservers::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :check_registration, only: [:create]
 
+  def new
+    # meta
+    set_meta(
+      title: "觀察者註冊頁",
+      description: "觀察者註冊頁",
+      keywords: "觀察者註冊頁"
+    )
+    super
+  end
+
   def update
     context = CourtObserver::ChangeEmailContext.new(current_court_observer)
 

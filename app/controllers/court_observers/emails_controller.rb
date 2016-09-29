@@ -2,6 +2,12 @@ class CourtObservers::EmailsController < CourtObservers::BaseController
   before_action :find_court_observer, only: [:edit, :update]
 
   def edit
+    # meta
+    set_meta(
+      title: "觀察者編輯信箱",
+      description: "觀察者編輯信箱",
+      keywords: "觀察者編輯信箱"
+    )
   end
 
   def update

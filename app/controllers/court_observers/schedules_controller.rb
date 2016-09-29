@@ -6,9 +6,21 @@ class CourtObservers::SchedulesController < CourtObservers::BaseController
   before_action :story_adjudged?, only: [:edit, :update]
 
   def rule
+    # meta
+    set_meta(
+      title: "觀察者評鑑開庭規則頁",
+      description: "觀察者評鑑開庭規則頁",
+      keywords: "觀察者評鑑開庭規則頁"
+    )
   end
 
   def new
+    # meta
+    set_meta(
+      title: "觀察者建立評鑑頁",
+      description: "觀察者建立評鑑頁",
+      keywords: "觀察者建立評鑑頁"
+    )
   end
 
   def create
@@ -21,6 +33,12 @@ class CourtObservers::SchedulesController < CourtObservers::BaseController
   end
 
   def edit
+    # meta
+    set_meta(
+      title: "觀察者編輯評鑑頁",
+      description: "觀察者編輯評鑑頁",
+      keywords: "觀察者編輯評鑑頁"
+    )
   end
 
   def update
@@ -34,6 +52,12 @@ class CourtObservers::SchedulesController < CourtObservers::BaseController
   end
 
   def input_info
+    # meta
+    set_meta(
+      title: "觀察者輸入案件資訊頁",
+      description: "觀察者輸入案件資訊頁",
+      keywords: "觀察者輸入案件資訊頁"
+    )
   end
 
   def check_info
@@ -46,6 +70,12 @@ class CourtObservers::SchedulesController < CourtObservers::BaseController
   end
 
   def input_date
+    # meta
+    set_meta(
+      title: "觀察者輸入庭期日期頁",
+      description: "觀察者輸入庭期日期頁",
+      keywords: "觀察者輸入庭期日期頁"
+    )
   end
 
   def check_date
@@ -59,6 +89,12 @@ class CourtObservers::SchedulesController < CourtObservers::BaseController
   end
 
   def input_judge
+    # meta
+    set_meta(
+      title: "觀察者輸入法官頁",
+      description: "觀察者輸入法官頁",
+      keywords: "觀察者輸入法官頁"
+    )
   end
 
   def check_judge
@@ -71,6 +107,12 @@ class CourtObservers::SchedulesController < CourtObservers::BaseController
   end
 
   def thanks_scored
+    # meta
+    set_meta(
+      title: "觀察者評鑑感謝頁",
+      description: "觀察者評鑑感謝頁",
+      keywords: "觀察者評鑑感謝頁"
+    )
   end
 
   private
