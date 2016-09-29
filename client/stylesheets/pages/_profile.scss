@@ -28,6 +28,8 @@
     position: relative;
     z-index: index($layers, profile-label);
     &.active { background-color: $link-color; }
+    &.active.judge { background-color: $blue; }
+    &.active.prosecutor { background-color: $purple; }
   }
   
   .name {

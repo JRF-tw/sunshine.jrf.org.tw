@@ -15,7 +15,10 @@ ruby:
         = render partial: 'components/avatar_pic', locals: { person: @profile }
 
       .text-wrapper
-        small.active-label class=(@profile.is_active ? 'active' : '')
+        small.active-label[
+          class=(@profile.is_active ? 'active' : '')
+          class=job
+        ]
           = @profile.is_active ? '在職': '不在職'
         h2.name= person.name
         p.job

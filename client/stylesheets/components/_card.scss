@@ -122,6 +122,8 @@
 .card--tape__heading {
   margin: 0 0 r(-3);
   text: center ms(2) $white;
+  &.judge .text { background-color: $blue; }
+  &.prosecutor .text { background-color: $purple; }
 
   .text {
     display: inline-block;
