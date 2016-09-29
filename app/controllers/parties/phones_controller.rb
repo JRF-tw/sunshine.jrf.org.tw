@@ -18,9 +18,8 @@ class Parties::PhonesController < Parties::BaseController
     if context.perform(party_params)
       redirect_to verify_party_phone_path, flash: { success: '已寄出簡訊認證碼' }
     else
-      @input_phone_number = party_params[:unconfirmed_phone] || current_party.phone_number
-      flash[:error] = context.error_messages.join(', ')
-      render 'new'
+      flash[:error] = context.error_messages.join(", ")
+      render "new"
     end
   end
 
