@@ -8,65 +8,74 @@ class Lawyers::SchedulesController < Lawyers::BaseController
   def rule
   end
 
-  def new
-  end
-
   def edit
   end
 
   def update
     context = Lawyer::ScheduleScoreUpdateContext.new(@schedule_score)
     if @record = context.perform(schedule_score_params)
-      @status = "thanks_scored"
-      render_as_success(:new)
+      render_as_success(:thanks_scored)
     else
       context.errors
       render_as_fail(:edit, context.error_messages.join(","))
     end
   end
 
-  def checked_info
+  def input_info
+
+  end
+
+  def check_info
     context = Lawyer::CheckScheduleScoreInfoContext.new(current_lawyer)
     if context.perform(schedule_score_params)
-      @status = "checked_info"
-      render_as_success(:new)
+      redirect_as_success(input_date_lawyer_score_schedules_path(schedule_score: schedule_score_params))
     else
-      render_as_fail(:new, context.error_messages.join(","))
+      redirect_as_fail(input_info_lawyer_score_schedules_path(schedule_score: schedule_score_params), context.error_messages.join(","))
     end
   end
 
-  def checked_date
+  def input_date
+
+  end
+
+  def check_date
     context = Lawyer::CheckScheduleScoreDateContext.new(current_lawyer)
     context.perform(schedule_score_params)
-    if context.has_error?
-      @status = "checked_info"
-      render_as_fail(:new, context.error_messages.join(","))
+    unless context.has_error?
+      redirect_as_success(input_judge_lawyer_score_schedules_path(schedule_score: schedule_score_params))
     else
-      @status = "checked_date"
-      render_as_success(:new)
+      redirect_as_fail(input_date_lawyer_score_schedules_path(schedule_score: schedule_score_params), context.error_messages.join(","))
     end
   end
 
-  def checked_judge
+  def input_judge
+
+  end
+
+  def check_judge
     context = Lawyer::CheckScheduleScoreJudgeContext.new(current_lawyer)
     if context.perform(schedule_score_params)
-      @status = "checked_judge"
-      render_as_success(:new)
+      redirect_as_success(new_lawyer_score_schedule_path(schedule_score: schedule_score_params))
     else
-      @status = "checked_date"
-      render_as_fail(:new, context.error_messages.join(","))
+      redirect_as_fail(input_judge_lawyer_score_schedules_path(schedule_score: schedule_score_params), context.error_messages.join(","))
     end
+  end
+
+  def new
+
   end
 
   def create
     context = Lawyer::ScheduleScoreCreateContext.new(current_lawyer)
     if @record = context.perform(schedule_score_params)
-      @status = "thanks_scored"
-      render_as_success(:new)
+      render_as_success(:thanks_scored)
     else
-      @status = "checked_judge"
-      render_as_fail(:new, context.error_messages.join(","))
+      redirect_as_fail(new_lawyer_score_schedule_path(schedule_score: schedule_score_params), context.error_messages.join(","))
     end
+  end
+
+  def thanks_scored
+
   end
 
   private

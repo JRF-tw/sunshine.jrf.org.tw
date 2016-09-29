@@ -1,5 +1,5 @@
 = render layout: 'components/score_card',
-  locals: { status: 'checked_judge', type: 'schedule' }
+  locals: { status: @status, type: 'schedule' }
   - max_steps = 4
 
   = render layout: 'components/input_score_start', locals: {\
