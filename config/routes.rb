@@ -92,8 +92,10 @@ Rails.application.routes.draw do
         collection do
           get :rule
           get :thanks_scored
-          post :checked_info
-          post :checked_judge
+          get :input_info
+          post :check_info
+          get :input_judge
+          post :check_judge
         end
       end
     end

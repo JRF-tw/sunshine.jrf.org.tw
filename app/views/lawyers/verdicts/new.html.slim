@@ -1,31 +1,12 @@
 = render layout: 'components/score_card',
-  locals: { status: @status, type: 'verdict' }
-  - max_steps = 3
-
-  - case @status
-  - when 'checked_info'
-    = render 'components/input_score_judge',
-      step_text: '輸入法官姓名', step_count: 2, max_steps: max_steps,
-      as: :verdict_score,
-      form_for: @verdict_score,
-      form_url: checked_judge_lawyer_score_verdicts_path,
-      prev_url: new_lawyer_score_verdict_path(verdict_score: params[:verdict_score]),
-      prev_url_method: :get
-
-  - when 'checked_judge'
+  locals: { status: "checked_judge", type: 'verdict' }
     = render layout: 'components/input_score_start', locals: {\
-      step_text: '判決流程評鑑', step_count: 4, max_steps: max_steps,
+      step_text: '判決流程評鑑', step_count: 4, max_steps: 3,
       form_for: @verdict_score,
       as: :verdict_score,
+      prev_url: input_judge_lawyer_score_verdicts_path(verdict_score: params[:verdict_score]),
+      prev_url_method: :get,
       form_url: lawyer_score_verdicts_path\
     } do |f|
       = render 'components/input_score', f: f,
         label: '裁判品質評分', options: :quality_score
-
-  - else
-    = render 'components/input_score_info',
-      step_text: '選擇法院/案號', step_count: 1, max_steps: max_steps,
-      as: :verdict_score,
-      form_for: @verdict_score,
-      form_url: checked_info_lawyer_score_verdicts_path,
-      cancel_path: '/lawyer'

@@ -8,16 +8,16 @@ ruby:
 
   case type
   when 'lawyer'
-    add_score_schedule = checked_info_lawyer_score_schedules_path(schedule_score: score)
-    add_score_verdict = checked_info_lawyer_score_verdicts_path(verdict_score: score)
-    story_page = '/lawyer/stories'    
+    add_score_schedule = input_info_lawyer_score_schedules_path(schedule_score: score)
+    add_score_verdict = input_info_lawyer_score_verdicts_path(verdict_score: score)
+    story_page = lawyer_root_path
   when 'party'
     add_score_schedule = checked_info_party_score_schedules_path(schedule_score: score)
     add_score_verdict = checked_info_party_score_verdicts_path(verdict_score: score)
-    story_page = '/party/stories'    
+    story_page = '/party/stories'
   when 'observer'
     add_score_schedule = checked_info_court_observer_score_schedules_path(schedule_score: score)
-    story_page = '/observer/stories'    
+    story_page = '/observer/stories'
   else
   end
 
@@ -77,7 +77,7 @@ ruby:
                   class: 'flat-button--addons' do
                   => inline_svg 'pencil'
                   | 編輯評鑑
-              - else 
+              - else
                 = link_to edit_score_verdict,
                   class: 'flat-button--addons' do
                   => inline_svg 'pencil'
