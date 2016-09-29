@@ -5,11 +5,23 @@ class Parties::StoriesController < Parties::BaseController
 
   def index
     @stories = ::PartyQueries.new(current_party).get_stories
+    # meta
+    set_meta(
+      title: "當事人案件列表頁",
+      description: "當事人案件列表頁",
+      keywords: "當事人案件列表頁"
+    )
   end
 
   def show
     @pending_score_verdict = ::PartyQueries.new(current_party).pending_score_verdict(@story)
     @pending_score_schedules = ::PartyQueries.new(current_party).pending_score_schedules(@story)
+    # meta
+    set_meta(
+      title: "當事人 案件-#{@story.identity} 資訊頁",
+      description: "當事人 案件-#{@story.identity} 資訊頁",
+      keywords: "當事人 案件-#{@story.identity} 資訊頁"
+    )
   end
 
   private

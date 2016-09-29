@@ -2,7 +2,12 @@ class Parties::EmailsController < Parties::BaseController
   before_action :find_party, only: [:edit, :update]
 
   def edit
-    # prev_unconfirmed_email = current_party.unconfirmed_email if current_party.respond_to?(:unconfirmed_email)
+    # meta
+    set_meta(
+      title: "當事人編輯信箱頁",
+      description: "當事人編輯信箱頁",
+      keywords: "當事人編輯信箱頁"
+    )
   end
 
   def update

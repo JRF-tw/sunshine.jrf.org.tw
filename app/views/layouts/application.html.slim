@@ -1,7 +1,7 @@
 doctype 5
 html
   head
-    = display_meta_tags set_meta
+    = display_meta_tags
     = stylesheet_link_tag    'application', media: 'all',
                              'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
@@ -10,7 +10,7 @@ html
       = javascript_include_tag 'http://localhost:8080/assets/javascripts/webpack_bundle.js', 'data-turbolinks-track' => true
 
     = csrf_meta_tags
-  
+
   body class=(yield :body_classes)
     = render 'components/main_header',
       classes: yield(:header_classes),
@@ -18,8 +18,8 @@ html
 
     .page-wrapper class=(yield :wrapper_classes)
       main role='main'
-        
+
         = content_for?(:yield) ? yield(:yield) : yield
-      
+
     = render 'components/main_footer'
     = render 'components/drawer', type: yield(:character_type)

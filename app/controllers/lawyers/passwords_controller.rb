@@ -4,6 +4,16 @@ class Lawyers::PasswordsController < Devise::PasswordsController
 
   prepend_before_action :require_no_authentication, except: [:edit, :update, :send_reset_password_mail]
 
+  def new
+    # meta
+    set_meta(
+      title: "律師忘記密碼頁",
+      description: "律師忘記密碼頁",
+      keywords: "律師忘記密碼頁"
+    )
+    super
+  end
+
   # POST /resource/password
   def create
     @lawyer = Lawyer.find_by_email(resource_params[:email])
@@ -53,6 +63,13 @@ class Lawyers::PasswordsController < Devise::PasswordsController
       set_minimum_password_length
       resource.reset_password_token = params[:reset_password_token]
     end
+
+    # meta
+    set_meta(
+      title: "律師設定密碼頁",
+      description: "律師設定密碼頁",
+      keywords: "律師設定密碼頁"
+    )
   end
 
   def send_reset_password_mail

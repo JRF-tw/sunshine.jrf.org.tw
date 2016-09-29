@@ -1,6 +1,16 @@
 class CourtObservers::SessionsController < Devise::SessionsController
   layout "observer"
 
+  def new
+    # meta
+    set_meta(
+      title: "觀察者登入頁",
+      description: "觀察者登入頁",
+      keywords: "觀察者登入頁"
+    )
+    super
+  end
+
   def create
     self.resource = warden.authenticate!(auth_options)
     set_flash_message(:notice, :signed_in) if is_flashing_format?

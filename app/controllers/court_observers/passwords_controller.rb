@@ -5,6 +5,16 @@ class CourtObservers::PasswordsController < Devise::PasswordsController
   prepend_before_action :require_no_authentication, except: [:edit, :update, :send_reset_password_mail]
   before_action :check_observer_confirmed, only: [:create]
 
+  def new
+    # meta
+    set_meta(
+      title: "觀察者忘記密碼頁",
+      description: "觀察者忘記密碼頁",
+      keywords: "觀察者忘記密碼頁"
+    )
+    super
+  end
+
   def edit
     court_observer_by_token = CourtObserver.with_reset_password_token(params[:reset_password_token])
     if court_observer_by_token.nil?
@@ -17,6 +27,13 @@ class CourtObservers::PasswordsController < Devise::PasswordsController
       resource.reset_password_token = params[:reset_password_token]
       @court_observer_by_token = CourtObserver.with_reset_password_token(params[:reset_password_token])
     end
+
+    # meta
+    set_meta(
+      title: "觀察者更改密碼頁",
+      description: "觀察者更改密碼頁",
+      keywords: "觀察者更改密碼頁"
+    )
   end
 
   def update

@@ -3,6 +3,12 @@ class Parties::PhonesController < Parties::BaseController
   before_action :can_verify?, only: [:verify, :verifing, :resend_verify_sms]
 
   def new
+    # meta
+    set_meta(
+      title: "當事人新增手機頁",
+      description: "當事人新增手機頁",
+      keywords: "當事人新增手機頁"
+    )
   end
 
   def create
@@ -17,6 +23,12 @@ class Parties::PhonesController < Parties::BaseController
   end
 
   def edit
+    # meta
+    set_meta(
+      title: "當事人更改手機頁",
+      description: "當事人更改手機頁",
+      keywords: "當事人更改手機頁"
+    )
   end
 
   def update
@@ -31,6 +43,12 @@ class Parties::PhonesController < Parties::BaseController
   end
 
   def verify
+    # meta
+    set_meta(
+      title: "當事人手機驗證頁",
+      description: "當事人手機驗證頁",
+      keywords: "當事人手機驗證頁"
+    )
   end
 
   def verifing

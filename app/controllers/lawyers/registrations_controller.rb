@@ -3,6 +3,16 @@ class Lawyers::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
   layout "lawyer"
 
+  def new
+    # meta
+    set_meta(
+      title: "律師註冊頁",
+      description: "律師註冊頁",
+      keywords: "律師註冊頁"
+    )
+    super
+  end
+
   def create
     context = Lawyer::RegisterContext.new(params)
     @lawyer = context.perform

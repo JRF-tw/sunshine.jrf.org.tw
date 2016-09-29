@@ -2,6 +2,12 @@ class Lawyers::EmailsController < Lawyers::BaseController
   before_action :find_lawyer, only: [:edit, :update]
 
   def edit
+    # meta
+    set_meta(
+      title: "律師編輯信箱頁",
+      description: "律師編輯信箱頁",
+      keywords: "律師編輯信箱頁"
+    )
   end
 
   def update

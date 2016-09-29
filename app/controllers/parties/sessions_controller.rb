@@ -1,6 +1,16 @@
 class Parties::SessionsController < Devise::SessionsController
   layout "party"
 
+  def new
+    # meta
+    set_meta(
+      title: "當事人登入頁",
+      description: "當事人登入頁",
+      keywords: "當事人登入頁"
+    )
+    super
+  end
+
   # POST /resource/sign_in
   def create
     self.resource = warden.authenticate!(auth_options)
