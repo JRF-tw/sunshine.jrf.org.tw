@@ -1,0 +1,12 @@
+= render layout: 'components/score_card',
+  locals: { status: "thanks_scored", type: 'schedule' }
+
+  = render partial: 'components/schedule_thanks_scored', locals: {\
+    form_url: check_date_party_score_schedules_path,
+    path_to_root: party_root_path,
+    current_user: current_party,
+    toggle_subscribe_story_path: \
+    toggle_party_subscribe_path(@record.story, format: :js),
+    toggle_subscribe_edm_path: \
+    toggle_subscribe_party_edm_path(format: :js)\
+  }

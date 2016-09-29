@@ -133,17 +133,22 @@ Rails.application.routes.draw do
       resources :schedules, only: [:new, :create, :edit, :update] do
         collection do
           get :rule
-          post :checked_info
-          post :checked_date
-          post :checked_judge
+          get :input_info
+          post :check_info
+          get :input_date
+          post :check_date
+          get :input_judge
+          post :check_judge
         end
       end
       resources :verdicts, only: [:new, :create, :edit, :update] do
         collection do
           get :rule
           get :thanks_scored
-          post :checked_info
-          post :checked_judge
+          get :input_info
+          post :check_info
+          get :input_judge
+          post :check_judge
         end
       end
     end

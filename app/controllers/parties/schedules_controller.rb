@@ -17,56 +17,63 @@ class Parties::SchedulesController < Parties::BaseController
   def update
     context = Party::ScheduleScoreUpdateContext.new(@schedule_score)
     if @record = context.perform(schedule_score_params)
-      @status = "thanks_scored"
-      render_as_success(:new)
+      render_as_success(:thanks_scored)
     else
       context.errors
       render_as_fail(:edit, context.error_messages.join(","))
     end
   end
 
-  def checked_info
+  def input_info
+  end
+
+  def check_info
     context = Party::CheckScheduleScoreInfoContext.new(current_party)
     if context.perform(schedule_score_params)
-      @status = "checked_info"
-      render_as_success(:new)
+      redirect_as_success(input_date_party_score_schedules_path(schedule_score: schedule_score_params))
     else
-      render_as_fail(:new, context.error_messages.join(","))
+      redirect_as_fail(input_info_party_score_schedules_path(schedule_score: schedule_score_params), context.error_messages.join(","))
     end
   end
 
-  def checked_date
+  def input_date
+  end
+
+  def check_date
     context = Party::CheckScheduleScoreDateContext.new(current_party)
     context.perform(schedule_score_params)
-    if context.has_error?
-      @status = "checked_info"
-      render_as_fail(:new, context.error_messages.join(","))
+    unless context.has_error?
+      redirect_as_success(input_judge_party_score_schedules_path(schedule_score: schedule_score_params))
     else
-      @status = "checked_date"
-      render_as_success(:new)
+      redirect_as_fail(input_date_party_score_schedules_path(schedule_score: schedule_score_params), context.error_messages.join(","))
     end
   end
 
-  def checked_judge
+  def input_judge
+  end
+
+  def check_judge
     context = Party::CheckScheduleScoreJudgeContext.new(current_party)
     if context.perform(schedule_score_params)
-      @status = "checked_judge"
-      render_as_success(:new)
+      redirect_as_success(new_party_score_schedule_path(schedule_score: schedule_score_params))
     else
-      @status = "checked_date"
-      render_as_fail(:new, context.error_messages.join(","))
+      redirect_as_fail(input_judge_party_score_schedules_path(schedule_score: schedule_score_params), context.error_messages.join(","))
     end
+  end
+
+  def new
   end
 
   def create
     context = Party::ScheduleScoreCreateContext.new(current_party)
     if @record = context.perform(schedule_score_params)
-      @status = "thanks_scored"
-      render_as_success(:new)
+      render_as_success(:thanks_scored)
     else
-      @status = "checked_judge"
-      render_as_fail(:new, context.error_messages.join(","))
+      redirect_as_fail(new_party_score_schedule_path(schedule_score: schedule_score_params), context.error_messages.join(","))
     end
+  end
+
+  def thanks_scored
   end
 
   private

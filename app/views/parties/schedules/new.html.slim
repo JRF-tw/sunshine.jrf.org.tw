@@ -1,51 +1,13 @@
 = render layout: 'components/score_card',
-  locals: { status: @status, type: 'schedule' }
-  - max_steps = 4
+  locals: { status: "checked_judge", type: 'schedule' }
 
-  - case @status
-  - when 'checked_info'
-    = render 'components/input_score_date',
-      step_text: '輸入開庭日期', step_count: 2, max_steps: max_steps,
-      form_for: @schedule_score,
-      as: :schedule_score,
-      form_url: checked_date_party_score_schedules_path,
-      prev_url: new_party_score_schedule_path(schedule_score: params[:schedule_score]),
-      prev_url_method: :get
-
-  - when 'checked_date'
-    = render 'components/input_score_judge',
-      step_text: '輸入法官姓名', step_count: 3, max_steps: max_steps,
-      form_for: @schedule_score,
-      as: :schedule_score,
-      form_url: checked_judge_party_score_schedules_path,
-      prev_url: checked_info_party_score_schedules_path(schedule_score: params[:schedule_score]),
-      prev_url_method: :post
-
-  - when 'checked_judge'
-    = render layout: 'components/input_score_start', locals: {\
-      step_text: '開庭流程評鑑', step_count: 4, max_steps: max_steps,
-      form_for: @schedule_score,
-      as: :schedule_score,
-      form_url: party_score_schedules_path\
-    } do |f|
-      = render 'components/input_score', f: f,
-        label: '開庭滿意度評分', options: :rating_score
-
-  - when 'thanks_scored'
-    = render partial: 'components/schedule_thanks_scored', locals: {\
-      form_url: checked_date_party_score_schedules_path,
-      path_to_root: party_root_path,
-      current_user: current_party,
-      toggle_subscribe_story_path: \
-      toggle_party_subscribe_path(@record.story, format: :js),
-      toggle_subscribe_edm_path: \
-      toggle_subscribe_party_edm_path(format: :js)\
-    }
-
-  - else
-    = render 'components/input_score_info',
-      step_text: '選擇法院/案號', step_count: 1, max_steps: max_steps,
-      as: :schedule_score,
-      form_for: @schedule_score,
-      form_url: checked_info_party_score_schedules_path,
-      cancel_path: '/party'
+  = render layout: 'components/input_score_start', locals: {\
+    step_text: '開庭流程評鑑', step_count: 4, max_steps: 4,
+    form_for: @schedule_score,
+    as: :schedule_score,
+    prev_url: input_judge_party_score_schedules_path(schedule_score: params[:schedule_score]),
+    prev_url_method: :get,
+    form_url: party_score_schedules_path\
+  } do |f|
+    = render 'components/input_score', f: f,
+      label: '開庭滿意度評分', options: :rating_score

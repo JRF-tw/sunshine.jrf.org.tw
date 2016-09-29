@@ -26,24 +26,27 @@ class Parties::VerdictsController < Parties::BaseController
     end
   end
 
-  def checked_info
+  def input_info
+  end
+
+  def check_info
     context = Party::VerdictScoreCheckInfoContext.new(current_party)
     if @story = context.perform(verdict_score_params)
-      @status = "checked_info"
-      render_as_success(:new)
+      redirect_as_success(input_judge_party_score_verdicts_path(verdict_score: verdict_score_params))
     else
-      render_as_fail(:new, context.error_messages.join(","))
+      redirect_as_fail(input_info_party_score_verdicts_path(verdict_score: verdict_score_params), context.error_messages.join(","))
     end
   end
 
-  def checked_judge
+  def input_judge
+  end
+
+  def check_judge
     context = Party::VerdictScoreCheckJudgeContext.new(current_party)
     if context.perform(verdict_score_params)
-      @status = "checked_judge"
-      render_as_success(:new)
+      redirect_as_success(new_party_score_verdict_path(verdict_score: verdict_score_params))
     else
-      @status = "checked_info"
-      render_as_fail(:new, context.error_messages.join(","))
+      redirect_as_fail(input_judge_party_score_verdicts_path(verdict_score: verdict_score_params), context.error_messages.join(","))
     end
   end
 
@@ -52,8 +55,7 @@ class Parties::VerdictsController < Parties::BaseController
     if context.perform(verdict_score_params)
       redirect_as_success(thanks_scored_party_score_verdicts_path, "評鑑已新增")
     else
-      @status = "checked_judge"
-      render_as_fail(:new, context.error_messages.join(","))
+      redirect_as_fail(new_party_score_verdict_path(verdict_score: verdict_score_params), context.error_messages.join(","))
     end
   end
 

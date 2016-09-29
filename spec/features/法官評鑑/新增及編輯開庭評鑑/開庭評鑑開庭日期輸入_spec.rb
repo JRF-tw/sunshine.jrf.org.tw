@@ -95,9 +95,10 @@ describe "法官評鑑 - 新增及編輯開庭評鑑 - 開庭評鑑開庭日期�
       before { signin_party(party) }
       let!(:out_score_inverval_schedule) { create :schedule, story: story, start_on: Time.zone.today - 15.days }
       before { params[:start_on] = out_score_inverval_schedule.start_on }
-      subject! { post "/party/score/schedules/checked_date", schedule_score: params }
+      subject! { post "/party/score/schedules/check_date", schedule_score: params }
 
       it "Then 顯示開庭日期輸入頁，保留原先輸入的日期，並顯示錯誤訊息" do
+        follow_redirect!
         expect(response).to be_success
         expect(flash[:error]).to match("已超過可評鑑時間")
         expect(response.body).to match(story.court.full_name)
@@ -165,9 +166,10 @@ describe "法官評鑑 - 新增及編輯開庭評鑑 - 開庭評鑑開庭日期�
       let!(:party) { create :party, :already_confirmed }
       before { signin_party(party) }
       before { params[:start_on] = Time.zone.today - 15.days }
-      subject! { post "/party/score/schedules/checked_date", schedule_score: params }
+      subject! { post "/party/score/schedules/check_date", schedule_score: params }
 
       it "Then 顯示開庭日期輸入頁，保留原先輸入的日期，並顯示錯誤訊息" do
+        follow_redirect!
         expect(response).to be_success
         expect(flash[:error]).to match("已超過可評鑑時間")
         expect(response.body).to match(story.court.full_name)
