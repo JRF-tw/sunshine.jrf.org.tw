@@ -64,7 +64,7 @@ describe "法官評鑑 - 新增及編輯開庭評鑑 - 開庭評鑑開庭日期�
       it "Then 顯示開庭日期輸入頁，保留原先輸入的日期，並顯示錯誤訊息" do
         follow_redirect!
         expect(response).to be_success
-        expect(flash[:error]).to match("庭期比對失敗")
+        expect(flash[:error]).to match("查無此庭期")
         expect(response.body).to match(story.court.full_name)
         expect(response.body).to match(story.year.to_s)
         expect(response.body).to match(story.word_type)
