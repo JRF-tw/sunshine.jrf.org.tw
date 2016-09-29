@@ -1,6 +1,16 @@
 class Lawyers::SessionsController < Devise::SessionsController
   layout "lawyer"
 
+  def new
+    # meta
+    set_meta(
+      title: "律師登入頁",
+      description: "律師登入頁",
+      keywords: "律師登入頁"
+    )
+    super
+  end
+
   # POST /resource/sign_in
   def create
     self.resource = warden.authenticate!(auth_options)

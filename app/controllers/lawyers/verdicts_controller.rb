@@ -7,15 +7,39 @@ class Lawyers::VerdictsController < Lawyers::BaseController
   before_action :story_can_score?, only: [:edit, :update]
 
   def rule
+    # meta
+    set_meta(
+      title: "律師判決評鑑規則頁",
+      description: "律師判決評鑑規則頁",
+      keywords: "律師判決評鑑規則頁"
+    )
   end
 
   def thanks_scored
+    # meta
+    set_meta(
+      title: "律師判決評鑑感謝頁",
+      description: "律師判決評鑑感謝頁",
+      keywords: "律師判決評鑑感謝頁"
+    )
   end
 
   def new
+    # meta
+    set_meta(
+      title: "律師新增判決評鑑頁",
+      description: "律師新增判決評鑑頁",
+      keywords: "律師新增判決評鑑頁"
+    )
   end
 
   def edit
+    # meta
+    set_meta(
+      title: "律師判決評鑑編輯頁",
+      description: "律師判決評鑑編輯頁",
+      keywords: "律師判決評鑑編輯頁"
+    )
   end
 
   def update
@@ -28,6 +52,12 @@ class Lawyers::VerdictsController < Lawyers::BaseController
   end
 
   def input_info
+    # meta
+    set_meta(
+      title: "律師判決評鑑案件輸入頁",
+      description: "律師判決評鑑案件輸入頁",
+      keywords: "律師判決評鑑案件輸入頁"
+    )
   end
 
   def check_info
@@ -40,6 +70,12 @@ class Lawyers::VerdictsController < Lawyers::BaseController
   end
 
   def input_judge
+    # meta
+    set_meta(
+      title: "律師判決評鑑法官輸入頁",
+      description: "律師判決評鑑法官輸入頁",
+      keywords: "律師判決評鑑法官輸入頁"
+    )
   end
 
   def check_judge

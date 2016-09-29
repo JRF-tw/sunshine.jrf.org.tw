@@ -6,9 +6,21 @@ class Lawyers::SchedulesController < Lawyers::BaseController
   before_action :story_adjudged?, only: [:edit, :update]
 
   def rule
+    # meta
+    set_meta(
+      title: "律師評鑑開庭規則頁",
+      description: "律師評鑑開庭規則頁",
+      keywords: "律師評鑑開庭規則頁"
+    )
   end
 
   def new
+    # meta
+    set_meta(
+      title: "律師建立開庭評鑑頁",
+      description: "律師建立開庭評鑑頁",
+      keywords: "律師建立開庭評鑑頁"
+    )
   end
 
   def create
@@ -21,6 +33,12 @@ class Lawyers::SchedulesController < Lawyers::BaseController
   end
 
   def edit
+    # meta
+    set_meta(
+      title: "律師編輯開庭評鑑頁",
+      description: "律師編輯開庭評鑑頁",
+      keywords: "律師編輯開庭評鑑頁"
+    )
   end
 
   def update
@@ -34,6 +52,12 @@ class Lawyers::SchedulesController < Lawyers::BaseController
   end
 
   def input_info
+    # meta
+    set_meta(
+      title: "律師開庭評鑑案件輸入頁",
+      description: "律師開庭評鑑案件輸入頁",
+      keywords: "律師開庭評鑑案件輸入頁"
+    )
   end
 
   def check_info
@@ -46,6 +70,12 @@ class Lawyers::SchedulesController < Lawyers::BaseController
   end
 
   def input_date
+    # meta
+    set_meta(
+      title: "律師開庭評鑑庭期輸入頁",
+      description: "律師開庭評鑑庭期輸入頁",
+      keywords: "律師開庭評鑑庭期輸入頁"
+    )
   end
 
   def check_date
@@ -59,6 +89,12 @@ class Lawyers::SchedulesController < Lawyers::BaseController
   end
 
   def input_judge
+    # meta
+    set_meta(
+      title: "律師開庭評鑑法官輸入頁",
+      description: "律師開庭評鑑法官輸入頁",
+      keywords: "律師開庭評鑑法官輸入頁"
+    )
   end
 
   def check_judge
@@ -71,6 +107,12 @@ class Lawyers::SchedulesController < Lawyers::BaseController
   end
 
   def thanks_scored
+    # meta
+    set_meta(
+      title: "律師開庭評鑑感謝頁",
+      description: "律師開庭評鑑感謝頁",
+      keywords: "律師開庭評鑑感謝頁"
+    )
   end
 
   private
