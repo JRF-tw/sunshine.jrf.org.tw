@@ -51,10 +51,10 @@
       $calc_value: if(str-length('#{$value}') < 3, '#{$value}.0', $value);
       &[value='#{$calc_value}']:checked ~ .form-group--score__stars {
         @for $j from 0 through floor($value) {
-          .star-full:nth-child(#{$j}) { animation: bounceIn .5s ease-in-out 0s both; }
+          .icon-star-full:nth-child(#{$j}) { animation: bounceIn .5s ease-in-out 0s both; }
         }
         @for $k from 0 through round($value) {
-          .star-half:nth-child(#{$k}) { animation: bounceIn .5s ease-in-out 0s both; }
+          .icon-star-half:nth-child(#{$k}) { animation: bounceIn .5s ease-in-out 0s both; }
         }
       }
     }
@@ -80,9 +80,9 @@
     size: 34px;
   }
 
-  .star-full, .star-half {
+  .icon-star-full, .icon-star-half {
     opacity: 0;
     fill: url(#radialGradient-star);
   }
-  .star-o { fill: $divider-gray; }
+  .icon-star-o { fill: $divider-gray; }
 }
