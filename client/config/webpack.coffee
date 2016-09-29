@@ -10,6 +10,7 @@ ExtractTextPlugin = require "extract-text-webpack-plugin"
 config =
   svg_sprite: JSON.stringify
     spriteModule: path.resolve path_to.root, "config/custom-sprite"
+    name: 'icon-[name]'
   svgo: JSON.stringify
     plugins: [
       cleanupIDs: on
