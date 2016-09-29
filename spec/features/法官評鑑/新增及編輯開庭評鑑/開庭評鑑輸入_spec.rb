@@ -51,6 +51,7 @@ describe "法官評鑑 - 新增及編輯開庭評鑑 - 開庭評鑑輸入", type
       subject! { post "/observer/score/schedules", schedule_score: params }
 
       it "Then 失敗新增，顯示評鑑輸入頁，保留先輸入的資料" do
+        follow_redirect!
         expect(response).to be_success
         expect(flash[:error]).to match("開庭滿意度分數為必填")
         expect(response.body).to match(params[:note])

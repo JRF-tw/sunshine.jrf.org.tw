@@ -46,16 +46,15 @@ Rails.application.routes.draw do
       resources :schedules, only: [:new, :create, :edit, :update] do
         collection do
           get :rule
-          post :checked_info
-          post :checked_date
-          post :checked_judge
+          get :input_info
+          post :check_info
+          get :input_date
+          post :check_date
+          get :input_judge
+          post :check_judge
         end
       end
-      resource :verdicts, only: [:new] do
-        collection do
-          get :rule
-        end
-      end
+      resource :verdicts, only: [:new]
     end
     resources :stories, only: [:show] do
       member do

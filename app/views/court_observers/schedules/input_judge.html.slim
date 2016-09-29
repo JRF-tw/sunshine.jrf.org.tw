@@ -1,0 +1,10 @@
+= render layout: 'components/score_card',
+  locals: { status: "checked_date", type: 'schedule' }
+
+  = render 'components/input_score_judge',
+    step_text: '輸入法官姓名', step_count: 3, max_steps: 4,
+    form_for: @schedule_score,
+    as: :schedule_score,
+    form_url: check_judge_court_observer_score_schedules_path,
+    prev_url: input_date_court_observer_score_schedules_path(schedule_score: params[:schedule_score]),
+    prev_url_method: :get

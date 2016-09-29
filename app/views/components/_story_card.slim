@@ -16,8 +16,8 @@ ruby:
     add_score_verdict = input_info_party_score_verdicts_path(verdict_score: score)
     story_page = party_root_path
   when 'observer'
-    add_score_schedule = checked_info_court_observer_score_schedules_path(schedule_score: score)
-    story_page = '/observer/stories'
+    add_score_schedule = input_info_court_observer_score_schedules_path(schedule_score: score)
+    story_page = court_observer_root_path
   else
   end
 

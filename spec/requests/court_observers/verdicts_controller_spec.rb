@@ -7,9 +7,4 @@ RSpec.describe CourtObservers::VerdictsController, type: :request do
     subject! { get "/observer/score/verdicts/new" }
     it { expect(response.status).to eq(404) }
   end
-
-  describe "#rule" do
-    subject! { get "/observer/score/verdicts/rule" }
-    it { expect(response).to be_success }
-  end
 end
