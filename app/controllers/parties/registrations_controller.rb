@@ -4,6 +4,16 @@ class Parties::RegistrationsController < Devise::RegistrationsController
   before_action :check_registration, only: [:create]
   # POST /resource
 
+  def new
+    # meta
+    set_meta(
+      title: "當事人註冊頁",
+      description: "當事人註冊頁",
+      keywords: "當事人註冊頁"
+    )
+    super
+  end
+
   def check_identify_number
     context = Party::IdentifyNumberCheckContext.new(params)
     if @party = context.perform
