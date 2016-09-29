@@ -1,7 +1,7 @@
 section.resumes.container
   - if @educations.present?
     section.card--tape.resume
-      h3.card--tape__heading
+      h3.card--tape__heading class=job
         .text 學經歷
 
       .card--tape__content
@@ -11,7 +11,7 @@ section.resumes.container
 
   - if @careers.present?
     section.card--tape.resume
-      h3.card--tape__heading
+      h3.card--tape__heading class=job
         .text 職務經歷
 
       .card--tape__content
@@ -23,7 +23,7 @@ section.resumes.container
 
   - if @licenses.present?
     section.card--tape.resume
-      h3.card--tape__heading
+      h3.card--tape__heading class=job
         .text 專業證書
 
       .card--tape__content
