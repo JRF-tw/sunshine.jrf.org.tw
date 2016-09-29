@@ -13,18 +13,20 @@ describe "法官評鑑 - 案件狀態和開庭、判決評鑑與否", type: :req
 
     context "When 到新增開庭評鑑頁面時" do
       let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number } }
-      subject! { post "/lawyer/score/schedules/checked_info", schedule_score: params }
+      subject! { post "/lawyer/score/schedules/check_info", schedule_score: params }
 
       it "Then 頁面成功讀取" do
+        follow_redirect!
         expect(response).to be_success
       end
     end
 
     context "When 在新增判決時，輸入完案件資訊後" do
       let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number } }
-      subject! { post "/lawyer/score/verdicts/checked_info", verdict_score: params }
+      subject! { post "/lawyer/score/verdicts/check_info", verdict_score: params }
 
       it "Then 新增失敗，顯示錯誤訊息" do
+        follow_redirect!
         expect(response.body).to match("尚未抓到判決書")
         expect(lawyer.verdict_scores.count).to eq(0)
       end
@@ -36,18 +38,20 @@ describe "法官評鑑 - 案件狀態和開庭、判決評鑑與否", type: :req
 
     context "When 到新增開庭評鑑頁面時" do
       let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number } }
-      subject! { post "/lawyer/score/schedules/checked_info", schedule_score: params }
+      subject! { post "/lawyer/score/schedules/check_info", schedule_score: params }
 
       it "Then 頁面成功讀取" do
+        follow_redirect!
         expect(response).to be_success
       end
     end
 
     context "When 在新增判決時，輸入完案件資訊後" do
       let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number } }
-      subject! { post "/lawyer/score/verdicts/checked_info", verdict_score: params }
+      subject! { post "/lawyer/score/verdicts/check_info", verdict_score: params }
 
       it "Then 新增失敗，顯示錯誤訊息" do
+        follow_redirect!
         expect(response.body).to match("尚未抓到判決書")
         expect(lawyer.verdict_scores.count).to eq(0)
       end
@@ -59,9 +63,10 @@ describe "法官評鑑 - 案件狀態和開庭、判決評鑑與否", type: :req
 
     context "When 在新增開庭評鑑時，輸入完案件資訊後" do
       let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number } }
-      subject! { post "/lawyer/score/schedules/checked_info", schedule_score: params }
+      subject! { post "/lawyer/score/schedules/check_info", schedule_score: params }
 
       it "Then 新增失敗，顯示錯誤訊息" do
+        follow_redirect!
         expect(response.body).to match("案件已宣判, 無法評鑑")
         expect(lawyer.verdict_scores.count).to eq(0)
       end
@@ -69,9 +74,10 @@ describe "法官評鑑 - 案件狀態和開庭、判決評鑑與否", type: :req
 
     context "When 在新增判決評鑑時，輸入完案件資訊後" do
       let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number } }
-      subject! { post "/lawyer/score/verdicts/checked_info", verdict_score: params }
+      subject! { post "/lawyer/score/verdicts/check_info", verdict_score: params }
 
       it "Then 新增失敗，顯示錯誤訊息" do
+        follow_redirect!
         expect(response.body).to match("尚未抓到判決書")
         expect(lawyer.verdict_scores.count).to eq(0)
       end
@@ -83,9 +89,10 @@ describe "法官評鑑 - 案件狀態和開庭、判決評鑑與否", type: :req
 
     context "When 在新增判決時，輸入完案件資訊後" do
       let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, judge_name: judge.name, quality_score: 1, note: "xxxxx", appeal_judge: false } }
-      subject! { post "/lawyer/score/verdicts/checked_info", verdict_score: params }
+      subject! { post "/lawyer/score/verdicts/check_info", verdict_score: params }
 
       it "Then 頁面成功讀取" do
+        follow_redirect!
         expect(response).to be_success
       end
     end
@@ -120,9 +127,10 @@ describe "法官評鑑 - 案件狀態和開庭、判決評鑑與否", type: :req
 
     context "When 到新增判決評鑑頁面時" do
       let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, judge_name: judge.name, quality_score: 1, note: "xxxxx", appeal_judge: false } }
-      subject! { post "/lawyer/score/verdicts/checked_info", verdict_score: params }
+      subject! { post "/lawyer/score/verdicts/check_info", verdict_score: params }
 
       it "Then 頁面成功讀取" do
+        follow_redirect!
         expect(response).to be_success
       end
     end
@@ -150,9 +158,10 @@ describe "法官評鑑 - 案件狀態和開庭、判決評鑑與否", type: :req
 
     context "When 在新增判決時，輸入完案件資訊後" do
       let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, judge_name: judge.name, quality_score: 1, note: "xxxxx", appeal_judge: false } }
-      subject! { post "/lawyer/score/verdicts/checked_info", verdict_score: params }
+      subject! { post "/lawyer/score/verdicts/check_info", verdict_score: params }
 
       it "Then 新增失敗，顯示錯誤訊息" do
+        follow_redirect!
         expect(response.body).to match("判決已評鑑")
       end
     end
@@ -195,9 +204,10 @@ describe "法官評鑑 - 案件狀態和開庭、判決評鑑與否", type: :req
 
     context "When 在新增判決時，輸入完案件資訊後" do
       let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number } }
-      subject! { post "/lawyer/score/verdicts/checked_info", verdict_score: params }
+      subject! { post "/lawyer/score/verdicts/check_info", verdict_score: params }
 
       it "Then 新增失敗，顯示錯誤訊息" do
+        follow_redirect!
         expect(response.body).to match("已超過可評鑑時間")
       end
     end
@@ -219,9 +229,10 @@ describe "法官評鑑 - 案件狀態和開庭、判決評鑑與否", type: :req
 
     context "When 在新增判決時，輸入完案件資訊後" do
       let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number } }
-      subject! { post "/lawyer/score/verdicts/checked_info", verdict_score: params }
+      subject! { post "/lawyer/score/verdicts/check_info", verdict_score: params }
 
       it "Then 新增失敗，顯示錯誤訊息" do
+        follow_redirect!
         expect(response.body).to match("已超過可評鑑時間")
       end
     end

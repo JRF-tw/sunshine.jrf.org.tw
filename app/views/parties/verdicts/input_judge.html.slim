@@ -1,0 +1,10 @@
+= render layout: 'components/score_card',
+  locals: { status: "checked_info", type: 'verdict' }
+
+  = render 'components/input_score_judge',
+    step_text: '輸入法官姓名', step_count: 2, max_steps: 3,
+    as: :verdict_score,
+    form_for: @verdict_score,
+    form_url: check_judge_party_score_verdicts_path,
+    prev_url: input_info_party_score_verdicts_path(verdict_score: params[:verdict_score]),
+    prev_url_method: :get

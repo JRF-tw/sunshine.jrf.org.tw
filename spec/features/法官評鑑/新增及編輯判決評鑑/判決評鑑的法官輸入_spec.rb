@@ -13,9 +13,10 @@ describe "法官評鑑 - 新增及編輯判決評鑑 - 判決評鑑的法官輸�
     before { story.update_attributes(adjudge_date: Time.zone.today) }
 
     context "When 輸入正確的法官姓名" do
-      subject! { post "/lawyer/score/verdicts/checked_judge", verdict_score: params }
+      subject! { post "/lawyer/score/verdicts/check_judge", verdict_score: params }
 
       it "Then 進入評鑑頁" do
+        follow_redirect!
         expect(response).to be_success
         expect(flash[:error]).to be_nil
         expect(response.body).to match("裁判品質評分")
@@ -24,9 +25,10 @@ describe "法官評鑑 - 新增及編輯判決評鑑 - 判決評鑑的法官輸�
 
     context "When 法官姓名空白" do
       before { params[:judge_name] = "" }
-      subject! { post "/lawyer/score/verdicts/checked_judge", verdict_score: params }
+      subject! { post "/lawyer/score/verdicts/check_judge", verdict_score: params }
 
       it "Then 顯示法官輸入頁，和錯誤訊息" do
+        follow_redirect!
         expect(response).to be_success
         expect(flash[:error]).to match("法官姓名不能為空")
       end
@@ -34,9 +36,10 @@ describe "法官評鑑 - 新增及編輯判決評鑑 - 判決評鑑的法官輸�
 
     context "When 輸入判決書上非主審法官的名字" do
       before { params[:judge_name] = judge2.name }
-      subject! { post "/lawyer/score/verdicts/checked_judge", verdict_score: params }
+      subject! { post "/lawyer/score/verdicts/check_judge", verdict_score: params }
 
       it "Then 顯示法官輸入頁，和錯誤訊息" do
+        follow_redirect!
         expect(response).to be_success
         expect(flash[:error]).to match("判決書比對法官名稱錯誤")
       end
@@ -44,9 +47,10 @@ describe "法官評鑑 - 新增及編輯判決評鑑 - 判決評鑑的法官輸�
 
     context "When 輸入不存在的法官姓名" do
       before { params[:judge_name] = "xzcxcz" }
-      subject! { post "/lawyer/score/verdicts/checked_judge", verdict_score: params }
+      subject! { post "/lawyer/score/verdicts/check_judge", verdict_score: params }
 
       it "Then 顯示法官輸入頁，保留原先輸入的法官姓名，並且錯誤訊息" do
+        follow_redirect!
         expect(response).to be_success
         expect(response.body).to match(params[:judge_name])
         expect(flash[:error]).to match("沒有該位法官")

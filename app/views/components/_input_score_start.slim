@@ -23,7 +23,7 @@ ruby:
     = yield f
 
     = f.input :note, as: :text, label: false, placeholder: '法官表現特別好或特別壞的註記'
-    
+
     .form-group
       ul.toggle-list
         li.toggle-list__cell
@@ -31,5 +31,6 @@ ruby:
           = f.label :appeal_judge do
             | 我要申訴法官#{tag :br}
               案件申訴電話：#{link_to '02-2542-1958', 'tel:+886225421958'}
-    
-    = render 'components/score_form_actions', f: f, submit: submit, final: true
+
+    = render 'components/score_form_actions', f: f, submit: submit, final: true,
+      link: { text: '上一步', href: prev_url, method: prev_url_method }

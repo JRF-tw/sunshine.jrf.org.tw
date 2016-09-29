@@ -1,0 +1,10 @@
+= render layout: 'components/score_card',
+  locals: { status: "checked_info", type: 'schedule' }
+
+  = render 'components/input_score_date',
+    step_text: '輸入開庭日期', step_count: 2, max_steps: 4,
+    form_for: @schedule_score,
+    as: :schedule_score,
+    form_url: check_date_party_score_schedules_path,
+    prev_url: input_info_party_score_schedules_path(schedule_score: params[:schedule_score]),
+    prev_url_method: :get

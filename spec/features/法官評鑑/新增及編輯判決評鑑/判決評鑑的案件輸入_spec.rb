@@ -10,9 +10,10 @@ describe "法官評鑑 - 新增及編輯判決評鑑 - 判決評鑑的案件輸�
     before { story.update_attributes(adjudge_date: Time.zone.today) }
 
     context "When 輸入完整案件資訊" do
-      subject! { post "/lawyer/score/verdicts/checked_info", verdict_score: params }
+      subject! { post "/lawyer/score/verdicts/check_info", verdict_score: params }
 
       it "Then 跳轉至輸入法官姓名頁，並顯示此筆案件的法院+年度+字號+案號" do
+        follow_redirect!
         expect(response).to be_success
         expect(response.body).to match(story.court.full_name)
         expect(response.body).to match(story.year.to_s)
@@ -23,9 +24,10 @@ describe "法官評鑑 - 新增及編輯判決評鑑 - 判決評鑑的案件輸�
 
     context "When 輸入不存在的案件資訊" do
       before { params[:word_type] = "xxxx" }
-      subject! { post "/lawyer/score/verdicts/checked_info", verdict_score: params }
+      subject! { post "/lawyer/score/verdicts/check_info", verdict_score: params }
 
       it "Then 到案件輸入頁，保留原始輸入資訊，顯示錯誤訊息" do
+        follow_redirect!
         expect(response).to be_success
         expect(flash[:error]).to match("案件不存在")
         expect(response.body).to match(story.court.full_name)
@@ -37,9 +39,10 @@ describe "法官評鑑 - 新增及編輯判決評鑑 - 判決評鑑的案件輸�
 
     context "When 輸入案件資料任一選項空白" do
       before { params[:word_type] = "" }
-      subject! { post "/lawyer/score/verdicts/checked_info", verdict_score: params }
+      subject! { post "/lawyer/score/verdicts/check_info", verdict_score: params }
 
       it "Then 到案件輸入頁，保留原始輸入資訊，顯示錯誤訊息" do
+        follow_redirect!
         expect(response).to be_success
         expect(flash[:error]).to match("字號不能為空")
         expect(response.body).to match(story.court.full_name)
@@ -50,7 +53,7 @@ describe "法官評鑑 - 新增及編輯判決評鑑 - 判決評鑑的案件輸�
     end
     context "When 登出，且完整輸入該案件資料" do
       before { signout_lawyer }
-      subject! { post "/lawyer/score/verdicts/checked_info", verdict_score: params }
+      subject! { post "/lawyer/score/verdicts/check_info", verdict_score: params }
 
       it "Then 跳轉至登入頁面" do
         expect(response).to redirect_to("/lawyer/sign_in")
@@ -62,9 +65,10 @@ describe "法官評鑑 - 新增及編輯判決評鑑 - 判決評鑑的案件輸�
     before { story.update_attributes(pronounce_date: Time.zone.today) }
 
     context "When 輸入完整案件資訊" do
-      subject! { post "/lawyer/score/verdicts/checked_info", verdict_score: params }
+      subject! { post "/lawyer/score/verdicts/check_info", verdict_score: params }
 
       it "Then 到案件輸入頁，保留原始輸入資訊，顯示錯誤訊息" do
+        follow_redirect!
         expect(response).to be_success
         expect(flash[:error]).to match("尚未抓到判決書")
         expect(response.body).to match(story.court.full_name)
@@ -79,9 +83,10 @@ describe "法官評鑑 - 新增及編輯判決評鑑 - 判決評鑑的案件輸�
     before { story.update_attributes(adjudge_date: Time.zone.today - 91.days) }
 
     context "When 輸入完整案件資訊" do
-      subject! { post "/lawyer/score/verdicts/checked_info", verdict_score: params }
+      subject! { post "/lawyer/score/verdicts/check_info", verdict_score: params }
 
       it "Then 到案件輸入頁，保留原始輸入資訊，顯示錯誤訊息" do
+        follow_redirect!
         expect(response).to be_success
         expect(flash[:error]).to match("已超過可評鑑時間")
         expect(response.body).to match(story.court.full_name)

@@ -1,5 +1,5 @@
 = render layout: 'components/score_card',
-  locals: { status: 'checked_judge', type: 'schedule' }
+  locals: { status: "checked_judge", type: 'schedule' }
   - max_steps = 4
 
   = render layout: 'components/input_score_start', locals: {\
@@ -8,6 +8,8 @@
     as: :schedule_score,
     form_url: lawyer_score_schedule_path(@schedule_score),
     method: :put,
+    prev_url: lawyer_story_path(@schedule_score.story),
+    prev_url_method: :get,
     submit: '更新評鑑'\
   } do |f|
     = render 'components/input_score', f: f,

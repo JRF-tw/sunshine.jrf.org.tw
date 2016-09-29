@@ -13,17 +13,27 @@ RSpec.describe Parties::VerdictsController, type: :request do
       it { expect(response).to be_success }
     end
 
-    describe "#checked_info" do
-      let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number } }
-      subject! { post "/party/score/verdicts/checked_info", verdict_score: params }
+    describe "#input_info" do
+      subject! { get "/party/score/verdicts/input_info" }
       it { expect(response).to be_success }
+    end
+
+    describe "#check_info" do
+      let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number } }
+      subject! { post "/party/score/verdicts/check_info", verdict_score: params }
+      it { expect(response).to be_redirect }
       it { expect(flash[:error]).to be_nil }
     end
 
-    describe "#checked_judge" do
-      let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, judge_name: judge.name } }
-      subject! { post "/party/score/verdicts/checked_judge", verdict_score: params }
+    describe "#input_judge" do
+      subject! { get "/party/score/verdicts/input_judge" }
       it { expect(response).to be_success }
+    end
+
+    describe "#check_judge" do
+      let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, judge_name: judge.name } }
+      subject! { post "/party/score/verdicts/check_judge", verdict_score: params }
+      it { expect(response).to be_redirect }
       it { expect(flash[:error]).to be_nil }
     end
 

@@ -23,6 +23,7 @@ describe "法官評鑑 - 新增及編輯判決評鑑 - 判決評鑑輸入", type
       subject! { post "/lawyer/score/verdicts", verdict_score: params }
 
       it "失敗新增，顯示評鑑輸入頁，保留先輸入的資料" do
+        follow_redirect!
         expect(response).to be_success
         expect(response.body).to match(params[:note])
       end
