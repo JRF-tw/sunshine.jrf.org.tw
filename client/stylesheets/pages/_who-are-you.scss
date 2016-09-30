@@ -107,10 +107,10 @@ body.who-are-you {
   @extend %character-selector__cell;
   background-color: $avatar-green;
   margin: r(25) auto r(5);
-  &:hover { color: $avatar-black; }  
+  &:hover { color: $avatar-green; }  
   @include susy-media($character-selector-twick) {
     margin: 0;
-    &:hover .text { color: $avatar-black; }  
+    &:hover .text { color: $avatar-green; }  
 
     .icon {
       size: 60%;
