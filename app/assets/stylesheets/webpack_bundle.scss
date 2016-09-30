@@ -1803,7 +1803,8 @@ a:focus {
   position: absolute;
 }
 
-.form-group.has-error .control-label::before {
+.form-group.has-error .control-label::before,
+.form-group.has-hint .control-label::before {
   top: 41px;
   bottom: auto;
 }
@@ -3173,7 +3174,7 @@ body.who-are-you {
 }
 
 .character-selector__cell--observer:hover {
-  color: #262626;
+  color: #1E9387;
 }
 
 @media (min-width: 694px) {
@@ -3182,7 +3183,7 @@ body.who-are-you {
   }
 
   .character-selector__cell--observer:hover .text {
-    color: #262626;
+    color: #1E9387;
   }
 
   .character-selector__cell--observer .icon {
