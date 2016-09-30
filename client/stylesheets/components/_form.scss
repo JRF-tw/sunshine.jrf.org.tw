@@ -47,7 +47,8 @@ $error-rhythm: r(3);
       position: absolute ($input-rhythm * 2) n() n() 0;
     }
   }
-  &.has-error {
+  &.has-error,
+  &.has-hint {
     .control-label::before {
       top: r(5) + 1px; bottom: auto;
     }
