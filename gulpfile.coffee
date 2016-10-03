@@ -21,7 +21,7 @@ gulp.task 'resolve-url', ->
     url\(
       #{publicPath}
       images\/
-      (.+)
+      ([^\.]+\.(png|jpe?g|gif|svg))
     \)
   ///ig
 
