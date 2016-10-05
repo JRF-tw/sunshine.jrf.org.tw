@@ -47,7 +47,7 @@ feature "觀察者透過 email 建立帳號到通過認證", type: :feature, js:
         When "以觀察者A的帳號進行登入" do
           before { visit(new_court_observer_session_path) }
           before { capybara_input_sign_in_observer(observer_a) }
-          before { capybara_sign_in_observer }
+          before { capybara_log_in_observer }
 
           Then "登入失敗" do
             expect(page).to have_content("您的帳號需需要經過驗證後，才能繼續。")
@@ -67,7 +67,7 @@ feature "觀察者透過 email 建立帳號到通過認證", type: :feature, js:
         When "以觀察者A的帳號進行登入" do
           before { visit(new_court_observer_session_path) }
           before { capybara_input_sign_in_observer(observer_a) }
-          before { capybara_sign_in_observer }
+          before { capybara_log_in_observer }
 
           Then "登入成功" do
             expect(page).to have_content("成功登入了。")

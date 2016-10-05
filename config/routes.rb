@@ -54,7 +54,7 @@ Rails.application.routes.draw do
           post :check_judge
         end
       end
-      resource :verdicts, only: [:new]
+      resources :verdicts, only: [:new]
     end
     resources :stories, only: [:show] do
       member do
