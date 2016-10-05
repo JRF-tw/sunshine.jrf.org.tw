@@ -32,13 +32,13 @@ class Party::CheckScheduleScoreJudgeContext < BaseContext
   end
 
   def find_story
-    context = Lawyer::CheckScheduleScoreInfoContext.new(@lawyer)
+    context = Party::CheckScheduleScoreInfoContext.new(@party)
     @story = context.perform(@params)
     return add_error(:story_not_found, context.error_messages.join(",")) unless @story
   end
 
   def find_schedule
-    context = Lawyer::CheckScheduleScoreDateContext.new(@lawyer)
+    context = Party::CheckScheduleScoreDateContext.new(@party)
     @schedule = context.perform(@params)
     return add_error(:schedule_not_found, context.error_messages.join(",")) if context.has_error?
   end
