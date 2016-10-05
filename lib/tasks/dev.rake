@@ -50,21 +50,21 @@ namespace :dev do
 
   task fake_profiles: :environment do
     Profile.destroy_all
-    judge_name = ["連添泰", "蕭健銘", "謝孟蓮", "陳信宏", "趙定輝", "賴雅婷", "梁貴鑫", "林旭弘", "陳宛臻", "陳幸愛", "李欣宸", "阮宜臻"]
-    prosecutor_name = ["郭耿妹", "蔡宜玉", "賴枝仰", "李孟霞", "洪偉裕", "張育如", "黃秀琴", "吳秀芬", "周哲銘", "施依婷", "賴元士", "王珮瑜"]
-    judge_name.each_with_index do |n, i|
-      file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-#{i + 1}.jpg"
-      Admin::Profile.create!(name: n, current: "法官", gender: User::GENDER_TYPES.sample, birth_year: rand(50..70), avatar: file, is_active: true, is_hidden: false)
+    judge_name = Array.new(150) { |i| "測試法官 - #{i + 1}" }
+    prosecutor_name = Array.new(150) { |i| "測試檢察官 - #{i + 1}" }
+    judge_name.each do |n|
+      file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-#{rand(1..12)}.jpg"
+      Admin::Profile.create!(name: n, current: "法官", gender: User::GENDER_TYPES.sample, birth_year: rand(50..70), avatar: file, is_active: true, is_hidden: false, current_court: "臺灣臺北地方法院")
     end
-    prosecutor_name.each_with_index do |n, i|
-      file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-#{i + 13}.jpg"
-      Admin::Profile.create!(name: n, current: "檢察官", gender: User::GENDER_TYPES.sample, birth_year: rand(50..70), avatar: file, is_active: true, is_hidden: false)
+    prosecutor_name.each do |n|
+      file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-#{rand(13..24)}.jpg"
+      Admin::Profile.create!(name: n, current: "檢察官", gender: User::GENDER_TYPES.sample, birth_year: rand(50..70), avatar: file, is_active: true, is_hidden: false, current_court: "臺灣臺北地方法院檢察署")
     end
   end
 
   task fake_judges: :environment do
     Judge.destroy_all
-    judge_name = ["連添泰", "蕭健銘", "謝孟蓮", "陳信宏", "趙定輝", "賴雅婷", "梁貴鑫", "林旭弘", "陳宛臻", "陳幸愛", "李欣宸", "阮宜臻"]
+    judge_name = Array.new(30) { |i| "測試法官-#{i + 1}" }
     gender = ["男", "女", "其他"]
     judge_name.each_with_index do |n, _i|
       file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-23.jpg"
@@ -97,7 +97,7 @@ namespace :dev do
     Career.destroy_all
     career_types = ["任命", "調派", "再次調任", "首次調任", "提前回任", "調任", "歸建", "請辭", "再任", "留任", "調升", "調任歷練", "歷練遷調"]
     titles = ["檢察官", "副司長", "檢察長", "法官", "主任檢察官"]
-    Admin::Profile.all.each do |p|
+    Admin::Profile.last(10).each do |p|
       (3..5).to_a.sample.times do
         p.careers.create!(career_type: career_types.sample, new_unit: Admin::Court.all.sample.full_name, new_title: titles.sample, publish_at: rand(20).years.ago, is_hidden: false)
       end
