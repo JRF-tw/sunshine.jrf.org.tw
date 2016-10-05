@@ -18,7 +18,7 @@
     .form-group
       = f.input_field :confirmed_realdate, as: :boolean, boolean_style: :inline
       = f.label :confirmed_realdate do
-        | 確認此日期為實際開庭日期
+        = "實際開庭日有誤，我確認此日為實際開庭日。"
         = link_to '#', class: 'popover-trigger',
           'data-content' => '更改庭期規則',
           'data-placement' => 'top' do
