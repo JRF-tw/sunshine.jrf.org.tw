@@ -40,5 +40,10 @@ describe Lawyer::CheckScheduleScoreJudgeContext do
       before { create :schedule_score, story: story, schedule: schedule, judge: judge, schedule_rater: lawyer }
       it { expect(subject).to be_falsey }
     end
+
+    context "check confirmed realdate" do
+      before { params[:confirmed_realdate] = true }
+      it { expect(subject).to be_truthy }
+    end
   end
 end
