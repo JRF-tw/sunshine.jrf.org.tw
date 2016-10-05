@@ -53,7 +53,7 @@ module Capybara
     end
 
     def capybara_court_observer_input_info_schedule_score(story)
-      select "#{story.court.full_name}", from: "schedule_score_court_id"
+      select story.court.full_name.to_s, from: "schedule_score_court_id"
       within("#new_schedule_score") do
         fill_in "schedule_score_year", with: story.year
         fill_in "schedule_score_word_type", with: story.word_type
@@ -84,7 +84,7 @@ module Capybara
       click_button "送出評鑑"
     end
 
-    def capybara_court_observer_run_verdict_score_flow(story, judge)
+    def capybara_court_observer_run_verdict_score_flow
       visit(new_court_observer_score_verdict_path)
     end
   end
