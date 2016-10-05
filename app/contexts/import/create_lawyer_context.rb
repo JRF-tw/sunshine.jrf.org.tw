@@ -12,7 +12,7 @@ class Import::CreateLawyerContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      add_error(:lawyer_create_fail) unless @lawyer.save
+      return add_error(:lawyer_create_fail) unless @lawyer.save
       @lawyer
     end
   end
@@ -20,11 +20,11 @@ class Import::CreateLawyerContext < BaseContext
   private
 
   def check_email_not_exist
-    add_error(:lawyer_exist) if Lawyer.pluck(:email).include?(@lawyer_data[:email])
+    return add_error(:lawyer_exist) if Lawyer.pluck(:email).include?(@lawyer_data[:email])
   end
 
   def check_has_name_and_email
-    add_error(:lawyer_data_lack) unless @lawyer_data[:email].present? && @lawyer_data[:name].present?
+    return add_error(:lawyer_data_lack) unless @lawyer_data[:email].present? && @lawyer_data[:name].present?
   end
 
   def phone_format_check
