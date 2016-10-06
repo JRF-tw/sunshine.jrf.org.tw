@@ -83,7 +83,7 @@ class Parties::PhonesController < Parties::BaseController
   end
 
   def phone_params
-    params.fetch(:party_change_phone_form_object, {}).permit(:unconfirmed_phone)
+    params.fetch(:phone_form, {}).permit(:unconfirmed_phone)
   end
 
   def verify_params

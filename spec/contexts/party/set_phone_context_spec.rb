@@ -1,59 +1,60 @@
 require 'rails_helper'
 
 describe Party::SetPhoneContext do
-  let!(:party) { create :party }
-  let!(:params) { { unconfirmed_phone: '0911111111' } }
-  subject { described_class.new(party) }
+  let!(:phone_form) { create :party_change_phone_form_object, unconfirmed_phone: '0911111111' }
+  subject { described_class.new(phone_form) }
 
   describe '#perform' do
     context 'check_phone' do
-      let!(:params) { { unconfirmed_phone: '' } }
-      it { expect(subject.perform(params)).to be_falsey }
+      let!(:phone_form) { create :party_change_phone_form_object, unconfirmed_phone: '' }
+      it { expect(subject.perform).to be_falsey }
     end
 
     context 'check_phone_format' do
-      let!(:params) { { unconfirmed_phone: '092112312x' } }
-      it { expect(subject.perform(params)).to be_falsey }
+      let!(:phone_form) { create :party_change_phone_form_object, unconfirmed_phone: '092112312x' }
+      it { expect(subject.perform).to be_falsey }
     end
 
     context 'check_unexist_phone_number' do
-      let!(:party1) { create :party, phone_number: params[:unconfirmed_phone] }
-      it { expect(subject.perform(params)).to be_falsey }
+      let!(:party1) { create :party, phone_number: '0911222333' }
+      let!(:phone_form) { create :party_change_phone_form_object, unconfirmed_phone: '0911222333' }
+      it { expect(subject.perform).to be_falsey }
     end
 
     context 'check_phone_not_the_same' do
-      let!(:party1) { create :party }
-      let!(:params) { { unconfirmed_phone: party.phone_number } }
-      it { expect(subject.perform(params)).to be_falsey }
+      before { phone_form.unconfirmed_phone = phone_form.phone_number }
+      it { expect(subject.perform).to be_falsey }
     end
 
     context 'check_unexist_unconfirmed_phone' do
       let!(:party1) { create :party }
-      before { party1.unconfirmed_phone = params[:unconfirmed_phone] }
+      before { party1.unconfirmed_phone = '0911222333' }
+      let!(:phone_form) { create :party_change_phone_form_object, unconfirmed_phone: '0911222333' }
 
-      it { expect(subject.perform(params)).to be_falsey }
+      it { expect(subject.perform).to be_falsey }
     end
 
     context 'check_sms_send_count' do
-      before { party.sms_sent_count.value = 2 }
-      it { expect(subject.perform(params)).to be_falsey }
+      before { phone_form.party.sms_sent_count.value = 2 }
+      it { expect(subject.perform).to be_falsey }
     end
 
     context 'success' do
-      it { expect { subject.perform(params) }.to change { party.sms_sent_count.value } }
-      it { expect { subject.perform(params) }.to change_sidekiq_jobs_size_of(SmsService, :send_sms) }
+      it { expect { subject.perform }.to change { phone_form.party.sms_sent_count.value } }
+      it { expect { subject.perform }.to change_sidekiq_jobs_size_of(SmsService, :send_sms) }
 
       context 'assign_value' do
-        before { subject.perform(params) }
+        before { subject.perform }
 
-        it { expect(party.phone_varify_code.value).to be_present }
-        it { expect(party.unconfirmed_phone).to eq(params[:unconfirmed_phone]) }
+        it { expect(phone_form.party.phone_varify_code.value).to be_present }
+        it { expect(phone_form.party.unconfirmed_phone).to eq(phone_form.unconfirmed_phone) }
       end
 
-      context 'set_unconfirm' do
-        before { subject.perform(params) }
 
-        it { expect(party.confirmed?).to be_falsey }
+      context 'set_unconfirm' do
+        before { subject.perform }
+
+        it { expect(phone_form.party.confirmed?).to be_falsey }
       end
     end
   end

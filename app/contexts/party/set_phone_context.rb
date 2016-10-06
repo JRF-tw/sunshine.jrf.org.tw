@@ -1,8 +1,6 @@
 class Party::SetPhoneContext < BaseContext
-  PERMITS = [:unconfirmed_phone].freeze
   SENDINGLIMIT = 2
 
-  before_perform  :check_phone
   before_perform  :check_phone_format
   before_perform  :check_phone_not_the_same
   before_perform  :check_unexist_phone_number
@@ -15,43 +13,37 @@ class Party::SetPhoneContext < BaseContext
   after_perform   :send_sms
   after_perform   :increment_sms_count
 
-  def initialize(party)
-    @party = party
+  def initialize(phone_form)
+    @phone_form = phone_form
   end
 
-  def perform(params)
-    @params = permit_params(params[:party] || params, PERMITS)
-
+  def perform
     run_callbacks :perform do
-      return add_error(:data_create_fail, @party.errors.full_messages.join(',').to_s) unless @party.save
+      return add_error(:data_update_fail, @phone_form.errors.full_messages.join(',').to_s) unless @phone_form.save
       true
     end
   end
 
   private
 
-  def check_phone
-    return add_error(:phone_number_blank) unless @params[:unconfirmed_phone].present?
-  end
-
   def check_phone_format
-    return add_error(:invalid_phone_number) unless @params[:unconfirmed_phone] =~ /\A(0)(9)([0-9]{8})\z/
+    return add_error(:invalid_phone_number, @phone_form.errors.full_messages.join(",").to_s) unless @phone_form.valid?
   end
 
   def check_phone_not_the_same
-    return add_error(:phone_number_conflict) if @party.phone_number == @params[:unconfirmed_phone]
+    return add_error(:phone_number_conflict) if @phone_form.phone_number == @phone_form.unconfirmed_phone
   end
 
   def check_unexist_phone_number
-    return add_error(:phone_number_exist) if Party.pluck(:phone_number).include?(@params[:unconfirmed_phone])
+    return add_error(:phone_number_exist) if Party.pluck(:phone_number).include?(@phone_form.unconfirmed_phone)
   end
 
   def check_unexist_unconfirmed_phone
-    return add_error(:phone_number_confirming) if (Party.all.map { |n| n if n.unconfirmed_phone.value == @params[:unconfirmed_phone] }).compact.present?
+    return add_error(:phone_number_confirming) if (Party.all.map { |n| n if n.unconfirmed_phone.value == @phone_form.unconfirmed_phone }).compact.present?
   end
 
   def check_sms_send_count
-    return add_error(:send_sms_too_frequent) if @party.sms_sent_count.value >= SENDINGLIMIT
+    return add_error(:send_sms_too_frequent) if @phone_form.party.sms_sent_count.value >= SENDINGLIMIT
   end
 
   def generate_verify_code
@@ -59,25 +51,24 @@ class Party::SetPhoneContext < BaseContext
   end
 
   def assign_value
-    @party.unconfirmed_phone = @params[:unconfirmed_phone]
-    @party.phone_varify_code = @verify_code
+    @phone_form.phone_varify_code = @verify_code
   end
 
   def set_unconfirm
-    @party.phone_unconfirm!
+    @phone_form.party.phone_unconfirm!
   end
 
   def build_message
     link = verify_party_phone_url(host: Setting.host)
-    @message = "當事人手機驗證簡訊 發送至 #{@party.unconfirmed_phone.value}: 認證碼 : #{@party.phone_varify_code.value}, #{link}"
+    @message = "當事人手機驗證簡訊 發送至 #{@phone_form.unconfirmed_phone}: 認證碼 : #{@phone_form.phone_varify_code}, #{link}"
   end
 
   def send_sms
-    SmsService.send_async(@party.unconfirmed_phone.value, @message)
+    SmsService.send_async(@phone_form.unconfirmed_phone, @message)
   end
 
   def increment_sms_count
-    @party.sms_sent_count.increment
+    @phone_form.party.sms_sent_count.increment
   end
 
 end

@@ -1,4 +1,12 @@
 zh-TW:
+  activemodel:
+    models:
+      party/change_phone_form_object: "Phone form"
+    attributes:
+      party/change_phone_form_object:
+        phone_number: "舊手機號碼"
+        unconfirmed_phone: "手機號碼"
+        phone_varify_code: "手機驗證碼"
   activerecord:
     models:
       court: "法院 / 檢察署"
