@@ -44,6 +44,7 @@ feature "法官評鑑 - 旁觀者", type: :feature, js: true do
 
       Given "輸入庭期表「有」的日期 and 日期已超過期限（觀察者：3 日內）" do
         before { Timecop.freeze(Time.zone.today + 4.days) }
+        after { Timecop.return }
         before do
           within("#new_schedule_score") do
             fill_in "schedule_score_start_on", with: schedule.start_on
@@ -97,6 +98,7 @@ feature "法官評鑑 - 旁觀者", type: :feature, js: true do
 
       Given "輸入庭期表「沒有」的日期 and 日期已超過期限（觀察者：3 日內）" do
         before { Timecop.freeze(Time.zone.today + 4.days) }
+        after { Timecop.return }
         before do
           within("#new_schedule_score") do
             fill_in "schedule_score_start_on", with: schedule.start_on
