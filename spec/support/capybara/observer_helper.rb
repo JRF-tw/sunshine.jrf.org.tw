@@ -84,6 +84,14 @@ module Capybara
       click_button "送出評鑑"
     end
 
+    def capybara_court_observer_edit_schedule_score
+      visit(court_observer_root_path)
+      find(:xpath, "//tbody/tr/td/a").click
+      sleep 1
+      click_link("編輯評鑑")
+      sleep 1
+    end
+
     def capybara_court_observer_run_verdict_score_flow
       visit(new_court_observer_score_verdict_path)
     end

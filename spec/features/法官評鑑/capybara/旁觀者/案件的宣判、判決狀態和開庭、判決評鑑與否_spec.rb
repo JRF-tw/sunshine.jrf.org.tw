@@ -12,7 +12,7 @@ feature "法官評鑑 - 旁觀者", type: :feature, js: true do
       before { story.update_attributes(is_adjudge: false) }
 
       Given "案件無宣判日" do
-        When "進行開庭評鑑" do
+        When "進行新增開庭評鑑" do
           before { capybara_court_observer_run_schedule_score_flow(story, schedule, judge) }
 
           Then "成功新增開庭評鑑" do
@@ -20,7 +20,16 @@ feature "法官評鑑 - 旁觀者", type: :feature, js: true do
           end
         end
 
-        When "進行判決評鑑" do
+        When "進行編輯開庭評鑑" do
+          before { capybara_court_observer_run_schedule_score_flow(story, schedule, judge) }
+          before { capybara_court_observer_edit_schedule_score }
+          before { click_button "更新評鑑" }
+          Then "成功編輯開庭評鑑" do
+            expect(page).to have_content("感謝您的評鑑")
+          end
+        end
+
+        When "進行新增判決評鑑" do
           before { visit(new_court_observer_score_verdict_path) }
 
           Then "無法進行" do
@@ -32,7 +41,7 @@ feature "法官評鑑 - 旁觀者", type: :feature, js: true do
       Given "案件的宣判日在未來" do
         before { story.update_attributes(pronounce_date: Time.zone.today + 1.day) }
 
-        When "進行開庭評鑑" do
+        When "進行新增開庭評鑑" do
           before { capybara_court_observer_run_schedule_score_flow(story, schedule, judge) }
 
           Then "成功新增開庭評鑑" do
@@ -40,7 +49,16 @@ feature "法官評鑑 - 旁觀者", type: :feature, js: true do
           end
         end
 
-        When "進行判決評鑑" do
+        When "進行編輯開庭評鑑" do
+          before { capybara_court_observer_run_schedule_score_flow(story, schedule, judge) }
+          before { capybara_court_observer_edit_schedule_score }
+          before { click_button "更新評鑑" }
+          Then "成功編輯開庭評鑑" do
+            expect(page).to have_content("感謝您的評鑑")
+          end
+        end
+
+        When "進行新增判決評鑑" do
           before { visit(new_court_observer_score_verdict_path) }
 
           Then "無法進行" do
@@ -52,7 +70,7 @@ feature "法官評鑑 - 旁觀者", type: :feature, js: true do
       Given "案件的宣判日在過去" do
         before { story.update_attributes(pronounce_date: Time.zone.today - 1.day) }
 
-        When "進行開庭評鑑" do
+        When "進行新增開庭評鑑" do
           before { visit(input_info_court_observer_score_schedules_path) }
           before { capybara_court_observer_input_info_schedule_score(story) }
 
@@ -61,7 +79,7 @@ feature "法官評鑑 - 旁觀者", type: :feature, js: true do
           end
         end
 
-        When "進行判決評鑑" do
+        When "進行新增判決評鑑" do
           before { visit(new_court_observer_score_verdict_path) }
 
           Then "無法進行" do
@@ -78,7 +96,7 @@ feature "法官評鑑 - 旁觀者", type: :feature, js: true do
         before { story.update_attributes(adjudge_date: Time.zone.today) }
         before { story.update_attributes(pronounce_date: Time.zone.today) }
 
-        When "進行開庭評鑑" do
+        When "進行新增開庭評鑑" do
           before { visit(input_info_court_observer_score_schedules_path) }
           before { capybara_court_observer_input_info_schedule_score(story) }
 
@@ -87,10 +105,10 @@ feature "法官評鑑 - 旁觀者", type: :feature, js: true do
           end
         end
 
-        When "進行判決評鑑" do
+        When "進行新增判決評鑑" do
           before { capybara_court_observer_run_verdict_score_flow }
 
-          Then "成功新增判決評鑑" do
+          Then "無法進行" do
             expect(page).to have_content("此頁面不存在")
           end
         end
@@ -100,7 +118,7 @@ feature "法官評鑑 - 旁觀者", type: :feature, js: true do
         before { story.update_attributes(adjudge_date: Time.zone.today - 2.months) }
         before { story.update_attributes(pronounce_date: Time.zone.today - 4.months) }
 
-        When "進行開庭評鑑" do
+        When "進行新增開庭評鑑" do
           before { visit(input_info_court_observer_score_schedules_path) }
           before { capybara_court_observer_input_info_schedule_score(story) }
 
@@ -109,10 +127,10 @@ feature "法官評鑑 - 旁觀者", type: :feature, js: true do
           end
         end
 
-        When "進行判決評鑑" do
+        When "進行新增判決評鑑" do
           before { capybara_court_observer_run_verdict_score_flow }
 
-          Then "成功新增判決評鑑" do
+          Then "無法進行" do
             expect(page).to have_content("此頁面不存在")
           end
         end
@@ -122,7 +140,7 @@ feature "法官評鑑 - 旁觀者", type: :feature, js: true do
         before { story.update_attributes(adjudge_date: Time.zone.today - 4.months) }
         before { story.update_attributes(pronounce_date: Time.zone.today - 4.months) }
 
-        When "進行開庭評鑑" do
+        When "進行新增開庭評鑑" do
           before { visit(input_info_court_observer_score_schedules_path) }
           before { capybara_court_observer_input_info_schedule_score(story) }
 
@@ -131,7 +149,7 @@ feature "法官評鑑 - 旁觀者", type: :feature, js: true do
           end
         end
 
-        When "進行判決評鑑" do
+        When "進行新增判決評鑑" do
           before { visit(new_court_observer_score_verdict_path) }
 
           Then "無法進行" do

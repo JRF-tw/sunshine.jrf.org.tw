@@ -74,6 +74,14 @@ module Capybara
       click_button "送出評鑑"
     end
 
+    def capybara_lawyer_edit_schedule_score
+      visit(lawyer_root_path)
+      find(:xpath, "//tbody/tr/td/a").click
+      sleep 1
+      click_link("編輯評鑑")
+      sleep 1
+    end
+
     def capybara_lawyer_run_verdict_score_flow(story, judge)
       visit(input_info_lawyer_score_verdicts_path)
       capybara_lawyer_input_info_verdict_score(story)
@@ -104,6 +112,14 @@ module Capybara
         fill_in "verdict_score_note", with: "test"
       end
       click_button "送出評鑑"
+    end
+
+    def capybara_lawyer_edit_verdict_score
+      visit(lawyer_root_path)
+      find(:xpath, "//tbody/tr/td/a").click
+      sleep 1
+      click_link("編輯評鑑")
+      sleep 1
     end
   end
 end
