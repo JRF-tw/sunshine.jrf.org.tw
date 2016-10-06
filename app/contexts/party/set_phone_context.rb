@@ -15,6 +15,7 @@ class Party::SetPhoneContext < BaseContext
 
   def initialize(phone_form)
     @phone_form = phone_form
+    @party = @phone_form.party
   end
 
   def perform
@@ -43,7 +44,7 @@ class Party::SetPhoneContext < BaseContext
   end
 
   def check_sms_send_count
-    return add_error(:send_sms_too_frequent) if @phone_form.party.sms_sent_count.value >= SENDINGLIMIT
+    return add_error(:send_sms_too_frequent) if @party.sms_sent_count.value >= SENDINGLIMIT
   end
 
   def generate_verify_code
@@ -55,7 +56,7 @@ class Party::SetPhoneContext < BaseContext
   end
 
   def set_unconfirm
-    @phone_form.party.phone_unconfirm!
+    @party.phone_unconfirm!
   end
 
   def build_message
@@ -68,7 +69,7 @@ class Party::SetPhoneContext < BaseContext
   end
 
   def increment_sms_count
-    @phone_form.party.sms_sent_count.increment
+    @party.sms_sent_count.increment
   end
 
 end

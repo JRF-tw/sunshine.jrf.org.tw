@@ -47,7 +47,7 @@ module PartyHelper
   end
 
   def party_verifing_error_times(times)
-    times.times { put "/party/phone/verifing", party_verify_phone_form_object: { phone_varify_code: "" } }
+    times.times { put "/party/phone/verifing", verify_form: { phone_varify_code: "" } }
   end
 
   def party_subscribe_story_date_today

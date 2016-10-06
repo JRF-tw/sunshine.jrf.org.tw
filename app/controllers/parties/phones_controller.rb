@@ -52,8 +52,8 @@ class Parties::PhonesController < Parties::BaseController
   end
 
   def verifing
-    context = Party::VerifyPhoneContext.new(current_party)
-    if context.perform(verify_params)
+    context = Party::VerifyPhoneContext.new(@verify_form)
+    if context.perform
       redirect_to party_root_path, flash: { success: "已驗證成功" }
     elsif context.errors.include?(:retry_verify_count_out_range)
       redirect_to edit_party_phone_path, flash: { error: context.error_messages.join(', ').to_s }
@@ -87,7 +87,7 @@ class Parties::PhonesController < Parties::BaseController
   end
 
   def verify_params
-    params.fetch(:party_verify_phone_form_object, {}).permit(:phone_varify_code)
+    params.fetch(:verify_form, {}).permit(:phone_varify_code)
   end
 
   def can_verify?

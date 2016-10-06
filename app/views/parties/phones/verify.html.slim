@@ -1,11 +1,11 @@
 = render layout: 'components/card', locals: {heading: '輸入驗證碼'}
-  = simple_form_for @verify_form,
+  = simple_form_for @verify_form, as: "verify_form",
     url: verifing_party_phone_url,
     method: :put,
     wrapper: :md do |f|
 
-    = f.input :unconfirmed_phone, disabled: true, label: '手機號碼'
-    = f.input :phone_varify_code, label: "認證碼"
+    = f.input :unconfirmed_phone, disabled: true
+    = f.input :phone_varify_code
 
     = render 'components/form_actions',
       f: f,

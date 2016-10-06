@@ -52,12 +52,12 @@ RSpec.describe Parties::PhonesController, type: :request do
     before { current_party.phone_varify_code = '1111' }
 
     context "success" do
-      subject! { put "/party/phone/verifing", party_verify_phone_form_object: { phone_varify_code: "1111" } }
+      subject! { put "/party/phone/verifing", verify_form: { phone_varify_code: "1111" } }
       it { expect(response).to redirect_to("/party") }
     end
 
     context "fail" do
-      subject! { put "/party/phone/verifing", party_verify_phone_form_object: { phone_varify_code: "1234" } }
+      subject! { put "/party/phone/verifing", verify_form: { phone_varify_code: "1234" } }
       it { expect(response).to be_success }
       it { expect(response.body).to match('1234') }
     end
