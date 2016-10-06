@@ -19,7 +19,7 @@ module Capybara
     end
 
     def capybara_party_input_info_schedule_score(story, court: nil, year: nil, word_type: nil, number: nil)
-      select court ? court.full_name.to_s : story.court.full_name.to_s, from: "schedule_score_court_id"
+      select court ? court.full_name : story.court.full_name, from: "schedule_score_court_id"
       within("#new_schedule_score") do
         fill_in "schedule_score_year", with: year ? year : story.year
         fill_in "schedule_score_word_type", with: word_type ? word_type : story.word_type
@@ -57,12 +57,12 @@ module Capybara
       capybara_party_create_verdict_score
     end
 
-    def capybara_party_input_info_verdict_score(story)
-      select story.court.full_name.to_s, from: "verdict_score_court_id"
+    def capybara_party_input_info_verdict_score(story, court: nil, year: nil, word_type: nil, number: nil)
+      select court ? court.full_name : story.court.full_name, from: "verdict_score_court_id"
       within("#new_verdict_score") do
-        fill_in "verdict_score_year", with: story.year
-        fill_in "verdict_score_word_type", with: story.word_type
-        fill_in "verdict_score_number", with: story.number
+        fill_in "verdict_score_year", with: year ? year : story.year
+        fill_in "verdict_score_word_type", with: word_type ? word_type : story.word_type
+        fill_in "verdict_score_number", with: number ? number : story.number
       end
       click_button "下一步"
     end
