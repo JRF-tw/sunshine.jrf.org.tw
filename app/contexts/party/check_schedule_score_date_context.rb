@@ -3,6 +3,7 @@ class Party::CheckScheduleScoreDateContext < BaseContext
   SCORE_INTERVEL = 14.days
   MAX_REPORT_TIME = 5
 
+  before_perform :check_story
   before_perform :check_date
   before_perform :future_date
   before_perform :find_story, unless: :report_realdate?
@@ -24,8 +25,10 @@ class Party::CheckScheduleScoreDateContext < BaseContext
 
   private
 
-  def report_realdate?
-    ActiveRecord::Type::Boolean.new.type_cast_from_database(@params[:confirmed_realdate])
+  def check_story
+    context = Party::CheckScheduleScoreInfoContext.new(@party)
+    @story = context.perform(@params)
+    return add_error(:story_not_found, context.error_messages.join(",")) unless @story
   end
 
   def check_date
@@ -58,5 +61,9 @@ class Party::CheckScheduleScoreDateContext < BaseContext
     if @party.score_report_schedule_real_date.value >= MAX_REPORT_TIME
       SlackService.user_report_schedule_date_over_range_async("當事人 : #{@party.name} 已超過回報庭期真實開庭日期次數")
     end
+  end
+
+  def report_realdate?
+    ActiveRecord::Type::Boolean.new.type_cast_from_database(@params[:confirmed_realdate])
   end
 end

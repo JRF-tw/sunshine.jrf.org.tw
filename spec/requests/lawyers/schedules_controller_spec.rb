@@ -84,7 +84,7 @@ RSpec.describe Lawyers::SchedulesController, type: :request do
       end
 
       context "error params" do
-        subject! { post "/lawyer/score/schedules/check_judge", schedule_score: {} }
+        subject! { post "/lawyer/score/schedules", schedule_score: {} }
         it { expect(response).to be_redirect }
         it { expect(flash[:error]).to eq("選擇法院不存在") }
       end
