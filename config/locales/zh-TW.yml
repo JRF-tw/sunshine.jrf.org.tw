@@ -164,6 +164,7 @@ zh-TW:
       story_already_have_judgement: "已有判決書, 不可評鑑開庭"
       schedule_score_update_fail: "評鑑更新失敗"
       schedule_rating_score_blank: "開庭滿意度分數為必填"
+      schedule_attitude_score_blank: "開庭態度分數為必填"
       schedule_not_found: "查無此庭期"
       subscribe_fail: "訂閱失敗"
       story_subscription_not_found: "無此訂閱資料"

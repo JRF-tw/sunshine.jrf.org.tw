@@ -79,6 +79,7 @@ class Errors::Code
     schedule_not_exist: 400,
     schedule_not_found: 400,
     schedule_rating_score_blank: 400,
+    schedule_attitude_score_blank: 400,
     schedule_score_update_fail: 400,
     subscribe_fail: 400,
     subscriber_without_password: 401,

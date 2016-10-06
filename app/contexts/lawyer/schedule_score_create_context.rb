@@ -38,7 +38,7 @@ class Lawyer::ScheduleScoreCreateContext < BaseContext
 
   def check_attitude_score
     # TODO : check score type attitude_score & rating_score
-    return add_error(:schedule_rating_score_blank) unless @params[:attitude_score].present?
+    return add_error(:schedule_attitude_score_blank) unless @params[:attitude_score].present?
   end
 
   def check_story
