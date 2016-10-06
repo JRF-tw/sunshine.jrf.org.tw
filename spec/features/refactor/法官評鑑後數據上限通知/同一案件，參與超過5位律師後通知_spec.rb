@@ -22,7 +22,6 @@ feature "法官評鑑後數據上限通知", type: :request do
       When "「未評鑑此案件律師」新增案件的「判決評鑑」" do
         before { story.update_attributes(adjudge_date: Time.zone.today) }
         subject { post "/lawyer/score/verdicts", verdict_score: verdict_score_params }
-
         Then "發送通知" do
           expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify)
         end
@@ -31,7 +30,6 @@ feature "法官評鑑後數據上限通知", type: :request do
       When "「已評鑑此案件律師」新增案件的「開庭評鑑」" do
         before { create :schedule_score, schedule_rater: lawyer, story: story }
         subject { post "/lawyer/score/schedules", schedule_score: schedule_score_params }
-
         Then "不發送通知" do
           expect { subject }.not_to change_sidekiq_jobs_size_of(SlackService, :notify)
         end
@@ -41,7 +39,6 @@ feature "法官評鑑後數據上限通知", type: :request do
         before { story.update_attributes(adjudge_date: Time.zone.today) }
         before { create :schedule_score, schedule_rater: lawyer, story: story }
         subject { post "/lawyer/score/verdicts", verdict_score: verdict_score_params }
-
         Then "不發送通知" do
           expect { subject }.not_to change_sidekiq_jobs_size_of(SlackService, :notify)
         end

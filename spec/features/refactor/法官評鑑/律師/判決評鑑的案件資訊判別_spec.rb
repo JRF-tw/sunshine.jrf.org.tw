@@ -23,7 +23,6 @@ feature "法官評鑑 - 律師", type: :feature, js: true do
 
       Given "輸入非該法院下的正確案件資訊" do
         before { capybara_lawyer_input_info_verdict_score(story, court: court1) }
-
         When "送出" do
           before { click_button "下一步" }
           Then "顯示錯誤訊息，頁面仍保留原始輸入資訊" do
