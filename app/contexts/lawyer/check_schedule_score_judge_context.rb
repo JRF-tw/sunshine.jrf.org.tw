@@ -1,10 +1,10 @@
 class Lawyer::CheckScheduleScoreJudgeContext < BaseContext
   PERMITS = [:court_id, :year, :word_type, :number, :start_on, :confirmed_realdate, :judge_name].freeze
 
+  before_perform :check_story
+  before_perform :check_schedule
   before_perform :check_judge_name
   before_perform :find_judge
-  before_perform :find_story
-  before_perform :find_schedule
   before_perform :check_judge_in_correct_court
   before_perform :check_judge_already_scored
 
@@ -21,6 +21,18 @@ class Lawyer::CheckScheduleScoreJudgeContext < BaseContext
 
   private
 
+  def check_story
+    context = Lawyer::CheckScheduleScoreInfoContext.new(@lawyer)
+    @story = context.perform(@params)
+    return add_error(:story_not_found, context.error_messages.join(",")) unless @story
+  end
+
+  def check_schedule
+    context = Lawyer::CheckScheduleScoreDateContext.new(@lawyer)
+    @schedule = context.perform(@params)
+    return add_error(:schedule_not_found, context.error_messages.join(",")) if context.has_error?
+  end
+
   def check_judge_name
     return add_error(:judge_name_blank) unless @params[:judge_name].present?
   end
@@ -29,18 +41,6 @@ class Lawyer::CheckScheduleScoreJudgeContext < BaseContext
     # TODO : need check same name issue
     @judge = Judge.where(name: @params[:judge_name]).last
     return add_error(:judge_not_found) unless @judge
-  end
-
-  def find_story
-    context = Lawyer::CheckScheduleScoreInfoContext.new(@lawyer)
-    @story = context.perform(@params)
-    return add_error(:story_not_found, context.error_messages.join(",")) unless @story
-  end
-
-  def find_schedule
-    context = Lawyer::CheckScheduleScoreDateContext.new(@lawyer)
-    @schedule = context.perform(@params)
-    return add_error(:schedule_not_found, context.error_messages.join(",")) if context.has_error?
   end
 
   def check_judge_in_correct_court

@@ -2,9 +2,9 @@ class Lawyer::VerdictScoreCreateContext < BaseContext
   PERMITS = [:court_id, :year, :word_type, :number, :judge_name, :quality_score, :note, :appeal_judge].freeze
 
   # before_perform :can_not_score
-  before_perform :check_quality_score
   before_perform :check_story
   before_perform :check_judge
+  before_perform :check_quality_score
   before_perform :build_verdict_score
   before_perform :find_judgment
   before_perform :assign_attribute
@@ -31,10 +31,6 @@ class Lawyer::VerdictScoreCreateContext < BaseContext
     # TODO : Block user
   end
 
-  def check_quality_score
-    return add_error(:quality_score_blank) unless @params[:quality_score].present?
-  end
-
   def check_story
     context = Lawyer::VerdictScoreCheckInfoContext.new(@lawyer)
     @story = context.perform(@params)
@@ -43,6 +39,10 @@ class Lawyer::VerdictScoreCreateContext < BaseContext
 
   def check_judge
     @judge = Lawyer::VerdictScoreCheckJudgeContext.new(@lawyer).perform(@params)
+  end
+
+  def check_quality_score
+    return add_error(:quality_score_blank) unless @params[:quality_score].present?
   end
 
   def build_verdict_score

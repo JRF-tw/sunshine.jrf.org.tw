@@ -2,9 +2,9 @@ class Party::VerdictScoreCreateContext < BaseContext
   PERMITS = [:court_id, :year, :word_type, :number, :judge_name, :rating_score, :note, :appeal_judge].freeze
 
   # before_perform :can_not_score
-  before_perform :check_rating_score
   before_perform :check_story
   before_perform :check_judge
+  before_perform :check_rating_score
   before_perform :build_verdict_score
   before_perform :find_judgment
   before_perform :assign_attribute
@@ -31,10 +31,6 @@ class Party::VerdictScoreCreateContext < BaseContext
     # TODO : Block user
   end
 
-  def check_rating_score
-    return add_error(:judge_rating_score_blank) unless @params[:rating_score].present?
-  end
-
   def check_story
     context = Party::VerdictScoreCheckInfoContext.new(@party)
     @story = context.perform(@params)
@@ -43,6 +39,10 @@ class Party::VerdictScoreCreateContext < BaseContext
 
   def check_judge
     @judge = Party::VerdictScoreCheckJudgeContext.new(@party).perform(@params)
+  end
+
+  def check_rating_score
+    return add_error(:judge_rating_score_blank) unless @params[:rating_score].present?
   end
 
   def build_verdict_score

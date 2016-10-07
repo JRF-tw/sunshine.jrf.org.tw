@@ -2,11 +2,11 @@ class Lawyer::ScheduleScoreCreateContext < BaseContext
   PERMITS = [:court_id, :year, :word_type, :number, :start_on, :confirmed_realdate, :judge_name, :command_score, :attitude_score, :note, :appeal_judge].freeze
 
   # before_perform :can_not_score
-  before_perform :check_command_score
-  before_perform :check_attitude_score
   before_perform :check_story
   before_perform :check_schedule
   before_perform :check_judge
+  before_perform :check_command_score
+  before_perform :check_attitude_score
   before_perform :build_schedule_score
   before_perform :assign_attribute
   before_perform :get_scorer_ids
