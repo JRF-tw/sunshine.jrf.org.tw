@@ -4,20 +4,20 @@ describe Party::SetPhoneContext do
   let!(:phone_form) { create :party_change_phone_form_object, unconfirmed_phone: '0911111111' }
   subject { described_class.new(phone_form) }
 
-  describe '#perform' do
-    context 'check_phone' do
-      let!(:phone_form) { create :party_change_phone_form_object, unconfirmed_phone: '' }
+  describe "#perform" do
+    context "check_phone" do
+      before { phone_form.unconfirmed_phone = "" }
       it { expect(subject.perform).to be_falsey }
     end
 
-    context 'check_phone_format' do
-      let!(:phone_form) { create :party_change_phone_form_object, unconfirmed_phone: '092112312x' }
+    context "check_phone_format" do
+      before { phone_form.unconfirmed_phone = "092112312x" }
       it { expect(subject.perform).to be_falsey }
     end
 
-    context 'check_unexist_phone_number' do
-      let!(:party1) { create :party, phone_number: '0911222333' }
-      let!(:phone_form) { create :party_change_phone_form_object, unconfirmed_phone: '0911222333' }
+    context "check_unexist_phone_number" do
+      let!(:party) { create :party, phone_number: "0911222333" }
+      before { phone_form.unconfirmed_phone = "0911222333" }
       it { expect(subject.perform).to be_falsey }
     end
 
@@ -26,10 +26,10 @@ describe Party::SetPhoneContext do
       it { expect(subject.perform).to be_falsey }
     end
 
-    context 'check_unexist_unconfirmed_phone' do
-      let!(:party1) { create :party }
-      before { party1.unconfirmed_phone = '0911222333' }
-      let!(:phone_form) { create :party_change_phone_form_object, unconfirmed_phone: '0911222333' }
+    context "check_unexist_unconfirmed_phone" do
+      let!(:party) { create :party }
+      before { party.unconfirmed_phone = "0911222333" }
+      before { phone_form.unconfirmed_phone = "0911222333" }
 
       it { expect(subject.perform).to be_falsey }
     end

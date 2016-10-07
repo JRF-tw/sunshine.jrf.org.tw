@@ -12,11 +12,7 @@ class Party::VerifyPhoneFormObject
   end
 
   def save
-    if valid?
-      @party.update_attributes(phone_number: unconfirmed_phone)
-      true
-    else
-      false
-    end
+    return false unless valid?
+    @party.update_attributes(phone_number: unconfirmed_phone)
   end
 end

@@ -13,11 +13,7 @@ class Party::ChangePhoneFormObject
   end
 
   def save
-    if valid?
-      @party.update_attributes(unconfirmed_phone: unconfirmed_phone, phone_varify_code: phone_varify_code)
-      true
-    else
-      false
-    end
+    return false unless valid?
+    @party.update_attributes(unconfirmed_phone: unconfirmed_phone, phone_varify_code: phone_varify_code)
   end
 end
