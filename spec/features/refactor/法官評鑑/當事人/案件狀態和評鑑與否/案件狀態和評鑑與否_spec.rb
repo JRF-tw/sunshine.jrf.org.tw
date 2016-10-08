@@ -7,7 +7,7 @@ feature "法官評鑑 - 當事人", type: :feature, js: true do
   let!(:schedule) { create :schedule, court: court, story: story }
   before { capybara_signin_party(party) }
 
-  feature "案件的宣判、判決狀態和開庭、判決評鑑與否" do
+  feature "案件的狀態和評鑑與否" do
     Scenario "案件尚未抓到判決書 (即沒有判決日)" do
       before { story.update_attributes(is_adjudge: false) }
       Given "案件無宣判日" do
