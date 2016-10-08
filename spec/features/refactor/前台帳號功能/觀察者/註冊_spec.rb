@@ -1,5 +1,5 @@
 require "rails_helper"
-feature "觀察者透過 email 建立帳號到通過認證", type: :feature, js: true do
+feature "觀察者註冊 (Email)", type: :feature, js: true do
   let!(:observer_a) { { name: "當事人a", email: "test@gmail.com", password: "00000000" } }
 
   feature "相同的 email 無法再註冊" do
