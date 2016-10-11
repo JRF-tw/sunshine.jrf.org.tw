@@ -1,7 +1,7 @@
 class Party::SetPhoneContext < BaseContext
   SENDINGLIMIT = 2
 
-  before_perform  :check_phone_format
+  before_perform  :check_phone_form_valid
   before_perform  :check_phone_not_the_same
   before_perform  :check_unexist_phone_number
   before_perform  :check_unexist_unconfirmed_phone
@@ -27,7 +27,7 @@ class Party::SetPhoneContext < BaseContext
 
   private
 
-  def check_phone_format
+  def check_phone_form_valid
     return add_error(:invalid_phone_number, @phone_form.errors.full_messages.join(",").to_s) unless @phone_form.valid?
   end
 
