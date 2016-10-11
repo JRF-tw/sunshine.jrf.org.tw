@@ -1,6 +1,7 @@
 class Import::CreateLawyerContext < BaseContext
   before_perform  :check_email_not_exist
-  before_perform  :check_has_name_and_email
+  before_perform  :check_has_name
+  before_perform  :check_has_email
   before_perform  :phone_format_check
   before_perform  :assign_phone_number, if: :is_phone?
   before_perform  :assign_office_number, unless: :is_phone?
@@ -23,8 +24,12 @@ class Import::CreateLawyerContext < BaseContext
     return add_error(:lawyer_exist) if Lawyer.pluck(:email).include?(@lawyer_data[:email])
   end
 
-  def check_has_name_and_email
-    return add_error(:lawyer_data_lack) unless @lawyer_data[:email].present? && @lawyer_data[:name].present?
+  def check_has_name
+    return add_error(:lawyer_name_lack) unless @lawyer_data[:name].present?
+  end
+
+  def check_has_email
+    return add_error(:lawyer_email_lack) unless @lawyer_data[:email].present?
   end
 
   def phone_format_check
