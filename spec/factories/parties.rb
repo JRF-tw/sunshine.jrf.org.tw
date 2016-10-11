@@ -25,7 +25,6 @@
 #  imposter                 :boolean          default(FALSE)
 #  imposter_identify_number :string
 #  phone_confirmed_at       :datetime
-#  subscribe_edm            :boolean          default(FALSE)
 #
 
 FactoryGirl.define do
