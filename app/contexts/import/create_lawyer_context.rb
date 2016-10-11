@@ -25,11 +25,11 @@ class Import::CreateLawyerContext < BaseContext
   end
 
   def check_has_name
-    return add_error(:lawyer_name_lack) unless @lawyer_data[:name].present?
+    return add_error(:lawyer_name_blank) unless @lawyer_data[:name].present?
   end
 
   def check_has_email
-    return add_error(:lawyer_email_lack) unless @lawyer_data[:email].present?
+    return add_error(:lawyer_email_blank) unless @lawyer_data[:email].present?
   end
 
   def phone_format_check
