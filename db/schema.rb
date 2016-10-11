@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160905095026) do
+ActiveRecord::Schema.define(version: 20161011031058) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,13 +125,13 @@ ActiveRecord::Schema.define(version: 20160905095026) do
   add_index "careers", ["profile_id"], name: "index_careers_on_profile_id", using: :btree
 
   create_table "court_observers", force: :cascade do |t|
-    t.string   "name",                                   null: false
-    t.string   "email",                                  null: false
-    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "name",                                null: false
+    t.string   "email",                               null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -140,14 +140,13 @@ ActiveRecord::Schema.define(version: 20160905095026) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.string   "phone_number"
     t.string   "school"
     t.string   "student_number"
     t.string   "department_level"
     t.date     "last_scored_at"
-    t.boolean  "subscribe_edm",          default: false
   end
 
   add_index "court_observers", ["confirmation_token"], name: "index_court_observers_on_confirmation_token", unique: true, using: :btree
@@ -155,7 +154,6 @@ ActiveRecord::Schema.define(version: 20160905095026) do
   add_index "court_observers", ["last_scored_at"], name: "index_court_observers_on_last_scored_at", using: :btree
   add_index "court_observers", ["reset_password_token"], name: "index_court_observers_on_reset_password_token", unique: true, using: :btree
   add_index "court_observers", ["school"], name: "index_court_observers_on_school", using: :btree
-  add_index "court_observers", ["subscribe_edm"], name: "index_court_observers_on_subscribe_edm", using: :btree
 
   create_table "courts", force: :cascade do |t|
     t.string   "court_type"
@@ -264,20 +262,20 @@ ActiveRecord::Schema.define(version: 20160905095026) do
   add_index "judgments", ["main_judge_id"], name: "index_judgments_on_main_judge_id", using: :btree
 
   create_table "lawyers", force: :cascade do |t|
-    t.string   "name",                                   null: false
+    t.string   "name",                                null: false
     t.string   "current"
     t.string   "avatar"
     t.string   "gender"
     t.integer  "birth_year"
     t.string   "memo"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.string   "email",                                  null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "email",                               null: false
     t.string   "encrypted_password",     default: ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "last_sign_in_at"
     t.datetime "current_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -288,13 +286,11 @@ ActiveRecord::Schema.define(version: 20160905095026) do
     t.string   "unconfirmed_email"
     t.string   "phone_number"
     t.string   "office_number"
-    t.boolean  "subscribe_edm",          default: false
   end
 
   add_index "lawyers", ["confirmation_token"], name: "index_lawyers_on_confirmation_token", unique: true, using: :btree
   add_index "lawyers", ["email"], name: "index_lawyers_on_email", unique: true, using: :btree
   add_index "lawyers", ["reset_password_token"], name: "index_lawyers_on_reset_password_token", unique: true, using: :btree
-  add_index "lawyers", ["subscribe_edm"], name: "index_lawyers_on_subscribe_edm", using: :btree
 
   create_table "licenses", force: :cascade do |t|
     t.integer  "profile_id"
@@ -337,14 +333,12 @@ ActiveRecord::Schema.define(version: 20160905095026) do
     t.boolean  "imposter",                 default: false
     t.string   "imposter_identify_number"
     t.datetime "phone_confirmed_at"
-    t.boolean  "subscribe_edm",            default: false
   end
 
   add_index "parties", ["confirmation_token"], name: "index_parties_on_confirmation_token", unique: true, using: :btree
   add_index "parties", ["email"], name: "index_parties_on_email", unique: true, using: :btree
   add_index "parties", ["imposter"], name: "index_parties_on_imposter", using: :btree
   add_index "parties", ["reset_password_token"], name: "index_parties_on_reset_password_token", unique: true, using: :btree
-  add_index "parties", ["subscribe_edm"], name: "index_parties_on_subscribe_edm", using: :btree
 
   create_table "procedures", force: :cascade do |t|
     t.integer  "profile_id"
@@ -498,8 +492,8 @@ ActiveRecord::Schema.define(version: 20160905095026) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.integer  "branch_judge_id"
-    t.string   "courtroom"
     t.datetime "start_at"
+    t.string   "courtroom"
   end
 
   add_index "schedules", ["branch_judge_id", "court_id", "story_id"], name: "index_schedules_on_branch_judge_id_and_court_id_and_story_id", using: :btree
