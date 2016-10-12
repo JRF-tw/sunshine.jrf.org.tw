@@ -53,5 +53,4 @@ class Lawyer::RegisterContext < BaseContext
   def send_setting_password_mail
     CustomDeviseMailer.delay.send_setting_password_mail(@lawyer, @token)
   end
-
 end

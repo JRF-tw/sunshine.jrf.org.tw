@@ -7,6 +7,10 @@ describe Party::RegisterCheckContext do
     context "success" do
       let!(:params) { { party: { name: "老夫子", identify_number: "F122121211", password: "123123123", password_confirmation: "123123123" } } }
       it { expect(subject.perform).to be_truthy }
+
+      context "alert!" do
+        it { expect { subject.perform }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      end
     end
 
     context "fail" do

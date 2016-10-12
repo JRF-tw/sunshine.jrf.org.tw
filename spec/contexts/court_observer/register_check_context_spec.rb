@@ -7,6 +7,10 @@ describe CourtObserver::RegisterCheckContext do
     context "success" do
       let!(:params) { { court_observer: { name: "老夫子", email: "hh5566@gmail.com", password: "123123123", password_confirmation: "123123123" }, policy_agreement: "1" } }
       it { expect(subject.perform).to be_truthy }
+
+      context "alert!" do
+        it { expect { subject.perform }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      end
     end
 
     context "fail" do
