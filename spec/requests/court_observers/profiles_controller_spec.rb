@@ -20,10 +20,18 @@ RSpec.describe CourtObservers::ProfilesController, type: :request do
     end
 
     context "fails" do
-      subject! { put "/observer/profile", court_observer: { name: "柯南", phone_number: "1111" } }
-      it { expect(response.body).to match("柯南") }
-      it { expect(response.body).to match("1111") }
-      it { expect(response).to be_success }
+      context "empty name" do
+        subject! { put "/observer/profile", court_observer: { name: "", phone_number: "0933803939" } }
+        it { expect(response.body).to match("0933803939") }
+        it { expect(response).to render_template("edit") }
+      end
+
+      context "invalid phone_number" do
+        subject! { put "/observer/profile", court_observer: { name: "柯南", phone_number: "111122" } }
+        it { expect(response.body).to match("柯南") }
+        it { expect(response.body).to match("111122") }
+        it { expect(response).to render_template("edit") }
+      end
     end
   end
 end
