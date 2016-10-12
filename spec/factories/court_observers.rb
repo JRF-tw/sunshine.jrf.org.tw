@@ -54,4 +54,11 @@ FactoryGirl.define do
     confirmation_token "token"
   end
 
+  factory :court_observer_for_create, class: CourtObserver do
+    sequence(:name) { |n| "court_observer-#{n}" }
+    sequence(:email) { |n| "court_observer-#{n}@test.com" }
+    password "123123123"
+    password_confirmation "123123123"
+  end
+
 end

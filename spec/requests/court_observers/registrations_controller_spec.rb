@@ -2,6 +2,13 @@ require "rails_helper"
 
 RSpec.describe CourtObservers::RegistrationsController, type: :request do
 
+  describe "create" do
+    context "alert to slack" do
+      subject { post "/observer", court_observer: attributes_for(:court_observer_for_create), policy_agreement: "1" }
+      it { expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+    end
+  end
+
   describe "#update" do
     before { signin_court_observer }
     let!(:court_observer) { current_court_observer }

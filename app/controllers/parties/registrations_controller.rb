@@ -14,6 +14,29 @@ class Parties::RegistrationsController < Devise::RegistrationsController
     super
   end
 
+  # POST /resource
+  def create
+    build_resource(sign_up_params)
+    resource.save
+    yield resource if block_given?
+    alert_to_slack!(resource)
+    if resource.persisted?
+      if resource.active_for_authentication?
+        set_flash_message :notice, :signed_up if is_flashing_format?
+        sign_up(resource_name, resource)
+        respond_with resource, location: after_sign_up_path_for(resource)
+      else
+        set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_flashing_format?
+        expire_data_after_sign_in!
+        respond_with resource, location: after_inactive_sign_up_path_for(resource)
+      end
+    else
+      clean_up_passwords resource
+      set_minimum_password_length
+      respond_with resource
+    end
+  end
+
   def check_identify_number
     context = Party::IdentifyNumberCheckContext.new(params)
     if @party = context.perform
@@ -48,5 +71,9 @@ class Parties::RegistrationsController < Devise::RegistrationsController
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << [:identify_number, :name]
+  end
+
+  def alert_to_slack!(resource)
+    SlackService.notify_user_activity_alert("新當事人註冊 : #{SlackService.render_link(admin_parties_url(q: { name_cont: resource.name }, host: Setting.host), resource.name)}  已經申請註冊")
   end
 end

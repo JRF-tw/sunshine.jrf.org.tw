@@ -9,6 +9,7 @@ RSpec.describe Parties::RegistrationsController, type: :request do
 
       it { expect { subject }.to change { Party.count } }
       it { expect(subject).to redirect_to("/party/phone/new") }
+      it { expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
     end
 
     context "nil params" do
