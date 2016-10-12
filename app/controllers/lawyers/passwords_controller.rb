@@ -3,6 +3,7 @@ class Lawyers::PasswordsController < Devise::PasswordsController
   layout "lawyer"
 
   prepend_before_action :require_no_authentication, except: [:edit, :update, :send_reset_password_mail]
+  before_action :first_time_setting?, only: [:update]
 
   def new
     # meta
@@ -35,6 +36,7 @@ class Lawyers::PasswordsController < Devise::PasswordsController
     self.resource = resource_class.reset_password_by_token(resource_params)
     yield resource if block_given?
     if resource.errors.empty?
+      alert_to_slack if @first_time_setting
       resource.unlock_access! if unlockable?(resource)
       if Devise.sign_in_after_reset_password
         flash_message = resource.active_for_authentication? ? :updated : :updated_not_active
@@ -86,6 +88,14 @@ class Lawyers::PasswordsController < Devise::PasswordsController
 
   def after_resetting_password_path
     lawyer_root_path
+  end
+
+  def first_time_setting?
+    @first_time_setting = !Lawyer.with_reset_password_token(resource_params[:reset_password_token]).try(:encrypted_password).present?
+  end
+
+  def alert_to_slack
+    SlackService.notify_user_activity_alert("新律師註冊 : #{SlackService.render_link(admin_lawyers_url(q: { email_cont: resource.email }, host: Setting.host), resource.name)} 已經申請註冊")
   end
 
 end
