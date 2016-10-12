@@ -4,6 +4,7 @@ class Party::RegisterCheckContext < BaseContext
   before_perform :check_params_data
   before_perform :check_party_params_exist
   before_perform :check_password_valid
+  after_perform :alert!
 
   def initialize(params)
     @params = permit_params(params[:party] || params, PERMITS)
@@ -35,4 +36,7 @@ class Party::RegisterCheckContext < BaseContext
     return false if errors.present?
   end
 
+  def alert!
+    SlackService.notify_user_activity_alert("新當事人註冊 : #{ SlackService.render_link(admin_parties_url(q: { name_cont: @params[:name] }, host: Setting.host), @params[:name])}  已經申請註冊")
+  end
 end

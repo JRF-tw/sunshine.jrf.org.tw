@@ -17,7 +17,6 @@ class CourtObservers::RegistrationsController < Devise::RegistrationsController
 
   def update
     context = CourtObserver::ChangeEmailContext.new(current_court_observer)
-
     if context.perform(params)
       set_flash_message :notice, :update_needs_confirmation
       sign_in :court_observer, current_court_observer, bypass: true
@@ -55,5 +54,4 @@ class CourtObservers::RegistrationsController < Devise::RegistrationsController
   def after_update_path_for(_resource)
     court_observer_profile_path
   end
-
 end

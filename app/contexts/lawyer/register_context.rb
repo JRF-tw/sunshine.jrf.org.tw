@@ -8,6 +8,7 @@ class Lawyer::RegisterContext < BaseContext
   before_perform :check_agree_policy
   after_perform :generate_reset_password_token
   after_perform :send_setting_password_mail
+  after_perform :alert!
 
   def initialize(params)
     @params = permit_params(params[:lawyer] || params, PERMITS)
@@ -52,6 +53,10 @@ class Lawyer::RegisterContext < BaseContext
 
   def send_setting_password_mail
     CustomDeviseMailer.delay.send_setting_password_mail(@lawyer, @token)
+  end
+
+  def alert!
+    SlackService.notify_user_activity_alert("新律師註冊 : #{ SlackService.render_link(admin_lawyers_url(q: { email_cont: @lawyer.email }, host: Setting.host), @lawyer.name)} 已經申請註冊")
   end
 
 end
