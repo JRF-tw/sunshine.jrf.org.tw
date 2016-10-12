@@ -8,6 +8,10 @@ describe Lawyer::RegisterContext do
       subject { described_class.new(lawyer: { name: lawyer.name, email: lawyer.email }, policy_agreement: "1") }
       it { expect { subject.perform }.not_to change { subject.errors } }
       it { expect { subject.perform }.to change_sidekiq_jobs_size_of(CustomDeviseMailer, :send_setting_password_mail) }
+
+      context "alert!" do
+        it { expect { subject.perform }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      end
     end
 
     context "without policy agreement" do
