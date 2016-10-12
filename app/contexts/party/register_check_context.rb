@@ -37,6 +37,6 @@ class Party::RegisterCheckContext < BaseContext
   end
 
   def alert!
-    SlackService.notify_user_activity_alert("新當事人註冊 : #{ SlackService.render_link(admin_parties_url(q: { name_cont: @params[:name] }, host: Setting.host), @params[:name])}  已經申請註冊")
+    SlackService.notify_user_activity_alert("新當事人註冊 : #{SlackService.render_link(admin_parties_url(q: { name_cont: @params[:name] }, host: Setting.host), @params[:name])}  已經申請註冊")
   end
 end

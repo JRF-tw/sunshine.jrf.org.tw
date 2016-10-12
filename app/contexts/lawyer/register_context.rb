@@ -56,7 +56,7 @@ class Lawyer::RegisterContext < BaseContext
   end
 
   def alert!
-    SlackService.notify_user_activity_alert("新律師註冊 : #{ SlackService.render_link(admin_lawyers_url(q: { email_cont: @lawyer.email }, host: Setting.host), @lawyer.name)} 已經申請註冊")
+    SlackService.notify_user_activity_alert("新律師註冊 : #{SlackService.render_link(admin_lawyers_url(q: { email_cont: @lawyer.email }, host: Setting.host), @lawyer.name)} 已經申請註冊")
   end
 
 end

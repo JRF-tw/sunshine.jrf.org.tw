@@ -55,7 +55,7 @@ class CourtObserver::RegisterCheckContext < BaseContext
   end
 
   def alert!
-    SlackService.notify_user_activity_alert("新觀察者註冊 : #{ SlackService.render_link(admin_observers_url(q: { email_cont: @params[:email] }, host: Setting.host), @params[:name])} 已經申請註冊")
+    SlackService.notify_user_activity_alert("新觀察者註冊 : #{SlackService.render_link(admin_observers_url(q: { email_cont: @params[:email] }, host: Setting.host), @params[:name])} 已經申請註冊")
   end
 
 end
