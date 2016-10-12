@@ -6,7 +6,6 @@ class CourtObserver::RegisterCheckContext < BaseContext
   before_perform :check_password_valid
   before_perform :check_observer_status
   before_perform :check_agree_policy
-  after_perform :alert!
 
   def initialize(params)
     @params = permit_params(params[:court_observer] || params, PERMITS)
@@ -53,9 +52,4 @@ class CourtObserver::RegisterCheckContext < BaseContext
       return add_error(:observer_already_sign_up)
     end
   end
-
-  def alert!
-    SlackService.notify_user_activity_alert("新觀察者註冊 : #{SlackService.render_link(admin_observers_url(q: { email_cont: @params[:email] }, host: Setting.host), @params[:name])} 已經申請註冊")
-  end
-
 end
