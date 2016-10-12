@@ -50,4 +50,9 @@ Rails.application.configure do
   config.cache_store = :dalli_store, *(Setting.dalli.servers + [ Setting.dalli.options.symbolize_keys ])
 
   config.action_controller.asset_host = ->(source){ Setting.assets_host }
+
+
+  # Middleware
+  # see https://gist.github.com/dhh/2492118#gistcomment-911645
+  config.middleware.use RoutesReloader
 end
