@@ -25,7 +25,7 @@ module Capybara
     end
 
     def capybara_confirm_observer(email)
-      perform_sidekiq_job(fetch_sidekiq_last_job)
+      perform_sidekiq_job(fetch_sidekiq_jobs(Devise::Async::Backend::Sidekiq).last)
       open_email(email)
       current_email.find("a").click
     end
