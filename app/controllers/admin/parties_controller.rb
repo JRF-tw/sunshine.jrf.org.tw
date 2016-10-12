@@ -23,6 +23,14 @@ class Admin::PartiesController < Admin::BaseController
     end
   end
 
+  def stories
+    @stories = PartyQueries.new(@party).get_relate_stories
+    @admin_party_title = "當事人檔案 - #{@party.name} 的詳細資料"
+    add_crumb @admin_party_title, admin_party_path(@party)
+    @admin_page_title = "#{@party.name}參與案件列表"
+    add_crumb @admin_page_title, "#"
+  end
+
   private
 
   def party

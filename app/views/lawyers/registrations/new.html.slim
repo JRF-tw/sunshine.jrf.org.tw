@@ -1,0 +1,12 @@
+= render layout: 'components/card', locals: {heading: '律師註冊'}
+  = simple_form_for(resource, as: resource_name, url:  lawyer_registration_path, method: :post, wrapper: :md) do |f|
+    = f.input :name, required: true, label: '中文全名'
+
+    = f.input :email, required: true
+
+    = render 'components/policy_checkbox'
+
+    = render 'components/form_actions',
+      f: f,
+      submit: '註冊',
+      link: { text: '登入', href: new_session_path(resource_name) }

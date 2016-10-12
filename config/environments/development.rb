@@ -1,4 +1,10 @@
 Rails.application.configure do
+	# Add Rack::LiveReload to the bottom of the middleware stack with the default options:
+	# config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload
+
+	# or, if you're using better_errors:
+	config.middleware.insert_before Rack::Lock, Rack::LiveReload
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -14,6 +20,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send.
+  config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.raise_delivery_errors = false
 
   # Print deprecation notices to the Rails logger.
@@ -43,4 +50,9 @@ Rails.application.configure do
   config.cache_store = :dalli_store, *(Setting.dalli.servers + [ Setting.dalli.options.symbolize_keys ])
 
   config.action_controller.asset_host = ->(source){ Setting.assets_host }
+
+
+  # Middleware
+  # see https://gist.github.com/dhh/2492118#gistcomment-911645
+  config.middleware.use RoutesReloader
 end

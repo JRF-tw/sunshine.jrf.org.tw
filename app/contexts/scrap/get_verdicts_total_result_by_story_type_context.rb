@@ -21,7 +21,7 @@ class Scrap::GetVerdictsTotalResultByStoryTypeContext < BaseContext
     run_callbacks :perform do
       @total_result.times.each do |index|
         scrap_id = index + 1
-        Scrap::ParseVerdictContext.delay.perform(@court, scrap_id, @type, @start_date, @end_date)
+        Scrap::ParseVerdictContext.delay(retry: 3).perform(@court, scrap_id, @type, @start_date, @end_date)
       end
     end
   end

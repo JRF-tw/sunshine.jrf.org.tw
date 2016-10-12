@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160712043140) do
+ActiveRecord::Schema.define(version: 20161011031058) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "postgis"
   enable_extension "hstore"
+  enable_extension "postgis"
 
   create_table "articles", force: :cascade do |t|
     t.integer  "profile_id"
@@ -146,10 +146,12 @@ ActiveRecord::Schema.define(version: 20160712043140) do
     t.string   "school"
     t.string   "student_number"
     t.string   "department_level"
+    t.date     "last_scored_at"
   end
 
   add_index "court_observers", ["confirmation_token"], name: "index_court_observers_on_confirmation_token", unique: true, using: :btree
   add_index "court_observers", ["email"], name: "index_court_observers_on_email", unique: true, using: :btree
+  add_index "court_observers", ["last_scored_at"], name: "index_court_observers_on_last_scored_at", using: :btree
   add_index "court_observers", ["reset_password_token"], name: "index_court_observers_on_reset_password_token", unique: true, using: :btree
   add_index "court_observers", ["school"], name: "index_court_observers_on_school", using: :btree
 
@@ -461,14 +463,37 @@ ActiveRecord::Schema.define(version: 20160712043140) do
   add_index "reviews", ["is_hidden"], name: "index_reviews_on_is_hidden", using: :btree
   add_index "reviews", ["profile_id"], name: "index_reviews_on_profile_id", using: :btree
 
+  create_table "schedule_scores", force: :cascade do |t|
+    t.integer  "schedule_id"
+    t.integer  "judge_id"
+    t.integer  "schedule_rater_id"
+    t.string   "schedule_rater_type"
+    t.float    "rating_score"
+    t.float    "command_score"
+    t.float    "attitude_score"
+    t.hstore   "data"
+    t.boolean  "appeal_judge",        default: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.integer  "story_id"
+  end
+
+  add_index "schedule_scores", ["appeal_judge"], name: "index_schedule_scores_on_appeal_judge", using: :btree
+  add_index "schedule_scores", ["judge_id", "schedule_rater_id"], name: "index_schedule_scores_on_judge_id_and_schedule_rater_id", using: :btree
+  add_index "schedule_scores", ["judge_id"], name: "index_schedule_scores_on_judge_id", using: :btree
+  add_index "schedule_scores", ["schedule_id"], name: "index_schedule_scores_on_schedule_id", using: :btree
+  add_index "schedule_scores", ["story_id"], name: "index_schedule_scores_on_story_id", using: :btree
+
   create_table "schedules", force: :cascade do |t|
     t.integer  "story_id"
     t.integer  "court_id"
     t.string   "branch_name"
-    t.date     "date"
+    t.date     "start_on"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.integer  "branch_judge_id"
+    t.datetime "start_at"
+    t.string   "courtroom"
   end
 
   add_index "schedules", ["branch_judge_id", "court_id", "story_id"], name: "index_schedules_on_branch_judge_id_and_court_id_and_story_id", using: :btree
@@ -476,7 +501,9 @@ ActiveRecord::Schema.define(version: 20160712043140) do
   add_index "schedules", ["branch_judge_id", "story_id"], name: "index_schedules_on_branch_judge_id_and_story_id", using: :btree
   add_index "schedules", ["branch_judge_id"], name: "index_schedules_on_branch_judge_id", using: :btree
   add_index "schedules", ["court_id"], name: "index_schedules_on_court_id", using: :btree
-  add_index "schedules", ["date"], name: "index_schedules_on_date", using: :btree
+  add_index "schedules", ["courtroom"], name: "index_schedules_on_courtroom", using: :btree
+  add_index "schedules", ["start_at"], name: "index_schedules_on_start_at", using: :btree
+  add_index "schedules", ["start_on"], name: "index_schedules_on_start_on", using: :btree
   add_index "schedules", ["story_id", "court_id"], name: "index_schedules_on_story_id_and_court_id", using: :btree
   add_index "schedules", ["story_id"], name: "index_schedules_on_story_id", using: :btree
 
@@ -489,12 +516,12 @@ ActiveRecord::Schema.define(version: 20160712043140) do
     t.integer  "number"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
-    t.date     "adjudge_date"
-    t.boolean  "is_adjudge",       default: false
     t.text     "party_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
+    t.boolean  "is_adjudge",       default: false
+    t.date     "adjudge_date"
     t.date     "pronounce_date"
     t.boolean  "is_pronounce",     default: false
   end
@@ -633,6 +660,26 @@ ActiveRecord::Schema.define(version: 20160712043140) do
   add_index "verdict_relations", ["verdict_id", "person_id"], name: "index_verdict_relations_on_verdict_id_and_person_id", using: :btree
   add_index "verdict_relations", ["verdict_id", "person_type"], name: "index_verdict_relations_on_verdict_id_and_person_type", using: :btree
   add_index "verdict_relations", ["verdict_id"], name: "index_verdict_relations_on_verdict_id", using: :btree
+
+  create_table "verdict_scores", force: :cascade do |t|
+    t.integer  "story_id"
+    t.integer  "judge_id"
+    t.integer  "verdict_rater_id"
+    t.string   "verdict_rater_type"
+    t.float    "quality_score"
+    t.float    "rating_score"
+    t.hstore   "data"
+    t.boolean  "appeal_judge"
+    t.integer  "status"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "verdict_scores", ["appeal_judge"], name: "index_verdict_scores_on_appeal_judge", using: :btree
+  add_index "verdict_scores", ["judge_id"], name: "index_verdict_scores_on_judge_id", using: :btree
+  add_index "verdict_scores", ["status"], name: "index_verdict_scores_on_status", using: :btree
+  add_index "verdict_scores", ["story_id"], name: "index_verdict_scores_on_story_id", using: :btree
+  add_index "verdict_scores", ["verdict_rater_id", "verdict_rater_type"], name: "index_verdict_scores_on_verdict_rater_id_and_verdict_rater_type", using: :btree
 
   create_table "verdicts", force: :cascade do |t|
     t.integer  "story_id"

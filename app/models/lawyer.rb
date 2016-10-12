@@ -32,6 +32,10 @@
 class Lawyer < ActiveRecord::Base
   has_many :story_relations, as: :people
   has_many :verdict_relations, as: :person
+  has_many :story_subscriptions, as: :subscriber, dependent: :destroy
+  has_many :schedule_scores, as: :schedule_rater
+  has_many :verdict_scores, as: :verdict_rater
+
   devise :database_authenticatable, :registerable, :async, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -39,9 +43,15 @@ class Lawyer < ActiveRecord::Base
   mount_uploader :avatar, ProfileAvatarUploader
 
   validates :phone_number, uniqueness: true, format: { with: /\A(0)(9)([0-9]{8})\z/ }, allow_blank: true, allow_nil: true
-  validates :office_number, uniqueness: true, format: { with: /0\d{1,2}-?(\d{6,8})(#\d{1,5}){0,1}/ }, allow_blank: true, allow_nil: true
+  validates :office_number, format: { with: /0\d{1,2}-?(\d{6,8})(#\d{1,5}){0,1}/ }, allow_blank: true, allow_nil: true
 
   before_create :skip_confirmation_notification
+
+  include Redis::Objects
+  counter :score_report_schedule_real_date
+  counter :scored_count
+
+  MAX_SCORED_COUNT = 5
 
   def need_update_info?
     ## TODO need_update_info definition logic
@@ -49,7 +59,7 @@ class Lawyer < ActiveRecord::Base
   end
 
   def password_required?
-    super if confirmed?
+    super if confirmed? || reset_password_token
   end
 
   def set_reset_password_token

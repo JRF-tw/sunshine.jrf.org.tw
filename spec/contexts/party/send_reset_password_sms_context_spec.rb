@@ -7,7 +7,7 @@ describe Party::SendResetPasswordSmsContext do
   context "success" do
     let!(:params) { { identify_number: party.identify_number, phone_number: party.phone_number } }
 
-    it { expect { subject.perform }.to change_sidekiq_jobs_size_of(SmsService, :send_to).by(1) }
+    it { expect { subject.perform }.to change_sidekiq_jobs_size_of(SmsService, :send_sms).by(1) }
     it { expect(subject.perform).to be_truthy }
   end
 

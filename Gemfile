@@ -8,7 +8,6 @@ gem "redis"
 gem "redis-objects", require: "redis/objects"
 gem "redis-namespace"
 
-# stores
 gem "dalli"
 gem "connection_pool"
 
@@ -62,6 +61,11 @@ gem "axlsx_rails"
 # gem 'bcrypt', '~> 3.1.7'
 
 group :development do
+  # Gems for Front-end development
+  gem "guard-livereload", "~>2.5.2", require: false
+  gem "rack-livereload"
+  gem "dotenv-rails"
+
   # capistrano
   gem "capistrano-rails"
   gem "capistrano-rvm"
@@ -85,6 +89,7 @@ group :development do
   gem "spring"
   gem "venus", git: "git@github.com:marsz/venus.git", branch: "v1.0"
   gem "rename"
+  gem "letter_opener"
 end
 
 group :development, :test do
@@ -97,8 +102,13 @@ group :development, :test do
 end
 
 group :test do
+  gem "launchy"
+  gem "capybara"
+  gem "capybara-webkit"
+  gem "capybara-email"
   gem "webmock"
   gem "test_after_commit"
+  gem "database_cleaner"
 end
 
 group :doc do

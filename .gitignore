@@ -33,6 +33,7 @@ config/database.yml
 
 /node_modules
 /gulp/tasks/responsive.js
+/.env
 
 # Ignore compiled assets by Gulp to prevent rev issue.
 # Capistranno will execute Gulp to compile the assets during deploy process.
@@ -50,4 +51,6 @@ dump.rdb
 # app/assets/javascripts/global.js
 
 public/uploads
+/mockup
 .byebug_history
+/jrf-sunny.sublime-workspace

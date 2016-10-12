@@ -27,7 +27,7 @@ class Scrap::ParseVerdictContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      Scrap::ImportVerdictContext.delay.perform(@court, @orginal_data, @verdict_content, @verdict_word, @verdict_publish_date, @verdict_stroy_type)
+      Scrap::ImportVerdictContext.delay(retry: 3).perform(@court, @orginal_data, @verdict_content, @verdict_word, @verdict_publish_date, @verdict_stroy_type)
     end
   end
 

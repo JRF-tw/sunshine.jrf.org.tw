@@ -1,0 +1,12 @@
+= render layout: 'components/score_card',
+  locals: { status: "checked_judge", type: 'verdict' }
+    = render layout: 'components/input_score_start', locals: {\
+      step_text: '判決流程評鑑', step_count: 4, max_steps: 3,
+      form_for: @verdict_score,
+      as: :verdict_score,
+      prev_url: input_judge_lawyer_score_verdicts_path(verdict_score: params[:verdict_score]),
+      prev_url_method: :get,
+      form_url: lawyer_score_verdicts_path\
+    } do |f|
+      = render 'components/input_score', f: f,
+        label: '裁判品質評分', options: :quality_score

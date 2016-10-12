@@ -26,17 +26,17 @@ class Scrap::ImportCourtContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      return add_error(:data_create_fail, "data not create/update") unless @court.save
+      return add_error(:scrap_court_create_fail) unless @court.save
       @court
     end
   end
 
   def check_data
-    return add_error(:data_create_fail, "data info incorrect") unless @scrap_name && @code
+    return add_error(:scrap_data_info_incorrect) unless @scrap_name && @code
   end
 
   def tricky_court_data
-    return add_error(:data_create_fail, "tricky_court_data") if @scrap_name == "臺灣高等法院－訴願決定" && @code == "TPH"
+    return add_error(:scrap_tricky_court_data) if @scrap_name == "臺灣高等法院－訴願決定" && @code == "TPH"
   end
 
   def find_court

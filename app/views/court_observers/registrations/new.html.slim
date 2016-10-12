@@ -1,0 +1,16 @@
+= render layout: 'components/card', locals: { heading: '觀察員註冊' }
+  = simple_form_for(resource, as: resource_name, url: court_observer_registration_path, wrapper: :md) do |f|
+    = f.input :name, required: true, label: '中文全名'
+
+    = f.input :email, required: true
+
+    = f.input :password, required: true, label: '密碼'
+
+    = f.input :password_confirmation, required: true, label: '確認密碼'
+
+    = render 'components/policy_checkbox'
+
+    = render 'components/form_actions',
+      f: f,
+      submit: '註冊',
+      link: { text: '登入', href: new_session_path(resource_name) }

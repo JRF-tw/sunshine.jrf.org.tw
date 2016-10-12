@@ -44,7 +44,7 @@ FactoryGirl.define do
     end
 
     trait :with_confirmed do
-      confirmed_at Time.now
+      after(:create, &:confirm)
     end
 
     trait :with_gender do
@@ -59,6 +59,10 @@ FactoryGirl.define do
 
     trait :with_unconfirmed_email do
       unconfirmed_email "test@gmail.com"
+    end
+
+    trait :with_confirmation_token do
+      confirmation_token "totoken"
     end
   end
 

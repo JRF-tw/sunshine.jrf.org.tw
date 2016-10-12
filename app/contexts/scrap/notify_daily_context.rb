@@ -3,6 +3,12 @@ class Scrap::NotifyDailyContext < BaseContext
 
   after_perform :cleanup_redis_date
 
+  class << self
+    def perform
+      new.perform
+    end
+  end
+
   def perform(scrap_models = SCRAP_MODELS)
     run_callbacks :perform do
       scrap_models.keys.map(&:to_s).each do |model|

@@ -1,6 +1,7 @@
 class Import::CreateLawyerContext < BaseContext
   before_perform  :check_email_not_exist
-  before_perform  :check_has_name_and_email
+  before_perform  :check_has_name
+  before_perform  :check_has_email
   before_perform  :phone_format_check
   before_perform  :assign_phone_number, if: :is_phone?
   before_perform  :assign_office_number, unless: :is_phone?
@@ -12,7 +13,7 @@ class Import::CreateLawyerContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      add_error(:data_create_fail, "律師建立失敗") unless @lawyer.save
+      return add_error(:lawyer_create_fail) unless @lawyer.save
       @lawyer
     end
   end
@@ -20,11 +21,15 @@ class Import::CreateLawyerContext < BaseContext
   private
 
   def check_email_not_exist
-    add_error(:lawyer_exist, "該律師已存在") if Lawyer.pluck(:email).include?(@lawyer_data[:email])
+    return add_error(:lawyer_exist) if Lawyer.pluck(:email).include?(@lawyer_data[:email])
   end
 
-  def check_has_name_and_email
-    add_error(:data_blank, "律師資料不足") unless @lawyer_data[:email].present? && @lawyer_data[:name].present?
+  def check_has_name
+    return add_error(:lawyer_name_blank) unless @lawyer_data[:name].present?
+  end
+
+  def check_has_email
+    return add_error(:lawyer_email_blank) unless @lawyer_data[:email].present?
   end
 
   def phone_format_check

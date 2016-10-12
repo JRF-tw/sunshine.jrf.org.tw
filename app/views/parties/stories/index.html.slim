@@ -1,0 +1,7 @@
+= render layout: 'components/stories_card', locals: {\
+  profile: party_profile_path,
+  scores:  scores_path,
+  stories: @stories,
+  type:    'party'\
+}
+  = render partial: 'chose_type'

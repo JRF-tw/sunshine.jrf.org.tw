@@ -48,6 +48,27 @@ FactoryGirl.define do
       end
     end
 
+    trait :pronounced do
+      pronounce_date Time.zone.today
+      is_pronounce true
+    end
+
+    trait :adjudged do
+      adjudge_date Time.zone.today
+      is_adjudge true
+    end
+
+    trait :with_adjugde_verdict do
+      after(:create) do |story|
+        create :verdict, is_judgment: true, story: story
+      end
+    end
+
+    trait :adjudged_yesterday do
+      adjudge_date Time.zone.yesterday
+      is_adjudge true
+    end
+
   end
 
 end

@@ -1,28 +1,15 @@
-doctype 5
-html
-  head
-    = display_meta_tags
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
-    = csrf_meta_tags
+- content_for :header_classes do
+  | lawyer
 
-  body class="#{yield :body_classes}"
-    .page-wrapper class='base-page-wrapper'
-      - if current_lawyer
-        = link_to("律師 #{current_lawyer.name}", lawyer_profile_path)
-        = ' | '
-        = link_to('修改Email', edit_lawyer_email_path)
-        = ' | '
-        = link_to('修改個人資訊', edit_lawyer_profile_path)
-        = ' | '
-        = link_to('登出', destroy_lawyer_session_path, :method => :delete)
-      - else
-        = link_to('註冊', new_lawyer_registration_path)
-        = link_to('登入', new_session_path(:lawyer))
-      hr
-      - flash.each do |k, message|
-        div class= "alert fade in alert-#{k}"
-          a.close data-dismiss="alert" href="#"
-          = raw(message)
+- content_for :wrapper_classes do
+  | lawyer
 
-      main.main role='main' = yield
+- content_for :character_type do
+  | lawyer
+
+- content_for :yield do
+  = render 'components/billboard', character: 'lawyer'
+
+  = yield
+
+= render template: 'layouts/application'

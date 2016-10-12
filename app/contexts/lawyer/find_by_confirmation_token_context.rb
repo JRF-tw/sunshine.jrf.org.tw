@@ -9,7 +9,7 @@ class Lawyer::FindByConfirmationTokenContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      return add_error(:lawyer_not_found, "無此律師資料") unless @lawyer
+      return add_error(:lawyer_not_found) unless @lawyer
       @lawyer
     end
   end

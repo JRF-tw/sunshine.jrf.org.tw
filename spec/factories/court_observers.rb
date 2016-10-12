@@ -24,6 +24,7 @@
 #  school                 :string
 #  student_number         :string
 #  department_level       :string
+#  last_scored_at         :date
 #
 
 FactoryGirl.define do
@@ -36,6 +37,14 @@ FactoryGirl.define do
     trait :with_unconfirmed_email do
       unconfirmed_email "aron1122@gmail.com"
     end
+
+    trait :without_confirm do
+      confirmed_at nil
+    end
+
+    trait :with_confirmation_token do
+      confirmation_token "totoken"
+    end
   end
 
   factory :court_observer_without_validate, class: CourtObserver do
@@ -43,6 +52,13 @@ FactoryGirl.define do
     sequence(:email) { |n| "court_observer_without_prove-#{n}@test.com" }
     password "123123123"
     confirmation_token "token"
+  end
+
+  factory :court_observer_for_create, class: CourtObserver do
+    sequence(:name) { |n| "court_observer-#{n}" }
+    sequence(:email) { |n| "court_observer-#{n}@test.com" }
+    password "123123123"
+    password_confirmation "123123123"
   end
 
 end

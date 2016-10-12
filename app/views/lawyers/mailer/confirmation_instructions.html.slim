@@ -1,0 +1,5 @@
+p = "您剛剛在司法陽光網請求重設律師帳號的電子郵件信箱，因此收到這封郵件。請點選以下連結以修改您的電子郵件信箱（若無法點選，請拷貝網址貼到網址列）："
+
+p = link_to confirmation_url(@resource, confirmation_token: @token), confirmation_url(@resource, confirmation_token: @token) 
+
+p 如果您並未送出這個請求，請忽略此封郵件。

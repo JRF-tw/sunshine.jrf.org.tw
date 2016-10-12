@@ -1,43 +1,43 @@
-= search_form_for @search, :url => admin_parties_path, :wrapper => :admin, :html => { :class => "form-horizontal" } do |f|
+= search_form_for @search, url: admin_parties_path, wrapper: :admin, html: { :class => "form-horizontal" } do |f|
   .well
     fieldset
       legend 搜尋
       .row
         .span6
           .control-group
-            label.control-label= f.label :name_cont
-            .controls= f.search_field :name_cont
+            label.control-label = f.label :name_cont
+            .controls = f.search_field :name_cont
           .control-group
-            label.control-label= f.label :phone_number_cont
-            .controls= f.search_field :phone_number_cont
+            label.control-label = f.label :phone_number_cont
+            .controls = f.search_field :phone_number_cont
         .span6
           .control-group
-            label.control-label= f.label :identify_number_cont
-            .controls= f.search_field :identify_number_cont
+            label.control-label = f.label :identify_number_cont
+            .controls = f.search_field :identify_number_cont
           .control-group
-            label.control-label= f.label :current_sign_in_ip_cont
-            .controls= f.search_field :current_sign_in_ip_cont
+            label.control-label = f.label :current_sign_in_ip_cont
+            .controls = f.search_field :current_sign_in_ip_cont
       .row
         .span6
           .control-group#datepicker
-            label.control-label= f.label :created_at_gteq
-            .controls= f.search_field :created_at_gteq, placeholder: "起始時間，非必填"
-            .controls= f.search_field :created_at_lteq, placeholder: "結束時間，非必填"
+            label.control-label = f.label :created_at_gteq
+            .controls = f.search_field :created_at_gteq, placeholder: "起始時間，非必填"
+            .controls = f.search_field :created_at_lteq, placeholder: "結束時間，非必填"
         .span6
           .control-group#datepicker
-            label.control-label= f.label :current_sign_in_at_gteq
-            .controls= f.search_field :current_sign_in_at_gteq, placeholder: "起始時間，非必填"
-            .controls= f.search_field :current_sign_in_at_lteq, placeholder: "結束時間，非必填"
+            label.control-label = f.label :current_sign_in_at_gteq
+            .controls = f.search_field :current_sign_in_at_gteq, placeholder: "起始時間，非必填"
+            .controls = f.search_field :current_sign_in_at_lteq, placeholder: "結束時間，非必填"
       .row
         .span6
           .control-group
-            label.control-label= f.label :imposter_true
-            .controls= f.select :imposter_true,
+            label.control-label = f.label :imposter_true
+            .controls = f.select :imposter_true,
             collect_for_boolean, include_blank: "請選擇"
         .span6
           .control-group
-            label.control-label= f.label :phone_confirmed_at_not_null
-            .controls= f.select :phone_confirmed_at_not_null,
+            label.control-label = f.label :phone_confirmed_at_not_null
+            .controls = f.select :phone_confirmed_at_not_null,
             collect_for_boolean, include_blank: "請選擇"
     hr
     .form-actions
@@ -62,16 +62,16 @@
       tbody
         - @parties.each do |party|
           tr
-            td= party.id
-            td= party.name
-            td= party.identify_number
-            td= party.email
+            td = party.id
+            td = party.name
+            td = party.identify_number
+            td = party.email
             td
               - if party.phone_number
                 = "#{party.phone_number}   (#{party.phone_confirmed? ? "已驗證" : "尚未驗證"})"
                 br
               = party.unconfirmed_phone.value || "無待驗證號碼"
-            td= party.created_at.to_date
+            td = party.created_at.to_date
             td
               = party.current_sign_in_at.try(:to_date)
               br

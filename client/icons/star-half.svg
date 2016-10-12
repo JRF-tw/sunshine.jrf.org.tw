@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="34px" height="32px" viewBox="0 0 34 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>icon star half</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <radialGradient cx="50%" cy="0%" fx="50%" fy="0%" r="100%" id="radialGradient-1">
+            <stop stop-color="#FFC109" offset="0%"></stop>
+            <stop stop-color="#FFA000" offset="100%"></stop>
+        </radialGradient>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill-rule="evenodd">
+        <g id="List/ranking-stars" transform="translate(-84.000000, 0.000000)" fill="url(#radialGradient-1)">
+            <path d="M101,22.5418719 L107.384977,26.4039409 L105.70892,19.2315271 L111.375587,14.3448276 L103.873239,13.7142857 L101,6.93596059 L101,22.5418719 Z M118,12.2167488 L108.741784,20.1773399 L111.535211,32 L101,25.6945813 L90.4647887,32 L93.258216,20.1773399 L84,12.2167488 L96.2112676,11.1921182 L101,0 L105.788732,11.1921182 L118,12.2167488 Z" id="icon-star-half"></path>
+        </g>
+    </g>
+</svg>

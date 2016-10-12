@@ -8,6 +8,12 @@ module CrudConcern
     render action
   end
 
+  def render_as_success(action, messages = nil)
+    public_send(action)
+    flash.now[:success] = messages if messages
+    render action
+  end
+
   def redirect_as_success(url, message = nil)
     flash_opts = message ? { success: message } : nil
     redirect_to params[:redirect_to] || url, flash: flash_opts

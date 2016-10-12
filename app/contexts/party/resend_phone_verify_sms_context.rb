@@ -19,16 +19,16 @@ class Party::ResendPhoneVerifySmsContext < BaseContext
   private
 
   def check_verify_code
-    return add_error(:data_update_fail, "請先設定手機號碼") unless @party.phone_varify_code.value
+    return add_error(:party_without_phone_number) unless @party.phone_varify_code.value
   end
 
   def check_sms_send_count
-    return add_error(:data_update_fail, "五分鐘內只能寄送兩次簡訊") if @party.sms_sent_count.value >= 2
+    return add_error(:send_sms_too_frequent) if @party.sms_sent_count.value >= 2
   end
 
   def build_message
     link = verify_party_phone_url(host: Setting.host)
-    @message = "當事人手機驗證簡訊 發送至 #{@party.unconfirmed_phone.value}: 認證碼 : #{@party.phone_varify_code.value}, #{SlackService.render_link(link, "認證手機網址")}"
+    @message = "當事人手機驗證簡訊 發送至 #{@party.unconfirmed_phone.value}: 認證碼 : #{@party.phone_varify_code.value}, #{link}"
   end
 
   def send_sms

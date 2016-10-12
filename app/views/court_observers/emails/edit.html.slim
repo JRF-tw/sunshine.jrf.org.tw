@@ -1,0 +1,25 @@
+= render layout: 'components/card', locals: {\
+  heading: '更改 Email',
+  type: 'observer'}
+  
+  = simple_form_for @court_observer, as: :court_observer,
+    url: court_observer_email_path, method: :put, wrapper: :md do |f|
+    
+    .form-group class=('has-error' if current_court_observer.unconfirmed_email)
+      = f.input_field :email, required: true
+      = f.label :email, label: "新 Email"
+      = f.error :email
+      - if current_court_observer.unconfirmed_email
+        .help-block--error
+          = "目前等待驗證中信箱: #{current_court_observer.unconfirmed_email}"
+      
+      = f.input :current_password, required: true, label: "密碼"
+    
+    - if current_court_observer.unconfirmed_email
+      p.text-center style='margin-bottom: 8px'
+        = link_to "重寄認證信",
+          resend_confirmation_mail_court_observer_email_path,
+          method: :post, class: "flat-button"
+    
+    = render 'components/form_actions', f: f, submit: '送出',
+      link: { text: '取消', href: court_observer_profile_path }

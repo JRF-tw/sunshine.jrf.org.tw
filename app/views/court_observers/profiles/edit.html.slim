@@ -1,0 +1,12 @@
+= render layout: 'components/card',
+  locals: { heading: '個人基本資料', type: 'observer' }
+  = simple_form_for @court_observer, as: :court_observer,
+    url:  court_observer_profile_path, method: :put, wrapper: :md do |f|
+    = f.input :name
+    = f.input :phone_number, input_html: { type: "tel" }
+    = f.input :school, as: :select, collection: ["school1", "school2"], include_blank: "請選擇"
+    = f.input :department_level, as: :select, collection: ["101", "102"], include_blank: "請選擇"
+    = f.input :student_number
+
+    = render 'components/form_actions', f: f, submit: '確定更新',
+      link: { text: '取消', href: court_observer_profile_path }

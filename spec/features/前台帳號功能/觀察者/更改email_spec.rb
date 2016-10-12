@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "觀察者更改email", type: :request do
   context "成功送出" do
-    let!(:court_observer) { create :court_observer, name: "丁丁觀察者", email: "dingding@gmail.com" }
+    let!(:court_observer) { create :court_observer, :with_confirmation_token, name: "丁丁觀察者", email: "dingding@gmail.com" }
     before { signin_court_observer(court_observer) }
 
     context "新的 email 為別人正在驗證中的 email ，也可以成功送出" do
@@ -10,16 +10,16 @@ describe "觀察者更改email", type: :request do
       subject { put "/observer/email", court_observer: { email: court_observer_with_unconfirmed_email.unconfirmed_email, current_password: "123123123" } }
 
       it "成功送出" do
-        expect { subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq)
+        expect { subject }.to change_sidekiq_jobs_size_of(CustomDeviseMailer, :resend_confirmation_instructions)
       end
     end
 
     context "發送信件" do
-      subject { put "/observer/email", court_observer: { email: "windwizard@gmail.com", current_password: "123123123" } }
       before { signin_court_observer(court_observer) }
+      subject { put "/observer/email", court_observer: { email: "windwizard@gmail.com", current_password: "123123123" } }
 
       it "成功發送" do
-        expect { subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq)
+        expect { subject }.to change_sidekiq_jobs_size_of(CustomDeviseMailer, :resend_confirmation_instructions)
       end
     end
 
@@ -46,6 +46,15 @@ describe "觀察者更改email", type: :request do
         expect { subject }.to change { court_observer.reload.current_sign_in_at }
       end
     end
+
+    context "已登入時  驗證email" do
+      before { put "/observer/email", court_observer: { email: "windwizard@gmail.com", current_password: "123123123" } }
+      subject { get "/observer/confirmation", confirmation_token: court_observer.reload.confirmation_token }
+
+      it "導向個人評鑑頁面" do
+        expect(subject).to redirect_to("/observer")
+      end
+    end
   end
 
   context "失敗送出" do
@@ -57,7 +66,7 @@ describe "觀察者更改email", type: :request do
         subject! { put "/observer/email", court_observer: { email: "", current_password: "123123123" } }
 
         it "顯示錯誤提示" do
-          expect(response.body).to match("不能是空白字元")
+          expect(response.body).to match("email 的格式是無效的")
         end
       end
 
@@ -98,7 +107,7 @@ describe "觀察者更改email", type: :request do
         subject! { put "/observer/email", court_observer: { email: court_observer2.email, current_password: "123123123" } }
 
         it "提示已經被使用" do
-          expect(response.body).to match("已經被使用")
+          expect(response.body).to match("email 已被使用")
         end
       end
 
@@ -106,7 +115,7 @@ describe "觀察者更改email", type: :request do
         subject! { put "/observer/email", court_observer: { email: court_observer.email, current_password: "123123123" } }
 
         it "提示不可與原本相同" do
-          expect(response.body).to match("不可與原本相同")
+          expect(response.body).to match("email 不可與原本相同")
         end
       end
     end

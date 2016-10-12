@@ -22,14 +22,16 @@
 #  confirmed_at             :datetime
 #  confirmation_token       :string
 #  confirmation_sent_at     :datetime
-#  phone_confirmed_at       :datetime
 #  imposter                 :boolean          default(FALSE)
 #  imposter_identify_number :string
+#  phone_confirmed_at       :datetime
 #
 
 class Party < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable and :omniauthable
+  has_many :schedule_scores, as: :schedule_rater
+  has_many :verdict_scores, as: :verdict_rater
 
   devise :database_authenticatable, :registerable, :async, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -49,6 +51,10 @@ class Party < ActiveRecord::Base
   value :phone_varify_code, expiration: 1.hour
   counter :retry_verify_count, expiration: 1.hour
   counter :sms_sent_count, expiration: 5.minutes
+  counter :score_report_schedule_real_date
+  counter :scored_count
+
+  MAX_SCORED_COUNT = 2
 
   def email_required?
     false

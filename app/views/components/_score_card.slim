@@ -1,0 +1,10 @@
+ruby:
+  if status == 'thanks_scored'
+    heading = '感謝您的評鑑！'
+  else
+    heading = type == 'schedule' ? '評鑑開庭' : '評鑑判決'
+  end
+
+= render layout: 'components/card',
+  locals: { heading: heading, wide: (true if status && status != 'thanks_scored') }
+  = yield

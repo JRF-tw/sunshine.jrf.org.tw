@@ -6,7 +6,7 @@ describe "律師註冊", type: :request do
     subject { post "/lawyer", lawyer: { name: lawyer.name, email: lawyer.email }, policy_agreement: "1" }
 
     it "發送密碼設定信" do
-      expect { subject }.to change_sidekiq_jobs_size_of(CustomDeviseMailer, :send_confirm_mail)
+      expect { subject }.to change_sidekiq_jobs_size_of(CustomDeviseMailer, :send_setting_password_mail)
     end
 
     it "跳轉到登入頁，並跳出註冊成功訊息" do
@@ -50,7 +50,7 @@ describe "律師註冊", type: :request do
 
         it "顯示查無此律師" do
           expect(flash[:error]).to eq("查無此律師資料 請改以人工管道註冊 <a href='/lawyer/appeal/new'>點此註冊</a>")
-          expect(response).to render_template("lawyer/registrations/new")
+          expect(response).to render_template("lawyers/registrations/new")
         end
       end
 
@@ -59,7 +59,7 @@ describe "律師註冊", type: :request do
 
         it "顯示查無此律師" do
           expect(flash[:error]).to eq("查無此律師資料 請改以人工管道註冊 <a href='/lawyer/appeal/new'>點此註冊</a>")
-          expect(response).to render_template("lawyer/registrations/new")
+          expect(response).to render_template("lawyers/registrations/new")
         end
       end
 
@@ -68,7 +68,7 @@ describe "律師註冊", type: :request do
 
         it "顯示查無此律師" do
           expect(flash[:error]).to eq("查無此律師資料 請改以人工管道註冊 <a href='/lawyer/appeal/new'>點此註冊</a>")
-          expect(response).to render_template("lawyer/registrations/new")
+          expect(response).to render_template("lawyers/registrations/new")
         end
       end
     end
@@ -79,7 +79,7 @@ describe "律師註冊", type: :request do
 
       it "顯示未勾選同意條款" do
         expect(flash[:error]).to eq("您尚未勾選同意條款")
-        expect(response).to render_template("lawyer/registrations/new")
+        expect(response).to render_template("lawyers/registrations/new")
       end
     end
 
@@ -88,17 +88,17 @@ describe "律師註冊", type: :request do
         subject! { post "/lawyer", lawyer: { name: "", email: "bigtiger@gmail.com" }, policy_agreement: "1" }
 
         it "顯示格式錯誤訊息" do
-          expect(flash[:error]).to eq("姓名不可為空白字元")
-          expect(response).to render_template("lawyer/registrations/new")
+          expect(flash[:error]).to eq("姓名 不可為空白字元")
+          expect(response).to render_template("lawyers/registrations/new")
         end
       end
 
       context "email 格式不符" do
         subject! { post "/lawyer", lawyer: { name: "胖虎", email: "55566" }, policy_agreement: "1" }
 
-        it "顯示查無此律師" do
-          expect(flash[:error]).to eq("查無此律師資料 請改以人工管道註冊 <a href='/lawyer/appeal/new'>點此註冊</a>")
-          expect(response).to render_template("lawyer/registrations/new")
+        it "顯示email 的格式無效" do
+          expect(flash[:error]).to eq("email 的格式是無效的")
+          expect(response).to render_template("lawyers/registrations/new")
         end
       end
 
@@ -106,8 +106,8 @@ describe "律師註冊", type: :request do
         subject! { post "/lawyer", lawyer: { name: "胖虎", email: "" }, policy_agreement: "1" }
 
         it "顯示格式錯誤訊息" do
-          expect(flash[:error]).to eq("email不可為空白字元")
-          expect(response).to render_template("lawyer/registrations/new")
+          expect(flash[:error]).to eq("email 不可為空白字元")
+          expect(response).to render_template("lawyers/registrations/new")
         end
       end
     end

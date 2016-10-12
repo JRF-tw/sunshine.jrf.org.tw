@@ -1,0 +1,18 @@
+= render layout: 'components/score_card',
+  locals: { status: "checked_judge", type: 'schedule' }
+  - max_steps = 4
+
+  = render layout: 'components/input_score_start', locals: {\
+    step_text: '開庭流程評鑑', step_count: 4, max_steps: max_steps,
+    form_for: @schedule_score,
+    as: :schedule_score,
+    form_url: lawyer_score_schedule_path(@schedule_score),
+    method: :put,
+    prev_url: lawyer_story_path(@schedule_score.story),
+    prev_url_method: :get,
+    submit: '更新評鑑'\
+  } do |f|
+    = render 'components/input_score', f: f,
+      label: '訴訟指揮評分', options: :command_score
+    = render 'components/input_score', f: f,
+      label: '開庭態度評分', options: :attitude_score

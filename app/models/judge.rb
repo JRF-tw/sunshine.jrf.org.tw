@@ -31,6 +31,7 @@ class Judge < ActiveRecord::Base
   has_many :schedules, foreign_key: "branch_judge_id"
   has_many :story_relations, as: :people
   has_many :verdict_relations, as: :person
+  has_many :schedule_scores
 
   mount_uploader :avatar, ProfileAvatarUploader
 

@@ -1,0 +1,9 @@
+= render layout: 'components/score_card',
+  locals: { status: nil, type: 'schedule' }
+
+  = render 'components/input_score_info',
+    step_text: '選擇法院/案號', step_count: 1, max_steps: 4,
+    as: :schedule_score,
+    form_for: @schedule_score,
+    form_url: check_info_party_score_schedules_path,
+    cancel_path: party_root_path

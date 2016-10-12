@@ -1,0 +1,10 @@
+= render layout: 'components/card', locals: { heading: '更改手機號碼' }
+  = simple_form_for current_party,
+    url: party_phone_path, method: :put, wrapper: :md do |f|
+    .form-group 請輸入您的新手機號碼
+
+    = f.input :phone_number, label: '舊手機號碼', disabled: true
+    = f.input :unconfirmed_phone, label: '新手機號碼', input_html: { value: @input_phone_number }
+
+    = render 'components/form_actions', f: f, submit: '送出',
+      link: { text: '取消', href: party_profile_path }

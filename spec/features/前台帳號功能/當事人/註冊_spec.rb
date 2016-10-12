@@ -39,7 +39,7 @@ describe "當事人註冊", type: :request do
           subject! { post "/party", party: { name: "老夫子", identify_number: "F122121211", password: "11111111", password_confirmation: "00000000" }, policy_agreement: "1" }
 
           it "提示密碼與密碼確認須一致" do
-            expect(response.body).to match("兩次輸入須一致")
+            expect(response.body).to match("密碼 需與密碼確認相同")
           end
         end
 
@@ -47,7 +47,7 @@ describe "當事人註冊", type: :request do
           subject! { post "/party", party: { name: "老夫子", identify_number: "F122121211", password: "111", password_confirmation: "111" }, policy_agreement: "1" }
 
           it "提示密碼過短" do
-            expect(response.body).to match("過短（最短是 8 個字）")
+            expect(response.body).to match("密碼 不得小於八個字元")
           end
         end
 
@@ -61,7 +61,7 @@ describe "當事人註冊", type: :request do
       end
 
       context "沒有勾選「我已詳細閱讀服務條款和隱私權保護政策」" do
-        subject! { post "/party", party: { name: "老夫子", identify_number: "F122121211", password: "00000000", password_confirmation: "00000000" } }
+        subject! { post "/party/registrations/check_identify_number", party: { name: "老夫子", identify_number: "F122121211", password: "00000000", password_confirmation: "00000000" } }
 
         it "提示尚未同意條款" do
           expect(response.body).to match("您尚未勾選同意條款")

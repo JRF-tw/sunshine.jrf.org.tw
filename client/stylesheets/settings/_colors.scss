@@ -1,0 +1,86 @@
+//  Settings
+//  ========
+
+$color-light-saturation: 93%;
+$characters: ('lawyer', 'party', 'observer');
+
+//  Colors
+//  ======
+
+$gray-base:     #000 !default;
+$gray-darker:   tint($gray-base, 13.5%) !default;
+$gray-dark:     tint($gray-base, 20%)   !default;
+$gray:          tint($gray-base, 33.5%) !default;
+$gray-light:    tint($gray-base, 46.5%) !default;
+$gray-lighter:  tint($gray-base, 93.5%) !default;
+
+$white: #fff;
+
+//  Texts
+//  -----
+
+$text-primary:   rgba(#000, .87);
+$text-secondary: rgba(#000, .54);
+$text-disabled:  rgba(#000, .38);
+
+$text-primary-dark:   #fff;
+$text-secondary-dark: rgba(#fff, .7);
+$text-disabled-dark:  rgba(#fff, .5);
+
+$text-color: $text-primary;
+
+//  Pallete
+//  -----------
+
+$accent:  #00bcd4;
+$primary: shade(#428bca, 6.5%);
+$success: #5cb85c;
+$info:    #5bc0dc;
+$warning: #f0ad4e;
+$danger:  #d9534f;
+
+// Party
+$red-dark:  #d32f2f;
+$red:       #f44336;
+$red-light: #ffcdd2;
+
+// Lawyer
+$yellow-dark:  #ffa000;
+$yellow:       #ffc107;
+$yellow-light: #ffec83;
+
+// Observer
+$green-dark:  #00796b;
+$green:       #009688;
+$green-light: #b2dfdb;
+
+// Default
+$brown-dark:  #5D4037;
+$brown:       #795548;
+$brown-light: #D7CCC8;
+
+$black:     #212121;
+$gray-dark: #727272;
+$gray:      #b6b6b6;
+
+//  Links
+//  -----
+
+$link-color:           $accent !default;
+$link-hover-color:     shade($link-color, 15%) !default;
+$link-focus-color:     $gray-dark !default;
+$link-active-color:    $gray-dark !default;
+$link-visited-color:   $gray-dark !default;
+
+//  NProgress
+//  ---------
+$nprogress-color:    $primary;
+
+//  Component colors
+//  ----------------
+$divider-gray: rgba(#000, .12);
+$mask-gray: rgba(#000, .5);
+
+$avatar-red: #F04B40;
+$avatar-black: #262626;
+$avatar-green: #1E9387;

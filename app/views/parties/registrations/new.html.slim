@@ -1,0 +1,12 @@
+- unless @checked
+  = render layout: 'components/card', locals: { heading: '當事人註冊' }
+    = render partial: 'identify_number_check_form'
+
+- else
+  = render layout: 'components/card', locals: {\
+    heading: '當事人註冊',
+    type: 'party',
+    title: '當事人',
+    name: @party.name,
+    identify_number: @party.identify_number}
+    = render partial: 'form'

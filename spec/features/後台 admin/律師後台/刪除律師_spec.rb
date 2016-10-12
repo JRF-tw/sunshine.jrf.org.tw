@@ -23,7 +23,7 @@ describe "律師後台 刪除律師", type: :request do
   end
 
   context "刪除後回到原本的列表頁，假如原本是搜尋結果的某一頁，則必須回到該頁" do
-    subject! { delete "/admin/lawyers/#{lawyer.id}", {}, "HTTP_REFERER" => "/admin/lawyers?page=2" }
+    subject! { delete "/admin/lawyers/#{lawyer.id}", redirect_to: "/admin/lawyers?page=2" }
 
     it "刪除成功" do
       expect(response).to redirect_to("/admin/lawyers?page=2")

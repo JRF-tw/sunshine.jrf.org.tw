@@ -1,0 +1,17 @@
+= render layout: 'components/user_info_card', locals: { type: 'party' }
+
+  = render layout: 'components/user_info',
+    locals: {title: '註冊手機號碼', path: '/party/phone/edit'}
+    = kv_cell '手機', current_party.phone_number
+    = kv_cell '密碼',
+      link_to('重設密碼', party_password_send_reset_password_sms_path, method: :post)
+
+  = render layout: 'components/user_info',
+    locals: {title: '電子信箱', path: '/party/email/edit'}
+    = kv_cell 'Email', current_party.email ? current_party.email : \
+      content_tag(:span, '建議填寫，開庭前及判決書公布時會以 email 通知', class: 'helper--error')
+
+  = render layout: 'components/user_info',
+    locals: {title: '個人基本資料', path: '/party/profile/edit'}
+    = kv_cell '姓名', current_party.name
+    = kv_cell '身分證字號', current_party.identify_number

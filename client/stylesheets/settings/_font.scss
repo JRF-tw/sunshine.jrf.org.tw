@@ -1,0 +1,31 @@
+//  Font settings
+//  =============
+$hide-text-direction:   right;
+
+// 僅針對英文
+// @font-face {
+//   font-family: English;
+//   unicode-range: U+00-024F;
+//   src: local(Helvetica);
+// }
+
+$sans:    HelveticaNeue-Light
+       , 'Helvetica Neue Light'
+       , 'Helvetica Neue'
+       ,  Helvetica
+       , 'Heiti TC'
+       , 'LiHei Pro'
+       , 'Microsoft JhengHei'
+       , '微軟正黑體'
+       ,  Arial
+       ,  sans-serif;
+
+$serif:  'PT Serif'
+       , Georgia
+       , Times
+       , 'Times New Roman'
+       , 'Songti TC'
+       , 'Hiragino Mincho ProN'
+       , serif;
+
+$base-font-family: $sans;

@@ -1,0 +1,102 @@
+.card {
+  margin: 0 r(2);
+  padding: 0 r(2) r(2);
+  background: $white;
+  box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.12), 0px 8px 8px 0px rgba(0,0,0,0.24);
+  border-radius: $global-radius;
+  position: relative;
+  z-index: index($layers, base);
+  @include susy-media($card-max + r(4)) {
+    margin: 0 auto;
+    max-width: $card-max;
+  }
+  @include susy($tablet) {
+    padding-top: r(2);
+    &.has-info {
+      position: relative r(-3) n() n() n();
+      z-index: index($layers, base);
+    }
+  }
+}
+.card--wide {
+  @include susy($tablet) {
+    width: 90%;
+    max-width: container($tablet-columns);
+
+    .avatar .icon {
+      size: 80px 50px;
+      stroke-width: 4px;
+    }
+  }
+}
+.card--flex {
+  display: flex;
+  flex-flow: column nowrap;
+  height: 50vh;
+}
+.card__heading {
+  margin: 0 r(-2) r(2);
+  text: center $white ms(2) r(7);
+  background-color: $accent;
+  @include susy($tablet) {
+    text: ms(5) 1.5;
+    background-color: transparent;
+    width: 100%;
+    top: r(-20);
+    @include scut-center-transform(x);
+
+    .has-info & { top: r(-17); }
+
+    & + .card__message { margin-top: 0; }
+  }
+}
+.card__info {
+  display: flex;
+  padding-bottom: r(2);
+  margin-bottom: r(2);
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  border-bottom: 1px solid $divider-gray;
+
+  .title {
+    font-size: ms(1);
+  }
+
+  .info {
+    width: 100%;
+    color: $text-secondary;
+  }
+
+  .avatar {
+    position: absolute 0 0 n() n();
+    z-index: index($layers, base);
+  }
+
+  .icon {
+    stroke: #ABABAB;
+    stroke-width: 10px;
+    size: 30px 25px;
+  }
+
+  .avatar-party { stroke-width: 6px; }
+}
+.card__rule {
+  flex: 1;
+  overflow: auto;
+  background-image: linear-gradient(to bottom, #fff 30%, rgba(255,255,255,0)),
+                    linear-gradient(to top, #fff 30%, rgba(255,255,255,0)),
+                    radial-gradient(farthest-side at 50% 0%, rgba(0,0,0,.2), rgba(255,255,255,0)),
+                    radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.2), rgba(255,255,255,0));
+  background-repeat: no-repeat;
+  background-position: 50% 0%, 50% 101%, 50% 0%, 50% 100%;
+  background-size: 100% 40px, 100% 40px, 100% 10px, 100% 10px;
+  background-attachment: local, local, scroll, scroll;
+
+  > p:first-child { margin-top: 0; }
+  > p:last-child { margin-bottom: 0; }
+}
+.card__actions {
+  padding-top: r(2);
+}

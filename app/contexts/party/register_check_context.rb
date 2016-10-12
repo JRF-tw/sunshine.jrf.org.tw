@@ -1,13 +1,13 @@
 class Party::RegisterCheckContext < BaseContext
   PERMITS = [:name, :identify_number, :password, :password_confirmation].freeze
 
+  before_perform :check_params_data
   before_perform :check_party_params_exist
-  before_perform :check_party_not_used
-  before_perform :check_agree_policy
+  before_perform :check_password_valid
 
   def initialize(params)
     @params = permit_params(params[:party] || params, PERMITS)
-    @params[:policy_agreement] = true if params[:policy_agreement] == "1"
+    @params[:policy_agreement] = true
   end
 
   def perform
@@ -18,23 +18,20 @@ class Party::RegisterCheckContext < BaseContext
 
   private
 
-  def check_agree_policy
-    return add_error(:without_policy_agreement, "您尚未勾選同意條款") unless @params[:policy_agreement]
+  def check_params_data
+    context = Party::IdentifyNumberCheckContext.new(@params)
+    return add_error(:data_invalid, context.error_messages.join(", ")) unless context.perform
   end
 
   def check_party_params_exist
-    add_error(:data_blank, "姓名 不可為空白字元") if @params[:name].blank?
-    add_error(:data_blank, "身分證字號 不可為空白字元") if @params[:identify_number].blank?
-    add_error(:data_blank, "密碼 不可為空白字元") if @params[:password].blank?
-    add_error(:data_blank, "密碼確認 不可為空白字元") if @params[:password_confirmation].blank?
-
+    add_error(:password_blank) if @params[:password].blank?
+    add_error(:password_confirmation_blank) if @params[:password_confirmation].blank?
     return false if errors.present?
   end
 
-  def check_party_not_used
-    if Party.pluck(:identify_number).include?(@params[:identify_number])
-      add_error(:party_exist, "此身分證字號已經被使用 <a href='#{new_party_appeal_path}'>人工申訴連結</a>")
-    end
+  def check_password_valid
+    add_error(:password_less_than_minimum) if @params[:password].size < 8
+    add_error(:password_not_match_confirmation) if @params[:password] != @params[:password_confirmation]
+    return false if errors.present?
   end
-
 end

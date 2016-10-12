@@ -17,6 +17,7 @@ AllCops:
     - node_modules/**/*
     - Guardfile
     - .gems/**/*
+    - spec/support/example_group_helper.rb
 
 Rails:
   Enabled: true

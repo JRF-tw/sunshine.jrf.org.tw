@@ -3,46 +3,46 @@
     tbody
       tr
         td 姓名
-        td= @party.name
+        td = @party.name
       - if @party.imposter
         tr
           td 冒用身分證字號
-          td= @party.imposter_identify_number
-      - else 
+          td = @party.imposter_identify_number
+      - else
         tr
           td 身分證字號
-          td= @party.identify_number
+          td = @party.identify_number
       tr
         td 電話號碼
-        td= @party.phone_number
+        td = @party.phone_number
       tr
         td 待驗證電話號碼
-        td= @party.unconfirmed_phone.value
+        td = @party.unconfirmed_phone.value
       tr
         td 電話號碼驗證狀態
-        td= @party.phone_confirmed? ? "已驗證" : "尚未驗證"
+        td = @party.phone_confirmed? ? "已驗證" : "尚未驗證"
       tr
         td email
-        td= @party.email
+        td = @party.email
       tr
         td 最後一次登入時間
-        td= @party.current_sign_in_at
+        td = @party.current_sign_in_at
       tr
         td 最後一次登入ip
-        td= @party.current_sign_in_ip
+        td = @party.current_sign_in_ip
       tr
         td 登入次數
-        td= @party.sign_in_count
+        td = @party.sign_in_count
       tr
         td 註冊時間
-        td= @party.created_at
+        td = @party.created_at
       tr
         td 最後更新時間
-        td= @party.updated_at
+        td = @party.updated_at
       tr
         td 案件列表
         td
-          = link_to "TODO 案件列表", "#", class: "btn btn-mini"
+          = link_to "參與案件列表", stories_admin_party_path, class: "btn btn-mini"
       tr
         td 評鑑列表
         td

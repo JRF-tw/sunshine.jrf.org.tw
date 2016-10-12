@@ -1,0 +1,29 @@
+= render 'components/step_meter', text: step_text, count: step_count, max: max_steps
+
+= simple_form_for form_for, as: as, url: form_url,
+  html: { method: :post, class: 'form--score' }, wrapper: :md do |f|
+  = f.input :court_id, as: :hidden
+
+  .form--score__preview
+    = f.input :court_id, as: :select,
+      collection: collect_for_courts, include_blank: "請選擇法院",
+      label: "法院", disabled: true
+    = f.input :year, label: '年度', readonly: true
+    = f.input :word_type, label: '字號', readonly: true
+    = f.input :number, label: '案號', readonly: true
+
+  .form--score__editor
+    = f.input :start_on, label: "選擇開庭日期", input_html: { class: 'datepicker' }
+
+    .form-group
+      = f.input_field :confirmed_realdate, as: :boolean, boolean_style: :inline
+      = f.label :confirmed_realdate do
+        = "實際開庭日有誤，我確認此日為實際開庭日。"
+        = link_to '#', class: 'popover-trigger',
+          'data-content' => '更改庭期規則',
+          'data-placement' => 'top' do
+          = inline_svg 'info'
+
+    = render 'components/score_form_actions', f: f,
+      submit: '下一步',
+      link: { text: '上一步', href: prev_url, method: prev_url_method }

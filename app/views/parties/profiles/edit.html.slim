@@ -1,0 +1,12 @@
+= render layout: 'components/card',
+  locals: { heading: '個人基本資料', type: 'party' }
+
+  = simple_form_for @party, as: :party,
+    url:  party_profile_path, method: :put, wrapper: :md do |f|
+
+    = f.input :name
+
+    = f.input :identify_number, disabled: true, required: false
+
+    = render 'components/form_actions', f: f, submit: '確認更新',
+      link: { text: '取消', href: party_profile_path }

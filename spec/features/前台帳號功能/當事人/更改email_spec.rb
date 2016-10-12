@@ -1,7 +1,7 @@
 require "rails_helper"
 
 describe "當事人更改email", type: :request do
-  let!(:party) { create :party }
+  let!(:party) { create :party, :with_confirmation_token }
 
   context "成功送出" do
     before { signin_party(party) }
@@ -11,7 +11,7 @@ describe "當事人更改email", type: :request do
       subject { put "/party/email", party: { email: party_with_unconfirmed_email.unconfirmed_email, current_password: "12321313213" } }
 
       it "成功送出" do
-        expect { subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq)
+        expect { subject }.to change_sidekiq_jobs_size_of(CustomDeviseMailer, :resend_confirmation_instructions)
       end
     end
 
@@ -19,7 +19,7 @@ describe "當事人更改email", type: :request do
       subject { put "/party/email", party: { email: "5566@gmail.com", current_password: "12321313213" } }
 
       it "成功送出" do
-        expect { subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq)
+        expect { subject }.to change_sidekiq_jobs_size_of(CustomDeviseMailer, :resend_confirmation_instructions)
       end
     end
 
@@ -40,8 +40,8 @@ describe "當事人更改email", type: :request do
       context "新 email 空白" do
         subject! { put "/party/email", party: { email: "", current_password: "12321313213" } }
 
-        it "顯示不可為空" do
-          expect(response.body).to match("email 不可為空")
+        it "顯示格式錯誤" do
+          expect(response.body).to match("email 的格式是無效的")
         end
       end
 
@@ -49,7 +49,7 @@ describe "當事人更改email", type: :request do
         subject! { put "/party/email", party: { email: "4554", current_password: "12321313213" } }
 
         it "email 格式錯誤" do
-          expect(flash[:error]).to eq("無效的 email")
+          expect(flash[:error]).to eq("email 的格式是無效的")
         end
       end
 
@@ -77,7 +77,7 @@ describe "當事人更改email", type: :request do
         subject! { put "/party/email", party: { email: party2.email, current_password: "12321313213" } }
 
         it "顯示已經被使用" do
-          expect(response.body).to match("email 已經被使用")
+          expect(response.body).to match("email 已被使用")
         end
       end
 

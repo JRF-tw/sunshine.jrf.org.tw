@@ -16,10 +16,10 @@
       .row
         .span6
           .control-group#datepicker
-            label.control-label= f.label :date_gteq
-            .controls= f.search_field :date_gteq, placeholder: "起始時間，非必填"
-            label.control-label= f.label :date_lteq
-            .controls= f.search_field :date_lteq, placeholder: "結束時間，非必填"
+            label.control-label= f.label :start_on_gteq
+            .controls= f.search_field :start_on_gteq, placeholder: "起始時間，非必填"
+            label.control-label= f.label :start_on_lteq
+            .controls= f.search_field :start_on_lteq, placeholder: "結束時間，非必填"
 
     .form-actions
       = f.submit :value => "搜尋", :class => "btn btn-primary"
@@ -36,7 +36,7 @@
           th 股別法官
           th 案件
           th = sort_link(@search, :branch_name, "股別名稱")
-          th = sort_link(@search, :date, "開庭時間")
+          th = sort_link(@search, :start_on, "開庭時間")
           th
       tbody
         - @schedules.each do |schedule|
@@ -46,7 +46,7 @@
             td = link_to schedule.branch_judge.name, admin_judge_path(schedule.branch_judge) if schedule.branch_judge
             td = link_to "#{schedule.story.identity}", admin_story_path(schedule.story)
             td = schedule.branch_name
-            td = schedule.date
+            td = schedule.start_on
             td = link_to "詳細資料", admin_schedule_path(schedule), class: "btn btn-mini"
     .ui-toolbar.ui-widget-header
       = paginate @schedules, theme: :admin

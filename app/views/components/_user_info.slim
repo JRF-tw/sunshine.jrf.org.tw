@@ -1,0 +1,10 @@
+.user-info
+  h3.user-info__title = title
+
+  = link_to path, class: 'flat-button--addons user-info__action' do
+    = inline_svg 'pencil'
+    | 更改
+
+  .user-info__content
+    dl.list--user-info
+      = yield

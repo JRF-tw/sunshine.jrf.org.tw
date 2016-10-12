@@ -26,7 +26,7 @@ module PartyHelper
   def party_with_unconfirm_phone_number(phone_number)
     party = create(:party)
     signin_party(party)
-    post "/party/phone", party: { phone_number: phone_number }
+    post "/party/phone", party: { unconfirmed_phone: phone_number }
     signout_party
     party
   end
@@ -43,7 +43,7 @@ module PartyHelper
   end
 
   def party_chang_phone_number_times(times)
-    times.times { put "/party/phone", party: { phone_number: "09" + rand(10_000_000..99_999_999).to_s } }
+    times.times { put "/party/phone", party: { unconfirmed_phone: "09" + rand(10_000_000..99_999_999).to_s } }
   end
 
   def party_verifing_error_times(times)
@@ -53,7 +53,7 @@ module PartyHelper
   def party_subscribe_story_date_today
     party = create(:party, :already_confirmed)
     story = create(:story, :with_schedule_date_today)
-    StorySubscriptionCreateContext.new(story).perform(party)
+    Party::StorySubscriptionToggleContext.new(story).perform(party)
     party
   end
 

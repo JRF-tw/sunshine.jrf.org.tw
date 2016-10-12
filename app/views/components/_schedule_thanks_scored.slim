@@ -1,0 +1,26 @@
+- toggle_subscribe_story_path = toggle_subscribe_story_path ? toggle_subscribe_story_path : false
+
+= simple_form_for @schedule_score, as: :schedule_score,
+  url: form_url, html: { method: :post }, wrapper: :md do |f|
+  = f.input :court_id, as: :hidden
+  = f.input :year, as: :hidden
+  = f.input :word_type, as: :hidden
+  = f.input :number, as: :hidden
+  = f.input :start_on, as: :hidden
+  = f.input :confirmed_realdate, as: :hidden
+
+  ul.toggle-list
+    = render 'components/toggle_list_cell',
+      toggle_for: :subscribe_story,
+      toggle_checked: already_subscribed_story?(current_user, @record.story),
+      toggle_url: toggle_subscribe_story_path,
+      toggle_text: '是否同意我們在下一次開庭或判決書公布時用email通知您？'\
+      if toggle_subscribe_story_path
+
+  = render 'components/wrapped_donate_button'
+
+  = yield
+
+  .form-actions--space-between
+    = f.button :button, "評鑑其他法官", class: "raised-button"
+    = link_to "返回評鑑紀錄", path_to_root, class: "raised-button"

@@ -204,7 +204,7 @@ module ApplicationHelper
     User::GENDER_TYPES
   end
 
-  def collect_for_judgement_type
+  def collect_for_judgment_type
     [["是", true], ["否 (為裁決)", false]]
   end
 
@@ -212,7 +212,35 @@ module ApplicationHelper
     [["是", true], ["否", false]]
   end
 
+  def collect_for_adjudgement
+    [["是", "yes"], ["否", "no"]]
+  end
+
   def collect_for_main_judge_present
     [["有", 1], ["無", 0]]
+  end
+
+  def get_court_fullname(court_id)
+    Court.find(court_id).full_name
+  end
+
+  def get_name_by_role(role)
+    case role.class.name
+    when "Lawyer"
+      "律師"
+    when "Party"
+      "當事人"
+    when "CourtObserver"
+      "旁觀者"
+    end
+  end
+
+  def render_html(text)
+    text = simple_format(text, {}, wrapper_tag: "div")
+    safe_join([text], "")
+  end
+
+  def already_subscribed_story?(role, story)
+    role.story_subscriptions.find_by(story_id: story.id).present?
   end
 end

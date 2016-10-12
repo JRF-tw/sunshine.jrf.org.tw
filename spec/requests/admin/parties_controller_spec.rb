@@ -29,4 +29,18 @@ RSpec.describe Admin::PartiesController do
       it { expect(response).to redirect_to("/admin/parties") }
     end
   end
+
+  describe "#stories" do
+    context "have stories" do
+      let(:story) { create :story }
+      let!(:story_relation) { create :story_relation, people: party, story: story }
+      subject! { get "/admin/parties/#{party.id}/stories" }
+      it { expect(response.body).to match(story.story_type) }
+    end
+
+    context "don't have stories" do
+      subject! { get "/admin/parties/#{party.id}/stories" }
+      it { expect(response).to be_success }
+    end
+  end
 end

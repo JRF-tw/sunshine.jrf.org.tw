@@ -1,0 +1,31 @@
+- use_identify_number = use_identify_number ? true : false
+
+= render layout: 'components/card', locals: { heading: heading }
+  = simple_form_for(resource, as: resource_name, url: session_path(resource_name), wrapper: :md) do |f|
+    .form-group.addon-prefix
+      - if use_identify_number
+        = f.input_field :identify_number, class: 'form-control'
+        = f.label :identify_number
+        = f.error :identify_number
+      
+      - else
+        = f.input_field :email, class: 'form-control'
+        = f.label :email
+        = f.error :email
+      
+      = inline_svg "profile"
+    
+    .form-group.addon-prefix.addon-forgot-password
+      = f.input_field :password, class: 'form-control'
+      = f.label :password
+      = f.error :password
+      = inline_svg "key"
+      = link_to "忘記密碼", new_password_path(resource_name), class: "forgot-password"
+    
+    .form-group.squish-before
+      = f.input_field :remember_me, inline_label: "記住我", as: :boolean if devise_mapping.rememberable?
+
+    = render 'components/form_actions',
+      f: f,
+      submit: '登入',
+      link: { text: '註冊', href: signup }

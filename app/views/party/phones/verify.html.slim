@@ -1,8 +1,0 @@
-| 輸入驗證碼
-
-= simple_form_for current_party, url: verifing_party_phone_url, method: :put do |f|
-  = f.input :phone_varify_code, input_html: { value: nil }, label: "認證碼"
-  .form-actions
-    = f.submit "認證", class: "btn btn-primary"
-    = " "
-    = link_to "重新寄送認證碼", resend_party_phone_path, :class => "btn btn-default", method: :put

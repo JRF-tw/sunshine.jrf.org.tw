@@ -20,7 +20,7 @@ module Search
 
     def find_court
       @court = Court.find_by(full_name: @court_name)
-      add_error(:data_not_found, "沒有該法院相關資料") unless @court
+      add_error(:search_court_not_find) unless @court
     end
 
     def find_story

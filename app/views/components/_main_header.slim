@@ -1,28 +1,33 @@
-header.main-header
-  .container
-    .main-header__wrapper.cf
-      = link_to '/', class: "main-logo"
-        h1.main-logo__icon 司法陽光網
-        p.main-logo__slogan 揭開司法的神秘面紗
+ruby:
+  type    = type ? type : false
+  classes = classes ? classes : ""
 
-      nav.main-nav
-        ul.main-nav__cells
-          li = link_to '認識法官', judges_path, class: "#{class_of_judges} main-nav__cell"
-          li = link_to '認識檢察官', prosecutors_path, class: "#{class_of_prosecutors} main-nav__cell"
-          li = link_to '我想找', searchs_path, class: "#{class_of_searchs} main-nav__cell"
-          li = link_to '關於我們', about_path, class: "#{class_of_about} main-nav__cell"
-          li = link_to '回報錯誤', 'https://jrf.neticrm.tw/civicrm/profile/create?gid=49&reset=1', class: "#{class_of_about} main-nav__cell", target: "_blank"
+  case type
+  when 'lawyer'
+    if current_lawyer
+      sign_out = destroy_lawyer_session_path
+    end
+  when 'party'
+    if current_party
+      sign_out = destroy_party_session_path
+    end
+  when 'observer'
+    if current_court_observer
+      sign_out = destroy_court_observer_session_path
+    end
+  else
+    sign_out = false
+  end
 
+header.main-header#main-header class=classes
+  .main-header__wrapper.container--wide
+    = link_to '/', class: "main-header__logo"
+      h1.icon 司法陽光網
+      p.slogan 揭開司法的神秘面紗
 
-      button#mb-nav-toggle.mb-nav-toggle type='button'
-        .bar
-        .bar
-        .bar
+    nav.main-header__nav
+      = render 'components/nav_cells'
 
-    nav#mb-nav.mb-nav
-      ul.mb-nav__cells
-        li = link_to '認識法官', judges_path, class: 'mb-nav__cell'
-        li = link_to '認識檢察官', prosecutors_path, class: 'mb-nav__cell'
-        li = link_to '關於我們', about_path, class: 'mb-nav__cell'
-        li = link_to '我想找', searchs_path, class: 'mb-nav__cell'
-        li = link_to '回報錯誤', 'https://jrf.neticrm.tw/civicrm/profile/create?gid=49&reset=1', class: 'mb-nav__cell', target: '_blank'
+      - if sign_out
+        = link_to sign_out, method: :delete, class: 'cell' do
+          = inline_svg 'exit'

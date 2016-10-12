@@ -2,11 +2,12 @@ class Lawyer::RegisterContext < BaseContext
   PERMITS = [:name, :email].freeze
 
   before_perform :check_lawyer_params
+  before_perform :check_email_valid
   before_perform :find_lawyer_by_params
   before_perform :check_lawyer_not_active
   before_perform :check_agree_policy
-  after_perform :generate_token
-  after_perform :send_confirm_mail
+  after_perform :generate_reset_password_token
+  after_perform :send_setting_password_mail
 
   def initialize(params)
     @params = permit_params(params[:lawyer] || params, PERMITS)
@@ -22,31 +23,34 @@ class Lawyer::RegisterContext < BaseContext
   private
 
   def check_agree_policy
-    return add_error(:without_policy_agreement, "您尚未勾選同意條款") unless @params[:policy_agreement]
+    return add_error(:without_policy_agreement) unless @params[:policy_agreement]
   end
 
   def check_lawyer_params
-    add_error(:data_blank, "姓名不可為空白字元") if @params[:name].blank?
-    add_error(:data_blank, "email不可為空白字元") if @params[:email].blank?
+    add_error(:name_blank) if @params[:name].blank?
+    add_error(:email_blank) if @params[:email].blank?
 
     return false if errors.present?
   end
 
+  def check_email_valid
+    return add_error(:email_pattern_invalid) unless @params[:email][/\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i]
+  end
+
   def find_lawyer_by_params
     @lawyer = Lawyer.find_by(name: @params[:name], email: @params[:email])
-    return add_error(:lawyer_not_found, "查無此律師資料 請改以人工管道註冊 <a href='/lawyer/appeal/new'>點此註冊</a>") unless @lawyer
+    return add_error(:lawyer_not_found_manual_sign_up) unless @lawyer
   end
 
   def check_lawyer_not_active
-    return add_error(:lawyer_exist, "已經註冊 請直接登入") if @lawyer.confirmed?
+    return add_error(:lawyer_exist_please_sign_in) if @lawyer.confirmed?
   end
 
-  def generate_token
-    @token = @lawyer.set_confirmation_token
+  def generate_reset_password_token
+    @token = @lawyer.set_reset_password_token
   end
 
-  def send_confirm_mail
-    CustomDeviseMailer.delay.send_confirm_mail(@lawyer, @token)
+  def send_setting_password_mail
+    CustomDeviseMailer.delay.send_setting_password_mail(@lawyer, @token)
   end
-
 end

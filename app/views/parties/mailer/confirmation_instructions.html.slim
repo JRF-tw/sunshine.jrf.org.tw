@@ -1,0 +1,5 @@
+p = "您剛剛以 #{@email} 信箱註冊了司法陽光網的當事人帳戶，請點選以下連結以認證您的信箱（若無法點選，請拷貝網址貼到網址列）："
+
+p = link_to confirmation_url(@resource, confirmation_token: @token), confirmation_url(@resource, confirmation_token: @token) 
+
+p 如果您並未送出這個請求，請忽略此封郵件。

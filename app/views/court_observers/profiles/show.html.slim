@@ -1,0 +1,14 @@
+= render layout: 'components/user_info_card', locals: { type: 'observer' }
+
+  = render layout: 'components/user_info',
+    locals: {title: '註冊帳號', path: '/observer/email/edit'}
+    = kv_cell 'Email', current_court_observer.email
+    = kv_cell '密碼', link_to('重設密碼',
+      observer_password_send_reset_password_mail_path, method: :post)
+
+  = render layout: 'components/user_info',
+    locals: {title: '個人基本資料', path: '/observer/profile/edit'}
+    = kv_cell '姓名', current_court_observer.name
+    = kv_cell '手機', current_court_observer.phone_number
+    = kv_cell '學校', current_court_observer.school
+    = kv_cell '系級', current_court_observer.department_level

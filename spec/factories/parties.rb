@@ -22,10 +22,9 @@
 #  confirmed_at             :datetime
 #  confirmation_token       :string
 #  confirmation_sent_at     :datetime
-#  phone_confirmed_at       :datetime
 #  imposter                 :boolean          default(FALSE)
 #  imposter_identify_number :string
-#
+#  phone_confirmed_at       :datetime
 #
 
 FactoryGirl.define do
@@ -41,6 +40,10 @@ FactoryGirl.define do
 
     trait :already_confirmed do
       confirmed_at Time.now
+    end
+
+    trait :with_confirmation_token do
+      confirmation_token "2grgr212fd"
     end
   end
 

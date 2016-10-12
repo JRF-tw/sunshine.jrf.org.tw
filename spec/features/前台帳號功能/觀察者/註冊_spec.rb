@@ -1,115 +1,77 @@
 require "rails_helper"
+feature "觀察者註冊 (Email)", type: :feature, js: true do
+  let!(:observer_a) { { name: "當事人a", email: "test@gmail.com", password: "00000000" } }
 
-describe "觀察者註冊", type: :request do
-  context "成功註冊" do
-    subject { post "/observer", court_observer: { name: "阿怪", email: "h2312@gmail.com", password: "123123123", password_confirmation: "123123123" }, policy_agreement: "1" }
+  feature "相同的 email 無法再註冊" do
+    Given "已存在觀察者A" do
+      before { visit(new_court_observer_registration_path) }
+      before { capybara_input_sign_up_observer(observer_a) }
+      before { capybara_regiter_submit_observer }
+      before { capybara_confirm_observer(observer_a[:email]) }
+      before { manual_http_request(:delete, "/observer/sign_out") }
 
-    it "發送驗證信" do
-      expect { subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq)
-    end
+      When "使用觀察者A的 email 進行註冊" do
+        let!(:observer_b) { { name: "當事人b", email: observer_a[:email], password: "199999999" } }
+        before { visit(new_court_observer_registration_path) }
+        before { capybara_input_sign_up_observer(observer_b) }
+        before { capybara_regiter_submit_observer }
 
-    it "轉跳到登入頁，並跳出註冊成功訊息" do
-      expect(subject).to redirect_to("/observer/sign_in")
-      expect(flash[:notice]).to eq("確認信件已送至您的 Email 信箱，請點擊信件內連結以啓動您的帳號。")
+        Then "帳號建立失敗" do
+          expect(page).to have_content("您已經註冊請直接登入")
+        end
+      end
     end
   end
 
-  context "失敗註冊" do
-    context "失敗後的頁面" do
-      subject! { post "/observer", court_observer: { name: "阿怪", email: "h2312@gmail.com", password: "123123123", password_confirmation: "22222222" }, policy_agreement: "1" }
+  feature "成功註冊後，送出驗證信" do
+    Given "前往觀察者註冊頁" do
+      before { visit(new_court_observer_registration_path) }
+      When "填寫註冊資訊並送出表單" do
+        before { capybara_input_sign_up_observer(observer_a) }
+        before { capybara_regiter_submit_observer }
 
-      it "應保留原本輸入的內容" do
-        expect(response.body).to match("阿怪")
-        expect(response.body).to match("h2312@gmail.com")
+        Then "觀察者收到註冊認證信" do
+          expect(page).to have_content("確認信件已送至您的 Email 信箱，請點擊信件內連結以啓動您的帳號。")
+        end
+      end
+    end
+  end
+
+  feature "帳號必須經過驗證後才能登入" do
+    Scenario "尚未通過驗證" do
+      Given "觀察者A已註冊，但尚未通過驗證" do
+        before { visit(new_court_observer_registration_path) }
+        before { capybara_input_sign_up_observer(observer_a) }
+        before { capybara_regiter_submit_observer }
+
+        When "以觀察者A的帳號進行登入" do
+          before { visit(new_court_observer_session_path) }
+          before { capybara_input_sign_in_observer(observer_a) }
+          before { capybara_log_in_observer }
+
+          Then "登入失敗" do
+            expect(page).to have_content("您的帳號需需要經過驗證後，才能繼續。")
+          end
+        end
       end
     end
 
-    context "email已存在，且已驗證" do
-      let!(:court_observer) { create :court_observer }
-      subject { post "/observer", court_observer: { name: "阿怪", email: court_observer.email, password: "123123123", password_confirmation: "123123123" }, policy_agreement: "1" }
+    Scenario "已通過驗證" do
+      Given "觀察者A已註冊，且點擊（前往）過認證信內的連結" do
+        before { visit(new_court_observer_registration_path) }
+        before { capybara_input_sign_up_observer(observer_a) }
+        before { capybara_regiter_submit_observer }
+        before { capybara_confirm_observer(observer_a[:email]) }
+        before { manual_http_request(:delete, "/observer/sign_out") }
 
-      it "轉跳至登入頁" do
-        expect(subject).to redirect_to("/observer/sign_in")
-        expect(flash[:error]).to eq("您已經註冊請直接登入")
-      end
-    end
+        When "以觀察者A的帳號進行登入" do
+          before { visit(new_court_observer_session_path) }
+          before { capybara_input_sign_in_observer(observer_a) }
+          before { capybara_log_in_observer }
 
-    context "email 已存在，但未驗證" do
-      let!(:court_observer_without_validate) { create :court_observer_without_validate }
-      subject { post "/observer", court_observer: { name: "阿怪", email: court_observer_without_validate.email, password: "123123123", password_confirmation: "123123123" }, policy_agreement: "1" }
-
-      it "發送驗證信" do
-        expect { subject }.to change_sidekiq_jobs_size_of(Devise::Async::Backend::Sidekiq)
-      end
-
-      it "轉跳至登入頁" do
-        expect(subject).to redirect_to("/observer/sign_in")
-        expect(flash[:error]).to eq("此email已經註冊 驗證信已發送到您的信箱 請點擊連結驗證後登入")
-      end
-    end
-
-    context "沒有勾選「我已詳細閱讀服務條款和隱私權保護政策」" do
-      subject! { post "/observer", court_observer: { name: "阿怪", email: "h2312@gmail.com", password: "123123123", password_confirmation: "123123123" }, policy_agreement: "0" }
-
-      it "提示尚未同意條款" do
-        expect(flash[:error]).to eq("您尚未勾選同意條款")
-      end
-    end
-
-    context "輸入內容錯誤" do
-      context "姓名空白" do
-        subject! { post "/observer", court_observer: { name: "", email: "h2312@gmail.com", password: "123123123", password_confirmation: "123123123" }, policy_agreement: "1" }
-
-        it "提示姓名不可空白" do
-          expect(flash[:error]).to eq("姓名 不可為空白字元")
-        end
-      end
-
-      context "email 格式不符" do
-        subject! { post "/observer", court_observer: { name: "阿怪", email: "h2312", password: "123123123", password_confirmation: "123123123" }, policy_agreement: "1" }
-
-        it "提示email 無效" do
-          expect(response.body).to match("是無效的")
-        end
-      end
-
-      context "email空白" do
-        subject! { post "/observer", court_observer: { name: "阿怪", email: "", password: "123123123", password_confirmation: "123123123" }, policy_agreement: "1" }
-
-        it "提示email不可空白" do
-          expect(flash[:error]).to eq("email 不可為空白字元")
-        end
-      end
-
-      context "密碼空白" do
-        subject! { post "/observer", court_observer: { name: "阿怪", email: "h2312@gmail.com", password: "", password_confirmation: "123123123" }, policy_agreement: "1" }
-
-        it "提示密碼不可空白" do
-          expect(flash[:error]).to eq("密碼 不可為空白字元")
-        end
-      end
-
-      context "密碼和確認密碼兩次內容不一致" do
-        subject! { post "/observer", court_observer: { name: "阿怪", email: "h2312@gmail.com", password: "11111111", password_confirmation: "22222222" }, policy_agreement: "1" }
-
-        it "提示密碼與密碼確認須一致" do
-          expect(response.body).to match("兩次輸入須一致")
-        end
-      end
-
-      context "密碼過短" do
-        subject! { post "/observer", court_observer: { name: "阿怪", email: "h2312@gmail.com", password: "11", password_confirmation: "11" }, policy_agreement: "1" }
-
-        it "提示密碼過短" do
-          expect(response.body).to match("過短（最短是 8 個字）")
-        end
-      end
-
-      context "四格任一項空白" do
-        subject! { post "/observer", court_observer: { name: "阿怪", email: "h2312@gmail.com", password: "11", password_confirmation: "" }, policy_agreement: "1" }
-
-        it "提示該欄位不可為空" do
-          expect(flash[:error]).to eq("密碼確認 不可為空白字元")
+          Then "登入成功" do
+            expect(page).to have_content("成功登入了。")
+          end
         end
       end
     end

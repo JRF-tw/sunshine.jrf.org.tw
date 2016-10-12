@@ -13,7 +13,7 @@ module Scrap
 
     def perform
       run_callbacks :perform do
-        return add_error(:data_create_fail, "create judge failed") unless @judge.save
+        return add_error(:scrap_judge_create_fail) unless @judge.save
         @judge
       end
     end
@@ -21,7 +21,7 @@ module Scrap
     private
 
     def is_highest_court?
-      return add_error(:data_create_fail, "court is not highest") unless @court.code == "TPS"
+      return add_error(:scrap_not_highest_court) unless @court.code == "TPS"
     end
 
     def find_judge_by_court

@@ -1,0 +1,11 @@
+= render layout: 'components/card', locals: { heading: '輸入手機號碼' }
+  = simple_form_for current_party,
+    url: party_phone_path,
+    method: :post,
+    wrapper: :md do |f|
+    
+    = f.input :unconfirmed_phone, input_html: { value: @input_phone_number }
+
+    = render 'components/form_actions',
+      f: f,
+      submit: '寄送驗證碼'

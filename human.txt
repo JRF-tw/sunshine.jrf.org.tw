@@ -1,0 +1,18 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+# TEAM
+
+    Frontend developer: Jude Wang
+    Contact: jude [at] jude.asia
+    Twitter: @jude_w
+    Location: Taipei, Taiwan
+
+# TECHNOLOGY COLOPHON
+
+    Responsive Web Design
+    HTML5, CSS3, Javascript, SVG
+    jQuery, jQuery Mobile, Angular.js
+    NodeJS, Yeoman, Gulp, Grunt, Bower
+    Ruby on Rails, Middleman
+    Sketch, Photoshop

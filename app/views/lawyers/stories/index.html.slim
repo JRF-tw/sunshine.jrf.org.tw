@@ -1,0 +1,7 @@
+= render layout: 'components/stories_card', locals: {\
+  profile: lawyer_profile_path,
+  scores:  scores_path,
+  stories: @stories,
+  type:    'lawyer'\
+}
+  = render partial: 'chose_type'

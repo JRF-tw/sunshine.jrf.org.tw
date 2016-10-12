@@ -9,7 +9,7 @@ describe "當事人忘記密碼", type: :request do
       subject { post "/party/password", party: params }
 
       it "發送重設密碼簡訊" do
-        expect { subject }.to change_sidekiq_jobs_size_of(SmsService, :send_to)
+        expect { subject }.to change_sidekiq_jobs_size_of(SmsService, :send_sms)
       end
 
       it "回到登入頁" do
@@ -42,7 +42,7 @@ describe "當事人忘記密碼", type: :request do
           subject! { post "/party/password", party: { identify_number: "F123456789", phone_number: party.phone_number } }
 
           it "顯示無此當事人資訊" do
-            expect(response.body).to match("沒有此當事人資訊")
+            expect(response.body).to match("無此當事人資料")
           end
         end
 
@@ -58,7 +58,7 @@ describe "當事人忘記密碼", type: :request do
           subject! { post "/party/password", party: { identify_number: "F123456789", phone_number: "0911111111" } }
 
           it "顯示無此當事人資訊" do
-            expect(response.body).to match("沒有此當事人資訊")
+            expect(response.body).to match("無此當事人資料")
           end
         end
       end
@@ -68,7 +68,7 @@ describe "當事人忘記密碼", type: :request do
           subject! { post "/party/password", party: { identify_number: "", phone_number: party.phone_number } }
 
           it "顯示無此當事人資訊" do
-            expect(response.body).to match("沒有此當事人資訊")
+            expect(response.body).to match("無此當事人資料")
           end
         end
 
@@ -84,7 +84,7 @@ describe "當事人忘記密碼", type: :request do
           subject! { post "/party/password", party: { identify_number: "", phone_number: "" } }
 
           it "顯示無此當事人資訊" do
-            expect(response.body).to match("沒有此當事人資訊")
+            expect(response.body).to match("無此當事人資料")
           end
         end
       end

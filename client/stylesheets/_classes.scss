@@ -1,0 +1,27 @@
+@mixin Hidden {
+  display: none !important; visibility: hidden;
+}
+
+@mixin Select {
+  appearance: none;
+  padding: 0 r(2) 0 0;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid $divider-gray;
+  background: url("images/arrow-down.svg")
+              98% 50% / 8px 10px
+              no-repeat
+              transparent;
+  .no-css-appearance & {
+    @include scut-padding(n 0);
+    background-image: none;
+  }
+}
+
+@mixin Normalize() {
+  appearance: none;
+  border: none;
+  outline: none;
+  background: none transparent;
+  padding: 0;
+}
