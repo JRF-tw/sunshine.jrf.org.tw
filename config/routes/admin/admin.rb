@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => "/sidekiq"
   namespace :admin do
     root to: "profiles#index"
-    resources :courts
     resources :profiles do
       resources :educations
       resources :careers
