@@ -492,8 +492,8 @@ ActiveRecord::Schema.define(version: 20161011031058) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.integer  "branch_judge_id"
-    t.datetime "start_at"
     t.string   "courtroom"
+    t.datetime "start_at"
   end
 
   add_index "schedules", ["branch_judge_id", "court_id", "story_id"], name: "index_schedules_on_branch_judge_id_and_court_id_and_story_id", using: :btree

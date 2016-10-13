@@ -5,7 +5,7 @@ describe CourtObserver::CheckScheduleScoreDateContext do
   let!(:court) { create :court }
   let!(:story) { create :story, court: court }
   let!(:schedule) { create :schedule, story: story }
-  let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, start_on: schedule.start_on, confirmed_realdate: false } }
+  let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type, start_on: schedule.start_on, confirmed_realdate: false } }
 
   describe "#perform" do
     subject { described_class.new(court_observer).perform(params) }

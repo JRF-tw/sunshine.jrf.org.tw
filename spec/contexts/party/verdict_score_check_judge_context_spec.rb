@@ -6,7 +6,7 @@ describe Party::VerdictScoreCheckJudgeContext do
   let!(:story) { create :story, :pronounced, :adjudged, court: court }
   let!(:judge) { create :judge, court: court }
   let!(:judge2) { create :judge }
-  let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, judge_name: judge.name } }
+  let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type, judge_name: judge.name } }
 
   describe "#perform" do
     subject { described_class.new(party).perform(params) }
