@@ -18,8 +18,8 @@
               td
                 = link_to "詳細資料", admin_court_path(court), class: "btn btn-mini"
                 | &nbsp;
-                - { first: "頂", up: "上", down: "下", last: "底"}.each do |weight, label|
+                - sort_button(court).each do |url|
                   | &nbsp;
-                  = link_to label, admin_court_update_weight_path(court, admin_court: { weight: weight }, format: :js), class: "btn btn-mini btn-info", remote: true, method: :put
+                  = url
       .ui-toolbar.ui-widget-header
         = paginate @courts, theme: :admin
