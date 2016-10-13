@@ -59,10 +59,9 @@ module Capybara
       sleep 1
     end
 
-    def capybara_party_run_verdict_score_flow(story, judge)
+    def capybara_party_run_verdict_score_flow(story)
       visit(input_info_party_score_verdicts_path)
       capybara_party_input_info_verdict_score(story)
-      capybara_party_input_judge_verdict_score(judge)
       capybara_party_create_verdict_score
     end
 
@@ -73,13 +72,6 @@ module Capybara
         fill_in "verdict_score_year", with: year ? year : story.year
         fill_in "verdict_score_word_type", with: word_type ? word_type : story.word_type
         fill_in "verdict_score_number", with: number ? number : story.number
-      end
-      click_button "下一步"
-    end
-
-    def capybara_party_input_judge_verdict_score(judge)
-      within("#new_verdict_score") do
-        fill_in "verdict_score_judge_name", with: judge.name
       end
       click_button "下一步"
     end
@@ -95,9 +87,7 @@ module Capybara
     def capybara_party_edit_verdict_score
       visit(party_root_path)
       find(:xpath, "//tbody/tr/td/a").click
-      sleep 1
       click_link("編輯評鑑")
-      sleep 1
     end
   end
 end

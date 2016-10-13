@@ -19,7 +19,6 @@
 FactoryGirl.define do
   factory :verdict_score do
     story { FactoryGirl.create :story }
-    judge { FactoryGirl.create :judge }
     verdict_rater { FactoryGirl.create :lawyer }
 
     trait :by_party do

@@ -11,7 +11,7 @@ describe "法官評鑑 - 評鑑紀錄", type: :request do
 
   context "Given 有評鑑資料" do
     let!(:schedule_score) { create :schedule_score, :with_start_on, schedule_rater: lawyer, judge: judge, story: story }
-    let!(:verdict_score) { create :verdict_score, verdict_rater: lawyer, judge: judge, story: story }
+    let!(:verdict_score) { create :verdict_score, verdict_rater: lawyer, story: story }
 
     context "When 到個人評鑑記錄頁" do
       subject! { get "/lawyer" }
@@ -70,7 +70,7 @@ describe "法官評鑑 - 評鑑紀錄", type: :request do
   end
 
   context "Given 案件已宣判，且已評鑑判決" do
-    let!(:verdict_score) { create :verdict_score, verdict_rater: lawyer, judge: judge, story: story }
+    let!(:verdict_score) { create :verdict_score, verdict_rater: lawyer, story: story }
     before { story.update_attributes(adjudge_date: Time.zone.today) }
 
     context "When 到該案件的評鑑記錄頁" do
@@ -87,7 +87,7 @@ describe "法官評鑑 - 評鑑紀錄", type: :request do
   end
 
   context "Given 案件已宣判，且已評鑑判決，但已超過判決評鑑時間" do
-    let!(:verdict_score) { create :verdict_score, verdict_rater: lawyer, judge: judge, story: story }
+    let!(:verdict_score) { create :verdict_score, verdict_rater: lawyer, story: story }
     before { story.update_attributes(adjudge_date: Time.zone.today - 91.days) }
 
     context "When 到該案件的評鑑記錄頁" do
