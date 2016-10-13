@@ -3,8 +3,8 @@ class Admin::CourtUpdateContext < BaseContext
 
   before_perform :assign_weight
   before_perform :assign_value
-  after_perform :remove_weight
-  after_perform :add_weight
+  after_perform :remove_weight, unless: :court_sortable?
+  after_perform :add_weight, if: :court_sortable?
 
   def initialize(court)
     @court = court
@@ -21,7 +21,7 @@ class Admin::CourtUpdateContext < BaseContext
   private
 
   def assign_weight
-    if @params[:weight] && @params[:weight].to_i.to_s == @params[:weight]
+    if @params[:weight] && @params[:weight][/^[1-9][0-9]+$/]
       @params[:weight] = @params[:weight].to_i
     elsif @params[:weight]
       @params.delete :weight
@@ -35,16 +35,18 @@ class Admin::CourtUpdateContext < BaseContext
   end
 
   def remove_weight
-    if (!is_court? || @court.is_hidden) && @court.in_list?
-      @court.remove_from_list
-    end
+    @court.remove_from_list if @court.in_list?
   end
 
   def add_weight
-    if is_court? && !@court.is_hidden && @court.not_in_list?
+    if @court.not_in_list?
       @court.insert_at(1)
       @court.move_to_bottom
     end
+  end
+
+  def court_sortable?
+    is_court? && !@court.is_hidden
   end
 
   def is_court?

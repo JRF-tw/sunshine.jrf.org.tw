@@ -1,21 +1,19 @@
-.dataTables_wrapper
+.edit_court_weight
     table.table.table-bordered.table-striped.table-hover
       thead
         tr
+          th #
           th 排序
-          th 類別
           th 全名
           th 前台顯示簡稱
-          th 是否在前端隱藏
           th
       tbody
         - @courts.each do |court|
           tr
+            td= court.id
             td= court.weight
-            td= court.court_type
             td= court.full_name
             td= court.name
-            td= court.is_hidden? ? "是" : "否"
             td
               = link_to "詳細資料", admin_court_path(court), class: "btn btn-mini"
               | &nbsp;

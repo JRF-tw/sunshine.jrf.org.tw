@@ -34,7 +34,6 @@ class Court < ActiveRecord::Base
   scope :newest, -> { order("id DESC") }
   scope :order_by_weight, -> { order("weight DESC, id DESC") }
   scope :with_codes, -> { where.not(code: nil) }
-  scope :not_hidden, -> { where(is_hidden: false) }
 
   class << self
     def collect_codes
