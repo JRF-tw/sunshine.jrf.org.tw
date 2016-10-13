@@ -4,7 +4,6 @@
 #
 #  id                 :integer          not null, primary key
 #  story_id           :integer
-#  judge_id           :integer
 #  verdict_rater_id   :integer
 #  verdict_rater_type :string
 #  quality_score      :float
