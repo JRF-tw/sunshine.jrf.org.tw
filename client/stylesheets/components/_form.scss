@@ -112,7 +112,7 @@ input:-webkit-autofill {
   .is-focused &,
   input[value] + &,
   input:focus + &,
-  select + & { @include active-control-label; }
+  select ~ & { @include active-control-label; }
 }
 input:-webkit-autofill + .control-label { @include active-control-label; }
 
@@ -142,6 +142,42 @@ select {
   outline: none;
   &:focus + .control-label::before { transform: scaleX(1); }
   &:disabled { color: $text-disabled; }
+}
+.chosen-container-active + .control-label::before { transform: scaleX(1); }
+.chosen-single {
+  .chosen-container-single & {
+    @include Select;
+    text: ms(0);
+    size: 100% 34px;
+    line-height: 34px;
+    box-shadow: none;
+    div { display: none; }    
+  }
+  .chosen-container-active & { box-shadow: none; }
+  .chosen-container-active.chosen-with-drop & {
+    border: none;
+    background-image: none;
+  }
+}
+.chosen-drop {
+  text: ms(0) 1.5;
+  .chosen-container.chosen-with-drop & {
+    background: $white;
+    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.12), 0px 8px 8px 0px rgba(0,0,0,0.24);
+    border-radius: $global-radius;    
+    border: none;
+    left: r(-1); right: r(-1);
+    width: auto;
+  }
+}
+.chosen-results {
+  .chosen-container & {
+    color: $text-color;
+    padding: 0;
+    margin: 0;
+  }
+  .active-result { padding: n() r(1) !important; }
+  .highlighted { background: none $accent !important; }
 }
 
 abbr[title="required"] { display: none; }

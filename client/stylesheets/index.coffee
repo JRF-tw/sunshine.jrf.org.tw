@@ -6,6 +6,7 @@ require 'base/_type.scss'
 
 # require 'magnific-popup/dist/magnific-popup.css'
 require 'webui-popover/dist/jquery.webui-popover.css'
+require 'chosen-js/chosen.css'
 
 require 'components/_list.scss'
 require 'components/_footer.scss'

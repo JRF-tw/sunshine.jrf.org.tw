@@ -76,6 +76,7 @@ module.exports = (env) ->
         include: [
           path_to.images
           path.resolve(path_to.root, '../node_modules/webui-popover/img')
+          path.resolve(path_to.root, '../node_modules/chosen-js')
         ]
         loaders: [
           "file?name=images/[name].[ext]"
