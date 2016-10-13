@@ -33,8 +33,6 @@ Rails.application.routes.draw do
           get :thanks_scored
           get :input_info
           post :check_info
-          get :input_judge
-          post :check_judge
         end
       end
     end

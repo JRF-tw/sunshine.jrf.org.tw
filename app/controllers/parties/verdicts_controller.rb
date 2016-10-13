@@ -62,27 +62,9 @@ class Parties::VerdictsController < Parties::BaseController
   def check_info
     context = Party::VerdictScoreCheckInfoContext.new(current_party)
     if @story = context.perform(verdict_score_params)
-      redirect_as_success(input_judge_party_score_verdicts_path(verdict_score: verdict_score_params))
-    else
-      redirect_as_fail(input_info_party_score_verdicts_path(verdict_score: verdict_score_params), context.error_messages.join(","))
-    end
-  end
-
-  def input_judge
-    # meta
-    set_meta(
-      title: "當事人判決評鑑法官輸入頁",
-      description: "當事人判決評鑑法官輸入頁",
-      keywords: "當事人判決評鑑法官輸入頁"
-    )
-  end
-
-  def check_judge
-    context = Party::VerdictScoreCheckJudgeContext.new(current_party)
-    if context.perform(verdict_score_params)
       redirect_as_success(new_party_score_verdict_path(verdict_score: verdict_score_params))
     else
-      redirect_as_fail(input_judge_party_score_verdicts_path(verdict_score: verdict_score_params), context.error_messages.join(","))
+      redirect_as_fail(input_info_party_score_verdicts_path(verdict_score: verdict_score_params), context.error_messages.join(","))
     end
   end
 
@@ -98,7 +80,7 @@ class Parties::VerdictsController < Parties::BaseController
   private
 
   def verdict_score_params
-    params.fetch(:verdict_score, {}).permit(:court_id, :year, :word_type, :number, :story_type, :confirmed_realdate, :judge_name, :rating_score, :note, :appeal_judge)
+    params.fetch(:verdict_score, {}).permit(:court_id, :year, :word_type, :number, :story_type, :confirmed_realdate, :rating_score, :note, :appeal_judge)
   end
 
   def verdict_score
