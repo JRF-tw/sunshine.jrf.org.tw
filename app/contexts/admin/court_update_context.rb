@@ -21,7 +21,7 @@ class Admin::CourtUpdateContext < BaseContext
   private
 
   def assign_weight
-    if @params[:weight].to_i.to_s == @params[:weight]
+    if @params[:weight] && @params[:weight].to_i.to_s == @params[:weight]
       @params[:weight] = @params[:weight].to_i
     elsif @params[:weight]
       @params.delete :weight
@@ -31,6 +31,7 @@ class Admin::CourtUpdateContext < BaseContext
 
   def assign_value
     @court.assign_attributes @params
+    @court.court_type = @params[:court_type] if @params[:court_type]
   end
 
   def remove_weight

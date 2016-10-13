@@ -21,6 +21,6 @@
               | &nbsp;
               - { first: "頂", up: "上", down: "下", last: "底"}.each do |weight, label|
                 | &nbsp;
-                = link_to label, update_weight_admin_court_path(court, court: { weight: weight }, format: :js), class: "btn btn-mini btn-info", remote: true, method: :put
+                = link_to label, update_weight_admin_court_path(court, admin_court: { weight: weight }, format: :js), class: "btn btn-mini btn-info", remote: true, method: :put
     .ui-toolbar.ui-widget-header
       = paginate @courts, theme: :admin

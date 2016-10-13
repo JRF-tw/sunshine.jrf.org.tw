@@ -6,9 +6,10 @@ class Admin::CourtWeightUpdateContext < BaseContext
   end
 
   def perform(params)
-    @params = permit_params(params[:court] || params, PERMITS)
+    @params = permit_params(params[:admin_court] || params, PERMITS)
     run_callbacks :perform do
-      @court.weight = @params[:weight]
+      return add_error(:data_update_fail) unless @court.weight = @params[:weight]
+      true
     end
   end
 
