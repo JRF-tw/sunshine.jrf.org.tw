@@ -108,5 +108,18 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
         it { expect { subject }.to change { StoryRelation.count }.by(4) }
       end
     end
+
+    context "#alert_new_story_type" do
+      context "alert" do
+        let!(:stroy_type) { "新der案件類別" }
+        subject { described_class.new(court, orginal_data, content, word, publish_date, stroy_type).perform }
+        it { expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      end
+
+      context "not alert" do
+        subject { described_class.new(court, orginal_data, content, word, publish_date, stroy_type).perform }
+        it { expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      end
+    end
   end
 end

@@ -71,5 +71,18 @@ RSpec.describe Scrap::ImportScheduleContext, type: :model do
         it { expect { subject }.not_to change { subject.story.pronounce_date } }
       end
     end
+
+    context "#alert_new_story_type" do
+      context "alert" do
+        let(:new_story_type_data) { hash_data.merge(story_type: "新der案件類別") }
+        subject { described_class.new(court.code).perform(new_story_type_data) }
+        it { expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      end
+
+      context "not alert" do
+        subject { described_class.new(court.code).perform(hash_data) }
+        it { expect { subject }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
+      end
+    end
   end
 end
