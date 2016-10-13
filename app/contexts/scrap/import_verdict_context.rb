@@ -140,6 +140,6 @@ class Scrap::ImportVerdictContext < BaseContext
   end
 
   def alert_new_story_type
-    SlackService.notify_analysis_async("取得新的案件類別 : #{ @story_type }") unless @story_type.present? && StoryTypes.list.include?(@story_type)
+    SlackService.notify_analysis_async("取得新的案件類別 : #{@story_type}") unless @story_type.present? && StoryTypes.list.include?(@story_type)
   end
 end

@@ -48,10 +48,6 @@ class Party::CheckScheduleScoreInfoContext < BaseContext
     return add_error(:story_not_found) unless @story = Story.where(@params).last
   end
 
-  def check_story_type
-    return add_error(:story_type_blank) unless @params[:story_type].present?
-  end
-
   def story_has_pronounce_date?
     @story.pronounce_date.present?
   end

@@ -174,10 +174,6 @@ module ApplicationHelper
     arr.join(" ")
   end
 
-  def collect_for_story_types
-    Story.all.map(&:story_type).uniq.compact
-  end
-
   def collect_for_schedule_branch_names
     Schedule.all.map(&:branch_name).uniq
   end
