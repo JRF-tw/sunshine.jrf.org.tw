@@ -69,7 +69,6 @@ class Lawyers::VerdictsController < Lawyers::BaseController
     end
   end
 
-
   def create
     context = Lawyer::VerdictScoreCreateContext.new(current_lawyer)
     if context.perform(verdict_score_params)
