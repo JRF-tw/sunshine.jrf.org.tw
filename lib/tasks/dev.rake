@@ -291,6 +291,7 @@ namespace :dev do
     story = FactoryGirl.create(:story, main_judge: judge, court: court)
     schedule = FactoryGirl.create(:schedule, court: court, story: story, branch_judge: judge)
 
+    puts "該庭期案件類別 = #{schedule.story.story_type}"
     puts "該庭期案件年份 = #{schedule.story.year}"
     puts "該庭期案件字號 = #{schedule.story.word_type}"
     puts "該庭期案件案號 = #{schedule.story.number}"
@@ -305,6 +306,7 @@ namespace :dev do
     story = FactoryGirl.create(:story, main_judge: judge, court: court, is_adjudge: true, adjudge_date: Time.now)
     verdict = FactoryGirl.create(:verdict, story: story, main_judge: judge, is_judgment: true, adjudge_date: Time.now)
 
+    puts "該判決書案件類別 = #{verdict.story.story_type}"
     puts "該判決書案件年份 = #{verdict.story.year}"
     puts "該判決書案件字號 = #{verdict.story.word_type}"
     puts "該判決書案件案號 = #{verdict.story.number}"

@@ -99,7 +99,7 @@ class Lawyers::VerdictsController < Lawyers::BaseController
   private
 
   def verdict_score_params
-    params.fetch(:verdict_score, {}).permit(:id, :court_id, :year, :word_type, :number, :confirmed_realdate, :judge_name, :quality_score, :note, :appeal_judge)
+    params.fetch(:verdict_score, {}).permit(:id, :court_id, :year, :word_type, :number, :story_type, :confirmed_realdate, :judge_name, :quality_score, :note, :appeal_judge)
   end
 
   def verdict_score

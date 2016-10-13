@@ -224,6 +224,10 @@ module ApplicationHelper
     Court.find(court_id).full_name
   end
 
+  def collect_for_story_types
+    StoryTypes.list
+  end
+
   def get_name_by_role(role)
     case role.class.name
     when "Lawyer"

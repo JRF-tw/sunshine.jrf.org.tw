@@ -118,7 +118,7 @@ class CourtObservers::SchedulesController < CourtObservers::BaseController
   private
 
   def schedule_score_params
-    params.fetch(:schedule_score, {}).permit(:id, :court_id, :year, :word_type, :number, :start_on, :confirmed_realdate, :judge_name, :rating_score, :note, :appeal_judge)
+    params.fetch(:schedule_score, {}).permit(:id, :court_id, :year, :word_type, :number, :story_type, :start_on, :confirmed_realdate, :judge_name, :rating_score, :note, :appeal_judge)
   end
 
   def schedule_score

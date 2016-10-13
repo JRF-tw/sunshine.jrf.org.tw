@@ -118,10 +118,12 @@ class Lawyers::SchedulesController < Lawyers::BaseController
   private
 
   def schedule_score_params
-    params.fetch(:schedule_score, {}).permit(:id, :court_id, :year, :word_type, :number, :start_on, :confirmed_realdate, :judge_name, :command_score, :attitude_score, :note, :appeal_judge)
+    # raise params.inspect
+    params.fetch(:schedule_score, {}).permit(:id, :court_id, :year, :word_type, :number, :story_type, :start_on, :confirmed_realdate, :judge_name, :command_score, :attitude_score, :note, :appeal_judge)
   end
 
   def schedule_score
+    # raise params.inspect
     @schedule_score = ScheduleScore.new(schedule_score_params)
   end
 

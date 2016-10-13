@@ -98,7 +98,7 @@ class Parties::VerdictsController < Parties::BaseController
   private
 
   def verdict_score_params
-    params.fetch(:verdict_score, {}).permit(:court_id, :year, :word_type, :number, :start_on, :confirmed_realdate, :judge_name, :rating_score, :note, :appeal_judge)
+    params.fetch(:verdict_score, {}).permit(:court_id, :year, :word_type, :number, :story_type, :confirmed_realdate, :judge_name, :rating_score, :note, :appeal_judge)
   end
 
   def verdict_score
