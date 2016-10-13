@@ -17,14 +17,8 @@ Rails.application.routes.draw do
     resources :suits do
       resources :procedures
     end
-    resources :courts, only: [] do
-      collection do
-        get :edit_weight
-      end
-      member do
-        put :update_weight
-      end
-    end
+    get "/courts/edit_weight", to: "courts#edit_weight", as: "courts_edit_weight"
+    put "/courts/:id/update_weight", to: "courts#update_weight", as: "court_update_weight"
     resources :courts
     resources :judgments
     resources :banners

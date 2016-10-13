@@ -1,5 +1,5 @@
 - content_for :btns do
-  = link_to "法院排序調整", edit_weight_admin_courts_path, class: "btn btn-success"
+  = link_to "法院排序調整", admin_courts_edit_weight_path, class: "btn btn-success"
 = search_form_for @search, :url => admin_courts_path, :wrapper => :admin, :html => { :class => "form-horizontal" } do |f|
   .well
     fieldset

@@ -1,24 +1,25 @@
 .edit_court_weight
-    table.table.table-bordered.table-striped.table-hover
-      thead
-        tr
-          th #
-          th 排序
-          th 全名
-          th 前台顯示簡稱
-          th
-      tbody
-        - @courts.each do |court|
+   .dataTables_wrapper
+      table.table.table-bordered.table-striped.table-hover
+        thead
           tr
-            td= court.id
-            td= court.weight
-            td= court.full_name
-            td= court.name
-            td
-              = link_to "詳細資料", admin_court_path(court), class: "btn btn-mini"
-              | &nbsp;
-              - { first: "頂", up: "上", down: "下", last: "底"}.each do |weight, label|
+            th #
+            th 排序
+            th 全名
+            th 前台顯示簡稱
+            th
+        tbody
+          - @courts.each do |court|
+            tr
+              td= court.id
+              td= court.weight
+              td= court.full_name
+              td= court.name
+              td
+                = link_to "詳細資料", admin_court_path(court), class: "btn btn-mini"
                 | &nbsp;
-                = link_to label, update_weight_admin_court_path(court, admin_court: { weight: weight }, format: :js), class: "btn btn-mini btn-info", remote: true, method: :put
-    .ui-toolbar.ui-widget-header
-      = paginate @courts, theme: :admin
+                - { first: "頂", up: "上", down: "下", last: "底"}.each do |weight, label|
+                  | &nbsp;
+                  = link_to label, admin_court_update_weight_path(court, admin_court: { weight: weight }, format: :js), class: "btn btn-mini btn-info", remote: true, method: :put
+      .ui-toolbar.ui-widget-header
+        = paginate @courts, theme: :admin
