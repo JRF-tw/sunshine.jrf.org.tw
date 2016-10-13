@@ -11,6 +11,11 @@
     display: block;
     padding-right: r(6);
     width: 50%;
+
+    .control-label.disabled,
+    .select:disabled,
+    .readonly,
+    .readonly .control-label { color: $text-color !important; }
   }
 }
 .form--score__editor {
