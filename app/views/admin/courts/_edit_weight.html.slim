@@ -16,4 +16,4 @@ table.table.table-bordered.table-striped.table-hover.edit_court_table
         td
           = link_to "詳細資料", admin_court_path(court), class: "btn btn-mini"
           | &nbsp;
-          = sort_buttons(court)
+          = sort_buttons(court, @page)
