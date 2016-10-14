@@ -20,7 +20,7 @@ RSpec.describe Lawyers::VerdictsController, type: :request do
 
     describe "#check_info" do
       context "success" do
-        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number } }
+        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type } }
         subject! { post "/lawyer/score/verdicts/check_info", verdict_score: params }
         it { expect(response).to be_redirect }
         it { expect(flash[:error]).to be_nil }
@@ -40,7 +40,7 @@ RSpec.describe Lawyers::VerdictsController, type: :request do
 
     describe "#check_judge" do
       context "success" do
-        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, judge_name: judge.name } }
+        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type, judge_name: judge.name } }
         subject! { post "/lawyer/score/verdicts/check_judge", verdict_score: params }
         it { expect(response).to be_redirect }
         it { expect(flash[:error]).to be_nil }
@@ -55,7 +55,7 @@ RSpec.describe Lawyers::VerdictsController, type: :request do
 
     describe "#create" do
       context "success" do
-        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, judge_name: judge.name, quality_score: 1, note: "xxxxx", appeal_judge: false } }
+        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type, judge_name: judge.name, quality_score: 1, note: "xxxxx", appeal_judge: false } }
         subject! { post "/lawyer/score/verdicts", verdict_score: params }
         it { expect(response).to be_redirect }
         it { expect(flash[:error]).to be_nil }

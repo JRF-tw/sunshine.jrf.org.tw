@@ -37,6 +37,7 @@ class Errors::Code
     lawyer_has_verdict: 400,
     main_judge_not_exist: 400,
     number_blank: 400,
+    story_type_blank: 400,
     name_blank: 400,
     need_sign_up: 401,
     out_score_intervel: 400,

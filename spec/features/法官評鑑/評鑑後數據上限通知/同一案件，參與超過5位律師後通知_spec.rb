@@ -5,8 +5,8 @@ feature "法官評鑑", type: :request do
   let!(:schedule) { create :schedule, story: story }
   let!(:judge) { create :judge, court: court }
   let!(:lawyer) { create :lawyer, :with_password, :with_confirmed }
-  let!(:schedule_score_params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, start_on: schedule.start_on, confirmed_realdate: false, judge_name: judge.name, command_score: 1, attitude_score: 1, note: "xxxxx", appeal_judge: false } }
-  let!(:verdict_score_params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, judge_name: judge.name, quality_score: 1, note: "xxxxx", appeal_judge: false } }
+  let!(:schedule_score_params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type, start_on: schedule.start_on, confirmed_realdate: false, judge_name: judge.name, command_score: 1, attitude_score: 1, note: "xxxxx", appeal_judge: false } }
+  let!(:verdict_score_params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type, judge_name: judge.name, quality_score: 1, note: "xxxxx", appeal_judge: false } }
   before { signin_lawyer(lawyer) }
 
   feature "評鑑後數據上限通知" do

@@ -1,5 +1,5 @@
 class CourtObserver::CheckScheduleScoreDateContext < BaseContext
-  PERMITS = [:court_id, :year, :word_type, :number, :start_on, :confirmed_realdate].freeze
+  PERMITS = [:court_id, :year, :word_type, :number, :start_on, :story_type, :confirmed_realdate].freeze
   SCORE_INTERVEL = 3.days
   MAX_REPORT_TIME = 5
 

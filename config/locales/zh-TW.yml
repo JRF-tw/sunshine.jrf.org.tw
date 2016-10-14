@@ -128,6 +128,7 @@ zh-TW:
       main_judge_not_exist: "判決書沒有主審法官"
       not_highest_court: "法院並非為最高法院"
       number_blank: "案號不能為空"
+      story_type_blank: "案件類別不能為空"
       name_blank: "姓名 不可為空白字元"
       need_sign_up: "訂閱案件前請先註冊"
       observer_already_confirm: "您已經註冊請直接登入"

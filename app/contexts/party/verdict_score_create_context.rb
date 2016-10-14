@@ -1,5 +1,5 @@
 class Party::VerdictScoreCreateContext < BaseContext
-  PERMITS = [:court_id, :year, :word_type, :number, :judge_name, :rating_score, :note, :appeal_judge].freeze
+  PERMITS = [:court_id, :year, :word_type, :number, :story_type, :judge_name, :rating_score, :note, :appeal_judge].freeze
 
   # before_perform :can_not_score
   before_perform :check_story

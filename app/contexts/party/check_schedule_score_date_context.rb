@@ -1,5 +1,5 @@
 class Party::CheckScheduleScoreDateContext < BaseContext
-  PERMITS = [:court_id, :year, :word_type, :number, :start_on, :confirmed_realdate].freeze
+  PERMITS = [:court_id, :year, :word_type, :number, :story_type, :start_on, :confirmed_realdate].freeze
   SCORE_INTERVEL = 14.days
   MAX_REPORT_TIME = 5
 

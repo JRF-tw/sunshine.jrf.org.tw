@@ -174,10 +174,6 @@ module ApplicationHelper
     arr.join(" ")
   end
 
-  def collect_for_story_types
-    Story.all.map(&:story_type).uniq.compact
-  end
-
   def collect_for_schedule_branch_names
     Schedule.all.map(&:branch_name).uniq
   end
@@ -222,6 +218,10 @@ module ApplicationHelper
 
   def get_court_fullname(court_id)
     Court.find(court_id).full_name
+  end
+
+  def collect_for_story_types
+    StoryTypes.list
   end
 
   def get_name_by_role(role)
