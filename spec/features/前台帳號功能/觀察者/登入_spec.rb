@@ -66,7 +66,7 @@ describe "觀察者登入", type: :request do
 
       it "提示需驗證後才能登入" do
         follow_redirect!
-        expect(response.body).to match("您的帳號需需要經過驗證後，才能繼續。")
+        expect(response.body).to match("您的帳號需要經過驗證後，才能繼續。")
       end
     end
   end

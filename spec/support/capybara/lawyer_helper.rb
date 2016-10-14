@@ -1,6 +1,6 @@
 module Capybara
   module LawyerHelper
-    def capybara_register_lawyer(lawyer_data = nil)
+    def capybara_build_lawyer(lawyer_data = nil)
       lawyer_data ||= { name: "孔令則", phone: 33_381_841, email: "kungls@hotmail.com" }
       lawyer = Import::CreateLawyerContext.new(lawyer_data).perform
       lawyer
@@ -11,14 +11,13 @@ module Capybara
       lawyer.confirm
     end
 
-    def capybara_signin_lawyer(lawyer, password:)
+    def capybara_signin_lawyer(email:, password:)
       visit(new_lawyer_session_path)
       within("#new_lawyer") do
-        fill_in "lawyer_email", with: lawyer.email
+        fill_in "lawyer_email", with: email
         fill_in "lawyer_password", with: password
       end
       click_button "登入"
-      lawyer
     end
 
     def capybara_submit_password_lawyer(password:)
