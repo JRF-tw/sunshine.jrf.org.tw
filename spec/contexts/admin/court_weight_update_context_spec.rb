@@ -30,7 +30,7 @@ describe Admin::CourtWeightUpdateContext do
         expect(court.reload.weight).to eq(origin_weight + 1)
       end
 
-      context "sortiing" do
+      context "sorting" do
         before { to_last(court1) }
         before { to_last(court2) }
         before { to_last(court3) }
