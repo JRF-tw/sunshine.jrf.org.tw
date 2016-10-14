@@ -6,7 +6,7 @@ feature "法官評鑑 - 律師", type: :feature, js: true do
   let!(:story) { create :story, :adjudged, court: court }
   let!(:judge) { create :judge, court: court }
   let!(:verdict) { create :verdict, story: story, main_judge: judge, is_judgment: true }
-  before { capybara_signin_lawyer(lawyer, password: lawyer.password) }
+  before { capybara_signin_lawyer(email: lawyer.email, password: lawyer.password) }
 
   feature "判決評鑑" do
     feature "案件資訊驗證" do

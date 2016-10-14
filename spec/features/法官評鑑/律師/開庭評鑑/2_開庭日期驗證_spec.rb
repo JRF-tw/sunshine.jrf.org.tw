@@ -5,7 +5,7 @@ feature "法官評鑑 - 律師", type: :feature, js: true do
   let!(:story) { create :story, court: court }
   let!(:judge) { create :judge, court: court }
   let!(:schedule) { create :schedule, court: court, story: story }
-  before { capybara_signin_lawyer(lawyer, password: lawyer.password) }
+  before { capybara_signin_lawyer(email: lawyer.email, password: lawyer.password) }
 
   feature "開庭評鑑" do
     feature "開庭日期驗證" do
