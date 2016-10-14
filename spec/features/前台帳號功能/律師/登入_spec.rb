@@ -40,12 +40,12 @@ feature "前台帳號功能", type: :feature, js: true do
         end
 
         Given "資料庫無該律師資料" do
-          let!(:lawyer) { create :lawyer }
+          let!(:lawyer) { Lawyer.new(attributes_for(:lawyer)) }
           When "律師登入，密碼為預設密碼" do
             before { capybara_signin_lawyer(lawyer, password: "11111111") }
             Then "登入失敗，頁面轉跳" do
               expect(current_path).to match(lawyer_root_path)
-              expect(page).to have_content("信箱或密碼是無效的。")
+              expect(page).to have_content("輸入資訊是無效的。")
             end
           end
         end
