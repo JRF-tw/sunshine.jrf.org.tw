@@ -11,6 +11,13 @@ module Capybara
       lawyer.confirm
     end
 
+    def confirmed_lawyer(lawyer_data = nil, password = "11111111")
+      lawyer = capybara_register_lawyer(lawyer_data)
+      capybara_setting_password_lawyer(lawyer, password: password)
+      lawyer.update_attributes(phone_number: "0922888888")
+      lawyer
+    end
+
     def capybara_signin_lawyer(lawyer, password:)
       visit(new_lawyer_session_path)
       within("#new_lawyer") do
