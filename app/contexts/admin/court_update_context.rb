@@ -1,8 +1,8 @@
 class Admin::CourtUpdateContext < BaseContext
   PERMITS = [:court_type, :full_name, :name, :weight, :is_hidden].freeze
 
-  before_perform :assign_weight
   before_perform :assign_value
+  after_perform :assign_weight
   after_perform :remove_weight, unless: :court_sortable?
   after_perform :add_weight, if: :court_sortable?
 
@@ -20,22 +20,16 @@ class Admin::CourtUpdateContext < BaseContext
 
   private
 
-  def assign_weight
-    if @params[:weight] && @params[:weight][/^[1-9][0-9]+$/]
-      @params[:weight] = @params[:weight].to_i
-    elsif @params[:weight]
-      @params.delete :weight
-    end
-    true
-  end
-
   def assign_value
-    @court.assign_attributes @params
-    @court.court_type = @params[:court_type] if @params[:court_type]
+    @court.assign_attributes @params.except(:weight)
   end
 
   def remove_weight
     @court.remove_from_list if @court.in_list?
+  end
+
+  def assign_weight
+    @court.weight = @params[:weight].to_i if @params[:weight] && @params[:weight][/^[1-9][0-9]+$/]
   end
 
   def add_weight
