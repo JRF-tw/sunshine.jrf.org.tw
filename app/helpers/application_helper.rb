@@ -183,7 +183,7 @@ module ApplicationHelper
   end
 
   def collect_for_courts
-    Court.get_courts.map { |c| [c.full_name, c.id] }
+    Court.get_courts.sorted.map { |c| [c.full_name, c.id] }
   end
 
   def collect_for_judges_name

@@ -2,6 +2,8 @@ class Admin::CourtCreateContext < BaseContext
   PERMITS = [:court_type, :full_name, :name, :weight, :is_hidden].freeze
 
   before_perform :build_court
+  after_perform :update_weight
+  after_perform :add_weight
   attr_reader :court
 
   def initialize(params)
@@ -22,6 +24,23 @@ class Admin::CourtCreateContext < BaseContext
 
   def build_court
     @court = Admin::Court.new(@params)
+  end
+
+  def update_weight
+    if @params[:weight] && @params[:weight].to_i.to_s == @params[:weight]
+      @court.update_attributes(weight: @params[:weight].to_i)
+    end
+  end
+
+  def add_weight
+    if is_court? && !@court.is_hidden && @court.not_in_list?
+      @court.insert_at(1)
+      @court.move_to_bottom
+    end
+  end
+
+  def is_court?
+    @court.court_type == "法院"
   end
 
 end
