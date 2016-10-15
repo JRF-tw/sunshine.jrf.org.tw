@@ -160,11 +160,17 @@ select {
     background-image: none;
   }
 }
-.chosen-container-single .chosen-search input[type="text"] {
-  border-color: $divider-gray;
-  border-radius: $global-radius;
-  background-image: url(search.svg);
-  background-position: 100% 50%;
+.chosen-container-single .chosen-search {
+  padding-bottom: 0;
+  input[type="text"] {
+    margin-bottom: 0;
+    border-color: $divider-gray;
+    border-width: 0 0 1px 0;
+    line-height: 1.5;
+    background-image: url(search.svg) !important;
+    background-position: 100% 50% !important;
+    background-size: size('search.svg') !important;
+  }
 }
 .chosen-drop {
   text: ms(0) 1.5;
