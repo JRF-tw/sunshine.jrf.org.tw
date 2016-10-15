@@ -503,7 +503,8 @@
 	    });
 	  });
 	  $('select').chosen({
-	    no_results_text: '沒有選項符合'
+	    no_results_text: '沒有選項符合',
+	    search_contains: true
 	  });
 	  return $('.popover-trigger').webuiPopover();
 	});
