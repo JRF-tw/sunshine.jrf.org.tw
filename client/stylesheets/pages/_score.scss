@@ -15,7 +15,9 @@
     .control-label.disabled,
     .select:disabled,
     .readonly,
-    .readonly .control-label { color: $text-color !important; }
+    .readonly .control-label,
+    .chosen-disabled .chosen-single { color: $text-color !important; }
+    .chosen-disabled { opacity: 1 !important; }
   }
 }
 .form--score__editor {

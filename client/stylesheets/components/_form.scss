@@ -143,6 +143,7 @@ select {
   &:focus + .control-label::before { transform: scaleX(1); }
   &:disabled { color: $text-disabled; }
 }
+.chosen-container { width: 100% !important; }
 .chosen-container-active + .control-label::before { transform: scaleX(1); }
 .chosen-single {
   .chosen-container-single & {
