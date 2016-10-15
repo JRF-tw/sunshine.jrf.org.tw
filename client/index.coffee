@@ -44,6 +44,7 @@ $(document).on 'ready page:load', ->
   # Chosen
   $('select').chosen
     no_results_text: '沒有選項符合'
+    search_contains: on
 
   # Popover
   $('.popover-trigger').webuiPopover()
