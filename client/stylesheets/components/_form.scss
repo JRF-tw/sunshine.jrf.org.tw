@@ -160,6 +160,12 @@ select {
     background-image: none;
   }
 }
+.chosen-container-single .chosen-search input[type="text"] {
+  border-color: $divider-gray;
+  border-radius: $global-radius;
+  background-image: url(search.svg);
+  background-position: 100% 50%;
+}
 .chosen-drop {
   text: ms(0) 1.5;
   .chosen-container.chosen-with-drop & {
@@ -179,6 +185,10 @@ select {
   }
   .active-result { padding: n() r(1) !important; }
   .highlighted { background: none $accent !important; }
+  li.no-results {
+    padding: r(1);
+    border-radius: 0 0 $global-radius $global-radius;
+  }
 }
 
 abbr[title="required"] { display: none; }
