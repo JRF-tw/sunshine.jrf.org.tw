@@ -37,6 +37,7 @@ class BaseController < ApplicationController
   end
 
   def render_404
-    render :not_found, status: 404
+    # render :not_found, status: 404
+    redirect_to root_path
   end
 end
