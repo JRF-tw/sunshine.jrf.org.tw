@@ -77,9 +77,7 @@ module Capybara
     def capybara_lawyer_edit_schedule_score
       visit(lawyer_root_path)
       find(:xpath, "//tbody/tr/td/a").click
-      sleep 1
       click_link("編輯評鑑")
-      sleep 1
     end
 
     def capybara_lawyer_run_verdict_score_flow(story)

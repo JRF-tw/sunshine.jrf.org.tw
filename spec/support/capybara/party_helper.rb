@@ -54,9 +54,7 @@ module Capybara
     def capybara_party_edit_schedule_score
       visit(party_root_path)
       find(:xpath, "//tbody/tr/td/a").click
-      sleep 1
       click_link("編輯評鑑")
-      sleep 1
     end
 
     def capybara_party_run_verdict_score_flow(story)
