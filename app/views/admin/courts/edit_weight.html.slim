@@ -1,0 +1,23 @@
+.edit_court_weight
+   .dataTables_wrapper
+      table.table.table-bordered.table-striped.table-hover
+        thead
+          tr
+            th #
+            th 排序
+            th 全名
+            th 前台顯示簡稱
+            th
+        tbody
+          - @courts.each do |court|
+            tr
+              td= court.id
+              td= court.weight
+              td= court.full_name
+              td= court.name
+              td
+                = link_to "詳細資料", admin_court_path(court), class: "btn btn-mini"
+                | &nbsp;
+                = sort_buttons(court)
+      .ui-toolbar.ui-widget-header
+        = paginate @courts, theme: :admin

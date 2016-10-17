@@ -50,7 +50,7 @@ feature "觀察者註冊 (Email)", type: :feature, js: true do
           before { capybara_log_in_observer }
 
           Then "登入失敗" do
-            expect(page).to have_content("您的帳號需需要經過驗證後，才能繼續。")
+            expect(page).to have_content("您的帳號需要經過驗證後，才能繼續。")
           end
         end
       end

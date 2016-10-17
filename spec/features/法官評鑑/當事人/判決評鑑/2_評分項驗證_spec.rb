@@ -12,7 +12,6 @@ feature "法官評鑑 - 當事人", type: :feature, js: true do
       Scenario "判決評鑑流程中，正在輸入評分項的頁面" do
         before { visit(input_info_party_score_verdicts_path) }
         before { capybara_party_input_info_verdict_score(story) }
-        before { capybara_party_input_judge_verdict_score(judge) }
 
         Given "當事人 選擇「裁判滿意度」評分" do
           before { choose("verdict_score_rating_score_20") }

@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "animate.css": "^3.5.1",
+    "chosen-js": "^1.6.2",
     "js-cookie": "^2.1.3",
     "lazysizes": "^2.0.0",
     "magnific-popup": "^1.1.0",

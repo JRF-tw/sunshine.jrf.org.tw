@@ -1,12 +1,10 @@
 class Party::VerdictScoreCreateContext < BaseContext
-  PERMITS = [:court_id, :year, :word_type, :number, :judge_name, :rating_score, :note, :appeal_judge].freeze
+  PERMITS = [:court_id, :year, :word_type, :number, :story_type, :judge_name, :rating_score, :note, :appeal_judge].freeze
 
   # before_perform :can_not_score
   before_perform :check_story
-  before_perform :check_judge
   before_perform :check_rating_score
   before_perform :build_verdict_score
-  before_perform :find_judgment
   before_perform :assign_attribute
   before_perform :get_scorer_ids
   before_perform :get_scored_story_ids
@@ -37,10 +35,6 @@ class Party::VerdictScoreCreateContext < BaseContext
     return add_error(:data_blank, context.error_messages.join(",")) unless @story
   end
 
-  def check_judge
-    @judge = Party::VerdictScoreCheckJudgeContext.new(@party).perform(@params)
-  end
-
   def check_rating_score
     return add_error(:judge_rating_score_blank) unless @params[:rating_score].present?
   end
@@ -49,12 +43,8 @@ class Party::VerdictScoreCreateContext < BaseContext
     @verdict_score = @party.verdict_scores.new(@params)
   end
 
-  def find_judgment
-    @judgment = @story.judgment_verdict
-  end
-
   def assign_attribute
-    @verdict_score.assign_attributes(story: @story, judge: @judge)
+    @verdict_score.assign_attributes(story: @story)
   end
 
   # TODO : alert need refactory, performance issue

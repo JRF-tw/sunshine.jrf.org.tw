@@ -1,10 +1,11 @@
 class Party::CheckScheduleScoreInfoContext < BaseContext
-  PERMITS = [:court_id, :year, :word_type, :number].freeze
+  PERMITS = [:court_id, :year, :word_type, :number, :story_type].freeze
 
   before_perform :check_court_id
   before_perform :check_year
   before_perform :check_word_type
   before_perform :check_number
+  before_perform :check_story_type
   before_perform :find_story
   before_perform :can_score, if: :story_has_pronounce_date?
   before_perform :story_already_adjudge
@@ -37,6 +38,10 @@ class Party::CheckScheduleScoreInfoContext < BaseContext
 
   def check_number
     return add_error(:number_blank) unless @params[:number].present?
+  end
+
+  def check_story_type
+    return add_error(:story_type_blank) unless @params[:story_type].present?
   end
 
   def find_story

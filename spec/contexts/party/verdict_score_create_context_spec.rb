@@ -6,7 +6,7 @@ describe Party::VerdictScoreCreateContext do
   let!(:story) { create :story, :pronounced, :adjudged, court: court }
   let!(:judge) { create :judge, court: court }
   let!(:judge2) { create :judge }
-  let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, judge_name: judge.name, rating_score: 1, note: "xxxxx", appeal_judge: false } }
+  let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type, rating_score: 1, note: "xxxxx", appeal_judge: false } }
 
   describe "#perform" do
     subject { described_class.new(party).perform(params) }
@@ -18,7 +18,6 @@ describe Party::VerdictScoreCreateContext do
 
       context "assign_attribute" do
         it { expect(subject.story).to eq(story) }
-        it { expect(subject.judge).to eq(judge) }
       end
     end
 

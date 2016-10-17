@@ -5,7 +5,7 @@ describe Lawyer::CheckScheduleScoreInfoContext do
   let!(:court) { create :court }
   let!(:story) { create :story, court: court }
   let!(:schedule) { create :schedule, story: story }
-  let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number } }
+  let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type } }
 
   describe "#perform" do
     subject { described_class.new(lawyer).perform(params) }

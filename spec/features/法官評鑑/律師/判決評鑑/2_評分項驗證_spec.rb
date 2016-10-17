@@ -5,14 +5,13 @@ feature "法官評鑑 - 律師", type: :feature, js: true do
   let!(:story) { create :story, :adjudged, court: court }
   let!(:judge) { create :judge, court: court }
   let!(:verdict) { create :verdict, story: story, main_judge: judge, is_judgment: true }
-  before { capybara_signin_lawyer(lawyer, password: lawyer.password) }
+  before { capybara_signin_lawyer(email: lawyer.email, password: lawyer.password) }
 
   feature "判決評鑑" do
     feature "評分項驗證" do
       Scenario "判決評鑑流程中，正在輸入評分項的頁面" do
         before { visit(input_info_lawyer_score_verdicts_path) }
         before { capybara_lawyer_input_info_verdict_score(story) }
-        before { capybara_lawyer_input_judge_verdict_score(judge) }
 
         Given "律師 選擇「裁判品質」評分" do
           before { choose("verdict_score_quality_score_20") }

@@ -34,6 +34,7 @@ class CourtObserver < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :async, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates :name, presence: true
   validates :phone_number, uniqueness: true, format: { with: /\A(0)(9)([0-9]{8})\z/ }, allow_nil: true
 
   include Redis::Objects

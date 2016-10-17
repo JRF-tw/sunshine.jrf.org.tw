@@ -63,4 +63,19 @@ RSpec.describe Admin::CourtsController do
     it { expect { subject }.to change { Court.count }.by(1) }
     it { expect(response).to be_redirect }
   end
+
+  describe "#edit_weight" do
+    subject! { get "/admin/courts/edit_weight" }
+    it { expect(response).to be_success }
+  end
+
+  describe "#update_weight" do
+    let!(:court1) { create :court, is_hidden: false }
+    let!(:court2) { create :court, is_hidden: false }
+    before { court1.insert_at(1) }
+    before { court2.insert_at(2) }
+    subject! { put "/admin/courts/#{court2.id}/update_weight.js", admin_court: { weight: "up" } }
+    it { expect(response).to be_success }
+    it { expect(court2.reload.weight).to eq(1) }
+  end
 end

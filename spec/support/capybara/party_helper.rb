@@ -18,8 +18,9 @@ module Capybara
       capybara_party_create_schedule_score
     end
 
-    def capybara_party_input_info_schedule_score(story, court: nil, year: nil, word_type: nil, number: nil)
-      select court ? court.full_name : story.court.full_name, from: "schedule_score_court_id"
+    def capybara_party_input_info_schedule_score(story, court: nil, year: nil, word_type: nil, number: nil, story_type: nil)
+      select_from_chosen court ? court.full_name : story.court.full_name, from: "schedule_score_court_id"
+      select_from_chosen story_type ? story_type : story.story_type, from: "schedule_score_story_type"
       within("#new_schedule_score") do
         fill_in "schedule_score_year", with: year ? year : story.year
         fill_in "schedule_score_word_type", with: word_type ? word_type : story.word_type
@@ -53,31 +54,22 @@ module Capybara
     def capybara_party_edit_schedule_score
       visit(party_root_path)
       find(:xpath, "//tbody/tr/td/a").click
-      sleep 1
       click_link("編輯評鑑")
-      sleep 1
     end
 
-    def capybara_party_run_verdict_score_flow(story, judge)
+    def capybara_party_run_verdict_score_flow(story)
       visit(input_info_party_score_verdicts_path)
       capybara_party_input_info_verdict_score(story)
-      capybara_party_input_judge_verdict_score(judge)
       capybara_party_create_verdict_score
     end
 
-    def capybara_party_input_info_verdict_score(story, court: nil, year: nil, word_type: nil, number: nil)
-      select court ? court.full_name : story.court.full_name, from: "verdict_score_court_id"
+    def capybara_party_input_info_verdict_score(story, court: nil, year: nil, word_type: nil, number: nil, story_type: nil)
+      select_from_chosen court ? court.full_name : story.court.full_name, from: "verdict_score_court_id"
+      select_from_chosen story_type ? story_type : story.story_type, from: "verdict_score_story_type"
       within("#new_verdict_score") do
         fill_in "verdict_score_year", with: year ? year : story.year
         fill_in "verdict_score_word_type", with: word_type ? word_type : story.word_type
         fill_in "verdict_score_number", with: number ? number : story.number
-      end
-      click_button "下一步"
-    end
-
-    def capybara_party_input_judge_verdict_score(judge)
-      within("#new_verdict_score") do
-        fill_in "verdict_score_judge_name", with: judge.name
       end
       click_button "下一步"
     end
@@ -93,9 +85,7 @@ module Capybara
     def capybara_party_edit_verdict_score
       visit(party_root_path)
       find(:xpath, "//tbody/tr/td/a").click
-      sleep 1
       click_link("編輯評鑑")
-      sleep 1
     end
   end
 end

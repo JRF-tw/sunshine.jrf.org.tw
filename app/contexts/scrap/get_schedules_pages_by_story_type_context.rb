@@ -42,5 +42,7 @@ class Scrap::GetSchedulesPagesByStoryTypeContext < BaseContext
                   else
                     0
                   end
+  rescue
+    nil
   end
 end

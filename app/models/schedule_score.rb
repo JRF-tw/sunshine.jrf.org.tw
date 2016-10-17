@@ -26,5 +26,5 @@ class ScheduleScore < ActiveRecord::Base
   validates :schedule_rater_type, presence: true
   validates :schedule_rater_id, uniqueness: { scope: [:judge_id, :schedule_rater_type] }, presence: true
   validates :judge_id, presence: true
-  store_accessor :data, :court_id, :year, :word_type, :number, :start_on, :confirmed_realdate, :judge_name, :note
+  store_accessor :data, :court_id, :year, :word_type, :number, :story_type, :start_on, :confirmed_realdate, :judge_name, :note
 end

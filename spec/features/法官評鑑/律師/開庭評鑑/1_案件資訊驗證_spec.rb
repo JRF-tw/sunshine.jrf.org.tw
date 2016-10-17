@@ -6,7 +6,7 @@ feature "法官評鑑 - 律師", type: :feature, js: true do
   let!(:story) { create :story, court: court }
   let!(:judge) { create :judge, court: court }
   let!(:schedule) { create :schedule, court: court, story: story }
-  before { capybara_signin_lawyer(lawyer, password: lawyer.password) }
+  before { capybara_signin_lawyer(email: lawyer.email, password: lawyer.password) }
 
   feature "開庭評鑑" do
     feature "案件資訊驗證" do
@@ -27,7 +27,7 @@ feature "法官評鑑 - 律師", type: :feature, js: true do
           When "送出" do
             before { click_button "下一步" }
             Then "顯示錯誤訊息，頁面仍保留原始輸入資訊" do
-              expect(page).to have_select("schedule_score_court_id", selected: court1.full_name)
+              expect(page).to have_selector("#schedule_score_court_id_chosen", text: court1.full_name)
               expect(page).to have_content("案件不存在")
             end
           end

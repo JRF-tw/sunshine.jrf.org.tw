@@ -14,6 +14,7 @@ class Scrap::ImportVerdictContext < BaseContext
   after_perform   :create_relation_for_main_judge
   after_perform   :create_relation_for_party
   after_perform   :record_count_to_daily_notify
+  after_perform   :alert_new_story_type
 
   class << self
     def perform(court, orginal_data, content, word, publish_date, stroy_type)
@@ -136,5 +137,9 @@ class Scrap::ImportVerdictContext < BaseContext
 
   def record_count_to_daily_notify
     Redis::Counter.new("daily_scrap_verdict_count").increment
+  end
+
+  def alert_new_story_type
+    SlackService.notify_analysis_async("取得新的案件類別 : #{@story_type}") unless @story_type.present? && StoryTypes.list.include?(@story_type)
   end
 end

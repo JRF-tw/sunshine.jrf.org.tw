@@ -1,5 +1,5 @@
 class Lawyer::CheckScheduleScoreJudgeContext < BaseContext
-  PERMITS = [:court_id, :year, :word_type, :number, :start_on, :confirmed_realdate, :judge_name].freeze
+  PERMITS = [:court_id, :year, :word_type, :number, :story_type, :start_on, :confirmed_realdate, :judge_name].freeze
 
   before_perform :check_story
   before_perform :check_schedule

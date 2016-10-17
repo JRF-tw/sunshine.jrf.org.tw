@@ -3,12 +3,16 @@
 = simple_form_for form_for, as: as, url: form_url,
   html: { method: :post, class: 'form--score' }, wrapper: :md do |f|
   = f.input :court_id, as: :hidden
+  = f.input :story_type, as: :hidden
   = f.input :confirmed_realdate, as: :hidden unless as == :verdict_score
 
   .form--score__preview
     = f.input :court_id, as: :select,
       collection: collect_for_courts, include_blank: "請選擇法院",
       label: "法院", disabled: true
+    = f.input :story_type, as: :select,
+      collection: collect_for_story_types, include_blank: "請選擇案件類別",
+      label: "案件類別", disabled: true
     = f.input :year, label: '年度', readonly: true
     = f.input :word_type, label: '字號', readonly: true
     = f.input :number, label: '案號', readonly: true

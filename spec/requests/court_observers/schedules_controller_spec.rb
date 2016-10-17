@@ -22,7 +22,7 @@ RSpec.describe CourtObservers::SchedulesController, type: :request do
 
     describe "#check_info" do
       context "success" do
-        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number } }
+        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type } }
         subject! { post "/observer/score/schedules/check_info", schedule_score: params }
         it { expect(response).to be_redirect }
         it { expect(flash[:error]).to be_nil }
@@ -42,7 +42,7 @@ RSpec.describe CourtObservers::SchedulesController, type: :request do
 
     describe "#check_date" do
       context "success" do
-        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, start_on: schedule.start_on, confirmed_realdate: false } }
+        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type, start_on: schedule.start_on, confirmed_realdate: false } }
         subject! { post "/observer/score/schedules/check_date", schedule_score: params }
         it { expect(response).to be_redirect }
         it { expect(flash[:error]).to be_nil }
@@ -62,7 +62,7 @@ RSpec.describe CourtObservers::SchedulesController, type: :request do
 
     describe "#check_judge" do
       context "success" do
-        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, start_on: schedule.start_on, confirmed_realdate: false, judge_name: judge.name } }
+        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type, start_on: schedule.start_on, confirmed_realdate: false, judge_name: judge.name } }
         subject! { post "/observer/score/schedules/check_judge", schedule_score: params }
         it { expect(response).to be_redirect }
         it { expect(flash[:error]).to be_nil }
@@ -77,7 +77,7 @@ RSpec.describe CourtObservers::SchedulesController, type: :request do
 
     describe "#create" do
       context "success" do
-        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, start_on: schedule.start_on, confirmed_realdate: false, judge_name: judge.name, rating_score: 1, note: "xxxxx", appeal_judge: false } }
+        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type, start_on: schedule.start_on, confirmed_realdate: false, judge_name: judge.name, rating_score: 1, note: "xxxxx", appeal_judge: false } }
         subject! { post "/observer/score/schedules", schedule_score: params }
         it { expect(response).to be_success }
         it { expect(flash[:error]).to be_nil }

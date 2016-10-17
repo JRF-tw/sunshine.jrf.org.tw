@@ -22,7 +22,7 @@ zh-TW:
         court_type: "類型"
         full_name: "全名"
         name: "前台顯示簡稱"
-        weight: "顯示權重"
+        weight: "排序"
         is_hidden: "隱藏"
         scrap_name: "爬蟲名稱"
       court_observer:

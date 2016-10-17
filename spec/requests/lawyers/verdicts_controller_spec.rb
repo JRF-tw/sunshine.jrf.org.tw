@@ -20,7 +20,7 @@ RSpec.describe Lawyers::VerdictsController, type: :request do
 
     describe "#check_info" do
       context "success" do
-        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number } }
+        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type } }
         subject! { post "/lawyer/score/verdicts/check_info", verdict_score: params }
         it { expect(response).to be_redirect }
         it { expect(flash[:error]).to be_nil }
@@ -33,29 +33,9 @@ RSpec.describe Lawyers::VerdictsController, type: :request do
       end
     end
 
-    describe "#input_judge" do
-      subject! { get "/lawyer/score/verdicts/input_judge" }
-      it { expect(response).to be_success }
-    end
-
-    describe "#check_judge" do
-      context "success" do
-        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, judge_name: judge.name } }
-        subject! { post "/lawyer/score/verdicts/check_judge", verdict_score: params }
-        it { expect(response).to be_redirect }
-        it { expect(flash[:error]).to be_nil }
-      end
-
-      context "error params" do
-        subject! { post "/lawyer/score/verdicts/check_judge", verdict_score: {} }
-        it { expect(response).to be_redirect }
-        it { expect(flash[:error]).to eq("選擇法院不存在") }
-      end
-    end
-
     describe "#create" do
       context "success" do
-        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, judge_name: judge.name, quality_score: 1, note: "xxxxx", appeal_judge: false } }
+        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type, judge_name: judge.name, quality_score: 1, note: "xxxxx", appeal_judge: false } }
         subject! { post "/lawyer/score/verdicts", verdict_score: params }
         it { expect(response).to be_redirect }
         it { expect(flash[:error]).to be_nil }

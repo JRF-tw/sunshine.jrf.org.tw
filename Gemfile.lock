@@ -50,6 +50,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    acts_as_list (0.8.2)
+      activerecord (>= 3.0)
     addressable (2.4.0)
     annotate (2.7.0)
       activerecord (>= 3.2, < 6.0)
@@ -635,6 +637,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-postgis-adapter
+  acts_as_list
   annotate
   asset_sync
   awesome_print

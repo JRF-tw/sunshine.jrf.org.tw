@@ -14,4 +14,7 @@ Rails.application.routes.draw do
 
   load Rails.root.join("config/routes/api.rb")
   load Rails.root.join("config/routes/admin/admin.rb")
+
+  # routes exception to 404
+  get "*unmatched_route", to: "base#render_404", via: :all
 end
