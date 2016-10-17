@@ -1,5 +1,5 @@
 class Party::ChangePhoneFormObject < BaseFormObject
-  attr_accessor :phone_varify_code, :unconfirmed_phone
+  attr_accessor :unconfirmed_phone
   attr_reader :phone_number
 
   validates :unconfirmed_phone, format: { with: /\A(0)(9)([0-9]{8})\z/ }, presence: true
@@ -25,6 +25,6 @@ class Party::ChangePhoneFormObject < BaseFormObject
 
   def save
     return false unless valid?
-    @party.update_attributes(unconfirmed_phone: unconfirmed_phone, phone_varify_code: phone_varify_code)
+    @party.unconfirmed_phone = unconfirmed_phone
   end
 end
