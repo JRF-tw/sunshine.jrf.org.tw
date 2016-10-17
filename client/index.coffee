@@ -11,6 +11,7 @@ require "modernizr"
 
 require 'waypoints/lib/jquery.waypoints'
 require 'webui-popover/dist/jquery.webui-popover.js'
+require 'chosen-js'
 
 # Require Custom Modules
 # Modal = require "./modules/modal"
@@ -39,6 +40,11 @@ $(document).on 'ready page:load', ->
       dateFormat: "yy-mm-dd"
       altField: $(@).next()
       onClose: -> $(@).trigger 'blur'
+
+  # Chosen
+  $('select').chosen
+    no_results_text: '沒有選項符合'
+    search_contains: on
 
   # Popover
   $('.popover-trigger').webuiPopover()

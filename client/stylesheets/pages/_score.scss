@@ -11,6 +11,13 @@
     display: block;
     padding-right: r(6);
     width: 50%;
+
+    .control-label.disabled,
+    .select:disabled,
+    .readonly,
+    .readonly .control-label,
+    .chosen-disabled .chosen-single { color: $text-color !important; }
+    .chosen-disabled { opacity: 1 !important; }
   }
 }
 .form--score__editor {

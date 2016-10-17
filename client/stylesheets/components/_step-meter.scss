@@ -11,8 +11,7 @@
   width: 100%;
 }
 .step-meter__count {
-  size: 32px 1px;
-  margin: n() 2px;
+  size: r(5) 1px;
   background-color: $divider-gray;
   &.active,
   &.current {
