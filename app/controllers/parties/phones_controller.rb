@@ -3,6 +3,7 @@ class Parties::PhonesController < Parties::BaseController
   before_action :can_verify?, only: [:verify, :verifing, :resend_verify_sms]
 
   def new
+    @phone_form = Party::ChangePhoneFormObject.new(current_party)
     # meta
     set_meta(
       title: '當事人新增手機頁',
@@ -13,8 +14,9 @@ class Parties::PhonesController < Parties::BaseController
 
   def create
     context = Party::SetPhoneContext.new(current_party)
-    if context.perform(party_params)
-      redirect_to verify_party_phone_path, flash: { success: '已寄出簡訊認證碼' }
+    @phone_form = context.perform(params)
+    unless context.has_error?
+      redirect_to verify_party_phone_path, flash: { success: "已寄出簡訊認證碼" }
     else
       flash[:error] = context.error_messages.join(", ")
       render "new"
@@ -33,8 +35,9 @@ class Parties::PhonesController < Parties::BaseController
 
   def update
     context = Party::SetPhoneContext.new(current_party)
-    if context.perform(party_params)
-      redirect_to verify_party_phone_path, flash: { success: '已寄出簡訊認證碼' }
+    @phone_form = context.perform(params)
+    unless context.has_error?
+      redirect_to verify_party_phone_path, flash: { success: "已寄出簡訊認證碼" }
     else
       flash[:error] = context.error_messages.join(", ")
       render 'edit'

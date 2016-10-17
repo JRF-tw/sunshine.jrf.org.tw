@@ -4,9 +4,6 @@ class Party::SetPhoneContext < BaseContext
 
   before_perform  :init_form_object
   before_perform  :check_phone_form_valid
-  before_perform  :check_phone_not_the_same
-  before_perform  :check_unexist_phone_number
-  before_perform  :check_unexist_unconfirmed_phone
   before_perform  :check_sms_send_count
   before_perform  :generate_verify_code
   before_perform  :assign_value
@@ -20,11 +17,11 @@ class Party::SetPhoneContext < BaseContext
   end
 
   def perform(params)
-    @params = permit_params(params[:party] || params, PERMITS)
+    @params = permit_params(params[:phone_form] || params, PERMITS)
     run_callbacks :perform do
-      return add_error(:data_update_fail, @form_object.errors.full_messages.join(',').to_s) unless @form_object.save
-      true
+      return add_error(:data_update_fail, @form_object.errors.full_messages.join(",").to_s) unless @form_object.save
     end
+    @form_object
   end
 
   private
@@ -34,7 +31,7 @@ class Party::SetPhoneContext < BaseContext
   end
 
   def check_phone_form_valid
-    return add_error(:invalid_phone_number, @form_object.errors.full_messages.join(",").to_s) unless @form_object.valid?
+    return add_error(:invalid_phone_number, @form_object.errors.values.join(",").to_s) unless @form_object.valid?
   end
 
   def check_sms_send_count
