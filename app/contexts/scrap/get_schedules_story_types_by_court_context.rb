@@ -32,5 +32,7 @@ class Scrap::GetSchedulesStoryTypesByCourtContext < BaseContext
     response_data = Mechanize.new.post(COURT_INFO_URI, data)
     response_data = Nokogiri::HTML(Iconv.new("UTF-8//IGNORE", "Big5").iconv(response_data.body))
     @story_types = response_data.css("input[type='radio']").map { |r| r.attribute("value").value }
+  rescue => e
+    nil
   end
 end

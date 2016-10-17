@@ -27,6 +27,8 @@ class Scrap::GetCourtsContext < BaseContext
     parse_courts_data(response_data).each do |data|
       @scrap_data << { scrap_name: data.text, code: data.attr("value").gsub(data.text, "").squish }
     end
+  rescue => e
+    nil
   end
 
   def parse_courts_data(response_data)

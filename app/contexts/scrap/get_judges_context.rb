@@ -28,6 +28,8 @@ class Scrap::GetJudgesContext < BaseContext
     response_data = Mechanize.new.get(scrap_file_url)
     response_data = Nokogiri::HTML(Iconv.new("UTF-8//IGNORE", "Big5").iconv(response_data.body))
     @data = response_data.css("body p").text.split("\n")
+  rescue => e
+    nil
   end
 
   def get_diff_import_daily_branch

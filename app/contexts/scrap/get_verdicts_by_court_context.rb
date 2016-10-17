@@ -29,5 +29,7 @@ class Scrap::GetVerdictsByCourtContext < BaseContext
     response_data = Mechanize.new.get(INDEX_URI)
     response_data = Nokogiri::HTML(response_data.body)
     @story_types = response_data.css("input[type='radio']").map { |row| row.attribute("value").value }.uniq
+  rescue => e
+    nil
   end
 end
