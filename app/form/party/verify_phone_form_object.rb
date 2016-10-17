@@ -1,5 +1,4 @@
-class Party::VerifyPhoneFormObject
-  include ActiveModel::Model
+class Party::VerifyPhoneFormObject < BaseFormObject
 
   attr_accessor :party, :phone_varify_code, :unconfirmed_phone
 

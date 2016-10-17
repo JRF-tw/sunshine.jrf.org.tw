@@ -1,8 +1,6 @@
 class Parties::PhonesController < Parties::BaseController
   before_action :set_phone?, only: []
   before_action :can_verify?, only: [:verify, :verifing, :resend_verify_sms]
-  before_action :init_phone_form_object, except: [:verify, :verifing, :resend]
-  before_action :init_verify_form_object, only: [:verify, :verifing]
 
   def new
     # meta
@@ -24,6 +22,7 @@ class Parties::PhonesController < Parties::BaseController
   end
 
   def edit
+    @phone_form = Party::ChangePhoneFormObject.new(current_party)
     # meta
     set_meta(
       title: '當事人更改手機頁',
@@ -74,16 +73,8 @@ class Parties::PhonesController < Parties::BaseController
 
   private
 
-  def init_phone_form_object
-    @phone_form = Party::ChangePhoneFormObject.new(current_party, phone_params)
-  end
-
   def init_verify_form_object
     @verify_form = Party::VerifyPhoneFormObject.new(current_party, verify_params)
-  end
-
-  def phone_params
-    params.fetch(:phone_form, {}).permit(:unconfirmed_phone)
   end
 
   def verify_params
