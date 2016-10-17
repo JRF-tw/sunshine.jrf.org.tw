@@ -25,6 +25,7 @@ RSpec.describe BaseController, type: :request do
 
   context "error route" do
     subject! { get "/robots" }
-    it { expect(response.status).to eq(404) }
+    # it { expect(response.status).to eq(404) }
+    it { expect(response).to be_redirect }
   end
 end
