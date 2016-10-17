@@ -27,7 +27,7 @@ feature "法官評鑑 - 律師", type: :feature, js: true do
           When "送出" do
             before { click_button "下一步" }
             Then "顯示錯誤訊息，頁面仍保留原始輸入資訊" do
-              expect(page).to have_select("schedule_score_court_id", selected: court1.full_name)
+              expect(page).to have_selector("#schedule_score_court_id_chosen", text: court1.full_name)
               expect(page).to have_content("案件不存在")
             end
           end

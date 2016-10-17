@@ -41,8 +41,8 @@ module Capybara
     end
 
     def capybara_lawyer_input_info_schedule_score(story, court: nil, year: nil, word_type: nil, number: nil, story_type: nil)
-      select court ? court.full_name : story.court.full_name, from: "schedule_score_court_id"
-      select story_type ? story_type : story.story_type, from: "schedule_score_story_type"
+      select_from_chosen court ? court.full_name : story.court.full_name, from: "schedule_score_court_id"
+      select_from_chosen story_type ? story_type : story.story_type, from: "schedule_score_story_type"
       within("#new_schedule_score") do
         fill_in "schedule_score_year", with: year ? year : story.year
         fill_in "schedule_score_word_type", with: word_type ? word_type : story.word_type
@@ -90,8 +90,8 @@ module Capybara
     end
 
     def capybara_lawyer_input_info_verdict_score(story, court: nil, year: nil, word_type: nil, number: nil, story_type: nil)
-      select court ? court.full_name : story.court.full_name, from: "verdict_score_court_id"
-      select story_type ? story_type : story.story_type, from: "verdict_score_story_type"
+      select_from_chosen court ? court.full_name : story.court.full_name, from: "verdict_score_court_id"
+      select_from_chosen story_type ? story_type : story.story_type, from: "verdict_score_story_type"
       within("#new_verdict_score") do
         fill_in "verdict_score_year", with: year ? year : story.year
         fill_in "verdict_score_word_type", with: word_type ? word_type : story.word_type
