@@ -63,27 +63,9 @@ class Lawyers::VerdictsController < Lawyers::BaseController
   def check_info
     context = Lawyer::VerdictScoreCheckInfoContext.new(current_lawyer)
     if @story = context.perform(verdict_score_params)
-      redirect_as_success(input_judge_lawyer_score_verdicts_path(verdict_score: verdict_score_params))
-    else
-      redirect_as_fail(input_info_lawyer_score_verdicts_path(verdict_score: verdict_score_params), context.error_messages.join(","))
-    end
-  end
-
-  def input_judge
-    # meta
-    set_meta(
-      title: "律師判決評鑑法官輸入頁",
-      description: "律師判決評鑑法官輸入頁",
-      keywords: "律師判決評鑑法官輸入頁"
-    )
-  end
-
-  def check_judge
-    context = Lawyer::VerdictScoreCheckJudgeContext.new(current_lawyer)
-    if context.perform(verdict_score_params)
       redirect_as_success(new_lawyer_score_verdict_path(verdict_score: verdict_score_params))
     else
-      redirect_as_fail(input_judge_lawyer_score_verdicts_path(verdict_score: verdict_score_params), context.error_messages.join(","))
+      redirect_as_fail(input_info_lawyer_score_verdicts_path(verdict_score: verdict_score_params), context.error_messages.join(","))
     end
   end
 
@@ -99,7 +81,7 @@ class Lawyers::VerdictsController < Lawyers::BaseController
   private
 
   def verdict_score_params
-    params.fetch(:verdict_score, {}).permit(:id, :court_id, :year, :word_type, :number, :story_type, :confirmed_realdate, :judge_name, :quality_score, :note, :appeal_judge)
+    params.fetch(:verdict_score, {}).permit(:id, :court_id, :year, :word_type, :number, :story_type, :confirmed_realdate, :quality_score, :note, :appeal_judge)
   end
 
   def verdict_score

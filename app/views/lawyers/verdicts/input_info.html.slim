@@ -2,7 +2,7 @@
   locals: { status: nil, type: 'verdict' }
 
   = render 'components/input_score_info',
-    step_text: '選擇法院/案號', step_count: 1, max_steps: 3,
+    step_text: '選擇法院/案號', step_count: 1, max_steps: 2,
     as: :verdict_score,
     form_for: @verdict_score,
     form_url: check_info_lawyer_score_verdicts_path,

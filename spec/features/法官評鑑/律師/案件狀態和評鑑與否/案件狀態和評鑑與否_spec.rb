@@ -98,14 +98,14 @@ feature "法官評鑑 - 律師", type: :feature, js: true do
         end
 
         When "進行新增判決評鑑" do
-          before { capybara_lawyer_run_verdict_score_flow(story, judge) }
+          before { capybara_lawyer_run_verdict_score_flow(story) }
           Then "成功新增判決評鑑" do
             expect(page).to have_content("感謝您的評鑑")
           end
         end
 
         When "進行編輯判決評鑑" do
-          before { capybara_lawyer_run_verdict_score_flow(story, judge) }
+          before { capybara_lawyer_run_verdict_score_flow(story) }
           before { capybara_lawyer_edit_verdict_score }
           before { click_button "更新評鑑" }
           Then "成功編輯判決評鑑" do
@@ -126,14 +126,14 @@ feature "法官評鑑 - 律師", type: :feature, js: true do
         end
 
         When "進行新增判決評鑑" do
-          before { capybara_lawyer_run_verdict_score_flow(story, judge) }
+          before { capybara_lawyer_run_verdict_score_flow(story) }
           Then "成功新增判決評鑑" do
             expect(page).to have_content("感謝您的評鑑")
           end
         end
 
         When "進行編輯判決評鑑" do
-          before { capybara_lawyer_run_verdict_score_flow(story, judge) }
+          before { capybara_lawyer_run_verdict_score_flow(story) }
           before { capybara_lawyer_edit_verdict_score }
           before { click_button "更新評鑑" }
           Then "成功編輯判決評鑑" do
