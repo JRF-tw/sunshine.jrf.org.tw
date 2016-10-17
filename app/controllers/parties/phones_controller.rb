@@ -15,11 +15,11 @@ class Parties::PhonesController < Parties::BaseController
   def create
     context = Party::SetPhoneContext.new(current_party)
     @phone_form = context.perform(params)
-    unless context.has_error?
-      redirect_to verify_party_phone_path, flash: { success: "已寄出簡訊認證碼" }
-    else
+    if context.has_error?
       flash[:error] = context.error_messages.join(", ")
       render "new"
+    else
+      redirect_to verify_party_phone_path, flash: { success: "已寄出簡訊認證碼" }
     end
   end
 
@@ -36,11 +36,11 @@ class Parties::PhonesController < Parties::BaseController
   def update
     context = Party::SetPhoneContext.new(current_party)
     @phone_form = context.perform(params)
-    unless context.has_error?
-      redirect_to verify_party_phone_path, flash: { success: "已寄出簡訊認證碼" }
-    else
+    if context.has_error?
       flash[:error] = context.error_messages.join(", ")
-      render 'edit'
+      render "edit"
+    else
+      redirect_to verify_party_phone_path, flash: { success: "已寄出簡訊認證碼" }
     end
   end
 

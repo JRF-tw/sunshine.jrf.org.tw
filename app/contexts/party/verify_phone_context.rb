@@ -15,7 +15,7 @@ class Party::VerifyPhoneContext < BaseContext
   def perform(params)
     @params = permit_params(params[:verify_form] || params, PERMITS)
     run_callbacks :perform do
-      return add_error(:data_update_fail, @form_object.errors.values.join(",").to_s) unless @form_object.save
+      return add_error(:data_update_fail, @form_object.errors.full_messages.join(",").to_s) unless @form_object.save
     end
     @form_object
   end
