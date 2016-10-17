@@ -38,6 +38,8 @@ class Scrap::ParseVerdictContext < BaseContext
     verdict_query = "?id=#{@scrap_id}&v_court=#{court_value}&v_sys=#{@type}&jud_year=&jud_case=&jud_no=&jud_no_end=&jud_title=&keyword=&sdate=#{@start_date}&edate=#{@end_date}&page=1&searchkw=&jmain=&cw=0"
     sleep @sleep_time_interval
     @response_data = Mechanize.new.get(VERDICT_URI + verdict_query, {}, RESULT_URI)
+  rescue
+    nil
   end
 
   def parse_orginal_data

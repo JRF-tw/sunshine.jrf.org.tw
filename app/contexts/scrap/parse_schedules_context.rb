@@ -36,6 +36,8 @@ class Scrap::ParseSchedulesContext < BaseContext
     sleep @sleep_time_interval
     response_data = Mechanize.new.get(SCHEDULE_INFO_URI, data)
     @data = Nokogiri::HTML(Iconv.new("UTF-8//IGNORE", "Big5").iconv(response_data.body))
+  rescue
+    nil
   end
 
   def parse_schedule_info
