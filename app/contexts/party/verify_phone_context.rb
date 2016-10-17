@@ -1,27 +1,33 @@
 class Party::VerifyPhoneContext < BaseContext
+  PERMITS = [:phone_varify_code].freeze
 
+  before_perform  :init_verify_form_object
   before_perform  :record_retry_count, unless: :valid?
   before_perform  :reset_data_out_retry_range, unless: :valid?
   after_perform   :build_message
   after_perform   :confirmed
   after_perform   :reset_data
 
-  def initialize(verify_form)
-    @verify_form = verify_form
-    @party = @verify_form.party
+  def initialize(party)
+    @party = party
   end
 
-  def perform
+  def perform(params)
+    @params = permit_params(params[:verify_form] || params, PERMITS)
     run_callbacks :perform do
-      return add_error(:data_update_fail, @verify_form.errors.full_messages.join(',').to_s) unless @verify_form.save
-      true
+      return add_error(:data_update_fail, @form_object.errors.values.join(",").to_s) unless @form_object.save
     end
+    @form_object
   end
 
   private
 
+  def init_verify_form_object
+    @form_object = Party::VerifyPhoneFormObject.new(@party, @params)
+  end
+
   def valid?
-    @verify_form.phone_varify_code == @party.phone_varify_code.value
+    @form_object.phone_varify_code == @party.phone_varify_code.value
   end
 
   def record_retry_count

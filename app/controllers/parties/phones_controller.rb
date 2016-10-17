@@ -1,6 +1,6 @@
 class Parties::PhonesController < Parties::BaseController
   before_action :set_phone?, only: []
-  before_action :can_verify?, only: [:verify, :verifing, :resend_verify_sms]
+  before_action :can_verify?, only: [:verify, :verifing, :resend]
 
   def new
     @phone_form = Party::ChangePhoneFormObject.new(current_party)
@@ -45,6 +45,7 @@ class Parties::PhonesController < Parties::BaseController
   end
 
   def verify
+    @verify_form = Party::VerifyPhoneFormObject.new(current_party)
     # meta
     set_meta(
       title: '當事人手機驗證頁',
@@ -54,8 +55,9 @@ class Parties::PhonesController < Parties::BaseController
   end
 
   def verifing
-    context = Party::VerifyPhoneContext.new(@verify_form)
-    if context.perform
+    context = Party::VerifyPhoneContext.new(current_party)
+    @verify_form = context.perform(params)
+    if !context.has_error?
       redirect_to party_root_path, flash: { success: "已驗證成功" }
     elsif context.errors.include?(:retry_verify_count_out_range)
       redirect_to edit_party_phone_path, flash: { error: context.error_messages.join(', ').to_s }
@@ -75,14 +77,6 @@ class Parties::PhonesController < Parties::BaseController
   end
 
   private
-
-  def init_verify_form_object
-    @verify_form = Party::VerifyPhoneFormObject.new(current_party, verify_params)
-  end
-
-  def verify_params
-    params.fetch(:verify_form, {}).permit(:phone_varify_code)
-  end
 
   def can_verify?
     redirect_to edit_party_phone_path, flash: { error: '請先設定手機號碼' } unless current_party.phone_varify_code.value
