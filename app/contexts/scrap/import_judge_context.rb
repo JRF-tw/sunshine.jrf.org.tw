@@ -26,7 +26,7 @@ class Scrap::ImportJudgeContext < BaseContext
     @branch_name = @row_data[1].strip
     @judge_name = @row_data[2].gsub("法官", "").squish
   rescue => e
-    SlackService.notify_scrap_async("法官爬取失敗: 股別資料解析錯誤\n row_data : #{@row_data}\n #{e.message}")
+    SlackService.notify_scrap_judge_by_schedule_error("法官爬取失敗: 股別資料解析錯誤\n row_data : #{@row_data}\n #{e.message}")
   end
 
   def find_court

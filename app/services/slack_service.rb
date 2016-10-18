@@ -16,40 +16,63 @@ class SlackService
       delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook) unless DISABLED_ENV.include?(Rails.env)
     end
 
-    def notify_scrap_async(message, channel: "#notify-scrap-error", name: "Exception", icon_url: DEFAULT_ICON_URL, webhook: nil)
+    def notify_scrap_court_error(message, channel: "#notify-scrap-error", name: "Exception", icon_url: DEFAULT_ICON_URL, webhook: nil)
       delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook) unless DISABLED_ENV.include?(Rails.env)
       false
     end
 
-    def notify_analysis_async(message, channel: "#notify-scrap-analysis", name: "slack-robot", icon_url: DEFAULT_ICON_URL, webhook: nil)
+    def notify_scrap_judge_by_schedule_error(message, channel: "#notify-scrap-error", name: "Exception", icon_url: DEFAULT_ICON_URL, webhook: nil)
+      delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook) unless DISABLED_ENV.include?(Rails.env)
+      false
+    end
+
+    def notify_scrap_verdict_error(message, channel: "#notify-scrap-error", name: "Exception", icon_url: DEFAULT_ICON_URL, webhook: nil)
+      delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook) unless DISABLED_ENV.include?(Rails.env)
+      false
+    end
+
+    def notify_verdict_upload_error(message, channel: "#notify-scrap-error", name: "Exception", icon_url: DEFAULT_ICON_URL, webhook: nil)
+      delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook) unless DISABLED_ENV.include?(Rails.env)
+      false
+    end
+
+    def notify_new_story_type_alert(message, channel: "#notify-scrap-analysis", name: "slack-robot", icon_url: DEFAULT_ICON_URL, webhook: nil)
       delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook) unless DISABLED_ENV.include?(Rails.env)
     end
 
-    def notify_scrap_daily_async(message, channel: "#notify-scrap-daily", name: "scrap-daily", icon_url: DEFAULT_ICON_URL, webhook: nil)
+    def notify_analysis_schedule_error(message, channel: "#notify-scrap-analysis", name: "slack-robot", icon_url: DEFAULT_ICON_URL, webhook: nil)
       delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook) unless DISABLED_ENV.include?(Rails.env)
     end
 
-    def notify_court_alert_async(message, channel: "#notify-court", name: "scrap-court", icon_url: DEFAULT_ICON_URL, webhook: nil)
+    def notify_analysis_verdict_error(message, channel: "#notify-scrap-analysis", name: "slack-robot", icon_url: DEFAULT_ICON_URL, webhook: nil)
       delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook) unless DISABLED_ENV.include?(Rails.env)
     end
 
-    def notify_branch_alert_async(message, channel: "#notify-branch", name: "scrap-branch", icon_url: DEFAULT_ICON_URL, webhook: nil)
+    def notify_scrap_daily_alert(message, channel: "#notify-scrap-daily", name: "scrap-daily", icon_url: DEFAULT_ICON_URL, webhook: nil)
       delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook) unless DISABLED_ENV.include?(Rails.env)
     end
 
-    def notify_verdict_alert_async(message, channel: "#notify-verdict", name: "scrap-verdict", icon_url: DEFAULT_ICON_URL, webhook: nil)
+    def notify_court_alert(message, channel: "#notify-court", name: "scrap-court", icon_url: DEFAULT_ICON_URL, webhook: nil)
       delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook) unless DISABLED_ENV.include?(Rails.env)
     end
 
-    def notify_sms_alert_async(message, channel: "#notify-sms", name: "notify", icon_url: DEFAULT_ICON_URL, webhook: nil)
+    def notify_branch_alert(message, channel: "#notify-branch", name: "scrap-branch", icon_url: DEFAULT_ICON_URL, webhook: nil)
+      delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook) unless DISABLED_ENV.include?(Rails.env)
+    end
+
+    def notify_create_highest_judge_alert(message, channel: "#notify-verdict", name: "scrap-verdict", icon_url: DEFAULT_ICON_URL, webhook: nil)
+      delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook) unless DISABLED_ENV.include?(Rails.env)
+    end
+
+    def notify_sms_alert(message, channel: "#notify-sms", name: "notify", icon_url: DEFAULT_ICON_URL, webhook: nil)
       delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook) unless Rails.env == "production"
     end
 
-    def user_report_schedule_date_over_range_async(message, channel: "#notify-developer", name: "notify", icon_url: DEFAULT_ICON_URL, webhook: nil)
+    def notify_report_schedule_date_over_range_alert(message, channel: "#notify-developer", name: "notify", icon_url: DEFAULT_ICON_URL, webhook: nil)
       delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook)
     end
 
-    def notify_scored_time_alert(message, channel: "#notify-developer", name: "notify", icon_url: DEFAULT_ICON_URL, webhook: nil)
+    def notify_scored_time_over_range_alert(message, channel: "#notify-developer", name: "notify", icon_url: DEFAULT_ICON_URL, webhook: nil)
       delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook)
     end
 

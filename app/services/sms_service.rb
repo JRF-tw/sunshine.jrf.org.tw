@@ -22,7 +22,7 @@ class SmsService
   end
 
   def send_by_slack_async(text)
-    SlackService.notify_sms_alert_async(text)
+    SlackService.notify_sms_alert(text)
   end
 
   def send_by_twilio(text)
