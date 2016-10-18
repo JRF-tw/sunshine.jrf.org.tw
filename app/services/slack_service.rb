@@ -1,7 +1,7 @@
 class SlackService
   WEBHOOK = "https://hooks.slack.com/services/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".freeze
   DEFAULT_ICON_URL = "http://i.imgur.com/kwu9VJF.jpg".freeze
-  DISABLED_ENV = ["staging"].freeze
+  DISABLED_ENV = ["staging", "production"].freeze
 
   class << self
     def notify(message, channel: "#general", name: "slack-robot", icon_url: DEFAULT_ICON_URL, webhook: nil)
