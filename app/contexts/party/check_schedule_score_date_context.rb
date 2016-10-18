@@ -59,7 +59,7 @@ class Party::CheckScheduleScoreDateContext < BaseContext
 
   def alert!
     if @party.score_report_schedule_real_date.value >= MAX_REPORT_TIME
-      SlackService.user_report_schedule_date_over_range_async("當事人 : #{@party.name} 已超過回報庭期真實開庭日期次數")
+      SlackService.notify_report_schedule_date_over_range_alert("當事人 : #{@party.name} 已超過回報庭期真實開庭日期次數")
     end
   end
 

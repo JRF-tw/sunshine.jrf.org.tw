@@ -82,10 +82,10 @@ class Lawyer::ScheduleScoreCreateContext < BaseContext
   end
 
   def alert_story_by_lawyer_scored_count
-    SlackService.notify_scored_time_alert("案件編號 #{@story.id} 同一案件，參與評鑑的「律師人數」超過 #{Story::MAX_LAWYER_SCORED_COUNT} 人") if @total_scorer_ids.count >= Story::MAX_LAWYER_SCORED_COUNT && !@total_scorer_ids.include?(@lawyer.id)
+    SlackService.notify_scored_time_over_range_alert("案件編號 #{@story.id} 同一案件，參與評鑑的「律師人數」超過 #{Story::MAX_LAWYER_SCORED_COUNT} 人") if @total_scorer_ids.count >= Story::MAX_LAWYER_SCORED_COUNT && !@total_scorer_ids.include?(@lawyer.id)
   end
 
   def alert_lawyer_scored_story_count
-    SlackService.notify_scored_time_alert("律師 #{@lawyer.name} 已評鑑超過超過 #{Lawyer::MAX_SCORED_COUNT}") if @total_scored_story_ids.count >= Lawyer::MAX_SCORED_COUNT && !@total_scored_story_ids.include?(@story.id)
+    SlackService.notify_scored_time_over_range_alert("律師 #{@lawyer.name} 已評鑑超過超過 #{Lawyer::MAX_SCORED_COUNT}") if @total_scored_story_ids.count >= Lawyer::MAX_SCORED_COUNT && !@total_scored_story_ids.include?(@story.id)
   end
 end

@@ -34,14 +34,14 @@ class Scrap::GetCourtsContext < BaseContext
   def parse_courts_data(response_data)
     return response_data.css("table")[2].css("select")[0].css("option")
   rescue => e
-    SlackService.notify_scrap_async("法院爬取失敗: 解析法院代碼資訊錯誤\n #{e.message}")
+    SlackService.notify_scrap_court_error("法院爬取失敗: 解析法院代碼資訊錯誤\n #{e.message}")
   end
 
   def check_db_data_and_notify
     scrap_court_codes = @scrap_data.map { |data| data[:code] }
     diff_courts = Court.get_courts.where.not(code: scrap_court_codes).where.not(code: nil)
     diff_courts.each do |court|
-      SlackService.notify_scrap_async("法院資料不再爬蟲資料內 : \n法院ID : #{court.id}\n法院全名 : #{court.full_name}\n法院代碼 : #{court.code}")
+      SlackService.notify_scrap_court_error("法院資料不再爬蟲資料內 : \n法院ID : #{court.id}\n法院全名 : #{court.full_name}\n法院代碼 : #{court.code}")
     end
   end
 

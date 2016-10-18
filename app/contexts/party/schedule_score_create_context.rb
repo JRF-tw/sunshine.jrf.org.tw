@@ -76,10 +76,10 @@ class Party::ScheduleScoreCreateContext < BaseContext
   end
 
   def alert_story_by_party_scored_count
-    SlackService.notify_scored_time_alert("案件編號 #{@story.id} 同一案件，參與評鑑的「當事人人數」超過 #{Story::MAX_PARTY_SCORED_COUNT} 人") if @total_scorer_ids.count >= Story::MAX_PARTY_SCORED_COUNT && !@total_scorer_ids.include?(@party.id)
+    SlackService.notify_scored_time_over_range_alert("案件編號 #{@story.id} 同一案件，參與評鑑的「當事人人數」超過 #{Story::MAX_PARTY_SCORED_COUNT} 人") if @total_scorer_ids.count >= Story::MAX_PARTY_SCORED_COUNT && !@total_scorer_ids.include?(@party.id)
   end
 
   def alert_party_scored_story_count
-    SlackService.notify_scored_time_alert("當事人 #{@party.name} 已評鑑超過超過 #{Party::MAX_SCORED_COUNT}") if @total_scored_story_ids.count >= Party::MAX_SCORED_COUNT && !@total_scored_story_ids.include?(@story.id)
+    SlackService.notify_scored_time_over_range_alert("當事人 #{@party.name} 已評鑑超過超過 #{Party::MAX_SCORED_COUNT}") if @total_scored_story_ids.count >= Party::MAX_SCORED_COUNT && !@total_scored_story_ids.include?(@story.id)
   end
 end
