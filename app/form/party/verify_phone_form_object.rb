@@ -2,8 +2,8 @@ class Party::VerifyPhoneFormObject < BaseFormObject
 
   attr_accessor :phone_varify_code, :unconfirmed_phone
 
-  validates :phone_varify_code, presence: { message: "驗證碼 不能是空白字元" }
-  validate  :valid_varify_code
+  validates :phone_varify_code, presence: true
+  validate  :valid_varify_code, if: :has_varify_code?
 
   def initialize(party, params = nil)
     @party = party
@@ -17,6 +17,10 @@ class Party::VerifyPhoneFormObject < BaseFormObject
   end
 
   private
+
+  def has_varify_code?
+    phone_varify_code.present?
+  end
 
   def valid_varify_code
     add_error(:wrong_verify_code) unless phone_varify_code == @party.phone_varify_code.value

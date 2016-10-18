@@ -36,7 +36,7 @@ class Party::VerifyPhoneContext < BaseContext
       reset_data
       return add_error(:retry_verify_count_out_range)
     else
-      return add_error(:data_update_fail, @form_object.errors_messaage)
+      return add_error(:data_update_fail, @form_object.full_error_messages)
     end
   end
 

@@ -2,7 +2,7 @@ class Party::ChangePhoneFormObject < BaseFormObject
   attr_accessor :unconfirmed_phone
   attr_reader :phone_number
 
-  validates :unconfirmed_phone, format: { with: /\A(0)(9)([0-9]{8})\z/, message: "%{attribute} 是無效的"  }, presence: { message: "%{attribute} 不能是空白字元" }
+  validates :unconfirmed_phone, format: { with: /\A(0)(9)([0-9]{8})\z/ }, presence: true
   validate :unexist_phone_number, :unexist_unconfirmed_phone
 
   def initialize(party, params = nil)

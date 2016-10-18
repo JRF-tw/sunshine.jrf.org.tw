@@ -9,9 +9,22 @@ class BaseFormObject
     false
   end
 
-  def errors_messaage
-    message = []
-    errors.messages.each_value { |error| message << error  }
-    message.join(",").to_s
+  def full_error_messages
+    error_messages = []
+    errors.messages.map { |error_key, message| error_messages << error_message(error_key, message) }
+    error_messages.join(", ")
+  end
+
+  def error_message(error_key, message)
+    error_key_humanize = error_key.to_s.tr(".", "_").humanize
+    error_key_to_model_attr = self.class.human_attribute_name(error_key)
+
+    if error_key_humanize == error_key_to_model_attr
+      message
+    else
+      I18n.t(:"errors.format", default:  "%{error_key} %{message}",
+                               attribute: error_key_to_model_attr,
+                               message:   message.join(", "))
+    end
   end
 end
