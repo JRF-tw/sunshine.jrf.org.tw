@@ -39,7 +39,7 @@ class Scrap::GetJudgesContext < BaseContext
   def notify_diff_info
     @diff_branch_ids.each do |d|
       branch = Branch.find(d)
-      SlackService.notify_branch_alert_async("該股別不再目前爬蟲資料內 :\n法院名稱 : #{branch.court.full_name}\n名稱 : #{branch.name}\n 法庭名稱 : #{branch.chamber_name}")
+      SlackService.notify_branch_alert("該股別不再目前爬蟲資料內 :\n法院名稱 : #{branch.court.full_name}\n名稱 : #{branch.name}\n 法庭名稱 : #{branch.chamber_name}")
     end
   end
 

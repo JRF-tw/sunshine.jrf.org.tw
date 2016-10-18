@@ -37,7 +37,7 @@ module Scrap
     end
 
     def notify
-      SlackService.notify_verdict_alert_async("最高法院法官已新增 : #{@judge.name} 法官, #{SlackService.render_link("http://#{Setting.host + admin_judge_path(@judge)}", "點我查看")}") if @is_new_record
+      SlackService.notify_create_highest_judge_alert("最高法院法官已新增 : #{@judge.name} 法官, #{SlackService.render_link("http://#{Setting.host + admin_judge_path(@judge)}", "點我查看")}") if @is_new_record
     end
   end
 end

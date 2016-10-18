@@ -13,7 +13,7 @@ class Scrap::NotifyDailyContext < BaseContext
     run_callbacks :perform do
       scrap_models.keys.map(&:to_s).each do |model|
         message = parse_message(model)
-        SlackService.notify_scrap_daily_async(message) if message
+        SlackService.notify_scrap_daily_alert(message) if message
       end
     end
   end

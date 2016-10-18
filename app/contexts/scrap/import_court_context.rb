@@ -72,7 +72,7 @@ class Scrap::ImportCourtContext < BaseContext
   end
 
   def notify_diff_fullname
-    SlackService.notify_court_alert_async("法院全名與爬蟲不符合 :\n爬蟲名稱 : #{@scrap_name}\n資料庫名稱 : #{@court.full_name}") if @court.full_name != @scrap_name
+    SlackService.notify_court_alert("法院全名與爬蟲不符合 :\n爬蟲名稱 : #{@scrap_name}\n資料庫名稱 : #{@court.full_name}") if @court.full_name != @scrap_name
   end
 
   def record_count_to_daily_notify

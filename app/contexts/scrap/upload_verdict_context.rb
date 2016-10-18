@@ -14,7 +14,7 @@ class Scrap::UploadVerdictContext < BaseContext
       true
     end
   rescue => e
-    SlackService.notify_scrap_async("判決書上傳失敗:  #{e.message}")
+    SlackService.notify_verdict_upload_error("判決書上傳失敗:  #{e.message}")
   end
 
   private

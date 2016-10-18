@@ -47,7 +47,7 @@ class Scrap::ImportScheduleContext < BaseContext
     branches = @court.branches.current.where(name: @branch_name)
     branches = branches.where("chamber_name LIKE ? ", "%#{@story_type}%") if branches.map(&:judge_id).uniq.count > 1
     @main_judge = branches.first ? branches.first.judge : nil
-    SlackService.notify_analysis_async("庭期分析錯誤 : 取得 審判長法官 資訊為空\n #{@hash}") unless @main_judge
+    SlackService.notify_analysis_schedule_error("庭期分析錯誤 : 取得 審判長法官 資訊為空\n #{@hash}") unless @main_judge
   end
 
   def find_or_create_story
@@ -69,6 +69,6 @@ class Scrap::ImportScheduleContext < BaseContext
   end
 
   def alert_new_story_type
-    SlackService.notify_analysis_async("取得新的案件類別 : #{@story_type}") unless @story_type.present? && StoryTypes.list.include?(@story_type)
+    SlackService.notify_analysis_schedule_error("取得新的案件類別 : #{@story_type}") unless @story_type.present? && StoryTypes.list.include?(@story_type)
   end
 end

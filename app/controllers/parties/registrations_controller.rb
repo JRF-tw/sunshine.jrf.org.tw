@@ -74,6 +74,6 @@ class Parties::RegistrationsController < Devise::RegistrationsController
   end
 
   def alert_to_slack!(resource)
-    SlackService.notify_user_activity_alert("新當事人註冊 : #{SlackService.render_link(admin_parties_url(q: { name_cont: resource.name }, host: Setting.host), resource.name)}  已經申請註冊")
+    SlackService.notify_user_activity_alert("新當事人註冊 : #{SlackService.render_link(admin_party_url(resource, host: Setting.host), resource.name)}  已經申請註冊")
   end
 end
