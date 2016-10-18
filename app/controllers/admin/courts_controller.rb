@@ -17,10 +17,10 @@
 class Admin::CourtsController < Admin::BaseController
   before_action :court
   before_action(except: [:index]) { add_crumb("法院 / 檢察署列表", admin_courts_path) }
-  before_action :page, only: [:index, :edit_weight, :update_weight]
+
   def index
     @search = Court.all.newest.ransack(params[:q])
-    @courts = @search.result.page(@page).per(20)
+    @courts = @search.result.page(params[:page]).per(20)
     @admin_page_title = "法院 / 檢察署列表"
     add_crumb @admin_page_title, "#"
   end
@@ -78,12 +78,13 @@ class Admin::CourtsController < Admin::BaseController
   end
 
   def edit_weight
-    @courts = Court.all.get_courts.shown.sorted.page(@page).per(20)
+    @courts = Court.all.get_courts.shown.sorted.page(params[:page]).per(20)
     @admin_page_title = "法院 排序調整"
     add_crumb @admin_page_title, "#"
   end
 
   def update_weight
+    @page = params[:page]
     context = Admin::CourtWeightUpdateContext.new(@court)
     if context.perform(params)
       @courts = Court.all.get_courts.shown.sorted.page(@page).per(20)
@@ -96,10 +97,6 @@ class Admin::CourtsController < Admin::BaseController
 
   def court
     @court ||= params[:id] ? Admin::Court.find(params[:id]) : Admin::Court.new
-  end
-
-  def page
-    @page ||= params[:page]
   end
 
 end
