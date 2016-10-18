@@ -1,5 +1,5 @@
 .dataTables_wrapper
-  table.table.table-bordered.table-striped.table-hover.edit_court_table
+  table.table.table-bordered.table-striped.table-hover
     thead
       tr
         th #
@@ -7,7 +7,7 @@
         th 全名
         th 前台顯示簡稱
         th
-    tbody
+    tbody.edit_court_table
       - @courts.each do |court|
         tr
           td= court.id
