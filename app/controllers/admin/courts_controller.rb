@@ -84,9 +84,10 @@ class Admin::CourtsController < Admin::BaseController
   end
 
   def update_weight
+    @page = params[:page]
     context = Admin::CourtWeightUpdateContext.new(@court)
     if context.perform(params)
-      @courts = Court.all.get_courts.shown.sorted.page(params[:page]).per(20)
+      @courts = Court.all.get_courts.shown.sorted.page(@page).per(20)
     else
       @error_messages = context.error_messages
     end
