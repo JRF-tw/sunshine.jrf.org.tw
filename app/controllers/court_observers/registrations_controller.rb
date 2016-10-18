@@ -79,6 +79,6 @@ class CourtObservers::RegistrationsController < Devise::RegistrationsController
   end
 
   def alert_to_slack!(resource)
-    SlackService.notify_user_activity_alert("新觀察者註冊 : #{SlackService.render_link(admin_observers_url(q: { email_cont: resource.email }, host: Setting.host), resource.name)} 已經申請註冊")
+    SlackService.notify_user_activity_alert("新觀察者註冊 : #{SlackService.render_link(admin_observer_url(resource, host: Setting.host), resource.name)} 已經申請註冊")
   end
 end

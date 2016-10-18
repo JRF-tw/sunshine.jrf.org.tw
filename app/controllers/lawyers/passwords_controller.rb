@@ -95,7 +95,7 @@ class Lawyers::PasswordsController < Devise::PasswordsController
   end
 
   def alert_to_slack
-    SlackService.notify_user_activity_alert("新律師註冊 : #{SlackService.render_link(admin_lawyers_url(q: { email_cont: resource.email }, host: Setting.host), resource.name)} 已經申請註冊")
+    SlackService.notify_user_activity_alert("新律師註冊 : #{SlackService.render_link(admin_lawyer_url(resource, host: Setting.host), resource.name)} 已經申請註冊")
   end
 
 end
