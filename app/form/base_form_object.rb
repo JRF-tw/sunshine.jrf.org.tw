@@ -8,4 +8,10 @@ class BaseFormObject
     @errors[key.to_sym] << (custom_message || Errors::Code.desc(key))
     false
   end
+
+  def errors_messaage
+    message = []
+    errors.messages.each_value { |error| message << error  }
+    message.join(",").to_s
+  end
 end
