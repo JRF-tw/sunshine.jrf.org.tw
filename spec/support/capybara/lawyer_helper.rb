@@ -130,5 +130,13 @@ module Capybara
       perform_sidekiq_job(fetch_sidekiq_last_job)
       open_email(email)
     end
+
+    def lawyer_edit_email_with(email, password)
+      visit(edit_lawyer_email_path)
+      within("#edit_lawyer") do
+        fill_in "lawyer_email", with: email
+        fill_in "lawyer_current_password", with: password
+      end
+    end
   end
 end
