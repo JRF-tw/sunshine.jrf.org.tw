@@ -6,39 +6,6 @@ describe Party::SetPhoneContext do
 
   describe "#perform" do
     context "fail" do
-      context "check_phone" do
-        let(:params) { { phone_form: { unconfirmed_phone: "" } } }
-        before { subject.perform(params) }
-        it { expect(subject.has_error?).to be_truthy }
-      end
-
-      context "check_phone_format" do
-        let(:params) { { phone_form: { unconfirmed_phone: "092112312x" } } }
-        before { subject.perform(params) }
-        it { expect(subject.has_error?).to be_truthy }
-      end
-
-      context "check_unexist_phone_number" do
-        let!(:party1) { create :party, phone_number: "0911222333" }
-        let(:params) { { phone_form: { unconfirmed_phone: party1.phone_number } } }
-        before { subject.perform(params) }
-        it { expect(subject.has_error?).to be_truthy }
-      end
-
-      context "check_phone_not_the_same" do
-        let(:params) { { phone_form: { unconfirmed_phone: party.phone_number } } }
-        before { subject.perform(params) }
-        it { expect(subject.has_error?).to be_truthy }
-      end
-
-      context "check_unexist_unconfirmed_phone" do
-        let(:params) { { phone_form: { unconfirmed_phone: "0911222333" } } }
-        let!(:party1) { create :party, phone_number: "0911222333" }
-        before { party1.unconfirmed_phone = "0911222333" }
-        before { subject.perform(params) }
-        it { expect(subject.has_error?).to be_truthy }
-      end
-
       context "check_sms_send_count" do
         let(:params) { { phone_form: { unconfirmed_phone: "0911222333" } } }
         before { party.sms_sent_count.value = 2 }
