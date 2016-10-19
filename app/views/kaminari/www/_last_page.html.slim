@@ -6,5 +6,9 @@
     per_page     : number of items to fetch per page
     remote       : data-remote
 
-= link_to url, :remote => remote, class: ['pagination__cell', 'pagination__cell--last']
+= link_to url, :remote => remote, class: [\
+  'pagination__cell',
+  'pagination__cell--last',
+  ('disabled' if current_page.last?)\
+]
   = inline_svg 'arrow-last'
