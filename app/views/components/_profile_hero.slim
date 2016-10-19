@@ -3,6 +3,8 @@ ruby:
   m_size_path = path_to_image "hero-#{type}-M.png"
   l_size_path = path_to_image "hero-#{type}-L.png"
 
+  job = job ? job : ''
+
 .billboard[
   class="billboard--#{type} billboard--classic lazyload"
   data-bgset="#{m_size_path} 1000w, #{l_size_path} 2000w"
