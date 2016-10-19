@@ -25,6 +25,10 @@ $max: $size * 15 + r(8);
   transition: all .3s ease 0s;
   &:hover { color: $text-primary $white; }
   &.active { color: $text-secondary-dark $brown; }
+  &.disabled {
+    opacity: .3;
+    pointer-events: none;
+  }
 
   &--gap {
     display: none;
