@@ -1,15 +1,18 @@
-module.exports = ->
-  $to_top   = $('#to-top').hide()
-  $document = $(window)
-  
-  $to_top.on 'click', ->
-    $('html, body').animate
-      scrollTop: 0
-    , 500
-    false
+class ToTop
+  constructor: (@query) ->
+    $to_top = $(@query)
+    
+    $to_top.on 'click', ->
+      $('html, body').animate
+        scrollTop: 0
+      , 500
+      false
 
-  $document.on 'scroll', $.throttle 1000 / 10, ->
-    if $document.scrollTop() > 100
-      $to_top.fadeIn 300
-    else
-      $to_top.fadeOut 300
+    $(window).on 'scroll', ->
+      requestAnimationFrame ->
+        if $(window).scrollTop() > 100
+          $to_top.addClass 'active'
+        else
+          $to_top.removeClass 'active'
+    
+module.exports = ToTop

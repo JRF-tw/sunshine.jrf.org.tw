@@ -1,0 +1,19 @@
+.to-top {
+  @include Normalize();
+  size: r(6);
+  position: fixed n() r(1) r(1) n();
+  z-index: index($layers, to-top);
+  border-radius: 50%;
+  fill: currentColor;
+  color: $accent $text-secondary-dark;
+  box-shadow: 0px 1px 8px 0px rgba(0,0,0,0.12);
+  transition: all .3s ease 0s;
+  @include toggle-fade();
+
+  &:hover { color: $white $accent; }
+
+  .icon {
+    size: r(4);
+    transform: rotate(-90deg);
+  }
+}
