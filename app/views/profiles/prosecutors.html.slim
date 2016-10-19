@@ -6,5 +6,6 @@
 section.offcanvas-card-wrapper.container--wide
   = render partial: 'components/avatar_list', locals: { people: @prosecutors, type: 'prosecutor' }
 
+  br
+  .text-center （依姓名部首排序）
   = paginate @prosecutors, theme: 'www'
-  | （依姓名部首排序）
