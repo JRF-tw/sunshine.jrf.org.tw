@@ -20,7 +20,7 @@
     "update": "gulp update",
     "deploy": "gulp deploy",
     "check": "rubocop --auto-correct",
-    "rebase": "bundle install && foreman start -f Procfile.migrate && foreman start -f Procfile.test",
+    "rebase": "bundle install && foreman start -f Procfile.migrate",
     "migrate": "foreman start -f Procfile.migrate",
     "test": "foreman start -f Procfile.test && npm run check",
     "dev-server": "webpack-dev-server --inline --hot --config webpack-dev.config.coffee",
