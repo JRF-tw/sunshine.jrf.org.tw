@@ -137,6 +137,14 @@ module Capybara
         fill_in "lawyer_email", with: email
         fill_in "lawyer_current_password", with: password
       end
+      click_button "送出"
     end
+
+    def lawyer_confirm_email(email)
+      perform_sidekiq_job(fetch_sidekiq_jobs(Sidekiq::Extensions::DelayedMailer, wait_time: 1).last)
+      open_email(email)
+      current_email.find("a").click
+    end
+
   end
 end
