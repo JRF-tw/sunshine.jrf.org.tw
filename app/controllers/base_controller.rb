@@ -1,4 +1,12 @@
 class BaseController < ApplicationController
+  layout "classic", only: :index
+
+  # rescue_from ActiveRecord::RecordNotFound, with: :render_404
+  rescue_from ActionController::RoutingError, with: :render_404
+  # rescue_from ActionView::MissingTemplate do |exception|
+  #   render nothing: true, status: 404
+  # end
+
   def index
     @banners = Banner.shown.order_by_weight
     @suits = Suit.shown.last(3)
