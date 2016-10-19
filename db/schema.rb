@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161019074236) do
+ActiveRecord::Schema.define(version: 20161019090756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -186,6 +186,21 @@ ActiveRecord::Schema.define(version: 20161019074236) do
   end
 
   add_index "crawler_histories", ["scrap_at"], name: "index_crawler_histories_on_scrap_at", using: :btree
+
+  create_table "crawler_logs", force: :cascade do |t|
+    t.integer  "crawler_history_id"
+    t.integer  "crawler_kind"
+    t.integer  "crawler_error_type"
+    t.text     "crawler_errors"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "crawler_logs", ["crawler_error_type"], name: "index_crawler_logs_on_crawler_error_type", using: :btree
+  add_index "crawler_logs", ["crawler_history_id", "crawler_kind", "crawler_error_type"], name: "crawler_full_index", using: :btree
+  add_index "crawler_logs", ["crawler_history_id"], name: "index_crawler_logs_on_crawler_history_id", using: :btree
+  add_index "crawler_logs", ["crawler_kind", "crawler_error_type"], name: "index_crawler_logs_on_crawler_kind_and_crawler_error_type", using: :btree
+  add_index "crawler_logs", ["crawler_kind"], name: "index_crawler_logs_on_crawler_kind", using: :btree
 
   create_table "educations", force: :cascade do |t|
     t.integer  "profile_id"
