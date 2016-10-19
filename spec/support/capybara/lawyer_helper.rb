@@ -132,5 +132,16 @@ module Capybara
       end
       click_button("註冊")
     end
+
+    def lawyer_set_password(email, password: nil, password_confirmation: nil)
+      perform_sidekiq_job(fetch_sidekiq_jobs(Sidekiq::Extensions::DelayedMailer, wait_time: 1).last)
+      open_email(email)
+      current_email.find("a").click
+      within("#new_lawyer") do
+        fill_in "lawyer_password", with: password
+        fill_in "lawyer_password_confirmation", with: password_confirmation
+      end
+      click_button "送出"
+    end
   end
 end
