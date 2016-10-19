@@ -122,5 +122,15 @@ module Capybara
       perform_sidekiq_job(fetch_sidekiq_last_job)
       open_email(email)
     end
+
+    def register_lawyer_with(name, email)
+      visit(new_lawyer_registration_path)
+      within("#new_lawyer") do
+        fill_in "lawyer_name", with: name
+        fill_in "lawyer_email", with: email
+        check("policy_agreement")
+      end
+      click_button("註冊")
+    end
   end
 end
