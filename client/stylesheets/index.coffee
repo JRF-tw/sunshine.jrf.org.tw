@@ -23,6 +23,7 @@ require 'components/_date-picker.scss'
 require 'components/_popover.scss'
 require 'components/_avatars.scss'
 require 'components/_pagination.scss'
+require 'components/_to-top.scss'
 
 require 'pages/_story.scss'
 require 'pages/_who-are-you.scss'

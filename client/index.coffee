@@ -19,6 +19,7 @@ require 'chosen-js'
 {TextInput}       = require './modules/form'
 StoryCollapse     = require './modules/stories'
 Rules             = require './modules/rules'
+ToTop             = require './modules/to_top'
 
 # Require entry modules
 # EX:
@@ -48,6 +49,9 @@ $(document).on 'ready page:load', ->
 
   # Popover
   $('.popover-trigger').webuiPopover()
+
+  # To Top
+  new ToTop '#to-top'
 
 $(document).on "page:change", ->
   # Let cached input value trigger 'is-focus'

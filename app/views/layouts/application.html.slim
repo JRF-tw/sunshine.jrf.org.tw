@@ -24,3 +24,6 @@ html
 
     = render 'components/main_footer'
     = render 'components/drawer', type: yield(:character_type)
+
+    button#to-top.to-top type='button'
+      = inline_svg 'arrow-next'
