@@ -21,8 +21,7 @@
       "path": "app/views",
       "folder_exclude_patterns": [
         "admin",
-        "devise",
-        "kaminari"
+        "devise"
       ]
     },{
       "name": "F2E",
