@@ -138,10 +138,5 @@ module Capybara
       open_email(email)
     end
 
-    def open_lawyer_email(email)
-      perform_sidekiq_job(fetch_sidekiq_jobs(Sidekiq::Extensions::DelayedMailer, wait_time: 1).last)
-      open_email(email)
-    end
-
   end
 end
