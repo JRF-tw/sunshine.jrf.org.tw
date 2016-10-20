@@ -118,6 +118,14 @@ module Capybara
       end
     end
 
+    def lawyer_input_registration_form(name, email)
+      within("#new_lawyer") do
+        fill_in "lawyer_name", with: name
+        fill_in "lawyer_email", with: email
+        check("policy_agreement")
+      end
+    end
+
     def open_lawyer_email(email)
       perform_sidekiq_job(fetch_sidekiq_last_job)
       open_email(email)
