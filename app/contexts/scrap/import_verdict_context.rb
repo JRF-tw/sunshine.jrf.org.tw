@@ -2,11 +2,11 @@ class Scrap::ImportVerdictContext < BaseContext
   # only import judgment verdict
   DISABLE_RULING = true
 
+  before_perform  :disable_ruling
+  before_perform  :find_or_create_story
   before_perform  :build_analysis_context
-  before_perform  :is_judgment?
   before_perform  :create_main_judge_by_highest, if: :is_highest_court?
   before_perform  :find_main_judge, unless: :is_highest_court?
-  before_perform  :find_or_create_story
   before_perform  :build_verdict
   before_perform  :assign_default_value
   after_perform   :upload_file
@@ -44,16 +44,25 @@ class Scrap::ImportVerdictContext < BaseContext
 
   private
 
-  def build_analysis_context
-    @analysis_context = Scrap::AnalysisVerdictContext.new(@content, @word)
+  def is_judgment?
+    @content.split.first.match(/判決/).present?
   end
 
-  def is_judgment?
-    return @analysis_context.is_judgment? if DISABLE_RULING
+  def disable_ruling
+    return is_judgment? if DISABLE_RULING
   end
 
   def is_highest_court?
     @court.code == "TPS"
+  end
+
+  def find_or_create_story
+    array = @word.split(",")
+    @story = Story.find_or_create_by(year: array[0], word_type: array[1], number: array[2], court: @court)
+  end
+
+  def build_analysis_context
+    @analysis_context = Scrap::AnalysisVerdictContext.new(@story, @content, @word)
   end
 
   def find_main_judge
@@ -70,11 +79,6 @@ class Scrap::ImportVerdictContext < BaseContext
     @main_judge = Scrap::CreateJudgeByHighestCourtContext.new(@court, @analysis_context.main_judge_name).perform
   end
 
-  def find_or_create_story
-    array = @word.split(",")
-    @story = Story.find_or_create_by(year: array[0], word_type: array[1], number: array[2], court: @court)
-  end
-
   def build_verdict
     @verdict = Verdict.find_or_initialize_by(
       story: @story,
@@ -89,7 +93,7 @@ class Scrap::ImportVerdictContext < BaseContext
   end
 
   def assign_default_value
-    @verdict.assign_attributes(is_judgment: @analysis_context.is_judgment?)
+    @verdict.assign_attributes(is_judgment: is_judgment?)
   end
 
   def upload_file
@@ -102,19 +106,19 @@ class Scrap::ImportVerdictContext < BaseContext
     @story.assign_attributes(lawyer_names: (@story.lawyer_names + @verdict.lawyer_names).uniq)
     @story.assign_attributes(party_names: (@story.party_names + @verdict.party_names).uniq)
     @story.assign_attributes(main_judge: @main_judge) if @main_judge
-    @story.assign_attributes(is_adjudge: @verdict.is_judgment?) if @verdict.is_judgment?
-    @story.assign_attributes(is_pronounce: @verdict.is_judgment?) if @verdict.is_judgment? && !@story.is_pronounce
+    @story.assign_attributes(is_adjudge: is_judgment?) if is_judgment?
+    @story.assign_attributes(is_pronounce: is_judgment?) if is_judgment? && !@story.is_pronounce
     @story.save
   end
 
   def update_adjudge_date
-    return unless @analysis_context.is_judgment?
+    return unless is_judgment?
     @story.update_attributes(adjudge_date: Time.zone.today) unless @story.adjudge_date
     @verdict.update_attributes(adjudge_date: Time.zone.today)
   end
 
   def update_pronounce_date
-    return unless @analysis_context.is_judgment?
+    return unless is_judgment?
     @story.update_attributes(pronounce_date: Time.zone.today) unless @story.pronounce_date
   end
 

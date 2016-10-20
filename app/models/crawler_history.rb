@@ -14,6 +14,6 @@
 #
 
 class CrawlerHistory < ActiveRecord::Base
-  validates :scrap_at, presence: true
+  validates :scrap_at, presence: true, uniqueness: true
   has_many :crawler_logs
 end
