@@ -1,12 +1,10 @@
 class Scrap::AnalysisVerdictContext < BaseContext
 
-  def initialize(verdict_content, verdict_word)
+  def initialize(verdict, verdict_content, verdict_word)
+    @verdict = verdict
     @verdict_content = verdict_content
     @verdict_word = verdict_word
-  end
-
-  def is_judgment?
-    @verdict_content.split.first.match(/判決/).present?
+    @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
   end
 
   def main_judge_name
@@ -14,7 +12,7 @@ class Scrap::AnalysisVerdictContext < BaseContext
     if matched
       return matched[1].squish.delete("\r").delete(" ")
     else
-      SlackService.notify_analysis_verdict_error("裁判字號 : #{@verdict_word}, 取得 審判長法官 資訊為空") if is_judgment?
+      Logs::AddCrawlerError.add_verdict_error(@crawler_history, @verdict, :parse_main_judge_empty, "取得 審判長法官 資訊為空")
       return nil
     end
   end
@@ -24,7 +22,7 @@ class Scrap::AnalysisVerdictContext < BaseContext
     if matched
       return @verdict_content.scan(/^\s*法\s*官\s+([\p{Word}\w\s\S]*?)\n/).map { |i| i[0].squish.delete("\r").delete(" ") }
     else
-      SlackService.notify_analysis_verdict_error("裁判字號 : #{@verdict_word}, 取得 法官 資訊為空") if is_judgment?
+      Logs::AddCrawlerError.add_verdict_error(@crawler_history, @verdict, :parse_judge_empty, "取得 法官 資訊為空")
       return []
     end
   end
@@ -34,7 +32,7 @@ class Scrap::AnalysisVerdictContext < BaseContext
     if matched
       return @verdict_content.scan(/檢察官(\p{Word}+)到庭執行職務/).map { |i| i[0] }
     else
-      SlackService.notify_analysis_verdict_error("裁判字號 : #{@verdict_word}, 取得 檢察官 資訊為空") if is_judgment?
+      Logs::AddCrawlerError.add_verdict_error(@crawler_history, @verdict, :parse_prosecutor_empty, "取得 檢察官 資訊為空")
       return []
     end
   end
@@ -44,7 +42,7 @@ class Scrap::AnalysisVerdictContext < BaseContext
     if matched
       return @verdict_content.squish.scan(/\s+(\p{Word}+)律師/).map { |i| i[0] }
     else
-      SlackService.notify_analysis_verdict_error("裁判字號 : #{@verdict_word}, 取得 律師 資訊為空") if is_judgment?
+      Logs::AddCrawlerError.add_verdict_error(@crawler_history, @verdict, :parse_lawyer_empty, "取得 律師 資訊為空")
       return []
     end
   end
@@ -60,7 +58,7 @@ class Scrap::AnalysisVerdictContext < BaseContext
     elsif matched
       return @verdict_content.squish.scan(/被\s+告\s+(\p{Word}+)/).map { |i| i[0] }
     else
-      SlackService.notify_analysis_verdict_error("裁判字號 : #{@verdict_word}, 取得 當事人 資訊為空") if is_judgment?
+      Logs::AddCrawlerError.add_verdict_error(@crawler_history, @verdict, :parse_party_empty, "取得 當事人 資訊為空")
       return []
     end
   end

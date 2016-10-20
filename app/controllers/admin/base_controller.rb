@@ -1,4 +1,5 @@
 class Admin::BaseController < ApplicationController
+  # require 'rails_autolink'
   include CrudConcern
 
   layout "admin"

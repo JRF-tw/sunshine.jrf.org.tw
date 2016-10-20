@@ -19,6 +19,7 @@ gem "jbuilder", "~> 2.0"
 gem "simple_form"
 gem "nested_form"
 gem "slim"
+gem "rails_autolink"
 
 # assets
 gem "sass-rails", "~> 4.0.3"

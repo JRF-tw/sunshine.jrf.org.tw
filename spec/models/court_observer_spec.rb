@@ -25,7 +25,6 @@
 #  student_number         :string
 #  department_level       :string
 #  last_scored_at         :date
-#  subscribe_edm          :boolean          default(FALSE)
 #
 
 require "rails_helper"
