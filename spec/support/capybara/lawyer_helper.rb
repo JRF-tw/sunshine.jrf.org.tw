@@ -110,5 +110,17 @@ module Capybara
       find(:xpath, "//tbody/tr/td/a").click
       click_link("編輯評鑑")
     end
+
+    def lawyer_input_set_password_form(password: nil, password_confirmation: nil)
+      within("#new_lawyer") do
+        fill_in "lawyer_password", with: password
+        fill_in "lawyer_password_confirmation", with: password_confirmation
+      end
+    end
+
+    def open_lawyer_email(email)
+      perform_sidekiq_job(fetch_sidekiq_last_job)
+      open_email(email)
+    end
   end
 end
