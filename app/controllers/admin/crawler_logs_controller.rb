@@ -5,7 +5,7 @@ class Admin::CrawlerLogsController < Admin::BaseController
   def index
     @search = @crawler_history.crawler_logs.ransack(params[:q])
     @crawler_logs = @search.result.page(params[:page]).per(10)
-    @admin_page_title = "爬蟲紀錄 - #{ @crawler_history.scrap_at } 列表"
+    @admin_page_title = "爬蟲紀錄 - #{@crawler_history.scrap_at} 列表"
     add_crumb @admin_page_title, "#"
   end
 

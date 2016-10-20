@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe CrawlerHistory, type: :model do
   let(:crawler_history) { create :crawler_history }

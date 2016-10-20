@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe CrawlerLog, type: :model do
   let(:crawler_log) { create :crawler_log }
