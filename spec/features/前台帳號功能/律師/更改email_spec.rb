@@ -67,9 +67,8 @@ feature "前台帳號功能", type: :feature, js: true do
 
       feature "點擊連結後，新 Email 代換為登入 Email" do
         Scenario "律師A已送出新 Email 的認證信" do
-          before { capybara_signin_lawyer(email: lawyer_A.email, password: "123123123") }
-          before { lawyer_edit_email_with("test@gmail.com", "123123123") }
-          before { capybara_sign_out_lawyer }
+          before { lawyer_A.update_attributes(email: "test@gmail.com") }
+          before { CustomDeviseMailer.delay.resend_confirmation_instructions(lawyer_A) }
           Given "律師A已登入" do
             before { capybara_signin_lawyer(email: lawyer_A.email, password: "123123123") }
             When "前往認證連結" do
