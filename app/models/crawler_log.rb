@@ -13,7 +13,7 @@
 
 class CrawlerLog < ActiveRecord::Base
   validates :crawler_history_id, presence: true
-  validates :crawler_kind, presence: true
+  validates :crawler_kind, presence: true, uniqueness: { scope: [:crawler_error_type] }
   validates :crawler_error_type, presence: true
   belongs_to :crawler_history
 
