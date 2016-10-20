@@ -4,10 +4,11 @@ class Scrap::ImportVerdictContext < BaseContext
 
   before_perform  :disable_ruling
   before_perform  :find_or_create_story
+  before_perform  :create_verdict
   before_perform  :build_analysis_context
   before_perform  :create_main_judge_by_highest, if: :is_highest_court?
   before_perform  :find_main_judge, unless: :is_highest_court?
-  before_perform  :build_verdict
+  before_perform  :assign_names
   before_perform  :assign_default_value
   after_perform   :upload_file
   after_perform   :update_data_to_story
@@ -61,6 +62,13 @@ class Scrap::ImportVerdictContext < BaseContext
     @story = Story.find_or_create_by(year: array[0], word_type: array[1], number: array[2], court: @court)
   end
 
+  def create_verdict
+    @verdict = Verdict.find_or_initialize_by(
+      story: @story,
+      publish_date: @publish_date
+    )
+  end
+
   def build_analysis_context
     @analysis_context = Scrap::AnalysisVerdictContext.new(@story, @content, @word)
   end
@@ -79,11 +87,9 @@ class Scrap::ImportVerdictContext < BaseContext
     @main_judge = Scrap::CreateJudgeByHighestCourtContext.new(@court, @analysis_context.main_judge_name).perform
   end
 
-  def build_verdict
-    @verdict = Verdict.find_or_initialize_by(
-      story: @story,
+  def assign_names
+    @verdict.assign_attributes(
       main_judge: @main_judge,
-      publish_date: @publish_date,
       main_judge_name: @analysis_context.main_judge_name,
       judges_names: @analysis_context.judges_names,
       prosecutor_names: @analysis_context.prosecutor_names,

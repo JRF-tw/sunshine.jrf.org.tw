@@ -1,7 +1,7 @@
 class Scrap::AnalysisVerdictContext < BaseContext
 
-  def initialize(story, verdict_content, verdict_word)
-    @story = story
+  def initialize(verdict, verdict_content, verdict_word)
+    @verdict = verdict
     @verdict_content = verdict_content
     @verdict_word = verdict_word
     @crawler_history = CrawlerHistory.find_or_create_by(scrap_at: Time.zone.today)
@@ -13,7 +13,7 @@ class Scrap::AnalysisVerdictContext < BaseContext
       return matched[1].squish.delete("\r").delete(" ")
     else
       @log = @crawler_history.crawler_logs.find_or_create_by(crawler_kind: :crawler_verdict, crawler_error_type: :parse_main_judge_empty)
-      @log.crawler_errors << ["案件編號 : #{@story.id}, 取得 審判長法官 資訊為空"]
+      @log.crawler_errors << ["案件編號 : #{@verdict.id}, 取得 審判長法官 資訊為空"]
       @log.save
       return nil
     end
@@ -25,7 +25,7 @@ class Scrap::AnalysisVerdictContext < BaseContext
       return @verdict_content.scan(/^\s*法\s*官\s+([\p{Word}\w\s\S]*?)\n/).map { |i| i[0].squish.delete("\r").delete(" ") }
     else
       @log = @crawler_history.crawler_logs.find_or_create_by(crawler_kind: :crawler_verdict, crawler_error_type: :parse_judge_empty)
-      @log.crawler_errors << ["案件編號 : #{@story.id}, 取得 法官 資訊為空"]
+      @log.crawler_errors << ["案件編號 : #{@verdict.id}, 取得 法官 資訊為空"]
       @log.save
       return []
     end
@@ -37,7 +37,7 @@ class Scrap::AnalysisVerdictContext < BaseContext
       return @verdict_content.scan(/檢察官(\p{Word}+)到庭執行職務/).map { |i| i[0] }
     else
       @log = @crawler_history.crawler_logs.find_or_create_by(crawler_kind: :crawler_verdict, crawler_error_type: :parse_prosecutor_empty)
-      @log.crawler_errors << ["案件編號 : #{@story.id}, 取得 檢察官 資訊為空"]
+      @log.crawler_errors << ["案件編號 : #{@verdict.id}, 取得 檢察官 資訊為空"]
       @log.save
       return []
     end
@@ -49,7 +49,7 @@ class Scrap::AnalysisVerdictContext < BaseContext
       return @verdict_content.squish.scan(/\s+(\p{Word}+)律師/).map { |i| i[0] }
     else
       @log = @crawler_history.crawler_logs.find_or_create_by(crawler_kind: :crawler_verdict, crawler_error_type: :parse_lawyer_empty)
-      @log.crawler_errors << ["案件編號 : #{@story.id}, 取得 律師 資訊為空"]
+      @log.crawler_errors << ["案件編號 : #{@verdict.id}, 取得 律師 資訊為空"]
       @log.save
       return []
     end
@@ -67,7 +67,7 @@ class Scrap::AnalysisVerdictContext < BaseContext
       return @verdict_content.squish.scan(/被\s+告\s+(\p{Word}+)/).map { |i| i[0] }
     else
       @log = @crawler_history.crawler_logs.find_or_create_by(crawler_kind: :crawler_verdict, crawler_error_type: :parse_party_empty)
-      @log.crawler_errors << ["案件編號 : #{@story.id}, 取得 當事人 資訊為空"]
+      @log.crawler_errors << ["案件編號 : #{@verdict.id}, 取得 當事人 資訊為空"]
       @log.save
       return []
     end
