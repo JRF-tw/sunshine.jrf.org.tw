@@ -29,7 +29,7 @@ module Capybara
     end
 
     def capybara_sign_out_lawyer
-      click_link "登出"
+      find(:xpath, "//header/div/nav/a[@rel='nofollow']").click
     end
 
     def capybara_lawyer_run_schedule_score_flow(story, schedule, judge)
@@ -110,5 +110,33 @@ module Capybara
       find(:xpath, "//tbody/tr/td/a").click
       click_link("編輯評鑑")
     end
+
+    def lawyer_input_set_password_form(password: nil, password_confirmation: nil)
+      within("#new_lawyer") do
+        fill_in "lawyer_password", with: password
+        fill_in "lawyer_password_confirmation", with: password_confirmation
+      end
+    end
+
+    def lawyer_input_registration_form(name, email)
+      within("#new_lawyer") do
+        fill_in "lawyer_name", with: name
+        fill_in "lawyer_email", with: email
+        check("policy_agreement")
+      end
+    end
+
+    def lawyer_input_edit_email_form(email, password)
+      within("#edit_lawyer") do
+        fill_in "lawyer_email", with: email
+        fill_in "lawyer_current_password", with: password
+      end
+    end
+
+    def open_lawyer_email(email)
+      perform_sidekiq_job(fetch_sidekiq_last_job)
+      open_email(email)
+    end
+
   end
 end

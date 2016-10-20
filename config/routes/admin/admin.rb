@@ -44,5 +44,8 @@ Rails.application.routes.draw do
         get :stories
       end
     end
+    resources :crawler_histories, only: [:index] do
+      resources :crawler_logs, only: [:index, :show]
+    end
   end
 end

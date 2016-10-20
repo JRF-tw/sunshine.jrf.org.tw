@@ -8,6 +8,6 @@ class StoryTypes
   end
 
   def initialize
-    @types = Rails.application.config_for("story_types").deep_symbolize_keys
+    @types = Rails.application.config_for("settings").deep_symbolize_keys
   end
 end

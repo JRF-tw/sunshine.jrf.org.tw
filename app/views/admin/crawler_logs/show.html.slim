@@ -1,0 +1,12 @@
+= admin_widget_box "錯誤列表", icon: :th do
+  .dataTables_wrapper
+    table.table.table-bordered.table-striped.table-hover
+      thead
+        tr
+          th 錯誤編號
+          th 錯誤描述
+      tbody
+        - @crawler_log.crawler_errors.each_with_index do |error, i|
+          tr
+            td = i
+            td = auto_link(error.first, :html => { :target => '_blank' })

@@ -1,6 +1,4 @@
 class Party::SendResetPasswordSmsContext < BaseContext
-  include Rails.application.routes.url_helpers
-
   PERMITS = [:identify_number, :phone_number].freeze
   SENDINGLIMIT = 2
 

@@ -1,0 +1,33 @@
+default: &default
+  story_types:
+    - 民事
+    - 刑事
+    - 少年
+    - 行政
+  crawler_kinds:
+    crawler_court: "法院錯誤"
+    crawler_judge: "法官錯誤"
+    crawler_branch: "股別錯誤"
+    crawler_schedule: "庭期錯誤"
+    crawler_verdict: "判決書錯誤"
+  crawler_error_types:
+    parse_date_failed: "解析回傳資料失敗"
+    date_not_in_db: "爬蟲取得資料不存在於資料庫"
+    parse_main_judge_empty: "取得主審法官失敗"
+    parse_judge_empty: "取得法官失敗"
+    parse_prosecutor_empty: "取得檢察官失敗"
+    parse_lawyer_empty: "取得律師失敗"
+    parse_party_empty: "取得當事人失敗"
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+staging:
+  <<: *default
+
+production:
+  <<: *default
+

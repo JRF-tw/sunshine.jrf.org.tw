@@ -10,4 +10,12 @@ module AdminHelper
     end
     safe_join(url_array, " ")
   end
+
+  def collection_for_crawler_kinds
+    CrawlerKinds.list.to_enum.with_index.map { |n, i| [n.last, i] }
+  end
+
+  def collection_for_crawler_error_types
+    CrawlerErrorTypes.list.to_enum.with_index.map { |n, i| [n.last, i] }
+  end
 end

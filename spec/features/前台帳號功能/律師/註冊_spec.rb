@@ -1,113 +1,82 @@
 require "rails_helper"
 
-describe "律師註冊", type: :request do
-  context "成功註冊" do
-    let!(:lawyer) { create :lawyer }
-    subject { post "/lawyer", lawyer: { name: lawyer.name, email: lawyer.email }, policy_agreement: "1" }
-
-    it "發送密碼設定信" do
-      expect { subject }.to change_sidekiq_jobs_size_of(CustomDeviseMailer, :send_setting_password_mail)
-    end
-
-    it "跳轉到登入頁，並跳出註冊成功訊息" do
-      expect(subject).to redirect_to("/lawyer/sign_in")
-      expect(flash[:notice]).to eq("確認信件已送至您的 Email 信箱，請點擊信件內連結以啓動您的帳號。")
-    end
+feature "前台帳號功能", type: :feature, js: true do
+  def lawyer_register(name, email)
+    visit(new_lawyer_registration_path)
+    lawyer_input_registration_form(name, email)
+    click_button "註冊"
   end
 
-  context "失敗註冊" do
-    context "失敗後的頁面" do
-      subject! { post "/lawyer", lawyer: { name: "我是胖虎", email: "bigtiger@gmail.com" } }
+  def lawyer_set_password(email, password: nil, password_confirmation: nil)
+    open_lawyer_email(email)
+    current_email.find("a").click
+    lawyer_input_set_password_form(password: password, password_confirmation: password_confirmation)
+    click_button "送出"
+  end
 
-      it "應保留原本輸入的內容" do
-        expect(response.body).to match("我是胖虎")
-        expect(response.body).to match("bigtiger@gmail.com")
-      end
-    end
-
-    context "姓名 + email 存在於公會資料" do
-      let!(:lawyer_with_confirmed) { create :lawyer, :with_password, :with_confirmed }
-      subject { post "/lawyer", lawyer: { name: lawyer_with_confirmed.name, email: lawyer_with_confirmed.email }, policy_agreement: "1" }
-
-      it "該律師已設定密碼" do
-        expect(subject).to redirect_to("/lawyer/sign_in")
-        expect(flash[:error]).to eq("已經註冊 請直接登入")
-      end
-    end
-
-    context "姓名+email 不存在於公會資料" do
-      let!(:lawyer) { create :lawyer }
-      subject! { post "/lawyer", lawyer: { name: "胖虎", email: "KingOfKid@gmail.com" }, policy_agreement: "1" }
-
-      context "轉跳頁面的錯誤訊息應顯示人工審核的連結" do
-        it "顯示人工審核連結" do
-          expect(flash[:error]).to eq("查無此律師資料 請改以人工管道註冊 <a href='/lawyer/appeal/new'>點此註冊</a>")
+  feature "律師" do
+    feature "註冊" do
+      let(:lawyer) { create :lawyer }
+      Scenario "資料庫有未完成註冊的律師，才能成功註冊" do
+        Given "律師A未完成註冊" do
+          When "以律師A資料進行註冊" do
+            before { lawyer_register(lawyer.name, lawyer.email) }
+            Then "註冊成功、送出密碼設定信" do
+              expect(current_path).to match(new_lawyer_session_path)
+              expect(page).to have_content("確認信件已送至您的 Email 信箱，請點擊信件內連結以啓動您的帳號。")
+            end
+          end
         end
       end
 
-      context "email 正確、但姓名不符" do
-        subject! { post "/lawyer", lawyer: { name: "胖虎", email: lawyer.email }, policy_agreement: "1" }
-
-        it "顯示查無此律師" do
-          expect(flash[:error]).to eq("查無此律師資料 請改以人工管道註冊 <a href='/lawyer/appeal/new'>點此註冊</a>")
-          expect(response).to render_template("lawyers/registrations/new")
+      Scenario "已完成註冊的律師，無法重複註冊" do
+        Given "律師A已完成註冊" do
+          let(:lawyer) { create :lawyer, :with_confirmed }
+          When "以律師A資料進行註冊" do
+            before { lawyer_register(lawyer.name, lawyer.email) }
+            Then "註冊失敗" do
+              expect(current_path).to match(new_lawyer_session_path)
+              expect(page).to have_content("已經註冊 請直接登入")
+            end
+          end
         end
       end
 
-      context "姓名正確、但 email 不符" do
-        subject! { post "/lawyer", lawyer: { name: lawyer.name, email: "bigtiger@gmail.com" }, policy_agreement: "1" }
-
-        it "顯示查無此律師" do
-          expect(flash[:error]).to eq("查無此律師資料 請改以人工管道註冊 <a href='/lawyer/appeal/new'>點此註冊</a>")
-          expect(response).to render_template("lawyers/registrations/new")
+      Scenario "資料庫不存在的資料無法進行註冊" do
+        Given "資料庫無律師資料" do
+          When "以任何符合驗證的律師資料進行註冊" do
+            before { lawyer_register("王小明", "55669487@gmail.com") }
+            Then "註冊失敗" do
+              expect(current_path).to match(lawyer_registration_path)
+              expect(page).to have_content("查無此律師資料 請改以人工管道註冊")
+            end
+          end
         end
       end
 
-      context "email + 姓名皆不符" do
-        subject! { post "/lawyer", lawyer: { name: "胖虎", email: "bigtiger@gmail.com" }, policy_agreement: "1" }
-
-        it "顯示查無此律師" do
-          expect(flash[:error]).to eq("查無此律師資料 請改以人工管道註冊 <a href='/lawyer/appeal/new'>點此註冊</a>")
-          expect(response).to render_template("lawyers/registrations/new")
-        end
-      end
-    end
-
-    context "沒有勾選「我已詳細閱讀服務條款和隱私權保護政策」" do
-      let!(:lawyer) { create :lawyer }
-      subject! { post "/lawyer", lawyer: { name: lawyer.name, email: lawyer.email } }
-
-      it "顯示未勾選同意條款" do
-        expect(flash[:error]).to eq("您尚未勾選同意條款")
-        expect(response).to render_template("lawyers/registrations/new")
-      end
-    end
-
-    context "輸入內容錯誤" do
-      context "姓名空白" do
-        subject! { post "/lawyer", lawyer: { name: "", email: "bigtiger@gmail.com" }, policy_agreement: "1" }
-
-        it "顯示格式錯誤訊息" do
-          expect(flash[:error]).to eq("姓名 不可為空白字元")
-          expect(response).to render_template("lawyers/registrations/new")
+      Scenario "完成密碼設定才算是完成註冊，否則可以重複寄出密碼設定信以完成註冊" do
+        Given "律師A未完成註冊、且已註冊成功送出密碼信" do
+          before { lawyer_register(lawyer.name, lawyer.email) }
+          When "以律師A資料重新進行註冊" do
+            before { lawyer_register(lawyer.name, lawyer.email) }
+            Then "註冊成功、送出密碼設定信" do
+              expect(current_path).to match(new_lawyer_session_path)
+              expect(page).to have_content("確認信件已送至您的 Email 信箱，請點擊信件內連結以啓動您的帳號。")
+            end
+          end
         end
       end
 
-      context "email 格式不符" do
-        subject! { post "/lawyer", lawyer: { name: "胖虎", email: "55566" }, policy_agreement: "1" }
-
-        it "顯示email 的格式無效" do
-          expect(flash[:error]).to eq("email 的格式是無效的")
-          expect(response).to render_template("lawyers/registrations/new")
-        end
-      end
-
-      context "email 空白" do
-        subject! { post "/lawyer", lawyer: { name: "胖虎", email: "" }, policy_agreement: "1" }
-
-        it "顯示格式錯誤訊息" do
-          expect(flash[:error]).to eq("email 不可為空白字元")
-          expect(response).to render_template("lawyers/registrations/new")
+      Scenario "律師A成功設定密碼後會自動登入" do
+        Given "律師A申請註冊成功送出密碼信" do
+          before { lawyer_register(lawyer.name, lawyer.email) }
+          When "密碼設定成功" do
+            before { lawyer_set_password(lawyer.email, password: "11111111", password_confirmation: "11111111") }
+            Then "自動登入 並導向到律師首頁" do
+              expect(current_path).to match(lawyer_root_path)
+              expect(page).to have_content("您的密碼已被修改。")
+            end
+          end
         end
       end
     end

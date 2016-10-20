@@ -6,6 +6,7 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
   let!(:branch) { create :branch, court: court, judge: judge, chamber_name: "臺灣高等法院刑事庭", name: "丙" }
   let!(:orginal_data) { Mechanize.new.get(Scrap::ParseVerdictContext::VERDICT_URI).body.force_encoding("UTF-8") }
   let!(:content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/judgment_content.txt") }
+  let!(:ruling_content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/ruling_content.html") }
   let!(:word) { "105,上易緝,2" }
   let!(:publish_date) { Time.zone.today }
   let!(:stroy_type) { "刑事" }
@@ -14,7 +15,7 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
     subject { described_class.new(court, orginal_data, content, word, publish_date, stroy_type).perform }
 
     context "create verdict" do
-      it { expect { subject }.to change { Verdict.last } }
+      it { expect { subject }.to change { Verdict.count } }
     end
 
     context "main_judge data" do
@@ -120,6 +121,11 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
         subject { described_class.new(court, orginal_data, content, word, publish_date, stroy_type).perform }
         it { expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
       end
+    end
+
+    context "only create judgment verdict" do
+      subject { described_class.new(court, orginal_data, ruling_content, word, publish_date, stroy_type).perform }
+      it { expect { subject }.not_to change { Verdict.count } }
     end
   end
 end
