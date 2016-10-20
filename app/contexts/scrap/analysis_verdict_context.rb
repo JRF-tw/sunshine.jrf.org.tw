@@ -1,5 +1,4 @@
 class Scrap::AnalysisVerdictContext < BaseContext
-  include Rails.application.routes.url_helpers
 
   def initialize(verdict, verdict_content, verdict_word)
     @verdict = verdict
