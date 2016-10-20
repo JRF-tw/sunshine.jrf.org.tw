@@ -15,6 +15,6 @@
 
 FactoryGirl.define do
   factory :crawler_history do
-    scrap_at Date.today
+    scrap_at Time.zone.today
   end
 end
