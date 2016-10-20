@@ -10,7 +10,7 @@ class Admin::CrawlerLogsController < Admin::BaseController
   end
 
   def show
-    @admin_page_title = "#{@crawler_history.scrap_at} - #{CrawlerLog::KINDS[@crawler_log.crawler_kind.to_sym]} - #{CrawlerLog::ERROR_TYPES[@crawler_log.crawler_error_type.to_sym]}"
+    @admin_page_title = "#{@crawler_history.scrap_at} - #{CrawlerKinds.list[@crawler_log.crawler_kind.to_sym]} - #{CrawlerErrorTypes.list[@crawler_log.crawler_error_type.to_sym]}"
     add_crumb @admin_page_title, "#"
   end
 

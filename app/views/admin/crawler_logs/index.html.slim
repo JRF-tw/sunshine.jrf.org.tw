@@ -29,8 +29,8 @@
       tbody
         - @crawler_logs.each do |cl|
           tr
-            td = CrawlerLog::KINDS[cl.crawler_kind.to_sym]
-            td = CrawlerLog::ERROR_TYPES[cl.crawler_error_type.to_sym]
+            td = CrawlerKinds.list[cl.crawler_kind.to_sym]
+            td = CrawlerErrorTypes.list[cl.crawler_error_type.to_sym]
             td = cl.crawler_errors.count
             td
               = link_to "詳細內容", admin_crawler_history_crawler_log_path(@crawler_history, cl), class: "btn btn-mini"
