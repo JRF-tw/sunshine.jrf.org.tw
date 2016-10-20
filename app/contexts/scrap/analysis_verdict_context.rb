@@ -4,7 +4,7 @@ class Scrap::AnalysisVerdictContext < BaseContext
     @verdict = verdict
     @verdict_content = verdict_content
     @verdict_word = verdict_word
-    @crawler_history = CrawlerHistory.find_or_create_by(scrap_at: Time.zone.today)
+    @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
   end
 
   def main_judge_name

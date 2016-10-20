@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161019090756) do
+ActiveRecord::Schema.define(version: 20161020080114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -175,7 +175,7 @@ ActiveRecord::Schema.define(version: 20161019090756) do
   add_index "courts", ["scrap_name"], name: "index_courts_on_scrap_name", using: :btree
 
   create_table "crawler_histories", force: :cascade do |t|
-    t.date     "scrap_at"
+    t.date     "crawler_on"
     t.integer  "courts_count",    default: 0, null: false
     t.integer  "branches_count",  default: 0, null: false
     t.integer  "judges_count",    default: 0, null: false
@@ -185,7 +185,7 @@ ActiveRecord::Schema.define(version: 20161019090756) do
     t.datetime "updated_at",                  null: false
   end
 
-  add_index "crawler_histories", ["scrap_at"], name: "index_crawler_histories_on_scrap_at", using: :btree
+  add_index "crawler_histories", ["crawler_on"], name: "index_crawler_histories_on_crawler_on", using: :btree
 
   create_table "crawler_logs", force: :cascade do |t|
     t.integer  "crawler_history_id"

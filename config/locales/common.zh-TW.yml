@@ -313,8 +313,8 @@ zh-TW:
         imposter_true: "是否為冒用者"
         phone_confirmed_at_not_null: "是否已通過手機驗證"
       crawler_history:
-        scrap_at_gteq: "爬取日期"
-        scrap_at_lteq: "~"
+        crawler_on_gteq: "爬取日期"
+        crawler_on_lteq: "~"
       crawler_log:
         crawler_kind_eq: "錯誤種類為"
         crawler_error_type_eq: "錯誤狀態為"

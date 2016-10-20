@@ -5,10 +5,10 @@
       .row
         .span6
           .control-group#datepicker
-            label.control-label = f.label :scrap_at_gteq
-            .controls= f.search_field :scrap_at_gteq, placeholder: "起始時間，非必填"
-            label.control-label = f.label :scrap_at_lteq
-            .controls= f.search_field :scrap_at_lteq, placeholder: "結束時間，非必填"
+            label.control-label = f.label :crawler_on_gteq
+            .controls= f.search_field :crawler_on_gteq, placeholder: "起始時間，非必填"
+            label.control-label = f.label :crawler_on_lteq
+            .controls= f.search_field :crawler_on_lteq, placeholder: "結束時間，非必填"
     hr
       .form-actions
         = f.submit value:"搜尋", class: "btn btn-primary"
@@ -30,7 +30,7 @@
       tbody
         - @crawler_histories.each do |ch|
           tr
-            td = ch.scrap_at
+            td = ch.crawler_on
             td = ch.courts_count
             td = ch.branches_count
             td = ch.judges_count

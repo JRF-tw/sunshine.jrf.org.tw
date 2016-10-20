@@ -3,7 +3,7 @@
 # Table name: crawler_histories
 #
 #  id              :integer          not null, primary key
-#  scrap_at        :date
+#  crawler_on      :date
 #  courts_count    :integer          default(0), not null
 #  branches_count  :integer          default(0), not null
 #  judges_count    :integer          default(0), not null
@@ -14,6 +14,6 @@
 #
 
 class CrawlerHistory < ActiveRecord::Base
-  validates :scrap_at, presence: true, uniqueness: true
+  validates :crawler_on, presence: true, uniqueness: true
   has_many :crawler_logs
 end

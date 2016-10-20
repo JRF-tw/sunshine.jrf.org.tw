@@ -3,7 +3,7 @@
 # Table name: crawler_histories
 #
 #  id              :integer          not null, primary key
-#  scrap_at        :date
+#  crawler_on      :date
 #  courts_count    :integer          default(0), not null
 #  branches_count  :integer          default(0), not null
 #  judges_count    :integer          default(0), not null
@@ -15,6 +15,6 @@
 
 FactoryGirl.define do
   factory :crawler_history do
-    scrap_at Time.zone.today
+    crawler_on Time.zone.today
   end
 end

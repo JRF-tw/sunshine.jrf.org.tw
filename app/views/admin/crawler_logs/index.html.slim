@@ -17,7 +17,7 @@
         = " "
         = link_to "清空搜尋結果", admin_crawler_history_crawler_logs_path(@crawler_history), class: "btn btn-default"
 
-= admin_widget_box "爬蟲紀錄 - #{ @crawler_history.scrap_at } 列表", icon: :pencil do
+= admin_widget_box "爬蟲紀錄 - #{ @crawler_history.crawler_on } 列表", icon: :pencil do
   .dataTables_wrapper
     table.table.table-bordered.table-striped.table-hover
       thead
