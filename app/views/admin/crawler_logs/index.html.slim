@@ -1,0 +1,38 @@
+= search_form_for @search, url: admin_crawler_history_crawler_logs_path(@crawler_history), wrapper: :admin, html: { class: "form-horizontal" } do |f|
+  .well
+    fieldset
+      legend 搜尋
+      .row
+        .span6
+          .control-group#datepicker
+            label.control-label = f.label :crawler_kind_eq
+            .controls#chosen = f.select :crawler_kind_eq,
+            collection_for_crawler_kinds, include_blank: "請選擇"
+            label.control-label = f.label :crawler_error_type_eq
+            .controls#chosen = f.select :crawler_error_type_eq,
+            collection_for_crawler_error_types, include_blank: "請選擇"
+    hr
+      .form-actions
+        = f.submit value:"搜尋", class: "btn btn-primary"
+        = " "
+        = link_to "清空搜尋結果", admin_crawler_history_crawler_logs_path(@crawler_history), class: "btn btn-default"
+
+= admin_widget_box "爬蟲紀錄 - #{ @crawler_history.scrap_at } 列表", icon: :pencil do
+  .dataTables_wrapper
+    table.table.table-bordered.table-striped.table-hover
+      thead
+        tr
+          th 爬蟲類型
+          th 爬取錯誤狀態
+          th 爬取錯誤狀態總數
+          th 操作
+      tbody
+        - @crawler_logs.each do |cl|
+          tr
+            td = CrawlerLog::KINDS[cl.crawler_kind.to_sym]
+            td = CrawlerLog::ERROR_TYPES[cl.crawler_error_type.to_sym]
+            td = cl.crawler_errors.count
+            td
+              = link_to "詳細內容", admin_crawler_history_crawler_log_path(@crawler_history, cl), class: "btn btn-mini"
+    .ui-toolbar.ui-widget-header
+      = paginate @crawler_logs, theme: :admin

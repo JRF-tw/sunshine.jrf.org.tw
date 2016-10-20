@@ -1,0 +1,42 @@
+= search_form_for @search, url: admin_crawler_histories_path, wrapper: :admin, html: { class: "form-horizontal" } do |f|
+  .well
+    fieldset
+      legend 搜尋
+      .row
+        .span6
+          .control-group#datepicker
+            label.control-label = f.label :scrap_at_gteq
+            .controls= f.search_field :scrap_at_gteq, placeholder: "起始時間，非必填"
+            label.control-label = f.label :scrap_at_lteq
+            .controls= f.search_field :scrap_at_lteq, placeholder: "結束時間，非必填"
+    hr
+      .form-actions
+        = f.submit value:"搜尋", class: "btn btn-primary"
+        = " "
+        = link_to "清空搜尋結果", admin_crawler_histories_path, class: "btn btn-default"
+
+= admin_widget_box "爬蟲歷史紀錄", icon: :pencil do
+  .dataTables_wrapper
+    table.table.table-bordered.table-striped.table-hover
+      thead
+        tr
+          th 爬蟲日期
+          th 爬取法院數量
+          th 爬取股別數量
+          th 爬取法官數量
+          th 爬取判決書數量
+          th 爬取庭期數量
+          th 操作
+      tbody
+        - @crawler_histories.each do |ch|
+          tr
+            td = ch.scrap_at
+            td = ch.courts_count
+            td = ch.branches_count
+            td = ch.judges_count
+            td = ch.verdicts_count
+            td = ch.schedules_count
+            td
+              = link_to "詳細內容", admin_crawler_history_crawler_logs_path(ch), class: "btn btn-mini"
+    .ui-toolbar.ui-widget-header
+      = paginate @crawler_histories, theme: :admin
