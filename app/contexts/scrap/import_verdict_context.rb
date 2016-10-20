@@ -1,5 +1,9 @@
 class Scrap::ImportVerdictContext < BaseContext
+  # only import judgment verdict
+  DISABLE_RULING = true
+
   before_perform  :build_analysis_context
+  before_perform  :is_judgment?
   before_perform  :create_main_judge_by_highest, if: :is_highest_court?
   before_perform  :find_main_judge, unless: :is_highest_court?
   before_perform  :find_or_create_story
@@ -42,6 +46,10 @@ class Scrap::ImportVerdictContext < BaseContext
 
   def build_analysis_context
     @analysis_context = Scrap::AnalysisVerdictContext.new(@content, @word)
+  end
+
+  def is_judgment?
+    return @analysis_context.is_judgment? if DISABLE_RULING
   end
 
   def is_highest_court?
