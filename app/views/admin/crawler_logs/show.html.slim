@@ -9,4 +9,4 @@
         - @crawler_log.crawler_errors.each_with_index do |error, i|
           tr
             td = i
-            td = error.first
+            td = auto_link(error.first, :html => { :target => '_blank' })
