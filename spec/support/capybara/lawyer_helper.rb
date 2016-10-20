@@ -29,7 +29,7 @@ module Capybara
     end
 
     def capybara_sign_out_lawyer
-      click_link "登出"
+      find(:xpath, "//header/div/nav/a[@rel='nofollow']").click
     end
 
     def capybara_lawyer_run_schedule_score_flow(story, schedule, judge)
@@ -126,24 +126,21 @@ module Capybara
       end
     end
 
+    def lawyer_input_edit_email_form(email, password)
+      within("#edit_lawyer") do
+        fill_in "lawyer_email", with: email
+        fill_in "lawyer_current_password", with: password
+      end
+    end
+
     def open_lawyer_email(email)
       perform_sidekiq_job(fetch_sidekiq_last_job)
       open_email(email)
     end
 
-    def lawyer_edit_email_with(email, password)
-      visit(edit_lawyer_email_path)
-      within("#edit_lawyer") do
-        fill_in "lawyer_email", with: email
-        fill_in "lawyer_current_password", with: password
-      end
-      click_button "送出"
-    end
-
-    def lawyer_confirm_email(email)
+    def open_lawyer_email(email)
       perform_sidekiq_job(fetch_sidekiq_jobs(Sidekiq::Extensions::DelayedMailer, wait_time: 1).last)
       open_email(email)
-      current_email.find("a").click
     end
 
   end
