@@ -17,7 +17,7 @@ class BaseController < ApplicationController
       keywords: "司法,認識法官,認識檢察官,不適任法官,不適任檢察官,司法恐龍",
       image: image
     )
-    render layout: 'layouts/classic'
+    render layout: "layouts/classic"
   end
 
   def about
