@@ -1,0 +1,38 @@
+.punishment-records {
+  padding: r(6) r(2) n();
+  @include susy($tablet) {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
+}
+
+.punishment-record {
+  $pad-size: r(2);
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin-bottom: r(4);
+  padding: r(1) $pad-size;
+  text: $text-secondary ms(0) 1.5;
+  background-color: $text-disabled-dark;
+  border-radius: $global-radius;
+  transition: opacity .3s ease 0s;
+  &[href]:hover {
+    opacity: .7;
+    color: $text-secondary;
+  }
+  @include susy($tablet) {
+    flex: 1 45%;
+    margin: n() r(2);
+  }
+  @include susy($desktop) { flex: 1 0 0; }
+}
+
+.punishment-record__reason {
+  text: $brown ms(3) 1.5;
+  margin: 0 n() r(2);
+  width: 100%;
+}
+
+.punishment-record__decision-unit {margin-left: auto;}
