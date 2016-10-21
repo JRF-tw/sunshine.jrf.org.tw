@@ -2,24 +2,24 @@
   
 article
   - if @punishment.summary.present?
-    section.section-rhythm.bg-yellow
-      .container--narrow
-        h2.section-heading--black.text-center 摘要
-        p= @punishment.summary
+    section.punishment-summary
+      .container
+        h2.punishment-summary__heading 摘要
+        p.punishment-summary__content = @punishment.summary
 
-  section.section-rhythm
-    .container--narrow
-      h2.section-heading--gray.text-center 詳情
+  section.punishment-detail
+    .container
+      h2.punishment-detail__heading 詳情
 
-      ul.list--punishment-detail
+      ul.punishment-detail__list
         - if @punishment.decision_source.present?
           li = link_to "資料來源", @punishment.decision_source, target: 'blank', class: 'link'
         - if @punishment.unit.present?
-          li= "決議時當事者之服務機關：#{@punishment.unit}"
+          li = "決議時當事者之服務機關：#{@punishment.unit}"
         - if @punishment.title.present?
-          li= "決議時當事者之職稱：#{@punishment.title}"
+          li = "決議時當事者之職稱：#{@punishment.title}"
       
-      dl.kv-punishment
+      dl.punishment-detail__spec
         - render_punishment_cell(@punishment).each do |k, v|
           = kv_cell k, v
 
