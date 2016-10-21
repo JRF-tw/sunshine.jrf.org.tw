@@ -5011,6 +5011,13 @@ abbr[title="required"] {
 * Docs at http://davidtheclark.github.io/scut
 */
 
+.punishment-detail__list {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 .punishment-records {
   padding-top: 48px;
   padding-right: 16px;
@@ -5069,6 +5076,7 @@ abbr[title="required"] {
             flex: 1 45%;
     margin-right: 16px;
     margin-left: 16px;
+    padding: 16px 24px;
   }
 }
 
@@ -5086,11 +5094,121 @@ abbr[title="required"] {
   font-size: 24px;
   line-height: 1.5;
   margin-top: 0;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   width: 100%;
 }
 
 .punishment-record__decision-unit {
   margin-left: auto;
+}
+
+.punishment-summary {
+  padding-top: 32px;
+  padding-bottom: 32px;
+  text-align: center;
+}
+
+.punishment-summary__heading {
+  margin-top: 0;
+  font-size: 35px;
+}
+
+.punishment-summary__content {
+  font-size: 17px;
+}
+
+.punishment-detail {
+  padding-top: 32px;
+  padding-bottom: 32px;
+  text-align: center;
+  background-color: #fff;
+}
+
+.punishment-detail .container {
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
+@media (min-width: 768px) {
+  .punishment-detail .container {
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+}
+
+.punishment-detail__heading {
+  margin-top: 0;
+  font-size: 35px;
+  color: rgba(0, 0, 0, 0.38);
+}
+
+.punishment-detail__list {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  .punishment-detail__list {
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+                -ms-grid-row-align: center;
+            align-items: center;
+    text-align: center;
+  }
+}
+
+.punishment-detail__list .cell {
+  padding-left: 12px;
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+@media (min-width: 768px) {
+  .punishment-detail__list .cell {
+    padding: 0 16px;
+  }
+
+  .punishment-detail__list .cell:first-child {
+    border-left: none;
+  }
+}
+
+.punishment-detail__spec {
+  display: inline-block;
+  margin-top: 40px;
+  padding: 16px;
+  text-align: left;
+  font-size: 17px;
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 3px;
+}
+
+.punishment-detail__spec > dt {
+  clear: both;
+  float: left;
+}
+
+.punishment-detail__spec > dt:after {
+  content: "";
+  margin-right: 0.25em;
+}
+
+.punishment-detail__spec > dd {
+  margin-left: 96px;
+  margin-bottom: 8px;
+}
+
+.punishment-detail__spec .term {
+  font-weight: 700;
 }
 
