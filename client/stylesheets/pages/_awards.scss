@@ -1,0 +1,59 @@
+.award-records {
+  padding: r(6) r(2) n();
+  @include susy($tablet) {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
+}
+
+.award-record {
+  $pad-size: r(2);
+  margin-bottom: r(4);
+  padding: r(1) $pad-size;
+  background-color: $text-disabled-dark;
+  border-radius: $global-radius;
+  @include susy($tablet) {
+    flex: 1 45%;
+    margin: n() r(2);
+  }
+  @include susy($desktop) { flex: 1 0 0; }
+
+  .wrapper {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  .prize {
+    margin: 0;
+    text: normal $brown ms(5) 1.5;
+    order: 1;
+  }
+
+  .date {
+    width: 100%;
+    text: $text-secondary ms(0) 1;
+    order: 3;
+  }
+
+  .icon-medal {
+    size: r(5);
+    fill: $red;
+    order: 2;
+    margin: r(1) r(-1) n() auto;
+  }
+
+  .description {
+    margin: {
+      top: r(2);
+      bottom: r(2);
+    }
+    text: ms(1) 1.5;
+
+  }
+
+  .from {
+    text: $text-secondary ms(0) 1.5;
+    margin: 0;
+  }
+}
