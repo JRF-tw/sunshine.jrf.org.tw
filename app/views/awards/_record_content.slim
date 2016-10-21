@@ -1,0 +1,6 @@
+.award-record__wrapper
+  h4.award-record__prize= award.award_type
+  time.award-record__date= award.publish_at
+  = inline_svg 'medal'
+p.award-record__description= award.content.present? ? summary_text(award.content, 60) : "尚未填寫授獎事由"
+p.award-record__unit= "授獎機關：#{@newest_award.unit}"
