@@ -57,7 +57,7 @@
 .related-records {
   display: flex;
   flex-flow: column nowrap;
-  padding: r(4) r(2) 0;
+  padding: r(6) r(2) 0;
   &:last-child { margin-bottom: r(-4); }
   @include susy($tablet) {
     flex-flow: row wrap;
