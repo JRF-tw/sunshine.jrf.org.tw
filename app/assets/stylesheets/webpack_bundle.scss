@@ -4912,10 +4912,17 @@ abbr[title="required"] {
 }
 
 .award-record {
+  display: block;
   margin-bottom: 32px;
   padding: 8px 16px;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 3px;
+  -webkit-transition: opacity .3s ease 0s;
+  transition: opacity .3s ease 0s;
+}
+
+.award-record[href]:hover {
+  opacity: .7;
 }
 
 @media (min-width: 768px) {
@@ -4938,39 +4945,6 @@ abbr[title="required"] {
   }
 }
 
-.award-record .wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-flow: row wrap;
-      -ms-flex-flow: row wrap;
-          flex-flow: row wrap;
-}
-
-.award-record .prize {
-  margin: 0;
-  font-style: normal;
-  color: #795548;
-  font-size: 35px;
-  line-height: 1.5;
-  -webkit-box-ordinal-group: 2;
-  -webkit-order: 1;
-      -ms-flex-order: 1;
-          order: 1;
-}
-
-.award-record .date {
-  width: 100%;
-  color: rgba(0, 0, 0, 0.54);
-  font-size: 14px;
-  line-height: 1;
-  -webkit-box-ordinal-group: 4;
-  -webkit-order: 3;
-      -ms-flex-order: 3;
-          order: 3;
-}
-
 .award-record .icon-medal {
   width: 40px;
   height: 40px;
@@ -4984,17 +4958,139 @@ abbr[title="required"] {
   margin-left: auto;
 }
 
-.award-record .description {
+.award-record__wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+}
+
+.award-record__prize {
+  margin: 0;
+  color: #795548;
+  font-size: 35px;
+  line-height: 1.5;
+  -webkit-box-ordinal-group: 2;
+  -webkit-order: 1;
+      -ms-flex-order: 1;
+          order: 1;
+}
+
+.award-record__date {
+  width: 100%;
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 14px;
+  line-height: 1;
+  -webkit-box-ordinal-group: 4;
+  -webkit-order: 3;
+      -ms-flex-order: 3;
+          order: 3;
+}
+
+.award-record__description {
   margin-top: 16px;
   margin-bottom: 16px;
   font-size: 17px;
   line-height: 1.5;
 }
 
-.award-record .from {
+.award-record__unit {
   color: rgba(0, 0, 0, 0.54);
   font-size: 14px;
   line-height: 1.5;
   margin: 0;
+}
+
+/*
+* Scut, a collection of Sass utilities
+* to ease and improve our implementations of common style-code patterns.
+* v1.4.0
+* Docs at http://davidtheclark.github.io/scut
+*/
+
+.punishment-records {
+  padding-top: 48px;
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
+@media (min-width: 768px) {
+  .punishment-records {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+
+.punishment-record {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 32px;
+  padding: 8px 16px;
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 14px;
+  line-height: 1.5;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 3px;
+  -webkit-transition: opacity .3s ease 0s;
+  transition: opacity .3s ease 0s;
+}
+
+.punishment-record[href]:hover {
+  opacity: .7;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+@media (min-width: 768px) {
+  .punishment-record {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 45%;
+        -ms-flex: 1 45%;
+            flex: 1 45%;
+    margin-right: 16px;
+    margin-left: 16px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .punishment-record {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 0 0;
+        -ms-flex: 1 0 0;
+            flex: 1 0 0;
+  }
+}
+
+.punishment-record__reason {
+  color: #795548;
+  font-size: 24px;
+  line-height: 1.5;
+  margin-top: 0;
+  margin-bottom: 16px;
+  width: 100%;
+}
+
+.punishment-record__decision-unit {
+  margin-left: auto;
 }
 
