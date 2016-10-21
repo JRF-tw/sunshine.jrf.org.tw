@@ -116,7 +116,10 @@
 
 .card--feature {
   @include Card();
-  margin: r(3) n() r(5);
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin: r(3) n();
   background-color: $white;
 }
 .card--feature__heading {
@@ -134,5 +137,20 @@
   }
 }
 .card--feature__content {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  flex: 1;
+  width: 100%;
   padding: r(2);
+  font-size: ms(1);
+
+  .text-only {
+    margin: auto;
+    text-align: center;
+  }
+  
+  .more {
+    margin-top: r(2);
+  }
 }
