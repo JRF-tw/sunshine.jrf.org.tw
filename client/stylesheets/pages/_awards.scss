@@ -9,6 +9,7 @@
 
 .award-record {
   $pad-size: r(2);
+  display: block;
   margin-bottom: r(4);
   padding: r(1) $pad-size;
   background-color: $text-disabled-dark;
@@ -26,7 +27,7 @@
 
   .prize {
     margin: 0;
-    text: normal $brown ms(5) 1.5;
+    text: $brown ms(5) 1.5;
     order: 1;
   }
 
