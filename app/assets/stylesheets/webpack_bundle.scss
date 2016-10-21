@@ -4808,7 +4808,7 @@ abbr[title="required"] {
   -webkit-flex-flow: column nowrap;
       -ms-flex-flow: column nowrap;
           flex-flow: column nowrap;
-  padding: 32px 16px 0;
+  padding: 48px 16px 0;
 }
 
 .resumes:last-child,
@@ -4880,5 +4880,121 @@ abbr[title="required"] {
         -ms-flex: 1 0 0;
             flex: 1 0 0;
   }
+}
+
+/*
+* Scut, a collection of Sass utilities
+* to ease and improve our implementations of common style-code patterns.
+* v1.4.0
+* Docs at http://davidtheclark.github.io/scut
+*/
+
+.award-records {
+  padding-top: 48px;
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
+@media (min-width: 768px) {
+  .award-records {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+
+.award-record {
+  margin-bottom: 32px;
+  padding: 8px 16px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 3px;
+}
+
+@media (min-width: 768px) {
+  .award-record {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 45%;
+        -ms-flex: 1 45%;
+            flex: 1 45%;
+    margin-right: 16px;
+    margin-left: 16px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .award-record {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 0 0;
+        -ms-flex: 1 0 0;
+            flex: 1 0 0;
+  }
+}
+
+.award-record .wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+}
+
+.award-record .prize {
+  margin: 0;
+  font-style: normal;
+  color: #795548;
+  font-size: 35px;
+  line-height: 1.5;
+  -webkit-box-ordinal-group: 2;
+  -webkit-order: 1;
+      -ms-flex-order: 1;
+          order: 1;
+}
+
+.award-record .date {
+  width: 100%;
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 14px;
+  line-height: 1;
+  -webkit-box-ordinal-group: 4;
+  -webkit-order: 3;
+      -ms-flex-order: 3;
+          order: 3;
+}
+
+.award-record .icon-medal {
+  width: 40px;
+  height: 40px;
+  fill: #f44336;
+  -webkit-box-ordinal-group: 3;
+  -webkit-order: 2;
+      -ms-flex-order: 2;
+          order: 2;
+  margin-top: 8px;
+  margin-right: -8px;
+  margin-left: auto;
+}
+
+.award-record .description {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.award-record .from {
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
 }
 
