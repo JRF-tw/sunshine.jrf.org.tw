@@ -14,28 +14,13 @@
   padding: r(1) $pad-size;
   background-color: $text-disabled-dark;
   border-radius: $global-radius;
+  transition: opacity .3s ease 0s;
+  &[href]:hover { opacity: .7; }
   @include susy($tablet) {
     flex: 1 45%;
     margin: n() r(2);
   }
   @include susy($desktop) { flex: 1 0 0; }
-
-  .wrapper {
-    display: flex;
-    flex-flow: row wrap;
-  }
-
-  .prize {
-    margin: 0;
-    text: $brown ms(5) 1.5;
-    order: 1;
-  }
-
-  .date {
-    width: 100%;
-    text: $text-secondary ms(0) 1;
-    order: 3;
-  }
 
   .icon-medal {
     size: r(5);
@@ -43,18 +28,35 @@
     order: 2;
     margin: r(1) r(-1) n() auto;
   }
+}
 
-  .description {
-    margin: {
-      top: r(2);
-      bottom: r(2);
-    }
-    text: ms(1) 1.5;
+.award-record__wrapper {
+  display: flex;
+  flex-flow: row wrap;
+}
 
+.award-record__prize {
+  margin: 0;
+  text: $brown ms(5) 1.5;
+  order: 1;
+}
+
+.award-record__date {
+  width: 100%;
+  text: $text-secondary ms(0) 1;
+  order: 3;
+}
+
+.award-record__description {
+  margin: {
+    top: r(2);
+    bottom: r(2);
   }
+  text: ms(1) 1.5;
 
-  .from {
-    text: $text-secondary ms(0) 1.5;
-    margin: 0;
-  }
+}
+
+.award-record__unit {
+  text: $text-secondary ms(0) 1.5;
+  margin: 0;
 }
