@@ -1,34 +1,31 @@
 section.resumes.container
   - if @educations.present?
-    section.card--tape.resume
-      h3.card--tape__heading class=job
-        .text 學經歷
-
-      .card--tape__content
-        ul.list--dot.list
-          - @educations.each do |education|
-            li= education.title
+    = render layout: 'components/feature_card', locals: {\
+      heading: '學經歷', job: job,
+      attributes: { class: 'resume' }\
+      }
+      ul.list--dot
+        - @educations.each do |education|
+          li= education.title
 
   - if @careers.present?
-    section.card--tape.resume
-      h3.card--tape__heading class=job
-        .text 職務經歷
-
-      .card--tape__content
-        ul.list--dot.list
-          - @careers.each do |career|
-            li
-              => career.publish_at.to_s(:year).to_i
-              = render_career_content(career)
+    = render layout: 'components/feature_card', locals: {\
+      heading: '職務經歷', job: job,
+      attributes: { class: 'resume' }\
+      }
+      ul.list--dot
+        - @careers.each do |career|
+          li
+            => career.publish_at.to_s(:year).to_i
+            = render_career_content(career)
 
   - if @licenses.present?
-    section.card--tape.resume
-      h3.card--tape__heading class=job
-        .text 專業證書
-
-      .card--tape__content
-        ul.list--dot.list
-          - @licenses.each do |license|
-            li
-              => license.publish_at
-              = license.license_type
+    = render layout: 'components/feature_card', locals: {\
+      heading: '專業證書', job: job,
+      attributes: { class: 'resume' }\
+      }
+      ul.list--dot
+        - @licenses.each do |license|
+          li
+            => license.publish_at
+            = license.license_type

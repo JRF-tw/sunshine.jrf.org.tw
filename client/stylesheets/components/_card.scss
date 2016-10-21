@@ -114,12 +114,12 @@
   padding-top: r(2);
 }
 
-.card--tape {
+.card--feature {
   @include Card();
   margin: r(3) n() r(5);
   background-color: $white;
 }
-.card--tape__heading {
+.card--feature__heading {
   margin: 0 0 r(-3);
   text: center ms(2) $white;
   &.judge .text { background-color: $blue; }
@@ -133,6 +133,6 @@
     border-radius: $global-radius;
   }
 }
-.card--tape__content {
+.card--feature__content {
   padding: r(2);
 }
