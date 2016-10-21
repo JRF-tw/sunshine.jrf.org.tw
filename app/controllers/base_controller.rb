@@ -1,6 +1,4 @@
 class BaseController < ApplicationController
-  layout "classic", only: :index
-
   # rescue_from ActiveRecord::RecordNotFound, with: :render_404
   rescue_from ActionController::RoutingError, with: :render_404
   # rescue_from ActionView::MissingTemplate do |exception|
@@ -19,6 +17,7 @@ class BaseController < ApplicationController
       keywords: "司法,認識法官,認識檢察官,不適任法官,不適任檢察官,司法恐龍",
       image: image
     )
+    render layout: 'layouts/classic'
   end
 
   def about
