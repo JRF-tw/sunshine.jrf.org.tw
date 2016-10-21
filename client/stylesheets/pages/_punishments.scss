@@ -8,12 +8,11 @@
 }
 
 .punishment-record {
-  $pad-size: r(2);
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   margin-bottom: r(4);
-  padding: r(1) $pad-size;
+  padding: r(1) r(2);
   text: $text-secondary ms(0) 1.5;
   background-color: $text-disabled-dark;
   border-radius: $global-radius;
@@ -25,13 +24,14 @@
   @include susy($tablet) {
     flex: 1 45%;
     margin: n() r(2);
+    padding: r(2) r(3);
   }
   @include susy($desktop) { flex: 1 0 0; }
 }
 
 .punishment-record__reason {
   text: $brown ms(3) 1.5;
-  margin: 0 n() r(2);
+  margin: 0 n() r(3);
   width: 100%;
 }
 
