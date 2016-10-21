@@ -13,11 +13,12 @@ article
 
       ul.punishment-detail__list
         - if @punishment.decision_source.present?
-          li = link_to "資料來源", @punishment.decision_source, target: 'blank', class: 'link'
+          li.cell
+            = link_to "資料來源", @punishment.decision_source, target: 'blank', class: 'link'
         - if @punishment.unit.present?
-          li = "決議時當事者之服務機關：#{@punishment.unit}"
+          li.cell = "決議時當事者之服務機關：#{@punishment.unit}"
         - if @punishment.title.present?
-          li = "決議時當事者之職稱：#{@punishment.title}"
+          li.cell = "決議時當事者之職稱：#{@punishment.title}"
       
       dl.punishment-detail__spec
         - render_punishment_cell(@punishment).each do |k, v|
