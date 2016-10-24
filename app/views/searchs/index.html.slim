@@ -6,16 +6,20 @@
     description: '法官和檢察官都在這裡，快來搜尋！'\
   }
 
-.section-search-forms
-  nav.text-center
-    ul.search-tabs
+.section-tab
+  nav.section-tab__tabs
+    .container
       - ['法官', '檢察官'].each_with_index do |text, i|
-        li.search-tab class="#{'active' if i == 0}"
-          button.search-tab__cell type='button' data-content="#search-tab-#{i+1}" = text
+        button.section-tab__tab[
+          type='button'
+          data-tab-content="#search-tab-#{i+1}"
+          class=('active' if i == 0)
+          ]
+          = text
 
-  .search-tab__contents
-    #search-tab-1.search-tab__content
-      = render 'form_large', options: collection_for_courts, placeholder: '選法院或輸入關鍵字', type: "judge", search_url: judges_searchs_path
+  .section-tab__contents
+    #search-tab-1.section-tab__content.active
+      = render 'form', options: collection_for_courts, placeholder: '選法院或輸入關鍵字', type: "judge", search_url: judges_searchs_path
 
-    #search-tab-2.search-tab__content
-      = render 'form_large', options: collection_for_prosecutors, placeholder: '選法院或輸入關鍵字', type: "prosecutor", search_url: prosecutors_searchs_path
+    #search-tab-2.section-tab__content
+      = render 'form', options: collection_for_prosecutors, placeholder: '選檢察署或輸入關鍵字', type: "prosecutor", search_url: prosecutors_searchs_path
