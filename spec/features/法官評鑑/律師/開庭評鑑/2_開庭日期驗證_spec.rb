@@ -64,7 +64,7 @@ feature '法官評鑑 - 律師', type: :feature, js: true do
       Scenario '開庭評鑑流程中，正在輸入開庭日期的頁面。「確認此日期為實際開庭日」打勾' do
         before { visit(input_info_lawyer_score_schedules_path) }
         before { lawyer_input_info_schedule_score(story) }
-        before { check("schedule_score_confirmed_realdate") }
+        before { check('schedule_score_confirmed_realdate') }
 
         Given '輸入庭期表「有」的日期' do
           before do

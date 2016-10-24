@@ -14,10 +14,10 @@ feature '前台帳號功能', type: :feature, js: true do
       current_email.find('a').click
     end
 
-    feature "忘記與重設密碼" do
-      feature "送出重設密碼信" do
-        Scenario "只有完成註冊的律師才能重設密碼" do
-          Given "律師A已完成註冊、律師B未完成註冊" do
+    feature '忘記與重設密碼' do
+      feature '送出重設密碼信' do
+        Scenario '只有完成註冊的律師才能重設密碼' do
+          Given '律師A已完成註冊、律師B未完成註冊' do
             let(:lawyer_A) { create :lawyer, :with_password, :with_confirmed }
             let(:lawyer_B) { create :lawyer }
             When '送出律師A重設密碼資料' do
@@ -44,8 +44,8 @@ feature '前台帳號功能', type: :feature, js: true do
           let(:lawyer_B) { create :lawyer, :with_password, :with_confirmed }
           Given '律師A已送出密碼重設信，且已登入律師A' do
             before { send_reset_password_email(lawyer_A.email) }
-            before { signin_lawyer(email: lawyer_A.email, password: "123123123") }
-            When "前往 Email 中密碼重設頁" do
+            before { signin_lawyer(email: lawyer_A.email, password: '123123123') }
+            When '前往 Email 中密碼重設頁' do
               before { visit_reset_password_page(lawyer_A.email) }
               Then '頁面應顯示律師A資料' do
                 expect(current_path).to eq(edit_lawyer_password_path)
@@ -69,8 +69,8 @@ feature '前台帳號功能', type: :feature, js: true do
 
           Given '律師A已送出密碼重設信，且已登入律師B' do
             before { send_reset_password_email(lawyer_A.email) }
-            before { signin_lawyer(email: lawyer_B.email, password: "123123123") }
-            When "前往 Email 中密碼重設頁" do
+            before { signin_lawyer(email: lawyer_B.email, password: '123123123') }
+            When '前往 Email 中密碼重設頁' do
               before { visit_reset_password_page(lawyer_A.email) }
               Then '顯示錯誤訊息' do
                 expect(current_path).to eq(lawyer_profile_path)
@@ -84,7 +84,7 @@ feature '前台帳號功能', type: :feature, js: true do
           let(:lawyer_A) { create :lawyer, :with_password, :with_confirmed }
           Given '律師A重設密碼中、且已登入' do
             before { send_reset_password_email(lawyer_A.email) }
-            before { signin_lawyer(email: lawyer_A.email, password: "123123123") }
+            before { signin_lawyer(email: lawyer_A.email, password: '123123123') }
             before { visit_reset_password_page(lawyer_A.email) }
             When '送出新密碼' do
               before { lawyer_input_set_password_form(password: '11111111', password_confirmation: '11111111') }
