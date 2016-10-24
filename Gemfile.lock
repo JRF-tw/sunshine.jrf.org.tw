@@ -426,6 +426,7 @@ GEM
       railties (>= 3.1)
       thread_safe (~> 0.3.1)
     rack (1.6.4)
+    rack-cors (0.4.0)
     rack-livereload (0.3.16)
       rack
     rack-protection (1.5.3)
@@ -680,6 +681,7 @@ DEPENDENCIES
   pry-rails
   pry-remote
   rabl-rails
+  rack-cors
   rack-livereload
   rails (= 4.2.5.1)
   rails_autolink
