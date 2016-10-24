@@ -1,0 +1,21 @@
+.section-tab__tabs {
+  margin-top: r(-2);
+  text-align: center;
+  background-color: #fff; 
+
+  .container {
+    padding: 0 r(1);
+    @include susy($tablet) { padding: 0 r(2); }
+  }
+}
+.section-tab__tab {
+  @include Normalize();
+  padding: r(2) r(4);
+  text: center ms(1) bold;
+  border-bottom: 3px solid #fff;
+  &.active { border-bottom-color: $accent; }
+} 
+.section-tab__content {
+  display: none;
+  &.active { display: block; }
+}
