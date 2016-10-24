@@ -34,5 +34,5 @@ class Article < ActiveRecord::Base
 
   belongs_to :profile
 
-  scope :newest, -> { order("id DESC") }
+  scope :newest, -> { order('id DESC') }
 end

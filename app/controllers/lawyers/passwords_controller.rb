@@ -1,6 +1,6 @@
 class Lawyers::PasswordsController < Devise::PasswordsController
   include CrudConcern
-  layout "lawyer"
+  layout 'lawyer'
 
   prepend_before_action :require_no_authentication, except: [:edit, :update, :send_reset_password_mail]
   before_action :first_time_setting?, only: [:update]
@@ -8,9 +8,9 @@ class Lawyers::PasswordsController < Devise::PasswordsController
   def new
     # meta
     set_meta(
-      title: "律師忘記密碼頁",
-      description: "律師忘記密碼頁",
-      keywords: "律師忘記密碼頁"
+      title: '律師忘記密碼頁',
+      description: '律師忘記密碼頁',
+      keywords: '律師忘記密碼頁'
     )
     super
   end
@@ -26,7 +26,7 @@ class Lawyers::PasswordsController < Devise::PasswordsController
         respond_with(resource)
       end
     else
-      flash.now[:error] = @lawyer && !@lawyer.confirmed? ? "該帳號尚未註冊" : "無此律師帳號"
+      flash.now[:error] = @lawyer && !@lawyer.confirmed? ? '該帳號尚未註冊' : '無此律師帳號'
       self.resource = resource_class.new(email: params[:lawyer][:email])
       render :new
     end
@@ -57,9 +57,9 @@ class Lawyers::PasswordsController < Devise::PasswordsController
   def edit
     @lawyer_by_token = Lawyer.with_reset_password_token(params[:reset_password_token])
     if @lawyer_by_token.nil?
-      redirect_as_fail(invalid_edit_path, "無效的驗證連結")
+      redirect_as_fail(invalid_edit_path, '無效的驗證連結')
     elsif current_lawyer && @lawyer_by_token != current_lawyer
-      redirect_as_fail(invalid_edit_path, "你僅能修改本人的帳號")
+      redirect_as_fail(invalid_edit_path, '你僅能修改本人的帳號')
     else
       self.resource = resource_class.new
       set_minimum_password_length
@@ -68,9 +68,9 @@ class Lawyers::PasswordsController < Devise::PasswordsController
 
     # meta
     set_meta(
-      title: "律師設定密碼頁",
-      description: "律師設定密碼頁",
-      keywords: "律師設定密碼頁"
+      title: '律師設定密碼頁',
+      description: '律師設定密碼頁',
+      keywords: '律師設定密碼頁'
     )
   end
 

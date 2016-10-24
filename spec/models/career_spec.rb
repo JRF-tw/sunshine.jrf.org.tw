@@ -27,16 +27,16 @@
 #  is_hidden           :boolean
 #
 
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Career, type: :model do
   let!(:career) { create :career }
 
-  it "FactoryGirl" do
+  it 'FactoryGirl' do
     expect(career).not_to be_new_record
   end
 
-  it "has_many :careers, dependent: :destroy" do
+  it 'has_many :careers, dependent: :destroy' do
     expect(Career.count).to eq(1)
     profile = career.profile
     profile.destroy

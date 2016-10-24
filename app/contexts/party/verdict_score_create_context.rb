@@ -32,7 +32,7 @@ class Party::VerdictScoreCreateContext < BaseContext
   def check_story
     context = Party::VerdictScoreCheckInfoContext.new(@party)
     @story = context.perform(@params)
-    return add_error(:data_blank, context.error_messages.join(",")) unless @story
+    return add_error(:data_blank, context.error_messages.join(',')) unless @story
   end
 
   def check_rating_score
@@ -50,8 +50,8 @@ class Party::VerdictScoreCreateContext < BaseContext
   # TODO : alert need refactory, performance issue
 
   def get_scorer_ids
-    schedule_scorer_ids = Story.includes(:schedule_scores).find(@story.id).schedule_scores.where(schedule_rater_type: "Party").map(&:schedule_rater_id)
-    verdict_scorer_ids = Story.includes(:verdict_scores).find(@story.id).verdict_scores.where(verdict_rater_type: "Party").map(&:verdict_rater_id)
+    schedule_scorer_ids = Story.includes(:schedule_scores).find(@story.id).schedule_scores.where(schedule_rater_type: 'Party').map(&:schedule_rater_id)
+    verdict_scorer_ids = Story.includes(:verdict_scores).find(@story.id).verdict_scores.where(verdict_rater_type: 'Party').map(&:verdict_rater_id)
     @total_scorer_ids = (schedule_scorer_ids + verdict_scorer_ids).uniq
   end
 

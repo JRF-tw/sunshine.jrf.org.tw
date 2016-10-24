@@ -1,5 +1,5 @@
 class Parties::StoriesController < Parties::BaseController
-  layout "party"
+  layout 'party'
   before_action :find_story, only: [:show]
   before_action :has_score?, only: [:show]
 
@@ -7,9 +7,9 @@ class Parties::StoriesController < Parties::BaseController
     @stories = ::PartyQueries.new(current_party).get_stories
     # meta
     set_meta(
-      title: "當事人案件列表頁",
-      description: "當事人案件列表頁",
-      keywords: "當事人案件列表頁"
+      title: '當事人案件列表頁',
+      description: '當事人案件列表頁',
+      keywords: '當事人案件列表頁'
     )
   end
 
@@ -33,11 +33,11 @@ class Parties::StoriesController < Parties::BaseController
              rescue
                nil
              end
-    redirect_as_fail(party_root_path, "找不到該案件") unless @story
+    redirect_as_fail(party_root_path, '找不到該案件') unless @story
   end
 
   def has_score?
-    @scores_sorted = ::PartyQueries.new(current_party).get_scores_array(@story, sort_by: "date")
-    redirect_as_fail(party_root_path, "尚未有評鑑紀錄") unless @scores_sorted.present?
+    @scores_sorted = ::PartyQueries.new(current_party).get_scores_array(@story, sort_by: 'date')
+    redirect_as_fail(party_root_path, '尚未有評鑑紀錄') unless @scores_sorted.present?
   end
 end

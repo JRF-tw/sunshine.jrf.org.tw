@@ -47,7 +47,7 @@ class Party::SendResetPasswordSmsContext < BaseContext
 
   def build_message
     link = edit_party_password_url(reset_password_token: @token, host: Setting.host)
-    @message = "您剛剛在司法陽光網請求重設您的當事人帳號密碼。請點選以下連結重新設定您的密碼：#{SlackService.render_link(link, "重設密碼網址")} 如果您並未送出這個請求，請忽略此簡訊。"
+    @message = "您剛剛在司法陽光網請求重設您的當事人帳號密碼。請點選以下連結重新設定您的密碼：#{SlackService.render_link(link, '重設密碼網址')} 如果您並未送出這個請求，請忽略此簡訊。"
   end
 
   def send_sms

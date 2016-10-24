@@ -38,7 +38,7 @@ class Scrap::ImportVerdictContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      add_error("create date fail") unless @verdict.save
+      add_error('create date fail') unless @verdict.save
       @verdict
     end
   end
@@ -54,11 +54,11 @@ class Scrap::ImportVerdictContext < BaseContext
   end
 
   def is_highest_court?
-    @court.code == "TPS"
+    @court.code == 'TPS'
   end
 
   def find_or_create_story
-    array = @word.split(",")
+    array = @word.split(',')
     @story = Story.find_or_create_by(year: array[0], word_type: array[1], number: array[2], court: @court)
   end
 
@@ -74,7 +74,7 @@ class Scrap::ImportVerdictContext < BaseContext
   end
 
   def find_main_judge
-    branches = @court.branches.current.where("chamber_name LIKE ? ", "%#{@stroy_type}%")
+    branches = @court.branches.current.where('chamber_name LIKE ? ', "%#{@stroy_type}%")
     main_judges = branches.map { |a| a.judge if a.judge.name == @analysis_context.main_judge_name }.compact.uniq
     @main_judge = main_judges.count == 1 ? main_judges.last : nil
 
@@ -154,7 +154,7 @@ class Scrap::ImportVerdictContext < BaseContext
   end
 
   def record_count_to_daily_notify
-    Redis::Counter.new("daily_scrap_verdict_count").increment
+    Redis::Counter.new('daily_scrap_verdict_count').increment
   end
 
   def alert_new_story_type

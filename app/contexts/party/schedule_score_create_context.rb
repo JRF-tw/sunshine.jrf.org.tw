@@ -34,19 +34,19 @@ class Party::ScheduleScoreCreateContext < BaseContext
   def check_story
     context = Party::CheckScheduleScoreInfoContext.new(@party)
     @story = context.perform(@params)
-    return add_error(:story_not_found, context.error_messages.join(",")) unless @story
+    return add_error(:story_not_found, context.error_messages.join(',')) unless @story
   end
 
   def check_schedule
     context = Party::CheckScheduleScoreDateContext.new(@party)
     @schedule = context.perform(@params)
-    return add_error(:schedule_not_found, context.error_messages.join(",")) if context.has_error?
+    return add_error(:schedule_not_found, context.error_messages.join(',')) if context.has_error?
   end
 
   def check_judge
     context = Party::CheckScheduleScoreJudgeContext.new(@party)
     @judge = context.perform(@params)
-    return add_error(:judge_not_found, context.error_messages.join(",")) unless @judge
+    return add_error(:judge_not_found, context.error_messages.join(',')) unless @judge
   end
 
   def check_rating_score
@@ -64,8 +64,8 @@ class Party::ScheduleScoreCreateContext < BaseContext
   # TODO : alert need refactory, performance issue
 
   def get_scorer_ids
-    schedule_scorer_ids = Story.includes(:schedule_scores).find(@story.id).schedule_scores.where(schedule_rater_type: "Party").map(&:schedule_rater_id)
-    verdict_scorer_ids = Story.includes(:verdict_scores).find(@story.id).verdict_scores.where(verdict_rater_type: "Party").map(&:verdict_rater_id)
+    schedule_scorer_ids = Story.includes(:schedule_scores).find(@story.id).schedule_scores.where(schedule_rater_type: 'Party').map(&:schedule_rater_id)
+    verdict_scorer_ids = Story.includes(:verdict_scores).find(@story.id).verdict_scores.where(verdict_rater_type: 'Party').map(&:verdict_rater_id)
     @total_scorer_ids = (schedule_scorer_ids + verdict_scorer_ids).uniq
   end
 

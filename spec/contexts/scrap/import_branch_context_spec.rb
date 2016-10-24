@@ -1,14 +1,14 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Scrap::ImportBranchContext, type: :model do
   let!(:court) { create(:court) }
   let!(:judge) { create(:judge, court: court) }
 
-  describe "#perform" do
-    let!(:chamber_name) { "少年法庭" }
-    let!(:branch_name) { "聲" }
+  describe '#perform' do
+    let!(:chamber_name) { '少年法庭' }
+    let!(:branch_name) { '聲' }
 
-    context "success" do
+    context 'success' do
       subject { described_class.new(judge).perform(chamber_name, branch_name) }
 
       it { expect { subject }.to change { judge.branches.count }.by(1) }
@@ -18,17 +18,17 @@ RSpec.describe Scrap::ImportBranchContext, type: :model do
       it { expect(subject.name).to eq(branch_name) }
     end
 
-    context "branch exist" do
+    context 'branch exist' do
       subject! { described_class.new(judge).perform(chamber_name, branch_name) }
 
       it { expect { subject }.not_to change { judge.branches.count } }
     end
 
-    context "update_branch_judge" do
+    context 'update_branch_judge' do
       # see spec/features/judge_and_branch_update_from_scrap_spec.rb:40
     end
 
-    context "update_missed" do
+    context 'update_missed' do
       # see spec/features/judge_and_branch_update_from_scrap_spec.rb:73
     end
   end

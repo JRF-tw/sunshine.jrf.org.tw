@@ -29,20 +29,20 @@ class ProfilesController < BaseController
   def judges
     @judges = Profile.judges.shown.active.had_avatar.order_by_name.page(params[:page]).per(12)
     set_meta(
-      title: "認識法官",
-      description: "認識法官，決定當事人一生的法官，究竟有什麼紀錄？帶您來看看！",
-      keywords: "認識法官,法官,法院",
-      image: ActionController::Base.helpers.asset_path("hero-profiles-judges-M.png")
+      title: '認識法官',
+      description: '認識法官，決定當事人一生的法官，究竟有什麼紀錄？帶您來看看！',
+      keywords: '認識法官,法官,法院',
+      image: ActionController::Base.helpers.asset_path('hero-profiles-judges-M.png')
     )
   end
 
   def prosecutors
     @prosecutors = Profile.prosecutors.shown.active.had_avatar.order_by_name.page(params[:page]).per(12)
     set_meta(
-      title: "認識檢察官",
-      description: "認識檢察官，代表國家調查案例的檢察官，有什麼背景資料呢？一起來瞭解！",
-      keywords: "認識檢察官,檢察官,檢察署",
-      image: ActionController::Base.helpers.asset_path("hero-profiles-judges-M.png")
+      title: '認識檢察官',
+      description: '認識檢察官，代表國家調查案例的檢察官，有什麼背景資料呢？一起來瞭解！',
+      keywords: '認識檢察官,檢察官,檢察署',
+      image: ActionController::Base.helpers.asset_path('hero-profiles-judges-M.png')
     )
   end
 
@@ -65,7 +65,7 @@ class ProfilesController < BaseController
     image = @profile.avatar.present? ? @profile.avatar.L_540.url : nil
     set_meta(
       title: @profile.name.to_s,
-      description: description.join(""),
+      description: description.join(''),
       keywords: "#{@profile.name},#{@profile.current}",
       image: image
     )

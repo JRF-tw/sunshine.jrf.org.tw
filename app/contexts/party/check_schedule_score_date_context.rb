@@ -28,7 +28,7 @@ class Party::CheckScheduleScoreDateContext < BaseContext
   def check_story
     context = Party::CheckScheduleScoreInfoContext.new(@party)
     @story = context.perform(@params)
-    return add_error(:story_not_found, context.error_messages.join(",")) unless @story
+    return add_error(:story_not_found, context.error_messages.join(',')) unless @story
   end
 
   def check_date

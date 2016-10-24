@@ -1,9 +1,9 @@
-require "rails_helper"
+require 'rails_helper'
 
 describe Lawyer::SendSetPasswordEmailContext do
 
-  describe "perform" do
-    context "success" do
+  describe 'perform' do
+    context 'success' do
       let!(:lawyer) { create :lawyer }
       subject { described_class.new(lawyer) }
 

@@ -34,11 +34,11 @@ class Import::CreateLawyerContext < BaseContext
 
   def phone_format_check
     @lawyer_data[:phone] = @lawyer_data[:phone].to_s
-    @lawyer_data[:phone] = "0" + @lawyer_data[:phone] if @lawyer_data[:phone].present? && @lawyer_data[:phone][0] != "0"
+    @lawyer_data[:phone] = '0' + @lawyer_data[:phone] if @lawyer_data[:phone].present? && @lawyer_data[:phone][0] != '0'
   end
 
   def is_phone?
-    @lawyer_data[:phone] && @lawyer_data[:phone][0, 2] == "09"
+    @lawyer_data[:phone] && @lawyer_data[:phone][0, 2] == '09'
   end
 
   def assign_phone_number

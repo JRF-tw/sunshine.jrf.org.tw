@@ -1,4 +1,4 @@
-require "rails_helper"
+require 'rails_helper'
 
 describe Party::CheckScheduleScoreJudgeContext do
   let!(:party) { create :party }
@@ -9,39 +9,39 @@ describe Party::CheckScheduleScoreJudgeContext do
   let!(:judge2) { create :judge }
   let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type, start_on: schedule.start_on, confirmed_realdate: false, judge_name: judge.name } }
 
-  describe "#perform" do
+  describe '#perform' do
     subject { described_class.new(party).perform(params) }
 
-    context "success" do
+    context 'success' do
       it { expect(subject).to be_truthy }
     end
 
-    context "judge_name empty" do
-      before { params[:judge_name] = "" }
+    context 'judge_name empty' do
+      before { params[:judge_name] = '' }
       it { expect(subject).to be_falsey }
     end
 
     context "can't found judge" do
-      before { params[:judge_name] = "錯誤法官" }
+      before { params[:judge_name] = '錯誤法官' }
       it { expect(subject).to be_falsey }
     end
 
     context "can't found schedule" do
-      before { params[:year] = "xxx" }
+      before { params[:year] = 'xxx' }
       it { expect(subject).to be_falsey }
     end
 
-    context "judge not in in court" do
+    context 'judge not in in court' do
       before { params[:judge_name] = judge2.name }
       it { expect(subject).to be_falsey }
     end
 
-    context "check judge already scored" do
+    context 'check judge already scored' do
       before { create :schedule_score, story: story, schedule: schedule, judge: judge, schedule_rater: party }
       it { expect(subject).to be_falsey }
     end
 
-    context "check confirmed realdate" do
+    context 'check confirmed realdate' do
       before { params[:confirmed_realdate] = true }
       it { expect(subject).to be_truthy }
     end

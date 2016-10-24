@@ -14,25 +14,25 @@
 #  start_at        :datetime
 #
 
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Schedule do
   let(:schedule) { create :schedule }
 
-  describe "FactoryGirl" do
-    context "normalize" do
+  describe 'FactoryGirl' do
+    context 'normalize' do
       subject! { schedule }
       it { expect(subject).not_to be_new_record }
     end
 
-    context "with branch judge" do
+    context 'with branch judge' do
       let(:schedule) { create :schedule, :with_branch_judge }
       subject { schedule }
       it { expect(subject).not_to be_new_record }
     end
   end
 
-  describe "#on_day" do
+  describe '#on_day' do
     let!(:schedule_date_tomorrow) { create :schedule, :date_is_tomorrow }
     it { expect(Schedule.on_day(Date.tomorrow).last).to eq(schedule_date_tomorrow) }
   end

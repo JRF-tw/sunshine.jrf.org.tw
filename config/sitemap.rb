@@ -2,7 +2,7 @@ SitemapGenerator::Sitemap.default_host = "http://#{Setting.host}"
 # mapping to robots.txt
 SitemapGenerator::Sitemap.sitemaps_host = "http://#{Setting.assets_host}/"
 SitemapGenerator::Sitemap.sitemaps_path = Setting.sitemap.path
-SitemapGenerator::Sitemap.public_path = "public/"
+SitemapGenerator::Sitemap.public_path = 'public/'
 SitemapGenerator::Sitemap.adapter = SitemapGenerator::WaveAdapter.new
 SitemapGenerator::Sitemap.include_index = true
 SitemapGenerator::Sitemap.create do

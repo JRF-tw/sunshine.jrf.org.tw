@@ -46,12 +46,12 @@ class Profile < ActiveRecord::Base
   has_many :suits, through: :suit_prosecutors
   has_many :procedures, dependent: :destroy
 
-  scope :newest, -> { order("id DESC") }
+  scope :newest, -> { order('id DESC') }
   scope :had_avatar, -> { where.not(avatar: nil) }
   scope :active, -> { where.not(is_active: [false, nil]) }
-  scope :random, -> { order("RANDOM()") }
-  scope :by_punishments, -> { order("punishments_count DESC, name ASC") }
-  scope :order_by_name, -> { order("name ASC") }
+  scope :random, -> { order('RANDOM()') }
+  scope :by_punishments, -> { order('punishments_count DESC, name ASC') }
+  scope :order_by_name, -> { order('name ASC') }
 
   def suit_list
     ids = (suit_judges.map(&:suit_id) + suit_prosecutors.map(&:suit_id)).uniq
@@ -60,15 +60,15 @@ class Profile < ActiveRecord::Base
 
   class << self
     def judges
-      where(current: "法官")
+      where(current: '法官')
     end
 
     def prosecutors
-      where(current: "檢察官")
+      where(current: '檢察官')
     end
 
     def justices
-      where(current: "大法官")
+      where(current: '大法官')
     end
 
     def find_current_court(type)
@@ -76,7 +76,7 @@ class Profile < ActiveRecord::Base
       all
     end
 
-    def front_like_search(search_word, combination = "or")
+    def front_like_search(search_word, combination = 'or')
       search_word.keep_if { |_k, v| v.present? }
       if search_word.present?
         where_str = search_word.map { |k, _i| "\"#{table_name}\".\"#{k}\" like :#{k}" }.join(" #{combination} ")

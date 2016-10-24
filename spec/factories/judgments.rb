@@ -26,7 +26,7 @@ FactoryGirl.define do
     court do
       create :court
     end
-    judge_no "abc123"
+    judge_no 'abc123'
   end
 
 end

@@ -1,6 +1,6 @@
 class Scrap::GetVerdictsTotalResultByStoryTypeContext < BaseContext
-  INDEX_URI = "http://jirs.judicial.gov.tw/FJUD/FJUDQRY01_1.aspx".freeze
-  RESULT_URI = "http://jirs.judicial.gov.tw/FJUD/FJUDQRY02_1.aspx".freeze
+  INDEX_URI = 'http://jirs.judicial.gov.tw/FJUD/FJUDQRY01_1.aspx'.freeze
+  RESULT_URI = 'http://jirs.judicial.gov.tw/FJUD/FJUDQRY02_1.aspx'.freeze
 
   before_perform :total_result
 
@@ -29,7 +29,7 @@ class Scrap::GetVerdictsTotalResultByStoryTypeContext < BaseContext
   private
 
   def total_result
-    court_value = @court.code + " " + @court.scrap_name
+    court_value = @court.code + ' ' + @court.scrap_name
     request_query = "?v_court=#{court_value}&v_sys=#{@type}&keyword=&sdate=#{@start_date}&edate=#{@end_date}"
     response_data = Mechanize.new.get(RESULT_URI + request_query, {}, INDEX_URI)
     response_data = Nokogiri::HTML(response_data.body)

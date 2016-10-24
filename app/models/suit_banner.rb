@@ -23,5 +23,5 @@ class SuitBanner < ActiveRecord::Base
 
   include HiddenOrNot
 
-  scope :order_by_weight, -> { order("weight DESC, id DESC") }
+  scope :order_by_weight, -> { order('weight DESC, id DESC') }
 end

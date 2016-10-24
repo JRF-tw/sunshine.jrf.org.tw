@@ -17,7 +17,7 @@ class SmsService
   end
 
   def initialize(phone)
-    phone = "+886#{phone[1..-1]}" if phone.index("0") == 0
+    phone = "+886#{phone[1..-1]}" if phone.index('0') == 0
     self.phone = phone
   end
 

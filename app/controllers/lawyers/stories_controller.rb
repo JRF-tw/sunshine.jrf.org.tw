@@ -1,5 +1,5 @@
 class Lawyers::StoriesController < Lawyers::BaseController
-  layout "lawyer"
+  layout 'lawyer'
   before_action :find_story, only: [:show]
   before_action :has_score?, only: [:show]
 
@@ -7,9 +7,9 @@ class Lawyers::StoriesController < Lawyers::BaseController
     @stories = ::LawyerQueries.new(current_lawyer).get_stories
     # meta
     set_meta(
-      title: "律師案件列表頁",
-      description: "律師案件列表頁",
-      keywords: "律師案件列表頁"
+      title: '律師案件列表頁',
+      description: '律師案件列表頁',
+      keywords: '律師案件列表頁'
     )
   end
 
@@ -33,11 +33,11 @@ class Lawyers::StoriesController < Lawyers::BaseController
              rescue
                nil
              end
-    redirect_as_fail(lawyer_root_path, "找不到該案件") unless @story
+    redirect_as_fail(lawyer_root_path, '找不到該案件') unless @story
   end
 
   def has_score?
-    @scores_sorted = ::LawyerQueries.new(current_lawyer).get_scores_array(@story, sort_by: "date")
-    redirect_as_fail(lawyer_root_path, "尚未有評鑑紀錄") unless @scores_sorted.present?
+    @scores_sorted = ::LawyerQueries.new(current_lawyer).get_scores_array(@story, sort_by: 'date')
+    redirect_as_fail(lawyer_root_path, '尚未有評鑑紀錄') unless @scores_sorted.present?
   end
 end

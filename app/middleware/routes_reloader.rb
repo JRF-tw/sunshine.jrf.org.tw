@@ -12,7 +12,7 @@ class RoutesReloader
   private
 
   def build_routes_reloader
-    ActiveSupport::FileUpdateChecker.new([], "config/routes" => "rb") do
+    ActiveSupport::FileUpdateChecker.new([], 'config/routes' => 'rb') do
       Rails.application.reload_routes!
     end
   end

@@ -28,7 +28,7 @@ class Story < ActiveRecord::Base
   has_many :story_subscriptions, dependent: :destroy
   has_many :verdict_scores
   has_many :schedule_scores
-  belongs_to :main_judge, class_name: "Judge", foreign_key: "main_judge_id"
+  belongs_to :main_judge, class_name: 'Judge', foreign_key: 'main_judge_id'
   belongs_to :court
 
   serialize :party_names, Array
@@ -36,7 +36,7 @@ class Story < ActiveRecord::Base
   serialize :judges_names, Array
   serialize :prosecutor_names, Array
 
-  scope :newest, -> { order("id DESC") }
+  scope :newest, -> { order('id DESC') }
 
   include Redis::Objects
   counter :lawyer_scored_count
@@ -54,15 +54,15 @@ class Story < ActiveRecord::Base
   end
 
   def by_relation_judges
-    story_relations.where(people_type: "Judge")
+    story_relations.where(people_type: 'Judge')
   end
 
   def by_relation_lawyers
-    story_relations.where(people_type: "Lawyer")
+    story_relations.where(people_type: 'Lawyer')
   end
 
   def by_relation_parties
-    story_relations.where(people_type: "Party")
+    story_relations.where(people_type: 'Party')
   end
 
   def detail_info
@@ -75,10 +75,10 @@ class Story < ActiveRecord::Base
     end
 
     def have_adjudgement(status)
-      adjudged_story_ids = Story.joins(:verdicts).where("Verdicts.is_judgment = ?", true).pluck(:id)
-      if status == "yes"
+      adjudged_story_ids = Story.joins(:verdicts).where('Verdicts.is_judgment = ?', true).pluck(:id)
+      if status == 'yes'
         where(id: adjudged_story_ids)
-      elsif status == "no"
+      elsif status == 'no'
         where.not(id: adjudged_story_ids)
       end
     end

@@ -45,7 +45,7 @@ class Scrap::ImportScheduleContext < BaseContext
 
   def get_main_judge
     branches = @court.branches.current.where(name: @branch_name)
-    branches = branches.where("chamber_name LIKE ? ", "%#{@story_type}%") if branches.map(&:judge_id).uniq.count > 1
+    branches = branches.where('chamber_name LIKE ? ', "%#{@story_type}%") if branches.map(&:judge_id).uniq.count > 1
     @main_judge = branches.first ? branches.first.judge : nil
     SlackService.notify_analysis_schedule_error("庭期分析錯誤 : 取得 審判長法官 資訊為空\n #{@hash}") unless @main_judge
   end
@@ -65,7 +65,7 @@ class Scrap::ImportScheduleContext < BaseContext
   end
 
   def record_count_to_daily_notify
-    Redis::Counter.new("daily_scrap_schedule_count").increment
+    Redis::Counter.new('daily_scrap_schedule_count').increment
   end
 
   def alert_new_story_type

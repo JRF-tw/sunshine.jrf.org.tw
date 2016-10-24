@@ -32,7 +32,7 @@ class ReviewsController < BaseController
       title: "#{@profile.name}的相關新聞紀錄",
       description: "#{@profile.name}的新聞相關清單。",
       keywords: "#{@profile.name}相關新聞,#{@profile.name}",
-      image: ActionController::Base.helpers.asset_path("hero-profiles-show-M.png")
+      image: ActionController::Base.helpers.asset_path('hero-profiles-show-M.png')
     )
   end
 end

@@ -31,16 +31,16 @@
 
 FactoryGirl.define do
   factory :lawyer do
-    name "lawyer"
+    name 'lawyer'
     sequence(:email) { |n| "lawyer-#{n}@test.com" }
-    sequence(:phone_number) { |_n| "09#{rand(1..99_999_999).to_s.rjust(8, "0")}" }
-    sequence(:office_number) { |_n| "0#{rand(1..88_888_888).to_s.rjust(8, "0")}" }
+    sequence(:phone_number) { |_n| "09#{rand(1..99_999_999).to_s.rjust(8, '0')}" }
+    sequence(:office_number) { |_n| "0#{rand(1..88_888_888).to_s.rjust(8, '0')}" }
     trait :with_avatar do
       avatar File.open "#{Rails.root}/spec/fixtures/person_avatar/people-1.jpg"
     end
 
     trait :with_password do
-      password "123123123"
+      password '123123123'
     end
 
     trait :with_confirmed do
@@ -48,7 +48,7 @@ FactoryGirl.define do
     end
 
     trait :with_gender do
-      gender "男"
+      gender '男'
     end
 
     trait :with_verdict do
@@ -58,22 +58,22 @@ FactoryGirl.define do
     end
 
     trait :with_unconfirmed_email do
-      unconfirmed_email "test@gmail.com"
+      unconfirmed_email 'test@gmail.com'
     end
 
     trait :with_confirmation_token do
-      confirmation_token "totoken"
+      confirmation_token 'totoken'
     end
   end
 
   factory :empty_name_for_lawyer, class: Lawyer do
-    name ""
-    email "aron@example.com"
+    name ''
+    email 'aron@example.com'
   end
 
   factory :empty_email_for_lawyer, class: Lawyer do
-    name "aron"
-    email ""
+    name 'aron'
+    email ''
   end
 
 end

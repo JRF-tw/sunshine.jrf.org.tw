@@ -32,8 +32,8 @@ FactoryGirl.define do
     profile do
       create :profile
     end
-    article_type "專書"
-    publish_year "1986"
+    article_type '專書'
+    publish_year '1986'
   end
 
 end

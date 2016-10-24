@@ -1,62 +1,62 @@
-require "rails_helper"
+require 'rails_helper'
 
 describe Party::ChangeEmailContext do
-  let!(:party) { create :party, unconfirmed_email: "hh@gmail.com" }
-  let!(:new_email) { "h2312@gmail.com" }
+  let!(:party) { create :party, unconfirmed_email: 'hh@gmail.com' }
+  let!(:new_email) { 'h2312@gmail.com' }
   subject { described_class.new(party) }
 
-  describe "perform" do
-    context "success" do
-      let(:params) { { email: new_email, current_password: "12321313213" } }
+  describe 'perform' do
+    context 'success' do
+      let(:params) { { email: new_email, current_password: '12321313213' } }
 
       it { expect { subject.perform(params) }.to change { party.reload.unconfirmed_email } }
     end
 
-    context "email already exist" do
-      let!(:party2) { create :party, email: "55667788@gmail.com" }
-      let(:params) { { email: party2.email, current_password: "12321313213" } }
+    context 'email already exist' do
+      let!(:party2) { create :party, email: '55667788@gmail.com' }
+      let(:params) { { email: party2.email, current_password: '12321313213' } }
 
       it { expect { subject.perform(params) }.not_to change { party.reload.unconfirmed_email } }
       it { expect { subject.perform(params) }.to change { subject.errors[:email_exist] } }
     end
 
-    context "empty email" do
-      let(:params) { { email: "", current_password: "12321313213" } }
+    context 'empty email' do
+      let(:params) { { email: '', current_password: '12321313213' } }
 
       it { expect { subject.perform(params) }.not_to change { party.reload.unconfirmed_email } }
       it { expect { subject.perform(params) }.to change { subject.errors[:email_pattern_invalid] } }
     end
 
-    context "empty password" do
-      let(:params) { { email: new_email, current_password: "" } }
+    context 'empty password' do
+      let(:params) { { email: new_email, current_password: '' } }
 
       it { expect { subject.perform(params) }.not_to change { party.reload.unconfirmed_email } }
     end
 
-    context "wrong password" do
-      let(:params) { { email: new_email, current_password: "5566nice" } }
+    context 'wrong password' do
+      let(:params) { { email: new_email, current_password: '5566nice' } }
 
       it { expect { subject.perform(params) }.not_to change { party.reload.unconfirmed_email } }
       it { expect { subject.perform(params) }.to change { subject.errors[:wrong_password] } }
     end
 
-    context "update invalid email" do
-      let(:params) { { email: "5566ee", current_password: "12321313213" } }
+    context 'update invalid email' do
+      let(:params) { { email: '5566ee', current_password: '12321313213' } }
 
       it { expect { subject.perform(params) }.not_to change { party.reload.unconfirmed_email } }
       it { expect { subject.perform(params) }.to change { subject.errors[:email_pattern_invalid] } }
     end
 
-    context "update the same email" do
-      let(:params) { { email: party.email, current_password: "12321313213" } }
+    context 'update the same email' do
+      let(:params) { { email: party.email, current_password: '12321313213' } }
 
       it { expect { subject.perform(params) }.not_to change { party.reload.unconfirmed_email } }
       it { expect { subject.perform(params) }.to change { subject.errors[:email_conflict] } }
     end
 
     context "update other's unconfirmed_email" do
-      let!(:party2) { create :party, unconfirmed_email: "55667788@gmail.com" }
-      let(:params) { { email: party2.unconfirmed_email, current_password: "12321313213" } }
+      let!(:party2) { create :party, unconfirmed_email: '55667788@gmail.com' }
+      let(:params) { { email: party2.unconfirmed_email, current_password: '12321313213' } }
 
       it { expect { subject.perform(params) }.to change { party.reload.unconfirmed_email } }
     end

@@ -1,6 +1,6 @@
 class Lawyers::ConfirmationsController < Devise::ConfirmationsController
   include CrudConcern
-  layout "lawyer"
+  layout 'lawyer'
 
   before_action :redirect_new_to_sign_in, only: [:new]
   before_action :find_lawyer, expect: [:create]

@@ -27,7 +27,7 @@ class Import::GetLawyerContext < BaseContext
   end
 
   def build_tempfile
-    @file = Tempfile.new("lawyers", "#{Rails.root}/tmp/")
+    @file = Tempfile.new('lawyers', "#{Rails.root}/tmp/")
     @file.write(@data)
     @file.rewind
     @file.close

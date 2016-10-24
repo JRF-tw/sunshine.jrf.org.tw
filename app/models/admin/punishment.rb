@@ -36,7 +36,7 @@
 
 class Admin::Punishment < ::Punishment
 
-  belongs_to :profile, class_name: "Admin::Profile", counter_cache: :punishments_count
+  belongs_to :profile, class_name: 'Admin::Profile', counter_cache: :punishments_count
 
   validates :profile_id, presence: true
 end

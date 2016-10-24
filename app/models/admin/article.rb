@@ -28,20 +28,20 @@
 #
 
 class Admin::Article < ::Article
-  belongs_to :profile, class_name: "Admin::Profile"
+  belongs_to :profile, class_name: 'Admin::Profile'
 
   validates :profile_id, :article_type, presence: true
   validate :validate_publish_date
 
   ARTICLE_TYPES = [
-    "編輯專書",
-    "期刊文章",
-    "會議論文",
-    "報紙投書",
-    "專書",
-    "碩博士論文",
-    "報告",
-    "其他"
+    '編輯專書',
+    '期刊文章',
+    '會議論文',
+    '報紙投書',
+    '專書',
+    '碩博士論文',
+    '報告',
+    '其他'
   ].freeze
 
   private
