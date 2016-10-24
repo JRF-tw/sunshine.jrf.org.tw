@@ -2,7 +2,8 @@ set :deploy_to, '/home/apps/jrf-sunny'
 set :rails_env, 'production'
 set :branch, ENV["BR"] || 'master'
 set :ssh_options, {
-  user: 'apps'
+  user: 'apps',
+  forward_agent: true
 }
 # Simple Role Syntax
 # ==================
