@@ -4,5 +4,6 @@ Rails.application.routes.draw do
     resources :courts, only: [:index]
     get "judges", to: "profiles#judges", as: :judges
     get "prosecutors", to: "profiles#prosecutors", as: :prosecutors
+    get '*unmatched_route', to: 'base#page_404'
   end
 end
