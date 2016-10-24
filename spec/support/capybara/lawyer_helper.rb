@@ -11,7 +11,7 @@ module Capybara
       lawyer.confirm
     end
 
-    def signin_lawyer(email:, password:)
+    def signin_lawyer(email:, password: '123123123')
       visit(new_lawyer_session_path)
       within('#new_lawyer') do
         fill_in 'lawyer_email', with: email
