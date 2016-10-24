@@ -7,6 +7,16 @@ class Api::BaseController < ApplicationController
 
   private
 
+  def respond_200(hash_data)
+    response.headers['Accept-Language'] = 'zh_TW'
+    render json: hash_data
+  end
+
+  def respond_error(message, status = nil)
+    status ||= 400
+    render json: { message: message }, status: status
+  end
+
   def enable_cors
     response.headers["Access-Control-Allow-Origin"] = "*"
     response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE"

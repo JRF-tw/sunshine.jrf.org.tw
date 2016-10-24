@@ -1,7 +1,7 @@
 class Api::CourtsController < Api::BaseController
 
   def index
-    @court = Court.all
-    respond_with @court
+    @courts = Court.all
+    respond_200(@courts)
   end
 end
