@@ -81,7 +81,7 @@ group :development do
   gem "guard-annotate"
   gem "annotate"
   gem "awesome_print"
-  gem "xray-rails"
+  gem "xray-rails", "~> 0.2.0"
   gem "pry"
   gem "pry-rails"
   gem "pry-remote"
