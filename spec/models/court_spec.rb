@@ -14,12 +14,12 @@
 #  scrap_name :string
 #
 
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Court, type: :model do
   let!(:court) { create :court }
 
-  it "FactoryGirl" do
+  it 'FactoryGirl' do
     expect(court).not_to be_new_record
   end
 end

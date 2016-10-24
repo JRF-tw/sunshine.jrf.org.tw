@@ -20,24 +20,24 @@
 
 class Admin::ReviewsController < Admin::BaseController
   before_action :review
-  before_action { add_crumb("個人檔案列表", admin_profiles_path) }
+  before_action { add_crumb('個人檔案列表', admin_profiles_path) }
   before_action { add_crumb("#{@profile.name}的個人檔案", admin_profile_path(@profile)) }
   before_action(except: [:index]) { add_crumb("#{@profile.name}的相關新聞評論列表", admin_profile_reviews_path(@profile)) }
 
   def index
     @reviews = @profile.reviews.all.newest.page(params[:page]).per(10)
     @admin_page_title = "#{@profile.name}的相關新聞評論列表"
-    add_crumb @admin_page_title, "#"
+    add_crumb @admin_page_title, '#'
   end
 
   def new
     @admin_page_title = "新增#{@profile.name}的相關新聞評論"
-    add_crumb @admin_page_title, "#"
+    add_crumb @admin_page_title, '#'
   end
 
   def edit
     @admin_page_title = "編輯#{@profile.name}的相關新聞評論"
-    add_crumb @admin_page_title, "#"
+    add_crumb @admin_page_title, '#'
   end
 
   def create
@@ -50,7 +50,7 @@ class Admin::ReviewsController < Admin::BaseController
       respond_to do |f|
         f.html {
           @admin_page_title = "新增#{@profile.name}的相關新聞評論"
-          add_crumb @admin_page_title, "#"
+          add_crumb @admin_page_title, '#'
           flash[:error] = review.errors.full_messages
           render :new
         }
@@ -64,7 +64,7 @@ class Admin::ReviewsController < Admin::BaseController
       redirect_to admin_profile_reviews_path(@profile), flash: { success: "#{@profile.name}的相關新聞評論 - 已修改" }
     else
       @admin_page_title = "編輯#{@profile.name}的相關新聞評論"
-      add_crumb @admin_page_title, "#"
+      add_crumb @admin_page_title, '#'
       flash[:error] = review.errors.full_messages
       render :edit
     end

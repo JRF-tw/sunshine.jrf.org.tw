@@ -33,9 +33,9 @@ class Procedure < ActiveRecord::Base
   belongs_to :profile
   belongs_to :suit, counter_cache: :procedure_count
 
-  scope :newest, -> { order("id DESC") }
-  scope :sort_by_procedure_date, -> { order("procedure_date DESC") }
-  scope :flow_by_procedure_date, -> { order("procedure_date ASC") }
-  scope :is_done, -> { where(procedure_content: "結束") }
+  scope :newest, -> { order('id DESC') }
+  scope :sort_by_procedure_date, -> { order('procedure_date DESC') }
+  scope :flow_by_procedure_date, -> { order('procedure_date ASC') }
+  scope :is_done, -> { where(procedure_content: '結束') }
 
 end

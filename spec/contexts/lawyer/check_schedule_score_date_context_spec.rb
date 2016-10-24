@@ -1,4 +1,4 @@
-require "rails_helper"
+require 'rails_helper'
 
 describe Lawyer::CheckScheduleScoreDateContext do
   let!(:lawyer) { create :lawyer }
@@ -7,59 +7,59 @@ describe Lawyer::CheckScheduleScoreDateContext do
   let!(:schedule) { create :schedule, story: story }
   let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type, start_on: schedule.start_on, confirmed_realdate: false } }
 
-  describe "#perform" do
+  describe '#perform' do
     subject { described_class.new(lawyer).perform(params) }
 
-    context "success" do
+    context 'success' do
       it { expect(subject).to be_truthy }
     end
 
-    context "date nil" do
+    context 'date nil' do
       before { params[:start_on] = nil }
       it { expect(subject).to be_falsey }
     end
 
-    context "date empty" do
-      before { params[:start_on] = "" }
+    context 'date empty' do
+      before { params[:start_on] = '' }
       it { expect(subject).to be_falsey }
     end
 
-    context "date in future" do
+    context 'date in future' do
       before { params[:start_on] = Time.zone.today + 1.day }
       it { expect(subject).to be_falsey }
     end
 
-    context "story not found" do
-      before { params[:word_type] = "xx" }
+    context 'story not found' do
+      before { params[:word_type] = 'xx' }
       it { expect(subject).to be_falsey }
     end
 
-    context "schedule not found" do
+    context 'schedule not found' do
       before { params[:start_on] = schedule.start_on - 1.day }
       it { expect(subject).to be_falsey }
     end
 
-    context "schedule not found" do
+    context 'schedule not found' do
       before { params[:start_on] = schedule.start_on - 1.day }
       it { expect(subject).to be_falsey }
     end
 
-    context "not in score time intervel" do
+    context 'not in score time intervel' do
       before { schedule.update_attributes(start_on: Time.zone.today - 15.days) }
       it { expect(subject).to be_falsey }
     end
   end
 
-  context "report realdate" do
+  context 'report realdate' do
     subject { described_class.new(lawyer).perform(params) }
-    before { params[:confirmed_realdate] = "true" }
+    before { params[:confirmed_realdate] = 'true' }
 
-    context "diff date" do
+    context 'diff date' do
       before { params[:start_on] = schedule.start_on - 14.days }
       it { expect(subject).to be_nil }
     end
 
-    context "should alert slack over MAX_REPORT_TIME " do
+    context 'should alert slack over MAX_REPORT_TIME ' do
       before { params[:start_on] = schedule.start_on - 14.days }
       before { lawyer.score_report_schedule_real_date.value = 4 }
 

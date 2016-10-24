@@ -1,6 +1,6 @@
 namespace :import do
   task :lawyer, [:arg1] => :environment do |_t, args|
-    puts "匯入律師資料中..."
+    puts '匯入律師資料中...'
     context = Import::GetLawyerContext.new(args[:arg1])
     context.perform
     puts "成功匯入 #{context.import_lawyers.count} 筆"

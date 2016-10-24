@@ -28,7 +28,7 @@ class CourtObserver::CheckScheduleScoreDateContext < BaseContext
   def check_story
     context = CourtObserver::CheckScheduleScoreInfoContext.new(@court_observer)
     @story = context.perform(@params)
-    return add_error(:story_not_found, context.error_messages.join(",")) unless @story
+    return add_error(:story_not_found, context.error_messages.join(',')) unless @story
   end
 
   def check_date

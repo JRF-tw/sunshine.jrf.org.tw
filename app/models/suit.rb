@@ -30,9 +30,9 @@ class Suit < ActiveRecord::Base
   has_many :prosecutors, through: :suit_prosecutors
   has_many :procedures, dependent: :destroy
 
-  scope :newest, -> { order("id DESC") }
+  scope :newest, -> { order('id DESC') }
 
-  STATE = ["處理中", "未受懲處", "已懲處"].freeze
+  STATE = ['處理中', '未受懲處', '已懲處'].freeze
 
   def related_suits
     judge_ids = judges.map(&:id)
@@ -58,7 +58,7 @@ class Suit < ActiveRecord::Base
       all
     end
 
-    def front_like_search(search_word, combination = "or")
+    def front_like_search(search_word, combination = 'or')
       search_word.keep_if { |_k, v| v.present? }
       if search_word.present?
         where_str = search_word.map { |k, _i| "\"#{table_name}\".\"#{k}\" like :#{k}" }.join(" #{combination} ")

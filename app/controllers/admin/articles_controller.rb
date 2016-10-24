@@ -29,24 +29,24 @@
 
 class Admin::ArticlesController < Admin::BaseController
   before_action :article
-  before_action { add_crumb("個人檔案列表", admin_profiles_path) }
+  before_action { add_crumb('個人檔案列表', admin_profiles_path) }
   before_action { add_crumb("#{@profile.name}的個人檔案", admin_profile_path(@profile)) }
   before_action(except: [:index]) { add_crumb("#{@profile.name}的發表言論列表", admin_profile_articles_path(@profile)) }
 
   def index
     @articles = @profile.articles.all.newest.page(params[:page]).per(10)
     @admin_page_title = "#{@profile.name}的發表言論列表"
-    add_crumb @admin_page_title, "#"
+    add_crumb @admin_page_title, '#'
   end
 
   def new
     @admin_page_title = "新增#{@profile.name}的發表言論"
-    add_crumb @admin_page_title, "#"
+    add_crumb @admin_page_title, '#'
   end
 
   def edit
     @admin_page_title = "編輯#{@profile.name}的發表言論"
-    add_crumb @admin_page_title, "#"
+    add_crumb @admin_page_title, '#'
   end
 
   def create
@@ -59,7 +59,7 @@ class Admin::ArticlesController < Admin::BaseController
       respond_to do |f|
         f.html {
           @admin_page_title = "新增#{@profile.name}的發表言論"
-          add_crumb @admin_page_title, "#"
+          add_crumb @admin_page_title, '#'
           flash[:error] = article.errors.full_messages
           render :new
         }
@@ -73,7 +73,7 @@ class Admin::ArticlesController < Admin::BaseController
       redirect_to admin_profile_articles_path(@profile), flash: { success: "#{@profile.name}的發表言論 - 已修改" }
     else
       @admin_page_title = "編輯#{@profile.name}的發表言論"
-      add_crumb @admin_page_title, "#"
+      add_crumb @admin_page_title, '#'
       flash[:error] = article.errors.full_messages
       render :edit
     end

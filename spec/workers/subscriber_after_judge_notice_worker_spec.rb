@@ -1,6 +1,6 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe SubscriberAfterJudgeNoticeWorker, type: :worker do
-  context "feature spec 已測" do
+  context 'feature spec 已測' do
   end
 end

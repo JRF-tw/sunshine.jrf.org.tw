@@ -12,13 +12,13 @@
 #  missed       :boolean          default(FALSE)
 #
 
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Branch do
   let(:branch) { create :branch }
 
-  describe "FactoryGirl" do
-    describe "normalize" do
+  describe 'FactoryGirl' do
+    describe 'normalize' do
       subject! { branch }
       it { expect(subject).not_to be_new_record }
     end

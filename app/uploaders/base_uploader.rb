@@ -18,7 +18,7 @@ class BaseUploader < CarrierWave::Uploader::Base
   # end
 
   def store_dir
-    model_class = model.class.to_s.underscore.split("/").last
+    model_class = model.class.to_s.underscore.split('/').last
     "uploads/#{model_class}/#{mounted_as}/#{id_partition(model)}"
   end
 
@@ -68,9 +68,9 @@ class BaseUploader < CarrierWave::Uploader::Base
   def id_partition(attachment)
     case id = attachment.id
     when Integer
-      ("%09d" % id).scan(/\d{3}/).join("/")
+      ('%09d' % id).scan(/\d{3}/).join('/')
     when String
-      id.scan(/.{3}/).first(3).join("/")
+      id.scan(/.{3}/).first(3).join('/')
     end
   end
 

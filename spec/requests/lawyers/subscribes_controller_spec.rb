@@ -1,4 +1,4 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Lawyers::SubscribesController, type: :request do
 
@@ -6,12 +6,12 @@ RSpec.describe Lawyers::SubscribesController, type: :request do
   before { signin_lawyer(lawyer) }
   let!(:story) { create :story }
 
-  describe "#toggle" do
+  describe '#toggle' do
     subject! { post "/lawyer/stories/#{story.id}/subscribe/toggle.js" }
     it { expect(StorySubscription.count).to eq(1) }
   end
 
-  describe "#delete" do
+  describe '#delete' do
     before { post "/lawyer/stories/#{story.id}/subscribe/toggle.js" }
     subject! { delete "/lawyer/stories/#{story.id}/subscribe" }
     it { expect(response).to be_redirect }

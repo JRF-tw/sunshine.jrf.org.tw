@@ -1,5 +1,5 @@
 class Scrap::GetJudgesContext < BaseContext
-  EXCEL_URL = "http://csdi.judicial.gov.tw/abbs/wkw/WHD3A01_DOWNLOADCVS.jsp?court=".freeze
+  EXCEL_URL = 'http://csdi.judicial.gov.tw/abbs/wkw/WHD3A01_DOWNLOADCVS.jsp?court='.freeze
 
   before_perform  :get_remote_csv_data
   after_perform   :get_diff_import_daily_branch
@@ -24,16 +24,16 @@ class Scrap::GetJudgesContext < BaseContext
   private
 
   def get_remote_csv_data
-    scrap_file_url = EXCEL_URL + Court.collect_codes.join(",")
+    scrap_file_url = EXCEL_URL + Court.collect_codes.join(',')
     response_data = Mechanize.new.get(scrap_file_url)
-    response_data = Nokogiri::HTML(Iconv.new("UTF-8//IGNORE", "Big5").iconv(response_data.body))
-    @data = response_data.css("body p").text.split("\n")
+    response_data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
+    @data = response_data.css('body p').text.split("\n")
   rescue
     nil
   end
 
   def get_diff_import_daily_branch
-    @diff_branch_ids = Branch.all.map(&:id) - Redis::List.new("daily_import_branch_ids").values.map(&:to_i)
+    @diff_branch_ids = Branch.all.map(&:id) - Redis::List.new('daily_import_branch_ids').values.map(&:to_i)
   end
 
   def notify_diff_info
@@ -45,10 +45,10 @@ class Scrap::GetJudgesContext < BaseContext
 
   def update_diff_branch
     Branch.where(id: @diff_branch_ids).update_all(missed: true)
-    Redis::List.new("daily_import_branch_ids").clear
+    Redis::List.new('daily_import_branch_ids').clear
   end
 
   def record_intervel_to_daily_notify
-    Redis::Value.new("daily_scrap_judge_intervel").value = "#{Time.zone.today} ~ #{Time.zone.today}"
+    Redis::Value.new('daily_scrap_judge_intervel').value = "#{Time.zone.today} ~ #{Time.zone.today}"
   end
 end

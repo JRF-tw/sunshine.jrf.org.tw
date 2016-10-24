@@ -31,28 +31,28 @@
 
 class Admin::LawyersController < Admin::BaseController
   before_action :lawyer
-  before_action(except: [:index]) { add_crumb("律師列表", admin_lawyers_path) }
+  before_action(except: [:index]) { add_crumb('律師列表', admin_lawyers_path) }
 
   def index
     @search = Admin::Lawyer.all.ransack(params[:q])
     @lawyers = @search.result.page(params[:page]).per(20)
-    @admin_page_title = "律師列表"
-    add_crumb @admin_page_title, "#"
+    @admin_page_title = '律師列表'
+    add_crumb @admin_page_title, '#'
   end
 
   def show
     @admin_page_title = "律師檔案 - #{lawyer.name} 的詳細資料"
-    add_crumb @admin_page_title, "#"
+    add_crumb @admin_page_title, '#'
   end
 
   def new
-    @admin_page_title = "新增律師"
-    add_crumb @admin_page_title, "#"
+    @admin_page_title = '新增律師'
+    add_crumb @admin_page_title, '#'
   end
 
   def edit
     @admin_page_title = "編輯律師 - #{lawyer.name}"
-    add_crumb @admin_page_title, "#"
+    add_crumb @admin_page_title, '#'
   end
 
   def create

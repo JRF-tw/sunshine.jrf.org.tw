@@ -30,12 +30,12 @@
 FactoryGirl.define do
   factory :party do
     sequence(:name) { |n| "當事人 - #{n}" }
-    password "12321313213"
+    password '12321313213'
     sequence(:identify_number) { "A#{rand(100_000_000..299_999_999)}" }
-    sequence(:phone_number) { "09#{rand(1..99_999_999).to_s.rjust(8, "0")}" }
+    sequence(:phone_number) { "09#{rand(1..99_999_999).to_s.rjust(8, '0')}" }
     sequence(:email) { |n| "#{n}aaoo@gmail.com" }
     trait :with_unconfirmed_email do
-      unconfirmed_email "aron1122@gmail.com"
+      unconfirmed_email 'aron1122@gmail.com'
     end
 
     trait :already_confirmed do
@@ -43,15 +43,15 @@ FactoryGirl.define do
     end
 
     trait :with_confirmation_token do
-      confirmation_token "2grgr212fd"
+      confirmation_token '2grgr212fd'
     end
   end
 
   factory :party_for_create, class: Party do
     sequence(:name) { |n| "當事人 - #{n}" }
-    password "12321313213"
-    password_confirmation "12321313213"
+    password '12321313213'
+    password_confirmation '12321313213'
     sequence(:identify_number) { |_n| "A#{rand(100_000_000..299_999_999)}" }
-    sequence(:phone_number) { |_n| "09#{rand(1..99_999_999).to_s.rjust(8, "0")}" }
+    sequence(:phone_number) { |_n| "09#{rand(1..99_999_999).to_s.rjust(8, '0')}" }
   end
 end

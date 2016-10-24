@@ -1,5 +1,5 @@
 class CourtObservers::RegistrationsController < Devise::RegistrationsController
-  layout "observer"
+  layout 'observer'
   include CrudConcern
 
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -8,9 +8,9 @@ class CourtObservers::RegistrationsController < Devise::RegistrationsController
   def new
     # meta
     set_meta(
-      title: "觀察者註冊頁",
-      description: "觀察者註冊頁",
-      keywords: "觀察者註冊頁"
+      title: '觀察者註冊頁',
+      description: '觀察者註冊頁',
+      keywords: '觀察者註冊頁'
     )
     super
   end
@@ -46,7 +46,7 @@ class CourtObservers::RegistrationsController < Devise::RegistrationsController
       respond_with current_court_observer, location: after_update_path_for(current_court_observer)
     else
       clean_up_passwords resource
-      flash.now[:error] = context.error_messages.join(", ")
+      flash.now[:error] = context.error_messages.join(', ')
       render :edit
     end
   end
@@ -58,11 +58,11 @@ class CourtObservers::RegistrationsController < Devise::RegistrationsController
     context = CourtObserver::RegisterCheckContext.new(params)
     context.perform
     if context.errors[:observer_already_confirm] || context.errors[:observer_already_sign_up]
-      flash[:error] = context.error_messages.join(", ")
+      flash[:error] = context.error_messages.join(', ')
       redirect_to new_court_observer_session_path
     elsif context.errors.any?
-      flash[:error] = context.error_messages.join(", ")
-      render "new"
+      flash[:error] = context.error_messages.join(', ')
+      render 'new'
     end
   end
 

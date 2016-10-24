@@ -39,7 +39,7 @@ FactoryGirl.define do
     profile do
       create :profile
     end
-    decision_unit "foo"
+    decision_unit 'foo'
   end
 
 end

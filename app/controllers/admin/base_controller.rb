@@ -2,16 +2,16 @@ class Admin::BaseController < ApplicationController
   # require 'rails_autolink'
   include CrudConcern
 
-  layout "admin"
+  layout 'admin'
   before_action :authenticate_user!
   before_action :authenticate_admin_user!
   before_action do
-    add_crumb "首頁", admin_root_path
+    add_crumb '首頁', admin_root_path
   end
 
   def index
-    @admin_page_title = "首頁"
-    set_meta(title: "首頁")
+    @admin_page_title = '首頁'
+    set_meta(title: '首頁')
   end
 
   private

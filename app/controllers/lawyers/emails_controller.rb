@@ -4,25 +4,25 @@ class Lawyers::EmailsController < Lawyers::BaseController
   def edit
     # meta
     set_meta(
-      title: "律師編輯信箱頁",
-      description: "律師編輯信箱頁",
-      keywords: "律師編輯信箱頁"
+      title: '律師編輯信箱頁',
+      description: '律師編輯信箱頁',
+      keywords: '律師編輯信箱頁'
     )
   end
 
   def update
     context = Lawyer::ChangeEmailContext.new(@lawyer)
     if context.perform(params)
-      flash[:notice] = "需要重新驗證新的Email"
+      flash[:notice] = '需要重新驗證新的Email'
       redirect_to lawyer_profile_path
     else
-      flash.now[:error] = context.error_messages.join(", ")
+      flash.now[:error] = context.error_messages.join(', ')
       render :edit
     end
   end
 
   def resend_confirmation_mail
-    flash[:notice] = "您將在幾分鐘後收到一封電子郵件，內有驗證帳號的步驟說明。"
+    flash[:notice] = '您將在幾分鐘後收到一封電子郵件，內有驗證帳號的步驟說明。'
     CustomDeviseMailer.delay.resend_confirmation_instructions(current_lawyer)
     redirect_to lawyer_profile_path
   end

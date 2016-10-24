@@ -1,5 +1,5 @@
 class Parties::BaseController < ApplicationController
-  layout "party"
+  layout 'party'
   include CrudConcern
   before_action :authenticate_party!
   before_action :set_phone?

@@ -24,20 +24,20 @@ class Court < ActiveRecord::Base
   has_many :judges, foreign_key: :current_court_id
 
   def self.get_courts
-    where(court_type: "法院")
+    where(court_type: '法院')
   end
 
   def self.prosecutors
-    where(court_type: "檢察署")
+    where(court_type: '檢察署')
   end
 
-  scope :newest, -> { order("id DESC") }
-  scope :order_by_weight, -> { order("weight DESC, id DESC") }
+  scope :newest, -> { order('id DESC') }
+  scope :order_by_weight, -> { order('weight DESC, id DESC') }
   scope :with_codes, -> { where.not(code: nil) }
 
   class << self
     def collect_codes
-      where(court_type: "法院").map(&:code)
+      where(court_type: '法院').map(&:code)
     end
   end
 end

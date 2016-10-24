@@ -27,28 +27,28 @@
 
 class Admin::ProfilesController < Admin::BaseController
   before_action :profile
-  before_action(except: [:index]) { add_crumb("個人檔案列表", admin_profiles_path) }
+  before_action(except: [:index]) { add_crumb('個人檔案列表', admin_profiles_path) }
 
   def index
     @search = Profile.all.newest.ransack(params[:q])
     @profiles = @search.result.page(params[:page]).per(20)
-    @admin_page_title = "個人檔案列表"
-    add_crumb @admin_page_title, "#"
+    @admin_page_title = '個人檔案列表'
+    add_crumb @admin_page_title, '#'
   end
 
   def show
     @admin_page_title = "個人檔案 - #{profile.name} 的詳細資料"
-    add_crumb @admin_page_title, "#"
+    add_crumb @admin_page_title, '#'
   end
 
   def new
-    @admin_page_title = "新增個人檔案"
-    add_crumb @admin_page_title, "#"
+    @admin_page_title = '新增個人檔案'
+    add_crumb @admin_page_title, '#'
   end
 
   def edit
     @admin_page_title = "編輯個人檔案 - #{profile.name}"
-    add_crumb @admin_page_title, "#"
+    add_crumb @admin_page_title, '#'
   end
 
   def create
@@ -60,8 +60,8 @@ class Admin::ProfilesController < Admin::BaseController
     else
       respond_to do |f|
         f.html {
-          @admin_page_title = "新增個人檔案"
-          add_crumb @admin_page_title, "#"
+          @admin_page_title = '新增個人檔案'
+          add_crumb @admin_page_title, '#'
           flash[:error] = profile.errors.full_messages
           render :new
         }
@@ -75,7 +75,7 @@ class Admin::ProfilesController < Admin::BaseController
       redirect_to admin_profile_path(profile), flash: { success: "個人檔案 - #{profile.name} 已修改" }
     else
       @admin_page_title = "編輯個人檔案 - #{profile.name}"
-      add_crumb @admin_page_title, "#"
+      add_crumb @admin_page_title, '#'
       flash[:error] = profile.errors.full_messages
       render :edit
     end

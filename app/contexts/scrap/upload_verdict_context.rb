@@ -10,7 +10,7 @@ class Scrap::UploadVerdictContext < BaseContext
   def perform(verdict)
     @verdict = verdict
     run_callbacks :perform do
-      add_error("upload file failed") unless @verdict.save
+      add_error('upload file failed') unless @verdict.save
       true
     end
   rescue => e
@@ -20,7 +20,7 @@ class Scrap::UploadVerdictContext < BaseContext
   private
 
   def bulid_tempfile
-    @file = Tempfile.new("verdict", "#{Rails.root}/tmp/")
+    @file = Tempfile.new('verdict', "#{Rails.root}/tmp/")
     @file.write(@content)
     @file.rewind
     @file.close

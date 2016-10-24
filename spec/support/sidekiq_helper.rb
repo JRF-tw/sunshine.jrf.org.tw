@@ -7,11 +7,11 @@ module SidekiqHelper
 
   def fetch_sidekiq_jobs(worker_klass, method = nil, scheduled: false, queue: nil, wait_time: nil)
     queue ||= begin
-                worker_klass.get_sidekiq_options["queue"]
+                worker_klass.get_sidekiq_options['queue']
               rescue
                 nil
               end
-    queue ||= "default"
+    queue ||= 'default'
     sleep(wait_time) if wait_time
     (scheduled ? Sidekiq::ScheduledSet.new : Sidekiq::Queue.new(queue)).to_a.select do |j|
       if method # delay extension
@@ -23,7 +23,7 @@ module SidekiqHelper
     end
   end
 
-  def fetch_sidekiq_last_job(queue: "default", scheduled: false)
+  def fetch_sidekiq_last_job(queue: 'default', scheduled: false)
     sleep(1)
     (scheduled ? Sidekiq::ScheduledSet.new : Sidekiq::Queue.new(queue)).to_a.first
   end

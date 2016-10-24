@@ -19,7 +19,7 @@
 #
 
 class Admin::Review < ::Review
-  belongs_to :profile, class_name: "Admin::Profile"
+  belongs_to :profile, class_name: 'Admin::Profile'
 
   validates :profile_id, :name, :title, presence: true
 end

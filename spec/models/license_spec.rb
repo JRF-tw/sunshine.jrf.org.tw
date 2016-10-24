@@ -17,16 +17,16 @@
 #  is_hidden    :boolean
 #
 
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe License, type: :model do
   let!(:license) { create :license }
 
-  it "FactoryGirl" do
+  it 'FactoryGirl' do
     expect(license).not_to be_new_record
   end
 
-  it "has_many :licenses, dependent: :destroy" do
+  it 'has_many :licenses, dependent: :destroy' do
     expect(License.count).to eq(1)
     profile = license.profile
     profile.destroy

@@ -1,12 +1,12 @@
 class Lawyers::SessionsController < Devise::SessionsController
-  layout "lawyer"
+  layout 'lawyer'
 
   def new
     # meta
     set_meta(
-      title: "律師登入頁",
-      description: "律師登入頁",
-      keywords: "律師登入頁"
+      title: '律師登入頁',
+      description: '律師登入頁',
+      keywords: '律師登入頁'
     )
     super
   end
@@ -15,7 +15,7 @@ class Lawyers::SessionsController < Devise::SessionsController
   def create
     self.resource = warden.authenticate!(auth_options)
     if resource.need_update_info?
-      flash[:notice] = "請更新完整資料"
+      flash[:notice] = '請更新完整資料'
       redirect_to edit_lawyer_profile_path
     else
       set_flash_message(:notice, :signed_in) if is_flashing_format?

@@ -16,28 +16,28 @@
 
 class Admin::CourtsController < Admin::BaseController
   before_action :court
-  before_action(except: [:index]) { add_crumb("法院 / 檢察署列表", admin_courts_path) }
+  before_action(except: [:index]) { add_crumb('法院 / 檢察署列表', admin_courts_path) }
 
   def index
     @search = Court.all.newest.ransack(params[:q])
     @courts = @search.result.page(params[:page]).per(20)
-    @admin_page_title = "法院 / 檢察署列表"
-    add_crumb @admin_page_title, "#"
+    @admin_page_title = '法院 / 檢察署列表'
+    add_crumb @admin_page_title, '#'
   end
 
   def show
     @admin_page_title = "法院 - #{@court.full_name}"
-    add_crumb @admin_page_title, "#"
+    add_crumb @admin_page_title, '#'
   end
 
   def new
-    @admin_page_title = "新增法院 / 檢察署"
-    add_crumb @admin_page_title, "#"
+    @admin_page_title = '新增法院 / 檢察署'
+    add_crumb @admin_page_title, '#'
   end
 
   def edit
     @admin_page_title = "編輯法院 / 檢察署 - #{court.name}"
-    add_crumb @admin_page_title, "#"
+    add_crumb @admin_page_title, '#'
   end
 
   def create
@@ -79,8 +79,8 @@ class Admin::CourtsController < Admin::BaseController
 
   def edit_weight
     @courts = Court.all.get_courts.shown.sorted.page(params[:page]).per(20)
-    @admin_page_title = "法院 排序調整"
-    add_crumb @admin_page_title, "#"
+    @admin_page_title = '法院 排序調整'
+    add_crumb @admin_page_title, '#'
   end
 
   def update_weight

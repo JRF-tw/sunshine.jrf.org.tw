@@ -16,7 +16,7 @@ class Party::VerifyPhoneContext < BaseContext
     @params = permit_params(params[:party] || params, PERMITS)
 
     run_callbacks :perform do
-      return add_error(:data_update_fail, @party.errors.full_messages.join(",").to_s) unless @party.save
+      return add_error(:data_update_fail, @party.errors.full_messages.join(',').to_s) unless @party.save
       true
     end
   end
@@ -46,7 +46,7 @@ class Party::VerifyPhoneContext < BaseContext
   end
 
   def build_message
-    @message = "當事人手機驗證成功"
+    @message = '當事人手機驗證成功'
   end
 
   def confirmed

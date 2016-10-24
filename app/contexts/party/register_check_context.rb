@@ -20,7 +20,7 @@ class Party::RegisterCheckContext < BaseContext
 
   def check_params_data
     context = Party::IdentifyNumberCheckContext.new(@params)
-    return add_error(:data_invalid, context.error_messages.join(", ")) unless context.perform
+    return add_error(:data_invalid, context.error_messages.join(', ')) unless context.perform
   end
 
   def check_party_params_exist

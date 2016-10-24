@@ -19,10 +19,10 @@
 FactoryGirl.define do
   factory :suit_banner do
     pic_l File.open "#{Rails.root}/spec/fixtures/person_avatar/people-1.jpg"
-    url "http://google.com"
-    alt_string "haha"
-    title "foofoo"
-    content "foofoobarbarfoofoobarbarfoofoobarbarfoofoobarbar"
+    url 'http://google.com'
+    alt_string 'haha'
+    title 'foofoo'
+    content 'foofoobarbarfoofoobarbarfoofoobarbarfoofoobarbar'
   end
 
 end

@@ -1,12 +1,12 @@
 class CourtObservers::SessionsController < Devise::SessionsController
-  layout "observer"
+  layout 'observer'
 
   def new
     # meta
     set_meta(
-      title: "觀察者登入頁",
-      description: "觀察者登入頁",
-      keywords: "觀察者登入頁"
+      title: '觀察者登入頁',
+      description: '觀察者登入頁',
+      keywords: '觀察者登入頁'
     )
     super
   end

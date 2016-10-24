@@ -23,35 +23,35 @@
 
 class Admin::JudgmentsController < Admin::BaseController
   before_action :judgment
-  before_action(except: [:index]) { add_crumb("重要判決列表", admin_judgments_path) }
+  before_action(except: [:index]) { add_crumb('重要判決列表', admin_judgments_path) }
 
   def index
     @judgments = Judgment.all.newest.page(params[:page]).per(10)
-    @admin_page_title = "重要判決列表"
-    add_crumb @admin_page_title, "#"
+    @admin_page_title = '重要判決列表'
+    add_crumb @admin_page_title, '#'
   end
 
   def new
-    @admin_page_title = "新增重要判決"
-    add_crumb @admin_page_title, "#"
+    @admin_page_title = '新增重要判決'
+    add_crumb @admin_page_title, '#'
   end
 
   def edit
-    @admin_page_title = "編輯重要判決"
-    add_crumb @admin_page_title, "#"
+    @admin_page_title = '編輯重要判決'
+    add_crumb @admin_page_title, '#'
   end
 
   def create
     if judgment.save
       respond_to do |f|
-        f.html { redirect_to admin_judgments_path, flash: { success: "重要判決已新增" } }
+        f.html { redirect_to admin_judgments_path, flash: { success: '重要判決已新增' } }
         f.js { render }
       end
     else
       respond_to do |f|
         f.html {
-          @admin_page_title = "新增重要判決"
-          add_crumb @admin_page_title, "#"
+          @admin_page_title = '新增重要判決'
+          add_crumb @admin_page_title, '#'
           flash[:error] = judgment.errors.full_messages
           render :new
         }
@@ -62,10 +62,10 @@ class Admin::JudgmentsController < Admin::BaseController
 
   def update
     if judgment.update_attributes(judgment_params)
-      redirect_to admin_judgments_path, flash: { success: "重要判決已修改" }
+      redirect_to admin_judgments_path, flash: { success: '重要判決已修改' }
     else
-      @admin_page_title = "編輯重要判決"
-      add_crumb @admin_page_title, "#"
+      @admin_page_title = '編輯重要判決'
+      add_crumb @admin_page_title, '#'
       flash[:error] = judgment.errors.full_messages
       render :edit
     end
@@ -73,7 +73,7 @@ class Admin::JudgmentsController < Admin::BaseController
 
   def destroy
     if judgment.destroy
-      redirect_to admin_judgments_path, flash: { success: "重要判決已刪除" }
+      redirect_to admin_judgments_path, flash: { success: '重要判決已刪除' }
     else
       flash[:error] = judgment.errors.full_messages
       redirect_to :back

@@ -8,6 +8,6 @@ class SiteMapGeneratorWorker
   end
 
   def perform
-    `rake "-s sitemap:refresh"` if Rails.env == "production"
+    `rake "-s sitemap:refresh"` if Rails.env == 'production'
   end
 end

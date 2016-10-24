@@ -18,16 +18,16 @@
 #  is_hidden  :boolean
 #
 
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Review, type: :model do
   let!(:review) { create :review }
 
-  it "FactoryGirl" do
+  it 'FactoryGirl' do
     expect(review).not_to be_new_record
   end
 
-  it "has_many :careers, dependent: :destroy" do
+  it 'has_many :careers, dependent: :destroy' do
     expect(Review.count).to eq(1)
     profile = review.profile
     profile.destroy

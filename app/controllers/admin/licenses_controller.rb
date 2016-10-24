@@ -19,24 +19,24 @@
 
 class Admin::LicensesController < Admin::BaseController
   before_action :license
-  before_action { add_crumb("個人檔案列表", admin_profiles_path) }
+  before_action { add_crumb('個人檔案列表', admin_profiles_path) }
   before_action { add_crumb("#{@profile.name}的個人檔案", admin_profile_path(@profile)) }
   before_action(except: [:index]) { add_crumb("#{@profile.name}的專業證書列表", admin_profile_licenses_path(@profile)) }
 
   def index
     @licenses = @profile.licenses.all.newest.page(params[:page]).per(10)
     @admin_page_title = "#{@profile.name}的專業證書列表"
-    add_crumb @admin_page_title, "#"
+    add_crumb @admin_page_title, '#'
   end
 
   def new
     @admin_page_title = "新增#{@profile.name}的專業證書"
-    add_crumb @admin_page_title, "#"
+    add_crumb @admin_page_title, '#'
   end
 
   def edit
     @admin_page_title = "編輯#{@profile.name}的專業證書 - #{license.title}"
-    add_crumb @admin_page_title, "#"
+    add_crumb @admin_page_title, '#'
   end
 
   def create
@@ -49,7 +49,7 @@ class Admin::LicensesController < Admin::BaseController
       respond_to do |f|
         f.html {
           @admin_page_title = "新增#{@profile.name}的專業證書"
-          add_crumb @admin_page_title, "#"
+          add_crumb @admin_page_title, '#'
           flash[:error] = license.errors.full_messages
           render :new
         }
@@ -63,7 +63,7 @@ class Admin::LicensesController < Admin::BaseController
       redirect_to admin_profile_licenses_path(@profile), flash: { success: "#{@profile.name}的專業證書 - #{license.title} 已修改" }
     else
       @admin_page_title = "編輯#{@profile.name}的專業證書 - #{license.title}"
-      add_crumb @admin_page_title, "#"
+      add_crumb @admin_page_title, '#'
       flash[:error] = license.errors.full_messages
       render :edit
     end

@@ -10,11 +10,11 @@
 #  updated_at  :datetime         not null
 #
 
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe StoryRelation, type: :model do
-  describe "FactoryGirl" do
-    describe "normalize" do
+  describe 'FactoryGirl' do
+    describe 'normalize' do
       let!(:story_relation) { create :story_relation }
       it { expect(story_relation).to be_present }
       it { expect(story_relation.people).to eq(Judge.last) }

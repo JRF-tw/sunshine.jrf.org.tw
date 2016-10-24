@@ -1,10 +1,10 @@
-require "rails_helper"
+require 'rails_helper'
 
 describe Admin::JudgeDeleteContext do
   let(:judge) { create(:judge) }
 
-  describe "#perform" do
-    context "success" do
+  describe '#perform' do
+    context 'success' do
       subject! { described_class.new(judge) }
       it { expect { subject.perform }.to change { Judge.count }.by(-1) }
     end

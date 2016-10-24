@@ -1,5 +1,5 @@
 class Scrap::ImportCourtContext < BaseContext
-  SCRAP_URI = "http://jirs.judicial.gov.tw/FJUD/FJUDQRY01_1.aspx".freeze
+  SCRAP_URI = 'http://jirs.judicial.gov.tw/FJUD/FJUDQRY01_1.aspx'.freeze
   before_perform  :check_data
   before_perform  :tricky_court_data
   before_perform  :find_court
@@ -36,11 +36,11 @@ class Scrap::ImportCourtContext < BaseContext
   end
 
   def tricky_court_data
-    return add_error(:scrap_tricky_court_data) if @scrap_name == "臺灣高等法院－訴願決定" && @code == "TPH"
+    return add_error(:scrap_tricky_court_data) if @scrap_name == '臺灣高等法院－訴願決定' && @code == 'TPH'
   end
 
   def find_court
-    @court = Court.find_by(code: @code) || Court.find_by(scrap_name: @scrap_name) || Court.find_by(full_name: @scrap_name.delete(" "))
+    @court = Court.find_by(code: @code) || Court.find_by(scrap_name: @scrap_name) || Court.find_by(full_name: @scrap_name.delete(' '))
   end
 
   def build_court
@@ -68,7 +68,7 @@ class Scrap::ImportCourtContext < BaseContext
   end
 
   def assign_default_value
-    @court.assign_attributes(court_type: "法院") unless @court.court_type
+    @court.assign_attributes(court_type: '法院') unless @court.court_type
   end
 
   def notify_diff_fullname
@@ -76,6 +76,6 @@ class Scrap::ImportCourtContext < BaseContext
   end
 
   def record_count_to_daily_notify
-    Redis::Counter.new("daily_scrap_court_count").increment
+    Redis::Counter.new('daily_scrap_court_count').increment
   end
 end

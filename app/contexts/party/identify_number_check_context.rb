@@ -8,12 +8,12 @@ class Party::IdentifyNumberCheckContext < BaseContext
 
   def initialize(params)
     @params = permit_params(params[:party] || params, PERMITS)
-    @params[:policy_agreement] = true if params[:policy_agreement] == "1"
+    @params[:policy_agreement] = true if params[:policy_agreement] == '1'
   end
 
   def perform
     run_callbacks :perform do
-      @params.delete("policy_agreement")
+      @params.delete('policy_agreement')
       @party = Party.new(@params)
     end
   end

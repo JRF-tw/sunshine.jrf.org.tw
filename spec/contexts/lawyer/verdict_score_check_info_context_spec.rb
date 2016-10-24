@@ -1,4 +1,4 @@
-require "rails_helper"
+require 'rails_helper'
 
 describe Lawyer::VerdictScoreCheckInfoContext do
   let!(:lawyer) { create :lawyer }
@@ -6,57 +6,57 @@ describe Lawyer::VerdictScoreCheckInfoContext do
   let!(:story) { create :story, :pronounced, :adjudged, court: court }
   let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type } }
 
-  describe "#perform" do
+  describe '#perform' do
     subject { described_class.new(lawyer).perform(params) }
 
-    context "success" do
+    context 'success' do
       it { expect(subject).to be_truthy }
     end
 
-    context "court id invalid" do
+    context 'court id invalid' do
       before { params[:court_id] = court.id + 1 }
       it { expect(subject).to be_falsey }
     end
 
-    context "year empty" do
-      before { params[:year] = "" }
+    context 'year empty' do
+      before { params[:year] = '' }
       it { expect(subject).to be_falsey }
     end
 
-    context "word_type empty" do
-      before { params[:word_type] = "" }
+    context 'word_type empty' do
+      before { params[:word_type] = '' }
       it { expect(subject).to be_falsey }
     end
 
-    context "number empty" do
-      before { params[:number] = "" }
+    context 'number empty' do
+      before { params[:number] = '' }
       it { expect(subject).to be_falsey }
     end
 
-    context "wrong info not found story" do
-      before { params[:word_type] = "xxx" }
+    context 'wrong info not found story' do
+      before { params[:word_type] = 'xxx' }
       it { expect(subject).to be_falsey }
     end
 
-    context "story not adjudge" do
-      context "adjudge " do
+    context 'story not adjudge' do
+      context 'adjudge ' do
         before { story.update_attributes(adjudge_date: Time.zone.today) }
         it { expect(subject).to be_truthy }
       end
 
-      context "not adjudge" do
+      context 'not adjudge' do
         before { story.update_attributes(adjudge_date: nil) }
         it { expect(subject).to be_falsey }
       end
     end
 
-    context "valid_score_intervel" do
-      context "out score intervel" do
+    context 'valid_score_intervel' do
+      context 'out score intervel' do
         before { story.update_attributes(adjudge_date: Time.zone.today - 91.days) }
         it { expect(subject).to be_falsey }
       end
 
-      context "in score intervel" do
+      context 'in score intervel' do
         before { story.update_attributes(adjudge_date: Time.zone.today - 31.days) }
         it { expect(subject).to be_truthy }
       end
