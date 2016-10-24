@@ -20,6 +20,7 @@ require 'chosen-js'
 StoryCollapse     = require './modules/stories'
 Rules             = require './modules/rules'
 ToTop             = require './modules/to_top'
+Tab               = require './modules/tab'
 
 # Require entry modules
 # EX:
@@ -31,6 +32,7 @@ sprites.keys().forEach sprites
 new TextInput()
 new StoryCollapse '#story-collapse-toggle'
 new Toggle '.switch'
+new Tab '[data-tab-content]'
 new Dismiss '[data-dismiss]'
 new Rules()
 
