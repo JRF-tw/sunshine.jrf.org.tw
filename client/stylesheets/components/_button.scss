@@ -21,6 +21,17 @@
   position: relative;
   &:hover { color: $white; }
   &:active { color: $white shade($accent, 20%); }
+
+  &--judge {
+    $bg: $blue;
+    background-color: $bg;
+    &:active { background-color: shade($bg, 20%); }
+  }
+  &--prosecutor {
+    $bg: $purple;
+    background-color: $bg;
+    &:active { background-color: shade($bg, 20%); }    
+  }
 }
 .raised-button--large {
   @extend .raised-button;
