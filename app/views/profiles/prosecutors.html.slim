@@ -3,9 +3,4 @@
     description: '代表國家調查案例的檢察官，有什麼背景資料呢？一起來瞭解！'\
   }
 
-section.offcanvas-card-wrapper.container--wide
-  = render partial: 'components/avatar_list', locals: { people: @prosecutors, type: 'prosecutor' }
-
-  br
-  .text-center （依姓名部首排序）
-  = paginate @prosecutors, theme: 'www'
+= render partial: 'components/avatar_list', locals: { people: @prosecutors, type: 'prosecutor' }
