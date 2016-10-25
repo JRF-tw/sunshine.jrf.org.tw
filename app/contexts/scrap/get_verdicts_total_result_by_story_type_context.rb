@@ -35,6 +35,6 @@ class Scrap::GetVerdictsTotalResultByStoryTypeContext < BaseContext
     response_data = Nokogiri::HTML(response_data.body)
     @total_result = response_data.content.match(/共\s*([0-9]*)\s*筆/)[1].to_i
   rescue
-    nil
+    @total_result = 0
   end
 end
