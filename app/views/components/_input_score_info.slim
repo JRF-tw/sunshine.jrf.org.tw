@@ -3,7 +3,7 @@
 = simple_form_for form_for, as: as, url: form_url,
   wrapper: :md, html: { method: :post } do |f|
   = f.input :court_id, as: :select,
-    collection: collect_for_courts, include_blank: "請選擇法院",
+    collection: collect_for_shown_courts, include_blank: "請選擇法院",
     label: "法院"
   = f.input :story_type, as: :select,
     collection: collect_for_story_types, include_blank: "請選擇案件類別",
