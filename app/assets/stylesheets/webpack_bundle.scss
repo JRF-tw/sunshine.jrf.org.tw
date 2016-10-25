@@ -4927,7 +4927,7 @@ abbr[title="required"] {
 }
 
 .profile__avatar .job {
-  margin: 0;
+  margin: 0 auto 16px;
 }
 
 .list--profile-info {
@@ -4948,7 +4948,7 @@ abbr[title="required"] {
 .list--profile-info .cell {
   text-align: center;
   color: rgba(0, 0, 0, 0.54);
-  padding: 16px 0;
+  padding-bottom: 16px;
   width: 80px;
 }
 
