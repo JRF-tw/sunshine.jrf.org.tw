@@ -12,8 +12,8 @@ module TemplateHelper
   end
 
   def inline_svg(icon)
-    content_tag :svg, class: "#{icon} icon" do
-      tag :use, 'xlink:href' => "##{icon}"
+    content_tag :svg, class: "icon-#{icon} icon" do
+      tag :use, 'xlink:href' => "#icon-#{icon}"
     end
   end
 end
