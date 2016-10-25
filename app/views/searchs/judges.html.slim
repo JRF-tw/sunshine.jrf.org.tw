@@ -1,7 +1,7 @@
-= render layout: 'components/hero', locals: {\
-    heading: '法官搜尋結果', description: ''\
-  }
-
-  = render 'form', options: collection_for_courts, placeholder: '選法院或輸入關鍵字', search_url: judges_searchs_path, type: "judge"
-
-= render partial: 'components/avatar_list', locals: {people: @people, type: "judge"}
+= render 'results',
+  heading: '法官搜尋結果',
+  options: collection_for_courts,
+  placeholder: '選法院或輸入關鍵字',
+  search_url: judges_searchs_path,
+  type: "judge",
+  people: @people

@@ -25,6 +25,7 @@ require 'components/_avatars.scss'
 require 'components/_pagination.scss'
 require 'components/_to-top.scss'
 require 'components/_tab.scss'
+require 'components/_no-results.scss'
 
 require 'pages/_story.scss'
 require 'pages/_who-are-you.scss'

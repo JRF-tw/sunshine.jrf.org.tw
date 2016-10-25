@@ -1,7 +1,7 @@
-= render layout: 'components/hero', locals: {\
-    heading: '檢察官搜尋結果', description: ''\
-  }
-
-  = render 'form', options: collection_for_prosecutors, placeholder: '選檢察署或輸入關鍵字', search_url: prosecutors_searchs_path, type: "prosecutor"
-
-= render partial: 'components/avatar_list', locals: {people: @people, type: "prosecutor"}
+= render 'results',
+  heading: '檢察官搜尋結果',
+  options: collection_for_prosecutors,
+  placeholder: '選檢察署或輸入關鍵字',
+  search_url: prosecutors_searchs_path,
+  type: "prosecutor",
+  people: @people
