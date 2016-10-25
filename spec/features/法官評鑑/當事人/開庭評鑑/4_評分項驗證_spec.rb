@@ -5,7 +5,7 @@ feature '法官評鑑 - 當事人', type: :feature, js: true do
   let!(:story) { create :story, court: court }
   let!(:judge) { create :judge, court: court }
   let!(:schedule) { create :schedule, court: court, story: story }
-  before { signin_party(party) }
+  before { signin_party(identify_number: party.identify_number) }
 
   feature '開庭評鑑' do
     feature '評分項驗證' do

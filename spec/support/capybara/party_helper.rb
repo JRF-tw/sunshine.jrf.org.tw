@@ -15,14 +15,13 @@ module Capybara
       end
     end
 
-    def signin_party(party)
+    def signin_party(identify_number:, password: '12321313213')
       visit(new_party_session_path)
       within('#new_party') do
-        fill_in 'party_identify_number', with: party.identify_number
-        fill_in 'party_password', with: party.password
+        fill_in 'party_identify_number', with: identify_number
+        fill_in 'party_password', with: password
       end
       click_button '登入'
-      party
     end
 
     def party_run_schedule_score_flow(story, schedule, judge)
