@@ -729,7 +729,7 @@ DEPENDENCIES
   venus!
   webmock
   whenever
-  xray-rails
+  xray-rails (~> 0.2.0)
 
 BUNDLED WITH
    1.12.5
