@@ -23,9 +23,9 @@
 
 FactoryGirl.define do
   factory :story do
-    story_type "民事"
+    story_type '民事'
     year { rand(70..105) }
-    word_type "聲"
+    word_type '聲'
     number { rand(100..999) }
     court { create :court }
     main_judge { create :judge }

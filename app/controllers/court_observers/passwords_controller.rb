@@ -1,5 +1,5 @@
 class CourtObservers::PasswordsController < Devise::PasswordsController
-  layout "observer"
+  layout 'observer'
 
   include CrudConcern
   prepend_before_action :require_no_authentication, except: [:edit, :update, :send_reset_password_mail]
@@ -8,9 +8,9 @@ class CourtObservers::PasswordsController < Devise::PasswordsController
   def new
     # meta
     set_meta(
-      title: "觀察者忘記密碼頁",
-      description: "觀察者忘記密碼頁",
-      keywords: "觀察者忘記密碼頁"
+      title: '觀察者忘記密碼頁',
+      description: '觀察者忘記密碼頁',
+      keywords: '觀察者忘記密碼頁'
     )
     super
   end
@@ -18,9 +18,9 @@ class CourtObservers::PasswordsController < Devise::PasswordsController
   def edit
     court_observer_by_token = CourtObserver.with_reset_password_token(params[:reset_password_token])
     if court_observer_by_token.nil?
-      redirect_as_fail(invalid_edit_path, "無效的驗證連結")
+      redirect_as_fail(invalid_edit_path, '無效的驗證連結')
     elsif current_court_observer && court_observer_by_token != current_court_observer
-      redirect_as_fail(invalid_edit_path, "你僅能修改本人的帳號")
+      redirect_as_fail(invalid_edit_path, '你僅能修改本人的帳號')
     else
       self.resource = resource_class.new
       set_minimum_password_length
@@ -30,9 +30,9 @@ class CourtObservers::PasswordsController < Devise::PasswordsController
 
     # meta
     set_meta(
-      title: "觀察者更改密碼頁",
-      description: "觀察者更改密碼頁",
-      keywords: "觀察者更改密碼頁"
+      title: '觀察者更改密碼頁',
+      description: '觀察者更改密碼頁',
+      keywords: '觀察者更改密碼頁'
     )
   end
 
@@ -72,9 +72,9 @@ class CourtObservers::PasswordsController < Devise::PasswordsController
   def check_observer_confirmed
     @observer = CourtObserver.find_by_email(params[:court_observer][:email])
     if @observer && !@observer.confirmed?
-      flash[:error] = "此帳號尚未驗證"
+      flash[:error] = '此帳號尚未驗證'
       self.resource = resource_class.new
-      render "new"
+      render 'new'
     end
   end
 

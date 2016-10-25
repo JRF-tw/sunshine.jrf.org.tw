@@ -1,5 +1,5 @@
 class Parties::RegistrationsController < Devise::RegistrationsController
-  layout "party"
+  layout 'party'
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :check_registration, only: [:create]
   # POST /resource
@@ -7,9 +7,9 @@ class Parties::RegistrationsController < Devise::RegistrationsController
   def new
     # meta
     set_meta(
-      title: "當事人註冊頁",
-      description: "當事人註冊頁",
-      keywords: "當事人註冊頁"
+      title: '當事人註冊頁',
+      description: '當事人註冊頁',
+      keywords: '當事人註冊頁'
     )
     super
   end
@@ -44,7 +44,7 @@ class Parties::RegistrationsController < Devise::RegistrationsController
       flash.clear
     else
       build_resource(sign_up_params)
-      flash[:error] = context.error_messages.join(", ")
+      flash[:error] = context.error_messages.join(', ')
     end
     render :new
   end
@@ -55,9 +55,9 @@ class Parties::RegistrationsController < Devise::RegistrationsController
     context = Party::RegisterCheckContext.new(params)
     unless context.perform
       build_resource(sign_up_params)
-      flash[:error] = context.error_messages.join(", ")
+      flash[:error] = context.error_messages.join(', ')
       @checked = true
-      render "new"
+      render 'new'
     end
   end
 

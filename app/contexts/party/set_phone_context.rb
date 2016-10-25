@@ -23,7 +23,7 @@ class Party::SetPhoneContext < BaseContext
     @params = permit_params(params[:party] || params, PERMITS)
 
     run_callbacks :perform do
-      return add_error(:data_create_fail, @party.errors.full_messages.join(",").to_s) unless @party.save
+      return add_error(:data_create_fail, @party.errors.full_messages.join(',').to_s) unless @party.save
       true
     end
   end
@@ -55,7 +55,7 @@ class Party::SetPhoneContext < BaseContext
   end
 
   def generate_verify_code
-    @verify_code = rand(1..9999).to_s.rjust(4, "0")
+    @verify_code = rand(1..9999).to_s.rjust(4, '0')
   end
 
   def assign_value

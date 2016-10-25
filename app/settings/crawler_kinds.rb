@@ -8,6 +8,6 @@ class CrawlerKinds
   end
 
   def initialize
-    @list = Rails.application.config_for("settings").deep_symbolize_keys
+    @list = Rails.application.config_for('settings').deep_symbolize_keys
   end
 end

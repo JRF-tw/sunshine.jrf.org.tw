@@ -40,7 +40,7 @@ class Admin::CourtCreateContext < BaseContext
   end
 
   def is_court?
-    @court.court_type == "法院"
+    @court.court_type == '法院'
   end
 
 end

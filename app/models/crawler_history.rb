@@ -15,5 +15,5 @@
 
 class CrawlerHistory < ActiveRecord::Base
   validates :crawler_on, presence: true, uniqueness: true
-  has_many :crawler_logs
+  has_many :crawler_logs, dependent: :destroy
 end

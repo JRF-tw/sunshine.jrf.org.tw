@@ -31,7 +31,7 @@ class AwardsController < BaseController
       title: "#{@profile.name}的獎勵紀錄",
       description: "#{@profile.name}獎勵相關紀錄清單。",
       keywords: "#{@profile.name}獎勵紀錄,#{@profile.name}",
-      image: ActionController::Base.helpers.asset_path("hero-profiles-show-M.png")
+      image: ActionController::Base.helpers.asset_path('hero-profiles-show-M.png')
     )
   end
 end

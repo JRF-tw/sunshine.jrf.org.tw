@@ -1,16 +1,16 @@
-require "rails_helper"
+require 'rails_helper'
 
 describe Admin::LawyerCreateContext do
 
-  describe "perform" do
-    context "create success" do
+  describe 'perform' do
+    context 'create success' do
       let(:params) { attributes_for(:lawyer) }
       subject { described_class.new(params) }
 
       it { expect { subject.perform }.to change { Lawyer.count }.by(1) }
     end
 
-    context "created should unconfirm" do
+    context 'created should unconfirm' do
       let(:params) { attributes_for(:lawyer) }
       before { subject.perform }
       subject { described_class.new(params) }

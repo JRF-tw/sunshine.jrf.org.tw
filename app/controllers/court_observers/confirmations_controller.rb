@@ -1,5 +1,5 @@
 class CourtObservers::ConfirmationsController < Devise::ConfirmationsController
-  layout "observer"
+  layout 'observer'
   include CrudConcern
 
   before_action :check_observer, only: [:show]
@@ -31,7 +31,7 @@ class CourtObservers::ConfirmationsController < Devise::ConfirmationsController
 
   def check_observer
     @observer_by_token = CourtObserver.find_by_confirmation_token(params[:confirmation_token])
-    redirect_as_fail(court_observer_root_path, "你僅能修改本人的帳號") if current_court_observer && current_court_observer != @observer_by_token
+    redirect_as_fail(court_observer_root_path, '你僅能修改本人的帳號') if current_court_observer && current_court_observer != @observer_by_token
   end
 
   def check_first_time_confirm

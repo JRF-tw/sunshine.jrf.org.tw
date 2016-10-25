@@ -1,17 +1,17 @@
 class Admin::PartiesController < Admin::BaseController
   before_action :party
-  before_action(except: [:index]) { add_crumb("當事人列表", admin_parties_path) }
+  before_action(except: [:index]) { add_crumb('當事人列表', admin_parties_path) }
 
   def index
     @search = Party.all.ransack(params[:q])
     @parties = @search.result.page(params[:page]).per(20)
-    @admin_page_title = "當事人列表"
-    add_crumb @admin_page_title, "#"
+    @admin_page_title = '當事人列表'
+    add_crumb @admin_page_title, '#'
   end
 
   def show
     @admin_page_title = "當事人檔案 - #{party.name} 的詳細資料"
-    add_crumb @admin_page_title, "#"
+    add_crumb @admin_page_title, '#'
   end
 
   def set_to_imposter
@@ -28,7 +28,7 @@ class Admin::PartiesController < Admin::BaseController
     @admin_party_title = "當事人檔案 - #{@party.name} 的詳細資料"
     add_crumb @admin_party_title, admin_party_path(@party)
     @admin_page_title = "#{@party.name}參與案件列表"
-    add_crumb @admin_page_title, "#"
+    add_crumb @admin_page_title, '#'
   end
 
   private

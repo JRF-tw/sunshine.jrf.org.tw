@@ -32,11 +32,11 @@ FactoryGirl.define do
   end
 
   factory :judge_for_params, class: Judge do
-    name "不理不理左衛門"
+    name '不理不理左衛門'
   end
 
   factory :empty_name_for_judge, class: Judge do
-    name ""
+    name ''
   end
 
 end

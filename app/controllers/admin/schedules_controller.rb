@@ -17,18 +17,18 @@
 class Admin::SchedulesController < Admin::BaseController
   before_action :schedule
   before_action :find_story_by_ransack_search, only: [:index]
-  before_action(except: [:index]) { add_crumb("庭期列表", admin_schedules_path) }
+  before_action(except: [:index]) { add_crumb('庭期列表', admin_schedules_path) }
 
   def index
     @search = Schedule.all.newest.ransack(params[:q])
     @schedules = @search.result.includes(:court, :story).page(params[:page]).per(20)
-    @admin_page_title = @story ? "案件 #{@story.identity} 的庭期表" : "庭期表列表"
-    add_crumb @admin_page_title, "#"
+    @admin_page_title = @story ? "案件 #{@story.identity} 的庭期表" : '庭期表列表'
+    add_crumb @admin_page_title, '#'
   end
 
   def show
     @admin_page_title = "#{@schedule.court.name}-#{@schedule.story.identity} 庭期表"
-    add_crumb @admin_page_title, "#"
+    add_crumb @admin_page_title, '#'
   end
 
   private

@@ -23,11 +23,11 @@
 #  is_hidden         :boolean
 #
 
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Procedure, type: :model do
 
-  it "has_many :procedures, dependent: :destroy" do
+  it 'has_many :procedures, dependent: :destroy' do
     procedure = create :procedure
     expect(Procedure.count).to eq(1)
     suit = procedure.suit

@@ -1,9 +1,9 @@
-require "rails_helper"
+require 'rails_helper'
 
 describe CourtObserver::SendSetPasswordEmailContext do
 
-  describe "perform" do
-    context "success" do
+  describe 'perform' do
+    context 'success' do
       let!(:court_observer) { create :court_observer }
       subject { described_class.new(court_observer) }
 

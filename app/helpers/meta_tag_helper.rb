@@ -25,15 +25,15 @@ module MetaTagHelper
   end
 
   def default_meta
-    { title: "My app",
-      viewport: "width=device-width, initial-scale=1.0, user-scalable=no",
-      description: "5Fpro awesome!",
-      keywords: "5fpro",
-      fb_app_id: "12341234",
-      fb_admin_ids: "1234,123",
-      separator: " | ",
+    { title: 'My app',
+      viewport: 'width=device-width, initial-scale=1.0, user-scalable=no',
+      description: '5Fpro awesome!',
+      keywords: '5fpro',
+      fb_app_id: '12341234',
+      fb_admin_ids: '1234,123',
+      separator: ' | ',
       reverse: true,
-      og_type: "website",
-      site: "司法陽光網" }
+      og_type: 'website',
+      site: '司法陽光網' }
   end
 end

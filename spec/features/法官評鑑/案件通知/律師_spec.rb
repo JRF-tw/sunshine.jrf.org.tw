@@ -1,95 +1,95 @@
-require "rails_helper"
+require 'rails_helper'
 
-describe "律師案件通知", type: :request do
-  context "可訂閱與否" do
+describe '律師案件通知', type: :request do
+  context '可訂閱與否' do
     let(:story) { create(:story) }
     let(:context) { Lawyer::StorySubscriptionToggleContext.new(story) }
 
-    context "Given 有設定密碼 (即已註冊)" do
+    context 'Given 有設定密碼 (即已註冊)' do
       let!(:lawyer) { create(:lawyer, :with_password, :with_confirmed) }
 
-      context "When 訂閱案件" do
+      context 'When 訂閱案件' do
         subject { context.perform(lawyer) }
 
-        it "Then 訂閱成功" do
+        it 'Then 訂閱成功' do
           expect { subject }.to change { StorySubscription.count }.by(1)
         end
       end
     end
 
-    context "Given 尚未註冊" do
+    context 'Given 尚未註冊' do
       let!(:lawyer) { create(:lawyer, :with_password) }
 
-      context "When 訂閱案件" do
+      context 'When 訂閱案件' do
         subject { context.perform(lawyer) }
 
-        it "Then 訂閱失敗" do
+        it 'Then 訂閱失敗' do
           expect { subject }.not_to change { StorySubscription.count }
         end
       end
     end
   end
 
-  context "已訂閱的案件" do
+  context '已訂閱的案件' do
     let!(:lawyer) { lawyer_subscribe_story_date_today }
 
-    context "開庭前「一天」會進行 email 開庭通知" do
+    context '開庭前「一天」會進行 email 開庭通知' do
       before { Timecop.freeze(Time.zone.today - 1) }
       after { Timecop.return }
       subject { Crontab::SubscribeStoryBeforeJudgeNotifyContext.new(Time.zone.today).perform }
 
-      it "寄出email" do
+      it '寄出email' do
         expect { subject }.to change_sidekiq_jobs_size_of(Sidekiq::Extensions::DelayedMailer)
       end
     end
 
-    context "開庭後「隔天」會進行 email 通知評鑑" do
+    context '開庭後「隔天」會進行 email 通知評鑑' do
       before { Timecop.freeze(Time.zone.today + 1) }
       after { Timecop.return }
       subject { Crontab::SubscribeStoryAfterJudgeNotifyContext.new(Time.zone.today).perform }
 
-      it "寄出email" do
+      it '寄出email' do
         expect { subject }.to change_sidekiq_jobs_size_of(Sidekiq::Extensions::DelayedMailer)
       end
     end
   end
 
-  context "取消訂閱" do
+  context '取消訂閱' do
     let!(:lawyer) { lawyer_subscribe_story_date_today }
-    context "案件已訂閱" do
+    context '案件已訂閱' do
       before { StorySubscriptionDeleteContext.new(Story.last).perform(lawyer) }
 
-      it "成功取消" do
+      it '成功取消' do
         expect(StorySubscription.count).to eq(0)
       end
 
-      context "開庭前「1 天」不會進行 email 開庭通知" do
+      context '開庭前「1 天」不會進行 email 開庭通知' do
         before { Timecop.freeze(Time.zone.today - 1) }
         after { Timecop.return }
         subject { Crontab::SubscribeStoryBeforeJudgeNotifyContext.new(Time.zone.today).perform }
 
-        it "不會寄出email" do
+        it '不會寄出email' do
           expect { subject }.not_to change_sidekiq_jobs_size_of(Sidekiq::Extensions::DelayedMailer)
         end
       end
 
-      context "開庭後「隔天」不會進行 email 通知評鑑" do
+      context '開庭後「隔天」不會進行 email 通知評鑑' do
         before { Timecop.freeze(Time.zone.today + 1) }
         after { Timecop.return }
         subject { Crontab::SubscribeStoryAfterJudgeNotifyContext.new(Time.zone.today).perform }
 
-        it "不會寄出email" do
+        it '不會寄出email' do
           expect { subject }.not_to change_sidekiq_jobs_size_of(Sidekiq::Extensions::DelayedMailer)
         end
       end
     end
 
-    context "案件未訂閱" do
+    context '案件未訂閱' do
       let!(:lawyer) { create(:lawyer, :with_confirmed, :with_password) }
       let!(:story) { create(:story, :with_schedule_date_today) }
       subject { StorySubscriptionDeleteContext.new(story).perform(lawyer) }
 
-      it "不變" do
+      it '不變' do
         expect { subject }.not_to change { StorySubscription.count }
       end
     end

@@ -1,4 +1,4 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe ReviewsController, type: :request do
   let!(:profile) { create :profile }

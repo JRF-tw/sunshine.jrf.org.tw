@@ -31,10 +31,10 @@ FactoryGirl.define do
     suit do
       create :suit
     end
-    unit "foo"
-    title "bar"
-    procedure_unit "haha"
-    procedure_content "hoho"
+    unit 'foo'
+    title 'bar'
+    procedure_unit 'haha'
+    procedure_content 'hoho'
     procedure_date Time.zone.today
   end
 

@@ -1,12 +1,12 @@
-require "rails_helper"
+require 'rails_helper'
 
 describe Admin::JudgeUpdateContext do
   let!(:judge) { create :judge }
   let(:params) { attributes_for(:judge_for_params) }
   subject { described_class.new(judge) }
 
-  describe "#perform" do
-    context "success" do
+  describe '#perform' do
+    context 'success' do
       it { expect { subject.perform(params) }.to change { judge.name }.to eq(params[:name]) }
     end
 

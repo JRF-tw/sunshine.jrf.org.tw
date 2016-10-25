@@ -24,13 +24,13 @@ class Lawyer::CheckScheduleScoreJudgeContext < BaseContext
   def check_story
     context = Lawyer::CheckScheduleScoreInfoContext.new(@lawyer)
     @story = context.perform(@params)
-    return add_error(:story_not_found, context.error_messages.join(",")) unless @story
+    return add_error(:story_not_found, context.error_messages.join(',')) unless @story
   end
 
   def check_schedule
     context = Lawyer::CheckScheduleScoreDateContext.new(@lawyer)
     @schedule = context.perform(@params)
-    return add_error(:schedule_not_found, context.error_messages.join(",")) if context.has_error?
+    return add_error(:schedule_not_found, context.error_messages.join(',')) if context.has_error?
   end
 
   def check_judge_name

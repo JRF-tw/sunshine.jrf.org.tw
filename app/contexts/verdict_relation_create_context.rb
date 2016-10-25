@@ -25,15 +25,15 @@ class VerdictRelationCreateContext < BaseContext
   private
 
   def find_person_type
-    @person_type = "Party" if @verdict.party_names.include?(@person_name)
-    @person_type = "Lawyer" if @verdict.lawyer_names.include?(@person_name)
-    @person_type = "Judge" if @verdict.judges_names.include?(@person_name)
+    @person_type = 'Party' if @verdict.party_names.include?(@person_name)
+    @person_type = 'Lawyer' if @verdict.lawyer_names.include?(@person_name)
+    @person_type = 'Judge' if @verdict.judges_names.include?(@person_name)
     # @person_type = "Prosecutor" if @verdict.prosecutor_names.include?(@person_name)
     add_error(:story_without_people_name) unless @person_type
   end
 
   def is_judge?
-    @person_type == "Judge"
+    @person_type == 'Judge'
   end
 
   def find_person
@@ -43,7 +43,7 @@ class VerdictRelationCreateContext < BaseContext
   end
 
   def find_judge_person
-    branches = @court.branches.current.where("chamber_name LIKE ? ", "%#{@story.story_type}%")
+    branches = @court.branches.current.where('chamber_name LIKE ? ', "%#{@story.story_type}%")
     @scoped = branches.map { |a| a.judge if a.judge.name == @person_name }.compact.uniq
     @person = @scoped.first
   end

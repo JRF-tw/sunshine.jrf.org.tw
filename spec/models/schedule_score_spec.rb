@@ -17,13 +17,13 @@
 #  story_id            :integer
 #
 
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe ScheduleScore do
   let(:schedule_score) { create :schedule_score }
 
-  describe "FactoryGirl" do
-    context "normalize" do
+  describe 'FactoryGirl' do
+    context 'normalize' do
       subject! { schedule_score }
       it { expect(subject).not_to be_new_record }
     end

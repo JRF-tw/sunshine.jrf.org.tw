@@ -24,7 +24,7 @@
 
 class Admin::Judge < ::Judge
   has_many :branches
-  belongs_to :court, class_name: "Court", foreign_key: :current_court_id
+  belongs_to :court, class_name: 'Court', foreign_key: :current_court_id
 
   validates :name, presence: true
 end

@@ -33,15 +33,15 @@ class Party::ChangeEmailContext < BaseContext
   end
 
   def check_email_different
-    return add_error_and_assign_email(:email_conflict, @params[:email]) if @params["email"] == @party.email
+    return add_error_and_assign_email(:email_conflict, @params[:email]) if @params['email'] == @party.email
   end
 
   def check_email_unique
-    return add_error_and_assign_email(:email_exist, @params[:email]) if Party.pluck(:email).include?(@params["email"])
+    return add_error_and_assign_email(:email_exist, @params[:email]) if Party.pluck(:email).include?(@params['email'])
   end
 
   def transfer_email_to_unconfirmed_email
-    @params["unconfirmed_email"] = @params.delete("email")
+    @params['unconfirmed_email'] = @params.delete('email')
   end
 
   def already_confirmed?

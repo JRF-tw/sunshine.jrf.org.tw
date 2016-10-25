@@ -66,11 +66,11 @@ Style/Semicolon:
   AllowAsExpressionSeparator: true
 
 Style/StringLiterals:
-  EnforcedStyle: double_quotes
+  EnforcedStyle: single_quotes
   Enabled: true
 
 Style/StringLiteralsInInterpolation:
-  EnforcedStyle: double_quotes
+  EnforcedStyle: single_quotes
   Enabled: true
 
 Style/ClassAndModuleChildren:

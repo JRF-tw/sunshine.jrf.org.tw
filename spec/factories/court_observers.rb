@@ -31,11 +31,11 @@ FactoryGirl.define do
   factory :court_observer do
     sequence(:name) { |n| "court_observer-#{n}" }
     sequence(:email) { |n| "court_observer-#{n}@test.com" }
-    password "123123123"
+    password '123123123'
     confirmed_at Time.now
 
     trait :with_unconfirmed_email do
-      unconfirmed_email "aron1122@gmail.com"
+      unconfirmed_email 'aron1122@gmail.com'
     end
 
     trait :without_confirm do
@@ -43,22 +43,22 @@ FactoryGirl.define do
     end
 
     trait :with_confirmation_token do
-      confirmation_token "totoken"
+      confirmation_token 'totoken'
     end
   end
 
   factory :court_observer_without_validate, class: CourtObserver do
-    name "不理不理左衛門"
+    name '不理不理左衛門'
     sequence(:email) { |n| "court_observer_without_prove-#{n}@test.com" }
-    password "123123123"
-    confirmation_token "token"
+    password '123123123'
+    confirmation_token 'token'
   end
 
   factory :court_observer_for_create, class: CourtObserver do
     sequence(:name) { |n| "court_observer-#{n}" }
     sequence(:email) { |n| "court_observer-#{n}@test.com" }
-    password "123123123"
-    password_confirmation "123123123"
+    password '123123123'
+    password_confirmation '123123123'
   end
 
 end

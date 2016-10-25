@@ -32,7 +32,7 @@ class CourtObserver::ChangeEmailContext < BaseContext
   end
 
   def check_email_different
-    return add_error_and_assign_email(:email_conflict) if @params["email"] == @court_observer.email
+    return add_error_and_assign_email(:email_conflict) if @params['email'] == @court_observer.email
   end
 
   def check_email_unique

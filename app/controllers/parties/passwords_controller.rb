@@ -2,14 +2,14 @@ class Parties::PasswordsController < Devise::PasswordsController
   include CrudConcern
 
   prepend_before_action :require_no_authentication, except: [:edit, :update, :send_reset_password_sms]
-  layout "party"
+  layout 'party'
 
   def new
     # meta
     set_meta(
-      title: "當事人忘記密碼頁",
-      description: "當事人忘記密碼頁",
-      keywords: "當事人忘記密碼頁"
+      title: '當事人忘記密碼頁',
+      description: '當事人忘記密碼頁',
+      keywords: '當事人忘記密碼頁'
     )
     super
   end
@@ -18,13 +18,13 @@ class Parties::PasswordsController < Devise::PasswordsController
   def create
     context = Party::SendResetPasswordSmsContext.new(resource_params)
     if context.perform
-      redirect_to new_session_path(:party), flash: { success: "已寄送簡訊" }
+      redirect_to new_session_path(:party), flash: { success: '已寄送簡訊' }
     else
       # for build resource
       params = resource_params.each_with_object({}) { |array, hash| hash[array.first.to_sym] = array.last }
       self.resource = resource_class.new(params)
-      flash[:notice] = context.error_messages.join(", ")
-      render "new"
+      flash[:notice] = context.error_messages.join(', ')
+      render 'new'
     end
   end
 
@@ -32,9 +32,9 @@ class Parties::PasswordsController < Devise::PasswordsController
   def edit
     party_by_token = Party.with_reset_password_token(params[:reset_password_token])
     if party_by_token.nil?
-      redirect_as_fail(invalid_edit_path, "無效的驗證連結")
+      redirect_as_fail(invalid_edit_path, '無效的驗證連結')
     elsif current_party && party_by_token != current_party
-      redirect_as_fail(invalid_edit_path, "你僅能修改本人的帳號")
+      redirect_as_fail(invalid_edit_path, '你僅能修改本人的帳號')
     else
       self.resource = resource_class.new
       set_minimum_password_length
@@ -44,9 +44,9 @@ class Parties::PasswordsController < Devise::PasswordsController
 
     # meta
     set_meta(
-      title: "當事人重設密碼頁",
-      description: "當事人重設密碼頁",
-      keywords: "當事人重設密碼頁"
+      title: '當事人重設密碼頁',
+      description: '當事人重設密碼頁',
+      keywords: '當事人重設密碼頁'
     )
   end
 
@@ -75,9 +75,9 @@ class Parties::PasswordsController < Devise::PasswordsController
     context = Party::SendResetPasswordSmsContext.new(party_params)
     # TODO: refactory
     if context.perform
-      redirect_to party_profile_path, flash: { success: "已寄送重設密碼簡訊" }
+      redirect_to party_profile_path, flash: { success: '已寄送重設密碼簡訊' }
     else
-      redirect_to party_profile_path, flash: { error: context.error_messages.join(", ").to_s }
+      redirect_to party_profile_path, flash: { error: context.error_messages.join(', ').to_s }
     end
   end
 

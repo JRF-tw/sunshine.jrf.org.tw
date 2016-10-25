@@ -22,8 +22,8 @@ FactoryGirl.define do
     profile do
       create :profile
     end
-    award_type "嘉獎一次"
-    unit "司法院"
+    award_type '嘉獎一次'
+    unit '司法院'
     publish_at Time.zone.today
   end
 

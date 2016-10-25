@@ -17,16 +17,16 @@
 #  is_hidden   :boolean
 #
 
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Award, type: :model do
   let!(:award) { create :award }
 
-  it "FactoryGirl" do
+  it 'FactoryGirl' do
     expect(award).not_to be_new_record
   end
 
-  it "has_many :awards, dependent: :destroy" do
+  it 'has_many :awards, dependent: :destroy' do
     expect(Award.count).to eq(1)
     profile = award.profile
     profile.destroy

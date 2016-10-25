@@ -34,25 +34,25 @@
 #  status           :text
 #
 
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Punishment, type: :model do
   let!(:punishment) { create :punishment }
 
-  it "FactoryGirl" do
+  it 'FactoryGirl' do
     expect(punishment).not_to be_new_record
   end
 
-  it "has_many :punishment, dependent: :destroy" do
+  it 'has_many :punishment, dependent: :destroy' do
     expect(Punishment.count).to eq(1)
     profile = punishment.profile
     profile.destroy
     expect(Punishment.count).to be_zero
   end
 
-  it "#punishments_count counter cache" do
+  it '#punishments_count counter cache' do
     profile = create :profile
-    Admin::Punishment.create decision_unit: "foofoo", profile_id: profile.id
+    Admin::Punishment.create decision_unit: 'foofoo', profile_id: profile.id
     profile.reload
     expect(profile.punishments_count).to eq(1)
     Admin::Punishment.last.destroy

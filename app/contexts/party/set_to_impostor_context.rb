@@ -19,7 +19,7 @@ class Party::SetToImpostorContext < BaseContext
   end
 
   def destroy_identify_number
-    @party.identify_number = ""
+    @party.identify_number = ''
   end
 
   def set_to_imposter

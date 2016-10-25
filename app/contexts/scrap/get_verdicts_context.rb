@@ -1,6 +1,6 @@
 class Scrap::GetVerdictsContext < BaseContext
-  INDEX_URI = "http://jirs.judicial.gov.tw/FJUD/FJUDQRY01_1.aspx".freeze
-  RESULT_URI = "http://jirs.judicial.gov.tw/FJUD/FJUDQRY02_1.aspx".freeze
+  INDEX_URI = 'http://jirs.judicial.gov.tw/FJUD/FJUDQRY01_1.aspx'.freeze
+  RESULT_URI = 'http://jirs.judicial.gov.tw/FJUD/FJUDQRY02_1.aspx'.freeze
 
   before_perform  :get_courts
   after_perform   :record_intervel_to_daily_notify
@@ -12,8 +12,8 @@ class Scrap::GetVerdictsContext < BaseContext
   end
 
   def initialize
-    @start_date = (Time.zone.today - 5.days).strftime("%Y%m%d")
-    @end_date = (Time.zone.today + 5.days).strftime("%Y%m%d")
+    @start_date = (Time.zone.today - 5.days).strftime('%Y%m%d')
+    @end_date = (Time.zone.today + 5.days).strftime('%Y%m%d')
   end
 
   def perform
@@ -31,6 +31,6 @@ class Scrap::GetVerdictsContext < BaseContext
   end
 
   def record_intervel_to_daily_notify
-    Redis::Value.new("daily_scrap_verdict_intervel").value = "#{@start_date} ~ #{@end_date}"
+    Redis::Value.new('daily_scrap_verdict_intervel').value = "#{@start_date} ~ #{@end_date}"
   end
 end

@@ -25,9 +25,9 @@
 
 FactoryGirl.define do
   factory :user do
-    name "5Fpro"
+    name '5Fpro'
     sequence(:email) { |n| "user#{n}@5fpro.com" }
-    password "12341234"
+    password '12341234'
     confirmed_at Time.now
 
     factory :admin_user do
@@ -39,7 +39,7 @@ FactoryGirl.define do
     end
 
     factory :creating_user do
-      admin "0"
+      admin '0'
       confirmed_at nil
     end
   end

@@ -1,5 +1,5 @@
 class CourtObservers::StoriesController < CourtObservers::BaseController
-  layout "observer"
+  layout 'observer'
   before_action :find_story, only: [:show]
   before_action :has_score?, only: [:show]
 
@@ -7,9 +7,9 @@ class CourtObservers::StoriesController < CourtObservers::BaseController
     @stories = ::CourtObserverQueries.new(current_court_observer).get_stories
     # meta
     set_meta(
-      title: "觀察者案件列表頁",
-      description: "觀察者案件列表頁",
-      keywords: "觀察者案件列表頁"
+      title: '觀察者案件列表頁',
+      description: '觀察者案件列表頁',
+      keywords: '觀察者案件列表頁'
     )
   end
 
@@ -32,11 +32,11 @@ class CourtObservers::StoriesController < CourtObservers::BaseController
              rescue
                nil
              end
-    redirect_as_fail(court_observer_root_path, "找不到該案件") unless @story
+    redirect_as_fail(court_observer_root_path, '找不到該案件') unless @story
   end
 
   def has_score?
     @scores_sorted = ::CourtObserverQueries.new(current_court_observer).get_schedule_scores_array(@story)
-    redirect_as_fail(court_observer_root_path, "尚未有評鑑紀錄") unless @scores_sorted.present?
+    redirect_as_fail(court_observer_root_path, '尚未有評鑑紀錄') unless @scores_sorted.present?
   end
 end

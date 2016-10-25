@@ -28,7 +28,7 @@ class Lawyer::CheckScheduleScoreDateContext < BaseContext
   def check_story
     context = Lawyer::CheckScheduleScoreInfoContext.new(@lawyer)
     @story = context.perform(@params)
-    return add_error(:story_not_found, context.error_messages.join(",")) unless @story
+    return add_error(:story_not_found, context.error_messages.join(',')) unless @story
   end
 
   def check_date
