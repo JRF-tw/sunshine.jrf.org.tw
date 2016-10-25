@@ -1,24 +1,21 @@
 require 'rails_helper'
-
 feature '前台帳號功能', type: :feature, js: true do
   feature '律師' do
-    feature '更改登入 Email' do
+    def lawyer_click_confirm_link(email)
+      open_lawyer_email(email)
+      current_email.find('a').click
+    end
+
+    def lawyer_edit_email_with(email, password)
+      visit(edit_lawyer_email_path)
+      lawyer_input_edit_email_form(email, password)
+      click_button '送出'
+    end
+    feature '更改 Email' do
       let!(:lawyer_A) { create :lawyer, :with_confirmed, :with_password }
-
-      def lawyer_click_confirm_link(email)
-        open_lawyer_email(email)
-        current_email.find('a').click
-      end
-
-      def lawyer_edit_email_with(email, password)
-        visit(edit_lawyer_email_path)
-        lawyer_input_edit_email_form(email, password)
-        click_button '送出'
-      end
-
       feature '送出新的 Email 認證' do
         Scenario '律師A已登入，且律師A的新 Email 不能和任何人（包含自己）已認證的 Email 一樣' do
-          before { capybara_signin_lawyer(email: lawyer_A.email, password: '123123123') }
+          before { signin_lawyer(email: lawyer_A.email, password: '123123123') }
           Given '律師B已完成註冊' do
             let!(:lawyer_B) { create :lawyer, :with_confirmed, :with_password }
             When '新 Email 和律師B一樣' do
@@ -70,7 +67,7 @@ feature '前台帳號功能', type: :feature, js: true do
           before { lawyer_A.update_attributes(email: 'test@gmail.com') }
           before { CustomDeviseMailer.delay.resend_confirmation_instructions(lawyer_A) }
           Given '律師A已登入' do
-            before { capybara_signin_lawyer(email: lawyer_A.email, password: '123123123') }
+            before { signin_lawyer(email: lawyer_A.email, password: '123123123') }
             When '前往認證連結' do
               before { lawyer_click_confirm_link('test@gmail.com') }
               Then '律師A的 Email 成功代換' do
@@ -90,10 +87,9 @@ feature '前台帳號功能', type: :feature, js: true do
               end
             end
           end
-
           Given '律師B已登入' do
             let!(:lawyer_B) { create :lawyer, :with_confirmed, :with_password, email: '55669487@gmail.com' }
-            before { capybara_signin_lawyer(email: lawyer_B.email, password: '123123123') }
+            before { signin_lawyer(email: lawyer_B.email, password: '123123123') }
             When '前往認證連結' do
               before { lawyer_click_confirm_link('test@gmail.com') }
               Then '律師A的 Email 成功代換、律師B則不受影響' do

@@ -5,15 +5,15 @@ feature '法官評鑑 - 當事人', type: :feature, js: true do
   let!(:story) { create :story, court: court }
   let!(:judge) { create :judge, court: court }
   let!(:schedule) { create :schedule, court: court, story: story }
-  before { capybara_signin_party(party) }
+  before { signin_party(party) }
 
   feature '開庭評鑑' do
     feature '評分項驗證' do
       Scenario '開庭評鑑流程中，正在輸入評分項的頁面' do
         before { visit(input_info_party_score_schedules_path) }
-        before { capybara_party_input_info_schedule_score(story) }
-        before { capybara_party_input_date_schedule_score(schedule) }
-        before { capybara_party_input_judge_schedule_score(judge) }
+        before { party_input_info_schedule_score(story) }
+        before { party_input_date_schedule_score(schedule) }
+        before { party_input_judge_schedule_score(judge) }
 
         Given '當事人 選擇「開庭滿意度」評分' do
           before { choose('schedule_score_rating_score_20') }

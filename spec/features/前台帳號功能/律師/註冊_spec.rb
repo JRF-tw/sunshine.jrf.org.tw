@@ -1,20 +1,19 @@
 require 'rails_helper'
 
 feature '前台帳號功能', type: :feature, js: true do
-  def lawyer_register(name, email)
-    visit(new_lawyer_registration_path)
-    lawyer_input_registration_form(name, email)
-    click_button '註冊'
-  end
-
-  def lawyer_set_password(email, password: nil, password_confirmation: nil)
-    open_lawyer_email(email)
-    current_email.find('a').click
-    lawyer_input_set_password_form(password: password, password_confirmation: password_confirmation)
-    click_button '送出'
-  end
-
   feature '律師' do
+    def lawyer_register(name, email)
+      visit(new_lawyer_registration_path)
+      lawyer_input_registration_form(name, email)
+      click_button '註冊'
+    end
+
+    def lawyer_set_password(email, password: nil, password_confirmation: nil)
+      open_lawyer_email(email)
+      current_email.find('a').click
+      lawyer_input_set_password_form(password: password, password_confirmation: password_confirmation)
+      click_button '送出'
+    end
     feature '註冊' do
       let(:lawyer) { create :lawyer }
       Scenario '資料庫有未完成註冊的律師，才能成功註冊' do

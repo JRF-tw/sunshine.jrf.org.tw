@@ -14,11 +14,12 @@ feature '前台帳號功能', type: :feature, js: true do
       current_email.find('a').click
     end
 
-    feature '忘記密碼' do
+    feature '忘記與重設密碼' do
+      let(:lawyer_A) { create :lawyer, :with_password, :with_confirmed }
+      before { send_reset_password_email(lawyer_A.email) }
       feature '送出重設密碼信' do
         Scenario '只有完成註冊的律師才能重設密碼' do
           Given '律師A已完成註冊、律師B未完成註冊' do
-            let(:lawyer_A) { create :lawyer, :with_password, :with_confirmed }
             let(:lawyer_B) { create :lawyer }
             When '送出律師A重設密碼資料' do
               before { send_reset_password_email(lawyer_A.email) }
@@ -40,11 +41,9 @@ feature '前台帳號功能', type: :feature, js: true do
 
       feature '重設密碼' do
         Scenario '重設密碼頁應顯示目前帳號資料，並且比對已登入者資料' do
-          let(:lawyer_A) { create :lawyer, :with_password, :with_confirmed }
-          let(:lawyer_B) { create :lawyer, :with_password, :with_confirmed }
+          before { send_reset_password_email(lawyer_A.email) }
           Given '律師A已送出密碼重設信，且已登入律師A' do
-            before { send_reset_password_email(lawyer_A.email) }
-            before { capybara_signin_lawyer(email: lawyer_A.email, password: '123123123') }
+            before { signin_lawyer(email: lawyer_A.email) }
             When '前往 Email 中密碼重設頁' do
               before { visit_reset_password_page(lawyer_A.email) }
               Then '頁面應顯示律師A資料' do
@@ -56,7 +55,6 @@ feature '前台帳號功能', type: :feature, js: true do
           end
 
           Given '律師A已送出密碼重設信，且未登入' do
-            before { send_reset_password_email(lawyer_A.email) }
             When '前往 Email 中密碼重設頁' do
               before { visit_reset_password_page(lawyer_A.email) }
               Then '頁面應顯示律師A資料' do
@@ -68,8 +66,8 @@ feature '前台帳號功能', type: :feature, js: true do
           end
 
           Given '律師A已送出密碼重設信，且已登入律師B' do
-            before { send_reset_password_email(lawyer_A.email) }
-            before { capybara_signin_lawyer(email: lawyer_B.email, password: '123123123') }
+            let(:lawyer_B) { create :lawyer, :with_password, :with_confirmed }
+            before { signin_lawyer(email: lawyer_B.email) }
             When '前往 Email 中密碼重設頁' do
               before { visit_reset_password_page(lawyer_A.email) }
               Then '顯示錯誤訊息' do
@@ -81,10 +79,8 @@ feature '前台帳號功能', type: :feature, js: true do
         end
 
         Scenario '成功設定密碼後應自動登入' do
-          let(:lawyer_A) { create :lawyer, :with_password, :with_confirmed }
           Given '律師A重設密碼中、且已登入' do
-            before { send_reset_password_email(lawyer_A.email) }
-            before { capybara_signin_lawyer(email: lawyer_A.email, password: '123123123') }
+            before { signin_lawyer(email: lawyer_A.email) }
             before { visit_reset_password_page(lawyer_A.email) }
             When '送出新密碼' do
               before { lawyer_input_set_password_form(password: '11111111', password_confirmation: '11111111') }
@@ -97,7 +93,6 @@ feature '前台帳號功能', type: :feature, js: true do
           end
 
           Given '律師A重設密碼中、且未登入' do
-            before { send_reset_password_email(lawyer_A.email) }
             before { visit_reset_password_page(lawyer_A.email) }
             When '送出新密碼' do
               before { lawyer_input_set_password_form(password: '11111111', password_confirmation: '11111111') }

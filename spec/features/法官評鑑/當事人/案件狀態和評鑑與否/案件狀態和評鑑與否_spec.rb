@@ -5,22 +5,22 @@ feature '法官評鑑 - 當事人', type: :feature, js: true do
   let!(:story) { create :story, court: court }
   let!(:judge) { create :judge, court: court }
   let!(:schedule) { create :schedule, court: court, story: story }
-  before { capybara_signin_party(party) }
+  before { signin_party(party) }
 
   feature '案件的狀態和評鑑與否' do
     Scenario '案件尚未抓到判決書 (即沒有判決日)' do
       before { story.update_attributes(is_adjudge: false) }
       Given '案件無宣判日' do
         When '進行新增開庭評鑑' do
-          before { capybara_party_run_schedule_score_flow(story, schedule, judge) }
+          before { party_run_schedule_score_flow(story, schedule, judge) }
           Then '成功新增開庭評鑑' do
             expect(page).to have_content('感謝您的評鑑')
           end
         end
 
         When '進行編輯開庭評鑑' do
-          before { capybara_party_run_schedule_score_flow(story, schedule, judge) }
-          before { capybara_party_edit_schedule_score }
+          before { party_run_schedule_score_flow(story, schedule, judge) }
+          before { party_edit_schedule_score }
           before { click_button '更新評鑑' }
           Then '成功編輯開庭評鑑' do
             expect(page).to have_content('感謝您的評鑑')
@@ -29,7 +29,7 @@ feature '法官評鑑 - 當事人', type: :feature, js: true do
 
         When '進行新增判決評鑑' do
           before { visit(input_info_party_score_verdicts_path) }
-          before { capybara_party_input_info_verdict_score(story) }
+          before { party_input_info_verdict_score(story) }
           Then '無法進行' do
             expect(page).to have_content('尚未抓到判決書')
           end
@@ -39,15 +39,15 @@ feature '法官評鑑 - 當事人', type: :feature, js: true do
       Given '案件的宣判日在未來' do
         before { story.update_attributes(pronounce_date: Time.zone.today + 1.day) }
         When '進行新增開庭評鑑' do
-          before { capybara_party_run_schedule_score_flow(story, schedule, judge) }
+          before { party_run_schedule_score_flow(story, schedule, judge) }
           Then '成功新增開庭評鑑' do
             expect(page).to have_content('感謝您的評鑑')
           end
         end
 
         When '進行編輯開庭評鑑' do
-          before { capybara_party_run_schedule_score_flow(story, schedule, judge) }
-          before { capybara_party_edit_schedule_score }
+          before { party_run_schedule_score_flow(story, schedule, judge) }
+          before { party_edit_schedule_score }
           before { click_button '更新評鑑' }
           Then '成功編輯開庭評鑑' do
             expect(page).to have_content('感謝您的評鑑')
@@ -56,7 +56,7 @@ feature '法官評鑑 - 當事人', type: :feature, js: true do
 
         When '進行新增判決評鑑' do
           before { visit(input_info_party_score_verdicts_path) }
-          before { capybara_party_input_info_verdict_score(story) }
+          before { party_input_info_verdict_score(story) }
           Then '無法進行' do
             expect(page).to have_content('尚未抓到判決書')
           end
@@ -67,7 +67,7 @@ feature '法官評鑑 - 當事人', type: :feature, js: true do
         before { story.update_attributes(pronounce_date: Time.zone.today - 1.day) }
         When '進行新增開庭評鑑' do
           before { visit(input_info_party_score_schedules_path) }
-          before { capybara_party_input_info_schedule_score(story) }
+          before { party_input_info_schedule_score(story) }
           Then '無法進行' do
             expect(page).to have_content('案件已宣判, 無法評鑑')
           end
@@ -75,7 +75,7 @@ feature '法官評鑑 - 當事人', type: :feature, js: true do
 
         When '進行新增判決評鑑' do
           before { visit(input_info_party_score_verdicts_path) }
-          before { capybara_party_input_info_verdict_score(story) }
+          before { party_input_info_verdict_score(story) }
           Then '無法進行' do
             expect(page).to have_content('尚未抓到判決書')
           end
@@ -91,22 +91,22 @@ feature '法官評鑑 - 當事人', type: :feature, js: true do
 
         When '進行新增開庭評鑑' do
           before { visit(input_info_party_score_schedules_path) }
-          before { capybara_party_input_info_schedule_score(story) }
+          before { party_input_info_schedule_score(story) }
           Then '無法進行' do
             expect(page).to have_content('已有判決書, 不可評鑑開庭')
           end
         end
 
         When '進行新增判決評鑑' do
-          before { capybara_party_run_verdict_score_flow(story) }
+          before { party_run_verdict_score_flow(story) }
           Then '成功新增判決評鑑' do
             expect(page).to have_content('感謝您的評鑑')
           end
         end
 
         When '進行編輯判決評鑑' do
-          before { capybara_party_run_verdict_score_flow(story) }
-          before { capybara_party_edit_verdict_score }
+          before { party_run_verdict_score_flow(story) }
+          before { party_edit_verdict_score }
           before { click_button '更新評鑑' }
           Then '成功編輯判決評鑑' do
             expect(page).to have_content('感謝您的評鑑')
@@ -119,22 +119,22 @@ feature '法官評鑑 - 當事人', type: :feature, js: true do
         before { story.update_attributes(pronounce_date: Time.zone.today - 4.months) }
         When '進行新增開庭評鑑' do
           before { visit(input_info_party_score_schedules_path) }
-          before { capybara_party_input_info_schedule_score(story) }
+          before { party_input_info_schedule_score(story) }
           Then '無法進行' do
             expect(page).to have_content('案件已宣判, 無法評鑑')
           end
         end
 
         When '進行新增判決評鑑' do
-          before { capybara_party_run_verdict_score_flow(story) }
+          before { party_run_verdict_score_flow(story) }
           Then '成功新增判決評鑑' do
             expect(page).to have_content('感謝您的評鑑')
           end
         end
 
         When '進行編輯判決評鑑' do
-          before { capybara_party_run_verdict_score_flow(story) }
-          before { capybara_party_edit_verdict_score }
+          before { party_run_verdict_score_flow(story) }
+          before { party_edit_verdict_score }
           before { click_button '更新評鑑' }
           Then '成功編輯判決評鑑' do
             expect(page).to have_content('感謝您的評鑑')
@@ -147,7 +147,7 @@ feature '法官評鑑 - 當事人', type: :feature, js: true do
         before { story.update_attributes(pronounce_date: Time.zone.today - 4.months) }
         When '進行新增開庭評鑑' do
           before { visit(input_info_party_score_schedules_path) }
-          before { capybara_party_input_info_schedule_score(story) }
+          before { party_input_info_schedule_score(story) }
           Then '無法進行' do
             expect(page).to have_content('案件已宣判, 無法評鑑')
           end
@@ -155,7 +155,7 @@ feature '法官評鑑 - 當事人', type: :feature, js: true do
 
         When '進行新增判決評鑑' do
           before { visit(input_info_party_score_verdicts_path) }
-          before { capybara_party_input_info_verdict_score(story) }
+          before { party_input_info_verdict_score(story) }
           Then '無法進行' do
             expect(page).to have_content('已超過可評鑑時間')
           end
