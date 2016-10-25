@@ -63,14 +63,14 @@ class Scrap::ImportVerdictContext < BaseContext
   end
 
   def create_verdict
-    @verdict = Verdict.find_or_initialize_by(
+    @verdict = Verdict.find_or_create_by(
       story: @story,
       publish_date: @publish_date
     )
   end
 
   def build_analysis_context
-    @analysis_context = Scrap::AnalysisVerdictContext.new(@story, @content, @word)
+    @analysis_context = Scrap::AnalysisVerdictContext.new(@verdict, @content, @word)
   end
 
   def find_main_judge
