@@ -1,5 +1,5 @@
-section.offcanvas-card-wrapper.container--wide
-  - if people.present?
+- if people.present?
+  section.offcanvas-card-wrapper.container--wide
     ul.list--avatar
       - people.each do |person|
         li.list--avatar__cell
@@ -7,7 +7,3 @@ section.offcanvas-card-wrapper.container--wide
     br
     .text-center （依姓名部首排序）
     = paginate people, theme: 'www'
-
-  - else
-    / # TODO 請設計一下『查無資料』的情況
-    = "查無資料"

@@ -31,6 +31,11 @@ $character-gradients: (
   
   &.billboard--profiles-judges { background-position: 0 50%; }
   &.billboard--profiles-show   { padding-top: r(20); }
+
+  .enable-full-billboard & {
+    flex: 1 0 auto;
+    margin-bottom: 0;
+  }
 }
 .billboard__heading {
   text: center $white ms(3);

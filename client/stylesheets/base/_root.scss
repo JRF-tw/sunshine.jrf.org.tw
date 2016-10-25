@@ -24,9 +24,23 @@ body {
   @each $type in $characters {
     &.#{$type} { background-color: theme($type); }
   }
+
+  &.enable-full-billboard {
+    display: flex;
+    flex-flow: column nowrap;
+  }
 }
 
-main[role="main"] { padding-bottom: r(10); }
+main[role="main"] {
+  padding-bottom: r(10);
+
+  .enable-full-billboard & {
+    padding-bottom: 0;
+    flex: 1;
+    display: flex;
+    flex-flow: column nowrap;
+  }
+}
 
 // Turbolinks
 html.turbolinks-progress-bar::before {background-color: $nprogress-color !important;}
