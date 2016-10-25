@@ -36,7 +36,7 @@
     margin-bottom: 0;
     font-size: ms(4);
   }
-  .job { margin: 0; }
+  .job { margin: 0 auto r(2); }
 }
 
 .list--profile-info {
@@ -47,7 +47,7 @@
 
   .cell {
     text: center $text-secondary;
-    padding: r(2) 0;
+    padding-bottom: r(2);
     width: r(10);
   }
   .desc {text: bold;}
