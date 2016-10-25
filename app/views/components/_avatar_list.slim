@@ -1,9 +1,14 @@
+- hide_pagination = hide_pagination ? hide_pagination : false
+
 - if people.present?
   section.offcanvas-card-wrapper.container--wide
     ul.list--avatar
       - people.each do |person|
         li.list--avatar__cell
-          = render partial: 'components/avatar', locals: { person: person, type: type }
+          = render 'components/avatar', person: person, type: type
+
     br
     .text-center （依姓名部首排序）
-    = paginate people, theme: 'www'
+    
+    - unless hide_pagination
+      = paginate people, theme: 'www'
