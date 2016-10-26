@@ -25,5 +25,4 @@ feature '前台帳號功能', type: :feature, js: true do
       end
     end
   end
-
 end
