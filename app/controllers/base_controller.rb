@@ -36,6 +36,12 @@ class BaseController < ApplicationController
   def score_intro
   end
 
+  def terms_of_service
+  end
+
+  def privacy
+  end
+
   def render_404
     # render :not_found, status: 404
     redirect_to root_path
