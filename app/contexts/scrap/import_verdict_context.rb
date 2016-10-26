@@ -34,6 +34,7 @@ class Scrap::ImportVerdictContext < BaseContext
     @word = word
     @publish_date = publish_date
     @stroy_type = stroy_type
+    @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
   end
 
   def perform
@@ -79,7 +80,7 @@ class Scrap::ImportVerdictContext < BaseContext
     @main_judge = main_judges.count == 1 ? main_judges.last : nil
 
     unless main_judges.count == 1
-      SlackService.notify_analysis_verdict_error("判決書關聯主審法官失敗 : 找到多位法官, 或者找不到任何法官\n 判決書類別 : #{@stroy_type}, 法官姓名 : #{@analysis_context.main_judge_name}, 法院 : #{@court.scrap_name}")
+      Logs::AddCrawlerError.add_verdict_error(@crawler_history, @verdict, :parse_main_judge_error, '判決書關聯主審法官失敗: 找到多位法官, 或者找不到任何法官')
     end
   end
 

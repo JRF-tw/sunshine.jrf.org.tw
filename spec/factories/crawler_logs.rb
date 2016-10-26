@@ -15,7 +15,7 @@ FactoryGirl.define do
   factory :crawler_log do
     crawler_history { create :crawler_history }
     crawler_kind :crawler_court
-    crawler_error_type :parse_date_failed
+    crawler_error_type :parse_data_failed
   end
 
 end
