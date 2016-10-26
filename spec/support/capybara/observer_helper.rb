@@ -11,14 +11,6 @@ module Capybara
       save_page
     end
 
-    def input_sign_in_observer(observer_data)
-      within('#new_court_observer') do
-        fill_in 'court_observer_email', with: observer_data[:email]
-        fill_in 'court_observer_password', with: observer_data[:password]
-      end
-      save_page
-    end
-
     def regiter_submit_observer
       click_button '註冊'
       save_page
@@ -30,16 +22,11 @@ module Capybara
       current_email.find('a').click
     end
 
-    def log_in_observer
-      click_button '登入'
-      save_page
-    end
-
-    def signin_court_observer(court_observer)
+    def signin_court_observer(email:, password: '123123123')
       visit(new_court_observer_session_path)
       within('#new_court_observer') do
-        fill_in 'court_observer_email', with: court_observer.email
-        fill_in 'court_observer_password', with: court_observer.password
+        fill_in 'court_observer_email', with: email
+        fill_in 'court_observer_password', with: password
       end
       click_button '登入'
     end
