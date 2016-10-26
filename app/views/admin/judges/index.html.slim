@@ -5,23 +5,23 @@
       .row
         .span6
           .control-group
-            label.control-label= f.label :is_active_true
-            .controls= f.select :is_active_true,
+            label.control-label = f.label :is_active_true
+            .controls#select2 = f.select :is_active_true,
             collect_for_boolean, include_blank: "請選擇"
         .span6
           .control-group
-            label.control-label= f.label :is_hidden_eq
-            .controls= f.select :is_hidden_eq,
+            label.control-label = f.label :is_hidden_eq
+            .controls#select2 = f.select :is_hidden_eq,
             collect_for_boolean, include_blank: "請選擇"
       .row
         .span6
           .control-group
-            label.control-label= f.label :name_cont
-            .controls= f.search_field :name_cont
+            label.control-label = f.label :name_cont
+            .controls = f.search_field :name_cont
         .span6
           .control-group
-            label.control-label= f.label :court_full_name_eq
-            .controls#select2= f.select :current_court_id_eq,
+            label.control-label = f.label :court_full_name_eq
+            .controls#select2 = f.select :current_court_id_eq,
             collect_for_courts, include_blank: "請選擇"
     hr
     .form-actions

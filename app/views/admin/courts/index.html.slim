@@ -7,23 +7,23 @@
       .row
         .span6
           .control-group
-            label.control-label= f.label :court_type_eq
-            .controls= f.select :court_type_eq,
-            collect_for_court_types, include_blank: "全部"
+            label.control-label = f.label :court_type_eq
+            .controls#select2 = f.select :court_type_eq,
+            collect_for_court_types, include_blank: "請選擇"
         .span6
           .control-group
-            label.control-label= f.label :is_hidden_eq
-            .controls= f.select :is_hidden_eq,
+            label.control-label = f.label :is_hidden_eq
+            .controls#select2 = f.select :is_hidden_eq,
             collect_for_boolean, include_blank: "請選擇"
       .row
         .span6
           .control-group
-            label.control-label= f.label :full_name_cont
+            label.control-label = f.label :full_name_cont
             .controls= f.search_field :full_name_cont
 
         .span6
           .control-group
-            label.control-label= f.label :name_cont
+            label.control-label = f.label :name_cont
             .controls= f.search_field :name_cont
     hr
     .form-actions
