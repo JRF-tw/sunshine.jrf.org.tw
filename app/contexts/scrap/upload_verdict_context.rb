@@ -5,6 +5,7 @@ class Scrap::UploadVerdictContext < BaseContext
 
   def initialize(content)
     @content = content
+    @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
   end
 
   def perform(verdict)
@@ -13,8 +14,8 @@ class Scrap::UploadVerdictContext < BaseContext
       add_error('upload file failed') unless @verdict.save
       true
     end
-  rescue => e
-    SlackService.notify_verdict_upload_error("判決書上傳失敗:  #{e.message}")
+  rescue
+    Logs::AddCrawlerError.add_verdict_error(@crawler_history, @verdict, :parse_judge_empty, '判決書上傳失敗')
   end
 
   private

@@ -8,6 +8,7 @@ class Scrap::ImportJudgeContext < BaseContext
 
   def initialize(data_string)
     @data_string = data_string
+    @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
   end
 
   def perform
@@ -25,8 +26,9 @@ class Scrap::ImportJudgeContext < BaseContext
     @court_name = @chamber_name =~ /分院/ ? "#{@chamber_name.split('分院')[0]}分院" : "#{@chamber_name.split('法院')[0]}法院"
     @branch_name = @row_data[1].strip
     @judge_name = @row_data[2].gsub('法官', '').squish
-  rescue => e
-    SlackService.notify_scrap_judge_by_schedule_error("法官爬取失敗: 股別資料解析錯誤\n row_data : #{@row_data}\n #{e.message}")
+  rescue
+    Logs::AddCrawlerError.parse_judge_data_error(@crawler_history, :parse_data_failed, "解析股別法官資料失敗 : 解析資料[ #{@row_data} ]")
+    false
   end
 
   def find_court

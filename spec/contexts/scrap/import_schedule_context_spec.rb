@@ -38,7 +38,7 @@ RSpec.describe Scrap::ImportScheduleContext, type: :model do
 
       context 'not match judge' do
         before { branch.update_attributes(name: 'x') }
-        it { expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+        it { expect { subject }.to change { CrawlerLog.count } }
       end
     end
 
