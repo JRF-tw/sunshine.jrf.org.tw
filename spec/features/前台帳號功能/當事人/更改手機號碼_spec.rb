@@ -71,6 +71,7 @@ feature '前台帳號功能', type: :feature, js: true do
         end
 
         Scenario '手機號碼輸入檢查條件情境同「手機驗證流程」' do
+          Then {}
         end
       end
 
@@ -98,6 +99,7 @@ feature '前台帳號功能', type: :feature, js: true do
         end
 
         Scenario '驗證碼輸入檢查條件同「手機驗證流程」' do
+          Then {}
         end
       end
     end
