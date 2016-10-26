@@ -23,4 +23,13 @@ RSpec.describe CrawlerHistory, type: :model do
       it { expect(crawler_history).not_to be_new_record }
     end
   end
+
+  context 'scope' do
+    let!(:crawler_history) { create :crawler_history }
+    let!(:crawler_history1) { create :crawler_history, :yesterday }
+
+    context 'newest' do
+      it { expect(CrawlerHistory.newest.first).to eq(crawler_history) }
+    end
+  end
 end

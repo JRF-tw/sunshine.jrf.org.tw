@@ -21,6 +21,11 @@ FactoryGirl.define do
     sequence(:name) { |n| "測試地院-#{n}" }
     code 'TPK'
     sequence(:scrap_name) { |n| "faker-court-#{n}" }
+    is_hidden false
+
+    trait :with_weight do
+      after(:create, &:insert_at)
+    end
   end
 
   factory :court_for_params, class: Court do

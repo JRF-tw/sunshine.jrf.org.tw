@@ -23,6 +23,7 @@ class Scrap::ParseVerdictContext < BaseContext
     @start_date = start_date
     @end_date = end_date
     @sleep_time_interval = rand(1..2)
+    @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
   end
 
   def perform
@@ -35,47 +36,54 @@ class Scrap::ParseVerdictContext < BaseContext
 
   def get_verdict_data
     court_value = @court.code + ' ' + @court.scrap_name
-    verdict_query = "?id=#{@scrap_id}&v_court=#{court_value}&v_sys=#{@type}&jud_year=&jud_case=&jud_no=&jud_no_end=&jud_title=&keyword=&sdate=#{@start_date}&edate=#{@end_date}&page=1&searchkw=&jmain=&cw=0"
+    @verdict_query = "?id=#{@scrap_id}&v_court=#{court_value}&v_sys=#{@type}&jud_year=&jud_case=&jud_no=&jud_no_end=&jud_title=&keyword=&sdate=#{@start_date}&edate=#{@end_date}&page=1&searchkw=&jmain=&cw=0"
     sleep @sleep_time_interval
-    @response_data = Mechanize.new.get(VERDICT_URI + verdict_query, {}, RESULT_URI)
+    @response_data = Mechanize.new.get(VERDICT_URI + @verdict_query, {}, RESULT_URI)
   rescue
-    nil
+    Logs::AddCrawlerError.parse_verdict_data_error(@crawler_history, :crawler_failed, "取得判決書搜尋結果失敗 : 來源網址 #{VERDICT_URI + @verdict_query}")
+    false
   end
 
   def parse_orginal_data
     @orginal_data = @response_data.body.force_encoding('UTF-8')
-  rescue => e
-    SlackService.notify_scrap_verdict_error("判決書分析資料失敗: parse_orginal_data處理資料為空\n response_data : #{@response_data.body}\n #{e.message}")
+  rescue
+    Logs::AddCrawlerError.parse_verdict_data_error(@crawler_history, :parse_data_failed, '解析資訊錯誤 : UTF-8 轉碼失敗')
+    false
   end
 
   def parse_nokogiri_data
     @nokogiri_data = Nokogiri::HTML(@response_data.body)
-  rescue => e
-    SlackService.notify_scrap_verdict_error("判決書分析資料失敗: parse_nokogiri_data處理資料為空\n response_data : #{@response_data.body}\n #{e.message}")
+  rescue
+    Logs::AddCrawlerError.parse_verdict_data_error(@crawler_history, :parse_data_failed, '解析資訊錯誤 : nokogiri 拆解 data 失敗')
+    false
   end
 
   def parse_verdict_stroy_type
     @verdict_stroy_type = @nokogiri_data.css('table')[0].css('b').text.match(/\s+(\p{Word}+)類/)[1]
-  rescue => e
-    SlackService.notify_scrap_verdict_error("判決書分析資料失敗: parse_nokogiri_data處理資料為空\n nokogiri_data : #{@nokogiri_data}\n #{e.message}")
+  rescue
+    Logs::AddCrawlerError.parse_verdict_data_error(@crawler_history, :parse_data_failed, '解析資訊錯誤 : 取得 判決書類別 失敗')
+    false
   end
 
   def parse_verdict_word
     @verdict_word = @nokogiri_data.css('table')[4].css('tr')[0].css('td')[1].text
-  rescue => e
-    SlackService.notify_scrap_verdict_error("判決書分析資料失敗: parse_verdict_word處理資料為空\n nokogiri_data : #{@nokogiri_data}\n #{e.message}")
+  rescue
+    Logs::AddCrawlerError.parse_verdict_data_error(@crawler_history, :parse_data_failed, '解析資訊錯誤 : 取得 判決書字別 失敗')
+    false
   end
 
   def parse_verdict_publish_date
     date_string = @nokogiri_data.css('table')[4].css('tr')[1].css('td')[1].text
     @verdict_publish_date = Date.new((date_string[0..2].to_i + 1911), date_string[3..4].to_i, date_string[5..6].to_i)
-  rescue => e
-    SlackService.notify_scrap_verdict_error("判決書分析資料失敗: parse_verdict_content處理資料為空\n nokogiri_data : #{@nokogiri_data}\n #{e.message}")
+  rescue
+    Logs::AddCrawlerError.parse_verdict_data_error(@crawler_history, :parse_data_failed, '解析資訊錯誤 : 取得 判決書發布日期 失敗')
+    false
   end
 
   def parse_verdict_content
     @verdict_content = @nokogiri_data.css('pre').text
-  rescue => e
-    SlackService.notify_scrap_verdict_error("判決書分析資料失敗: parse_verdict_content處理資料為空\n nokogiri_data : #{@nokogiri_data}\n #{e.message}")
+  rescue
+    Logs::AddCrawlerError.parse_verdict_data_error(@crawler_history, :parse_data_failed, '解析資訊錯誤 : 取得 判決書內容 失敗')
+    false
   end
 end

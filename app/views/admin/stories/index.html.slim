@@ -5,43 +5,43 @@
       .row
         .span6
           .control-group
-            label.control-label= f.label :is_pronounce_eq
-            .controls= f.select :is_pronounce_eq,
+            label.control-label = f.label :is_pronounce_eq
+            .controls#select2 = f.select :is_pronounce_eq,
             collect_for_boolean, include_blank: "請選擇"
         .span6
           .control-group
-            label.control-label= f.label :have_adjudgement
-            .controls= f.select :have_adjudgement,
+            label.control-label = f.label :have_adjudgement
+            .controls#select2 = f.select :have_adjudgement,
             collect_for_adjudgement, include_blank: "請選擇"
       .row
         .span6
           .control-group
-            label.control-label= f.label :court_full_name_eq
-            .controls#select2= f.select :court_id_eq,
+            label.control-label = f.label :court_full_name_eq
+            .controls#select2 = f.select :court_id_eq,
             collect_for_courts, include_blank: "請選擇"
         .span6
           .control-group#datepicker
-            label.control-label= f.label :adjudge_date_eq
-            .controls= f.search_field :adjudge_date_eq
+            label.control-label = f.label :adjudge_date_eq
+            .controls = f.search_field :adjudge_date_eq
 
       .row
         .span6
           .control-group
-            label.control-label= f.label :year_eq
-            .controls= f.search_field :year_eq
+            label.control-label = f.label :year_eq
+            .controls = f.search_field :year_eq
         .span6
           .control-group
-            label.control-label= f.label :number_eq
-            .controls= f.search_field :number_eq
+            label.control-label = f.label :number_eq
+            .controls = f.search_field :number_eq
       .row
         .span6
           .control-group
-            label.control-label= f.label :word_type_cont
-            .controls= f.search_field :word_type_cont
+            label.control-label = f.label :word_type_cont
+            .controls = f.search_field :word_type_cont
         .span6
           .control-group
-            label.control-label= f.label :main_judge_name_cont
-            .controls= f.search_field :main_judge_name_cont
+            label.control-label = f.label :main_judge_name_cont
+            .controls = f.search_field :main_judge_name_cont
 
 
     hr

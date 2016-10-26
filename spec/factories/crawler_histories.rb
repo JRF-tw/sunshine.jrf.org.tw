@@ -16,5 +16,13 @@
 FactoryGirl.define do
   factory :crawler_history do
     crawler_on Time.zone.today
+
+    trait :yesterday do
+      crawler_on Time.zone.today - 1.day
+    end
+
+    trait :tomorrow do
+      crawler_on Time.zone.today + 1.day
+    end
   end
 end

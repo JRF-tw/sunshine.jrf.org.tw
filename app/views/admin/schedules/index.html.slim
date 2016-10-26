@@ -5,21 +5,21 @@
       .row
         .span6
           .control-group
-            label.control-label= f.label :court_full_name_eq
-            .controls#select2= f.select :court_id_eq,
+            label.control-label = f.label :court_full_name_eq
+            .controls#select2 = f.select :court_id_eq,
             collect_for_courts, include_blank: "請選擇"
         .span6
           .control-group
-            label.control-label= f.label :branch_judge_id_eq
-            .controls#select2= f.select :branch_judge_id_eq,
+            label.control-label = f.label :branch_judge_id_eq
+            .controls#select2 = f.select :branch_judge_id_eq,
             collect_for_judges_name, include_blank: "請選擇"
       .row
         .span6
           .control-group#datepicker
-            label.control-label= f.label :start_on_gteq
-            .controls= f.search_field :start_on_gteq, placeholder: "起始時間，非必填"
-            label.control-label= f.label :start_on_lteq
-            .controls= f.search_field :start_on_lteq, placeholder: "結束時間，非必填"
+            label.control-label = f.label :start_on_gteq
+            .controls = f.search_field :start_on_gteq, placeholder: "起始時間，非必填"
+            label.control-label = f.label :start_on_lteq
+            .controls = f.search_field :start_on_lteq, placeholder: "結束時間，非必填"
 
     .form-actions
       = f.submit :value => "搜尋", :class => "btn btn-primary"
