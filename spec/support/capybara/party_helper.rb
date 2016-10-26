@@ -1,5 +1,20 @@
 module Capybara
   module PartyHelper
+    def party_input_name_and_id_form(name, identify_number)
+      within('#new_party') do
+        fill_in 'party_name', with: name
+        fill_in 'party_identify_number', with: identify_number
+      end
+      check('policy_agreement')
+    end
+
+    def party_input_password_form(password, password_confirmation)
+      within('#new_party') do
+        fill_in 'party_password', with: password
+        fill_in 'party_password_confirmation', with: password_confirmation || password
+      end
+    end
+
     def signin_party(party)
       visit(new_party_session_path)
       within('#new_party') do
