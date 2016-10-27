@@ -21,8 +21,7 @@
       thead
         tr
           th 爬蟲日期
-          th 爬取法院數量
-          th 爬取股別數量
+          th 爬取法院數量(每週爬取一次)
           th 爬取法官數量
           th 爬取判決書數量
           th 爬取庭期數量
@@ -32,7 +31,6 @@
           tr
             td = ch.crawler_on
             td = ch.courts_count
-            td = ch.branches_count
             td = ch.judges_count
             td = ch.verdicts_count
             td = ch.schedules_count
