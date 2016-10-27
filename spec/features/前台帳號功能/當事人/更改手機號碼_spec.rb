@@ -19,7 +19,7 @@ feature '前台帳號功能', type: :feature, js: true do
       feature '送出驗證碼' do
         Scenario '當事人A已驗證並登入，進行手機號碼更改。新手機號碼不能和其他人（包含自己）已驗證或驗證中的號碼相同' do
           let(:party_B) { create :party, :already_confirmed }
-          Given '當事人A 待驗證的號碼為空' do
+          Given '' do
             When '送出原本的手機號碼' do
               before { edit_phone_number(party_A.phone_number) }
               Then '顯示錯誤訊息' do
