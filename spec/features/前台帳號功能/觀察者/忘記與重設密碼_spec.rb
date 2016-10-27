@@ -15,7 +15,7 @@ feature '前台帳號功能', type: :feature, js: true do
         current_email.find('a').click
       end
       feature '送出重設密碼信' do
-        Scenario '通過認證後才可以送出重設密碼信' do
+        Scenario '必須通過認證才能送出重設密碼信' do
           Given '觀察者已完成註冊認證' do
             When '送出觀察者重設密碼資料' do
               before { send_reset_password_email(observer_A.email) }
