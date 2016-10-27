@@ -1,6 +1,6 @@
 module Capybara
   module ObserverHelper
-    def input_sign_up_observer(observer_data)
+    def court_observer_input_sign_up(observer_data)
       within('#new_court_observer') do
         fill_in 'court_observer_name', with: observer_data[:name]
         fill_in 'court_observer_email', with: observer_data[:email]
@@ -9,6 +9,19 @@ module Capybara
       end
       check('policy_agreement')
       save_page
+    end
+
+    def court_observer_input_resend_password_email(email)
+      within('#new_court_observer') do
+        fill_in 'court_observer_email', with: email
+      end
+    end
+
+    def court_observer_input_set_password(password:, password_confirmation: nil)
+      within('#new_court_observer') do
+        fill_in 'court_observer_password', with: password
+        fill_in 'court_observer_password_confirmation', with: password_confirmation || password
+      end
     end
 
     def regiter_submit_observer
@@ -80,6 +93,11 @@ module Capybara
 
     def court_observer_run_verdict_score_flow
       visit(new_court_observer_score_verdict_path)
+    end
+
+    def open_court_observer_email(email)
+      perform_sidekiq_job(fetch_sidekiq_last_job)
+      open_email(email)
     end
   end
 end

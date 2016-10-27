@@ -3,7 +3,7 @@ feature '觀察者註冊 (Email)', type: :feature, js: true do
   let!(:observer_a) { { name: '當事人a', email: 'test@gmail.com', password: '00000000' } }
   def observer_register(observer)
     visit(new_court_observer_registration_path)
-    input_sign_up_observer(observer)
+    court_observer_input_sign_up(observer)
     regiter_submit_observer
   end
 
