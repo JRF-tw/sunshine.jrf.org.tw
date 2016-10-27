@@ -49,7 +49,7 @@ class Scrap::ImportScheduleContext < BaseContext
     branches = branches.where('chamber_name LIKE ? ', "%#{@story_type}%") if branches.map(&:judge_id).uniq.count > 1
     @main_judge = branches.first ? branches.first.judge : nil
     unless @main_judge
-      Logs::AddCrawlerError.parse_verdict_data_error(@crawler_history, :parse_data_failed, "解析資訊錯誤 : 股別關聯主審法官 關聯失敗, 法院ID : #{@court.id}, 關聯資訊 : #{@hash}")
+      Logs::AddCrawlerError.parse_schedule_data_error(@crawler_history, :parse_data_failed, "股別關聯主審法官 關聯失敗, 法院ID : #{@court.id}, 關聯資訊 : #{@hash}")
     end
   end
 
