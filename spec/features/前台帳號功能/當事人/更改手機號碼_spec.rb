@@ -17,9 +17,9 @@ feature '前台帳號功能', type: :feature, js: true do
       let!(:party_A) { create :party, :already_confirmed }
       before { signin_party(identify_number: party_A.identify_number) }
       feature '送出驗證碼' do
-        Scenario '當事人A已驗證並登入，進行手機號碼更改。新手機號碼不能和其他人（包含自己）已驗證或驗證中的號碼相同' do
+        Scenario '當事人A已登入，進行手機號碼更改。新手機號碼不能和其他人（包含自己）已驗證或驗證中的號碼相同' do
           let(:party_B) { create :party, :already_confirmed }
-          Given '' do
+          Given '當事人A已通過手機驗證' do
             When '送出原本的手機號碼' do
               before { edit_phone_number(party_A.phone_number) }
               Then '顯示錯誤訊息' do
@@ -37,7 +37,7 @@ feature '前台帳號功能', type: :feature, js: true do
             end
           end
 
-          Given '當事人A 待驗證中號碼為 0988888888' do
+          Given '當事人A已通過手機驗證 待驗證中號碼為 0988888888' do
             before { party_A.unconfirmed_phone = '0988888888' }
             When '送出 0988888888' do
               before { edit_phone_number('0988888888') }
