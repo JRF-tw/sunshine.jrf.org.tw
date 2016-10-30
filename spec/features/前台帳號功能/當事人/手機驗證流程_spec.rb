@@ -9,10 +9,12 @@ feature '前台帳號功能', type: :feature, js: true do
       click_button '寄送驗證碼'
     end
 
-    def verify_phone_number(verify_code)
+    def verify_phone_number(verify_code, run_time = 1)
       visit(verify_party_phone_path)
-      party_input_verify_code(verify_code)
-      click_button '認證'
+      run_time.times do
+        party_input_verify_code(verify_code)
+        click_button '認證'
+      end
     end
     feature '手機驗證流程' do
       Scenario '手機號碼不能跟別人重複，包含別人正在驗證中的' do
@@ -28,7 +30,7 @@ feature '前台帳號功能', type: :feature, js: true do
           end
         end
 
-        Given '當事人B註冊後正在驗證手機號碼 0988888888' do
+        Given '當事人B註冊後第一次輸入手機號碼 0988888888 ，進行驗證中' do
           let!(:party_B) { create :party }
           before { party_B.unconfirmed_phone = '0988888888' }
           When '輸入 0988888888' do
@@ -40,9 +42,14 @@ feature '前台帳號功能', type: :feature, js: true do
           end
         end
 
-        Given '當事人B正在更改新手機號碼為 0988888888' do
+        Given '當事人B註冊後已完成手機驗證，但又再更改新手機號碼為 0988888888 ，進行驗證中' do
+          let!(:party_B) { create :party, :already_confirmed }
+          before { party_B.unconfirmed_phone = '0988888888' }
           When '輸入 0988888888' do
+            before { edit_phone_number('0988888888') }
             Then '顯示錯誤訊息' do
+              expect(current_path).to eq(party_phone_path)
+              expect(page).to have_content('該手機號碼正等待驗證中')
             end
           end
         end
@@ -88,14 +95,8 @@ feature '前台帳號功能', type: :feature, js: true do
           end
         end
 
-        Given '已嘗試錯誤 2 次' do
-          before { party_A.retry_verify_count.incr(2) }
-          When '輸入錯誤的驗證碼' do
-            before { verify_phone_number('2222') }
-            Then '顯示錯誤訊息 並導向至手機輸入頁面' do
-              expect(current_path).to eq(edit_party_phone_path)
-              expect(page).to have_content('驗證碼輸入錯誤超過三次, 請重新設定手機號碼')
-            end
+        Given '嘗試錯誤 3 次之後 輸入正確的驗證碼也會無效 ' do
+          Then '同 request 測試' do
           end
         end
 
