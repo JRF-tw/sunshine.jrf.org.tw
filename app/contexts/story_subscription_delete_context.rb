@@ -1,4 +1,5 @@
 class StorySubscriptionDeleteContext < BaseContext
+  MD5KEY = 'P2NVel3pHp'.freeze
   before_perform :check_token
   before_perform :find_story_subscription
 
@@ -18,7 +19,7 @@ class StorySubscriptionDeleteContext < BaseContext
   private
 
   def check_token
-    return add_error(:invalid_token) unless @token == Digest::MD5.hexdigest(@subscriber.email+'P2NVel3pHp')
+    return add_error(:invalid_token) unless @token == Digest::MD5.hexdigest(@subscriber.email + MD5KEY)
   end
 
   def find_story_subscription
