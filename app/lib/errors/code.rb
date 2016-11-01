@@ -16,6 +16,7 @@ class Errors::Code
     email_conflict: 400,
     email_pattern_invalid: 400,
     email_exist: 400,
+    invalid_token: 401,
     invalid_phone_number: 400,
     identify_number_blank: 400,
     identify_number_invalid: 400,
