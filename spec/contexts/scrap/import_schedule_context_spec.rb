@@ -89,12 +89,12 @@ RSpec.describe Scrap::ImportScheduleContext, type: :model do
       context 'logged' do
         let(:new_story_type_data) { hash_data.merge(branch_name: 'xxx') }
         subject { described_class.new(court.code).perform(new_story_type_data) }
-        it { expect { subject }.to change{ CrawlerLog.count } }
+        it { expect { subject }.to change { CrawlerLog.count } }
       end
 
       context 'not logged' do
         subject { described_class.new(court.code).perform(hash_data) }
-        it { expect { subject }.not_to change{ CrawlerLog.count } }
+        it { expect { subject }.not_to change { CrawlerLog.count } }
       end
     end
   end

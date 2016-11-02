@@ -33,10 +33,10 @@ class Scrap::GetVerdictsByCourtContext < BaseContext
     request_retry(key: "#{INDEX_URI} / #{Time.zone.today}")
   end
 
-  def request_retry(key: )
-    redis_object = Redis::Counter.new(key, expiration: 1.days)
+  def request_retry(key:)
+    redis_object = Redis::Counter.new(key, expiration: 1.day)
     if redis_object.value < 12
-      self.class.delay_for(1.hours).perform(@court, @start_date, @end_date)
+      self.class.delay_for(1.hour).perform(@court, @start_date, @end_date)
       redis_object.incr
     else
       Logs::AddCrawlerError.parse_verdict_data_error(@crawler_history, :crawler_failed, "取得判決書裁判類別失敗, 來源網址:#{INDEX_URI}")

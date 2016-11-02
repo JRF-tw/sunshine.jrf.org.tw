@@ -71,10 +71,10 @@ class Scrap::ParseSchedulesContext < BaseContext
     DateTime.new(year, split_date[1], split_date[2], hours, minutes, 0, '+8')
   end
 
-  def request_retry(key: )
-    redis_object = Redis::Counter.new(key, expiration: 1.days)
+  def request_retry(key:)
+    redis_object = Redis::Counter.new(key, expiration: 1.day)
     if redis_object.value < 12
-      self.class.delay_for(1.hours).perform(@court_code, @story_type, @current_page, @page_total, @start_date_format, @end_date_format)
+      self.class.delay_for(1.hour).perform(@court_code, @story_type, @current_page, @page_total, @start_date_format, @end_date_format)
       redis_object.incr
     else
       Logs::AddCrawlerError.parse_schedule_data_error(@crawler_history, :crawler_failed, "取得法院代碼-#{@court_code}庭期單頁資料失敗, 來源網址:#{SCHEDULE_INFO_URI}, 參數:#{@data}")
