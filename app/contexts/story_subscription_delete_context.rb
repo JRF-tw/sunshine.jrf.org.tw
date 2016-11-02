@@ -18,7 +18,7 @@ class StorySubscriptionDeleteContext < BaseContext
   private
 
   def check_token
-    return add_error(:invalid_token) unless @token == @subscriber.unsubscribe_key
+    return add_error(:invalid_token) unless @token == @subscriber.unsubscribe_token
   end
 
   def find_story_subscription

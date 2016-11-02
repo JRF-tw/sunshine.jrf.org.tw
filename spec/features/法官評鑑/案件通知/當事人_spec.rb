@@ -56,7 +56,7 @@ describe '當事人案件通知', type: :request do
 
   context '取消訂閱' do
     let!(:party) { party_subscribe_story_date_today }
-    let(:params) { { token: party.unsubscribe_key } }
+    let(:params) { { token: party.unsubscribe_token } }
     context '案件已訂閱' do
       before { StorySubscriptionDeleteContext.new(Story.last, party).perform(params) }
 
@@ -88,7 +88,7 @@ describe '當事人案件通知', type: :request do
     context '案件未訂閱' do
       let!(:party) { create(:party, :already_confirmed) }
       let!(:story) { create(:story, :with_schedule_date_today) }
-      let(:params) { { token: party.unsubscribe_key } }
+      let(:params) { { token: party.unsubscribe_token } }
       subject { StorySubscriptionDeleteContext.new(story, party).perform(params) }
 
       it '不變' do

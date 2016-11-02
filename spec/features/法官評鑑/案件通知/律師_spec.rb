@@ -56,7 +56,7 @@ describe '律師案件通知', type: :request do
 
   context '取消訂閱' do
     let!(:lawyer) { lawyer_subscribe_story_date_today }
-    let(:params) { { token: lawyer.unsubscribe_key } }
+    let(:params) { { token: lawyer.unsubscribe_token } }
     context '案件已訂閱' do
       before { StorySubscriptionDeleteContext.new(Story.last, lawyer).perform(params) }
 
@@ -88,7 +88,7 @@ describe '律師案件通知', type: :request do
     context '案件未訂閱' do
       let!(:lawyer) { create(:lawyer, :with_confirmed, :with_password) }
       let!(:story) { create(:story, :with_schedule_date_today) }
-      let(:params) { { token: lawyer.unsubscribe_key } }
+      let(:params) { { token: lawyer.unsubscribe_token } }
       subject { StorySubscriptionDeleteContext.new(story, lawyer).perform(params) }
 
       it '不變' do
