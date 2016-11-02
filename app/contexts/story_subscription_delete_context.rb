@@ -1,15 +1,14 @@
 class StorySubscriptionDeleteContext < BaseContext
-  MD5KEY = 'P2NVel3pHp'.freeze
   before_perform :check_token
   before_perform :find_story_subscription
 
-  def initialize(story)
+  def initialize(story, subscriber)
     @story = story
+    @subscriber = subscriber
   end
 
-  def perform(subscriber, params)
+  def perform(params)
     @token = params[:token]
-    @subscriber = subscriber
     run_callbacks :perform do
       add_error(:data_delete_fail, @story_subscription.errors.full_messages.join("\n")) unless @story_subscription.destroy
       true
@@ -19,7 +18,7 @@ class StorySubscriptionDeleteContext < BaseContext
   private
 
   def check_token
-    return add_error(:invalid_token) unless @token == Digest::MD5.hexdigest(@subscriber.email + MD5KEY)
+    return add_error(:invalid_token) unless @token == @subscriber.unsubscribe_key
   end
 
   def find_story_subscription

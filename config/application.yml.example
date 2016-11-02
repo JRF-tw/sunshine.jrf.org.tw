@@ -42,6 +42,8 @@ defaults: &defaults
     sid: "AC4d17f69a678c9ffaf4b190e92a340896"
     token: "xxxxxx"
     phone_number: "+18443293046"
+  lawyer_unsubscribe_key: "P2NVel3pHp"
+  party_unsubscribe_key: "18ae550899"
 
 development:
   <<: *defaults
@@ -85,6 +87,8 @@ staging: &defaults
     default_sender: "no-reply@jrf.org.tw"
   sitemap:
     path: "sitemaps/"
+  lawyer_unsubscribe_key:
+  party_unsubscribe_key:
 
 production:
   SECRET_KEY_BASE: daskdjaslkjdsalkdj12341234
@@ -122,3 +126,5 @@ production:
     default_sender: "no-reply@jrf.org.tw"
   sitemap:
     path: "sitemaps/"
+  lawyer_unsubscribe_key:
+  party_unsubscribe_key:

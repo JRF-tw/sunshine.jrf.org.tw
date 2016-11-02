@@ -80,9 +80,14 @@ class Lawyer < ActiveRecord::Base
     end
   end
 
+  def unsubscribe_key
+    Digest::MD5.hexdigest(email + ENV['lawyer_unsubscribe_key'])
+  end
+
   private
 
   def skip_confirmation_notification
     skip_confirmation_notification!
   end
+
 end

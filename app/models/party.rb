@@ -87,4 +87,8 @@ class Party < ActiveRecord::Base
     save(validate: false)
     raw
   end
+
+  def unsubscribe_key
+    Digest::MD5.hexdigest(email + ENV['party_unsubscribe_key'])
+  end
 end

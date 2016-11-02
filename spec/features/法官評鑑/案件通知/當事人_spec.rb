@@ -56,9 +56,9 @@ describe '當事人案件通知', type: :request do
 
   context '取消訂閱' do
     let!(:party) { party_subscribe_story_date_today }
-    let(:params) { { token: Digest::MD5.hexdigest(party.email + 'P2NVel3pHp') } }
+    let(:params) { { token: party.unsubscribe_key } }
     context '案件已訂閱' do
-      before { StorySubscriptionDeleteContext.new(Story.last).perform(party, params) }
+      before { StorySubscriptionDeleteContext.new(Story.last, party).perform(params) }
 
       it '成功取消' do
         expect(StorySubscription.count).to eq(0)
@@ -88,8 +88,8 @@ describe '當事人案件通知', type: :request do
     context '案件未訂閱' do
       let!(:party) { create(:party, :already_confirmed) }
       let!(:story) { create(:story, :with_schedule_date_today) }
-      let(:params) { { token: Digest::MD5.hexdigest(party.email + 'P2NVel3pHp') } }
-      subject { StorySubscriptionDeleteContext.new(story).perform(party, params) }
+      let(:params) { { token: party.unsubscribe_key } }
+      subject { StorySubscriptionDeleteContext.new(story, party).perform(params) }
 
       it '不變' do
         expect { subject }.not_to change { StorySubscription.count }
