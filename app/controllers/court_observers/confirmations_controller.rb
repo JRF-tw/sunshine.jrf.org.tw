@@ -40,7 +40,7 @@ class CourtObservers::ConfirmationsController < Devise::ConfirmationsController
 
   def after_confirmation_path_for
     if signed_in?(:court_observer)
-      court_observer_root_path
+      court_observer_profile_path
     else
       new_session_path(:court_observer)
     end
