@@ -81,7 +81,7 @@ class Lawyer < ActiveRecord::Base
   end
 
   def unsubscribe_token
-    Digest::MD5.hexdigest(email + Setting.unsubscribe_key)
+    Digest::MD5.hexdigest(Setting.unsubscribe_key + email)
   end
 
   private
