@@ -17,7 +17,7 @@ class Scrap::GetCourtsContext < BaseContext
   def perform
     run_callbacks :perform do
       @scrap_data.each do |court_data|
-        Scrap::ImportCourtContext.delay(retry: 3).perform(court_data)
+        Scrap::ImportCourtContext.delay(retry: false).perform(court_data)
       end
     end
   end
@@ -32,15 +32,11 @@ class Scrap::GetCourtsContext < BaseContext
       @scrap_data << { scrap_name: data.text, code: data.attr('value').gsub(data.text, '').squish }
     end
   rescue
-    Logs::AddCrawlerError.parse_court_data_error(@crawler_history, :crawler_failed, "回傳資訊取得失敗 : 來源網址 #{SCRAP_URI}")
-    nil
+    request_retry(key: "#{SCRAP_URI} / #{Time.zone.today}")
   end
 
   def parse_courts_data(response_data)
-    return response_data.css('table')[2].css('select')[0].css('option')
-  rescue
-    Logs::AddCrawlerError.parse_court_data_error(@crawler_history, :parse_data_failed, '擷取規則錯誤 : 無法取得所有法院資訊')
-    false
+    response_data.css('table')[2].css('select')[0].css('option')
   end
 
   def check_db_data_and_notify
@@ -53,5 +49,16 @@ class Scrap::GetCourtsContext < BaseContext
 
   def record_intervel_to_daily_notify
     Redis::Value.new('daily_scrap_court_intervel').value = "#{Time.zone.today} ~ #{Time.zone.today}"
+  end
+
+  def request_retry(key: )
+    redis_object = Redis::Counter.new(key, expiration: 1.days)
+    if redis_object.value < 12
+      self.class.delay_for(1.hours).perform
+      redis_object.incr
+    else
+      Logs::AddCrawlerError.parse_court_data_error(@crawler_history, :crawler_failed, "爬取法院資訊錯誤, 來源網址 #{SCRAP_URI}")
+    end
+    false
   end
 end

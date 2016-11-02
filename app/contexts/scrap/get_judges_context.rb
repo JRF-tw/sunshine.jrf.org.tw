@@ -29,7 +29,7 @@ class Scrap::GetJudgesContext < BaseContext
     response_data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
     @data = response_data.css('body p').text.split("\n")
   rescue
-    nil
+    request_retry(key: "#{EXCEL_URL} / #{Time.zone.today}")
   end
 
   def get_diff_import_daily_branch
@@ -50,5 +50,16 @@ class Scrap::GetJudgesContext < BaseContext
 
   def record_intervel_to_daily_notify
     Redis::Value.new('daily_scrap_judge_intervel').value = "#{Time.zone.today} ~ #{Time.zone.today}"
+  end
+
+  def request_retry(key: )
+    redis_object = Redis::Counter.new(key, expiration: 1.days)
+    if redis_object.value < 12
+      self.class.delay_for(1.hours).perform
+      redis_object.incr
+    else
+      Logs::AddCrawlerError.parse_judge_data_error(@crawler_history, :crawler_failed, "回傳股別EXCEL資訊取得失敗 : 來源網址 #{EXCEL_URL}")
+    end
+    false
   end
 end

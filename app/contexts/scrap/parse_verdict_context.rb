@@ -28,7 +28,7 @@ class Scrap::ParseVerdictContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      Scrap::ImportVerdictContext.delay(retry: 3).perform(@court, @orginal_data, @verdict_content, @verdict_word, @verdict_publish_date, @verdict_stroy_type)
+      Scrap::ImportVerdictContext.delay(retry: false).perform(@court, @orginal_data, @verdict_content, @verdict_word, @verdict_publish_date, @verdict_stroy_type)
     end
   end
 
@@ -40,8 +40,7 @@ class Scrap::ParseVerdictContext < BaseContext
     sleep @sleep_time_interval
     @response_data = Mechanize.new.get(VERDICT_URI + @verdict_query, {}, RESULT_URI)
   rescue
-    Logs::AddCrawlerError.parse_verdict_data_error(@crawler_history, :crawler_failed, "取得判決書搜尋結果失敗 : 來源網址 #{VERDICT_URI + @verdict_query}")
-    false
+    request_retry(key: "#{VERDICT_URI} / data=#{@verdict_query} /#{Time.zone.today}")
   end
 
   def parse_orginal_data
@@ -84,6 +83,17 @@ class Scrap::ParseVerdictContext < BaseContext
     @verdict_content = @nokogiri_data.css('pre').text
   rescue
     Logs::AddCrawlerError.parse_verdict_data_error(@crawler_history, :parse_data_failed, '解析資訊錯誤 : 取得 判決書內容 失敗')
+    false
+  end
+
+  def request_retry(key: )
+    redis_object = Redis::Counter.new(key, expiration: 1.days)
+    if redis_object.value < 12
+      self.class.delay_for(1.hours).perform(@court, @scrap_id, @type, @start_date, @end_date)
+      redis_object.incr
+    else
+      Logs::AddCrawlerError.parse_verdict_data_error(@crawler_history, :crawler_failed, "取得判決書內容失敗 : 來源網址: #{VERDICT_URI}, 參數: #{@verdict_query}")
+    end
     false
   end
 end

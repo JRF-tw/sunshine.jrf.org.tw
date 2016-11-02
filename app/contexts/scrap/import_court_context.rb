@@ -1,5 +1,4 @@
 class Scrap::ImportCourtContext < BaseContext
-  SCRAP_URI = 'http://jirs.judicial.gov.tw/FJUD/FJUDQRY01_1.aspx'.freeze
   before_perform  :check_data
   before_perform  :tricky_court_data
   before_perform  :find_court

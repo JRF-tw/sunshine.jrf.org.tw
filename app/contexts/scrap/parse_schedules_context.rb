@@ -23,7 +23,7 @@ class Scrap::ParseSchedulesContext < BaseContext
   def perform
     run_callbacks :perform do
       @hash_array.each do |hash|
-        Scrap::ImportScheduleContext.delay(retry: 3).perform(@court_code, hash)
+        Scrap::ImportScheduleContext.delay(retry: false).perform(@court_code, hash)
       end
     end
   end
@@ -32,12 +32,12 @@ class Scrap::ParseSchedulesContext < BaseContext
 
   def scrap_schedule
     sql = "UPPER(CRTID)='#{@court_code}' AND DUDT>='#{@start_date_format}' AND DUDT<='#{@end_date_format}' AND SYS='#{@story_type}'  ORDER BY  DUDT,DUTM,CRMYY,CRMID,CRMNO"
-    data = { pageNow: @current_page, sql_conction: sql, pageTotal: @page_total, pageSize: 15, rowStart: 1 }
+    @data = { pageNow: @current_page, sql_conction: sql, pageTotal: @page_total, pageSize: 15, rowStart: 1 }
     sleep @sleep_time_interval
-    response_data = Mechanize.new.get(SCHEDULE_INFO_URI, data)
+    response_data = Mechanize.new.get(SCHEDULE_INFO_URI, @data)
     @data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
   rescue
-    nil
+    request_retry(key: "#{SCHEDULE_INFO_URI} / data=#{@data} / #{Time.zone.today}")
   end
 
   def parse_schedule_info
@@ -69,5 +69,16 @@ class Scrap::ParseSchedulesContext < BaseContext
     hours = (time_string[0] + time_string[1]).to_i
     minutes = (time_string[2] + time_string[3]).to_i
     DateTime.new(year, split_date[1], split_date[2], hours, minutes, 0, '+8')
+  end
+
+  def request_retry(key: )
+    redis_object = Redis::Counter.new(key, expiration: 1.days)
+    if redis_object.value < 12
+      self.class.delay_for(1.hours).perform(@court_code, @story_type, @current_page, @page_total, @start_date_format, @end_date_format)
+      redis_object.incr
+    else
+      Logs::AddCrawlerError.parse_schedule_data_error(@crawler_history, :crawler_failed, "取得法院代碼-#{@court_code}庭期單頁資料失敗, 來源網址:#{SCHEDULE_INFO_URI}, 參數:#{@data}")
+    end
+    false
   end
 end
