@@ -18,4 +18,33 @@ module AdminHelper
   def collection_for_crawler_error_types
     CrawlerErrorTypes.list.to_enum.with_index.map { |n, i| [n.last, i] }
   end
+
+  def success_scrap_verdict_main_judge_precentage(ch)
+    calculate_failed = ch.crawler_logs.crawler_verdict.parse_main_judge_empty.last ? (ch.crawler_logs.crawler_verdict.parse_main_judge_empty.last.crawler_errors.count).to_f/(ch.verdicts_count.to_f) : 0
+    success_precentage(calculate_failed)
+  end
+
+  def success_scrap_verdict_judge_precentage(ch)
+    calculate_failed = ch.crawler_logs.crawler_verdict.parse_judge_empty.last ? (ch.crawler_logs.crawler_verdict.parse_judge_empty.last.crawler_errors.count).to_f/(ch.verdicts_count.to_f) : 0
+    success_precentage(calculate_failed)
+  end
+
+  def success_scrap_verdict_lawyer_precentage(ch)
+    calculate_failed = ch.crawler_logs.crawler_verdict.parse_lawyer_empty.last ? (ch.crawler_logs.crawler_verdict.parse_lawyer_empty.last.crawler_errors.count).to_f/(ch.verdicts_count.to_f) : 0
+    success_precentage(calculate_failed)
+  end
+
+  def success_scrap_verdict_party_precentage(ch)
+    calculate_failed = ch.crawler_logs.crawler_verdict.parse_party_empty.last ? (ch.crawler_logs.crawler_verdict.parse_party_empty.last.crawler_errors.count).to_f/(ch.verdicts_count.to_f) : 0
+    success_precentage(calculate_failed)
+  end
+
+  def success_scrap_verdict_prosecutor_precentage(ch)
+    calculate_failed = ch.crawler_logs.crawler_verdict.parse_prosecutor_empty.last ? (ch.crawler_logs.crawler_verdict.parse_prosecutor_empty.last.crawler_errors.count).to_f/(ch.verdicts_count.to_f) : 0
+    success_precentage(calculate_failed)
+  end
+
+  def success_precentage(calculate_failed)
+    number_to_percentage((1 - calculate_failed)*100, precision: 2)
+  end
 end
