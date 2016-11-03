@@ -25,7 +25,6 @@ gem 'rails_autolink'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
-gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails', '~> 4.2'
 gem 'turbolinks'
 gem 'asset_sync'
