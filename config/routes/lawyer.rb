@@ -31,9 +31,10 @@ Rails.application.routes.draw do
     end
     resources :stories, only: [:show] do
       member do
-        resource :subscribe, only: [:destroy] do
+        resource :subscribe, only: [] do
           collection do
             post :toggle
+            get  :destroy
           end
         end
       end

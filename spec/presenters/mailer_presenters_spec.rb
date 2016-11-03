@@ -10,8 +10,14 @@ RSpec.describe MailerPresenters do
     it { expect(subject).to eq(wording) }
   end
 
+  describe '#remind_story_after_judge' do
+    let(:date) { story.schedules.last.start_at }
+    let(:wday) { I18n.t('date.day_names')[date.wday][2] }
+    let(:wording) { "您於司法陽光網訂閱#{story.detail_info}，本次開庭日期為#{date.mon}月#{date.mday}日(#{wday})。若您已經開庭完畢，司改會邀請到司法陽光網提供您的寶貴意見！" }
+  end
+
   describe '#google_calendar_link' do
-    let(:datetime) { story.schedules.last.start_at }
+    let(:datetime) { story.schedules.last.start_at.utc }
     let(:wording) { "https://www.google.com/calendar/render?action=TEMPLATE&trp=true&sf=true&output=xml&dates=#{datetime.strftime('%Y%m%d')}T#{datetime.strftime('%H%M') + '00'}Z/#{datetime.strftime('%Y%m%d')}T#{(datetime + 10_800).strftime('%H%M') + '00'}Z&text=#{story.detail_info}案件開庭" }
     subject { described_class.new.google_calendar_link(story) }
     it { expect(subject).to eq(wording) }
