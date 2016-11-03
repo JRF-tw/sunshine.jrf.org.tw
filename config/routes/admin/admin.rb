@@ -46,6 +46,9 @@ Rails.application.routes.draw do
     end
     resources :crawler_histories, only: [:index] do
       resources :crawler_logs, only: [:index, :show]
+      collection do
+        get :status
+      end
     end
   end
 end

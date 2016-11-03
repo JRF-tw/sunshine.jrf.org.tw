@@ -7,6 +7,7 @@ class Scrap::ImportScheduleContext < BaseContext
   after_perform   :update_story_pronounce_date
   after_perform   :record_count_to_daily_notify
   after_perform   :alert_new_story_type
+  after_perform   :log_main_judge_not_found
 
   class << self
     def perform(court_code, hash)
@@ -48,9 +49,6 @@ class Scrap::ImportScheduleContext < BaseContext
     branches = @court.branches.current.where(name: @branch_name)
     branches = branches.where('chamber_name LIKE ? ', "%#{@story_type}%") if branches.map(&:judge_id).uniq.count > 1
     @main_judge = branches.first ? branches.first.judge : nil
-    unless @main_judge
-      Logs::AddCrawlerError.parse_schedule_data_error(@crawler_history, :parse_data_failed, "股別關聯主審法官 關聯失敗, 法院ID : #{@court.id}, 關聯資訊 : #{@hash}")
-    end
   end
 
   def find_or_create_story
@@ -73,5 +71,9 @@ class Scrap::ImportScheduleContext < BaseContext
 
   def alert_new_story_type
     SlackService.notify_analysis_schedule_alert("取得新的案件類別 : #{@story_type}") unless @story_type.present? && StoryTypes.list.include?(@story_type)
+  end
+
+  def log_main_judge_not_found
+    Logs::AddCrawlerError.add_schedule_error(@crawler_history, @schedule, :parse_branch_judge_empty, "股別關聯主審法官 關聯失敗, 關聯資訊 : #{@hash}") unless @main_judge
   end
 end

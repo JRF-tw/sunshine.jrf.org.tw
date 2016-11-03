@@ -1,5 +1,5 @@
-p = "您於司法陽光網訂閱#{@story.detail_info}，該案預計於XX點XX分開庭完畢。若您已經開庭完畢，司改會邀請到司法陽光網提供您的寶貴意見！"
+p = @close_court_info_wording
 
 p = link_to "點我提供意見", new_party_score_schedule_url
 
-p = "感謝您使用司法陽光網的案件訂閱服務！若您不想再訂閱此案，#{link_to "請點此", party_subscribe_url(@story), method: :delete, class: "btn btn-mini"}。".html_safe
+p = "感謝您使用司法陽光網的案件訂閱服務！若您不想再訂閱此案，#{link_to '請點此', party_subscribe_url(@story, token: @token)}。".html_safe

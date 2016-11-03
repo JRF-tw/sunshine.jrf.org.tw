@@ -1,146 +1,108 @@
 require 'rails_helper'
 
-describe '當事人更改手機號碼', type: :request do
-  context '手機號碼輸入頁' do
-    context '成功送出' do
-      before { signin_party }
-      subject { put '/party/phone', party: { unconfirmed_phone: '0911111111' } }
-
-      it '轉跳至認證碼輸入頁' do
-        expect(subject).to redirect_to('/party/phone/verify')
-      end
-
-      it '發送簡訊' do
-        expect { subject }.to change_sidekiq_jobs_size_of(SmsService, :send_sms)
-      end
+feature '前台帳號功能', type: :feature, js: true do
+  feature '當事人' do
+    def edit_phone_number(phone_number)
+      visit(edit_party_phone_path)
+      party_input_phone_number(phone_number)
+      click_button '送出'
     end
 
-    context '失敗送出' do
-      let!(:party) { create :party }
-
-      context '該手機號碼已被別人驗證' do
-        before { signin_party }
-        subject! { put '/party/phone', party: { unconfirmed_phone: party.phone_number } }
-
-        it '提示號碼已經被使用' do
-          expect(response.body).to match('該手機號碼已註冊')
-        end
-      end
-
-      context '該手機號碼正在被別人驗證中' do
-        before { party_with_unconfirm_phone_number('0911111111') }
-        before { signin_party }
-        subject! { put '/party/phone', party: { unconfirmed_phone: '0911111111' } }
-
-        it '提示號碼已經被使用' do
-          expect(response.body).to match('該手機號碼正等待驗證中')
-        end
-      end
-
-      context '該手機號碼跟原本的一樣' do
-        before { signin_party(party) }
-        subject! { put '/party/phone', party: { unconfirmed_phone: party.phone_number } }
-
-        it '提示號碼已經被使用' do
-          expect(response.body).to match('手機號碼不可與原本相同')
-        end
-      end
-
-      context '目前已超過簡訊發送限制' do
-        context '連續成功送出更改手機號碼的認證簡訊（每次都不同號碼），使其達到上限' do
-          before { signin_party }
-          before { party_chang_phone_number_times(3) }
-
-          it '提示五分鐘只能寄送兩次' do
-            expect(response.body).to match('五分鐘內只能寄送兩次簡訊')
-          end
-        end
-
-        context '連續發送忘記密碼簡訊，使其達到上限' do
-          let!(:party) { party_with_sms_send_count(2) }
-          let!(:params) { { identify_number: party.identify_number, phone_number: party.phone_number } }
-          subject! { post '/party/password', party: params }
-
-          it '連續發送 2 次後，達限制上限' do
-            expect(response.body).to match('五分鐘內只能寄送兩次簡訊')
-          end
-        end
-
-        context '連續發送忘記密碼和更改手機號碼簡訊，使其達到上限' do
-          before { post '/party/password', party: { identify_number: party.identify_number, phone_number: party.phone_number } }
-          before { signin_party(party) }
-          before { put '/party/phone', party: { unconfirmed_phone: '0911111111' } }
-          subject! { put '/party/phone', party: { unconfirmed_phone: '0911111112' } }
-
-          it '提示五分鐘只能寄送兩次' do
-            expect(response.body).to match('五分鐘內只能寄送兩次簡訊')
-          end
-        end
-      end
-
-      context '號碼格式不符' do
-        before { signin_party }
-
-        context '空白' do
-          subject! { put '/party/phone', party: { unconfirmed_phone: '' } }
-
-          it '提示手機號碼不可為空' do
-            expect(response.body).to match('手機號碼為必填欄位')
-          end
-        end
-
-        context '過長' do
-          subject! { put '/party/phone', party: { unconfirmed_phone: '091111111111' } }
-
-          it '提示手機號碼格式不符' do
-            expect(response.body).to match('手機號碼格式錯誤')
-          end
-        end
-
-        context '過短' do
-          subject! { put '/party/phone', party: { unconfirmed_phone: '0911' } }
-
-          it '提示手機號碼格式不符' do
-            expect(response.body).to match('手機號碼格式錯誤')
-          end
-        end
-
-        context '非09開頭' do
-          subject! { put '/party/phone', party: { unconfirmed_phone: '0811111111' } }
-
-          it '提示手機號碼格式不符' do
-            expect(response.body).to match('手機號碼格式錯誤')
-          end
-        end
-
-        context '非全數字' do
-          subject! { put '/party/phone', party: { unconfirmed_phone: '091111a111' } }
-
-          it '提示手機號碼格式不符' do
-            expect(response.body).to match('手機號碼格式錯誤')
-          end
-        end
-      end
+    def verify_phone_number(verify_code)
+      visit(verify_party_phone_path)
+      party_input_verify_code(verify_code)
+      click_button '認證'
     end
-  end
+    feature '更改手機號碼' do
+      let!(:party_A) { create :party, :already_confirmed }
+      before { signin_party(identify_number: party_A.identify_number) }
+      feature '送出驗證碼' do
+        Scenario '當事人A已登入，進行手機號碼更改。新手機號碼不能和其他人（包含自己）已驗證或驗證中的號碼相同' do
+          let(:party_B) { create :party, :already_confirmed }
+          Given '當事人A已通過手機驗證' do
+            When '送出原本的手機號碼' do
+              before { edit_phone_number(party_A.phone_number) }
+              Then '顯示錯誤訊息' do
+                expect(current_path).to eq(party_phone_path)
+                expect(page).to have_content('手機號碼不可與原本相同')
+              end
+            end
 
-  context '認證碼輸入頁' do
-    let(:party) { create :party }
-    before { signin_party(party) }
-    context '在當事人手機驗證流程已測過' do
-    end
+            When '送出符合格式的新手機號碼' do
+              before { edit_phone_number('0922556556') }
+              Then '導向驗證碼輸入頁面' do
+                expect(current_path).to eq(verify_party_phone_path)
+                expect(page).to have_content('已寄出簡訊認證碼')
+              end
+            end
+          end
 
-    context '成功驗證' do
-      before { put '/party/phone', party: { unconfirmed_phone: '0911111111' } }
-      subject { put '/party/phone/verifing', party: { phone_varify_code: party.phone_varify_code.value } }
+          Given '當事人A已通過手機驗證 待驗證中號碼為 0988888888' do
+            before { party_A.unconfirmed_phone = '0988888888' }
+            When '送出 0988888888' do
+              before { edit_phone_number('0988888888') }
+              Then '顯示錯誤訊息' do
+                expect(current_path).to eq(party_phone_path)
+                expect(page).to have_content('該手機號碼正等待驗證中')
+              end
+            end
+          end
 
-      it '確實更改了當事人的手機號碼' do
-        expect { subject }.to change { party.reload.unconfirmed_phone }
-        expect(response).to redirect_to('/party')
+          Given '當事人B已通過手機驗證' do
+            When '送出當事人B的手機號碼' do
+              before { edit_phone_number(party_B.phone_number) }
+              Then '顯示錯誤訊息' do
+                expect(current_path).to eq(party_phone_path)
+                expect(page).to have_content('該手機號碼已註冊')
+              end
+            end
+          end
+
+          Given '當事人B待驗證中手機號碼為 0988888888' do
+            before { party_B.unconfirmed_phone = '0988888888' }
+            When '送出 0988888888' do
+              before { edit_phone_number('0988888888') }
+              Then '顯示錯誤訊息' do
+                expect(current_path).to eq(party_phone_path)
+                expect(page).to have_content('該手機號碼正等待驗證中')
+              end
+            end
+          end
+        end
+
+        Scenario '手機號碼輸入檢查條件情境同「手機驗證流程」' do
+          it ' ' do
+          end
+        end
       end
 
-      it '清空驗證中的手機號碼' do
-        expect { subject }.to change { current_party.unconfirmed_phone.value }
+      feature '輸入正確的驗證碼後，舊手機號碼被取代' do
+        Scenario '輸入簡訊中驗證碼後，新手機號碼代換舊的手機號碼' do
+          before { party_A.phone_varify_code.value = '1111' }
+          before { party_A.unconfirmed_phone = '0956556556' }
+          Given '送出新手機的驗證碼' do
+            When '輸入正確的驗證碼' do
+              before { verify_phone_number('1111') }
+              Then '新手機號碼成功代換' do
+                expect(current_path).to eq(party_root_path)
+                expect(page).to have_content('已驗證成功')
+              end
+            end
+
+            When '輸入錯誤的驗證碼' do
+              before { verify_phone_number('55688') }
+              Then '新手機號碼代換失敗' do
+                expect(current_path).to eq(verifing_party_phone_path)
+                expect(page).to have_content('驗證碼輸入錯誤')
+              end
+            end
+          end
+        end
+
+        Scenario '驗證碼輸入檢查條件同「手機驗證流程」' do
+          it ' ' do
+          end
+        end
       end
     end
   end

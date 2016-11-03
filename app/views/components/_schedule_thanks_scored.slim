@@ -14,7 +14,7 @@
       toggle_for: :subscribe_story,
       toggle_checked: already_subscribed_story?(current_user, @record.story),
       toggle_url: toggle_subscribe_story_path,
-      toggle_text: '是否同意我們在下一次開庭或判決書公布時用email通知您？'\
+      toggle_text: '我同意在下一次開庭或判決書公佈時收到email通知'\
       if toggle_subscribe_story_path
 
   = render 'components/wrapped_donate_button'

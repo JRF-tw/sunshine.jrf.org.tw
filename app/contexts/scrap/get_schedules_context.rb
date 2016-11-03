@@ -15,7 +15,7 @@ class Scrap::GetSchedulesContext < BaseContext
   def perform
     run_callbacks :perform do
       Court.collect_codes.each do |court_code|
-        Scrap::GetSchedulesStoryTypesByCourtContext.delay(retry: 3).perform(court_code, @start_date, @end_date)
+        Scrap::GetSchedulesStoryTypesByCourtContext.delay(retry: false).perform(court_code, @start_date, @end_date)
       end
     end
   end
