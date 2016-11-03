@@ -366,7 +366,6 @@ GEM
       addressable (~> 2.3)
     letter_opener (1.4.1)
       launchy (~> 2.2)
-    libv8 (3.16.14.13)
     listen (3.0.5)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
@@ -486,7 +485,6 @@ GEM
       redis (~> 3.0, >= 3.0.4)
     redis-objects (1.2.1)
       redis (>= 3.0.2)
-    ref (2.0.0)
     responders (2.1.1)
       railties (>= 4.2.0, < 5.1)
     rgeo (0.5.2)
@@ -582,9 +580,6 @@ GEM
     temple (0.7.6)
     test_after_commit (0.4.2)
       activerecord (>= 3.2)
-    therubyracer (0.12.2)
-      libv8 (~> 3.16.14.0)
-      ref
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
@@ -713,7 +708,6 @@ DEPENDENCIES
   smarter_csv (~> 1.1)
   spring
   test_after_commit
-  therubyracer
   timecop
   turbolinks
   twilio-ruby
