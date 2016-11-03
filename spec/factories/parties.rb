@@ -43,7 +43,7 @@ FactoryGirl.define do
     end
 
     trait :with_confirmation_token do
-      confirmation_token '2grgr212fd'
+      sequence(:confirmation_token) { |n| "#{n}aaooggdw" }
     end
 
     trait :without_phone_number do
