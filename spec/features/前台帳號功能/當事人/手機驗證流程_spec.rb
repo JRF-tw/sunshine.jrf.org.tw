@@ -55,7 +55,7 @@ feature '前台帳號功能', type: :feature, js: true do
         end
       end
 
-      Scenario '簡訊發送條件' do
+      Scenario '簡訊發送條件，五分鐘內只能發送 2 次簡訊' do
         before { signin_party(identify_number: party_A.identify_number) }
         Given '5 分鐘內已送出 2 次手機驗證簡訊' do
           before { party_A.sms_sent_count.incr(2) }
@@ -66,11 +66,9 @@ feature '前台帳號功能', type: :feature, js: true do
               expect(page).to have_content('五分鐘內只能寄送兩次簡訊')
             end
           end
-        end
 
-        Given '5 分鐘內已送出 1 次手機驗證簡訊' do
-          before { party_A.sms_sent_count.incr(1) }
           When '第 6 分鐘輸入可通過手機號碼' do
+            before { party_A.sms_sent_count.reset }
             before { edit_phone_number('0988888888') }
             Then '成功送出驗證碼簡訊' do
               expect(current_path).to eq(verify_party_phone_path)
