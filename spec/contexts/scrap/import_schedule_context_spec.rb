@@ -84,5 +84,18 @@ RSpec.describe Scrap::ImportScheduleContext, type: :model do
         it { expect { subject }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
       end
     end
+
+    context '#log_main_judge_not_found' do
+      context 'logged' do
+        let(:new_story_type_data) { hash_data.merge(branch_name: 'xxx') }
+        subject { described_class.new(court.code).perform(new_story_type_data) }
+        it { expect { subject }.to change { CrawlerLog.count } }
+      end
+
+      context 'not logged' do
+        subject { described_class.new(court.code).perform(hash_data) }
+        it { expect { subject }.not_to change { CrawlerLog.count } }
+      end
+    end
   end
 end

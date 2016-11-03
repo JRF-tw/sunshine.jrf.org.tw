@@ -1,0 +1,39 @@
+= search_form_for @search, url: status_admin_crawler_histories_path, wrapper: :admin, html: { class: "form-horizontal" } do |f|
+  .well
+    fieldset
+      legend 搜尋
+      .row
+        .span6
+          .control-group#datepicker
+            label.control-label = f.label :crawler_on_gteq
+            .controls= f.search_field :crawler_on_gteq, placeholder: "起始時間，非必填"
+            label.control-label = f.label :crawler_on_lteq
+            .controls= f.search_field :crawler_on_lteq, placeholder: "結束時間，非必填"
+    hr
+      .form-actions
+        = f.submit value:"搜尋", class: "btn btn-primary"
+        = " "
+        = link_to "清空搜尋結果", status_admin_crawler_histories_path, class: "btn btn-default"
+
+= admin_widget_box "爬蟲成功數據比例", icon: :pencil do
+  .dataTables_wrapper
+    table.table.table-bordered.table-striped.table-hover
+      thead
+        tr
+          th 爬蟲日期
+          th 判決書抓取人名成功率(主審法官)
+          th 判決書抓取人名成功率(法官)
+          th 判決書抓取人名成功率(律師)
+          th 判決書抓取人名成功率(當事人)
+          th 判決書抓取人名成功率(檢察官)
+      tbody
+        - @crawler_histories.each do |ch|
+          tr
+            td = ch.crawler_on
+            td = success_scrap_verdict_main_judge_precentage(ch)
+            td = success_scrap_verdict_judge_precentage(ch)
+            td = success_scrap_verdict_lawyer_precentage(ch)
+            td = success_scrap_verdict_party_precentage(ch)
+            td = success_scrap_verdict_prosecutor_precentage(ch)
+    .ui-toolbar.ui-widget-header
+      = paginate @crawler_histories, theme: :admin
