@@ -77,7 +77,7 @@ group :development do
   # unicorn
   gem 'capistrano3-unicorn'
   # slack
-  gem 'slackistrano', require: false
+  gem 'slackistrano', '3.0.1'
 
   gem 'guard-annotate'
   gem 'annotate'
@@ -91,8 +91,6 @@ group :development do
   gem 'guard'
   gem 'http_logger'
   gem 'spring'
-  gem 'venus', git: 'git@github.com:marsz/venus.git', branch: 'v1.0'
-  gem 'rename'
   gem 'letter_opener'
 end
 
