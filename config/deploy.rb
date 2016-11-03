@@ -12,6 +12,11 @@ set :ssh_options, {
   forward_agent: true
 }
 
+# execjs use node
+set :default_env, {
+  'EXECJS_RUNTIME' => 'Node'
+}
+
 set :rvm_ruby_version, IO.read('./.ruby-version').split("\n")[0]
 
 # Default branch is :master
