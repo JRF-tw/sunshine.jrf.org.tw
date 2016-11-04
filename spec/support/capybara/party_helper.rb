@@ -8,7 +8,7 @@ module Capybara
       check('policy_agreement')
     end
 
-    def party_input_password(password, password_confirmation)
+    def party_input_password(password, password_confirmation = nil)
       within('#new_party') do
         fill_in 'party_password', with: password
         fill_in 'party_password_confirmation', with: password_confirmation || password
@@ -52,6 +52,13 @@ module Capybara
     def party_input_verify_code(verify_code)
       within('.edit_party') do
         fill_in 'party_phone_varify_code', with: verify_code
+      end
+    end
+
+    def party_input_reset_password(identify_number, phone_number)
+      within('#new_party') do
+        fill_in 'party_identify_number', with: identify_number
+        fill_in 'party_phone_number', with: phone_number
       end
     end
 
