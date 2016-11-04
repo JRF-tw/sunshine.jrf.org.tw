@@ -1,6 +1,7 @@
 class Parties::ConfirmationsController < Devise::ConfirmationsController
 
   before_action :redirect_new_to_sign_in, only: [:new]
+  before_action :check_unconfirmed_email_not_used, only: [:show]
 
   def show
     self.resource = resource_class.confirm_by_token(params[:confirmation_token])
@@ -15,6 +16,14 @@ class Parties::ConfirmationsController < Devise::ConfirmationsController
   end
 
   protected
+
+  def check_unconfirmed_email_not_used
+    party = Party.find_by_confirmation_token(params[:confirmation_token])
+    if party && Party.pluck(:email).include?(party.unconfirmed_email)
+      set_flash_message(:alert, :conflict_confirmed)
+      redirect_to new_party_session_path
+    end
+  end
 
   def redirect_new_to_sign_in
     redirect_to new_party_session_path

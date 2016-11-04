@@ -1,109 +1,112 @@
 require 'rails_helper'
 
-describe '當事人更改email', type: :request do
-  let!(:party) { create :party, :with_confirmation_token }
-
-  context '成功送出' do
-    before { signin_party(party) }
-
-    context '新的 email 為別人正在驗證中的 email ，也可以成功送出' do
-      let!(:party_with_unconfirmed_email) { create :party, unconfirmed_email: '556677@gmail.com' }
-      subject { put '/party/email', party: { email: party_with_unconfirmed_email.unconfirmed_email, current_password: '12321313213' } }
-
-      it '成功送出' do
-        expect { subject }.to change_sidekiq_jobs_size_of(CustomDeviseMailer, :resend_confirmation_instructions)
-      end
+feature '前台帳號功能', type: :feature, js: true do
+  feature '當事人' do
+    def party_click_confirm_link(email)
+      open_party_email(email)
+      current_email.find('a').click
     end
 
-    context '發送信件' do
-      subject { put '/party/email', party: { email: '5566@gmail.com', current_password: '12321313213' } }
-
-      it '成功送出' do
-        expect { subject }.to change_sidekiq_jobs_size_of(CustomDeviseMailer, :resend_confirmation_instructions)
-      end
+    def edit_email(email)
+      visit(edit_party_email_path)
+      party_input_edit_email(email: email)
+      click_button '送出'
     end
 
-    context '內容連結點擊後成功換置新的 email' do
-      before { put '/party/email', party: { email: 'windwizard@gmail.com', current_password: '12321313213' } }
-      subject! { get '/party/confirmation', confirmation_token: party.reload.confirmation_token }
-
-      it '成功更新email' do
-        expect(party.reload.email).to eq('windwizard@gmail.com')
-      end
-    end
-  end
-
-  context '失敗送出' do
-    context '內容錯誤' do
-      before { signin_party(party) }
-
-      context '新 email 空白' do
-        subject! { put '/party/email', party: { email: '', current_password: '12321313213' } }
-
-        it '顯示格式錯誤' do
-          expect(response.body).to match('email 的格式是無效的')
-        end
-      end
-
-      context '新 email 格式不符' do
-        subject! { put '/party/email', party: { email: '4554', current_password: '12321313213' } }
-
-        it 'email 格式錯誤' do
-          expect(flash[:error]).to eq('email 的格式是無效的')
-        end
-      end
-
-      context '密碼驗證錯誤' do
-        subject! { put '/party/email', party: { email: 'ggyy@gmail.com', current_password: '33333333' } }
-
-        it '顯示密碼無效' do
-          expect(response.body).to match('是無效的')
-        end
-      end
-
-      context '密碼驗證空白' do
-        subject! { put '/party/email', party: { email: 'ggyy@gmail.com', current_password: '' } }
-
-        it '顯示不可為空' do
-          expect(response.body).to match('不能是空白字元')
-        end
-      end
+    def sign_out_after_edit_email(party, email:)
+      signin_party(identify_number: party.identify_number)
+      edit_email(email)
+      manual_http_request(:delete, '/party/sign_out')
     end
 
-    context 'email 已經被使用' do
-      context '新 email 是別人的email' do
-        let!(:party2) { create :party, email: 'ggyy@gmail.com' }
-        before { signin_party(party) }
-        subject! { put '/party/email', party: { email: party2.email, current_password: '12321313213' } }
+    feature '更改 Email' do
+      let!(:party_A) { create :party, :already_confirmed, :with_confirmation_token }
+      let!(:party_B) { create :party, :already_confirmed, :with_confirmation_token }
+      feature '送出新 Email 認證' do
+        Scenario '當事人A已登入，且新 Email 不能和任何人（包含自己）已認證的 Email 一樣' do
+          before { signin_party(identify_number: party_A.identify_number) }
+          Given '當事人B已完成 Email 認證' do
+            When '當事人A的新 Email 和律師B一樣' do
+              before { edit_email(party_B.email) }
+              Then '顯示錯誤訊息' do
+                expect(current_path).to eq(party_email_path)
+                expect(page).to have_content('email 已被使用')
+              end
+            end
+          end
 
-        it '顯示已經被使用' do
-          expect(response.body).to match('email 已被使用')
+          Given '當事人B正在認證 Email `xx@xx.com`' do
+            let!(:party_B) { create :party, :already_confirmed, :with_unconfirmed_email }
+            When '新 Email 為 `xx@xx.com`' do
+              before { edit_email(party_B.unconfirmed_email) }
+              Then '送出新 Email 認證信' do
+                expect(current_path).to eq(party_profile_path)
+                expect(page).to have_content('需要重新驗證新的Email')
+              end
+            end
+          end
+
+          Given '當事人A的已認證 Email 為 `xx@xx.com`' do
+            When '新 Email 為 `xx@xx.com`' do
+              before { edit_email(party_A.email) }
+              Then '顯示錯誤訊息' do
+                expect(current_path).to eq(party_email_path)
+                expect(page).to have_content('email 不可與原本相同')
+              end
+            end
+          end
         end
       end
 
-      context '新 email 跟原本的一樣' do
-        before { signin_party(party) }
-        subject! { put '/party/email', party: { email: party.email, current_password: '12321313213' } }
-
-        it '顯示不可與原本相同' do
-          expect(response.body).to match('email 不可與原本相同')
-        end
-      end
-    end
-
-    context '其他情境' do
-      context '當事人A與B 有相同的待驗證email, A點完驗證連結之後 B才點驗證連結' do
-        let!(:party_A) { party_with_unconfirm_email('ggyy@gmail.com') }
-        let!(:party_B) { party_with_unconfirm_email('ggyy@gmail.com') }
-        before { get '/party/confirmation', confirmation_token: party_A.reload.confirmation_token }
-        subject { get '/party/confirmation', confirmation_token: party_B.confirmation_token }
-
-        it '當事人A 的email 置換成功' do
-          expect(party_A.reload.email).to eq('ggyy@gmail.com')
+      feature '點擊連結後，新 Email 代換舊 Email' do
+        Scenario '若當事人A和B皆送出相同的 Email 認證，先點擊連結者可順利完成代換，其他相同 Email 者則不行' do
+          Given '當事人A和當事人B送出相同的 Email 進行認證，且 B 已前往認證連結完成代換' do
+            before { party_A.update_attributes(unconfirmed_email: 'test@gmail.com') }
+            before { CustomDeviseMailer.delay.resend_confirmation_instructions(party_A) }
+            let!(:party_B) { create :party, :already_confirmed, email: 'test@gmail.com' }
+            When '當事人A前往認證連結' do
+              before { party_click_confirm_link(party_A.reload.unconfirmed_email) }
+              Then '當事人A的 Email 代換失敗' do
+                expect(current_path).to eq(new_party_session_path)
+                expect(page).to have_content('您的待驗證email已從別的帳號完成驗證')
+              end
+            end
+          end
         end
 
-        it '當事人B 的email 置換失敗' do
-          expect { subject }.not_to change { party_B.email }
+        Scenario '無論是否登入或登入者為別人，認證連結均有效。當事人A 已送出 Email 進行認證。' do
+          before { sign_out_after_edit_email(party_A, email: '4545@gmail.com') }
+          Given '無當事人登入' do
+            When '前往 Email 認證連結' do
+              before { party_click_confirm_link(party_A.reload.unconfirmed_email) }
+              Then '當事人A的 Email 認證成功' do
+                expect(current_path).to eq(new_party_session_path)
+                expect(page).to have_content('您的帳號已通過驗證')
+              end
+            end
+          end
+
+          Given '當事人A已登入' do
+            before { signin_party(identify_number: party_A.identify_number) }
+            When '前往 Email 認證連結' do
+              before { party_click_confirm_link(party_A.reload.unconfirmed_email) }
+              Then '當事人A的 Email 認證成功' do
+                expect(current_path).to eq(party_profile_path)
+                expect(page).to have_content('您的帳號已通過驗證')
+              end
+            end
+          end
+
+          Given '當事人B已登入' do
+            before { signin_party(identify_number: party_B.identify_number) }
+            When '前往 Email 認證連結' do
+              before { party_click_confirm_link(party_A.reload.unconfirmed_email) }
+              Then '當事人A的 Email 認證成功' do
+                expect(current_path).to eq(party_profile_path)
+                expect(page).to have_content('您的帳號已通過驗證')
+              end
+            end
+          end
         end
       end
     end

@@ -27,6 +27,13 @@ module Capybara
       end
     end
 
+    def party_input_edit_email(email:, password: '12321313213')
+      within('#edit_party') do
+        fill_in 'party_email', with: email
+        fill_in 'party_current_password', with: password
+      end
+    end
+
     def signin_party(identify_number:, password: '12321313213')
       visit(new_party_session_path)
       within('#new_party') do
@@ -124,6 +131,11 @@ module Capybara
       visit(party_root_path)
       find(:xpath, '//tbody/tr/td/a').click
       click_link('編輯評鑑')
+    end
+
+    def open_party_email(email)
+      perform_sidekiq_job(fetch_sidekiq_last_job)
+      open_email(email)
     end
   end
 end
