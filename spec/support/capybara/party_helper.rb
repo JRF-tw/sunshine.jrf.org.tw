@@ -15,6 +15,18 @@ module Capybara
       end
     end
 
+    def party_input_phone_number(phone_number)
+      within('.edit_party') do
+        fill_in 'party_unconfirmed_phone', with: phone_number
+      end
+    end
+
+    def party_input_verify_code(verify_code)
+      within('.edit_party') do
+        fill_in 'party_phone_varify_code', with: verify_code
+      end
+    end
+
     def signin_party(identify_number:, password: '12321313213')
       visit(new_party_session_path)
       within('#new_party') do

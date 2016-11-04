@@ -45,6 +45,10 @@ FactoryGirl.define do
     trait :with_confirmation_token do
       confirmation_token '2grgr212fd'
     end
+
+    trait :without_phone_number do
+      phone_number nil
+    end
   end
 
   factory :party_for_create, class: Party do

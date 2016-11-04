@@ -61,6 +61,13 @@ RSpec.describe Parties::PhonesController, type: :request do
       it { expect(response).to be_success }
       it { expect(response.body).to match('1234') }
     end
+
+    context '3 errors reset phone data' do
+      before { party_verifing_error_times(3) }
+      subject { put '/party/phone/verifing', party: { phone_varify_code: '1111' } }
+      it { expect(subject).to redirect_to('/party/phone/edit') }
+      it { expect { subject }.not_to change { Party.last.phone_number } }
+    end
   end
 
   describe '#resend' do
