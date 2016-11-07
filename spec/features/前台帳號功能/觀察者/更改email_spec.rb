@@ -68,7 +68,7 @@ feature '前台帳號功能', type: :feature, js: true do
             When '前往認證連結' do
               before { click_confirm_link(observer_A.reload.unconfirmed_email) }
               Then '觀察者A的 Email 成功代換' do
-                expect(current_path).to eq(court_observer_profile_path)
+                expect(current_path).to eq(court_observer_root_path)
                 expect(page).to have_content('您的帳號已通過驗證')
               end
             end
@@ -89,7 +89,7 @@ feature '前台帳號功能', type: :feature, js: true do
             When '前往認證連結' do
               before { click_confirm_link(observer_A.reload.unconfirmed_email) }
               Then '觀察者A的 Email 成功代換、觀察者B則不受影響' do
-                expect(current_path).to eq(court_observer_profile_path)
+                expect(current_path).to eq(court_observer_root_path)
                 expect(page).to have_content('您的帳號已通過驗證')
               end
             end

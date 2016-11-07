@@ -71,7 +71,7 @@ feature '前台帳號功能', type: :feature, js: true do
             When '前往認證連結' do
               before { lawyer_click_confirm_link('test@gmail.com') }
               Then '律師A的 Email 成功代換' do
-                expect(current_path).to match(lawyer_profile_path)
+                expect(current_path).to match(lawyer_root_path)
                 expect(page).to have_content('您的帳號已通過驗證')
               end
             end
@@ -93,7 +93,7 @@ feature '前台帳號功能', type: :feature, js: true do
             When '前往認證連結' do
               before { lawyer_click_confirm_link('test@gmail.com') }
               Then '律師A的 Email 成功代換、律師B則不受影響' do
-                expect(current_path).to match(lawyer_profile_path)
+                expect(current_path).to match(lawyer_root_path)
                 expect(page).to have_content('您的帳號已通過驗證')
               end
             end

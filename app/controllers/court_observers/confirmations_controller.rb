@@ -29,12 +29,13 @@ class CourtObservers::ConfirmationsController < Devise::ConfirmationsController
   end
 
   def check_first_time_confirm
+    @observer_by_token = CourtObserver.find_by_confirmation_token(params[:confirmation_token])
     @first_time_confirm = @observer_by_token.unconfirmed_email.nil? if @observer_by_token
   end
 
   def after_confirmation_path_for
     if signed_in?(:court_observer)
-      court_observer_profile_path
+      court_observer_root_path
     else
       new_session_path(:court_observer)
     end
