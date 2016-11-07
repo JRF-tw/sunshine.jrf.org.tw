@@ -18,6 +18,7 @@ class Scrap::GetSchedulesPagesByStoryTypeContext < BaseContext
     @court_code = court_code
     @story_type = story_type
     @sleep_time_interval = rand(1..2)
+    @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
   end
 
   def perform

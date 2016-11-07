@@ -13,6 +13,7 @@ class Scrap::GetVerdictsByCourtContext < BaseContext
     @court = court
     @start_date = start_date
     @end_date = end_date
+    @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
   end
 
   def perform

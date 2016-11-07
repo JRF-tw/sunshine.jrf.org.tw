@@ -18,6 +18,7 @@ class Scrap::ParseSchedulesContext < BaseContext
     @start_date_format = start_date_format
     @end_date_format = end_date_format
     @sleep_time_interval = rand(1..2)
+    @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
   end
 
   def perform

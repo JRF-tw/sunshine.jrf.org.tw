@@ -13,6 +13,10 @@ class Scrap::GetJudgesContext < BaseContext
     end
   end
 
+  def initialize
+    @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
+  end
+
   def perform
     run_callbacks :perform do
       @data.each do |data_string|
