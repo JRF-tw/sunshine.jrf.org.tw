@@ -24,8 +24,8 @@ FactoryGirl.define do
       story { create :story, :with_schedule_date_tomorrow }
     end
 
-    trait :schedule_yesterday do
-      story { create :story, :with_schedule_date_yesterday }
+    trait :schedule_today do
+      story { create :story, :with_schedule_date_today }
     end
   end
 
