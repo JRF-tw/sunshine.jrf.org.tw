@@ -71,7 +71,7 @@ group :development do
 
   # capistrano
   gem 'capistrano-rails'
-  gem 'capistrano-rvm'
+  gem 'capistrano-rbenv'
   gem 'capistrano-sidekiq'
   # unicorn
   gem 'capistrano3-unicorn'
