@@ -4,8 +4,7 @@ class Party::SetPhoneContext < BaseContext
 
   before_perform  :init_form_object
   before_perform  :check_sms_send_count
-  after_perform  :generate_verify_code
-  after_perform  :assign_verify_code
+  after_perform :assign_verify_code
   after_perform   :set_unconfirm
   after_perform   :build_message
   after_perform   :send_sms
@@ -34,11 +33,11 @@ class Party::SetPhoneContext < BaseContext
   end
 
   def generate_verify_code
-    @verify_code = rand(1..9999).to_s.rjust(4, '0')
+    rand(1..9999).to_s.rjust(4, '0')
   end
 
   def assign_verify_code
-    @party.phone_varify_code = @verify_code
+    @party.phone_varify_code = generate_verify_code
   end
 
   def set_unconfirm
