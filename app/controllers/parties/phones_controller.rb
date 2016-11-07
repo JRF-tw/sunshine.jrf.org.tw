@@ -16,10 +16,10 @@ class Parties::PhonesController < Parties::BaseController
     context = Party::SetPhoneContext.new(current_party)
     @phone_form = context.perform(params)
     if context.has_error?
-      flash[:error] = context.error_messages.join(", ")
-      render "new"
+      flash[:error] = context.error_messages.join(', ')
+      render 'new'
     else
-      redirect_to verify_party_phone_path, flash: { success: "已寄出簡訊認證碼" }
+      redirect_to verify_party_phone_path, flash: { success: '已寄出簡訊認證碼' }
     end
   end
 
@@ -37,10 +37,10 @@ class Parties::PhonesController < Parties::BaseController
     context = Party::SetPhoneContext.new(current_party)
     @phone_form = context.perform(params)
     if context.has_error?
-      flash[:error] = context.error_messages.join(", ")
-      render "edit"
+      flash[:error] = context.error_messages.join(', ')
+      render 'edit'
     else
-      redirect_to verify_party_phone_path, flash: { success: "已寄出簡訊認證碼" }
+      redirect_to verify_party_phone_path, flash: { success: '已寄出簡訊認證碼' }
     end
   end
 
@@ -58,12 +58,12 @@ class Parties::PhonesController < Parties::BaseController
     context = Party::VerifyPhoneContext.new(current_party)
     @verify_form = context.perform(params)
     if !context.has_error?
-      redirect_to party_root_path, flash: { success: "已驗證成功" }
+      redirect_to party_root_path, flash: { success: '已驗證成功' }
     elsif context.errors.include?(:retry_verify_count_out_range)
       redirect_to edit_party_phone_path, flash: { error: context.error_messages.join(', ').to_s }
     else
-      flash[:error] = context.error_messages.join(", ")
-      render "verify"
+      flash[:error] = context.error_messages.join(', ')
+      render 'verify'
     end
   end
 

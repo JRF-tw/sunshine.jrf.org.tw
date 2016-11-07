@@ -16,14 +16,14 @@ module Capybara
     end
 
     def party_input_phone_number(phone_number)
-      within('.edit_party') do
-        fill_in 'party_unconfirmed_phone', with: phone_number
+      within('.new_phone_form') do
+        fill_in 'phone_form_unconfirmed_phone', with: phone_number
       end
     end
 
     def party_input_verify_code(verify_code)
-      within('.edit_party') do
-        fill_in 'party_phone_varify_code', with: verify_code
+      within('.new_verify_form') do
+        fill_in 'verify_form_phone_varify_code', with: verify_code
       end
     end
 
