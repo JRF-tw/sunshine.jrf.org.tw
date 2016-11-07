@@ -10,12 +10,12 @@ class Party::SetPhoneContext < BaseContext
   after_perform   :send_sms
   after_perform   :increment_sms_count
 
-  def initialize(party)
+  def initialize(party, params)
     @party = party
+    @params = permit_params(params[:phone_form] || params, PERMITS)
   end
 
-  def perform(params)
-    @params = permit_params(params[:phone_form] || params, PERMITS)
+  def perform
     run_callbacks :perform do
       add_error(:data_update_fail, @form_object.full_error_messages) unless @form_object.save
     end

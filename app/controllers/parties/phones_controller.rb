@@ -13,8 +13,8 @@ class Parties::PhonesController < Parties::BaseController
   end
 
   def create
-    context = Party::SetPhoneContext.new(current_party)
-    @phone_form = context.perform(params)
+    context = Party::SetPhoneContext.new(current_party, params)
+    @phone_form = context.perform
     if context.has_error?
       flash[:error] = context.error_messages.join(', ')
       render 'new'
@@ -34,8 +34,8 @@ class Parties::PhonesController < Parties::BaseController
   end
 
   def update
-    context = Party::SetPhoneContext.new(current_party)
-    @phone_form = context.perform(params)
+    context = Party::SetPhoneContext.new(current_party, params)
+    @phone_form = context.perform
     if context.has_error?
       flash[:error] = context.error_messages.join(', ')
       render 'edit'
@@ -55,8 +55,8 @@ class Parties::PhonesController < Parties::BaseController
   end
 
   def verifing
-    context = Party::VerifyPhoneContext.new(current_party)
-    @verify_form = context.perform(params)
+    context = Party::VerifyPhoneContext.new(current_party, params)
+    @verify_form = context.perform
     if !context.has_error?
       redirect_to party_root_path, flash: { success: '已驗證成功' }
     elsif context.errors.include?(:retry_verify_count_out_range)

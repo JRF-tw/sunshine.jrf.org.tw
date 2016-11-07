@@ -6,12 +6,12 @@ class Party::VerifyPhoneContext < BaseContext
   after_perform   :confirmed
   after_perform   :reset_data
 
-  def initialize(party)
+  def initialize(party, params)
     @party = party
+    @params = permit_params(params[:verify_form] || params, PERMITS)
   end
 
-  def perform(params)
-    @params = permit_params(params[:verify_form] || params, PERMITS)
+  def perform
     run_callbacks :perform do
       unless @form_object.save
         record_retry_count
