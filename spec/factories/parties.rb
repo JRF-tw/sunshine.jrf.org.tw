@@ -35,7 +35,7 @@ FactoryGirl.define do
     sequence(:phone_number) { "09#{rand(1..99_999_999).to_s.rjust(8, '0')}" }
     sequence(:email) { |n| "#{n}aaoo@gmail.com" }
     trait :with_unconfirmed_email do
-      unconfirmed_email 'aron1122@gmail.com'
+      sequence(:unconfirmed_email) { |n| "#{n}aaoogg@gmail.com" }
     end
 
     trait :already_confirmed do
@@ -43,7 +43,11 @@ FactoryGirl.define do
     end
 
     trait :with_confirmation_token do
-      confirmation_token '2grgr212fd'
+      sequence(:confirmation_token) { |n| "#{n}aaooggdw" }
+    end
+
+    trait :without_phone_number do
+      phone_number nil
     end
   end
 

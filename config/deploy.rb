@@ -12,7 +12,14 @@ set :ssh_options, {
   forward_agent: true
 }
 
-set :rvm_ruby_version, IO.read('./.ruby-version').split("\n")[0]
+# execjs use node
+set :default_env, {
+  'EXECJS_RUNTIME' => 'Node'
+}
+
+set :rbenv_type, :user
+set :rbenv_ruby, IO.read('.ruby-version').strip
+set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 
 # Default branch is :master
 ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
