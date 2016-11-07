@@ -2,6 +2,8 @@ class Parties::PasswordsController < Devise::PasswordsController
   include CrudConcern
 
   prepend_before_action :require_no_authentication, except: [:edit, :update, :send_reset_password_sms]
+  before_action :check_party, only: [:edit, :update]
+
   layout 'party'
 
   def new
@@ -30,18 +32,9 @@ class Parties::PasswordsController < Devise::PasswordsController
 
   # GET /resource/password/edit?reset_password_token=abcdef
   def edit
-    party_by_token = Party.with_reset_password_token(params[:reset_password_token])
-    if party_by_token.nil?
-      redirect_as_fail(invalid_edit_path, '無效的驗證連結')
-    elsif current_party && party_by_token != current_party
-      redirect_as_fail(invalid_edit_path, '你僅能修改本人的帳號')
-    else
-      self.resource = resource_class.new
-      set_minimum_password_length
-      resource.reset_password_token = params[:reset_password_token]
-      @party_by_token = Party.with_reset_password_token(params[:reset_password_token])
-    end
-
+    self.resource = resource_class.new
+    set_minimum_password_length
+    resource.reset_password_token = params[:reset_password_token]
     # meta
     set_meta(
       title: '當事人重設密碼頁',
@@ -82,6 +75,16 @@ class Parties::PasswordsController < Devise::PasswordsController
   end
 
   private
+
+  def check_party
+    token = params[:reset_password_token] || params[:party][:reset_password_token]
+    @party_by_token = Party.with_reset_password_token(token)
+    if @party_by_token.nil?
+      redirect_as_fail(invalid_edit_path, '無效的驗證連結')
+    elsif current_party && current_party != @party_by_token
+      redirect_as_fail(invalid_edit_path, '你僅能修改本人的帳號')
+    end
+  end
 
   def invalid_edit_path
     current_party ? party_profile_path : new_party_session_path
