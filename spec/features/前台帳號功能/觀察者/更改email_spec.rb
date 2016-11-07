@@ -84,16 +84,16 @@ feature '前台帳號功能', type: :feature, js: true do
             end
           end
 
-          # Given '觀察者B已登入' do
-          #   before { signin_court_observer(email: observer_B.email) }
-          #   When '前往認證連結' do
-          #     before { click_confirm_link(observer_A.reload.unconfirmed_email) }
-          #     Then '觀察者A的 Email 成功代換、觀察者B則不受影響' do
-          #       expect(current_path).to eq(court_observer_profile_path)
-          #       expect(page).to have_content('您的帳號已通過驗證')
-          #     end
-          #   end
-          # end
+          Given '觀察者B已登入' do
+            before { signin_court_observer(email: observer_B.email) }
+            When '前往認證連結' do
+              before { click_confirm_link(observer_A.reload.unconfirmed_email) }
+              Then '觀察者A的 Email 成功代換、觀察者B則不受影響' do
+                expect(current_path).to eq(court_observer_profile_path)
+                expect(page).to have_content('您的帳號已通過驗證')
+              end
+            end
+          end
 
           Given '觀察者A和觀察者B送出相同的 Email 進行認證，且 B 已前往認證連結完成代換' do
             before { sign_out_after_edit_email(observer_B, email: '4545@gmail.com') }
