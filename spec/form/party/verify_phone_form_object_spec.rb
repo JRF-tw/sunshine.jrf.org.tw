@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Party::VerifyPhoneFormObject, type: :model do
-  let!(:party) { create :party }
-  before { party.unconfirmed_phone = '0922888888' }
+  let!(:party) { create :party, :with_unconfirmed_phone }
   before { party.phone_varify_code = '1111' }
   let(:form_object) { Party::VerifyPhoneFormObject.new(party, params) }
 
@@ -30,12 +29,12 @@ RSpec.describe Party::VerifyPhoneFormObject, type: :model do
 
     context 'success' do
       let(:params) { { phone_varify_code: '1111' } }
-      it { expect(party.reload.phone_number).to eq('0922888888') }
+      it { expect(party.reload.phone_number).to eq(party.unconfirmed_phone) }
     end
 
     context 'fail' do
       let(:params) { { phone_varify_code: '1122' } }
-      it { expect(party.reload.phone_number).not_to eq('0922888888') }
+      it { expect(party.reload.phone_number).not_to eq(party.unconfirmed_phone) }
     end
   end
 end

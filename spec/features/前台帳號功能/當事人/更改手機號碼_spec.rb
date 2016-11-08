@@ -14,11 +14,11 @@ feature '前台帳號功能', type: :feature, js: true do
       click_button '認證'
     end
     feature '更改手機號碼' do
-      let!(:party_A) { create :party, :already_confirmed }
+      let!(:party_A) { create :party, :already_confirmed, :with_unconfirmed_phone }
       before { signin_party(identify_number: party_A.identify_number) }
       feature '送出驗證碼' do
         Scenario '當事人A已登入，進行手機號碼更改。新手機號碼不能和其他人（包含自己）已驗證或驗證中的號碼相同' do
-          let(:party_B) { create :party, :already_confirmed }
+          let(:party_B) { create :party, :already_confirmed, :with_unconfirmed_phone }
           Given '當事人A已通過手機驗證' do
             When '送出原本的手機號碼' do
               before { edit_phone_number(party_A.phone_number) }
@@ -38,9 +38,8 @@ feature '前台帳號功能', type: :feature, js: true do
           end
 
           Given '當事人A已通過手機驗證 待驗證中號碼為 0988888888' do
-            before { party_A.unconfirmed_phone = '0988888888' }
             When '送出 0988888888' do
-              before { edit_phone_number('0988888888') }
+              before { edit_phone_number(party_A.unconfirmed_phone) }
               Then '顯示錯誤訊息' do
                 expect(current_path).to eq(party_phone_path)
                 expect(page).to have_content('該手機號碼正等待驗證中')
@@ -59,9 +58,8 @@ feature '前台帳號功能', type: :feature, js: true do
           end
 
           Given '當事人B待驗證中手機號碼為 0988888888' do
-            before { party_B.unconfirmed_phone = '0988888888' }
             When '送出 0988888888' do
-              before { edit_phone_number('0988888888') }
+              before { edit_phone_number(party_B.unconfirmed_phone) }
               Then '顯示錯誤訊息' do
                 expect(current_path).to eq(party_phone_path)
                 expect(page).to have_content('該手機號碼正等待驗證中')
@@ -79,7 +77,6 @@ feature '前台帳號功能', type: :feature, js: true do
       feature '輸入正確的驗證碼後，舊手機號碼被取代' do
         Scenario '輸入簡訊中驗證碼後，新手機號碼代換舊的手機號碼' do
           before { party_A.phone_varify_code.value = '1111' }
-          before { party_A.unconfirmed_phone = '0956556556' }
           Given '送出新手機的驗證碼' do
             When '輸入正確的驗證碼' do
               before { verify_phone_number('1111') }

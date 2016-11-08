@@ -3,10 +3,9 @@ require 'rails_helper'
 describe Party::VerifyPhoneContext do
 
   describe '#perform' do
-    let!(:party) { create :party }
+    let!(:party) { create :party, unconfirmed_phone: '0922222222' }
     let(:params) { { phone_varify_code: '1111' } }
     before { party.phone_varify_code = '1111' }
-    before { party.unconfirmed_phone = '0922888888' }
     subject { described_class.new(party, params) }
 
     context 'fails' do
@@ -32,9 +31,8 @@ describe Party::VerifyPhoneContext do
 
       context 'assign_value' do
         before { subject.perform }
-
-        it { expect(party.phone_number).to eq('0922888888') }
-        it { expect(party.unconfirmed_phone.value).to be_nil }
+        it { expect(party.phone_number).to eq('0922222222') }
+        it { expect(party.unconfirmed_phone).to be_nil }
       end
 
       context 'phone_confirmed?' do

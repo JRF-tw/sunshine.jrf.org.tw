@@ -52,5 +52,6 @@ class Party::VerifyPhoneContext < BaseContext
     @party.unconfirmed_phone = nil
     @party.phone_varify_code = nil
     @party.retry_verify_count.reset
+    @party.save
   end
 end

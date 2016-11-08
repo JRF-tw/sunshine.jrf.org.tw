@@ -37,7 +37,7 @@ describe Party::SendResetPasswordSmsContext do
   end
 
   context 'phone_number unconfirmed' do
-    before { party.unconfirmed_phone.value = '0911111111' }
+    let!(:party) { create :party, unconfirmed_phone: '0911111111' }
     let!(:params) { { identify_number: party.identify_number, phone_number: '0911111111' } }
 
     it { expect(subject.perform).to be_falsey }

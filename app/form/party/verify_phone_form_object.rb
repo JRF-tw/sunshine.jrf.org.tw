@@ -7,7 +7,7 @@ class Party::VerifyPhoneFormObject < BaseFormObject
 
   def initialize(party, params = nil)
     @party = party
-    self.unconfirmed_phone = @party.unconfirmed_phone.value
+    self.unconfirmed_phone = @party.unconfirmed_phone
     self.phone_varify_code = params[:phone_varify_code] if params && params[:phone_varify_code]
   end
 

@@ -30,7 +30,7 @@ class Party::SendResetPasswordSmsContext < BaseContext
   end
 
   def check_phone_number_verified
-    return add_error(:phone_number_not_verify) if @params[:phone_number] == @party.unconfirmed_phone.value
+    return add_error(:phone_number_not_verify) if @params[:phone_number] == @party.unconfirmed_phone
   end
 
   def check_phone_number_exist

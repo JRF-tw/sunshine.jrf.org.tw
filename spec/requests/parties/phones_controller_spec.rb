@@ -71,7 +71,7 @@ RSpec.describe Parties::PhonesController, type: :request do
   end
 
   describe '#resend' do
-    before { current_party.unconfirmed_phone.value = '0911111111' }
+    before { current_party.update_attributes(unconfirmed_phone: '0911111111') }
     before { current_party.phone_varify_code = '1111' }
 
     context 'success' do

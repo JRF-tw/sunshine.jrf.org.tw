@@ -13,7 +13,7 @@ class Party::ChangePhoneFormObject < BaseFormObject
 
   def save
     return false unless valid?
-    @party.unconfirmed_phone = unconfirmed_phone
+    @party.update_attributes(unconfirmed_phone: unconfirmed_phone)
   end
 
   private
@@ -27,7 +27,7 @@ class Party::ChangePhoneFormObject < BaseFormObject
   end
 
   def unexist_unconfirmed_phone
-    add_error(:phone_number_confirming) if (Party.all.map { |n| n if n.unconfirmed_phone.value == unconfirmed_phone }).compact.present? && unconfirmed_phone.present?
+    add_error(:phone_number_confirming) if Party.pluck(:unconfirmed_phone).include?(unconfirmed_phone) && unconfirmed_phone.present?
   end
 
   def same_phone_number?

@@ -47,7 +47,6 @@ class Party < ActiveRecord::Base
   has_many :verdict_relations, as: :person
 
   include Redis::Objects
-  value :unconfirmed_phone, expiration: 1.hour
   value :phone_varify_code, expiration: 1.hour
   counter :retry_verify_count, expiration: 1.hour
   counter :sms_sent_count, expiration: 5.minutes
