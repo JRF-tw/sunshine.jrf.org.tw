@@ -25,7 +25,6 @@ gem 'rails_autolink'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
-gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails', '~> 4.2'
 gem 'turbolinks'
 gem 'asset_sync'
@@ -72,12 +71,12 @@ group :development do
 
   # capistrano
   gem 'capistrano-rails'
-  gem 'capistrano-rvm'
+  gem 'capistrano-rbenv'
   gem 'capistrano-sidekiq'
   # unicorn
   gem 'capistrano3-unicorn'
   # slack
-  gem 'slackistrano', require: false
+  gem 'slackistrano', '3.0.1'
 
   gem 'guard-annotate'
   gem 'annotate'
@@ -91,8 +90,6 @@ group :development do
   gem 'guard'
   gem 'http_logger'
   gem 'spring'
-  gem 'venus', git: 'git@github.com:marsz/venus.git', branch: 'v1.0'
-  gem 'rename'
   gem 'letter_opener'
 end
 

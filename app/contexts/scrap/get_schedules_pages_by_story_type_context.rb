@@ -18,13 +18,14 @@ class Scrap::GetSchedulesPagesByStoryTypeContext < BaseContext
     @court_code = court_code
     @story_type = story_type
     @sleep_time_interval = rand(1..2)
+    @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
   end
 
   def perform
     run_callbacks :perform do
       @page_total.times.each_with_index do |i|
         current_page = i + 1
-        Scrap::ParseSchedulesContext.delay(retry: 3).perform(@court_code, @story_type, current_page, @page_total, @start_date_format, @end_date_format)
+        Scrap::ParseSchedulesContext.delay(retry: false).perform(@court_code, @story_type, current_page, @page_total, @start_date_format, @end_date_format)
       end
     end
   end
@@ -33,9 +34,9 @@ class Scrap::GetSchedulesPagesByStoryTypeContext < BaseContext
 
   def page_total_by_story_type_and_court_code
     sql = "UPPER(CRTID)='#{@court_code}' AND DUDT>='#{@start_date_format}' AND DUDT<='#{@end_date_format}' AND SYS='#{@story_type}'  ORDER BY  DUDT,DUTM,CRMYY,CRMID,CRMNO"
-    data = { sql_conction: sql }
+    @data = { sql_conction: sql }
     sleep @sleep_time_interval
-    response_data = Mechanize.new.get(SCHEDULE_INFO_URI, data)
+    response_data = Mechanize.new.get(SCHEDULE_INFO_URI, @data)
     response_data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
     @page_total = if response_data.css('table')[2].css('tr')[0].text =~ /合計件數/
                     response_data.css('table')[2].css('tr')[0].text.match(/\d+/)[0].to_i / PAGE_PER + 1
@@ -43,6 +44,17 @@ class Scrap::GetSchedulesPagesByStoryTypeContext < BaseContext
                     0
                   end
   rescue
+    request_retry(key: "#{SCHEDULE_INFO_URI} / data=#{@data} / #{Time.zone.today}")
     nil
+  end
+
+  def request_retry(key:)
+    redis_object = Redis::Counter.new(key, expiration: 1.day)
+    if redis_object.value < 12
+      self.class.delay_for(1.hour).perform(@court_code, @story_type, @start_date, @end_date)
+      redis_object.incr
+    else
+      Logs::AddCrawlerError.parse_schedule_data_error(@crawler_history, :crawler_failed, "取得法院代碼-#{@court_code}庭期搜尋頁數失敗, 來源網址:#{SCHEDULE_INFO_URI}, 參數:#{@data}")
+    end
   end
 end

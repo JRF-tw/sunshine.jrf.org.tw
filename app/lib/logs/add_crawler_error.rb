@@ -9,6 +9,13 @@ class Logs::AddCrawlerError
       crawler_log.save
     end
 
+    def add_schedule_error(crawler_history, schedule, type, message)
+      crawler_log = crawler_history.crawler_logs.find_or_create_by(crawler_kind: CrawlerKinds.list.keys.index(:crawler_schedule), crawler_error_type: CrawlerErrorTypes.list.keys.index(type))
+      error_message = ["庭期表 : #{admin_schedule_url(schedule, host: Setting.host)}, #{message}"]
+      crawler_log.crawler_errors << error_message unless crawler_log.crawler_errors.include?(error_message)
+      crawler_log.save
+    end
+
     def parse_court_data_error(crawler_history, type, message)
       crawler_log = crawler_history.crawler_logs.find_or_create_by(crawler_kind: CrawlerKinds.list.keys.index(:crawler_court), crawler_error_type: CrawlerErrorTypes.list.keys.index(type))
       crawler_log.crawler_errors << message unless crawler_log.crawler_errors.include?(message)

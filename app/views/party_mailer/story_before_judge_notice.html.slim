@@ -1,6 +1,6 @@
-p = @remind_story_before_judge
+p = @open_court_info_wording
 
 p = link_to "點我放入Google 行事曆", @google_calendar_link
 
-p = "感謝您使用司法陽光網的案件訂閱服務！若您不想再訂閱此案，#{link_to "請點此", lawyer_subscribe_url(@story), method: :delete, class: "btn btn-mini"}。".html_safe
+p = "感謝您使用司法陽光網的案件訂閱服務！若您不想再訂閱此案，#{link_to '請點此', party_subscribe_url(@story, token: @token)}。".html_safe
 

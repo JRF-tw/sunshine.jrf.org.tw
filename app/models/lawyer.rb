@@ -80,9 +80,14 @@ class Lawyer < ActiveRecord::Base
     end
   end
 
+  def unsubscribe_token
+    Digest::MD5.hexdigest(self.class.name + email + Setting.unsubscribe_key)
+  end
+
   private
 
   def skip_confirmation_notification
     skip_confirmation_notification!
   end
+
 end

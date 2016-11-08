@@ -1,7 +1,4 @@
 class Scrap::GetVerdictsContext < BaseContext
-  INDEX_URI = 'http://jirs.judicial.gov.tw/FJUD/FJUDQRY01_1.aspx'.freeze
-  RESULT_URI = 'http://jirs.judicial.gov.tw/FJUD/FJUDQRY02_1.aspx'.freeze
-
   before_perform  :get_courts
   after_perform   :record_intervel_to_daily_notify
 
@@ -19,7 +16,7 @@ class Scrap::GetVerdictsContext < BaseContext
   def perform
     run_callbacks :perform do
       @courts.each do |court|
-        Scrap::GetVerdictsByCourtContext.delay(retry: 3).perform(court, @start_date, @end_date)
+        Scrap::GetVerdictsByCourtContext.delay(retry: false).perform(court, @start_date, @end_date)
       end
     end
   end

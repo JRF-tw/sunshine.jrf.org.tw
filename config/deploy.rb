@@ -1,14 +1,28 @@
 # config valid only for current version of Capistrano
-lock '3.4.0'
+lock '3.6.1'
 
 # 指定使用 nvm 的 bash 指令，防止 capistrano 回去找 usr/bin/env
 nvm_sh       = '. /home/apps/.nvm/nvm.sh'
 
 set :application, 'jrf-sunny'
 set :repo_url, 'git@github.com:5fpro/jrf-sunny.git'
+set :deploy_to, '/home/apps/jrf-sunny'
+set :ssh_options, {
+  user: 'apps',
+  forward_agent: true
+}
+
+# execjs use node
+set :default_env, {
+  'EXECJS_RUNTIME' => 'Node'
+}
+
+set :rbenv_type, :user
+set :rbenv_ruby, IO.read('.ruby-version').strip
+set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 
 # Default branch is :master
-# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
+ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, '/var/www/my_app_name'

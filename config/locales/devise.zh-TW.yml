@@ -3,6 +3,7 @@
 zh-TW:
   devise:
     confirmations:
+      conflict_confirmed: "您的待驗證email已從別的帳號完成驗證"
       confirmed: "您的帳號已通過驗證。"
       send_instructions: "您將在幾分鐘後收到一封電子郵件，內有驗證帳號的步驟說明。"
       send_paranoid_instructions: "如果我們有您的信箱，您將會收到一封驗證您的帳號的電子郵件。"

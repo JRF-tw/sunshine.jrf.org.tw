@@ -8,10 +8,29 @@ module Capybara
       check('policy_agreement')
     end
 
-    def party_input_password(password, password_confirmation)
+    def party_input_password(password, password_confirmation = nil)
       within('#new_party') do
         fill_in 'party_password', with: password
         fill_in 'party_password_confirmation', with: password_confirmation || password
+      end
+    end
+
+    def party_input_phone_number(phone_number)
+      within('.edit_party') do
+        fill_in 'party_unconfirmed_phone', with: phone_number
+      end
+    end
+
+    def party_input_verify_code(verify_code)
+      within('.edit_party') do
+        fill_in 'party_phone_varify_code', with: verify_code
+      end
+    end
+
+    def party_input_edit_email(email:, password: '12321313213')
+      within('#edit_party') do
+        fill_in 'party_email', with: email
+        fill_in 'party_current_password', with: password
       end
     end
 
@@ -22,6 +41,13 @@ module Capybara
         fill_in 'party_password', with: password
       end
       click_button '登入'
+    end
+
+    def party_input_reset_password(identify_number, phone_number)
+      within('#new_party') do
+        fill_in 'party_identify_number', with: identify_number
+        fill_in 'party_phone_number', with: phone_number
+      end
     end
 
     def party_run_schedule_score_flow(story, schedule, judge)
@@ -100,6 +126,11 @@ module Capybara
       visit(party_root_path)
       find(:xpath, '//tbody/tr/td/a').click
       click_link('編輯評鑑')
+    end
+
+    def open_party_email(email)
+      perform_sidekiq_job(fetch_sidekiq_last_job)
+      open_email(email)
     end
   end
 end
