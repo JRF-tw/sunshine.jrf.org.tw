@@ -14,6 +14,12 @@ RSpec.describe Scrap::NotifyDailyContext, type: :model do
       it { expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
     end
 
+    context 'update_to_crawler_history' do
+      let!(:crawler_history) { create :crawler_history }
+      subject! { described_class.new.perform }
+      it { expect(crawler_history.reload.courts_count).to eq(1) }
+    end
+
     context 'cleanup_redis_date' do
       subject! { described_class.new.perform }
 

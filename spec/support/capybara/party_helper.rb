@@ -1,13 +1,27 @@
 module Capybara
   module PartyHelper
-    def signin_party(party)
+    def party_input_name_and_id(name, identify_number)
+      within('#new_party') do
+        fill_in 'party_name', with: name
+        fill_in 'party_identify_number', with: identify_number
+      end
+      check('policy_agreement')
+    end
+
+    def party_input_password(password, password_confirmation)
+      within('#new_party') do
+        fill_in 'party_password', with: password
+        fill_in 'party_password_confirmation', with: password_confirmation || password
+      end
+    end
+
+    def signin_party(identify_number:, password: '12321313213')
       visit(new_party_session_path)
       within('#new_party') do
-        fill_in 'party_identify_number', with: party.identify_number
-        fill_in 'party_password', with: party.password
+        fill_in 'party_identify_number', with: identify_number
+        fill_in 'party_password', with: password
       end
       click_button '登入'
-      party
     end
 
     def party_run_schedule_score_flow(story, schedule, judge)

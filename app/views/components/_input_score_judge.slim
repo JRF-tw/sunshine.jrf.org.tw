@@ -8,7 +8,7 @@
 
   .form--score__preview
     = f.input :court_id, as: :select,
-      collection: collect_for_courts, include_blank: "請選擇法院",
+      collection: collect_for_shown_courts, include_blank: "請選擇法院",
       label: "法院", disabled: true
     = f.input :story_type, as: :select,
       collection: collect_for_story_types, include_blank: "請選擇案件類別",

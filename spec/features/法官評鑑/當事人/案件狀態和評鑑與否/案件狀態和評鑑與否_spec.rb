@@ -5,7 +5,7 @@ feature '法官評鑑 - 當事人', type: :feature, js: true do
   let!(:story) { create :story, court: court }
   let!(:judge) { create :judge, court: court }
   let!(:schedule) { create :schedule, court: court, story: story }
-  before { signin_party(party) }
+  before { signin_party(identify_number: party.identify_number) }
 
   feature '案件的狀態和評鑑與否' do
     Scenario '案件尚未抓到判決書 (即沒有判決日)' do

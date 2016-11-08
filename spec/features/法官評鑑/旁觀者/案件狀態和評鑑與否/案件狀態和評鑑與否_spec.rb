@@ -5,7 +5,7 @@ feature '法官評鑑 - 旁觀者', type: :feature, js: true do
   let!(:story) { create :story, court: court }
   let!(:judge) { create :judge, court: court }
   let!(:schedule) { create :schedule, court: court, story: story }
-  before { signin_court_observer(court_observer) }
+  before { signin_court_observer(email: court_observer.email) }
 
   feature '案件的狀態和評鑑與否' do
     Scenario '案件尚未抓到判決書 (即沒有判決日)' do

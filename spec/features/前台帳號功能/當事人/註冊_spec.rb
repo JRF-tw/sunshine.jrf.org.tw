@@ -1,138 +1,44 @@
 require 'rails_helper'
 
-describe '當事人註冊', type: :request do
-  context '註冊' do
-    context '成功註冊' do
-      let!(:params) { attributes_for(:party_for_create) }
-      subject { post '/party', party: params, policy_agreement: '1' }
-
-      it '轉跳到手機驗證頁' do
-        expect(subject).to redirect_to('/party/phone/new')
-      end
-
-      it '帳號成功建立' do
-        expect { subject }.to change { Party.count }
-      end
+feature '前台帳號功能', type: :feature, js: true do
+  feature '當事人' do
+    def register_name_and_id(name:, identify_number:)
+      visit(new_party_registration_path)
+      party_input_name_and_id(name, identify_number)
+      click_button '下一步'
     end
 
-    context '失敗註冊' do
-      context '失敗後的頁面' do
-        subject! { post '/party', party: { name: '老夫子', identify_number: 'f122121211', password: '00000000', password_confirmation: '123123123' } }
-
-        it '應保留原本註冊內容' do
-          expect(response.body).to match('老夫子')
-          expect(response.body).to match('f122121211')
-        end
-      end
-
-      context 'ID 已註冊過' do
-        let!(:party) { create :party, identify_number: 'F122121211' }
-        subject! { post '/party', party: { name: '老夫子', identify_number: 'F122121211', password: '123123123', password_confirmation: '123123123' }, policy_agreement: '1' }
-
-        it '轉跳頁面的錯誤訊息應顯示人工申訴的連結' do
-          expect(response.body).to match("此身分證字號已經被使用 <a href='/party/appeal/new'>人工申訴連結</a>")
-        end
-      end
-
-      context 'ID 未註冊' do
-        context '密碼兩次輸入不符' do
-          subject! { post '/party', party: { name: '老夫子', identify_number: 'F122121211', password: '11111111', password_confirmation: '00000000' }, policy_agreement: '1' }
-
-          it '提示密碼與密碼確認須一致' do
-            expect(response.body).to match('密碼 需與密碼確認相同')
-          end
-        end
-
-        context '密碼過短' do
-          subject! { post '/party', party: { name: '老夫子', identify_number: 'F122121211', password: '111', password_confirmation: '111' }, policy_agreement: '1' }
-
-          it '提示密碼過短' do
-            expect(response.body).to match('密碼 不得小於八個字元')
-          end
-        end
-
-        context '密碼空白' do
-          subject! { post '/party', party: { name: '老夫子', identify_number: 'F122121211', password: '', password_confirmation: '00000000' }, policy_agreement: '1' }
-
-          it '提示密碼不可為空' do
-            expect(response.body).to match('密碼 不可為空白字元')
-          end
-        end
-      end
-
-      context '沒有勾選「我已詳細閱讀服務條款和隱私權保護政策」' do
-        subject! { post '/party/registrations/check_identify_number', party: { name: '老夫子', identify_number: 'F122121211', password: '00000000', password_confirmation: '00000000' } }
-
-        it '提示尚未同意條款' do
-          expect(response.body).to match('您尚未勾選同意條款')
-        end
-      end
-
-      context '內容輸入錯誤' do
-        context '姓名空白' do
-          subject! { post '/party', party: { name: '', identify_number: 'F122121211', password: '00000000', password_confirmation: '00000000' }, policy_agreement: '1' }
-
-          it '提示姓名不可為空' do
-            expect(response.body).to match('姓名 不可為空白字元')
-          end
-        end
-
-        context 'ID 不合法' do
-          subject! { post '/party', party: { name: '老夫子', identify_number: 'F332212121', password: '00000000', password_confirmation: '00000000' }, policy_agreement: '1' }
-
-          it '提示身分證字號格式不符' do
-            expect(response.body).to match('身分證字號格式不符')
-          end
-        end
-
-        context 'ID 格式不符' do
-          context '非大寫英文字開頭' do
-            subject! { post '/party', party: { name: '老夫子', identify_number: 'f122121211', password: '00000000', password_confirmation: '00000000' }, policy_agreement: '1' }
-
-            it '提示身分證字號格式不符' do
-              expect(response.body).to match('身分證字號格式不符')
+    def register_password(password:, password_confirmation: nil)
+      party_input_password(password, password_confirmation)
+      click_button '註冊'
+    end
+    feature '註冊' do
+      Scenario '僅身分證字號不能重複，且格式必須正確，加上必填資訊後即算完成註冊' do
+        let!(:party) { create :party }
+        Given '當事人進行註冊中' do
+          When '輸入已註冊的身分證字號' do
+            before { register_name_and_id(name: '咕嚕', identify_number: party.identify_number) }
+            Then '註冊失敗' do
+              expect(current_path).to match(party_registrations_check_identify_number_path)
+              expect(page).to have_content('此身分證字號已經被使用 人工申訴連結')
             end
           end
 
-          context '非大寫英文字+9位數字' do
-            subject! { post '/party', party: { name: '老夫子', identify_number: 'f1211', password: '00000000', password_confirmation: '00000000' }, policy_agreement: '1' }
-
-            it '提示身分證字號格式不符' do
-              expect(response.body).to match('身分證字號格式不符')
+          When '輸入不存在的身分證字號，但格式不符' do
+            before { register_name_and_id(name: '咕嚕', identify_number: 'AAA112212') }
+            Then '註冊失敗' do
+              expect(current_path).to match(party_registrations_check_identify_number_path)
+              expect(page).to have_content('身分證字號格式不符(英文字母請大寫)')
             end
           end
 
-          context '含有其他特殊字元' do
-            subject! { post '/party', party: { name: '老夫子', identify_number: 'f122!!++', password: '00000000', password_confirmation: '00000000' }, policy_agreement: '1' }
-
-            it '提示身分證字號格式不符' do
-              expect(response.body).to match('身分證字號格式不符')
+          When '輸入不存在的身分證字號，且符合格式' do
+            before { register_name_and_id(name: '咕嚕', identify_number: 'A127216262') }
+            before { register_password(password: '00000000') }
+            Then '註冊成功' do
+              expect(current_path).to match(new_party_phone_path)
+              expect(page).to have_content('註冊成功，歡迎！')
             end
-          end
-
-          context '9位數字中含有英文字' do
-            subject! { post '/party', party: { name: '老夫子', identify_number: 'f122aoao11', password: '00000000', password_confirmation: '00000000' }, policy_agreement: '1' }
-
-            it '提示身分證字號格式不符' do
-              expect(response.body).to match('身分證字號格式不符')
-            end
-          end
-        end
-
-        context 'ID 空白' do
-          subject! { post '/party', party: { name: '老夫子', identify_number: '', password: '00000000', password_confirmation: '00000000' }, policy_agreement: '1' }
-
-          it '提示身分證字號不可為空' do
-            expect(response.body).to match('身分證字號 不可為空白字元')
-          end
-        end
-
-        context '姓名 + ID空白' do
-          subject! { post '/party', party: { name: '', identify_number: '', password: '00000000', password_confirmation: '00000000' }, policy_agreement: '1' }
-
-          it '提示欄位不可為空' do
-            expect(response.body).to match('身分證字號 不可為空白字元')
-            expect(response.body).to match('姓名 不可為空白字元')
           end
         end
       end

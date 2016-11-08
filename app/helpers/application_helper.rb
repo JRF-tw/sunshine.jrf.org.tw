@@ -186,6 +186,10 @@ module ApplicationHelper
     Court.get_courts.sorted.map { |c| [c.full_name, c.id] }
   end
 
+  def collect_for_shown_courts
+    Court.get_courts.shown.sorted.map { |c| [c.full_name, c.id] }
+  end
+
   def collect_for_judges_name
     Judge.all.includes(:current_branches).map do |j|
       ["#{j.name} - #{j.current_branches.map(&:name).join(', ')}", j.id]
