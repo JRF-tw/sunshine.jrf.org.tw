@@ -1,7 +1,13 @@
 ruby:
-  type = "#{controller.controller_name}-#{controller.action_name}"
+  static = static || false
+  type = if static
+      "base-about"
+    else
+      "#{controller.controller_name}-#{controller.action_name}"
+    end
   m_size_path = path_to_image "hero-#{type}-M.png"
   l_size_path = path_to_image "hero-#{type}-L.png"
+  description = description || ""
 
 .billboard[
   class="billboard--#{type} billboard--classic lazyload"

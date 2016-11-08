@@ -40,6 +40,10 @@
     max-width: container($tablet-columns);
   }
 
+  h4 { margin-top: 0; }
+
+  ul { margin-bottom: r(2); }
+
   & > p { margin-top: 0; }
 }
 .card--flex {
