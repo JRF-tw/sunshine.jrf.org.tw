@@ -28,6 +28,10 @@ describe Party::SetPhoneContext do
         before { subject.perform }
         it { expect(party.confirmed?).to be_falsey }
       end
+
+      context 'auto_delete_unconfirmed_phone' do
+        it { expect { subject.perform }.to change { fetch_sidekiq_last_job(scheduled: true) } }
+      end
     end
   end
 end

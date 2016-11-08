@@ -2,13 +2,14 @@ class Party::SetPhoneContext < BaseContext
   PERMITS = [:unconfirmed_phone].freeze
   SENDINGLIMIT = 2
 
-  before_perform  :init_form_object
-  before_perform  :check_sms_send_count
-  after_perform :assign_verify_code
-  after_perform   :set_unconfirm
-  after_perform   :build_message
-  after_perform   :send_sms
-  after_perform   :increment_sms_count
+  before_perform :init_form_object
+  before_perform :check_sms_send_count
+  after_perform  :assign_verify_code
+  after_perform  :set_unconfirm
+  after_perform  :build_message
+  after_perform  :send_sms
+  after_perform  :increment_sms_count
+  after_perform  :auto_delete_unconfirmed_phone
 
   def initialize(party, params)
     @party = party
@@ -55,6 +56,10 @@ class Party::SetPhoneContext < BaseContext
 
   def increment_sms_count
     @party.sms_sent_count.increment
+  end
+
+  def auto_delete_unconfirmed_phone
+    @party.delay_until(1.hour.from_now).update_columns(unconfirmed_phone: nil)
   end
 
 end
