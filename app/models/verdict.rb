@@ -26,7 +26,6 @@ class Verdict < ActiveRecord::Base
   serialize :prosecutor_names, Array
   has_many :verdict_relations
   belongs_to :story
-  belongs_to :main_judge, class_name: 'Judge', foreign_key: :main_judge_id
 
   scope :newest, -> { order('id DESC') }
 

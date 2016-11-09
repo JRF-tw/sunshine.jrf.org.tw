@@ -13,11 +13,6 @@ RSpec.describe Admin::StoriesController do
       it { expect(response.body).to match(story.story_type) }
     end
 
-    context 'search the main_judge of stories' do
-      before { get '/admin/stories', q: { main_judge_id_eq: story.main_judge.id } }
-      it { expect(response.body).to match(story.word_type) }
-    end
-
     context 'search the adjudge_date of stories' do
       before { get '/admin/stories', q: { adjudge_date_eq: story.adjudge_date } }
       it { expect(response.body).to match(story.word_type) }

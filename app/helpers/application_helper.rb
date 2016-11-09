@@ -216,10 +216,6 @@ module ApplicationHelper
     [['是', 'yes'], ['否', 'no']]
   end
 
-  def collect_for_main_judge_present
-    [['有', 1], ['無', 0]]
-  end
-
   def get_court_fullname(court_id)
     Court.find(court_id).full_name
   end

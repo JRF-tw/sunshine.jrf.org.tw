@@ -26,8 +26,8 @@ class Party::VerdictScoreCheckInfoContext < BaseContext
   private
 
   def check_court_id
-    @court = Court.find(@params[:court_id]) if @params[:court_id].present?
-    return add_error(:court_not_found) unless @court
+    court = Court.exists?(@params[:court_id]) if @params[:court_id].present?
+    return add_error(:court_not_found) unless court
   end
 
   def check_year

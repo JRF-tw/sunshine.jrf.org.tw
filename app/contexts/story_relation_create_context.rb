@@ -25,10 +25,6 @@ class StoryRelationCreateContext < BaseContext
     @people_type = 'Party' if @story.party_names.include?(@people_name)
     @people_type = 'Lawyer' if @story.lawyer_names.include?(@people_name)
     @people_type = 'Judge' if @story.judges_names.include?(@people_name)
-
-    if @story.main_judge
-      @people_type = 'Judge' if @story.main_judge.name == @people_name
-    end
     # @people_type = "Prosecutor" if @story.prosecutor_names.include?(@people_name)
     add_error(:story_without_people_name) unless @people_type
   end

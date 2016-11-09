@@ -21,7 +21,6 @@
       thead
         tr
           th 爬蟲日期
-          th 判決書抓取人名成功率(主審法官)
           th 判決書抓取人名成功率(法官)
           th 判決書抓取人名成功率(律師)
           th 判決書抓取人名成功率(當事人)
@@ -30,7 +29,6 @@
         - @crawler_histories.each do |ch|
           tr
             td = ch.crawler_on
-            td = success_scrap_verdict_main_judge_precentage(ch)
             td = success_scrap_verdict_judge_precentage(ch)
             td = success_scrap_verdict_lawyer_precentage(ch)
             td = success_scrap_verdict_party_precentage(ch)

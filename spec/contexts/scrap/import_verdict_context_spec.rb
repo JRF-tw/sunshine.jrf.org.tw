@@ -18,11 +18,6 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
       it { expect { subject }.to change { Verdict.count } }
     end
 
-    context 'main_judge data' do
-      it { expect(subject.main_judge).to eq(judge) }
-      it { expect(subject.main_judge_name).to eq('施俊堯') }
-    end
-
     context 'find_or_create_story' do
       context 'create' do
         it { expect { subject }.to change { Story.count } }
@@ -50,10 +45,6 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
         it { expect(subject.prosecutor_names).to eq(subject.story.prosecutor_names) }
         it { expect(subject.party_names).to eq(subject.story.party_names) }
         it { expect(subject.lawyer_names).to eq(subject.story.lawyer_names) }
-      end
-
-      context 'sync main jugde info' do
-        it { expect(subject.story.main_judge).to be_present }
       end
 
       context 'sync is pronounce to story' do

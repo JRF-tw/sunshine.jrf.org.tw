@@ -1,13 +1,13 @@
 class Scrap::ImportScheduleContext < BaseContext
   before_perform  :find_court
   before_perform  :build_data
-  before_perform  :get_main_judge
+  before_perform  :get_branch_judge
   before_perform  :find_or_create_story
   after_perform   :update_story_is_pronounce
   after_perform   :update_story_pronounce_date
   after_perform   :record_count_to_daily_notify
   after_perform   :alert_new_story_type
-  after_perform   :log_main_judge_not_found
+  after_perform   :log_branch_judge_not_found
 
   class << self
     def perform(court_code, hash)
@@ -23,7 +23,7 @@ class Scrap::ImportScheduleContext < BaseContext
   def perform(hash)
     @hash = hash
     run_callbacks :perform do
-      @schedule = @story.schedules.find_or_create_by(court: @court, branch_name: @branch_name, start_on: @start_on, start_at: @start_at, branch_judge: @main_judge, courtroom: @courtroom)
+      @schedule = @story.schedules.find_or_create_by(court: @court, branch_name: @branch_name, start_on: @start_on, start_at: @start_at, branch_judge: @branch_judge, courtroom: @courtroom)
     end
   end
 
@@ -45,10 +45,10 @@ class Scrap::ImportScheduleContext < BaseContext
     @courtroom    = @hash[:courtroom]
   end
 
-  def get_main_judge
+  def get_branch_judge
     branches = @court.branches.current.where(name: @branch_name)
     branches = branches.where('chamber_name LIKE ? ', "%#{@story_type}%") if branches.map(&:judge_id).uniq.count > 1
-    @main_judge = branches.first ? branches.first.judge : nil
+    @branch_judge = branches.first ? branches.first.judge : nil
   end
 
   def find_or_create_story
@@ -73,7 +73,7 @@ class Scrap::ImportScheduleContext < BaseContext
     SlackService.notify_analysis_schedule_alert("取得新的案件類別 : #{@story_type}") unless @story_type.present? && StoryTypes.list.include?(@story_type)
   end
 
-  def log_main_judge_not_found
-    Logs::AddCrawlerError.add_schedule_error(@crawler_history, @schedule, :parse_branch_judge_empty, "股別關聯主審法官 關聯失敗, 關聯資訊 : #{@hash}") unless @main_judge
+  def log_branch_judge_not_found
+    Logs::AddCrawlerError.add_schedule_error(@crawler_history, @schedule, :parse_branch_judge_empty, "股別關聯主審法官 關聯失敗, 關聯資訊 : #{@hash}") unless @branch_judge
   end
 end
