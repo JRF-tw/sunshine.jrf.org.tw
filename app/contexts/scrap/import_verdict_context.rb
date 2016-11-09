@@ -7,7 +7,6 @@ class Scrap::ImportVerdictContext < BaseContext
   before_perform  :create_verdict
   before_perform  :build_analysis_context
   before_perform  :create_main_judge_by_highest, if: :is_highest_court?
-  before_perform  :find_main_judge, unless: :is_highest_court?
   before_perform  :assign_names
   before_perform  :assign_default_value
   after_perform   :upload_file
@@ -16,7 +15,6 @@ class Scrap::ImportVerdictContext < BaseContext
   after_perform   :update_pronounce_date
   after_perform   :create_relation_for_lawyer
   after_perform   :create_relation_for_judge
-  after_perform   :create_relation_for_main_judge
   after_perform   :create_relation_for_party
   after_perform   :record_count_to_daily_notify
   after_perform   :alert_new_story_type
@@ -74,24 +72,12 @@ class Scrap::ImportVerdictContext < BaseContext
     @analysis_context = Scrap::AnalysisVerdictContext.new(@verdict, @content, @word)
   end
 
-  def find_main_judge
-    branches = @court.branches.current.where('chamber_name LIKE ? ', "%#{@stroy_type}%")
-    main_judges = branches.map { |a| a.judge if a.judge.name == @analysis_context.main_judge_name }.compact.uniq
-    @main_judge = main_judges.count == 1 ? main_judges.last : nil
-
-    unless main_judges.count == 1
-      Logs::AddCrawlerError.add_verdict_error(@crawler_history, @verdict, :parse_main_judge_error, '判決書關聯主審法官失敗: 找到多位法官, 或者找不到任何法官')
-    end
-  end
-
   def create_main_judge_by_highest
-    @main_judge = Scrap::CreateJudgeByHighestCourtContext.new(@court, @analysis_context.main_judge_name).perform
+    Scrap::CreateJudgeByHighestCourtContext.new(@court, @analysis_context.main_judge_name).perform
   end
 
   def assign_names
     @verdict.assign_attributes(
-      main_judge: @main_judge,
-      main_judge_name: @analysis_context.main_judge_name,
       judges_names: @analysis_context.judges_names,
       prosecutor_names: @analysis_context.prosecutor_names,
       lawyer_names: @analysis_context.lawyer_names,
@@ -112,7 +98,6 @@ class Scrap::ImportVerdictContext < BaseContext
     @story.assign_attributes(prosecutor_names: (@story.prosecutor_names + @verdict.prosecutor_names).uniq)
     @story.assign_attributes(lawyer_names: (@story.lawyer_names + @verdict.lawyer_names).uniq)
     @story.assign_attributes(party_names: (@story.party_names + @verdict.party_names).uniq)
-    @story.assign_attributes(main_judge: @main_judge) if @main_judge
     @story.assign_attributes(is_adjudge: is_judgment?) if is_judgment?
     @story.assign_attributes(is_pronounce: is_judgment?) if is_judgment? && !@story.is_pronounce
     @story.save
@@ -141,10 +126,6 @@ class Scrap::ImportVerdictContext < BaseContext
       VerdictRelationCreateContext.new(@verdict).perform(name)
       StoryRelationCreateContext.new(@story).perform(name)
     end
-  end
-
-  def create_relation_for_main_judge
-    StoryRelationCreateContext.new(@story).perform(@verdict.main_judge.name) if @verdict.main_judge
   end
 
   def create_relation_for_party
