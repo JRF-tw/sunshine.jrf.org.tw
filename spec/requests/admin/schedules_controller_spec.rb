@@ -11,11 +11,6 @@ RSpec.describe Admin::SchedulesController do
       it { expect(response.body).to match(schedule.branch_name) }
     end
 
-    context 'search the main_judge of schedules' do
-      before { get '/admin/schedules', q: { main_judge_id_eq: schedule.story.main_judge.id } }
-      it { expect(response.body).to match(schedule.branch_name) }
-    end
-
     context 'search the story_id of schedules' do
       before { get '/admin/schedules', q: { story_id_eq: schedule.story.id } }
       it { expect(response.body).to match(schedule.story.identity) }

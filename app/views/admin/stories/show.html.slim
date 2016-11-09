@@ -1,7 +1,6 @@
 - content_for :btns do
   = link_to "庭期列表", admin_schedules_path(q: { "story_id_eq" => @story.id } ), class: "btn btn-large"
 
-
 = admin_widget_box "#{@story.identity}資料", icon: :th do
   table.table.table-bordered.table-striped.table-hover
     tbody
@@ -23,9 +22,6 @@
       tr
         td 案件類別
         td = @story.story_type
-      tr
-        td 審判長法官
-        td = link_to "#{@story.main_judge.name}", admin_judge_path(@story.main_judge) if @story.main_judge
       tr
         td 與案件相關法官
         td

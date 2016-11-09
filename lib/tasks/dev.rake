@@ -288,7 +288,7 @@ namespace :dev do
   task fake_schedule: :environment do
     court = FactoryGirl.create(:court, full_name: "測試法院-#{Time.now}")
     judge = FactoryGirl.create(:judge, court: court, name: "測試法官-#{Time.now}")
-    story = FactoryGirl.create(:story, main_judge: judge, court: court)
+    story = FactoryGirl.create(:story, court: court)
     schedule = FactoryGirl.create(:schedule, court: court, story: story, branch_judge: judge)
 
     puts "該庭期案件類別 = #{schedule.story.story_type}"
@@ -302,9 +302,8 @@ namespace :dev do
 
   task fake_verdict: :environment do
     court = FactoryGirl.create(:court, full_name: "測試法院-#{Time.now}")
-    judge = FactoryGirl.create(:judge, court: court, name: "測試法官-#{Time.now}")
-    story = FactoryGirl.create(:story, main_judge: judge, court: court, is_adjudge: true, adjudge_date: Time.now)
-    verdict = FactoryGirl.create(:verdict, story: story, main_judge: judge, is_judgment: true, adjudge_date: Time.now)
+    story = FactoryGirl.create(:story, court: court, is_adjudge: true, adjudge_date: Time.now)
+    verdict = FactoryGirl.create(:verdict, story: story, is_judgment: true, adjudge_date: Time.now)
 
     puts "該判決書案件類別 = #{verdict.story.story_type}"
     puts "該判決書案件年份 = #{verdict.story.year}"
@@ -312,7 +311,6 @@ namespace :dev do
     puts "該判決書案件案號 = #{verdict.story.number}"
     puts "該判決書隸屬法院 = #{verdict.story.court.full_name}"
     puts "該判決書宣判日期 = #{verdict.adjudge_date}"
-    puts "該判決書主審法官名稱 = #{verdict.main_judge.name}"
   end
 
 end

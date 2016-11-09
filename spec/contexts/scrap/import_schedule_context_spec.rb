@@ -13,33 +13,27 @@ RSpec.describe Scrap::ImportScheduleContext, type: :model do
       it { expect { subject }.to change { Schedule.count } }
     end
 
-    context 'main_judge association' do
-      context 'not association to story' do
-        it { expect(subject.story.main_judge).to be_nil }
-      end
+    context 'branch judge association' do
+      it { expect(subject.branch_judge).to eq(judge) }
+    end
 
-      context 'normalize' do
-        it { expect(subject.branch_judge).to eq(judge) }
-      end
+    context 'update start_at' do
+      it { expect(subject.start_at).not_to be_nil }
+    end
 
-      context 'update start_at' do
-        it { expect(subject.start_at).not_to be_nil }
-      end
+    context 'update courtroom' do
+      it { expect(subject.courtroom).to eq('鋼鐵教廷') }
+    end
 
-      context 'update courtroom' do
-        it { expect(subject.courtroom).to eq('鋼鐵教廷') }
-      end
+    context 'mutiple branche' do
+      let!(:judge1) { create :judge, court: court }
+      let!(:branch1) { create :branch, court: court, judge: judge1, name: '平', chamber_name: 'xxx法院民事庭' }
+      it { expect(subject.branch_judge).to eq(judge1) }
+    end
 
-      context 'mutiple branche' do
-        let!(:judge1) { create :judge, court: court }
-        let!(:branch1) { create :branch, court: court, judge: judge1, name: '平', chamber_name: 'xxx法院民事庭' }
-        it { expect(subject.branch_judge).to eq(judge1) }
-      end
-
-      context 'not match judge' do
-        before { branch.update_attributes(name: 'x') }
-        it { expect { subject }.to change { CrawlerLog.count } }
-      end
+    context 'not match judge' do
+      before { branch.update_attributes(name: 'x') }
+      it { expect { subject }.to change { CrawlerLog.count } }
     end
 
     context 'find story' do

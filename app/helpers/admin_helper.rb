@@ -19,11 +19,6 @@ module AdminHelper
     CrawlerErrorTypes.list.to_enum.with_index.map { |n, i| [n.last, i] }
   end
 
-  def success_scrap_verdict_main_judge_precentage(ch)
-    calculate_failed = ch.crawler_logs.crawler_verdict.parse_main_judge_empty.last ? ch.crawler_logs.crawler_verdict.parse_main_judge_empty.last.crawler_errors.count.to_f / ch.verdicts_count.to_f : 0
-    success_precentage(calculate_failed)
-  end
-
   def success_scrap_verdict_judge_precentage(ch)
     calculate_failed = ch.crawler_logs.crawler_verdict.parse_judge_empty.last ? ch.crawler_logs.crawler_verdict.parse_judge_empty.last.crawler_errors.count.to_f / ch.verdicts_count.to_f : 0
     success_precentage(calculate_failed)

@@ -28,11 +28,5 @@ RSpec.describe Verdict do
       subject! { verdict }
       it { expect(subject).not_to be_new_record }
     end
-
-    context 'with_main_judge' do
-      let(:verdict) { create :verdict, :with_main_judge }
-      subject! { verdict }
-      it { expect(subject).not_to be_new_record }
-    end
   end
 end

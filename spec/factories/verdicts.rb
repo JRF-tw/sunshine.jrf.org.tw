@@ -25,10 +25,6 @@ FactoryGirl.define do
     trait :with_file do
       file { File.open("#{Rails.root}/spec/fixtures/scrap_data/judgment.html") }
     end
-
-    trait :with_main_judge do
-      main_judge { create :judge }
-    end
   end
 
 end
