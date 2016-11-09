@@ -18,9 +18,9 @@ class Scrap::AnalysisVerdictContext < BaseContext
   end
 
   def judges_names
-    matched = @verdict_content.match(/^\s*法\s*官\s+([\p{Word}\w\s\S]*?)\n/)
+    matched = @verdict_content.match(/法\s*官\s+([\p{Word}\w\s\S]*?)\n/)
     if matched
-      return @verdict_content.scan(/^\s*法\s*官\s+([\p{Word}\w\s\S]*?)\n/).map { |i| i[0].squish.delete("\r").delete(' ') }
+      return @verdict_content.scan(/法\s*官\s+([\p{Word}\w\s\S]*?)\n/).map { |i| i[0].squish.delete("\r").delete(' ') }
     else
       Logs::AddCrawlerError.add_verdict_error(@crawler_history, @verdict, :parse_judge_empty, '取得 法官 資訊為空')
       return []

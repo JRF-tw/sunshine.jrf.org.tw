@@ -5,7 +5,7 @@ feature '法官評鑑 - 律師', type: :feature, js: true do
   let!(:court1) { create :court }
   let!(:story) { create :story, :adjudged, court: court }
   let!(:judge) { create :judge, court: court }
-  let!(:verdict) { create :verdict, story: story, main_judge: judge, is_judgment: true }
+  let!(:verdict) { create :verdict, story: story, is_judgment: true }
   before { signin_lawyer(email: lawyer.email, password: lawyer.password) }
 
   feature '判決評鑑' do

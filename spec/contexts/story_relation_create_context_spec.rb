@@ -22,13 +22,6 @@ describe StoryRelationCreateContext do
     it { expect { subject.perform(story.judges_names.first) }.to change { judge.story_relations.count } }
   end
 
-  context 'create main judge' do
-    let!(:judge) { create :judge, name: 'judge' }
-    before { story.update_attributes(main_judge: judge) }
-
-    it { expect { subject.perform(story.main_judge.name) }.to change { judge.story_relations.count } }
-  end
-
   context 'name not in story' do
     it { expect(subject.perform('xxx')).to be_falsey }
   end
