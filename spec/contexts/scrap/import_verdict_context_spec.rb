@@ -97,7 +97,7 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
         let!(:party) { create :party, name: '張坤樹' }
         let!(:branch1) { create :branch, court: court, judge: judge1, chamber_name: '臺灣高等法院刑事庭' }
 
-        it { expect { subject }.to change { VerdictRelation.count }.by(3) }
+        it { expect { subject }.to change { VerdictRelation.count }.by(4) }
       end
 
       context 'story_relations' do
