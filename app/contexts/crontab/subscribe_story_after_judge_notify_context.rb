@@ -18,7 +18,7 @@ class Crontab::SubscribeStoryAfterJudgeNotifyContext < BaseContext
 
   def find_after_judge_story
     @close_court_story = []
-    Schedule.where(start_on: @date.yesterday).each { |schedule| @close_court_story << schedule.story }
+    Schedule.where(start_on: @date).each { |schedule| @close_court_story << schedule.story }
   end
 
 end

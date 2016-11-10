@@ -43,8 +43,8 @@ describe '律師案件通知', type: :request do
       end
     end
 
-    context '開庭後「隔天」會進行 email 通知評鑑' do
-      before { Timecop.freeze(Time.zone.today + 1) }
+    context '開庭後「當天」會進行 email 通知評鑑' do
+      before { Timecop.freeze(Time.zone.today) }
       after { Timecop.return }
       subject { Crontab::SubscribeStoryAfterJudgeNotifyContext.new(Time.zone.today).perform }
 
