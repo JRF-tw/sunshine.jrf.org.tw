@@ -4,7 +4,7 @@ class CourtObservers::PasswordsController < Devise::PasswordsController
   include CrudConcern
   prepend_before_action :require_no_authentication, except: [:edit, :update, :send_reset_password_mail]
   before_action :check_observer_confirmed, only: [:create]
-  before_action :check_observer, only: [:edit, :update]
+  before_action :check_same_observer, only: [:edit, :update]
 
   def new
     # meta
@@ -67,7 +67,7 @@ class CourtObservers::PasswordsController < Devise::PasswordsController
     end
   end
 
-  def check_observer
+  def check_same_observer
     token = params[:reset_password_token] || params[:court_observer][:reset_password_token]
     @court_observer_by_token = CourtObserver.with_reset_password_token(token)
     if @court_observer_by_token.nil?

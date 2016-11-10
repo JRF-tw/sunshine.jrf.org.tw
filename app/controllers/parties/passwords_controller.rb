@@ -2,7 +2,7 @@ class Parties::PasswordsController < Devise::PasswordsController
   include CrudConcern
 
   prepend_before_action :require_no_authentication, except: [:edit, :update, :send_reset_password_sms]
-  before_action :check_party, only: [:edit, :update]
+  before_action :check_same_party, only: [:edit, :update]
 
   layout 'party'
 
@@ -77,7 +77,7 @@ class Parties::PasswordsController < Devise::PasswordsController
 
   private
 
-  def check_party
+  def check_same_party
     token = params[:reset_password_token] || params[:party][:reset_password_token]
     @party_by_token = Party.with_reset_password_token(token)
     if @party_by_token.nil?

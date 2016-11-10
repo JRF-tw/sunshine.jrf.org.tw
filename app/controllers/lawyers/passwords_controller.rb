@@ -3,7 +3,7 @@ class Lawyers::PasswordsController < Devise::PasswordsController
   layout 'lawyer'
 
   prepend_before_action :require_no_authentication, except: [:edit, :update, :send_reset_password_mail]
-  before_action :check_lawyer, only: [:edit, :update]
+  before_action :check_same_lawyer, only: [:edit, :update]
   before_action :first_time_setting?, only: [:update]
 
   def new
@@ -77,7 +77,7 @@ class Lawyers::PasswordsController < Devise::PasswordsController
 
   protected
 
-  def check_lawyer
+  def check_same_lawyer
     token = params[:reset_password_token] || params[:lawyer][:reset_password_token]
     @lawyer_by_token = Lawyer.with_reset_password_token(token)
     if @lawyer_by_token.nil?
