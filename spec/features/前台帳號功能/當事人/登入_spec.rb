@@ -14,6 +14,15 @@ feature '前台帳號功能', type: :feature, js: true do
             end
           end
 
+          When '先到編輯email頁面 轉跳至登入頁面後 再以正確的身分證字號和密碼登入' do
+            before { visit(edit_party_email_path) }
+            before { signin_party(identify_number: party.identify_number, password: party.password) }
+            Then '登入後轉跳至編輯email頁面' do
+              expect(current_path).to match(edit_party_email_path)
+              expect(page).to have_content('成功登入了。')
+            end
+          end
+
           When '正確的身分證字號和錯誤的密碼登入' do
             before { signin_party(identify_number: party.identify_number, password: '55669487') }
             Then '登入失敗' do

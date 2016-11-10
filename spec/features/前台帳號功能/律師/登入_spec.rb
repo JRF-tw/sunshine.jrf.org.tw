@@ -13,6 +13,15 @@ feature '前台帳號功能', type: :feature, js: true do
               expect(page).to have_content('成功登入了')
             end
           end
+
+          When '先到編輯profile頁面 轉跳至登入頁面後 再以正確的 Email 和密碼登入' do
+            before { visit(edit_lawyer_profile_path) }
+            before { signin_lawyer(email: lawyer.email, password: '123123123') }
+            Then '登入後轉跳至編輯profile頁面' do
+              expect(current_path).to match(edit_lawyer_profile_path)
+              expect(page).to have_content('成功登入了')
+            end
+          end
         end
 
         Given '有律師登入' do
