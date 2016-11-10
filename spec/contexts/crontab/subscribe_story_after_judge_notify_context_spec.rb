@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Crontab::SubscribeStoryAfterJudgeNotifyContext do
-  let!(:story_subscription_with_party) { create :story_subscription_with_party, :schedule_yesterday }
+  let!(:story_subscription_with_party) { create :story_subscription_with_party, :schedule_today }
 
   describe '#perform' do
     context 'send after judge notify' do
@@ -11,7 +11,7 @@ describe Crontab::SubscribeStoryAfterJudgeNotifyContext do
 
     context 'find after judge story' do
       subject { described_class.new(Time.zone.today) }
-      it { expect(subject.perform.first.schedules.last.start_on).to eq(Time.zone.yesterday) }
+      it { expect(subject.perform.first.schedules.last.start_on).to eq(Time.zone.today) }
     end
   end
 
