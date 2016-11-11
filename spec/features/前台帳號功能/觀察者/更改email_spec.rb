@@ -102,6 +102,7 @@ feature '前台帳號功能', type: :feature, js: true do
               before { click_confirm_link(observer_A.reload.unconfirmed_email) }
               Then '觀察者A的 Email 代換失敗' do
                 expect(current_path).to eq(new_court_observer_session_path)
+                expect(page).to have_content('已經驗證，請直接登入。')
               end
             end
           end

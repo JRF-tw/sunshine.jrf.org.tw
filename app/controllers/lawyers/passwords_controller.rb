@@ -42,8 +42,7 @@ class Lawyers::PasswordsController < Devise::PasswordsController
       if Devise.sign_in_after_reset_password
         flash_message = resource.active_for_authentication? ? :updated : :updated_not_active
         resource.confirm unless resource.confirmed?
-        sign_out(current_lawyer) if current_lawyer
-        sign_in(resource_name, resource)
+        sign_in(resource_name, resource, bypass: true)
         set_flash_message(:notice, flash_message)
       else
         set_flash_message(:notice, :updated_not_active)
