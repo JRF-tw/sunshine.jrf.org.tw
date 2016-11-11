@@ -49,14 +49,14 @@ class Party::VerifyPhoneContext < BaseContext
   end
 
   def reset_data
-    clean_delete_unconfirmed_phone_job
     @party.update_attributes(unconfirmed_phone: nil)
-    @party.phone_varify_code = nil
-    @party.retry_verify_count.reset
+    Sidekiq::ScheduledSet.new.find_job(@party.delete_phone_job_id.value).try(:delete)
+    reset_redis_object
   end
 
-  def clean_delete_unconfirmed_phone_job
-    Sidekiq::ScheduledSet.new.find_job(@party.delete_phone_job_id.value).try(:delete) if @party.delete_phone_job_id.value
+  def reset_redis_object
+    @party.phone_varify_code = nil
+    @party.retry_verify_count.reset
     @party.delete_phone_job_id = nil
   end
 end
