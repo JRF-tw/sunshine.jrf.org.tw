@@ -9,7 +9,7 @@ class Party::SetPhoneContext < BaseContext
   after_perform  :build_message
   after_perform  :send_sms
   after_perform  :increment_sms_count
-  after_perform  :auto_delete_unconfirmed_phone
+  after_perform  :set_delete_unconfirmed_phone_job
 
   def initialize(party, params)
     @party = party
@@ -58,8 +58,13 @@ class Party::SetPhoneContext < BaseContext
     @party.sms_sent_count.increment
   end
 
-  def auto_delete_unconfirmed_phone
-    @party.delay_until(1.hour.from_now).update_columns(unconfirmed_phone: nil)
+  def set_delete_unconfirmed_phone_job
+    clean_delete_unconfirmed_phone_job
+    @party.delete_phone_job_id = @party.delay_until(1.hour.from_now).update_columns(unconfirmed_phone: nil)
+  end
+
+  def clean_delete_unconfirmed_phone_job
+    Sidekiq::ScheduledSet.new.find_job(@party.delete_phone_job_id.value).try(:delete) if @party.delete_phone_job_id.value
   end
 
 end

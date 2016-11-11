@@ -29,8 +29,15 @@ describe Party::SetPhoneContext do
         it { expect(party.confirmed?).to be_falsey }
       end
 
-      context 'auto_delete_unconfirmed_phone' do
+      context 'set_delete_unconfirmed_phone_job' do
         it { expect { subject.perform }.to change { fetch_sidekiq_last_job(scheduled: true) } }
+        it { expect { subject.perform }.to change { party.delete_phone_job_id.value } }
+        context 'reset delete_unconfirmed_phone_job' do
+          let(:params_1) { { phone_form: { unconfirmed_phone: '0933333333' } } }
+          before { subject.perform }
+          before { described_class.new(party, params_1).perform }
+          it { expect(Sidekiq::ScheduledSet.new.size).to eq(1) }
+        end
       end
     end
   end

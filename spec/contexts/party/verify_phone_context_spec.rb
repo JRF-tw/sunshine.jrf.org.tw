@@ -42,11 +42,19 @@ describe Party::VerifyPhoneContext do
       end
 
       context 'reset_data' do
-        before { subject.perform }
+        context 'success' do
+          before { subject.perform }
+          it { expect(Sidekiq::ScheduledSet.new.size).to eq(0) }
+          it { expect(party.delete_phone_job_id.value).to be_nil }
+          it { expect(party.unconfirmed_phone).to be_nil }
+          it { expect(party.phone_varify_code.value).to be_nil }
+          it { expect(party.retry_verify_count.value).to eq(0) }
+        end
 
-        it { expect(party.unconfirmed_phone).to be_nil }
-        it { expect(party.phone_varify_code.value).to be_nil }
-        it { expect(party.retry_verify_count.value).to eq(0) }
+        context 'clean Sidekiq job if exist' do
+          before { party.delete_phone_job_id = party.delay_until(1.hour.from_now).update_columns(unconfirmed_phone: nil) }
+          it { expect { subject.perform }.to change { Sidekiq::ScheduledSet.new.size }.by(-1) }
+        end
       end
     end
   end
