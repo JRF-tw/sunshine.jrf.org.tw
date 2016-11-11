@@ -92,6 +92,14 @@ RSpec.describe Lawyers::PasswordsController, type: :request do
       it { expect(flash[:notice]).to eq('您的密碼已被修改，下次登入時請使用新密碼登入。') }
     end
 
+    context 'fail with login others' do
+      before { signin_lawyer }
+      subject! { put '/lawyer/password', lawyer: { password: '55667788', password_confirmation: '55667788', reset_password_token: token } }
+
+      it { expect(response).to redirect_to('/lawyer/profile') }
+      it { expect(flash[:error]).to eq('你僅能修改本人的帳號') }
+    end
+
     context 'not alert to slack has password' do
       subject { put '/lawyer/password', lawyer: { password: '55667788', password_confirmation: '55667788', reset_password_token: token } }
       it { expect { subject }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }

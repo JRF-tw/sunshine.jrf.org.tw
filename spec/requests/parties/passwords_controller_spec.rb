@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Parties::RegistrationsController, type: :request do
   let!(:party) { create :party }
+  let(:token) { party.send_reset_password_instructions }
 
   describe '#new' do
     context 'success' do
@@ -35,7 +36,6 @@ RSpec.describe Parties::RegistrationsController, type: :request do
 
   describe '#edit' do
     let!(:party) { create :party }
-    let(:token) { party.send_reset_password_instructions }
     context 'success with sign in' do
       before { signin_party(party) }
       subject { get '/party/password/edit', reset_password_token: token }
@@ -58,8 +58,6 @@ RSpec.describe Parties::RegistrationsController, type: :request do
   end
 
   describe '#update' do
-    let(:token) { party.send_reset_password_instructions }
-
     context 'success with login' do
       before { signin_party(party) }
       subject! { put '/party/password', party: { password: '55667788', password_confirmation: '55667788', reset_password_token: token } }
@@ -73,6 +71,14 @@ RSpec.describe Parties::RegistrationsController, type: :request do
 
       it { expect(response).to redirect_to('/party') }
       it { expect(flash[:notice]).to eq('您的密碼已被修改，下次登入時請使用新密碼登入。') }
+    end
+
+    context 'fail with login others' do
+      before { signin_party }
+      subject! { put '/party/password', party: { password: '55667788', password_confirmation: '55667788', reset_password_token: token } }
+
+      it { expect(response).to redirect_to('/party/profile') }
+      it { expect(flash[:error]).to eq('你僅能修改本人的帳號') }
     end
   end
 

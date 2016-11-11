@@ -24,6 +24,13 @@ module Capybara
       end
     end
 
+    def court_observer_input_edit_email(email:, password: '123123123')
+      within('#edit_court_observer') do
+        fill_in 'court_observer_email', with: email
+        fill_in 'court_observer_current_password', with: password
+      end
+    end
+
     def regiter_submit_observer
       click_button '註冊'
       save_page
