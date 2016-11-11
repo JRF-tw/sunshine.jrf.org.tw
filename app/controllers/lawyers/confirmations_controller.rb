@@ -42,7 +42,7 @@ class Lawyers::ConfirmationsController < Devise::ConfirmationsController
 
   def after_confirmation_path_for(resource_name, _resource)
     if signed_in?(resource_name)
-      lawyer_profile_path
+      lawyer_root_path
     else
       new_session_path(resource_name)
     end

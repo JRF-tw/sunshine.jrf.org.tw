@@ -3,6 +3,7 @@ class Lawyers::PasswordsController < Devise::PasswordsController
   layout 'lawyer'
 
   prepend_before_action :require_no_authentication, except: [:edit, :update, :send_reset_password_mail]
+  before_action :check_same_lawyer, only: [:edit, :update]
   before_action :first_time_setting?, only: [:update]
 
   def new
@@ -40,9 +41,9 @@ class Lawyers::PasswordsController < Devise::PasswordsController
       resource.unlock_access! if unlockable?(resource)
       if Devise.sign_in_after_reset_password
         flash_message = resource.active_for_authentication? ? :updated : :updated_not_active
-        set_flash_message(:notice, flash_message)
         resource.confirm unless resource.confirmed?
-        sign_in(resource_name, resource) unless current_lawyer
+        sign_in(resource_name, resource, bypass: true)
+        set_flash_message(:notice, flash_message)
       else
         set_flash_message(:notice, :updated_not_active)
       end
@@ -55,16 +56,9 @@ class Lawyers::PasswordsController < Devise::PasswordsController
   end
 
   def edit
-    @lawyer_by_token = Lawyer.with_reset_password_token(params[:reset_password_token])
-    if @lawyer_by_token.nil?
-      redirect_as_fail(invalid_edit_path, '無效的驗證連結')
-    elsif current_lawyer && @lawyer_by_token != current_lawyer
-      redirect_as_fail(invalid_edit_path, '你僅能修改本人的帳號')
-    else
-      self.resource = resource_class.new
-      set_minimum_password_length
-      resource.reset_password_token = params[:reset_password_token]
-    end
+    self.resource = resource_class.new
+    set_minimum_password_length
+    resource.reset_password_token = params[:reset_password_token]
 
     # meta
     set_meta(
@@ -81,6 +75,16 @@ class Lawyers::PasswordsController < Devise::PasswordsController
   end
 
   protected
+
+  def check_same_lawyer
+    token = params[:reset_password_token] || params[:lawyer][:reset_password_token]
+    @lawyer_by_token = Lawyer.with_reset_password_token(token)
+    if @lawyer_by_token.nil?
+      redirect_as_fail(invalid_edit_path, '無效的驗證連結')
+    elsif current_lawyer && current_lawyer != @lawyer_by_token
+      redirect_as_fail(invalid_edit_path, '你僅能修改本人的帳號')
+    end
+  end
 
   def invalid_edit_path
     current_lawyer ? lawyer_profile_path : new_lawyer_session_path

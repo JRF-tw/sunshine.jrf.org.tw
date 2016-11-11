@@ -19,6 +19,14 @@ RSpec.describe CourtObservers::PasswordsController, type: :request do
       it { expect(response).to redirect_to('/observer') }
       it { expect(flash[:notice]).to eq('您的密碼已被修改，下次登入時請使用新密碼登入。') }
     end
+
+    context 'fail with login others' do
+      before { signin_court_observer }
+      subject! { put '/observer/password', court_observer: { password: '55667788', password_confirmation: '55667788', reset_password_token: token } }
+
+      it { expect(response).to redirect_to('/observer/profile') }
+      it { expect(flash[:error]).to eq('你僅能修改本人的帳號') }
+    end
   end
 
   describe '#edit' do

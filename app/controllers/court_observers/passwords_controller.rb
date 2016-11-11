@@ -4,6 +4,7 @@ class CourtObservers::PasswordsController < Devise::PasswordsController
   include CrudConcern
   prepend_before_action :require_no_authentication, except: [:edit, :update, :send_reset_password_mail]
   before_action :check_observer_confirmed, only: [:create]
+  before_action :check_same_observer, only: [:edit, :update]
 
   def new
     # meta
@@ -16,18 +17,9 @@ class CourtObservers::PasswordsController < Devise::PasswordsController
   end
 
   def edit
-    court_observer_by_token = CourtObserver.with_reset_password_token(params[:reset_password_token])
-    if court_observer_by_token.nil?
-      redirect_as_fail(invalid_edit_path, '無效的驗證連結')
-    elsif current_court_observer && court_observer_by_token != current_court_observer
-      redirect_as_fail(invalid_edit_path, '你僅能修改本人的帳號')
-    else
-      self.resource = resource_class.new
-      set_minimum_password_length
-      resource.reset_password_token = params[:reset_password_token]
-      @court_observer_by_token = CourtObserver.with_reset_password_token(params[:reset_password_token])
-    end
-
+    self.resource = resource_class.new
+    set_minimum_password_length
+    resource.reset_password_token = params[:reset_password_token]
     # meta
     set_meta(
       title: '觀察者更改密碼頁',
@@ -44,7 +36,7 @@ class CourtObservers::PasswordsController < Devise::PasswordsController
       resource.unlock_access! if unlockable?(resource)
       if Devise.sign_in_after_reset_password
         flash_message = resource.active_for_authentication? ? :updated : :updated_not_active
-        sign_in(resource_name, resource) unless current_court_observer
+        sign_in(resource_name, resource, bypass: true)
         set_flash_message(:notice, flash_message)
       else
         set_flash_message(:notice, :updated_not_active)
@@ -65,10 +57,6 @@ class CourtObservers::PasswordsController < Devise::PasswordsController
 
   protected
 
-  def invalid_edit_path
-    current_court_observer ? court_observer_profile_path : new_court_observer_session_path
-  end
-
   def check_observer_confirmed
     @observer = CourtObserver.find_by_email(params[:court_observer][:email])
     if @observer && !@observer.confirmed?
@@ -76,6 +64,20 @@ class CourtObservers::PasswordsController < Devise::PasswordsController
       self.resource = resource_class.new
       render 'new'
     end
+  end
+
+  def check_same_observer
+    token = params[:reset_password_token] || params[:court_observer][:reset_password_token]
+    @court_observer_by_token = CourtObserver.with_reset_password_token(token)
+    if @court_observer_by_token.nil?
+      redirect_as_fail(invalid_edit_path, '無效的驗證連結')
+    elsif current_court_observer && current_court_observer != @court_observer_by_token
+      redirect_as_fail(invalid_edit_path, '你僅能修改本人的帳號')
+    end
+  end
+
+  def invalid_edit_path
+    current_court_observer ? court_observer_profile_path : new_court_observer_session_path
   end
 
   def after_resetting_password_path

@@ -35,7 +35,7 @@ FactoryGirl.define do
     confirmed_at Time.now
 
     trait :with_unconfirmed_email do
-      unconfirmed_email 'aron1122@gmail.com'
+      sequence(:unconfirmed_email) { |n| "court_observer-#{n}@testgg.com" }
     end
 
     trait :without_confirm do
