@@ -1,20 +1,9 @@
 section.base-hero
-  .base-hero__mask
-    .wrapper
-      h1.base-logo 司法陽光網
-      p.base-slogan 揭開司法的神秘面紗
-      nav.base-nav
-        ul.base-nav__cells
-          li = link_to '認識法官', judges_path, class: 'base-nav__cell'
-          li = link_to '認識檢察官', prosecutors_path, class: 'base-nav__cell'
-          li = link_to '我想找', searchs_path, class: 'base-nav__cell'
-          li = link_to '關於我們', about_path, class: 'base-nav__cell'
-          li = link_to '回報錯誤', 'https://jrf.neticrm.tw/civicrm/profile/create?gid=49&reset=1', target: '_blank', class: 'base-nav__cell'
-
-  #hero-carousel.hero-carousel
+  #base-hero-carousel.base-hero-carousel
     - @banners.each do |banner|
-      .hero-carousel__cell = render partial: 'components/art_direction', locals: {banner: banner}
+      .base-hero-carousel__cell
+        = rias_srcset "#{banner.pic_l}",
+          [360, 540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2160, 2592],
+          'base-hero-carousel__image'
 
 = render partial: 'statement'
-= render partial: 'people_judges'
-= render partial: 'people_prosecutors'

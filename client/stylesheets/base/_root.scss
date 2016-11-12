@@ -7,7 +7,7 @@ html {
   font-family: $base-font-family;
   text: 400 $text-color 1.5 $base-font-size;
   -webkit-font-smoothing: antialiased;
-  &:after { @include share-breakpoints($susy-media); }
+  &::after { @include share-breakpoints($susy-media); }
 }
 
 body {

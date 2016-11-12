@@ -7,6 +7,7 @@ require 'base/_type.scss'
 # require 'magnific-popup/dist/magnific-popup.css'
 require 'webui-popover/dist/jquery.webui-popover.css'
 require 'chosen-js/chosen.css'
+require "slick-carousel/slick/slick.css"
 
 require 'components/_list.scss'
 require 'components/_footer.scss'
@@ -27,6 +28,7 @@ require 'components/_to-top.scss'
 require 'components/_tab.scss'
 require 'components/_no-results.scss'
 
+require 'pages/_base.scss'
 require 'pages/_story.scss'
 require 'pages/_who-are-you.scss'
 require 'pages/_score.scss'

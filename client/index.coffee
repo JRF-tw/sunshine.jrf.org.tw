@@ -12,6 +12,7 @@ require "modernizr"
 require 'waypoints/lib/jquery.waypoints'
 require 'webui-popover/dist/jquery.webui-popover.js'
 require 'chosen-js'
+require 'slick-carousel'
 
 # Require Custom Modules
 # Modal = require "./modules/modal"
@@ -54,6 +55,19 @@ $(document).on 'ready page:load', ->
 
   # To Top
   new ToTop '#to-top'
+
+  # Base carousel
+  $('#base-hero-carousel').slick
+    dots: false
+    infinite: true
+    speed: 300
+    fade: true
+    cssEase: 'linear'
+    adaptiveHeight: false
+    slidesToShow: 1
+    autoplay: true
+    autoplaySpeed: 3000
+    arrows: false
 
 $(document).on "page:change", ->
   # Let cached input value trigger 'is-focus'
