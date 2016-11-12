@@ -43,7 +43,8 @@
   text: bold center;
   min-width: 64px;
   color: $accent !important;
-  &:hover { background-color: $divider-gray; }
+  &:hover,
+  &.active { background-color: $divider-gray; }
 }
 .flat-button--large {
   @extend .flat-button;

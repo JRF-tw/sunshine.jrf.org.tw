@@ -3,7 +3,17 @@ $portrait: (
   max-width: '767px',
 );
 
-.base-hero-carousel {}
+.base-hero-carousel {
+  position: relative;
+  z-index: index($layers, base);
+
+  &::before {
+    content: "";
+    position: absolute 0 0 0 0;
+    z-index: index($layers, hero-cover);
+    background-image: radial-gradient(circle farthest-corner, rgba(0,0,0,0.2), rgba(0,0,0,.7));
+  }
+}
 .base-hero-carousel__cell {
   @include susy-media($portrait) {
     height: 100vh;
@@ -15,5 +25,35 @@ $portrait: (
     position: absolute 0 n() n() -50%;
     max-width: none;
     size: auto 100% !important;
+  }
+}
+
+.base-hero-search {
+  background-color: rgba(0,0,0,.3);
+}
+.base-hero-search__tabs {
+  text-align: center;
+}
+.base-hero-search__tab {
+  @include Normalize();
+  padding: r(1) r(2);
+  text: ms(1) 2 #fff;
+  position: relative;
+  &.active,
+  &:hover { border-top: 2px solid $accent; }
+
+  & + &::before {
+    content: "";
+    size: 1px r(2);
+    background-color: currentColor;
+    left: 0;
+    @include scut-center-transform(y);
+  }
+}
+.base-hero-search__content {
+  @include toggle-show();
+
+  .search-form {
+    padding: 0 n() r(2);
   }
 }
