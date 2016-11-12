@@ -3,6 +3,8 @@ $portrait: (
   max-width: '767px',
 );
 
+.base-hero { position: relative; }
+
 .base-hero-carousel {
   position: relative;
   z-index: index($layers, base);
@@ -28,15 +30,39 @@ $portrait: (
   }
 }
 
+.base-hero-content-wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  position: absolute 0 0 0 0;
+  z-index: index($layers, hero-cover);
+}
+
+.base-hero-content {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+.base-hero-content__slogan {
+  padding: n() r(2);
+  margin-bottom: r(4);
+  text: center ms(2) #fff;
+}
+.base-hero-content__button { font-size: ms(1); }
+
 .base-hero-search {
+  margin-top: auto;
   background-color: rgba(0,0,0,.3);
 }
 .base-hero-search__tabs {
-  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 .base-hero-search__tab {
   @include Normalize();
   padding: r(1) r(2);
+  width: 50%;
   text: ms(1) 2 #fff;
   position: relative;
   &.active,

@@ -1,3 +1,5 @@
+- accent_button = accent_button || false
+
 = simple_form_for :search, url: search_url,
   method: :get, html: { role: "menu", class: 'search-form' } do |f|
   - if options.length > 0
@@ -18,5 +20,5 @@
     
     button.raised-button.search-form__submit[
       type="submit"
-      class="raised-button--#{type}"
+      class=(accent_button ? "raised-button" : "raised-button--#{type}")
       ] 馬上找
