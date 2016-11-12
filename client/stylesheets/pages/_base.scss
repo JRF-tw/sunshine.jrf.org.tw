@@ -1,0 +1,19 @@
+$portrait: (
+  orientation: portrait,
+  max-width: '767px',
+);
+
+.base-hero-carousel {}
+.base-hero-carousel__cell {
+  @include susy-media($portrait) {
+    height: 100vh;
+    position: relative;
+  }
+}
+.base-hero-carousel__image {
+  @include susy-media($portrait) {
+    position: absolute 0 n() n() -50%;
+    max-width: none;
+    size: auto 100% !important;
+  }
+}
