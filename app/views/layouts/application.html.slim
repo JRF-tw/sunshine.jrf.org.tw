@@ -14,7 +14,7 @@ html
 
   body class=(yield :body_classes)
     = render 'components/main_header',
-      classes: yield(:header_classes),
+      classes: content_for?(:header_classes) ? yield(:header_classes) : 'base',
       type: yield(:character_type)
 
     .page-wrapper class=(yield :wrapper_classes)

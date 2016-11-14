@@ -5,7 +5,10 @@
   z-index: index($layers, drawer-toggle);
   @include susy($tablet) { @include Hidden(); }
 
-  .icon { size: r(3); }
+  .icon {
+    fill: #fff;
+    size: r(3);
+  }
 }
 .drawer {
   display: flex;

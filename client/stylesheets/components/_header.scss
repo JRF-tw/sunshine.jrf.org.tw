@@ -3,12 +3,21 @@
   z-index: index($layers, header);
   transition: background-color .3s ease 0s;
   &.has-background {
-    background-color: theme('', true);
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.3);
     @each $type in $characters {
       &.#{$type} {
         background-color: theme($type, true);
       }
+    }
+    &.base {
+      background-color: #fff;
+
+      .main-header__nav .cell { color: $text-color; }
+      .main-header__logo {
+        .icon { background-image: url('logo.svg'); }
+        .slogan { color: $text-color; }
+      }
+      & ~ .drawer-toggle .icon { fill: $text-color; }
     }
   }
 }
