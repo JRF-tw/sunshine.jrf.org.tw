@@ -1,12 +1,16 @@
 class Lawyer::ScheduleScoreCreateContext < BaseContext
-  PERMITS = [:court_id, :year, :word_type, :number, :story_type, :start_on, :confirmed_realdate, :judge_name, :command_score, :attitude_score, :note, :appeal_judge].freeze
+  PERMITS = [:court_id, :year, :word_type, :number, :story_type,
+             :start_on, :confirmed_realdate, :judge_name,
+             :note, :appeal_judge].freeze +
+            ScheduleScore.stored_attributes[:attitude_scores] +
+            ScheduleScore.stored_attributes[:command_scores]
 
   # before_perform :can_not_score
   before_perform :check_story
   before_perform :check_schedule
   before_perform :check_judge
-  before_perform :check_command_score
-  before_perform :check_attitude_score
+  before_perform :check_attitude_scores
+  before_perform :check_command_scores
   before_perform :build_schedule_score
   before_perform :assign_attribute
   before_perform :get_scorer_ids
@@ -32,13 +36,18 @@ class Lawyer::ScheduleScoreCreateContext < BaseContext
     # TODO : Block user
   end
 
-  def check_command_score
-    return add_error(:command_score_blank) unless @params[:command_score].present?
+  def check_command_scores
+    ScheduleScore.stored_attributes[:command_scores].each do |keys|
+      return add_error(:command_scores_blank) unless @params[keys].present?
+    end
+    return false if has_error?
   end
 
-  def check_attitude_score
-    # TODO : check score type attitude_score & rating_score
-    return add_error(:schedule_attitude_score_blank) unless @params[:attitude_score].present?
+  def check_attitude_scores
+    ScheduleScore.stored_attributes[:attitude_scores].each do |keys|
+      return add_error(:attitude_scores_blank) unless @params[keys].present?
+    end
+    return false if has_error?
   end
 
   def check_story

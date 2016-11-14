@@ -1,6 +1,4 @@
 class Parties::VerdictsController < Parties::BaseController
-  layout 'party'
-  include CrudConcern
   before_action :verdict_score, except: [:edit, :update]
   before_action :find_verdict_score, only: [:edit, :update]
   before_action :story_can_score?, only: [:edit, :update]
@@ -80,7 +78,7 @@ class Parties::VerdictsController < Parties::BaseController
   private
 
   def verdict_score_params
-    params.fetch(:verdict_score, {}).permit(:court_id, :year, :word_type, :number, :story_type, :confirmed_realdate, :rating_score, :note, :appeal_judge)
+    params.fetch(:verdict_score, {}).permit(:court_id, :year, :word_type, :number, :story_type, :confirmed_realdate, :score_3_1, :note, :appeal_judge)
   end
 
   def verdict_score

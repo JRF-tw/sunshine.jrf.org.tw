@@ -1,9 +1,11 @@
 class Lawyer::VerdictScoreCreateContext < BaseContext
-  PERMITS = [:court_id, :year, :word_type, :number, :story_type, :judge_name, :quality_score, :note, :appeal_judge].freeze
+  PERMITS = [:court_id, :year, :word_type, :number, :story_type,
+             :judge_name, :note, :appeal_judge].freeze +
+            VerdictScore.stored_attributes[:quality_scores]
 
   # before_perform :can_not_score
   before_perform :check_story
-  before_perform :check_quality_score
+  before_perform :check_quality_scores
   before_perform :build_verdict_score
   before_perform :assign_attribute
   before_perform :get_scorer_ids
@@ -35,8 +37,11 @@ class Lawyer::VerdictScoreCreateContext < BaseContext
     return add_error(:data_blank, context.error_messages.join(',')) unless @story
   end
 
-  def check_quality_score
-    return add_error(:quality_score_blank) unless @params[:quality_score].present?
+  def check_quality_scores
+    VerdictScore.stored_attributes[:quality_scores].each do |keys|
+      return add_error(:quality_scores_blank) unless @params[keys].present?
+    end
+    return false if has_error?
   end
 
   def build_verdict_score
