@@ -1,6 +1,4 @@
 class Lawyers::SchedulesController < Lawyers::BaseController
-  layout 'lawyer'
-  include CrudConcern
   before_action :schedule_score, except: [:edit, :update]
   before_action :find_schedule_score, only: [:edit, :update]
   before_action :story_adjudged?, only: [:edit, :update]
@@ -118,12 +116,15 @@ class Lawyers::SchedulesController < Lawyers::BaseController
   private
 
   def schedule_score_params
-    # raise params.inspect
-    params.fetch(:schedule_score, {}).permit(:id, :court_id, :year, :word_type, :number, :story_type, :start_on, :confirmed_realdate, :judge_name, :command_score, :attitude_score, :note, :appeal_judge)
+    params.fetch(:schedule_score, {}).permit(
+      [:id, :court_id, :year, :word_type, :number, :story_type,
+      :start_on, :confirmed_realdate, :judge_name, :note, :appeal_judge] +
+      ScheduleScore.stored_attributes[:attitude_scores] +
+      ScheduleScore.stored_attributes[:command_scores]
+    )
   end
 
   def schedule_score
-    # raise params.inspect
     @schedule_score = ScheduleScore.new(schedule_score_params)
   end
 
