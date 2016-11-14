@@ -78,7 +78,8 @@ $(document).on "page:change", ->
 
   $main_header = $('#main-header')
   
-  $('.card__heading,
+  $('.base-hero-content__slogan,
+     .card__heading,
      .character-selector__heading,
      .profile__avatar,
      .billboard__heading').waypoint
