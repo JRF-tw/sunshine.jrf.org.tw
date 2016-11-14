@@ -9,7 +9,7 @@ class Admin::CrawlerHistoriesController < Admin::BaseController
   def status
     @search = CrawlerHistory.newest.ransack(params[:q])
     @crawler_histories = @search.result.page(params[:page]).per(10)
-    @admin_page_title = '爬蟲成功數據比例'
+    @admin_page_title = '判決書抓取數據'
     add_crumb @admin_page_title, '#'
   end
 end
