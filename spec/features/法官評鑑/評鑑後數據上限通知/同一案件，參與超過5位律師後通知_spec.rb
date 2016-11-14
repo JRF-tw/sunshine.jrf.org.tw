@@ -5,8 +5,8 @@ feature '法官評鑑', type: :request do
   let!(:schedule) { create :schedule, story: story }
   let!(:judge) { create :judge, court: court }
   let!(:lawyer) { create :lawyer, :with_password, :with_confirmed }
-  let!(:schedule_score_params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type, start_on: schedule.start_on, confirmed_realdate: false, judge_name: judge.name, score_1_1: 1, score_1_2: 1, score_1_3: 1, score_2_1: 1, score_2_2: 1, score_2_3: 1, score_2_4: 1, score_2_5: 1, note: 'xxxxx', appeal_judge: false } }
-  let!(:verdict_score_params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type, judge_name: judge.name, score_3_1: 1, score_3_2_1: 1, score_3_2_2: 1, score_3_2_3: 1, score_3_2_4: 1, score_3_2_5: 1, score_3_2_6: 1, note: 'xxxxx', appeal_judge: false } }
+  let!(:schedule_score_params) { attributes_for(:schedule_score_for_params, court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type, judge_name: judge.name) }
+  let!(:verdict_score_params) { attributes_for(:verdict_score_for_params, court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type) }
   before { signin_lawyer(lawyer) }
 
   feature '評鑑後數據上限通知' do

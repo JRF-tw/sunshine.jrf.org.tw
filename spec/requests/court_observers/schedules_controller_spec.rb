@@ -77,7 +77,7 @@ RSpec.describe CourtObservers::SchedulesController, type: :request do
 
     describe '#create' do
       context 'success' do
-        let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type, start_on: schedule.start_on, confirmed_realdate: false, judge_name: judge.name, score_1_1: 1, score_1_2: 1, score_1_3: 1, note: 'xxxxx', appeal_judge: false } }
+        let!(:params) { attributes_for(:schedule_score_for_params, court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type, judge_name: judge.name) }
         subject! { post '/observer/score/schedules', schedule_score: params }
         it { expect(response).to be_success }
         it { expect(flash[:error]).to be_nil }
@@ -105,7 +105,7 @@ RSpec.describe CourtObservers::SchedulesController, type: :request do
 
   describe '#update' do
     let!(:schedule_score) { create :schedule_score, schedule_rater: court_observer, court_id: court.id }
-    let!(:params) { { rating_score: 1, note: 'xxxxx', appeal_judge: false } }
+    let!(:params) { attributes_for(:schedule_score_for_update_params) }
     subject! { put "/observer/score/schedules/#{schedule_score.id}", schedule_score: params }
 
     it { expect(response).to be_success }

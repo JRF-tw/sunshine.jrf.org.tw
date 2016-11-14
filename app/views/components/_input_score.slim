@@ -1,12 +1,13 @@
 .form-group--score
   label.form-group--score__label = label
   - options.each_with_index do |option, i|
-    - if ScoreQuestions.question_type(option) == "true_or_false"
-      = ScoreQuestions.list(scored_type, option[0..-3].to_sym) if ScoreQuestions.need_show_up_level_title(option)
-      = ScoreQuestions.list(scored_type, option)
+    - if question_is_true_or_false?(option)
+      = up_level_question_desc(scored_type, option)
+      br
+      = question_desc(scored_type, option)
       = f.collection_radio_buttons option, [[100, '是'], [0, '否']], :first, :last
     - else
-      = ScoreQuestions.list(scored_type, option)
+      = question_desc(scored_type, option)
       = f.collection_radio_buttons option,
         (0.5..5.0).step(0.5).to_a.collect {|x| [x.to_s, x.to_s] }, :first, :last,
         boolean_style: :inline, item_wrapper_tag: false do |b|

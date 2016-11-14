@@ -15,7 +15,7 @@ feature '法官評鑑 - 律師', type: :feature, js: true do
 
         Given '律師 選擇「裁判品質」評分' do
           before { choose('verdict_score_score_3_1_20') }
-          before { 6.times.each_with_index { |i| choose("verdict_score_score_3_2_#{i+1}_100") } }
+          before { 6.times.each_with_index { |i| choose("verdict_score_score_3_2_#{i + 1}_100") } }
           When '送出' do
             before { click_button '送出評鑑' }
             Then '顯示感謝頁面' do

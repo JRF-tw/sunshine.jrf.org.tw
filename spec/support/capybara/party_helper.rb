@@ -84,7 +84,7 @@ module Capybara
     end
 
     def party_create_schedule_score
-      3.times.each_with_index { |i| choose("schedule_score_score_1_#{i+1}_20") }
+      3.times.each_with_index { |i| choose("schedule_score_score_1_#{i + 1}_20") }
       within('#new_schedule_score') do
         fill_in 'schedule_score_note', with: 'test'
       end

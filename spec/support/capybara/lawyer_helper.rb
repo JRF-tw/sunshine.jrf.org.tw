@@ -58,8 +58,8 @@ module Capybara
     end
 
     def lawyer_create_schedule_score
-      3.times.each_with_index { |i| choose("schedule_score_score_1_#{i+1}_20") }
-      5.times.each_with_index { |i| choose("schedule_score_score_2_#{i+1}_20") }
+      3.times.each_with_index { |i| choose("schedule_score_score_1_#{i + 1}_20") }
+      5.times.each_with_index { |i| choose("schedule_score_score_2_#{i + 1}_20") }
       within('#new_schedule_score') do
         fill_in 'schedule_score_note', with: 'test'
       end
@@ -91,7 +91,7 @@ module Capybara
 
     def lawyer_create_verdict_score
       choose('verdict_score_score_3_1_20')
-      6.times.each_with_index { |i| choose("verdict_score_score_3_2_#{i+1}_100") }
+      6.times.each_with_index { |i| choose("verdict_score_score_3_2_#{i + 1}_100") }
       within('#new_verdict_score') do
         fill_in 'verdict_score_note', with: 'test'
       end

@@ -16,8 +16,8 @@ feature '法官評鑑 - 律師', type: :feature, js: true do
         before { lawyer_input_judge_schedule_score(judge) }
 
         Given '律師 選擇「訴訟指揮」「開庭態度」評分' do
-          before { 3.times.each_with_index { |i| choose("schedule_score_score_1_#{i+1}_20") } }
-          before { 5.times.each_with_index { |i| choose("schedule_score_score_2_#{i+1}_20") } }
+          before { 3.times.each_with_index { |i| choose("schedule_score_score_1_#{i + 1}_20") } }
+          before { 5.times.each_with_index { |i| choose("schedule_score_score_2_#{i + 1}_20") } }
           When '送出' do
             before { click_button '送出評鑑' }
             Then '顯示感謝頁面' do
@@ -27,7 +27,7 @@ feature '法官評鑑 - 律師', type: :feature, js: true do
         end
 
         Given '律師 未選擇「訴訟指揮」評分' do
-          before { 3.times.each_with_index { |i| choose("schedule_score_score_1_#{i+1}_20") } }
+          before { 3.times.each_with_index { |i| choose("schedule_score_score_1_#{i + 1}_20") } }
           When '送出' do
             before { click_button '送出評鑑' }
             Then '顯示錯誤訊息，頁面仍保留原始輸入資訊' do
@@ -38,7 +38,7 @@ feature '法官評鑑 - 律師', type: :feature, js: true do
         end
 
         Given '律師 未選擇「開庭態度」評分' do
-          before { 5.times.each_with_index { |i| choose("schedule_score_score_2_#{i+1}_20") } }
+          before { 5.times.each_with_index { |i| choose("schedule_score_score_2_#{i + 1}_20") } }
           When '送出' do
             before { click_button '送出評鑑' }
             Then '顯示錯誤訊息，頁面仍保留原始輸入資訊' do

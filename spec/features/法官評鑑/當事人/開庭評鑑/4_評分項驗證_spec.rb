@@ -16,7 +16,7 @@ feature '法官評鑑 - 當事人', type: :feature, js: true do
         before { party_input_judge_schedule_score(judge) }
 
         Given '當事人 選擇「開庭態度」評分' do
-          before { 3.times.each_with_index { |i| choose("schedule_score_score_1_#{i+1}_20") } }
+          before { 3.times.each_with_index { |i| choose("schedule_score_score_1_#{i + 1}_20") } }
           When '送出' do
             before { click_button '送出評鑑' }
             Then '顯示感謝頁面' do

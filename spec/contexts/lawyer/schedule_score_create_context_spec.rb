@@ -7,7 +7,7 @@ describe Lawyer::ScheduleScoreCreateContext do
   let!(:schedule) { create :schedule, story: story }
   let!(:judge) { create :judge, court: court }
   let!(:judge2) { create :judge }
-  let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type, start_on: schedule.start_on, confirmed_realdate: false, judge_name: judge.name, score_1_1: 1, score_1_2: 1, score_1_3: 1, score_2_1: 1, score_2_2: 1, score_2_3: 1, score_2_4: 1, score_2_5: 1, note: 'xxxxx', appeal_judge: false } }
+  let!(:params) { attributes_for(:schedule_score_for_params, court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type, judge_name: judge.name) }
 
   describe '#perform' do
     subject { described_class.new(lawyer).perform(params) }
