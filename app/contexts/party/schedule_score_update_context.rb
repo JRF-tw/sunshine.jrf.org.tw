@@ -1,7 +1,8 @@
 class Party::ScheduleScoreUpdateContext < BaseContext
-  PERMITS = [:rating_score, :note, :appeal_judge].freeze
+  PERMITS = [ :note, :appeal_judge].freeze +
+              ScheduleScore.stored_attributes[:attitude_scores]
 
-  before_perform :check_rating_score
+  before_perform :check_attitude_scores
   before_perform :assign_attribute
 
   def initialize(schedule_score)
@@ -18,8 +19,11 @@ class Party::ScheduleScoreUpdateContext < BaseContext
 
   private
 
-  def check_rating_score
-    return add_error(:schedule_rating_score_blank) unless @params[:rating_score].present?
+  def check_attitude_scores
+    ScheduleScore.stored_attributes[:attitude_scores].each do |keys|
+      return add_error(:attitude_scores_blank) unless @params[keys].present?
+    end
+    return false if has_error?
   end
 
   def assign_attribute
