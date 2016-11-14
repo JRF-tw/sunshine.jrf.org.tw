@@ -22,7 +22,8 @@ class Scrap::AnalysisVerdictContext < BaseContext
     if matched
       return @verdict_content.scan(/法\s*官\s+([\p{Word}\w\s\S]*?)\n/).map { |i| i[0].squish.delete("\r").delete(' ') }
     else
-      Logs::AddCrawlerError.add_verdict_error(@crawler_history, @verdict, :parse_judge_empty, '取得 法官 資訊為空')
+      Logs::AddCrawlerError.add_verdict_error(@crawler_history, @verdict, :parse_judge_error, '爬取法官格式錯誤, 撈取為空') if @verdict_content =~ /法官/
+      Logs::AddCrawlerError.add_verdict_error(@crawler_history, @verdict, :parse_judge_not_exist, '判決書上沒有法官') unless @verdict_content =~ /法官/
       return []
     end
   end
@@ -32,7 +33,8 @@ class Scrap::AnalysisVerdictContext < BaseContext
     if matched
       return @verdict_content.scan(/檢察官(\p{Word}+)到庭執行職務/).map { |i| i[0] }
     else
-      Logs::AddCrawlerError.add_verdict_error(@crawler_history, @verdict, :parse_prosecutor_empty, '取得 檢察官 資訊為空')
+      Logs::AddCrawlerError.add_verdict_error(@crawler_history, @verdict, :parse_prosecutor_error, '爬取檢察官格式錯誤, 撈取為空') if @verdict_content =~ /檢察官/
+      Logs::AddCrawlerError.add_verdict_error(@crawler_history, @verdict, :parse_prosecutor_not_exist, '判決書上沒有檢察官') unless @verdict_content =~ /檢察官/
       return []
     end
   end
@@ -42,7 +44,8 @@ class Scrap::AnalysisVerdictContext < BaseContext
     if matched
       return @verdict_content.squish.scan(/\s+(\p{Word}+)律師/).map { |i| i[0] }
     else
-      Logs::AddCrawlerError.add_verdict_error(@crawler_history, @verdict, :parse_lawyer_empty, '取得 律師 資訊為空')
+      Logs::AddCrawlerError.add_verdict_error(@crawler_history, @verdict, :parse_lawyer_error, '爬取律師格式錯誤, 撈取為空') if @verdict_content =~ /律師/
+      Logs::AddCrawlerError.add_verdict_error(@crawler_history, @verdict, :parse_lawyer_not_exist, '判決書上沒有律師') unless @verdict_content =~ /律師/
       return []
     end
   end
@@ -58,7 +61,7 @@ class Scrap::AnalysisVerdictContext < BaseContext
     elsif matched
       return @verdict_content.squish.scan(/被\s+告\s+(\p{Word}+)/).map { |i| i[0] }
     else
-      Logs::AddCrawlerError.add_verdict_error(@crawler_history, @verdict, :parse_party_empty, '取得 當事人 資訊為空')
+      Logs::AddCrawlerError.add_verdict_error(@crawler_history, @verdict, :parse_party_error, '爬取當事人格式錯誤, 撈取為空')
       return []
     end
   end

@@ -15,12 +15,15 @@ default: &default
     date_not_in_db: "爬蟲取得資料不存在於資料庫"
     parse_main_judge_empty: "取得主審法官失敗"
     parse_main_judge_error: "取得主審法官錯誤"
-    parse_judge_empty: "取得法官失敗"
-    parse_prosecutor_empty: "取得檢察官失敗"
-    parse_lawyer_empty: "取得律師失敗"
-    parse_party_empty: "取得當事人失敗"
+    parse_judge_error: "取得法官失敗"
+    parse_prosecutor_error: "取得檢察官失敗"
+    parse_lawyer_error: "取得律師失敗"
+    parse_party_error: "取得當事人失敗"
     crawler_failed: "爬取來源失敗"
     parse_branch_judge_empty: "取得股別所屬法官失敗"
+    parse_judge_not_exist: "檢察官未出現在判決書上"
+    parse_lawyer_not_exist: "檢察官未出現在判決書上"
+    parse_prosecutor_not_exist: "檢察官未出現在判決書上"
   scores_questions:
     attitude_scores:
       score_1: '開庭態度評分'
