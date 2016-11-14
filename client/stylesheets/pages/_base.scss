@@ -108,8 +108,9 @@ $mobile-search-bar-height: 195px;
 .base-hero-search__contents {
 }
 .base-hero-search__content {
-  @include toggle-show();
+  display: none;
   overflow: visible !important;
+  &.active { display: block; }
 
   .search-form {
     padding: 0 n() r(2);
