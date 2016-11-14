@@ -4071,22 +4071,12 @@ abbr[title="required"] {
 }
 
 .base-hero-search__content {
-  opacity: 0;
-  visibility: hidden;
-  -webkit-transition: opacity .2s ease 0s, visibility .2s ease .2s;
-  transition: opacity .2s ease 0s, visibility .2s ease .2s;
-  overflow: hidden;
-  height: 0;
+  display: none;
   overflow: visible !important;
 }
 
 .base-hero-search__content.active {
-  opacity: 1;
-  visibility: visible;
-  -webkit-transition-delay: 0s;
-          transition-delay: 0s;
-  overflow: auto;
-  height: auto;
+  display: block;
 }
 
 .base-hero-search__content .search-form {
