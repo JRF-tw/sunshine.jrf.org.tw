@@ -80,7 +80,7 @@ class Lawyers::VerdictsController < Lawyers::BaseController
   def verdict_score_params
     params.fetch(:verdict_score, {}).permit(
       [:id, :court_id, :year, :word_type, :number, :story_type,
-      :confirmed_realdate, :quality_score, :note, :appeal_judge] +
+       :confirmed_realdate, :quality_score, :note, :appeal_judge] +
       VerdictScore.stored_attributes[:quality_scores]
     )
   end

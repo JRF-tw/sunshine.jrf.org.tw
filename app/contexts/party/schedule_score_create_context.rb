@@ -1,7 +1,7 @@
 class Party::ScheduleScoreCreateContext < BaseContext
-  PERMITS = [ :court_id, :year, :word_type, :number, :story_type, :start_on,
-              :confirmed_realdate, :judge_name, :note, :appeal_judge].freeze +
-              ScheduleScore.stored_attributes[:attitude_scores]
+  PERMITS = [:court_id, :year, :word_type, :number, :story_type, :start_on,
+             :confirmed_realdate, :judge_name, :note, :appeal_judge].freeze +
+            ScheduleScore.stored_attributes[:attitude_scores]
 
   # before_perform :can_not_score
   before_perform :check_story

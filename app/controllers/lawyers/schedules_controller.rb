@@ -118,7 +118,7 @@ class Lawyers::SchedulesController < Lawyers::BaseController
   def schedule_score_params
     params.fetch(:schedule_score, {}).permit(
       [:id, :court_id, :year, :word_type, :number, :story_type,
-      :start_on, :confirmed_realdate, :judge_name, :note, :appeal_judge] +
+       :start_on, :confirmed_realdate, :judge_name, :note, :appeal_judge] +
       ScheduleScore.stored_attributes[:attitude_scores] +
       ScheduleScore.stored_attributes[:command_scores]
     )

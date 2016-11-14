@@ -1,6 +1,6 @@
 class Lawyer::VerdictScoreCreateContext < BaseContext
   PERMITS = [:court_id, :year, :word_type, :number, :story_type,
-            :judge_name, :note, :appeal_judge].freeze +
+             :judge_name, :note, :appeal_judge].freeze +
             VerdictScore.stored_attributes[:quality_scores]
 
   # before_perform :can_not_score

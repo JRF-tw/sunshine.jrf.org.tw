@@ -1,6 +1,6 @@
 class Party::ScheduleScoreUpdateContext < BaseContext
-  PERMITS = [ :note, :appeal_judge].freeze +
-              ScheduleScore.stored_attributes[:attitude_scores]
+  PERMITS = [:note, :appeal_judge].freeze +
+            ScheduleScore.stored_attributes[:attitude_scores]
 
   before_perform :check_attitude_scores
   before_perform :assign_attribute
