@@ -172,7 +172,7 @@ zh-TW:
       subscriber_without_password: "訂閱案件前請先設定密碼"
       subscriber_without_email: "訂閱失敗 : Email未填寫"
       subscriber_email_not_confirm: "訂閱失敗 : 尚未驗證Email"
-      quality_score_blank: "裁判品質分數為必填"
+      quality_scores_blank: "裁判品質分數為必填"
       attitude_scores_blank: "開庭態度答題為必填"
       command_scores_blank: "訴訟指揮答題為必填"
       verdict_score_found: "判決已評鑑"

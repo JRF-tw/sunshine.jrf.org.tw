@@ -9,4 +9,4 @@
       form_url: lawyer_score_verdicts_path\
     } do |f|
       = render 'components/input_score', f: f,
-        label: '裁判品質評分', options: :quality_score
+        label: ScoreQuestions.list(:quality_scores, :score_3), options: VerdictScore.stored_attributes[:quality_scores], scored_type: :quality_scores

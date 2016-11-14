@@ -1,7 +1,4 @@
 class Lawyers::VerdictsController < Lawyers::BaseController
-  layout 'lawyer'
-  include CrudConcern
-
   before_action :verdict_score, except: [:edit, :update]
   before_action :find_verdict_score, only: [:edit, :update]
   before_action :story_can_score?, only: [:edit, :update]
@@ -81,7 +78,11 @@ class Lawyers::VerdictsController < Lawyers::BaseController
   private
 
   def verdict_score_params
-    params.fetch(:verdict_score, {}).permit(:id, :court_id, :year, :word_type, :number, :story_type, :confirmed_realdate, :quality_score, :note, :appeal_judge)
+    params.fetch(:verdict_score, {}).permit(
+      [:id, :court_id, :year, :word_type, :number, :story_type,
+      :confirmed_realdate, :quality_score, :note, :appeal_judge] +
+      VerdictScore.stored_attributes[:quality_scores]
+    )
   end
 
   def verdict_score
@@ -89,11 +90,7 @@ class Lawyers::VerdictsController < Lawyers::BaseController
   end
 
   def find_verdict_score
-    @verdict_score = begin
-                       current_lawyer.verdict_scores.find(params[:id])
-                     rescue
-                       nil
-                     end
+    @verdict_score = current_lawyer.verdict_scores.find_by(id: params[:id])
     redirect_as_fail(lawyer_root_path, '沒有該評鑑紀錄') unless @verdict_score
   end
 

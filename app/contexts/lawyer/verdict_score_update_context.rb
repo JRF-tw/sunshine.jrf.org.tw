@@ -1,7 +1,7 @@
 class Lawyer::VerdictScoreUpdateContext < BaseContext
-  PERMITS = [:quality_score, :note, :appeal_judge].freeze
+  PERMITS = [:note, :appeal_judge].freeze + VerdictScore.stored_attributes[:quality_scores]
 
-  before_perform :check_quality_score
+  before_perform :check_quality_scores
   before_perform :assign_attribute
 
   def initialize(verdict_score)
@@ -19,7 +19,10 @@ class Lawyer::VerdictScoreUpdateContext < BaseContext
   private
 
   def check_quality_score
-    return add_error(:quality_score_blank) unless @params[:quality_score].present?
+    VerdictScore.stored_attributes[:quality_scores].each do |keys|
+      return add_error(:quality_scores_blank) unless @params[keys].present?
+    end
+    return false if has_error?
   end
 
   def assign_attribute

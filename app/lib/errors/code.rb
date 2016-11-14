@@ -88,7 +88,7 @@ class Errors::Code
     subscriber_without_email: 401,
     subscriber_email_not_confirm: 401,
     subscriber_not_confirm: 401,
-    quality_score_blank: 400,
+    quality_scores_blank: 400,
     verdict_score_valid_failed: 401,
     verdict_score_not_found: 400,
     verdict_score_found: 400,
