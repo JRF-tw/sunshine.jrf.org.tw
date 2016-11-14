@@ -53,6 +53,7 @@ $mobile-search-bar-height: 195px;
   align-items: center;
   flex: 1;
   padding-top: r(2);
+  @include susy($tablet) { padding-top: r(3); }
 }
 .base-hero-content__slogan {
   padding: n() r(2);
@@ -64,8 +65,11 @@ $mobile-search-bar-height: 195px;
 .base-hero-search {
   margin-top: auto;
   background-color: rgba(0,0,0,.3);
-  @include susy-media($mobile-landscape) {
-    background-color: rgba(#000, 0.7);
+  @include susy-media($mobile-landscape) { background-color: rgba(#000, 0.7); }
+  @include susy($tablet) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 .base-hero-search__tabs {
@@ -73,6 +77,9 @@ $mobile-search-bar-height: 195px;
   justify-content: center;
   position: relative;
   padding: 0 r(2);
+  @include susy($tablet) {
+    min-width: 250px;
+  }
 }
 .base-hero-search__tab {
   @include Normalize();
@@ -98,11 +105,29 @@ $mobile-search-bar-height: 195px;
     &.active::after { transform: translateX(100%); }
   }
 }
+.base-hero-search__contents {
+}
 .base-hero-search__content {
   @include toggle-show();
+  overflow: visible !important;
 
   .search-form {
     padding: 0 n() r(2);
+    @include susy($tablet) {
+      padding-bottom: 0;
+      max-width: none;
+    }
+  }
+  .search-form__input {
+    @include susy($tablet) {
+      flex: 1 0 auto;
+      width: auto;
+    }
+  }
+
+  .chosen-with-drop .chosen-drop {
+    left: 0;
+    top: calc(100% + #{r(1)});
   }
 }
 
