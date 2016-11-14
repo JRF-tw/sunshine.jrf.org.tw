@@ -14,7 +14,7 @@ describe CourtObserver::ScheduleScoreUpdateContext do
     end
 
     context 'success' do
-      let!(:params) { { rating_score: 5, note: 'xxx', appeal_judge: false } }
+      let!(:params) { { score_1_1: 5, score_1_2: 5, score_1_3: 5, note: 'xxx', appeal_judge: false } }
       subject { context.perform(params) }
 
       it { expect(subject).to be_truthy }

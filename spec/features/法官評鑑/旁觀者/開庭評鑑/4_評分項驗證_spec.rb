@@ -15,8 +15,8 @@ feature '法官評鑑 - 旁觀者', type: :feature, js: true do
         before { court_observer_input_date_schedule_score(schedule) }
         before { court_observer_input_judge_schedule_score(judge) }
 
-        Given '旁觀者 選擇「開庭滿意度」評分' do
-          before { choose('schedule_score_rating_score_20') }
+        Given '旁觀者 選擇「開庭態度」評分' do
+          before { 3.times.each_with_index{ |i| choose("schedule_score_score_1_#{i+1}_20") } }
           When '送出' do
             before { click_button '送出評鑑' }
             Then '顯示感謝頁面' do
@@ -25,12 +25,12 @@ feature '法官評鑑 - 旁觀者', type: :feature, js: true do
           end
         end
 
-        Given '旁觀者 未選擇「開庭滿意度」評分' do
+        Given '旁觀者 未選擇「開庭態度」評分' do
           When '送出' do
             before { click_button '送出評鑑' }
             Then '顯示錯誤訊息，頁面仍保留原始輸入資訊' do
-              expect(find_field('schedule_score_rating_score_20')).not_to be_checked
-              expect(page).to have_content('開庭滿意度分數為必填')
+              expect(find_field('schedule_score_score_1_1_20')).not_to be_checked
+              expect(page).to have_content('開庭態度分數為必填')
             end
           end
         end

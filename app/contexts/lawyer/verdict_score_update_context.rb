@@ -18,7 +18,7 @@ class Lawyer::VerdictScoreUpdateContext < BaseContext
 
   private
 
-  def check_quality_score
+  def check_quality_scores
     VerdictScore.stored_attributes[:quality_scores].each do |keys|
       return add_error(:quality_scores_blank) unless @params[keys].present?
     end

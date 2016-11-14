@@ -85,7 +85,7 @@ module Capybara
     end
 
     def court_observer_create_schedule_score
-      choose('schedule_score_rating_score_20')
+      3.times.each_with_index { |i| choose("schedule_score_score_1_#{i+1}_20") }
       within('#new_schedule_score') do
         fill_in 'schedule_score_note', with: 'test'
       end

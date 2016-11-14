@@ -14,7 +14,8 @@ feature '法官評鑑 - 律師', type: :feature, js: true do
         before { lawyer_input_info_verdict_score(story) }
 
         Given '律師 選擇「裁判品質」評分' do
-          before { choose('verdict_score_quality_score_20') }
+          before { choose('verdict_score_score_3_1_20') }
+          before { 6.times.each_with_index { |i| choose("verdict_score_score_3_2_#{i+1}_100") } }
           When '送出' do
             before { click_button '送出評鑑' }
             Then '顯示感謝頁面' do
@@ -27,7 +28,7 @@ feature '法官評鑑 - 律師', type: :feature, js: true do
           When '送出' do
             before { click_button '送出評鑑' }
             Then '顯示錯誤訊息，頁面仍保留原始輸入資訊' do
-              expect(find_field('verdict_score_quality_score_20')).not_to be_checked
+              expect(find_field('verdict_score_score_3_1_20')).not_to be_checked
               expect(page).to have_content('裁判品質分數為必填')
             end
           end
