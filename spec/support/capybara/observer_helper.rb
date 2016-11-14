@@ -24,6 +24,13 @@ module Capybara
       end
     end
 
+    def court_observer_input_edit_email(email:, password: '123123123')
+      within('#edit_court_observer') do
+        fill_in 'court_observer_email', with: email
+        fill_in 'court_observer_current_password', with: password
+      end
+    end
+
     def regiter_submit_observer
       click_button '註冊'
       save_page
@@ -78,7 +85,7 @@ module Capybara
     end
 
     def court_observer_create_schedule_score
-      choose('schedule_score_rating_score_20')
+      3.times.each_with_index { |i| choose("schedule_score_score_1_#{i + 1}_20") }
       within('#new_schedule_score') do
         fill_in 'schedule_score_note', with: 'test'
       end

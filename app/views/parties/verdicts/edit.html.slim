@@ -13,4 +13,4 @@
     submit: '更新評鑑'\
   } do |f|
     = render 'components/input_score', f: f,
-      label: '裁判滿意度評分', options: :rating_score
+      label: question_desc(:quality_scores, :score_3), options: [:score_3_1], scored_type: :quality_scores

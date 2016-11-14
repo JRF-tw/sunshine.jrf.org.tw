@@ -13,8 +13,8 @@ feature '法官評鑑 - 當事人', type: :feature, js: true do
         before { visit(input_info_party_score_verdicts_path) }
         before { party_input_info_verdict_score(story) }
 
-        Given '當事人 選擇「裁判滿意度」評分' do
-          before { choose('verdict_score_rating_score_20') }
+        Given '當事人 選擇「裁判品質」評分' do
+          before { choose('verdict_score_score_3_1_20') }
           When '送出' do
             before { click_button '送出評鑑' }
             Then '顯示感謝頁面' do
@@ -23,12 +23,12 @@ feature '法官評鑑 - 當事人', type: :feature, js: true do
           end
         end
 
-        Given '當事人 未選擇「裁判滿意度」評分' do
+        Given '當事人 未選擇「裁判品質」評分' do
           When '送出' do
             before { click_button '送出評鑑' }
             Then '顯示錯誤訊息，頁面仍保留原始輸入資訊' do
-              expect(find_field('verdict_score_rating_score_20')).not_to be_checked
-              expect(page).to have_content('裁判滿意度分數為必填')
+              expect(find_field('verdict_score_score_3_1_20')).not_to be_checked
+              expect(page).to have_content('裁判品質分數為必填')
             end
           end
         end

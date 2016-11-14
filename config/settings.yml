@@ -15,13 +15,56 @@ default: &default
     date_not_in_db: "爬蟲取得資料不存在於資料庫"
     parse_main_judge_empty: "取得主審法官失敗"
     parse_main_judge_error: "取得主審法官錯誤"
-    parse_judge_empty: "取得法官失敗"
-    parse_prosecutor_empty: "取得檢察官失敗"
-    parse_lawyer_empty: "取得律師失敗"
-    parse_party_empty: "取得當事人失敗"
+    parse_judge_error: "取得法官失敗"
+    parse_prosecutor_error: "取得檢察官失敗"
+    parse_lawyer_error: "取得律師失敗"
+    parse_party_error: "取得當事人失敗"
     crawler_failed: "爬取來源失敗"
     parse_branch_judge_empty: "取得股別所屬法官失敗"
-
+    parse_judge_not_exist: "檢察官未出現在判決書上"
+    parse_lawyer_not_exist: "檢察官未出現在判決書上"
+    parse_prosecutor_not_exist: "檢察官未出現在判決書上"
+  scores_questions:
+    attitude_scores:
+      score_1: '開庭態度評分'
+      score_1_1: '（1）法官開庭時客觀、公正、中立、耐心、有禮聽審'
+      score_1_2: '（2）法官開庭時公正，沒有偏見、歧視、差別待遇'
+      score_1_3: '（3）法官開庭時態度良好，沒有對在庭之人辱罵、無理之責備或其他有損在庭之人尊嚴之行為。'
+    command_scores:
+      score_2: '訴訟指揮評分'
+      score_2_1: '（1）法官開庭時有充分準備，有效整理爭點。'
+      score_2_2: '（2）法官開庭時給予合理陳述的機會。'
+      score_2_3: '（3）法官開庭時妥適調查證據。'
+      score_2_4: '（4）法官開庭能確實推展案件進度。'
+      score_2_5: '（5）法官開庭能公平維護各方當事人及關係人訴訟上權利。'
+    quality_scores:
+      score_3: '裁判品質評分'
+      score_3_1: '（1）你認為本案裁判品質綜合評價。'
+      score_3_2: '（2）有無下列裁判品質不良的情形：'
+      score_3_2_1: '（2-1）裁判書認定事實與客觀事實嚴重不符。'
+      score_3_2_2: '（2-2）裁判書證據取捨與卷內證據明顯不符。'
+      score_3_2_3: '（2-3）裁判書適用法律明顯有誤。'
+      score_3_2_4: '（2-4）顯然之突襲性裁判。'
+      score_3_2_5: '（2-5）裁判書理由顯然違反論理法則或經驗法則。'
+      score_3_2_6: '（2-6）裁判書顯無理由或理由不明。'
+    question_types:
+      score_1_1: 'choice_question'
+      score_1_2: 'choice_question'
+      score_1_3: 'choice_question'
+      score_2_1: 'choice_question'
+      score_2_2: 'choice_question'
+      score_2_3: 'choice_question'
+      score_2_4: 'choice_question'
+      score_2_5: 'choice_question'
+      score_3_1: 'choice_question'
+      score_3_2_1: 'true_or_false'
+      score_3_2_2: 'true_or_false'
+      score_3_2_3: 'true_or_false'
+      score_3_2_4: 'true_or_false'
+      score_3_2_5: 'true_or_false'
+      score_3_2_6: 'true_or_false'
+    show_up_level_title:
+      score_3_2_1: true
 development:
   <<: *default
 

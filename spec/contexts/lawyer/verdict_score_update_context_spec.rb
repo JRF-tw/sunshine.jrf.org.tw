@@ -7,14 +7,14 @@ describe Lawyer::VerdictScoreUpdateContext do
 
   describe 'perform' do
     context 'quality_score empty' do
-      let!(:params) { { quality_score: '', note: 'xxx', appeal_judge: false } }
+      let!(:params) { { score_3_1: '', note: 'xxx', appeal_judge: false } }
       subject { context.perform(params) }
 
       it { expect(subject).to be_falsey }
     end
 
     context 'success' do
-      let!(:params) { { quality_score: 5, note: 'xxx', appeal_judge: false } }
+      let!(:params) { attributes_for(:verdict_score_for_update_params) }
       subject { context.perform(params) }
 
       it { expect(subject).to be_truthy }

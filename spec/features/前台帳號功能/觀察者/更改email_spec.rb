@@ -1,138 +1,111 @@
 require 'rails_helper'
 
-describe '觀察者更改email', type: :request do
-  context '成功送出' do
-    let!(:court_observer) { create :court_observer, :with_confirmation_token, name: '丁丁觀察者', email: 'dingding@gmail.com' }
-    before { signin_court_observer(court_observer) }
-
-    context '新的 email 為別人正在驗證中的 email ，也可以成功送出' do
-      let!(:court_observer_with_unconfirmed_email) { create :court_observer_without_validate, unconfirmed_email: '5566@gmail.com' }
-      subject { put '/observer/email', court_observer: { email: court_observer_with_unconfirmed_email.unconfirmed_email, current_password: '123123123' } }
-
-      it '成功送出' do
-        expect { subject }.to change_sidekiq_jobs_size_of(CustomDeviseMailer, :resend_confirmation_instructions)
-      end
+feature '前台帳號功能', type: :feature, js: true do
+  feature '觀察者' do
+    def click_confirm_link(email)
+      open_court_observer_email(email)
+      current_email.find('a').click
     end
 
-    context '發送信件' do
-      before { signin_court_observer(court_observer) }
-      subject { put '/observer/email', court_observer: { email: 'windwizard@gmail.com', current_password: '123123123' } }
-
-      it '成功發送' do
-        expect { subject }.to change_sidekiq_jobs_size_of(CustomDeviseMailer, :resend_confirmation_instructions)
-      end
+    def edit_email(email)
+      visit(edit_court_observer_email_path)
+      court_observer_input_edit_email(email: email)
+      click_button '送出'
     end
 
-    context '內容連結點擊後成功換置新的 email' do
-      before { put '/observer/email', court_observer: { email: 'windwizard@gmail.com', current_password: '123123123' } }
-      subject! { get '/observer/confirmation', confirmation_token: court_observer.reload.confirmation_token }
-
-      it '成功更新email' do
-        expect(court_observer.reload.email).to eq('windwizard@gmail.com')
-      end
+    def sign_out_after_edit_email(observer, email:)
+      signin_court_observer(email: observer.email)
+      edit_email(email)
+      manual_http_request(:delete, '/observer/sign_out')
     end
 
-    context '跳轉至登入頁，用新的 email 登入' do
-      before { put '/observer/email', court_observer: { email: 'windwizard@gmail.com', current_password: '123123123' } }
-      before { signout_court_observer }
-      before { get '/observer/confirmation', confirmation_token: court_observer.reload.confirmation_token }
-      subject { post '/observer/sign_in', court_observer: { email: 'windwizard@gmail.com', password: '123123123' } }
+    feature '更改 Email' do
+      let!(:observer_A) { create :court_observer }
+      feature '送出新 Email 認證' do
+        Scenario '觀察者A已登入，且觀察者A的新 Email 不能和任何人（包含自己）已認證的 Email 一樣' do
+          before { signin_court_observer(email: observer_A.email) }
+          Given '觀察者B已註冊，但尚未通過 Email 認證' do
+            let!(:observer_B) { create :court_observer, :without_confirm }
+            When '觀察者A的新 Email 和觀察者B一樣' do
+              before { edit_email(observer_B.email) }
+              Then '顯示錯誤訊息' do
+                expect(current_path).to eq(court_observer_email_path)
+                expect(page).to have_content('email 已被使用')
+              end
+            end
+          end
 
-      it '導向觀察者登入' do
-        expect(response).to redirect_to('/observer/sign_in')
-      end
+          Given '觀察者B已完成註冊，正在認證新 Email `xx@xx.com`' do
+            let!(:observer_B) { create :court_observer, :with_unconfirmed_email }
+            When '觀察者A的新 Email 為 `xx@xx.com`' do
+              before { edit_email(observer_B.unconfirmed_email) }
+              Then '成功送出' do
+                expect(current_path).to eq(court_observer_profile_path)
+                expect(page).to have_content('需要重新驗證新的Email')
+              end
+            end
+          end
 
-      it '新email 登入成功' do
-        expect { subject }.to change { court_observer.reload.current_sign_in_at }
-      end
-    end
-
-    context '已登入時  驗證email' do
-      before { put '/observer/email', court_observer: { email: 'windwizard@gmail.com', current_password: '123123123' } }
-      subject { get '/observer/confirmation', confirmation_token: court_observer.reload.confirmation_token }
-
-      it '導向個人評鑑頁面' do
-        expect(subject).to redirect_to('/observer')
-      end
-    end
-  end
-
-  context '失敗送出' do
-    let!(:court_observer) { create :court_observer, name: '丁丁觀察者', email: 'dingding@gmail.com' }
-
-    context '內容錯誤' do
-      context '新email空白' do
-        before { signin_court_observer(court_observer) }
-        subject! { put '/observer/email', court_observer: { email: '', current_password: '123123123' } }
-
-        it '顯示錯誤提示' do
-          expect(response.body).to match('email 的格式是無效的')
+          Given '觀察者A的登入 Email 為 `xx@xx.com`' do
+            When '觀察者A的新 Email 為 `xx@xx.com`' do
+              before { edit_email(observer_A.email) }
+              Then '顯示錯誤訊息' do
+                expect(current_path).to eq(court_observer_email_path)
+                expect(page).to have_content('email 不可與原本相同')
+              end
+            end
+          end
         end
       end
 
-      context '新email格式不符' do
-        before { signin_court_observer(court_observer) }
-        subject! { put '/observer/email', court_observer: { email: 'windwizard', current_password: '123123123' } }
+      feature '點擊連結後，新 Email 代換為登入 Email' do
+        let!(:observer_A) { create :court_observer }
+        let!(:observer_B) { create :court_observer }
+        Scenario '觀察者A已送出新 Email 的認證信。登入狀態與否不影響認證連結結果。但相同的 Email 會是「先認證先贏」' do
+          before { sign_out_after_edit_email(observer_A, email: '4545@gmail.com') }
+          Given '觀察者A已登入' do
+            before { signin_court_observer(email: observer_A.email) }
+            When '前往認證連結' do
+              before { click_confirm_link(observer_A.reload.unconfirmed_email) }
+              Then '觀察者A的 Email 成功代換' do
+                expect(current_path).to eq(court_observer_root_path)
+                expect(page).to have_content('您的帳號已通過驗證')
+              end
+            end
+          end
 
-        it '顯示錯誤提示' do
-          expect(response.body).to match('是無效的')
-        end
-      end
+          Given '觀察者A未登入' do
+            When '前往認證連結' do
+              before { click_confirm_link(observer_A.reload.unconfirmed_email) }
+              Then '觀察者A的 Email 成功代換' do
+                expect(current_path).to eq(new_court_observer_session_path)
+                expect(page).to have_content('您的帳號已通過驗證')
+              end
+            end
+          end
 
-      context '密碼驗證錯誤' do
-        before { signin_court_observer(court_observer) }
-        subject! { put '/observer/email', court_observer: { email: 'windwizard@gmail.com', current_password: 'wrongpassword' } }
+          Given '觀察者B已登入' do
+            before { signin_court_observer(email: observer_B.email) }
+            When '前往認證連結' do
+              before { click_confirm_link(observer_A.reload.unconfirmed_email) }
+              Then '觀察者A的 Email 成功代換、觀察者B則不受影響' do
+                expect(current_path).to eq(court_observer_root_path)
+                expect(page).to have_content('您的帳號已通過驗證')
+              end
+            end
+          end
 
-        it '顯示錯誤提示' do
-          expect(response.body).to match('是無效的')
-        end
-      end
-
-      context '密碼驗證空白' do
-        before { signin_court_observer(court_observer) }
-        subject! { put '/observer/email', court_observer: { email: 'windwizard@gmail.com', current_password: '' } }
-
-        it '顯示錯誤提示' do
-          expect(response.body).to match('不能是空白字元')
-        end
-      end
-    end
-
-    context 'email 已被使用' do
-      before { signin_court_observer(court_observer) }
-      let!(:court_observer2) { create :court_observer, email: 'windwizard@gmail.com' }
-      subject! { put '/observer/email', court_observer: { email: 'windwizard@gmail.com', current_password: '123123123' } }
-
-      context '新 email 是別人的 email' do
-        subject! { put '/observer/email', court_observer: { email: court_observer2.email, current_password: '123123123' } }
-
-        it '提示已經被使用' do
-          expect(response.body).to match('email 已被使用')
-        end
-      end
-
-      context '新 email 跟原本的一樣' do
-        subject! { put '/observer/email', court_observer: { email: court_observer.email, current_password: '123123123' } }
-
-        it '提示不可與原本相同' do
-          expect(response.body).to match('email 不可與原本相同')
-        end
-      end
-    end
-
-    context '其他情境' do
-      context '觀察者A與B 有相同的待驗證email, A點完驗證連結之後 B才點驗證連結' do
-        let!(:court_observer_A) { observer_with_unconfirm_email('ggyy@gmail.com') }
-        let!(:court_observer_B) { observer_with_unconfirm_email('ggyy@gmail.com') }
-        before { get '/observer/confirmation', confirmation_token: court_observer_A.reload.confirmation_token }
-        subject! { get '/observer/confirmation', confirmation_token: court_observer_B.confirmation_token }
-
-        it '觀察者A 的email 置換成功' do
-          expect(court_observer_A.reload.email).to eq('ggyy@gmail.com')
-        end
-
-        it '觀察者B 的email 置換失敗' do
-          expect { subject }.not_to change { court_observer_B.email }
+          Given '觀察者A和觀察者B送出相同的 Email 進行認證，且 B 已前往認證連結完成代換' do
+            before { sign_out_after_edit_email(observer_B, email: '4545@gmail.com') }
+            before { click_confirm_link(observer_B.reload.unconfirmed_email) }
+            When '前往觀察者A的認證連結' do
+              before { click_confirm_link(observer_A.reload.unconfirmed_email) }
+              Then '觀察者A的 Email 代換失敗' do
+                expect(current_path).to eq(new_court_observer_session_path)
+                expect(page).to have_content('已經驗證，請直接登入。')
+              end
+            end
+          end
         end
       end
     end

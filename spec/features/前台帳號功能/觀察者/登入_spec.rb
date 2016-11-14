@@ -14,6 +14,15 @@ feature '前台帳號功能', type: :feature, js: true do
             end
           end
 
+          When '先到profile頁面 轉跳至登入頁面後 再以正確的 Email 和密碼登入' do
+            before { visit(court_observer_profile_path) }
+            before { signin_court_observer(email: observer.email) }
+            Then '登入後轉跳profile頁面' do
+              expect(current_path).to eq(court_observer_profile_path)
+              expect(page).to have_content('成功登入了')
+            end
+          end
+
           When '正確的 Email 和錯誤的密碼登入' do
             before { signin_court_observer(email: observer.email, password: '11111111') }
             Then '登入失敗' do

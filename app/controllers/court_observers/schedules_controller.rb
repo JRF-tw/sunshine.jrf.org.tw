@@ -1,6 +1,4 @@
 class CourtObservers::SchedulesController < CourtObservers::BaseController
-  layout 'observer'
-  include CrudConcern
   before_action :schedule_score, except: [:edit, :update]
   before_action :find_schedule_score, only: [:edit, :update]
   before_action :story_adjudged?, only: [:edit, :update]
@@ -118,7 +116,11 @@ class CourtObservers::SchedulesController < CourtObservers::BaseController
   private
 
   def schedule_score_params
-    params.fetch(:schedule_score, {}).permit(:id, :court_id, :year, :word_type, :number, :story_type, :start_on, :confirmed_realdate, :judge_name, :rating_score, :note, :appeal_judge)
+    params.fetch(:schedule_score, {}).permit(
+      [:id, :court_id, :year, :word_type, :number, :story_type, :start_on,
+       :confirmed_realdate, :judge_name, :rating_score, :note, :appeal_judge] +
+      ScheduleScore.stored_attributes[:attitude_scores]
+    )
   end
 
   def schedule_score

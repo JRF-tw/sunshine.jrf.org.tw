@@ -7,21 +7,21 @@ describe Lawyer::ScheduleScoreUpdateContext do
 
   describe 'perform' do
     context 'command_score empty' do
-      let!(:params) { { command_score: '', attitude_score: 5, note: 'xxx', appeal_judge: false } }
+      let!(:params) { attributes_for(:schedule_score_for_update_no_command_params) }
       subject { context.perform(params) }
 
       it { expect(subject).to be_falsey }
     end
 
     context 'attitude_score empty' do
-      let!(:params) { { command_score: 5, attitude_score: '', note: 'xxx', appeal_judge: false } }
+      let!(:params) { attributes_for(:schedule_score_for_update_no_attitute_params) }
       subject { context.perform(params) }
 
       it { expect(subject).to be_falsey }
     end
 
     context 'success' do
-      let!(:params) { { command_score: 5, attitude_score: 5, note: 'xxx', appeal_judge: false } }
+      let!(:params) { attributes_for(:schedule_score_for_update_params) }
       subject { context.perform(params) }
 
       it { expect(subject).to be_truthy }

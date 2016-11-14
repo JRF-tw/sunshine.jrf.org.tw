@@ -1,7 +1,7 @@
 class Party::VerdictScoreUpdateContext < BaseContext
-  PERMITS = [:rating_score, :note, :appeal_judge].freeze
+  PERMITS = [:score_3_1, :note, :appeal_judge].freeze
 
-  before_perform :check_rating_score
+  before_perform :check_quality_scores
   before_perform :assign_attribute
 
   def initialize(verdict_score)
@@ -18,8 +18,8 @@ class Party::VerdictScoreUpdateContext < BaseContext
 
   private
 
-  def check_rating_score
-    return add_error(:judge_rating_score_blank) unless @params[:rating_score].present?
+  def check_quality_scores
+    return add_error(:quality_scores_blank) unless @params[:score_3_1].present?
   end
 
   def assign_attribute

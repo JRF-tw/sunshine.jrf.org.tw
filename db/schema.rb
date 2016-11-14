@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161020080114) do
+ActiveRecord::Schema.define(version: 20161114041300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -496,14 +496,13 @@ ActiveRecord::Schema.define(version: 20161020080114) do
     t.integer  "judge_id"
     t.integer  "schedule_rater_id"
     t.string   "schedule_rater_type"
-    t.float    "rating_score"
-    t.float    "command_score"
-    t.float    "attitude_score"
     t.hstore   "data"
     t.boolean  "appeal_judge",        default: false
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.integer  "story_id"
+    t.hstore   "attitude_scores"
+    t.hstore   "command_scores"
   end
 
   add_index "schedule_scores", ["appeal_judge"], name: "index_schedule_scores_on_appeal_judge", using: :btree
@@ -693,13 +692,12 @@ ActiveRecord::Schema.define(version: 20161020080114) do
     t.integer  "story_id"
     t.integer  "verdict_rater_id"
     t.string   "verdict_rater_type"
-    t.float    "quality_score"
-    t.float    "rating_score"
     t.hstore   "data"
     t.boolean  "appeal_judge"
     t.integer  "status"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.hstore   "quality_scores"
   end
 
   add_index "verdict_scores", ["appeal_judge"], name: "index_verdict_scores_on_appeal_judge", using: :btree
