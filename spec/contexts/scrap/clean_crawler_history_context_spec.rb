@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Scrap::CleanCrawlerHistoryContext do
   before { create :crawler_history }
-  before { create :crawler_history, crawler_on: Time.zone.today - 2.month }
+  before { create :crawler_history, crawler_on: Time.zone.today - 2.months }
 
   describe 'perform' do
     context 'success' do
