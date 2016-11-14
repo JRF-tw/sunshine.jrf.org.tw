@@ -7883,7 +7883,7 @@
 
 	
 	var sprite = __webpack_require__(58);
-	var image = "<symbol viewBox=\"0 0 18 12\" id=\"icon-menu\" ><title>menu</title><path d=\"M0 12h18v-2H0v2zm0-5h18V5H0v2zm0-7v2h18V0H0z\" fill=\"#FFF\" fill-rule=\"evenodd\"/></symbol>";
+	var image = "<symbol viewBox=\"0 0 18 12\" id=\"icon-menu\" ><title>menu</title><path d=\"M0 12h18v-2H0v2zm0-5h18V5H0v2zm0-7v2h18V0H0z\" fill-rule=\"evenodd\"/></symbol>";
 	module.exports = sprite.add(image, "icon-menu");
 
 /***/ },
