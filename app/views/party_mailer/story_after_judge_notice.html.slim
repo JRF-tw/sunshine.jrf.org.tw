@@ -1,5 +1,5 @@
 p = @close_court_info_wording
 
-p = link_to "點我提供意見", new_party_score_schedule_url(@params_for_schedule_score)
+p = link_to "點我提供意見", @score_schedules_link
 
 p = "感謝您使用司法陽光網的案件訂閱服務！若您不想再訂閱此案，#{link_to '請點此', party_subscribe_url(@story, token: @token)}。".html_safe
