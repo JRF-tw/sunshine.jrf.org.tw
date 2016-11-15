@@ -83,7 +83,7 @@ class Story < ActiveRecord::Base
     end
 
     def have_judge(judge_id)
-      have_judge_story_ids = Story.joins(:judges).where(judges: {id: judge_id} )
+      Story.joins(:judges).where(judges: { id: judge_id })
     end
   end
 end

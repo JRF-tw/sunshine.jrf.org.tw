@@ -254,7 +254,6 @@ namespace :dev do
 
   task fake_stories: :environment do
     Story.destroy_all
-    main_judge = Admin::Judge.all
     10.times do |_i|
       Court.all.get_courts.sample.stories.create!(
         story_type: ['民事', '邢事'].sample,
