@@ -261,7 +261,6 @@ namespace :dev do
         year: rand(70..105),
         word_type: ['生', '老', '病', '死'].sample,
         number: rand(100..999),
-        main_judge_id: main_judge.sample.id,
         adjudge_date: rand(5).years.ago
       )
     end
