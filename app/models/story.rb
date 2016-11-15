@@ -70,7 +70,7 @@ class Story < ActiveRecord::Base
 
   class << self
     def ransackable_scopes(_auth_object = nil)
-      [:have_adjudgement, :have_judge]
+      [:have_adjudgement, :relation_by_judge]
     end
 
     def have_adjudgement(status)
@@ -82,8 +82,9 @@ class Story < ActiveRecord::Base
       end
     end
 
-    def have_judge(judge_id)
-      Story.joins(:judges).where(judges: { id: judge_id })
+    def relation_by_judge(judge_id)
+      relations_stroy_ids = Judge.find(judge_id).story_relations.pluck(:id)
+      where(id: relations_stroy_ids)
     end
   end
 end

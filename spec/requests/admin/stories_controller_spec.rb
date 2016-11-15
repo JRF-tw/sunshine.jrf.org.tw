@@ -45,7 +45,7 @@ RSpec.describe Admin::StoriesController do
     end
 
     context 'search the judge of stories' do
-      before { get '/admin/stories', q: { have_judge: Judge.last.id } }
+      before { get '/admin/stories', q: { relation_by_judge: Judge.last.id } }
       it { expect(response.body).to match(story.story_type) }
     end
 
