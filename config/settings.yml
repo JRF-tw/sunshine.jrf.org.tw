@@ -21,8 +21,8 @@ default: &default
     parse_party_error: "取得當事人失敗"
     crawler_failed: "爬取來源失敗"
     parse_branch_judge_empty: "取得股別所屬法官失敗"
-    parse_judge_not_exist: "檢察官未出現在判決書上"
-    parse_lawyer_not_exist: "檢察官未出現在判決書上"
+    parse_judge_not_exist: "法官未出現在判決書上"
+    parse_lawyer_not_exist: "律師未出現在判決書上"
     parse_prosecutor_not_exist: "檢察官未出現在判決書上"
   scores_questions:
     attitude_scores:
