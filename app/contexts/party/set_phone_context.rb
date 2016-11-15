@@ -6,9 +6,7 @@ class Party::SetPhoneContext < BaseContext
   before_perform :check_sms_send_count
   after_perform  :assign_verify_code
   after_perform  :set_unconfirm
-  after_perform  :build_message
   after_perform  :send_sms
-  after_perform  :increment_sms_count
   after_perform  :reset_expire_job
 
   def initialize(party, params)
@@ -21,6 +19,11 @@ class Party::SetPhoneContext < BaseContext
       add_error(:data_update_fail, @form_object.full_error_messages) unless @form_object.save
     end
     @form_object
+  end
+
+  def self.clean_expire_job_data(party)
+    party.update_columns(unconfirmed_phone: nil)
+    party.delete_phone_job_id = nil
   end
 
   private
@@ -45,13 +48,14 @@ class Party::SetPhoneContext < BaseContext
     @party.phone_unconfirm!
   end
 
-  def build_message
-    link = verify_party_phone_url(host: Setting.host)
-    @message = "當事人手機驗證簡訊 發送至 #{@params[:unconfirmed_phone]}: 認證碼 : #{@verify_code}, #{link}"
+  def send_sms
+    SmsService.send_async(@params[:unconfirmed_phone], build_message)
+    increment_sms_count
   end
 
-  def send_sms
-    SmsService.send_async(@params[:unconfirmed_phone], @message)
+  def build_message
+    link = verify_party_phone_url(host: Setting.host)
+    "當事人手機驗證簡訊 發送至 #{@params[:unconfirmed_phone]}: 認證碼 : #{@verify_code}, #{link}"
   end
 
   def increment_sms_count
@@ -60,11 +64,7 @@ class Party::SetPhoneContext < BaseContext
 
   def reset_expire_job
     Sidekiq::ScheduledSet.new.find_job(@party.delete_phone_job_id.value).try(:delete)
-    @party.delete_phone_job_id = @party.delay_until(1.hour.from_now).clean_expire_job_data
+    @party.delete_phone_job_id = self.class.delay_until(1.hour.from_now).clean_expire_job_data(@party)
   end
 
-  def clean_expire_job_data
-    @praty.update_columns(unconfirmed_phone: nil)
-    @party.delete_phone_job_id = nil
-  end
 end

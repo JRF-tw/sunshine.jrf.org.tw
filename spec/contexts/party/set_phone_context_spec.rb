@@ -42,6 +42,14 @@ describe Party::SetPhoneContext do
           it { expect(Sidekiq::ScheduledSet.new.size).to eq(1) }
         end
       end
+
+      context '.clean_expire_job_data' do
+        let!(:party) { create :party, :with_unconfirmed_phone }
+        before { party.delete_phone_job_id = '585858585' }
+        before { subject.class.clean_expire_job_data(party) }
+        it { expect(party.reload.unconfirmed_phone).to be_nil }
+        it { expect(party.delete_phone_job_id).to be_nil }
+      end
     end
   end
 end
