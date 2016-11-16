@@ -20,11 +20,13 @@ RSpec.describe BaseController, type: :request do
   describe '#terms_of_service' do
     before { get '/tos' }
     it { expect(response).to be_success }
+    it { expect(response_meta_title).to match('服務條款') }
   end
 
   describe '#privacy' do
     before { get '/privacy' }
     it { expect(response).to be_success }
+    it { expect(response_meta_title).to match('隱私條款') }
   end
 
   it 'GET /robots.txt' do
