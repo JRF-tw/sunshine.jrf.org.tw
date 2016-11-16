@@ -17,6 +17,16 @@ RSpec.describe BaseController, type: :request do
     it { expect(response).to be_success }
   end
 
+  describe '#terms_of_service' do
+    before { get '/tos' }
+    it { expect(response).to be_success }
+  end
+
+  describe '#privacy' do
+    before { get '/privacy' }
+    it { expect(response).to be_success }
+  end
+
   it 'GET /robots.txt' do
     get '/robots.txt'
     expect(response).to be_success
