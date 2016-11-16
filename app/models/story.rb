@@ -4,7 +4,6 @@
 #
 #  id               :integer          not null, primary key
 #  court_id         :integer
-#  main_judge_id    :integer
 #  story_type       :string
 #  year             :integer
 #  word_type        :string
@@ -25,6 +24,7 @@ class Story < ActiveRecord::Base
   has_many :schedules
   has_many :verdicts
   has_many :story_relations
+  has_many :judges, through: :story_relations, source: :people, source_type: :Judge
   has_many :story_subscriptions, dependent: :destroy
   has_many :verdict_scores
   has_many :schedule_scores
@@ -70,7 +70,7 @@ class Story < ActiveRecord::Base
 
   class << self
     def ransackable_scopes(_auth_object = nil)
-      [:have_adjudgement]
+      [:have_adjudgement, :relation_by_judge]
     end
 
     def have_adjudgement(status)
@@ -80,6 +80,11 @@ class Story < ActiveRecord::Base
       elsif status == 'no'
         where.not(id: adjudged_story_ids)
       end
+    end
+
+    def relation_by_judge(judge_id)
+      relations_stroy_ids = Judge.find(judge_id).story_relations.pluck(:story_id)
+      where(id: relations_stroy_ids)
     end
   end
 end

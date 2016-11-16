@@ -4,7 +4,6 @@
 #
 #  id               :integer          not null, primary key
 #  court_id         :integer
-#  main_judge_id    :integer
 #  story_type       :string
 #  year             :integer
 #  word_type        :string
