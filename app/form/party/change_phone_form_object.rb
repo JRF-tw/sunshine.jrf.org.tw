@@ -27,7 +27,7 @@ class Party::ChangePhoneFormObject < BaseFormObject
   end
 
   def unexist_unconfirmed_phone
-    add_error(:phone_number_confirming) if Party.exists?(unconfirmed_phone: unconfirmed_phone) && unconfirmed_phone.present?
+    add_error(:phone_number_confirming) if unconfirmed_phone.present? && Party.exists?(unconfirmed_phone: unconfirmed_phone)
   end
 
   def same_phone_number?
