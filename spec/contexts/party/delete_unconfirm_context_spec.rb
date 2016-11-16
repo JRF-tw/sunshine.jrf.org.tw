@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe Party::SelfDeleteContext do
+describe Party::DeleteUnconfirmContext do
   let!(:party) { create :party }
-  subject { described_class.perform(party) }
+  subject { described_class.delete_unconfirm_party(party) }
 
   context 'success delete' do
     it { expect { subject }.to change { Party.count }.by(-1) }
