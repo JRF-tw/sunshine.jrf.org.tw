@@ -9,6 +9,13 @@ class Party::SetPhoneContext < BaseContext
   after_perform  :send_sms
   after_perform  :reset_expire_job
 
+  class << self
+    def clean_expire_job_data(party)
+      party.update_columns(unconfirmed_phone: nil)
+      party.delete_phone_job_id = nil
+    end
+  end
+
   def initialize(party, params)
     @party = party
     @params = permit_params(params[:phone_form] || params, PERMITS)
@@ -19,11 +26,6 @@ class Party::SetPhoneContext < BaseContext
       add_error(:data_update_fail, @form_object.full_error_messages) unless @form_object.save
     end
     @form_object
-  end
-
-  def self.clean_expire_job_data(party)
-    party.update_columns(unconfirmed_phone: nil)
-    party.delete_phone_job_id = nil
   end
 
   private
