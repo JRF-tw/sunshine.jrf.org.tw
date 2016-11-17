@@ -3,7 +3,7 @@ require 'rails_helper'
 feature '前台帳號功能', type: :feature, js: true do
   feature '當事人' do
     def party_click_confirm_link(email)
-      open_party_email(email)
+      open_last_email(email)
       current_email.find('a').click
     end
 

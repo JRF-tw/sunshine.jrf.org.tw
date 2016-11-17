@@ -101,10 +101,5 @@ module Capybara
     def court_observer_run_verdict_score_flow
       visit(new_court_observer_score_verdict_path)
     end
-
-    def open_court_observer_email(email)
-      perform_sidekiq_job(fetch_sidekiq_last_job)
-      open_email(email)
-    end
   end
 end

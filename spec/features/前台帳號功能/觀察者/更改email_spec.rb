@@ -3,7 +3,7 @@ require 'rails_helper'
 feature '前台帳號功能', type: :feature, js: true do
   feature '觀察者' do
     def click_confirm_link(email)
-      open_court_observer_email(email)
+      open_last_email(email)
       current_email.find('a').click
     end
 
