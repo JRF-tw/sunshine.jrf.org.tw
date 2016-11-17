@@ -1,4 +1,4 @@
-class BulletinsController < ApplicationController
+class BulletinsController < BaseController
 
   def index
   end
