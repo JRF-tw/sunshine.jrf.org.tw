@@ -1,0 +1,12 @@
+@mixin scut-image-replace {
+
+  text-indent: 102%;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0;
+
+}
+
+%scut-image-replace {
+  @include scut-image-replace;
+}

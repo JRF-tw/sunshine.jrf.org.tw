@@ -1,0 +1,30 @@
+{
+  "name": "sass-toolkit",
+  "description": "Toolkit full of bits and bobs of awesome aimed at assisting in advanced styling with Sass",
+  "version": "2.9.0",
+  "main": "stylesheets/_toolkit.scss",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "tests",
+    "vendor",
+    "working",
+    "Gemfile",
+    "Gemfile.lock",
+    "Rakefile",
+    "lib",
+    "*.gemspec"
+  ],
+  "dependencies": {},
+  "homepage": "https://github.com/Team-Sass/toolkit",
+  "_release": "2.9.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.9.0",
+    "commit": "dfb8069cbaa88325b90cddcb189798631cb8bf51"
+  },
+  "_source": "git://github.com/Team-Sass/toolkit.git",
+  "_target": "~2.9.0",
+  "_originalSource": "sass-toolkit"
+}
