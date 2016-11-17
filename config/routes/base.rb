@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   get '/privacy', to: 'base#privacy'
   resources :scores, only: [:index]
   resources :judges, only: [:show]
+  resources :bulletins, only: [:index, :show]
 end

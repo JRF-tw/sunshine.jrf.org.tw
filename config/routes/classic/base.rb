@@ -20,6 +20,4 @@ Rails.application.routes.draw do
     resources :awards
     resources :punishments
   end
-
-  resources :bulletins, only: [:index, :show]
 end
