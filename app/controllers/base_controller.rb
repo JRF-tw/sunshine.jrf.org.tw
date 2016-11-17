@@ -35,9 +35,19 @@ class BaseController < ApplicationController
   end
 
   def terms_of_service
+    set_meta(
+      title: '服務條款',
+      description: '使用者於閱覽本頁面使用說明及著作權政策之後，繼續使用司法陽光網及其服務網站之作為，視為書面同意本服務條款。',
+      keywords: '服務條款,司法陽光網'
+    )
   end
 
   def privacy
+    set_meta(
+      title: '隱私條款',
+      description: '隱私權政策，適用於您在司法陽光網以及其延伸服務網站活動時，所涉及有關個人資料的蒐集、處理及利用說明。',
+      keywords: '隱私條款,司法陽光網'
+    )
   end
 
   def render_404
