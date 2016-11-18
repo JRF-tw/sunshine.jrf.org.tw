@@ -1,0 +1,13 @@
+.news-card-wrapper {
+  margin-top: r(-7);
+
+  .container--wide {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+}
+
+.news-card {
+  margin: 0 r(2) r(4);
+}

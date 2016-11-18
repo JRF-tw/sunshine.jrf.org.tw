@@ -1,1 +1,11 @@
-= '公告 index 頁'
+= render partial: 'components/hero', locals: {\
+    heading: '公告', static: true}
+
+.news-card-wrapper
+  .container--wide
+    - 9.times do |i|
+      = render 'components/news_card',
+        thumbnail: 'http://placehold.it/600x400',
+        title: zh_lorem_sentence,
+        summary: zh_lorem_paragraphs(2),
+        href: "/bulletins/#{i+1}"

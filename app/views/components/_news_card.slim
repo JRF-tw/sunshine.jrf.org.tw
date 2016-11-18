@@ -1,0 +1,10 @@
+section.news-card.card
+  .news-card__thumbnail-wrapper
+    h3.news-card__heading = title
+    
+    = image_tag thumbnail, class: 'news-card__thumbnail'
+    
+  .news-card__content-wrapper
+    p.news-card__summary
+    
+    = link_to '詳細內容', href, class: 'news-card__more'
