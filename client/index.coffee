@@ -25,6 +25,7 @@ Tab               = require './modules/tab'
 
 # Require entry modules
 # EX:
+require './entry/article'
 
 # Inject SVG Sprite
 sprites = require.context "icons", off
@@ -77,7 +78,7 @@ $(document).on "page:change", ->
   Waypoint.destroyAll()
 
   $main_header = $('#main-header')
-  
+
   $('.base-hero-content__slogan,
      .card__heading,
      .character-selector__heading,

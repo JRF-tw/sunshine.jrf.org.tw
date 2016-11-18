@@ -37,7 +37,7 @@
   @include susy($tablet) {
     padding: r(3) r(3) r(1);
     width: 90%;
-    max-width: container($tablet-columns);
+    max-width: container($tablet-columns - 2);
   }
 
   h4 { margin-top: 0; }
@@ -45,6 +45,28 @@
   ul { margin-bottom: r(2); }
 
   & > p { margin-top: 0; }
+
+  blockquote {
+    margin-left: 0;
+    padding-left: r(2);
+    border-left: 5px solid $divider-gray;
+  }
+
+  .image-wrapper {
+    margin: r(2) r(-2);
+    @include susy($tablet) {
+      margin: n() r(-3);
+    }
+
+    &:first-child {
+      margin-top: r(-2);
+      border-radius: $global-radius $global-radius 0 0;
+      overflow: hidden;
+      @include susy($tablet) {
+        margin-top: r(-3);
+      }
+    }
+  }
 }
 .card--flex {
   display: flex;
@@ -153,7 +175,7 @@
     margin: auto;
     text-align: center;
   }
-  
+
   .more {
     margin-top: r(2);
   }

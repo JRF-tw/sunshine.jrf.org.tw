@@ -39,15 +39,15 @@ module.exports = (env) ->
         gumshoe:    "gumshoe/dist/js/gumshoe.js"
         "~susy":    "susy/sass/susy"
         "~scut":    "scut/dist/scut"
-        "smooth-scroll":  "smooth-scroll/dist/js/smooth-scroll.js"        
+        "smooth-scroll":  "smooth-scroll/dist/js/smooth-scroll.js"
         "../img/loading.gif": "webui-popover/img/loading.gif"
-    
+
     entry:
       main: [
         'animate-css-webpack!./config/animate-css.js'
         './index.coffee'
       ]
-    
+
     output:
       path: path_to.assets
       filename: 'javascripts/webpack_bundle.js'
@@ -57,6 +57,10 @@ module.exports = (env) ->
       loaders: [
         test: /\.coffee$/
         loader: 'coffee-loader'
+        include: path_to.root
+      ,
+        test: /\.js$/
+        loader: 'babel?cacheDirectory'
         include: path_to.root
       ,
         test: /\.svg$/
@@ -149,7 +153,7 @@ module.exports = (env) ->
           ]
         ,
           test: /\.css$/
-          loader: "style!css"          
+          loader: "style!css"
         ]
 
   if env is 'production'
@@ -159,7 +163,7 @@ module.exports = (env) ->
           'NODE_ENV': JSON.stringify 'production'
       new webpack.optimize.DedupePlugin()
       # new webpack.optimize.UglifyJsPlugin(compress: {warnings: false})
-      new webpack.NoErrorsPlugin()    
+      new webpack.NoErrorsPlugin()
     ]
 
     webpack_config = merge webpack_config,

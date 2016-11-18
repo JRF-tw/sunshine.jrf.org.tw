@@ -1,1 +1,23 @@
-= '公告 show 頁'
+article
+  = render partial: 'components/hero', locals: {\
+    heading: zh_lorem_sentence, static: true}
+
+  section.container.offcanvas-card-wrapper
+    .card.card--article
+      / 假資料
+      = image_tag 'http://placehold.it/900x500'
+      
+      - 3.times
+        p = zh_lorem_paragraphs rand(1..5)
+      
+      ul
+        - 5.times
+          li = zh_lorem_sentence
+          
+      = image_tag 'http://placehold.it/900x500'
+      
+      ol
+        - 5.times
+          li = zh_lorem_sentence
+          
+      blockquote = zh_lorem_paragraphs 5
