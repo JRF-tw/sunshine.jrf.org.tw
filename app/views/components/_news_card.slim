@@ -5,6 +5,6 @@ section.news-card.card
     = image_tag thumbnail, class: 'news-card__thumbnail'
     
   .news-card__content-wrapper
-    p.news-card__summary
+    p.news-card__summary = summary
     
-    = link_to '詳細內容', href, class: 'news-card__more'
+    = link_to '詳細內容', href, class: 'news-card__more flat-button--densed'

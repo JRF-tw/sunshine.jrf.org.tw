@@ -30,7 +30,7 @@
   &--prosecutor {
     $bg: $purple;
     background-color: $bg;
-    &:active { background-color: shade($bg, 20%); }    
+    &:active { background-color: shade($bg, 20%); }
   }
 }
 .raised-button--large {
@@ -46,13 +46,17 @@
   &:hover,
   &.active { background-color: $divider-gray; }
 }
+.flat-button--densed {
+  @extend .flat-button;
+  padding: r(1);
+}
 .flat-button--large {
   @extend .flat-button;
   padding: n() r(5);
 }
 .flat-button--addons {
   font-weight: bold;
-  
+
   .icon {
     size: 16px;
     fill: currentColor;

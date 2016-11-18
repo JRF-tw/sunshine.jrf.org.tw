@@ -9,5 +9,35 @@
 }
 
 .news-card {
+  display: flex;
+  flex-flow: column;
   margin: 0 r(2) r(4);
+  overflow: hidden;
+}
+.news-card__thumbnail-wrapper {
+  margin: r(-2) r(-2) 0;
+  position: relative;
+}
+.news-card__heading {
+  margin: 0;
+  padding: r(2);
+  position: absolute n() 0 0 0;
+  text: #fff ms(1);
+  background:
+    linear-gradient(to top,
+      rgba(0,0,0,.5) 0%,
+      rgba(0,0,0,0) 100%)
+    no-repeat
+    50% 50%
+    transparent;
+}
+.news-card__content-wrapper {
+  display: flex;
+  flex-flow: column;
+  flex: 1;
+}
+.news-card__more {
+  margin-top: auto;
+  margin-left: r(-1);
+  align-self: flex-start;
 }
