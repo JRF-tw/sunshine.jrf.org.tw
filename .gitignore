@@ -43,5 +43,5 @@ public/uploads
 /mockup
 .byebug_history
 /jrf-sunny.sublime-workspace
-.tags
+.tags*
 .ctags
