@@ -1,0 +1,12 @@
+= f.input :title
+= f.input :content
+- if f.object.pic?
+  .control-group
+    label.control-label 已上傳圖片：
+    .controls= image_tag f.object.pic.L_360.url
+= f.input :pic, as: :file, hint: "建議尺寸/比例：2592 × 1296"
+= f.input :is_hidden, as: :boolean, hint: "打勾 = 前端頁面不顯示"
+
+.form-actions
+  = f.submit "送出", class: "btn btn-primary"
+  = " "

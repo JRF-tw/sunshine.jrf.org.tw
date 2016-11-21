@@ -26,6 +26,7 @@ zh-TW:
       suit: "評鑑資料-案例"
       procedure: "評鑑資料-案例處理經過"
       banner: "首頁橫幅"
+      bulletin: "公告訊息"
       suit_banner: "司法案例面面觀橫幅"
       party: "當事人"
       court_observer: "旁觀者"
@@ -244,6 +245,11 @@ zh-TW:
         pic_m: "平板用圖"
         pic_s: "手機用圖"
         weight: "權重"
+        is_hidden: "隱藏"
+      bulletin:
+        title: "標題"
+        content: "內文"
+        pic: "圖片"
         is_hidden: "隱藏"
       suit_banner:
         pic_l: "桌機用圖"
