@@ -11,11 +11,5 @@
 #  updated_at :datetime         not null
 #
 
-class BulletinsController < BaseController
-
-  def index
-  end
-
-  def show
-  end
+class Bulletin < ActiveRecord::Base
 end

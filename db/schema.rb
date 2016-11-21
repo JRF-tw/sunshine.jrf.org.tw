@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161115040539) do
+ActiveRecord::Schema.define(version: 20161121030323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,19 @@ ActiveRecord::Schema.define(version: 20161115040539) do
   add_index "branches", ["missed", "judge_id"], name: "index_branches_on_missed_and_judge_id", using: :btree
   add_index "branches", ["missed"], name: "index_branches_on_missed", using: :btree
   add_index "branches", ["name"], name: "index_branches_on_name", using: :btree
+
+  create_table "bulletins", force: :cascade do |t|
+    t.string   "title"
+    t.text     "content"
+    t.text     "pic"
+    t.boolean  "is_hidden"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "bulletins", ["content"], name: "index_bulletins_on_content", using: :btree
+  add_index "bulletins", ["is_hidden"], name: "index_bulletins_on_is_hidden", using: :btree
+  add_index "bulletins", ["title"], name: "index_bulletins_on_title", using: :btree
 
   create_table "careers", force: :cascade do |t|
     t.integer  "profile_id"

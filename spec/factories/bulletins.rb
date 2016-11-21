@@ -11,11 +11,9 @@
 #  updated_at :datetime         not null
 #
 
-class BulletinsController < BaseController
-
-  def index
+FactoryGirl.define do
+  factory :bulletin do
+    
   end
 
-  def show
-  end
 end
