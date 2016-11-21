@@ -12,4 +12,8 @@
 #
 
 class Bulletin < ActiveRecord::Base
+  include HiddenOrNot
+  validates :title, presence: true
+  validates :content, presence: true
+  mount_uploader :pic, BulletinPicUploader
 end
