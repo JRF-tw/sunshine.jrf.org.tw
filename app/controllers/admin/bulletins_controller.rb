@@ -3,8 +3,14 @@ class Admin::BulletinsController < Admin::BaseController
   before_action(except: [:index]) { add_crumb('公告訊息管理', admin_bulletins_path) }
 
   def index
-    @bulletins = Bulletin.all.page(params[:page]).per(10)
+    @search = Bulletin.all.ransack(params[:q])
+    @bulletins = @search.result.page(params[:page]).per(20)
     @admin_page_title = '公告訊息管理'
+    add_crumb @admin_page_title, '#'
+  end
+
+  def show
+    @admin_page_title = "公告訊息 - #{@bulletin.title}"
     add_crumb @admin_page_title, '#'
   end
 

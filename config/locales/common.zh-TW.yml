@@ -270,6 +270,10 @@ zh-TW:
         password_confirmation: "密碼確認"
   ransack:
     attributes:
+      bulletin:
+        title_cont: "標題包含"
+        content_cont: "內文包含"
+        is_hidden_eq: "是否在前端隱藏"
       profile:
         is_active_true: "在職中"
         is_hidden_true: "不顯示於前端"

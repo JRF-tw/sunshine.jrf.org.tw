@@ -10,6 +10,7 @@
 #= require redactor-rails/plugins
 #= require redactor-rails/langs/zh_tw
 #= require redactor-rails/app_config
+#= require ckeditor-jquery
 #= require_self
 
 # admin menu auto active

@@ -1,5 +1,5 @@
 = f.input :title
-= f.input :content
+= f.input :content, as: :ckeditor, input_html: { ckeditor: { toolbar: 'Full' } }
 - if f.object.pic?
   .control-group
     label.control-label 已上傳圖片：
