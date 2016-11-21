@@ -13,11 +13,12 @@ module RetinaHelper
   end
 
   def rwd_image(image)
-    image_tag image[:src],
+    image_tag\
+      image[:src],
       alt: (image[:alt] if image[:alt]),
-      class: [(image[:class] if image[:class]), "lazyload"],
-      "data-sizes" => "auto",
-      "data-srcset" => image[:srcset].join(",")
+      class: [(image[:class] if image[:class]), 'lazyload'],
+      'data-sizes' => 'auto',
+      'data-srcset' => image[:srcset].join(',')
   end
 
   def source_srcset(source, size, media)

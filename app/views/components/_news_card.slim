@@ -2,7 +2,10 @@ section.news-card.card
   .news-card__thumbnail-wrapper
     h3.news-card__heading = title
     
-    = image_tag thumbnail, class: 'news-card__thumbnail'
+    = rwd_image\
+      src: thumbnail[:src],
+      srcset: thumbnail[:srcset],
+      class: 'news-card__thumbnail'
     
   .news-card__content-wrapper
     p.news-card__summary = summary

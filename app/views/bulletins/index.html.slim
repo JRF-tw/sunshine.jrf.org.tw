@@ -5,7 +5,13 @@
   .container--wide
     - 9.times do |i|
       = render 'components/news_card',
-        thumbnail: 'http://placehold.it/600x400',
+        thumbnail: {\
+          src: "http://placehold.it/255x170",
+          srcset: [\
+            "http://placehold.it/255x170 255w",
+            "http://placehold.it/656x437 656w"\
+          ]\
+        },
         title: zh_lorem_sentence,
         summary: zh_lorem_paragraphs(2),
         href: "/bulletins/#{i+1}"
