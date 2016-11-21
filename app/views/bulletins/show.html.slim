@@ -5,7 +5,16 @@ article
   section.container.offcanvas-card-wrapper
     .card.card--article
       / 假資料
-      = image_tag 'http://placehold.it/900x500'
+      = rwd_image\
+        src: "http://placehold.it/288x158",
+        srcset: [\
+          "http://placehold.it/288x158 288w",
+          "http://placehold.it/722x401 722w",
+          "http://placehold.it/1018x565 1018w",
+          "http://placehold.it/1260x700 1260w",
+          "http://placehold.it/1501x833 1501w",
+          "http://placehold.it/1706x947 1706w"\
+        ]
       
       - 3.times
         p = zh_lorem_paragraphs rand(1..5)
@@ -14,7 +23,16 @@ article
         - 5.times
           li = zh_lorem_sentence
           
-      = image_tag 'http://placehold.it/900x500'
+      = rwd_image\
+        src: "http://placehold.it/288x158",
+        srcset: [\
+          "http://placehold.it/288x158 288w",
+          "http://placehold.it/722x401 722w",
+          "http://placehold.it/1018x565 1018w",
+          "http://placehold.it/1260x700 1260w",
+          "http://placehold.it/1501x833 1501w",
+          "http://placehold.it/1706x947 1706w"\
+        ]
       
       ol
         - 5.times

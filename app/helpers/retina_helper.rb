@@ -12,6 +12,14 @@ module RetinaHelper
     image_tag image_src, class: "#{name} lazyload", 'data-sizes': 'auto', 'data-srcset': path, 'data-widths': sizes.to_s # after scaled, size will be Array
   end
 
+  def rwd_image(image)
+    image_tag image[:src],
+      alt: (image[:alt] if image[:alt]),
+      class: [(image[:class] if image[:class]), "lazyload"],
+      "data-sizes" => "auto",
+      "data-srcset" => image[:srcset].join(",")
+  end
+
   def source_srcset(source, size, media)
     image_file = source.sub(/[^\/]*$/) { |matched| "#{size}_{width}_#{matched}" }
     path = path_to_image image_file.to_s
