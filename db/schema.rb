@@ -361,14 +361,12 @@ ActiveRecord::Schema.define(version: 20161115040539) do
     t.boolean  "imposter",                 default: false
     t.string   "imposter_identify_number"
     t.datetime "phone_confirmed_at"
-    t.string   "unconfirmed_phone"
   end
 
   add_index "parties", ["confirmation_token"], name: "index_parties_on_confirmation_token", unique: true, using: :btree
   add_index "parties", ["email"], name: "index_parties_on_email", unique: true, using: :btree
   add_index "parties", ["imposter"], name: "index_parties_on_imposter", using: :btree
   add_index "parties", ["reset_password_token"], name: "index_parties_on_reset_password_token", unique: true, using: :btree
-  add_index "parties", ["unconfirmed_phone"], name: "index_parties_on_unconfirmed_phone", using: :btree
 
   create_table "procedures", force: :cascade do |t|
     t.integer  "profile_id"
