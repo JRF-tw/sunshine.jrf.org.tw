@@ -100,13 +100,13 @@ ActiveRecord::Schema.define(version: 20161121030323) do
     t.string   "title"
     t.text     "content"
     t.text     "pic"
-    t.boolean  "is_hidden"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "is_banner",  default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   add_index "bulletins", ["content"], name: "index_bulletins_on_content", using: :btree
-  add_index "bulletins", ["is_hidden"], name: "index_bulletins_on_is_hidden", using: :btree
+  add_index "bulletins", ["is_banner"], name: "index_bulletins_on_is_banner", using: :btree
   add_index "bulletins", ["title"], name: "index_bulletins_on_title", using: :btree
 
   create_table "careers", force: :cascade do |t|

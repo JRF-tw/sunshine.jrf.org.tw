@@ -14,8 +14,8 @@
       .row
         .span6
           .control-group
-            label.control-label = f.label :is_hidden_eq
-            .controls#select2 = f.select :is_hidden_eq,
+            label.control-label = f.label :is_banner_eq
+            .controls#select2 = f.select :is_banner_eq,
             collect_for_boolean, include_blank: "請選擇"
     hr
     .form-actions
@@ -35,7 +35,7 @@
           th #
           th 標題
           th 圖片
-          th 是否隱藏
+          th 是否顯示於banner
           th
       tbody
         - @bulletins.each do |bulletin|
@@ -43,7 +43,7 @@
             td= bulletin.id
             td= bulletin.title
             td= image_tag bulletin.pic.L_360
-            td= bulletin.is_hidden ? "隱藏" : "-"
+            td= bulletin.is_banner ? '顯示' : '-'
             td
               = link_to "詳細資料", admin_bulletin_path(bulletin), class: "btn btn-mini"
               | &nbsp;

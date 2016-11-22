@@ -243,7 +243,8 @@ namespace :dev do
     2.times do |i|
       Admin::Bulletin.create!(
         title: "重要公告-#{i}",
-        content: '沒事'
+        content: '沒事',
+        is_banner: false
       )
     end
   end

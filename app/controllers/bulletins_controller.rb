@@ -6,7 +6,7 @@
 #  title      :string
 #  content    :text
 #  pic        :text
-#  is_hidden  :boolean
+#  is_banner  :boolean          default(FALSE)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
