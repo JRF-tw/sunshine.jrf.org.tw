@@ -1,0 +1,5 @@
+p.form-group--score-name = label
+
+= render partial: 'components/input_score',
+  collection: options, as: :option,
+  locals: {f: f, scored_type: scored_type}

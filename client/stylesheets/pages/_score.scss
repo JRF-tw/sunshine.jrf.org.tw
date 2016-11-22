@@ -1,3 +1,6 @@
+$radio-height: 55px;
+$star-size: 34px;
+
 .form--score {
   @include susy($tablet) {
     display: flex;
@@ -32,23 +35,39 @@
   }
 }
 
+.form-group--score-name {
+  margin: 0 n() r(2);
+}
 .form-group--score {
+  margin-bottom: r(2);
+}
+.form-group--score__stars-wrapper {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
-  margin-bottom: r(2);
   position: relative;
-  
+
   [type='radio'] {
     @include Normalize();
     display: inline-block;
-    height: 55px;
+    height: $radio-height;
     flex: 1;
     border: 1px solid transparent;
     opacity: 0;
+    cursor: pointer;
+    position: relative;
+
     @for $i from 1 through 10 {
       $value: $i * 0.5;
       $calc_value: if(str-length('#{$value}') < 3, '#{$value}.0', $value);
+      &[value='#{$calc_value}']:hover ~ .form-group--score__stars {
+        @for $j from 0 through floor($value) {
+          .icon-star-full:nth-child(#{$j}) { opacity: 1;}
+        }
+        @for $k from 0 through round($value) {
+          .icon-star-half:nth-child(#{$k}) { opacity: 1;}
+        }
+      }
       &[value='#{$calc_value}']:checked ~ .form-group--score__stars {
         @for $j from 0 through floor($value) {
           .icon-star-full:nth-child(#{$j}) { animation: bounceIn .5s ease-in-out 0s both; }
@@ -63,11 +82,9 @@
 .form-group--score__label {
   display: block;
   margin-bottom: r(1);
-  width: 100%;
 }
 .form-group--score__stars {
-  @include debug();
-  position: absolute r(5) 0 n() 0;
+  position: absolute round(($radio-height - $star-size)/2) 0 n() 0;
   pointer-events: none;
 
   .stars-wrapper {

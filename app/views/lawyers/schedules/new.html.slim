@@ -9,7 +9,11 @@
     prev_url_method: :get,
     form_url: lawyer_score_schedules_path\
   } do |f|
-    = render 'components/input_score', f: f,
-      label: question_desc(:attitude_scores, :score_1), options: get_schedule_score_hstore_attributes(:attitude_scores), scored_type: :attitude_scores
-    = render 'components/input_score', f: f,
-      label: question_desc(:command_scores, :score_2), options: get_schedule_score_hstore_attributes(:command_scores), scored_type: :command_scores
+    = render 'components/input_score_list', f: f,
+      label: question_desc(:attitude_scores, :score_1),
+      options: get_schedule_score_hstore_attributes(:attitude_scores),
+      scored_type: :attitude_scores
+    = render 'components/input_score_list', f: f,
+      label: question_desc(:command_scores, :score_2),
+      options: get_schedule_score_hstore_attributes(:command_scores),
+      scored_type: :command_scores
