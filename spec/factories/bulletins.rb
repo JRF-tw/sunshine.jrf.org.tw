@@ -13,7 +13,9 @@
 
 FactoryGirl.define do
   factory :bulletin do
-    
+    sequence(:title) { |n| "測試公告訊息-#{n}" }
+    content '布拉不拉不拉'
+    pic File.open "#{Rails.root}/spec/fixtures/person_avatar/people-2.jpg"
   end
 
 end

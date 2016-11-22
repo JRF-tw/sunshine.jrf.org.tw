@@ -23,6 +23,7 @@ namespace :dev do
     'dev:fake_procedures',
     'dev:fake_punishments',
     'dev:fake_banners',
+    'dev:fake_bulletins',
     'dev:fake_suit_banners',
     'dev:fake_stories',
     'dev:fake_schedules',
@@ -233,6 +234,16 @@ namespace :dev do
         pic_m: File.open("#{Rails.root}/spec/fixtures/banner/M_banner_#{i + 1}.jpg"),
         pic_s: File.open("#{Rails.root}/spec/fixtures/banner/S_banner_#{i + 1}.jpg"),
         weight: i + 1
+      )
+    end
+  end
+
+  task fake_bulletins: :environment do
+    Bulletin.destroy_all
+    2.times do |i|
+      Admin::Bulletin.create!(
+        title: "重要公告-#{i}",
+        content: '沒事'
       )
     end
   end
