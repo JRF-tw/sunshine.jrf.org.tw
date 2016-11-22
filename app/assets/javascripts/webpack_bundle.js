@@ -552,6 +552,17 @@
 	});
 
 
+	/**
+	 * 評分星星
+	 */
+
+	$(document).on('mouseenter', '.form-group--score [type="radio"]', function(e) {
+	  return $(this).addClass('hover');
+	}).on('mouseleave', '.form-group--score [type="radio"]', function(e) {
+	  return $(this).removeClass('hover');
+	});
+
+
 /***/ },
 /* 9 */
 /***/ function(module, exports, __webpack_require__) {
