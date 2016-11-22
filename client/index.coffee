@@ -90,3 +90,13 @@ $(document).on "page:change", ->
       else
         $main_header.removeClass 'has-background'
     offset: -> $main_header.height()
+
+###*
+ * 評分星星
+###
+
+$(document)
+  .on 'mouseenter', '.form-group--score [type="radio"]', (e) ->
+    $(@).addClass 'hover'
+  .on 'mouseleave', '.form-group--score [type="radio"]', (e) ->
+    $(@).removeClass 'hover'

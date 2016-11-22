@@ -16,11 +16,11 @@ li.form-group--score
         
       .form-group--score__stars
         .stars-wrapper
-          - 5.times do
+          - 10.times do
             = inline_svg 'star-o'
+        / .stars-wrapper
+        /   - 5.times do
+        /     = inline_svg 'star-half'
         .stars-wrapper
-          - 5.times do
-            = inline_svg 'star-half'
-        .stars-wrapper
-          - 5.times do
+          - 10.times do
             = inline_svg 'star-full'

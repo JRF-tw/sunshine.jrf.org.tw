@@ -63,20 +63,20 @@ $star-size: 34px;
     @for $i from 1 through 10 {
       $value: $i * 0.5;
       $calc_value: if(str-length('#{$value}') < 3, '#{$value}.0', $value);
-      &[value='#{$calc_value}']:hover ~ .form-group--score__stars {
+      &[value='#{$calc_value}'].hover ~ .form-group--score__stars {
         @for $j from 0 through floor($value) {
           .icon-star-full:nth-child(#{$j}) { opacity: 1;}
         }
-        @for $k from 0 through round($value) {
-          .icon-star-half:nth-child(#{$k}) { opacity: 1;}
+        @for $k from 0 through $value * 2 {
+          .icon-star-full:nth-child(#{$k}) { opacity: 1;}
         }
       }
       &[value='#{$calc_value}']:checked ~ .form-group--score__stars {
         @for $j from 0 through floor($value) {
           .icon-star-full:nth-child(#{$j}) { animation: bounceIn .5s ease-in-out 0s both; }
         }
-        @for $k from 0 through round($value) {
-          .icon-star-half:nth-child(#{$k}) { animation: bounceIn .5s ease-in-out 0s both; }
+        @for $k from 0 through $value * 2 {
+          .icon-star-full:nth-child(#{$k}) { animation: bounceIn .5s ease-in-out 0s both; }
         }
       }
     }
@@ -90,22 +90,25 @@ $star-size: 34px;
   text-indent: r(-$indent);
 }
 .form-group--score__stars {
-  position: absolute round(($radio-height - $star-size)/2) 0 n() 0;
+  position: absolute 0 0 0 0;
   pointer-events: none;
 
   .stars-wrapper {
     display: flex;
     justify-content: space-around;
-    position: absolute 0 0 n() 0;
+    position: absolute r(1) 0 r(1) 0;
   }
 
   .icon {
     size: 34px;
+    padding: n() r(.5);
   }
 
   .icon-star-full, .icon-star-half {
     opacity: 0;
     fill: url(#radialGradient-star);
   }
-  .icon-star-o { fill: $divider-gray; }
+  .icon-star-o {
+    fill: $divider-gray;
+  }
 }
