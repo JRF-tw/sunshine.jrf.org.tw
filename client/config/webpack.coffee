@@ -108,6 +108,7 @@ module.exports = (env) ->
         browsers: [
           'last 2 versions'
           'last 3 Safari versions'
+          'Safari 8'
           'Android 4.3'
         ]
       )
