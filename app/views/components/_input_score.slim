@@ -4,6 +4,7 @@ li.form-group--score
     br
     = question_desc(scored_type, option)
     = f.collection_radio_buttons option, [[100, '是'], [0, '否']], :first, :last
+    
   - else
     label.form-group--score__label
       = question_desc(scored_type, option).sub /（\d*）/, ''
@@ -18,9 +19,7 @@ li.form-group--score
         .stars-wrapper
           - 10.times do
             = inline_svg 'star-o'
-        / .stars-wrapper
-        /   - 5.times do
-        /     = inline_svg 'star-half'
+            
         .stars-wrapper
           - 10.times do
             = inline_svg 'star-full'

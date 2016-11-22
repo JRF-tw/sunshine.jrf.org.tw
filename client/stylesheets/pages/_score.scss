@@ -65,10 +65,10 @@ $star-size: 34px;
       $calc_value: if(str-length('#{$value}') < 3, '#{$value}.0', $value);
       &[value='#{$calc_value}'].hover ~ .form-group--score__stars {
         @for $j from 0 through floor($value) {
-          .icon-star-full:nth-child(#{$j}) { opacity: 1;}
+          .icon-star-full:nth-child(#{$j}) { opacity: floor($value) * .1; }
         }
         @for $k from 0 through $value * 2 {
-          .icon-star-full:nth-child(#{$k}) { opacity: 1;}
+          .icon-star-full:nth-child(#{$k}) { opacity: $value * 2 * .1; }
         }
       }
       &[value='#{$calc_value}']:checked ~ .form-group--score__stars {
