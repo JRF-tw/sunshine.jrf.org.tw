@@ -35,12 +35,15 @@ $star-size: 34px;
   }
 }
 
-.form-group--score-name {
+.form-group--scores-name {
   margin: 0 n() r(2);
 }
-.form-group--score {
-  margin-bottom: r(2);
+.form-group--scores {
+  margin: r(2) n();
+  padding-left: 0;
+  list-style-position: inside;
 }
+.form-group--score { margin-bottom: r(2);}
 .form-group--score__stars-wrapper {
   display: flex;
   flex-flow: row wrap;
@@ -80,8 +83,11 @@ $star-size: 34px;
   }
 }
 .form-group--score__label {
+  $indent: 2;
   display: block;
   margin-bottom: r(1);
+  padding-left: r($indent);
+  text-indent: r(-$indent);
 }
 .form-group--score__stars {
   position: absolute round(($radio-height - $star-size)/2) 0 n() 0;

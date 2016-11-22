@@ -1,12 +1,12 @@
-.form-group--score
-  / - options.each_with_index do |option, i|
+li.form-group--score
   - if question_is_true_or_false?(option)
     = up_level_question_desc(scored_type, option)
     br
     = question_desc(scored_type, option)
     = f.collection_radio_buttons option, [[100, '是'], [0, '否']], :first, :last
   - else
-    label.form-group--score__label = question_desc(scored_type, option)
+    label.form-group--score__label
+      = question_desc(scored_type, option).sub /（\d*）/, ''
     
     .form-group--score__stars-wrapper
       = f.collection_radio_buttons option,
