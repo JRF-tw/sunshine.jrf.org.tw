@@ -120,6 +120,8 @@ $mobile-search-bar-height: 195px;
     }
   }
   .search-form__input {
+    border-radius: 0;
+    box-shadow: none;
     @include susy($tablet) {
       flex: 1 0 auto;
       width: auto;
@@ -137,7 +139,7 @@ $mobile-search-bar-height: 195px;
   @include susy-media($mobile-landscape) {
     padding-top: $mobile-search-bar-height;
   }
-} 
+}
 
 .base-content-section {
   padding: r(4) r(2) r(5);
@@ -153,7 +155,7 @@ $mobile-search-bar-height: 195px;
     color: #fff $accent;
     box-shadow: inset 0px ($blur + $offset) $blur (-$blur) $shadow-color,
                 inset 0px (-$blur - $offset) $blur (-$blur) $shadow-color;
-    
+
     .flat-button { color: #fff !important; }
   }
   @include susy($tablet) {
