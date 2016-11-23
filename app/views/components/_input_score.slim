@@ -8,7 +8,9 @@ li.form-group--score
       - true_or_false_keys(scored_type, option).each do |key|
         li
           = show_true_or_false_topic(scored_type, option, key).sub pattern_of_list_num, ''
-          = f.collection_radio_buttons key, [[100, '是'], [0, '否']], :first, :last
+          
+          .form-group--score__radio-set
+            = f.collection_radio_buttons key, [[100, '是'], [0, '否']], :first, :last
 
   - else
     label.form-group--score__label
