@@ -9,6 +9,6 @@
       form_url: lawyer_score_verdicts_path\
     } do |f|
       = render 'components/input_score_list', f: f,
-        label: question_desc(:quality_scores, :score_3),
-        options: get_verdict_score_hstore_attributes(:quality_scores),
+        label: show_topic(:quality_scores, :score_3),
+        options: [:score_3_1, :score_3_2],
         scored_type: :quality_scores
