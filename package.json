@@ -25,7 +25,8 @@
     "test": "foreman start -f Procfile.test && npm run check",
     "dev-server": "webpack-dev-server --inline --hot --config webpack-dev.config.coffee",
     "build": "webpack --config webpack.config.coffee",
-    "postbuild": "gulp resolve-url"
+    "postbuild": "gulp resolve-url",
+    "clean": "rake tmp:clear && rake tmp:sessions:clear"
   },
   "dependencies": {
     "animate.css": "^3.5.1",
