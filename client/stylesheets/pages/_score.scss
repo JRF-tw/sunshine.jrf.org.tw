@@ -66,8 +66,38 @@ $star-size: 34px;
 .form-group--score__radio-set {
   padding-left: r(2);
 
-  .collection_radio_buttons { margin-right: r(2); }
-  [type="radio"] { margin-right: r(.5); }
+  .collection_radio_buttons {
+    margin-right: r(2);
+    padding-left: r(3);
+    position: relative;
+    cursor: pointer;
+
+    &::before {
+      display: inline-block;
+      content: '';
+      size: r(2);
+      border: 2px solid $divider-gray;
+      border-radius: 50%;
+      position: absolute n() n() 0 0;
+    }
+    &::after {
+      display: inline-block;
+      content: '';
+      size: r(1);
+      border-radius: 50%;
+      background-color: $accent;
+      position: absolute n() n() r(.5) r(.5);
+      transition: transform .2s ease 0s;
+      transform: scale(0);
+    }
+  }
+
+  [type="radio"] {
+    display: none;
+    margin-right: r(.5);
+
+    &:checked + .collection_radio_buttons::after { transform: scale(1); }
+  }
 }
 .form-group--score__stars-wrapper {
   display: flex;
