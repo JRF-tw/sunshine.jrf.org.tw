@@ -8,7 +8,7 @@ RSpec.describe Api::CourtsController, type: :request do
   describe '#index' do
     context 'success' do
       subject! { get '/api/courts.json' }
-      it { expect(response_body[0].key?('full_name')).to be_truthy }
+      it { expect(response_body['courts'][0].key?('full_name')).to be_truthy }
       it { expect(response).to be_success }
     end
   end

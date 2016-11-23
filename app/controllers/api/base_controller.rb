@@ -3,17 +3,13 @@ class Api::BaseController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :enable_cors
   before_action :set_default_format
-  before_action :set_header
+  before_action :set_default_language
 
   def page_404
     raise ActionController::RoutingError, "No route matches /#{params[:unmatched_route]}"
   end
 
   private
-
-  def respond_200(hash_data)
-    render json: hash_data
-  end
 
   def enable_cors
     response.headers['Access-Control-Allow-Origin'] = '*'
@@ -27,7 +23,7 @@ class Api::BaseController < ApplicationController
     request.format = 'json'
   end
 
-  def set_header
+  def set_default_language
     response.headers['Accept-Language'] = 'zh_TW'
   end
 end
