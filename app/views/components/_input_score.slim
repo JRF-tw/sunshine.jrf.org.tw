@@ -7,18 +7,18 @@
         = show_true_or_false_topic(scored_type, option, key)
         = f.collection_radio_buttons key, [[100, '是'], [0, '否']], :first, :last
     - else
-        = show_topic(scored_type, option)
-        = f.collection_radio_buttons option,
-          (0.5..5.0).step(0.5).to_a.collect {|x| [x.to_s, x.to_s] }, :first, :last,
-          boolean_style: :inline, item_wrapper_tag: false do |b|
-          = b.radio_button
-        .form-group--score__stars
-          .stars-wrapper
-            - 5.times do
-              = inline_svg 'star-o'
-          .stars-wrapper
-            - 5.times do
-              = inline_svg 'star-half'
-          .stars-wrapper
-            - 5.times do
-              = inline_svg 'star-full'
+      = show_topic(scored_type, option)
+      = f.collection_radio_buttons option,
+        (0.5..5.0).step(0.5).to_a.collect {|x| [x.to_s, x.to_s] }, :first, :last,
+        boolean_style: :inline, item_wrapper_tag: false do |b|
+        = b.radio_button
+      .form-group--score__stars
+        .stars-wrapper
+          - 5.times do
+            = inline_svg 'star-o'
+        .stars-wrapper
+          - 5.times do
+            = inline_svg 'star-half'
+        .stars-wrapper
+          - 5.times do
+            = inline_svg 'star-full'
