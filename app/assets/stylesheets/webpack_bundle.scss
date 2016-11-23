@@ -4960,18 +4960,87 @@ abbr[title="required"] {
 
 .form-group--scores-name {
   margin-top: 0;
-  margin-bottom: 16px;
+  margin-bottom: 0;
 }
 
 .form-group--scores {
   margin-top: 16px;
   margin-bottom: 16px;
+}
+
+.form-group--scores,
+.form-group--scores ol {
   padding-left: 0;
-  list-style-position: inside;
+  list-style: none;
+  counter-reset: section;
+}
+
+.form-group--scores li::before {
+  display: inline-block;
+  margin-left: -16px;
+  margin-right: 8px;
+  counter-increment: section;
+  content: counters(section, "-");
 }
 
 .form-group--score {
   margin-bottom: 16px;
+  padding-left: 16px;
+}
+
+.form-group--score li {
+  margin-top: 8px;
+}
+
+.form-group--score__radio-set {
+  padding-left: 16px;
+}
+
+.form-group--score__radio-set .collection_radio_buttons {
+  margin-right: 16px;
+  padding-left: 24px;
+  position: relative;
+  cursor: pointer;
+}
+
+.form-group--score__radio-set .collection_radio_buttons::before {
+  display: inline-block;
+  content: '';
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(0, 0, 0, 0.12);
+  border-radius: 50%;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+}
+
+.form-group--score__radio-set .collection_radio_buttons::after {
+  display: inline-block;
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #00bcd4;
+  bottom: 4px;
+  left: 4px;
+  position: absolute;
+  -webkit-transition: -webkit-transform .2s ease 0s;
+  transition: -webkit-transform .2s ease 0s;
+  transition: transform .2s ease 0s;
+  transition: transform .2s ease 0s, -webkit-transform .2s ease 0s;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+}
+
+.form-group--score__radio-set [type="radio"] {
+  display: none;
+  margin-right: 4px;
+}
+
+.form-group--score__radio-set [type="radio"]:checked + .collection_radio_buttons::after {
+  -webkit-transform: scale(1);
+          transform: scale(1);
 }
 
 .form-group--score__stars-wrapper {
@@ -5908,11 +5977,9 @@ abbr[title="required"] {
           animation: bounceIn .5s ease-in-out 0s both;
 }
 
-.form-group--score__label {
-  display: block;
-  margin-bottom: 8px;
-  padding-left: 16px;
-  text-indent: -16px;
+.form-group--score__stars-wrapper {
+  margin-top: 16px;
+  margin-left: -16px;
 }
 
 .form-group--score__stars {
