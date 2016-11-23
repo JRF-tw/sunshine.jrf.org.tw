@@ -41,9 +41,22 @@ $star-size: 34px;
 .form-group--scores {
   margin: r(2) n();
   padding-left: 0;
-  list-style-position: inside;
+
+  &, ol {
+    list-style: none;
+    counter-reset: section;
+  }
+
+  li::before {
+    display: inline-block;
+    margin-right: r(1);
+    counter-increment: section;
+    content: counters(section, '-');
+  }
 }
-.form-group--score { margin-bottom: r(2);}
+.form-group--score {
+  margin-bottom: r(2);
+}
 .form-group--score__stars-wrapper {
   display: flex;
   flex-flow: row wrap;
@@ -83,11 +96,7 @@ $star-size: 34px;
   }
 }
 .form-group--score__label {
-  $indent: 2;
-  display: block;
   margin-bottom: r(1);
-  padding-left: r($indent);
-  text-indent: r(-$indent);
 }
 .form-group--score__stars {
   position: absolute 0 0 0 0;
