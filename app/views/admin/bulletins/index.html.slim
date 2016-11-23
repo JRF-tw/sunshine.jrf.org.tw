@@ -1,4 +1,4 @@
-= search_form_for @search, :url => admin_bulletins_path, :wrapper => :admin, :html => { :class => "form-horizontal" } do |f|
+= search_form_for @search, url: admin_bulletins_path, wrapper: :admin, html: { class: "form-horizontal" } do |f|
   .well
     fieldset
       legend 搜尋
@@ -6,11 +6,11 @@
         .span6
           .control-group
             label.control-label = f.label :title_cont
-            .controls= f.search_field :title_cont
+            .controls = f.search_field :title_cont
         .span6
           .control-group
             label.control-label = f.label :content_cont
-            .controls= f.search_field :content_cont
+            .controls = f.search_field :content_cont
       .row
         .span6
           .control-group
@@ -19,9 +19,9 @@
             collect_for_boolean, include_blank: "請選擇"
     hr
     .form-actions
-      = f.submit :value => "搜尋", :class => "btn btn-primary"
+      = f.submit value: "搜尋", class: "btn btn-primary"
       = " "
-      = link_to "清空搜尋結果", admin_bulletins_path, :class => "btn btn-default"
+      = link_to "清空搜尋結果", admin_bulletins_path, class: "btn btn-default"
 
 
 = admin_widget_box "公告訊息 列表", icon: :pencil do
@@ -40,15 +40,15 @@
       tbody
         - @bulletins.each do |bulletin|
           tr
-            td= bulletin.id
-            td= bulletin.title
-            td= image_tag bulletin.pic.L_360
-            td= bulletin.is_banner ? '顯示' : '-'
+            td = bulletin.id
+            td = bulletin.title
+            td = image_tag bulletin.pic.L_360
+            td = bulletin.is_banner ? '顯示' : '-'
             td
-              = link_to "詳細資料", admin_bulletin_path(bulletin), class: "btn btn-mini"
-              | &nbsp;
-              = link_to "編輯", edit_admin_bulletin_path(bulletin), class: "btn btn-mini btn-success"
-              | &nbsp;
-              = link_to "刪除", admin_bulletin_path(bulletin), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除公告訊息？"
+               = link_to "詳細資料", admin_bulletin_path(bulletin), class: "btn btn-mini"
+               | &nbsp;
+               = link_to "編輯", edit_admin_bulletin_path(bulletin), class: "btn btn-mini btn-success"
+               | &nbsp;
+               = link_to "刪除", admin_bulletin_path(bulletin), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除公告訊息？"
     .ui-toolbar.ui-widget-header
       = paginate @bulletins, theme: :admin

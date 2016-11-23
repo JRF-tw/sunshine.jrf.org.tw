@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161121030323) do
+ActiveRecord::Schema.define(version: 20161122075403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "postgis"
   enable_extension "hstore"
+  enable_extension "postgis"
 
   create_table "articles", force: :cascade do |t|
     t.integer  "profile_id"
@@ -105,9 +105,7 @@ ActiveRecord::Schema.define(version: 20161121030323) do
     t.datetime "updated_at",                 null: false
   end
 
-  add_index "bulletins", ["content"], name: "index_bulletins_on_content", using: :btree
   add_index "bulletins", ["is_banner"], name: "index_bulletins_on_is_banner", using: :btree
-  add_index "bulletins", ["title"], name: "index_bulletins_on_title", using: :btree
 
   create_table "careers", force: :cascade do |t|
     t.integer  "profile_id"

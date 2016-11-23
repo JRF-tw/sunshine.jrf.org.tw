@@ -9,7 +9,5 @@ class CreateBulletins < ActiveRecord::Migration
     end
 
     add_index :bulletins, :is_banner
-    add_index :bulletins, :title
-    add_index :bulletins, :content
   end
 end

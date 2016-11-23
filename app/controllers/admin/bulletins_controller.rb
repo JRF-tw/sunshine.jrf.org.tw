@@ -16,7 +16,7 @@ class Admin::BulletinsController < Admin::BaseController
   before_action(except: [:index]) { add_crumb('公告訊息管理', admin_bulletins_path) }
 
   def index
-    @search = Bulletin.all.ransack(params[:q])
+    @search = Admin::Bulletin.all.ransack(params[:q])
     @bulletins = @search.result.page(params[:page]).per(20)
     @admin_page_title = '公告訊息管理'
     add_crumb @admin_page_title, '#'
@@ -39,20 +39,12 @@ class Admin::BulletinsController < Admin::BaseController
 
   def create
     if bulletin.save
-      respond_to do |f|
-        f.html { redirect_to admin_bulletins_path, flash: { success: '公告訊息已新增' } }
-        f.js { render }
-      end
+      redirect_to admin_bulletins_path, flash: { success: '公告訊息已新增' }
     else
-      respond_to do |f|
-        f.html {
-          @admin_page_title = '新增公告訊息'
-          add_crumb @admin_page_title, '#'
-          flash[:error] = bulletin.errors.full_messages
-          render :new
-        }
-        f.js { render }
-      end
+      @admin_page_title = '新增公告訊息'
+      add_crumb @admin_page_title, '#'
+      flash[:error] = bulletin.errors.full_messages
+      render :new
     end
   end
 

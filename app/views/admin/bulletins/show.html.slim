@@ -3,13 +3,13 @@
     tbody
       tr
         td 標題
-        td= @bulletin.title
+        td = @bulletin.title
       tr
         td 內容
-        td= raw @bulletin.content
+        td = raw @bulletin.content
       tr
         td 圖片
-        td= image_tag @bulletin.pic.L_360
+        td = image_tag @bulletin.pic.L_360
       tr
-        td 是否顯示於banner
-        td= @bulletin.is_banner? ? "是" : "否"
+        td 是否顯示於首頁banner
+        td = @bulletin.is_banner? ? "是" : "否"
