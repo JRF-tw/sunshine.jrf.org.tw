@@ -12,7 +12,7 @@
 #
 
 class Admin::BulletinsController < Admin::BaseController
-  before_action :bulletin
+  before_action :bulletin, except: [:index]
   before_action(except: [:index]) { add_crumb('公告訊息管理', admin_bulletins_path) }
 
   def index
@@ -75,6 +75,6 @@ class Admin::BulletinsController < Admin::BaseController
   end
 
   def bulletin_params
-    params.fetch(:admin_bulletin, {}).permit(:title, :content, :pic, :is_banner)
+    params.require(:admin_bulletin).permit(:title, :content, :pic, :is_banner) unless params[:action] == 'new'
   end
 end
