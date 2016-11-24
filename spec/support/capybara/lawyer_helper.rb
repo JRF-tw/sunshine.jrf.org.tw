@@ -91,7 +91,7 @@ module Capybara
 
     def lawyer_create_verdict_score
       choose('verdict_score_score_3_1_20')
-      6.times.each_with_index { |i| choose("verdict_score_score_3_2_#{i + 1}_100") }
+      6.times.each_with_index { |i| first("label[for$='verdict_score_score_3_2_#{i + 1}_100']").click }
       within('#new_verdict_score') do
         fill_in 'verdict_score_note', with: 'test'
       end
