@@ -12,7 +12,7 @@
 #
 
 class Admin::BulletinsController < Admin::BaseController
-  before_action :bulletin, except: [:index]
+  before_action :bulletin, except: [:index, :new]
   before_action(except: [:index]) { add_crumb('公告訊息管理', admin_bulletins_path) }
 
   def index
@@ -28,6 +28,7 @@ class Admin::BulletinsController < Admin::BaseController
   end
 
   def new
+    @bulletin = Admin::Bulletin.new
     @admin_page_title = '新增公告訊息'
     add_crumb @admin_page_title, '#'
   end
@@ -39,32 +40,29 @@ class Admin::BulletinsController < Admin::BaseController
 
   def create
     if bulletin.save
-      redirect_to admin_bulletins_path, flash: { success: '公告訊息已新增' }
+      redirect_as_success(admin_bulletins_path, '公告訊息已新增')
     else
       @admin_page_title = '新增公告訊息'
       add_crumb @admin_page_title, '#'
-      flash[:error] = bulletin.errors.full_messages
-      render :new
+      render_as_fail(:new, bulletin.errors.full_messages)
     end
   end
 
   def update
     if bulletin.update_attributes(bulletin_params)
-      redirect_to admin_bulletins_path, flash: { success: '公告訊息已修改' }
+      redirect_as_success(admin_bulletins_path, '公告訊息已修改')
     else
       @admin_page_title = '編輯公告訊息'
       add_crumb @admin_page_title, '#'
-      flash[:error] = bulletin.errors.full_messages
-      render :edit
+      render_as_fail(:edit, bulletin.errors.full_messages)
     end
   end
 
   def destroy
     if bulletin.destroy
-      redirect_to admin_bulletins_path, flash: { success: '公告訊息已刪除' }
+      redirect_as_success(admin_bulletins_path, '公告訊息已刪除')
     else
-      flash[:error] = bulletin.errors.full_messages
-      redirect_to :back
+      redirect_to :back, flash: { error: bulletin.errors.full_messages }
     end
   end
 
@@ -75,6 +73,6 @@ class Admin::BulletinsController < Admin::BaseController
   end
 
   def bulletin_params
-    params.require(:admin_bulletin).permit(:title, :content, :pic, :is_banner) unless params[:action] == 'new'
+    params.require(:admin_bulletin).permit(:title, :content, :pic, :is_banner)
   end
 end
