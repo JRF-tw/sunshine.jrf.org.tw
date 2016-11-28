@@ -32,6 +32,7 @@ class Judge < ActiveRecord::Base
   has_many :stories, through: :story_relations, as: :people
   has_many :verdict_relations, as: :person
   has_many :schedule_scores
+  has_many :valid_scores
   has_one :prosecutor
 
   mount_uploader :avatar, AvatarUploader

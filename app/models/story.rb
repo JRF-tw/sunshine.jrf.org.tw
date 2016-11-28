@@ -28,6 +28,7 @@ class Story < ActiveRecord::Base
   has_many :story_subscriptions, dependent: :destroy
   has_many :verdict_scores
   has_many :schedule_scores
+  has_many :valid_scores
   belongs_to :court
 
   serialize :party_names, Array

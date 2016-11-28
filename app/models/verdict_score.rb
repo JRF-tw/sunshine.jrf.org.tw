@@ -23,4 +23,5 @@ class VerdictScore < ActiveRecord::Base
 
   belongs_to :story
   belongs_to :verdict_rater, polymorphic: true
+  has_one    :valid_score, as: :score
 end

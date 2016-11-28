@@ -33,6 +33,7 @@ class Party < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   has_many :schedule_scores, as: :schedule_rater
   has_many :verdict_scores, as: :verdict_rater
+  has_many :valid_scroes, as: :score_rater
 
   devise :database_authenticatable, :registerable, :async, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
