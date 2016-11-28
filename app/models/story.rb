@@ -21,6 +21,7 @@
 #
 
 class Story < ActiveRecord::Base
+  include StoryCalculateStatusConcern
   has_many :schedules
   has_many :verdicts
   has_many :story_relations
@@ -36,6 +37,11 @@ class Story < ActiveRecord::Base
   serialize :judges_names, Array
   serialize :prosecutor_names, Array
 
+  enum calculate_status: {
+    not_done: 1,
+    schedule_score_done: 2,
+    all_score_done: 3
+  }
   scope :newest, -> { order('id DESC') }
 
   include Redis::Objects

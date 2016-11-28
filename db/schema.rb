@@ -618,9 +618,11 @@ ActiveRecord::Schema.define(version: 20161128024202) do
     t.date     "adjudge_date"
     t.date     "pronounce_date"
     t.boolean  "is_pronounce",     default: false
+    t.integer  "calculate_status", default: 1
   end
 
   add_index "stories", ["adjudge_date"], name: "index_stories_on_adjudge_date", using: :btree
+  add_index "stories", ["calculate_status"], name: "index_stories_on_calculate_status", using: :btree
   add_index "stories", ["court_id"], name: "index_stories_on_court_id", using: :btree
   add_index "stories", ["is_adjudge"], name: "index_stories_on_is_adjudge", using: :btree
   add_index "stories", ["is_pronounce"], name: "index_stories_on_is_pronounce", using: :btree

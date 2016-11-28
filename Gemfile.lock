@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     CFPropertyList (2.3.2)
+    aasm (4.11.1)
     actionmailer (4.2.5.1)
       actionpack (= 4.2.5.1)
       actionview (= 4.2.5.1)
@@ -634,6 +635,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aasm
   activerecord-postgis-adapter
   acts_as_list
   annotate

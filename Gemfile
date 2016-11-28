@@ -10,6 +10,7 @@ gem 'redis-namespace'
 
 gem 'dalli'
 gem 'connection_pool'
+gem 'aasm'
 
 # ENV
 gem 'settingslogic'
