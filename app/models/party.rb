@@ -25,6 +25,7 @@
 #  imposter                 :boolean          default(FALSE)
 #  imposter_identify_number :string
 #  phone_confirmed_at       :datetime
+#  unconfirmed_phone        :string
 #
 
 class Party < ActiveRecord::Base
@@ -47,7 +48,7 @@ class Party < ActiveRecord::Base
   has_many :verdict_relations, as: :person
 
   include Redis::Objects
-  value :unconfirmed_phone, expiration: 1.hour
+  value :delete_phone_job_id
   value :phone_varify_code, expiration: 1.hour
   counter :retry_verify_count, expiration: 1.hour
   counter :sms_sent_count, expiration: 5.minutes

@@ -25,6 +25,7 @@
 #  imposter                 :boolean          default(FALSE)
 #  imposter_identify_number :string
 #  phone_confirmed_at       :datetime
+#  unconfirmed_phone        :string
 #
 
 FactoryGirl.define do
@@ -44,6 +45,10 @@ FactoryGirl.define do
 
     trait :with_confirmation_token do
       sequence(:confirmation_token) { |n| "#{n}aaooggdw" }
+    end
+
+    trait :with_unconfirmed_phone do
+      sequence(:unconfirmed_phone) { "09#{rand(1..99_999_999).to_s.rjust(8, '0')}" }
     end
 
     trait :without_phone_number do

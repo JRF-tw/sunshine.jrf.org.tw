@@ -70,7 +70,7 @@
               - if party.phone_number
                 = "#{party.phone_number}   (#{party.phone_confirmed? ? "已驗證" : "尚未驗證"})"
                 br
-              = party.unconfirmed_phone.value || "無待驗證號碼"
+              = party.unconfirmed_phone || "無待驗證號碼"
             td = party.created_at.to_date
             td
               = party.current_sign_in_at.try(:to_date)

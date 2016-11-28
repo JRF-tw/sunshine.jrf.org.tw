@@ -1,30 +1,30 @@
 class Party::VerifyPhoneContext < BaseContext
   PERMITS = [:phone_varify_code].freeze
 
-  before_perform  :record_retry_count, unless: :valid?
-  before_perform  :reset_data_out_retry_range, unless: :valid?
-  before_perform  :assign_value
+  before_perform  :init_verify_form_object
   after_perform   :build_message
   after_perform   :confirmed
   after_perform   :reset_data
 
-  def initialize(party)
+  def initialize(party, params)
     @party = party
+    @params = permit_params(params[:verify_form] || params, PERMITS)
   end
 
-  def perform(params)
-    @params = permit_params(params[:party] || params, PERMITS)
-
+  def perform
     run_callbacks :perform do
-      return add_error(:data_update_fail, @party.errors.full_messages.join(',').to_s) unless @party.save
-      true
+      unless @form_object.save
+        record_retry_count
+        reset_data_out_retry_range
+      end
     end
+    @form_object
   end
 
   private
 
-  def valid?
-    @params[:phone_varify_code] == @party.phone_varify_code.value
+  def init_verify_form_object
+    @form_object = Party::VerifyPhoneFormObject.new(@party, @params)
   end
 
   def record_retry_count
@@ -36,13 +36,8 @@ class Party::VerifyPhoneContext < BaseContext
       reset_data
       return add_error(:retry_verify_count_out_range)
     else
-      return add_error(:wrong_verify_code)
+      return add_error(:data_update_fail, @form_object.full_error_messages)
     end
-  end
-
-  def assign_value
-    @party.assign_attributes(phone_number: @party.unconfirmed_phone.value)
-    @party.unconfirmed_phone = nil
   end
 
   def build_message
@@ -54,8 +49,14 @@ class Party::VerifyPhoneContext < BaseContext
   end
 
   def reset_data
-    @party.unconfirmed_phone = nil
+    @party.update_attributes(unconfirmed_phone: nil)
+    Sidekiq::ScheduledSet.new.find_job(@party.delete_phone_job_id.value).try(:delete)
+    reset_redis_object
+  end
+
+  def reset_redis_object
     @party.phone_varify_code = nil
     @party.retry_verify_count.reset
+    @party.delete_phone_job_id = nil
   end
 end
