@@ -28,11 +28,11 @@ class Party::ResendPhoneVerifySmsContext < BaseContext
 
   def build_message
     link = verify_party_phone_url(host: Setting.host)
-    @message = "當事人手機驗證簡訊 發送至 #{@party.unconfirmed_phone.value}: 認證碼 : #{@party.phone_varify_code.value}, #{link}"
+    @message = "當事人手機驗證簡訊 發送至 #{@party.unconfirmed_phone}: 認證碼 : #{@party.phone_varify_code.value}, #{link}"
   end
 
   def send_sms
-    SmsService.send_async(@party.unconfirmed_phone.value, @message)
+    SmsService.send_async(@party.unconfirmed_phone, @message)
   end
 
   def record_sms_count

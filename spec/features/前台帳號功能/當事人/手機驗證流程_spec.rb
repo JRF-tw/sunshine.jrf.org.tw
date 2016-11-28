@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature '前台帳號功能', type: :feature, js: true do
   feature '當事人' do
-    let!(:party_A) { create :party, :without_phone_number }
+    let!(:party_A) { create :party, :without_phone_number, :with_unconfirmed_phone }
     def edit_phone_number(phone_number)
       visit(new_party_phone_path)
       party_input_phone_number(phone_number)
@@ -31,8 +31,7 @@ feature '前台帳號功能', type: :feature, js: true do
         end
 
         Given '當事人B註冊後第一次輸入手機號碼 0988888888 ，進行驗證中' do
-          let!(:party_B) { create :party }
-          before { party_B.unconfirmed_phone = '0988888888' }
+          let!(:party_B) { create :party, unconfirmed_phone: '0988888888' }
           When '輸入 0988888888' do
             before { edit_phone_number('0988888888') }
             Then '顯示錯誤訊息' do
@@ -43,8 +42,7 @@ feature '前台帳號功能', type: :feature, js: true do
         end
 
         Given '當事人B註冊後已完成手機驗證，但又再更改新手機號碼為 0988888888 ，進行驗證中' do
-          let!(:party_B) { create :party, :already_confirmed }
-          before { party_B.unconfirmed_phone = '0988888888' }
+          let!(:party_B) { create :party, :already_confirmed, unconfirmed_phone: '0988888888' }
           When '輸入 0988888888' do
             before { edit_phone_number('0988888888') }
             Then '顯示錯誤訊息' do
@@ -80,7 +78,6 @@ feature '前台帳號功能', type: :feature, js: true do
 
       Scenario '認證碼通過的條件' do
         before { signin_party(identify_number: party_A.identify_number) }
-        before { party_A.unconfirmed_phone = '0988888888' }
         before { party_A.phone_varify_code = '1111' }
         Given '已嘗試錯誤 1 次，並且時間在 60 分鐘內' do
           before { verify_phone_number('2222') }
@@ -101,7 +98,7 @@ feature '前台帳號功能', type: :feature, js: true do
         Given '已超過 60 分鐘' do
           before { visit(verify_party_phone_path) }
           before { party_input_verify_code('2222') }
-          before { party_A.unconfirmed_phone = nil }
+          before { party_A.update_attributes(unconfirmed_phone: nil) }
           before { party_A.phone_varify_code = nil }
           When '輸入正確的驗證碼' do
             before { click_button '認證' }

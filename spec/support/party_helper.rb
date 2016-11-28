@@ -26,7 +26,7 @@ module PartyHelper
   def party_with_unconfirm_phone_number(phone_number)
     party = create(:party)
     signin_party(party)
-    post '/party/phone', party: { unconfirmed_phone: phone_number }
+    post '/party/phone', phone_form: { unconfirmed_phone: phone_number }
     signout_party
     party
   end
@@ -43,11 +43,11 @@ module PartyHelper
   end
 
   def party_chang_phone_number_times(times)
-    times.times { put '/party/phone', party: { unconfirmed_phone: '09' + rand(10_000_000..99_999_999).to_s } }
+    times.times { put '/party/phone', phone_form: { unconfirmed_phone: '09' + rand(10_000_000..99_999_999).to_s } }
   end
 
   def party_verifing_error_times(times)
-    times.times { put '/party/phone/verifing', party: { phone_varify_code: '' } }
+    times.times { put '/party/phone/verifing', verify_form: { phone_varify_code: '' } }
   end
 
   def party_subscribe_story_date_today
