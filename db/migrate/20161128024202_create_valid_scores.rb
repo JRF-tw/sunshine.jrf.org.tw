@@ -11,6 +11,7 @@ class CreateValidScores < ActiveRecord::Migration
       t.hstore  :attitude_scores
       t.hstore  :command_scores
       t.hstore  :quality_scores
+      t.timestamps null: false
     end
     add_index :valid_scores, :story_id
     add_index :valid_scores, :judge_id
