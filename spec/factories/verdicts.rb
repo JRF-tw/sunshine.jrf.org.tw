@@ -23,6 +23,26 @@ FactoryGirl.define do
     trait :with_file do
       file { File.open("#{Rails.root}/spec/fixtures/scrap_data/judgment.html") }
     end
+
+    trait :create_relation_by_role_name do
+      after(:create) do |v|
+        v.party_names.each do |name|
+          party = Party.find_by_name(name)
+          create :verdict_relation, person: party, verdict: v
+        end
+
+        v.lawyer_names.each do |name|
+          lawyer = Lawyer.find_by_name(name)
+          create :verdict_relation, person: lawyer, verdict: v
+        end
+
+        v.judges_names.each do |name|
+          judge = Judge.find_by_name(name)
+          create :verdict_relation, person: judge, verdict: v
+        end
+      end
+    end
+
   end
 
 end

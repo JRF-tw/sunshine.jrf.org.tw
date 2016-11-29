@@ -13,9 +13,8 @@ describe '判決書分析', type: :context do
       Given '觀察者在同案件下，對法官A和法官B有開庭評鑑記錄' do
         let!(:schedule_score_A) { create :schedule_score, story: story, schedule_rater: court_observer, judge: judge_A }
         let!(:schedule_score_B) { create :schedule_score, story: story, schedule_rater: court_observer, judge: judge_B }
-        let!(:verdict) { create :verdict, is_judgment: true, story: story, judges_names: [judge_A.name] }
+        let!(:verdict) { create :verdict, :create_relation_by_role_name, is_judgment: true, story: story, judges_names: [judge_A.name] }
         When '判決書上有法官A、無法官B' do
-          let!(:verdict_relation) { create :verdict_relation, verdict: verdict, person: judge_A }
           Then '法官A評鑑有效、法官B評鑑無效' do
             expect(subject.new(schedule_score_A).perform).to be_truthy
             expect(subject.new(schedule_score_B).perform).to be_falsey
@@ -29,10 +28,8 @@ describe '判決書分析', type: :context do
       Given '律師在同案件下，對法官A和法官B有開庭評鑑記錄，且判決書上有法官A、無法官B' do
         let!(:schedule_score_A) { create :schedule_score, story: story, schedule_rater: lawyer, judge: judge_A }
         let!(:schedule_score_B) { create :schedule_score, story: story, schedule_rater: lawyer, judge: judge_B }
-        let!(:verdict) { create :verdict, is_judgment: true, story: story, judges_names: [judge_A.name], lawyer_names: [lawyer.name] }
-        let!(:verdict_relation_1) { create :verdict_relation, verdict: verdict, person: judge_A }
+        let!(:verdict) { create :verdict, :create_relation_by_role_name, is_judgment: true, story: story, judges_names: [judge_A.name], lawyer_names: [lawyer.name] }
         When '有抓到律師姓名' do
-          let!(:verdict_relation_2) { create :verdict_relation, verdict: verdict, person: lawyer }
           Then '法官A評鑑有效、法官B評鑑無效' do
             expect(subject.new(schedule_score_A).perform).to be_truthy
             expect(subject.new(schedule_score_B).perform).to be_falsey
@@ -54,10 +51,8 @@ describe '判決書分析', type: :context do
       Given '當事人在同案件下，對法官A和法官B有開庭評鑑記錄，且判決書上有法官A、無法官B' do
         let!(:schedule_score_A) { create :schedule_score, story: story, schedule_rater: party, judge: judge_A }
         let!(:schedule_score_B) { create :schedule_score, story: story, schedule_rater: party, judge: judge_B }
-        let!(:verdict) { create :verdict, is_judgment: true, story: story, judges_names: [judge_A.name], party_names: [party.name] }
-        let!(:verdict_relation_1) { create :verdict_relation, verdict: verdict, person: judge_A }
+        let!(:verdict) { create :verdict, :create_relation_by_role_name, is_judgment: true, story: story, judges_names: [judge_A.name], party_names: [party.name] }
         When '有抓到當事人姓名' do
-          let!(:verdict_relation_2) { create :verdict_relation, verdict: verdict, person: party }
           Then '法官A開庭評鑑有效、法官B開庭評鑑無效' do
             expect(subject.new(schedule_score_A).perform).to be_truthy
             expect(subject.new(schedule_score_B).perform).to be_falsey
@@ -65,7 +60,7 @@ describe '判決書分析', type: :context do
         end
 
         When '沒抓到當事人姓名' do
-          let!(:verdict) { create :verdict, is_judgment: true, story: story, judges_names: [judge_A.name] }
+          let!(:verdict) { create :verdict, :create_relation_by_role_name, is_judgment: true, story: story, judges_names: [judge_A.name] }
           Then '開庭評鑑皆無效' do
             expect(subject.new(schedule_score_A).perform).to be_falsey
             expect(subject.new(schedule_score_B).perform).to be_falsey
@@ -79,10 +74,7 @@ describe '判決書分析', type: :context do
       Scenario '當事人的判決評鑑是否有效，取決於當事人和法官姓名是否有抓到' do
         let!(:party) { create :party, :already_confirmed}
         Given '判決書有當事人姓名、有法官A,B姓名' do
-          let!(:verdict) { create :verdict, is_judgment: true, story: story, judges_names: [judge_A.name, judge_B.name], party_names: [party.name] }
-          let!(:verdict_relation_1) { create :verdict_relation, verdict: verdict, person: party }
-          let!(:verdict_relation_2) { create :verdict_relation, verdict: verdict, person: judge_A }
-          let!(:verdict_relation_3) { create :verdict_relation, verdict: verdict, person: judge_B }
+          let!(:verdict) { create :verdict, :create_relation_by_role_name, is_judgment: true, story: story, judges_names: [judge_A.name, judge_B.name], party_names: [party.name] }
           When '當事人進行判決評鑑（一次）' do
             let!(:verdict_score) { create :verdict_score, story: story , verdict_rater: party }
             Then '當事人對法官A,B 共 2 筆判決評鑑皆有效' do
@@ -92,9 +84,7 @@ describe '判決書分析', type: :context do
         end
 
         Given '判決書無當事人姓名、有法官A,B姓名' do
-          let!(:verdict) { create :verdict, is_judgment: true, story: story, judges_names: [judge_A.name, judge_B.name] }
-          let!(:verdict_relation_1) { create :verdict_relation, verdict: verdict, person: judge_A }
-          let!(:verdict_relation_2) { create :verdict_relation, verdict: verdict, person: judge_B }
+          let!(:verdict) { create :verdict, :create_relation_by_role_name, is_judgment: true, story: story, judges_names: [judge_A.name, judge_B.name] }
           When '當事人進行判決評鑑（一次）' do
             let!(:verdict_score) { create :verdict_score, story: story , verdict_rater: party }
             Then '當事人的判決評鑑皆無效' do
@@ -104,8 +94,7 @@ describe '判決書分析', type: :context do
         end
 
         Given '判決書有當事人姓名、無法官' do
-          let!(:verdict) { create :verdict, is_judgment: true, story: story, party_names: [party.name] }
-          let!(:verdict_relation) { create :verdict_relation, verdict: verdict, person: party }
+          let!(:verdict) { create :verdict, :create_relation_by_role_name, is_judgment: true, story: story, party_names: [party.name] }
           When '當事人進行判決評鑑（一次）' do
             let!(:verdict_score) { create :verdict_score, story: story , verdict_rater: party }
             Then '當事人的判決評鑑皆無效' do
@@ -118,10 +107,7 @@ describe '判決書分析', type: :context do
       Scenario '律師的判決評鑑是否有效，取決於律師和法官姓名是否有抓到' do
         let!(:lawyer) { create :lawyer, :with_confirmed }
         Given '判決書有律師姓名、有法官A,B姓名' do
-          let!(:verdict) { create :verdict, is_judgment: true, story: story, judges_names: [judge_A.name, judge_B.name], lawyer_names: [lawyer.name] }
-          let!(:verdict_relation_1) { create :verdict_relation, verdict: verdict, person: lawyer }
-          let!(:verdict_relation_2) { create :verdict_relation, verdict: verdict, person: judge_A }
-          let!(:verdict_relation_3) { create :verdict_relation, verdict: verdict, person: judge_B }
+          let!(:verdict) { create :verdict, :create_relation_by_role_name, is_judgment: true, story: story, judges_names: [judge_A.name, judge_B.name], lawyer_names: [lawyer.name] }
           When '律師進行判決評鑑（一次）' do
             let!(:verdict_score) { create :verdict_score, story: story , verdict_rater: lawyer }
             Then '律師對法官A,B 共 2 筆判決評鑑皆有效' do
@@ -131,9 +117,7 @@ describe '判決書分析', type: :context do
         end
 
         Given '判決書無律師姓名、有法官A,B姓名' do
-          let!(:verdict) { create :verdict, is_judgment: true, story: story, judges_names: [judge_A.name, judge_B.name] }
-          let!(:verdict_relation_1) { create :verdict_relation, verdict: verdict, person: judge_A }
-          let!(:verdict_relation_2) { create :verdict_relation, verdict: verdict, person: judge_B }
+          let!(:verdict) { create :verdict, :create_relation_by_role_name, is_judgment: true, story: story, judges_names: [judge_A.name, judge_B.name] }
           When '律師進行判決評鑑（一次）' do
             let!(:verdict_score) { create :verdict_score, story: story , verdict_rater: lawyer }
             Then '律師的判決評鑑皆無效' do
@@ -143,9 +127,7 @@ describe '判決書分析', type: :context do
         end
 
         Given '判決書有律師姓名、無法官' do
-          let!(:verdict) { create :verdict, is_judgment: true, story: story, lawyer_names: [lawyer.name] }
-          let!(:verdict_relation) { create :verdict_relation, verdict: verdict, person: lawyer }
-          
+          let!(:verdict) { create :verdict, :create_relation_by_role_name, is_judgment: true, story: story, lawyer_names: [lawyer.name] }
           When '律師進行判決評鑑（一次）' do
             let!(:verdict_score) { create :verdict_score, story: story , verdict_rater: lawyer }
             Then '律師的判決評鑑皆無效' do
