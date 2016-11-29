@@ -1,11 +1,11 @@
 class Scrap::ScheduleScoreConvertContext < BaseContext
   before_perform :check_Schedule_score_valid
 
-  def initialize(schedule_score, schedule: nil)
+  def initialize(schedule_score)
     @schedule_score = schedule_score
-    @schedule = schedule
     @story = @schedule_score.story
     @rater = @schedule_score.schedule_rater
+    @verdict = @story.verdicts.find_by_is_judgment(true)
   end
 
   def perform
@@ -20,11 +20,11 @@ class Scrap::ScheduleScoreConvertContext < BaseContext
 
   def valid_score_params
     { 
+      story: @schedule_score.story,
+      judge: @schedule_score.judge,
+      schedule: @schedule_score.schedule,
       score: @schedule_score, 
-      story: @schedule_score.story, 
-      judge: @schedule_score.judge, 
       score_rater: @rater, 
-      schedule: @schedule, 
       attitude_scores: @schedule_score.attitude_scores, 
       command_scores: @schedule_score.command_scores 
     }
@@ -48,15 +48,15 @@ class Scrap::ScheduleScoreConvertContext < BaseContext
   end
 
   def judge_exist?
-    @story.verdicts.find_by_is_judgment(true).judges_names.include?(@schedule_score.judge.name)
+    @verdict.judges.include?(@schedule_score.judge)
   end
 
   def lawyer_exist?
-    @story.verdicts.find_by_is_judgment(true).lawyer_names.include?(@rater.name)
+    @verdict.lawyers.include?(@rater)
   end
 
   def party_exist?
-    @story.verdicts.find_by_is_judgment(true).party_names.include?(@rater.name)
+    @verdict.parties.include?(@rater)
   end
 
 end

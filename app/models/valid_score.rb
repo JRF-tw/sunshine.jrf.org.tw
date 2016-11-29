@@ -17,6 +17,7 @@
 
 class ValidScore < ActiveRecord::Base
   validates :story_id, presence: true
+  validates :judge_id, presence: true
   validates :score_id, presence: true
   validates :score_type, presence: true
   validates :score_rater_id, presence: true
