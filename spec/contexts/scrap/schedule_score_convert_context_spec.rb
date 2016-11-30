@@ -33,19 +33,19 @@ describe Scrap::ScheduleScoreConvertContext do
         it { expect { subject }.to change { ValidScore.count } }
       end
     end
-  end
 
-  context '#valid_score_params' do
-    let!(:role) { create :party, :already_confirmed }
-    let!(:verdict) { create :verdict, :create_relation_by_role_name, is_judgment: true, story: story, judges_names: [judge_A.name], party_names: [role.name] }
-    before { subject }
+    context '#valid_score_params' do
+      let!(:role) { create :party, :already_confirmed }
+      let!(:verdict) { create :verdict, :create_relation_by_role_name, is_judgment: true, story: story, judges_names: [judge_A.name], party_names: [role.name] }
+      before { subject }
 
-    it { expect(ValidScore.last.story).to eq story }
-    it { expect(ValidScore.last.schedule).to eq schedule_score.schedule }
-    it { expect(ValidScore.last.judge).to eq schedule_score.judge }
-    it { expect(ValidScore.last.score).to eq schedule_score }
-    it { expect(ValidScore.last.score_rater).to eq role }
-    it { expect(ValidScore.last.attitude_scores).to eq schedule_score.attitude_scores }
-    it { expect(ValidScore.last.command_scores).to eq schedule_score.command_scores }
+      it { expect(ValidScore.last.story).to eq story }
+      it { expect(ValidScore.last.schedule).to eq schedule_score.schedule }
+      it { expect(ValidScore.last.judge).to eq schedule_score.judge }
+      it { expect(ValidScore.last.score).to eq schedule_score }
+      it { expect(ValidScore.last.score_rater).to eq role }
+      it { expect(ValidScore.last.attitude_scores).to eq schedule_score.attitude_scores }
+      it { expect(ValidScore.last.command_scores).to eq schedule_score.command_scores }
+    end
   end
 end
