@@ -16,6 +16,7 @@ class Scrap::ImportVerdictContext < BaseContext
   after_perform   :create_relation_for_lawyer
   after_perform   :create_relation_for_judge
   after_perform   :create_relation_for_party
+  after_perform   :calculate_schedule_scores, if: :story_pronounce?
   after_perform   :record_count_to_daily_notify
   after_perform   :alert_new_story_type
 
@@ -54,6 +55,10 @@ class Scrap::ImportVerdictContext < BaseContext
 
   def is_highest_court?
     @court.code == 'TPS'
+  end
+
+  def story_pronounce?
+    @story.is_pronounce
   end
 
   def find_or_create_story
@@ -134,6 +139,12 @@ class Scrap::ImportVerdictContext < BaseContext
     @verdict.party_names.each do |name|
       VerdictRelationCreateContext.new(@verdict).perform(name)
       StoryRelationCreateContext.new(@story).perform(name)
+    end
+  end
+
+  def calculate_schedule_scores
+    @story.schedule_scores.each do |ss|
+      Scrap::ScheduleScoreConvertContext.new(ss).perform
     end
   end
 
