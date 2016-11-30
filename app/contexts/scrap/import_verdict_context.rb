@@ -17,12 +17,19 @@ class Scrap::ImportVerdictContext < BaseContext
   after_perform   :create_relation_for_judge
   after_perform   :create_relation_for_party
   after_perform   :calculate_schedule_scores, if: :story_pronounce?
+  after_perform   :set_delay_calculate_verdict_scores, if: :story_pronounce?
   after_perform   :record_count_to_daily_notify
   after_perform   :alert_new_story_type
 
   class << self
     def perform(court, orginal_data, content, word, publish_date, stroy_type)
       new(court, orginal_data, content, word, publish_date, stroy_type).perform
+    end
+
+    def calculate_verdict_scores(story)
+      story.verdict_scores.each do |vs|
+        Scrap::VerdictScoreConvertContext.new(vs).perform
+      end
     end
   end
 
@@ -146,6 +153,10 @@ class Scrap::ImportVerdictContext < BaseContext
     @story.schedule_scores.each do |ss|
       Scrap::ScheduleScoreConvertContext.new(ss).perform
     end
+  end
+
+  def set_delay_calculate_verdict_scores
+    self.class.delay_until(3.months.from_now).calculate_verdict_scores(@story)
   end
 
   def record_count_to_daily_notify

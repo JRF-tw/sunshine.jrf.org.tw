@@ -105,8 +105,22 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
       let(:story_params) { word.split(',') }
       let!(:story) { create :story, year: story_params[0], word_type: story_params[1], number: story_params[2], court: court, story_type: story_type }
       let!(:party) { create :party, name: '張坤樹' }
-      let!(:schedule_score_A) { create :schedule_score, story: story, schedule_rater: party, judge: judge }
+      let!(:schedule_score) { create :schedule_score, story: story, schedule_rater: party, judge: judge }
       it { expect { subject }.to change { ValidScore.count }.by(1) }
+    end
+
+    context '#set_delay_calculate_verdict_scores' do
+      it { expect { subject }.to change_sidekiq_jobs_size_of(Sidekiq::Extensions::DelayedClass, scheduled: true) }
+    end
+
+    context '.calculate_verdict_scores' do
+      subject { described_class.new(court, orginal_data, content, word, publish_date, story_type) }
+      let(:story_params) { word.split(',') }
+      let!(:story) { create :story, year: story_params[0], word_type: story_params[1], number: story_params[2], court: court, story_type: story_type }
+      let!(:party) { create :party, name: '張坤樹' }
+      let!(:verdict_score) { create :verdict_score, story: story, verdict_rater: party }
+      before { subject.perform }
+      it { expect { subject.class.calculate_verdict_scores(story) }.to change { ValidScore.count }.by(1) }
     end
 
     context '#alert_new_story_type' do
