@@ -5,7 +5,7 @@ class Scrap::VerdictScoreConvertContext < BaseContext
     @verdict_score = verdict_score
     @story = @verdict_score.story
     @rater = @verdict_score.verdict_rater
-    @verdict = @story.verdicts.find_by_is_judgment(true) 
+    @verdict = @story.verdicts.find_by_is_judgment(true)
   end
 
   def perform
@@ -21,18 +21,18 @@ class Scrap::VerdictScoreConvertContext < BaseContext
   private
 
   def valid_score_params(judge)
-    { 
+    {
       story: @verdict_score.story,
       judge: judge,
-      score: @verdict_score, 
+      score: @verdict_score,
       score_rater: @rater,
       quality_scores: @verdict_score.quality_scores
     }
   end
 
   def check_verdict_score_valid
-    rater =  @rater.class.name.underscore
-    return false unless self.send("#{rater}_valid_score_check")
+    rater = @rater.class.name.underscore
+    return false unless send("#{rater}_valid_score_check")
   end
 
   def lawyer_valid_score_check

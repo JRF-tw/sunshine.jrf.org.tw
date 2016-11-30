@@ -47,7 +47,7 @@ describe '判決書分析', type: :context do
     end
 
     Scenario '當事人的開庭評鑑是否有效，取決於法官和當事人是否都有抓到' do
-      let!(:party) { create :party, :already_confirmed}
+      let!(:party) { create :party, :already_confirmed }
       Given '當事人在同案件下，對法官A和法官B有開庭評鑑記錄，且判決書上有法官A、無法官B' do
         let!(:schedule_score_A) { create :schedule_score, story: story, schedule_rater: party, judge: judge_A }
         let!(:schedule_score_B) { create :schedule_score, story: story, schedule_rater: party, judge: judge_B }
@@ -72,11 +72,11 @@ describe '判決書分析', type: :context do
     Scenario '抓到判決書後，才能進行判決評鑑' do
       subject { Scrap::VerdictScoreConvertContext }
       Scenario '當事人的判決評鑑是否有效，取決於當事人和法官姓名是否有抓到' do
-        let!(:party) { create :party, :already_confirmed}
+        let!(:party) { create :party, :already_confirmed }
         Given '判決書有當事人姓名、有法官A,B姓名' do
           let!(:verdict) { create :verdict, :create_relation_by_role_name, is_judgment: true, story: story, judges_names: [judge_A.name, judge_B.name], party_names: [party.name] }
           When '當事人進行判決評鑑（一次）' do
-            let!(:verdict_score) { create :verdict_score, story: story , verdict_rater: party }
+            let!(:verdict_score) { create :verdict_score, story: story, verdict_rater: party }
             Then '當事人對法官A,B 共 2 筆判決評鑑皆有效' do
               expect { subject.new(verdict_score).perform }.to change { ValidScore.count }.by(2)
             end
@@ -86,7 +86,7 @@ describe '判決書分析', type: :context do
         Given '判決書無當事人姓名、有法官A,B姓名' do
           let!(:verdict) { create :verdict, :create_relation_by_role_name, is_judgment: true, story: story, judges_names: [judge_A.name, judge_B.name] }
           When '當事人進行判決評鑑（一次）' do
-            let!(:verdict_score) { create :verdict_score, story: story , verdict_rater: party }
+            let!(:verdict_score) { create :verdict_score, story: story, verdict_rater: party }
             Then '當事人的判決評鑑皆無效' do
               expect { subject.new(verdict_score).perform }.not_to change { ValidScore.count }
             end
@@ -96,7 +96,7 @@ describe '判決書分析', type: :context do
         Given '判決書有當事人姓名、無法官' do
           let!(:verdict) { create :verdict, :create_relation_by_role_name, is_judgment: true, story: story, party_names: [party.name] }
           When '當事人進行判決評鑑（一次）' do
-            let!(:verdict_score) { create :verdict_score, story: story , verdict_rater: party }
+            let!(:verdict_score) { create :verdict_score, story: story, verdict_rater: party }
             Then '當事人的判決評鑑皆無效' do
               expect { subject.new(verdict_score).perform }.not_to change { ValidScore.count }
             end
@@ -109,7 +109,7 @@ describe '判決書分析', type: :context do
         Given '判決書有律師姓名、有法官A,B姓名' do
           let!(:verdict) { create :verdict, :create_relation_by_role_name, is_judgment: true, story: story, judges_names: [judge_A.name, judge_B.name], lawyer_names: [lawyer.name] }
           When '律師進行判決評鑑（一次）' do
-            let!(:verdict_score) { create :verdict_score, story: story , verdict_rater: lawyer }
+            let!(:verdict_score) { create :verdict_score, story: story, verdict_rater: lawyer }
             Then '律師對法官A,B 共 2 筆判決評鑑皆有效' do
               expect { subject.new(verdict_score).perform }.to change { ValidScore.count }.by(2)
             end
@@ -119,7 +119,7 @@ describe '判決書分析', type: :context do
         Given '判決書無律師姓名、有法官A,B姓名' do
           let!(:verdict) { create :verdict, :create_relation_by_role_name, is_judgment: true, story: story, judges_names: [judge_A.name, judge_B.name] }
           When '律師進行判決評鑑（一次）' do
-            let!(:verdict_score) { create :verdict_score, story: story , verdict_rater: lawyer }
+            let!(:verdict_score) { create :verdict_score, story: story, verdict_rater: lawyer }
             Then '律師的判決評鑑皆無效' do
               expect { subject.new(verdict_score).perform }.not_to change { ValidScore.count }
             end
@@ -129,7 +129,7 @@ describe '判決書分析', type: :context do
         Given '判決書有律師姓名、無法官' do
           let!(:verdict) { create :verdict, :create_relation_by_role_name, is_judgment: true, story: story, lawyer_names: [lawyer.name] }
           When '律師進行判決評鑑（一次）' do
-            let!(:verdict_score) { create :verdict_score, story: story , verdict_rater: lawyer }
+            let!(:verdict_score) { create :verdict_score, story: story, verdict_rater: lawyer }
             Then '律師的判決評鑑皆無效' do
               expect { subject.new(verdict_score).perform }.not_to change { ValidScore.count }
             end

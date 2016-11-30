@@ -1,5 +1,5 @@
 class Scrap::ScheduleScoreConvertContext < BaseContext
-  before_perform :check_Schedule_score_valid
+  before_perform :check_schedule_score_valid
 
   def initialize(schedule_score)
     @schedule_score = schedule_score
@@ -19,20 +19,20 @@ class Scrap::ScheduleScoreConvertContext < BaseContext
   private
 
   def valid_score_params
-    { 
+    {
       story: @schedule_score.story,
       judge: @schedule_score.judge,
       schedule: @schedule_score.schedule,
-      score: @schedule_score, 
-      score_rater: @rater, 
-      attitude_scores: @schedule_score.attitude_scores, 
-      command_scores: @schedule_score.command_scores 
+      score: @schedule_score,
+      score_rater: @rater,
+      attitude_scores: @schedule_score.attitude_scores,
+      command_scores: @schedule_score.command_scores
     }
   end
 
-  def check_Schedule_score_valid
-    rater =  @rater.class.name.underscore
-    return false unless self.send("#{rater}_valid_score_check")
+  def check_schedule_score_valid
+    rater = @rater.class.name.underscore
+    return false unless send("#{rater}_valid_score_check")
   end
 
   def court_observer_valid_score_check
