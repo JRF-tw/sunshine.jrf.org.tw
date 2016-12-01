@@ -1,5 +1,22 @@
 CKEDITOR.editorConfig = function( config ) {
   config.height = 400;
+
+  /* Filebrowser routes */
+  // The location of an external file browser, that should be launched when "Browse Server" button is pressed.
+  config.filebrowserBrowseUrl = "/ckeditor/attachment_files";
+
+  // The location of an external file browser, that should be launched when "Browse Server" button is pressed in the Link tab of Image dialog.
+  config.filebrowserImageBrowseLinkUrl = "/ckeditor/pictures";
+
+  // The location of an external file browser, that should be launched when "Browse Server" button is pressed in the Image dialog.
+  config.filebrowserImageBrowseUrl = "/ckeditor/pictures";
+
+  // The location of a script that handles file uploads in the Image dialog.
+  config.filebrowserImageUploadUrl = "/ckeditor/pictures";
+
+  // The location of a script that handles file uploads.
+  config.filebrowserUploadUrl = "/ckeditor/attachment_files";
+
   config.toolbar = [
     { name: 'document', items: [ 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] },
     { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
