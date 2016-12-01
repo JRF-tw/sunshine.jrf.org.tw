@@ -30,8 +30,8 @@
 #
 
 class Lawyer < ActiveRecord::Base
-  has_many :story_relations, as: :people
-  has_many :verdict_relations, as: :person
+  has_many :story_relations, as: :people, dependent: :destroy
+  has_many :verdict_relations, as: :person, dependent: :destroy
   has_many :verdicts, through: :verdict_relations
   has_many :story_subscriptions, as: :subscriber, dependent: :destroy
   has_many :schedule_scores, as: :schedule_rater

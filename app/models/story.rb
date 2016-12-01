@@ -23,7 +23,7 @@
 class Story < ActiveRecord::Base
   has_many :schedules
   has_many :verdicts
-  has_many :story_relations
+  has_many :story_relations, dependent: :destroy
   has_many :judges, through: :story_relations, source: :people, source_type: :Judge
   has_many :story_subscriptions, dependent: :destroy
   has_many :verdict_scores
