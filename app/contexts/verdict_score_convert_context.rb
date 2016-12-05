@@ -1,18 +1,20 @@
-class Scrap::VerdictScoreConvertContext < BaseContext
+class VerdictScoreConvertContext < BaseContext
   before_perform :check_verdict_score_valid
 
   def initialize(verdict_score)
     @verdict_score = verdict_score
     @story = @verdict_score.story
     @rater = @verdict_score.verdict_rater
-    @verdict = @story.verdicts.find_by_is_judgment(true)
+    @verdict = @story.judgment_verdict
+    @quality_scores = @verdict_score.quality_scores
   end
 
   def perform
     run_callbacks :perform do
       valid_scores = []
       @verdict.judges.each do |judge|
-        valid_scores << ValidScore.create!(valid_score_params(judge))
+        valid_score = build_valid_score(judge)
+        valid_scores << valid_score.save || valid_score.errors.full_messages
       end
       valid_scores
     end
@@ -20,14 +22,15 @@ class Scrap::VerdictScoreConvertContext < BaseContext
 
   private
 
-  def valid_score_params(judge)
-    {
-      story: @verdict_score.story,
+  def build_valid_score(judge)
+    data = {
+      story: @story,
       judge: judge,
       score: @verdict_score,
       score_rater: @rater,
-      quality_scores: @verdict_score.quality_scores
+      quality_scores: @quality_scores
     }
+    ValidScore.new(data)
   end
 
   def check_verdict_score_valid
@@ -36,11 +39,11 @@ class Scrap::VerdictScoreConvertContext < BaseContext
   end
 
   def lawyer_valid_score_check
-    @verdict.lawyer_names.include?(@rater.name)
+    @verdict.lawyers.include?(@rater)
   end
 
   def party_valid_score_check
-    @verdict.party_names.include?(@rater.name)
+    @verdict.parties.include?(@rater)
   end
 
 end

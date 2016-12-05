@@ -1,33 +1,38 @@
 class ScheduleScoreConvertContext < BaseContext
   before_perform :check_schedule_score_valid
+  before_perform :build_valid_score
 
   def initialize(schedule_score)
     @schedule_score = schedule_score
     @story = @schedule_score.story
+    @verdict = @story.judgment_verdict
     @rater = @schedule_score.schedule_rater
-    @verdict = @story.verdicts.find_by_is_judgment(true)
+    @judge = @schedule_score.judge
+    @schedule = @schedule_score.schedule
+    @attitude_scores = @schedule_score.attitude_scores
+    @command_scores = @schedule_score.command_scores
   end
 
   def perform
     run_callbacks :perform do
-      valid_score = ValidScore.new(valid_score_params)
-      return false unless valid_score.save!
-      valid_score
+      return false unless @valid_score.save
+      @valid_score
     end
   end
 
   private
 
-  def valid_score_params
-    {
-      story: @schedule_score.story,
-      judge: @schedule_score.judge,
-      schedule: @schedule_score.schedule,
+  def build_valid_score
+    data = {
+      story: @story,
+      judge: @judge,
+      schedule: @schedule,
       score: @schedule_score,
       score_rater: @rater,
-      attitude_scores: @schedule_score.attitude_scores,
-      command_scores: @schedule_score.command_scores
+      attitude_scores: @attitude_scores,
+      command_scores: @command_scores
     }
+    @valid_score = ValidScore.new(data)
   end
 
   def check_schedule_score_valid

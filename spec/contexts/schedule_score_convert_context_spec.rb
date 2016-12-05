@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Scrap::ScheduleScoreConvertContext do
+describe ScheduleScoreConvertContext do
   let!(:story) { create :story, :pronounced }
   let(:schedule_score) { create :schedule_score_for_params, judge: judge_A, story: story, schedule_rater: role }
   let!(:judge_A) { create :judge }
@@ -11,7 +11,7 @@ describe Scrap::ScheduleScoreConvertContext do
       let!(:role) { create :court_observer }
 
       context 'verdict with judges' do
-        let!(:verdict) { create :verdict, :create_relation_by_role_name, is_judgment: true, story: story, judges_names: [judge_A.name] }
+        let!(:verdict) { create :verdict_for_convert_valid_score, story: story, judges_names: [judge_A.name] }
         it { expect { subject }.to change { ValidScore.count } }
       end
     end
@@ -20,7 +20,7 @@ describe Scrap::ScheduleScoreConvertContext do
       let!(:role) { create :party, :already_confirmed }
 
       context 'verdict with party and judge' do
-        let!(:verdict) { create :verdict, :create_relation_by_role_name, is_judgment: true, story: story, judges_names: [judge_A.name], party_names: [role.name] }
+        let!(:verdict) { create :verdict_for_convert_valid_score, story: story, judges_names: [judge_A.name], party_names: [role.name] }
         it { expect { subject }.to change { ValidScore.count } }
       end
     end
@@ -29,14 +29,14 @@ describe Scrap::ScheduleScoreConvertContext do
       let!(:role) { create :lawyer, :with_confirmed }
 
       context 'verdict with lawyer and judge' do
-        let!(:verdict) { create :verdict, :create_relation_by_role_name, is_judgment: true, story: story, judges_names: [judge_A.name], lawyer_names: [role.name] }
+        let!(:verdict) { create :verdict_for_convert_valid_score, story: story, judges_names: [judge_A.name], lawyer_names: [role.name] }
         it { expect { subject }.to change { ValidScore.count } }
       end
     end
 
     context '#valid_score_params' do
       let!(:role) { create :party, :already_confirmed }
-      let!(:verdict) { create :verdict, :create_relation_by_role_name, is_judgment: true, story: story, judges_names: [judge_A.name], party_names: [role.name] }
+      let!(:verdict) { create :verdict_for_convert_valid_score, story: story, judges_names: [judge_A.name], party_names: [role.name] }
       before { subject }
 
       it { expect(ValidScore.last.story).to eq story }

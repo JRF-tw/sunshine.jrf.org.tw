@@ -17,7 +17,11 @@
 
 FactoryGirl.define do
   factory :valid_score, class: 'ValidScore' do
-
+    score { FactoryGirl.create :schedule_score }
+    story { score.story }
+    schedule { score.schedule }
+    judge { score.judge }
+    score_rater { score.schedule_rater }
   end
 
 end

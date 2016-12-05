@@ -16,6 +16,10 @@ class CreateValidScores < ActiveRecord::Migration
     add_index :valid_scores, :story_id
     add_index :valid_scores, :judge_id
     add_index :valid_scores, :schedule_id
+    add_index :valid_scores, [:judge_id, :story_id]
+    add_index :valid_scores, [:judge_id, :schedule_id]
+    add_index :valid_scores, [:schedule_id, :story_id]
+    add_index :valid_scores, [:judge_id, :schedule_id, :story_id]
     add_index :valid_scores, [:score_id, :score_type]
     add_index :valid_scores, [:score_rater_id, :score_rater_type]
   end

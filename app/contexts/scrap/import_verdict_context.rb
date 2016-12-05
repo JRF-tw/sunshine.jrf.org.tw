@@ -27,9 +27,7 @@ class Scrap::ImportVerdictContext < BaseContext
     end
 
     def calculate_verdict_scores(story)
-      story.verdict_scores.each do |vs|
-        Scrap::VerdictScoreConvertContext.new(vs).perform
-      end
+      StoryCalculateVerdictScoresContext.new(story).perform
     end
   end
 
@@ -52,20 +50,12 @@ class Scrap::ImportVerdictContext < BaseContext
 
   private
 
-  def is_judgment?
-    @content.split.first.match(/判決/).present?
-  end
-
   def disable_ruling
     return is_judgment? if DISABLE_RULING
   end
 
-  def is_highest_court?
-    @court.code == 'TPS'
-  end
-
-  def story_pronounce?
-    @story.is_pronounce
+  def is_judgment?
+    @content.split.first.match(/判決/).present?
   end
 
   def find_or_create_story
@@ -88,6 +78,10 @@ class Scrap::ImportVerdictContext < BaseContext
     @analysis_context.judges_names.each do |judge|
       Scrap::CreateJudgeByHighestCourtContext.new(@court, judge).perform
     end
+  end
+
+  def is_highest_court?
+    @court.code == 'TPS'
   end
 
   def assign_names
@@ -150,13 +144,15 @@ class Scrap::ImportVerdictContext < BaseContext
   end
 
   def calculate_schedule_scores
-    @story.schedule_scores.each do |ss|
-      Scrap::ScheduleScoreConvertContext.new(ss).perform
-    end
+    StoryCalculateScheduleScoresContext.new(@story).perform
   end
 
   def set_delay_calculate_verdict_scores
     self.class.delay_until(3.months.from_now).calculate_verdict_scores(@story)
+  end
+
+  def story_pronounce?
+    @story.is_pronounce
   end
 
   def record_count_to_daily_notify
