@@ -4,7 +4,7 @@ class Admin::SchedulesController < Admin::BaseController
   before_action(except: [:index]) { add_crumb('庭期列表', admin_schedules_path) }
 
   def index
-    @search = Schedule.all.newest.ransack(params[:q])
+    @search = Schedule.includes(:branch_judge).newest.ransack(params[:q])
     @schedules = @search.result.includes(:court, :story).page(params[:page]).per(20)
     @admin_page_title = @story ? "案件 #{@story.identity} 的庭期表" : '庭期表列表'
     add_crumb @admin_page_title, '#'
