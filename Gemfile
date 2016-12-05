@@ -94,6 +94,9 @@ group :development do
   gem 'http_logger'
   gem 'spring'
   gem 'letter_opener'
+
+  # query tunning
+  gem "bullet"
 end
 
 group :development, :test do
