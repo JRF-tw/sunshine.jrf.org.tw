@@ -94,9 +94,6 @@ group :development do
   gem 'http_logger'
   gem 'spring'
   gem 'letter_opener'
-
-  # query tunning
-  gem 'bullet'
 end
 
 group :development, :test do
@@ -106,6 +103,8 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'byebug'
   gem 'rubocop', require: false
+  # query tunning
+  gem 'bullet'
 end
 
 group :test do
