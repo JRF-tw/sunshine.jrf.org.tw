@@ -96,7 +96,7 @@ group :development do
   gem 'letter_opener'
 
   # query tunning
-  gem "bullet"
+  gem 'bullet'
 end
 
 group :development, :test do
