@@ -1,8 +1,8 @@
-= f.input :court_id, as: :select, collection: collect_for_courts, include_blank: "請選擇", input_html: { class: 'chosen-select' }
-= f.input :main_judge_id, as: :select, collection: Profile.judges.map{ |p| [p.name, p.id] }, include_blank: "請選擇", input_html: { class: 'chosen-select' }
-= f.input :presiding_judge_id, collection: Profile.judges.map{ |p| [p.name, p.id] }, include_blank: "請選擇", input_html: { class: 'chosen-select' }
-= f.input :judge_ids, as: :select, collection: Profile.judges.map{ |p| [p.name, p.id] }, include_blank: "請選擇", input_html: { multiple: true, class: 'chosen-select' }
-= f.input :prosecutor_ids, as: :select, collection: Profile.prosecutors.map{ |p| [p.name, p.id] }, include_blank: "請選擇", input_html: { multiple: true, class: 'chosen-select' }
+= f.input :court_id, as: :select, collection: collect_for_courts, include_blank: "請選擇", input_html: { class: 'select2' }
+= f.input :main_judge_id, as: :select, collection: Profile.judges.map{ |p| [p.name, p.id] }, include_blank: "請選擇", input_html: { class: 'select2' }
+= f.input :presiding_judge_id, collection: Profile.judges.map{ |p| [p.name, p.id] }, include_blank: "請選擇", input_html: { class: 'select2' }
+= f.input :judge_ids, as: :select, collection: Profile.judges.map{ |p| [p.name, p.id] }, include_blank: "請選擇", input_html: { multiple: true, class: 'select2' }
+= f.input :prosecutor_ids, as: :select, collection: Profile.prosecutors.map{ |p| [p.name, p.id] }, include_blank: "請選擇", input_html: { multiple: true, class: 'select2' }
 = f.input :judge_no
 = f.input :court_no, hint: "裁判字號及庭號擇一必填"
 = f.input :judge_type, as: :select, collection: Admin::Judgment::JUDGMENT_TYPES, include_blank: "請選擇"

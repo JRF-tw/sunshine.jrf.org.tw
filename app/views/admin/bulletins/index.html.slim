@@ -15,7 +15,7 @@
         .span6
           .control-group
             label.control-label = f.label :is_banner_eq
-            .controls#select2 = f.select :is_banner_eq,
+            .controls.select2 = f.select :is_banner_eq,
             collect_for_boolean, include_blank: '請選擇'
     hr
     .form-actions
@@ -35,7 +35,7 @@
           th #
           th 標題
           th 圖片
-          th 是否顯示於banner
+          th 是否顯示於首頁banner
           th
       tbody
         - @bulletins.each do |bulletin|

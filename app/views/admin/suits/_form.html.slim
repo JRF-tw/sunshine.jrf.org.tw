@@ -9,8 +9,8 @@
     = f.input :remove_pic, as: :boolean
 = f.input :pic, as: :file
 = f.input :keyword, hint: "純文字，多組關鍵字需以全型逗號隔開"
-= f.input :judge_ids, as: :select, collection: Profile.all.map{ |p| [p.name, p.id] }, include_blank: "請選擇", input_html: { multiple: true, class: 'chosen-select' }
-= f.input :prosecutor_ids, as: :select, collection: Profile.all.map{ |p| [p.name, p.id] }, include_blank: "請選擇", input_html: { multiple: true, class: 'chosen-select' }
+= f.input :judge_ids, as: :select, collection: Profile.all.map{ |p| [p.name, p.id] }, include_blank: "請選擇", input_html: { multiple: true, class: 'select2' }
+= f.input :prosecutor_ids, as: :select, collection: Profile.all.map{ |p| [p.name, p.id] }, include_blank: "請選擇", input_html: { multiple: true, class: 'select2' }
 = f.input :is_hidden, as: :boolean, hint: "打勾 = 前端頁面不顯示，目前該案例的案件處理經過數量為 #{@suit.procedure_count}"
 
 .form-actions
