@@ -5,11 +5,7 @@ class Api::CourtsController < Api::BaseController
   end
 
   def show
-    @court = Court.find_by_id(params[:id])
-
-    unless @court
-      respond_error('法院id不存在', 404)
-    end
+    @court = Court.find(params[:id])
   end
 
 end

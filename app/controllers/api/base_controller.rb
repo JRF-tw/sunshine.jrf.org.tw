@@ -1,5 +1,5 @@
 class Api::BaseController < ApplicationController
-  include ApiErrorConcern
+  include Api::ErrorConcern
   skip_before_action :verify_authenticity_token
   before_action :enable_cors
   before_action :set_default_format

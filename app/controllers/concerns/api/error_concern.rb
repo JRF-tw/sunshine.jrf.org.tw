@@ -1,10 +1,9 @@
-module ApiErrorConcern
+module Api::ErrorConcern
   extend ActiveSupport::Concern
 
   included do
-    include ActiveSupport::Rescuable
     rescue_from Exception, with: :respond_500
-    rescue_from ActionController::RoutingError, with: :respond_404
+    rescue_from ActiveRecord::RecordNotFound, with: :respond_404
   end
 
   private
