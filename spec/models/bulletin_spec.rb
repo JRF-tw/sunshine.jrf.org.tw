@@ -14,7 +14,6 @@ RSpec.describe Bulletin, type: :model do
     end
 
     context 'false' do
-      let!(:bulletin) { create :bulletin }
       it { expect(bulletin.can_be_banner?).to be_falsey }
     end
   end

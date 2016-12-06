@@ -25,6 +25,7 @@
 #  imposter                 :boolean          default(FALSE)
 #  imposter_identify_number :string
 #  phone_confirmed_at       :datetime
+#  unconfirmed_phone        :string
 #
 
 class Party < ActiveRecord::Base
