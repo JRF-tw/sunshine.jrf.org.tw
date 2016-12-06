@@ -250,6 +250,7 @@ zh-TW:
         title: "標題"
         content: "內文"
         pic: "圖片"
+        remove_pic: '移除現有圖片'
         is_banner: "顯示於首頁banner"
       suit_banner:
         pic_l: "桌機用圖"
