@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     resources :stories
     resources :schedules
     resources :judges
+    resources :prosecutors
     resources :lawyers do
       member do
         post :send_reset_password_mail

@@ -13,6 +13,7 @@
 #
 
 class ProsecutorsOffice < ActiveRecord::Base
+  include HiddenOrNot
   has_many :prosecutors
   belongs_to :court
 end

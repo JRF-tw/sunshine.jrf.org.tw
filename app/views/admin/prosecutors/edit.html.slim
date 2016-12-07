@@ -1,0 +1,3 @@
+= admin_widget_box "編輯檢察官檔案", icon: :pencil do
+  = simple_form_for @prosecutor, url: admin_prosecutor_path(@prosecutor), method: :put, wrapper: :admin do |f|
+    = render partial: "form", object: f, as: :f

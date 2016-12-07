@@ -18,6 +18,7 @@ module AdminMenuHelper
         }
       },
       "法官管理": { url: admin_judges_path, match: /\/admin\/judges/ },
+      "檢察官管理": { url: admin_prosecutors_path, match: /\/admin\/prosecutors/ },
       "法院 / 檢察署管理": { url: admin_courts_path, match: /\/admin\/courts/ },
       "庭期表管理": { url: admin_schedules_path, match: /\/admin\/schedules/ },
       "案件管理": { url: admin_stories_path, match: /\/admin\/stories/ },

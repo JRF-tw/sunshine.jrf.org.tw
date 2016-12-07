@@ -30,6 +30,7 @@ zh-TW:
       suit_banner: "司法案例面面觀橫幅"
       party: "當事人"
       court_observer: "旁觀者"
+      prosecutor: '檢察官'
     attributes:
       court:
         court_type: "類型"
@@ -66,6 +67,22 @@ zh-TW:
       judge:
         name: "姓名"
         court: "任職法院"
+        remove_avatar: "移除現有頭像"
+        avatar: "頭像"
+        gender: "性別"
+        gender_source: "性別來源"
+        birth_year: "出生年"
+        birth_year_source: "出生年來源"
+        stage: "司訓所期別"
+        stage_source: "司訓所期別來源"
+        appointment: "任用資格"
+        appointment_source: "任用資格來源"
+        is_active: "在職中？"
+        memo: "備註"
+        is_hidden: "隱藏"
+      prosecutor:
+        name: "姓名"
+        prosecutors_office: "任職檢察署"
         remove_avatar: "移除現有頭像"
         avatar: "頭像"
         gender: "性別"
@@ -315,6 +332,11 @@ zh-TW:
         is_hidden_eq: "是否在前端隱藏"
         name_cont: "姓名包含"
         court_full_name_eq: "任職法院"
+      prosecutor:
+        is_active_true: "是否在職"
+        is_hidden_eq: "是否在前端隱藏"
+        name_cont: "姓名包含"
+        prosecutors_office_full_name_eq: "任職檢察署"
       lawyer:
         name_cont: "姓名包含"
         current_cont: "現職包含"

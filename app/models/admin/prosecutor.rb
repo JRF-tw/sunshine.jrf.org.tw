@@ -22,9 +22,6 @@
 #  updated_at            :datetime         not null
 #
 
-class Prosecutor < ActiveRecord::Base
-  belongs_to :prosecutors_office
-  belongs_to :judge
-
-  mount_uploader :avatar, ProfileAvatarUploader
+class Admin::Prosecutor < ::Prosecutor
+  validates :name, presence: true
 end
