@@ -264,11 +264,13 @@ ActiveRecord::Schema.define(version: 20161201110200) do
     t.integer  "punishments_count",  default: 0
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
+    t.boolean  "is_prosecutor"
   end
 
   add_index "judges", ["current_court_id"], name: "index_judges_on_current_court_id", using: :btree
   add_index "judges", ["is_active"], name: "index_judges_on_is_active", using: :btree
   add_index "judges", ["is_hidden"], name: "index_judges_on_is_hidden", using: :btree
+  add_index "judges", ["is_prosecutor"], name: "index_judges_on_is_prosecutor", using: :btree
 
   create_table "judgment_judges", force: :cascade do |t|
     t.integer  "profile_id"
@@ -450,6 +452,41 @@ ActiveRecord::Schema.define(version: 20161201110200) do
   add_index "profiles", ["current_court"], name: "index_profiles_on_current_court", using: :btree
   add_index "profiles", ["is_active"], name: "index_profiles_on_is_active", using: :btree
   add_index "profiles", ["is_hidden"], name: "index_profiles_on_is_hidden", using: :btree
+
+  create_table "prosecutors", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "prosecutors_office_id"
+    t.integer  "judge_id"
+    t.string   "avatar"
+    t.string   "gender"
+    t.string   "gender_source"
+    t.integer  "birth_year"
+    t.string   "birth_year_source"
+    t.integer  "stage"
+    t.string   "stage_source"
+    t.string   "appointment"
+    t.string   "appointment_source"
+    t.string   "memo"
+    t.boolean  "is_active",             default: true
+    t.boolean  "is_hidden",             default: true
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "prosecutors", ["judge_id"], name: "index_prosecutors_on_judge_id", using: :btree
+  add_index "prosecutors", ["prosecutors_office_id"], name: "index_prosecutors_on_prosecutors_office_id", using: :btree
+
+  create_table "prosecutors_offices", force: :cascade do |t|
+    t.string   "full_name"
+    t.string   "name"
+    t.integer  "court_id"
+    t.integer  "weight"
+    t.boolean  "is_hidden",  default: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "prosecutors_offices", ["court_id"], name: "index_prosecutors_offices_on_court_id", using: :btree
 
   create_table "punishments", force: :cascade do |t|
     t.integer  "profile_id"
@@ -699,6 +736,27 @@ ActiveRecord::Schema.define(version: 20161201110200) do
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "valid_scores", force: :cascade do |t|
+    t.integer  "story_id"
+    t.integer  "judge_id"
+    t.integer  "schedule_id"
+    t.integer  "score_id"
+    t.string   "score_type"
+    t.integer  "score_rater_id"
+    t.string   "score_rater_type"
+    t.hstore   "attitude_scores"
+    t.hstore   "command_scores"
+    t.hstore   "quality_scores"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "valid_scores", ["judge_id"], name: "index_valid_scores_on_judge_id", using: :btree
+  add_index "valid_scores", ["schedule_id"], name: "index_valid_scores_on_schedule_id", using: :btree
+  add_index "valid_scores", ["score_id", "score_type"], name: "index_valid_scores_on_score_id_and_score_type", using: :btree
+  add_index "valid_scores", ["score_rater_id", "score_rater_type"], name: "index_valid_scores_on_score_rater_id_and_score_rater_type", using: :btree
+  add_index "valid_scores", ["story_id"], name: "index_valid_scores_on_story_id", using: :btree
 
   create_table "verdict_relations", force: :cascade do |t|
     t.integer  "verdict_id"

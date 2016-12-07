@@ -22,6 +22,7 @@ class Court < ActiveRecord::Base
   has_many :schedules
   has_many :branches
   has_many :judges, foreign_key: :current_court_id
+  has_one :prosecutors_office
 
   def self.get_courts
     where(court_type: '法院')
