@@ -23,7 +23,7 @@
     "check": "rubocop --auto-correct",
     "rebase": "bundle install && foreman start -f Procfile.migrate",
     "migrate": "redis-server & bundle exec rake db:migrate",
-    "test": "foreman start -f Procfile.test && npm run check",
+    "test": "redis-server & bundle exec rake spec",
     "dev-server": "webpack-dev-server --inline --hot --config webpack-dev.config.coffee",
     "build": "webpack --config webpack.config.coffee",
     "postbuild": "gulp resolve-url",
