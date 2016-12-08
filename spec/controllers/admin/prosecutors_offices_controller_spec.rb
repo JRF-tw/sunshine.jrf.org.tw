@@ -12,10 +12,8 @@
 #  updated_at :datetime         not null
 #
 
-class ProsecutorsOffice < ActiveRecord::Base
-  include HiddenOrNot
-  has_many :prosecutors
-  belongs_to :court
+require 'rails_helper'
 
-  scope :newest, -> { order('id DESC') }
+RSpec.describe Admin::ProsecutorsOfficesController, type: :controller do
+
 end

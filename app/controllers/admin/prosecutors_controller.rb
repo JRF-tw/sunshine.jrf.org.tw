@@ -50,9 +50,10 @@ class Admin::ProsecutorsController < Admin::BaseController
 
   def create
     context = Admin::ProsecutorCreateContext.new(params)
-    if @prosecutor = context.perform
+    if context.perform
       redirect_as_success(admin_prosecutors_path, "檢察官 - #{prosecutor.name} 已新增")
     else
+      @prosecutor = context.prosecutor
       @admin_page_title = '新增檢察官'
       add_crumb @admin_page_title, '#'
       render_as_fail(:new, context.error_messages)

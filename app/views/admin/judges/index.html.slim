@@ -51,7 +51,7 @@
             td= judge.id
             td= judge.name
             td= judge.gender
-            td= link_to "#{judge.court.full_name}", admin_court_path(judge.court)
+            td= link_to "#{judge.court.full_name}", admin_court_path(judge.court) if judge.court
             td= judge.is_active? ? "是" : "否"
             td= judge.is_hidden? ? "是" : "否"
             td= judge.memo

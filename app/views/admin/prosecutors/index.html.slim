@@ -21,7 +21,7 @@
         .span6
           .control-group
             label.control-label = f.label :prosecutors_office_full_name_eq
-            .controls#select2 = f.select :prosecutors_office_court_id_eq,
+            .controls#select2 = f.select :prosecutors_office_id_eq,
             collect_for_prosecutors_offices, include_blank: "請選擇"
     hr
     .form-actions
@@ -51,8 +51,7 @@
             td= prosecutor.id
             td= prosecutor.name
             td= prosecutor.gender
-            td 
-                / link_to "#{prosecutor.prosecutors_office.full_name}", admin_prosecutors_office_path(prosecutor.prosecutors_office) if prosecutor.prosecutors_office
+            td= link_to "#{prosecutor.prosecutors_office.full_name}", admin_prosecutors_office_path(prosecutor.prosecutors_office) if prosecutor.prosecutors_office
             td= prosecutor.is_active? ? "是" : "否"
             td= prosecutor.is_hidden? ? "是" : "否"
             td= prosecutor.memo

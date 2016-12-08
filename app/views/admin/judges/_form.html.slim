@@ -1,5 +1,5 @@
 = f.input :name
-= f.association :court, label_method: :full_name, value_method: :id, include_blank: "請選擇"
+= f.association :court, label_method: :full_name, value_method: :id, include_blank: "請選擇", input_html: { class: 'select2' }
 
 - if f.object.avatar?
   .control-group

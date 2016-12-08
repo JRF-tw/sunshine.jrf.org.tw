@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     get '/courts/edit_weight', to: 'courts#edit_weight', as: 'courts_edit_weight'
     put '/courts/:id/update_weight', to: 'courts#update_weight', as: 'court_update_weight'
     resources :courts
+    resources :prosecutors_offices
     resources :judgments
     resources :banners
     resources :bulletins

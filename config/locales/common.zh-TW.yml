@@ -39,6 +39,12 @@ zh-TW:
         weight: "排序"
         is_hidden: "隱藏"
         scrap_name: "爬蟲名稱"
+      prosecutors_office:
+        full_name: "全名"
+        court: "隸屬法院"
+        name: "前台顯示簡稱"
+        weight: "排序"
+        is_hidden: "隱藏"
       court_observer:
         name: "姓名"
         phone_number: "手機號碼"
@@ -302,6 +308,11 @@ zh-TW:
         full_name_cont: "全名包含"
         name_cont: "前台顯示簡稱包含"
         is_hidden_eq: "是否在前端隱藏"
+      prosecutors_office:
+        full_name_cont: "全名包含"
+        name_cont: "前台顯示簡稱包含"
+        is_hidden_eq: "是否在前端隱藏"
+        court_full_name_eq: "隸屬法院"
       story:
         story_type_eq: "案件類別"
         year_eq: "年度"

@@ -1,0 +1,67 @@
+- content_for :btns do
+= search_form_for @search, :url => admin_prosecutors_offices_path, :wrapper => :admin, :html => { :class => "form-horizontal" } do |f|
+  .well
+    fieldset
+      legend 搜尋
+      .row
+        .span6
+          .control-group
+            label.control-label = f.label :full_name_cont
+            .controls= f.search_field :full_name_cont
+
+        .span6
+          .control-group
+            label.control-label = f.label :name_cont
+            .controls= f.search_field :name_cont
+      .row
+        .span6
+          .control-group
+            label.control-label = f.label :court_full_name_eq
+            .controls#select2 = f.select :court_id_eq,
+            collect_for_courts, include_blank: "請選擇"
+        .span6
+          .control-group
+            label.control-label = f.label :is_hidden_eq
+            .controls#select2 = f.select :is_hidden_eq,
+            collect_for_boolean, include_blank: "請選擇"
+    hr
+    .form-actions
+      = f.submit :value => "搜尋", :class => "btn btn-primary"
+      = " "
+      = link_to "清空搜尋結果", admin_prosecutors_offices_path, :class => "btn btn-default"
+
+
+= admin_widget_box "檢察署列表 : 搜尋結果為 #{@search.result.count} 筆", icon: :pencil do
+  .dataTables_wrapper
+    div
+      .dataTables_length
+        = link_to "新增檢察署", new_admin_prosecutors_office_path, class: "btn btn-primary btn-mini"
+    table.table.table-bordered.table-striped.table-hover
+      thead
+        tr
+          th= sort_link(@search, :id, "#")
+          th= sort_link(@search, :weight, "排序")
+          th= sort_link(@search, :full_name, "全名")
+          th= sort_link(@search, :name, "前台顯示簡稱")
+          th= sort_link(@search, :court, "隸屬法院")
+          th= sort_link(@search, :is_hidden, "是否在前端隱藏")
+          th
+      tbody
+        - @prosecutors_offices.each do |prosecutors_office|
+          tr
+            td= prosecutors_office.id
+            td= prosecutors_office.weight
+            td= prosecutors_office.full_name
+            td= prosecutors_office.name
+            td= link_to "#{prosecutors_office.court.full_name}", admin_court_path(prosecutors_office.court) if prosecutors_office.court
+            td= prosecutors_office.is_hidden? ? "是" : "否"
+            td
+              = link_to "詳細資料", admin_prosecutors_office_path(prosecutors_office), class: "btn btn-mini"
+              | &nbsp;
+              = link_to "檢察官列表", admin_prosecutors_path(q: { "prosecutors_office_id_eq" => prosecutors_office.id } ), class: "btn btn-mini"
+              | &nbsp;
+              = link_to "編輯", edit_admin_prosecutors_office_path(prosecutors_office), class: "btn btn-mini btn-success"
+              | &nbsp;
+              = link_to "刪除", admin_prosecutors_office_path(prosecutors_office), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除檢察署 - #{prosecutors_office.name}？"
+    .ui-toolbar.ui-widget-header
+      = paginate @prosecutors_offices, theme: :admin

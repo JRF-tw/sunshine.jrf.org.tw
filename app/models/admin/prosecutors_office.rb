@@ -12,10 +12,7 @@
 #  updated_at :datetime         not null
 #
 
-class ProsecutorsOffice < ActiveRecord::Base
-  include HiddenOrNot
-  has_many :prosecutors
-  belongs_to :court
-
-  scope :newest, -> { order('id DESC') }
+class Admin::ProsecutorsOffice < ProsecutorsOffice
+  validates :full_name, presence: true
+  validates :court, presence: true
 end

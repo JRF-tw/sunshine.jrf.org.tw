@@ -2,7 +2,6 @@ class Admin::LawyerCreateContext < BaseContext
   PERMITS = [:name, :current, :avatar, :gender, :birth_year, :memo, :email, :phone_number, :office_number].freeze
 
   before_perform :build_lawyer
-
   attr_reader :lawyer
 
   def initialize(params)
