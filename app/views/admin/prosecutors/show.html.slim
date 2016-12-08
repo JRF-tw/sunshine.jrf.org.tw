@@ -1,5 +1,6 @@
 - content_for :btns do
   = link_to "編輯", edit_admin_prosecutor_path(@prosecutor), class: "btn btn-large btn-success"
+  = link_to '轉換為法官', set_to_judge_admin_prosecutor_path(@prosecutor), class: 'btn btn-large btn-warning', method: :post if @prosecutor.judge.nil? || @prosecutor.judge.try(:is_prosecutor)
 
 = admin_widget_box "#{@prosecutor.name}的個人檔案", icon: :th do
   table.table.table-bordered.table-striped.table-hover
@@ -40,5 +41,14 @@
             br
             = "來源：#{@prosecutor.appointment_source}"
       tr
+        td 是否在職
+        td= @prosecutor.is_active ? '是' : '否'
+      tr
+        td 是否在前端隱藏
+        td= @prosecutor.is_hidden ? '是' : '否'
+      tr
         td 備註
         td= @prosecutor.memo
+      tr
+        td 關聯法官
+        td= link_to "#{@prosecutor.judge.name}", admin_judge_path(@prosecutor.judge) if @prosecutor.judge

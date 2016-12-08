@@ -23,6 +23,12 @@
             label.control-label = f.label :court_full_name_eq
             .controls.select2 = f.select :current_court_id_eq,
             collect_for_courts, include_blank: "請選擇"
+      .row
+        .span6
+          .control-group
+            label.control-label = f.label :is_prosecutor_true
+            .controls#select2 = f.select :is_prosecutor_true,
+            collect_for_boolean, include_blank: "請選擇"
     hr
     .form-actions
       = f.submit value: "搜尋", class: "btn btn-primary"

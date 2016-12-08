@@ -56,6 +56,15 @@ class Admin::JudgesController < Admin::BaseController
     end
   end
 
+  def set_to_prosecutor
+    context = Admin::JudgeProsecutorToggleContext.new(@judge)
+    if context.perform
+      redirect_as_success(admin_judge_path, "法官 - #{judge.name} 已轉換為檢察官")
+    else
+      redirect_to :back, flash: { error: context.error_messages }
+    end
+  end
+
   private
 
   def judge

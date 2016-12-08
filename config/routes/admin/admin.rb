@@ -28,8 +28,16 @@ Rails.application.routes.draw do
     resources :users
     resources :stories
     resources :schedules
-    resources :judges
-    resources :prosecutors
+    resources :judges do
+      member do
+        post :set_to_prosecutor
+      end
+    end
+    resources :prosecutors do
+      member do
+        post :set_to_judge
+      end
+    end
     resources :lawyers do
       member do
         post :send_reset_password_mail

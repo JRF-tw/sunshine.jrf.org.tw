@@ -340,6 +340,7 @@ zh-TW:
         start_on_lteq: "~"
       judge:
         is_active_true: "是否在職"
+        is_prosecutor_true: "是否轉換為檢察官"
         is_hidden_eq: "是否在前端隱藏"
         name_cont: "姓名包含"
         court_full_name_eq: "任職法院"
