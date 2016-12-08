@@ -47,7 +47,7 @@ RSpec.describe Admin::JudgesController do
   end
 
   describe '#create' do
-    context 'delete success' do
+    context 'create success' do
       subject { post '/admin/judges', admin_judge: { name: '笑笑' } }
       it { expect { subject }.to change { Judge.count }.by(1) }
       it { expect(response).to be_redirect }

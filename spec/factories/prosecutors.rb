@@ -24,7 +24,19 @@
 
 FactoryGirl.define do
   factory :prosecutor do
+    sequence(:name) { |n| "Raptor prosecutor-#{n}" }
+    prosecutors_office { create :prosecutors_office }
+    trait :with_avatar do
+      avatar File.open "#{Rails.root}/spec/fixtures/person_avatar/people-1.jpg"
+    end
+  end
 
+  factory :prosecutor_for_params, class: Prosecutor do
+    name '不理不理右衛門'
+  end
+
+  factory :empty_name_for_prosecutor, class: Prosecutor do
+    name ''
   end
 
 end
