@@ -42,7 +42,20 @@ section.base-hero
             search_url: prosecutors_searchs_path,
             accent_button: true            
 
-article.base-content-sections
-  = render partial: 'statement'
-  = render partial: 'statement'
-  = render partial: 'statement'
+.base-news-cards
+  h2.base-news-cards__heading
+    = link_to '最新消息', '/bulletins', class: 'text'
+  
+  .container--wide
+    - 6.times do |i|
+      = render 'components/news_card',
+        thumbnail: {\
+          src: "http://placehold.it/255x170",
+          srcset: [\
+            "http://placehold.it/255x170 255w",
+            "http://placehold.it/656x437 656w"\
+          ]\
+        },
+        title: zh_lorem_sentence,
+        summary: zh_lorem_paragraphs(2),
+        href: "/bulletins/#{i+1}"

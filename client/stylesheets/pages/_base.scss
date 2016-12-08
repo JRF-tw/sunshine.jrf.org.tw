@@ -134,6 +134,35 @@ $mobile-search-bar-height: 195px;
   }
 }
 
+.base-news-cards {
+  .container--wide {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+}
+.base-news-cards__heading {
+  text: center  ms(3);
+  @include susy($tablet) {
+    font-size: ms(5);
+  }
+  .text {
+    display: inline-block;
+    padding: 0 r(1);
+    color: $text-secondary;
+    position: relative;
+    &:hover::before { opacity: 1; }
+    &::before {
+      content: '';
+      position: absolute 0 0 0 0;
+      background-color: rgba(0,0,0,.1);
+      border-radius: $global-radius;
+      opacity: 0;
+      transition: opacity .1s ease 0s;
+    }
+  }
+}
+
 .base-content-sections {
   margin-bottom: -80px;
   @include susy-media($mobile-landscape) {
