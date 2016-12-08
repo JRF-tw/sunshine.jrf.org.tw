@@ -18,11 +18,9 @@ section.base-hero
     .base-hero-search
       nav.base-hero-search__tabs
         - ['法官', '檢察官'].each_with_index do |text, i|
-          button.base-hero-search__tab[
-            type='button'
+          button.base-hero-search__tab[type='button'
             data-tab-content="#base-hero-search-#{i+1}"
-            class=('active' if i == 0)
-            ]
+            class=('active' if i == 0)]
             = "找#{text}"
       
       .base-hero-search__contents
@@ -59,3 +57,23 @@ section.base-hero
         title: zh_lorem_sentence,
         summary: zh_lorem_paragraphs(2),
         href: "/bulletins/#{i+1}"
+
+.base-content-sections
+  section.base-content-section
+    h2.base-content-section__heading 特色介紹
+    
+    .intro-columns
+      .intro-column
+        .intro-column__icon= inline_svg 'user'
+        h3.intro-column__heading 司法官一覽無遺
+        p.intro-column__text 司改會努力收集的檢察官、法官資料一次呈現給你！
+        
+      .intro-column
+        .intro-column__icon= inline_svg 'user'
+        h3.intro-column__heading 監督評鑑一把抓
+        p.intro-column__text 使用手機就可以回傳開庭時法官的狀況，簡單好用！
+      
+      .intro-column
+        .intro-column__icon= inline_svg 'user'
+        h3.intro-column__heading 訂閱案件好方便
+        p.intro-column__text 只要註冊帳號、訂閱案件，開庭通知、事後評鑑不遺漏！

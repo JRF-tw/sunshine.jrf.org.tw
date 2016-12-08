@@ -135,14 +135,19 @@ $mobile-search-bar-height: 195px;
 }
 
 .base-news-cards {
+  @include susy-media($mobile-landscape) {
+    padding-top: $mobile-search-bar-height;
+  }
   .container--wide {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
+    padding-bottom: r(6);
   }
 }
 .base-news-cards__heading {
-  text: center  ms(3);
+  margin: r(8) auto r(9);
+  text: center ms(3);
   @include susy($tablet) {
     font-size: ms(5);
   }
@@ -165,32 +170,67 @@ $mobile-search-bar-height: 195px;
 
 .base-content-sections {
   margin-bottom: -80px;
-  @include susy-media($mobile-landscape) {
-    padding-top: $mobile-search-bar-height;
-  }
 }
 
 .base-content-section {
-  padding: r(4) r(2) r(5);
+  padding: r(4) r(2) r(8);
   text: center;
-  &:nth-child(odd) {
-    color: $text-color #fff;
+  &:nth-child(even) {
+    color: $text-color $text-primary-dark;
     &:last-child { border-bottom: 1px solid $divider-gray; }
   }
-  &:nth-child(even) {
-    $blur: 20px;
+  &:nth-child(odd) {
     $offset: 10px;
     $shadow-color: rgba(#000, .2);
-    color: #fff $accent;
-    box-shadow: inset 0px ($blur + $offset) $blur (-$blur) $shadow-color,
-                inset 0px (-$blur - $offset) $blur (-$blur) $shadow-color;
+    color: $text-primary-dark $brown-dark;
+    fill: currentColor;
 
-    .flat-button { color: #fff !important; }
+    .flat-button { color: $text-primary-dark !important; }
   }
   @include susy($tablet) {
     text: ms(1);
   }
 }
 .base-content-section__heading {
-  @include susy($tablet) { font-size: ms(3); }
+  text: center ms(3);
+  margin: r(4) auto r(8);
+  @include susy($tablet) { font-size: ms(5); }
+}
+
+$intro-columns-break: 700px;
+.intro-columns {
+  @include susy-media($intro-columns-break) {
+    display: flex;
+    justify-content: center;
+    padding: r(4) 0 r(6);
+  }
+}
+.intro-column {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  padding: r(8) r(2);
+  @include susy-media($intro-columns-break) {
+    padding: r(4);
+    width: span(1 of 3 0);
+    max-width: 490px;
+  }
+  &:first-child { padding-top: r(4); }
+  & + & {
+    border-top: 1px solid $text-secondary-dark;
+    @include susy-media($intro-columns-break) {
+      border-top: none;
+      border-left: 1px solid $text-secondary-dark;
+    }
+  }
+}
+.intro-column__heading {
+  margin: r(2) auto;
+  text: ms(1);
+}
+.intro-column__text {
+  margin: 0;
+}
+.intro-column__icon {
+  @include ir(1/1, 30%);
 }
