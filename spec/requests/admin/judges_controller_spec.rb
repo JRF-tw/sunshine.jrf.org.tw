@@ -23,6 +23,13 @@ RSpec.describe Admin::JudgesController do
     end
   end
 
+  describe '#show' do
+    context 'render success' do
+      before { get "/admin/judges/#{judge.id}" }
+      it { expect(response).to be_success }
+    end
+  end
+
   describe '#edit' do
     context 'render edit success' do
       before { get "/admin/judges/#{judge.id}/edit" }
@@ -34,7 +41,7 @@ RSpec.describe Admin::JudgesController do
     context 'update success' do
       subject { put "/admin/judges/#{judge.id}", admin_judge: { name: '哭哭' } }
       it { expect { subject }.to change { judge.reload.name }.to('哭哭') }
-      it { expect(response).to be_redirect }
+      it { expect(subject).to eq(302) }
     end
   end
 
@@ -42,7 +49,7 @@ RSpec.describe Admin::JudgesController do
     context 'delete success' do
       subject { delete "/admin/judges/#{judge.id}" }
       it { expect { subject }.to change { Judge.count }.by(-1) }
-      it { expect(response).to be_redirect }
+      it { expect(subject).to eq(302) }
     end
   end
 
@@ -50,7 +57,16 @@ RSpec.describe Admin::JudgesController do
     context 'create success' do
       subject { post '/admin/judges', admin_judge: { name: '笑笑' } }
       it { expect { subject }.to change { Judge.count }.by(1) }
-      it { expect(response).to be_redirect }
+      it { expect(subject).to eq(302) }
+    end
+  end
+
+  describe '#set_to_prosecutor' do
+    context 'success' do
+      subject { post "/admin/judges/#{judge.id}/set_to_prosecutor" }
+
+      it { expect { subject }.to change { judge.reload.is_active } }
+      it { expect(subject).to eq(302) }
     end
   end
 

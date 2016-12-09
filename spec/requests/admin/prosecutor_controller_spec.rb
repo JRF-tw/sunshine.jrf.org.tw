@@ -54,4 +54,13 @@ RSpec.describe Admin::ProsecutorsController do
     end
   end
 
+  describe '#set_to_judge' do
+    context 'success' do
+      subject { post "/admin/prosecutors/#{prosecutor.id}/set_to_judge" }
+
+      it { expect { subject }.to change { prosecutor.reload.is_active } }
+      it { expect(subject).to eq(302) }
+    end
+  end
+
 end
