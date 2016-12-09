@@ -8,7 +8,11 @@ class Import::ConvertProsecutorsOfficesContext < BaseContext
     run_callbacks :perform do
       prosecutors_offices = []
       @prosecutors_offices_by_court.each do |p|
-        prosecutors_offices << ProsecutorsOffice.create(prosecutors_office_data(p))
+        prosecutors_office = ProsecutorsOffice.create(prosecutors_office_data(p))
+        if prosecutors_office
+          prosecutors_offices << prosecutors_office
+          p.delete
+        end
       end
       prosecutors_offices
     end
