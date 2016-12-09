@@ -43,7 +43,6 @@ zh-TW:
         full_name: "全名"
         court: "隸屬法院"
         name: "前台顯示簡稱"
-        weight: "排序"
         is_hidden: "隱藏"
       court_observer:
         name: "姓名"

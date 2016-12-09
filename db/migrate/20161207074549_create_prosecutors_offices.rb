@@ -4,7 +4,6 @@ class CreateProsecutorsOffices < ActiveRecord::Migration
       t.string :full_name
       t.string :name
       t.integer :court_id
-      t.integer :weight
       t.boolean :is_hidden, default: true
       t.timestamps null: false
     end

@@ -40,7 +40,6 @@
       thead
         tr
           th= sort_link(@search, :id, "#")
-          th= sort_link(@search, :weight, "排序")
           th= sort_link(@search, :full_name, "全名")
           th= sort_link(@search, :name, "前台顯示簡稱")
           th= sort_link(@search, :court, "隸屬法院")
@@ -50,7 +49,6 @@
         - @prosecutors_offices.each do |prosecutors_office|
           tr
             td= prosecutors_office.id
-            td= prosecutors_office.weight
             td= prosecutors_office.full_name
             td= prosecutors_office.name
             td= link_to "#{prosecutors_office.court.full_name}", admin_court_path(prosecutors_office.court) if prosecutors_office.court

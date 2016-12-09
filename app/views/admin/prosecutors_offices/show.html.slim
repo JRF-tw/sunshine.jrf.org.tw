@@ -16,9 +16,6 @@
         td 隸屬法院
         td= link_to "#{@prosecutors_office.court.full_name}", admin_court_path(@prosecutors_office.court) if @prosecutors_office.court
       tr
-        td 排序
-        td= @prosecutors_office.weight
-      tr
         td 是否在前端隱藏
         td= @prosecutors_office.is_hidden? ? "是" : "否"
       tr

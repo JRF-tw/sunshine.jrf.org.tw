@@ -480,7 +480,6 @@ ActiveRecord::Schema.define(version: 20161201110200) do
     t.string   "full_name"
     t.string   "name"
     t.integer  "court_id"
-    t.integer  "weight"
     t.boolean  "is_hidden",  default: true
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false

@@ -6,7 +6,6 @@
 #  full_name  :string
 #  name       :string
 #  court_id   :integer
-#  weight     :integer
 #  is_hidden  :boolean          default(TRUE)
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
