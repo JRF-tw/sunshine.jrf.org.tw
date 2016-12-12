@@ -10,4 +10,16 @@ namespace :import do
     puts "缺少 email #{context.error_message.select { |a| a[:lawyer_email_blank] }.count} 筆"
     puts "儲存失敗 #{context.error_message.select { |a| a[:lawyer_create_fail] }.count} 筆"
   end
+
+  task prosecutors: :environment do
+    puts '從個人檔案匯入檢察官資料中...'
+    prosecutors = Import::ConvertProsecutorsContext.new.perform
+    puts "已建立 #{prosecutors.count} 筆檢察官資料"
+  end
+
+  task prosecutors_offices: :environment do
+    puts '正在從法院匯出檢察署資料...'
+    prosecutors_offices = Import::ConvertProsecutorsOfficesContext.new.perform
+    puts "已建立 並從法院刪除#{prosecutors_offices.count} 筆檢察署資料"
+  end
 end
