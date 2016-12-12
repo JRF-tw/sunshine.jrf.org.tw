@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe StoryBeforeJudgeNoticeContext do
+describe Story::AfterJudgeNoticeContext do
   let!(:story_subscription_with_party) { create :story_subscription_with_party }
   let!(:story) { Story.last }
   let!(:party) { Party.last }

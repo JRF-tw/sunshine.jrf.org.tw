@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe StorySubscriptionDeleteContext do
+describe Story::SubscriptionDeleteContext do
 
   context 'party delete subscription' do
     let!(:story_subscription) { create :story_subscription_with_party }

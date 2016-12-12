@@ -27,7 +27,7 @@ class Scrap::ImportVerdictContext < BaseContext
     end
 
     def calculate_verdict_scores(story)
-      StoryCalculateVerdictScoresContext.new(story).perform
+      Story::CalculateVerdictScoresContext.new(story).perform
     end
   end
 
@@ -125,26 +125,26 @@ class Scrap::ImportVerdictContext < BaseContext
   def create_relation_for_lawyer
     @verdict.lawyer_names.each do |name|
       VerdictRelationCreateContext.new(@verdict).perform(name)
-      StoryRelationCreateContext.new(@story).perform(name)
+      Story::RelationCreateContext.new(@story).perform(name)
     end
   end
 
   def create_relation_for_judge
     @verdict.judges_names.each do |name|
       VerdictRelationCreateContext.new(@verdict).perform(name)
-      StoryRelationCreateContext.new(@story).perform(name)
+      Story::RelationCreateContext.new(@story).perform(name)
     end
   end
 
   def create_relation_for_party
     @verdict.party_names.each do |name|
       VerdictRelationCreateContext.new(@verdict).perform(name)
-      StoryRelationCreateContext.new(@story).perform(name)
+      Story::RelationCreateContext.new(@story).perform(name)
     end
   end
 
   def calculate_schedule_scores
-    StoryCalculateScheduleScoresContext.new(@story).perform
+    Story::CalculateScheduleScoresContext.new(@story).perform
   end
 
   def set_delay_calculate_verdict_scores

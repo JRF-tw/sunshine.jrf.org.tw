@@ -1,4 +1,4 @@
-class StoryCalculateScheduleScoresContext < BaseContext
+class Story::CalculateScheduleScoresContext < BaseContext
 
   def initialize(story)
     @story = story

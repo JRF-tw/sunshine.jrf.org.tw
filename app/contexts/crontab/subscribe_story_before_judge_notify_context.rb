@@ -9,7 +9,7 @@ class Crontab::SubscribeStoryBeforeJudgeNotifyContext < BaseContext
   def perform
     run_callbacks :perform do
       @open_court_story.each do |story|
-        StoryBeforeJudgeNoticeContext.new(story).perform
+        Story::BeforeJudgeNoticeContext.new(story).perform
       end
 
     end
