@@ -1,21 +1,3 @@
-# == Schema Information
-#
-# Table name: suit_banners
-#
-#  id         :integer          not null, primary key
-#  pic_l      :string
-#  pic_m      :string
-#  pic_s      :string
-#  url        :string
-#  alt_string :string
-#  title      :string
-#  content    :text
-#  weight     :integer
-#  is_hidden  :boolean
-#  created_at :datetime
-#  updated_at :datetime
-#
-
 class Admin::SuitBannersController < Admin::BaseController
   before_action :suit_banner
   before_action(except: [:index]) { add_crumb('司法案例面面觀 banner 列表', admin_suit_banners_path) }
