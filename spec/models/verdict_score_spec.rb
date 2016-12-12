@@ -6,13 +6,12 @@
 #  story_id           :integer
 #  verdict_rater_id   :integer
 #  verdict_rater_type :string
-#  quality_score      :float
-#  rating_score       :float
 #  data               :hstore
 #  appeal_judge       :boolean
 #  status             :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  quality_scores     :hstore
 #
 
 require 'rails_helper'

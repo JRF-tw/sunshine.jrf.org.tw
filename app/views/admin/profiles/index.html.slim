@@ -15,7 +15,7 @@
         .span6
           .control-group
             label.control-label = f.label :current_eq
-            .controls#select2 = f.select :current_eq, Admin::Profile::CURRENT_TYPES, include_blank: "請選擇"
+            .controls.select2 = f.select :current_eq, Admin::Profile::CURRENT_TYPES, include_blank: "請選擇"
         .span6
           .control-group
             label.control-label = f.label :name_cont

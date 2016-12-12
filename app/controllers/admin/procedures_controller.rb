@@ -1,28 +1,3 @@
-# == Schema Information
-#
-# Table name: procedures
-#
-#  id                :integer          not null, primary key
-#  profile_id        :integer
-#  suit_id           :integer
-#  unit              :string
-#  title             :string
-#  procedure_unit    :string
-#  procedure_content :text
-#  procedure_result  :text
-#  procedure_no      :string
-#  procedure_date    :date
-#  suit_no           :integer
-#  source            :text
-#  source_link       :text
-#  punish_link       :string
-#  file              :string
-#  memo              :text
-#  created_at        :datetime
-#  updated_at        :datetime
-#  is_hidden         :boolean
-#
-
 class Admin::ProceduresController < Admin::BaseController
   before_action :procedure
   before_action { add_crumb('評鑑資料 - 案例列表', admin_suits_path) }

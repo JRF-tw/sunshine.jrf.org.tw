@@ -46,6 +46,7 @@ gem 'carrierwave_backgrounder'
 
 # editor
 gem 'redactor-rails'
+gem 'ckeditor'
 
 # api
 

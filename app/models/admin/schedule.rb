@@ -10,8 +10,8 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  branch_judge_id :integer
-#  courtroom       :string
 #  start_at        :datetime
+#  courtroom       :string
 #
 
 class Admin::Schedule < ::Schedule

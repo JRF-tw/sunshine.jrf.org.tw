@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161115040539) do
+ActiveRecord::Schema.define(version: 20161201110200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "postgis"
   enable_extension "hstore"
+  enable_extension "postgis"
 
   create_table "articles", force: :cascade do |t|
     t.integer  "profile_id"
@@ -96,6 +96,18 @@ ActiveRecord::Schema.define(version: 20161115040539) do
   add_index "branches", ["missed"], name: "index_branches_on_missed", using: :btree
   add_index "branches", ["name"], name: "index_branches_on_name", using: :btree
 
+  create_table "bulletins", force: :cascade do |t|
+    t.string   "title"
+    t.text     "content"
+    t.text     "pic"
+    t.boolean  "is_banner",  default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "bulletins", ["is_banner"], name: "index_bulletins_on_is_banner", using: :btree
+  add_index "bulletins", ["title"], name: "index_bulletins_on_title", using: :btree
+
   create_table "careers", force: :cascade do |t|
     t.integer  "profile_id"
     t.string   "career_type"
@@ -123,6 +135,22 @@ ActiveRecord::Schema.define(version: 20161115040539) do
 
   add_index "careers", ["is_hidden"], name: "index_careers_on_is_hidden", using: :btree
   add_index "careers", ["profile_id"], name: "index_careers_on_profile_id", using: :btree
+
+  create_table "ckeditor_assets", force: :cascade do |t|
+    t.string   "data_file_name",               null: false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    limit: 30
+    t.string   "type",              limit: 30
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
 
   create_table "court_observers", force: :cascade do |t|
     t.string   "name",                                null: false
