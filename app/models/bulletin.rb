@@ -13,7 +13,7 @@
 
 class Bulletin < ActiveRecord::Base
   scope :shown, -> { where(is_banner: true) }
-  scope :most_recent, -> { order(created_at: :desc).limit(3) }
+  scope :most_recent, -> (amount) { order(created_at: :desc).limit(amount) }
 
   def can_be_banner?
     title && pic.present?
