@@ -7,7 +7,7 @@
     tbody
       tr
         td 姓名
-        td= @judge.name
+        td = @judge.name
       tr
         td 頭像
         td
@@ -42,16 +42,16 @@
             = "來源：#{@judge.appointment_source}"
       tr
         td 是否在職
-        td= @judge.is_active ? '是' : '否'
+        td = @judge.is_active ? '是' : '否'
       tr
         td 是否在前端隱藏
-        td= @judge.is_hidden ? '是' : '否'
+        td = @judge.is_hidden ? '是' : '否'
       tr
         td 備註
-        td= @judge.memo
+        td = @judge.memo
       tr 
         td 轉換為檢察官
-        td= @judge.is_prosecutor ? '是' : '否'
+        td = @judge.is_prosecutor ? '是' : '否'
       tr
         td 關聯檢察官
-        td= link_to "#{@judge.prosecutor.name}", admin_prosecutor_path(@judge.prosecutor) if @judge.prosecutor
+        td = link_to "#{@judge.prosecutor.name}", admin_prosecutor_path(@judge.prosecutor) if @judge.prosecutor

@@ -10,7 +10,7 @@ class Admin::JudgeProsecutorToggleContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      return add_error(:data_update_fail,  @new_role.errors.full_messages) unless @new_role.save
+      return add_error(:data_update_fail, @new_role.errors.full_messages) unless @new_role.save
       true
     end
   end
@@ -18,7 +18,7 @@ class Admin::JudgeProsecutorToggleContext < BaseContext
   private
 
   def converted_role_data
-    @old_role.attributes.symbolize_keys.except(:id, :created_at, :judge_id, :updated_at, :punishments_count, :current_court_id, :prosecutors_office_id, :is_prosecutor , :is_judge)
+    @old_role.attributes.symbolize_keys.except(:id, :created_at, :judge_id, :updated_at, :punishments_count, :current_court_id, :prosecutors_office_id, :is_prosecutor, :is_judge)
   end
 
   def check_role

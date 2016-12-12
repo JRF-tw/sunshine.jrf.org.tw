@@ -1,5 +1,5 @@
 = f.input :name
-= f.association :prosecutors_office, label_method: :full_name, value_method: :id, include_blank: "請選擇", input_html: { class: 'select2' }
+= f.association :prosecutors_office, label_method: :full_name, value_method: :id, include_blank: '請選擇', input_html: { class: 'select2' }
 
 - if f.object.avatar?
   .control-group
@@ -7,19 +7,19 @@
     .controls= image_tag f.object.avatar.L_180.url
     = f.input :remove_avatar, as: :boolean
 = f.input :avatar, as: :file
-= f.input :gender, as: :select, collection: collect_gender_by_user, include_blank: "請選擇"
+= f.input :gender, as: :select, collection: collect_gender_by_user, include_blank: '請選擇'
 = f.input :gender_source
-= f.input :birth_year, hint: "半型純數字，民國"
+= f.input :birth_year, hint: '半型純數字，民國'
 = f.input :birth_year_source
 = f.input :stage
 = f.input :stage_source
-= f.input :appointment, hint: "非經司法官考試及格者，所具之任用資格。"
+= f.input :appointment, hint: '非經司法官考試及格者，所具之任用資格。'
 = f.input :appointment_source
-= f.input :is_active, hint: "打勾 = 在職中"
+= f.input :is_active, hint: '打勾 = 在職中'
 = f.input :memo, as: :text, input_html: { rows: 5 }
-= f.input :is_hidden, as: :boolean, hint: "打勾 = 前端頁面不顯示"
+= f.input :is_hidden, as: :boolean, hint: '打勾 = 前端頁面不顯示'
 .form-actions
-  = f.submit "送出", class: "btn btn-primary"
-  = " "
-  = link_to admin_judges_path, class: "btn" do
+  = f.submit '送出', class: 'btn btn-primary'
+  = ' '
+  = link_to admin_judges_path, class: 'btn' do
     | 回到檢察官列表

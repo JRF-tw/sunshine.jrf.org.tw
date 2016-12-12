@@ -1,13 +1,13 @@
 class Import::ConvertProsecutorsOfficesContext < BaseContext
 
   def initialize
-    @prosecutors_offices_by_court = Court.prosecutors
+    @offices = Court.prosecutors
   end
 
   def perform
     run_callbacks :perform do
       prosecutors_offices = []
-      @prosecutors_offices_by_court.each do |p|
+      @offices.each do |p|
         prosecutors_office = ProsecutorsOffice.create(prosecutors_office_data(p))
         if prosecutors_office
           prosecutors_offices << prosecutors_office
@@ -20,12 +20,6 @@ class Import::ConvertProsecutorsOfficesContext < BaseContext
 
   def prosecutors_office_data(p)
     court = Court.find_by_full_name(p.full_name.gsub('檢察署', ''))
-    {
-      name: p.name,
-      full_name: p.full_name,
-      weight: p.weight,
-      is_hidden: p.is_hidden,
-      court: court
-    }
+    p.attributes.symbolize_keys.except(:id, :court_type, :scrap_name, :code, :weight).merge(court: court)
   end
 end

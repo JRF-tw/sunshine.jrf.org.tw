@@ -15,20 +15,6 @@ class Import::ConvertProsecutorsContext < BaseContext
   end
 
   def prosecutor_data(p)
-    {
-      name: p.name,
-      avatar: p.avatar,
-      gender: p.gender,
-      gender_source: p.gender_source,
-      birth_year: p.birth_year,
-      birth_year_source: p.birth_year_source,
-      stage: p.stage,
-      stage_source: p.stage_source,
-      appointment: p.appointment,
-      appointment_source: p.appointment_source,
-      memo: p.memo,
-      is_active: p.is_active,
-      is_hidden: p.is_hidden
-    }
+    p.attributes.symbolize_keys.except(:id, :current, :created_at, :updated_at, :current_court, :punishments_count, :current_department, :current_branch)
   end
 end

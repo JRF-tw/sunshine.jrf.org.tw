@@ -10,11 +10,8 @@ class Admin::ProsecutorCreateContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      if @prosecutor.save
-        @prosecutor
-      else
-        add_error(:data_create_fail, @prosecutor.errors.full_messages)
-      end
+      return add_error(:data_create_fail, @prosecutor.errors.full_messages) unless @prosecutor.save
+      @prosecutor
     end
   end
 

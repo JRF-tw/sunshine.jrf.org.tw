@@ -10,11 +10,8 @@ class Admin::ProsecutorsOfficeCreateContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      if @prosecutors_office.save
-        @prosecutors_office
-      else
-        add_error(:data_create_fail, @prosecutors_office.errors.full_messages)
-      end
+      return add_error(:data_create_fail, @prosecutors_office.errors.full_messages) unless @prosecutors_office.save
+      @prosecutors_office
     end
   end
 
