@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: valid_scroes
+# Table name: valid_scores
 #
 #  id               :integer          not null, primary key
 #  story_id         :integer
@@ -13,6 +13,8 @@
 #  attitude_scores  :hstore
 #  command_scores   :hstore
 #  quality_scores   :hstore
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
 #
 
 class ValidScore < ActiveRecord::Base
@@ -22,9 +24,9 @@ class ValidScore < ActiveRecord::Base
   validates :score_type, presence: true
   validates :score_rater_id, presence: true
   validates :score_rater_type, presence: true
-  store_accessor :attitude_scores, :score_1_1, :score_1_2, :score_1_3
-  store_accessor :command_scores, :score_2_1, :score_2_2, :score_2_3, :score_2_4, :score_2_5
-  store_accessor :quality_scores, :score_3_1, :score_3_2_1, :score_3_2_2, :score_3_2_3, :score_3_2_4, :score_3_2_5, :score_3_2_6
+  store_accessor :attitude_scores, ScheduleScore.stored_attributes[:attitude_scores]
+  store_accessor :command_scores, ScheduleScore.stored_attributes[:command_scores]
+  store_accessor :quality_scores, :score_3_1, VerdictScore.stored_attributes[:quality_scores]
 
   belongs_to :schedule
   belongs_to :story
