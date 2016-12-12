@@ -6,7 +6,7 @@ class Api::BaseController < ApplicationController
   before_action :set_default_language
 
   def page_404
-    raise ActionController::RoutingError, "No route matches /#{params[:unmatched_route]}"
+    respond_404("No route matches /#{params[:unmatched_route]}")
   end
 
   private
