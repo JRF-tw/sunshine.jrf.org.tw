@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161201110200) do
+ActiveRecord::Schema.define(version: 20161207081350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -184,7 +184,6 @@ ActiveRecord::Schema.define(version: 20161201110200) do
   add_index "court_observers", ["school"], name: "index_court_observers_on_school", using: :btree
 
   create_table "courts", force: :cascade do |t|
-    t.string   "court_type"
     t.string   "full_name"
     t.string   "name"
     t.integer  "weight"
@@ -193,6 +192,7 @@ ActiveRecord::Schema.define(version: 20161201110200) do
     t.boolean  "is_hidden",  default: true
     t.string   "code"
     t.string   "scrap_name"
+    t.string   "court_type"
   end
 
   add_index "courts", ["code"], name: "index_courts_on_code", using: :btree
@@ -469,10 +469,12 @@ ActiveRecord::Schema.define(version: 20161201110200) do
     t.string   "memo"
     t.boolean  "is_active",             default: true
     t.boolean  "is_hidden",             default: true
+    t.boolean  "is_judge"
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
   end
 
+  add_index "prosecutors", ["is_judge"], name: "index_prosecutors_on_is_judge", using: :btree
   add_index "prosecutors", ["judge_id"], name: "index_prosecutors_on_judge_id", using: :btree
   add_index "prosecutors", ["prosecutors_office_id"], name: "index_prosecutors_on_prosecutors_office_id", using: :btree
 

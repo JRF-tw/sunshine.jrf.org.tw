@@ -18,6 +18,7 @@
 #  memo                  :string
 #  is_active             :boolean          default(TRUE)
 #  is_hidden             :boolean          default(TRUE)
+#  is_judge              :boolean
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #

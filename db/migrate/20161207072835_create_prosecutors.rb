@@ -16,9 +16,11 @@ class CreateProsecutors < ActiveRecord::Migration
       t.string :memo
       t.boolean :is_active, default: true
       t.boolean :is_hidden, default: true
+      t.boolean :is_judge
       t.timestamps null: false
     end
     add_index :prosecutors, :prosecutors_office_id
     add_index :prosecutors, :judge_id
+    add_index :prosecutors, :is_judge
   end
 end
