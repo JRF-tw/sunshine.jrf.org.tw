@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     resources :courts
     resources :judgments
     resources :banners
+    resources :bulletins
     resources :suit_banners
     resources :users
     resources :stories

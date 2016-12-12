@@ -13,8 +13,6 @@
 #  prosecutor_names :text
 #  is_judgment      :boolean          default(FALSE)
 #  adjudge_date     :date
-#  main_judge_id    :integer
-#  main_judge_name  :string
 #  publish_date     :date
 #
 

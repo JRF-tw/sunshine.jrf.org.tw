@@ -1,0 +1,3 @@
+= admin_widget_box '編輯公告訊息', icon: :pencil do
+  = simple_form_for @bulletin, url: admin_bulletin_path(@bulletin), method: :put, wrapper: :admin do |f|
+    = render partial: 'form', object: f, as: :f

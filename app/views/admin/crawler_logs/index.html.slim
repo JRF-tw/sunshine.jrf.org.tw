@@ -6,10 +6,10 @@
         .span6
           .control-group#datepicker
             label.control-label = f.label :crawler_kind_eq
-            .controls#select2 = f.select :crawler_kind_eq,
+            .controls.select2 = f.select :crawler_kind_eq,
             collection_for_crawler_kinds, include_blank: "請選擇"
             label.control-label = f.label :crawler_error_type_eq
-            .controls#select2 = f.select :crawler_error_type_eq,
+            .controls.select2 = f.select :crawler_error_type_eq,
             collection_for_crawler_error_types, include_blank: "請選擇"
     hr
       .form-actions

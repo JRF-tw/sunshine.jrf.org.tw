@@ -1,30 +1,3 @@
-# == Schema Information
-#
-# Table name: profiles
-#
-#  id                 :integer          not null, primary key
-#  name               :string
-#  current            :string
-#  avatar             :string
-#  gender             :string
-#  gender_source      :text
-#  birth_year         :integer
-#  birth_year_source  :text
-#  stage              :integer
-#  stage_source       :text
-#  appointment        :string
-#  appointment_source :text
-#  memo               :text
-#  created_at         :datetime
-#  updated_at         :datetime
-#  current_court      :string
-#  is_active          :boolean
-#  is_hidden          :boolean
-#  punishments_count  :integer          default(0)
-#  current_department :string
-#  current_branch     :string
-#
-
 class ProfilesController < BaseController
   def judges
     @judges = Profile.judges.shown.active.had_avatar.order_by_name.page(params[:page]).per(12)

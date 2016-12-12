@@ -46,9 +46,12 @@ gem 'carrierwave_backgrounder'
 
 # editor
 gem 'redactor-rails'
+gem 'ckeditor'
 
 # api
+
 gem 'rabl-rails'
+gem 'rack-cors', require: 'rack/cors'
 
 # xls Download
 gem 'axlsx', '~> 2.0'
