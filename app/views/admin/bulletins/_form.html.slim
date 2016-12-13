@@ -3,7 +3,7 @@
 - if f.object.pic?
   .control-group
     label.control-label 已上傳圖片：
-    .controls= image_tag f.object.pic.L_360.url
+    .controls= image_tag f.object.pic.S_280.url
     = f.input :remove_pic, as: :boolean
 = f.input :pic, as: :file, hint: '建議尺寸/比例：2592 × 1296'
 
