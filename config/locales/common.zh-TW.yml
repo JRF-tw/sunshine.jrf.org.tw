@@ -346,6 +346,7 @@ zh-TW:
       prosecutor:
         is_active_true: "是否在職"
         is_hidden_eq: "是否在前端隱藏"
+        is_judge_true: "是否轉換為法官"
         name_cont: "姓名包含"
         prosecutors_office_full_name_eq: "任職檢察署"
       lawyer:

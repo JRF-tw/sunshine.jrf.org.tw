@@ -6,6 +6,7 @@ describe Admin::JudgeProsecutorToggleContext do
   shared_examples 'judge to prosecutor' do
     it { expect(Prosecutor.last.is_active).to be_truthy }
     it { expect(Prosecutor.last.is_hidden).to be_falsey }
+    it { expect(Prosecutor.last.is_judge).to be_falsey }
     it { expect(judge.reload.is_hidden).to be_truthy }
     it { expect(judge.reload.is_active).to be_falsey }
     it { expect(judge.reload.is_prosecutor).to be_truthy }
@@ -17,6 +18,7 @@ describe Admin::JudgeProsecutorToggleContext do
     it { expect(Judge.last.is_hidden).to be_falsey }
     it { expect(prosecutor.is_hidden).to be_truthy }
     it { expect(prosecutor.is_active).to be_falsey }
+    it { expect(prosecutor.is_judge).to be_truthy }
     it { expect(Judge.last.is_prosecutor).to be_falsey }
     it { expect(prosecutor.reload.judge).to eq(Judge.last) }
   end
