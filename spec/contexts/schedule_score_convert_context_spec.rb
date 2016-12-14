@@ -34,7 +34,7 @@ describe ScheduleScoreConvertContext do
       end
     end
 
-    context '#valid_score_params' do
+    context '#build_valid_score' do
       let!(:role) { create :party, :already_confirmed }
       let!(:verdict) { create :verdict_for_convert_valid_score, story: story, judges_names: [judge_A.name], party_names: [role.name] }
       before { subject }

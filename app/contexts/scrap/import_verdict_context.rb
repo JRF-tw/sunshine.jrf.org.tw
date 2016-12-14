@@ -16,8 +16,8 @@ class Scrap::ImportVerdictContext < BaseContext
   after_perform   :create_relation_for_lawyer
   after_perform   :create_relation_for_judge
   after_perform   :create_relation_for_party
-  after_perform   :calculate_schedule_scores, if: :story_pronounce?
-  after_perform   :set_delay_calculate_verdict_scores, if: :story_pronounce?
+  after_perform   :calculate_schedule_scores, if: :story_adjudge?
+  after_perform   :set_delay_calculate_verdict_scores, if: :story_adjudge?
   after_perform   :record_count_to_daily_notify
   after_perform   :alert_new_story_type
 
@@ -151,8 +151,8 @@ class Scrap::ImportVerdictContext < BaseContext
     self.class.delay_until(3.months.from_now).calculate_verdict_scores(@story)
   end
 
-  def story_pronounce?
-    @story.is_pronounce
+  def story_adjudge?
+    @story.is_adjudge
   end
 
   def record_count_to_daily_notify

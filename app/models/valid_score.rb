@@ -18,12 +18,7 @@
 #
 
 class ValidScore < ActiveRecord::Base
-  validates :story_id, presence: true
-  validates :judge_id, presence: true
-  validates :score_id, presence: true
-  validates :score_type, presence: true
-  validates :score_rater_id, presence: true
-  validates :score_rater_type, presence: true
+  validates :story_id, :judge_id, :score_id, :score_type, :score_rater_id, :score_rater_type, presence: true
   store_accessor :attitude_scores, ScheduleScore.stored_attributes[:attitude_scores]
   store_accessor :command_scores, ScheduleScore.stored_attributes[:command_scores]
   store_accessor :quality_scores, :score_3_1, VerdictScore.stored_attributes[:quality_scores]
