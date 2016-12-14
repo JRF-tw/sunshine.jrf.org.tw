@@ -1,16 +1,3 @@
-# == Schema Information
-#
-# Table name: prosecutors_offices
-#
-#  id         :integer          not null, primary key
-#  full_name  :string
-#  name       :string
-#  court_id   :integer
-#  is_hidden  :boolean          default(TRUE)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#
-
 class Admin::ProsecutorsOfficesController < Admin::BaseController
   before_action :prosecutors_office
   before_action(except: [:index]) { add_crumb('檢察署列表', admin_prosecutors_offices_path) }

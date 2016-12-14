@@ -13,8 +13,10 @@ namespace :import do
 
   task prosecutors: :environment do
     puts '從個人檔案匯入檢察官資料中...'
-    prosecutors = Import::ConvertProsecutorsContext.new.perform
+    context = Import::ConvertProsecutorsContext.new
+    prosecutors = context.perform
     puts "已建立 #{prosecutors.count} 筆檢察官資料"
+    puts "缺少姓名 #{context.error_message.count} 筆" if context.error_message.present?
   end
 
   task prosecutors_offices: :environment do

@@ -1,5 +1,9 @@
 class Admin::ProsecutorCreateContext < BaseContext
-  PERMITS = [:name, :prosecutors_office_id, :avatar, :judge_id, :judge, :prosecutors_office, :remove_avatar, :gender, :birth_year, :stage, :appointment, :memo, :gender_source, :birth_year_source, :stage_source, :appointment_source, :is_active, :is_hidden].freeze
+  PERMITS = [:name, :prosecutors_office_id, :avatar, :judge_id,
+             :judge, :prosecutors_office, :remove_avatar,
+             :gender, :birth_year, :stage, :appointment, :memo,
+             :gender_source, :birth_year_source, :stage_source,
+             :appointment_source, :is_active, :is_hidden].freeze
 
   before_perform :build_prosecutor
   attr_reader :prosecutor

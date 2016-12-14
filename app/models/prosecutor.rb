@@ -27,5 +27,6 @@ class Prosecutor < ActiveRecord::Base
   belongs_to :prosecutors_office
   belongs_to :judge
 
-  mount_uploader :avatar, ProfileAvatarUploader
+  mount_uploader :avatar, AvatarUploader
+  validates :name, presence: true
 end

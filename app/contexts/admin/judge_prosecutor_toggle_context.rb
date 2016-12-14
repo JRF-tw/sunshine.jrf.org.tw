@@ -38,11 +38,11 @@ class Admin::JudgeProsecutorToggleContext < BaseContext
   end
 
   def find_or_new_judge
-    @new_role = @old_role.judge || Judge.find_by_name(@old_role.name) || Admin::Judge.new(converted_role_data)
+    @new_role = @old_role.judge || Admin::Judge.find_by_name(@old_role.name) || Admin::Judge.new(converted_role_data)
   end
 
   def find_or_new_prosecutor
-    @new_role = @old_role.prosecutor || Prosecutor.find_by_name(@old_role.name) || Admin::Prosecutor.new(converted_role_data)
+    @new_role = @old_role.prosecutor || Admin::Prosecutor.find_by_name(@old_role.name) || Admin::Prosecutor.new(converted_role_data)
   end
 
   def build_role_relation

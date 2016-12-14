@@ -34,6 +34,6 @@ class Judge < ActiveRecord::Base
   has_many :schedule_scores
   has_one :prosecutor
 
-  mount_uploader :avatar, ProfileAvatarUploader
+  mount_uploader :avatar, AvatarUploader
 
 end

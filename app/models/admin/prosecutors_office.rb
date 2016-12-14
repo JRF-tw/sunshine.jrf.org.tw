@@ -12,6 +12,4 @@
 #
 
 class Admin::ProsecutorsOffice < ProsecutorsOffice
-  validates :full_name, :name, uniqueness: true
-  validates :court, :full_name, presence: true
 end

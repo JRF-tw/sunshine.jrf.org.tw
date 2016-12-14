@@ -28,7 +28,7 @@
           .control-group
             label.control-label = f.label :is_judge_true
             .controls#select2 = f.select :is_judge_true,
-            collect_for_boolean, include_blank: "請選擇"
+            collect_for_boolean, include_blank: '請選擇'
     hr
     .form-actions
       = f.submit value: '搜尋', class: 'btn btn-primary'
@@ -54,18 +54,18 @@
       tbody
         - @prosecutors.each do |prosecutor|
           tr
-            td= prosecutor.id
-            td= prosecutor.name
-            td= prosecutor.gender
-            td= link_to "#{prosecutor.prosecutors_office.full_name}", admin_prosecutors_office_path(prosecutor.prosecutors_office) if prosecutor.prosecutors_office
-            td= prosecutor.is_active? ? "是" : "否"
-            td= prosecutor.is_hidden? ? "是" : "否"
-            td= prosecutor.memo
+            td = prosecutor.id
+            td = prosecutor.name
+            td = prosecutor.gender
+            td = link_to "#{prosecutor.prosecutors_office.full_name}", admin_prosecutors_office_path(prosecutor.prosecutors_office) if prosecutor.prosecutors_office
+            td = prosecutor.is_active? ? '是' : '否'
+            td = prosecutor.is_hidden? ? '是' : '否'
+            td = prosecutor.memo
             td
-              = link_to "詳細資料", admin_prosecutor_path(prosecutor), class: "btn btn-mini"
+              = link_to '詳細資料', admin_prosecutor_path(prosecutor), class: 'btn btn-mini'
               | &nbsp;
-              = link_to "編輯", edit_admin_prosecutor_path(prosecutor), class: "btn btn-mini btn-success"
+              = link_to '編輯', edit_admin_prosecutor_path(prosecutor), class: 'btn btn-mini btn-success'
               | &nbsp;
-              = link_to "刪除", admin_prosecutor_path(prosecutor), class: "btn btn-mini btn-danger", method: :delete, 'data-confirm': "確認刪除該檢察官檔案 - #{prosecutor.name}？"
+              = link_to '刪除', admin_prosecutor_path(prosecutor), class: 'btn btn-mini btn-danger', method: :delete, 'data-confirm': "確認刪除該檢察官檔案 - #{prosecutor.name}？"
     .ui-toolbar.ui-widget-header
       = paginate @prosecutors, theme: :admin

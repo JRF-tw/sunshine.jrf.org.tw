@@ -24,5 +24,4 @@
 #
 
 class Admin::Prosecutor < ::Prosecutor
-  validates :name, presence: true
 end

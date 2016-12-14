@@ -49,9 +49,8 @@
       tr
         td 備註
         td = @prosecutor.memo
-      tr 
-        td 轉換為法官
-        td = @prosecutor.is_judge ? '是' : '否'
-      tr
-        td 輪調法官
-        td = link_to "#{@prosecutor.judge.name}", admin_judge_path(@prosecutor.judge) if @prosecutor.judge
+
+      - if @prosecutor.is_judge
+        tr 
+          td 已輪調至法官
+          td = @prosecutor.judge ? (link_to "#{@prosecutor.judge.name}", admin_judge_path(@prosecutor.judge)) : '是'

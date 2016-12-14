@@ -17,4 +17,7 @@ class ProsecutorsOffice < ActiveRecord::Base
   belongs_to :court
 
   scope :newest, -> { order('id DESC') }
+
+  validates :full_name, :name, uniqueness: true
+  validates :court, :full_name, presence: true
 end
