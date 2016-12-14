@@ -21,7 +21,7 @@ module Capybara
     end
 
     def sign_out_lawyer
-      find(:xpath, "//header/div/nav/a[@rel='nofollow']").click
+      find(:xpath, "//a[@href='/lawyer/sign_out']").click
     end
 
     def lawyer_run_schedule_score_flow(story, schedule, judge)
@@ -125,11 +125,5 @@ module Capybara
         fill_in 'lawyer_current_password', with: password
       end
     end
-
-    def open_lawyer_email(email)
-      perform_sidekiq_job(fetch_sidekiq_last_job)
-      open_email(email)
-    end
-
   end
 end

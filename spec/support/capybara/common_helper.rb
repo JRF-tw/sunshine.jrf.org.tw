@@ -14,5 +14,10 @@ module Capybara
       page.execute_script("$('##{field[:id]}').val(#{option_value})")
       page.execute_script("$('##{field[:id]}').trigger('liszt:updated').trigger('change')")
     end
+
+    def open_last_email(email)
+      perform_sidekiq_job(fetch_sidekiq_last_job)
+      open_email(email)
+    end
   end
 end
