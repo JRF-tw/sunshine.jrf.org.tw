@@ -10,7 +10,7 @@ feature '前台帳號功能', type: :feature, js: true do
     end
 
     def visit_reset_password_page(email)
-      open_lawyer_email(email)
+      open_last_email(email)
       current_email.find('a').click
     end
 

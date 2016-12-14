@@ -2,7 +2,7 @@ require 'rails_helper'
 feature '前台帳號功能', type: :feature, js: true do
   feature '律師' do
     def lawyer_click_confirm_link(email)
-      open_lawyer_email(email)
+      open_last_email(email)
       current_email.find('a').click
     end
 

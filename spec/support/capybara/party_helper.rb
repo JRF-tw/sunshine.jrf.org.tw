@@ -127,10 +127,5 @@ module Capybara
       find(:xpath, '//tbody/tr/td/a').click
       click_link('編輯評鑑')
     end
-
-    def open_party_email(email)
-      perform_sidekiq_job(fetch_sidekiq_last_job)
-      open_email(email)
-    end
   end
 end
