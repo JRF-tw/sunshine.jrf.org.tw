@@ -65,14 +65,14 @@ class Scrap::ParseVerdictContext < BaseContext
   end
 
   def parse_verdict_word
-    @verdict_word = @nokogiri_data.css('table')[4].css('tr')[0].css('td')[1].text
+    @verdict_word = @nokogiri_data.css('table')[4].css('tr')[0].css('td')[0].text
   rescue
     Logs::AddCrawlerError.parse_verdict_data_error(@crawler_history, :parse_data_failed, '解析資訊錯誤 : 取得 判決書字別 失敗')
     false
   end
 
   def parse_verdict_publish_date
-    date_string = @nokogiri_data.css('table')[4].css('tr')[1].css('td')[1].text
+    date_string = @nokogiri_data.css('table')[4].css('tr')[1].css('td')[0].text.match(/\d+/)[0]
     @verdict_publish_date = Date.new((date_string[0..2].to_i + 1911), date_string[3..4].to_i, date_string[5..6].to_i)
   rescue
     Logs::AddCrawlerError.parse_verdict_data_error(@crawler_history, :parse_data_failed, '解析資訊錯誤 : 取得 判決書發布日期 失敗')

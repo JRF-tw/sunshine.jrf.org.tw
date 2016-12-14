@@ -57,7 +57,7 @@ class Scrap::ImportVerdictContext < BaseContext
   end
 
   def find_or_create_story
-    array = @word.split(',')
+    array = @word.match(/\d+,\W+,\d+/)[0].split(',')
     @story = Story.find_or_create_by(year: array[0], word_type: array[1], number: array[2], court: @court)
   end
 
@@ -73,7 +73,9 @@ class Scrap::ImportVerdictContext < BaseContext
   end
 
   def create_main_judge_by_highest
-    Scrap::CreateJudgeByHighestCourtContext.new(@court, @analysis_context.main_judge_name).perform
+    @analysis_context.judges_names.each do |judge|
+      Scrap::CreateJudgeByHighestCourtContext.new(@court, judge).perform
+    end
   end
 
   def assign_names
