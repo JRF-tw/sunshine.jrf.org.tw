@@ -19,46 +19,15 @@ module AdminHelper
     CrawlerErrorTypes.list.to_enum.with_index.map { |n, i| [n.last, i] }
   end
 
-  def success_scrap_verdict_judge_precentage(ch)
-    calculate_failed = ch.crawler_logs.crawler_verdict.parse_judge_error.last ? ch.crawler_logs.crawler_verdict.parse_judge_error.last.crawler_errors.count.to_f / ch.verdicts_count.to_f : 0
-    success_precentage(calculate_failed)
+  def precentage(numerator, denominator)
+    number_to_percentage(numerator.to_f / denominator.to_f * 100, precision: 2)
   end
 
-  def verdict_judge_not_exist_precentage(ch)
-    calculate_failed = ch.crawler_logs.crawler_verdict.parse_judge_not_exist.last ? ch.crawler_logs.crawler_verdict.parse_judge_not_exist.last.crawler_errors.count.to_f / ch.verdicts_count.to_f : 0
-    failed_precentage(calculate_failed)
-  end
-
-  def success_scrap_verdict_lawyer_precentage(ch)
-    calculate_failed = ch.crawler_logs.crawler_verdict.parse_lawyer_error.last ? ch.crawler_logs.crawler_verdict.parse_lawyer_error.last.crawler_errors.count.to_f / ch.verdicts_count.to_f : 0
-    success_precentage(calculate_failed)
-  end
-
-  def verdict_lawyer_not_exist_precentage(ch)
-    calculate_failed = ch.crawler_logs.crawler_verdict.parse_lawyer_not_exist.last ? ch.crawler_logs.crawler_verdict.parse_lawyer_not_exist.last.crawler_errors.count.to_f / ch.verdicts_count.to_f : 0
-    failed_precentage(calculate_failed)
-  end
-
-  def success_scrap_verdict_party_precentage(ch)
-    calculate_failed = ch.crawler_logs.crawler_verdict.parse_party_error.last ? ch.crawler_logs.crawler_verdict.parse_party_error.last.crawler_errors.count.to_f / ch.verdicts_count.to_f : 0
-    success_precentage(calculate_failed)
-  end
-
-  def success_scrap_verdict_prosecutor_precentage(ch)
-    calculate_failed = ch.crawler_logs.crawler_verdict.parse_prosecutor_error.last ? ch.crawler_logs.crawler_verdict.parse_prosecutor_error.last.crawler_errors.count.to_f / ch.verdicts_count.to_f : 0
-    success_precentage(calculate_failed)
-  end
-
-  def verdict_prosecutor_not_exist_precentage(ch)
-    calculate_failed = ch.crawler_logs.crawler_verdict.parse_prosecutor_not_exist.last ? ch.crawler_logs.crawler_verdict.parse_prosecutor_not_exist.last.crawler_errors.count.to_f / ch.verdicts_count.to_f : 0
-    failed_precentage(calculate_failed)
-  end
-
-  def success_precentage(calculate_failed)
-    number_to_percentage((1 - calculate_failed) * 100, precision: 2)
-  end
-
-  def failed_precentage(calculate_failed)
-    number_to_percentage(calculate_failed * 100, precision: 2)
+  def generate_crawler_hitory_pie_hash(key, crawler_history)
+    @hash = {}
+    crawler_history.crawler_logs.public_send(key.to_s).map(&:crawler_error_type).each do |cet|
+      @hash.merge! CrawlerErrorTypes.list[cet.to_sym] => crawler_history.failed_count(key, cet.to_sym)
+    end
+    @hash.present? ? @hash : nil
   end
 end

@@ -18,4 +18,21 @@ class CrawlerHistory < ActiveRecord::Base
   has_many :crawler_logs, dependent: :destroy
 
   scope :newest, -> { order('crawler_on DESC') }
+
+  def success_count(crawler_kind, crawler_error_type)
+    verdicts_count - error_log_count(crawler_kind, crawler_error_type)
+  end
+
+  def failed_count(crawler_kind, crawler_error_type)
+    error_log_count(crawler_kind, crawler_error_type)
+  end
+
+  def find_log(crawler_kind, crawler_error_type)
+    crawler_logs.find_by(crawler_kind: CrawlerKinds.list.keys.index(crawler_kind), crawler_error_type: CrawlerErrorTypes.list.keys.index(crawler_error_type))
+  end
+
+  def error_log_count(kind, error_type)
+    return 0 unless log = find_log(kind, error_type)
+    log.crawler_errors.count
+  end
 end

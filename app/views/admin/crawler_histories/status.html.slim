@@ -1,4 +1,4 @@
-= search_form_for @search, url: status_admin_crawler_histories_path, wrapper: :admin, html: { class: "form-horizontal" } do |f|
+= search_form_for @search, url: status_admin_crawler_histories_path, wrapper: :admin, html: { class: 'form-horizontal' } do |f|
   .well
     fieldset
       legend 搜尋
@@ -6,38 +6,70 @@
         .span6
           .control-group#datepicker
             label.control-label = f.label :crawler_on_gteq
-            .controls= f.search_field :crawler_on_gteq, placeholder: "起始時間，非必填"
+            .controls= f.search_field :crawler_on_gteq, placeholder: '起始時間，非必填'
             label.control-label = f.label :crawler_on_lteq
-            .controls= f.search_field :crawler_on_lteq, placeholder: "結束時間，非必填"
+            .controls= f.search_field :crawler_on_lteq, placeholder: '結束時間，非必填'
+        .span6
+          .control-group
+            label.control-label = f.label :verdicts_count_gteq
+            .controls= f.search_field :verdicts_count_gteq
     hr
       .form-actions
-        = f.submit value:"搜尋", class: "btn btn-primary"
+        = f.submit value: '搜尋', class: 'btn btn-primary'
         = " "
-        = link_to "清空搜尋結果", status_admin_crawler_histories_path, class: "btn btn-default"
+        = link_to '清空搜尋結果', status_admin_crawler_histories_path, class: 'btn btn-default'
 
-= admin_widget_box "判決書抓取數據", icon: :pencil do
+= admin_widget_box '判決書抓取數據', icon: :pencil do
   .dataTables_wrapper
     table.table.table-bordered.table-striped.table-hover
       thead
         tr
           th 爬蟲日期
+          th 判決書數量
           th 法官抓取成功
           th 法官不存在
           th 律師抓取成功
           th 律師不存在
           th 當事人抓取成功
+          th 當事人不存在
           th 檢察官抓取成功
           th 檢察官不存在
       tbody
         - @crawler_histories.each do |ch|
           tr
             td = ch.crawler_on
-            td = success_scrap_verdict_judge_precentage(ch)
-            td = verdict_judge_not_exist_precentage(ch)
-            td = success_scrap_verdict_lawyer_precentage(ch)
-            td = verdict_lawyer_not_exist_precentage(ch)
-            td = success_scrap_verdict_party_precentage(ch)
-            td = success_scrap_verdict_prosecutor_precentage(ch)
-            td = verdict_prosecutor_not_exist_precentage(ch)
+            td = ch.verdicts_count
+            td
+              = "#{ precentage(ch.success_count(:crawler_verdict, :parse_judge_error), ch.verdicts_count) }"
+              br
+              = "(#{ ch.success_count(:crawler_verdict, :parse_judge_error) } / #{ ch.verdicts_count })"
+            td
+              = "#{ precentage(ch.failed_count(:crawler_verdict, :parse_judge_not_exist), ch.verdicts_count) }"
+              br
+              = "(#{ ch.failed_count(:crawler_verdict, :parse_judge_not_exist) } / #{ch.verdicts_count})"
+            td
+              = "#{ precentage(ch.success_count(:crawler_verdict, :parse_lawyer_error), ch.verdicts_count) }"
+              br
+              = "(#{ ch.success_count(:crawler_verdict, :parse_lawyer_error) } / #{ch.verdicts_count})"
+            td
+              = "#{ precentage(ch.failed_count(:crawler_verdict, :parse_lawyer_not_exist), ch.verdicts_count) }"
+              br
+              = "(#{ ch.failed_count(:crawler_verdict, :parse_lawyer_not_exist) } / #{ch.verdicts_count})"
+            td
+              = "#{ precentage(ch.success_count(:crawler_verdict, :parse_party_error), ch.verdicts_count) }"
+              br
+              = "(#{ ch.success_count(:crawler_verdict, :parse_party_error) } / #{ch.verdicts_count})"
+            td
+              = "#{ precentage(ch.failed_count(:crawler_verdict, :parse_party_not_exist), ch.verdicts_count) }"
+              br
+              = "(#{ ch.failed_count(:crawler_verdict, :parse_party_not_exist) } / #{ch.verdicts_count})"
+            td
+              = "#{ precentage(ch.success_count(:crawler_verdict, :parse_prosecutor_error), ch.verdicts_count) }"
+              br
+              = "(#{ ch.success_count(:crawler_verdict, :parse_prosecutor_error) } / #{ch.verdicts_count})"
+            td
+              = "#{ precentage(ch.failed_count(:crawler_verdict, :parse_prosecutor_not_exist), ch.verdicts_count) }"
+              br
+              = "(#{ ch.failed_count(:crawler_verdict, :parse_prosecutor_not_exist) } / #{ch.verdicts_count})"
     .ui-toolbar.ui-widget-header
       = paginate @crawler_histories, theme: :admin

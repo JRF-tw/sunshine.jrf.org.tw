@@ -5,11 +5,11 @@ default: &default
     - 少年
     - 行政
   crawler_kinds:
-    crawler_court: "法院錯誤"
-    crawler_judge: "法官錯誤"
-    crawler_branch: "股別錯誤"
-    crawler_schedule: "庭期錯誤"
-    crawler_verdict: "判決書錯誤"
+    crawler_court: "法院爬取錯誤"
+    crawler_judge: "法官爬取錯誤"
+    crawler_branch: "股別爬取錯誤"
+    crawler_schedule: "庭期爬取錯誤"
+    crawler_verdict: "判決書爬取錯誤"
   crawler_error_types:
     parse_data_failed: "解析回傳資料失敗"
     date_not_in_db: "爬蟲取得資料不存在於資料庫"

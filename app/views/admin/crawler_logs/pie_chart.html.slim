@@ -1,0 +1,4 @@
+- CrawlerKinds.list.keys.each do |key|
+  - if generate_crawler_hitory_pie_hash(key, @crawler_history)
+    = pie_chart generate_crawler_hitory_pie_hash(key, @crawler_history), title: CrawlerKinds.list[key]
+    br
