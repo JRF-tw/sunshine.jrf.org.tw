@@ -155,3 +155,5 @@ gem 'slack-notifier'
 
 # SMS
 gem 'twilio-ruby'
+
+gem 'chartkick'

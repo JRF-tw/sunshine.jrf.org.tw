@@ -140,6 +140,7 @@ GEM
       timers (>= 4.1.1)
     celluloid-supervision (0.20.5)
       timers (>= 4.1.1)
+    chartkick (2.2.1)
     chosen-rails (1.2.0)
       coffee-rails (>= 3.2)
       compass-rails (>= 1.1.2)
@@ -656,6 +657,7 @@ DEPENDENCIES
   capybara-webkit
   carrierwave
   carrierwave_backgrounder
+  chartkick
   chosen-rails (~> 1.2.0)
   ckeditor
   coffee-rails (~> 4.0.0)
