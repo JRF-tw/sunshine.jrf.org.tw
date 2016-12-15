@@ -11,7 +11,6 @@ class Import::ConvertProsecutorsOfficesContext < BaseContext
         prosecutors_office = ProsecutorsOffice.create(prosecutors_office_data(p))
         if prosecutors_office
           prosecutors_offices << prosecutors_office
-          p.delete
         end
       end
       prosecutors_offices
