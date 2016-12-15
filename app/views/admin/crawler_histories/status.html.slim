@@ -1,4 +1,4 @@
-= search_form_for @search, url: status_admin_crawler_histories_path, wrapper: :admin, html: { class: "form-horizontal" } do |f|
+= search_form_for @search, url: status_admin_crawler_histories_path, wrapper: :admin, html: { class: 'form-horizontal' } do |f|
   .well
     fieldset
       legend 搜尋
@@ -6,20 +6,20 @@
         .span6
           .control-group#datepicker
             label.control-label = f.label :crawler_on_gteq
-            .controls= f.search_field :crawler_on_gteq, placeholder: "起始時間，非必填"
+            .controls= f.search_field :crawler_on_gteq, placeholder: '起始時間，非必填'
             label.control-label = f.label :crawler_on_lteq
-            .controls= f.search_field :crawler_on_lteq, placeholder: "結束時間，非必填"
+            .controls= f.search_field :crawler_on_lteq, placeholder: '結束時間，非必填'
         .span6
           .control-group
             label.control-label = f.label :verdicts_count_gteq
             .controls= f.search_field :verdicts_count_gteq
     hr
       .form-actions
-        = f.submit value:"搜尋", class: "btn btn-primary"
+        = f.submit value: '搜尋', class: 'btn btn-primary'
         = " "
-        = link_to "清空搜尋結果", status_admin_crawler_histories_path, class: "btn btn-default"
+        = link_to '清空搜尋結果', status_admin_crawler_histories_path, class: 'btn btn-default'
 
-= admin_widget_box "判決書抓取數據", icon: :pencil do
+= admin_widget_box '判決書抓取數據', icon: :pencil do
   .dataTables_wrapper
     table.table.table-bordered.table-striped.table-hover
       thead

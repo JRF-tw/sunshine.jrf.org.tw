@@ -22,4 +22,12 @@ module AdminHelper
   def precentage(numerator, denominator)
     number_to_percentage(numerator.to_f / denominator.to_f * 100, precision: 2)
   end
+
+  def generate_crawler_hitory_pie_hash(key, crawler_history)
+    @hash = {}
+    crawler_history.crawler_logs.public_send(key.to_s).map(&:crawler_error_type).each do |cet|
+      @hash.merge! CrawlerErrorTypes.list[cet.to_sym] => crawler_history.failed_count(key, cet.to_sym)
+    end
+    return @hash.present? ? @hash : nil
+  end
 end
