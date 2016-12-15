@@ -7,14 +7,12 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  file             :string
-#  is_judgment      :boolean          default(FALSE)
 #  party_names      :text
 #  lawyer_names     :text
 #  judges_names     :text
 #  prosecutor_names :text
+#  is_judgment      :boolean          default(FALSE)
 #  adjudge_date     :date
-#  main_judge_id    :integer
-#  main_judge_name  :string
 #  publish_date     :date
 #
 
@@ -24,7 +22,10 @@ class Verdict < ActiveRecord::Base
   serialize :lawyer_names, Array
   serialize :judges_names, Array
   serialize :prosecutor_names, Array
-  has_many :verdict_relations
+  has_many :verdict_relations, dependent: :destroy
+  has_many :parties, through: :verdict_relations, source: :person, source_type: 'Party'
+  has_many :lawyers, through: :verdict_relations, source: :person, source_type: 'Lawyer'
+  has_many :judges, through: :verdict_relations, source: :person, source_type: 'Judge'
   belongs_to :story
 
   scope :newest, -> { order('id DESC') }

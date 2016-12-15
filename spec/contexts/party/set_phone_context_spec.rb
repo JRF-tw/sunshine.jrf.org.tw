@@ -2,58 +2,53 @@ require 'rails_helper'
 
 describe Party::SetPhoneContext do
   let!(:party) { create :party }
-  let!(:params) { { unconfirmed_phone: '0911111111' } }
-  subject { described_class.new(party) }
+  subject { described_class.new(party, params) }
 
   describe '#perform' do
-    context 'check_phone' do
-      let!(:params) { { unconfirmed_phone: '' } }
-      it { expect(subject.perform(params)).to be_falsey }
-    end
-
-    context 'check_phone_format' do
-      let!(:params) { { unconfirmed_phone: '092112312x' } }
-      it { expect(subject.perform(params)).to be_falsey }
-    end
-
-    context 'check_unexist_phone_number' do
-      let!(:party1) { create :party, phone_number: params[:unconfirmed_phone] }
-      it { expect(subject.perform(params)).to be_falsey }
-    end
-
-    context 'check_phone_not_the_same' do
-      let!(:party1) { create :party }
-      let!(:params) { { unconfirmed_phone: party.phone_number } }
-      it { expect(subject.perform(params)).to be_falsey }
-    end
-
-    context 'check_unexist_unconfirmed_phone' do
-      let!(:party1) { create :party }
-      before { party1.unconfirmed_phone = params[:unconfirmed_phone] }
-
-      it { expect(subject.perform(params)).to be_falsey }
-    end
-
-    context 'check_sms_send_count' do
-      before { party.sms_sent_count.value = 2 }
-      it { expect(subject.perform(params)).to be_falsey }
+    context 'fail' do
+      context 'check_sms_send_count' do
+        let(:params) { { phone_form: { unconfirmed_phone: '0911222333' } } }
+        before { party.sms_sent_count.value = 2 }
+        before { subject.perform }
+        it { expect(subject.has_error?).to be_truthy }
+      end
     end
 
     context 'success' do
-      it { expect { subject.perform(params) }.to change { party.sms_sent_count.value } }
-      it { expect { subject.perform(params) }.to change_sidekiq_jobs_size_of(SmsService, :send_sms) }
-
+      let(:params) { { phone_form: { unconfirmed_phone: '0911222333' } } }
+      it { expect { subject.perform }.to change { party.sms_sent_count.value } }
+      it { expect { subject.perform }.to change_sidekiq_jobs_size_of(SmsService, :send_sms) }
       context 'assign_value' do
-        before { subject.perform(params) }
-
+        before { subject.perform }
         it { expect(party.phone_varify_code.value).to be_present }
-        it { expect(party.unconfirmed_phone).to eq(params[:unconfirmed_phone]) }
+        it { expect(party.unconfirmed_phone).to eq('0911222333') }
       end
 
       context 'set_unconfirm' do
-        before { subject.perform(params) }
-
+        before { subject.perform }
         it { expect(party.confirmed?).to be_falsey }
+      end
+
+      context 'reset_data' do
+        context 'generate expire job' do
+          it { expect { subject.perform }.to change { fetch_sidekiq_last_job(scheduled: true) } }
+          it { expect { subject.perform }.to change { party.delete_phone_job_id.value } }
+        end
+
+        context 'replace exist expire job' do
+          let(:params_1) { { phone_form: { unconfirmed_phone: '0933333333' } } }
+          before { subject.perform }
+          before { described_class.new(party, params_1).perform }
+          it { expect(Sidekiq::ScheduledSet.new.size).to eq(1) }
+        end
+      end
+
+      context '.clean_expire_job_data' do
+        let!(:party) { create :party, :with_unconfirmed_phone }
+        before { party.delete_phone_job_id = '585858585' }
+        before { subject.class.clean_expire_job_data(party) }
+        it { expect(party.reload.unconfirmed_phone).to be_nil }
+        it { expect(party.delete_phone_job_id).to be_nil }
       end
     end
   end

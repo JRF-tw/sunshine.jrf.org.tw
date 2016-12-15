@@ -23,6 +23,7 @@ namespace :dev do
     'dev:fake_procedures',
     'dev:fake_punishments',
     'dev:fake_banners',
+    'dev:fake_bulletins',
     'dev:fake_suit_banners',
     'dev:fake_stories',
     'dev:fake_schedules',
@@ -237,6 +238,25 @@ namespace :dev do
     end
   end
 
+  task fake_bulletins: :environment do
+    Bulletin.destroy_all
+    2.times do |i|
+      Admin::Bulletin.create!(
+        title: "重要公告-#{i}",
+        content: '沒事',
+        is_banner: false
+      )
+    end
+    2.times do |i|
+      Admin::Bulletin.create!(
+        title: "重要公告 banner -#{i}",
+        content: '有事',
+        pic: File.open("#{Rails.root}/spec/fixtures/banner/L_banner_#{i + 1}.jpg"),
+        is_banner: true
+      )
+    end
+  end
+
   task fake_suit_banners: :environment do
     SuitBanner.destroy_all
     urls = ['https://www.facebook.com', 'https://www.google.com', 'https://www.yahoo.com']
@@ -254,14 +274,12 @@ namespace :dev do
 
   task fake_stories: :environment do
     Story.destroy_all
-    main_judge = Admin::Judge.all
     10.times do |_i|
       Court.all.get_courts.sample.stories.create!(
         story_type: ['民事', '邢事'].sample,
         year: rand(70..105),
         word_type: ['生', '老', '病', '死'].sample,
         number: rand(100..999),
-        main_judge_id: main_judge.sample.id,
         adjudge_date: rand(5).years.ago
       )
     end

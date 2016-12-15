@@ -1,0 +1,56 @@
+- content_for :btns do
+  = link_to '編輯', edit_admin_prosecutor_path(@prosecutor), class: 'btn btn-large btn-success'
+  = link_to '轉換為法官', set_to_judge_admin_prosecutor_path(@prosecutor), class: 'btn btn-large btn-warning', method: :post unless @prosecutor.is_judge
+
+= admin_widget_box "#{@prosecutor.name}的個人檔案", icon: :th do
+  table.table.table-bordered.table-striped.table-hover
+    tbody
+      tr
+        td 姓名
+        td = @prosecutor.name
+      tr
+        td 頭像
+        td
+          = image_tag @prosecutor.avatar.L_180 if @prosecutor.avatar.present?
+      tr
+        td 性別
+        td
+          = @prosecutor.gender
+          - if @prosecutor.gender_source.present?
+            br
+            = "來源：#{@prosecutor.gender_source}"
+      tr
+        td 出生年
+        td
+          = "民國#{@prosecutor.birth_year}年"
+          - if @prosecutor.birth_year_source.present?
+            br
+            = "來源：#{@prosecutor.birth_year_source}"
+      tr
+        td 司訓所期別
+        td
+          = @prosecutor.stage
+          - if @prosecutor.stage_source.present?
+            br
+            = "來源：#{@prosecutor.stage_source}"
+      tr
+        td 任用資格
+        td
+          = @prosecutor.appointment
+          - if @prosecutor.appointment_source.present?
+            br
+            = "來源：#{@prosecutor.appointment_source}"
+      tr
+        td 是否在職
+        td = @prosecutor.is_active ? '是' : '否'
+      tr
+        td 是否在前端隱藏
+        td = @prosecutor.is_hidden ? '是' : '否'
+      tr
+        td 備註
+        td = @prosecutor.memo
+
+      - if @prosecutor.is_judge
+        tr 
+          td 已輪調至法官
+          td = @prosecutor.judge ? (link_to "#{@prosecutor.judge.name}", admin_judge_path(@prosecutor.judge)) : '尚未關聯法官'

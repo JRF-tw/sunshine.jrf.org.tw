@@ -3,7 +3,6 @@
 # Table name: courts
 #
 #  id         :integer          not null, primary key
-#  court_type :string
 #  full_name  :string
 #  name       :string
 #  weight     :integer
@@ -12,6 +11,7 @@
 #  is_hidden  :boolean          default(TRUE)
 #  code       :string
 #  scrap_name :string
+#  court_type :string
 #
 
 class Admin::Court < ::Court

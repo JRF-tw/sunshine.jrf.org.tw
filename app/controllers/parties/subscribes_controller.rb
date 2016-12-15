@@ -6,7 +6,7 @@ class Parties::SubscribesController < Parties::BaseController
   end
 
   def destroy
-    context = StorySubscriptionDeleteContext.new(@story, current_party)
+    context = Story::SubscriptionDeleteContext.new(@story, current_party)
     if context.perform(params)
       redirect_to party_root_path, flash: { success: "案件#{@story.identity} 已取消訂閱" }
     else

@@ -2,6 +2,7 @@ class Admin::JudgeCreateContext < BaseContext
   PERMITS = [:name, :current_court_id, :avatar, :court, :remove_avatar, :gender, :birth_year, :stage, :appointment, :memo, :gender_source, :birth_year_source, :stage_source, :appointment_source, :is_active, :is_hidden].freeze
 
   before_perform :build_judge
+  attr_reader :judge
 
   def initialize(params)
     @params = permit_params(params[:admin_judge] || params, PERMITS)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161114041300) do
+ActiveRecord::Schema.define(version: 20161207081350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,6 +96,18 @@ ActiveRecord::Schema.define(version: 20161114041300) do
   add_index "branches", ["missed"], name: "index_branches_on_missed", using: :btree
   add_index "branches", ["name"], name: "index_branches_on_name", using: :btree
 
+  create_table "bulletins", force: :cascade do |t|
+    t.string   "title"
+    t.text     "content"
+    t.text     "pic"
+    t.boolean  "is_banner",  default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "bulletins", ["is_banner"], name: "index_bulletins_on_is_banner", using: :btree
+  add_index "bulletins", ["title"], name: "index_bulletins_on_title", using: :btree
+
   create_table "careers", force: :cascade do |t|
     t.integer  "profile_id"
     t.string   "career_type"
@@ -123,6 +135,22 @@ ActiveRecord::Schema.define(version: 20161114041300) do
 
   add_index "careers", ["is_hidden"], name: "index_careers_on_is_hidden", using: :btree
   add_index "careers", ["profile_id"], name: "index_careers_on_profile_id", using: :btree
+
+  create_table "ckeditor_assets", force: :cascade do |t|
+    t.string   "data_file_name",               null: false
+    t.string   "data_content_type"
+    t.integer  "data_file_size"
+    t.integer  "assetable_id"
+    t.string   "assetable_type",    limit: 30
+    t.string   "type",              limit: 30
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
+  add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
 
   create_table "court_observers", force: :cascade do |t|
     t.string   "name",                                null: false
@@ -156,7 +184,6 @@ ActiveRecord::Schema.define(version: 20161114041300) do
   add_index "court_observers", ["school"], name: "index_court_observers_on_school", using: :btree
 
   create_table "courts", force: :cascade do |t|
-    t.string   "court_type"
     t.string   "full_name"
     t.string   "name"
     t.integer  "weight"
@@ -165,6 +192,7 @@ ActiveRecord::Schema.define(version: 20161114041300) do
     t.boolean  "is_hidden",  default: true
     t.string   "code"
     t.string   "scrap_name"
+    t.string   "court_type"
   end
 
   add_index "courts", ["code"], name: "index_courts_on_code", using: :btree
@@ -236,11 +264,13 @@ ActiveRecord::Schema.define(version: 20161114041300) do
     t.integer  "punishments_count",  default: 0
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
+    t.boolean  "is_prosecutor"
   end
 
   add_index "judges", ["current_court_id"], name: "index_judges_on_current_court_id", using: :btree
   add_index "judges", ["is_active"], name: "index_judges_on_is_active", using: :btree
   add_index "judges", ["is_hidden"], name: "index_judges_on_is_hidden", using: :btree
+  add_index "judges", ["is_prosecutor"], name: "index_judges_on_is_prosecutor", using: :btree
 
   create_table "judgment_judges", force: :cascade do |t|
     t.integer  "profile_id"
@@ -361,12 +391,14 @@ ActiveRecord::Schema.define(version: 20161114041300) do
     t.boolean  "imposter",                 default: false
     t.string   "imposter_identify_number"
     t.datetime "phone_confirmed_at"
+    t.string   "unconfirmed_phone"
   end
 
   add_index "parties", ["confirmation_token"], name: "index_parties_on_confirmation_token", unique: true, using: :btree
   add_index "parties", ["email"], name: "index_parties_on_email", unique: true, using: :btree
   add_index "parties", ["imposter"], name: "index_parties_on_imposter", using: :btree
   add_index "parties", ["reset_password_token"], name: "index_parties_on_reset_password_token", unique: true, using: :btree
+  add_index "parties", ["unconfirmed_phone"], name: "index_parties_on_unconfirmed_phone", using: :btree
 
   create_table "procedures", force: :cascade do |t|
     t.integer  "profile_id"
@@ -420,6 +452,42 @@ ActiveRecord::Schema.define(version: 20161114041300) do
   add_index "profiles", ["current_court"], name: "index_profiles_on_current_court", using: :btree
   add_index "profiles", ["is_active"], name: "index_profiles_on_is_active", using: :btree
   add_index "profiles", ["is_hidden"], name: "index_profiles_on_is_hidden", using: :btree
+
+  create_table "prosecutors", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "prosecutors_office_id"
+    t.integer  "judge_id"
+    t.string   "avatar"
+    t.string   "gender"
+    t.string   "gender_source"
+    t.integer  "birth_year"
+    t.string   "birth_year_source"
+    t.integer  "stage"
+    t.string   "stage_source"
+    t.string   "appointment"
+    t.string   "appointment_source"
+    t.string   "memo"
+    t.boolean  "is_active",             default: true
+    t.boolean  "is_hidden",             default: true
+    t.boolean  "is_judge"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "prosecutors", ["is_judge"], name: "index_prosecutors_on_is_judge", using: :btree
+  add_index "prosecutors", ["judge_id"], name: "index_prosecutors_on_judge_id", using: :btree
+  add_index "prosecutors", ["prosecutors_office_id"], name: "index_prosecutors_on_prosecutors_office_id", using: :btree
+
+  create_table "prosecutors_offices", force: :cascade do |t|
+    t.string   "full_name"
+    t.string   "name"
+    t.integer  "court_id"
+    t.boolean  "is_hidden",  default: true
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "prosecutors_offices", ["court_id"], name: "index_prosecutors_offices_on_court_id", using: :btree
 
   create_table "punishments", force: :cascade do |t|
     t.integer  "profile_id"
@@ -519,8 +587,8 @@ ActiveRecord::Schema.define(version: 20161114041300) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.integer  "branch_judge_id"
-    t.string   "courtroom"
     t.datetime "start_at"
+    t.string   "courtroom"
   end
 
   add_index "schedules", ["branch_judge_id", "court_id", "story_id"], name: "index_schedules_on_branch_judge_id_and_court_id_and_story_id", using: :btree
@@ -536,7 +604,6 @@ ActiveRecord::Schema.define(version: 20161114041300) do
 
   create_table "stories", force: :cascade do |t|
     t.integer  "court_id"
-    t.integer  "main_judge_id"
     t.string   "story_type"
     t.integer  "year"
     t.string   "word_type"
@@ -557,7 +624,6 @@ ActiveRecord::Schema.define(version: 20161114041300) do
   add_index "stories", ["court_id"], name: "index_stories_on_court_id", using: :btree
   add_index "stories", ["is_adjudge"], name: "index_stories_on_is_adjudge", using: :btree
   add_index "stories", ["is_pronounce"], name: "index_stories_on_is_pronounce", using: :btree
-  add_index "stories", ["main_judge_id"], name: "index_stories_on_main_judge_id", using: :btree
   add_index "stories", ["pronounce_date"], name: "index_stories_on_pronounce_date", using: :btree
 
   create_table "story_relations", force: :cascade do |t|
@@ -672,6 +738,27 @@ ActiveRecord::Schema.define(version: 20161114041300) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "valid_scores", force: :cascade do |t|
+    t.integer  "story_id"
+    t.integer  "judge_id"
+    t.integer  "schedule_id"
+    t.integer  "score_id"
+    t.string   "score_type"
+    t.integer  "score_rater_id"
+    t.string   "score_rater_type"
+    t.hstore   "attitude_scores"
+    t.hstore   "command_scores"
+    t.hstore   "quality_scores"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "valid_scores", ["judge_id"], name: "index_valid_scores_on_judge_id", using: :btree
+  add_index "valid_scores", ["schedule_id"], name: "index_valid_scores_on_schedule_id", using: :btree
+  add_index "valid_scores", ["score_id", "score_type"], name: "index_valid_scores_on_score_id_and_score_type", using: :btree
+  add_index "valid_scores", ["score_rater_id", "score_rater_type"], name: "index_valid_scores_on_score_rater_id_and_score_rater_type", using: :btree
+  add_index "valid_scores", ["story_id"], name: "index_valid_scores_on_story_id", using: :btree
+
   create_table "verdict_relations", force: :cascade do |t|
     t.integer  "verdict_id"
     t.integer  "person_id"
@@ -716,15 +803,11 @@ ActiveRecord::Schema.define(version: 20161114041300) do
     t.text     "prosecutor_names"
     t.boolean  "is_judgment",      default: false
     t.date     "adjudge_date"
-    t.integer  "main_judge_id"
-    t.string   "main_judge_name"
     t.date     "publish_date"
   end
 
   add_index "verdicts", ["adjudge_date"], name: "index_verdicts_on_adjudge_date", using: :btree
   add_index "verdicts", ["is_judgment"], name: "index_verdicts_on_is_judgment", using: :btree
-  add_index "verdicts", ["main_judge_id", "story_id"], name: "index_verdicts_on_main_judge_id_and_story_id", using: :btree
-  add_index "verdicts", ["main_judge_id"], name: "index_verdicts_on_main_judge_id", using: :btree
   add_index "verdicts", ["publish_date"], name: "index_verdicts_on_publish_date", using: :btree
 
 end

@@ -25,6 +25,7 @@
 #  imposter                 :boolean          default(FALSE)
 #  imposter_identify_number :string
 #  phone_confirmed_at       :datetime
+#  unconfirmed_phone        :string
 #
 
 class Party < ActiveRecord::Base
@@ -32,6 +33,7 @@ class Party < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   has_many :schedule_scores, as: :schedule_rater
   has_many :verdict_scores, as: :verdict_rater
+  has_many :valid_scroes, as: :score_rater
 
   devise :database_authenticatable, :registerable, :async, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -42,12 +44,13 @@ class Party < ActiveRecord::Base
   validates :phone_number, uniqueness: true, format: { with: /\A(0)(9)([0-9]{8})\z/ }, allow_nil: true
   validates :unconfirmed_email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }, allow_nil: true
 
-  has_many :story_relations, as: :people
+  has_many :story_relations, as: :people, dependent: :destroy
   has_many :story_subscriptions, as: :subscriber, dependent: :destroy
-  has_many :verdict_relations, as: :person
+  has_many :verdict_relations, as: :person, dependent: :destroy
+  has_many :verdicts, through: :verdict_relations
 
   include Redis::Objects
-  value :unconfirmed_phone, expiration: 1.hour
+  value :delete_phone_job_id
   value :phone_varify_code, expiration: 1.hour
   counter :retry_verify_count, expiration: 1.hour
   counter :sms_sent_count, expiration: 5.minutes

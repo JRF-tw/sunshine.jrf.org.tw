@@ -1,22 +1,3 @@
-# == Schema Information
-#
-# Table name: awards
-#
-#  id          :integer          not null, primary key
-#  profile_id  :integer
-#  award_type  :string
-#  unit        :string
-#  content     :text
-#  publish_at  :date
-#  source      :text
-#  source_link :text
-#  origin_desc :text
-#  memo        :text
-#  created_at  :datetime
-#  updated_at  :datetime
-#  is_hidden   :boolean
-#
-
 class Admin::AwardsController < Admin::BaseController
   before_action :award
   before_action { add_crumb('個人檔案列表', admin_profiles_path) }

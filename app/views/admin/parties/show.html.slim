@@ -17,7 +17,7 @@
         td = @party.phone_number
       tr
         td 待驗證電話號碼
-        td = @party.unconfirmed_phone.value
+        td = @party.unconfirmed_phone
       tr
         td 電話號碼驗證狀態
         td = @party.phone_confirmed? ? "已驗證" : "尚未驗證"

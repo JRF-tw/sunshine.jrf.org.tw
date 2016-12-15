@@ -10,4 +10,4 @@
     form_url: party_score_verdicts_path\
   } do |f|
     = render 'components/input_score', f: f,
-      label: question_desc(:quality_scores, :score_3), options: [:score_3_1], scored_type: :quality_scores
+      label: show_topic(:quality_scores, :score_3), options: [:score_3_1], scored_type: :quality_scores

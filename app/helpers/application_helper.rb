@@ -140,7 +140,7 @@ module ApplicationHelper
     Court.get_courts.shown.sorted.map(&:full_name).unshift('全部法院')
   end
 
-  def collection_for_prosecutors
+  def collect_for_prosecutors_offices
     Court.prosecutors.shown.map(&:full_name).unshift('全部檢察署')
   end
 
@@ -244,23 +244,27 @@ module ApplicationHelper
     role.story_subscriptions.find_by(story_id: story.id).present?
   end
 
-  def question_is_true_or_false?(question_key)
-    ScoreQuestions.question_type(question_key) == 'true_or_false'
+  def topic_is_true_or_false?(topic_key)
+    ScoreTopic.topic_type(topic_key) == 'true_or_false'
   end
 
-  def up_level_question_desc(scored_type, question_key)
-    ScoreQuestions.list(scored_type, question_key[0..-3].to_sym) if ScoreQuestions.need_show_up_level_title(question_key)
+  def true_or_false_keys(scored_type, main_topic_key)
+    ScoreTopic.list_true_or_false_keys(scored_type, main_topic_key)
   end
 
-  def question_desc(scored_type, question_key)
-    ScoreQuestions.list(scored_type, question_key)
+  def show_true_or_false_main_topic(scored_type, main_topic_key)
+    ScoreTopic.list_true_or_false_title(scored_type, main_topic_key)
+  end
+
+  def show_true_or_false_topic(scored_type, main_topic_key, topic_key)
+    ScoreTopic.list_true_or_false_topic(scored_type, main_topic_key, topic_key)
+  end
+
+  def show_topic(scored_type, question_key)
+    ScoreTopic.list_topic(scored_type, question_key)
   end
 
   def get_schedule_score_hstore_attributes(scores_type)
     ScheduleScore.stored_attributes[scores_type]
-  end
-
-  def get_verdict_score_hstore_attributes(scores_type)
-    VerdictScore.stored_attributes[scores_type]
   end
 end

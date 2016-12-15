@@ -1,4 +1,4 @@
-= search_form_for @search, :url => admin_judges_path, :wrapper => :admin, :html => { :class => "form-horizontal" } do |f|
+= search_form_for @search, url: admin_judges_path, wrapper: :admin, html: { class: "form-horizontal" } do |f|
   .well
     fieldset
       legend 搜尋
@@ -6,13 +6,13 @@
         .span6
           .control-group
             label.control-label = f.label :is_active_true
-            .controls#select2 = f.select :is_active_true,
-            collect_for_boolean, include_blank: "請選擇"
+            .controls.select2 = f.select :is_active_true,
+            collect_for_boolean, include_blank: '請選擇'
         .span6
           .control-group
             label.control-label = f.label :is_hidden_eq
-            .controls#select2 = f.select :is_hidden_eq,
-            collect_for_boolean, include_blank: "請選擇"
+            .controls.select2 = f.select :is_hidden_eq,
+            collect_for_boolean, include_blank: '請選擇'
       .row
         .span6
           .control-group
@@ -21,19 +21,25 @@
         .span6
           .control-group
             label.control-label = f.label :court_full_name_eq
-            .controls#select2 = f.select :current_court_id_eq,
-            collect_for_courts, include_blank: "請選擇"
+            .controls.select2 = f.select :current_court_id_eq,
+            collect_for_courts, include_blank: '請選擇'
+      .row
+        .span6
+          .control-group
+            label.control-label = f.label :is_prosecutor_true
+            .controls#select2 = f.select :is_prosecutor_true,
+            collect_for_boolean, include_blank: '請選擇'
     hr
     .form-actions
-      = f.submit :value => "搜尋", :class => "btn btn-primary"
-      = " "
-      = link_to "清空搜尋結果", admin_judges_path, :class => "btn btn-default"
+      = f.submit value: '搜尋', class: 'btn btn-primary'
+      = ' '
+      = link_to '清空搜尋結果', admin_judges_path, class: 'btn btn-default'
 
 = admin_widget_box "法官列表 : 搜尋結果為 #{@search.result.count} 筆", icon: :pencil do
   .dataTables_wrapper
     div
       .dataTables_length
-        = link_to "新增法官", new_admin_judge_path, class: "btn btn-primary btn-mini"
+        = link_to '新增法官', new_admin_judge_path, class: 'btn btn-primary btn-mini'
     table.table.table-bordered.table-striped.table-hover
       thead
         tr
@@ -48,22 +54,22 @@
       tbody
         - @judges.each do |judge|
           tr
-            td= judge.id
-            td= judge.name
-            td= judge.gender
-            td= link_to "#{judge.court.full_name}", admin_court_path(judge.court)
-            td= judge.is_active? ? "是" : "否"
-            td= judge.is_hidden? ? "是" : "否"
-            td= judge.memo
+            td = judge.id
+            td = judge.name
+            td = judge.gender
+            td = link_to "#{judge.court.full_name}", admin_court_path(judge.court) if judge.court
+            td = judge.is_active? ? '是' : '否'
+            td = judge.is_hidden? ? '是' : '否'
+            td = judge.memo
             td
-              = link_to "詳細資料", admin_judge_path(judge), class: "btn btn-mini"
+              = link_to '詳細資料', admin_judge_path(judge), class: 'btn btn-mini'
               | &nbsp;
-              = link_to "案件列表", admin_stories_path(q: { "main_judge_id_eq" => judge.id } ), class: "btn btn-mini"
+              = link_to '案件列表', admin_stories_path(q: { relation_by_judge: judge.id } ), class: 'btn btn-mini'
               | &nbsp;
-              = link_to "庭期列表", admin_schedules_path(q: { "branch_judge_id_eq" => judge.id } ), class: "btn btn-mini"
+              = link_to '庭期列表', admin_schedules_path(q: { branch_judge_id_eq: judge.id } ), class: 'btn btn-mini'
               | &nbsp;
-              = link_to "編輯", edit_admin_judge_path(judge), class: "btn btn-mini btn-success"
+              = link_to '編輯', edit_admin_judge_path(judge), class: 'btn btn-mini btn-success'
               | &nbsp;
-              = link_to "刪除", admin_judge_path(judge), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除該法官檔案 - #{judge.name}？"
+              = link_to '刪除', admin_judge_path(judge), class: 'btn btn-mini btn-danger', method: :delete, 'data-confirm': "確認刪除該法官檔案 - #{judge.name}？"
     .ui-toolbar.ui-widget-header
       = paginate @judges, theme: :admin

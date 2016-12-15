@@ -9,7 +9,7 @@ feature '前台帳號功能', type: :feature, js: true do
     end
 
     def lawyer_set_password(email, password: nil, password_confirmation: nil)
-      open_lawyer_email(email)
+      open_last_email(email)
       current_email.find('a').click
       lawyer_input_set_password_form(password: password, password_confirmation: password_confirmation)
       click_button '送出'

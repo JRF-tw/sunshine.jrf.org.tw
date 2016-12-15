@@ -1,0 +1,17 @@
+- content_for :btns do
+  = link_to "編輯", edit_admin_bulletin_path(@bulletin), class: "btn btn-large btn-success"
+= admin_widget_box "#{@bulletin.title} 詳細資料", icon: :th do
+  table.table.table-bordered.table-striped.table-hover
+    tbody
+      tr
+        td 標題
+        td = @bulletin.title
+      tr
+        td 內容
+        td = raw @bulletin.content
+      tr
+        td 圖片
+        td = image_tag @bulletin.pic.L_360
+      tr
+        td 是否顯示於首頁banner
+        td = @bulletin.is_banner? ? '是' : '否'

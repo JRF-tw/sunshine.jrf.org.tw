@@ -1,21 +1,3 @@
-# == Schema Information
-#
-# Table name: suits
-#
-#  id              :integer          not null, primary key
-#  title           :string
-#  summary         :text
-#  content         :text
-#  state           :string
-#  pic             :string
-#  suit_no         :integer
-#  keyword         :string
-#  created_at      :datetime
-#  updated_at      :datetime
-#  is_hidden       :boolean
-#  procedure_count :integer          default(0)
-#
-
 class SuitsController < BaseController
   def index
     @suit_banners = SuitBanner.shown.order_by_weight

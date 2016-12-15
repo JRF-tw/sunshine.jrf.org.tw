@@ -6,7 +6,7 @@ RSpec.describe Admin::StoriesController do
   let!(:story) { create :story, :pronounced, story_type: '邢事', year: 1990, word_type: '火箭', number: 100 }
   let!(:story_with_adjugde_verdict) { create :story, :with_adjugde_verdict, :pronounced, story_type: '民事', year: 1990, word_type: '隊', number: 100, court: court }
   let!(:story_without_judge) { create :story, story_type: '民事', year: 1990, word_type: '風', number: 100, is_adjudge: true, court: court, adjudge_date: Time.now }
-
+  let!(:story_relation) { create :story_relation, story: story }
   describe '#index' do
     context 'search the story_type of stories' do
       before { get '/admin/stories', q: { story_type: '邢事' } }
@@ -42,6 +42,11 @@ RSpec.describe Admin::StoriesController do
       before { get '/admin/stories', q: { have_adjudgement: 'no' } }
       it { expect(response.body).to match(story_without_judge.word_type) }
       it { expect(response.body).not_to match(story_with_adjugde_verdict.word_type) }
+    end
+
+    context 'search the judge of stories' do
+      before { get '/admin/stories', q: { relation_by_judge: Judge.last.id } }
+      it { expect(response.body).to match(story.word_type) }
     end
 
     context 'render success' do

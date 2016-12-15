@@ -1,0 +1,26 @@
+- content_for :btns do
+  = link_to '檢察官列表', admin_prosecutors_path(q: { prosecutors_office_id_eq: @prosecutors_office.id } ), class: 'btn btn-large'
+  = link_to '編輯', edit_admin_prosecutors_office_path(@prosecutors_office), class: 'btn btn-large btn-success'
+  = link_to '刪除', admin_prosecutors_office_path(@prosecutors_office), method: :delete, class: 'btn btn-large btn-danger'
+
+= admin_widget_box "#{@prosecutors_office.name}資料", icon: :th do
+  table.table.table-bordered.table-striped.table-hover
+    tbody
+      tr
+        td 全名
+        td= @prosecutors_office.full_name
+      tr
+        td 前台顯示簡稱
+        td= @prosecutors_office.name
+      tr
+        td 隸屬法院
+        td= link_to "#{@prosecutors_office.court.full_name}", admin_court_path(@prosecutors_office.court) if @prosecutors_office.court
+      tr
+        td 是否在前端隱藏
+        td= @prosecutors_office.is_hidden? ? '是' : '否'
+      tr
+        td 新增時間
+        td= @prosecutors_office.created_at
+      tr
+        td 最後更新時間
+        td= @prosecutors_office.updated_at

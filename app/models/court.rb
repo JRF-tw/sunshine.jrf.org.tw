@@ -3,7 +3,6 @@
 # Table name: courts
 #
 #  id         :integer          not null, primary key
-#  court_type :string
 #  full_name  :string
 #  name       :string
 #  weight     :integer
@@ -12,6 +11,7 @@
 #  is_hidden  :boolean          default(TRUE)
 #  code       :string
 #  scrap_name :string
+#  court_type :string
 #
 
 class Court < ActiveRecord::Base
@@ -22,6 +22,7 @@ class Court < ActiveRecord::Base
   has_many :schedules
   has_many :branches
   has_many :judges, foreign_key: :current_court_id
+  has_one :prosecutors_office
 
   def self.get_courts
     where(court_type: '法院')

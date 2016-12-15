@@ -9,10 +9,10 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
   let!(:ruling_content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/ruling_content.html") }
   let!(:word) { '105,上易緝,2' }
   let!(:publish_date) { Time.zone.today }
-  let!(:stroy_type) { '刑事' }
+  let!(:story_type) { '刑事' }
 
   describe '#perform' do
-    subject { described_class.new(court, orginal_data, content, word, publish_date, stroy_type).perform }
+    subject { described_class.new(court, orginal_data, content, word, publish_date, story_type).perform }
 
     context 'create verdict' do
       it { expect { subject }.to change { Verdict.count } }
@@ -101,21 +101,43 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
       end
     end
 
+    context '#calculate_schedule_scores' do
+      let(:story_params) { word.split(',') }
+      let!(:story) { create :story, year: story_params[0], word_type: story_params[1], number: story_params[2], court: court, story_type: story_type }
+      let!(:party) { create :party, name: '張坤樹' }
+      let!(:schedule_score) { create :schedule_score, story: story, schedule_rater: party, judge: judge }
+      it { expect { subject }.to change { ValidScore.count }.by(1) }
+    end
+
+    context '#set_delay_calculate_verdict_scores' do
+      it { expect { subject }.to change_sidekiq_jobs_size_of(Sidekiq::Extensions::DelayedClass, scheduled: true) }
+    end
+
+    context '.calculate_verdict_scores' do
+      subject { described_class.new(court, orginal_data, content, word, publish_date, story_type) }
+      let(:story_params) { word.split(',') }
+      let!(:story) { create :story, year: story_params[0], word_type: story_params[1], number: story_params[2], court: court, story_type: story_type }
+      let!(:party) { create :party, name: '張坤樹' }
+      let!(:verdict_score) { create :verdict_score, story: story, verdict_rater: party }
+      before { subject.perform }
+      it { expect { subject.class.calculate_verdict_scores(story) }.to change { ValidScore.count }.by(1) }
+    end
+
     context '#alert_new_story_type' do
       context 'alert' do
-        let!(:stroy_type) { '新der案件類別' }
-        subject { described_class.new(court, orginal_data, content, word, publish_date, stroy_type).perform }
+        let!(:story_type) { '新der案件類別' }
+        subject { described_class.new(court, orginal_data, content, word, publish_date, story_type).perform }
         it { expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
       end
 
       context 'not alert' do
-        subject { described_class.new(court, orginal_data, content, word, publish_date, stroy_type).perform }
+        subject { described_class.new(court, orginal_data, content, word, publish_date, story_type).perform }
         it { expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
       end
     end
 
     context 'only create judgment verdict' do
-      subject { described_class.new(court, orginal_data, ruling_content, word, publish_date, stroy_type).perform }
+      subject { described_class.new(court, orginal_data, ruling_content, word, publish_date, story_type).perform }
       it { expect { subject }.not_to change { Verdict.count } }
     end
   end

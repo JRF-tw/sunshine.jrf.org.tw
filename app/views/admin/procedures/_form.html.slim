@@ -1,5 +1,5 @@
 - arr = @suit.judges + @suit.prosecutors
-= f.input :profile_id, as: :select, collection: arr.map{ |a| [a.name, a.id] }, include_blank: "請選擇", input_html: { class: 'chosen-select' }
+= f.input :profile_id, as: :select, collection: arr.map{ |a| [a.name, a.id] }, include_blank: "請選擇", input_html: { class: 'select2' }
 = f.input :unit
 = f.input :title
 = f.input :procedure_unit
