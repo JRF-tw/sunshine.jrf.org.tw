@@ -19,7 +19,6 @@ class CrawlerHistory < ActiveRecord::Base
 
   scope :newest, -> { order('crawler_on DESC') }
 
-
   def success_count(crawler_kind, crawler_error_type)
     verdicts_count - error_log_count(crawler_kind, crawler_error_type)
   end
