@@ -33,6 +33,6 @@ CKEDITOR.editorConfig = function( config ) {
     { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
     { name: 'about', items: [ 'About' ] }
   ];
-  config.removeButtons = 'Save,Flash,Iframe,Anchor,CreateDiv';
+  config.removeButtons = 'Save,Flash,Smiley,Iframe,Anchor,CreateDiv';
   config.removePlugins = "forms";
 };
