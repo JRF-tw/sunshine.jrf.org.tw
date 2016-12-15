@@ -11,6 +11,7 @@
 #= require redactor-rails/langs/zh_tw
 #= require redactor-rails/app_config
 #= require ckeditor/init
+#= require chartkick
 #= require_self
 
 # admin menu auto active
