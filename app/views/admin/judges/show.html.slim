@@ -53,4 +53,4 @@
       - if @judge.is_prosecutor
         tr 
           td 已輪調至檢察官
-          td = @judge.prosecutor ? (link_to "#{@judge.prosecutor.name}", admin_prosecutor_path(@judge.prosecutor)) : '是'
+          td = @judge.prosecutor ? (link_to "#{@judge.prosecutor.name}", admin_prosecutor_path(@judge.prosecutor)) : '尚未關聯檢察官'
