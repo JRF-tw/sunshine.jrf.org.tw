@@ -140,7 +140,7 @@ module ApplicationHelper
     Court.get_courts.shown.sorted.map(&:full_name).unshift('全部法院')
   end
 
-  def collection_for_prosecutors
+  def collect_for_prosecutors_offices
     Court.prosecutors.shown.map(&:full_name).unshift('全部檢察署')
   end
 

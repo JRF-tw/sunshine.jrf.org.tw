@@ -1,0 +1,9 @@
+= f.input :full_name
+= f.input :name
+= f.association :court, label_method: :full_name, value_method: :id, include_blank: '請選擇', input_html: { class: 'select2' }
+= f.input :is_hidden, as: :boolean, hint: '打勾 = 前端頁面不顯示'
+.form-actions
+  = f.submit '送出', class: 'btn btn-primary'
+  = ' '
+  = link_to admin_prosecutors_offices_path, class: 'btn' do
+    | 回到檢察署列表

@@ -40,7 +40,7 @@ class Lawyer < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :name, :email, presence: true
-  mount_uploader :avatar, ProfileAvatarUploader
+  mount_uploader :avatar, AvatarUploader
 
   validates :phone_number, uniqueness: true, format: { with: /\A(0)(9)([0-9]{8})\z/ }, allow_blank: true, allow_nil: true
   validates :office_number, format: { with: /0\d{1,2}-?(\d{6,8})(#\d{1,5}){0,1}/ }, allow_blank: true, allow_nil: true
