@@ -25,4 +25,26 @@ FactoryGirl.define do
     end
   end
 
+  factory :verdict_for_convert_valid_score, class: Verdict do
+    story { create(:story) }
+    is_judgment { true }
+
+    after(:create) do |v|
+      v.party_names.each do |name|
+        party = Party.find_by_name(name)
+        create :verdict_relation, person: party, verdict: v
+      end
+
+      v.lawyer_names.each do |name|
+        lawyer = Lawyer.find_by_name(name)
+        create :verdict_relation, person: lawyer, verdict: v
+      end
+
+      v.judges_names.each do |name|
+        judge = Judge.find_by_name(name)
+        create :verdict_relation, person: judge, verdict: v
+      end
+    end
+  end
+
 end
