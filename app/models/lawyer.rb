@@ -30,17 +30,19 @@
 #
 
 class Lawyer < ActiveRecord::Base
-  has_many :story_relations, as: :people
-  has_many :verdict_relations, as: :person
+  has_many :story_relations, as: :people, dependent: :destroy
+  has_many :verdict_relations, as: :person, dependent: :destroy
+  has_many :verdicts, through: :verdict_relations
   has_many :story_subscriptions, as: :subscriber, dependent: :destroy
   has_many :schedule_scores, as: :schedule_rater
   has_many :verdict_scores, as: :verdict_rater
+  has_many :valid_scroes, as: :score_rater
 
   devise :database_authenticatable, :registerable, :async, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :name, :email, presence: true
-  mount_uploader :avatar, ProfileAvatarUploader
+  mount_uploader :avatar, AvatarUploader
 
   validates :phone_number, uniqueness: true, format: { with: /\A(0)(9)([0-9]{8})\z/ }, allow_blank: true, allow_nil: true
   validates :office_number, format: { with: /0\d{1,2}-?(\d{6,8})(#\d{1,5}){0,1}/ }, allow_blank: true, allow_nil: true

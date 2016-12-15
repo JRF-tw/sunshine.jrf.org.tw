@@ -1,4 +1,4 @@
-class StoryRelationCreateContext < BaseContext
+class Story::RelationCreateContext < BaseContext
   before_perform :find_people_type
   before_perform :find_people
   before_perform :check_scoped

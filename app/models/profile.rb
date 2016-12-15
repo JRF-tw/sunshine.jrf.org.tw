@@ -27,7 +27,7 @@
 
 class Profile < ActiveRecord::Base
   include HiddenOrNot
-  mount_uploader :avatar, ProfileAvatarUploader
+  mount_uploader :avatar, AvatarUploader
 
   has_many :educations, dependent: :destroy
   has_many :careers, dependent: :destroy

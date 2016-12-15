@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe StoryRelationCreateContext do
+describe Story::RelationCreateContext do
   let!(:story) { create :story, party_names: ['party'], lawyer_names: ['lawyer'], judges_names: ['judge'] }
   subject { described_class.new(story) }
 

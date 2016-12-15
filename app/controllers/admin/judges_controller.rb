@@ -26,9 +26,10 @@ class Admin::JudgesController < Admin::BaseController
 
   def create
     context = Admin::JudgeCreateContext.new(params)
-    if @judge = context.perform
+    if context.perform
       redirect_as_success(admin_judges_path, "法官 - #{judge.name} 已新增")
     else
+      @judge = context.judge
       @admin_page_title = '新增法官'
       add_crumb @admin_page_title, '#'
       render_as_fail(:new, context.error_messages)
@@ -36,7 +37,7 @@ class Admin::JudgesController < Admin::BaseController
   end
 
   def update
-    context = Admin::JudgeUpdateContext.new(@judge)
+    context = Admin::JudgeUpdateContext.new(judge)
     if context.perform(params)
       redirect_as_success(admin_judges_path, "法官 - #{judge.name} 已修改")
     else
@@ -47,9 +48,18 @@ class Admin::JudgesController < Admin::BaseController
   end
 
   def destroy
-    context = Admin::JudgeDeleteContext.new(@judge)
+    context = Admin::JudgeDeleteContext.new(judge)
     if context.perform
       redirect_as_success(admin_judges_path, "法官 - #{judge.name} 已刪除")
+    else
+      redirect_to :back, flash: { error: context.error_messages }
+    end
+  end
+
+  def set_to_prosecutor
+    context = Admin::JudgeProsecutorToggleContext.new(judge)
+    if context.perform
+      redirect_as_success(admin_judge_path, "法官 - #{judge.name} 已轉換為檢察官")
     else
       redirect_to :back, flash: { error: context.error_messages }
     end

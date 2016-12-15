@@ -1,3 +1,5 @@
+- content_for :btns do
+  = link_to "編輯", edit_admin_bulletin_path(@bulletin), class: "btn btn-large btn-success"
 = admin_widget_box "#{@bulletin.title} 詳細資料", icon: :th do
   table.table.table-bordered.table-striped.table-hover
     tbody

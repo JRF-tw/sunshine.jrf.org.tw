@@ -6,7 +6,7 @@ class Lawyers::SubscribesController < Lawyers::BaseController
   end
 
   def destroy
-    context = StorySubscriptionDeleteContext.new(@story, current_lawyer)
+    context = Story::SubscriptionDeleteContext.new(@story, current_lawyer)
     if context.perform(params)
       redirect_to lawyer_root_path, flash: { success: "案件#{@story.identity} 已取消訂閱" }
     else

@@ -16,12 +16,18 @@ class Scrap::ImportVerdictContext < BaseContext
   after_perform   :create_relation_for_lawyer
   after_perform   :create_relation_for_judge
   after_perform   :create_relation_for_party
+  after_perform   :calculate_schedule_scores, if: :story_adjudge?
+  after_perform   :set_delay_calculate_verdict_scores, if: :story_adjudge?
   after_perform   :record_count_to_daily_notify
   after_perform   :alert_new_story_type
 
   class << self
     def perform(court, orginal_data, content, word, publish_date, stroy_type)
       new(court, orginal_data, content, word, publish_date, stroy_type).perform
+    end
+
+    def calculate_verdict_scores(story)
+      Story::CalculateVerdictScoresContext.new(story).perform
     end
   end
 
@@ -44,16 +50,12 @@ class Scrap::ImportVerdictContext < BaseContext
 
   private
 
-  def is_judgment?
-    @content.split.first.match(/判決/).present?
-  end
-
   def disable_ruling
     return is_judgment? if DISABLE_RULING
   end
 
-  def is_highest_court?
-    @court.code == 'TPS'
+  def is_judgment?
+    @content.split.first.match(/判決/).present?
   end
 
   def find_or_create_story
@@ -76,6 +78,10 @@ class Scrap::ImportVerdictContext < BaseContext
     @analysis_context.judges_names.each do |judge|
       Scrap::CreateJudgeByHighestCourtContext.new(@court, judge).perform
     end
+  end
+
+  def is_highest_court?
+    @court.code == 'TPS'
   end
 
   def assign_names
@@ -119,22 +125,34 @@ class Scrap::ImportVerdictContext < BaseContext
   def create_relation_for_lawyer
     @verdict.lawyer_names.each do |name|
       VerdictRelationCreateContext.new(@verdict).perform(name)
-      StoryRelationCreateContext.new(@story).perform(name)
+      Story::RelationCreateContext.new(@story).perform(name)
     end
   end
 
   def create_relation_for_judge
     @verdict.judges_names.each do |name|
       VerdictRelationCreateContext.new(@verdict).perform(name)
-      StoryRelationCreateContext.new(@story).perform(name)
+      Story::RelationCreateContext.new(@story).perform(name)
     end
   end
 
   def create_relation_for_party
     @verdict.party_names.each do |name|
       VerdictRelationCreateContext.new(@verdict).perform(name)
-      StoryRelationCreateContext.new(@story).perform(name)
+      Story::RelationCreateContext.new(@story).perform(name)
     end
+  end
+
+  def calculate_schedule_scores
+    Story::CalculateScheduleScoresContext.new(@story).perform
+  end
+
+  def set_delay_calculate_verdict_scores
+    self.class.delay_until(3.months.from_now).calculate_verdict_scores(@story)
+  end
+
+  def story_adjudge?
+    @story.is_adjudge
   end
 
   def record_count_to_daily_notify

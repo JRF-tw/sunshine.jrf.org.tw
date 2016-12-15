@@ -31,6 +31,6 @@
 
 class Admin::Lawyer < ::Lawyer
   validates :name, presence: true
-  mount_uploader :avatar, ProfileAvatarUploader
+  mount_uploader :avatar, AvatarUploader
 
 end

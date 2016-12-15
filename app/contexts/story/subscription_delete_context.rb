@@ -1,4 +1,4 @@
-class StorySubscriptionDeleteContext < BaseContext
+class Story::SubscriptionDeleteContext < BaseContext
   before_perform :check_token
   before_perform :find_story_subscription
 

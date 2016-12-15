@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     get '/courts/edit_weight', to: 'courts#edit_weight', as: 'courts_edit_weight'
     put '/courts/:id/update_weight', to: 'courts#update_weight', as: 'court_update_weight'
     resources :courts
+    resources :prosecutors_offices
     resources :judgments
     resources :banners
     resources :bulletins
@@ -27,7 +28,16 @@ Rails.application.routes.draw do
     resources :users
     resources :stories
     resources :schedules
-    resources :judges
+    resources :judges do
+      member do
+        post :set_to_prosecutor
+      end
+    end
+    resources :prosecutors do
+      member do
+        post :set_to_judge
+      end
+    end
     resources :lawyers do
       member do
         post :send_reset_password_mail

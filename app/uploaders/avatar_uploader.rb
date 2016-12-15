@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class ProfileAvatarUploader < BaseUploader
+class AvatarUploader < BaseUploader
   version :L_540 do
     process resize_to_fill: [540, 540]
   end
