@@ -68,11 +68,11 @@ RSpec.describe Profile, type: :model do
       create :prosecutor_profile, name: 'sfdsdf', current_court: '台北檢察署'
       create :prosecutor_profile, name: 'zyyzzyz', current_court: '台南檢察署'
 
-      people = Profile.prosecutors.find_current_court('台北檢察署').front_like_search(name: 'yy')
+      people = Profile.prosecutors.find_current_prosecutors_office('台北檢察署').front_like_search(name: 'yy')
       expect(people.count).to eq(1)
       expect(people.first.name).to eq(pp1.name)
 
-      people = Profile.prosecutors.find_current_court('請選擇').front_like_search(name: 'yy')
+      people = Profile.prosecutors.find_current_prosecutors_office('請選擇').front_like_search(name: 'yy')
       expect(people.count).to eq(2)
 
       people = Profile.prosecutors.find_current_court('請選擇').front_like_search(name: '')
