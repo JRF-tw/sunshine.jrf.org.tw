@@ -194,7 +194,6 @@ ActiveRecord::Schema.define(version: 20161226090809) do
   end
 
   add_index "courts", ["code"], name: "index_courts_on_code", using: :btree
-  add_index "courts", ["court_type"], name: "index_courts_on_court_type", using: :btree
   add_index "courts", ["full_name"], name: "index_courts_on_full_name", using: :btree
   add_index "courts", ["is_hidden"], name: "index_courts_on_is_hidden", using: :btree
   add_index "courts", ["name"], name: "index_courts_on_name", using: :btree

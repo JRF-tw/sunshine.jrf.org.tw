@@ -62,7 +62,7 @@ class Admin::CourtsController < Admin::BaseController
   end
 
   def edit_weight
-    @courts = Court.all.get_courts.shown.sorted
+    @courts = Court.all.shown.sorted
     @admin_page_title = '法院 排序調整'
     add_crumb @admin_page_title, '#'
   end
@@ -70,7 +70,7 @@ class Admin::CourtsController < Admin::BaseController
   def update_weight
     context = Admin::CourtWeightUpdateContext.new(@court)
     if context.perform(params)
-      @courts = Court.all.get_courts.shown.sorted
+      @courts = Court.all.shown.sorted
     else
       @error_messages = context.error_messages
     end

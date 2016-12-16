@@ -39,21 +39,6 @@ describe Admin::CourtUpdateContext do
         it { expect(court.reload.is_hidden).to be_falsey }
       end
     end
-
-    context 'update court type' do
-      before { subject.perform(params) }
-      context 'when court && not hidden add weight' do
-        let!(:court) { create :court, court_type: '檢察署' }
-        let(:params) { { court_type: '法院', is_hidden: '0' } }
-        it { expect(court.reload.weight).to be_present }
-      end
-
-      context 'when prosecutor remove weight' do
-        let!(:court) { create :court, :with_weight }
-        let(:params) { { court_type: '檢察署' } }
-        it { expect(court.reload.weight).to be_nil }
-      end
-    end
   end
 
 end

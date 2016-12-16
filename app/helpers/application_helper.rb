@@ -137,11 +137,11 @@ module ApplicationHelper
   end
 
   def collection_for_courts
-    Court.get_courts.shown.sorted.map(&:full_name).unshift('全部法院')
+    Court.shown.sorted.map(&:full_name).unshift('全部法院')
   end
 
   def collect_for_prosecutors_offices
-    Court.prosecutors.shown.map(&:full_name).unshift('全部檢察署')
+    ProsecutorsOffice.shown.map(&:full_name).unshift('全部檢察署')
   end
 
   def collection_state_for_suits
@@ -178,16 +178,12 @@ module ApplicationHelper
     Schedule.all.map(&:branch_name).uniq
   end
 
-  def collect_for_court_types
-    Court.all.map(&:court_type).uniq.compact
-  end
-
   def collect_for_courts
-    Court.get_courts.sorted.map { |c| [c.full_name, c.id] }
+    Court.sorted.map { |c| [c.full_name, c.id] }
   end
 
   def collect_for_shown_courts
-    Court.get_courts.shown.sorted.map { |c| [c.full_name, c.id] }
+    Court.shown.sorted.map { |c| [c.full_name, c.id] }
   end
 
   def collect_for_judges_name

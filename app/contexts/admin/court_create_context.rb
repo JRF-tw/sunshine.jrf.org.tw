@@ -1,5 +1,5 @@
 class Admin::CourtCreateContext < BaseContext
-  PERMITS = [:court_type, :full_name, :name, :weight, :is_hidden].freeze
+  PERMITS = [:full_name, :name, :weight, :is_hidden].freeze
 
   before_perform :build_court
   after_perform :update_weight
@@ -33,14 +33,10 @@ class Admin::CourtCreateContext < BaseContext
   end
 
   def add_weight
-    if is_court? && !@court.is_hidden && @court.not_in_list?
+    if !@court.is_hidden && @court.not_in_list?
       @court.insert_at(1)
       @court.move_to_bottom
     end
-  end
-
-  def is_court?
-    @court.court_type == '法院'
   end
 
 end
