@@ -1,7 +1,7 @@
-= f.input :article_type, as: :select, collection: Admin::Article::ARTICLE_TYPES, include_blank: "請選擇"
-= f.input :publish_year, hint: "半型純數字，民國"
-= f.input :paper_publish_at_in_tw, as: "string", hint: "半型純數字，民國，格式：YY/MM/DD，如不清楚確切日期就填該年第一天或該月第一天"
-= f.input :news_publish_at_in_tw, as: "string", hint: "半型純數字，民國，格式：YY/MM/DD，如不清楚確切日期就填該年第一天或該月第一天"
+= f.input :article_type, as: :select, collection: Admin::Article::ARTICLE_TYPES, include_blank: '請選擇'
+= f.input :publish_year, hint: '半型純數字，民國'
+= f.input :paper_publish_at_in_tw, as: 'string', hint: '半型純數字，民國，格式：YY/MM/DD，如不清楚確切日期就填該年第一天或該月第一天'
+= f.input :news_publish_at_in_tw, as: 'string', hint: '半型純數字，民國，格式：YY/MM/DD，如不清楚確切日期就填該年第一天或該月第一天'
 = f.input :book_title
 = f.input :title
 = f.input :journal_no
@@ -16,10 +16,10 @@
 = f.input :degree
 = f.input :source
 = f.input :memo, as: :text, input_html: { rows: 5 }
-= f.input :is_hidden, as: :boolean, hint: "打勾 = 前端頁面不顯示"
+= f.input :is_hidden, as: :boolean, hint: '打勾 = 前端頁面不顯示'
 
 .form-actions
-  = f.submit "送出", class: "btn btn-primary"
-  = " "
-  = link_to admin_profile_articles_path(@profile), class: "btn" do
+  = f.submit '送出', class: 'btn btn-primary'
+  = ' '
+  = link_to admin_profile_articles_path(@profile), class: 'btn' do
     = "回到#{@profile.name}的發表言論列表"

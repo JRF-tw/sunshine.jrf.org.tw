@@ -11,7 +11,6 @@
 #  is_hidden  :boolean          default(TRUE)
 #  code       :string
 #  scrap_name :string
-#  court_type :string
 #
 
 class Court < ActiveRecord::Base
@@ -30,7 +29,7 @@ class Court < ActiveRecord::Base
 
   class << self
     def collect_codes
-      all.map(&:code)
+      pluck(:code).uniq
     end
   end
 end

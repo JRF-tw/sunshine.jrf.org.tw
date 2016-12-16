@@ -190,7 +190,6 @@ ActiveRecord::Schema.define(version: 20161226090809) do
     t.boolean  "is_hidden",  default: true
     t.string   "code"
     t.string   "scrap_name"
-    t.string   "court_type"
   end
 
   add_index "courts", ["code"], name: "index_courts_on_code", using: :btree
