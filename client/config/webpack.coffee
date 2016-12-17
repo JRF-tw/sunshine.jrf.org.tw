@@ -11,14 +11,24 @@ config =
   svg_sprite: JSON.stringify
     spriteModule: path.resolve path_to.root, "config/custom-sprite"
     name: 'icon-[name]'
-  svgo: JSON.stringify
+  svg_icon: JSON.stringify
     plugins: [
-      cleanupIDs: on
-      removeComments: on
-      removeDesc: on
-      removeAttrs:
-        attrs: ['fill']
-      removeDimensions: on
+      {cleanupIDs: on}
+      {removeTitle: on}
+      {removeComments: on}
+      {removeDesc: on}
+      {removeDimensions: on}
+      {removeUselessStrokeAndFill: on}
+      {convertColors: {currentColor: on}}
+    ]
+  svg_image: JSON.stringify
+    plugins: [
+      {cleanupIDs: on}
+      {removeTitle: on}
+      {removeComments: on}
+      {removeDesc: on}
+      {removeDimensions: on}
+      {removeUselessStrokeAndFill: on}
     ]
 
 module.exports = (env) ->
@@ -67,14 +77,14 @@ module.exports = (env) ->
         include: path_to.icons
         loaders: [
           "svg-sprite?#{config.svg_sprite}"
-          "svgo?#{config.svgo}"
+          "svgo?#{config.svg_icon}"
         ]
       ,
         test: /\.svg$/i
         include: path_to.images
         loaders: [
           "file?name=images/[name].[ext]"
-          "svgo?#{config.svgo}"
+          "svgo?#{config.svg_image}"
         ]
       ,
         test: /\.(png|jpe?g|gif)$/i
