@@ -28,7 +28,7 @@ $character-gradients: (
   padding: r(10) r(3);
   margin-bottom: r(2);
   background-size: cover;
-  
+
   &.billboard--profiles-judges { background-position: 0 50%; }
   &.billboard--profiles-show   { padding-top: r(20); }
 
@@ -38,10 +38,7 @@ $character-gradients: (
   }
 }
 .billboard__heading {
-  text: center $white ms(3);
-  @include susy($tablet) {
-    font-size: ms(5);
-  }
+  @include Heading(tablet);
 }
 .billboard__description {
   display: inline-block;
@@ -70,6 +67,6 @@ $character-gradients: (
 
   .billboard--#{map-get($character, name)} {
     background: $c-gradient, $gradients, $bg;
-    @include susy($tablet) { background: $gradients, $bg-lg; }    
-  }  
+    @include susy($tablet) { background: $gradients, $bg-lg; }
+  }
 }

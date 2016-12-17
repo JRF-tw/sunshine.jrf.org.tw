@@ -30,3 +30,10 @@
   box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.12), 0px 8px 8px 0px rgba(0,0,0,0.24);
   border-radius: $global-radius;
 }
+
+@mixin Heading($breakpoint) {
+  text: 400 center $white ms(4);
+  @include susy-media($breakpoint) {
+    font-size: ms(6);
+  }
+}
