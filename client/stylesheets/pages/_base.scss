@@ -146,7 +146,7 @@ $mobile-search-bar-height: 195px;
   }
 }
 .base-news-cards__heading {
-  margin: r(8) auto r(9);
+  margin: r(12) auto;
   text: center ms(3);
   @include susy($tablet) {
     font-size: ms(5);
@@ -189,16 +189,16 @@ $mobile-search-bar-height: 195px;
 }
 .base-content-section__heading {
   text: center ms(3);
-  margin: r(4) auto r(8);
+  margin: r(6) auto;
   @include susy($tablet) { font-size: ms(5); }
 }
 
-$intro-columns-break: 700px;
+$intro-columns-break: tablet;
 .intro-columns {
   @include susy-media($intro-columns-break) {
     display: flex;
     justify-content: center;
-    padding: r(4) 0 r(6);
+    padding-bottom: r(2);
   }
 }
 .intro-column {
@@ -206,27 +206,35 @@ $intro-columns-break: 700px;
   flex-flow: column nowrap;
   align-items: center;
   padding: r(8) r(2);
+  position: relative;
   @include susy-media($intro-columns-break) {
     padding: r(4);
     width: span(1 of 3 0);
     max-width: 490px;
   }
   &:first-child { padding-top: r(4); }
-  & + & {
-    border-top: 1px solid $text-disabled;
+  & + &::before {
+    content: '';
+    display: block;
+    size: 25% 1px;
+    background-color: $divider-gray;
+    top: 0;
+    @include scut-center-transform(x);
     @include susy-media($intro-columns-break) {
-      border-top: none;
-      border-left: 1px solid $text-disabled;
+      size: 1px 50%;
+      left: 0;
+      @include scut-center-transform(y);
     }
   }
 }
 .intro-column__heading {
   margin: r(2) auto;
-  text: ms(1);
+  text: ms(3);
 }
 .intro-column__text {
   margin: 0;
 }
 .intro-column__icon {
   @include ir(1/1, 30%);
+  color: $accent;
 }
