@@ -24,5 +24,9 @@ FactoryGirl.define do
     trait :tomorrow do
       crawler_on Time.zone.today + 1.day
     end
+
+    trait :has_verdict do
+      verdicts_count { rand(1..50) }
+    end
   end
 end
