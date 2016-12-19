@@ -1,0 +1,24 @@
+.base-hero-search
+  nav.base-hero-search__tabs
+    - ['法官', '檢察官'].each_with_index do |text, i|
+      button.base-hero-search__tab[type='button'
+        data-tab-content="#base-hero-search-#{i+1}"
+        class=('active' if i == 0)]
+        = "找#{text}"
+  
+  .base-hero-search__contents
+    #base-hero-search-1.base-hero-search__content.active
+      = render 'searchs/form',
+        options: collection_for_courts,
+        placeholder: '選法院或輸入關鍵字',
+        type: "judge",
+        search_url: judges_searchs_path,
+        accent_button: true
+
+    #base-hero-search-2.base-hero-search__content
+      = render 'searchs/form',
+        options: collect_for_prosecutors_offices,
+        placeholder: '選檢察署或輸入關鍵字',
+        type: "prosecutor",
+        search_url: prosecutors_searchs_path,
+        accent_button: true

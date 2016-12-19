@@ -1,0 +1,26 @@
+section.base-hero
+  #base-hero-carousel.base-hero-carousel
+    .base-hero-carousel__cell.lazyload data-sizes="auto" data-bgset=lorem_banner_image(1)
+      .container
+        h2.heading= truncate zh_lorem_paragraph, length: 30
+      
+        = link_to '開始評鑑', 'who-are-you', class: ['button', 'raised-button--large']
+        
+    / 以下僅是範例
+    .base-hero-carousel__cell.lazyload data-sizes="auto" data-bgset=lorem_banner_image(2)
+      .container
+        h2.heading= truncate zh_lorem_paragraph, length: 30
+        
+        p= zh_lorem_paragraph
+      
+        = link_to '瞭解更多', '/bulletins/1', class: ['button', 'raised-button--large']
+        
+    .base-hero-carousel__cell.lazyload data-sizes="auto" data-bgset=lorem_banner_image(3)
+      .container
+        h2.heading= truncate zh_lorem_paragraph, length: 30
+        
+        p= zh_lorem_paragraph
+      
+        = link_to '瞭解更多', '/bulletins/1', class: ['button', 'raised-button--large']
+          
+  = render partial: 'hero_search'

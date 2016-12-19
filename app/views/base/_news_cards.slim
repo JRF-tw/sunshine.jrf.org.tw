@@ -1,0 +1,17 @@
+.base-news-cards
+  h2.base-news-cards__heading
+    = link_to '最新消息', '/bulletins', class: 'text'
+  
+  .container
+    - 6.times do |i|
+      = render 'components/news_card',
+        thumbnail: {\
+          src: "http://placehold.it/360x240",
+          srcset: [\
+            "http://placehold.it/360x240 360w",
+            "http://placehold.it/720x480 720w"\
+          ]\
+        },
+        title: zh_lorem_sentence,
+        summary: zh_lorem_paragraphs(2),
+        href: "/bulletins/#{i+1}"
