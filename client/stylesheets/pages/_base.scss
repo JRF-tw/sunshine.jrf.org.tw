@@ -15,6 +15,7 @@ $mobile-search-bar-height: 195px;
   z-index: index($layers, base);
 }
 .base-hero-carousel__cell {
+  $duration: .4s;
   padding-top: r(10);
   position: relative;
   background-size: cover;
@@ -43,16 +44,33 @@ $mobile-search-bar-height: 195px;
     text: center ms(2) $text-primary-dark;
     @include susy($tablet) {max-width: container(6);}
   }
+  .heading,
+  .summary,
+  .button {
+    opacity: 0;
+    transform: translateY(40%);
+    transition: opacity $duration ease 0s, transform $duration ease 0s;
+  }
   .heading {
     text: ms(4);
     margin: 0 r(2) r(2);
   }
   .summary {
     margin: r(2);
+    transition-delay: $duration*.3;
   }
   .button {
     margin-top: r(8);
     font-size: ms(3);
+    transition-delay: $duration*.6;
+  }
+  &.slick-active {
+    .heading,
+    .summary,
+    .button {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 %base-hero-carousel__nav {
