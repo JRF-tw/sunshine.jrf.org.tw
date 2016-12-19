@@ -67,7 +67,7 @@ $(document).on 'ready page:load', ->
     adaptiveHeight: false
     slidesToShow: 1
     autoplay: true
-    autoplaySpeed: 3000
+    autoplaySpeed: 5000
     arrows: false
 
 $(document).on "page:change", ->
@@ -79,7 +79,7 @@ $(document).on "page:change", ->
 
   $main_header = $('#main-header')
 
-  $('.base-hero-content__slogan,
+  $('.base-hero-carousel__cell .heading,
      .card__heading,
      .character-selector__heading,
      .profile__avatar,

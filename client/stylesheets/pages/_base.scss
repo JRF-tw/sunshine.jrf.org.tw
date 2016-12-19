@@ -13,29 +13,42 @@ $mobile-search-bar-height: 195px;
 .base-hero-carousel {
   position: relative;
   z-index: index($layers, base);
-
+}
+.base-hero-carousel__cell {
+  position: relative;
+  background-size: cover;
+  height: 2/3*100vw;
+  max-height: 100vh;
+  @include susy-media($mobile-portrait) {
+    height: 100vh;
+    padding-bottom: 200px;
+  }
   &::before {
     content: "";
     position: absolute 0 0 0 0;
     z-index: index($layers, hero-cover);
     background-image: radial-gradient(circle farthest-corner, rgba(0,0,0,0.2), rgba(0,0,0,.7));
   }
-}
-.base-hero-carousel__cell {
-  @include susy-media($mobile-portrait) {
-    height: 100vh;
+  .container {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    max-width: container(5);
+    padding-top: r(2);
     position: relative;
+    z-index: index($layers, hero-content);
   }
-}
-.base-hero-carousel__image {
-  @include susy-media($mobile-portrait) {
-    position: absolute 0 n() n() -50%;
-    max-width: none;
-    size: auto 100% !important;
+  .heading {
+    padding: n() r(2);
+    margin-bottom: r(8);
+    text: center ms(4) #fff;
   }
+  .button { font-size: ms(3); }
 }
 
-.base-hero-content-wrapper {
+.base-hero-search-wrapper {
   display: flex;
   flex-flow: column nowrap;
   position: absolute 0 0 n() 0;
@@ -46,26 +59,15 @@ $mobile-search-bar-height: 195px;
   }
 }
 
-.base-hero-content {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-  padding-top: r(2);
-  @include susy($tablet) { padding-top: r(3); }
-}
-.base-hero-content__slogan {
-  padding: n() r(2);
-  margin-bottom: r(8);
-  text: center ms(4) #fff;
-}
-.base-hero-content__button { font-size: ms(3); }
-
 .base-hero-search {
   margin-top: auto;
+  position: absolute n() 0 0 0;
+  z-index: index($layers, hero-cover);
   background-color: rgba(0,0,0,.3);
-  @include susy-media($mobile-landscape) { background-color: rgba(#000, 0.7); }
+  @include susy-media($mobile-landscape) {
+    position: static;
+    background-color: $text-primary;
+  }
   @include susy($tablet) {
     display: flex;
     justify-content: center;
