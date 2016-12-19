@@ -22,6 +22,7 @@ StoryCollapse     = require './modules/stories'
 Rules             = require './modules/rules'
 ToTop             = require './modules/to_top'
 Tab               = require './modules/tab'
+Arrow             = require './modules/arrow'
 
 # Require entry modules
 # EX:
@@ -68,7 +69,9 @@ $(document).on 'ready page:load', ->
     slidesToShow: 1
     autoplay: true
     autoplaySpeed: 5000
-    arrows: false
+    appendArrows: '.base-hero'
+    prevArrow: Arrow.prev 'base-hero-carousel'
+    nextArrow: Arrow.next 'base-hero-carousel'
 
 $(document).on "page:change", ->
   # Let cached input value trigger 'is-focus'

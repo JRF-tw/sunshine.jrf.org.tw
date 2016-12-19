@@ -47,6 +47,28 @@ $mobile-search-bar-height: 195px;
   }
   .button { font-size: ms(3); }
 }
+%base-hero-carousel__nav {
+  $size: r(6);
+  @include Normalize();
+  @include scut-center-absolutely(n $size);
+  z-index: index($layers, hero-content);
+  color: $text-secondary-dark;
+  display: none !important;
+  @include susy($tablet) {display: inline-block !important;}
+  .icon {
+    size: $size;
+    fill: currentColor;
+  }
+}
+.base-hero-carousel__prev {
+  @extend %base-hero-carousel__nav;
+  left: r(2);
+  transform: rotate(180deg);
+}
+.base-hero-carousel__next {
+  @extend %base-hero-carousel__nav;
+  right: r(2);
+}
 
 .base-hero-search-wrapper {
   display: flex;
