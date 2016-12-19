@@ -30,4 +30,13 @@ module RetinaHelper
         'media'       => media
   end
 
+  # 假圖範例，套版完可以砍掉
+  def lorem_banner_image(num)
+    images = [360, 540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2160, 2592].map do |width|
+      "http://lorempixel.com/#{width}/#{(width/1.5).round}/sports/#{num} #{width}w"
+    end
+
+    images.join ", "
+  end
+
 end
