@@ -8,20 +8,21 @@ $mobile-landscape: (
 );
 $mobile-search-bar-height: 195px;
 
-.base-hero { position: relative; }
+.base-hero {position: relative;}
 
 .base-hero-carousel {
   position: relative;
   z-index: index($layers, base);
 }
 .base-hero-carousel__cell {
+  padding-top: r(10);
   position: relative;
   background-size: cover;
   height: 2/3*100vw;
-  max-height: 100vh;
-  @include susy-media($mobile-portrait) {
-    height: 100vh;
-    padding-bottom: 200px;
+  @include susy-media($mobile-portrait) {height: 100vh;}
+  @include susy($tablet) {
+    padding-top: 0;
+    max-height: 100vh;
   }
   &::before {
     content: "";
@@ -39,13 +40,20 @@ $mobile-search-bar-height: 195px;
     padding-top: r(2);
     position: relative;
     z-index: index($layers, hero-content);
+    text: center ms(2) $text-primary-dark;
+    @include susy($tablet) {max-width: container(6);}
   }
   .heading {
-    padding: n() r(2);
-    margin-bottom: r(8);
-    text: center ms(4) #fff;
+    text: ms(4);
+    margin: 0 r(2) r(2);
   }
-  .button { font-size: ms(3); }
+  .summary {
+    margin: r(2);
+  }
+  .button {
+    margin-top: r(8);
+    font-size: ms(3);
+  }
 }
 %base-hero-carousel__nav {
   $size: r(6);
@@ -70,30 +78,17 @@ $mobile-search-bar-height: 195px;
   right: r(2);
 }
 
-.base-hero-search-wrapper {
-  display: flex;
-  flex-flow: column nowrap;
-  position: absolute 0 0 n() 0;
-  height: 100%;
-  z-index: index($layers, hero-cover);
-  @include susy-media($mobile-landscape) {
-    height: calc(100% + #{$mobile-search-bar-height});
-  }
-}
-
 .base-hero-search {
   margin-top: auto;
-  position: absolute n() 0 0 0;
-  z-index: index($layers, hero-cover);
-  background-color: rgba(0,0,0,.3);
-  @include susy-media($mobile-landscape) {
-    position: static;
-    background-color: $text-primary;
-  }
+  position: static;
+  background-color: $text-primary;
   @include susy($tablet) {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: absolute n() 0 0 0;
+    z-index: index($layers, hero-cover);
+    background-color: rgba(0,0,0,.3);
   }
 }
 .base-hero-search__tabs {
