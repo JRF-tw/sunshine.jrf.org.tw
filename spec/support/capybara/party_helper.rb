@@ -50,9 +50,9 @@ module Capybara
       end
     end
 
-    def party_run_schedule_score_flow(story, schedule, judge)
+    def party_run_schedule_score_flow(schedule, judge = Judge.last)
       visit(input_info_party_score_schedules_path)
-      party_input_info_schedule_score(story)
+      party_input_info_schedule_score(schedule.story)
       party_input_date_schedule_score(schedule)
       party_input_judge_schedule_score(judge)
       party_create_schedule_score
