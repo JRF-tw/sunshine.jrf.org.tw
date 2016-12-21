@@ -16,6 +16,11 @@
           .control-group
             label.control-label = f.label :email_cont
             .controls = f.search_field :email_cont
+        .span6
+          .control-group
+            label.control-label = f.label :confirmed_at_not_null
+            .controls.select2 = f.select :confirmed_at_not_null,
+            collect_for_register, include_blank: "請選擇"
 
     hr
     .form-actions
