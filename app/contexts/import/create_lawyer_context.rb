@@ -33,8 +33,14 @@ class Import::CreateLawyerContext < BaseContext
   end
 
   def phone_format_check
-    @lawyer_data[:phone] = @lawyer_data[:phone].to_s
+    phone_format_adjust
     @lawyer_data[:phone] = '0' + @lawyer_data[:phone] if @lawyer_data[:phone].present? && @lawyer_data[:phone][0] != '0'
+  end
+
+  def phone_format_adjust
+    @lawyer_data[:phone] = @lawyer_data[:phone].to_s
+    @lawyer_data[:phone].gsub!(/[\s()-]/, '')
+    @lawyer_data[:phone].gsub!(/[(分機)]/, '#')
   end
 
   def is_phone?
