@@ -7,12 +7,7 @@ class Lawyers::PasswordsController < Devise::PasswordsController
   before_action :first_time_setting?, only: [:update]
 
   def new
-    # meta
-    set_meta(
-      title: '律師忘記密碼頁',
-      description: '律師忘記密碼頁',
-      keywords: '律師忘記密碼頁'
-    )
+    set_meta
     super
   end
 
@@ -59,13 +54,7 @@ class Lawyers::PasswordsController < Devise::PasswordsController
     self.resource = resource_class.new
     set_minimum_password_length
     resource.reset_password_token = params[:reset_password_token]
-
-    # meta
-    set_meta(
-      title: '律師設定密碼頁',
-      description: '律師設定密碼頁',
-      keywords: '律師設定密碼頁'
-    )
+    set_meta
   end
 
   def send_reset_password_mail

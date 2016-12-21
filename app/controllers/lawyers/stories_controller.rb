@@ -5,22 +5,16 @@ class Lawyers::StoriesController < Lawyers::BaseController
 
   def index
     @stories = ::LawyerQueries.new(current_lawyer).get_stories
-    # meta
-    set_meta(
-      title: '律師案件列表頁',
-      description: '律師案件列表頁',
-      keywords: '律師案件列表頁'
-    )
+    set_meta
   end
 
   def show
     @pending_score_verdict = ::LawyerQueries.new(current_lawyer).pending_score_verdict(@story)
     @pending_score_schedules = ::LawyerQueries.new(current_lawyer).pending_score_schedules(@story)
-    # meta
     set_meta(
-      title: "律師 案件-#{@story.identity} 資訊頁",
-      description: "律師 案件-#{@story.identity} 資訊頁",
-      keywords: "律師 案件-#{@story.identity} 資訊頁"
+      title: { identity: @story.identity },
+      description: { identity: @story.identity },
+      keywords: { identity: @story.identity }
     )
   end
 

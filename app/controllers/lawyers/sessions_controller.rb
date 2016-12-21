@@ -2,12 +2,7 @@ class Lawyers::SessionsController < Devise::SessionsController
   layout 'lawyer'
 
   def new
-    # meta
-    set_meta(
-      title: '律師登入頁',
-      description: '律師登入頁',
-      keywords: '律師登入頁'
-    )
+    set_meta
     super
   end
 

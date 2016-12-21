@@ -4,12 +4,7 @@ class Lawyers::RegistrationsController < Devise::RegistrationsController
   layout 'lawyer'
 
   def new
-    # meta
-    set_meta(
-      title: '律師註冊頁',
-      description: '律師註冊頁',
-      keywords: '律師註冊頁'
-    )
+    set_meta
     super
   end
 

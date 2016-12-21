@@ -7,12 +7,7 @@ class Parties::PasswordsController < Devise::PasswordsController
   layout 'party'
 
   def new
-    # meta
-    set_meta(
-      title: '當事人忘記密碼頁',
-      description: '當事人忘記密碼頁',
-      keywords: '當事人忘記密碼頁'
-    )
+    set_meta
     super
   end
 
@@ -35,12 +30,7 @@ class Parties::PasswordsController < Devise::PasswordsController
     self.resource = resource_class.new
     set_minimum_password_length
     resource.reset_password_token = params[:reset_password_token]
-    # meta
-    set_meta(
-      title: '當事人重設密碼頁',
-      description: '當事人重設密碼頁',
-      keywords: '當事人重設密碼頁'
-    )
+    set_meta
   end
 
   def update

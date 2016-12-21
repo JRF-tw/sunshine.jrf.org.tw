@@ -2,21 +2,11 @@ class CourtObservers::ProfilesController < CourtObservers::BaseController
   before_action :find_court_observer, only: [:edit, :update]
 
   def show
-    # meta
-    set_meta(
-      title: '觀察者個人資訊頁',
-      description: '觀察者個人資訊頁',
-      keywords: '觀察者個人資訊頁'
-    )
+    set_meta
   end
 
   def edit
-    # meta
-    set_meta(
-      title: '觀察者編輯個人資訊頁',
-      description: '觀察者編輯個人資訊頁',
-      keywords: '觀察者編輯個人資訊頁'
-    )
+    set_meta
   end
 
   def update

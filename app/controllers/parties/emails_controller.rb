@@ -2,12 +2,7 @@ class Parties::EmailsController < Parties::BaseController
   before_action :find_party, only: [:edit, :update]
 
   def edit
-    # meta
-    set_meta(
-      title: '當事人編輯信箱頁',
-      description: '當事人編輯信箱頁',
-      keywords: '當事人編輯信箱頁'
-    )
+    set_meta
   end
 
   def update

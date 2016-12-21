@@ -5,12 +5,7 @@ class Parties::RegistrationsController < Devise::RegistrationsController
   # POST /resource
 
   def new
-    # meta
-    set_meta(
-      title: '當事人註冊頁',
-      description: '當事人註冊頁',
-      keywords: '當事人註冊頁'
-    )
+    set_meta
     super
   end
 

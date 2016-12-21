@@ -4,9 +4,9 @@ class PunishmentsController < BaseController
   def index
     @punishments = @punishments.shown.page(params[:page]).per(12)
     set_meta(
-      title: "#{@profile.name}的懲處相關紀錄",
-      description: "#{@profile.name}懲處紀錄。",
-      keywords: "#{@profile.name}懲處紀錄,#{@profile.name}",
+      title: { name: @profile.name },
+      description: { name: @profile.name },
+      keywords: { name: @profile.name },
       image: ActionController::Base.helpers.asset_path('hero-profiles-show-M.png')
     )
   end
@@ -17,9 +17,9 @@ class PunishmentsController < BaseController
       not_found
     end
     set_meta(
-      title: "#{@profile.name}的懲處紀錄內容",
-      description: "#{@profile.name}懲處內容。",
-      keywords: "#{@profile.name}懲處內容,#{@profile.name}",
+      title: { name: @profile.name },
+      description: { name: @profile.name },
+      keywords: { name: @profile.name },
       image: ActionController::Base.helpers.asset_path('hero-profiles-show-M.png')
     )
   end

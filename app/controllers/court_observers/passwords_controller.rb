@@ -7,12 +7,7 @@ class CourtObservers::PasswordsController < Devise::PasswordsController
   before_action :check_same_observer, only: [:edit, :update]
 
   def new
-    # meta
-    set_meta(
-      title: '觀察者忘記密碼頁',
-      description: '觀察者忘記密碼頁',
-      keywords: '觀察者忘記密碼頁'
-    )
+    set_meta
     super
   end
 
@@ -20,12 +15,7 @@ class CourtObservers::PasswordsController < Devise::PasswordsController
     self.resource = resource_class.new
     set_minimum_password_length
     resource.reset_password_token = params[:reset_password_token]
-    # meta
-    set_meta(
-      title: '觀察者更改密碼頁',
-      description: '觀察者更改密碼頁',
-      keywords: '觀察者更改密碼頁'
-    )
+    set_meta
   end
 
   def update

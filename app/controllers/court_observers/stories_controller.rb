@@ -5,21 +5,15 @@ class CourtObservers::StoriesController < CourtObservers::BaseController
 
   def index
     @stories = ::CourtObserverQueries.new(current_court_observer).get_stories
-    # meta
-    set_meta(
-      title: '觀察者案件列表頁',
-      description: '觀察者案件列表頁',
-      keywords: '觀察者案件列表頁'
-    )
+    set_meta
   end
 
   def show
     @pending_score_schedules = ::CourtObserverQueries.new(current_court_observer).pending_score_schedules(@story)
-    # meta
     set_meta(
-      title: "觀察者 案件-#{@story.identity} 資訊頁",
-      description: "觀察者 案件-#{@story.identity} 資訊頁",
-      keywords: "觀察者 案件-#{@story.identity} 資訊頁"
+      title: { identity: @story.identity },
+      description: { identity: @story.identity },
+      keywords: { identity: @story.identity }
     )
   end
 

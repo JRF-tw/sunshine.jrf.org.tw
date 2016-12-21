@@ -11,7 +11,7 @@ class Admin::BaseController < ApplicationController
 
   def index
     @admin_page_title = '首頁'
-    set_meta(title: '首頁')
+    set_meta
   end
 
   private

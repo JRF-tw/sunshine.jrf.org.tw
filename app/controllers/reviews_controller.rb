@@ -1,6 +1,7 @@
 class ReviewsController < BaseController
   def index
     @profile = Profile.find(params[:profile_id])
+    raise @profile.inspect
     if @profile.is_hidden?
       not_found
     end
@@ -9,9 +10,9 @@ class ReviewsController < BaseController
     @newest_punishments = @profile.punishments.shown.order_by_relevant_date.first(3)
     @newest_reviews = @reviews.shown.first(3)
     set_meta(
-      title: "#{@profile.name}的相關新聞紀錄",
-      description: "#{@profile.name}的新聞相關清單。",
-      keywords: "#{@profile.name}相關新聞,#{@profile.name}",
+      title: { name: @profile.name },
+      description: { name: @profile.name },
+      keywords: { name: @profile.name },
       image: ActionController::Base.helpers.asset_path('hero-profiles-show-M.png')
     )
   end

@@ -4,21 +4,11 @@ class Parties::SchedulesController < Parties::BaseController
   before_action :story_adjudged?, only: [:edit, :update]
 
   def rule
-    # meta
-    set_meta(
-      title: '當事人開庭評鑑規則頁',
-      description: '當事人開庭評鑑規則頁',
-      keywords: '當事人開庭評鑑規則頁'
-    )
+    set_meta
   end
 
   def new
-    # meta
-    set_meta(
-      title: '當事人開庭評鑑輸入頁',
-      description: '當事人開庭評鑑輸入頁',
-      keywords: '當事人開庭評鑑輸入頁'
-    )
+    set_meta
   end
 
   def create
@@ -31,12 +21,7 @@ class Parties::SchedulesController < Parties::BaseController
   end
 
   def edit
-    # meta
-    set_meta(
-      title: '當事人開庭評鑑編輯頁',
-      description: '當事人開庭評鑑編輯頁',
-      keywords: '當事人開庭評鑑編輯頁'
-    )
+    set_meta
   end
 
   def update
@@ -50,12 +35,7 @@ class Parties::SchedulesController < Parties::BaseController
   end
 
   def input_info
-    # meta
-    set_meta(
-      title: '當事人開庭評鑑案件輸入頁',
-      description: '當事人開庭評鑑案件輸入頁',
-      keywords: '當事人開庭評鑑案件輸入頁'
-    )
+    set_meta
   end
 
   def check_info
@@ -68,12 +48,7 @@ class Parties::SchedulesController < Parties::BaseController
   end
 
   def input_date
-    # meta
-    set_meta(
-      title: '當事人開庭評鑑庭期輸入頁',
-      description: '當事人開庭評鑑庭期輸入頁',
-      keywords: '當事人開庭評鑑庭期輸入頁'
-    )
+    set_meta
   end
 
   def check_date
@@ -87,12 +62,7 @@ class Parties::SchedulesController < Parties::BaseController
   end
 
   def input_judge
-    # meta
-    set_meta(
-      title: '當事人開庭評鑑法官輸入頁',
-      description: '當事人開庭評鑑法官輸入頁',
-      keywords: '當事人開庭評鑑法官輸入頁'
-    )
+    set_meta
   end
 
   def check_judge
@@ -105,12 +75,7 @@ class Parties::SchedulesController < Parties::BaseController
   end
 
   def thanks_scored
-    # meta
-    set_meta(
-      title: '當事人開庭評鑑感謝頁',
-      description: '當事人開庭評鑑感謝頁',
-      keywords: '當事人開庭評鑑感謝頁'
-    )
+    set_meta
   end
 
   private

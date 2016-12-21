@@ -4,12 +4,7 @@ class Parties::PhonesController < Parties::BaseController
 
   def new
     @phone_form = Party::ChangePhoneFormObject.new(current_party)
-    # meta
-    set_meta(
-      title: '當事人新增手機頁',
-      description: '當事人新增手機頁',
-      keywords: '當事人新增手機頁'
-    )
+    set_meta
   end
 
   def create
@@ -25,12 +20,7 @@ class Parties::PhonesController < Parties::BaseController
 
   def edit
     @phone_form = Party::ChangePhoneFormObject.new(current_party)
-    # meta
-    set_meta(
-      title: '當事人更改手機頁',
-      description: '當事人更改手機頁',
-      keywords: '當事人更改手機頁'
-    )
+    set_meta
   end
 
   def update
@@ -46,12 +36,7 @@ class Parties::PhonesController < Parties::BaseController
 
   def verify
     @verify_form = Party::VerifyPhoneFormObject.new(current_party)
-    # meta
-    set_meta(
-      title: '當事人手機驗證頁',
-      description: '當事人手機驗證頁',
-      keywords: '當事人手機驗證頁'
-    )
+    set_meta
   end
 
   def verifing
