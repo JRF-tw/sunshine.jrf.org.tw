@@ -9,9 +9,10 @@ namespace :dev do
   desc 'Generate fake data for development'
   task fake: [
     'dev:fake_users',
-    'dev:fake_courts',
+    'dev:fake_courts_and_prosecutors_offices',
     'dev:fake_profiles',
     'dev:fake_judges',
+    'dev:fake_prosecutors',
     'dev:fake_educations',
     'dev:fake_careers',
     'dev:fake_licenses',
@@ -37,29 +38,22 @@ namespace :dev do
     User.find_by(email: email) || FactoryGirl.create(:user, email: email, password: 'P@ssw0rd', admin: true)
   end
 
-  task fake_courts: :environment do
+  task fake_courts_and_prosecutors_offices: :environment do
     Court.destroy_all
+    ProsecutorsOffice.destroy_all
     judge_name_hash = { "臺灣基隆地方法院": '基隆地院', "臺灣臺北地方法院": '臺北地院', "臺灣士林地方法院": '士林地院', "臺灣新北地方法院": '新北地院', "臺灣宜蘭地方法院": '宜蘭地院' }
-    prosecutor_name_hash = { "臺灣臺北地方法院檢察署": '臺北地檢署', "臺灣彰化地方法院檢察署": '彰化地檢署', "臺灣臺南地方法院檢察署": '臺南地檢署', "臺灣臺中地方法院檢察署": '臺中地檢署' }
     judge_name_hash.each do |k, v|
-      Admin::Court.create!(full_name: k, name: v, weight: (1..20).to_a.sample)
-    end
-    prosecutor_name_hash.each do |k, v|
-      Admin::ProsecutorsOffice.create!(full_name: k, name: v)
+      court = Admin::Court.create!(full_name: k, name: v, weight: (1..20).to_a.sample)
+      Admin::ProsecutorsOffice.create!(full_name: k.to_s + '檢察署', name: v.gsub('院', '檢署'), court: court)
     end
   end
 
   task fake_profiles: :environment do
     Profile.destroy_all
     judge_name = Array.new(150) { |i| "測試法官 - #{i + 1}" }
-    prosecutor_name = Array.new(150) { |i| "測試檢察官 - #{i + 1}" }
     judge_name.each do |n|
       file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-#{rand(1..12)}.jpg"
       Admin::Profile.create!(name: n, current: '法官', gender: User::GENDER_TYPES.sample, birth_year: rand(50..70), avatar: file, is_active: true, is_hidden: false, current_court: '臺灣臺北地方法院')
-    end
-    prosecutor_name.each do |n|
-      file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-#{rand(13..24)}.jpg"
-      Admin::Profile.create!(name: n, current: '檢察官', gender: User::GENDER_TYPES.sample, birth_year: rand(50..70), avatar: file, is_active: true, is_hidden: false, current_court: '臺灣臺北地方法院檢察署')
     end
   end
 
@@ -69,7 +63,17 @@ namespace :dev do
     gender = ['男', '女', '其他']
     judge_name.each_with_index do |n, _i|
       file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-23.jpg"
-      Court.sample.judges.create!(name: n, gender: gender.sample, birth_year: (50..70).to_a.sample, avatar: file, is_active: true, is_hidden: false)
+      Court.all.sample.judges.create!(name: n, gender: gender.sample, birth_year: (50..70).to_a.sample, avatar: file, is_active: true, is_hidden: false)
+    end
+  end
+
+  task fake_prosecutors: :environment do
+    Prosecutor.destroy_all
+    prosecutor_name = Array.new(30) { |i| "測試檢察官 - #{i + 1}" }
+    gender = ['男', '女', '其他']
+    prosecutor_name.each_with_index do |n, _i|
+      file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-23.jpg"
+      ProsecutorsOffice.all.sample.prosecutors.create!(name: n, gender: gender.sample, birth_year: (50..70).to_a.sample, avatar: file, is_active: true, is_hidden: false)
     end
   end
 
