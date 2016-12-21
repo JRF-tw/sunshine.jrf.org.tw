@@ -51,9 +51,9 @@ module Capybara
       click_button '登入'
     end
 
-    def court_observer_run_schedule_score_flow(story, schedule, judge)
+    def court_observer_run_schedule_score_flow(schedule, judge = Judge.last)
       visit(input_info_court_observer_score_schedules_path)
-      court_observer_input_info_schedule_score(story)
+      court_observer_input_info_schedule_score(schedule.story)
       court_observer_input_date_schedule_score(schedule)
       court_observer_input_judge_schedule_score(judge)
       court_observer_create_schedule_score

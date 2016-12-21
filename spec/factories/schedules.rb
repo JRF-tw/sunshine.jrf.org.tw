@@ -21,7 +21,7 @@ FactoryGirl.define do
     start_at { Date.current }
     courtroom '鋼鐵教廷'
     court { create :court }
-    story { create :story }
+    story { create :story, court: court }
 
     trait :with_branch_judge do
       branch_judge { create :judge }
@@ -33,6 +33,10 @@ FactoryGirl.define do
 
     trait :date_is_yesterday do
       start_on { Date.yesterday }
+    end
+
+    trait :court_with_judge do
+      court { create :court, :with_judge }
     end
   end
 

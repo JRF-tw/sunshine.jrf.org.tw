@@ -24,9 +24,9 @@ module Capybara
       find(:xpath, "//a[@href='/lawyer/sign_out']").click
     end
 
-    def lawyer_run_schedule_score_flow(story, schedule, judge)
+    def lawyer_run_schedule_score_flow(schedule, judge = Judge.last)
       visit(input_info_lawyer_score_schedules_path)
-      lawyer_input_info_schedule_score(story)
+      lawyer_input_info_schedule_score(schedule.story)
       lawyer_input_date_schedule_score(schedule)
       lawyer_input_judge_schedule_score(judge)
       lawyer_create_schedule_score

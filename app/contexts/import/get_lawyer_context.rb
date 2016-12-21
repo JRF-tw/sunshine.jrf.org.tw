@@ -15,7 +15,7 @@ class Import::GetLawyerContext < BaseContext
   def perform
     run_callbacks :perform do
       @data_array.each do |lawyer|
-        context = Import::CreateLawyerContext.new(lawyer)
+        context = Import::CreateLawyerContext.new(lawyer.slice(:name, :gender, :email, :phone))
         if @lawyer = context.perform
           @import_lawyers << @lawyer
         else
