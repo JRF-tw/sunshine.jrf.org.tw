@@ -1,7 +1,6 @@
 class ReviewsController < BaseController
   def index
     @profile = Profile.find(params[:profile_id])
-    raise @profile.inspect
     if @profile.is_hidden?
       not_found
     end

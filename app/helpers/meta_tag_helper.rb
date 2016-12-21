@@ -45,18 +45,18 @@ module MetaTagHelper
   end
 
   def check_i18n_key(last_key)
-    I18n.exists?("#{prefix_meta_key_pattern(last_key)}", I18n.default_locale)
+    I18n.exists?(prefix_meta_key_pattern(last_key).to_s, I18n.default_locale)
   end
 
   def match_title(hash)
-    check_i18n_key('title') ? I18n.t("#{prefix_meta_key_pattern('title')}", hash) : nil
+    check_i18n_key('title') ? I18n.t(prefix_meta_key_pattern('title').to_s, hash) : nil
   end
 
   def match_description(hash)
-    check_i18n_key('description') ? I18n.t("#{prefix_meta_key_pattern('description')}", hash) : nil
+    check_i18n_key('description') ? I18n.t(prefix_meta_key_pattern('description').to_s, hash) : nil
   end
 
   def match_keywords(hash)
-    check_i18n_key('keywords') ? I18n.t("#{prefix_meta_key_pattern('keywords')}", hash) : nil
+    check_i18n_key('keywords') ? I18n.t(prefix_meta_key_pattern('keywords').to_s, hash) : nil
   end
 end
