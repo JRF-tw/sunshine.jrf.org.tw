@@ -4,7 +4,7 @@ module Scrap
     before_perform  :find_judge_by_court
     before_perform  :build_judge
     before_perform  :new_record_or_not
-    after_perform :notify
+    after_perform   :assign_to_redis
 
     def initialize(court, name)
       @court = court
@@ -36,8 +36,8 @@ module Scrap
       @is_new_record = @judge.new_record?
     end
 
-    def notify
-      SlackService.notify_create_highest_judge_alert("最高法院法官已新增 : #{@judge.name} 法官, #{SlackService.render_link("http://#{Setting.host + admin_judge_path(@judge)}", '點我查看')}") if @is_new_record
+    def assign_to_redis
+      Redis::HashKey.new('higest_court_judge_created')[@judge.name] = Time.zone.today.to_s
     end
   end
 end

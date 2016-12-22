@@ -1,5 +1,6 @@
 - content_for :btns do
-  = link_to '檢視判決書抓取數據', status_admin_crawler_histories_path, class: 'btn btn-success'
+  = link_to '最高法院法官建立數據', highest_judges_admin_crawler_histories_path, class: 'btn btn-info'
+  = link_to '判決書抓取數據', status_admin_crawler_histories_path, class: 'btn btn-success'
 = search_form_for @search, url: admin_crawler_histories_path, wrapper: :admin, html: { class: 'form-horizontal' } do |f|
   .well
     fieldset
