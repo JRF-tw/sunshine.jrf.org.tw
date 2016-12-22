@@ -1,11 +1,11 @@
 class Scrap::ImportVerdictContext < BaseContext
+  include Scrap::Concerns::AnalysisVerdictContent
   # only import judgment verdict
   DISABLE_RULING = true
 
   before_perform  :disable_ruling
   before_perform  :find_or_create_story
   before_perform  :create_verdict
-  before_perform  :build_analysis_context
   before_perform  :create_main_judge_by_highest, if: :is_highest_court?
   before_perform  :assign_names
   before_perform  :assign_default_value
@@ -70,12 +70,8 @@ class Scrap::ImportVerdictContext < BaseContext
     )
   end
 
-  def build_analysis_context
-    @analysis_context = Scrap::AnalysisVerdictContext.new(@verdict, @content, @word)
-  end
-
   def create_main_judge_by_highest
-    @analysis_context.judges_names.each do |judge|
+    parse_judges_names(@verdict, @content, @crawler_history).each do |judge|
       Scrap::CreateJudgeByHighestCourtContext.new(@court, judge).perform
     end
   end
@@ -86,10 +82,10 @@ class Scrap::ImportVerdictContext < BaseContext
 
   def assign_names
     @verdict.assign_attributes(
-      judges_names: @analysis_context.judges_names,
-      prosecutor_names: @analysis_context.prosecutor_names,
-      lawyer_names: @analysis_context.lawyer_names,
-      party_names: @analysis_context.party_names
+      judges_names: parse_judges_names(@verdict, @content, @crawler_history),
+      prosecutor_names: parse_prosecutor_names(@verdict, @content, @crawler_history),
+      lawyer_names: parse_lawyer_names(@verdict, @content, @crawler_history),
+      party_names: parse_party_names(@verdict, @content, @crawler_history)
     )
   end
 
