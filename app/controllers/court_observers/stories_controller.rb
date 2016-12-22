@@ -2,24 +2,18 @@ class CourtObservers::StoriesController < CourtObservers::BaseController
   layout 'observer'
   before_action :find_story, only: [:show]
   before_action :has_score?, only: [:show]
+  before_action :init_meta, only: [:index]
 
   def index
     @stories = ::CourtObserverQueries.new(current_court_observer).get_stories
-    # meta
-    set_meta(
-      title: '觀察者案件列表頁',
-      description: '觀察者案件列表頁',
-      keywords: '觀察者案件列表頁'
-    )
   end
 
   def show
     @pending_score_schedules = ::CourtObserverQueries.new(current_court_observer).pending_score_schedules(@story)
-    # meta
     set_meta(
-      title: "觀察者 案件-#{@story.identity} 資訊頁",
-      description: "觀察者 案件-#{@story.identity} 資訊頁",
-      keywords: "觀察者 案件-#{@story.identity} 資訊頁"
+      title: { identity: @story.identity },
+      description: { identity: @story.identity },
+      keywords: { identity: @story.identity }
     )
   end
 
@@ -38,5 +32,9 @@ class CourtObservers::StoriesController < CourtObservers::BaseController
   def has_score?
     @scores_sorted = ::CourtObserverQueries.new(current_court_observer).get_schedule_scores_array(@story)
     redirect_as_fail(court_observer_root_path, '尚未有評鑑紀錄') unless @scores_sorted.present?
+  end
+
+  def init_meta
+    set_meta
   end
 end

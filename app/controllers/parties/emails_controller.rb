@@ -1,13 +1,8 @@
 class Parties::EmailsController < Parties::BaseController
   before_action :find_party, only: [:edit, :update]
+  before_action :init_meta, only: [:edit]
 
   def edit
-    # meta
-    set_meta(
-      title: '當事人編輯信箱頁',
-      description: '當事人編輯信箱頁',
-      keywords: '當事人編輯信箱頁'
-    )
   end
 
   def update
@@ -27,7 +22,13 @@ class Parties::EmailsController < Parties::BaseController
     redirect_to party_profile_path
   end
 
+  private
+
   def find_party
     @party ||= Party.find(current_party.id)
+  end
+
+  def init_meta
+    set_meta
   end
 end

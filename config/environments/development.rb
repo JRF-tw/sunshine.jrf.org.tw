@@ -55,4 +55,12 @@ Rails.application.configure do
   # Middleware
   # see https://gist.github.com/dhh/2492118#gistcomment-911645
   config.middleware.use RoutesReloader
+
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert = true
+    Bullet.bullet_logger = true
+    # Bullet.console = true
+    # Bullet.rails_logger = true
+  end
 end

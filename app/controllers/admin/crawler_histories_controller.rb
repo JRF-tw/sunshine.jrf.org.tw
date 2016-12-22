@@ -7,9 +7,15 @@ class Admin::CrawlerHistoriesController < Admin::BaseController
   end
 
   def status
-    @search = CrawlerHistory.newest.ransack(params[:q])
+    @search = CrawlerHistory.has_verdicts.newest.ransack(params[:q])
     @crawler_histories = @search.result.page(params[:page]).per(10)
     @admin_page_title = '判決書抓取數據'
+    add_crumb @admin_page_title, '#'
+  end
+
+  def highest_judges
+    @hash = Redis::HashKey.new('higest_court_judge_created').all
+    @admin_page_title = '最高法院法官建立數據'
     add_crumb @admin_page_title, '#'
   end
 end

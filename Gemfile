@@ -103,6 +103,8 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'byebug'
   gem 'rubocop', require: false
+  # query tunning
+  gem 'bullet'
 end
 
 group :test do

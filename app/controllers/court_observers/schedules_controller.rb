@@ -2,23 +2,12 @@ class CourtObservers::SchedulesController < CourtObservers::BaseController
   before_action :schedule_score, except: [:edit, :update]
   before_action :find_schedule_score, only: [:edit, :update]
   before_action :story_adjudged?, only: [:edit, :update]
+  before_action :init_meta, only: [:rule, :new, :edit, :input_info, :input_date, :input_judge, :thanks_scored]
 
   def rule
-    # meta
-    set_meta(
-      title: '觀察者評鑑開庭規則頁',
-      description: '觀察者評鑑開庭規則頁',
-      keywords: '觀察者評鑑開庭規則頁'
-    )
   end
 
   def new
-    # meta
-    set_meta(
-      title: '觀察者建立評鑑頁',
-      description: '觀察者建立評鑑頁',
-      keywords: '觀察者建立評鑑頁'
-    )
   end
 
   def create
@@ -31,12 +20,6 @@ class CourtObservers::SchedulesController < CourtObservers::BaseController
   end
 
   def edit
-    # meta
-    set_meta(
-      title: '觀察者編輯評鑑頁',
-      description: '觀察者編輯評鑑頁',
-      keywords: '觀察者編輯評鑑頁'
-    )
   end
 
   def update
@@ -50,12 +33,6 @@ class CourtObservers::SchedulesController < CourtObservers::BaseController
   end
 
   def input_info
-    # meta
-    set_meta(
-      title: '觀察者輸入案件資訊頁',
-      description: '觀察者輸入案件資訊頁',
-      keywords: '觀察者輸入案件資訊頁'
-    )
   end
 
   def check_info
@@ -68,12 +45,6 @@ class CourtObservers::SchedulesController < CourtObservers::BaseController
   end
 
   def input_date
-    # meta
-    set_meta(
-      title: '觀察者輸入庭期日期頁',
-      description: '觀察者輸入庭期日期頁',
-      keywords: '觀察者輸入庭期日期頁'
-    )
   end
 
   def check_date
@@ -87,12 +58,6 @@ class CourtObservers::SchedulesController < CourtObservers::BaseController
   end
 
   def input_judge
-    # meta
-    set_meta(
-      title: '觀察者輸入法官頁',
-      description: '觀察者輸入法官頁',
-      keywords: '觀察者輸入法官頁'
-    )
   end
 
   def check_judge
@@ -105,12 +70,6 @@ class CourtObservers::SchedulesController < CourtObservers::BaseController
   end
 
   def thanks_scored
-    # meta
-    set_meta(
-      title: '觀察者評鑑感謝頁',
-      description: '觀察者評鑑感謝頁',
-      keywords: '觀察者評鑑感謝頁'
-    )
   end
 
   private
@@ -134,5 +93,9 @@ class CourtObservers::SchedulesController < CourtObservers::BaseController
 
   def story_adjudged?
     redirect_as_fail(court_observer_root_path, '案件已判決') if @schedule_score.story.adjudge_date.present?
+  end
+
+  def init_meta
+    set_meta
   end
 end

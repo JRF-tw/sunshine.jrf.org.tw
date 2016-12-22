@@ -1,10 +1,8 @@
 require 'rails_helper'
 feature '法官評鑑 - 律師', type: :feature, js: true do
   let!(:lawyer) { create :lawyer, :with_password, :with_confirmed }
-  let!(:court) { create :court }
-  let!(:story) { create :story, court: court }
-  let!(:judge) { create :judge, court: court }
-  let!(:schedule) { create :schedule, court: court, story: story }
+  let!(:schedule) { create :schedule, :court_with_judge }
+  let!(:story) { schedule.story }
   before { signin_lawyer(email: lawyer.email, password: lawyer.password) }
 
   feature '案件的狀態和評鑑與否' do
@@ -12,14 +10,14 @@ feature '法官評鑑 - 律師', type: :feature, js: true do
       before { story.update_attributes(is_adjudge: false) }
       Given '案件無宣判日' do
         When '進行新增開庭評鑑' do
-          before { lawyer_run_schedule_score_flow(story, schedule, judge) }
+          before { lawyer_run_schedule_score_flow(schedule) }
           Then '成功新增開庭評鑑' do
             expect(page).to have_content('感謝您的評鑑')
           end
         end
 
         When '進行編輯開庭評鑑' do
-          before { lawyer_run_schedule_score_flow(story, schedule, judge) }
+          before { lawyer_run_schedule_score_flow(schedule) }
           before { lawyer_edit_schedule_score }
           before { click_button '更新評鑑' }
           Then '成功編輯開庭評鑑' do
@@ -39,14 +37,14 @@ feature '法官評鑑 - 律師', type: :feature, js: true do
       Given '案件的宣判日在未來' do
         before { story.update_attributes(pronounce_date: Time.zone.today + 1.day) }
         When '進行新增開庭評鑑' do
-          before { lawyer_run_schedule_score_flow(story, schedule, judge) }
+          before { lawyer_run_schedule_score_flow(schedule) }
           Then '成功新增開庭評鑑' do
             expect(page).to have_content('感謝您的評鑑')
           end
         end
 
         When '進行編輯開庭評鑑' do
-          before { lawyer_run_schedule_score_flow(story, schedule, judge) }
+          before { lawyer_run_schedule_score_flow(schedule) }
           before { lawyer_edit_schedule_score }
           before { click_button '更新評鑑' }
           Then '成功編輯開庭評鑑' do

@@ -26,6 +26,12 @@ FactoryGirl.define do
     trait :with_weight do
       after(:create, &:insert_at)
     end
+
+    trait :with_judge do
+      after(:create) do |court|
+        create :judge, court: court
+      end
+    end
   end
 
   factory :court_for_params, class: Court do

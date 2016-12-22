@@ -3,7 +3,7 @@ class Admin::JudgmentsController < Admin::BaseController
   before_action(except: [:index]) { add_crumb('重要判決列表', admin_judgments_path) }
 
   def index
-    @judgments = Judgment.all.newest.page(params[:page]).per(10)
+    @judgments = Judgment.includes(:court).newest.page(params[:page]).per(10)
     @admin_page_title = '重要判決列表'
     add_crumb @admin_page_title, '#'
   end

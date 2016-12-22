@@ -5,16 +5,7 @@ class Lawyers::PasswordsController < Devise::PasswordsController
   prepend_before_action :require_no_authentication, except: [:edit, :update, :send_reset_password_mail]
   before_action :check_same_lawyer, only: [:edit, :update]
   before_action :first_time_setting?, only: [:update]
-
-  def new
-    # meta
-    set_meta(
-      title: '律師忘記密碼頁',
-      description: '律師忘記密碼頁',
-      keywords: '律師忘記密碼頁'
-    )
-    super
-  end
+  before_action :init_meta, only: [:new, :edit]
 
   # POST /resource/password
   def create
@@ -59,13 +50,6 @@ class Lawyers::PasswordsController < Devise::PasswordsController
     self.resource = resource_class.new
     set_minimum_password_length
     resource.reset_password_token = params[:reset_password_token]
-
-    # meta
-    set_meta(
-      title: '律師設定密碼頁',
-      description: '律師設定密碼頁',
-      keywords: '律師設定密碼頁'
-    )
   end
 
   def send_reset_password_mail
@@ -100,6 +84,12 @@ class Lawyers::PasswordsController < Devise::PasswordsController
 
   def alert_to_slack
     SlackService.notify_user_activity_alert("新律師註冊 : #{SlackService.render_link(admin_lawyer_url(resource, host: Setting.host), resource.name)} 已經申請註冊")
+  end
+
+  private
+
+  def init_meta
+    set_meta
   end
 
 end

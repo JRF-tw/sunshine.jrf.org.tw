@@ -63,6 +63,7 @@ Rails.application.routes.draw do
       end
       collection do
         get :status
+        get :highest_judges
       end
     end
   end
