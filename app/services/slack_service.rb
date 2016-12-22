@@ -41,10 +41,6 @@ class SlackService
       delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook) unless DISABLED_ENV.include?(Rails.env)
     end
 
-    def notify_create_highest_judge_alert(message, channel: '#notify-verdict', name: 'notify', icon_url: DEFAULT_ICON_URL, webhook: nil)
-      delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook) unless DISABLED_ENV.include?(Rails.env)
-    end
-
     def notify_sms_alert(message, channel: '#notify-sms', name: 'notify', icon_url: DEFAULT_ICON_URL, webhook: nil)
       delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook) unless Rails.env == 'production'
     end

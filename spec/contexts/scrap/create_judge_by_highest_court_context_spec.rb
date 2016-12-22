@@ -30,14 +30,15 @@ RSpec.describe Scrap::CreateJudgeByHighestCourtContext, type: :model do
       it { expect { subject }.to change { Judge.count } }
     end
 
-    describe '#notify' do
+    describe '#assign_to_redis' do
+      let!(:redis_object) { Redis::HashKey.new('higest_court_judge_created') }
       context 'new record' do
-        it { expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+        it { expect { subject }.to change{ redis_object.all.count } }
       end
 
-      context 'new record' do
+      context 'not new record' do
         let!(:judge) { create :judge, name: 'xxx', court: court }
-        it { expect { subject }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
+        it { expect { subject }.not_to change{ redis_object.all.count } }
       end
     end
   end
