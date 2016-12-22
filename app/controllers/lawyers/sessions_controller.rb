@@ -1,15 +1,6 @@
 class Lawyers::SessionsController < Devise::SessionsController
   layout 'lawyer'
-
-  def new
-    # meta
-    set_meta(
-      title: '律師登入頁',
-      description: '律師登入頁',
-      keywords: '律師登入頁'
-    )
-    super
-  end
+  before_action :init_meta, only: [:new]
 
   # POST /resource/sign_in
   def create
@@ -29,5 +20,11 @@ class Lawyers::SessionsController < Devise::SessionsController
 
   def after_sign_out_path_for(_resource_or_scope)
     new_lawyer_session_path
+  end
+
+  private
+
+  def init_meta
+    set_meta
   end
 end

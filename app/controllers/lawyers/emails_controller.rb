@@ -1,13 +1,8 @@
 class Lawyers::EmailsController < Lawyers::BaseController
   before_action :find_lawyer, only: [:edit, :update]
+  before_action :init_meta, only: [:edit]
 
   def edit
-    # meta
-    set_meta(
-      title: '律師編輯信箱頁',
-      description: '律師編輯信箱頁',
-      keywords: '律師編輯信箱頁'
-    )
   end
 
   def update
@@ -27,7 +22,13 @@ class Lawyers::EmailsController < Lawyers::BaseController
     redirect_to lawyer_profile_path
   end
 
+  private
+
   def find_lawyer
     @lawyer ||= Lawyer.find(current_lawyer.id)
+  end
+
+  def init_meta
+    set_meta
   end
 end

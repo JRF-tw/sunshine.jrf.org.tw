@@ -5,27 +5,12 @@ class CourtObservers::PasswordsController < Devise::PasswordsController
   prepend_before_action :require_no_authentication, except: [:edit, :update, :send_reset_password_mail]
   before_action :check_observer_confirmed, only: [:create]
   before_action :check_same_observer, only: [:edit, :update]
-
-  def new
-    # meta
-    set_meta(
-      title: '觀察者忘記密碼頁',
-      description: '觀察者忘記密碼頁',
-      keywords: '觀察者忘記密碼頁'
-    )
-    super
-  end
+  before_action :init_meta, only: [:new, :edit]
 
   def edit
     self.resource = resource_class.new
     set_minimum_password_length
     resource.reset_password_token = params[:reset_password_token]
-    # meta
-    set_meta(
-      title: '觀察者更改密碼頁',
-      description: '觀察者更改密碼頁',
-      keywords: '觀察者更改密碼頁'
-    )
   end
 
   def update
@@ -82,6 +67,12 @@ class CourtObservers::PasswordsController < Devise::PasswordsController
 
   def after_resetting_password_path
     court_observer_root_path
+  end
+
+  private
+
+  def init_meta
+    set_meta
   end
 
 end

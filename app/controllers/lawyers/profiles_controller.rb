@@ -1,24 +1,13 @@
 class Lawyers::ProfilesController < Lawyers::BaseController
   layout 'lawyer'
   before_action :find_lawyer, only: [:edit, :update]
-  # TODO: Layout render error
+  before_action :init_meta, only: [:show, :edit]
 
+  # TODO: Layout render error
   def show
-    # meta
-    set_meta(
-      title: '律師個人資訊頁',
-      description: '律師個人資訊頁',
-      keywords: '律師個人資訊頁'
-    )
   end
 
   def edit
-    # meta
-    set_meta(
-      title: '律師個人資訊編輯頁',
-      description: '律師個人資訊編輯頁',
-      keywords: '律師個人資訊編輯頁'
-    )
   end
 
   def update
@@ -31,7 +20,13 @@ class Lawyers::ProfilesController < Lawyers::BaseController
     end
   end
 
+  private
+
   def find_lawyer
     @lawyer || @lawyer = Lawyer.find(current_lawyer.id)
+  end
+
+  def init_meta
+    set_meta
   end
 end
