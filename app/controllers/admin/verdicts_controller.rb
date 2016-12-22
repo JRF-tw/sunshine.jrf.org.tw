@@ -3,7 +3,7 @@ class Admin::VerdictsController < Admin::BaseController
   before_action(except: [:index]) { add_crumb('判決書列表', admin_verdicts_path) }
 
   def index
-    @search = Verdict.all.newest.ransack(params[:q])
+    @search = Verdict.includes(story: :court).newest.ransack(params[:q])
     @verdicts = @search.result.includes(:story).page(params[:page]).per(20)
     @admin_page_title = '判決書列表'
     add_crumb @admin_page_title, '#'
