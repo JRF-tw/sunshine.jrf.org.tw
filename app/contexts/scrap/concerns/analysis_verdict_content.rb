@@ -11,7 +11,6 @@ module Scrap::Concerns::AnalysisVerdictContent
   HAS_PROSECUTOR = /檢察官/
   HAS_LAWYER = /律師/
 
-
   def parse_main_judge_name(verdict, content, crawler_history)
     matched = content.match(MAIN_JUDGE)
     if matched
