@@ -34,8 +34,9 @@ class Import::CreateLawyerContext < BaseContext
   def assign_phone
     phone_reformat
     if multi_phone_include?
-      multi_phone_divide
-      multi_phones_assign
+      divide_phone_group
+      office_numbers_assign if @office_numbers.present?
+      phone_numbers_assign if @phone_numbers.present?
     else
       single_phone_assign
     end
@@ -52,19 +53,24 @@ class Import::CreateLawyerContext < BaseContext
   end
 
   def multi_phone_include?
-    @lawyer_data[:phone][/(\(0\d+\))/] && (@lawyer_data[:phone][/(\s09)/] || @lawyer_data[:phone][/\A09/])
+    @lawyer_data[:phone].size >= 20
   end
 
-  def multi_phone_divide
-    @phone_number = @lawyer_data[:phone][/(09)(\d{2})((-{0,1})([0-9]{3})){2}/].gsub(/\(|\)|-|\s/, '')
-    @phone_number.gsub!(/\(|\)|-|\s/, '') if @phone_number
-    @office_number = @lawyer_data[:phone][/(\(0\d{1,2}\))(\d{3,4})-(\d{3,4})(#\d{1,5}){0,1}/].gsub(/\(|\)|-|\s/, '')
-    @office_number.gsub!(/\(|\)|-|\s/, '') if @office_number
+  def divide_phone_group
+    @phone_numbers = []
+    @office_numbers = []
+    @lawyer_data[:phone].scan(/(0?(9)(\d{2})(-?([0-9]{3})){2})/) { |number| @phone_numbers << number[0] }
+    @lawyer_data[:phone].scan(/((0\d{1,2}|\+(\d){1,4}|\(0\d{1,2}\))(-?[0-9]{3,4}){2}(#\d{1,7}){0,1})/) { |number| @office_numbers << number[0] }
   end
 
-  def multi_phones_assign
-    assign_phone_number(@phone_number) if @phone_number
-    assign_office_number(@office_number) if @office_number
+  def office_numbers_assign
+    @office_numbers.each { |number| number.gsub!(/\(|\)|-|\s/, '') }
+    assign_office_number(@office_numbers.join("\n"))
+  end
+
+  def phone_numbers_assign
+    @phone_numbers.each { |number| number.gsub!(/\(|\)|-|\s/, '') }
+    assign_phone_number(@phone_numbers.first)
   end
 
   def single_phone_assign

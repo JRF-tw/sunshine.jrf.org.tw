@@ -45,7 +45,7 @@ class Lawyer < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
 
   validates :phone_number, uniqueness: true, format: { with: /\A(0)(9)([0-9]{8})\z/ }, allow_blank: true, allow_nil: true
-  validates :office_number, format: { with: /0\d{1,2}-?(\d{6,8})(#\d{1,5}){0,1}/ }, allow_blank: true, allow_nil: true
+  validates :office_number, format: { with: /(0\d{1,2}|\+(\d){1,4})(-?[0-9]{3,4}){2}(#\d{1,7}){0,1}/ }, allow_blank: true, allow_nil: true
 
   before_create :skip_confirmation_notification
 
