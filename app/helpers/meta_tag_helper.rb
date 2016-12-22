@@ -3,7 +3,7 @@ module MetaTagHelper
     data = {}
     url =  options[:url] || url_for(params.merge(host: Setting.host))
     data[:title] = match_title(options[:title]) || default_meta[:title]
-    data[:description] = match_description(options[:description]) || default_meta[:description]
+    data[:description] = match_desc(options[:description]) || default_meta[:description]
     data[:keywords] = match_keywords(options[:keywords]) || default_meta[:keywords]
     data[:site] ||= default_meta[:site]
     data[:og] = {
@@ -44,19 +44,22 @@ module MetaTagHelper
     "meta.#{params[:controller]}.#{params[:action]}.#{last_key}"
   end
 
-  def check_i18n_key(last_key)
+  def check_i18n_key?(last_key)
     I18n.exists?(prefix_meta_key_pattern(last_key).to_s, I18n.default_locale)
   end
 
-  def match_title(hash)
-    check_i18n_key('title') ? I18n.t(prefix_meta_key_pattern('title').to_s, hash) : nil
+  def match_title(title)
+    return title if title.is_a?(String)
+    check_i18n_key?('title') ? I18n.t(prefix_meta_key_pattern('title').to_s, title) : nil
   end
 
-  def match_description(hash)
-    check_i18n_key('description') ? I18n.t(prefix_meta_key_pattern('description').to_s, hash) : nil
+  def match_desc(desc)
+    return desc if desc.is_a?(String)
+    check_i18n_key?('description') ? I18n.t(prefix_meta_key_pattern('description').to_s, desc) : nil
   end
 
-  def match_keywords(hash)
-    check_i18n_key('keywords') ? I18n.t(prefix_meta_key_pattern('keywords').to_s, hash) : nil
+  def match_keywords(keywords)
+    return keywords if keywords.is_a?(String)
+    check_i18n_key?('keywords') ? I18n.t(prefix_meta_key_pattern('keywords').to_s, keywords) : nil
   end
 end
