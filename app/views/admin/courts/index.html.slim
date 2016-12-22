@@ -1,6 +1,6 @@
 - content_for :btns do
   = link_to '法院排序調整', admin_courts_edit_weight_path, class: 'btn btn-success'
-= search_form_for @search, :url => admin_courts_path, :wrapper => :admin, :html => { :class => 'form-horizontal' } do |f|
+= search_form_for @search, url: admin_courts_path, wrapper: :admin, html: { class: 'form-horizontal' } do |f|
   .well
     fieldset
       legend 搜尋
@@ -22,9 +22,9 @@
             collect_for_boolean, include_blank: '請選擇'
     hr
     .form-actions
-      = f.submit :value => '搜尋', :class => 'btn btn-primary'
+      = f.submit value: '搜尋', class: 'btn btn-primary'
       = ' '
-      = link_to '清空搜尋結果', admin_courts_path, :class => 'btn btn-default'
+      = link_to '清空搜尋結果', admin_courts_path, class: 'btn btn-default'
 
 
 = admin_widget_box "法院列表 : 搜尋結果為 #{@search.result.count} 筆", icon: :pencil do
@@ -35,28 +35,28 @@
     table.table.table-bordered.table-striped.table-hover
       thead
         tr
-          th= sort_link(@search, :id, '#')
-          th= sort_link(@search, :weight, '排序')
-          th= sort_link(@search, :full_name, '全名')
-          th= sort_link(@search, :name, '前台顯示簡稱')
-          th= sort_link(@search, :is_hidden, '是否在前端隱藏')
+          th = sort_link(@search, :id, '#')
+          th = sort_link(@search, :weight, '排序')
+          th = sort_link(@search, :full_name, '全名')
+          th = sort_link(@search, :name, '前台顯示簡稱')
+          th = sort_link(@search, :is_hidden, '是否在前端隱藏')
           th
       tbody
         - @courts.each do |court|
           tr
-            td= court.id
-            td= court.weight
-            td= court.full_name
-            td= court.name
-            td= court.is_hidden? ? '是' : '否'
+            td = court.id
+            td = court.weight
+            td = court.full_name
+            td = court.name
+            td = court.is_hidden? ? '是' : '否'
             td
               = link_to '詳細資料', admin_court_path(court), class: 'btn btn-mini'
               | &nbsp;
-              = link_to '法官列表', admin_judges_path(q: { 'court_id_eq' => court.id } ), class: 'btn btn-mini'
+              = link_to '法官列表', admin_judges_path(q: { court_id_eq: court.id } ), class: 'btn btn-mini'
               | &nbsp;
-              = link_to '案件列表', admin_stories_path(q: { 'court_id_eq' => court.id } ), class: 'btn btn-mini'
+              = link_to '案件列表', admin_stories_path(q: { court_id_eq: court.id } ), class: 'btn btn-mini'
               | &nbsp;
-              = link_to '庭期列表', admin_schedules_path(q: { 'court_id_eq' => court.id } ), class: 'btn btn-mini'
+              = link_to '庭期列表', admin_schedules_path(q: { court_id_eq: court.id } ), class: 'btn btn-mini'
               | &nbsp;
               = link_to '編輯', edit_admin_court_path(court), class: 'btn btn-mini btn-success'
               | &nbsp;
