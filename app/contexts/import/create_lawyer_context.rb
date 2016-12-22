@@ -32,8 +32,9 @@ class Import::CreateLawyerContext < BaseContext
   end
 
   def assign_phone
-    phone_format_adjust
-    if @lawyer_data[:phone].size >= 20
+    phone_reformat
+    if multi_phone_include?
+      multi_phone_divide
       multi_phones_assign
     else
       single_phone_assign
@@ -44,26 +45,30 @@ class Import::CreateLawyerContext < BaseContext
     @lawyer_data[:phone].present?
   end
 
-  def phone_format_adjust
+  def phone_reformat
     @lawyer_data[:phone] = @lawyer_data[:phone].to_s
-    @lawyer_data[:phone] = '0' + @lawyer_data[:phone] if @lawyer_data[:phone].present? && @lawyer_data[:phone][0] != '0'
-    @lawyer_data[:phone].gsub!(/\(|\)|-|\s/, '')
-    @lawyer_data[:phone].gsub!(/[(分機)]/, '#')
+    @lawyer_data[:phone] = '0' + @lawyer_data[:phone] unless @lawyer_data[:phone][/\A0|\(|\+/]
+    @lawyer_data[:phone].gsub!(/(\s*分機)/, '#')
+  end
+
+  def multi_phone_include?
+    @lawyer_data[:phone][/(\(0\d+\))/] && (@lawyer_data[:phone][/(\s09)/] || @lawyer_data[:phone][/\A09/])
+  end
+
+  def multi_phone_divide
+    @phone_number = @lawyer_data[:phone][/(09)(\d{2})((-{0,1})([0-9]{3})){2}/].gsub(/\(|\)|-|\s/, '')
+    @phone_number.gsub!(/\(|\)|-|\s/, '') if @phone_number
+    @office_number = @lawyer_data[:phone][/(\(0\d{1,2}\))(\d{3,4})-(\d{3,4})(#\d{1,5}){0,1}/].gsub(/\(|\)|-|\s/, '')
+    @office_number.gsub!(/\(|\)|-|\s/, '') if @office_number
   end
 
   def multi_phones_assign
-    number_1 = @lawyer_data[:phone].slice!(0..9)
-    number_2 = @lawyer_data[:phone]
-    if number_1[0, 2] == '09'
-      assign_phone_number(number_1)
-      assign_office_number(number_2)
-    else
-      assign_phone_number(number_2)
-      assign_office_number(number_1)
-    end
+    assign_phone_number(@phone_number) if @phone_number
+    assign_office_number(@office_number) if @office_number
   end
 
   def single_phone_assign
+    @lawyer_data[:phone].gsub!(/\(|\)|-|\s/, '')
     @lawyer_data[:phone][0, 2] == '09' ? assign_phone_number : assign_office_number
   end
 
