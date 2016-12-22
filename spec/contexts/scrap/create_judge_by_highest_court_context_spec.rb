@@ -33,12 +33,12 @@ RSpec.describe Scrap::CreateJudgeByHighestCourtContext, type: :model do
     describe '#assign_to_redis' do
       let!(:redis_object) { Redis::HashKey.new('higest_court_judge_created') }
       context 'new record' do
-        it { expect { subject }.to change{ redis_object.all.count } }
+        it { expect { subject }.to change { redis_object.all.count } }
       end
 
       context 'not new record' do
         let!(:judge) { create :judge, name: 'xxx', court: court }
-        it { expect { subject }.not_to change{ redis_object.all.count } }
+        it { expect { subject }.not_to change { redis_object.all.count } }
       end
     end
   end

@@ -37,8 +37,7 @@ module Scrap
     end
 
     def assign_to_redis
-      hash = Redis::HashKey.new('higest_court_judge_created')
-      hash[@judge.name] = Time.zone.today.to_s
+      Redis::HashKey.new('higest_court_judge_created')[@judge.name] = Time.zone.today.to_s
     end
   end
 end
