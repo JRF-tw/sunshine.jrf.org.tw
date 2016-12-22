@@ -18,7 +18,13 @@ class CourtObservers::ProfilesController < CourtObservers::BaseController
     end
   end
 
+  private
+
   def find_court_observer
     @court_observer || @court_observer = CourtObserver.find(current_court_observer.id)
+  end
+
+  def init_meta
+    set_meta
   end
 end

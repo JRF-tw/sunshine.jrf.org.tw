@@ -5,11 +5,6 @@ class Parties::RegistrationsController < Devise::RegistrationsController
   before_action :init_meta, only: [:new]
 
   # POST /resource
-  def new
-    super
-  end
-
-  # POST /resource
   def create
     build_resource(sign_up_params)
     resource.save
@@ -71,5 +66,11 @@ class Parties::RegistrationsController < Devise::RegistrationsController
 
   def alert_to_slack!(resource)
     SlackService.notify_user_activity_alert("新當事人註冊 : #{SlackService.render_link(admin_party_url(resource, host: Setting.host), resource.name)}  已經申請註冊")
+  end
+
+  private
+
+  def init_meta
+    set_meta
   end
 end

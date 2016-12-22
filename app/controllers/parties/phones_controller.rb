@@ -64,4 +64,8 @@ class Parties::PhonesController < Parties::BaseController
   def can_verify?
     redirect_to edit_party_phone_path, flash: { error: '請先設定手機號碼' } unless current_party.phone_varify_code.value
   end
+
+  def init_meta
+    set_meta
+  end
 end

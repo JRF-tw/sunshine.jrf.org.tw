@@ -69,4 +69,8 @@ class Lawyers::VerdictsController < Lawyers::BaseController
     range = (@verdict_score.story.adjudge_date..@verdict_score.story.adjudge_date + Lawyer::VerdictScoreCheckInfoContext::SCORE_INTERVEL)
     redirect_as_fail(lawyer_root_path, '案件已超過可評鑑判決時間') unless range.include?(Time.zone.today)
   end
+
+  def init_meta
+    set_meta
+  end
 end

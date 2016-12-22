@@ -65,4 +65,8 @@ class Parties::VerdictsController < Parties::BaseController
     range = (@verdict_score.story.adjudge_date..@verdict_score.story.adjudge_date + Party::VerdictScoreCheckInfoContext::SCORE_INTERVEL)
     redirect_as_fail(party_root_path, '案件已超過可評鑑判決時間') unless range.include?(Time.zone.today)
   end
+
+  def init_meta
+    set_meta
+  end
 end

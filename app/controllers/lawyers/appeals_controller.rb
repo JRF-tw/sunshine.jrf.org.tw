@@ -4,4 +4,10 @@ class Lawyers::AppealsController < Lawyers::BaseController
 
   def new
   end
+
+  private
+
+  def init_meta
+    set_meta
+  end
 end

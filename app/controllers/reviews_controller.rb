@@ -8,7 +8,7 @@ class ReviewsController < BaseController
     @newest_award = @profile.awards.shown.order_by_publish_at.first
     @newest_punishments = @profile.punishments.shown.order_by_relevant_date.first(3)
     @newest_reviews = @reviews.shown.first(3)
-    init_meta(
+    set_meta(
       title: { name: @profile.name },
       description: { name: @profile.name },
       keywords: { name: @profile.name },

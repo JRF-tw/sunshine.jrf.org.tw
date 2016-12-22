@@ -6,10 +6,6 @@ class CourtObservers::RegistrationsController < Devise::RegistrationsController
   before_action :check_registration, only: [:create]
   before_action :init_meta, only: [:new]
 
-  def new
-    super
-  end
-
   # POST /resource
   def create
     build_resource(sign_up_params)
@@ -75,5 +71,11 @@ class CourtObservers::RegistrationsController < Devise::RegistrationsController
 
   def alert_to_slack!(resource)
     SlackService.notify_user_activity_alert("新觀察者註冊 : #{SlackService.render_link(admin_observer_url(resource, host: Setting.host), resource.name)} 已經申請註冊")
+  end
+
+  private
+
+  def init_meta
+    set_meta
   end
 end

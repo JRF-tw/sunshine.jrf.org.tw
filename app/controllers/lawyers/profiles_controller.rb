@@ -20,7 +20,13 @@ class Lawyers::ProfilesController < Lawyers::BaseController
     end
   end
 
+  private
+
   def find_lawyer
     @lawyer || @lawyer = Lawyer.find(current_lawyer.id)
+  end
+
+  def init_meta
+    set_meta
   end
 end

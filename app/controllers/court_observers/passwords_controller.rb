@@ -69,4 +69,10 @@ class CourtObservers::PasswordsController < Devise::PasswordsController
     court_observer_root_path
   end
 
+  private
+
+  def init_meta
+    set_meta
+  end
+
 end

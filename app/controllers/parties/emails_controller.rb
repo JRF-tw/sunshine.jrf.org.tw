@@ -22,7 +22,13 @@ class Parties::EmailsController < Parties::BaseController
     redirect_to party_profile_path
   end
 
+  private
+
   def find_party
     @party ||= Party.find(current_party.id)
+  end
+
+  def init_meta
+    set_meta
   end
 end

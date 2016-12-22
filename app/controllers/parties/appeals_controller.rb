@@ -3,4 +3,10 @@ class Parties::AppealsController < Parties::BaseController
 
   def new
   end
+
+  private
+
+  def init_meta
+    set_meta
+  end
 end

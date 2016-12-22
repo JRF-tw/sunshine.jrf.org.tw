@@ -23,7 +23,13 @@ class CourtObservers::EmailsController < CourtObservers::BaseController
     redirect_to court_observer_profile_path
   end
 
+  private
+
   def find_court_observer
     @court_observer ||= CourtObserver.find(current_court_observer.id)
+  end
+
+  def init_meta
+    set_meta
   end
 end

@@ -11,7 +11,7 @@ class Parties::StoriesController < Parties::BaseController
   def show
     @pending_score_verdict = ::PartyQueries.new(current_party).pending_score_verdict(@story)
     @pending_score_schedules = ::PartyQueries.new(current_party).pending_score_schedules(@story)
-    init_meta(
+    set_meta(
       title: { identity: @story.identity },
       description: { identity: @story.identity },
       keywords: { identity: @story.identity }
@@ -33,5 +33,9 @@ class Parties::StoriesController < Parties::BaseController
   def has_score?
     @scores_sorted = ::PartyQueries.new(current_party).get_scores_array(@story, sort_by: 'date')
     redirect_as_fail(party_root_path, '尚未有評鑑紀錄') unless @scores_sorted.present?
+  end
+
+  def init_meta
+    set_meta
   end
 end

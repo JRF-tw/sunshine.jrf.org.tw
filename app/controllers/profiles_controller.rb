@@ -1,12 +1,12 @@
 class ProfilesController < BaseController
   def judges
     @judges = Profile.judges.shown.active.had_avatar.order_by_name.page(params[:page]).per(12)
-    init_meta(image: ActionController::Base.helpers.asset_path('hero-profiles-judges-M.png'))
+    set_meta(image: ActionController::Base.helpers.asset_path('hero-profiles-judges-M.png'))
   end
 
   def prosecutors
     @prosecutors = Profile.prosecutors.shown.active.had_avatar.order_by_name.page(params[:page]).per(12)
-    init_meta(image: ActionController::Base.helpers.asset_path('hero-profiles-judges-M.png'))
+    set_meta(image: ActionController::Base.helpers.asset_path('hero-profiles-judges-M.png'))
   end
 
   def show
@@ -26,7 +26,7 @@ class ProfilesController < BaseController
     description << "出生年份#{@profile.birth_year}、" if @profile.birth_year.present?
     description << "現任#{@profile.current}" if @profile.current.present?
     image = @profile.avatar.present? ? @profile.avatar.L_540.url : nil
-    init_meta(
+    set_meta(
       title: { name: @profile.name },
       description: { description: description.join('') },
       keywords: { name: @profile.name, current: @profile.current },

@@ -16,4 +16,8 @@ class CourtObservers::SessionsController < Devise::SessionsController
     new_court_observer_session_path
   end
 
+  def init_meta
+    set_meta
+  end
+
 end

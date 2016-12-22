@@ -21,4 +21,8 @@ class Parties::SessionsController < Devise::SessionsController
     devise_parameter_sanitizer.for(:sign_in) << :identify_number
   end
 
+  def init_meta
+    set_meta
+  end
+
 end

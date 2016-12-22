@@ -14,11 +14,11 @@ class BaseController < ApplicationController
     @judges = Profile.judges.shown.active.had_avatar.sample(12)
     @prosecutors = Profile.prosecutors.shown.active.had_avatar.sample(12)
     image = @banners.count > 0 ? @banners.first.pic_l.L_540.url : nil
-    init_meta(image: image)
+    set_meta(image: image)
   end
 
   def about
-    init_meta(image: ActionController::Base.helpers.asset_path('hero-base-about-M.png'))
+    set_meta(image: ActionController::Base.helpers.asset_path('hero-base-about-M.png'))
   end
 
   def who_are_you
@@ -36,5 +36,11 @@ class BaseController < ApplicationController
   def render_404
     # render :not_found, status: 404
     redirect_to root_path
+  end
+
+  private
+
+  def init_meta
+    set_meta
   end
 end

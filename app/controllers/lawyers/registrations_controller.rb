@@ -4,10 +4,6 @@ class Lawyers::RegistrationsController < Devise::RegistrationsController
   before_action :init_meta, only: [:new]
   layout 'lawyer'
 
-  def new
-    super
-  end
-
   def create
     context = Lawyer::RegisterContext.new(params)
     @lawyer = context.perform
@@ -35,4 +31,9 @@ class Lawyers::RegistrationsController < Devise::RegistrationsController
     new_lawyer_session_path
   end
 
+  private
+
+  def init_meta
+    set_meta
+  end
 end

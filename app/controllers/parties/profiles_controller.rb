@@ -18,7 +18,13 @@ class Parties::ProfilesController < Parties::BaseController
     end
   end
 
+  private
+
   def find_party
     @party || @party = Party.find(current_party.id)
+  end
+
+  def init_meta
+    set_meta
   end
 end

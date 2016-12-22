@@ -82,4 +82,8 @@ class Parties::PasswordsController < Devise::PasswordsController
     party_root_path
   end
 
+  def init_meta
+    set_meta
+  end
+
 end

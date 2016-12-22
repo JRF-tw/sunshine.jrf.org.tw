@@ -19,4 +19,8 @@ class Admin::BaseController < ApplicationController
   def authenticate_admin_user!
     redirect_to root_path unless current_user.admin?
   end
+
+  def init_meta
+    set_meta
+  end
 end
