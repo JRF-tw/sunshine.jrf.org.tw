@@ -7,9 +7,8 @@ class ProceduresController < BaseController
     @procedures_by_person = @suit.procedures_by_person
     image = @suit.pic.present? ? @suit.pic.L_540.url : nil
     set_meta(
-      title: "#{@suit.title} - 處理經過",
-      description: "#{@suit.title} #{@suit.summary}",
-      keywords: '不適任法官案例,不適任檢察官案例,司法恐龍案例,司法案例',
+      title: { title: @suit.title },
+      description: { title: @suit.title, summary: @suit.summary },
       image: image
     )
   end

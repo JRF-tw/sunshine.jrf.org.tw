@@ -4,16 +4,7 @@ class CourtObservers::RegistrationsController < Devise::RegistrationsController
 
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :check_registration, only: [:create]
-
-  def new
-    # meta
-    set_meta(
-      title: '觀察者註冊頁',
-      description: '觀察者註冊頁',
-      keywords: '觀察者註冊頁'
-    )
-    super
-  end
+  before_action :init_meta, only: [:new]
 
   # POST /resource
   def create
@@ -80,5 +71,11 @@ class CourtObservers::RegistrationsController < Devise::RegistrationsController
 
   def alert_to_slack!(resource)
     SlackService.notify_user_activity_alert("新觀察者註冊 : #{SlackService.render_link(admin_observer_url(resource, host: Setting.host), resource.name)} 已經申請註冊")
+  end
+
+  private
+
+  def init_meta
+    set_meta
   end
 end

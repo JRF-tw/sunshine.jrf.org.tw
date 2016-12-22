@@ -1,15 +1,6 @@
 class CourtObservers::SessionsController < Devise::SessionsController
+  before_action :init_meta, only: [:new]
   layout 'observer'
-
-  def new
-    # meta
-    set_meta(
-      title: '觀察者登入頁',
-      description: '觀察者登入頁',
-      keywords: '觀察者登入頁'
-    )
-    super
-  end
 
   def create
     self.resource = warden.authenticate!(auth_options)
@@ -23,6 +14,10 @@ class CourtObservers::SessionsController < Devise::SessionsController
 
   def after_sign_out_path_for(_resource_or_scope)
     new_court_observer_session_path
+  end
+
+  def init_meta
+    set_meta
   end
 
 end

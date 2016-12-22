@@ -1,22 +1,11 @@
 class CourtObservers::ProfilesController < CourtObservers::BaseController
   before_action :find_court_observer, only: [:edit, :update]
+  before_action :init_meta, only: [:show, :edit]
 
   def show
-    # meta
-    set_meta(
-      title: '觀察者個人資訊頁',
-      description: '觀察者個人資訊頁',
-      keywords: '觀察者個人資訊頁'
-    )
   end
 
   def edit
-    # meta
-    set_meta(
-      title: '觀察者編輯個人資訊頁',
-      description: '觀察者編輯個人資訊頁',
-      keywords: '觀察者編輯個人資訊頁'
-    )
   end
 
   def update
@@ -29,7 +18,13 @@ class CourtObservers::ProfilesController < CourtObservers::BaseController
     end
   end
 
+  private
+
   def find_court_observer
     @court_observer || @court_observer = CourtObserver.find(current_court_observer.id)
+  end
+
+  def init_meta
+    set_meta
   end
 end

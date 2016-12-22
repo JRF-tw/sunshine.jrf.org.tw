@@ -1,0 +1,12 @@
+= admin_widget_box "最高法院法官建立數據 - 新增 #{@hash.count} 筆", icon: :pencil do
+  .dataTables_wrapper
+    table.table.table-bordered.table-striped.table-hover
+      thead
+        tr
+          th 法官名稱
+          th 紀錄時間
+      tbody
+        - @hash.each do |k, v|
+          tr
+            td = k
+            td = v

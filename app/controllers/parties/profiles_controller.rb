@@ -1,22 +1,11 @@
 class Parties::ProfilesController < Parties::BaseController
   before_action :find_party, only: [:edit, :update]
+  before_action :init_meta, only: [:show, :edit]
 
   def show
-    # meta
-    set_meta(
-      title: '當事人個人資訊頁',
-      description: '當事人個人資訊頁',
-      keywords: '當事人個人資訊頁'
-    )
   end
 
   def edit
-    # meta
-    set_meta(
-      title: '當事人個人資訊編輯頁',
-      description: '當事人個人資訊編輯頁',
-      keywords: '當事人個人資訊編輯頁'
-    )
   end
 
   def update
@@ -29,7 +18,13 @@ class Parties::ProfilesController < Parties::BaseController
     end
   end
 
+  private
+
   def find_party
     @party || @party = Party.find(current_party.id)
+  end
+
+  def init_meta
+    set_meta
   end
 end

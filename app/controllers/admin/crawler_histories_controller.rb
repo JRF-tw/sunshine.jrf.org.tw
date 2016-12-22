@@ -12,4 +12,10 @@ class Admin::CrawlerHistoriesController < Admin::BaseController
     @admin_page_title = '判決書抓取數據'
     add_crumb @admin_page_title, '#'
   end
+
+  def highest_judges
+    @hash = Redis::HashKey.new('higest_court_judge_created').all
+    @admin_page_title = '最高法院法官建立數據'
+    add_crumb @admin_page_title, '#'
+  end
 end

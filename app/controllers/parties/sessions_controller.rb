@@ -1,15 +1,6 @@
 class Parties::SessionsController < Devise::SessionsController
   layout 'party'
-
-  def new
-    # meta
-    set_meta(
-      title: '當事人登入頁',
-      description: '當事人登入頁',
-      keywords: '當事人登入頁'
-    )
-    super
-  end
+  before_action :init_meta, only: [:new]
 
   # POST /resource/sign_in
   def create
@@ -28,6 +19,10 @@ class Parties::SessionsController < Devise::SessionsController
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_in) << :identify_number
+  end
+
+  def init_meta
+    set_meta
   end
 
 end

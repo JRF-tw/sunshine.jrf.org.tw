@@ -9,9 +9,9 @@ class AwardsController < BaseController
     @newest_punishments = @profile.punishments.shown.order_by_relevant_date.first(3)
     @newest_reviews = @profile.reviews.had_title.shown.order_by_publish_at.first(3)
     set_meta(
-      title: "#{@profile.name}的獎勵紀錄",
-      description: "#{@profile.name}獎勵相關紀錄清單。",
-      keywords: "#{@profile.name}獎勵紀錄,#{@profile.name}",
+      title: { name: @profile.name },
+      description: { name: @profile.name },
+      keywords: { name: @profile.name },
       image: ActionController::Base.helpers.asset_path('hero-profiles-show-M.png')
     )
   end

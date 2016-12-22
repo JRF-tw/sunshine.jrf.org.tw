@@ -1,15 +1,10 @@
 class Parties::PhonesController < Parties::BaseController
   before_action :set_phone?, only: []
   before_action :can_verify?, only: [:verify, :verifing, :resend]
+  before_action :init_meta, only: [:new, :edit, :verify]
 
   def new
     @phone_form = Party::ChangePhoneFormObject.new(current_party)
-    # meta
-    set_meta(
-      title: '當事人新增手機頁',
-      description: '當事人新增手機頁',
-      keywords: '當事人新增手機頁'
-    )
   end
 
   def create
@@ -25,12 +20,6 @@ class Parties::PhonesController < Parties::BaseController
 
   def edit
     @phone_form = Party::ChangePhoneFormObject.new(current_party)
-    # meta
-    set_meta(
-      title: '當事人更改手機頁',
-      description: '當事人更改手機頁',
-      keywords: '當事人更改手機頁'
-    )
   end
 
   def update
@@ -46,12 +35,6 @@ class Parties::PhonesController < Parties::BaseController
 
   def verify
     @verify_form = Party::VerifyPhoneFormObject.new(current_party)
-    # meta
-    set_meta(
-      title: '當事人手機驗證頁',
-      description: '當事人手機驗證頁',
-      keywords: '當事人手機驗證頁'
-    )
   end
 
   def verifing
@@ -80,5 +63,9 @@ class Parties::PhonesController < Parties::BaseController
 
   def can_verify?
     redirect_to edit_party_phone_path, flash: { error: '請先設定手機號碼' } unless current_party.phone_varify_code.value
+  end
+
+  def init_meta
+    set_meta
   end
 end

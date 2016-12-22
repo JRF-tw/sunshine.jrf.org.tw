@@ -1,0 +1,363 @@
+zh-TW:
+  meta:
+    base:
+      index:
+        title: '揭開司法的神秘面紗'
+        description: '司法陽光網，帶你揭開司法的神秘面紗，讓我們一起認識法官、認識檢察官，為司法照進陽光。'
+        keywords: '司法,認識法官,認識檢察官,不適任法官,不適任檢察官,司法恐龍'
+      about:
+        title: '關於我們'
+        description: '關於司法陽光網。司法資訊不公開是造成人民不信任司法的重要因素之一，我們期待能夠藉由司法陽光網照亮台灣司法黑暗面，追求人民擁有公平審判的權利。'
+        keywords: '關於我們,關於司法陽光網'
+      terms_of_service:
+        title: '服務條款'
+        description: '使用者於閱覽本頁面使用說明及著作權政策之後，繼續使用司法陽光網及其服務網站之作為，視為書面同意本服務條款。'
+        keywords: '服務條款,司法陽光網'
+      privacy:
+        title: '隱私條款'
+        description: '隱私權政策，適用於您在司法陽光網以及其延伸服務網站活動時，所涉及有關個人資料的蒐集、處理及利用說明。'
+        keywords: '隱私條款,司法陽光網'
+    awards:
+      index:
+        title: '%{name}的獎勵紀錄'
+        description: '%{name}獎勵相關紀錄清單。'
+        keywords: '%{name}獎勵紀錄,%{name}'
+    procedures:
+      index:
+        title: '%{title} - 處理經過'
+        description: '%{title} %{summary}'
+        keywords: '不適任法官案例,不適任檢察官案例,司法恐龍案例,司法案例'
+    profiles:
+      judges:
+        title: '認識法官'
+        description: '認識法官，決定當事人一生的法官，究竟有什麼紀錄？帶您來看看！'
+        keywords: '認識法官,法官,法院'
+      prosecutors:
+        title: '認識檢察官'
+        description: '認識檢察官，代表國家調查案例的檢察官，有什麼背景資料呢？一起來瞭解！'
+        keywords: '認識檢察官,檢察官,檢察署'
+      show:
+        title: '%{name}'
+        description: '%{description}'
+        keywords: '%{name},%{current}'
+    punishments:
+      index:
+        title: '%{name}的懲處相關紀錄'
+        description: '%{name}懲處紀錄。'
+        keywords: '%{name}懲處紀錄,%{name}'
+      show:
+        title: '%{name}的懲處紀錄內容'
+        description: '%{name}懲處內容。'
+        keywords: '%{name}懲處內容,%{name}'
+    reviews:
+      index:
+        title: '%{name}的相關新聞紀錄'
+        description: '%{name}的新聞相關清單。'
+        keywords: '%{name}相關新聞,%{name}'
+    searchs:
+      index:
+        title: '我想找'
+        description: '想找司法案例嗎？想找法官檢察官基本資料嗎？你想找的全在這！'
+        keywords: '找法官,找檢察官,找案例,找不適任法官,找不適任檢察官,找司法恐龍'
+      suits:
+        title: '案例搜尋結果'
+        description: '案例搜尋結果，快來看看有哪些案例！'
+        keywords: '不適任法官案例,不適任檢察官案例,司法恐龍案例,法官案例,檢察官案例'
+      judges:
+        title: '法官搜尋結果'
+        description: '法官搜尋結果，快來看看有哪些法官資料！'
+        keywords: '找法官,法官,法院'
+      prosecutors:
+        title: '檢察官搜尋結果'
+        description: '檢察官搜尋結果，快來看看有哪些檢察官資料！'
+        keywords: '找檢察官,檢察官,檢察署'
+    suits:
+      index:
+        title: '司法案例面面觀'
+        description: '不適任的法官、檢察官狀況有哪些？看看幾個案例，認識不適任的法官、檢察官！'
+        keywords: '不適任法官,不適任檢察官,司法案例面面觀,司法恐龍,恐龍法官,恐龍檢察官'
+      show:
+        title: '%{title}'
+        description: '%{title} %{summary}'
+        keywords: '不適任法官,不適任檢察官,司法恐龍案例,司法案例'
+    admin/base:
+      index:
+        title: '首頁'
+    court_observers/emails:
+      edit:
+        title: '觀察者編輯信箱'
+        description: '觀察者編輯信箱'
+        keywords: '觀察者編輯信箱'
+    court_observers/passwords:
+      new:
+        title: '觀察者忘記密碼頁'
+        description: '觀察者忘記密碼頁'
+        keywords: '觀察者忘記密碼頁'
+      edit:
+        title: '觀察者更改密碼頁'
+        description: '觀察者更改密碼頁'
+        keywords: '觀察者更改密碼頁'
+    court_observers/profiles:
+      show:
+        title: '觀察者個人資訊頁'
+        description: '觀察者個人資訊頁'
+        keywords: '觀察者個人資訊頁'
+      edit:
+        title: '觀察者編輯個人資訊頁'
+        description: '觀察者編輯個人資訊頁'
+        keywords: '觀察者編輯個人資訊頁'
+    court_observers/registrations:
+      new:
+        title: '觀察者註冊頁'
+        description: '觀察者註冊頁'
+        keywords: '觀察者註冊頁'
+    court_observers/schedules:
+      rule:
+        title: '觀察者評鑑開庭規則頁'
+        description: '觀察者評鑑開庭規則頁'
+        keywords: '觀察者評鑑開庭規則頁'
+      new:
+        title: '觀察者建立評鑑頁'
+        description: '觀察者建立評鑑頁'
+        keywords: '觀察者建立評鑑頁'
+      edit:
+        title: '觀察者編輯評鑑頁'
+        description: '觀察者編輯評鑑頁'
+        keywords: '觀察者編輯評鑑頁'
+      input_info:
+        title: '觀察者輸入案件資訊頁'
+        description: '觀察者輸入案件資訊頁'
+        keywords: '觀察者輸入案件資訊頁'
+      input_date:
+        title: '觀察者輸入庭期日期頁'
+        description: '觀察者輸入庭期日期頁'
+        keywords: '觀察者輸入庭期日期頁'
+      input_judge:
+        title: '觀察者輸入法官頁'
+        description: '觀察者輸入法官頁'
+        keywords: '觀察者輸入法官頁'
+      thanks_scored:
+        title: '觀察者評鑑感謝頁'
+        description: '觀察者評鑑感謝頁'
+        keywords: '觀察者評鑑感謝頁'
+    court_observers/sessions:
+      new:
+        title: '觀察者登入頁'
+        description: '觀察者登入頁'
+        keywords: '觀察者登入頁'
+    court_observers/stories:
+      index:
+        title: '觀察者案件列表頁'
+        description: '觀察者案件列表頁'
+        keywords: '觀察者案件列表頁'
+      show:
+        title: '觀察者 案件-%{identity} 資訊頁'
+        description: '觀察者 案件-%{identity} 資訊頁'
+        keywords: '觀察者 案件-%{identity} 資訊頁'
+    lawyers/appeals:
+      new:
+        title: '律師人工申訴頁'
+        description: '律師人工申訴頁'
+        keywords: '律師人工申訴頁'
+    lawyers/emails:
+      edit:
+        title: '律師編輯信箱頁'
+        description: '律師編輯信箱頁'
+        keywords: '律師編輯信箱頁'
+    lawyers/passwords:
+      new:
+        title: '律師忘記密碼頁'
+        description: '律師忘記密碼頁'
+        keywords: '律師忘記密碼頁'
+      edit:
+        title: '律師設定密碼頁'
+        description: '律師設定密碼頁'
+        keywords: '律師設定密碼頁'
+    lawyers/profiles:
+      show:
+        title: '律師個人資訊頁'
+        description: '律師個人資訊頁'
+        keywords: '律師個人資訊頁'
+      edit:
+        title: '律師個人資訊編輯頁'
+        description: '律師個人資訊編輯頁'
+        keywords: '律師個人資訊編輯頁'
+    lawyers/registrations:
+      new:
+        title: '律師註冊頁'
+        description: '律師註冊頁'
+        keywords: '律師註冊頁'
+    lawyers/schedules:
+      rule:
+        title: '律師評鑑開庭規則頁'
+        description: '律師評鑑開庭規則頁'
+        keywords: '律師評鑑開庭規則頁'
+      new:
+        title: '律師建立評鑑頁'
+        description: '律師建立評鑑頁'
+        keywords: '律師建立評鑑頁'
+      edit:
+        title: '律師編輯評鑑頁'
+        description: '律師編輯評鑑頁'
+        keywords: '律師編輯評鑑頁'
+      input_info:
+        title: '律師輸入案件資訊頁'
+        description: '律師輸入案件資訊頁'
+        keywords: '律師輸入案件資訊頁'
+      input_date:
+        title: '律師輸入庭期日期頁'
+        description: '律師輸入庭期日期頁'
+        keywords: '律師輸入庭期日期頁'
+      input_judge:
+        title: '律師輸入法官頁'
+        description: '律師輸入法官頁'
+        keywords: '律師輸入法官頁'
+      thanks_scored:
+        title: '律師評鑑感謝頁'
+        description: '律師評鑑感謝頁'
+        keywords: '律師評鑑感謝頁'
+    lawyers/sessions:
+      new:
+        title: '律師登入頁'
+        description: '律師登入頁'
+        keywords: '律師登入頁'
+    lawyers/stories:
+      index:
+        title: '律師案件列表頁'
+        description: '律師案件列表頁'
+        keywords: '律師案件列表頁'
+      show:
+        title: '律師 案件-%{identity} 資訊頁'
+        description: '律師 案件-%{identity} 資訊頁'
+        keywords: '律師 案件-%{identity} 資訊頁'
+    lawyers/verdicts:
+      rule:
+        title: '律師判決評鑑規則頁'
+        description: '律師判決評鑑規則頁'
+        keywords: '律師判決評鑑規則頁'
+      thanks_scored:
+        title: '律師判決評鑑感謝頁'
+        description: '律師判決評鑑感謝頁'
+        keywords: '律師判決評鑑感謝頁'
+      new:
+        title: '律師新增判決評鑑頁'
+        description: '律師新增判決評鑑頁'
+        keywords: '律師新增判決評鑑頁'
+      edit:
+        title: '律師判決評鑑編輯頁'
+        description: '律師判決評鑑編輯頁'
+        keywords: '律師判決評鑑編輯頁'
+      input_info:
+        title: '律師判決評鑑案件輸入頁'
+        description: '律師判決評鑑案件輸入頁'
+        keywords: '律師判決評鑑案件輸入頁'
+    parties/appeals:
+      new:
+        title: '當事人人工申訴頁'
+        description: '當事人人工申訴頁'
+        keywords: '當事人人工申訴頁'
+    parties/emails:
+      edit:
+        title: '當事人編輯信箱頁'
+        description: '當事人編輯信箱頁'
+        keywords: '當事人編輯信箱頁'
+    parties/passwords:
+      new:
+        title: '當事人忘記密碼頁'
+        description: '當事人忘記密碼頁'
+        keywords: '當事人忘記密碼頁'
+      edit:
+        title: '當事人重設密碼頁'
+        description: '當事人重設密碼頁'
+        keywords: '當事人重設密碼頁'
+    parties/phones:
+      new:
+        title: '當事人新增手機頁'
+        description: '當事人新增手機頁'
+        keywords: '當事人新增手機頁'
+      edit:
+        title: '當事人更改手機頁'
+        description: '當事人更改手機頁'
+        keywords: '當事人更改手機頁'
+      verify:
+        title: '當事人手機驗證頁'
+        description: '當事人手機驗證頁'
+        keywords: '當事人手機驗證頁'
+    parties/profiles:
+      show:
+        title: '當事人個人資訊頁'
+        description: '當事人個人資訊頁'
+        keywords: '當事人個人資訊頁'
+      edit:
+        title: '當事人個人資訊編輯頁'
+        description: '當事人個人資訊編輯頁'
+        keywords: '當事人個人資訊編輯頁'
+    parties/registrations:
+      new:
+        title: '當事人註冊頁'
+        description: '當事人註冊頁'
+        keywords: '當事人註冊頁'
+    parties/schedules:
+      rule:
+        title: '當事人開庭評鑑規則頁'
+        description: '當事人開庭評鑑規則頁'
+        keywords: '當事人開庭評鑑規則頁'
+      new:
+        title: '當事人開庭評鑑輸入頁'
+        description: '當事人開庭評鑑輸入頁'
+        keywords: '當事人開庭評鑑輸入頁'
+      edit:
+        title: '當事人開庭評鑑編輯頁'
+        description: '當事人開庭評鑑編輯頁'
+        keywords: '當事人開庭評鑑編輯頁'
+      input_info:
+        title: '當事人開庭評鑑案件輸入頁'
+        description: '當事人開庭評鑑案件輸入頁'
+        keywords: '當事人開庭評鑑案件輸入頁'
+      input_date:
+        title: '當事人開庭評鑑庭期輸入頁'
+        description: '當事人開庭評鑑庭期輸入頁'
+        keywords: '當事人開庭評鑑庭期輸入頁'
+      input_judge:
+        title: '當事人開庭評鑑法官輸入頁'
+        description: '當事人開庭評鑑法官輸入頁'
+        keywords: '當事人開庭評鑑法官輸入頁'
+      thanks_scored:
+        title: '當事人開庭評鑑感謝頁'
+        description: '當事人開庭評鑑感謝頁'
+        keywords: '當事人開庭評鑑感謝頁'
+    parties/sessions:
+      new:
+        title: '當事人登入頁'
+        description: '當事人登入頁'
+        keywords: '當事人登入頁'
+    parties/stories:
+      index:
+        title: '當事人案件列表頁'
+        description: '當事人案件列表頁'
+        keywords: '當事人案件列表頁'
+      show:
+        title: '當事人 案件-%{identity} 資訊頁'
+        description: '當事人 案件-%{identity} 資訊頁'
+        keywords: '當事人 案件-%{identity} 資訊頁'
+    parties/verdicts:
+      rule:
+        title: '當事人判決評鑑規則頁'
+        description: '當事人判決評鑑規則頁'
+        keywords: '當事人判決評鑑規則頁'
+      thanks_scored:
+        title: '當事人判決評鑑感謝頁'
+        description: '當事人判決評鑑感謝頁'
+        keywords: '當事人判決評鑑感謝頁'
+      new:
+        title: '當事人新增判決評鑑頁'
+        description: '當事人新增判決評鑑頁'
+        keywords: '當事人新增判決評鑑頁'
+      edit:
+        title: '當事人判決評鑑編輯頁'
+        description: '當事人判決評鑑編輯頁'
+        keywords: '當事人判決評鑑編輯頁'
+      input_info:
+        title: '當事人判決評鑑案件輸入頁'
+        description: '當事人判決評鑑案件輸入頁'
+        keywords: '當事人判決評鑑案件輸入頁'

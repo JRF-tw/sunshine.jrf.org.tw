@@ -10,4 +10,18 @@ RSpec.describe Admin::CrawlerHistoriesController, type: :request do
       it { expect(response).to be_success }
     end
   end
+
+  describe '#status' do
+    context 'render success' do
+      before { get '/admin/crawler_histories/status' }
+      it { expect(response).to be_success }
+    end
+  end
+
+  describe '#index' do
+    context 'render success' do
+      before { get '/admin/crawler_histories/highest_judges' }
+      it { expect(response).to be_success }
+    end
+  end
 end

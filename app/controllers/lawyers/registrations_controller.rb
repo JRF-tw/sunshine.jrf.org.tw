@@ -1,17 +1,8 @@
 class Lawyers::RegistrationsController < Devise::RegistrationsController
   include CrudConcern
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :init_meta, only: [:new]
   layout 'lawyer'
-
-  def new
-    # meta
-    set_meta(
-      title: '律師註冊頁',
-      description: '律師註冊頁',
-      keywords: '律師註冊頁'
-    )
-    super
-  end
 
   def create
     context = Lawyer::RegisterContext.new(params)
@@ -40,4 +31,9 @@ class Lawyers::RegistrationsController < Devise::RegistrationsController
     new_lawyer_session_path
   end
 
+  private
+
+  def init_meta
+    set_meta
+  end
 end
