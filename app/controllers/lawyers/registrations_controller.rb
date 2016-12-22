@@ -1,10 +1,10 @@
 class Lawyers::RegistrationsController < Devise::RegistrationsController
   include CrudConcern
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :init_meta, only: [:new]
   layout 'lawyer'
 
   def new
-    set_meta
     super
   end
 

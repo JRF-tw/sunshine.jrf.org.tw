@@ -1,12 +1,11 @@
 class CourtObservers::ProfilesController < CourtObservers::BaseController
   before_action :find_court_observer, only: [:edit, :update]
+  before_action :init_meta, only: [:show, :edit]
 
   def show
-    set_meta
   end
 
   def edit
-    set_meta
   end
 
   def update

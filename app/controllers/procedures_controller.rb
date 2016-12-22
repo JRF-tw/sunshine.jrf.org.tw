@@ -6,7 +6,7 @@ class ProceduresController < BaseController
     end
     @procedures_by_person = @suit.procedures_by_person
     image = @suit.pic.present? ? @suit.pic.L_540.url : nil
-    set_meta(
+    init_meta(
       title: { title: @suit.title },
       description: { title: @suit.title, summary: @suit.summary },
       image: image

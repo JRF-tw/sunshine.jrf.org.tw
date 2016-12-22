@@ -2,16 +2,16 @@ class Lawyers::StoriesController < Lawyers::BaseController
   layout 'lawyer'
   before_action :find_story, only: [:show]
   before_action :has_score?, only: [:show]
+  before_action :init_meta, only: [:index]
 
   def index
     @stories = ::LawyerQueries.new(current_lawyer).get_stories
-    set_meta
   end
 
   def show
     @pending_score_verdict = ::LawyerQueries.new(current_lawyer).pending_score_verdict(@story)
     @pending_score_schedules = ::LawyerQueries.new(current_lawyer).pending_score_schedules(@story)
-    set_meta(
+    init_meta(
       title: { identity: @story.identity },
       description: { identity: @story.identity },
       keywords: { identity: @story.identity }

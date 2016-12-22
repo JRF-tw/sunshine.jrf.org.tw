@@ -1,8 +1,8 @@
 class CourtObservers::EmailsController < CourtObservers::BaseController
   before_action :find_court_observer, only: [:edit, :update]
+  before_action :init_meta, only: [:edit]
 
   def edit
-    set_meta
   end
 
   def update

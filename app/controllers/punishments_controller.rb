@@ -3,7 +3,7 @@ class PunishmentsController < BaseController
 
   def index
     @punishments = @punishments.shown.page(params[:page]).per(12)
-    set_meta(
+    init_meta(
       title: { name: @profile.name },
       description: { name: @profile.name },
       keywords: { name: @profile.name },
@@ -16,7 +16,7 @@ class PunishmentsController < BaseController
     if @punishment.is_hidden?
       not_found
     end
-    set_meta(
+    init_meta(
       title: { name: @profile.name },
       description: { name: @profile.name },
       keywords: { name: @profile.name },

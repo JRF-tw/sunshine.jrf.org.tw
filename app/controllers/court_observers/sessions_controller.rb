@@ -1,10 +1,6 @@
 class CourtObservers::SessionsController < Devise::SessionsController
+  before_action :init_meta, only: [:new]
   layout 'observer'
-
-  def new
-    set_meta
-    super
-  end
 
   def create
     self.resource = warden.authenticate!(auth_options)

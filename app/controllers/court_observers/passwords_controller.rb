@@ -5,17 +5,12 @@ class CourtObservers::PasswordsController < Devise::PasswordsController
   prepend_before_action :require_no_authentication, except: [:edit, :update, :send_reset_password_mail]
   before_action :check_observer_confirmed, only: [:create]
   before_action :check_same_observer, only: [:edit, :update]
-
-  def new
-    set_meta
-    super
-  end
+  before_action :init_meta, only: [:new, :edit]
 
   def edit
     self.resource = resource_class.new
     set_minimum_password_length
     resource.reset_password_token = params[:reset_password_token]
-    set_meta
   end
 
   def update

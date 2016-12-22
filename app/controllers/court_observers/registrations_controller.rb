@@ -4,9 +4,9 @@ class CourtObservers::RegistrationsController < Devise::RegistrationsController
 
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :check_registration, only: [:create]
+  before_action :init_meta, only: [:new]
 
   def new
-    set_meta
     super
   end
 

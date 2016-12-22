@@ -1,8 +1,8 @@
 class Parties::EmailsController < Parties::BaseController
   before_action :find_party, only: [:edit, :update]
+  before_action :init_meta, only: [:edit]
 
   def edit
-    set_meta
   end
 
   def update

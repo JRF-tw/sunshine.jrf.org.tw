@@ -2,13 +2,12 @@ class Parties::SchedulesController < Parties::BaseController
   before_action :schedule_score, except: [:edit, :update]
   before_action :find_schedule_score, only: [:edit, :update]
   before_action :story_adjudged?, only: [:edit, :update]
+  before_action :init_meta, only: [:rule, :new, :edit, :input_info, :input_date, :input_judge, :thanks_scored]
 
   def rule
-    set_meta
   end
 
   def new
-    set_meta
   end
 
   def create
@@ -21,7 +20,6 @@ class Parties::SchedulesController < Parties::BaseController
   end
 
   def edit
-    set_meta
   end
 
   def update
@@ -35,7 +33,6 @@ class Parties::SchedulesController < Parties::BaseController
   end
 
   def input_info
-    set_meta
   end
 
   def check_info
@@ -48,7 +45,6 @@ class Parties::SchedulesController < Parties::BaseController
   end
 
   def input_date
-    set_meta
   end
 
   def check_date
@@ -62,7 +58,6 @@ class Parties::SchedulesController < Parties::BaseController
   end
 
   def input_judge
-    set_meta
   end
 
   def check_judge
@@ -75,7 +70,6 @@ class Parties::SchedulesController < Parties::BaseController
   end
 
   def thanks_scored
-    set_meta
   end
 
   private

@@ -5,13 +5,13 @@ class Admin::BaseController < ApplicationController
   layout 'admin'
   before_action :authenticate_user!
   before_action :authenticate_admin_user!
+  before_action :init_meta, only: [:index]
   before_action do
     add_crumb '首頁', admin_root_path
   end
 
   def index
     @admin_page_title = '首頁'
-    set_meta
   end
 
   private

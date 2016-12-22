@@ -1,8 +1,8 @@
 class Lawyers::EmailsController < Lawyers::BaseController
   before_action :find_lawyer, only: [:edit, :update]
+  before_action :init_meta, only: [:edit]
 
   def edit
-    set_meta
   end
 
   def update

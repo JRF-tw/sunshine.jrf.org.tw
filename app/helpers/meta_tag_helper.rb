@@ -1,5 +1,5 @@
 module MetaTagHelper
-  def set_meta(options = {})
+  def init_meta(options = {})
     data = {}
     url =  options[:url] || url_for(params.merge(host: Setting.host))
     data[:title] = match_title(options[:title]) || default_meta[:title]

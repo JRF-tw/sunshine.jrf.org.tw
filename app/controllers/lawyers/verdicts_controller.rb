@@ -2,21 +2,18 @@ class Lawyers::VerdictsController < Lawyers::BaseController
   before_action :verdict_score, except: [:edit, :update]
   before_action :find_verdict_score, only: [:edit, :update]
   before_action :story_can_score?, only: [:edit, :update]
+  before_action :init_meta, only: [:rule, :thanks_scored, :new, :edit, :input_info]
 
   def rule
-    set_meta
   end
 
   def thanks_scored
-    set_meta
   end
 
   def new
-    set_meta
   end
 
   def edit
-    set_meta
   end
 
   def update
@@ -29,7 +26,6 @@ class Lawyers::VerdictsController < Lawyers::BaseController
   end
 
   def input_info
-    set_meta
   end
 
   def check_info

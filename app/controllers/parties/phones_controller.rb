@@ -1,10 +1,10 @@
 class Parties::PhonesController < Parties::BaseController
   before_action :set_phone?, only: []
   before_action :can_verify?, only: [:verify, :verifing, :resend]
+  before_action :init_meta, only: [:new, :edit, :verify]
 
   def new
     @phone_form = Party::ChangePhoneFormObject.new(current_party)
-    set_meta
   end
 
   def create
@@ -20,7 +20,6 @@ class Parties::PhonesController < Parties::BaseController
 
   def edit
     @phone_form = Party::ChangePhoneFormObject.new(current_party)
-    set_meta
   end
 
   def update
@@ -36,7 +35,6 @@ class Parties::PhonesController < Parties::BaseController
 
   def verify
     @verify_form = Party::VerifyPhoneFormObject.new(current_party)
-    set_meta
   end
 
   def verifing

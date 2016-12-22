@@ -2,15 +2,15 @@ class CourtObservers::StoriesController < CourtObservers::BaseController
   layout 'observer'
   before_action :find_story, only: [:show]
   before_action :has_score?, only: [:show]
+  before_action :init_meta, only: [:index]
 
   def index
     @stories = ::CourtObserverQueries.new(current_court_observer).get_stories
-    set_meta
   end
 
   def show
     @pending_score_schedules = ::CourtObserverQueries.new(current_court_observer).pending_score_schedules(@story)
-    set_meta(
+    init_meta(
       title: { identity: @story.identity },
       description: { identity: @story.identity },
       keywords: { identity: @story.identity }

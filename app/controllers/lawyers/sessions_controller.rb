@@ -1,10 +1,6 @@
 class Lawyers::SessionsController < Devise::SessionsController
   layout 'lawyer'
-
-  def new
-    set_meta
-    super
-  end
+  before_action :init_meta, only: [:new]
 
   # POST /resource/sign_in
   def create

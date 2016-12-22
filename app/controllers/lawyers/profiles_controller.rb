@@ -1,14 +1,13 @@
 class Lawyers::ProfilesController < Lawyers::BaseController
   layout 'lawyer'
   before_action :find_lawyer, only: [:edit, :update]
-  # TODO: Layout render error
+  before_action :init_meta, only: [:show, :edit]
 
+  # TODO: Layout render error
   def show
-    set_meta
   end
 
   def edit
-    set_meta
   end
 
   def update
