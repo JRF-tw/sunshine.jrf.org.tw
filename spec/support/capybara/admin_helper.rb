@@ -10,13 +10,13 @@ module Capybara
       click_button '登入'
     end
 
-    def admin_search_lawyer(name: nil, current: nil, email: nil, status: nil)
+    def admin_search_lawyer(filter = {})
       visit(admin_lawyers_path)
       within('#admin\/lawyer_search') do
-        fill_in 'q_name_cont', with: name
-        fill_in 'q_current_cont', with: current
-        fill_in 'q_email_cont', with: email
-        select(status, from: 'q_confirmed_at_not_null')
+        fill_in 'q_name_cont', with: filter[:name]
+        fill_in 'q_current_cont', with: filter[:current]
+        fill_in 'q_email_cont', with: filter[:email]
+        select(filter[:status], from: 'q_confirmed_at_not_null')
       end
       click_button '搜尋'
     end

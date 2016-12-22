@@ -3,6 +3,12 @@ require 'rails_helper'
 feature '後台系統', type: :feature, js: true do
   feature '律師後台' do
     before { admin_signin_user }
+
+    def create_lawyer(name, email)
+      visit(new_admin_lawyer_path)
+      admin_lawyer_input_create(name, email)
+      click_button '送出'
+    end
     feature '律師列表' do
       Scenario '能夠依註冊狀態搜尋律師，並且可知道結果總數' do
         Given '有未註冊律師和已註冊律師各一名' do
@@ -37,11 +43,6 @@ feature '後台系統', type: :feature, js: true do
     end
 
     feature '新增律師' do
-      def create_lawyer(name, email)
-        visit(new_admin_lawyer_path)
-        admin_lawyer_input_create(name, email)
-        click_button '送出'
-      end
       Scenario '律師成功建立後，不會發送任何信件出去' do
         Given '登入後台並至律師新增頁' do
           When '填完律師新增表單，送出' do
