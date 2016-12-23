@@ -13,6 +13,8 @@ html
     = csrf_meta_tags
 
   body class=(yield :body_classes)
+    = render 'components/svg_defs'
+  
     = render 'components/main_header',
       classes: content_for?(:header_classes) ? yield(:header_classes) : 'base',
       type: yield(:character_type)
