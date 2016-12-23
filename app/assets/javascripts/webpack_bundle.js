@@ -8124,7 +8124,7 @@
 
 	
 	var sprite = __webpack_require__(61);
-	var image = "<symbol viewBox=\"0 0 34 32\" id=\"icon-star-full\" ><defs><radialGradient cy=\"0%\" fx=\"50%\" fy=\"0%\" r=\"100%\" id=\"icon-star-full_a\"><stop stop-color=\"currentColor\" offset=\"0%\"/><stop stop-color=\"currentColor\" offset=\"100%\"/></radialGradient></defs><path d=\"M17 25.679L6.465 32l2.793-11.852L0 12.168l12.211-1.027L17 0l4.789 11.14L34 12.169l-9.258 7.98L27.535 32z\" fill=\"currentColor\" fill-rule=\"evenodd\"/></symbol>";
+	var image = "<symbol viewBox=\"0 0 34 32\" id=\"icon-star-full\" ><path d=\"M17 25.679L6.465 32l2.793-11.852L0 12.168l12.211-1.027L17 0l4.789 11.14L34 12.169l-9.258 7.98L27.535 32z\" fill-rule=\"evenodd\"/></symbol>";
 	module.exports = sprite.add(image, "icon-star-full");
 
 /***/ },
