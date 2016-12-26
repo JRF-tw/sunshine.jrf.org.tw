@@ -60,6 +60,6 @@ class Admin::BulletinsController < Admin::BaseController
   end
 
   def bulletin_params
-    params.require(:admin_bulletin).permit(:title, :content, :pic, :is_banner, :remove_pic)
+    params.require(:admin_bulletin).permit(:title, :content, :pic, :remove_pic)
   end
 end
