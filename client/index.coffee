@@ -32,6 +32,8 @@ require './entry/article'
 sprites = require.context "icons", off
 sprites.keys().forEach sprites
 
+Turbolinks.enableProgressBar()
+
 new TextInput()
 new StoryCollapse '#story-collapse-toggle'
 new Toggle '.switch'
@@ -103,3 +105,10 @@ $(document)
     $(@).addClass 'hover'
   .on 'mouseleave', '.form-group--score [type="radio"]', (e) ->
     $(@).removeClass 'hover'
+
+###*
+ * 評鑑紀錄 table
+###
+
+$(document).on 'click', '.story-list__table tbody tr', (e) ->
+  Turbolinks.visit $('td:last a', e.currentTarget).attr 'href'
