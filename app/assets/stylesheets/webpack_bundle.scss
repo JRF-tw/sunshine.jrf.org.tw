@@ -631,7 +631,7 @@ main[role="main"] {
 }
 
 html.turbolinks-progress-bar::before {
-  background-color: #3e82bd !important;
+  background-color: #00bcd4 !important;
 }
 
 textarea {
@@ -4794,6 +4794,11 @@ abbr[title="required"] {
 .story-list__table thead {
   color: rgba(255, 255, 255, 0.7);
   background-color: #00bcd4;
+}
+
+.story-list__table tbody tr:hover td {
+  background-color: #eeeeee;
+  cursor: pointer;
 }
 
 .story-list__table td:first-child,

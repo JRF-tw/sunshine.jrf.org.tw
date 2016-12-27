@@ -492,6 +492,10 @@
 
 	sprites.keys().forEach(sprites);
 
+	Turbolinks.enableProgressBar();
+
+	Turbolinks.enableTransitionCache();
+
 	new TextInput();
 
 	new StoryCollapse('#story-collapse-toggle');
@@ -564,6 +568,15 @@
 	  return $(this).addClass('hover');
 	}).on('mouseleave', '.form-group--score [type="radio"]', function(e) {
 	  return $(this).removeClass('hover');
+	});
+
+
+	/**
+	 * 評鑑紀錄 table
+	 */
+
+	$(document).on('click', '.story-list__table tbody tr', function(e) {
+	  return Turbolinks.visit($('td:last a', e.currentTarget).attr('href'));
 	});
 
 
