@@ -33,6 +33,7 @@ sprites = require.context "icons", off
 sprites.keys().forEach sprites
 
 Turbolinks.enableProgressBar()
+Turbolinks.enableTransitionCache()
 
 new TextInput()
 new StoryCollapse '#story-collapse-toggle'
