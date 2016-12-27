@@ -9,7 +9,7 @@ class Scrap::GetVerdictsContext < BaseContext
   end
 
   def initialize
-    @start_date = (Time.zone.today - 2.weeks).strftime('%Y%m%d')
+    @start_date = (Time.zone.today - 45.days).strftime('%Y%m%d')
     @end_date = Time.zone.today.strftime('%Y%m%d')
   end
 
