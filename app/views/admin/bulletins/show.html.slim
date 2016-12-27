@@ -12,7 +12,7 @@
         td = raw @bulletin.content
       tr
         td 圖片
-        td = image_tag @bulletin.pic.W_255
+        td = image_tag @bulletin.pic.W_360
       tr
         td 是否顯示於首頁banner
         td = @bulletin.is_banner? ? '是' : '否'
