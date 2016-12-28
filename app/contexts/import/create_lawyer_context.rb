@@ -65,25 +65,21 @@ class Import::CreateLawyerContext < BaseContext
 
   def office_numbers_assign
     @office_numbers.each { |number| number.gsub!(/\(|\)|-|\s/, '') }
-    assign_office_number(@office_numbers.join("\n"))
+    @lawyer_data[:office_number] = @office_numbers.join("\n")
   end
 
   def phone_numbers_assign
     @phone_numbers.each { |number| number.gsub!(/\(|\)|-|\s/, '') }
-    assign_phone_number(@phone_numbers.first)
+    @lawyer_data[:phone_number] = @phone_numbers.first
   end
 
   def single_phone_assign
     @lawyer_data[:phone].gsub!(/\(|\)|-|\s/, '')
-    @lawyer_data[:phone][0, 2] == '09' ? assign_phone_number : assign_office_number
-  end
-
-  def assign_phone_number(phone_number = nil)
-    @lawyer_data[:phone_number] = phone_number || @lawyer_data[:phone]
-  end
-
-  def assign_office_number(office_number = nil)
-    @lawyer_data[:office_number] = office_number || @lawyer_data[:phone]
+    if @lawyer_data[:phone][0, 2] == '09'
+      @lawyer_data[:phone_number] = @lawyer_data[:phone]
+    else
+      @lawyer_data[:office_number] = @lawyer_data[:phone]
+    end
   end
 
   def clean_phone_params
