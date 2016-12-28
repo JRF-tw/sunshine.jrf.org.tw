@@ -11,12 +11,6 @@
           .control-group
             label.control-label = f.label :content_cont
             .controls = f.search_field :content_cont
-      .row
-        .span6
-          .control-group
-            label.control-label = f.label :is_banner_eq
-            .controls.select2 = f.select :is_banner_eq,
-            collect_for_boolean, include_blank: '請選擇'
     hr
     .form-actions
       = f.submit value: '搜尋', class: 'btn btn-primary'
@@ -35,7 +29,6 @@
           th #
           th 標題
           th 圖片
-          th 是否顯示於首頁banner
           th
       tbody
         - @bulletins.each do |bulletin|
@@ -43,7 +36,6 @@
             td = bulletin.id
             td = bulletin.title
             td = image_tag bulletin.pic.W_360
-            td = bulletin.is_banner ? '顯示' : '-'
             td
               = link_to '詳細資料', admin_bulletin_path(bulletin), class: 'btn btn-mini'
               | &nbsp;
