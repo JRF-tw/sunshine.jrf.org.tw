@@ -9,6 +9,6 @@ RSpec.describe Scrap::ParseVerdictContext, type: :model do
 
   describe '#perform' do
     subject { described_class.new(court, scrap_id, type, start_date, end_date).perform }
-    it { expect { subject }.to change_sidekiq_jobs_size_of(Scrap::ImportVerdictContext, :perform) }
+    it { expect { subject }.to change_sidekiq_jobs_size_of(Scrap::ImportVerdictContext, :perform, queue: 'crawler_verdict') }
   end
 end

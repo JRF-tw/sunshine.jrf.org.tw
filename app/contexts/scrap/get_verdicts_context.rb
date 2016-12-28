@@ -9,14 +9,14 @@ class Scrap::GetVerdictsContext < BaseContext
   end
 
   def initialize
-    @start_date = (Time.zone.today - 2.weeks).strftime('%Y%m%d')
+    @start_date = (Time.zone.today - 45.days).strftime('%Y%m%d')
     @end_date = Time.zone.today.strftime('%Y%m%d')
   end
 
   def perform
     run_callbacks :perform do
       @courts.each do |court|
-        Scrap::GetVerdictsByCourtContext.delay(retry: false).perform(court, @start_date, @end_date)
+        Scrap::GetVerdictsByCourtContext.delay(retry: false, queue: 'crawler_verdict').perform(court, @start_date, @end_date)
       end
     end
   end

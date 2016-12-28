@@ -5,7 +5,7 @@ RSpec.describe Scrap::GetVerdictsContext, type: :model do
 
   describe '#perform' do
     subject { described_class.new.perform }
-    it { expect { subject }.to change_sidekiq_jobs_size_of(Scrap::GetVerdictsByCourtContext, :perform) }
+    it { expect { subject }.to change_sidekiq_jobs_size_of(Scrap::GetVerdictsByCourtContext, :perform, queue: 'crawler_verdict') }
 
     context 'notify daily report' do
       before { described_class.new.perform }

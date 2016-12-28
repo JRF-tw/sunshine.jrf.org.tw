@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: valid_scroes
+# Table name: valid_scores
 #
 #  id               :integer          not null, primary key
 #  story_id         :integer
@@ -13,6 +13,8 @@
 #  attitude_scores  :hstore
 #  command_scores   :hstore
 #  quality_scores   :hstore
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
 #
 
 FactoryGirl.define do

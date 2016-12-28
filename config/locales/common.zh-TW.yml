@@ -273,7 +273,6 @@ zh-TW:
         content: '內文'
         pic: '圖片'
         remove_pic: '移除現有圖片'
-        is_banner: '顯示於首頁banner'
       suit_banner:
         pic_l: '桌機用圖'
         pic_m: '平板用圖'
@@ -296,7 +295,6 @@ zh-TW:
       bulletin:
         title_cont: '標題包含'
         content_cont: '內文包含'
-        is_banner_eq: '是否顯示於首頁banner'
       profile:
         is_active_true: '在職中'
         is_hidden_true: '不顯示於前端'
