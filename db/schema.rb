@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161226090809) do
+ActiveRecord::Schema.define(version: 20161228071746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,11 @@ ActiveRecord::Schema.define(version: 20161226090809) do
     t.boolean  "is_hidden"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "title"
+    t.string   "link"
+    t.string   "button_string"
+    t.string   "pic"
+    t.string   "desc"
   end
 
   add_index "banners", ["is_hidden"], name: "index_banners_on_is_hidden", using: :btree
