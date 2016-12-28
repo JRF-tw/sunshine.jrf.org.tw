@@ -1,5 +1,6 @@
 class BulletinsController < BaseController
   before_action :init_meta, only: [:index]
+  before_action :http_auth_for_production
 
   def index
   end
