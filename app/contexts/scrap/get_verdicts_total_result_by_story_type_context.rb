@@ -49,6 +49,8 @@ class Scrap::GetVerdictsTotalResultByStoryTypeContext < BaseContext
     @total_result = response_data.content.match(/共\s*([0-9]*)\s*筆/)[1].to_i
     @total_page = response_data.content.match(/共\s*([0-9]*)\s*頁/)[1].to_i
   rescue
+    @total_result = 0
+    @total_page = 0
     request_retry(key: "#{RESULT_URI} / data=#{@request_query} /#{Time.zone.today}")
   end
 
