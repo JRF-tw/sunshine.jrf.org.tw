@@ -244,15 +244,7 @@ namespace :dev do
       Admin::Bulletin.create!(
         title: "重要公告-#{i}",
         content: '沒事',
-        is_banner: false
-      )
-    end
-    2.times do |i|
-      Admin::Bulletin.create!(
-        title: "重要公告 banner -#{i}",
-        content: '有事',
-        pic: File.open("#{Rails.root}/spec/fixtures/banner/L_banner_#{i + 1}.jpg"),
-        is_banner: true
+        pic: File.open("#{Rails.root}/spec/fixtures/banner/L_banner_#{i + 1}.jpg")
       )
     end
   end

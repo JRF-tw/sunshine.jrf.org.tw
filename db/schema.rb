@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161207081350) do
+ActiveRecord::Schema.define(version: 20161226090809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,12 +100,10 @@ ActiveRecord::Schema.define(version: 20161207081350) do
     t.string   "title"
     t.text     "content"
     t.text     "pic"
-    t.boolean  "is_banner",  default: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "bulletins", ["is_banner"], name: "index_bulletins_on_is_banner", using: :btree
   add_index "bulletins", ["title"], name: "index_bulletins_on_title", using: :btree
 
   create_table "careers", force: :cascade do |t|
