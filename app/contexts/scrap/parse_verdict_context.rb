@@ -22,13 +22,13 @@ class Scrap::ParseVerdictContext < BaseContext
     @type = type
     @start_date = start_date
     @end_date = end_date
-    @sleep_time_interval = rand(1..2)
+    @sleep_time_interval = rand(0.1..1.0).round(3)
     @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
   end
 
   def perform
     run_callbacks :perform do
-      Scrap::ImportVerdictContext.delay(retry: false).perform(@court, @orginal_data, @verdict_content, @verdict_word, @verdict_publish_date, @verdict_stroy_type)
+      Scrap::ImportVerdictContext.delay(retry: false, queue: 'crawler_verdict').perform(@court, @orginal_data, @verdict_content, @verdict_word, @verdict_publish_date, @verdict_stroy_type)
     end
   end
 

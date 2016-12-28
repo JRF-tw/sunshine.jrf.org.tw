@@ -6,6 +6,6 @@ class Scrap::GetVerdictsWorker
   end
 
   def perform
-    Scrap::GetVerdictsContext.delay(retry: false).perform
+    Scrap::GetVerdictsContext.delay(retry: false, queue: 'crawler_verdict').perform
   end
 end
