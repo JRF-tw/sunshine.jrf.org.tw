@@ -30,10 +30,9 @@ class Scrap::GetVerdictsTotalResultByStoryTypeContext < BaseContext
         PAGE_PER.times.each_with_index do |_, row_index|
           row_index += 1
           scrap_id = i * PAGE_PER + row_index
-          if scrap_id < @total_result
-            unless story_vericct_exist?(split_story_identify(row_index, page_data))
-              Scrap::ParseVerdictContext.delay(retry: false, queue: 'crawler_verdict').perform(@court, scrap_id, @type, @start_date, @end_date)
-            end
+          next unless scrap_id < @total_result
+          unless story_vericct_exist?(split_story_identify(row_index, page_data))
+            Scrap::ParseVerdictContext.delay(retry: false, queue: 'crawler_verdict').perform(@court, scrap_id, @type, @start_date, @end_date)
           end
         end
       end
