@@ -13,12 +13,8 @@
   @include Card();
   display: block;
   overflow: hidden;
-  &.card--avatar--judge {
-    @include scut-color-swap($blue, $blue-dark, .2s, true);
-  }
-  &.card--avatar--prosecutor {
-    @include scut-color-swap($purple, $purple-dark, .2s, true);
-  }
+  &.card--avatar--judge {background-color: $blue;}
+  &.card--avatar--prosecutor {background-color: $purple;}
 }
 .card--avatar__pic {
   transition: opacity .2s ease-in-out 0s;
