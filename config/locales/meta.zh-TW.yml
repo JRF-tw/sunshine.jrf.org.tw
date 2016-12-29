@@ -17,11 +17,33 @@ zh-TW:
         title: '隱私條款'
         description: '隱私權政策，適用於您在司法陽光網以及其延伸服務網站活動時，所涉及有關個人資料的蒐集、處理及利用說明。'
         keywords: '隱私條款,司法陽光網'
+      who_are_you:
+        title: '選擇角色'
+        description: '選擇登入角色'
+        keywords: '律師,當事人,旁觀者'
+      score_intro:
+        title: '導覽頁面'
+        description: '評鑑系統運作流程說明'
+        keywords: '評鑑,導覽'
     awards:
       index:
         title: '%{name}的獎勵紀錄'
         description: '%{name}獎勵相關紀錄清單。'
         keywords: '%{name}獎勵紀錄,%{name}'
+    bulletins:
+      index:
+        title: '公告訊息'
+        description: '司法陽光網公告訊息'
+        keywords: '公告'
+      show:
+        title: '%{title} - 公告'
+        description: '%{title}'
+        keywords: '%{title}, 公告訊息'
+    judges:
+      show:
+        title: '%{name} - 法官個人頁'
+        description: '%{name} 法官的個人資訊'
+        keywords: '%{name}, 法官'
     procedures:
       index:
         title: '%{title} - 處理經過'
@@ -80,6 +102,11 @@ zh-TW:
         title: '%{title}'
         description: '%{title} %{summary}'
         keywords: '不適任法官,不適任檢察官,司法恐龍案例,司法案例'
+    scores:
+      index:
+        title: '評鑑報表'
+        description: '評鑑報表資料'
+        keywords: '評鑑,報表'
     admin/base:
       index:
         title: '首頁'
