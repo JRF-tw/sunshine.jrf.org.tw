@@ -26,6 +26,7 @@ ruby:
   .form--score__editor
     = yield f
 
+    p.form-group--scores-name = '法官表現特別好或特別壞的註記'
     = f.input :note, as: :text, label: false, placeholder: '法官表現特別好或特別壞的註記'
 
     .form-group

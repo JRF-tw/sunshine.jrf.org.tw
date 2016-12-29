@@ -37,9 +37,11 @@ $star-size: 34px;
 
 .form-group--scores-name {
   margin: 0 n();
+  text: bold ms(1);
 }
 .form-group--scores {
-  margin: r(2) n();
+  margin: r(2) n() r(2.5);
+  border-bottom: 3px double $divider-gray;
 
   &, ol {
     padding-left: 0;
