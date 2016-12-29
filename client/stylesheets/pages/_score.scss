@@ -37,11 +37,15 @@ $star-size: 34px;
 
 .form-group--scores-name {
   margin: 0 n();
-  text: bold ms(1);
+  @include scut-side-lined($color: $divider-gray, $v-adjust: 1px);
+  text: left $text-secondary ms(1);
+  &::after {
+    margin-right: -100%;
+    width: 100%;
+  }
 }
 .form-group--scores {
-  margin: r(2) n() r(2.5);
-  border-bottom: 3px double $divider-gray;
+  margin: r(2) n() 0;
 
   &, ol {
     padding-left: 0;
