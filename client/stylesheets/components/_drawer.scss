@@ -18,7 +18,7 @@
   z-index: index($layers, drawer);
   transition: transform .3s ease 0s;
   transform: translate3D(-120%, 0, 0);
-  &.active { transform: translate3D(0, 0, 0); }  
+  &.active { transform: translate3D(0, 0, 0); }
   @include susy($tablet) { @include Hidden(); }
 }
 .drawer__profile {
@@ -37,7 +37,7 @@
   }
 
   .title, .info { margin-top: r(1); }
-  
+
   .action {
     display: inline-block;
     position: absolute n() 0 0 n();
@@ -60,11 +60,13 @@
     color: $text-secondary;
     & + .cell { margin-top: r(2); }
   }
+
+  .link {color: $text-secondary;}
 }
 .drawer-mask {
   position: fixed 0 0 0 0;
   z-index: index($layers, drawer-mask);
   background-color: $mask-gray;
   @include toggle-fade();
-  @include susy($tablet) { @include Hidden(); }  
+  @include susy($tablet) { @include Hidden(); }
 }
