@@ -719,7 +719,8 @@ img[data-sizes="auto"]:not(.slick-slide) {
   }
 }
 
-.container--wide {
+.container--wide,
+.container--list {
   max-width: 478.4px;
   margin-left: auto;
   margin-right: auto;
@@ -728,16 +729,28 @@ img[data-sizes="auto"]:not(.slick-slide) {
   padding-left: 16px;
 }
 
-.container--wide:after {
+.container--wide:after,
+.container--list:after {
   content: "";
   display: table;
   clear: both;
 }
 
 @media (min-width: 880px) {
-  .container--wide {
+  .container--wide,
+  .container--list {
     padding-right: 32px;
     padding-left: 32px;
+  }
+}
+
+.container--list {
+  max-width: 852.8px;
+}
+
+@media (min-width: 1200px) {
+  .container--list {
+    max-width: 1248px;
   }
 }
 
@@ -3619,8 +3632,6 @@ abbr[title="required"] {
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
-  margin-right: -16px;
-  margin-left: -16px;
 }
 
 .list--avatar__cell {
@@ -3880,56 +3891,6 @@ abbr[title="required"] {
 * Docs at http://davidtheclark.github.io/scut
 */
 
-.section-tab__tabs {
-  margin-top: -16px;
-  text-align: center;
-  background-color: #fff;
-}
-
-.section-tab__tabs .container {
-  padding: 0 8px;
-}
-
-@media (min-width: 768px) {
-  .section-tab__tabs .container {
-    padding: 0 16px;
-  }
-}
-
-.section-tab__tab {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  border: none;
-  outline: none;
-  background: none transparent;
-  padding: 0;
-  padding: 16px 32px;
-  text-align: center;
-  font-size: 17px;
-  font-weight: 700;
-  border-bottom: 3px solid #fff;
-}
-
-.section-tab__tab.active {
-  border-bottom-color: #00bcd4;
-}
-
-.section-tab__content {
-  display: none;
-}
-
-.section-tab__content.active {
-  display: block;
-}
-
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
-
 .no-results {
   margin: 48px auto 0;
   padding: 0 16px;
@@ -3979,6 +3940,103 @@ abbr[title="required"] {
 .no-results .text:after {
   left: 16px;
   margin-right: -50%;
+}
+
+/*
+* Scut, a collection of Sass utilities
+* to ease and improve our implementations of common style-code patterns.
+* v1.4.0
+* Docs at http://davidtheclark.github.io/scut
+*/
+
+.search-form {
+  margin: 0 auto;
+  padding: 32px 16px 0;
+  max-width: 320px;
+  text-align: center;
+  font-size: 17px;
+}
+
+@media (min-width: 768px) {
+  .search-form {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    padding-top: 48px;
+    text-align: left;
+  }
+
+  .billboard .search-form {
+    top: -32px;
+    position: relative;
+  }
+}
+
+.search-form__select {
+  padding-right: 8px;
+  padding-left: 8px;
+  background-color: #fff;
+}
+
+@media (min-width: 768px) {
+  .search-form__select {
+    border-bottom: none;
+    border-radius: 3px 0 0 3px;
+  }
+}
+
+.search-form__select + .chosen-container {
+  text-align: left;
+  border-radius: 3px 0 0 3px;
+  background-color: #fff;
+}
+
+.search-form__select + .chosen-container .chosen-single {
+  margin-top: 4px;
+  padding-left: 8px;
+  font-size: 17px;
+  border-bottom: none;
+}
+
+@media (min-width: 768px) {
+  .search-form__select + .chosen-container .chosen-single {
+    padding-left: 16px;
+  }
+}
+
+.search-form__input {
+  padding-right: 8px !important;
+  padding-left: 8px !important;
+}
+
+@media (min-width: 768px) {
+  .search-form__input {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 0 auto;
+        -ms-flex: 1 0 auto;
+            flex: 1 0 auto;
+    padding-left: 16px !important;
+    border-bottom: none !important;
+  }
+}
+
+.search-form__submit {
+  margin-top: 16px;
+}
+
+@media (min-width: 768px) {
+  .search-form__submit {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 0 auto;
+        -ms-flex: 1 0 auto;
+            flex: 1 0 auto;
+    margin-top: 0;
+  }
 }
 
 /*
@@ -6745,102 +6803,5 @@ abbr[title="required"] {
 
 .punishment-detail__spec .term {
   font-weight: 700;
-}
-
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
-
-.search-form {
-  margin: 0 auto;
-  padding: 32px 16px 0;
-  max-width: 320px;
-  text-align: center;
-  font-size: 17px;
-}
-
-@media (min-width: 768px) {
-  .search-form {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -webkit-justify-content: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    padding-top: 48px;
-    text-align: left;
-  }
-
-  .billboard .search-form {
-    top: -32px;
-    position: relative;
-  }
-}
-
-.search-form__select {
-  padding-right: 8px;
-  padding-left: 8px;
-  background-color: #fff;
-}
-
-@media (min-width: 768px) {
-  .search-form__select {
-    border-bottom: none;
-    border-radius: 3px 0 0 3px;
-  }
-}
-
-.search-form__select + .chosen-container {
-  text-align: left;
-  border-radius: 3px 0 0 3px;
-  background-color: #fff;
-}
-
-.search-form__select + .chosen-container .chosen-single {
-  margin-top: 4px;
-  padding-left: 8px;
-  font-size: 17px;
-  border-bottom: none;
-}
-
-@media (min-width: 768px) {
-  .search-form__select + .chosen-container .chosen-single {
-    padding-left: 16px;
-  }
-}
-
-.search-form__input {
-  padding-right: 8px !important;
-  padding-left: 8px !important;
-}
-
-@media (min-width: 768px) {
-  .search-form__input {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1 0 auto;
-        -ms-flex: 1 0 auto;
-            flex: 1 0 auto;
-    padding-left: 16px !important;
-    border-bottom: none !important;
-  }
-}
-
-.search-form__submit {
-  margin-top: 16px;
-}
-
-@media (min-width: 768px) {
-  .search-form__submit {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1 0 auto;
-        -ms-flex: 1 0 auto;
-            flex: 1 0 auto;
-    margin-top: 0;
-  }
 }
 
