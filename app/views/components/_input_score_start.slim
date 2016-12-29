@@ -26,8 +26,8 @@ ruby:
   .form--score__editor
     = yield f
 
-    p.form-group--scores-name = '法官表現特別好或特別壞的註記'
-    = f.input :note, as: :text, label: false, placeholder: '法官表現特別好或特別壞的註記'
+    p.form-group--scores-name = '特別註記'
+    = f.input :note, as: :text, label: false, placeholder: '特別註記'
 
     .form-group
       ul.toggle-list
