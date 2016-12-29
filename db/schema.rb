@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 20161228071746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
   enable_extension "postgis"
+  enable_extension "hstore"
 
   create_table "articles", force: :cascade do |t|
     t.integer  "profile_id"
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 20161228071746) do
     t.datetime "updated_at"
     t.string   "title"
     t.string   "link"
-    t.string   "button_string"
+    t.string   "btn_wording"
     t.string   "pic"
     t.string   "desc"
   end

@@ -265,7 +265,7 @@ zh-TW:
         title: '標題'
         desc: '描述'
         link: '連結'
-        button_string: '按鈕文字'
+        btn_wording: '按鈕文字'
         pic: '背景圖'
         pic_l: '桌機用圖'
         pic_m: '平板用圖'

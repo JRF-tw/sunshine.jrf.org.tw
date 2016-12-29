@@ -237,7 +237,7 @@ namespace :dev do
         title: "我是標題-#{i}",
         desc: "我是描述-#{i}",
         link: "我是連結-#{i}",
-        button_string: "我是按鈕文字-#{i}",
+        btn_wording: "我是按鈕文字-#{i}",
         pic: File.open("#{Rails.root}/spec/fixtures/banner/M_banner_#{i + 1}.jpg"),
         pic_l: File.open("#{Rails.root}/spec/fixtures/banner/L_banner_#{i + 1}.jpg"),
         pic_m: File.open("#{Rails.root}/spec/fixtures/banner/M_banner_#{i + 1}.jpg"),
