@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Party::ScheduleScoreCreateContext do
-  let!(:party) { create :party }
+  let!(:party) { create :party, :already_confirmed }
   let!(:court) { create :court }
   let!(:story) { create :story, court: court }
   let!(:schedule) { create :schedule, story: story }
@@ -36,6 +36,17 @@ describe Party::ScheduleScoreCreateContext do
     context 'judge not in in court' do
       before { params[:judge_name] = judge2.name }
       it { expect(subject).to be_falsey }
+    end
+
+    describe '#auto_subscribe_story' do
+      before { create_list :verdict_score, 1, :by_party, story: story }
+      before { create_list :schedule_score, 2, :by_party, story: story }
+      it { expect { subject }.to change { StorySubscription.count }.by(1) }
+
+      context 'already subscribe' do
+        let!(:story_subscription) { create :story_subscription, story: story, subscriber: party }
+        it { expect { subject }.to_not change { StorySubscription.count } }
+      end
     end
 
     describe '#alert_story_by_party_scored_count' do

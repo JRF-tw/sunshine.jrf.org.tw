@@ -12,6 +12,7 @@ class Party::ScheduleScoreCreateContext < BaseContext
   before_perform :assign_attribute
   before_perform :get_scorer_ids
   before_perform :get_scored_story_ids
+  after_perform  :auto_subscribe_story
   after_perform  :alert_story_by_party_scored_count
   after_perform  :alert_party_scored_story_count
 
@@ -78,6 +79,10 @@ class Party::ScheduleScoreCreateContext < BaseContext
     schedule_scored_story_ids = ScheduleScore.where(schedule_rater: @party).map(&:story_id)
     verdict_scored_story_ids = VerdictScore.where(verdict_rater: @party).map(&:story_id)
     @total_scored_story_ids = (schedule_scored_story_ids + verdict_scored_story_ids).uniq
+  end
+
+  def auto_subscribe_story
+    Party::StorySubscriptionToggleContext.new(@story).perform(@party) unless @party.story_subscriptions.find_by(story_id: @story.id)
   end
 
   def alert_story_by_party_scored_count
