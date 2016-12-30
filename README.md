@@ -66,6 +66,12 @@ GRANT ALL PRIVILEGES ON DATABASE "your_name" to "your_name";
 ALTER USER "your_name" WITH SUPERUSER;
 ```
 
+Qt(qmake) (use by webkit)
+=================
+
+- find your os here https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit
+
+
 LICENSE
 =================
 This project is release under MIT License.
