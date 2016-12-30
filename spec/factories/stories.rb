@@ -58,7 +58,7 @@ FactoryGirl.define do
 
     trait :with_adjugde_verdict do
       after(:create) do |story|
-        create :verdict, is_judgment: true, story: story
+        create :verdict, :with_file, is_judgment: true, story: story
       end
     end
 
