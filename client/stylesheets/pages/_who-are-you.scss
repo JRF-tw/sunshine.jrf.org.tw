@@ -10,7 +10,9 @@
 }
 
 .character-selector {
-  padding: r(12) 0;
+  padding: r(12) r(5);
+  text-align: center;
+  color: $white;
   @include susy-media($character-selector-twick) {
     max-width: 784px !important;
   }
@@ -19,11 +21,20 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  padding: r(14) r(5);
+  padding: r(4) 0 r(2);
+  @include susy-media($character-selector-twick) {padding-bottom: r(10);}
 }
 .character-selector__heading {
   @include Heading($character-selector-twick);
-  width: 100%;
+}
+.character-selector__description {
+  text: ms(2);
+}
+.character-selector__sub-heading {
+  text: normal ms(2);
+  margin: r(8) auto r(2);
+  max-width: container(3);
+  @include scut-side-lined($color: $text-secondary-dark);
 }
 
 %character-selector__cell {
@@ -103,7 +114,7 @@
 .character-selector__cell--observer {
   @extend %character-selector__cell;
   background-color: $avatar-green;
-  margin: r(25) auto r(5);
+  margin: 50% auto r(5);
   &:hover { color: $avatar-green; }
   @include susy-media($character-selector-twick) {
     margin: 0;

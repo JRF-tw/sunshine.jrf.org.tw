@@ -2,7 +2,13 @@
   | who-are-you
 
 section.character-selector.container
-  h2.character-selector__heading 請選擇角色
+  h2.character-selector__heading 評鑑法官
+  
+  p.character-selector__description
+    = zh_lorem_paragraph
+    = link_to "教程連結", "#link", class: "link"
+  
+  h3.character-selector__sub-heading 請選擇角色
 
   .character-selector__wrapper
     = link_to 'party/sign_in',
