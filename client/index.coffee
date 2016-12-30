@@ -4,11 +4,6 @@ require "stylesheets"
 # Require Modernizr
 require "modernizr"
 
-# Require Lazysizes
-# require "lazysizes/plugins/custommedia/ls.custommedia"
-# require "lazysizes/plugins/respimg/ls.respimg"
-# require "lazysizes"
-
 require 'waypoints/lib/jquery.waypoints'
 require 'webui-popover/dist/jquery.webui-popover.js'
 require 'chosen-js'

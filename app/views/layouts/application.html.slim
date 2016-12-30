@@ -8,7 +8,8 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
 
     - if ENV['F2E_DEV']
-      = javascript_include_tag 'http://localhost:8080/assets/javascripts/webpack_bundle.js', 'data-turbolinks-track' => true
+      = javascript_include_tag 'http://localhost:8080/assets/javascripts/webpack_priority.js', 'data-turbolinks-track' => true
+      = javascript_include_tag 'http://localhost:8080/assets/javascripts/webpack_main.js', 'data-turbolinks-track' => true
 
     = csrf_meta_tags
 

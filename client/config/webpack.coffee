@@ -57,10 +57,11 @@ module.exports = (env) ->
         'animate-css-webpack!./config/animate-css.js'
         './index.coffee'
       ]
+      priority: './priority.coffee'
 
     output:
       path: path_to.assets
-      filename: 'javascripts/webpack_bundle.js'
+      filename: 'javascripts/webpack_[name].js'
       chunkFilename: 'javascripts/webpack_chunk_[id].js'
 
     module:
