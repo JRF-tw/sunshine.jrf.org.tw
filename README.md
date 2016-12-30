@@ -66,29 +66,11 @@ GRANT ALL PRIVILEGES ON DATABASE "your_name" to "your_name";
 ALTER USER "your_name" WITH SUPERUSER;
 ```
 
-Responsive Image
-================
+Qt(qmake) (use by webkit)
+=================
 
-- helper & syntax
+- find your os here https://github.com/thoughtbot/capybara-webkit/wiki/Installing-Qt-and-compiling-capybara-webkit
 
-```slim
-= rwd_image\
-  src: fallback_image_path, # The smallest image
-  srcset: [\
-    path_to_image_whose_width_is_280px 280w,
-    path_to_image_whose_width_is_540px 540w,
-    path_to_image_whose_width_is_780px 780w,
-    ...\
-  ],
-  alt: alt_text,
-  class: appended_classname
-```
-
-- syntax of `srcset` Array's elements
-
-```ruby
-"#{path_to_image} #{width of image without 'px'}w"
-```
 
 LICENSE
 =================
