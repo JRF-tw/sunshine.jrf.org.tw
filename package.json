@@ -41,6 +41,7 @@
     "modernizr": "^3.3.1",
     "modularscale-sass": "^2.1.1",
     "node.normalize.scss": "^3.0.3",
+    "picturefill": "3.x",
     "sass-toolkit": "^2.10.0",
     "scut": "^1.4.0",
     "slick-carousel": "^1.6.0",
