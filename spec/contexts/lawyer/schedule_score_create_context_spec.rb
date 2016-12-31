@@ -44,8 +44,6 @@ describe Lawyer::ScheduleScoreCreateContext do
     end
 
     describe '#auto_subscribe_story' do
-      before { create_list :verdict_score, 2, story: story }
-      before { create_list :schedule_score, 3, story: story }
       it { expect { subject }.to change { StorySubscription.count }.by(1) }
 
       context 'already subscribe' do
