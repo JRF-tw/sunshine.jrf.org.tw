@@ -6,7 +6,7 @@ class BaseController < ApplicationController
   # rescue_from ActionView::MissingTemplate do |exception|
   #   render nothing: true, status: 404
   # end
-  before_action :init_meta, only: [:terms_of_service, :privacy]
+  before_action :init_meta, only: [:who_are_you, :score_intro, :terms_of_service, :privacy]
 
   def index
     @banners = Banner.shown.order_by_weight
