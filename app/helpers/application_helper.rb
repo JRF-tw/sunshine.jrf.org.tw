@@ -212,6 +212,10 @@ module ApplicationHelper
     [['是', true], ['否', false]]
   end
 
+  def collect_for_register
+    [['已註冊', true], ['未註冊', false]]
+  end
+
   def collect_for_adjudgement
     [['是', 'yes'], ['否', 'no']]
   end
