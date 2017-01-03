@@ -52,7 +52,7 @@
           th 備註
           th
       tbody
-        - @prosecutors.includes(:prosecutors_office).each do |prosecutor|
+        - @prosecutors.each do |prosecutor|
           tr
             td = prosecutor.id
             td = prosecutor.name
