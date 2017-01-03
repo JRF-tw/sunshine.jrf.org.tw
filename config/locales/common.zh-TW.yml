@@ -351,6 +351,7 @@ zh-TW:
         name_cont: '姓名包含'
         current_cont: '現職包含'
         email_cont: 'email包含'
+        confirmed_at_not_null: '註冊狀態'
       court_observer:
         name_cont: '姓名包含'
         email_cont: 'EmaiL包含'
