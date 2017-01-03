@@ -1,13 +1,13 @@
 ---
 :verbose: false
-:concurrency: 6
+:concurrency: 3
 :queues:
   - [default, 1]
-  - [crawler_verdict, 5]
+  - [crawler_verdict, 2]
 :limits:
   default: 1
-  crawler_verdict: 5
+  crawler_verdict: 2
 staging:
-  :concurrency: 6
+  :concurrency: 3
 production:
-  :concurrency: 6
+  :concurrency: 3
