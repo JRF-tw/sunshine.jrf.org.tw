@@ -52,7 +52,7 @@ zh-TW:
       profile:
         name: '姓名'
         current: '現職'
-        current_court: '現職法院 / 檢察署'
+        current_court: '現職法院'
         current_department: '庭別'
         current_branch: '股別'
         remove_avatar: '移除現有頭像'
