@@ -13,7 +13,7 @@ zh-TW:
         phone_varify_code: '驗證碼'
   activerecord:
     models:
-      court: '法院 / 檢察署'
+      court: '法院'
       profile: '個人檔案'
       education: '學經歷'
       career: '職務經歷'
@@ -33,12 +33,11 @@ zh-TW:
       prosecutor: '檢察官'
     attributes:
       court:
-        court_type: '類型'
-        full_name: '全名'
-        name: '前台顯示簡稱'
-        weight: '排序'
-        is_hidden: '隱藏'
-        scrap_name: '爬蟲名稱'
+        full_name: "全名"
+        name: "前台顯示簡稱"
+        weight: "排序"
+        is_hidden: "隱藏"
+        scrap_name: "爬蟲名稱"
       prosecutors_office:
         full_name: '全名'
         court: '隸屬法院'
@@ -53,7 +52,7 @@ zh-TW:
       profile:
         name: '姓名'
         current: '現職'
-        current_court: '現職法院 / 檢察署'
+        current_court: '現職法院'
         current_department: '庭別'
         current_branch: '股別'
         remove_avatar: '移除現有頭像'
@@ -301,10 +300,9 @@ zh-TW:
         current_eq: '現職'
         name_cont: '姓名包含'
       court:
-        court_type_eq: '類型'
-        full_name_cont: '全名包含'
-        name_cont: '前台顯示簡稱包含'
-        is_hidden_eq: '是否在前端隱藏'
+        full_name_cont: "全名包含"
+        name_cont: "前台顯示簡稱包含"
+        is_hidden_eq: "是否在前端隱藏"
       prosecutors_office:
         full_name_cont: '全名包含'
         name_cont: '前台顯示簡稱包含'

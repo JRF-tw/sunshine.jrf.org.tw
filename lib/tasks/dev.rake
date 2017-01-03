@@ -9,9 +9,10 @@ namespace :dev do
   desc 'Generate fake data for development'
   task fake: [
     'dev:fake_users',
-    'dev:fake_courts',
+    'dev:fake_courts_and_prosecutors_offices',
     'dev:fake_profiles',
     'dev:fake_judges',
+    'dev:fake_prosecutors',
     'dev:fake_educations',
     'dev:fake_careers',
     'dev:fake_licenses',
@@ -37,29 +38,21 @@ namespace :dev do
     User.find_by(email: email) || FactoryGirl.create(:user, email: email, password: 'P@ssw0rd', admin: true)
   end
 
-  task fake_courts: :environment do
+  task fake_courts_and_prosecutors_offices: :environment do
     Court.destroy_all
-    judge_name_hash = { "臺灣基隆地方法院": '基隆地院', "臺灣臺北地方法院": '臺北地院', "臺灣士林地方法院": '士林地院', "臺灣新北地方法院": '新北地院', "臺灣宜蘭地方法院": '宜蘭地院' }
-    prosecutor_name_hash = { "臺灣臺北地方法院檢察署": '臺北地檢署', "臺灣彰化地方法院檢察署": '彰化地檢署', "臺灣臺南地方法院檢察署": '臺南地檢署', "臺灣臺中地方法院檢察署": '臺中地檢署' }
+    judge_name_hash = { '臺灣基隆地方法院': '基隆地院', '臺灣臺北地方法院': '臺北地院', '臺灣士林地方法院': '士林地院', '臺灣新北地方法院': '新北地院', '臺灣宜蘭地方法院': '宜蘭地院' }
     judge_name_hash.each do |k, v|
-      Admin::Court.create!(full_name: k, name: v, court_type: '法院', weight: (1..20).to_a.sample)
-    end
-    prosecutor_name_hash.each do |k, v|
-      Admin::Court.create!(full_name: k, name: v, court_type: '檢察署', weight: (1..20).to_a.sample)
+      court = Admin::Court.create!(full_name: k, name: v, weight: (1..20).to_a.sample)
+      Admin::ProsecutorsOffice.create!(full_name: k.to_s + '檢察署', name: v.gsub('院', '檢署'), court: court)
     end
   end
 
   task fake_profiles: :environment do
     Profile.destroy_all
     judge_name = Array.new(150) { |i| "測試法官 - #{i + 1}" }
-    prosecutor_name = Array.new(150) { |i| "測試檢察官 - #{i + 1}" }
     judge_name.each do |n|
       file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-#{rand(1..12)}.jpg"
       Admin::Profile.create!(name: n, current: '法官', gender: User::GENDER_TYPES.sample, birth_year: rand(50..70), avatar: file, is_active: true, is_hidden: false, current_court: '臺灣臺北地方法院')
-    end
-    prosecutor_name.each do |n|
-      file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-#{rand(13..24)}.jpg"
-      Admin::Profile.create!(name: n, current: '檢察官', gender: User::GENDER_TYPES.sample, birth_year: rand(50..70), avatar: file, is_active: true, is_hidden: false, current_court: '臺灣臺北地方法院檢察署')
     end
   end
 
@@ -69,7 +62,17 @@ namespace :dev do
     gender = ['男', '女', '其他']
     judge_name.each_with_index do |n, _i|
       file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-23.jpg"
-      Court.get_courts.sample.judges.create!(name: n, gender: gender.sample, birth_year: (50..70).to_a.sample, avatar: file, is_active: true, is_hidden: false)
+      Court.all.sample.judges.create!(name: n, gender: gender.sample, birth_year: (50..70).to_a.sample, avatar: file, is_active: true, is_hidden: false)
+    end
+  end
+
+  task fake_prosecutors: :environment do
+    Prosecutor.destroy_all
+    prosecutor_name = Array.new(30) { |i| "測試檢察官 - #{i + 1}" }
+    gender = ['男', '女', '其他']
+    prosecutor_name.each_with_index do |n, _i|
+      file = File.open "#{Rails.root}/spec/fixtures/person_avatar/people-23.jpg"
+      ProsecutorsOffice.all.sample.prosecutors.create!(name: n, gender: gender.sample, birth_year: (50..70).to_a.sample, avatar: file, is_active: true, is_hidden: false)
     end
   end
 
@@ -159,7 +162,7 @@ namespace :dev do
   task fake_judgments: :environment do
     Judgment.destroy_all
     50.times do |i|
-      court = Admin::Court.get_courts.sample
+      court = Admin::Court.sample
       presiding_judge = Admin::Profile.judges.sample
       main_judge = Admin::Profile.judges.sample
       judge_nos = ["我的願構調王出#{i}", "那作之所好能一地#{i}", "新布類系眼美成的子#{i}", "晚適事制質一銷可麗民#{i}", "色手黃備型食勢我成原動#{i}"]
@@ -267,7 +270,7 @@ namespace :dev do
   task fake_stories: :environment do
     Story.destroy_all
     10.times do |_i|
-      Court.all.get_courts.sample.stories.create!(
+      Court.all.sample.stories.create!(
         story_type: ['民事', '邢事'].sample,
         year: rand(70..105),
         word_type: ['生', '老', '病', '死'].sample,
