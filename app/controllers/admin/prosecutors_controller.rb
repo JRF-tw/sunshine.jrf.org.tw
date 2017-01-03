@@ -3,7 +3,7 @@ class Admin::ProsecutorsController < Admin::BaseController
   before_action(except: [:index]) { add_crumb('檢察官列表', admin_prosecutors_path) }
 
   def index
-    @search = Prosecutor.all.ransack(params[:q])
+    @search = Prosecutor.all.includes(:prosecutors_office).ransack(params[:q])
     @prosecutors = @search.result.page(params[:page]).per(20)
     @admin_page_title = '檢察官列表'
     add_crumb @admin_page_title, '#'

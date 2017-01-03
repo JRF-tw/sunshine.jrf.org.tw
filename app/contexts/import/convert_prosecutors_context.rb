@@ -11,6 +11,7 @@ class Import::ConvertProsecutorsContext < BaseContext
       prosecutors = []
       @prosecutors_by_profile.each do |prosecutor|
         p = Prosecutor.new(prosecutor_data(prosecutor))
+        p.prosecutors_office = ProsecutorsOffice.find_by(full_name: prosecutor.current_court)
         p.save ? prosecutors << p : @error_message << p.errors.full_messages
       end
       prosecutors
