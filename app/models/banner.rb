@@ -19,6 +19,7 @@
 
 class Banner < ActiveRecord::Base
   include HiddenOrNot
+  mount_uploader :pic, BannerPicUploader
   mount_uploader :pic_l, BannerPicLUploader
   mount_uploader :pic_m, BannerPicMUploader
   mount_uploader :pic_s, BannerPicSUploader

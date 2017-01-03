@@ -18,5 +18,4 @@
 #
 
 class Admin::Banner < ::Banner
-  mount_uploader :pic, BannerPicUploader
 end
