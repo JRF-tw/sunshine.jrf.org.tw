@@ -7,6 +7,7 @@ development: &default
   password: ''
   postgis_extension: true
   schema_search_path: 'public, postgis'
+  pool: 20
 
 test: &TEST
   <<: *default
