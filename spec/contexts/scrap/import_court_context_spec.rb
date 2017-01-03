@@ -74,12 +74,6 @@ RSpec.describe Scrap::ImportCourtContext, type: :model do
       it { expect(court.reload.code).to eq(data_hash[:code]) }
     end
 
-    context 'assign default value' do
-      before { subject }
-
-      it { expect(subject.court_type).to eq('法院') }
-    end
-
     context 'notify_diff_fullname' do
       # see spec/features/courts_update_from_scrap_spec.rb:22
     end

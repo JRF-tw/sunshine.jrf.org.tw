@@ -1,5 +1,5 @@
 class Admin::CourtUpdateContext < BaseContext
-  PERMITS = [:court_type, :full_name, :name, :weight, :is_hidden].freeze
+  PERMITS = [:full_name, :name, :weight, :is_hidden].freeze
 
   before_perform :assign_value
   after_perform :assign_weight
@@ -40,11 +40,7 @@ class Admin::CourtUpdateContext < BaseContext
   end
 
   def court_sortable?
-    is_court? && !@court.is_hidden
-  end
-
-  def is_court?
-    @court.court_type == '法院'
+    !@court.is_hidden
   end
 
 end

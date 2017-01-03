@@ -32,7 +32,7 @@ class Scrap::ImportJudgeContext < BaseContext
   end
 
   def find_court
-    @court = Court.get_courts.select { |c| c.scrap_name.delete(' ') == @court_name }.last
+    @court = Court.select { |c| c.scrap_name.delete(' ') == @court_name }.last
     return add_error(:scrap_court_not_found) unless @court
   end
 

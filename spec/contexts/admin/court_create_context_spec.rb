@@ -9,7 +9,7 @@ describe Admin::CourtCreateContext do
     it { expect(Court.last.weight).to eq(5) }
 
     context 'add weight if not hidden && court' do
-      let(:params) { { is_hidden: '0', court_type: '法院', full_name: '‎臺灣', name: '‎新北' } }
+      let(:params) { { is_hidden: '0', full_name: '‎臺灣', name: '‎新北' } }
       before { subject.perform }
       it { expect(Court.last.weight).to be_present }
     end

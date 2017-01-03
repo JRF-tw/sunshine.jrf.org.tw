@@ -1,4 +1,3 @@
-= f.input :court_type, as: :select, collection: collect_for_court_types, include_blank: "請選擇"
 = f.input :full_name
 = f.input :name
 = f.input :scrap_name, disabled: true
@@ -8,4 +7,4 @@
   = f.submit "送出", class: "btn btn-primary"
   = " "
   = link_to admin_courts_path, class: "btn" do
-    | 回到法院 / 檢察署列表
+    | 回到法院

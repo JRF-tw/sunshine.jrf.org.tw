@@ -41,7 +41,7 @@ class Scrap::GetCourtsContext < BaseContext
 
   def check_db_data_and_notify
     scrap_court_codes = @scrap_data.map { |data| data[:code] }
-    diff_courts = Court.get_courts.where.not(code: scrap_court_codes).where.not(code: nil)
+    diff_courts = Court.where.not(code: scrap_court_codes).where.not(code: nil)
     diff_courts.each do |court|
       SlackService.notify_scrap_court_alert("法院資料不再爬蟲資料內 : \n法院ID : #{court.id}\n法院全名 : #{court.full_name}\n法院代碼 : #{court.code}")
     end
