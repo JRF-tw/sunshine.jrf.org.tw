@@ -161,6 +161,6 @@ class Scrap::ImportVerdictContext < BaseContext
   end
 
   def send_after_verdict_noice
-    Story::AfterVerdictNoticeContext.new(@story).perform
+    Story::AfterVerdictNoticeContext.new(@verdict).perform
   end
 end

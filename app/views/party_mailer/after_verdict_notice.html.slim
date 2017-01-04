@@ -1,4 +1,4 @@
-p= "#{@lawyer.name} 您好："
+p= "#{@party.name} 您好："
 
 p= "您訂閱的案件 #{@court.full_name} #{@story.number}判決書已經上網囉！您可以在#{link_to '這裡', @verdict_url} 看到判決書全文，歡迎來司法陽光網告訴我們您對這個判決書的看法！評鑑期限至 #{@limit_date.year}年#{@limit_date.mon}月#{@limit_date.mday}日，不要忘記囉！".html_safe
-p = link_to "點我以回報想法", @score_verdicts_link
+p = link_to "點我以回報想法", @score_verdicts_link, target: "_blank"

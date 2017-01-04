@@ -1,18 +1,23 @@
 class Story::AfterVerdictNoticeContext < BaseContext
 
-  def initialize(story)
-    @story = story
+  def initialize(verdict)
+    @verdict = verdict
   end
 
   def perform
     run_callbacks :perform do
-      @story.story_subscriptions.each do |story_subscription|
+      @verdict.story.story_subscriptions.each do |story_subscription|
         subscriber = story_subscription.subscriber
-        subscriber_type = subscriber.class.name
-        mailer_class = "#{subscriber_type}Mailer".constantize
-        mailer_class.delay.story_after_verdict_notice(@story.id, subscriber.id)
+        mailer_constantize(subscriber).delay.after_verdict_notice(@verdict.id, subscriber.id)
       end
     end
+  end
+
+  private
+
+  def mailer_constantize(subscriber)
+    subscriber_type = subscriber.class.name
+    "#{subscriber_type}Mailer".constantize
   end
 
 end

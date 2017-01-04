@@ -19,14 +19,15 @@ class LawyerMailer < ApplicationMailer
     mail(to: @lawyer.email, subject: @subject)
   end
 
-  def story_after_verdict_notice(story_id, lawyer_id)
-    @story = Story.find(story_id)
+  def after_verdict_notice(verdict_id, lawyer_id)
+    @verdict = Verdict.find(verdict_id)
+    @story = @verdict.story
     @lawyer = Lawyer.find(lawyer_id)
     @court = @story.court
-    @verdict_url = @story.verdicts.find_by(is_judgment: true).file.url
+    @verdict_url = @verdict.file.url
     @limit_date = @story.adjudge_date + 3.months
     @score_verdicts_link = generate_score_verdicts_link(@story)
-    @subject = @story.detail_info + '案件已判決，邀請您提供您的寶貴意見！'
+    @subject = @story.detail_info + '案件判決書已公開上網，邀請您提供您的寶貴意見！'
     mail(to: @lawyer.email, subject: @subject)
   end
 

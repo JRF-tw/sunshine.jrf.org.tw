@@ -16,10 +16,10 @@ RSpec.describe PartyMailer, type: :mailer do
     it { expect(mail.to).to eq([party.email]) }
   end
 
-  context '#story_after_verdict_notice' do
+  context '#after_verdict_notice' do
     let!(:story) { create :story, :with_adjugde_verdict, :adjudged }
-    let(:mail) { described_class.story_after_verdict_notice(story.id, party.id).deliver_now }
-    it { expect(mail.subject).to eq("#{story.court.full_name}#{story.year}年#{story.word_type}字第#{story.number}號案件已判決，邀請您提供您的寶貴意見！") }
+    let(:mail) { described_class.after_verdict_notice(story.verdicts.last.id, party.id).deliver_now }
+    it { expect(mail.subject).to eq("#{story.court.full_name}#{story.year}年#{story.word_type}字第#{story.number}號案件判決書已公開上網，邀請您提供您的寶貴意見！") }
     it { expect(mail.to).to eq([party.email]) }
   end
 end
