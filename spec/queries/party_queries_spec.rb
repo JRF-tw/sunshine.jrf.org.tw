@@ -37,6 +37,11 @@ RSpec.describe PartyQueries do
     it { expect(query.get_relate_stories.include?(story_relation.story)).to be_truthy }
   end
 
+  describe '#already_subscribed_story?' do
+    let!(:story_subscription) { create :story_subscription, story: story, subscriber: party }
+    it { expect(query.already_subscribed_story?(story)).to be_truthy }
+  end
+
   describe '#pending_score_schedules' do
     before { create_list :schedule, 3, story: story }
 

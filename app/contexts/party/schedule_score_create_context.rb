@@ -82,7 +82,7 @@ class Party::ScheduleScoreCreateContext < BaseContext
   end
 
   def auto_subscribe_story
-    Party::StorySubscriptionToggleContext.new(@story).perform(@party) unless @party.story_subscriptions.find_by(story_id: @story.id)
+    Party::StorySubscriptionToggleContext.new(@story).perform(@party) unless PartyQueries.new(@party).already_subscribed_story?(@story)
   end
 
   def alert_story_by_party_scored_count

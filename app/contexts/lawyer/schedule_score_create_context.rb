@@ -92,7 +92,7 @@ class Lawyer::ScheduleScoreCreateContext < BaseContext
   end
 
   def auto_subscribe
-    Lawyer::StorySubscriptionToggleContext.new(@story).perform(@lawyer) unless @lawyer.story_subscriptions.find_by(story_id: @story.id)
+    Lawyer::StorySubscriptionToggleContext.new(@story).perform(@lawyer) unless LawyerQueries.new(@lawyer).already_subscribed_story?(@story)
   end
 
   def alert_story_by_lawyer_scored_count
