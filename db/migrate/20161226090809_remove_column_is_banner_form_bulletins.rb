@@ -4,6 +4,6 @@ class RemoveColumnIsBannerFormBulletins < ActiveRecord::Migration
   end
 
   def down
-    add_column :bulletins, :is_banner, :bollean
+    add_column :bulletins, :is_banner, :boolean
   end
 end
