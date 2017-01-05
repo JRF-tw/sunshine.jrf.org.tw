@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
   end
 
   def private_namespace?
-    self.class.parent == Lawyers || Parties || CourtObservers
+    ['Lawyers', 'Parties', 'CourtObservers'].include?(self.class.parent.to_s)
   end
 
   def layout_by_resource
