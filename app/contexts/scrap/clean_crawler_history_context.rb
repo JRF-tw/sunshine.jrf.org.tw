@@ -1,6 +1,4 @@
 class Scrap::CleanCrawlerHistoryContext < BaseContext
-  KEEP_INTERVEL = (Time.zone.today - 1.month)..Time.zone.today
-
   class << self
     def perform
       new.perform
@@ -8,7 +6,8 @@ class Scrap::CleanCrawlerHistoryContext < BaseContext
   end
 
   def initialize
-    @crawler_histories = CrawlerHistory.where.not(crawler_on: KEEP_INTERVEL)
+    @keep_intervel = (Time.zone.today - 1.month)..Time.zone.today
+    @crawler_histories = CrawlerHistory.where.not(crawler_on: @keep_intervel)
   end
 
   def perform
