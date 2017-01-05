@@ -262,6 +262,11 @@ zh-TW:
         memo: '備註'
         is_hidden: '隱藏'
       banner:
+        title: '標題'
+        desc: '描述'
+        link: '連結'
+        btn_wording: '按鈕文字'
+        pic: '背景圖'
         pic_l: '桌機用圖'
         pic_m: '平板用圖'
         pic_s: '手機用圖'
