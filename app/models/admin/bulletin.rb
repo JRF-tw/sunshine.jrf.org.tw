@@ -13,6 +13,5 @@
 class Admin::Bulletin < ::Bulletin
   validates :title, presence: true
   validates :content, presence: true
-  mount_uploader :pic, BulletinPicUploader
 
 end

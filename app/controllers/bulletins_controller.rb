@@ -3,6 +3,7 @@ class BulletinsController < BaseController
   before_action :http_auth_for_production
 
   def index
+    @bulletins = Bulletin.all.page(params[:page]).per(9)
   end
 
   def show
