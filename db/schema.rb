@@ -182,6 +182,7 @@ ActiveRecord::Schema.define(version: 20161226090809) do
   add_index "court_observers", ["school"], name: "index_court_observers_on_school", using: :btree
 
   create_table "courts", force: :cascade do |t|
+    t.string   "court_type"
     t.string   "full_name"
     t.string   "name"
     t.integer  "weight"
@@ -193,6 +194,7 @@ ActiveRecord::Schema.define(version: 20161226090809) do
   end
 
   add_index "courts", ["code"], name: "index_courts_on_code", using: :btree
+  add_index "courts", ["court_type"], name: "index_courts_on_court_type", using: :btree
   add_index "courts", ["full_name"], name: "index_courts_on_full_name", using: :btree
   add_index "courts", ["is_hidden"], name: "index_courts_on_is_hidden", using: :btree
   add_index "courts", ["name"], name: "index_courts_on_name", using: :btree
@@ -583,8 +585,8 @@ ActiveRecord::Schema.define(version: 20161226090809) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.integer  "branch_judge_id"
-    t.datetime "start_at"
     t.string   "courtroom"
+    t.datetime "start_at"
   end
 
   add_index "schedules", ["branch_judge_id", "court_id", "story_id"], name: "index_schedules_on_branch_judge_id_and_court_id_and_story_id", using: :btree
@@ -749,7 +751,11 @@ ActiveRecord::Schema.define(version: 20161226090809) do
     t.datetime "updated_at",       null: false
   end
 
+  add_index "valid_scores", ["judge_id", "schedule_id", "story_id"], name: "index_valid_scores_on_judge_id_and_schedule_id_and_story_id", using: :btree
+  add_index "valid_scores", ["judge_id", "schedule_id"], name: "index_valid_scores_on_judge_id_and_schedule_id", using: :btree
+  add_index "valid_scores", ["judge_id", "story_id"], name: "index_valid_scores_on_judge_id_and_story_id", using: :btree
   add_index "valid_scores", ["judge_id"], name: "index_valid_scores_on_judge_id", using: :btree
+  add_index "valid_scores", ["schedule_id", "story_id"], name: "index_valid_scores_on_schedule_id_and_story_id", using: :btree
   add_index "valid_scores", ["schedule_id"], name: "index_valid_scores_on_schedule_id", using: :btree
   add_index "valid_scores", ["score_id", "score_type"], name: "index_valid_scores_on_score_id_and_score_type", using: :btree
   add_index "valid_scores", ["score_rater_id", "score_rater_type"], name: "index_valid_scores_on_score_rater_id_and_score_rater_type", using: :btree
