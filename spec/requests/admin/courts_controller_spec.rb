@@ -4,16 +4,8 @@ RSpec.describe Admin::CourtsController do
   before { signin_user }
 
   describe '#index' do
-    let!(:court1) { create :court, court_type: '法院', full_name: '台北第一法院', name: '台北第一' }
-    let!(:court2) { create :court, court_type: '檢察署', full_name: '台南第一法院', name: '台北第一' }
-
-    context 'search the type of courts' do
-      before { get '/admin/courts', q: { court_type_eq: '法院' } }
-      it {
-        expect(response.body).to match(court1.full_name)
-        expect(assigns(:courts).first.id).to eq court1.id
-      }
-    end
+    let!(:court1) { create :court, full_name: '台北第一法院', name: '台北第一' }
+    let!(:court2) { create :court, full_name: '台南第一法院', name: '台北第一' }
 
     context 'search the fullname of courts' do
       before { get '/admin/courts', q: { full_name_cont: '台南第一法院' } }

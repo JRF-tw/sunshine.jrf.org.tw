@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   include MetaTagHelper
   include CharacterConversion
 
+  before_action :http_auth_for_production, if: :private_namespace?
   before_action :http_auth_for_staging
 
   layout :layout_by_resource
@@ -17,6 +18,17 @@ class ApplicationController < ActionController::Base
     authenticate_or_request_with_http_basic do |username, password|
       username == 'myapp' && password == 'myapp'
     end
+  end
+
+  def http_auth_for_production
+    return unless Rails.env.production?
+    authenticate_or_request_with_http_basic do |username, password|
+      username == 'admin_role' && password == '52748898'
+    end
+  end
+
+  def private_namespace?
+    self.class.parent == Lawyers || Parties || CourtObservers
   end
 
   def layout_by_resource

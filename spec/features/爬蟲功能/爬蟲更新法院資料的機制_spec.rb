@@ -71,7 +71,7 @@ describe '爬蟲更新法院資料的機制', type: :request do
   end
 
   context '後台' do
-    let!(:court) { create :court, court_type: '法院', full_name: '台北第一法院', name: '台北第一' }
+    let!(:court) { create :court, full_name: '台北第一法院', name: '台北第一' }
     subject { put "/admin/courts/#{court.id}", admin_court: { scrap_name: 'haha' } }
 
     it '無法更新爬蟲名稱' do

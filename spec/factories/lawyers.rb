@@ -31,7 +31,7 @@
 
 FactoryGirl.define do
   factory :lawyer do
-    name 'lawyer'
+    sequence(:name) { |n| "律師#{n}號" }
     sequence(:email) { |n| "lawyer-#{n}@test.com" }
     sequence(:phone_number) { |_n| "09#{rand(1..99_999_999).to_s.rjust(8, '0')}" }
     sequence(:office_number) { |_n| "0#{rand(1..88_888_888).to_s.rjust(8, '0')}" }

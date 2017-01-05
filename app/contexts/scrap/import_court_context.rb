@@ -7,7 +7,6 @@ class Scrap::ImportCourtContext < BaseContext
   before_perform  :update_fullname, unless: :is_new_record?
   before_perform  :update_scrap_name, unless: :is_new_record?
   before_perform  :update_code, unless: :is_new_record?
-  before_perform  :assign_default_value
   after_perform   :notify_diff_fullname
   after_perform   :record_count_to_daily_notify
 
@@ -64,10 +63,6 @@ class Scrap::ImportCourtContext < BaseContext
 
   def update_code
     @court.assign_attributes(code: @code)
-  end
-
-  def assign_default_value
-    @court.assign_attributes(court_type: '法院') unless @court.court_type
   end
 
   def notify_diff_fullname

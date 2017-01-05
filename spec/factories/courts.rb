@@ -11,12 +11,10 @@
 #  is_hidden  :boolean          default(TRUE)
 #  code       :string
 #  scrap_name :string
-#  court_type :string
 #
 
 FactoryGirl.define do
   factory :court do
-    court_type '法院'
     sequence(:full_name) { |n| "測試法院-#{n}" }
     sequence(:name) { |n| "測試地院-#{n}" }
     code 'TPK'
@@ -35,7 +33,6 @@ FactoryGirl.define do
   end
 
   factory :court_for_params, class: Court do
-    court_type '法院'
     full_name '‎臺灣'
     name '‎新北'
   end

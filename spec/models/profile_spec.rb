@@ -43,8 +43,8 @@ RSpec.describe Profile, type: :model do
   context 'search for profile' do
     it 'judges' do
       Profile.destroy_all
-      create :court, court_type: '法院', full_name: '台北法官', name: '台北法官'
-      create :court, court_type: '法院', full_name: '台南法官', name: '台南法官'
+      create :court, full_name: '台北法官', name: '台北法官'
+      create :court, full_name: '台南法官', name: '台南法官'
       create :judge_profile, name: 'sdgfsdg', current_court: '台北法官'
       create :judge_profile, name: 'xzxzxz', current_court: '台南法官'
       jp1 = create :judge_profile, name: 'xxxzzz', current_court: '台北法官'
@@ -62,17 +62,17 @@ RSpec.describe Profile, type: :model do
 
     it 'prosecutors' do
       Profile.destroy_all
-      create :court, court_type: '檢察署', full_name: '台北檢察署', name: '台北檢察署'
-      create :court, court_type: '檢察署', full_name: '台南檢察署', name: '台南檢察署'
+      create :prosecutors_office, full_name: '台北檢察署', name: '台北檢察署'
+      create :prosecutors_office, full_name: '台南檢察署', name: '台南檢察署'
       pp1 = create :prosecutor_profile, name: 'yyyzzz', current_court: '台北檢察署'
       create :prosecutor_profile, name: 'sfdsdf', current_court: '台北檢察署'
       create :prosecutor_profile, name: 'zyyzzyz', current_court: '台南檢察署'
 
-      people = Profile.prosecutors.find_current_court('台北檢察署').front_like_search(name: 'yy')
+      people = Profile.prosecutors.find_current_prosecutors_office('台北檢察署').front_like_search(name: 'yy')
       expect(people.count).to eq(1)
       expect(people.first.name).to eq(pp1.name)
 
-      people = Profile.prosecutors.find_current_court('請選擇').front_like_search(name: 'yy')
+      people = Profile.prosecutors.find_current_prosecutors_office('請選擇').front_like_search(name: 'yy')
       expect(people.count).to eq(2)
 
       people = Profile.prosecutors.find_current_court('請選擇').front_like_search(name: '')
