@@ -40,6 +40,7 @@ namespace :dev do
 
   task fake_courts_and_prosecutors_offices: :environment do
     Court.destroy_all
+    ProsecutorsOffice.destroy_all
     judge_name_hash = { '臺灣基隆地方法院': '基隆地院', '臺灣臺北地方法院': '臺北地院', '臺灣士林地方法院': '士林地院', '臺灣新北地方法院': '新北地院', '臺灣宜蘭地方法院': '宜蘭地院' }
     judge_name_hash.each do |k, v|
       court = Admin::Court.create!(full_name: k, name: v, weight: (1..20).to_a.sample)
@@ -162,7 +163,7 @@ namespace :dev do
   task fake_judgments: :environment do
     Judgment.destroy_all
     50.times do |i|
-      court = Admin::Court.sample
+      court = Admin::Court.all.sample
       presiding_judge = Admin::Profile.judges.sample
       main_judge = Admin::Profile.judges.sample
       judge_nos = ["我的願構調王出#{i}", "那作之所好能一地#{i}", "新布類系眼美成的子#{i}", "晚適事制質一銷可麗民#{i}", "色手黃備型食勢我成原動#{i}"]
