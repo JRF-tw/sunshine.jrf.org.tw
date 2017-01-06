@@ -37,8 +37,8 @@ $star-size: 34px;
 
 .form-group--scores-name {
   margin: 0 n();
-  @include scut-side-lined($color: $divider-gray, $v-adjust: 1px);
-  text: left $text-secondary ms(1);
+  @include scut-side-lined($height: 2px, $color: $accent, $v-adjust: 1px);
+  text: left ms(1);
   &::after {
     margin-right: -100%;
     width: 100%;
