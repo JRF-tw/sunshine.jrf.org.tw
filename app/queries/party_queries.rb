@@ -28,6 +28,10 @@ class PartyQueries
     score
   end
 
+  def already_subscribed_story?(story)
+    @party.story_subscriptions.find_by(story_id: story.id).present?
+  end
+
   def pending_score_schedules(story)
     schedule_ids = story.schedules.map(&:id)
     scored_schedule_ids = @party.schedule_scores.map(&:schedule_id).uniq

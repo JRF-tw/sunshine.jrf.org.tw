@@ -15,6 +15,7 @@ class Lawyer::ScheduleScoreCreateContext < BaseContext
   before_perform :assign_attribute
   before_perform :get_scorer_ids
   before_perform :get_scored_story_ids
+  after_perform  :auto_subscribe
   after_perform  :alert_story_by_lawyer_scored_count
   after_perform  :alert_lawyer_scored_story_count
 
@@ -88,6 +89,10 @@ class Lawyer::ScheduleScoreCreateContext < BaseContext
     schedule_scored_story_ids = ScheduleScore.where(schedule_rater: @lawyer).map(&:story_id)
     verdict_scored_story_ids = VerdictScore.where(verdict_rater: @lawyer).map(&:story_id)
     @total_scored_story_ids = (schedule_scored_story_ids + verdict_scored_story_ids).uniq
+  end
+
+  def auto_subscribe
+    Lawyer::StorySubscriptionToggleContext.new(@story).perform(@lawyer) unless LawyerQueries.new(@lawyer).already_subscribed_story?(@story)
   end
 
   def alert_story_by_lawyer_scored_count
