@@ -1,5 +1,5 @@
 class Scrap::NotifyAbnormalDataContext < BaseContext
-  PARSE_SUCCESS_VALIDITY = 80
+  PARSE_SUCCESS_VALIDITY = 90
   before_perform :check_crawler_execute
   before_perform :check_parse_verdict_validity
 
