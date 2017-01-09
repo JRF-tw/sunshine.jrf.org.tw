@@ -64,6 +64,6 @@ class Admin::BannersController < Admin::BaseController
   end
 
   def banner_params
-    params.fetch(:admin_banner, {}).permit(:title, :desc, :link, :btn_wording, :pic, :weight, :is_hidden)
+    params.fetch(:admin_banner, {}).permit(:title, :desc, :link, :btn_wording, :pic_l, :pic_m, :pic_s, :weight, :is_hidden)
   end
 end
