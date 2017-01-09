@@ -13,7 +13,7 @@
           ]\
         },
         title: bulletin.title,
-        summary: bulletin.content,
-        href: "/bulletins/#{bulletin.id}"
+        summary: bulletin.content.html_safe,
+        href: bulletin_path(bulletin)
   .ui-toolbar
     = paginate @bulletins, theme: 'www'

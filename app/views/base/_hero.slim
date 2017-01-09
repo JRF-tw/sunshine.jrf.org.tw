@@ -3,9 +3,9 @@ section.base-hero
     - @banners.each do |banner|
       .base-hero-carousel__cell.lazyload data-sizes="auto" data-bgset=banner.pic.url
         .container
-          h2.heading= banner.title
+          h2.heading = banner.title
         
-          p.summary= banner.desc
-          = link_to banner.btn_wording, banner.link, class: ['button', 'raised-button--large']
+          p.summary = banner.desc
+          = link_to banner.btn_wording, banner.link, class: ['button', 'raised-button--large'], target: '_blank'
           
   = render partial: 'hero_search'

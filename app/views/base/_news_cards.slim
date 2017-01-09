@@ -13,6 +13,6 @@
           ]\
         },
         title: bulletin.title,
-        summary: bulletin.content,
-        href: "/bulletins/#{bulletin.id}"
-  = link_to 'more', bulletins_path
+        summary: bulletin.content.html_safe,
+        href: bulletin_path(bulletin)
+  = link_to 'more', bulletins_path, target: '_blank'
