@@ -16,6 +16,11 @@ FactoryGirl.define do
     crawler_history { create :crawler_history }
     crawler_kind :crawler_court
     crawler_error_type :parse_data_failed
-  end
 
+    trait :judge_parse_error do
+      crawler_kind :crawler_verdict
+      crawler_error_type :parse_judge_error
+      sequence(:crawler_errors) { |n| Array.new(10, "法官抓取格式錯誤 - #{n}") }
+    end
+  end
 end
