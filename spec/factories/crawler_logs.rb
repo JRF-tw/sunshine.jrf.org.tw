@@ -20,7 +20,7 @@ FactoryGirl.define do
     trait :judge_parse_error do
       crawler_kind :crawler_verdict
       crawler_error_type :parse_judge_error
-      sequence(:crawler_errors) { |n| Array.new(10, "法官抓取格式錯誤 - #{}") }
+      sequence(:crawler_errors) { |n| Array.new(10, "法官抓取格式錯誤 - #{n}") }
     end
   end
 end
