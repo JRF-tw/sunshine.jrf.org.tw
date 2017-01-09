@@ -140,5 +140,10 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
       subject { described_class.new(court, orginal_data, ruling_content, word, publish_date, story_type).perform }
       it { expect { subject }.not_to change { Verdict.count } }
     end
+
+    context '#send_after_verdict_noice' do
+      before { subject }
+      it { expect(fetch_sidekiq_jobs(Sidekiq::Extensions::DelayedClass).size).to eq(1) }
+    end
   end
 end
