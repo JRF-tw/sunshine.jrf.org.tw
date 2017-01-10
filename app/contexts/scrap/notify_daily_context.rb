@@ -3,6 +3,7 @@ class Scrap::NotifyDailyContext < BaseContext
 
   after_perform :update_to_crawler_history
   after_perform :cleanup_redis_date
+  after_perform :notify_abnormal_data
 
   class << self
     def perform
@@ -34,11 +35,11 @@ class Scrap::NotifyDailyContext < BaseContext
   end
 
   def update_to_crawler_history
-    crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
+    @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
     SCRAP_MODELS.keys.map(&:to_s).each do |model|
-      crawler_history.assign_attributes("#{model}s_count": Redis::Counter.new("daily_scrap_#{model}_count").value)
+      @crawler_history.assign_attributes("#{model}s_count": Redis::Counter.new("daily_scrap_#{model}_count").value)
     end
-    crawler_history.save
+    @crawler_history.save
   end
 
   def cleanup_redis_date
@@ -46,5 +47,9 @@ class Scrap::NotifyDailyContext < BaseContext
       Redis::Value.new("daily_scrap_#{model}_intervel").delete
       Redis::Counter.new("daily_scrap_#{model}_count").value = 0
     end
+  end
+
+  def notify_abnormal_data
+    Scrap::NotifyAbnormalDataContext.new(@crawler_history).perform
   end
 end

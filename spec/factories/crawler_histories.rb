@@ -28,5 +28,13 @@ FactoryGirl.define do
     trait :has_verdict do
       verdicts_count { rand(1..50) }
     end
+
+    trait :exist_counts do
+      courts_count { rand(1..50) }
+      branches_count { rand(1..50) }
+      judges_count { rand(1..50) }
+      verdicts_count { rand(1..50) }
+      schedules_count { rand(1..50) }
+    end
   end
 end

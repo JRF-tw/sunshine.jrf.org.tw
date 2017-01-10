@@ -32,6 +32,11 @@ RSpec.describe LawyerQueries do
     it { expect(query.get_verdict_score(story)).to eq(verdict_score) }
   end
 
+  describe '#already_subscribed_story?' do
+    let!(:story_subscription) { create :story_subscription, story: story, subscriber: lawyer }
+    it { expect(query.already_subscribed_story?(story)).to be_truthy }
+  end
+
   describe '#pending_score_schedules' do
     before { create_list :schedule, 3, story: story }
 

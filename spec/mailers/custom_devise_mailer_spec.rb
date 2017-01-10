@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe CustomDeviseMailer, type: :mailer do
-  pending "add some examples to (or delete) #{__FILE__}"
 
   context '#send_setting_password_mail' do
     let!(:lawyer) { create :lawyer }
