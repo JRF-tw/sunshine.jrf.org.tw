@@ -21,6 +21,12 @@ RSpec.describe Scrap::Concerns::AnalysisVerdictContent, type: :model do
       subject { including_class.new.parse_judges_names(verdict, verdict_content, crawler_history) }
       it { expect { subject }.to change { CrawlerLog.count } }
     end
+
+    context 'check 法官 in line last' do
+      let!(:verdict_content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/verdict_example_1.html") }
+      subject { including_class.new.parse_judges_names(verdict, verdict_content, crawler_history) }
+      it { expect(subject.count).to eq(5) }
+    end
   end
 
   describe '#parse_main_judge_name' do
