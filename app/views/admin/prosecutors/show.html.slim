@@ -20,6 +20,9 @@
             br
             = "來源：#{@prosecutor.gender_source}"
       tr
+        td 任職檢察署
+        td = link_to "#{@prosecutor.prosecutors_office.full_name}", admin_prosecutors_office_path(@prosecutor.prosecutors_office) if @prosecutor.prosecutors_office
+      tr
         td 出生年
         td
           = "民國#{@prosecutor.birth_year}年"
@@ -40,6 +43,9 @@
           - if @prosecutor.appointment_source.present?
             br
             = "來源：#{@prosecutor.appointment_source}"
+      tr
+        td 現任職務
+        td = @prosecutor.is_judge ? '法官' : '檢查官'
       tr
         td 是否在職
         td = @prosecutor.is_active ? '是' : '否'

@@ -56,6 +56,7 @@ RSpec.describe Admin::ProsecutorsController do
 
   describe '#set_to_judge' do
     context 'success' do
+      let!(:court) { create :court, prosecutors_office: prosecutor.prosecutors_office }
       subject { post "/admin/prosecutors/#{prosecutor.id}/set_to_judge" }
 
       it { expect { subject }.to change { prosecutor.reload.is_active } }

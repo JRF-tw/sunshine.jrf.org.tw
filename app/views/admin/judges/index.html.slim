@@ -28,7 +28,7 @@
           .control-group
             label.control-label = f.label :is_prosecutor_true
             .controls#select2 = f.select :is_prosecutor_true,
-            collect_for_boolean, include_blank: '請選擇'
+            collect_for_is_prosecutor, include_blank: '請選擇'
     hr
     .form-actions
       = f.submit value: '搜尋', class: 'btn btn-primary'
@@ -47,6 +47,7 @@
           th 名稱
           th 性別
           th 任職法院
+          th 現任職務
           th 是否在職
           th 是否在前端隱藏
           th 備註
@@ -58,6 +59,7 @@
             td = judge.name
             td = judge.gender
             td = link_to "#{judge.court.full_name}", admin_court_path(judge.court) if judge.court
+            td = judge.is_prosecutor ? '檢察官' : '法官'
             td = judge.is_active? ? '是' : '否'
             td = judge.is_hidden? ? '是' : '否'
             td = judge.memo
@@ -69,6 +71,8 @@
               = link_to '庭期列表', admin_schedules_path(q: { branch_judge_id_eq: judge.id } ), class: 'btn btn-mini'
               | &nbsp;
               = link_to '編輯', edit_admin_judge_path(judge), class: 'btn btn-mini btn-success'
+              | &nbsp;
+              = link_to '轉換為檢察官', set_to_prosecutor_admin_judge_path(judge), class: 'btn btn-mini btn-warning', method: :post unless judge.is_prosecutor
               | &nbsp;
               = link_to '刪除', admin_judge_path(judge), class: 'btn btn-mini btn-danger', method: :delete, 'data-confirm': "確認刪除該法官檔案 - #{judge.name}？"
     .ui-toolbar.ui-widget-header

@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161228071746) do
+ActiveRecord::Schema.define(version: 20170110063318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "postgis"
   enable_extension "hstore"
+  enable_extension "postgis"
 
   create_table "articles", force: :cascade do |t|
     t.integer  "profile_id"
@@ -265,9 +265,9 @@ ActiveRecord::Schema.define(version: 20161228071746) do
     t.boolean  "is_active",          default: true
     t.boolean  "is_hidden",          default: true
     t.integer  "punishments_count",  default: 0
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
-    t.boolean  "is_prosecutor"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.boolean  "is_prosecutor",      default: false
   end
 
   add_index "judges", ["current_court_id"], name: "index_judges_on_current_court_id", using: :btree
@@ -472,9 +472,9 @@ ActiveRecord::Schema.define(version: 20161228071746) do
     t.string   "memo"
     t.boolean  "is_active",             default: true
     t.boolean  "is_hidden",             default: true
-    t.boolean  "is_judge"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.boolean  "is_judge",              default: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
   add_index "prosecutors", ["is_judge"], name: "index_prosecutors_on_is_judge", using: :btree

@@ -20,6 +20,9 @@
             br
             = "來源：#{@judge.gender_source}"
       tr
+        td 任職法院
+        td = link_to "#{@judge.court.full_name}", admin_court_path(@judge.court) if @judge.court
+      tr
         td 出生年
         td
           = "民國#{@judge.birth_year}年"
@@ -40,6 +43,9 @@
           - if @judge.appointment_source.present?
             br
             = "來源：#{@judge.appointment_source}"
+      tr
+        td 現任職務
+        td = @judge.is_prosecutor ? '檢察官' : '法官'
       tr
         td 是否在職
         td = @judge.is_active ? '是' : '否'

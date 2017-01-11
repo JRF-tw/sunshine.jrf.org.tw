@@ -37,7 +37,7 @@ class Admin::ProsecutorsController < Admin::BaseController
   end
 
   def update
-    context = Admin::ProsecutorUpdateContext.new(@prosecutor)
+    context = Admin::ProsecutorUpdateContext.new(prosecutor)
     if context.perform(params)
       redirect_as_success(admin_prosecutors_path, "檢察官 - #{prosecutor.name} 已修改")
     else
@@ -48,7 +48,7 @@ class Admin::ProsecutorsController < Admin::BaseController
   end
 
   def destroy
-    context = Admin::ProsecutorDeleteContext.new(@prosecutor)
+    context = Admin::ProsecutorDeleteContext.new(prosecutor)
     if context.perform
       redirect_as_success(admin_prosecutors_path, "檢察官 - #{prosecutor.name} 已刪除")
     else
@@ -57,9 +57,9 @@ class Admin::ProsecutorsController < Admin::BaseController
   end
 
   def set_to_judge
-    context = Admin::JudgeProsecutorToggleContext.new(@prosecutor)
+    context = Admin::JudgeProsecutorToggleContext.new(prosecutor)
     if context.perform
-      redirect_as_success(admin_prosecutor_path, "檢察官 - #{prosecutor.name} 已轉換為法官")
+      redirect_as_success(edit_admin_judge_path(prosecutor.judge), "檢察官 - #{prosecutor.name} 已轉換為法官")
     else
       redirect_to :back, flash: { error: context.error_messages }
     end

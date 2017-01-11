@@ -1,6 +1,7 @@
 class Admin::JudgeProsecutorToggleContext < BaseContext
   before_perform :check_role
   before_perform :set_new_role
+  before_perform :check_institution_exist
   before_perform :build_role_relation
   after_perform :set_old_role
 
@@ -35,6 +36,11 @@ class Admin::JudgeProsecutorToggleContext < BaseContext
       @new_role.assign_attributes(is_prosecutor: false, is_active: true, is_hidden: false)
       @new_role.court = @old_role.prosecutors_office.try(:court) if @new_role.new_record?
     end
+  end
+
+  def check_institution_exist
+    return add_error(:data_update_fail, '轉換失敗 請先建立與所屬法院關聯的檢察署') if convert_to_prosecutor? && @new_role.prosecutors_office.nil?
+    return add_error(:data_update_fail, '轉換失敗 請先建立與所屬檢察署關聯的法院') if convert_to_judge? && @new_role.court.nil?
   end
 
   def find_or_new_judge
