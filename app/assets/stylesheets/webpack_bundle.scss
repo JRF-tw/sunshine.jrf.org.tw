@@ -5274,7 +5274,6 @@ abbr[title="required"] {
   overflow: hidden;
   text-align: center;
   text-align: left;
-  color: rgba(0, 0, 0, 0.54);
   font-size: 17px;
 }
 
@@ -5286,8 +5285,8 @@ abbr[title="required"] {
   position: relative;
   width: 50%;
   border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: rgba(0, 0, 0, 0.12);
+  border-top-width: 2px;
+  border-top-color: #00bcd4;
   bottom: 1px;
 }
 
@@ -6321,7 +6320,6 @@ abbr[title="required"] {
 }
 
 .form-group--score__stars-wrapper {
-  margin-top: 16px;
   margin-left: -16px;
 }
 
