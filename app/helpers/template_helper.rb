@@ -18,14 +18,10 @@ module TemplateHelper
   end
 
   def rwd_generate(html_content)
-    content = html_content
-
-    if all_image_tags = html_content.scan(/<img\salt.+\/>/)
-      all_image_tags.each do |img_tag|
-        content = content.gsub(img_tag, img_html_generate(img_tag))
-      end
-    end
-    content
+    html_content.scan(/<img\salt.+\/>/).each { |img_tag|
+      html_content = html_content.gsub(img_tag, img_html_generate(img_tag))
+    }
+    html_content
   end
 
   private
