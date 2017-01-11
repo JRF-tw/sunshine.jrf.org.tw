@@ -4,17 +4,4 @@ article
 
   section.container.offcanvas-card-wrapper
     .card.card--article
-      = rwd_image\
-        src: @bulletin.pic.W_360,
-        srcset: [\
-          "#{@bulletin.pic.W_360} 360W",
-          "#{@bulletin.pic.W_540} 540W",
-          "#{@bulletin.pic.W_720} 720W",
-          "#{@bulletin.pic.W_900} 900W",
-          "#{@bulletin.pic.W_1080} 1080W",
-          "#{@bulletin.pic.W_1296} 1296W",
-          "#{@bulletin.pic.W_1512} 1512W",
-          "#{@bulletin.pic.W_1728} 1728W"\
-        ]
-      
-      p = @bulletin.content.html_safe
+      p = rwd_generate(@bulletin.content).html_safe
