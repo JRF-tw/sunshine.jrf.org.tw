@@ -1,4 +1,7 @@
-= link_to profile_path(person), class: "card--avatar card--avatar--#{type}"
+= link_to profile_path(person),
+	class: ["card--avatar",
+					"card--avatar--#{type}",
+				 ("card--avatar--inactive" unless person.is_active)]
 	.card--avatar__name = person.name
 	
 	small.card--avatar__stage

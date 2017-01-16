@@ -36,6 +36,7 @@
     transform: scale(2);
     opacity: 1;
   }
+  &.card--avatar--inactive {opacity: .7;}
   &.card--avatar--judge {background-color: $blue;}
   &.card--avatar--prosecutor {background-color: $purple;}
 }
