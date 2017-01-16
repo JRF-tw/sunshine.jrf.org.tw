@@ -13,5 +13,5 @@
           ]\
         },
         title: bulletin.title,
-        summary: bulletin.content.html_safe,
+        summary: rwd_generate(bulletin.content).html_safe,
         href: bulletin_path(bulletin)
