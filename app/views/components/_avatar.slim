@@ -4,15 +4,11 @@
 				 ("card--avatar--inactive" unless person.is_active)]
 	.card--avatar__name = person.name
 	
-	small.card--avatar__stage
-		= person.is_active ? '在職' : '不在職'
+	ul.card--avatar__stage.list--unstyled
+		li = person.is_active ? '在職' : '不在職'
 	
 		- if person.stage.present? && person.stage != 0
-			br
-			= "司訓第 #{person.stage} 期"
+			li = "司訓第 #{person.stage} 期"
 	
 	.card--avatar__job
-		- if person.current_court
-			= "#{person.current_court} #{person.current}"
-		- else
-			= person.current
+		= "#{person.current_court}" if person.current_court
