@@ -1,6 +1,6 @@
 - content_for :btns do
   = link_to '編輯', edit_admin_judge_path(@judge), class: 'btn btn-large btn-success'
-  = link_to '轉換為檢察官', set_to_prosecutor_admin_judge_path(@judge), class: 'btn btn-large btn-warning', method: :post unless @judge.is_prosecutor
+  = link_to '轉換為檢察官', set_to_prosecutor_admin_judge_path(@judge), class: 'btn btn-large btn-warning', method: :post, 'data-confirm': "確認將 #{@judge.name} 轉換為檢察官？" unless @judge.is_prosecutor
 
 = admin_widget_box "#{@judge.name}的個人檔案", icon: :th do
   table.table.table-bordered.table-striped.table-hover
