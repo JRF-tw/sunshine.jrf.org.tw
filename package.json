@@ -18,7 +18,6 @@
     "start": "redis-server & bundle exec rails s & bundle exec guard -i & npm run dev-server",
     "rails": "redis-server & bundle exec rails s & bundle exec guard -i",
     "console": "redis-server & bundle exec rails c",
-    "update": "gulp update",
     "check": "rubocop --auto-correct",
     "rebase": "bundle install && npm run migrate",
     "migrate": "redis-server & bundle exec rake db:migrate",
@@ -26,6 +25,10 @@
     "dev-server": "webpack-dev-server --inline --hot --config webpack-dev.config.coffee",
     "build": "webpack --config webpack.config.coffee",
     "postbuild": "gulp resolve-url",
+    "preupdate": "npm run build",
+    "update": "git commit -a -m 'precompile f2e assets'",
+    "presync": "npm run update",
+    "sync": "git push",
     "clean": "rake tmp:clear && rake tmp:sessions:clear"
   },
   "dependencies": {
@@ -57,7 +60,6 @@
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
-    "git-branch": "^0.3.0",
     "gulp": "^3.9.1",
     "gulp-error-notifier": "^1.1.0",
     "gulp-replace": "^0.5.4",

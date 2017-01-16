@@ -2509,10 +2509,6 @@ gifsicle@^3.0.0:
     bin-wrapper "^3.0.0"
     logalot "^2.0.0"
 
-git-branch@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/git-branch/-/git-branch-0.3.0.tgz#cae53f599054d2bd4773e164550f54cc5fe53d2c"
-
 glob-base@^0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/glob-base/-/glob-base-0.3.0.tgz#dbb164f6221b1c0b1ccf82aea328b497df0ea3c4"

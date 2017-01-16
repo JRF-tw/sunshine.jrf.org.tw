@@ -2,21 +2,18 @@ path     = require 'path'
 gulp     = require 'gulp'
 replace  = require 'gulp-replace'
 notify   = require 'gulp-error-notifier'
-
-shell    = require 'gulp-shell'
 # responsive = require 'gulp-responsive'
 
-
-# 
+#
 # 修改路徑來使用 Rails Sprockets path helper
-# START 
+# START
 
 # 取得 publicPath
 { publicPath } = require './package.json'
 
 gulp.task 'resolve-url', ->
   sourcemap_pattern = /\/\*#\ssourceMappingURL.+\*\//ig
-  
+
   assets_pattern    = ///
     url\(
       #{publicPath}
@@ -26,7 +23,7 @@ gulp.task 'resolve-url', ->
   ///ig
 
   replace_assets_path = (_full, $1) -> "asset-url('#{$1}')"
-  
+
   gulp.src path.join("app/assets", "stylesheets/webpack_bundle.+(css|scss)")
       .pipe notify.handleError replace(assets_pattern, replace_assets_path)
       .pipe notify.handleError replace(sourcemap_pattern, "")
@@ -34,30 +31,9 @@ gulp.task 'resolve-url', ->
 
 # 修改路徑來使用 Rails Sprockets path helper
 # END
-# 
+#
 
-# 
-# 自動化部屬
-# START
-
-# 確認所在 branch
-current_branch = require('git-branch').sync()
-
-gulp.task 'update', shell.task [
-  'npm run build'
-  'git add -A'
-  'git commit -m "update assets"'  
-]
-
-gulp.task 'deploy', shell.task [
-  "cap staging deploy BR=#{current_branch}"
-]
-
-# 自動化部屬
-# END
-# 
-
-# 
+#
 # Build Responsive Image
 # START
 
