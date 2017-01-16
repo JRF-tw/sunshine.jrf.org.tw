@@ -29,6 +29,7 @@
     "update": "git commit -a -q -m 'precompile f2e assets'",
     "presync": "npm run update",
     "sync": "git push",
+    "mini": "git commit -a -q -m 'precompile f2e assets'",
     "clean": "rake tmp:clear && rake tmp:sessions:clear"
   },
   "dependencies": {
