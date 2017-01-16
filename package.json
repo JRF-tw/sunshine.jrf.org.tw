@@ -26,11 +26,9 @@
     "build": "webpack --config webpack.config.coffee",
     "postbuild": "gulp resolve-url",
     "preupdate": "npm run build",
-    "update": "git commit -a -q -m 'precompile f2e assets'",
+    "update": "coffee precompile.coffee",
     "presync": "npm run update",
     "sync": "git push",
-    "mini": "git commit -a -q -m 'precompile f2e assets'",
-    "two": "coffee sync.coffee",
     "clean": "rake tmp:clear && rake tmp:sessions:clear"
   },
   "dependencies": {
