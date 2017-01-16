@@ -3650,6 +3650,11 @@ abbr[title="required"] {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
   margin: 0 8px 32px;
   width: 160px;
 }
@@ -3666,10 +3671,6 @@ abbr[title="required"] {
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-      -ms-flex-align: start;
-          align-items: flex-start;
   padding: 12px 16px 0;
   min-height: 187px;
   overflow: hidden;
@@ -3717,9 +3718,11 @@ abbr[title="required"] {
 
 .card--avatar__name {
   font-size: 20px;
+  line-height: 1.2;
 }
 
 .card--avatar__stage {
+  margin-top: 8px;
   margin-bottom: 32px;
 }
 
