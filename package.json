@@ -30,7 +30,7 @@
     "presync": "npm run update",
     "sync": "git push",
     "mini": "git commit -a -q -m 'precompile f2e assets'",
-    "two": "npm run mini --silent",
+    "two": "coffee sync.coffee",
     "clean": "rake tmp:clear && rake tmp:sessions:clear"
   },
   "dependencies": {
