@@ -6,6 +6,7 @@ section.base-hero
           h2.heading = banner.title
         
           p.summary = banner.desc
-          = link_to banner.btn_wording, banner.link, class: ['button', 'raised-button--large'], target: '_blank'
+          - button_wording = banner.btn_wording.present? ? banner.btn_wording : '瞭解更多'
+          = link_to button_wording, banner.link, class: ['button', 'raised-button--large'], target: '_blank'
           
   = render partial: 'hero_search'
