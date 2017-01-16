@@ -1,14 +1,15 @@
 = link_to profile_path(person), class: "card--avatar card--avatar--#{type}"
 	.card--avatar__name = person.name
 	
-	small.card--avatar__active
+	small.card--avatar__stage
 		= person.is_active ? '在職' : '不在職'
 	
-	- if person.stage.present? && person.stage != 0
-		.card--avatar__stage = "司訓第 #{person.stage} 期"
+		- if person.stage.present? && person.stage != 0
+			br
+			= "司訓第 #{person.stage} 期"
 	
 	.card--avatar__job
-    - if person.current_court
-      = "#{person.current_court} #{person.current}"
-    - else
-      = person.current
+		- if person.current_court
+			= "#{person.current_court} #{person.current}"
+		- else
+			= person.current

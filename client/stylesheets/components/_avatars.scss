@@ -5,23 +5,33 @@
   justify-content: center;
 }
 .list--avatar__cell {
+  display: flex;
   margin: 0 r(1) r(4);
   width: r(20);
 }
 
 .card--avatar {
   @include Card();
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: r(1.5) r(2) 0;
   overflow: hidden;
+  color: $text-primary-dark !important;
   &.card--avatar--judge {background-color: $blue;}
   &.card--avatar--prosecutor {background-color: $purple;}
 }
-.card--avatar__pic {
-  transition: opacity .2s ease-in-out 0s;
-  .card--avatar:hover & { opacity: .8; }
-}
 .card--avatar__name {
-  margin: 0;
-  padding: r(1);
-  text: bold center ms(2) $white;
+  font-size: ms(2);
+}
+.card--avatar__stage {
+  margin-bottom: r(4);
+}
+.card--avatar__job {
+  margin-top: auto;
+  padding: r(1.5) 0;
+  border-top: 1px solid $divider-gray;
+  @include bleed-x(r(2));
+  .card--avatar--judge & {background-color: $blue-dark;}
+  .card--avatar--prosecutor & {background-color: $purple-dark;}
 }
