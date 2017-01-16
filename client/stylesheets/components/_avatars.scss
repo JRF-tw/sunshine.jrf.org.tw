@@ -6,6 +6,7 @@
 }
 .list--avatar__cell {
   display: flex;
+  flex-direction: column;
   margin: 0 r(1) r(4);
   width: r(20);
 }
@@ -14,7 +15,6 @@
   @include Card();
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   padding: r(1.5) r(2) 0;
   min-height: 187px;
   overflow: hidden;
@@ -42,9 +42,12 @@
 }
 .card--avatar__name {
   font-size: ms(2);
+  line-height: 1.2;
 }
 .card--avatar__stage {
+  margin-top: r(1);
   margin-bottom: r(4);
+  font-size: ms(0);
 }
 .card--avatar__job {
   margin-top: auto;
