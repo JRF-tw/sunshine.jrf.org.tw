@@ -1,26 +1,12 @@
 section.base-hero
   #base-hero-carousel.base-hero-carousel
-    .base-hero-carousel__cell.lazyload data-sizes="auto" data-bgset=lorem_banner_image(1)
-      .container
-        h2.heading= truncate zh_lorem_paragraph, length: 30
-      
-        = link_to '開始評鑑', 'who-are-you', class: ['button', 'raised-button--large']
+    - @banners.each do |banner|
+      .base-hero-carousel__cell.lazyload data-sizes="auto" data-bgset=banner.pic.url
+        .container
+          h2.heading = banner.title
         
-    / 以下僅是範例
-    .base-hero-carousel__cell.lazyload data-sizes="auto" data-bgset=lorem_banner_image(2)
-      .container
-        h2.heading= truncate zh_lorem_paragraph, length: 30
-        
-        p.summary= zh_lorem_paragraph
-      
-        = link_to '瞭解更多', '/bulletins/1', class: ['button', 'raised-button--large']
-        
-    .base-hero-carousel__cell.lazyload data-sizes="auto" data-bgset=lorem_banner_image(3)
-      .container
-        h2.heading= truncate zh_lorem_paragraph, length: 30
-        
-        p.summary= zh_lorem_paragraph
-      
-        = link_to '瞭解更多', '/bulletins/1', class: ['button', 'raised-button--large']
+          p.summary = banner.desc
+          - button_wording = banner.btn_wording.present? ? banner.btn_wording : '瞭解更多'
+          = link_to button_wording, banner.link, class: ['button', 'raised-button--large'], target: '_blank' if banner.link
           
   = render partial: 'hero_search'

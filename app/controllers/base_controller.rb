@@ -9,6 +9,7 @@ class BaseController < ApplicationController
 
   def index
     @banners = Banner.shown.order_by_weight
+    @bulletins = Bulletin.most_recent(6)
     @suits = Suit.shown.last(3)
     @judges = Profile.judges.shown.active.had_avatar.sample(12)
     @prosecutors = Profile.prosecutors.shown.active.had_avatar.sample(12)
