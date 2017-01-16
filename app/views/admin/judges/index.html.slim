@@ -72,7 +72,7 @@
               | &nbsp;
               = link_to '編輯', edit_admin_judge_path(judge), class: 'btn btn-mini btn-success'
               | &nbsp;
-              = link_to '轉換為檢察官', set_to_prosecutor_admin_judge_path(judge), class: 'btn btn-mini btn-warning', method: :post unless judge.is_prosecutor
+              = link_to '轉換為檢察官', set_to_prosecutor_admin_judge_path(judge), class: 'btn btn-mini btn-warning', method: :post,'data-confirm': "確認將 #{judge.name} 轉換為檢察官？" unless judge.is_prosecutor
               | &nbsp;
               = link_to '刪除', admin_judge_path(judge), class: 'btn btn-mini btn-danger', method: :delete, 'data-confirm': "確認刪除該法官檔案 - #{judge.name}？"
     .ui-toolbar.ui-widget-header
