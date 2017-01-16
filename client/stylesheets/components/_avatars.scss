@@ -18,6 +18,23 @@
   padding: r(1.5) r(2) 0;
   overflow: hidden;
   color: $text-primary-dark !important;
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute 0 n() n() 0;
+    size: 100%;
+    background-color: rgba($accent, .5);
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: 0 100%;
+    transition: transform .3s ease-in-out 0s,
+                opacity .3s ease-in-out 0s;
+  }
+  &:hover::before {
+    transform: scale(2);
+    opacity: 1;
+  }
   &.card--avatar--judge {background-color: $blue;}
   &.card--avatar--prosecutor {background-color: $purple;}
 }
