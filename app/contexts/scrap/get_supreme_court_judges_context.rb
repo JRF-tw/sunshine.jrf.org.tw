@@ -34,14 +34,13 @@ class Scrap::GetSupremeCourtJudgesContext < BaseContext
   def get_judges_data
     response_data = Mechanize.new.get(SCRAP_URI)
     response_data = Nokogiri::HTML(response_data.body)
-    @civil_brance_judge_names = parse_judges_data(response_data)[:civil]
-    @criminal_brance_judge_names = parse_judges_data(response_data)[:criminal]
+    @civil_brance_judge_names, @criminal_brance_judge_names = parse_judges_data(response_data)
   rescue
     request_retry(key: "#{SCRAP_URI} / #{Time.zone.today}")
   end
 
   def parse_judges_data(response_data)
-    { civil: response_data.css('table')[0].css('b').text.squish.tr(' ', '').split(')'), criminal: response_data.css('table')[1].css('b').text.squish.split(')') }
+    [response_data.css('table')[0].css('b').text.squish.tr(' ', '').split(')'), response_data.css('table')[1].css('b').text.squish.split(')')]
   end
 
   def request_retry(key:)
