@@ -32,9 +32,7 @@ Turbolinks.enableTransitionCache()
 
 new TextInput()
 new StoryCollapse '#story-collapse-toggle'
-new Toggle '.switch'
 new Tab '[data-tab-content]'
-new Dismiss '[data-dismiss]'
 new Rules()
 
 $(document).on 'ready page:load', ->
@@ -44,6 +42,10 @@ $(document).on 'ready page:load', ->
       dateFormat: "yy-mm-dd"
       altField: $(@).next()
       onClose: -> $(@).trigger 'blur'
+
+  # Active class toggle
+  new Toggle '.switch'
+  new Dismiss '[data-dismiss]'
 
   # Chosen
   $('select').chosen
