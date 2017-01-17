@@ -7,30 +7,27 @@ pkg = require path_to.package
 
 ExtractTextPlugin = require "extract-text-webpack-plugin"
 
+base_svg_plugins = [
+  {cleanupIDs: on}
+  {removeTitle: on}
+  {removeComments: on}
+  {removeDesc: on}
+  {removeDimensions: on}
+  {removeUselessStrokeAndFill: on}
+]
+
 config =
   svg_sprite: JSON.stringify
     spriteModule: path.resolve path_to.root, "config/custom-sprite"
     name: 'icon-[name]'
   svg_icon: JSON.stringify
     plugins: [
-      {cleanupIDs: on}
-      {removeTitle: on}
-      {removeComments: on}
-      {removeDesc: on}
-      {removeDimensions: on}
-      {removeUselessStrokeAndFill: on}
+      base_svg_plugins...
       {convertColors: {currentColor: on}}
     ]
   svg_image: JSON.stringify
-    plugins: [
-      {cleanupIDs: on}
-      {removeTitle: on}
-      {removeComments: on}
-      {removeDesc: on}
-      {removeDimensions: on}
-      {removeUselessStrokeAndFill: on}
-    ]
-
+    plugins: base_svg_plugins
+    
 module.exports = (env) ->
   webpack_config =
     context: path_to.root
