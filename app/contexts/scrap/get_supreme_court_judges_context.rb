@@ -20,11 +20,11 @@ class Scrap::GetSupremeCourtJudgesContext < BaseContext
   def perform
     run_callbacks :perform do
       @civil_brance_judge_names.each do |data_string|
-        Scrap::ImportSupremeCourtJudgesContext.new(data_string, '民事庭').perform
+        Scrap::ImportSupremeCourtJudgeContext.new(data_string, '民事庭').perform
       end
 
       @criminal_brance_judge_names.each do |data_string|
-        Scrap::ImportSupremeCourtJudgesContext.new(data_string, '邢事庭').perform
+        Scrap::ImportSupremeCourtJudgeContext.new(data_string, '邢事庭').perform
       end
     end
   end
@@ -41,7 +41,7 @@ class Scrap::GetSupremeCourtJudgesContext < BaseContext
   end
 
   def parse_judges_data(response_data)
-    { civil: response_data.css('table')[0].css('b').text.squish.split(')'), criminal: response_data.css('table')[1].css('b').text.squish.split(')') }
+    { civil: response_data.css('table')[0].css('b').text.squish.tr(' ', '').split(')'), criminal: response_data.css('table')[1].css('b').text.squish.split(')') }
   end
 
   def request_retry(key:)

@@ -1,4 +1,4 @@
-class Scrap::ImportSupremeCourtJudgesContext < BaseContext
+class Scrap::ImportSupremeCourtJudgeContext < BaseContext
   before_perform  :parse_data
   before_perform  :build_judge
   after_perform   :import_branch
@@ -8,7 +8,7 @@ class Scrap::ImportSupremeCourtJudgesContext < BaseContext
   def initialize(data_string, chamber_name)
     @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
     @data_string = data_string
-    @court = Court.find_by(full_name: '最高法院', name: '最高院', code: 'TPS')
+    @court = Court.find_or_create_by(full_name: '最高法院', name: '最高院', code: 'TPS')
     @chamber_name = chamber_name
   end
 
