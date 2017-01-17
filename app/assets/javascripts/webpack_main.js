@@ -500,11 +500,7 @@
 
 	new StoryCollapse('#story-collapse-toggle');
 
-	new Toggle('.switch');
-
 	new Tab('[data-tab-content]');
-
-	new Dismiss('[data-dismiss]');
 
 	new Rules();
 
@@ -518,6 +514,8 @@
 	      }
 	    });
 	  });
+	  new Toggle('.switch');
+	  new Dismiss('[data-dismiss]');
 	  $('select').chosen({
 	    no_results_text: '沒有選項符合',
 	    search_contains: true
@@ -7039,7 +7037,7 @@
 	Toggle = (function() {
 	  function Toggle(query) {
 	    this.query = query;
-	    $(document).on('click', this.query, (function(_this) {
+	    $(this.query).on('click', (function(_this) {
 	      return function(e) {
 	        var $this, off_targets, on_targets;
 	        $this = $(e.currentTarget);
@@ -7090,7 +7088,7 @@
 	Dismiss = (function() {
 	  function Dismiss(query) {
 	    this.query = query;
-	    $(document).on('click', this.query, function(e) {
+	    $(this.query).on('click', function(e) {
 	      var $this;
 	      $this = $(this);
 	      switch ($this.data('dismiss')) {
