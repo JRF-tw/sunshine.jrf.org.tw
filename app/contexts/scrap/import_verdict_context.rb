@@ -157,7 +157,7 @@ class Scrap::ImportVerdictContext < BaseContext
   end
 
   def alert_new_story_type
-    SlackService.notify_new_story_type_alert("取得新的案件類別 : #{@story_type}") unless @story_type.present? && StoryTypes.list.include?(@story_type)
+    SlackService.notify_new_story_type_alert("取得新的案件類別 : #{@story_type}") if @story_type.present? && !StoryTypes.list.include?(@story_type)
   end
 
   def send_after_verdict_noice
