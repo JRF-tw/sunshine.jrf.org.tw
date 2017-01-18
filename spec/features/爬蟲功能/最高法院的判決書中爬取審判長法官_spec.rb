@@ -10,8 +10,8 @@ describe '從最高法院的判決書中爬取審判長法官，並且檢查建�
     let!(:verdict_content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/highest_verdict_content.txt") }
     let!(:verdict_word) { '105,台上,1159' }
     let!(:verdict_publish_date) { Time.zone.today }
-    let!(:verdict_stroy_type) { '刑事' }
-    subject { Scrap::ImportVerdictContext.new(court, orginal_data, verdict_content, verdict_word, verdict_publish_date, verdict_stroy_type).perform }
+    let!(:verdict_story_type) { '刑事' }
+    subject { Scrap::ImportVerdictContext.new(court, orginal_data, verdict_content, verdict_word, verdict_publish_date, verdict_story_type).perform }
 
     context '最高法院的法官列表中，姓名已存在' do
       let!(:judge) { create :judge, name: '陳宗鎮', court: court }
@@ -63,8 +63,8 @@ describe '從最高法院的判決書中爬取審判長法官，並且檢查建�
     let!(:verdict_content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/judgment_content.txt") }
     let!(:verdict_word) { '105,上易緝,2' }
     let!(:verdict_publish_date) { Time.zone.today }
-    let!(:verdict_stroy_type) { '刑事' }
-    subject { Scrap::ImportVerdictContext.new(court1, orginal_data, verdict_content, verdict_word, verdict_publish_date, verdict_stroy_type).perform }
+    let!(:verdict_story_type) { '刑事' }
+    subject { Scrap::ImportVerdictContext.new(court1, orginal_data, verdict_content, verdict_word, verdict_publish_date, verdict_story_type).perform }
 
     context '最高法院的法官列表中，姓名已存在' do
       let!(:judge) { create :judge, name: '施俊堯', court: court }
