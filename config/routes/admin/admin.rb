@@ -56,7 +56,7 @@ Rails.application.routes.draw do
       end
     end
     resources :crawler_histories, only: [:index] do
-      resources :crawler_logs, only: [:index, :show] do
+      resources :crawler_logs, only: [:show] do
         collection do
           get :pie_chart
         end

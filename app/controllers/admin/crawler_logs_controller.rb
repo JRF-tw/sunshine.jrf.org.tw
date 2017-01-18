@@ -1,14 +1,7 @@
 class Admin::CrawlerLogsController < Admin::BaseController
   before_action :crawler_history
   before_action :crawler_log, only: [:show]
-  before_action(except: [:index]) { add_crumb('爬蟲紀錄列表', admin_crawler_histories_path) }
-
-  def index
-    @search = @crawler_history.crawler_logs.ransack(params[:q])
-    @crawler_logs = @search.result.page(params[:page]).per(10)
-    @admin_page_title = "爬蟲紀錄 - #{@crawler_history.crawler_on} 列表"
-    add_crumb @admin_page_title, '#'
-  end
+  before_action { add_crumb('爬蟲紀錄列表', admin_crawler_histories_path) }
 
   def show
     @admin_page_title = "#{@crawler_history.crawler_on} - #{CrawlerKinds.list[@crawler_log.crawler_kind.to_sym]} - #{CrawlerErrorTypes.list[@crawler_log.crawler_error_type.to_sym]}"

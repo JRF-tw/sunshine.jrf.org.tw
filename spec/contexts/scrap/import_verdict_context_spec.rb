@@ -132,7 +132,7 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
 
       context 'not alert' do
         subject { described_class.new(court, orginal_data, content, word, publish_date, story_type).perform }
-        it { expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+        it { expect { subject }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
       end
     end
 
@@ -141,9 +141,6 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
       it { expect { subject }.not_to change { Verdict.count } }
     end
 
-    context '#send_after_verdict_noice' do
-      before { subject }
-      it { expect(fetch_sidekiq_jobs(Sidekiq::Extensions::DelayedClass).size).to eq(1) }
-    end
+    xit '#send_after_verdict_noice, should be test in AfterVerdictNoticeContextSpec'
   end
 end

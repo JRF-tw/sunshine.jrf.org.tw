@@ -40,8 +40,8 @@ class CourtObserver::CheckScheduleScoreDateContext < BaseContext
   end
 
   def find_story
-    stroy_params = @params.except(:start_on, :confirmed_realdate)
-    return add_error(:story_not_found) unless @story = Story.where(stroy_params).last
+    story_params = @params.except(:start_on, :confirmed_realdate)
+    return add_error(:story_not_found) unless @story = Story.where(story_params).last
   end
 
   def find_schedule

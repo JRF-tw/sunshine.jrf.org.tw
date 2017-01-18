@@ -1,4 +1,10 @@
 - CrawlerKinds.list.keys.each do |key|
   - if generate_crawler_hitory_pie_hash(key, @crawler_history)
+    .dropdown
+      button#dropdownMenu1.btn.btn-default.dropdown-toggle data-toggle="dropdown" type="button"
+        = "#{CrawlerKinds.list[key]}詳細紀錄"
+        span.caret
+      ul.dropdown-menu
+        - @crawler_history.crawler_logs.public_send(key.to_s).each do |log|
+          li = link_to CrawlerErrorTypes.list[log.crawler_error_type.to_sym], admin_crawler_history_crawler_log_path(@crawler_history, log), target: '_blank'
     = pie_chart generate_crawler_hitory_pie_hash(key, @crawler_history), title: CrawlerKinds.list[key]
-    br
