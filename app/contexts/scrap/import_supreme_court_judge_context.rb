@@ -4,10 +4,9 @@ class Scrap::ImportSupremeCourtJudgeContext < BaseContext
   after_perform   :import_branch
   after_perform   :record_import_daily_branch
 
-  def initialize(data_string, chamber_name)
-    @data_string = data_string
+  def initialize(data_array)
+    @data_array = data_array
     @court = Court.find_or_create_by(full_name: '最高法院', name: '最高院', code: 'TPS')
-    @chamber_name = chamber_name
   end
 
   def perform
@@ -20,7 +19,7 @@ class Scrap::ImportSupremeCourtJudgeContext < BaseContext
   private
 
   def parse_data
-    @judge_name, @branch_name = @data_string.split('(')
+    @judge_name, @branch_name, @chamber_name = @data_array
   end
 
   def build_judge
