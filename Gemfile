@@ -159,3 +159,4 @@ gem 'slack-notifier'
 gem 'twilio-ruby'
 
 gem 'chartkick'
+gem 'groupdate'
