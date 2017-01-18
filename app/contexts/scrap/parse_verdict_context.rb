@@ -5,7 +5,7 @@ class Scrap::ParseVerdictContext < BaseContext
   before_perform :get_verdict_data
   before_perform :parse_orginal_data
   before_perform :parse_nokogiri_data
-  before_perform :parse_verdict_stroy_type
+  before_perform :parse_verdict_story_type
   before_perform :parse_verdict_word
   before_perform :parse_verdict_publish_date
   before_perform :parse_verdict_content
@@ -28,7 +28,7 @@ class Scrap::ParseVerdictContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      Scrap::ImportVerdictContext.delay(retry: false, queue: 'crawler_verdict').perform(@court, @orginal_data, @verdict_content, @verdict_word, @verdict_publish_date, @verdict_stroy_type)
+      Scrap::ImportVerdictContext.delay(retry: false, queue: 'crawler_verdict').perform(@court, @orginal_data, @verdict_content, @verdict_word, @verdict_publish_date, @verdict_story_type)
     end
   end
 
@@ -57,8 +57,8 @@ class Scrap::ParseVerdictContext < BaseContext
     false
   end
 
-  def parse_verdict_stroy_type
-    @verdict_stroy_type = @nokogiri_data.css('table')[0].css('b').text.match(/\s+(\p{Word}+)類/)[1]
+  def parse_verdict_story_type
+    @verdict_story_type = @nokogiri_data.css('table')[0].css('b').text.match(/\s+(\p{Word}+)類/)[1]
   rescue
     Logs::AddCrawlerError.parse_verdict_data_error(@crawler_history, :parse_data_failed, '解析資訊錯誤 : 取得 判決書類別 失敗')
     false

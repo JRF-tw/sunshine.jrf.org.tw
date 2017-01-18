@@ -84,8 +84,8 @@ class Story < ActiveRecord::Base
     end
 
     def relation_by_judge(judge_id)
-      relations_stroy_ids = Judge.find(judge_id).story_relations.pluck(:story_id)
-      where(id: relations_stroy_ids)
+      relations_story_ids = Judge.find(judge_id).story_relations.pluck(:story_id)
+      where(id: relations_story_ids)
     end
   end
 end
