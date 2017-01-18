@@ -34,6 +34,7 @@ FactoryGirl.define do
 
   factory :prosecutor_for_params, class: Prosecutor do
     name '不理不理右衛門'
+    prosecutors_office_id { (create :prosecutors_office).id }
   end
 
   factory :empty_name_for_prosecutor, class: Prosecutor do

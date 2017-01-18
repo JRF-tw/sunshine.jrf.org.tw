@@ -34,6 +34,7 @@ FactoryGirl.define do
 
   factory :judge_for_params, class: Judge do
     name '不理不理左衛門'
+    current_court_id { (create :court).id }
   end
 
   factory :empty_name_for_judge, class: Judge do
