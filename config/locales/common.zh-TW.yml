@@ -344,12 +344,14 @@ zh-TW:
         is_hidden_eq: '是否在前端隱藏'
         name_cont: '姓名包含'
         court_full_name_eq: '任職法院'
+        current_court_id_null: '無任職法院'
       prosecutor:
         is_active_true: '是否在職'
         is_hidden_eq: '是否在前端隱藏'
         is_judge_true: '現任職務'
         name_cont: '姓名包含'
         prosecutors_office_full_name_eq: '任職檢察署'
+        prosecutors_office_id_null: '無任職檢察署'
       lawyer:
         name_cont: '姓名包含'
         current_cont: '現職包含'

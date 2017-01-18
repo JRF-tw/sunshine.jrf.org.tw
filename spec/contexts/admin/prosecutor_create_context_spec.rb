@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Admin::ProsecutorCreateContext do
-  let(:params) { attributes_for(:prosecutor) }
+  let(:params) { attributes_for(:prosecutor_for_params) }
 
   context 'success' do
     subject { described_class.new(params) }
