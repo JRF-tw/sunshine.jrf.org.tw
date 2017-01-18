@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Admin::JudgeCreateContext do
-  let(:params) { attributes_for(:judge) }
+  let(:params) { attributes_for(:judge_for_params) }
 
   context 'success' do
     subject { described_class.new(params) }

@@ -55,7 +55,8 @@ RSpec.describe Admin::JudgesController do
 
   describe '#create' do
     context 'create success' do
-      subject { post '/admin/judges', admin_judge: { name: '笑笑' } }
+      let!(:court) { create :court }
+      subject { post '/admin/judges', admin_judge: { name: '笑笑', current_court_id: court.id } }
       it { expect { subject }.to change { Judge.count }.by(1) }
       it { expect(subject).to eq(302) }
     end
