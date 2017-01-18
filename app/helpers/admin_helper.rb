@@ -34,7 +34,7 @@ module AdminHelper
   def generate_crawler_daily_line_chart(crawler_histories)
     [
       { name: '法院總數', data: crawler_histories.inject({}) { |a, e| a.merge(e.crawler_on => e.courts_count) } },
-      { name: '股別總數', data: crawler_histories.inject({}) { |a, e| a.merge(e.crawler_on => e.branees_count) } },
+      { name: '股別總數', data: crawler_histories.inject({}) { |a, e| a.merge(e.crawler_on => e.branches_count) } },
       { name: '法官總數', data: crawler_histories.inject({}) { |a, e| a.merge(e.crawler_on => e.judges_count) } },
       { name: '判決書總數', data: crawler_histories.inject({}) { |a, e| a.merge(e.crawler_on => e.verdicts_count) } },
       { name: '庭期總數', data: crawler_histories.inject({}) { |a, e| a.merge(e.crawler_on => e.schedules_count) } }
