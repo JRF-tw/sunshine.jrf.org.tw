@@ -35,8 +35,6 @@
             td = ch.verdicts_count
             td = ch.schedules_count
             td
-              = link_to '詳細內容', admin_crawler_history_crawler_logs_path(ch), class: 'btn btn-mini'
-              = ' '
               = link_to '錯誤圓餅圖', pie_chart_admin_crawler_history_crawler_logs_path(ch), class: 'btn btn-mini'
     .ui-toolbar.ui-widget-header
       = paginate @crawler_histories, theme: :admin
