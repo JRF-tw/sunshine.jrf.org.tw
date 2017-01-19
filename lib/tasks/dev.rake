@@ -239,9 +239,6 @@ namespace :dev do
         link: 'http://example.com',
         btn_wording: "我是按鈕文字-#{i}",
         pic: File.open("#{Rails.root}/spec/fixtures/banner/M_banner_#{i + 1}.jpg"),
-        pic_l: File.open("#{Rails.root}/spec/fixtures/banner/L_banner_#{i + 1}.jpg"),
-        pic_m: File.open("#{Rails.root}/spec/fixtures/banner/M_banner_#{i + 1}.jpg"),
-        pic_s: File.open("#{Rails.root}/spec/fixtures/banner/S_banner_#{i + 1}.jpg"),
         weight: i + 1
       )
     end

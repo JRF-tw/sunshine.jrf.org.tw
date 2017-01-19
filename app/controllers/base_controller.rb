@@ -13,7 +13,7 @@ class BaseController < ApplicationController
     @suits = Suit.shown.last(3)
     @judges = Profile.judges.shown.active.had_avatar.sample(12)
     @prosecutors = Profile.prosecutors.shown.active.had_avatar.sample(12)
-    image = @banners.count > 0 ? @banners.first.pic_l.L_540.url : nil
+    image = @banners.count > 0 ? @banners.first.pic.W_540.url : nil
     set_meta(image: image)
   end
 
