@@ -32,6 +32,10 @@ RSpec.describe CrawlerHistory, type: :model do
       it { expect(CrawlerHistory.newest.first).to eq(crawler_history) }
     end
 
+    context 'oldest' do
+      it { expect(CrawlerHistory.oldest.first).to eq(crawler_history1) }
+    end
+
     context 'has_verdicts' do
       it { expect(CrawlerHistory.has_verdicts.count).to eq(1) }
     end
