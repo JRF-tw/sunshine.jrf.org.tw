@@ -16,7 +16,7 @@ RSpec.describe Scrap::GetSupremeCourtJudgesContext, type: :model do
       let!(:branches) { create_list :branch, 2, court: court, missed: false }
       before { subject }
 
-      it { expect(Branch.where(missed: true)).to eq(branches) }
+      it { expect(Branch.where(missed: true).count).to eq(2) }
     end
 
     context 'create TPS if not exist' do
