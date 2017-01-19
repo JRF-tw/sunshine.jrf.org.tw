@@ -13,11 +13,18 @@
   flex-flow: column;
   margin: 0 r(2) r(4);
   padding-bottom: r(1);
+  width: 100%;
   overflow: hidden;
+  @include susy($tablet) {width: 40%;}
+  @include susy($desktop) {width: 30%;}
 }
 .news-card__thumbnail-wrapper {
   margin: r(-2) r(-2) 0;
   position: relative;
+}
+.news-card__thumbnail-placeholder {
+  padding-bottom: 240/360*100%;
+  background-color: $divider-gray;
 }
 .news-card__heading {
   margin: 0;
