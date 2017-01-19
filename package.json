@@ -20,6 +20,7 @@
     "console": "redis-server & bundle exec rails c",
     "check": "rubocop --auto-correct",
     "rebase": "bundle install && npm run migrate",
+    "dev_build": "redis-server & bundle exec rake dev:build",
     "migrate": "redis-server & bundle exec rake db:migrate",
     "test": "redis-server & bundle exec rake spec",
     "dev-server": "webpack-dev-server --inline --hot --config webpack-dev.config.coffee",
