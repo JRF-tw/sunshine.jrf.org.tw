@@ -19,6 +19,7 @@ class CrawlerHistory < ActiveRecord::Base
 
   scope :has_verdicts, -> { where('verdicts_count > ? ', 0) }
   scope :newest, -> { order('crawler_on DESC') }
+  scope :oldest, -> { order('crawler_on ASC') }
 
   def success_count(crawler_kind, crawler_error_type)
     verdicts_count - error_log_count(crawler_kind, crawler_error_type)
