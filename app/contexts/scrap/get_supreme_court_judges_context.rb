@@ -15,7 +15,7 @@ class Scrap::GetSupremeCourtJudgesContext < BaseContext
 
   def initialize
     @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
-    @court = Court.find_or_create_by(full_name: '最高法院')
+    @court = Court.find_or_create_by(full_name: '最高法院', code: 'TPS')
     @judge_names = []
   end
 
@@ -38,15 +38,15 @@ class Scrap::GetSupremeCourtJudgesContext < BaseContext
   end
 
   def parse_judges_data(response_data)
-    response_data.css('center').slice(1, 2).each do |data|
-      parse_data_to_array(data)
+    response_data.css('center').each do |data|
+      parse_data_to_array(data) if data.css('table').present?
     end
   end
 
   def parse_data_to_array(data)
     chamber_name = data.css('font')[0].text
     data.css('b').text.squish.split(')').each do |judge|
-      @judge_names << [judge[/\p{Han}+/u], judge[/\(./][1], chamber_name]
+      @judge_names << [judge[/\p{Han}+/u], judge[/\(./][/\p{Han}+/u], chamber_name]
     end
   end
 
