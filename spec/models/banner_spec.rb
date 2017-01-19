@@ -22,4 +22,11 @@ RSpec.describe Banner, type: :model do
   it 'FactoryGirl' do
     expect(banner).not_to be_new_record
   end
+
+  context 'scope' do
+    context 'order_by_weight' do
+      let!(:banners) { create_list :banner, 3, weight: 3 }
+      it { expect(Banner.order_by_weight.last).to eq(banner) }
+    end
+  end
 end
