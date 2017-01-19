@@ -4,7 +4,7 @@ class Admin::BulletinsController < Admin::BaseController
 
   def index
     @search = Admin::Bulletin.all.ransack(params[:q])
-    @bulletins = @search.result.page(params[:page]).per(20)
+    @bulletins = @search.result.newest.page(params[:page]).per(20)
     @admin_page_title = '公告訊息管理'
     add_crumb @admin_page_title, '#'
   end

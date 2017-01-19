@@ -3,7 +3,7 @@ class Admin::BannersController < Admin::BaseController
   before_action(except: [:index]) { add_crumb('首頁橫幅列表', admin_banners_path) }
 
   def index
-    @banners = Admin::Banner.all.order_by_weight.page(params[:page]).per(10)
+    @banners = Admin::Banner.all.newest.page(params[:page]).per(10)
     @admin_page_title = '首頁橫幅列表'
     add_crumb @admin_page_title, '#'
   end

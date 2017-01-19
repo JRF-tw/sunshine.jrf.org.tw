@@ -19,5 +19,6 @@ class Banner < ActiveRecord::Base
   mount_uploader :pic, BannerPicUploader
   validates :title, :link, :pic, presence: true
 
-  scope :order_by_weight, -> { order('weight DESC, id DESC') }
+  scope :newest, -> { order(id: :desc) }
+  scope :order_by_weight, -> { order('weight IS NULL, weight DESC, id DESC') }
 end
