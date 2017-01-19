@@ -11,7 +11,6 @@
 #  is_hidden  :boolean          default(TRUE)
 #  code       :string
 #  scrap_name :string
-#  court_type :string
 #
 
 require 'rails_helper'
