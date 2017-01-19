@@ -18,7 +18,7 @@
 #  memo                  :string
 #  is_active             :boolean          default(TRUE)
 #  is_hidden             :boolean          default(TRUE)
-#  is_judge              :boolean
+#  is_judge              :boolean          default(FALSE)
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #
@@ -34,6 +34,7 @@ FactoryGirl.define do
 
   factory :prosecutor_for_params, class: Prosecutor do
     name '不理不理右衛門'
+    prosecutors_office_id { (create :prosecutors_office).id }
   end
 
   factory :empty_name_for_prosecutor, class: Prosecutor do

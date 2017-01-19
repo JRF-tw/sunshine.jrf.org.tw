@@ -20,12 +20,12 @@
 #  punishments_count  :integer          default(0)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  is_prosecutor      :boolean
+#  is_prosecutor      :boolean          default(FALSE)
 #
 
 class Admin::Judge < ::Judge
   has_many :branches
   belongs_to :court, class_name: 'Court', foreign_key: :current_court_id
 
-  validates :name, presence: true
+  validates :name, :court, presence: true
 end

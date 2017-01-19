@@ -48,7 +48,8 @@ RSpec.describe Admin::ProsecutorsController do
 
   describe '#create' do
     context 'create success' do
-      subject { post '/admin/prosecutors', admin_prosecutor: { name: '笑笑' } }
+      let!(:prosecutors_office) { create :prosecutors_office }
+      subject { post '/admin/prosecutors', admin_prosecutor: { name: '笑笑', prosecutors_office_id: prosecutors_office.id } }
       it { expect { subject }.to change { Prosecutor.count }.by(1) }
       it { expect(response).to be_redirect }
     end
@@ -56,6 +57,7 @@ RSpec.describe Admin::ProsecutorsController do
 
   describe '#set_to_judge' do
     context 'success' do
+      let!(:court) { create :court, prosecutors_office: prosecutor.prosecutors_office }
       subject { post "/admin/prosecutors/#{prosecutor.id}/set_to_judge" }
 
       it { expect { subject }.to change { prosecutor.reload.is_active } }

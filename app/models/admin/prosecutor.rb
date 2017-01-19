@@ -18,10 +18,11 @@
 #  memo                  :string
 #  is_active             :boolean          default(TRUE)
 #  is_hidden             :boolean          default(TRUE)
-#  is_judge              :boolean
+#  is_judge              :boolean          default(FALSE)
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #
 
 class Admin::Prosecutor < ::Prosecutor
+  validates :name, :prosecutors_office, presence: true
 end

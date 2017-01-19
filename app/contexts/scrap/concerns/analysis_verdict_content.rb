@@ -2,7 +2,7 @@ module Scrap::Concerns::AnalysisVerdictContent
   extend ActiveSupport::Concern
 
   MAIN_JUDGE = /審判長法\s*官\s*([\p{Word}\w\s\S]*?)\n/
-  JUDGE = /法\s*官\s+([\p{Word}\w\s\S]*?)\n/
+  JUDGE = /法\s*官[^\r\n]\s+([\p{Word}\w\s]*?)\n/
   PROSECUTOR = /檢察官(\p{Word}+)到庭執行職務/
   LAWYER = /\s+(\p{Word}+)律師/
   MUTI_TYPE_PARTY = /\n\s*被\s+告\s+([\p{Word}\w\s\S]+?)\n\s*[\s男\s|\s女\s|上|訴訟|法定|選任|指定|輔\s+佐\s+人]/

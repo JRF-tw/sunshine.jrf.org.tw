@@ -23,8 +23,8 @@ class Scrap::ImportVerdictContext < BaseContext
   after_perform   :send_after_verdict_noice
 
   class << self
-    def perform(court, orginal_data, content, word, publish_date, stroy_type)
-      new(court, orginal_data, content, word, publish_date, stroy_type).perform
+    def perform(court, orginal_data, content, word, publish_date, story_type)
+      new(court, orginal_data, content, word, publish_date, story_type).perform
     end
 
     def calculate_verdict_scores(story)
@@ -32,13 +32,13 @@ class Scrap::ImportVerdictContext < BaseContext
     end
   end
 
-  def initialize(court, orginal_data, content, word, publish_date, stroy_type)
+  def initialize(court, orginal_data, content, word, publish_date, story_type)
     @court = court
     @orginal_data = orginal_data
     @content = content
     @word = word
     @publish_date = publish_date
-    @stroy_type = stroy_type
+    @story_type = story_type
     @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
   end
 
@@ -157,7 +157,7 @@ class Scrap::ImportVerdictContext < BaseContext
   end
 
   def alert_new_story_type
-    SlackService.notify_new_story_type_alert("取得新的案件類別 : #{@story_type}") unless @story_type.present? && StoryTypes.list.include?(@story_type)
+    SlackService.notify_new_story_type_alert("取得新的案件類別 : #{@story_type}") if @story_type.present? && !StoryTypes.list.include?(@story_type)
   end
 
   def send_after_verdict_noice

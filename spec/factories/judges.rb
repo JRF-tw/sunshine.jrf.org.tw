@@ -20,7 +20,7 @@
 #  punishments_count  :integer          default(0)
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
-#  is_prosecutor      :boolean
+#  is_prosecutor      :boolean          default(FALSE)
 #
 
 FactoryGirl.define do
@@ -34,6 +34,7 @@ FactoryGirl.define do
 
   factory :judge_for_params, class: Judge do
     name '不理不理左衛門'
+    current_court_id { (create :court).id }
   end
 
   factory :empty_name_for_judge, class: Judge do

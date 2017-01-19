@@ -20,15 +20,20 @@
             .controls = f.search_field :name_cont
         .span6
           .control-group
-            label.control-label = f.label :prosecutors_office_full_name_eq
-            .controls#select2 = f.select :prosecutors_office_id_eq,
-            collect_for_prosecutors_offices, include_blank: '請選擇'
+            label.control-label = f.label :is_judge_true
+            .controls#select2 = f.select :is_judge_true,
+            collect_for_is_judge, include_blank: '請選擇'
       .row
         .span6
           .control-group
-            label.control-label = f.label :is_judge_true
-            .controls#select2 = f.select :is_judge_true,
-            collect_for_boolean, include_blank: '請選擇'
+            label.control-label = f.label :prosecutors_office_full_name_eq
+            .controls#select2 = f.select :prosecutors_office_id_eq,
+            collect_for_prosecutors_offices, include_blank: '請選擇'
+        .span6
+          .control-group
+            label.control-label = f.label :prosecutors_office_id_null
+            .controls.select2 = f.check_box :prosecutors_office_id_null
+        
     hr
     .form-actions
       = f.submit value: '搜尋', class: 'btn btn-primary'
@@ -47,6 +52,7 @@
           th 名稱
           th 性別
           th 任職檢察署
+          th 現任職務
           th 是否在職
           th 是否在前端隱藏
           th 備註
@@ -58,6 +64,7 @@
             td = prosecutor.name
             td = prosecutor.gender
             td = link_to "#{prosecutor.prosecutors_office.full_name}", admin_prosecutors_office_path(prosecutor.prosecutors_office) if prosecutor.prosecutors_office
+            td = prosecutor.is_judge ? '法官' : '檢察官'
             td = prosecutor.is_active? ? '是' : '否'
             td = prosecutor.is_hidden? ? '是' : '否'
             td = prosecutor.memo
@@ -65,6 +72,8 @@
               = link_to '詳細資料', admin_prosecutor_path(prosecutor), class: 'btn btn-mini'
               | &nbsp;
               = link_to '編輯', edit_admin_prosecutor_path(prosecutor), class: 'btn btn-mini btn-success'
+              | &nbsp;
+              = link_to '轉換為法官', set_to_judge_admin_prosecutor_path(prosecutor), class: 'btn btn-mini btn-warning', method: :post, 'data-confirm': "確認將 #{prosecutor.name} 轉換為法官？" unless prosecutor.is_judge
               | &nbsp;
               = link_to '刪除', admin_prosecutor_path(prosecutor), class: 'btn btn-mini btn-danger', method: :delete, 'data-confirm': "確認刪除該檢察官檔案 - #{prosecutor.name}？"
     .ui-toolbar.ui-widget-header

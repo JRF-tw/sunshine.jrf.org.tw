@@ -208,6 +208,14 @@ module ApplicationHelper
     [['是', true], ['否', false]]
   end
 
+  def collect_for_is_prosecutor
+    [['法官', false], ['檢察官', true]]
+  end
+
+  def collect_for_is_judge
+    [['檢察官', false], ['法官', true]]
+  end
+
   def collect_for_register
     [['已註冊', true], ['未註冊', false]]
   end

@@ -1,6 +1,6 @@
 - content_for :btns do
   = link_to '編輯', edit_admin_judge_path(@judge), class: 'btn btn-large btn-success'
-  = link_to '轉換為檢察官', set_to_prosecutor_admin_judge_path(@judge), class: 'btn btn-large btn-warning', method: :post unless @judge.is_prosecutor
+  = link_to '轉換為檢察官', set_to_prosecutor_admin_judge_path(@judge), class: 'btn btn-large btn-warning', method: :post, 'data-confirm': "確認將 #{@judge.name} 轉換為檢察官？" unless @judge.is_prosecutor
 
 = admin_widget_box "#{@judge.name}的個人檔案", icon: :th do
   table.table.table-bordered.table-striped.table-hover
@@ -19,6 +19,9 @@
           - if @judge.gender_source.present?
             br
             = "來源：#{@judge.gender_source}"
+      tr
+        td 任職法院
+        td = link_to "#{@judge.court.full_name}", admin_court_path(@judge.court) if @judge.court
       tr
         td 出生年
         td
@@ -40,6 +43,9 @@
           - if @judge.appointment_source.present?
             br
             = "來源：#{@judge.appointment_source}"
+      tr
+        td 現任職務
+        td = @judge.is_prosecutor ? '檢察官' : '法官'
       tr
         td 是否在職
         td = @judge.is_active ? '是' : '否'

@@ -70,7 +70,7 @@ class Scrap::ImportScheduleContext < BaseContext
   end
 
   def alert_new_story_type
-    SlackService.notify_analysis_schedule_alert("取得新的案件類別 : #{@story_type}") unless @story_type.present? && StoryTypes.list.include?(@story_type)
+    SlackService.notify_analysis_schedule_alert("取得新的案件類別 : #{@story_type}") if @story_type.present? && !StoryTypes.list.include?(@story_type)
   end
 
   def log_branch_judge_not_found
