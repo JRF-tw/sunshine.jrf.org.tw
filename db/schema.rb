@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170110063318) do
+ActiveRecord::Schema.define(version: 20170119040636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,9 +65,6 @@ ActiveRecord::Schema.define(version: 20170110063318) do
   add_index "awards", ["profile_id"], name: "index_awards_on_profile_id", using: :btree
 
   create_table "banners", force: :cascade do |t|
-    t.string   "pic_l"
-    t.string   "pic_m"
-    t.string   "pic_s"
     t.integer  "weight"
     t.boolean  "is_hidden"
     t.datetime "created_at"
