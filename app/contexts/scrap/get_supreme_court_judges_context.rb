@@ -15,7 +15,7 @@ class Scrap::GetSupremeCourtJudgesContext < BaseContext
 
   def initialize
     @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
-    @court = Court.find_or_create_by(full_name: '最高法院', name: '最高院', code: 'TPS')
+    @court = Court.find_or_create_by(full_name: '最高法院')
     @judge_names = []
   end
 
@@ -38,11 +38,15 @@ class Scrap::GetSupremeCourtJudgesContext < BaseContext
   end
 
   def parse_judges_data(response_data)
-    response_data.css('table')[0].css('b').text.squish.tr(' ', '').split(')').map do |judge|
-      @judge_names << judge.split('(') + ['民事庭']
+    response_data.css('center').slice(1, 2).each do |data|
+      parse_data_to_array(data)
     end
-    response_data.css('table')[1].css('b').text.squish.tr(' ', '').split(')').map do |judge|
-      @judge_names << judge.split('(') + ['刑事庭']
+  end
+
+  def parse_data_to_array(data)
+    chamber_name = data.css('font')[0].text
+    data.css('b').text.squish.split(')').each do |judge|
+      @judge_names << [judge[/\p{Han}+/u], judge[/\(./][1], chamber_name]
     end
   end
 
@@ -58,7 +62,7 @@ class Scrap::GetSupremeCourtJudgesContext < BaseContext
   end
 
   def get_diff_import_daily_branch
-    @diff_branch_ids = @court.branches.map(&:id) - Redis::List.new('import_supreme_branch_ids').values.map(&:to_i)
+    @diff_branch_ids = @court.branches.pluck(:id) - Redis::List.new('import_supreme_branch_ids').values.map(&:to_i)
   end
 
   def build_diff_info

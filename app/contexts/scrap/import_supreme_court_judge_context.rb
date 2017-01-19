@@ -6,7 +6,7 @@ class Scrap::ImportSupremeCourtJudgeContext < BaseContext
 
   def initialize(data_array)
     @data_array = data_array
-    @court = Court.find_or_create_by(full_name: '最高法院', name: '最高院', code: 'TPS')
+    @court = Court.find_or_create_by(full_name: '最高法院')
   end
 
   def perform
