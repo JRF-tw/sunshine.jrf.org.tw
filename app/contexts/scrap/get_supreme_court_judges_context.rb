@@ -46,6 +46,7 @@ class Scrap::GetSupremeCourtJudgesContext < BaseContext
   def parse_data_to_array(data)
     chamber_name = data.css('font')[0].text
     data.css('b').text.squish.split(')').each do |judge|
+      judge = judge.gsub(/(\s+)|(　+)/, "")
       @judge_names << [judge[/\p{Han}+/u], judge[/\(.+/][/\p{Han}+/u], chamber_name]
     end
   end
