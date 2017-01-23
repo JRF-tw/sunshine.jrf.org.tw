@@ -11,7 +11,7 @@ class Scrap::NotifyAbnormalDataContext < BaseContext
   def perform
     run_callbacks :perform do
       @messages.each do |m|
-        SlackService.notify_scrap_court_alert(m)
+        SlackService.notify_scrap_daily_alert(m)
       end
     end
   end
