@@ -8,6 +8,12 @@
   default: 1
   crawler_verdict: 2
 staging:
-  :concurrency: 3
+  :concurrency: 2
+  :queues:
+  - [default, 1]
+  - [crawler_verdict, 1]
+  :limits:
+    default: 1
+    crawler_verdict: 1
 production:
   :concurrency: 3
