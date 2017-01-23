@@ -28,6 +28,12 @@ class Logs::AddCrawlerError
       crawler_log.save
     end
 
+    def parse_supreme_court_judge_data_error(crawler_history, type, message)
+      crawler_log = crawler_history.crawler_logs.find_or_create_by(crawler_kind: CrawlerKinds.list.keys.index(:crawler_supreme_court_judge), crawler_error_type: CrawlerErrorTypes.list.keys.index(type))
+      crawler_log.crawler_errors << message unless crawler_log.crawler_errors.include?(message)
+      crawler_log.save
+    end
+
     def parse_verdict_data_error(crawler_history, type, message)
       crawler_log = crawler_history.crawler_logs.find_or_create_by(crawler_kind: CrawlerKinds.list.keys.index(:crawler_verdict), crawler_error_type: CrawlerErrorTypes.list.keys.index(type))
       crawler_log.crawler_errors << message unless crawler_log.crawler_errors.include?(message)

@@ -15,7 +15,7 @@ class Admin::CourtsController < Admin::BaseController
   end
 
   def new
-    @admin_page_title = '新增法院
+    @admin_page_title = '新增法院'
     add_crumb @admin_page_title, ' # '
   end
 
