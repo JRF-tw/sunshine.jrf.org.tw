@@ -16,7 +16,7 @@ class SlackService
       delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook) unless DISABLED_ENV.include?(Rails.env)
     end
 
-    def notify_scrap_court_alert(message, channel: '#notify-scrap-error', name: 'notify', icon_url: DEFAULT_ICON_URL, webhook: nil)
+    def notify_scrap_court_alert(message, channel: '#notify-court', name: 'notify', icon_url: DEFAULT_ICON_URL, webhook: nil)
       delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook) unless DISABLED_ENV.include?(Rails.env)
       false
     end
@@ -38,7 +38,8 @@ class SlackService
     end
 
     def notify_branch_alert(message, channel: '#notify-branch', name: 'notify', icon_url: DEFAULT_ICON_URL, webhook: nil)
-      delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook) unless DISABLED_ENV.include?(Rails.env)
+      # message should not be used now
+      # delay.notify(message, channel: channel, name: name, icon_url: icon_url, webhook: webhook) unless DISABLED_ENV.include?(Rails.env)
     end
 
     def notify_sms_alert(message, channel: '#notify-sms', name: 'notify', icon_url: DEFAULT_ICON_URL, webhook: nil)
