@@ -806,6 +806,7 @@ ActiveRecord::Schema.define(version: 20170207035248) do
     t.boolean  "is_judgment",      default: false
     t.date     "adjudge_date"
     t.date     "publish_date"
+    t.string   "content"
   end
 
   add_index "verdicts", ["adjudge_date"], name: "index_verdicts_on_adjudge_date", using: :btree
