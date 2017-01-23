@@ -19,6 +19,7 @@
 
 class Verdict < ActiveRecord::Base
   mount_uploader :file, VerdictFileUploader
+  mount_uploader :content, VerdictFileUploader
   serialize :party_names, Array
   serialize :lawyer_names, Array
   serialize :judges_names, Array
