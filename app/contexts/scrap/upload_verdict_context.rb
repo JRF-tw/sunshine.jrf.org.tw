@@ -1,9 +1,11 @@
 class Scrap::UploadVerdictContext < BaseContext
   before_perform  :bulid_tempfile
+  before_perform  :build_content_tempfile
   before_perform  :assign_value
   after_perform   :remove_tempfile
 
-  def initialize(content)
+  def initialize(orginal_data, content)
+    @orginal_data = orginal_data
     @content = content
     @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
   end
@@ -22,16 +24,25 @@ class Scrap::UploadVerdictContext < BaseContext
 
   def bulid_tempfile
     @file = Tempfile.new(['verdict', '.html'], "#{Rails.root}/tmp/")
-    @file.write(@content)
+    @file.write(@orginal_data)
     @file.rewind
     @file.close
   end
 
+  def build_content_tempfile
+    @content_file = Tempfile.new(['verdict', '.text'], "#{Rails.root}/tmp/")
+    @content_file.write(@content)
+    @content_file.rewind
+    @content_file.close
+  end
+
   def assign_value
     @verdict.assign_attributes(file: File.open(@file.path))
+    @verdict.assign_attributes(content: File.open(@content_file.path))
   end
 
   def remove_tempfile
     @file.unlink
+    @content_file.unlink
   end
 end

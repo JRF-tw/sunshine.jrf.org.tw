@@ -94,7 +94,7 @@ class Scrap::ImportVerdictContext < BaseContext
   end
 
   def upload_file
-    Scrap::UploadVerdictContext.new(@orginal_data).perform(@verdict)
+    Scrap::UploadVerdictContext.new(@orginal_data, @content).perform(@verdict)
   end
 
   def update_data_to_story

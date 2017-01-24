@@ -30,7 +30,7 @@ class VerdictFileToContentContext < BaseContext
   end
 
   def bulid_tempfile
-    @file = Tempfile.new(['verdict', '.html'], "#{Rails.root}/tmp/")
+    @file = Tempfile.new(['verdict', '.text'], "#{Rails.root}/tmp/")
     @file.write(@content_data)
     @file.rewind
     @file.close
