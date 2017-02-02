@@ -19,6 +19,7 @@ class Scrap::ImportVerdictContext < BaseContext
   after_perform   :record_count_to_daily_notify
   after_perform   :alert_new_story_type
   after_perform   :send_after_verdict_noice
+  after_perform   :send_active_verdict_notice
 
   class << self
     def perform(court, orginal_data, content, word, publish_date, story_type)
@@ -147,5 +148,9 @@ class Scrap::ImportVerdictContext < BaseContext
 
   def send_after_verdict_noice
     Story::AfterVerdictNoticeContext.new(@verdict).perform
+  end
+
+  def send_active_verdict_notice
+    Story::ActiveAfterVerdictNoticeContext.new(@verdict).perform
   end
 end

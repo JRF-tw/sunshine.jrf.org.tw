@@ -110,6 +110,7 @@ zh-TW:
         phone_number: '手機'
         office_number: '事務所電話'
         memo: '備註'
+        be_noticed: '是否接受通知'
       education:
         title: '學經歷'
         content: '說明'

@@ -27,6 +27,7 @@
 #  unconfirmed_email      :string
 #  phone_number           :string
 #  office_number          :string
+#  be_noticed             :boolean          default(TRUE)
 #
 
 class Admin::Lawyer < ::Lawyer
