@@ -47,15 +47,6 @@ feature '通知' do
           end
         end
       end
-
-      Scenario '律師在完成註冊後，預設開啟「我願意收到判決評鑑通知」' do
-        Given '律師尚未註冊' do
-          When '律師完成註冊' do
-            Then '律師的「我願意收到判決評鑑通知」設定為開啟' do
-            end
-          end
-        end
-      end
     end
   end
 end
