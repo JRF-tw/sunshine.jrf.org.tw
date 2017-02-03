@@ -224,6 +224,10 @@ module ApplicationHelper
     [['是', 'yes'], ['否', 'no']]
   end
 
+  def collect_for_score_roles
+    [['律師', 'Lawyer'], ['當事人', 'Party'], ['觀察者', 'CourtObserver']]
+  end
+
   def get_court_fullname(court_id)
     Court.find(court_id).full_name
   end

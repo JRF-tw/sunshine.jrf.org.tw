@@ -23,4 +23,21 @@ class VerdictScore < ActiveRecord::Base
   belongs_to :story
   belongs_to :verdict_rater, polymorphic: true
   has_many   :valid_scores, as: :score
+
+  def rater_info
+    case verdict_rater.class.name
+    when 'Lawyer'
+      type = '律師'
+    when 'Party'
+      type = '當事人'
+    when 'CourtObserver'
+      type = '觀察者'
+    end
+    "#{type} - #{verdict_rater.name}"
+  end
+
+  def rater_path
+    rater_type = verdict_rater.class.name.downcase.gsub('court', '')
+    Rails.application.routes.url_helpers.send("admin_#{rater_type}_path", verdict_rater)
+  end
 end

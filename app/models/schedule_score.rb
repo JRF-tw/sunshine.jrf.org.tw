@@ -29,4 +29,21 @@ class ScheduleScore < ActiveRecord::Base
   store_accessor :attitude_scores, :score_1_1, :score_1_2, :score_1_3
   store_accessor :command_scores, :score_2_1, :score_2_2, :score_2_3, :score_2_4, :score_2_5
   store_accessor :data, :court_id, :year, :word_type, :number, :story_type, :start_on, :confirmed_realdate, :judge_name, :note
+
+  def rater_info
+    case schedule_rater.class.name
+    when 'Lawyer'
+      type = '律師'
+    when 'Party'
+      type = '當事人'
+    when 'CourtObserver'
+      type = '觀察者'
+    end
+    "#{type} - #{schedule_rater.name}"
+  end
+
+  def rater_path
+    rater_type = schedule_rater.class.name.downcase.gsub('court', '')
+    Rails.application.routes.url_helpers.send("admin_#{rater_type}_path", schedule_rater)
+  end
 end

@@ -1,0 +1,55 @@
+= search_form_for @search, url: admin_scores_path, wrapper: :admin, html: { class: 'form-horizontal' } do |f|
+  .well
+    fieldset
+      legend 搜尋
+      .row
+        .span6
+          .control-group
+            label.control-label = f.label :judge_id_eq
+            .controls = f.search_field :judge_id_eq
+        .span6
+          .control-group
+            label.control-label = f.label :story_id_eq
+            .controls = f.search_field :story_id_eq
+      .row
+        .span6
+          .control-group
+            label.control-label = f.label :schedule_rater_type_eq
+            .controls.select2 = f.select :schedule_rater_type_eq,
+            collect_for_score_roles, include_blank: "請選擇"
+        .span6
+          .control-group
+            label.control-label = f.label :schedule_rater_id_eq
+            .controls = f.search_field :schedule_rater_id_eq
+      .row
+        .span6
+          .control-group#datepicker
+            label.control-label = f.label :created_at_gteq
+            .controls = f.search_field :created_at_gteq, placeholder: "起始時間，非必填"
+            .controls = f.search_field :created_at_lteq, placeholder: "結束時間，非必填"
+
+    hr
+    .form-actions
+      = f.submit value: '搜尋', class: 'btn btn-primary'
+      = ' '
+      = link_to '清空搜尋結果', admin_scores_path, class: 'btn btn-default'
+= admin_widget_box "評鑑記錄列表 : 搜尋結果為 #{@scores.count} 筆", icon: :pencil do
+  .dataTables_wrapper
+    table.table.table-bordered.table-striped.table-hover
+      thead
+        tr
+          th 案件
+          th 評鑑人
+          th 評鑑類型
+          th 評鑑時間
+          th
+      tbody
+        - @scores.each do |s|
+          tr
+            td = link_to s.story.identity, admin_story_path(s.story.id)
+            td = link_to s.rater_info, s.rater_path
+            td = s.class.name == 'ScheduleScore'? '開庭評鑑' : '判決評鑑'
+            td = s.created_at
+            td
+              = s.class.name == 'ScheduleScore'? link_to('詳細資料', ss_show_admin_score_path(s), class: 'btn btn-mini') : link_to('詳細資料', vs_show_admin_score_path(s), class: 'btn btn-mini')
+    .ui-toolbar.ui-widget-header
