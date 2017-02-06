@@ -2,6 +2,7 @@ path     = require 'path'
 gulp     = require 'gulp'
 replace  = require 'gulp-replace'
 notify   = require 'gulp-error-notifier'
+{ exec } = require "child_process"
 # responsive = require 'gulp-responsive'
 
 #
@@ -32,6 +33,13 @@ gulp.task 'resolve-url', ->
 # 修改路徑來使用 Rails Sprockets path helper
 # END
 #
+
+precompile = () ->
+  task = exec "git add -A --ignore-errors && git commit -m 'Precompile f2e assets.'"
+  task.stdout.on "data", (data) -> console.log data.toString()
+  task.stderr.on "data", (data) -> console.log data.toString()
+
+gulp.task "update", precompile
 
 #
 # Build Responsive Image

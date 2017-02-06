@@ -27,9 +27,9 @@
     "build": "webpack --config webpack.config.coffee",
     "postbuild": "gulp resolve-url",
     "preupdate": "npm run build",
-    "update": "coffee precompile.coffee",
-    "presync": "npm run update",
-    "sync": "git push",
+    "update": "gulp update",
+    "prepush": "npm run update",
+    "push": "git push",
     "clean": "rake tmp:clear && rake tmp:sessions:clear"
   },
   "dependencies": {
