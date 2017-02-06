@@ -7,7 +7,7 @@
       tr
         td 評鑑人
         td 
-          = link_to @v_score.rater_info, @v_score.rater_path
+          = AdminPresenters.new.rater_link(@v_score)
       tr
         td 是否申訴法官
         td = @v_score.appeal_judge ? '是' : '否'
