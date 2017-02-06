@@ -28,7 +28,7 @@ class VerdictRelationCreateContext < BaseContext
     @person_type = 'Party' if @verdict.party_names.include?(@person_name)
     @person_type = 'Lawyer' if @verdict.lawyer_names.include?(@person_name)
     @person_type = 'Judge' if @verdict.judges_names.include?(@person_name)
-    @person_type = "Prosecutor" if @verdict.prosecutor_names.include?(@person_name)
+    @person_type = 'Prosecutor' if @verdict.prosecutor_names.include?(@person_name)
     add_error(:story_without_people_name) unless @person_type
   end
 

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Story::RelationCreateContext do
-  let!(:story) { create :story, party_names: ['party'], lawyer_names: ['lawyer'], judges_names: ['judge'] }
+  let!(:story) { create :story, party_names: ['party'], lawyer_names: ['lawyer'], judges_names: ['judge'], prosecutor_names: ['prosecutor'] }
   subject { described_class.new(story) }
 
   context 'create party' do
@@ -20,6 +20,12 @@ describe Story::RelationCreateContext do
     let!(:judge) { create :judge, name: 'judge' }
 
     it { expect { subject.perform(story.judges_names.first) }.to change { judge.story_relations.count } }
+  end
+
+  context 'create prosecutor' do
+    let!(:prosecutor) { create :prosecutor, name: 'prosecutor' }
+
+    it { expect { subject.perform(story.prosecutor_names.first) }.to change { prosecutor.story_relations.count } }
   end
 
   context 'name not in story' do
