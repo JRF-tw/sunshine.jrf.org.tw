@@ -3,8 +3,9 @@ class Admin::ScoresController < Admin::BaseController
 
   def index
     @search = ScheduleScore.all.ransack(params[:q])
-    @vs = VerdictScore.all.ransack(vs_ransack_query)
-    @scores = (@search.result.includes(:story, :schedule_rater) + @vs.result.includes(:story, :verdict_rater)).sort_by(&:created_at).reverse!
+    @vs_search = VerdictScore.all.ransack(vs_ransack_query)
+    @scores = (@search.result.includes(:story, :schedule_rater) + @vs_search.result.includes(:story, :verdict_rater)).sort_by(&:created_at).reverse!
+    @scores = Kaminari.paginate_array(@scores).page(params[:page]).per(20)
     @admin_page_title = '評鑑記錄列表'
     add_crumb @admin_page_title, '#'
   end
