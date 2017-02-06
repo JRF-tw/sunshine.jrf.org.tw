@@ -1,30 +1,35 @@
-= search_form_for @search, url: admin_scores_path, wrapper: :admin, html: { class: 'form-horizontal' } do |f|
+= simple_form_for @search, url: admin_scores_path, wrapper: :admin, html: { class: 'form-horizontal' }, method: :get do |f|
   .well
     fieldset
       legend 搜尋
       .row
         .span6
           .control-group
-            label.control-label = f.label :judge_id_eq
+            = f.label :judge_id_eq
             .controls = f.search_field :judge_id_eq
         .span6
           .control-group
-            label.control-label = f.label :story_id_eq
+            = f.label :story_id_eq
             .controls = f.search_field :story_id_eq
       .row
         .span6
           .control-group
-            label.control-label = f.label :schedule_rater_type_eq
-            .controls.select2 = f.select :schedule_rater_type_eq,
+            = f.label :rater_type_eq
+            .controls = f.select :rater_type_eq,
             collect_for_score_roles, include_blank: '請選擇'
         .span6
           .control-group
-            label.control-label = f.label :schedule_rater_id_eq
-            .controls = f.search_field :schedule_rater_id_eq
+            = f.label :rater_id_eq
+            .controls = f.search_field :rater_id_eq
       .row
         .span6
+          .control-group
+            = f.label :score_type_eq
+            .controls = f.select :score_type_eq,
+            collect_for_score_type, include_blank: '請選擇'
+        .span6
           .control-group#datepicker
-            label.control-label = f.label :created_at_gteq
+            = f.label :created_at_gteq
             .controls = f.search_field :created_at_gteq, placeholder: '起始時間，非必填'
             .controls = f.search_field :created_at_lteq, placeholder: '結束時間，非必填'
 

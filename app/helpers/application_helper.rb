@@ -228,6 +228,10 @@ module ApplicationHelper
     [['律師', 'Lawyer'], ['當事人', 'Party'], ['觀察者', 'CourtObserver']]
   end
 
+  def collect_for_score_type
+    [['開庭評鑑', 'ScheduleScore'], ['判決評鑑', 'VerdictScore']]
+  end
+
   def get_court_fullname(court_id)
     Court.find(court_id).full_name
   end
