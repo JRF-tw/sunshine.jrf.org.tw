@@ -30,7 +30,10 @@
             = " "
       tr
         td 與案件相關檢察官
-        td = link_to "TODO 尚未實作檢察官", "#"
+        td
+          - @story.by_relation_prosecutors.each do |sr|
+            = link_to "#{sr.people.try(:name)} ", admin_prosecutor_path(sr.people) if sr.people
+            = " "
 
       tr
         td 與案件相關律師

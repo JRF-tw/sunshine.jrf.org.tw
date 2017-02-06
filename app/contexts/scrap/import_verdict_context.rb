@@ -16,6 +16,7 @@ class Scrap::ImportVerdictContext < BaseContext
   after_perform   :create_relation_for_lawyer
   after_perform   :create_relation_for_judge
   after_perform   :create_relation_for_party
+  after_perform   :create_relation_for_prosecutor
   after_perform   :calculate_schedule_scores, if: :story_adjudge?
   after_perform   :set_delay_calculate_verdict_scores, if: :story_adjudge?
   after_perform   :record_count_to_daily_notify
@@ -135,6 +136,13 @@ class Scrap::ImportVerdictContext < BaseContext
 
   def create_relation_for_party
     @verdict.party_names.each do |name|
+      VerdictRelationCreateContext.new(@verdict).perform(name)
+      Story::RelationCreateContext.new(@story).perform(name)
+    end
+  end
+
+  def create_relation_for_prosecutor
+    @verdict.prosecutor_names.each do |name|
       VerdictRelationCreateContext.new(@verdict).perform(name)
       Story::RelationCreateContext.new(@story).perform(name)
     end

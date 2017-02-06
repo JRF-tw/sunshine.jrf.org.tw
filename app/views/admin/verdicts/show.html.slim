@@ -19,7 +19,10 @@
         td = @verdict.prosecutor_names.join(",")
       tr
         td 陪審檢察官
-        td = link_to "TODO 檢察官資訊頁面", "#"
+        td
+          - @verdict.verdict_relations.by_type("Prosecutor").each do |relations|
+            = link_to "#{relations.person.name} ", admin_prosecutor_path(relations.person)
+            = " "
       tr
         td 分析律師結果
         td = @verdict.lawyer_names.join(",")
