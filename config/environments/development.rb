@@ -53,7 +53,7 @@ Rails.application.configure do
 
 	if ENV['F2E_DEV']
     ip = Socket.ip_address_list.detect{|intf| intf.ipv4_private?}.ip_address
-	  config.action_controller.asset_host = "#{ip}:3000"
+	  config.action_controller.asset_host = "http://#{ip}:3000"
 	end
 
   # Middleware

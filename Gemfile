@@ -70,7 +70,6 @@ group :development do
   # Gems for Front-end development
   gem 'guard-livereload', '~>2.5.2', require: false
   gem 'rack-livereload'
-  gem 'dotenv-rails'
 
   # capistrano
   gem 'capistrano-rails'
