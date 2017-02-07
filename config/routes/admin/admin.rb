@@ -1,15 +1,7 @@
 Rails.application.routes.draw do
   namespace :admin do
     root to: 'profiles#index'
-    resources :profiles do
-      resources :educations
-      resources :careers
-      resources :licenses
-      resources :awards
-      resources :punishments
-      resources :reviews
-      resources :articles
-    end
+    resources :profiles
     resources :suits do
       resources :procedures
     end
