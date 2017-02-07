@@ -1,5 +1,5 @@
 class Lawyer::UpdateProfileContext < BaseContext
-  PERMITS = [:name, :phone_number, :office_number, :be_noticed].freeze
+  PERMITS = [:name, :phone_number, :office_number, :active_noticed].freeze
 
   before_perform :parse_number
   before_perform :assign_value

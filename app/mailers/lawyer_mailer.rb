@@ -31,7 +31,7 @@ class LawyerMailer < ApplicationMailer
     mail(to: @lawyer.email, subject: @subject)
   end
 
-  def active_after_verdict_notice(verdict_id, lawyer_id)
+  def active_verdict_notice(verdict_id, lawyer_id)
     verdict = Verdict.find(verdict_id)
     @story = verdict.story
     @lawyer = Lawyer.find(lawyer_id)

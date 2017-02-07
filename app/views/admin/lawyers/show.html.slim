@@ -40,7 +40,7 @@
         td = @lawyer.confirmed? ? '已註冊' : '未註冊'
       tr
         td 是否願意收到通知
-        td = @lawyer.be_noticed? ? '是' : '否'
+        td = @lawyer.active_noticed? ? '是' : '否'
       tr
         td 備註
         td = @lawyer.memo

@@ -18,8 +18,8 @@ class Scrap::ImportVerdictContext < BaseContext
   after_perform   :set_delay_calculate_verdict_scores, if: :story_adjudge?
   after_perform   :record_count_to_daily_notify
   after_perform   :alert_new_story_type
-  after_perform   :send_after_verdict_noice
-  after_perform   :send_active_verdict_notice
+  after_perform   :send_noice
+  after_perform   :send_active_notice
 
   class << self
     def perform(court, orginal_data, content, word, publish_date, story_type)
@@ -146,11 +146,11 @@ class Scrap::ImportVerdictContext < BaseContext
     SlackService.notify_new_story_type_alert("取得新的案件類別 : #{@story_type}") if @story_type.present? && !StoryTypes.list.include?(@story_type)
   end
 
-  def send_after_verdict_noice
+  def send_noice
     Story::AfterVerdictNoticeContext.new(@verdict).perform
   end
 
-  def send_active_verdict_notice
-    Story::ActiveAfterVerdictNoticeContext.new(@verdict).perform
+  def send_active_notice
+    Story::ActiveVerdictNoticeContext.new(@verdict).perform
   end
 end
