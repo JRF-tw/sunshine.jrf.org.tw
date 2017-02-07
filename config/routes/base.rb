@@ -11,7 +11,13 @@ Rails.application.routes.draw do
   get '/tos', to: 'base#terms_of_service'
   get '/privacy', to: 'base#privacy'
   resources :scores, only: [:index]
-  resources :judges, only: [:show]
-  resources :prosecutors, only: [:show]
+  resources :judges, only: [:index, :show] do
+    resources :awards, only: [:index]
+    resources :punishments, only: [:index]
+  end
+  resources :prosecutors, only: [:index, :show] do
+    resources :awards, only: [:index]
+    resources :punishments, only: [:index]
+  end
   resources :bulletins, only: [:index, :show]
 end

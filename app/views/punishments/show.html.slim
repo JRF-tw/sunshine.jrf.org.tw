@@ -1,4 +1,4 @@
-= render partial: 'components/profile_hero', locals: { person: @profile }
+= render partial: 'components/profile_hero', locals: { person: @owner }
   
 article
   - if @punishment.summary.present?
@@ -24,4 +24,4 @@ article
         - render_punishment_cell(@punishment).each do |k, v|
           = kv_cell k, v
 
-= render partial: 'components/related_records'
+= render partial: 'components/related_records', locals: { person: @owner }

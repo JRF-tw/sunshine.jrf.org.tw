@@ -1,13 +1,4 @@
 class ProfilesController < BaseController
-  def judges
-    @judges = Profile.judges.shown.active.had_avatar.order_by_name.page(params[:page]).per(12)
-    set_meta(image: ActionController::Base.helpers.asset_path('hero-profiles-judges-M.png'))
-  end
-
-  def prosecutors
-    @prosecutors = Profile.prosecutors.shown.active.had_avatar.order_by_name.page(params[:page]).per(12)
-    set_meta(image: ActionController::Base.helpers.asset_path('hero-profiles-judges-M.png'))
-  end
 
   def show
     @profile = Profile.find(params[:id])

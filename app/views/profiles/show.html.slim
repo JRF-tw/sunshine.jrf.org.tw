@@ -12,4 +12,4 @@ ruby:
 
 = render partial: 'profiles', locals: { job: job }
 
-= render partial: 'components/related_records'
+= render partial: 'components/related_records', locals: { person: @profile }

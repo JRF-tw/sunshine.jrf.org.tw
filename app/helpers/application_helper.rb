@@ -137,11 +137,11 @@ module ApplicationHelper
   end
 
   def collection_for_courts
-    Court.shown.sorted.map(&:full_name).unshift('全部法院')
+    Court.shown.sorted.map { |c| [c.full_name, c.id] }.unshift(['全部法院', ''])
   end
 
-  def collect_for_prosecutors_offices
-    ProsecutorsOffice.shown.map(&:full_name).unshift('全部檢察署')
+  def collection_for_prosecutors_offices
+    ProsecutorsOffice.shown.map { |c| [c.full_name, c.id] }.unshift(['全部檢察署', ''])
   end
 
   def collection_state_for_suits
@@ -184,6 +184,10 @@ module ApplicationHelper
 
   def collect_for_shown_courts
     Court.shown.sorted.map { |c| [c.full_name, c.id] }
+  end
+
+  def collect_for_prosecutors_offices
+    ProsecutorsOffice.map { |c| [c.full_name, c.id] }
   end
 
   def collect_for_judges_name
@@ -244,7 +248,28 @@ module ApplicationHelper
       '當事人'
     when 'CourtObserver'
       '旁觀者'
+    when 'Judge'
+      '法官'
+    when 'Prosecutor'
+      '檢察官'
     end
+  end
+
+  def get_institution_by_role(role)
+    case role.class.name
+    when 'Judge'
+      role.court.full_name
+    when '檢察官'
+      role.prosecutors_office.full_name
+    end
+  end
+
+  def get_pluralize_by_role(role)
+    role.class.to_s.downcase.demodulize.pluralize
+  end
+
+  def get_singularize_by_role(role)
+    role.class.to_s.downcase.demodulize.singularize
   end
 
   def render_html(text)

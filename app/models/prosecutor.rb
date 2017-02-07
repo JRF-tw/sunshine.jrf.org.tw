@@ -34,5 +34,7 @@ class Prosecutor < ActiveRecord::Base
   has_many :rules, through: :rule_relations
   has_many :story_relations, as: :people, dependent: :destroy
   has_many :stories, through: :story_relations
+
+  scope :order_by_name, -> { order('name DESC') }
   mount_uploader :avatar, AvatarUploader
 end

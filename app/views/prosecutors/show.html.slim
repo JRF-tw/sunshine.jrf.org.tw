@@ -1,1 +1,5 @@
-= "檢察官個人頁"
+= render partial: 'components/profile_hero', locals: { person: @prosecutor }
+
+= render partial: 'profiles'
+
+= render partial: 'components/related_records', locals: { person: @prosecutor }

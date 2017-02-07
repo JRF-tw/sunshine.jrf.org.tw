@@ -1,4 +1,4 @@
-= render partial: 'components/profile_hero', locals: { person: @profile }
+= render partial: 'components/profile_hero', locals: { person: @owner }
 
 section.award-records.container
   / h3.section-heading--gray.text-center 獎勵紀錄
@@ -13,4 +13,4 @@ section.award-records.container
 
   = paginate @awards, theme: 'www'
 
-= render partial: 'components/related_records'
+= render partial: 'components/related_records', locals: { person: @owner }

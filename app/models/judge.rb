@@ -41,6 +41,7 @@ class Judge < ActiveRecord::Base
   has_many :valid_scores
   has_one :prosecutor
 
+  scope :order_by_name, -> { order('name DESC') }
   mount_uploader :avatar, AvatarUploader
 
 end

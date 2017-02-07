@@ -6,7 +6,7 @@ section.related-records.container
       .text-center
         = @newest_award.content.present? ? summary_text(@newest_award.content, 50) : "#{@newest_award.unit}獎勵#{@newest_award.award_type}"
       .text-center.more
-        = link_to '看更多', profile_awards_path(@profile), class: 'flat-button'
+        = link_to '看更多', link_to '看更多', send("#{person.class.to_s.downcase.singularize}_awards_path", person), class: 'flat-button'
     - else
       .text-only 目前無獎勵紀錄
 
@@ -16,7 +16,7 @@ section.related-records.container
     - if @newest_punishments.present?
       = render partial: 'components/list_related_punishments', locals: { newest_punishments: @newest_punishments }
       .text-center.more
-        = link_to '看更多', profile_punishments_path(@profile), class: 'flat-button'
+        = link_to '看更多', send("#{person.class.to_s.downcase.singularize}_punishments_path", person), class: 'flat-button'
     - else
       .text-only 目前無懲處紀錄
   
@@ -24,4 +24,4 @@ section.related-records.container
     heading: '相關新聞評論', attributes: { class: 'related-record' }\
     }
     .text-only
-      = link_to 'Google相關新聞', "https://www.google.com.tw/search?q=\"#{@profile.name}\"+\"#{@profile.current}\"&hl=zh-TW&tbm=nws", class: 'flat-button', target: '_blank'
+      = link_to 'Google相關新聞', "https://www.google.com.tw/search?q=\"#{person.name}\"+\"#{@profile.current}\"&hl=zh-TW&tbm=nws", class: 'flat-button', target: '_blank'

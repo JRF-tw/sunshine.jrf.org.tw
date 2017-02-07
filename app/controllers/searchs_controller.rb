@@ -11,13 +11,13 @@ class SearchsController < BaseController
 
   def judges
     get_params_utf8(['q', 'judge'])
-    @judges = Judge.shown.where(court: Court.find_by(full_name: params_utf8[:judge])).ransack(name_cont: params_utf8[:q]).result.order(:name).page(params[:page]).per(12)
+    @judges = Judge.shown.ransack(court_id_eq: params_utf8[:judge], name_cont: params_utf8[:q]).result.order(:name).page(params[:page]).per(12)
     set_meta(image: ActionController::Base.helpers.asset_path('hero-searchs-index-M.png'))
   end
 
   def prosecutors
     get_params_utf8(['q', 'prosecutor'])
-    @prosecutors = Prosecutor.shown.where(prosecutors_office: ProsecutorsOffice.find_by(full_name: params_utf8[:prosecutor])).ransack(name_cont: params_utf8[:q]).result.order(:name).page(params[:page]).per(12)
+    @prosecutors = Prosecutor.shown.ransack(prosecutors_office_id_eq: params_utf8[:prosecutor], name_cont: params_utf8[:q]).result.order(:name).page(params[:page]).per(12)
     set_meta(
       title: '檢察官搜尋結果',
       description: '檢察官搜尋結果，快來看看有哪些檢察官資料！',
