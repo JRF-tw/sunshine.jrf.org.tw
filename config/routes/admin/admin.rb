@@ -25,11 +25,25 @@ Rails.application.routes.draw do
     resources :stories
     resources :schedules
     resources :judges do
+      resources :educations
+      resources :careers
+      resources :licenses
+      resources :awards
+      resources :punishments
+      resources :reviews
+      resources :articles
       member do
         post :set_to_prosecutor
       end
     end
     resources :prosecutors do
+      resources :educations
+      resources :careers
+      resources :licenses
+      resources :awards
+      resources :punishments
+      resources :reviews
+      resources :articles
       member do
         post :set_to_judge
       end

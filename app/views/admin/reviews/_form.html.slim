@@ -15,5 +15,5 @@
 .form-actions
   = f.submit "送出", class: "btn btn-primary"
   = " "
-  = link_to admin_profile_reviews_path(@profile), class: "btn" do
-    = "回到#{@profile.name}的相關新聞評論列表"
+  = link_to send("admin_#{@owner_singularize}_reviews_path", @owner), class: "btn" do
+    = "回到#{@owner.name}的相關新聞評論列表"

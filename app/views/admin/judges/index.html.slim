@@ -79,6 +79,19 @@
               | &nbsp;
               = link_to '轉換為檢察官', set_to_prosecutor_admin_judge_path(judge), class: 'btn btn-mini btn-warning', method: :post,'data-confirm': "確認將 #{judge.name} 轉換為檢察官？" unless judge.is_prosecutor
               | &nbsp;
+              .btn-group
+                a.btn.btn-info.btn-mini.dropdown-toggle{ data-toggle="dropdown" href="#"}
+                  | 其他資料管理
+                  span.caret
+                ul.dropdown-menu
+                  li= link_to "學經歷管理", admin_judge_educations_path(judge)
+                  li= link_to "職務經歷管理", admin_judge_careers_path(judge)
+                  li= link_to "專業證書管理", admin_judge_licenses_path(judge)
+                  li= link_to "獎勵紀錄管理", admin_judge_awards_path(judge)
+                  li= link_to "懲處紀錄管理", admin_judge_punishments_path(judge)
+                  li= link_to "發表言論列表", admin_judge_articles_path(judge)
+                  li= link_to "相關新聞評論列表", admin_judge_reviews_path(judge)
+              | &nbsp;
               = link_to '刪除', admin_judge_path(judge), class: 'btn btn-mini btn-danger', method: :delete, 'data-confirm': "確認刪除該法官檔案 - #{judge.name}？"
     .ui-toolbar.ui-widget-header
       = paginate @judges, theme: :admin

@@ -1,8 +1,8 @@
-= admin_widget_box "#{@profile.name}的發表言論列表", icon: :pencil do
+= admin_widget_box "#{@owner.name}的發表言論列表", icon: :pencil do
   .dataTables_wrapper
     div
       .dataTables_length
-        = link_to "新增#{@profile.name}的發表言論", new_admin_profile_article_path(@profile), class: "btn btn-primary btn-mini"
+        = link_to "新增#{@owner.name}的發表言論", send("new_admin_#{@owner_singularize}_article_path", @owner), class: "btn btn-primary btn-mini"
     table.table.table-bordered.table-striped.table-hover
       thead
         tr
@@ -23,8 +23,8 @@
             td= article.news_publish_at_in_tw
             td= article.memo
             td
-              = link_to "編輯", edit_admin_profile_article_path(@profile, article), class: "btn btn-mini btn-success"
+              = link_to "編輯",send("edit_admin_#{@owner_singularize}_article_path", @owner, article), class: "btn btn-mini btn-success"
               | &nbsp;
-              = link_to "刪除", admin_profile_article_path(@profile, article), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除#{@profile.name}的發表言論？"
+              = link_to "刪除", send("admin_#{@owner_singularize}_article_path", @owner, article), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除#{@owner.name}的發表言論？"
     .ui-toolbar.ui-widget-header
       = paginate @articles, theme: :admin

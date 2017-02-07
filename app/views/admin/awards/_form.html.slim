@@ -10,5 +10,5 @@
 .form-actions
   = f.submit "送出", class: "btn btn-primary"
   = " "
-  = link_to admin_profile_awards_path(@profile), class: "btn" do
-    = "回到#{@profile.name}的獎勵紀錄列表"
+  = link_to send("admin_#{@owner_singularize}_awards_path", @owner), class: "btn" do
+    = "回到#{@owner.name}的獎勵紀錄列表"
