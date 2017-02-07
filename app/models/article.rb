@@ -25,6 +25,8 @@
 #  created_at       :datetime
 #  updated_at       :datetime
 #  is_hidden        :boolean
+#  owner_id         :integer
+#  owner_type       :string
 #
 
 class Article < ActiveRecord::Base
@@ -32,6 +34,7 @@ class Article < ActiveRecord::Base
   include TaiwanAge
   tw_age_columns :paper_publish_at, :news_publish_at
 
+  belongs_to :owner, polymorphic: true
   belongs_to :profile
 
   scope :newest, -> { order('id DESC') }

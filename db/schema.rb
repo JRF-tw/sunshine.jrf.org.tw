@@ -41,9 +41,12 @@ ActiveRecord::Schema.define(version: 20170504025324) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_hidden"
+    t.integer  "owner_id"
+    t.string   "owner_type"
   end
 
   add_index "articles", ["is_hidden"], name: "index_articles_on_is_hidden", using: :btree
+  add_index "articles", ["owner_id", "owner_type"], name: "index_articles_on_owner_id_and_owner_type", using: :btree
   add_index "articles", ["profile_id"], name: "index_articles_on_profile_id", using: :btree
 
   create_table "awards", force: :cascade do |t|
@@ -59,9 +62,12 @@ ActiveRecord::Schema.define(version: 20170504025324) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_hidden"
+    t.integer  "owner_id"
+    t.string   "owner_type"
   end
 
   add_index "awards", ["is_hidden"], name: "index_awards_on_is_hidden", using: :btree
+  add_index "awards", ["owner_id", "owner_type"], name: "index_awards_on_owner_id_and_owner_type", using: :btree
   add_index "awards", ["profile_id"], name: "index_awards_on_profile_id", using: :btree
 
   create_table "banners", force: :cascade do |t|
@@ -131,9 +137,12 @@ ActiveRecord::Schema.define(version: 20170504025324) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_hidden"
+    t.integer  "owner_id"
+    t.string   "owner_type"
   end
 
   add_index "careers", ["is_hidden"], name: "index_careers_on_is_hidden", using: :btree
+  add_index "careers", ["owner_id", "owner_type"], name: "index_careers_on_owner_id_and_owner_type", using: :btree
   add_index "careers", ["profile_id"], name: "index_careers_on_profile_id", using: :btree
 
   create_table "ckeditor_assets", force: :cascade do |t|
@@ -240,9 +249,12 @@ ActiveRecord::Schema.define(version: 20170504025324) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_hidden"
+    t.integer  "owner_id"
+    t.string   "owner_type"
   end
 
   add_index "educations", ["is_hidden"], name: "index_educations_on_is_hidden", using: :btree
+  add_index "educations", ["owner_id", "owner_type"], name: "index_educations_on_owner_id_and_owner_type", using: :btree
   add_index "educations", ["profile_id"], name: "index_educations_on_profile_id", using: :btree
 
   create_table "judges", force: :cascade do |t|
@@ -364,9 +376,12 @@ ActiveRecord::Schema.define(version: 20170504025324) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_hidden"
+    t.integer  "owner_id"
+    t.string   "owner_type"
   end
 
   add_index "licenses", ["is_hidden"], name: "index_licenses_on_is_hidden", using: :btree
+  add_index "licenses", ["owner_id", "owner_type"], name: "index_licenses_on_owner_id_and_owner_type", using: :btree
   add_index "licenses", ["profile_id"], name: "index_licenses_on_profile_id", using: :btree
 
   create_table "parties", force: :cascade do |t|
@@ -520,9 +535,12 @@ ActiveRecord::Schema.define(version: 20170504025324) do
     t.datetime "updated_at"
     t.boolean  "is_hidden"
     t.text     "status"
+    t.integer  "owner_id"
+    t.string   "owner_type"
   end
 
   add_index "punishments", ["is_hidden"], name: "index_punishments_on_is_hidden", using: :btree
+  add_index "punishments", ["owner_id", "owner_type"], name: "index_punishments_on_owner_id_and_owner_type", using: :btree
   add_index "punishments", ["profile_id"], name: "index_punishments_on_profile_id", using: :btree
 
   create_table "redactor_assets", force: :cascade do |t|
@@ -555,9 +573,12 @@ ActiveRecord::Schema.define(version: 20170504025324) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_hidden"
+    t.integer  "owner_id"
+    t.string   "owner_type"
   end
 
   add_index "reviews", ["is_hidden"], name: "index_reviews_on_is_hidden", using: :btree
+  add_index "reviews", ["owner_id", "owner_type"], name: "index_reviews_on_owner_id_and_owner_type", using: :btree
   add_index "reviews", ["profile_id"], name: "index_reviews_on_profile_id", using: :btree
 
   create_table "rule_relations", force: :cascade do |t|

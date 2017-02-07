@@ -25,6 +25,7 @@
 
 class Prosecutor < ActiveRecord::Base
   include HiddenOrNot
+  include ProfileData
   belongs_to :prosecutors_office
   belongs_to :judge
   has_many :verdict_relations, as: :person, dependent: :destroy

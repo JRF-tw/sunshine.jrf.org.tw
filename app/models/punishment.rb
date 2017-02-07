@@ -32,6 +32,8 @@
 #  updated_at       :datetime
 #  is_hidden        :boolean
 #  status           :text
+#  owner_id         :integer
+#  owner_type       :string
 #
 
 class Punishment < ActiveRecord::Base
@@ -39,6 +41,7 @@ class Punishment < ActiveRecord::Base
   include TaiwanAge
   tw_age_columns :relevant_date
 
+  belongs_to :owner, polymorphic: true
   belongs_to :profile
 
   scope :newest, -> { order('id DESC') }
