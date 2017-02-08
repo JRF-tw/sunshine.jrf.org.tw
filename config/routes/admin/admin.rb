@@ -57,8 +57,8 @@ Rails.application.routes.draw do
     end
     resources :scores, only: [:index] do
       member do
-        get :ss_show
-        get :vs_show
+        get :schedule
+        get :verdict
       end
     end
     resources :crawler_histories, only: [:index] do

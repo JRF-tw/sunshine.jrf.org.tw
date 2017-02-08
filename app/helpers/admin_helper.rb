@@ -19,6 +19,10 @@ module AdminHelper
     CrawlerErrorTypes.list.to_enum.with_index.map { |n, i| [n.last, i] }
   end
 
+  def collect_for_score_roles
+    [['律師', 'Lawyer'], ['當事人', 'Party'], ['觀察者', 'CourtObserver']]
+  end
+
   def precentage(numerator, denominator)
     number_to_percentage(numerator.to_f / denominator.to_f * 100, precision: 2)
   end

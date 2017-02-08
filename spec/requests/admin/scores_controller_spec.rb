@@ -37,13 +37,13 @@ RSpec.describe Admin::ScoresController do
   end
 
   describe '#show' do
-    context 'ss_show' do
-      before { get "/admin/scores/#{schedule_score.id}/ss_show" }
+    context 'schedule' do
+      before { get "/admin/scores/#{schedule_score.id}/schedule" }
       it { expect(response).to be_success }
     end
 
-    context 'vs_show' do
-      before { get "/admin/scores/#{verdict_score.id}/vs_show" }
+    context '#verdict' do
+      before { get "/admin/scores/#{verdict_score.id}/verdict" }
       it { expect(response).to be_success }
     end
   end

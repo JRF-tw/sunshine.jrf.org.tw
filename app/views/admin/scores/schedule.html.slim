@@ -1,0 +1,45 @@
+= admin_widget_box "開庭評鑑 - #{@score.id} 資料", icon: :th do
+  table.table.table-bordered.table-striped.table-hover
+    tbody
+      tr
+        td id
+        td = @score.id
+      tr
+        td 庭期id
+        td = link_to @score.schedule.id, admin_schedule_path(@score.schedule) if @score.schedule
+      tr
+        td 法官
+        td = link_to @score.judge.name, admin_judge_path(@score.judge) 
+      tr
+        td 評鑑人
+        td 
+           = AdminPresenters.new.rater_link(@score)
+      tr
+        td 是否申訴法官
+        td = @score.appeal_judge ? '是' : '否'
+      tr
+        td 開庭態度評分
+        td 
+          = "1. #{@score.score_1_1}"
+          br
+          = "2. #{@score.score_1_2}"
+          br
+          = "3. #{@score.score_1_3}"
+      tr
+        td 訴訟指揮評分
+        td
+          = "1. #{@score.score_2_1}"
+          br
+          = "2. #{@score.score_2_2}"
+          br
+          = "3. #{@score.score_2_3}"
+          br
+          = "4. #{@score.score_2_4}"
+          br
+          = "5. #{@score.score_2_5}"
+      tr
+        td 評鑑時間
+        td = @score.created_at
+      tr
+        td 最後更新時間
+        td = @score.updated_at

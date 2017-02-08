@@ -56,6 +56,6 @@
             td = s.class.name == 'ScheduleScore'? '開庭評鑑' : '判決評鑑'
             td = s.created_at
             td
-              = s.class.name == 'ScheduleScore'? link_to('詳細資料', ss_show_admin_score_path(s), class: 'btn btn-mini') : link_to('詳細資料', vs_show_admin_score_path(s), class: 'btn btn-mini')
+              = s.class.name == 'ScheduleScore'? link_to('詳細資料', schedule_admin_score_path(s), class: 'btn btn-mini') : link_to('詳細資料', verdict_admin_score_path(s), class: 'btn btn-mini')
     .ui-toolbar.ui-widget-header
       = paginate @scores, theme: :admin

@@ -224,10 +224,6 @@ module ApplicationHelper
     [['是', 'yes'], ['否', 'no']]
   end
 
-  def collect_for_score_roles
-    [['律師', 'Lawyer'], ['當事人', 'Party'], ['觀察者', 'CourtObserver']]
-  end
-
   def collect_for_score_type
     [['開庭評鑑', 'ScheduleScore'], ['判決評鑑', 'VerdictScore']]
   end
