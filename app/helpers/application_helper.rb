@@ -187,7 +187,7 @@ module ApplicationHelper
   end
 
   def collect_for_prosecutors_offices
-    ProsecutorsOffice.map { |c| [c.full_name, c.id] }
+    ProsecutorsOffice.all.map { |c| [c.full_name, c.id] }
   end
 
   def collect_for_judges_name
