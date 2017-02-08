@@ -5,5 +5,6 @@ class RemoveColumnStatusForVerdictScores < ActiveRecord::Migration
 
   def down
     add_column :verdict_scores, :status, :integer
+    add_index :verdict_scores, :status
   end
 end

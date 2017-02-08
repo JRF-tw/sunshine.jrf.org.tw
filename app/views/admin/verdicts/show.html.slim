@@ -13,49 +13,49 @@
         td = @verdict.adjudge_date
       tr
         td 是否為判決
-        td = @verdict.is_judgment ? "是" : "否"
+        td = @verdict.is_judgment ? '是' : '否'
       tr
         td 分析檢察官結果
-        td = @verdict.prosecutor_names.join(",")
+        td = @verdict.prosecutor_names.join(',')
       tr
         td 陪審檢察官
         td
-          - @verdict.verdict_relations.by_type("Prosecutor").each do |relations|
+          - @verdict.verdict_relations.by_type('Prosecutor').each do |relations|
             = link_to "#{relations.person.name} ", admin_prosecutor_path(relations.person)
-            = " "
+            = ' '
       tr
         td 分析律師結果
-        td = @verdict.lawyer_names.join(",")
+        td = @verdict.lawyer_names.join(',')
       tr
         td 陪審律師
         td
-          - @verdict.verdict_relations.by_type("Lawyer").each do |relations|
+          - @verdict.verdict_relations.by_type('Lawyer').each do |relations|
             = link_to "#{relations.person.name} ", admin_lawyer_path(relations.person)
             = " "
       tr
         td 分析陪審法官結果
-        td = @verdict.judges_names.join(",")
+        td = @verdict.judges_names.join(',')
       tr
         td 陪審法官
         td
-          - @verdict.verdict_relations.by_type("Judge").each do |relations|
+          - @verdict.verdict_relations.by_type('Judge').each do |relations|
             = link_to "#{relations.person.name} ", admin_judge_path(relations.person)
             = " "
       tr
         td 分析當事人結果
-        td = @verdict.party_names.join(",")
+        td = @verdict.party_names.join(',')
       tr
         td 陪審當事人
         td
-          - @verdict.verdict_relations.by_type("Party").each do |relations|
+          - @verdict.verdict_relations.by_type('Party').each do |relations|
             = link_to "#{relations.person.name} ", admin_party_path(relations.person)
-            = " "
+            = ' '
       tr
         td 發布日期
         td = @verdict.publish_date
       tr
         td 文件下載
-        td = link_to "點我下載", download_file_admin_verdict_path(@verdict) if @verdict.file
+        td = link_to '點我下載', download_file_admin_verdict_path(@verdict) if @verdict.file
       tr
         td 新增時間
         td = @verdict.created_at

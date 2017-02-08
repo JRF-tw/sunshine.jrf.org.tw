@@ -32,32 +32,43 @@ RSpec.describe Story do
     end
   end
 
-  context '#identity' do
+  describe '#identity' do
     let(:story) { create :story, year: 100, word_type: '耶', number: 100 }
     it { expect(story.identity).to eq('100-耶-100') }
   end
 
-  context '#by_relation_judges' do
-    let(:judge) { create :judge }
-    before { create :story_relation, story: story, people: judge }
-    subject { story }
+  describe '#by_relation_role' do
+    context 'judge' do
+      let(:judge) { create :judge }
+      before { create :story_relation, story: story, people: judge }
+      subject { story }
 
-    it { expect(story.by_relation_judges.first.people).to eq(judge) }
+      it { expect(story.by_relation_role('judge').first.people).to eq(judge) }
+    end
+
+    context 'lawyer' do
+      let(:lawyer) { create :lawyer }
+      before { create :story_relation, story: story, people: lawyer }
+      subject { story }
+
+      it { expect(story.by_relation_role('lawyer').first.people).to eq(lawyer) }
+    end
+
+    context 'parties' do
+      let(:party) { create :party }
+      before { create :story_relation, story: story, people: party }
+      subject { story }
+
+      it { expect(story.by_relation_role('party').first.people).to eq(party) }
+    end
+
+    context 'prosecutor' do
+      let(:prosecutor) { create :prosecutor }
+      before { create :story_relation, story: story, people: prosecutor }
+      subject { story }
+
+      it { expect(story.by_relation_role('prosecutor').first.people).to eq(prosecutor) }
+    end
   end
 
-  context '#by_relation_lawyers' do
-    let(:lawyer) { create :lawyer }
-    before { create :story_relation, story: story, people: lawyer }
-    subject { story }
-
-    it { expect(story.by_relation_lawyers.first.people).to eq(lawyer) }
-  end
-
-  context '#by_relation_parties' do
-    let(:party) { create :party }
-    before { create :story_relation, story: story, people: party }
-    subject { story }
-
-    it { expect(story.by_relation_parties.first.people).to eq(party) }
-  end
 end
