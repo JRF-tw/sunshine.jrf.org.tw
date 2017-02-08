@@ -23,33 +23,18 @@ class Score::SearchFormObject < BaseFormObject
   end
 
   def ss_result
-    @ss = if @params[:score_type_eq] && @params[:score_type_eq] == 'VerdictScore'
-            []
-          else
-            ScheduleScore.all.ransack(ss_query).result.includes(:story, :schedule_rater)
-          end
+    @ss = only_vs? ? [] : ScheduleScore.ransack(@params).result.includes(:story, :schedule_rater)
   end
 
   def vs_result
-    @vs = if @params[:score_type_eq] && @params[:score_type_eq] == 'ScheduleScore'
-            []
-          else
-            VerdictScore.all.ransack(vs_query).result.includes(:story, :verdict_rater)
-          end
+    @vs = only_ss? ? [] : VerdictScore.ransack(@params).result.includes(:story, :verdict_rater)
   end
 
-  def ss_query
-    query = @params.clone
-    query[:schedule_rater_type_eq] = query.delete(:rater_type_eq)
-    query[:schedule_rater_id_eq] = query.delete(:rater_id_eq)
-    query
+  def only_ss?
+    @params[:score_type_eq] == 'ScheduleScore' || @params[:judge_id_eq].present?
   end
 
-  def vs_query
-    query = @params.clone
-    query[:verdict_rater_type_eq] = query.delete(:rater_type_eq)
-    query[:verdict_rater_id_eq] = query.delete(:rater_id_eq)
-    query.delete(:judge_id_eq)
-    query
+  def only_vs?
+    @params[:score_type_eq] == 'VerdictScore'
   end
 end

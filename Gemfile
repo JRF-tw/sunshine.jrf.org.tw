@@ -147,7 +147,7 @@ gem 'meta-tags', require: 'meta_tags'
 gem 'sitemap_generator'
 
 # internal search
-gem 'ransack'
+gem 'ransack', github: 'activerecord-hackery/ransack'
 
 gem 'smarter_csv', '~> 1.1'
 gem 'mechanize'

@@ -23,4 +23,7 @@ class VerdictScore < ActiveRecord::Base
   belongs_to :story
   belongs_to :verdict_rater, polymorphic: true
   has_many   :valid_scores, as: :score
+
+  ransack_alias :rater_type, :verdict_rater_type
+  ransack_alias :rater_id, :verdict_rater_id
 end
