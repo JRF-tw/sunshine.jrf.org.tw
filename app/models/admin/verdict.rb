@@ -14,7 +14,7 @@
 #  is_judgment      :boolean          default(FALSE)
 #  adjudge_date     :date
 #  publish_date     :date
-#  content          :string
+#  content_file     :string
 #
 
 class Admin::Verdict < ::Verdict

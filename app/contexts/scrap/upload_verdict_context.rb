@@ -1,12 +1,11 @@
 class Scrap::UploadVerdictContext < BaseContext
-  before_perform  :bulid_tempfile
-  before_perform  :build_content_tempfile
+  before_perform  :build_content_json
+  before_perform  :build_file
   before_perform  :assign_value
   after_perform   :remove_tempfile
 
-  def initialize(orginal_data, content)
+  def initialize(orginal_data)
     @orginal_data = orginal_data
-    @content = content
     @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
   end
 
@@ -22,23 +21,31 @@ class Scrap::UploadVerdictContext < BaseContext
 
   private
 
-  def bulid_tempfile
-    @file = Tempfile.new(['verdict', '.html'], "#{Rails.root}/tmp/")
-    @file.write(@orginal_data)
-    @file.rewind
-    @file.close
+  def build_content_json
+    @content_data = {}
+    data = Nokogiri::HTML(@orginal_data)
+    @content_data['word'] = data.css('table')[2].css('table')[1].css('span')[0].text.split('】').last.squish
+    @content_data['date'] = data.css('table')[2].css('table')[1].css('span')[1].text.split('】').last.squish
+    @content_data['summary'] = data.css('table')[2].css('table')[1].css('span')[2].text.split('】').last.squish
+    @content_data['content'] = data.css('table')[2].css('table')[1].css('pre')[0].text
+    @content_data = @content_data.to_json
   end
 
-  def build_content_tempfile
-    @content_file = Tempfile.new(['verdict', '.text'], "#{Rails.root}/tmp/")
-    @content_file.write(@content)
-    @content_file.rewind
-    @content_file.close
+  def build_file
+    @file = bulid_tempfile(@orginal_data, 'verdict', 'html')
+    @content_file = bulid_tempfile(@content_data, @verdict.story.identity, 'json')
+  end
+
+  def bulid_tempfile(data, file_name, file_type)
+    file = Tempfile.new([file_name, ".#{file_type}"], "#{Rails.root}/tmp/")
+    file.write(data)
+    file.rewind
+    file.close
+    file
   end
 
   def assign_value
-    @verdict.assign_attributes(file: File.open(@file.path))
-    @verdict.assign_attributes(content: File.open(@content_file.path))
+    @verdict.assign_attributes(file: File.open(@file.path), content_file: File.open(@content_file.path))
   end
 
   def remove_tempfile

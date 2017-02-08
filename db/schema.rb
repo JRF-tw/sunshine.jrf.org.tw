@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 20170207035248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
   enable_extension "postgis"
+  enable_extension "hstore"
 
   create_table "articles", force: :cascade do |t|
     t.integer  "profile_id"
@@ -806,7 +806,7 @@ ActiveRecord::Schema.define(version: 20170207035248) do
     t.boolean  "is_judgment",      default: false
     t.date     "adjudge_date"
     t.date     "publish_date"
-    t.string   "content"
+    t.string   "content_file"
   end
 
   add_index "verdicts", ["adjudge_date"], name: "index_verdicts_on_adjudge_date", using: :btree
