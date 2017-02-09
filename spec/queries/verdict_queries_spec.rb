@@ -8,7 +8,7 @@ RSpec.describe VerdictQueries do
     let!(:lawyer) { create :lawyer, :with_confirmed }
     before { create :verdict_relation, verdict: verdict, person: lawyer }
 
-    context 'confirmed && active_noticed && no subscription' do
+    context 'confirmed && active_notice && no subscription' do
       it { expect(query.get_active_notice_receiver_id).to include(lawyer.id) }
     end
 
@@ -17,7 +17,7 @@ RSpec.describe VerdictQueries do
       it { expect(query.get_active_notice_receiver_id).not_to include(lawyer.id) }
     end
 
-    context 'confirmed && active_noticed && subscription' do
+    context 'confirmed && active_notice && subscription' do
       let!(:story_subscription) { create :story_subscription, story: verdict.story, subscriber: lawyer }
       it { expect(query.get_active_notice_receiver_id).not_to include(lawyer.id) }
     end

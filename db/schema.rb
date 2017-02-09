@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 20170207035248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "postgis"
   enable_extension "hstore"
+  enable_extension "postgis"
 
   create_table "articles", force: :cascade do |t|
     t.integer  "profile_id"
@@ -342,10 +342,10 @@ ActiveRecord::Schema.define(version: 20170207035248) do
     t.string   "unconfirmed_email"
     t.string   "phone_number"
     t.string   "office_number"
-    t.boolean  "active_noticed",         default: true
+    t.boolean  "active_notice",          default: true
   end
 
-  add_index "lawyers", ["active_noticed"], name: "index_lawyers_on_active_noticed", using: :btree
+  add_index "lawyers", ["active_notice"], name: "index_lawyers_on_active_notice", using: :btree
   add_index "lawyers", ["confirmation_token"], name: "index_lawyers_on_confirmation_token", unique: true, using: :btree
   add_index "lawyers", ["email"], name: "index_lawyers_on_email", unique: true, using: :btree
   add_index "lawyers", ["reset_password_token"], name: "index_lawyers_on_reset_password_token", unique: true, using: :btree

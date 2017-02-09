@@ -28,7 +28,7 @@ feature '通知' do
         end
 
         Given '律師已註冊、「未」開啟「我願意收到判決評鑑通知」、且未訂閱該案件' do
-          let!(:lawyer) { create :lawyer, :with_confirmed, active_noticed: false }
+          let!(:lawyer) { create :lawyer, :with_confirmed, active_notice: false }
           When '判決書抓到後且抓到該律師' do
             let!(:verdict_relation) { create :verdict_relation, verdict: verdict, person: lawyer }
             Then '不會發送通知信' do

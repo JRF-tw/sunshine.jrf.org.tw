@@ -84,7 +84,7 @@ feature '前台帳號功能', type: :feature, js: true do
           When '律師完成註冊' do
             before { lawyer_register(lawyer.name, lawyer.email) }
             Then '律師的「我願意收到判決評鑑通知」設定為開啟' do
-              expect(lawyer.active_noticed).to be_truthy
+              expect(lawyer.active_notice).to be_truthy
             end
           end
         end

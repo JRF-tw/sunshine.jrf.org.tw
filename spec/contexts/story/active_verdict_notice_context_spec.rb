@@ -6,10 +6,6 @@ describe Story::ActiveVerdictNoticeContext do
   before { create :verdict_relation, verdict: verdict, person: lawyer }
   subject { described_class.new(verdict) }
 
-  describe '#target_lawyer_id' do
-    xit 'test in VerdictQueries'
-  end
-
   describe '#perform' do
     it { expect { subject.perform }.to change_sidekiq_jobs_size_of(LawyerMailer, :active_verdict_notice) }
   end
