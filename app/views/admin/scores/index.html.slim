@@ -17,12 +17,12 @@
         .span6
           .control-group
             = f.label :rater_type_eq
-            .controls = f.select :rater_type_eq,
+            .controls.rater-type = f.select :rater_type_eq,
             collect_for_score_roles, include_blank: '請選擇'
         .span6
           .control-group
             = f.label :rater_id_eq
-            .controls = f.search_field :rater_id_eq
+            .controls.rater-name.select2 = f.select :rater_id_eq, {}
       .row
         .span6
           .control-group
@@ -53,7 +53,7 @@
       tbody
         - @scores.each do |s|
           tr
-            td = link_to s.story.identity, admin_story_path(s.story.id)
+            td = link_to s.story.identity, admin_story_path(s.story.id), target: '_blank'
             td = Admin::ScorePresenters.new.rater_link(s)
             td = s.class.name == 'ScheduleScore'? '開庭評鑑' : '判決評鑑'
             td = s.created_at

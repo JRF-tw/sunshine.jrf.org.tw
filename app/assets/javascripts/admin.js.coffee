@@ -18,3 +18,17 @@
 $ ->
   $("li.submenu li.active").each ->
     $(this).parents("li.submenu").addClass("open active")
+
+$ ->
+  change_rater_select = ->
+    $('.rater-name select').find('option').remove()
+    option = JSON.parse($('.rater-type select').find(':selected').attr('data'))
+    $('.rater-name select').append $('<option></option>').attr('value', '').text('請選擇')
+    option.map (a) ->
+      $('.rater-name select').append $('<option></option>').attr('value', a[1]).text(a[0])
+    return
+  change_rater_select()
+
+  $('.rater-type').change ->
+    change_rater_select()
+  return

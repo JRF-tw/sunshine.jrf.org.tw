@@ -20,7 +20,7 @@ module AdminHelper
   end
 
   def collect_for_score_roles
-    [['律師', 'Lawyer'], ['當事人', 'Party'], ['觀察者', 'CourtObserver']]
+    [['律師', 'Lawyer', { data: collect_for_lawyer_name }], ['當事人', 'Party', { data: collect_for_party_name }], ['觀察者', 'CourtObserver', { data: collect_for_observer_name }]]
   end
 
   def collect_for_story_identity
@@ -29,6 +29,18 @@ module AdminHelper
 
   def collect_for_judge_name
     Judge.all.map { |j| [j.name, j.id] }
+  end
+
+  def collect_for_party_name
+    Party.all.map { |j| ["當事人 - #{j.name}", j.id] }.to_json
+  end
+
+  def collect_for_lawyer_name
+    Lawyer.all.map { |j| ["律師 - #{j.name}", j.id] }.to_json
+  end
+
+  def collect_for_observer_name
+    CourtObserver.all.map { |o| ["觀察者 - #{o.name}", o.id] }.to_json
   end
 
   def score_show_path(s)

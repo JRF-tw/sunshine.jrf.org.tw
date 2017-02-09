@@ -7,6 +7,6 @@ class Admin::ScorePresenters
     wording = rater.model_name.human + ' - ' + rater.name
     rater_type = rater.class.name.downcase.gsub('court', '')
     path = Rails.application.routes.url_helpers.send("admin_#{rater_type}_path", rater)
-    link_to wording, path
+    link_to wording, path, target: '_blank'
   end
 end
