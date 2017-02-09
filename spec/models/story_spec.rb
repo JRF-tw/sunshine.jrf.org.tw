@@ -41,7 +41,6 @@ RSpec.describe Story do
     context 'judge' do
       let(:judge) { create :judge }
       before { create :story_relation, story: story, people: judge }
-      subject { story }
 
       it { expect(story.by_relation_role('judge').first.people).to eq(judge) }
     end
@@ -49,7 +48,6 @@ RSpec.describe Story do
     context 'lawyer' do
       let(:lawyer) { create :lawyer }
       before { create :story_relation, story: story, people: lawyer }
-      subject { story }
 
       it { expect(story.by_relation_role('lawyer').first.people).to eq(lawyer) }
     end
@@ -57,7 +55,6 @@ RSpec.describe Story do
     context 'parties' do
       let(:party) { create :party }
       before { create :story_relation, story: story, people: party }
-      subject { story }
 
       it { expect(story.by_relation_role('party').first.people).to eq(party) }
     end
@@ -65,7 +62,6 @@ RSpec.describe Story do
     context 'prosecutor' do
       let(:prosecutor) { create :prosecutor }
       before { create :story_relation, story: story, people: prosecutor }
-      subject { story }
 
       it { expect(story.by_relation_role('prosecutor').first.people).to eq(prosecutor) }
     end
