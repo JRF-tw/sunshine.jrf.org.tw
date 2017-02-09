@@ -1,0 +1,58 @@
+.list--avatar {
+  @extend %scut-list-unstyled;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+.list--avatar__cell {
+  display: flex;
+  flex-direction: column;
+  margin: 0 r(1) r(4);
+  width: r(20);
+}
+
+.card--avatar {
+  @include Card();
+  display: flex;
+  flex-direction: column;
+  padding: r(1.5) r(2) 0;
+  min-height: 187px;
+  overflow: hidden;
+  color: $text-primary-dark !important;
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute 0 n() n() 0;
+    size: 100%;
+    background-color: rgba($accent, .5);
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: 0 100%;
+    transition: transform .3s ease-in-out 0s,
+                opacity .3s ease-in-out 0s;
+  }
+  &:hover::before {
+    transform: scale(2);
+    opacity: 1;
+  }
+  &.card--avatar--inactive {opacity: .7;}
+  &.card--avatar--judge {background-color: $blue;}
+  &.card--avatar--prosecutor {background-color: $purple;}
+}
+.card--avatar__name {
+  font-size: ms(2);
+  line-height: 1.2;
+}
+.card--avatar__stage {
+  margin-top: r(1);
+  margin-bottom: r(4);
+}
+.card--avatar__job {
+  margin-top: auto;
+  padding: r(1.5) 0;
+  border-top: 1px solid $divider-gray;
+  @include bleed-x(r(2));
+  .card--avatar--judge & {background-color: $blue-dark;}
+  .card--avatar--prosecutor & {background-color: $purple-dark;}
+}

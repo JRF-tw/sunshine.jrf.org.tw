@@ -1,4 +1,4 @@
-body.who-are-you {
+.who-are-you .page-wrapper {
   $gradients: (
     linear-gradient(to top, rgba(0,0,0,0) 52%, rgba(0,0,0,.8) 100%) 50% 0 no-repeat,
     linear-gradient(to top, rgba(0,0,0,.3), rgba(0,0,0,.3)) 50% 0 no-repeat
@@ -10,7 +10,9 @@ body.who-are-you {
 }
 
 .character-selector {
-  padding: r(12) 0 0;
+  padding: r(12) r(5);
+  text-align: center;
+  color: $white;
   @include susy-media($character-selector-twick) {
     max-width: 784px !important;
   }
@@ -19,14 +21,20 @@ body.who-are-you {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  padding: r(14) r(5);
+  padding: r(4) 0 r(2);
+  @include susy-media($character-selector-twick) {padding-bottom: r(10);}
 }
 .character-selector__heading {
-  text: 400 center $white ms(3);
-  width: 100%;
-  @include susy-media($character-selector-twick) {
-    font-size: ms(5);
-  }
+  @include Heading($character-selector-twick);
+}
+.character-selector__description {
+  text: ms(2);
+}
+.character-selector__sub-heading {
+  text: normal ms(2);
+  margin: r(8) auto r(2);
+  max-width: container(3);
+  @include scut-side-lined($color: $text-secondary-dark);
 }
 
 %character-selector__cell {
@@ -37,13 +45,13 @@ body.who-are-you {
   transition: background-image .3s ease 0s,
               color .3s ease 0s;
   @include susy-media($character-selector-twick) { width: 185px; }
-  
+
   &:hover .ir-wrapper::before { size: 100%; }
-  
+
   .ir-wrapper {
     padding-top: 100%;
     position: relative;
-    z-index: index($layers, base);    
+    z-index: index($layers, base);
     background-color: inherit;
     border-radius: 50%;
     &::before {
@@ -106,11 +114,11 @@ body.who-are-you {
 .character-selector__cell--observer {
   @extend %character-selector__cell;
   background-color: $avatar-green;
-  margin: r(25) auto r(5);
-  &:hover { color: $avatar-green; }  
+  margin: 50% auto r(5);
+  &:hover { color: $avatar-green; }
   @include susy-media($character-selector-twick) {
     margin: 0;
-    &:hover .text { color: $avatar-green; }  
+    &:hover .text { color: $avatar-green; }
 
     .icon {
       size: 60%;

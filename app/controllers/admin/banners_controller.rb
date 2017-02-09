@@ -3,7 +3,7 @@ class Admin::BannersController < Admin::BaseController
   before_action(except: [:index]) { add_crumb('首頁橫幅列表', admin_banners_path) }
 
   def index
-    @banners = Admin::Banner.all.order_by_weight.page(params[:page]).per(10)
+    @banners = Admin::Banner.all.newest.page(params[:page]).per(10)
     @admin_page_title = '首頁橫幅列表'
     add_crumb @admin_page_title, '#'
   end
@@ -64,6 +64,6 @@ class Admin::BannersController < Admin::BaseController
   end
 
   def banner_params
-    params.fetch(:admin_banner, {}).permit(:title, :desc, :link, :btn_wording, :pic_l, :pic_m, :pic_s, :weight, :is_hidden)
+    params.fetch(:admin_banner, {}).permit(:title, :desc, :link, :btn_wording, :pic, :weight, :is_hidden)
   end
 end

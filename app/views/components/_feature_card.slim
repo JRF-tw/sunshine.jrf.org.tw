@@ -1,4 +1,9 @@
-section.feature-card
-  h3.feature-card__heading.text-center = heading
-  
-  = yield
+- attributes = attributes ? attributes : {}
+- job = job ? job : {}
+
+section.card--feature *attributes
+  h3.card--feature__heading class=(job if job)
+    .text = heading
+
+  .card--feature__content
+    = yield

@@ -11,5 +11,7 @@
 #
 
 class Bulletin < ActiveRecord::Base
+  mount_uploader :pic, BulletinPicUploader
   scope :most_recent, -> (amount) { order(created_at: :desc).limit(amount) }
+  scope :newest, -> { order(id: :desc) }
 end

@@ -65,9 +65,6 @@ ActiveRecord::Schema.define(version: 20170207035248) do
   add_index "awards", ["profile_id"], name: "index_awards_on_profile_id", using: :btree
 
   create_table "banners", force: :cascade do |t|
-    t.string   "pic_l"
-    t.string   "pic_m"
-    t.string   "pic_s"
     t.integer  "weight"
     t.boolean  "is_hidden"
     t.datetime "created_at"

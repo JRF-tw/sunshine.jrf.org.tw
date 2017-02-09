@@ -9,7 +9,7 @@
           th #
           th 標題
           th 描述
-          th 圖片
+          th 背景圖
           th 權重
           th 是否隱藏
           th
@@ -19,7 +19,7 @@
             td = banner.id
             td = banner.title
             td = banner.desc
-            td = image_tag banner.pic_l.L_360
+            td = image_tag banner.pic.W_360 if banner.pic
             td = banner.weight
             td = banner.is_hidden ? '隱藏' : '-'
             td

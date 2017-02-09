@@ -1,0 +1,17 @@
+section.news-card.card
+  .news-card__thumbnail-wrapper
+    - if thumbnail[:src].length > 0
+      = rwd_image\
+        src: thumbnail[:src],
+        srcset: thumbnail[:srcset],
+        class: 'news-card__thumbnail'
+        
+    - else
+      .news-card__thumbnail-placeholder
+      
+    h3.news-card__heading = title
+    
+  .news-card__content-wrapper
+    p.news-card__summary = summary
+    
+    = link_to '詳細內容', href, class: 'news-card__more flat-button--densed'

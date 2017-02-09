@@ -20,7 +20,7 @@
   border: 1px solid $divider-gray;
   border-radius: 50%;
   text: center $link-color;
-  fill: currentColor;  
+  fill: currentColor;
   transition: all .3s ease-in-out 0s;
   @include susy($tablet) {
     $size: 160px;
@@ -69,7 +69,7 @@
     width: 100%;
     @include susy($tablet) { width: auto; }
   }
-  
+
   .icon {
     display: none;
     @include susy($tablet) {
@@ -91,7 +91,7 @@
   padding: r(3);
   text-align: center;
   position: relative;
-  background-image: linear-gradient(to bottom, #019CB0 0%, #00BCD4 100%);  
+  background-image: linear-gradient(to bottom, #019CB0 0%, #00BCD4 100%);
   &::before {
     $size: 17px;
     content: "";
@@ -173,9 +173,14 @@
   text-align: left;
 
   .story-lists & { margin-bottom: 0; }
-  
+
   thead { color: $text-secondary-dark $accent; }
-  
+
+  tbody tr:hover td {
+    background-color: $gray-lighter;
+    cursor: pointer;
+  }
+
   td, th {
     &:first-child { padding-left: r(2); }
     &:last-child { padding-right: r(2); }
@@ -184,9 +189,9 @@
       &:last-child { padding-right: r(3); }
     }
   }
-  
+
   th { padding-bottom: r(1); }
-  
+
   td {
     padding: r(2) n();
     position: relative;
@@ -210,9 +215,9 @@
       }
     }
   }
-  
+
   tr:last-child td::before {display: none;}
-  
+
   .icon {
     size: 18px;
     fill: currentColor;

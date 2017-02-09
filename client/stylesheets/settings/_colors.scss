@@ -59,6 +59,14 @@ $brown-dark:  #5D4037;
 $brown:       #795548;
 $brown-light: #D7CCC8;
 
+$blue-dark:   #1976D2;
+$blue:        #2196F3;
+$blue-light:  #BBDEFB;
+
+$purple-dark:   #7B1FA2;
+$purple:        #9C27B0;
+$purple-light:  #E1BEE7;
+
 $black:     #212121;
 $gray-dark: #727272;
 $gray:      #b6b6b6;
@@ -74,7 +82,7 @@ $link-visited-color:   $gray-dark !default;
 
 //  NProgress
 //  ---------
-$nprogress-color:    $primary;
+$nprogress-color:    $accent;
 
 //  Component colors
 //  ----------------

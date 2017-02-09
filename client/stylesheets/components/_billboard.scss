@@ -24,6 +24,34 @@ $character-gradients: (
     padding-top: 380px;
   }
 }
+.billboard--classic {
+  padding: r(10) r(3);
+  margin-bottom: r(2);
+  background-size: cover;
+  background-position: 50% 50%;
+
+  &.billboard--profiles-judges { background-position: 0 50%; }
+  &.billboard--profiles-show   { padding-top: r(20); }
+
+  .enable-full-billboard & {
+    flex: 1 0 auto;
+    margin-bottom: 0;
+  }
+}
+.billboard__heading {
+  @include Heading(tablet);
+}
+.billboard__description {
+  display: inline-block;
+  margin: 0;
+  padding: r(1);
+  color: #bababa;
+  background-color: rgba(0,0,0,.55);
+  border-radius: $global-radius;
+  @include susy($tablet) { font-size: ms(1); }
+
+  &:empty { display: none }
+}
 
 @each $character in $character-gradients {
   $c-gradient: map-get($character, gradients);
@@ -40,6 +68,6 @@ $character-gradients: (
 
   .billboard--#{map-get($character, name)} {
     background: $c-gradient, $gradients, $bg;
-    @include susy($tablet) { background: $gradients, $bg-lg; }    
-  }  
+    @include susy($tablet) { background: $gradients, $bg-lg; }
+  }
 }

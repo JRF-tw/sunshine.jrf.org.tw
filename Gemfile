@@ -70,7 +70,6 @@ group :development do
   # Gems for Front-end development
   gem 'guard-livereload', '~>2.5.2', require: false
   gem 'rack-livereload'
-  gem 'dotenv-rails'
 
   # capistrano
   gem 'capistrano-rails'
@@ -84,7 +83,7 @@ group :development do
   gem 'guard-annotate'
   gem 'annotate'
   gem 'awesome_print'
-  gem 'xray-rails'
+  gem 'xray-rails', '~> 0.2.0'
   gem 'pry'
   gem 'pry-rails'
   gem 'pry-remote'

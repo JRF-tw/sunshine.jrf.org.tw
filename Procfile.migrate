@@ -1,2 +1,0 @@
-redis: redis-server
-migrate: bundle exec rake db:migrate

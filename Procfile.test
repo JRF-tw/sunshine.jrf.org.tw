@@ -1,2 +1,0 @@
-redis: redis-server
-test: bundle exec rake spec

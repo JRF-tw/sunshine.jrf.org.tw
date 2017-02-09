@@ -3,30 +3,11 @@
 = f.input :link, placeholder: 'http://example.com'
 = f.input :btn_wording
 
-- if f.object.pic_l?
+- if f.object.pic?
   .control-group
-    label.control-label 已上傳桌機用圖：
-    .controls= image_tag f.object.pic_l.L_360.url
-= f.input :pic_l, as: :file, hint: "建議尺寸/比例：2592 × 1296"
- 
-- if f.object.pic_m?
-  .control-group
-    label.control-label 已上傳平板用圖：
-    .controls= image_tag f.object.pic_m.M_360.url
-= f.input :pic_m, as: :file, hint: "建議尺寸/比例：1944 × 1266"
-
-- if f.object.pic_s?
-  .control-group
-    label.control-label 已上傳手機用圖：
-    .controls= image_tag f.object.pic_s.S_360.url
-= f.input :pic_s, as: :file, hint: "建議尺寸/比例：1296 × 1944"
-
-
-/ - if f.object.pic?
-/   .control-group
-/     label.control-label 已上傳背景圖：
-/     .controls= image_tag f.object.pic.W_360.url
-/ = f.input :pic, as: :file, hint: '新版首頁圖片'
+    label.control-label 已上傳背景圖：
+    .controls= image_tag f.object.pic.W_360.url
+= f.input :pic, as: :file
 
 = f.input :weight, hint: '數字越大 = 權重越高 = 排越前面'
 = f.input :is_hidden, as: :boolean, hint: '打勾 = 前端頁面不顯示'
@@ -34,5 +15,5 @@
 .form-actions
   = f.submit '送出', class: 'btn btn-primary'
   = ' '
-  = link_to admin_profiles_path, class: 'btn' do
-    | 回到個人檔案列表
+  = link_to admin_banners_path, class: 'btn' do
+    | 回到首頁橫幅列表

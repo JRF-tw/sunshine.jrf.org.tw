@@ -1,13 +1,24 @@
-.search-result-form-wrapper
-  = simple_form_for :search, :url => search_url, :method => :get, :html => { :role => "menu" } do |f|
-    - if options.length > 0
-      .select-container
-        select.select-custom name="#{type}"
-          - options.each do |option|
-            - if option == "#{params[type.to_sym]}"
-              option selected="selected" value="#{option}" = option
-            - else
-              option value="#{option}" = option
-    .input-group
-      input type="text" id="search" name="q" value="#{params[:q]}" placeholder="#{placeholder}" class="input"
-      button type="submit" class="button--gray-dark" 馬上找
+- accent_button = accent_button || false
+
+= simple_form_for :search, url: search_url,
+  method: :get, html: { role: "menu", class: 'search-form' } do |f|
+  - if options.length > 0
+    select.search-form__select name="#{type}"
+      - options.each do |option|
+        - if option == "#{params[type.to_sym]}"
+          option selected="selected" value="#{option}" = option
+        - else
+          option value="#{option}" = option
+
+    input.form-control.search-form__input[
+      type="text"
+      id="search"
+      name="q"
+      value="#{params[:q]}"
+      placeholder="#{placeholder}"
+      ]
+    
+    button.raised-button.search-form__submit[
+      type="submit"
+      class=(accent_button ? "raised-button" : "raised-button--#{type}")
+      ] 馬上找

@@ -1,3 +1,6 @@
+$radio-height: 55px;
+$star-size: 34px;
+
 .form--score {
   @include susy($tablet) {
     display: flex;
@@ -32,57 +35,135 @@
   }
 }
 
+.form-group--scores-name {
+  margin: 0 n();
+  @include scut-side-lined($height: 2px, $color: $accent, $v-adjust: 1px);
+  text: left ms(1);
+  &::after {
+    margin-right: -100%;
+    width: 100%;
+  }
+}
+.form-group--scores {
+  margin: r(2) n() 0;
+
+  &, ol {
+    padding-left: 0;
+    list-style: none;
+    counter-reset: section;
+  }
+
+  li::before {
+    display: inline-block;
+    margin-left: r(-2);
+    margin-right: r(1);
+    counter-increment: section;
+    content: counters(section, '-');
+  }
+}
 .form-group--score {
+  margin-bottom: r(2);
+  padding-left: r(2);
+
+  li {
+    margin-top: r(1);
+  }
+}
+.form-group--score__radio-set {
+  padding-left: r(2);
+
+  .collection_radio_buttons {
+    margin-right: r(2);
+    padding-left: r(3);
+    position: relative;
+    cursor: pointer;
+
+    &::before {
+      display: inline-block;
+      content: '';
+      size: r(2);
+      border: 2px solid $divider-gray;
+      border-radius: 50%;
+      position: absolute n() n() 0 0;
+    }
+    &::after {
+      display: inline-block;
+      content: '';
+      size: r(1);
+      border-radius: 50%;
+      background-color: $accent;
+      position: absolute n() n() r(.5) r(.5);
+      transition: transform .2s ease 0s;
+      transform: scale(0);
+    }
+  }
+
+  [type="radio"] {
+    display: none;
+    margin-right: r(.5);
+
+    &:checked + .collection_radio_buttons::after { transform: scale(1); }
+  }
+}
+.form-group--score__stars-wrapper {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
-  margin-bottom: r(2);
   position: relative;
-  
+
   [type='radio'] {
     @include Normalize();
     display: inline-block;
-    height: 55px;
+    height: $radio-height;
     flex: 1;
     border: 1px solid transparent;
     opacity: 0;
+    cursor: pointer;
+    position: relative;
+
     @for $i from 1 through 10 {
       $value: $i * 0.5;
       $calc_value: if(str-length('#{$value}') < 3, '#{$value}.0', $value);
+      &[value='#{$calc_value}'].hover ~ .form-group--score__stars {
+        @for $j from 0 through floor($value) {
+          .icon-star-full:nth-child(#{$j}) { opacity: floor($value) * .1; }
+        }
+        @for $k from 0 through $value * 2 {
+          .icon-star-full:nth-child(#{$k}) { opacity: $value * 2 * .1; }
+        }
+      }
       &[value='#{$calc_value}']:checked ~ .form-group--score__stars {
         @for $j from 0 through floor($value) {
-          .star-full:nth-child(#{$j}) { animation: bounceIn .5s ease-in-out 0s both; }
+          .icon-star-full:nth-child(#{$j}) { animation: bounceIn .5s ease-in-out 0s both; }
         }
-        @for $k from 0 through round($value) {
-          .star-half:nth-child(#{$k}) { animation: bounceIn .5s ease-in-out 0s both; }
+        @for $k from 0 through $value * 2 {
+          .icon-star-full:nth-child(#{$k}) { animation: bounceIn .5s ease-in-out 0s both; }
         }
       }
     }
   }
 }
-.form-group--score__label {
-  display: block;
-  margin-bottom: r(1);
-  width: 100%;
-}
+.form-group--score__stars-wrapper {margin-left: r(-2);}
 .form-group--score__stars {
-  @include debug();
-  position: absolute r(5) 0 n() 0;
+  position: absolute 0 0 0 0;
   pointer-events: none;
 
   .stars-wrapper {
     display: flex;
     justify-content: space-around;
-    position: absolute 0 0 n() 0;
+    position: absolute r(1) 0 r(1) 0;
   }
 
   .icon {
     size: 34px;
+    padding: n() r(.5);
   }
 
-  .star-full, .star-half {
+  .icon-star-full, .icon-star-half {
     opacity: 0;
     fill: url(#radialGradient-star);
   }
-  .star-o { fill: $divider-gray; }
+  .icon-star-o {
+    fill: $divider-gray;
+  }
 }

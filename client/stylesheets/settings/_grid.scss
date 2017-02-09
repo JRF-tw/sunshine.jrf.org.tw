@@ -22,7 +22,7 @@ $susy-media: (
   'tablet': '(min-width: 768px)',
   'tablet-portrait-min': '(min-width: 768px) and (orientation: portrait)',
   'tablet-landscape-min': '(min-width: 768px) and (orientation: landscape)',
-  'desktop': '(min-width: 1440px)'
+  'desktop': '(min-width: 1200px)'
 );
 $tablet: (
   query: map-get($susy-media, tablet),
@@ -31,7 +31,7 @@ $tablet: (
 $tablet-columns: susy-get(columns, map-get($tablet, layout));
 $desktop: (
   query: map-get($susy-media, desktop),
-  layout: 12 split
+  layout: 10 split
 );
 $desktop-columns: susy-get(columns, map-get($desktop, layout));
 $desktop-grid-padding: scut-rem(15);
@@ -43,7 +43,11 @@ $footer-copy-twick: 880px;
 //  {{ Layers ------ }}
 $layers: (
   base,
+  hero-cover,
+  hero-content,
+  profile-label,
   header,
+  to-top,
   drawer-toggle,
   drawer-mask,
   drawer

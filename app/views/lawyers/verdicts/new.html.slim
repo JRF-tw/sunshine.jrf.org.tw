@@ -8,5 +8,7 @@
       prev_url_method: :get,
       form_url: lawyer_score_verdicts_path\
     } do |f|
-      = render 'components/input_score', f: f,
-        label: show_topic(:quality_scores, :score_3), options: [:score_3_1, :score_3_2], scored_type: :quality_scores
+      = render 'components/input_score_list', f: f,
+        label: show_topic(:quality_scores, :score_3),
+        options: [:score_3_1, :score_3_2],
+        scored_type: :quality_scores

@@ -21,18 +21,7 @@ config/database.yml
 
 /.capistrano/*
 
-# Ignore bower and node modules to reduce commit size.
-# Remember to run `bower install` and `npm install` after pulling from GitHub.
-/vendor/assets/bower_components/jquery
-/vendor/assets/bower_components/normalize-scss
-/vendor/assets/bower_components/picturefill
-/vendor/assets/bower_components/sass-toolkit
-/vendor/assets/bower_components/scut
-/vendor/assets/bower_components/susy
-/vendor/assets/bower_components/vertical-rhythms-without-compass
-
 /node_modules
-/gulp/tasks/responsive.js
 /.env
 
 # Ignore compiled assets by Gulp to prevent rev issue.
@@ -54,4 +43,5 @@ public/uploads
 /mockup
 .byebug_history
 /jrf-sunny.sublime-workspace
-/.tags
+.tags*
+.ctags

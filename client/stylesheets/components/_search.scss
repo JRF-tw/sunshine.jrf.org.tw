@@ -1,0 +1,50 @@
+.search-form {
+  margin: 0 auto;
+  padding: r(4) r(2) 0;
+  max-width: r(40);
+  text: center ms(1);
+  @include susy($tablet) {
+    display: flex;
+    justify-content: center;
+    padding-top: r(6);
+    text-align: left;
+
+    .billboard & { position: relative r(-4) n() n() n(); }
+  }
+}
+.search-form__select {
+  padding: n() r(1);
+  background-color: $white;
+  @include susy($tablet) {
+    border-bottom: none;
+    border-radius: $global-radius 0 0 $global-radius;
+  }
+
+  + .chosen-container {
+    text-align: left;
+    border-radius: $global-radius 0 0 $global-radius;
+    background-color: #fff;
+    .chosen-single {
+      margin-top: r(.5);
+      padding-left: r(1);
+      font-size: ms(1);
+      border-bottom: none;
+      @include susy($tablet) { padding-left: r(2); }
+    }
+  }
+}
+.search-form__input {
+  padding: n() r(1) !important;
+  @include susy($tablet) {
+    flex: 1 0 auto;
+    padding-left: r(2) !important;
+    border-bottom: none !important;
+  }
+}
+.search-form__submit {
+  margin-top: r(2);
+  @include susy($tablet) {
+    flex: 1 0 auto;
+    margin-top: 0;
+  }
+}

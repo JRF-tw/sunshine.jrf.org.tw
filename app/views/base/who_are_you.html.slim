@@ -2,7 +2,15 @@
   | who-are-you
 
 section.character-selector.container
-  h2.character-selector__heading 請選擇角色
+  h2.character-selector__heading 評鑑法官
+  
+  p.character-selector__description
+    = "歡迎使用司法陽光網法官評鑑系統。透過評鑑，您的經驗將成為司法改革的一份力量！請選擇您的身分，開始評鑑法官".html_safe
+    
+  p.character-selector__description
+    = "若不清楚如何開始評鑑，請參考#{link_to '這份教學', score_intro_path, class: 'link'}。".html_safe
+  
+  h3.character-selector__sub-heading 請選擇角色
 
   .character-selector__wrapper
     = link_to 'party/sign_in',

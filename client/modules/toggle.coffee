@@ -1,11 +1,11 @@
 class Toggle
   constructor: (@query) ->
-    $(document).on 'click', @query, (e) =>
+    $(@query).on 'click', (e) =>
       $this = $(e.currentTarget)
       on_targets  = $this.data('switch-on')
       off_targets = $this.data('switch-off')
 
-      @enable on_targets if on_targets? 
+      @enable on_targets if on_targets?
       @disable off_targets if off_targets?
 
   enable: (targets) ->
@@ -22,7 +22,7 @@ class Toggle
 
 class Dismiss
   constructor: (@query) ->
-    $(document).on 'click', @query, (e) ->
+    $(@query).on 'click', (e) ->
       $this = $(@)
       switch $this.data 'dismiss'
         when 'alert' then $this.parent().slideUp()
