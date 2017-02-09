@@ -5,7 +5,7 @@ class BulletinPicUploader < BaseUploader
   weights.each do |w|
     w = w.to_i
     version "W_#{w}".to_sym do
-      process resize_to_fill: [w, w * 2 / 3]
+      process resize_to_fit: [w, w * 2 / 3]
     end
   end
 end
