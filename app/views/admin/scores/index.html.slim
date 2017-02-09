@@ -6,11 +6,13 @@
         .span6
           .control-group
             = f.label :judge_id_eq
-            .controls = f.search_field :judge_id_eq
+            .controls.select2  = f.select :judge_id_eq,
+            collect_for_judge_name, include_blank: '請選擇'
         .span6
           .control-group
             = f.label :story_id_eq
-            .controls = f.search_field :story_id_eq
+            .controls.select2  = f.select :story_id_eq,
+            collect_for_story_identity, include_blank: '請選擇'
       .row
         .span6
           .control-group
@@ -52,10 +54,10 @@
         - @scores.each do |s|
           tr
             td = link_to s.story.identity, admin_story_path(s.story.id)
-            td = AdminPresenters.new.rater_link(s)
+            td = Admin::ScorePresenters.new.rater_link(s)
             td = s.class.name == 'ScheduleScore'? '開庭評鑑' : '判決評鑑'
             td = s.created_at
             td
-              = s.class.name == 'ScheduleScore'? link_to('詳細資料', schedule_admin_score_path(s), class: 'btn btn-mini') : link_to('詳細資料', verdict_admin_score_path(s), class: 'btn btn-mini')
+              = score_show_path(s)
     .ui-toolbar.ui-widget-header
       = paginate @scores, theme: :admin

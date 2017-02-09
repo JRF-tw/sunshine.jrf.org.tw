@@ -8,10 +8,8 @@ RSpec.describe Admin::ScoresController do
   describe '#index' do
     context 'search the stroy id' do
       before { get '/admin/scores', score_search_form_object: { story_id_eq: schedule_score.story_id } }
-      it {
-        expect(response.body).to match(schedule_score.story.identity)
-        expect(assigns(:scores).first.id).to eq schedule_score.id
-      }
+      it { expect(response.body).to match(schedule_score.story.identity) }
+      it { expect(assigns(:scores).first.id).to eq schedule_score.id }
     end
 
     context 'search the rater' do
@@ -21,18 +19,14 @@ RSpec.describe Admin::ScoresController do
           rater_id_eq: verdict_score.verdict_rater_id
         }
       }
-      it {
-        expect(response.body).to match(verdict_score.story.identity)
-        expect(assigns(:scores).first.id).to eq verdict_score.id
-      }
+      it { expect(response.body).to match(verdict_score.story.identity) }
+      it { expect(assigns(:scores).first.id).to eq verdict_score.id }
     end
 
     context 'search the judge id' do
       before { get '/admin/scores', score_search_form_object: { judge_id_eq: schedule_score.judge_id } }
-      it {
-        expect(response.body).to match(schedule_score.story.identity)
-        expect(assigns(:scores).first.id).to eq schedule_score.id
-      }
+      it { expect(response.body).to match(schedule_score.story.identity) }
+      it { expect(assigns(:scores).first.id).to eq schedule_score.id }
     end
   end
 

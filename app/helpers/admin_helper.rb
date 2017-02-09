@@ -23,6 +23,18 @@ module AdminHelper
     [['律師', 'Lawyer'], ['當事人', 'Party'], ['觀察者', 'CourtObserver']]
   end
 
+  def collect_for_story_identity
+    Story.all.map { |s| [s.identity, s.id] }
+  end
+
+  def collect_for_judge_name
+    Judge.all.map { |j| [j.name, j.id] }
+  end
+
+  def score_show_path(s)
+    s.class.name == 'ScheduleScore' ? link_to('詳細資料', schedule_admin_score_path(s), class: 'btn btn-mini') : link_to('詳細資料', verdict_admin_score_path(s), class: 'btn btn-mini')
+  end
+
   def precentage(numerator, denominator)
     number_to_percentage(numerator.to_f / denominator.to_f * 100, precision: 2)
   end

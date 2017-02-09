@@ -12,8 +12,7 @@
         td = link_to @score.judge.name, admin_judge_path(@score.judge) 
       tr
         td 評鑑人
-        td 
-           = AdminPresenters.new.rater_link(@score)
+        td = Admin::ScorePresenters.new.rater_link(@score)
       tr
         td 是否申訴法官
         td = @score.appeal_judge ? '是' : '否'

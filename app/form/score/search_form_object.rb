@@ -7,7 +7,7 @@ class Score::SearchFormObject < BaseFormObject
   end
 
   def result
-    ss_result + vs_result
+    schedule_scores_result + verdict_scores_result
   end
 
   private
@@ -22,19 +22,19 @@ class Score::SearchFormObject < BaseFormObject
     self.created_at_lteq = @params[:created_at_lteq]
   end
 
-  def ss_result
-    @ss = only_vs? ? [] : ScheduleScore.ransack(@params).result.includes(:story, :schedule_rater)
+  def schedule_scores_result
+    only_verdict_score? ? [] : ScheduleScore.ransack(@params).result.includes(:story, :schedule_rater)
   end
 
-  def vs_result
-    @vs = only_ss? ? [] : VerdictScore.ransack(@params).result.includes(:story, :verdict_rater)
+  def verdict_scores_result
+    only_schedule_score? ? [] : VerdictScore.ransack(@params).result.includes(:story, :verdict_rater)
   end
 
-  def only_ss?
+  def only_schedule_score?
     @params[:score_type_eq] == 'ScheduleScore' || @params[:judge_id_eq].present?
   end
 
-  def only_vs?
+  def only_verdict_score?
     @params[:score_type_eq] == 'VerdictScore'
   end
 end
