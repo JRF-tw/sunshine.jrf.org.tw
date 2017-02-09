@@ -3,7 +3,7 @@ require 'rails_helper'
 describe VerdictRelationCreateContext do
   let!(:court) { create :court }
   let!(:story) { create :story, court: court, story_type: '民事' }
-  let!(:verdict) { create :verdict, party_names: ['party'], lawyer_names: ['lawyer'], judges_names: ['judge'], story: story }
+  let!(:verdict) { create :verdict, party_names: ['party'], lawyer_names: ['lawyer'], judges_names: ['judge'], prosecutor_names: ['prosecutor'], story: story }
   subject { described_class.new(verdict) }
 
   context 'create party' do
@@ -16,6 +16,12 @@ describe VerdictRelationCreateContext do
     let!(:lawyer) { create :lawyer, name: 'lawyer' }
 
     it { expect { subject.perform(verdict.lawyer_names.first) }.to change { lawyer.verdict_relations.count } }
+  end
+
+  context 'create prosecutor' do
+    let!(:prosecutor) { create :prosecutor, name: 'prosecutor' }
+
+    it { expect { subject.perform(verdict.prosecutor_names.first) }.to change { prosecutor.verdict_relations.count } }
   end
 
   context 'create judge' do

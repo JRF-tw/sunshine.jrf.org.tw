@@ -53,16 +53,9 @@ class Story < ActiveRecord::Base
     verdicts.find_by_is_judgment(true)
   end
 
-  def by_relation_judges
-    story_relations.where(people_type: 'Judge')
-  end
-
-  def by_relation_lawyers
-    story_relations.where(people_type: 'Lawyer')
-  end
-
-  def by_relation_parties
-    story_relations.where(people_type: 'Party')
+  def by_relation_role(role)
+    type = role.singularize.camelize
+    story_relations.where(people_type: type)
   end
 
   def detail_info
