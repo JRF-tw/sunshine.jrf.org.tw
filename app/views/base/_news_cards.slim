@@ -1,0 +1,17 @@
+.base-news-cards
+  h2.base-news-cards__heading
+    = link_to '最新消息', '/bulletins', class: 'text'
+  
+  .container
+    - @bulletins.each do |bulletin|
+      = render 'components/news_card',
+        thumbnail: {\
+          src: bulletin.pic.W_360,
+          srcset: [\
+            "#{bulletin.pic.W_360} 360W",
+            "#{bulletin.pic.W_720} 720W"\
+          ]\
+        },
+        title: bulletin.title,
+        summary: strip_tags(bulletin.content).truncate(60),
+        href: bulletin_path(bulletin)

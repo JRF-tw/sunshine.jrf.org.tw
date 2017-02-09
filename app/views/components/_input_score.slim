@@ -1,24 +1,32 @@
-.form-group--score
-  label.form-group--score__label = label
-  - options.each_with_index do |option, i|
-    - if topic_is_true_or_false?(option)
-      = show_true_or_false_main_topic(scored_type, option)
+- pattern_of_list_num = /（[\d\-]*）/
+
+li.form-group--score
+  - if topic_is_true_or_false?(option)
+    = show_true_or_false_main_topic(scored_type, option).sub pattern_of_list_num, ''
+    
+    ol
       - true_or_false_keys(scored_type, option).each do |key|
-        = show_true_or_false_topic(scored_type, option, key)
-        = f.collection_radio_buttons key, [[100, '是'], [0, '否']], :first, :last
-    - else
-      = show_topic(scored_type, option)
+        li
+          = show_true_or_false_topic(scored_type, option, key).sub pattern_of_list_num, ''
+          
+          .form-group--score__radio-set
+            = f.collection_radio_buttons key, [[100, '是'], [0, '否']], :first, :last
+
+  - else
+    label.form-group--score__label
+      = show_topic(scored_type, option).sub pattern_of_list_num, ''
+
+    .form-group--score__stars-wrapper
       = f.collection_radio_buttons option,
         (0.5..5.0).step(0.5).to_a.collect {|x| [x.to_s, x.to_s] }, :first, :last,
         boolean_style: :inline, item_wrapper_tag: false do |b|
         = b.radio_button
+
       .form-group--score__stars
         .stars-wrapper
-          - 5.times do
+          - 10.times do
             = inline_svg 'star-o'
+
         .stars-wrapper
-          - 5.times do
-            = inline_svg 'star-half'
-        .stars-wrapper
-          - 5.times do
+          - 10.times do
             = inline_svg 'star-full'

@@ -32,8 +32,8 @@ $color: $text-secondary;
   @include susy($tablet) {
     order: 5;
     margin-bottom: 0;
-    text-align: right;
   }
+  @include susy-media($footer-copy-twick) { text-align: right; }
 
   .text { color: $color !important; }
 }

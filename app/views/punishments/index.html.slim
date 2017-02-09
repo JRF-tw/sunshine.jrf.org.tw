@@ -1,18 +1,17 @@
 = render partial: 'components/profile_hero', locals: { person: @profile }
 
-section.section-rhythm.container
-  h3.section-heading--gray.text-center 懲處與其他相關紀錄
+section.punishment-records.container
+  / h3.section-heading--gray.text-center 懲處與其他相關紀錄
 
   - @punishments.each do |punishment|
 
-    = link_to profile_punishment_path(@profile, punishment), class: 'profile-card profile-card--punishment' do
+    = link_to profile_punishment_path(@profile, punishment), class: 'punishment-record'
       
-      article
-        h4.summary= render_punishment_reason(punishment)
+      h4.punishment-record__reason= render_punishment_reason(punishment)
 
-        time.date= punishment.relevant_date
+      time.punishment-record__date= punishment.relevant_date
 
-        span.by= render_punishment_decision_unit(punishment)
+      span.punishment-record__decision-unit= render_punishment_decision_unit(punishment)
 
   = paginate @punishments, theme: 'www'
 

@@ -3,31 +3,44 @@ ruby:
   m_size_path = path_to_image "hero-#{type}-M.png"
   l_size_path = path_to_image "hero-#{type}-L.png"
 
-section.hero--profile[
-  class="hero--#{type} lazyload"
+  job = job ? job : ''
+
+.billboard[
+  class="billboard--#{type} billboard--classic lazyload"
   data-bgset="#{m_size_path} 1000w, #{l_size_path} 2000w"
   data-sizes="auto"
 ]
-  .wrapper.cf
-    .hero--profile__avatar
+.profile
+  .container
+    section.profile__avatar
       .image-wrapper
-        = render partial: 'components/avatar_pic', locals: { person: @profile }
+        = render partial: 'components/avatar_pic', locals: { person: person }
 
       .text-wrapper
+        small.active-label[
+          class=(person.is_active ? 'active' : '')
+          class=job
+        ]
+          = person.is_active ? '在職': '不在職'
         h2.name= person.name
-        p.job= person.current
+        p.job
+          - if person.current_court
+            = "#{person.current_court} #{person.current}"
+          - else
+            = person.current
 
-    .hero--profile__profile
-      ul.list--profile
-        - if @profile.is_active
-          li.cell= "在職"
-        - else
-          li.cell= "不在職"
-        - if @profile.gender.present?
-          li.cell= "性別：#{@profile.gender}"
-        - if @profile.birth_year.present?
-          li.cell= "出生年份：#{year_in_bc(@profile.birth_year)}"
-        - if @profile.stage.present?
-          - stage = @profile.stage == 0 ? "不明" : "第#{@profile.stage}期"
-          li.cell= "司訓期別：#{stage}"
-        li.cell.break= "#{@profile.current_court} #{@profile.current}"
+    section.profile__info
+      ul.list--profile-info
+        - if person.gender.present?
+          li.cell
+            .term 性別
+            .desc= person.gender
+        - if person.birth_year.present?
+          li.cell
+            .term 出生年份
+            .desc= year_in_bc(person.birth_year)
+        - if person.stage.present?
+          - stage = person.stage == 0 ? "不明" : "第#{person.stage}期"
+          li.cell
+            .term 司訓期別
+            .desc= stage

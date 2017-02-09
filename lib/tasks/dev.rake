@@ -236,12 +236,9 @@ namespace :dev do
       Admin::Banner.create!(
         title: "我是標題-#{i}",
         desc: "我是描述-#{i}",
-        link: "我是連結-#{i}",
+        link: 'http://example.com',
         btn_wording: "我是按鈕文字-#{i}",
         pic: File.open("#{Rails.root}/spec/fixtures/banner/M_banner_#{i + 1}.jpg"),
-        pic_l: File.open("#{Rails.root}/spec/fixtures/banner/L_banner_#{i + 1}.jpg"),
-        pic_m: File.open("#{Rails.root}/spec/fixtures/banner/M_banner_#{i + 1}.jpg"),
-        pic_s: File.open("#{Rails.root}/spec/fixtures/banner/S_banner_#{i + 1}.jpg"),
         weight: i + 1
       )
     end
@@ -249,11 +246,13 @@ namespace :dev do
 
   task fake_bulletins: :environment do
     Bulletin.destroy_all
-    2.times do |i|
+    content = ["\r\n\r\n<h1>我今天想吃薯條</h1>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><em><strong><span style=\"color:#ff8c00\"><span style=\"font-size:16px\">不想吃漢堡</span></span></strong></em></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><em><strong><span style=\"color:#ff8c00\"><span style=\"font-size:16px\">真假啦</span></span></strong></em></p>\r\n",
+               "<ol>\r\n\t<li><s>我要當老師</s></li>\r\n\t<li><u>我要當老闆</u></li>\r\n\t<li>\r\n\t<h3>我要當老婆</h3>\r\n\t</li>\r\n\t<li><em>我要當老狗一條</em></li>\r\n</ol>\r\n\r\n<p><span style=\"font-size:16px\"><strong>今天天氣不錯</strong></span></p>\r\n"]
+    12.times do |i|
       Admin::Bulletin.create!(
         title: "重要公告-#{i}",
-        content: '沒事',
-        pic: File.open("#{Rails.root}/spec/fixtures/banner/L_banner_#{i + 1}.jpg")
+        content: content.sample,
+        pic: File.open("#{Rails.root}/spec/fixtures/banner/L_banner_#{[1, 2].sample}.jpg")
       )
     end
   end

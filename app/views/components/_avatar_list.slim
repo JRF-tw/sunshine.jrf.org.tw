@@ -1,8 +1,14 @@
-ul.list--avatar
-  - if people.present?
-    - people.each do |person|
-      li.list--avatar__cell
-        = render partial: 'components/avatar', locals: { person: person }
-  - else
-    / # TODO 請設計一下『查無資料』的情況
-    = "查無資料"
+- hide_pagination = hide_pagination ? hide_pagination : false
+
+- if people.present?
+  section.offcanvas-card-wrapper.container--list
+    ul.list--avatar
+      - people.each do |person|
+        li.list--avatar__cell
+          = render 'components/avatar', person: person, type: type
+
+    br
+    .text-center （依姓名部首排序）
+    
+    - unless hide_pagination
+      = paginate people, theme: 'www'

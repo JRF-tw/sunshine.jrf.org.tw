@@ -1,0 +1,11 @@
+- description = description || ''
+
+= render layout: 'components/hero', locals: {\
+    heading: heading, description: description\
+  }
+
+  = render 'searchs/form', options: options, placeholder: placeholder, search_url: search_url, type: type
+
+  = render 'components/no_results', people: people
+
+= render 'components/avatar_list', people: people, type: type

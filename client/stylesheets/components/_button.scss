@@ -21,6 +21,17 @@
   position: relative;
   &:hover { color: $white; }
   &:active { color: $white shade($accent, 20%); }
+
+  &--judge {
+    $bg: $blue;
+    background-color: $bg;
+    &:active { background-color: shade($bg, 20%); }
+  }
+  &--prosecutor {
+    $bg: $purple;
+    background-color: $bg;
+    &:active { background-color: shade($bg, 20%); }
+  }
 }
 .raised-button--large {
   @extend .raised-button;
@@ -32,7 +43,12 @@
   text: bold center;
   min-width: 64px;
   color: $accent !important;
-  &:hover { background-color: $divider-gray; }
+  &:hover,
+  &.active { background-color: $divider-gray; }
+}
+.flat-button--densed {
+  @extend .flat-button;
+  padding: r(1);
 }
 .flat-button--large {
   @extend .flat-button;
@@ -40,7 +56,7 @@
 }
 .flat-button--addons {
   font-weight: bold;
-  
+
   .icon {
     size: 16px;
     fill: currentColor;

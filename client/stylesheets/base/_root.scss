@@ -7,25 +7,40 @@ html {
   font-family: $base-font-family;
   text: 400 $text-color 1.5 $base-font-size;
   -webkit-font-smoothing: antialiased;
-  &:after { @include share-breakpoints($susy-media); }
+  &::after { @include share-breakpoints($susy-media); }
 }
 
 body {
   display: flex;
   flex-flow: column nowrap;
   background-color: #fff;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .page-wrapper {
-  flex: 1;
+  flex: 1 0 auto;
   min-height: r(20);
+  background-color: $brown-light;
   @each $type in $characters {
     &.#{$type} { background-color: theme($type); }
   }
+
+  &.enable-full-billboard {
+    display: flex;
+    flex-flow: column nowrap;
+  }
 }
 
-main[role="main"] { padding-bottom: r(10); }
+main[role="main"] {
+  padding-bottom: r(10);
+
+  .enable-full-billboard & {
+    padding-bottom: 0;
+    flex: 1;
+    display: flex;
+    flex-flow: column nowrap;
+  }
+}
 
 // Turbolinks
 html.turbolinks-progress-bar::before {background-color: $nprogress-color !important;}

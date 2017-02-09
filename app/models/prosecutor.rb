@@ -26,6 +26,8 @@
 class Prosecutor < ActiveRecord::Base
   belongs_to :prosecutors_office
   belongs_to :judge
+  has_many :verdict_relations, as: :person, dependent: :destroy
+  has_many :story_relations, as: :people, dependent: :destroy
 
   mount_uploader :avatar, AvatarUploader
 end

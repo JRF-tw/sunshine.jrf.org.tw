@@ -4,14 +4,10 @@ require "stylesheets"
 # Require Modernizr
 require "modernizr"
 
-# Require Lazysizes
-# require "lazysizes/plugins/custommedia/ls.custommedia"
-# require "lazysizes/plugins/respimg/ls.respimg"
-# require "lazysizes"
-
 require 'waypoints/lib/jquery.waypoints'
 require 'webui-popover/dist/jquery.webui-popover.js'
 require 'chosen-js'
+require 'slick-carousel'
 
 # Require Custom Modules
 # Modal = require "./modules/modal"
@@ -19,18 +15,24 @@ require 'chosen-js'
 {TextInput}       = require './modules/form'
 StoryCollapse     = require './modules/stories'
 Rules             = require './modules/rules'
+ToTop             = require './modules/to_top'
+Tab               = require './modules/tab'
+Arrow             = require './modules/arrow'
 
 # Require entry modules
 # EX:
+require './entry/article'
 
 # Inject SVG Sprite
 sprites = require.context "icons", off
 sprites.keys().forEach sprites
 
+Turbolinks.enableProgressBar()
+Turbolinks.enableTransitionCache()
+
 new TextInput()
 new StoryCollapse '#story-collapse-toggle'
-new Toggle '.switch'
-new Dismiss '[data-dismiss]'
+new Tab '[data-tab-content]'
 new Rules()
 
 $(document).on 'ready page:load', ->
@@ -41,6 +43,10 @@ $(document).on 'ready page:load', ->
       altField: $(@).next()
       onClose: -> $(@).trigger 'blur'
 
+  # Active class toggle
+  new Toggle '.switch'
+  new Dismiss '[data-dismiss]'
+
   # Chosen
   $('select').chosen
     no_results_text: '沒有選項符合'
@@ -48,6 +54,24 @@ $(document).on 'ready page:load', ->
 
   # Popover
   $('.popover-trigger').webuiPopover()
+
+  # To Top
+  new ToTop '#to-top'
+
+  # Base carousel
+  $('#base-hero-carousel').slick
+    dots: false
+    infinite: true
+    speed: 300
+    fade: true
+    cssEase: 'linear'
+    adaptiveHeight: false
+    slidesToShow: 1
+    autoplay: true
+    autoplaySpeed: 5000
+    appendArrows: '.base-hero'
+    prevArrow: Arrow.prev 'base-hero-carousel'
+    nextArrow: Arrow.next 'base-hero-carousel'
 
 $(document).on "page:change", ->
   # Let cached input value trigger 'is-focus'
@@ -57,11 +81,32 @@ $(document).on "page:change", ->
   Waypoint.destroyAll()
 
   $main_header = $('#main-header')
-  
-  $('.card__heading, .character-selector__heading').waypoint
+
+  $('.base-hero-carousel__cell .heading,
+     .card__heading,
+     .character-selector__heading,
+     .profile__avatar,
+     .billboard__heading').waypoint
     handler: (direction) ->
       if direction is 'down'
         $main_header.addClass 'has-background'
       else
         $main_header.removeClass 'has-background'
     offset: -> $main_header.height()
+
+###*
+ * 評分星星
+###
+
+$(document)
+  .on 'mouseenter', '.form-group--score [type="radio"]', (e) ->
+    $(@).addClass 'hover'
+  .on 'mouseleave', '.form-group--score [type="radio"]', (e) ->
+    $(@).removeClass 'hover'
+
+###*
+ * 評鑑紀錄 table
+###
+
+$(document).on 'click', '.story-list__table tbody tr', (e) ->
+  Turbolinks.visit $('td:last a', e.currentTarget).attr 'href'

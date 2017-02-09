@@ -192,10 +192,6 @@ GEM
     diff-lcs (1.2.5)
     domain_name (0.5.20160310)
       unf (>= 0.0.5, < 1.0.0)
-    dotenv (2.1.1)
-    dotenv-rails (2.1.1)
-      dotenv (= 2.1.1)
-      railties (>= 4.0, < 5.1)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
@@ -633,8 +629,7 @@ GEM
     xml-simple (1.1.5)
     xpath (2.0.0)
       nokogiri (~> 1.3)
-    xray-rails (0.1.18)
-      coffee-rails
+    xray-rails (0.2.0)
       rails (>= 3.1.0)
 
 PLATFORMS
@@ -674,7 +669,6 @@ DEPENDENCIES
   database_cleaner
   devise
   devise-async
-  dotenv-rails
   factory_girl_rails
   fog
   groupdate
@@ -735,7 +729,7 @@ DEPENDENCIES
   unicorn
   webmock
   whenever
-  xray-rails
+  xray-rails (~> 0.2.0)
 
 BUNDLED WITH
    1.13.6

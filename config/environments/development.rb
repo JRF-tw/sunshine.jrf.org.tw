@@ -51,6 +51,10 @@ Rails.application.configure do
 
   config.action_controller.asset_host = ->(source){ Setting.assets_host }
 
+	if ENV['F2E_DEV']
+    ip = Socket.ip_address_list.detect{|intf| intf.ipv4_private?}.ip_address
+	  config.action_controller.asset_host = "http://#{ip}:3000"
+	end
 
   # Middleware
   # see https://gist.github.com/dhh/2492118#gistcomment-911645

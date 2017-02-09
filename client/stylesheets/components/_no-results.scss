@@ -1,0 +1,16 @@
+$color: $text-secondary-dark;
+
+.no-results {
+  margin: r(6) auto 0;
+  padding: 0 r(2);
+  max-width: r(50);
+  @include susy($tablet) {
+    margin-top: r(10);
+  }
+
+  .text {
+    margin: 0;
+    text: center ms(8) $color bold nowrap;
+    @include scut-side-lined(1px, r(2), $color, solid, r(.5), $double: r(.5));
+  }
+}

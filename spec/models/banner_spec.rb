@@ -3,9 +3,6 @@
 # Table name: banners
 #
 #  id          :integer          not null, primary key
-#  pic_l       :string
-#  pic_m       :string
-#  pic_s       :string
 #  weight      :integer
 #  is_hidden   :boolean
 #  created_at  :datetime
@@ -24,5 +21,12 @@ RSpec.describe Banner, type: :model do
 
   it 'FactoryGirl' do
     expect(banner).not_to be_new_record
+  end
+
+  context 'scope' do
+    context 'order_by_weight' do
+      let!(:banners) { create_list :banner, 3, weight: 3 }
+      it { expect(Banner.order_by_weight.last).to eq(banner) }
+    end
   end
 end

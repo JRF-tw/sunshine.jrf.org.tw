@@ -1,14 +1,7 @@
-= content_for :body_classes do
-  = 'bg-yellow'
-
-= render layout: 'components/hero', locals: {\
-    heading: '法官搜尋結果', description: ''\
-  } do
-
-  = render 'form', options: collection_for_courts, placeholder: '選法院或輸入關鍵字', search_url: judges_searchs_path, type: "judge"
-
-section.section-rhythm.cf
-  .container
-    = render partial: 'components/avatar_list', locals: {from: 1, to: 18, people: @people}
-
-    = paginate @people, theme: 'www'
+= render 'results',
+  heading: '法官搜尋結果',
+  options: collection_for_courts,
+  placeholder: '選法院或輸入關鍵字',
+  search_url: judges_searchs_path,
+  type: "judge",
+  people: @people

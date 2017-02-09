@@ -1,0 +1,58 @@
+.news-card-wrapper {
+  margin-top: r(-7);
+
+  .container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+}
+
+.news-card {
+  display: flex;
+  flex-flow: column;
+  margin: 0 r(2) r(4);
+  padding-bottom: r(1);
+  width: 100%;
+  overflow: hidden;
+  @include susy($tablet) {width: 40%;}
+  @include susy($desktop) {width: 30%;}
+}
+.news-card__thumbnail-wrapper {
+  margin: r(-2) r(-2) 0;
+  position: relative;
+}
+.news-card__thumbnail-placeholder {
+  padding-bottom: 240/360*100%;
+  background: url("white-logo.svg") 50% 42% / 35% no-repeat;
+  .news-card:nth-child(4n) & {background-color: $green;}
+  .news-card:nth-child(4n+1) & {background-color: $text-disabled;}
+  .news-card:nth-child(4n+2) & {background-color: $accent;}
+  .news-card:nth-child(4n+3) & {background-color: $brown;}
+
+  & + .news-card__heading {background: none;}
+}
+.news-card__heading {
+  margin: 0;
+  padding: r(2);
+  position: absolute n() 0 0 0;
+  text: #fff ms(1);
+  background:
+    linear-gradient(to top,
+      rgba(0,0,0,.5) 0%,
+      rgba(0,0,0,.25) 30%,
+      rgba(0,0,0,0) 100%)
+    no-repeat
+    50% 50%
+    transparent;
+}
+.news-card__content-wrapper {
+  display: flex;
+  flex-flow: column;
+  flex: 1;
+}
+.news-card__more {
+  margin-top: auto;
+  margin-left: r(-1);
+  align-self: flex-start;
+}

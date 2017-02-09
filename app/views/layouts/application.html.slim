@@ -1,19 +1,24 @@
 doctype 5
 html
   head
-    = display_meta_tags set_meta
+    = display_meta_tags
     = stylesheet_link_tag    'application', media: 'all',
                              'data-turbolinks-track' => true
+    = javascript_include_tag 'priority', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
 
     - if ENV['F2E_DEV']
-      = javascript_include_tag 'http://localhost:8080/assets/javascripts/webpack_bundle.js', 'data-turbolinks-track' => true
+      - ip = Socket.ip_address_list.detect{|intf| intf.ipv4_private?}.ip_address
+      = javascript_include_tag "http://#{ip}:8080/assets/javascripts/webpack_priority.js", 'data-turbolinks-track' => true
+      = javascript_include_tag "http://#{ip}:8080/assets/javascripts/webpack_main.js", 'data-turbolinks-track' => true
 
     = csrf_meta_tags
 
   body class=(yield :body_classes)
+    = render 'components/svg_defs'
+  
     = render 'components/main_header',
-      classes: yield(:header_classes),
+      classes: content_for?(:header_classes) ? yield(:header_classes) : 'base',
       type: yield(:character_type)
 
     .page-wrapper class=(yield :wrapper_classes)
@@ -23,3 +28,6 @@ html
 
     = render 'components/main_footer'
     = render 'components/drawer', type: yield(:character_type)
+
+    button#to-top.to-top type='button'
+      = inline_svg 'arrow-next'

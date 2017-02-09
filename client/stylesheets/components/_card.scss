@@ -1,9 +1,10 @@
+.offcanvas-card-wrapper { margin-top: r(-8); }
+
 .card {
+  @include Card();
   margin: 0 r(2);
   padding: 0 r(2) r(2);
   background: $white;
-  box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.12), 0px 8px 8px 0px rgba(0,0,0,0.24);
-  border-radius: $global-radius;
   position: relative;
   z-index: index($layers, base);
   @include susy-media($card-max + r(4)) {
@@ -26,6 +27,44 @@
     .avatar .icon {
       size: 80px 50px;
       stroke-width: 4px;
+    }
+  }
+}
+.card--article {
+  padding: r(2) r(2) r(1);
+  max-width: 90%;
+  font-size: ms(1);
+  @include susy($tablet) {
+    padding: r(3) r(3) r(1);
+    width: 90%;
+    max-width: container($tablet-columns - 2);
+  }
+
+  h4 { margin-top: 0; }
+
+  ul { margin-bottom: r(2); }
+
+  & > p { margin-top: 0; }
+
+  blockquote {
+    margin-left: 0;
+    padding-left: r(2);
+    border-left: 5px solid $divider-gray;
+  }
+
+  .image-wrapper {
+    margin: r(2) r(-2);
+    @include susy($tablet) {
+      margin: n() r(-3);
+    }
+
+    &:first-child {
+      margin-top: r(-2);
+      border-radius: $global-radius $global-radius 0 0;
+      overflow: hidden;
+      @include susy($tablet) {
+        margin-top: r(-3);
+      }
     }
   }
 }
@@ -80,7 +119,7 @@
     size: 30px 25px;
   }
 
-  .avatar-party { stroke-width: 6px; }
+  .icon-avatar-party { stroke-width: 6px; }
 }
 .card__rule {
   flex: 1;
@@ -99,4 +138,45 @@
 }
 .card__actions {
   padding-top: r(2);
+}
+
+.card--feature {
+  @include Card();
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin: r(3) n();
+  background-color: $white;
+}
+.card--feature__heading {
+  margin: 0 0 r(-3);
+  text: center ms(2) $white;
+  &.judge .text { background-color: $blue; }
+  &.prosecutor .text { background-color: $purple; }
+
+  .text {
+    display: inline-block;
+    padding: r(1) r(3);
+    position: relative r(-3) n() n() n();
+    background-color: $accent;
+    border-radius: $global-radius;
+  }
+}
+.card--feature__content {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  flex: 1 0 auto;
+  width: 100%;
+  padding: r(2);
+  font-size: ms(1);
+
+  .text-only {
+    margin: auto;
+    text-align: center;
+  }
+
+  .more {
+    margin-top: r(2);
+  }
 }

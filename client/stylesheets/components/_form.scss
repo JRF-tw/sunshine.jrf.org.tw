@@ -8,7 +8,7 @@ $error-rhythm: r(3);
   background-color: $accent;
   position: absolute n() 0 0 0;
   transform: scaleX(0);
-  transition: transform .3s ease 0s;  
+  transition: transform .3s ease 0s;
 }
 
 .form-group {
@@ -36,7 +36,7 @@ $error-rhythm: r(3);
   &.addon-prefix {
     &.is-focused .control-label { color: $white; }
     input:-webkit-autofill + .control-label { color: $white; }
-    
+
     input { padding-left: r(3); }
 
     .control-label { padding-left: r(3); }
@@ -66,7 +66,8 @@ $error-rhythm: r(3);
     margin: r(2) n() r(-1);
   }
 
-  .flat-button + .raised-button { margin-left: r(1); }
+  .flat-button + .raised-button,
+  .flat-button + .raised-button--large { margin-left: r(1); }
 }
 
 #{$all-text-inputs} {
@@ -152,7 +153,7 @@ select {
     size: 100% 34px;
     line-height: 34px;
     box-shadow: none;
-    div { display: none; }    
+    div { display: none; }
   }
   .chosen-container-active & { box-shadow: none; }
   .chosen-container-active.chosen-with-drop & {
@@ -177,7 +178,7 @@ select {
   .chosen-container.chosen-with-drop & {
     background: $white;
     box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.12), 0px 8px 8px 0px rgba(0,0,0,0.24);
-    border-radius: $global-radius;    
+    border-radius: $global-radius;
     border: none;
     left: r(-1); right: r(-1);
     width: auto;

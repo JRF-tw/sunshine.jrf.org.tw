@@ -1,6 +1,4 @@
 class BaseController < ApplicationController
-  layout 'classic', except: [:who_are_you, :score_intro]
-
   # rescue_from ActiveRecord::RecordNotFound, with: :render_404
   rescue_from ActionController::RoutingError, with: :render_404
   # rescue_from ActionView::MissingTemplate do |exception|
@@ -11,10 +9,11 @@ class BaseController < ApplicationController
 
   def index
     @banners = Banner.shown.order_by_weight
+    @bulletins = Bulletin.most_recent(6)
     @suits = Suit.shown.last(3)
     @judges = Profile.judges.shown.active.had_avatar.sample(12)
     @prosecutors = Profile.prosecutors.shown.active.had_avatar.sample(12)
-    image = @banners.count > 0 ? @banners.first.pic_l.L_540.url : nil
+    image = @banners.count > 0 ? @banners.first.pic.W_540.url : nil
     set_meta(image: image)
   end
 
