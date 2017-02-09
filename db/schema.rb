@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170116093522) do
+ActiveRecord::Schema.define(version: 20170207035248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -786,14 +786,12 @@ ActiveRecord::Schema.define(version: 20170116093522) do
     t.string   "verdict_rater_type"
     t.hstore   "data"
     t.boolean  "appeal_judge"
-    t.integer  "status"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.hstore   "quality_scores"
   end
 
   add_index "verdict_scores", ["appeal_judge"], name: "index_verdict_scores_on_appeal_judge", using: :btree
-  add_index "verdict_scores", ["status"], name: "index_verdict_scores_on_status", using: :btree
   add_index "verdict_scores", ["story_id"], name: "index_verdict_scores_on_story_id", using: :btree
   add_index "verdict_scores", ["verdict_rater_id", "verdict_rater_type"], name: "index_verdict_scores_on_verdict_rater_id_and_verdict_rater_type", using: :btree
 

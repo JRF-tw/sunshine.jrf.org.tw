@@ -8,7 +8,6 @@
 #  verdict_rater_type :string
 #  data               :hstore
 #  appeal_judge       :boolean
-#  status             :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  quality_scores     :hstore

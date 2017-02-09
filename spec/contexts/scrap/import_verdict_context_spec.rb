@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Scrap::ImportVerdictContext, type: :model do
-  let!(:court) { create :court, code: 'TPH', full_name: '臺灣高等法院' }
-  let!(:judge) { create :judge, name: '施俊堯' }
-  let!(:branch) { create :branch, court: court, judge: judge, chamber_name: '臺灣高等法院刑事庭', name: '丙' }
+  let!(:court) { create :court, code: 'HLH', full_name: '臺灣高等法院花蓮分院' }
+  let!(:judge) { create :judge, name: '王紋瑩' }
+  let!(:branch) { create :branch, court: court, judge: judge, chamber_name: '臺灣高等法院花蓮分院刑事庭', name: '丙' }
   let!(:orginal_data) { Mechanize.new.get(Scrap::ParseVerdictContext::VERDICT_URI).body.force_encoding('UTF-8') }
   let!(:content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/judgment_content.txt") }
   let!(:ruling_content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/ruling_content.html") }
-  let!(:word) { '105,上易緝,2' }
+  let!(:word) { '105,原選上訴,1' }
   let!(:publish_date) { Time.zone.today }
   let!(:story_type) { '刑事' }
 
@@ -83,28 +83,30 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
 
     context 'create relations' do
       context 'verdict_relations' do
-        let!(:judge1) { create :judge, name: '李麗珠' }
-        let!(:lawyer) { create :lawyer, name: '陳圈圈' }
-        let!(:party) { create :party, name: '張坤樹' }
+        let!(:judge1) { create :judge, name: '邱志平' }
+        let!(:lawyer) { create :lawyer, name: '傅爾洵' }
+        let!(:party) { create :party, name: '余政忠' }
+        let!(:prosecutor) { create :prosecutor, name: '崔紀鎮' }
         let!(:branch1) { create :branch, court: court, judge: judge1, chamber_name: '臺灣高等法院刑事庭' }
 
-        it { expect { subject }.to change { VerdictRelation.count }.by(4) }
+        it { expect { subject }.to change { VerdictRelation.count }.by(5) }
       end
 
       context 'story_relations' do
-        let!(:judge1) { create :judge, name: '李麗珠' }
-        let!(:lawyer) { create :lawyer, name: '陳圈圈' }
-        let!(:party) { create :party, name: '張坤樹' }
+        let!(:judge1) { create :judge, name: '邱志平' }
+        let!(:lawyer) { create :lawyer, name: '傅爾洵' }
+        let!(:party) { create :party, name: '余政忠' }
+        let!(:prosecutor) { create :prosecutor, name: '崔紀鎮' }
         let!(:branch1) { create :branch, court: court, judge: judge1, chamber_name: '臺灣高等法院刑事庭' }
 
-        it { expect { subject }.to change { StoryRelation.count }.by(4) }
+        it { expect { subject }.to change { StoryRelation.count }.by(5) }
       end
     end
 
     context '#calculate_schedule_scores' do
       let(:story_params) { word.split(',') }
       let!(:story) { create :story, year: story_params[0], word_type: story_params[1], number: story_params[2], court: court, story_type: story_type }
-      let!(:party) { create :party, name: '張坤樹' }
+      let!(:party) { create :party, name: '余政忠' }
       let!(:schedule_score) { create :schedule_score, story: story, schedule_rater: party, judge: judge }
       it { expect { subject }.to change { ValidScore.count }.by(1) }
     end
@@ -117,7 +119,7 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
       subject { described_class.new(court, orginal_data, content, word, publish_date, story_type) }
       let(:story_params) { word.split(',') }
       let!(:story) { create :story, year: story_params[0], word_type: story_params[1], number: story_params[2], court: court, story_type: story_type }
-      let!(:party) { create :party, name: '張坤樹' }
+      let!(:party) { create :party, name: '余政忠' }
       let!(:verdict_score) { create :verdict_score, story: story, verdict_rater: party }
       before { subject.perform }
       it { expect { subject.class.calculate_verdict_scores(story) }.to change { ValidScore.count }.by(1) }
