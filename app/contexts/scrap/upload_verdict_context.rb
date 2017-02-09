@@ -24,9 +24,9 @@ class Scrap::UploadVerdictContext < BaseContext
   def build_content_json
     @content_data = {}
     data = Nokogiri::HTML(@orginal_data)
-    @content_data['word'] = data.css('table')[2].css('table')[1].css('span')[0].text[/\d+,[\u4e00-\u9fa5]+,\d+/]
+    @content_data['word'] = data.css('table')[2].css('table')[1].css('span')[0].text[/\d+,\p{Han}+,\d+/]
     @content_data['date'] = data.css('table')[2].css('table')[1].css('span')[1].text[/\d+/]
-    @content_data['summary'] = data.css('table')[2].css('table')[1].css('span')[2].text.split(/\u00a0/).last
+    @content_data['summary'] = data.css('table')[2].css('table')[1].css('span')[2].text[/(?<=\u00a0)\p{Han}+/]
     @content_data['content'] = data.css('table')[2].css('table')[1].css('pre')[0].text
     @content_data = @content_data.to_json
   end
