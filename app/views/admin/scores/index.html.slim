@@ -22,7 +22,7 @@
         .span6
           .control-group
             = f.label :rater_id_eq
-            .controls.rater-name.select2 = f.select :rater_id_eq, {}
+            .controls.rater-name.select2 rater-id="#{@rater_id}" = f.select :rater_id_eq, {}
       .row
         .span6
           .control-group

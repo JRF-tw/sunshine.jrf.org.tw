@@ -5,6 +5,7 @@ class Admin::ScoresController < Admin::BaseController
     @search = Score::SearchFormObject.new(search_params)
     @scores = Kaminari.paginate_array(@search.result.sort_by(&:created_at).reverse!).page(params[:page]).per(20)
     @admin_page_title = '評鑑記錄列表'
+    @rater_id = @search.rater_id_eq
     add_crumb @admin_page_title, '#'
   end
 
