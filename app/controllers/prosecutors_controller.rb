@@ -1,5 +1,4 @@
 class ProsecutorsController < BaseController
-  before_action :http_auth_for_production
 
   def index
     @prosecutors = Prosecutor.shown.order_by_name.includes(:prosecutors_office).page(params[:page]).per(12)

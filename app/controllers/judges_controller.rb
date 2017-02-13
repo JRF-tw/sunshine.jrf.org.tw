@@ -1,5 +1,4 @@
 class JudgesController < BaseController
-  before_action :http_auth_for_production
 
   def index
     @judges = Judge.shown.order_by_name.includes(:court).page(params[:page]).per(12)
