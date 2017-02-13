@@ -1,5 +1,5 @@
-= render partial: 'components/profile_hero', locals: { person: @prosecutor }
+= render partial: 'components/profile_hero', locals: { person: @prosecutor, job: 'prosecutor' }
 
-= render partial: 'profiles'
+= render partial: 'profiles', locals: { job: 'prosecutor' }
 
 = render partial: 'components/related_records', locals: { person: @prosecutor }

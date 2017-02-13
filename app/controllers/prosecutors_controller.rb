@@ -2,7 +2,7 @@ class ProsecutorsController < BaseController
   before_action :http_auth_for_production
 
   def index
-    @prosecutors = Prosecutor.shown.order_by_name.page(params[:page]).per(12)
+    @prosecutors = Prosecutor.shown.order_by_name.includes(:prosecutors_office).page(params[:page]).per(12)
     set_meta(image: ActionController::Base.helpers.asset_path('hero-profiles-judges-M.png'))
   end
 

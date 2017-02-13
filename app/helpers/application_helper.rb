@@ -258,9 +258,9 @@ module ApplicationHelper
   def get_institution_by_role(role)
     case role.class.name
     when 'Judge'
-      role.court.full_name
-    when '檢察官'
-      role.prosecutors_office.full_name
+      role.court.try(:full_name)
+    when 'Prosecutor'
+      role.prosecutors_office.try(:full_name)
     end
   end
 

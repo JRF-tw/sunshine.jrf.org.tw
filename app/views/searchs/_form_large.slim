@@ -4,9 +4,8 @@
       - if options.length > 0
         .select-container--search-form
           select.select-custom name="#{type}"
-            - type = params[:prosecutor] || params[:judge]
             - options.each do |option|
-              - if option[1] == type.to_i
+              - if option[1] == params[type].to_i
                 option selected="selected" value="#{option[1]}" = option[0]
               - else
                 option value="#{option[1]}" = option[0]

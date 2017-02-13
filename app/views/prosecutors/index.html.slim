@@ -1,14 +1,8 @@
-= content_for :body_classes do
-  = 'bg-yellow'
-
-= render partial: 'components/hero', locals: {\
-    heading: '認識檢察官',
-    description: '代表國家調查案例的檢察官，有什麼背景資料呢？一起來瞭解！'\
-  }
-
-section.section-rhythm.cf
-  .container
-    = render partial: 'components/avatar_list', locals: { people: @prosecutors }
-
-    = paginate @prosecutors, theme: 'www'
-    | （依姓名部首排序）
+= render 'searchs/results',
+  heading: '認識檢察官',
+  description: '代表國家調查案例的檢察官，有什麼背景資料呢？一起來瞭解！',
+  people: @prosecutors,
+  type: 'prosecutor',
+  placeholder: '選檢察署或輸入關鍵字',
+  options: collection_for_prosecutors_offices,
+  search_url: prosecutors_searchs_path

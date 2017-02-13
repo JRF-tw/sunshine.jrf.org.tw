@@ -11,5 +11,5 @@
 		- if person.stage.present? && person.stage != 0
 			li = "司訓第 #{person.stage} 期"
 	
-	- if person.current_court
-		.card--avatar__job = "#{person.current_court}"
+	- if get_institution_by_role(person)
+		.card--avatar__job = "#{get_institution_by_role(person)}"

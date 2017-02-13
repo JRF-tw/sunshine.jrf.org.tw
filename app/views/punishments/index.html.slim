@@ -5,7 +5,7 @@ section.punishment-records.container
 
   - @punishments.each do |punishment|
 
-    = link_to send("get_singularize_by_role(@owner)_punishment_path", @owner, punishment), class: 'punishment-record'
+    = link_to send("#{get_singularize_by_role(@owner)}_punishments_path", @owner, punishment), class: 'punishment-record'
       
       h4.punishment-record__reason= render_punishment_reason(punishment)
 
