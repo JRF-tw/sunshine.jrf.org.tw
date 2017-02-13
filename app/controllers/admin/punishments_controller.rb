@@ -1,4 +1,5 @@
 class Admin::PunishmentsController < Admin::BaseController
+  include OwnerFindingConcern
   before_action :find_owner
   before_action :punishment
   before_action { add_crumb("#{owner_type}列表", send("admin_#{owner_pluralize}_path")) }
@@ -73,26 +74,5 @@ class Admin::PunishmentsController < Admin::BaseController
 
   def punishment_params
     params.fetch(:punishment, {}).permit(:profile_id, :decision_unit, :unit, :title, :claimant, :punish_no, :decision_no, :punish_type, :relevant_date_in_tw, :relevant_date, :decision_result, :decision_source, :reason, :is_anonymous, :anonymous_source, :anonymous, :origin_desc, :proposer, :plaintiff, :defendant, :reply, :reply_source, :punish, :content, :summary, :status, :memo, :is_hidden)
-  end
-
-  def owner_type
-    case @owner.class.name.demodulize
-    when 'Judge'
-      '法官'
-    when 'Prosecutor'
-      '檢察官'
-    end
-  end
-
-  def owner_id
-    params["#{@owner_class.to_s.downcase.demodulize}_id"]
-  end
-
-  def owner_pluralize
-    @owner_pluralize = @owner.class.to_s.downcase.demodulize.pluralize
-  end
-
-  def owner_singularize
-    @owner_singularize = @owner.class.to_s.downcase.demodulize.singularize
   end
 end

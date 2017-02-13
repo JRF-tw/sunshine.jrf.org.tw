@@ -1,4 +1,5 @@
 class Admin::EducationsController < Admin::BaseController
+  include OwnerFindingConcern
   before_action :find_owner
   before_action :education
   before_action { add_crumb("#{owner_type}列表", send("admin_#{owner_pluralize}_path")) }
@@ -73,26 +74,5 @@ class Admin::EducationsController < Admin::BaseController
 
   def education_params
     params.fetch(:education, {}).permit(:owner_id, :owner_type, :title, :content, :start_at_in_tw, :end_at_in_tw, :start_at, :end_at, :source, :memo, :is_hidden)
-  end
-
-  def owner_type
-    case @owner.class.name.demodulize
-    when 'Judge'
-      '法官'
-    when 'Prosecutor'
-      '檢察官'
-    end
-  end
-
-  def owner_id
-    params["#{@owner_class.to_s.downcase.demodulize}_id"]
-  end
-
-  def owner_pluralize
-    @owner_pluralize = @owner.class.to_s.downcase.demodulize.pluralize
-  end
-
-  def owner_singularize
-    @owner_singularize = @owner.class.to_s.downcase.demodulize.singularize
   end
 end

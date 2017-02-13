@@ -1,4 +1,5 @@
 class Admin::ArticlesController < Admin::BaseController
+  include OwnerFindingConcern
   before_action :find_owner
   before_action :article
   before_action { add_crumb("#{owner_type}列表", send("admin_#{owner_pluralize}_path")) }
@@ -73,26 +74,5 @@ class Admin::ArticlesController < Admin::BaseController
 
   def article_params
     params.fetch(:article, {}).permit(:profile_id, :article_type, :publish_year, :paper_publish_at_in_tw, :paper_publish_at, :news_publish_at_in_tw, :news_publish_at, :book_title, :title, :journal_no, :journal_periods, :start_page, :end_page, :editor, :author, :publisher, :publish_locat, :department, :degree, :source, :memo, :is_hidden)
-  end
-
-  def owner_type
-    case @owner.class.name.demodulize
-    when 'Judge'
-      '法官'
-    when 'Prosecutor'
-      '檢察官'
-    end
-  end
-
-  def owner_id
-    params["#{@owner_class.to_s.downcase.demodulize}_id"]
-  end
-
-  def owner_pluralize
-    @owner_pluralize = @owner.class.to_s.downcase.demodulize.pluralize
-  end
-
-  def owner_singularize
-    @owner_singularize = @owner.class.to_s.downcase.demodulize.singularize
   end
 end

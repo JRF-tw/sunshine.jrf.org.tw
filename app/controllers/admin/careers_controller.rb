@@ -1,4 +1,5 @@
 class Admin::CareersController < Admin::BaseController
+  include OwnerFindingConcern
   before_action :find_owner
   before_action :career
   before_action { add_crumb("#{owner_type}列表", send("admin_#{owner_pluralize}_path")) }
@@ -73,26 +74,5 @@ class Admin::CareersController < Admin::BaseController
 
   def career_params
     params.fetch(:career, {}).permit(:profile_id, :career_type, :old_unit, :old_title, :old_assign_court, :old_assign_judicial, :old_pt, :new_unit, :new_title, :new_assign_court, :new_assign_judicial, :new_pt, :start_at, :end_at, :publish_at, :start_at_in_tw, :end_at_in_tw, :publish_at_in_tw, :source, :source_link, :origin_desc, :memo, :is_hidden)
-  end
-
-  def owner_type
-    case @owner.class.name.demodulize
-    when 'Judge'
-      '法官'
-    when 'Prosecutor'
-      '檢察官'
-    end
-  end
-
-  def owner_id
-    params["#{@owner_class.to_s.downcase.demodulize}_id"]
-  end
-
-  def owner_pluralize
-    @owner_pluralize = @owner.class.to_s.downcase.demodulize.pluralize
-  end
-
-  def owner_singularize
-    @owner_singularize = @owner.class.to_s.downcase.demodulize.singularize
   end
 end
