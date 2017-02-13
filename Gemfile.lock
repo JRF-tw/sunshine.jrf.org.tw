@@ -1,6 +1,5 @@
-GIT
-  remote: git://github.com/activerecord-hackery/ransack.git
-  revision: 8ca8c95c6543c5da9b98a4e2747a0a4023d60bfc
+PATH
+  remote: vendor/gems/ransack-master
   specs:
     ransack (1.8.2)
       actionpack (>= 3.0)
