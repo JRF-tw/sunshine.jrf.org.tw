@@ -19,10 +19,6 @@ module AdminHelper
     CrawlerErrorTypes.list.to_enum.with_index.map { |n, i| [n.last, i] }
   end
 
-  def collect_for_score_roles
-    [['律師', 'Lawyer', { data: collect_for_lawyer_name }], ['當事人', 'Party', { data: collect_for_party_name }], ['觀察者', 'CourtObserver', { data: collect_for_observer_name }]]
-  end
-
   def collect_for_story_identity
     Story.all.map { |s| [s.identity, s.id] }
   end
@@ -31,16 +27,8 @@ module AdminHelper
     Judge.all.map { |j| [j.name, j.id] }
   end
 
-  def collect_for_party_name
-    Party.all.map { |j| ["當事人 - #{j.name}", j.id] }.to_json
-  end
-
-  def collect_for_lawyer_name
-    Lawyer.all.map { |j| ["律師 - #{j.name}", j.id] }.to_json
-  end
-
-  def collect_for_observer_name
-    CourtObserver.all.map { |o| ["觀察者 - #{o.name}", o.id] }.to_json
+  def collect_for_score_type
+    [['開庭評鑑', 'ScheduleScore'], ['判決評鑑', 'VerdictScore']]
   end
 
   def score_show_path(s)

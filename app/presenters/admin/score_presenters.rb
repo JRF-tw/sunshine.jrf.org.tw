@@ -9,4 +9,8 @@ class Admin::ScorePresenters
     path = Rails.application.routes.url_helpers.send("admin_#{rater_type}_path", rater)
     link_to wording, path, target: '_blank'
   end
+
+  def score_type(score)
+    score.class.name == 'ScheduleScore' ? '開庭評鑑' : '判決評鑑'
+  end
 end

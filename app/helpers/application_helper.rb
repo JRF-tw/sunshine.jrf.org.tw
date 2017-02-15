@@ -224,10 +224,6 @@ module ApplicationHelper
     [['是', 'yes'], ['否', 'no']]
   end
 
-  def collect_for_score_type
-    [['開庭評鑑', 'ScheduleScore'], ['判決評鑑', 'VerdictScore']]
-  end
-
   def get_court_fullname(court_id)
     Court.find(court_id).full_name
   end

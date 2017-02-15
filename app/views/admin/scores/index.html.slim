@@ -18,7 +18,7 @@
           .control-group
             = f.label :rater_type_eq
             .controls.rater-type = f.select :rater_type_eq,
-            collect_for_score_roles, include_blank: '請選擇'
+            f.object.score_roles, include_blank: '請選擇'
         .span6
           .control-group
             = f.label :rater_id_eq
@@ -54,8 +54,8 @@
         - @scores.each do |s|
           tr
             td = link_to s.story.identity, admin_story_path(s.story.id), target: '_blank'
-            td = Admin::ScorePresenters.new.rater_link(s)
-            td = s.class.name == 'ScheduleScore'? '開庭評鑑' : '判決評鑑'
+            td = @presenter.rater_link(s)
+            td = @presenter.score_type(s)
             td = s.created_at
             td
               = score_show_path(s)

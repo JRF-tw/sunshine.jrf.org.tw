@@ -1,9 +1,10 @@
 class Score::SearchFormObject < BaseFormObject
-  attr_accessor :score_type_eq, :judge_id_eq, :story_id_eq, :rater_type_eq, :rater_id_eq, :created_at_gteq, :created_at_lteq
+  attr_accessor :score_type_eq, :judge_id_eq, :story_id_eq, :rater_type_eq, :rater_id_eq, :created_at_gteq, :created_at_lteq, :score_roles
 
   def initialize(params = {})
     @params = params
     assign_value
+    collect_for_score_roles
   end
 
   def result
@@ -36,5 +37,21 @@ class Score::SearchFormObject < BaseFormObject
 
   def only_verdict_score?
     @params[:score_type_eq] == 'VerdictScore'
+  end
+
+  def collect_for_score_roles
+    @score_roles = [['律師', 'Lawyer', { 'data-role-names' => collect_for_lawyer_name }], ['當事人', 'Party', { 'data-role-names' => collect_for_party_name }], ['觀察者', 'CourtObserver', { 'data-role-names' => collect_for_observer_name }]]
+  end
+
+  def collect_for_party_name
+    Party.all.map { |j| ["當事人 - #{j.name}", j.id] }.to_json
+  end
+
+  def collect_for_lawyer_name
+    Lawyer.all.map { |j| ["律師 - #{j.name}", j.id] }.to_json
+  end
+
+  def collect_for_observer_name
+    CourtObserver.all.map { |o| ["觀察者 - #{o.name}", o.id] }.to_json
   end
 end

@@ -25,7 +25,7 @@ $ ->
     select.find('option').remove()
     select.append $('<option></option>').attr('value', '').text('請選擇')
     select.val('').trigger 'change'
-    selected = $('.rater-type select').find(':selected').attr('data')
+    selected = $('.rater-type select').find(':selected').attr('data-role-names')
     if selected
       option = JSON.parse(selected)
     else
