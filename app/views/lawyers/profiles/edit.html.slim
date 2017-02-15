@@ -3,7 +3,7 @@
     = f.input :name
     = f.input :phone_number, input_html: { type: "tel" }
     = f.input :office_number, input_html: { type: "tel" }
-
+    = f.input_field :active_notice, as: :boolean, inline_label: '我願意接受判決評鑑通知'
     = render 'components/form_actions',
       f: f, submit: '確定更新',
       link: { text: '取消', href: lawyer_profile_path }
