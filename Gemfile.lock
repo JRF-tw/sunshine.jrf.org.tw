@@ -399,7 +399,7 @@ GEM
     mini_magick (4.3.6)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
-    multi_json (1.11.2)
+    multi_json (1.12.1)
     nenv (0.2.0)
     nested_form (0.3.2)
     net-http-digest_auth (1.4)
@@ -501,7 +501,7 @@ GEM
     rgeo-activerecord (4.0.5)
       activerecord (~> 4.2)
       rgeo (~> 0.3)
-    rollbar (2.7.1)
+    rollbar (2.14.0)
       multi_json
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
