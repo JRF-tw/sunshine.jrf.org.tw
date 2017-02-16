@@ -6,7 +6,7 @@
         td = @score.id
       tr
         td 評鑑人
-        td = Admin::ScorePresenters.new.rater_link(@score)
+        td = score_rater_link(@score)
       tr
         td 是否申訴法官
         td = @score.appeal_judge ? '是' : '否'
