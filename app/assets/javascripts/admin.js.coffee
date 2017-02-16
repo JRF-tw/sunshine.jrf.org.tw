@@ -30,13 +30,8 @@ $ ->
       option = JSON.parse(selected)
     else
       option = []
-    id = $('.rater-name').attr('rater-id')
     option.map (a) ->
       select.append $('<option></option>').attr('value', a[1]).text(a[0])
-      if a[1] == Number(id)
-        select.val(a[1]).trigger 'change'
-      return
-  change_rater_select()
 
   $('.rater-type').change ->
     select.val([])

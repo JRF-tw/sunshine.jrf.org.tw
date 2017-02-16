@@ -1,14 +1,28 @@
 class Score::SearchFormObject < BaseFormObject
-  attr_accessor :score_type_eq, :judge_id_eq, :story_id_eq, :rater_type_eq, :rater_id_eq, :created_at_gteq, :created_at_lteq, :score_roles
+  attr_accessor :score_type_eq, :judge_id_eq, :story_id_eq, :rater_type_eq, :rater_id_eq, :created_at_gteq, :created_at_lteq
 
   def initialize(params = {})
     @params = params
     assign_value
-    collect_for_score_roles
   end
 
-  def result
-    schedule_scores_result + verdict_scores_result
+  def collect_by_roles
+    if @params[:rater_type_eq].present?
+      case @params[:rater_type_eq]
+      when 'Party'
+        party_names
+      when 'Lawyer'
+        lawyer_names
+      when 'CourtObserver'
+        observer_names
+      end
+    else
+      []
+    end
+  end
+
+  def collect_all_roles
+    @score_roles = [['律師', 'Lawyer', { 'data-role-names' => lawyer_names.to_json }], ['當事人', 'Party', { 'data-role-names' => party_names.to_json }], ['觀察者', 'CourtObserver', { 'data-role-names' => observer_names.to_json }]]
   end
 
   private
@@ -23,35 +37,15 @@ class Score::SearchFormObject < BaseFormObject
     self.created_at_lteq = @params[:created_at_lteq]
   end
 
-  def schedule_scores_result
-    only_verdict_score? ? [] : ScheduleScore.ransack(@params).result.includes(:story, :schedule_rater)
+  def party_names
+    Party.all.map { |j| ["當事人 - #{j.name}", j.id] }
   end
 
-  def verdict_scores_result
-    only_schedule_score? ? [] : VerdictScore.ransack(@params).result.includes(:story, :verdict_rater)
+  def lawyer_names
+    Lawyer.all.map { |j| ["律師 - #{j.name}", j.id] }
   end
 
-  def only_schedule_score?
-    @params[:score_type_eq] == 'ScheduleScore' || @params[:judge_id_eq].present?
-  end
-
-  def only_verdict_score?
-    @params[:score_type_eq] == 'VerdictScore'
-  end
-
-  def collect_for_score_roles
-    @score_roles = [['律師', 'Lawyer', { 'data-role-names' => collect_for_lawyer_name }], ['當事人', 'Party', { 'data-role-names' => collect_for_party_name }], ['觀察者', 'CourtObserver', { 'data-role-names' => collect_for_observer_name }]]
-  end
-
-  def collect_for_party_name
-    Party.all.map { |j| ["當事人 - #{j.name}", j.id] }.to_json
-  end
-
-  def collect_for_lawyer_name
-    Lawyer.all.map { |j| ["律師 - #{j.name}", j.id] }.to_json
-  end
-
-  def collect_for_observer_name
-    CourtObserver.all.map { |o| ["觀察者 - #{o.name}", o.id] }.to_json
+  def observer_names
+    CourtObserver.all.map { |o| ["觀察者 - #{o.name}", o.id] }
   end
 end
