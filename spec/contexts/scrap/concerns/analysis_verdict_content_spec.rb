@@ -88,8 +88,8 @@ RSpec.describe Scrap::Concerns::AnalysisVerdictContent, type: :model do
   describe '#parse_roles_hash' do
     let(:main_titles) { ['代表人', '上 訴 人', '聲請人', '受 刑 人', '抗 告人', '公 訴 人', '選任辯護人', '被  告', '共同', '再抗告人', '兼代表人', '上一被告'] }
     let(:sub_titles) { ['即再審聲請人', '即受刑人', '即受判決人', '即被告', '選任辯護人'] }
-    let(:people_name) { ['邱政則', '王陽明有限公司', '火雞律師'] }
-    let(:plus_people_name) { ["\r\n      梁維祥律師", "\r\n      林啟智"] }
+    let(:people_name) { ['邱政則', '王陽明有限公司', '火雞律師', '陳威志（原名：陳宥菖）'] }
+    let(:plus_people_name) { ["\r\n      梁維祥律師", "\r\n      林啟智", "\r\n      黃仁到（原名：黃宥豬）"] }
     context 'only main title' do
       context 'single people' do
         let!(:verdict_content) { '號' + main_titles.sample + "\s" + people_name.sample + '上列' }

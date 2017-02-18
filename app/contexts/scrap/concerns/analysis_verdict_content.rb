@@ -76,7 +76,7 @@ module Scrap::Concerns::AnalysisVerdictContent
     role_hash = {}
     end_point = content.index('上列')
     data = content.tr('　', ' ')[0..end_point - 1][/(?<=號)(.|\n)+/]
-    role_array = data.scan(/(#{MAIN_ROLE.join('|')}){1}[\s]*(#{SUB_ROLE.join('|')})?(\s+\p{han}+)((\r\n\s{6}\p{han}+)*)/)
+    role_array = data.scan(/(#{MAIN_ROLE.join('|')}){1}[\s]*(#{SUB_ROLE.join('|')})?(\s+\p{han}+[^\r]+)((\r\n\s+\p{han}+)*)/)
     role_array.each do |a|
       title = a[0..1].join.delete(' ')
       names = a[2..-1].join.squish.split(' ').uniq
