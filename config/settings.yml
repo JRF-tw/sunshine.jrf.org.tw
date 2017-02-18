@@ -20,6 +20,7 @@ default: &default
     parse_prosecutor_error: '取得檢察官失敗'
     parse_lawyer_error: '取得律師失敗'
     parse_party_error: '取得當事人失敗'
+    parse_verdict_role_error: '取得判決書角色失敗'
     crawler_failed: '爬取來源失敗'
     parse_branch_judge_empty: '取得股別所屬法官失敗'
     parse_judge_not_exist: '法官未出現在判決書上'

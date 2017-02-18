@@ -1,4 +1,5 @@
 class Scrap::UploadVerdictContext < BaseContext
+  include Scrap::Concerns::AnalysisVerdictContent
   before_perform  :build_content_json
   before_perform  :build_file
   before_perform  :assign_value
@@ -37,7 +38,8 @@ class Scrap::UploadVerdictContext < BaseContext
     @content_data['律師姓名'] = @verdict.lawyer_names
     @content_data['被告姓名'] = @verdict.party_names
     @content_data['內文'] = data.css('table')[2].css('table')[1].css('pre')[0].text
-    @content_data = @content_data.to_json
+    role_hash = parse_roles_hash(@verdict, data, @crawler_history)
+    @content_data = @content_data.merge(role_hash)
   end
 
   def build_file

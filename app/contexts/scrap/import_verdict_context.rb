@@ -9,11 +9,11 @@ class Scrap::ImportVerdictContext < BaseContext
   before_perform  :create_main_judge_by_highest, if: :is_highest_court?
   before_perform  :assign_names
   before_perform  :assign_default_value
-  after_perform   :upload_file
   after_perform   :update_data_to_story
   after_perform   :update_adjudge_date
   after_perform   :update_pronounce_date
   after_perform   :create_relation_for_role
+  after_perform   :upload_file
   after_perform   :calculate_schedule_scores, if: :story_adjudge?
   after_perform   :set_delay_calculate_verdict_scores, if: :story_adjudge?
   after_perform   :record_count_to_daily_notify
@@ -93,10 +93,6 @@ class Scrap::ImportVerdictContext < BaseContext
     @verdict.assign_attributes(is_judgment: is_judgment?)
   end
 
-  def upload_file
-    Scrap::UploadVerdictContext.new(@orginal_data).perform(@verdict)
-  end
-
   def update_data_to_story
     @story.assign_attributes(judges_names: (@story.judges_names + @verdict.judges_names).uniq)
     @story.assign_attributes(prosecutor_names: (@story.prosecutor_names + @verdict.prosecutor_names).uniq)
@@ -124,6 +120,10 @@ class Scrap::ImportVerdictContext < BaseContext
       VerdictRelationCreateContext.new(@verdict).perform(name)
       Story::RelationCreateContext.new(@story).perform(name)
     end
+  end
+
+  def upload_file
+    Scrap::UploadVerdictContext.new(@orginal_data).perform(@verdict)
   end
 
   def calculate_schedule_scores
