@@ -10,8 +10,8 @@ module Scrap::Concerns::AnalysisVerdictContent
   HAS_JUDGES = /法官/
   HAS_PROSECUTOR = /檢察官/
   HAS_LAWYER = /律師/
-  MAIN_ROLE = ["代\s*表\s*人", "上\s*訴\s*人", "聲\s*請\s*人", "受\s*刑\s*人", "抗\s*告\s*人", "公\s*訴\s*人","選\s*任\s*辯\s*護\s*人","被\s*告", "共\s*同", "再\s*抗\s*告\s*人", "兼\s*代\s*表\s*人", "上\s*一\s*被\s*告"]
-  SUB_ROLE = ["即\s*再\s*審\s*聲\s*請\s*人", "即\s*受\s*刑\s*人", "即\s*受\s*判\s*決\s*人", "即\s*被\s*告", "選\s*任\s*辯\s*護\s*人"]
+  MAIN_ROLE = ["代\s*表\s*人", "上\s*訴\s*人", "聲\s*請\s*人", "受\s*刑\s*人", "抗\s*告\s*人", "公\s*訴\s*人", "選\s*任\s*辯\s*護\s*人", "被\s*告", "共\s*同", "再\s*抗\s*告\s*人", "兼\s*代\s*表\s*人", "上\s*一\s*被\s*告"].freeze
+  SUB_ROLE = ["即\s*再\s*審\s*聲\s*請\s*人", "即\s*受\s*刑\s*人", "即\s*受\s*判\s*決\s*人", "即\s*被\s*告", "選\s*任\s*辯\s*護\s*人"].freeze
 
   def parse_main_judge_name(verdict, content, crawler_history)
     matched = content.match(MAIN_JUDGE)
@@ -74,11 +74,11 @@ module Scrap::Concerns::AnalysisVerdictContent
 
   def parse_roles_hash(verdict, content, crawler_history)
     role_hash = {}
-    end_point = content.text.index('上列')
-    data = content.text.gsub('　', ' ')[0..end_point-1][/(?<=號)(.|\n)+/]
-    role_array = data.scan /(#{MAIN_ROLE.join('|')}){1}[\s]*(#{SUB_ROLE.join('|')})?(\s+\p{han}+)((\r\n\s{6}\p{han}+)*)/
+    end_point = content.index('上列')
+    data = content.tr('　', ' ')[0..end_point - 1][/(?<=號)(.|\n)+/]
+    role_array = data.scan(/(#{MAIN_ROLE.join('|')}){1}[\s]*(#{SUB_ROLE.join('|')})?(\s+\p{han}+)((\r\n\s{6}\p{han}+)*)/)
     role_array.each do |a|
-      title = a[0..1].join.gsub(' ','')
+      title = a[0..1].join.delete(' ')
       names = a[2..-1].join.squish.split(' ').uniq
       role_hash[title].present? ? role_hash[title] += names : role_hash[title] = names
     end

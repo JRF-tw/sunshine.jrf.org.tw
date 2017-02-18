@@ -38,7 +38,7 @@ class Scrap::UploadVerdictContext < BaseContext
     @content_data['律師姓名'] = @verdict.lawyer_names
     @content_data['被告姓名'] = @verdict.party_names
     @content_data['內文'] = data.css('table')[2].css('table')[1].css('pre')[0].text
-    @role_hash = parse_roles_hash(@verdict, data, @crawler_history)
+    @role_hash = parse_roles_hash(@verdict, data.text, @crawler_history)
     @content_data = @content_data.merge(@role_hash)
   end
 
