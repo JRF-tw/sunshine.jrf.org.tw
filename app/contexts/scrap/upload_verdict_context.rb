@@ -25,11 +25,11 @@ class Scrap::UploadVerdictContext < BaseContext
   def build_content_json
     @content_data = {}
     data = Nokogiri::HTML(@orginal_data)
+    date = data.css('table')[2].css('table')[1].css('span')[1].text[/\d+/]
     @content_data['裁判字號'] = data.css('table')[2].css('table')[1].css('span')[0].text[/\d+,\p{Han}+,\d+/].tr(',', '/')
     @content_data['法院名稱'] = @verdict.story.court.full_name
     @content_data['法院代號'] = @verdict.story.court.code
     @content_data['案由'] = data.css('table')[2].css('table')[1].css('span')[2].text[/(?<=\u00a0)\p{Han}+/]
-    date = data.css('table')[2].css('table')[1].css('span')[1].text[/\d+/]
     @content_data['民國年'] = date[0..-5]
     @content_data['西元年'] = (date[0..-5].to_i + 1911).to_s
     @content_data['月'] = date[-4..-3].to_i.to_s

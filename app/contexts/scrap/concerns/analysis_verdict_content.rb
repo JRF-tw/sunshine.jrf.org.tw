@@ -82,7 +82,7 @@ module Scrap::Concerns::AnalysisVerdictContent
       names = a[2..-1].join.squish.split(' ').uniq
       role_hash[title].present? ? role_hash[title] += names : role_hash[title] = names
     end
-    Logs::AddCrawlerError.add_verdict_error(crawler_history, verdict, :parse_verdict_role_error, '爬取判決角色錯誤, 撈取為空') unless role_hash.present?
+    Logs::AddCrawlerError.add_verdict_error(crawler_history, verdict, :parse_verdict_role_error, '爬取判決參與角色錯誤, 撈取為空') unless role_hash.present?
     role_hash
   end
 end
