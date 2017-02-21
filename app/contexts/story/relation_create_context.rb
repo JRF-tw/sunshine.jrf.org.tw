@@ -40,7 +40,7 @@ class Story::RelationCreateContext < BaseContext
   end
 
   def build_data
-    @story_relation = @story.story_relations.find_or_initialize_by(people: @people, story: @story)
+    @story_relation = @story.story_relations.find_or_initialize_by(people: @people)
   end
 
 end
