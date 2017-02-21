@@ -1,9 +1,9 @@
 - content_for :btns do
-  = link_to "發送密碼設定信", send_reset_password_mail_admin_lawyer_path(@lawyer), class: "btn btn-large", method: :post
+  = link_to '發送密碼設定信', send_reset_password_mail_admin_lawyer_path(@lawyer), class: 'btn btn-large', method: :post
   | %nbsp;
-  = link_to "編輯", edit_admin_lawyer_path(@lawyer), class: "btn btn-large btn-success"
+  = link_to '編輯', edit_admin_lawyer_path(@lawyer), class: 'btn btn-large btn-success'
   | %nbsp;
-  = link_to "刪除", admin_lawyer_path(@lawyer), method: :delete, class: "btn btn-large btn-danger"
+  = link_to '刪除', admin_lawyer_path(@lawyer), method: :delete, class: 'btn btn-large btn-danger'
 
 = admin_widget_box "#{@lawyer.name}的個人檔案", icon: :th do
   table.table.table-bordered.table-striped.table-hover
@@ -37,7 +37,10 @@
           = "民國#{@lawyer.birth_year}年"
       tr
         td 狀態
-        td = @lawyer.confirmed? ? "已註冊" : "未註冊"
+        td = @lawyer.confirmed? ? '已註冊' : '未註冊'
+      tr
+        td 是否願意收到通知
+        td = @lawyer.active_notice? ? '是' : '否'
       tr
         td 備註
         td = @lawyer.memo

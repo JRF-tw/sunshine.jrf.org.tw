@@ -318,20 +318,20 @@ ActiveRecord::Schema.define(version: 20170207035248) do
   add_index "judgments", ["main_judge_id"], name: "index_judgments_on_main_judge_id", using: :btree
 
   create_table "lawyers", force: :cascade do |t|
-    t.string   "name",                                null: false
+    t.string   "name",                                  null: false
     t.string   "current"
     t.string   "avatar"
     t.string   "gender"
     t.integer  "birth_year"
     t.string   "memo"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "email",                               null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.string   "email",                                 null: false
     t.string   "encrypted_password",     default: ""
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,    null: false
     t.datetime "last_sign_in_at"
     t.datetime "current_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -342,8 +342,10 @@ ActiveRecord::Schema.define(version: 20170207035248) do
     t.string   "unconfirmed_email"
     t.string   "phone_number"
     t.string   "office_number"
+    t.boolean  "active_notice",          default: true
   end
 
+  add_index "lawyers", ["active_notice"], name: "index_lawyers_on_active_notice", using: :btree
   add_index "lawyers", ["confirmation_token"], name: "index_lawyers_on_confirmation_token", unique: true, using: :btree
   add_index "lawyers", ["email"], name: "index_lawyers_on_email", unique: true, using: :btree
   add_index "lawyers", ["reset_password_token"], name: "index_lawyers_on_reset_password_token", unique: true, using: :btree

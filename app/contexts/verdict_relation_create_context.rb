@@ -53,7 +53,7 @@ class VerdictRelationCreateContext < BaseContext
   end
 
   def build_data
-    @verdict_relation = @verdict.verdict_relations.new(person: @person, verdict: @verdict)
+    @verdict_relation = @verdict.verdict_relations.find_or_initialize_by(person: @person)
   end
 
 end
