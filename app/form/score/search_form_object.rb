@@ -1,5 +1,6 @@
 class Score::SearchFormObject < BaseFormObject
-  attr_accessor :score_type_eq, :judge_id_eq, :story_id_eq, :rater_type_eq, :rater_id_eq, :created_at_gteq, :created_at_lteq
+  PARAMS = [:score_type_eq, :judge_id_eq, :story_id_eq, :rater_type_eq, :rater_id_eq, :created_at_gteq, :created_at_lteq].freeze
+  attr_accessor(*PARAMS)
 
   def initialize(params = {})
     @params = params
@@ -11,17 +12,14 @@ class Score::SearchFormObject < BaseFormObject
   end
 
   def collect_by_roles
-    if @params[:rater_type_eq].present?
-      case @params[:rater_type_eq]
-      when 'Party'
-        party_names
-      when 'Lawyer'
-        lawyer_names
-      when 'CourtObserver'
-        observer_names
-      end
-    else
-      []
+    return [] unless rater_type_eq.present?
+    case rater_type_eq
+    when 'Party'
+      party_names
+    when 'Lawyer'
+      lawyer_names
+    when 'CourtObserver'
+      observer_names
     end
   end
 
@@ -54,11 +52,11 @@ class Score::SearchFormObject < BaseFormObject
   end
 
   def only_schedule_score?
-    @params[:score_type_eq] == 'ScheduleScore' || @params[:judge_id_eq].present?
+    score_type_eq == 'ScheduleScore' || judge_id_eq.present?
   end
 
   def only_verdict_score?
-    @params[:score_type_eq] == 'VerdictScore'
+    score_type_eq == 'VerdictScore'
   end
 
   def schedule_scores_result

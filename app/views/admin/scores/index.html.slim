@@ -58,7 +58,6 @@
             td = score_rater_link(s)
             td = s.class.name == 'ScheduleScore' ? '開庭評鑑' : '判決評鑑'
             td = s.created_at
-            td
-              = score_show_path(s)
+            td = score_show_path(s)
     .ui-toolbar.ui-widget-header
       = paginate @scores, theme: :admin
