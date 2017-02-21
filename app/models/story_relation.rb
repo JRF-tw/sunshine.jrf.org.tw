@@ -13,4 +13,5 @@
 class StoryRelation < ActiveRecord::Base
   belongs_to :story
   belongs_to :people, polymorphic: true
+  validates :story_id, uniqueness: { scope: [:people_id, :people_type] }
 end

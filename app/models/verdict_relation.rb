@@ -14,5 +14,6 @@ class VerdictRelation < ActiveRecord::Base
   belongs_to :verdict
   belongs_to :person, polymorphic: true
 
+  validates :verdict_id, uniqueness: { scope: [:person_id, :person_type] }
   scope :by_type, ->(person_type) { where(person_type: person_type) }
 end
