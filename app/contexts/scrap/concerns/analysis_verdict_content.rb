@@ -74,15 +74,30 @@ module Scrap::Concerns::AnalysisVerdictContent
 
   def parse_roles_hash(verdict, content, crawler_history)
     role_hash = {}
-    end_point = content.index('上列')
-    data = content.tr('　', ' ')[0..end_point - 1][/(?<=號)(.|\n)+/]
-    role_array = data.scan(/(#{MAIN_ROLE.join('|')}){1}[\s]*(#{SUB_ROLE.join('|')})?(\s+\p{han}+[^\r]+)((\r\n\s+\p{han}+)*)/)
-    role_array.each do |a|
-      title = a[0..1].join.delete(' ')
-      names = a[2..-1].join.squish.split(' ').uniq
+    role_number = 0
+    sub_title_count = 0
+    data = tuncate_role_data(content)
+    role_array = data.scan(/(#{MAIN_ROLE.join('|')}){1}[\s]*(#{SUB_ROLE.join('|')})?(\s+\p{han}+[^\r]+)((\r\n\s+\p{han}?\s?\p{han}+[^\r]+)*)/)
+    role_array.each do |arr|
+      sub_title_count += 1 if arr[1].present?
+      title = arr[0..1].join.delete(' ')
+      names = arr[2..-1].compact.map { |a| a.delete(' ') }.join.split("\r\n").uniq
       role_hash[title].present? ? role_hash[title] += names : role_hash[title] = names
     end
-    Logs::AddCrawlerError.add_verdict_error(crawler_history, verdict, :parse_verdict_role_error, '爬取判決參與角色錯誤, 撈取為空') unless role_hash.present?
+    new_line_count = data.scan("\r\n").count - 1
+    role_hash.each_value { |v| role_number += v.count }
+    expect_role_number = new_line_count - sub_title_count
+    Logs::AddCrawlerError.add_verdict_error(crawler_history, verdict, :parse_verdict_role_error, '爬取判決參與角色數量錯誤(內涵pattern 未收錄角色)') unless expect_role_number == role_number
     role_hash
+  end
+
+  private
+
+  def tuncate_role_data(content)
+    end_point = content.index('上列') - 1
+    content.tr!('　', ' ')
+    start_word = content[0..end_point].scan(/.{3}年度.+第.+號/).last
+    start_point = content[0..end_point].index(start_word)
+    content[start_point..end_point]
   end
 end

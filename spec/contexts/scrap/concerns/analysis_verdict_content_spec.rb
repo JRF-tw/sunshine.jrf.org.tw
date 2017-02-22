@@ -90,9 +90,9 @@ RSpec.describe Scrap::Concerns::AnalysisVerdictContent, type: :model do
     let!(:sub_titles) { ["\r\n即再審聲請人", "\r\n即受刑人", "\r\n即受判決人", "\r\n即被告", "\r\n選任辯護人"] }
 
     def test_template(main_title:, sub_title: '', plus_people: 0)
-      people_names = ["\s邱政則", "\s王陽明有限公司", "\s火雞律師", "\s陳威志（原名：陳宥菖）"]
+      people_names = ["\s邱政則", "\s王陽明有限公司", "\s火雞律師", "\s陳威志（原名：陳宥菖）", "\s邵瑋", "\s李 辰"]
       plus_people_name = ["\r\n      梁維祥律師", "\r\n      林啟智", "\r\n      黃仁到（原名：黃宥豬）"]
-      '號' + main_title + sub_title + people_names.sample + plus_people_name.sample(plus_people).join + '上列'
+      "\r\n103年度無敵字第541號" + "\r\n" + main_title + sub_title + people_names.sample + plus_people_name.sample(plus_people).join + '上列'
     end
 
     context 'only main title' do
@@ -126,6 +126,12 @@ RSpec.describe Scrap::Concerns::AnalysisVerdictContent, type: :model do
         subject { including_class.parse_roles_hash(verdict, verdict_content, crawler_history) }
         it { expect(subject[title].count).to eq(2) }
       end
+    end
+
+    context 'check role number' do
+      let!(:verdict_content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/verdict_example_1.html") }
+      subject { including_class.parse_roles_hash(verdict, verdict_content, crawler_history) }
+      it { expect { subject }.not_to change { CrawlerLog.count } }
     end
   end
 end
