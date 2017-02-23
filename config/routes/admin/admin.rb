@@ -55,6 +55,12 @@ Rails.application.routes.draw do
         get :stories
       end
     end
+    resources :scores, only: [:index] do
+      member do
+        get :schedule
+        get :verdict
+      end
+    end
     resources :crawler_histories, only: [:index] do
       resources :crawler_logs, only: [:show] do
         collection do

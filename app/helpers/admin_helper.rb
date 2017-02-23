@@ -19,6 +19,22 @@ module AdminHelper
     CrawlerErrorTypes.list.to_enum.with_index.map { |n, i| [n.last, i] }
   end
 
+  def collect_for_story_identity
+    Story.all.map { |s| [s.identity, s.id] }
+  end
+
+  def collect_for_judge_name
+    Judge.all.map { |j| [j.name, j.id] }
+  end
+
+  def collect_for_score_type
+    [['開庭評鑑', 'ScheduleScore'], ['判決評鑑', 'VerdictScore']]
+  end
+
+  def score_show_path(s)
+    s.class.name == 'ScheduleScore' ? link_to('詳細資料', schedule_admin_score_path(s), class: 'btn btn-mini') : link_to('詳細資料', verdict_admin_score_path(s), class: 'btn btn-mini')
+  end
+
   def precentage(numerator, denominator)
     number_to_percentage(numerator.to_f / denominator.to_f * 100, precision: 2)
   end
@@ -39,5 +55,14 @@ module AdminHelper
       { name: '判決書總數', data: crawler_histories.inject({}) { |a, e| a.merge(e.crawler_on => e.verdicts_count) } },
       { name: '庭期總數', data: crawler_histories.inject({}) { |a, e| a.merge(e.crawler_on => e.schedules_count) } }
     ]
+  end
+
+  def score_rater_link(score)
+    score_type = score.class.name.underscore.split('_').first
+    rater = score.send("#{score_type}_rater")
+    wording = rater.model_name.human + ' - ' + rater.name
+    rater_type = rater.class.name.downcase.gsub('court', '')
+    path = Rails.application.routes.url_helpers.send("admin_#{rater_type}_path", rater)
+    link_to wording, path, target: '_blank'
   end
 end
