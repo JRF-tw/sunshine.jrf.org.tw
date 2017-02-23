@@ -19,10 +19,6 @@ module AdminHelper
     CrawlerErrorTypes.list.to_enum.with_index.map { |n, i| [n.last, i] }
   end
 
-  def collect_for_story_identity
-    Story.all.map { |s| [s.identity, s.id] }
-  end
-
   def collect_for_judge_name
     Judge.all.map { |j| [j.name, j.id] }
   end

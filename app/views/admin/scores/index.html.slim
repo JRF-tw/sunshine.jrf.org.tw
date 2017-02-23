@@ -11,8 +11,7 @@
         .span6
           .control-group
             = f.label :story_id_eq
-            .controls.select2  = f.select :story_id_eq,
-            collect_for_story_identity, include_blank: '請選擇'
+            .controls = f.search_field :story_id_eq
       .row
         .span6
           .control-group
