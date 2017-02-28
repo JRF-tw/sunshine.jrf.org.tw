@@ -2,7 +2,7 @@
 
   = render layout: 'components/user_info',
     locals: {title: '註冊帳號', path: '/lawyer/email/edit'}
-    = kv_cell 'Email', current_lawyer.email
+    = kv_email_cell current_lawyer
     = kv_cell '密碼', link_to('重設密碼',
       lawyer_password_send_reset_password_mail_path, method: :post)
 
