@@ -14,10 +14,13 @@
 #  is_judgment      :boolean          default(FALSE)
 #  adjudge_date     :date
 #  publish_date     :date
+#  content_file     :string
+#  crawl_data       :hstore
 #
 
 class Verdict < ActiveRecord::Base
   mount_uploader :file, VerdictFileUploader
+  mount_uploader :content_file, VerdictFileUploader
   serialize :party_names, Array
   serialize :lawyer_names, Array
   serialize :judges_names, Array
