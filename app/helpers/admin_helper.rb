@@ -27,6 +27,22 @@ module AdminHelper
     [['開庭評鑑', 'ScheduleScore'], ['判決評鑑', 'VerdictScore']]
   end
 
+  def collect_all_roles
+    [['律師', 'Lawyer', { 'data-role-names' => lawyer_names.to_json }], ['當事人', 'Party', { 'data-role-names' => party_names.to_json }], ['觀察者', 'CourtObserver', { 'data-role-names' => observer_names.to_json }]]
+  end
+
+  def collect_by_roles(role)
+    return [] unless role
+    case role
+    when 'Party'
+      party_names
+    when 'Lawyer'
+      lawyer_names
+    when 'CourtObserver'
+      observer_names
+    end
+  end
+
   def score_show_path(s)
     s.class.name == 'ScheduleScore' ? link_to('詳細資料', schedule_admin_score_path(s), class: 'btn btn-mini') : link_to('詳細資料', verdict_admin_score_path(s), class: 'btn btn-mini')
   end
@@ -56,9 +72,27 @@ module AdminHelper
   def score_rater_link(score)
     score_type = score.class.name.underscore.split('_').first
     rater = score.send("#{score_type}_rater")
-    wording = rater.model_name.human + ' - ' + rater.name
-    rater_type = rater.class.name.downcase.gsub('court', '')
-    path = Rails.application.routes.url_helpers.send("admin_#{rater_type}_path", rater)
+    show_role_link(rater)
+  end
+
+  def show_role_link(role)
+    wording = role.model_name.human + ' - ' + role.name
+    role_type = role.class.name.downcase.gsub('court', '')
+    path = Rails.application.routes.url_helpers.send("admin_#{role_type}_path", role)
     link_to wording, path, target: '_blank'
+  end
+
+  private
+
+  def party_names
+    Party.all.map { |j| ["當事人 - #{j.name}", j.id] }
+  end
+
+  def lawyer_names
+    Lawyer.all.map { |j| ["律師 - #{j.name}", j.id] }
+  end
+
+  def observer_names
+    CourtObserver.all.map { |o| ["觀察者 - #{o.name}", o.id] }
   end
 end

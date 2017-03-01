@@ -1,0 +1,47 @@
+= admin_widget_box "有效評鑑 - #{@valid_score.id} 資料", icon: :th do
+  table.table.table-bordered.table-striped.table-hover
+    tbody
+      tr
+        td id
+        td = @valid_score.id
+      tr
+        td 案件
+        td = link_to @valid_score.story.identity, admin_story_path(@valid_score.story.id), target: '_blank'
+      tr
+        td 庭期
+        td = link_to @valid_score.schedule.id, admin_schedule_path(@valid_score.schedule) if @valid_score.schedule
+      tr
+        td 法官
+        td = link_to @valid_score.judge.name, admin_judge_path(@valid_score.judge) 
+      tr
+        td 評鑑人
+        td = show_role_link(@valid_score.score_rater)
+      tr
+        td 原始評鑑
+        td = link_to "開庭評鑑-#{@valid_score.score.id}", schedule_admin_score_path(@valid_score.score)
+      tr
+        td 開庭態度評分
+        td 
+          = "1. #{@valid_score.score_1_1}"
+          br
+          = "2. #{@valid_score.score_1_2}"
+          br
+          = "3. #{@valid_score.score_1_3}"
+      tr
+        td 訴訟指揮評分
+        td
+          = "1. #{@valid_score.score_2_1}"
+          br
+          = "2. #{@valid_score.score_2_2}"
+          br
+          = "3. #{@valid_score.score_2_3}"
+          br
+          = "4. #{@valid_score.score_2_4}"
+          br
+          = "5. #{@valid_score.score_2_5}"
+      tr
+        td 建立時間
+        td = @valid_score.created_at
+      tr
+        td 最後更新時間
+        td = @valid_score.updated_at

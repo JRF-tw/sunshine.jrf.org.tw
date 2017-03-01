@@ -1,0 +1,40 @@
+= admin_widget_box "有效評鑑 - #{@valid_score.id} 資料", icon: :th do
+  table.table.table-bordered.table-striped.table-hover
+    tbody
+      tr
+        td id
+        td = @valid_score.id
+      tr
+        td 案件
+        td = link_to @valid_score.story.identity, admin_story_path(@valid_score.story.id), target: '_blank'
+      tr
+        td 法官
+        td = link_to @valid_score.judge.name, admin_judge_path(@valid_score.judge) 
+      tr
+        td 評鑑人
+        td = show_role_link(@valid_score.score_rater)
+      tr
+        td 原始評鑑
+        td = link_to "判決評鑑-#{@valid_score.score.id}", verdict_admin_score_path(@valid_score.score)
+      tr
+        td 裁判品質評分
+        td 
+          = "1. #{@valid_score.score_3_1}"
+          br
+          = "2. #{@valid_score.score_3_2_1}"
+          br
+          = "3. #{@valid_score.score_3_2_2}"
+          br
+          = "4. #{@valid_score.score_3_2_3}"
+          br
+          = "5. #{@valid_score.score_3_2_4}"
+          br
+          = "6. #{@valid_score.score_3_2_5}"
+          br
+          = "7. #{@valid_score.score_3_2_6}"
+      tr
+        td 建立時間
+        td = @valid_score.created_at
+      tr
+        td 最後更新時間
+        td = @valid_score.updated_at

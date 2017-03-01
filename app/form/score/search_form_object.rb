@@ -11,22 +11,6 @@ class Score::SearchFormObject < BaseFormObject
     schedule_scores_result + verdict_scores_result
   end
 
-  def collect_by_roles
-    return [] unless rater_type_eq.present?
-    case rater_type_eq
-    when 'Party'
-      party_names
-    when 'Lawyer'
-      lawyer_names
-    when 'CourtObserver'
-      observer_names
-    end
-  end
-
-  def collect_all_roles
-    @score_roles = [['律師', 'Lawyer', { 'data-role-names' => lawyer_names.to_json }], ['當事人', 'Party', { 'data-role-names' => party_names.to_json }], ['觀察者', 'CourtObserver', { 'data-role-names' => observer_names.to_json }]]
-  end
-
   private
 
   def assign_value
@@ -37,18 +21,6 @@ class Score::SearchFormObject < BaseFormObject
     self.rater_id_eq = @params[:rater_id_eq]
     self.created_at_gteq = @params[:created_at_gteq]
     self.created_at_lteq = @params[:created_at_lteq]
-  end
-
-  def party_names
-    Party.all.map { |j| ["當事人 - #{j.name}", j.id] }
-  end
-
-  def lawyer_names
-    Lawyer.all.map { |j| ["律師 - #{j.name}", j.id] }
-  end
-
-  def observer_names
-    CourtObserver.all.map { |o| ["觀察者 - #{o.name}", o.id] }
   end
 
   def only_schedule_score?

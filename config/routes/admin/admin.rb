@@ -51,6 +51,7 @@ Rails.application.routes.draw do
         get :stories
       end
     end
+    resources :valid_scores, only: [:index, :show]
     resources :scores, only: [:index] do
       member do
         get :schedule
