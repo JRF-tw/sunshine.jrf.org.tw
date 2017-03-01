@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308094026) do
+ActiveRecord::Schema.define(version: 20170301075745) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -825,6 +825,7 @@ ActiveRecord::Schema.define(version: 20170308094026) do
     t.date     "publish_on"
     t.string   "content_file"
     t.hstore   "crawl_data"
+    t.hstore   "roles_data"
   end
 
   add_index "verdicts", ["adjudge_date"], name: "index_verdicts_on_adjudge_date", using: :btree
