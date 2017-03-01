@@ -9,13 +9,13 @@
         td = link_to @valid_score.story.identity, admin_story_path(@valid_score.story.id), target: '_blank'
       tr
         td 法官
-        td = link_to @valid_score.judge.name, admin_judge_path(@valid_score.judge) 
+        td = link_to @valid_score.judge.name, admin_judge_path(@valid_score.judge), target: '_blank'
       tr
         td 評鑑人
         td = show_role_link(@valid_score.score_rater)
       tr
         td 原始評鑑
-        td = link_to "判決評鑑-#{@valid_score.score.id}", verdict_admin_score_path(@valid_score.score)
+        td = link_to "判決評鑑-#{@valid_score.score.id}", verdict_admin_score_path(@valid_score.score), target: '_blank'
       tr
         td 裁判品質評分
         td 
