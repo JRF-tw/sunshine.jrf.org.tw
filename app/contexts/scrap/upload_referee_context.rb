@@ -35,11 +35,10 @@ class Scrap::UploadRefereeContext < BaseContext
 
   def build_crawl_data
     @crawl_data = {}
-    @crawl_data['裁判字號'] = @data.css('table')[2].css('table')[1].css('span')[0].text[/\d+,\p{Han}+,\d+/].tr(',', '-')
-    @crawl_data['案由'] = @data.css('table')[2].css('table')[1].css('span')[2].text[/(?<=\u00a0)\p{Han}+/]
-    @crawl_data['日期'] = @data.css('table')[2].css('table')[1].css('span')[1].text[/\d+/]
-    extra_story = prase_extra_story(@data.text)
-    @crawl_data['相關案件字號'] = extra_story if extra_story.present?
+    @judge_word = @data.css('table')[2].css('table')[1].css('span')[0].text[/\d+,\p{Han}+,\d+/].tr(',', '-')
+    @summary = @data.css('table')[2].css('table')[1].css('span')[2].text[/(?<=\u00a0)\p{Han}+/]
+    @date = @data.css('table')[2].css('table')[1].css('span')[1].text[/\d+/]
+    @related_story = prase_extra_story(@data.text)
   end
 
   def build_file
@@ -56,7 +55,15 @@ class Scrap::UploadRefereeContext < BaseContext
   end
 
   def assign_value
-    @referee.assign_attributes(file: File.open(@file.path), content_file: File.open(@content_file.path), crawl_data: @crawl_data, roles_data: @content_file_data['案件相關人物'])
+    @referee.assign_attributes(
+      file: File.open(@file.path),
+      content_file: File.open(@content_file.path),
+      roles_data: @content_file_data['案件相關人物'],
+      date: @date,
+      summary: @summary,
+      judge_word: @judge_word,
+      related_story: @related_story
+    )
   end
 
   def remove_tempfile
