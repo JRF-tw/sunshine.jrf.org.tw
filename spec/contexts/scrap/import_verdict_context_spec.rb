@@ -111,9 +111,9 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
       it { expect { subject }.to change { ValidScore.count }.by(1) }
     end
 
-    context '#set_delay_calculate_verdict_scores' do
-      it { expect { subject }.to change_sidekiq_jobs_size_of(Sidekiq::Extensions::DelayedClass, scheduled: true) }
-    end
+    # context '#set_delay_calculate_verdict_scores' do
+    #   it { expect { subject }.to change_sidekiq_jobs_size_of(Sidekiq::Extensions::DelayedClass, scheduled: true) }
+    # end
 
     context '.calculate_verdict_scores' do
       subject { described_class.new(court, original_data, content, word, publish_date, story_type) }
