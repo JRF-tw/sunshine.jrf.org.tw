@@ -15,7 +15,7 @@ class Scrap::ImportVerdictContext < BaseContext
   after_perform   :create_relation_for_role
   after_perform   :upload_file
   after_perform   :calculate_schedule_scores, if: :story_adjudge?
-  after_perform   :set_delay_calculate_verdict_scores, if: :story_adjudge?
+  # after_perform   :set_delay_calculate_verdict_scores, if: :story_adjudge?
   after_perform   :record_count_to_daily_notify
   after_perform   :alert_new_story_type
   after_perform   :send_notice
@@ -130,9 +130,9 @@ class Scrap::ImportVerdictContext < BaseContext
     Story::CalculateScheduleScoresContext.new(@story).perform
   end
 
-  def set_delay_calculate_verdict_scores
-    self.class.delay_until(3.months.from_now).calculate_verdict_scores(@story)
-  end
+  # def set_delay_calculate_verdict_scores
+  #   self.class.delay_until(3.months.from_now).calculate_verdict_scores(@story)
+  # end
 
   def story_adjudge?
     @story.is_adjudge
