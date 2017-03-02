@@ -25,20 +25,20 @@ RSpec.describe Api::VerdictsController, type: :request do
     context 'court not exist' do
       let(:url) { URI.parse(URI.encode('/TPD-105-黑媽媽-123/verdict')) }
       subject! { get url }
-      it { expect(response_body['errors']).to eq('該法院不存在') }
+      it { expect(response_body['errors']).to eq('該法院代號不存在') }
     end
 
     context 'story not exist' do
       let(:url) { URI.parse(URI.encode("/#{code}-105-黑媽媽-123/verdict")) }
       subject! { get url }
-      it { expect(response_body['errors']).to eq('此案件不存在') }
+      it { expect(response_body['errors']).to eq('案件不存在') }
     end
 
     context 'verdicts not exist' do
       before { Verdict.destroy_all }
       let(:url) { URI.parse(URI.encode("/#{code}-#{year}-#{word_type}-#{number}/verdict")) }
       subject! { get url }
-      it { expect(response_body['messages']).to eq('此案件尚未有判決書') }
+      it { expect(response_body['errors']).to eq('此案件尚未有判決書') }
     end
   end
 end

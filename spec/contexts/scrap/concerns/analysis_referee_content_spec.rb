@@ -85,16 +85,16 @@ RSpec.describe Scrap::Concerns::AnalysisRefereeContent, type: :model do
     end
   end
 
-  describe '#prase_extra_story' do
+  describe '#prase_related_story' do
     context 'more than one story' do
       let!(:verdict_content) { "105年度上易字第541號\r\n 105年度上易字第545號\r\n 105年度上火字第547號\r\n 上列" }
-      subject { including_class.prase_extra_story(verdict_content) }
+      subject { including_class.prase_related_story(verdict_content) }
       it { expect(subject).to eq(['105年度上易字第545號', '105年度上火字第547號']) }
     end
 
     context 'one story' do
       let!(:verdict_content) { "105年度上易字第541號\r\n 上列" }
-      subject { including_class.prase_extra_story(verdict_content) }
+      subject { including_class.prase_related_story(verdict_content) }
       it { expect(subject).to eq([]) }
     end
   end

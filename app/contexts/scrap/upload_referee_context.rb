@@ -28,9 +28,8 @@ class Scrap::UploadRefereeContext < BaseContext
   def build_content_json
     @content_file_data = {}
     start_point = @data.css('pre').text.index('上列')
-    @role_hash = parse_roles_hash(@referee, data.text, @crawler_history)
-    @content_file_data['案件相關人物'] = parse_roles_hash(@referee, @data.text, @crawler_history)
-    @content_file_data['裁判主文'] = @data.css('pre').text[start_point..-1]
+    @content_file_data['story_related_roles'] = parse_roles_hash(@referee, @data.text, @crawler_history)
+    @content_file_data['main_content'] = @data.css('pre').text[start_point..-1]
   end
 
   def build_crawl_data
@@ -38,7 +37,7 @@ class Scrap::UploadRefereeContext < BaseContext
     @judge_word = @data.css('table')[2].css('table')[1].css('span')[0].text[/\d+,\p{Han}+,\d+/].tr(',', '-')
     @summary = @data.css('table')[2].css('table')[1].css('span')[2].text[/(?<=\u00a0)\p{Han}+/]
     @date = @data.css('table')[2].css('table')[1].css('span')[1].text[/\d+/]
-    @related_story = prase_extra_story(@data.text)
+    @related_story = prase_related_story(@data.text)
   end
 
   def build_file
@@ -58,7 +57,7 @@ class Scrap::UploadRefereeContext < BaseContext
     @referee.assign_attributes(
       file: File.open(@file.path),
       content_file: File.open(@content_file.path),
-      roles_data: @content_file_data['案件相關人物'],
+      roles_data: @content_file_data['story_related_roles'],
       date: @date,
       summary: @summary,
       judge_word: @judge_word,

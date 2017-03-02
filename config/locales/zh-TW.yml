@@ -161,6 +161,7 @@ zh-TW:
       start_on_blank: "開庭日期為必填"
       start_on_invalid: "開庭日期不能為未來時間"
       story_not_found: "案件不存在"
+      verdicts_not_exist: '此案件尚未有判決書'
       story_without_people_name: "案件內沒有該人名紀錄"
       story_already_pronounced: "案件已宣判, 無法評鑑"
       story_already_have_judgement: "已有判決書, 不可評鑑開庭"
