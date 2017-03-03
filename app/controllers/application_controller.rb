@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   def http_auth_for_production
     return unless Rails.env.production?
     authenticate_or_request_with_http_basic do |username, password|
-      username == 'admin_role' && password == '52748898'
+      username == 'jrf' && password == 'jrf2017'
     end
   end
 
