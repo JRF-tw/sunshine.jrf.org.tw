@@ -1,0 +1,62 @@
+= simple_form_for @search, url: admin_scores_path, wrapper: :admin, html: { class: 'form-horizontal' }, method: :get do |f|
+  .well
+    fieldset
+      legend 搜尋
+      .row
+        .span6
+          .control-group
+            = f.label :judge_id_eq
+            .controls.select2  = f.select :judge_id_eq,
+            collect_for_judge_name, include_blank: '請選擇'
+        .span6
+          .control-group
+            = f.label :story_id_eq
+            .controls = f.search_field :story_id_eq
+      .row
+        .span6
+          .control-group
+            = f.label :rater_type_eq
+            .controls.rater-type = f.select :rater_type_eq,
+            f.object.collect_all_roles, include_blank: '請選擇'
+        .span6
+          .control-group
+            = f.label :rater_id_eq
+            .controls.rater-name.select2 = f.select :rater_id_eq,
+            f.object.collect_by_roles, include_blank: '請選擇'
+      .row
+        .span6
+          .control-group
+            = f.label :score_type_eq
+            .controls = f.select :score_type_eq,
+            collect_for_score_type, include_blank: '請選擇'
+        .span6
+          .control-group#datepicker
+            = f.label :created_at_gteq
+            .controls = f.search_field :created_at_gteq, placeholder: '起始時間，非必填'
+            .controls = f.search_field :created_at_lteq, placeholder: '結束時間，非必填'
+
+    hr
+    .form-actions
+      = f.submit value: '搜尋', class: 'btn btn-primary'
+      = ' '
+      = link_to '清空搜尋結果', admin_scores_path, class: 'btn btn-default'
+= admin_widget_box "評鑑記錄列表 : 搜尋結果為 #{@scores.count} 筆", icon: :pencil do
+  .dataTables_wrapper
+    table.table.table-bordered.table-striped.table-hover
+      thead
+        tr
+          th 案件
+          th 評鑑人
+          th 評鑑類型
+          th 評鑑時間
+          th
+      tbody
+        - @scores.each do |s|
+          tr
+            td = link_to s.story.identity, admin_story_path(s.story.id), target: '_blank'
+            td = score_rater_link(s)
+            td = s.class.name == 'ScheduleScore' ? '開庭評鑑' : '判決評鑑'
+            td = s.created_at
+            td = score_show_path(s)
+    .ui-toolbar.ui-widget-header
+      = paginate @scores, theme: :admin

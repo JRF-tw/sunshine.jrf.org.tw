@@ -34,12 +34,13 @@ gulp.task 'resolve-url', ->
 # END
 #
 
-precompile = () ->
+precompile = (cb) ->
   task = exec "git add -A --ignore-errors && git commit -m 'Precompile f2e assets.'"
   task.stdout.on "data", (data) -> console.log data.toString()
   task.stderr.on "data", (data) -> console.log data.toString()
+  task.on "exit", -> cb()
 
-gulp.task "update", precompile
+gulp.task "update", (cb) -> precompile(cb)
 
 #
 # Build Responsive Image

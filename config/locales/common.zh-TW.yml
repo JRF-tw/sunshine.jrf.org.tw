@@ -11,6 +11,13 @@ zh-TW:
       party/verify_phone_form_object:
         unconfirmed_phone: '手機號碼'
         phone_varify_code: '驗證碼'
+      score/search_form_object:
+        judge_id_eq: '法官'
+        story_id_eq: '案件id'
+        rater_type_eq: '評鑑者類別'
+        rater_id_eq: '評鑑者姓名'
+        score_type_eq: 評鑑類別
+        created_at_gteq: '評鑑時間'
   activerecord:
     models:
       court: '法院'
@@ -31,6 +38,7 @@ zh-TW:
       party: '當事人'
       court_observer: '旁觀者'
       prosecutor: '檢察官'
+      lawyer: '律師'
     attributes:
       court:
         full_name: "全名"
@@ -377,3 +385,9 @@ zh-TW:
       crawler_log:
         crawler_kind_eq: '錯誤種類為'
         crawler_error_type_eq: '錯誤狀態為'
+      schedule_score:
+        judge_id_eq: '法官id'
+        story_id_eq: '案件id'
+        schedule_rater_type_eq: '評鑑人類型'
+        schedule_rater_id_eq: '評鑑人id'
+        created_at_gteq: '評鑑時間'

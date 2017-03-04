@@ -8,8 +8,10 @@
 
   = render layout: 'components/user_info',
     locals: {title: '電子信箱', path: '/party/email/edit'}
-    = kv_cell 'Email', current_party.email ? current_party.email : \
-      content_tag(:span, '建議填寫，開庭前及判決書公布時會以 email 通知', class: 'helper--error')
+    - if current_party.email
+      = kv_email_cell current_party
+    - else
+      = kv_cell 'Email', content_tag(:span, '建議填寫，開庭前及判決書公布時會以 email 通知', class: 'helper--error')
 
   = render layout: 'components/user_info',
     locals: {title: '個人基本資料', path: '/party/profile/edit'}

@@ -11,6 +11,14 @@ module TemplateHelper
     content_tag :dd, value.to_s, class: 'desc'
   end
 
+  def kv_email_cell(user)
+    concat content_tag :dt, 'Email', class: 'term'
+    content_tag :dd, class: 'desc' do
+      concat content_tag :div, user.email
+      concat content_tag :div, "等待驗證信箱：#{user.unconfirmed_email}", class: 'helper--error' if user.unconfirmed_email
+    end
+  end
+
   def inline_svg(icon)
     content_tag :svg, class: "icon-#{icon} icon" do
       tag :use, 'xlink:href' => "#icon-#{icon}"
