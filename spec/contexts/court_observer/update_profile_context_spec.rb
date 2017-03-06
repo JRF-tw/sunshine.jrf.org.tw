@@ -11,12 +11,4 @@ describe CourtObserver::UpdateProfileContext do
     it { expect(subject).to be_truthy }
     it { expect { subject }.to change { court_observer.reload.phone_number } }
   end
-
-  describe '#parse_phone_number' do
-    let!(:params) { { phone_number: '' } }
-    subject { described_class.new(court_observer).perform(params) }
-
-    it { expect(subject).to be_truthy }
-    it { expect { subject }.not_to change { court_observer.reload.phone_number } }
-  end
 end

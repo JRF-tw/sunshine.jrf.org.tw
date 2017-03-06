@@ -11,12 +11,4 @@ describe Lawyer::UpdateProfileContext do
     it { expect(subject).to be_truthy }
     it { expect { subject }.to change { lawyer.reload.phone_number } }
   end
-
-  describe '#parse_number' do
-    let!(:params) { { phone_number: '' } }
-    subject { described_class.new(lawyer).perform(params) }
-
-    it { expect(subject).to be_truthy }
-    it { expect { subject }.not_to change { lawyer.reload.phone_number } }
-  end
 end
