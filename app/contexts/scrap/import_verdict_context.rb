@@ -1,9 +1,8 @@
 class Scrap::ImportVerdictContext < BaseContext
   include Scrap::Concerns::AnalysisVerdictContent
   # only import judgment verdict
-  DISABLE_RULING = true
 
-  before_perform  :disable_ruling
+  before_perform  :import_rule, unless: :is_judgment?
   before_perform  :find_or_create_story
   before_perform  :create_verdict
   before_perform  :create_main_judge_by_highest, if: :is_highest_court?
@@ -50,8 +49,13 @@ class Scrap::ImportVerdictContext < BaseContext
 
   private
 
-  def disable_ruling
-    return is_judgment? if DISABLE_RULING
+  def import_rule
+    context = Scrap::ImportRuleContext.new(@court, @orginal_data, @content, @word, @publish_date, @story_type)
+    if @rule = context.perform
+      return add_error(:catch_rule, "抓取資料為裁決 id-#{@rule.id}")
+    else
+      return add_error(:data_create_fail, '裁決建立失敗' + context.error_messages.join(','))
+    end
   end
 
   def is_judgment?

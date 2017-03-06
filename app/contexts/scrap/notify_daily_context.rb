@@ -1,5 +1,5 @@
 class Scrap::NotifyDailyContext < BaseContext
-  SCRAP_MODELS = { court: '法院', judge: '法官', verdict: '判決書', schedule: '庭期表' }.freeze
+  SCRAP_MODELS = { court: '法院', judge: '法官', verdict: '判決書', schedule: '庭期表', rule: '裁決書' }.freeze
 
   after_perform :update_to_crawler_history
   after_perform :cleanup_redis_date

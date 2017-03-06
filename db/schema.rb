@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170303063238) do
+ActiveRecord::Schema.define(version: 20170306062342) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -209,6 +209,7 @@ ActiveRecord::Schema.define(version: 20170303063238) do
     t.integer  "schedules_count", default: 0, null: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.integer  "rules_count",     default: 0, null: false
   end
 
   add_index "crawler_histories", ["crawler_on"], name: "index_crawler_histories_on_crawler_on", using: :btree

@@ -6,7 +6,7 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
   let!(:branch) { create :branch, court: court, judge: judge, chamber_name: '臺灣高等法院花蓮分院刑事庭', name: '丙' }
   let!(:original_data) { Mechanize.new.get(Scrap::ParseVerdictContext::VERDICT_URI).body.force_encoding('UTF-8') }
   let!(:content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/judgment_content.txt") }
-  let!(:ruling_content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/ruling_content.html") }
+  let!(:ruling_content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/ruling_content.txt") }
   let!(:word) { '105,原選上訴,1' }
   let!(:publish_date) { Time.zone.today }
   let!(:story_type) { '刑事' }
@@ -36,6 +36,10 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
 
     context 'upload file to s3' do
       it { expect(subject.file).to be_present }
+    end
+
+    context 'upload content_file to s3' do
+      it { expect(subject.content_file).to be_present }
     end
 
     context 'update data to story' do
@@ -138,9 +142,12 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
       end
     end
 
-    context 'only create judgment verdict' do
+    context 'create rule if not verdict' do
+      let!(:court) { create :court, code: 'TPS', full_name: '最高法院' }
+      let!(:original_data) { File.read("#{Rails.root}/spec/fixtures/scrap_data/ruling.html") }
       subject { described_class.new(court, original_data, ruling_content, word, publish_date, story_type).perform }
       it { expect { subject }.not_to change { Verdict.count } }
+      it { expect { subject }.to change { Rule.count } }
     end
 
     xit '#send_after_verdict_noice, should be test in AfterVerdictNoticeContextSpec'
