@@ -25,8 +25,8 @@ class Scrap::ImportJudgeContext < BaseContext
     @chamber_name = @row_data[0].strip
     @court_name = @chamber_name =~ /分院/ ? "#{@chamber_name.split('分院')[0]}分院" : "#{@chamber_name.split('法院')[0]}法院"
     @branch_name = @row_data[1].strip
-    @judge_name = @row_data[2][/\p{han}+/]
     @memo = @row_data[2][/司法事務官/]
+    @judge_name = @row_data[2].delete('法官').delete('司法事務官').squish
   rescue
     Logs::AddCrawlerError.parse_judge_data_error(@crawler_history, :parse_data_failed, "解析股別法官資料失敗 : 解析資料[ #{@row_data} ]")
     false

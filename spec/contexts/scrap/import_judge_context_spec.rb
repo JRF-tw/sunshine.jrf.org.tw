@@ -38,7 +38,7 @@ RSpec.describe Scrap::ImportJudgeContext, type: :model do
     context 'judge name with illegal character' do
       let(:data_string) { '臺灣高等法院民事庭,乙,匡偉@司法事務官,黃千鶴,2415' }
       it { expect { subject }.to change { Judge.count }.by(1) }
-      it { expect(subject.name).to eq('匡偉') }
+      it { expect(subject.name).to eq('匡偉@') }
       it { expect(subject.memo).to eq('司法事務官') }
     end
 
