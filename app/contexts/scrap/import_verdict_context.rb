@@ -2,7 +2,6 @@ class Scrap::ImportVerdictContext < BaseContext
   include Scrap::Concerns::AnalysisVerdictContent
   # only import judgment verdict
 
-  before_perform  :import_rule, unless: :is_judgment?
   before_perform  :find_or_create_story
   before_perform  :create_verdict
   before_perform  :create_main_judge_by_highest, if: :is_highest_court?
@@ -49,19 +48,6 @@ class Scrap::ImportVerdictContext < BaseContext
 
   private
 
-  def import_rule
-    context = Scrap::ImportRuleContext.new(@court, @orginal_data, @content, @word, @publish_date, @story_type)
-    if @rule = context.perform
-      return add_error(:catch_rule, "抓取資料為裁決 id-#{@rule.id}")
-    else
-      return add_error(:data_create_fail, '裁決建立失敗' + context.error_messages.join(','))
-    end
-  end
-
-  def is_judgment?
-    @content.split.first.match(/判決/).present?
-  end
-
   def find_or_create_story
     array = @word.match(/\d+,\W+,\d+/)[0].split(',')
     @story = Story.find_or_create_by(year: array[0], word_type: array[1], number: array[2], court: @court)
@@ -94,7 +80,7 @@ class Scrap::ImportVerdictContext < BaseContext
   end
 
   def assign_default_value
-    @verdict.assign_attributes(is_judgment: is_judgment?)
+    @verdict.assign_attributes(is_judgment: true)
   end
 
   def update_data_to_story
@@ -102,19 +88,17 @@ class Scrap::ImportVerdictContext < BaseContext
     @story.assign_attributes(prosecutor_names: (@story.prosecutor_names + @verdict.prosecutor_names).uniq)
     @story.assign_attributes(lawyer_names: (@story.lawyer_names + @verdict.lawyer_names).uniq)
     @story.assign_attributes(party_names: (@story.party_names + @verdict.party_names).uniq)
-    @story.assign_attributes(is_adjudge: is_judgment?) if is_judgment?
-    @story.assign_attributes(is_pronounce: is_judgment?) if is_judgment? && !@story.is_pronounce
+    @story.assign_attributes(is_adjudge: true)
+    @story.assign_attributes(is_pronounce: true) unless @story.is_pronounce
     @story.save
   end
 
   def update_adjudge_date
-    return unless is_judgment?
     @story.update_attributes(adjudge_date: Time.zone.today) unless @story.adjudge_date
     @verdict.update_attributes(adjudge_date: Time.zone.today)
   end
 
   def update_pronounce_date
-    return unless is_judgment?
     @story.update_attributes(pronounce_date: Time.zone.today) unless @story.pronounce_date
   end
 

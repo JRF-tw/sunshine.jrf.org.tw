@@ -8,7 +8,18 @@ RSpec.describe Scrap::ParseVerdictContext, type: :model do
   let!(:end_date) { Time.zone.today.strftime('%Y%m%d') }
 
   describe '#perform' do
-    subject { described_class.new(court, scrap_id, type, start_date, end_date).perform }
-    it { expect { subject }.to change_sidekiq_jobs_size_of(Scrap::ImportVerdictContext, :perform, queue: 'crawler_verdict') }
+    context 'verdict' do
+      subject { described_class.new(court, scrap_id, type, start_date, end_date).perform }
+      it { expect { subject }.to change_sidekiq_jobs_size_of(Scrap::ImportVerdictContext, :perform, queue: 'crawler_verdict') }
+    end
+
+    context 'rule' do
+      before {
+        stub_request(:get, /http:\/\/jirs\.judicial\.gov\.tw\/FJUD\/FJUDQRY03_1\.aspx/)
+          .to_return(status: 200, body: File.read("#{Rails.root}/spec/fixtures/scrap_data/ruling.html"))
+      }
+      subject { described_class.new(court, scrap_id, type, start_date, end_date).perform }
+      it { expect { subject }.to change_sidekiq_jobs_size_of(Scrap::ImportRuleContext, :perform, queue: 'crawler_verdict') }
+    end
   end
 end

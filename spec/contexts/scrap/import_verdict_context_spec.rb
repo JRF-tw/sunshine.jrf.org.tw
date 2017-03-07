@@ -142,14 +142,6 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
       end
     end
 
-    context 'create rule if not verdict' do
-      let!(:court) { create :court, code: 'TPS', full_name: '最高法院' }
-      let!(:original_data) { File.read("#{Rails.root}/spec/fixtures/scrap_data/ruling.html") }
-      subject { described_class.new(court, original_data, ruling_content, word, publish_date, story_type).perform }
-      it { expect { subject }.not_to change { Verdict.count } }
-      it { expect { subject }.to change { Rule.count } }
-    end
-
     xit '#send_after_verdict_noice, should be test in AfterVerdictNoticeContextSpec'
   end
 end
