@@ -1,10 +1,10 @@
 class AddColumnCalculatedScoreToStory < ActiveRecord::Migration
   def up
-    add_column :stories, :calculated_score, :boolean, default: false
-    add_index :stories, :calculated_score
+    add_column :stories, :is_calculated, :boolean, default: false
+    add_index :stories, :is_calculated
   end
 
   def down
-    remove_column :stories, :calculated_score
+    remove_column :stories, :is_calculated
   end
 end

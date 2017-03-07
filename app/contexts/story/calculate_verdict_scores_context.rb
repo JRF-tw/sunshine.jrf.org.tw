@@ -23,6 +23,6 @@ class Story::CalculateVerdictScoresContext < BaseContext
   private
 
   def update_story_status
-    @story.update_attributes(calculated_score: true)
+    @story.update_attributes(is_calculated: true)
   end
 end

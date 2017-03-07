@@ -1,6 +1,6 @@
 class Party::VerdictScoreCheckInfoContext < BaseContext
   PERMITS = [:court_id, :year, :word_type, :number, :story_type].freeze
-  SCORE_INTERVEL = 90.days
+  SCORE_INTERVEL = ConvertVerdictScoreWorker::SCORE_INTERVEL
 
   before_perform :check_court_id
   before_perform :check_year

@@ -9,6 +9,6 @@ describe Story::CalculateVerdictScoresContext do
 
   describe '#perform' do
     it { expect { subject.perform }.to change { ValidScore.count } }
-    it { expect { subject.perform }.to change { story.calculated_score }.to be_truthy }
+    it { expect { subject.perform }.to change { story.is_calculated }.to be_truthy }
   end
 end
