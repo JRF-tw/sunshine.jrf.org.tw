@@ -18,6 +18,7 @@
 #  adjudge_date     :date
 #  pronounce_date   :date
 #  is_pronounce     :boolean          default(FALSE)
+#  calculated_score :boolean          default(FALSE)
 #
 
 class Admin::Story < ::Story

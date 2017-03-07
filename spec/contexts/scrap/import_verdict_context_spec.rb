@@ -109,20 +109,6 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
       it { expect { subject }.to change { ValidScore.count }.by(1) }
     end
 
-    # context '#set_delay_calculate_verdict_scores' do
-    #   it { expect { subject }.to change_sidekiq_jobs_size_of(Sidekiq::Extensions::DelayedClass, scheduled: true) }
-    # end
-
-    context '.calculate_verdict_scores' do
-      subject { described_class.new(court, original_data, content, word, publish_on, story_type) }
-      let(:story_params) { word.split(',') }
-      let!(:story) { create :story, year: story_params[0], word_type: story_params[1], number: story_params[2], court: court, story_type: story_type }
-      let!(:party) { create :party, name: '張榮獻' }
-      let!(:verdict_score) { create :verdict_score, story: story, verdict_rater: party }
-      before { subject.perform }
-      it { expect { subject.class.calculate_verdict_scores(story) }.to change { ValidScore.count }.by(1) }
-    end
-
     context '#alert_new_story_type' do
       context 'alert' do
         let!(:story_type) { '新der案件類別' }

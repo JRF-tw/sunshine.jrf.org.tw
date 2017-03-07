@@ -18,6 +18,7 @@
 #  adjudge_date     :date
 #  pronounce_date   :date
 #  is_pronounce     :boolean          default(FALSE)
+#  calculated_score :boolean          default(FALSE)
 #
 
 class Story < ActiveRecord::Base
@@ -38,6 +39,7 @@ class Story < ActiveRecord::Base
   serialize :prosecutor_names, Array
 
   scope :newest, -> { order('id DESC') }
+  scope :not_caculate, -> { where(calculated_score: false) }
 
   include Redis::Objects
   counter :lawyer_scored_count

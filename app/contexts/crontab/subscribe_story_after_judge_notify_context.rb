@@ -1,5 +1,4 @@
 class Crontab::SubscribeStoryAfterJudgeNotifyContext < BaseContext
-
   before_perform :find_after_judge_story
 
   def initialize(date)
