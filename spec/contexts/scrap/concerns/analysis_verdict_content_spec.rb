@@ -73,13 +73,13 @@ RSpec.describe Scrap::Concerns::AnalysisVerdictContent, type: :model do
 
   describe '#parse_party_names' do
     context 'exist' do
-      let!(:verdict_content) { '被　　　告　xxx' }
+      let!(:verdict_content) { "\r\n103年度無敵字第541號 \r\n被　　　告　xxx\n上列" }
       subject { including_class.parse_party_names(verdict, verdict_content, crawler_history) }
       it { expect(subject).to be_truthy }
     end
 
     context 'unexist' do
-      let!(:verdict_content) { '被衝康 xxx' }
+      let!(:verdict_content) { "\r\n103年度無敵字第541號 \r\n被　　　打　xxx\n上列" }
       subject { including_class.parse_party_names(verdict, verdict_content, crawler_history) }
       it { expect { subject }.to change { CrawlerLog.count } }
     end
