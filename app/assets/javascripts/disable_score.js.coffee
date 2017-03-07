@@ -1,5 +1,4 @@
 $(document).ready ->
-  $('.disable-score').attr("href", "#")
   $('.disable-score').hover (->
     $('.disable-score .text').text("敬請期待")
     return
