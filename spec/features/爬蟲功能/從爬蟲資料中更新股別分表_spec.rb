@@ -23,30 +23,30 @@ describe '從爬蟲資料中更新股別分表', type: :context do
     end
   end
 
-  context '同法院下，法官大屁有股別甲(missed 為 true)、乙，法官中屁有股別丙' do
-    let!(:judge_A) { create :judge, name: '大屁', court: court }
+  context '同法院下，法官王大明有股別甲(missed 為 true)、乙，法官中屁有股別丙' do
+    let!(:judge_A) { create :judge, name: '王大明', court: court }
     let!(:judge_B) { create :judge, name: 'B', court: court }
     let!(:branch1) { create :branch, court: court, name: '甲', judge: judge_A, chamber_name: '臺灣高等法院民事庭', missed: true }
     let!(:branch2) { create :branch, court: court, name: '乙', judge: judge_A, chamber_name: '臺灣高等法院民事庭' }
     let!(:branch3) { create :branch, court: court, name: '丙', judge: judge_B, chamber_name: '臺灣高等法院民事庭' }
     subject { Scrap::ImportJudgeContext.new(data_string).perform }
 
-    context '從爬蟲資料中新增了法官小屁' do
-      let(:data_string) { '臺灣高等法院民事庭,丁,小屁　法官,黃千鶴,2415' }
+    context '從爬蟲資料中新增了法官張小明' do
+      let(:data_string) { '臺灣高等法院民事庭,丁,張小明　法官,黃千鶴,2415' }
 
-      it '法官小屁和法官大屁同法院' do
+      it '法官張小明和法官王大明同法院' do
         expect(subject.court).to eq(judge_A.court)
       end
 
       context '從爬蟲資料中找到了股別丙' do
-        let(:data_string) { '臺灣高等法院民事庭,丙,小屁　法官,黃千鶴,2415' }
+        let(:data_string) { '臺灣高等法院民事庭,丙,張小明　法官,黃千鶴,2415' }
 
         it '不會新增股別' do
           expect { subject }.not_to change { Branch.count }
         end
 
         before { subject }
-        it '股別丙隸屬法官小屁' do
+        it '股別丙隸屬法官張小明' do
           expect(branch3.reload.judge).to eq(subject)
         end
 
@@ -56,7 +56,7 @@ describe '從爬蟲資料中更新股別分表', type: :context do
       end
 
       context '從爬蟲資料中找不到資料庫內的股別' do
-        let(:data_string) { '臺灣高等法院民事庭,丁,小屁　法官,黃千鶴,2415' }
+        let(:data_string) { '臺灣高等法院民事庭,丁,張小明　法官,黃千鶴,2415' }
         let(:branch) { Branch.last }
         before { subject }
 
@@ -64,7 +64,7 @@ describe '從爬蟲資料中更新股別分表', type: :context do
           expect(branch.name).to eq('丁')
         end
 
-        it '股別丁隸屬法官小屁' do
+        it '股別丁隸屬法官張小明' do
           expect(branch.judge).to eq(subject)
         end
 
@@ -91,16 +91,16 @@ describe '從爬蟲資料中更新股別分表', type: :context do
       end
     end
 
-    context '從爬蟲資料中找到了法官大屁' do
+    context '從爬蟲資料中找到了法官王大明' do
       context '從爬蟲資料中找到了股別丙' do
-        let(:data_string) { '臺灣高等法院民事庭,丙,大屁　法官,黃千鶴,2415' }
+        let(:data_string) { '臺灣高等法院民事庭,丙,王大明　法官,黃千鶴,2415' }
 
         it '不會新增股別' do
           expect { subject }.not_to change { Branch.count }
         end
 
         before { subject }
-        it '股別丙隸屬法官大屁' do
+        it '股別丙隸屬法官王大明' do
           expect(branch3.reload.judge).to eq(judge_A)
         end
 
@@ -110,7 +110,7 @@ describe '從爬蟲資料中更新股別分表', type: :context do
       end
 
       context '從爬蟲資料中找不到資料庫內的股別' do
-        let(:data_string) { '臺灣高等法院民事庭,丁,大屁　法官,黃千鶴,2415' }
+        let(:data_string) { '臺灣高等法院民事庭,丁,王大明　法官,黃千鶴,2415' }
         let(:branch) { Branch.last }
         before { subject }
 
@@ -118,7 +118,7 @@ describe '從爬蟲資料中更新股別分表', type: :context do
           expect(branch.name).to eq('丁')
         end
 
-        it '股別丁隸屬法官大屁' do
+        it '股別丁隸屬法官王大明' do
           expect(branch.judge).to eq(judge_A)
         end
 
