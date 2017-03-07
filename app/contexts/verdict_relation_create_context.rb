@@ -17,7 +17,7 @@ class VerdictRelationCreateContext < BaseContext
       if @verdict_relation.save
         @verdict_relation
       else
-        add_error(:data_create_fail, @judge.errors.full_messages.join("\n"))
+        add_error(:data_create_fail, @verdict_relation.errors.full_messages.join("\n"))
       end
     end
   end
