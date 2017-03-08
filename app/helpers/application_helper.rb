@@ -232,6 +232,10 @@ module ApplicationHelper
     StoryTypes.list
   end
 
+  def collect_for_observer_school
+    ['中國文化大學', '靜宜大學', '中原大學', '國立勤益科技大學', '國立中正大學']
+  end
+
   def get_name_by_role(role)
     case role.class.name
     when 'Lawyer'
