@@ -42,6 +42,12 @@ RSpec.describe Scrap::ImportJudgeContext, type: :model do
       it { expect(subject.memo).to eq('司法事務官') }
     end
 
+    context 'judge name with space' do
+      let(:data_string) { '臺灣高等法院民事庭,乙,匡 偉,黃千鶴,2415' }
+      it { expect { subject }.to change { Judge.count }.by(1) }
+      it { expect(subject.name).to eq('匡偉') }
+    end
+
     context 'court not exist' do
       let(:data_string) { 'xxxxxx,乙,匡偉　法官,黃千鶴,2415' }
 
