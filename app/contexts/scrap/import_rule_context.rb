@@ -8,21 +8,20 @@ class Scrap::ImportRuleContext < BaseContext
   after_perform   :update_data_to_story
   after_perform   :upload_file
   after_perform   :record_count_to_daily_notify
-  after_perform   :record_intervel_to_daily_notify
   after_perform   :alert_new_story_type
 
   class << self
-    def perform(court, orginal_data, content, word, publish_date, story_type)
-      new(court, orginal_data, content, word, publish_date, story_type).perform
+    def perform(court, orginal_data, content, word, publish_on, story_type)
+      new(court, orginal_data, content, word, publish_on, story_type).perform
     end
   end
 
-  def initialize(court, orginal_data, content, word, publish_date, story_type)
+  def initialize(court, orginal_data, content, word, publish_on, story_type)
     @court = court
     @orginal_data = orginal_data
     @content = content
     @word = word
-    @publish_date = publish_date
+    @publish_on = publish_on
     @story_type = story_type
     @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
   end
@@ -44,7 +43,7 @@ class Scrap::ImportRuleContext < BaseContext
   def create_rule
     @rule = Rule.find_or_create_by(
       story: @story,
-      publish_date: @publish_date
+      publish_on: @publish_on
     )
   end
 
@@ -81,10 +80,6 @@ class Scrap::ImportRuleContext < BaseContext
 
   def record_count_to_daily_notify
     Redis::Counter.new('daily_scrap_rule_count').increment
-  end
-
-  def record_intervel_to_daily_notify
-    Redis::Value.new('daily_scrap_rule_intervel').value = Redis::Value.new('daily_scrap_verdict_intervel').value
   end
 
   def alert_new_story_type

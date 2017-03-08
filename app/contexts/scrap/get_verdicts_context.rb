@@ -28,6 +28,6 @@ class Scrap::GetVerdictsContext < BaseContext
   end
 
   def record_intervel_to_daily_notify
-    Redis::Value.new('daily_scrap_verdict_intervel').value = "#{@start_date} ~ #{@end_date}"
+    Redis::Value.new('daily_scrap_rule_intervel').value = Redis::Value.new('daily_scrap_verdict_intervel').value = "#{@start_date} ~ #{@end_date}"
   end
 end

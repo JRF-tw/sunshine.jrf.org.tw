@@ -67,7 +67,7 @@
             td = verdict.adjudge_date
             td = link_to "#{verdict.story.identity}", admin_story_path(verdict.story)
             td = verdict.is_judgment ? "是" : "否"
-            td = verdict.publish_date
+            td = verdict.publish_on
             td = link_to "點我預覽", verdict.file.url, target: '_blank' if verdict.file
             td = link_to "點我下載", download_file_admin_verdict_path(verdict) if verdict.file
             td

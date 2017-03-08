@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170306062342) do
+ActiveRecord::Schema.define(version: 20170308094026) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -567,14 +567,15 @@ ActiveRecord::Schema.define(version: 20170306062342) do
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
-    t.date     "publish_date"
+    t.date     "publish_on"
     t.string   "content_file"
     t.hstore   "crawl_data"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
 
-  add_index "rules", ["publish_date"], name: "index_rules_on_publish_date", using: :btree
+  add_index "rules", ["publish_on"], name: "index_rules_on_publish_on", using: :btree
+  add_index "rules", ["story_id"], name: "index_rules_on_story_id", using: :btree
 
   create_table "schedule_scores", force: :cascade do |t|
     t.integer  "schedule_id"
@@ -822,13 +823,13 @@ ActiveRecord::Schema.define(version: 20170306062342) do
     t.text     "prosecutor_names"
     t.boolean  "is_judgment",      default: false
     t.date     "adjudge_date"
-    t.date     "publish_date"
+    t.date     "publish_on"
     t.string   "content_file"
     t.hstore   "crawl_data"
   end
 
   add_index "verdicts", ["adjudge_date"], name: "index_verdicts_on_adjudge_date", using: :btree
   add_index "verdicts", ["is_judgment"], name: "index_verdicts_on_is_judgment", using: :btree
-  add_index "verdicts", ["publish_date"], name: "index_verdicts_on_publish_date", using: :btree
+  add_index "verdicts", ["publish_on"], name: "index_verdicts_on_publish_on", using: :btree
 
 end

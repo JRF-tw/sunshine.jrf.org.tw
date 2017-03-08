@@ -13,8 +13,8 @@
 #  prosecutor_names :text
 #  is_judgment      :boolean          default(FALSE)
 #  adjudge_date     :date
-#  publish_date     :date
-#  content          :string
+#  publish_on       :date
+#  content_file     :string
 #
 
 require 'rails_helper'

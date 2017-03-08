@@ -7,12 +7,13 @@ class CreateRules < ActiveRecord::Migration
       t.text     :lawyer_names
       t.text     :judges_names
       t.text     :prosecutor_names
-      t.date     :publish_date
+      t.date     :publish_on
       t.string   :content_file
       t.hstore   :crawl_data
       t.timestamps null: false
     end
 
-    add_index :rules, :publish_date
+    add_index :rules, :story_id
+    add_index :rules, :publish_on
   end
 end
