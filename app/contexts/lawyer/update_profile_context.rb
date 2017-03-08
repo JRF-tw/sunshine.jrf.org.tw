@@ -1,7 +1,6 @@
 class Lawyer::UpdateProfileContext < BaseContext
   PERMITS = [:name, :phone_number, :office_number, :active_notice].freeze
 
-  before_perform :parse_number
   before_perform :assign_value
 
   def initialize(lawyer)
@@ -17,11 +16,6 @@ class Lawyer::UpdateProfileContext < BaseContext
   end
 
   private
-
-  def parse_number
-    @params = @params.except!(:phone_number) unless @params[:phone_number].present?
-    @params = @params.except!(:office_number) unless @params[:office_number].present?
-  end
 
   def assign_value
     @lawyer.assign_attributes(@params)
