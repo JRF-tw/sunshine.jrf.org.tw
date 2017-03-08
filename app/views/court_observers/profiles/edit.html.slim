@@ -4,8 +4,8 @@
     url:  court_observer_profile_path, method: :put, wrapper: :md do |f|
     = f.input :name
     = f.input :phone_number, input_html: { type: "tel" }
-    = f.input :school, as: :select, collection: ["school1", "school2"], include_blank: "請選擇"
-    = f.input :department_level, as: :select, collection: ["101", "102"], include_blank: "請選擇"
+    = f.input :school, as: :select, collection: collect_for_observer_school, include_blank: "請選擇"
+    = f.input :department_level, disabled: true
     = f.input :student_number
 
     = render 'components/form_actions', f: f, submit: '確定更新',
