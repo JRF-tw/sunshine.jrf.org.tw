@@ -33,7 +33,6 @@ class Scrap::UploadRefereeContext < BaseContext
   end
 
   def build_crawl_data
-    @crawl_data = {}
     @judge_word = @data.css('table')[2].css('table')[1].css('span')[0].text[/\d+,\p{Han}+,\d+/].tr(',', '-')
     @summary = @data.css('table')[2].css('table')[1].css('span')[2].text[/(?<=\u00a0)\p{Han}+/]
     @date = @data.css('table')[2].css('table')[1].css('span')[1].text[/\d+/]
