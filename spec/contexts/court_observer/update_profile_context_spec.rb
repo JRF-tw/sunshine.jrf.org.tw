@@ -18,7 +18,7 @@ describe CourtObserver::UpdateProfileContext do
       subject { described_class.new(court_observer).perform(params) }
 
       it { expect(subject).to be_truthy }
-      it { expect { subject }.to change { court_observer.reload.phone_number } }
+      it { expect { subject }.to change { court_observer.reload.phone_number }.to be_empty }
     end
   end
 end
