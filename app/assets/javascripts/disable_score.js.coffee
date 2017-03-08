@@ -5,3 +5,6 @@ $(document).ready ->
   ), ->
     $('.disable-score .text').text("評鑑報表")
     return
+  $('.disable-score').click ->
+    event.preventDefault()
+    return
