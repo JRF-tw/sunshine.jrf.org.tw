@@ -122,7 +122,7 @@ zh-TW:
       lawyer_have_password: "該律師已設定密碼"
       lawyer_has_verdict: "該律師已關聯判決書"
       lawyer_not_found: "無此律師資料"
-      lawyer_not_found_manual_sign_up: "查無此律師資料 請改以人工管道註冊 <a href='/lawyer/appeal/new'>點此註冊</a>"
+      lawyer_not_found_manual_sign_up: "查無此律師資料 請改以人工管道註冊 <a target='_blank' href='https://marsz330.typeform.com/to/lfDPuQ'>點此註冊</a>"
       invalid_token: "無效的 token"
       invalid_phone_number: "手機號碼格式錯誤"
       impostor_set_fail: "未能設置為冒用者"
