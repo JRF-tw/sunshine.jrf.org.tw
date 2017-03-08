@@ -9,4 +9,4 @@
   a.previous.ui-state-disabled.fg-button.ui-button.ui-state-default
     == t 'views.pagination.previous'
 - else
-  == link_to t('views.pagination.previous'), url, :rel => 'prev', :remote => remote, :class => "previous #{'ui-state-disabled' if current_page.first?} fg-button ui-button ui-state-default"
+  == link_to t('views.pagination.previous').html_safe, url, :rel => 'prev', :remote => remote, :class => "previous #{'ui-state-disabled' if current_page.first?} fg-button ui-button ui-state-default"
