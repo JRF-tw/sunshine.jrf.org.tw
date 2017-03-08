@@ -24,7 +24,7 @@
           td = story.is_pronounce ? "已宣判" : "尚未宣判"
           td = story.is_adjudge ? "已判決" : "尚未判決"
           td
-            = link_to "是", admin_verdict_path(story.judgment_verdict) if story.judgment_verdict
+            = link_to "是", admin_verdict_path(story.verdict) if story.verdict
 
           td
             = link_to "詳細資料", admin_story_path(story), class: "btn btn-mini"

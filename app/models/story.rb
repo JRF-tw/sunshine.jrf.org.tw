@@ -22,7 +22,7 @@
 
 class Story < ActiveRecord::Base
   has_many :schedules, dependent: :destroy
-  has_many :verdicts, dependent: :destroy
+  has_one :verdict, dependent: :destroy
   has_many :rules, dependent: :destroy
   has_many :story_relations, dependent: :destroy
   has_many :judges, through: :story_relations, source: :people, source_type: :Judge
@@ -50,10 +50,6 @@ class Story < ActiveRecord::Base
     "#{year}-#{word_type}-#{number}"
   end
 
-  def judgment_verdict
-    verdicts.find_by_is_judgment(true)
-  end
-
   def by_relation_role(role)
     type = role.singularize.camelize
     story_relations.where(people_type: type)
@@ -69,7 +65,7 @@ class Story < ActiveRecord::Base
     end
 
     def have_adjudgement(status)
-      adjudged_story_ids = Story.joins(:verdicts).where('Verdicts.is_judgment = ?', true).pluck(:id)
+      adjudged_story_ids = Story.joins(:verdict).pluck(:id)
       if status == 'yes'
         where(id: adjudged_story_ids)
       elsif status == 'no'

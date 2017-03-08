@@ -22,20 +22,6 @@ RSpec.describe Admin::VerdictsController do
       it { expect(response.body).to match(verdict.story.court.full_name) }
       it { expect(response.body).not_to match(verdict1.judges_names.first) }
     end
-
-    context 'search is_judgment' do
-      context 'true' do
-        let!(:verdict1) { create :verdict, is_judgment: true }
-        before { get '/admin/verdicts', q: { is_judgment_true: true } }
-        it { expect(response.body).to match(verdict1.story.identity) }
-      end
-
-      context 'false' do
-        let!(:verdict1) { create :verdict, is_judgment: false }
-        before { get '/admin/verdicts', q: { is_judgment_true: false } }
-        it { expect(response.body).to match(verdict1.story.identity) }
-      end
-    end
   end
 
   describe '#show' do

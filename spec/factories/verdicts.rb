@@ -11,7 +11,6 @@
 #  lawyer_names     :text
 #  judges_names     :text
 #  prosecutor_names :text
-#  is_judgment      :boolean          default(FALSE)
 #  adjudge_date     :date
 #  content_file     :string
 #  publish_on       :date
@@ -30,7 +29,6 @@ FactoryGirl.define do
 
   factory :verdict_for_convert_valid_score, class: Verdict do
     story { create(:story) }
-    is_judgment { true }
 
     after(:create) do |v|
       v.party_names.each do |name|

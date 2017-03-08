@@ -4,7 +4,7 @@ RSpec.describe Admin::StoriesController do
   before { signin_user }
   let(:court) { create :court, full_name: '不理不理法院' }
   let!(:story) { create :story, :pronounced, story_type: '邢事', year: 1990, word_type: '火箭', number: 100 }
-  let!(:story_with_adjugde_verdict) { create :story, :with_adjugde_verdict, :pronounced, story_type: '民事', year: 1990, word_type: '隊', number: 100, court: court }
+  let!(:story_with_verdict) { create :story, :with_verdict, :pronounced, story_type: '民事', year: 1990, word_type: '隊', number: 100, court: court }
   let!(:story_without_judge) { create :story, story_type: '民事', year: 1990, word_type: '風', number: 100, is_adjudge: true, court: court, adjudge_date: Time.now }
   let!(:story_relation) { create :story_relation, story: story }
   describe '#index' do
@@ -25,23 +25,23 @@ RSpec.describe Admin::StoriesController do
 
     context 'search the is_adjudge and court of stories' do
       before { get '/admin/stories', q: { is_pronounce_eq: true, court_id_eq: court.id } }
-      it { expect(response.body).to match(story_with_adjugde_verdict.word_type) }
+      it { expect(response.body).to match(story_with_verdict.word_type) }
     end
 
     context 'search the is_adjudge and adjudge_date of stories' do
-      before { get '/admin/stories', q: { is_pronounce_eq: true, adjudge_date_eq: story_with_adjugde_verdict.adjudge_date } }
-      it { expect(response.body).to match(story_with_adjugde_verdict.word_type) }
+      before { get '/admin/stories', q: { is_pronounce_eq: true, adjudge_date_eq: story_with_verdict.adjudge_date } }
+      it { expect(response.body).to match(story_with_verdict.word_type) }
     end
 
     context 'search the have_adjudgement' do
       before { get '/admin/stories', q: { have_adjudgement: 'yes' } }
-      it { expect(response.body).to match(story_with_adjugde_verdict.word_type) }
+      it { expect(response.body).to match(story_with_verdict.word_type) }
     end
 
     context 'search the not_adjudged_yet' do
       before { get '/admin/stories', q: { have_adjudgement: 'no' } }
       it { expect(response.body).to match(story_without_judge.word_type) }
-      it { expect(response.body).not_to match(story_with_adjugde_verdict.word_type) }
+      it { expect(response.body).not_to match(story_with_verdict.word_type) }
     end
 
     context 'search the judge of stories' do

@@ -6,7 +6,6 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
   let!(:branch) { create :branch, court: court, judge: judge, chamber_name: '臺灣高等法院花蓮分院刑事庭', name: '丙' }
   let!(:original_data) { Mechanize.new.get(Scrap::ParseVerdictContext::VERDICT_URI).body.force_encoding('UTF-8') }
   let!(:content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/judgment_content.txt") }
-  let!(:ruling_content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/ruling_content.txt") }
   let!(:word) { '105,原選上訴,1' }
   let!(:publish_on) { Time.zone.today }
   let!(:story_type) { '刑事' }
@@ -27,11 +26,6 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
         before { subject }
         it { expect { subject }.not_to change { Story.count } }
       end
-    end
-
-    context 'assign default value' do
-      before { subject }
-      it { expect(subject.is_judgment).to be_truthy }
     end
 
     context 'upload file to s3' do

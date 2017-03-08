@@ -814,14 +814,13 @@ ActiveRecord::Schema.define(version: 20170308094026) do
 
   create_table "verdicts", force: :cascade do |t|
     t.integer  "story_id"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "file"
     t.text     "party_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
-    t.boolean  "is_judgment",      default: false
     t.date     "adjudge_date"
     t.date     "publish_on"
     t.string   "content_file"
@@ -829,7 +828,6 @@ ActiveRecord::Schema.define(version: 20170308094026) do
   end
 
   add_index "verdicts", ["adjudge_date"], name: "index_verdicts_on_adjudge_date", using: :btree
-  add_index "verdicts", ["is_judgment"], name: "index_verdicts_on_is_judgment", using: :btree
   add_index "verdicts", ["publish_on"], name: "index_verdicts_on_publish_on", using: :btree
 
 end

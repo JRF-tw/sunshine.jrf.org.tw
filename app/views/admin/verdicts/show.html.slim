@@ -12,9 +12,6 @@
         td 宣判日期
         td = @verdict.adjudge_date
       tr
-        td 是否為判決
-        td = @verdict.is_judgment ? '是' : '否'
-      tr
         td 分析檢察官結果
         td = @verdict.prosecutor_names.join(',')
       tr

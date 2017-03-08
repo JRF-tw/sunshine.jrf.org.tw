@@ -69,6 +69,6 @@ class Scrap::GetVerdictsTotalResultByStoryTypeContext < BaseContext
   end
 
   def story_vericct_exist?(split_story_identify)
-    Story.find_by(year: split_story_identify[0], word_type: split_story_identify[1], number: split_story_identify[2]).try(:judgment_verdict).present?
+    Story.find_by(year: split_story_identify[0], word_type: split_story_identify[1], number: split_story_identify[2]).try(:verdict).present?
   end
 end

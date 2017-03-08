@@ -6,7 +6,6 @@ class Scrap::ImportVerdictContext < BaseContext
   before_perform  :create_verdict
   before_perform  :create_main_judge_by_highest, if: :is_highest_court?
   before_perform  :assign_names
-  before_perform  :assign_default_value
   after_perform   :update_data_to_story
   after_perform   :update_adjudge_date
   after_perform   :update_pronounce_date
@@ -77,10 +76,6 @@ class Scrap::ImportVerdictContext < BaseContext
       lawyer_names: parse_lawyer_names(@verdict, @content, @crawler_history),
       party_names: parse_party_names(@verdict, @content, @crawler_history)
     )
-  end
-
-  def assign_default_value
-    @verdict.assign_attributes(is_judgment: true)
   end
 
   def update_data_to_story
