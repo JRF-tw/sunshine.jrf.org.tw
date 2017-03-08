@@ -56,8 +56,8 @@ module Scrap::Concerns::AnalysisVerdictContent
   end
 
   def parse_party_names(verdict, content, crawler_history)
-    parties = parse_roles_hash(verdict, content, crawler_history).each_value.inject([]) { |a, b| a << b }
-    parties.reject! { |e| e[/律師/] }
+    parties = parse_roles_hash(verdict, content, crawler_history).each_value.inject([]) { |a, e| a << e }
+    parties = parties.flatten.reject! { |e| e[/律師/] }
     return parties if parties.present?
     Logs::AddCrawlerError.add_verdict_error(crawler_history, verdict, :parse_party_error, '爬取當事人格式錯誤, 撈取為空')
     []
