@@ -18,7 +18,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Verdict do
+RSpec.describe Rule do
   let(:rule) { create :rule }
 
   describe 'FactoryGirl' do

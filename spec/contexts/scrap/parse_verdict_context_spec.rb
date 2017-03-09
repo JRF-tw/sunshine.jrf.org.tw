@@ -14,12 +14,9 @@ RSpec.describe Scrap::ParseVerdictContext, type: :model do
     end
 
     context 'rule' do
-      before {
-        stub_request(:get, /http:\/\/jirs\.judicial\.gov\.tw\/FJUD\/FJUDQRY03_1\.aspx/)
-          .to_return(status: 200, body: File.read("#{Rails.root}/spec/fixtures/scrap_data/ruling.html"))
-      }
+      before { webmock_ruling }
       subject { described_class.new(court, scrap_id, type, start_date, end_date).perform }
-      it { expect { subject }.to change_sidekiq_jobs_size_of(Scrap::ImportRuleContext, :perform, queue: 'crawler_verdict') }
+      it { expect { subject }.to change_sidekiq_jobs_size_of(Scrap::ImportRuleContext, :perform, queue: 'crawler_rule') }
     end
   end
 end

@@ -29,7 +29,8 @@ namespace :dev do
     'dev:fake_stories',
     'dev:fake_schedules',
     'dev:fake_lawyers',
-    'dev:fake_verdicts'
+    'dev:fake_verdicts',
+    'dev:fake_rules'
   ]
 
   task fake_users: :environment do
@@ -288,7 +289,14 @@ namespace :dev do
   task fake_verdicts: :environment do
     Verdict.destroy_all
     5.times do |_i|
-      Story.all.sample.verdicts.create!(adjudge_date: rand(5).years.ago)
+      Verdict.create(story: Story.all.sample, adjudge_date: rand(5).years.ago, publish_on: rand(5).years.ago)
+    end
+  end
+
+  task fake_rules: :environment do
+    Rule.destroy_all
+    5.times do |_i|
+      Story.all.sample.rules.create!(publish_on: rand(5).years.ago)
     end
   end
 
