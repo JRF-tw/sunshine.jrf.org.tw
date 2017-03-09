@@ -14,7 +14,8 @@ ruby:
   .container
     section.profile__avatar
       .image-wrapper
-        = render partial: 'components/avatar_pic', locals: { person: person }
+        = inline_svg "#{job}-avatar"
+        / = render partial: 'components/avatar_pic', locals: { person: person }
 
       .text-wrapper
         small.active-label[
