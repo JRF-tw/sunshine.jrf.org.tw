@@ -5,6 +5,9 @@ class BaseContext
   include Rails.application.routes.url_helpers
   include Errors::HandlerConcern
 
+  SCHEDULE_SCORE_INTERVEL = 14.days
+  VERDICT_SCORE_INTERVEL = 3.months
+
   private
 
   def permit_params(params, *cols)

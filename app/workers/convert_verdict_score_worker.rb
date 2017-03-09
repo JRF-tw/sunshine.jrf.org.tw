@@ -1,5 +1,5 @@
 class ConvertVerdictScoreWorker
-  SCORE_INTERVEL = 90.days
+  SCORE_INTERVEL = BaseContext::VERDICT_SCORE_INTERVEL
   include Sidekiq::Worker
   include Sidetiq::Schedulable
   sidekiq_options retry: 3
