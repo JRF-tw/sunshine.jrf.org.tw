@@ -98,8 +98,7 @@ class Errors::Code
     wrong_verify_code: 400,
     wrong_password: 400,
     wrong_court_for_judge: 400,
-    year_blank: 400,
-    catch_rule: 400
+    year_blank: 400
   }.freeze
 
   class << self

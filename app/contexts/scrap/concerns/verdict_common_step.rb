@@ -1,10 +1,10 @@
 class Scrap::Concerns::VerdictCommonStep
   include Scrap::Concerns::AnalysisVerdictContent
 
-  def initialize(court:, orginal_data:, content:, word:, publish_on:, story_type:)
+  def initialize(court:, original_data:, content:, word:, publish_on:, story_type:)
     @verdict_type = content.split.first.match(/判決/).present? ? 'verdict' : 'rule'
     @court = court
-    @orginal_data = orginal_data
+    @original_data = original_data
     @content = content
     @word = word
     @publish_on = publish_on
@@ -76,7 +76,7 @@ class Scrap::Concerns::VerdictCommonStep
   end
 
   def upload_file
-    Scrap::UploadVerdictContext.new(@orginal_data).perform(@verdict)
+    Scrap::UploadVerdictContext.new(@original_data).perform(@verdict)
   end
 
   def record_count_to_daily_notify

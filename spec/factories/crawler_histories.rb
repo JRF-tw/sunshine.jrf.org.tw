@@ -35,6 +35,7 @@ FactoryGirl.define do
       branches_count { rand(1..50) }
       judges_count { rand(1..50) }
       verdicts_count { rand(1..50) }
+      rules_count { rand(1..50) }
       schedules_count { rand(1..50) }
     end
   end
