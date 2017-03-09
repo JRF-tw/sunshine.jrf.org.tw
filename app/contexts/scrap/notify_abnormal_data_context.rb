@@ -20,6 +20,7 @@ class Scrap::NotifyAbnormalDataContext < BaseContext
     get_courts_failed
     get_judges_failed
     get_verdicts_failed
+    get_rules_failed
     get_schedules_failed
   end
 
@@ -47,6 +48,12 @@ class Scrap::NotifyAbnormalDataContext < BaseContext
   def get_verdicts_failed
     if @crawler_history.verdicts_count.zero?
       @messages << "日期 : #{@crawler_history.crawler_on}, 尚未爬取到任何 `判決書`"
+    end
+  end
+
+  def get_rules_failed
+    if @crawler_history.rules_count.zero?
+      @messages << "日期 : #{@crawler_history.crawler_on}, 尚未爬取到任何 `裁決書`"
     end
   end
 

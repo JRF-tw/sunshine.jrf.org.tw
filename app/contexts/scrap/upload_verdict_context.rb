@@ -12,12 +12,13 @@ class Scrap::UploadVerdictContext < BaseContext
 
   def perform(verdict)
     @verdict = verdict
+    @type = verdict.class.name.downcase
     run_callbacks :perform do
       add_error('upload file failed') unless @verdict.save
       true
     end
   rescue
-    Logs::AddCrawlerError.add_verdict_error(@crawler_history, @verdict, :parse_judge_empty, '判決書上傳失敗')
+    Logs::AddCrawlerError.send("add_#{@type}_error", @crawler_history, @verdict, :upload_file_error, '檔案上傳s3失敗')
   end
 
   private

@@ -4,6 +4,7 @@
 :queues:
   - [default, 1]
   - [crawler_verdict, 2]
+  - [crawler_rule, 2]
 :limits:
   default: 1
   crawler_verdict: 2
@@ -12,6 +13,7 @@ staging:
   :queues:
   - [default, 1]
   - [crawler_verdict, 1]
+  - [crawler_rule, 1]
   :limits:
     default: 1
     crawler_verdict: 1
