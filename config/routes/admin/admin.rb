@@ -1,8 +1,4 @@
-require 'sidekiq/web'
-require 'sidetiq/web'
-
 Rails.application.routes.draw do
-  mount Sidekiq::Web => '/sidekiq'
   namespace :admin do
     root to: 'profiles#index'
     resources :profiles do
