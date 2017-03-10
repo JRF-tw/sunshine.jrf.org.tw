@@ -14,7 +14,8 @@
 #  is_judgment      :boolean          default(FALSE)
 #  adjudge_date     :date
 #  publish_date     :date
-#  content          :string
+#  content_file     :string
+#  crawl_data       :hstore
 #
 
 FactoryGirl.define do
