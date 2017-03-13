@@ -5,13 +5,12 @@ module Scrap::Concerns::AnalysisVerdictContent
   JUDGE = /法\s*官[^\r\n]\s+([\p{Word}\w\s]*?)\n/
   PROSECUTOR = /檢察官(\p{Word}+)到庭執行職務/
   LAWYER = /\s+(\p{Word}+)律師/
-  MUTI_TYPE_PARTY = /\n\s*被\s+告\s+([\p{Word}\w\s\S]+?)\n\s*[\s男\s|\s女\s|上|訴訟|法定|選任|指定|輔\s+佐\s+人]/
-  PARTY = /被\s+告\s+(\p{Word}+)/
   HAS_JUDGES = /法官/
   HAS_PROSECUTOR = /檢察官/
   HAS_LAWYER = /律師/
   MAIN_ROLE = ["代\s*表\s*人", "上\s*訴\s*人", "聲\s*請\s*人", "受\s*刑\s*人", "抗\s*告\s*人", "公\s*訴\s*人", "選\s*任\s*辯\s*護\s*人", "被\s*告", "共\s*同", "再\s*抗\s*告\s*人", "兼\s*代\s*表\s*人", "上\s*一\s*被\s*告", "原\s*告", "指\s*定\s*辯\s*護\s*人"].freeze
   SUB_ROLE = ["即\s*再\s*審\s*聲\s*請\s*人", "即\s*受\s*刑\s*人", "即\s*受\s*判\s*決\s*人", "即\s*被\s*告", "選\s*任\s*辯\s*護\s*人", "訴\s*訟\s*代\s*理\s*人", "複\s*代\s*理\s*人"].freeze
+  PARSE_ROLES_PATTERN = /(#{MAIN_ROLE.join('|')}){1}[\s]*(#{SUB_ROLE.join('|')})?(\s+\p{han}+[^\r\n]+)((\r\n\s+\p{han}?\s?\p{han}+[^\r\n]+)*)/
 
   def parse_main_judge_name(verdict, content, crawler_history)
     matched = content.match(MAIN_JUDGE)
@@ -57,26 +56,18 @@ module Scrap::Concerns::AnalysisVerdictContent
   end
 
   def parse_party_names(verdict, content, crawler_history)
-    matched_mutiple_type = content.squish.match(MUTI_TYPE_PARTY)
-    matched = content.squish.match(PARTY)
-    if matched_mutiple_type
-      parties = content.squish.scan(MUTI_TYPE_PARTY).map { |i| i[0] }
-      parties = parties.join("\n")
-      parties = parties.split(/\n+/).map(&:strip)
-      return parties.uniq
-    elsif matched
-      return content.squish.scan(PARTY).map { |i| i[0] }
-    else
-      Logs::AddCrawlerError.add_verdict_error(crawler_history, verdict, :parse_party_error, '爬取當事人格式錯誤, 撈取為空')
-      return []
-    end
+    parties = parse_roles_hash(verdict, content, crawler_history).each_value.inject([]) { |a, e| a << e }
+    parties = parties.flatten.reject! { |e| e[/律師/] }
+    return parties if parties.present?
+    Logs::AddCrawlerError.add_verdict_error(crawler_history, verdict, :parse_party_error, '爬取當事人格式錯誤, 撈取為空')
+    []
   end
 
   def parse_roles_hash(verdict, content, crawler_history)
     data = tuncate_role_data(content)
     role_number = 0
     new_line_count = data.scan("\r\n").count - 1
-    role_array = data.scan(/(#{MAIN_ROLE.join('|')}){1}[\s]*(#{SUB_ROLE.join('|')})?(\s+\p{han}+[^\r]+)((\r\n\s+\p{han}?\s?\p{han}+[^\r]+)*)/)
+    role_array = data.scan(PARSE_ROLES_PATTERN)
     role_hash, sub_title_count = parse_role_array(role_array)
     role_hash.each_value { |v| role_number += v.count }
     expect_role_number = new_line_count - sub_title_count
