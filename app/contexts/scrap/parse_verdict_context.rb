@@ -9,6 +9,7 @@ class Scrap::ParseVerdictContext < BaseContext
   before_perform :parse_verdict_word
   before_perform :parse_verdict_publish_date
   before_perform :parse_verdict_content
+  before_perform :parse_verdict_type
 
   class << self
     def perform(court, scrap_id, type, start_date, end_date)
@@ -28,7 +29,7 @@ class Scrap::ParseVerdictContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      if is_verdict?
+      if @is_verdict
         Scrap::ImportVerdictContext.delay(retry: false, queue: 'crawler_verdict').perform(@court, @orginal_data, @verdict_content, @verdict_word, @verdict_publish_date, @verdict_story_type)
       else
         Scrap::ImportRuleContext.delay(retry: false, queue: 'crawler_rule').perform(@court, @orginal_data, @verdict_content, @verdict_word, @verdict_publish_date, @verdict_story_type)
@@ -90,8 +91,12 @@ class Scrap::ParseVerdictContext < BaseContext
     false
   end
 
-  def is_verdict?
-    @verdict_content.split.first.match(/判決/).present?
+  def parse_verdict_type
+    @is_verdict = @verdict_content.split.first.match(/判決/).present?
+    true
+  rescue
+    Logs::AddCrawlerError.parse_verdict_data_error(@crawler_history, :parse_data_failed, "解析資訊錯誤 : 取得 判決書類型 失敗, 內文: #{@verdict_content}")
+    false
   end
 
   def request_retry(key:)
