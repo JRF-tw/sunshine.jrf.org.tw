@@ -10,7 +10,7 @@ RSpec.describe Api::VerdictsController, type: :request do
       subject! { get url }
       it { expect(response_body['verdicts'][0]['court_code']).to eq(code) }
       it { expect(response_body['verdicts'][0]['court_name']).to eq(court.full_name) }
-      it { expect(response_body['verdicts'][0]['verdict_file_url']).to eq(verdict.file.url) }
+      it { expect(response_body['verdicts'][0]['body']['verdict_file_url']).to eq(verdict.file.url) }
       it { expect(response).to be_success }
     end
 
