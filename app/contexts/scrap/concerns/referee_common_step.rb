@@ -3,7 +3,7 @@ module Scrap::Concerns::RefereeCommonStep
 
   def before_perform_common_step
     find_or_create_story
-    @referee = @content.split.first.match(/判決/).present? ? create_verdict : create_rule
+    @referee = parse_referee_type(@content, @crawler_history) == 'verdict' ? create_verdict : create_rule
     create_main_judge_by_highest if is_highest_court?
     assign_names
   end

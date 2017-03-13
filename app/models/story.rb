@@ -61,16 +61,7 @@ class Story < ActiveRecord::Base
 
   class << self
     def ransackable_scopes(_auth_object = nil)
-      [:have_adjudgement, :relation_by_judge]
-    end
-
-    def have_adjudgement(status)
-      adjudged_story_ids = Story.joins(:verdict).pluck(:id)
-      if status == 'yes'
-        where(id: adjudged_story_ids)
-      elsif status == 'no'
-        where.not(id: adjudged_story_ids)
-      end
+      [:relation_by_judge]
     end
 
     def relation_by_judge(judge_id)

@@ -75,6 +75,13 @@ module Scrap::Concerns::AnalysisRefereeContent
     role_hash
   end
 
+  def parse_referee_type(content, crawler_history)
+    content.split.first.match(/判決/).present? ? 'verdict' : 'rule'
+  rescue
+    Logs::AddCrawlerError.parse_referee_data_error(crawler_history, :parse_data_failed, "解析資訊錯誤 : 取得 裁判書類型 失敗, 內文: #{@content}")
+    false
+  end
+
   private
 
   def tuncate_role_data(content)

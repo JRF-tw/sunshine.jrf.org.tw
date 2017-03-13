@@ -1,4 +1,5 @@
 class Scrap::ParseRefereeContext < BaseContext
+  include Scrap::Concerns::AnalysisRefereeContent
   RESULT_URI = 'http://jirs.judicial.gov.tw/FJUD/FJUDQRY02_1.aspx'.freeze
   REFEREE_URI = 'http://jirs.judicial.gov.tw/FJUD/FJUDQRY03_1.aspx'.freeze
 
@@ -9,7 +10,6 @@ class Scrap::ParseRefereeContext < BaseContext
   before_perform :parse_referee_word
   before_perform :parse_referee_publish_date
   before_perform :parse_referee_content
-  before_perform :parse_referee_type
 
   class << self
     def perform(court, scrap_id, type, start_date, end_date)
@@ -29,7 +29,7 @@ class Scrap::ParseRefereeContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      if @is_verdict
+      if referee_type == 'verdict'
         Scrap::ImportVerdictContext.delay(retry: false, queue: 'crawler_verdict').perform(@court, @orginal_data, @referee_content, @referee_word, @referee_publish_date, @referee_story_type)
       else
         Scrap::ImportRuleContext.delay(retry: false, queue: 'crawler_rule').perform(@court, @orginal_data, @referee_content, @referee_word, @referee_publish_date, @referee_story_type)
@@ -91,12 +91,8 @@ class Scrap::ParseRefereeContext < BaseContext
     false
   end
 
-  def parse_referee_type
-    @is_verdict = @referee_content.split.first.match(/判決/).present?
-    true
-  rescue
-    Logs::AddCrawlerError.parse_referee_data_error(@crawler_history, :parse_data_failed, "解析資訊錯誤 : 取得 裁判書類型 失敗, 內文: #{@referee_content}")
-    false
+  def referee_type
+    parse_referee_type(@referee_content, @crawler_history)
   end
 
   def request_retry(key:)
