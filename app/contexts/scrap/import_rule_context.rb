@@ -1,8 +1,8 @@
 class Scrap::ImportRuleContext < BaseContext
-  include Scrap::Concerns::AnalysisVerdictContent
+  include Scrap::Concerns::RefereeCommonStep
 
-  before_perform    :run_before_common_step
-  after_perform     :run_after_common_step
+  before_perform    :before_perform_common_step
+  after_perform     :after_perform_common_step
 
   class << self
     def perform(court, original_data, content, word, publish_on, story_type)
@@ -18,12 +18,6 @@ class Scrap::ImportRuleContext < BaseContext
     @publish_on = publish_on
     @story_type = story_type
     @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
-    @common_step = Scrap::Concerns::VerdictCommonStep.new(court: @court,
-                                                          original_data: @original_data,
-                                                          content: @content,
-                                                          word: @word,
-                                                          publish_on: @publish_on,
-                                                          story_type: @story_type)
   end
 
   def perform
@@ -31,15 +25,5 @@ class Scrap::ImportRuleContext < BaseContext
       add_error('create date fail') unless @rule.save
       @rule
     end
-  end
-
-  private
-
-  def run_before_common_step
-    @rule, = @common_step.before_perform_step
-  end
-
-  def run_after_common_step
-    @common_step.after_perform_step
   end
 end

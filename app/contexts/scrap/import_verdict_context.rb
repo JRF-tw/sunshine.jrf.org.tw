@@ -1,11 +1,10 @@
 class Scrap::ImportVerdictContext < BaseContext
-  include Scrap::Concerns::AnalysisVerdictContent
-  # only import judgment verdict
+  include Scrap::Concerns::RefereeCommonStep
 
-  before_perform  :run_before_common_step
+  before_perform  :before_perform_common_step
   after_perform   :update_adjudge_date
   after_perform   :update_pronounce_date
-  after_perform   :run_after_common_step
+  after_perform   :after_perform_common_step
   after_perform   :create_relation_for_role
   after_perform   :calculate_schedule_scores, if: :story_adjudge?
   # after_perform   :set_delay_calculate_verdict_scores
@@ -30,12 +29,6 @@ class Scrap::ImportVerdictContext < BaseContext
     @publish_on = publish_on
     @story_type = story_type
     @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
-    @common_step = Scrap::Concerns::VerdictCommonStep.new(court: @court,
-                                                          original_data: @original_data,
-                                                          content: @content,
-                                                          word: @word,
-                                                          publish_on: @publish_on,
-                                                          story_type: @story_type)
   end
 
   def perform
@@ -47,10 +40,6 @@ class Scrap::ImportVerdictContext < BaseContext
 
   private
 
-  def run_before_common_step
-    @verdict, @story = @common_step.before_perform_step
-  end
-
   def update_adjudge_date
     @story.update_attributes(adjudge_date: Time.zone.today, is_adjudge: true) unless @story.adjudge_date
     @verdict.update_attributes(adjudge_date: Time.zone.today)
@@ -58,10 +47,6 @@ class Scrap::ImportVerdictContext < BaseContext
 
   def update_pronounce_date
     @story.update_attributes(pronounce_date: Time.zone.today, is_pronounce: true) unless @story.pronounce_date
-  end
-
-  def run_after_common_step
-    @common_step.after_perform_step
   end
 
   def create_relation_for_role
