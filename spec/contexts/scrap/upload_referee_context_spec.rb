@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Scrap::UploadVerdictContext, type: :model do
+RSpec.describe Scrap::UploadRefereeContext, type: :model do
   let!(:original_data) { File.read("#{Rails.root}/spec/fixtures/scrap_data/ruling_content.html") }
   let!(:verdict) { create :verdict }
   subject { described_class.new(original_data).perform(verdict) }

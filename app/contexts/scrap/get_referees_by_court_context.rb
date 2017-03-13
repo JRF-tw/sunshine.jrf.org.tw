@@ -1,4 +1,4 @@
-class Scrap::GetVerdictsByCourtContext < BaseContext
+class Scrap::GetRefereesByCourtContext < BaseContext
   INDEX_URI = 'http://jirs.judicial.gov.tw/FJUD/FJUDQRY01_1.aspx'.freeze
 
   before_perform :get_story_types
@@ -19,7 +19,7 @@ class Scrap::GetVerdictsByCourtContext < BaseContext
   def perform
     run_callbacks :perform do
       @story_types.each do |type|
-        Scrap::GetVerdictsTotalResultByStoryTypeContext.delay(retry: false, queue: 'crawler_verdict').perform(@court, type, @start_date, @end_date)
+        Scrap::GetRefereesTotalResultByStoryTypeContext.delay(retry: false, queue: 'crawler_referee').perform(@court, type, @start_date, @end_date)
       end
     end
   end

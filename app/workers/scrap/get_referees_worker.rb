@@ -1,4 +1,4 @@
-class Scrap::GetVerdictsWorker
+class Scrap::GetRefereesWorker
   include Sidekiq::Worker
   include Sidetiq::Schedulable
   recurrence backfill: true do
@@ -6,6 +6,6 @@ class Scrap::GetVerdictsWorker
   end
 
   def perform
-    Scrap::GetVerdictsContext.delay(retry: false, queue: 'crawler_verdict').perform
+    Scrap::GetRefereesContext.delay(retry: false, queue: 'crawler_referee').perform
   end
 end

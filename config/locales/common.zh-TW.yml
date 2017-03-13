@@ -381,6 +381,7 @@ zh-TW:
         crawler_on_gteq: '爬取日期'
         crawler_on_lteq: '~'
         verdicts_count_gteq: '判決書抓取數量大於'
+        rules_count_gteq: '裁決書抓取數量大於'
       crawler_log:
         crawler_kind_eq: '錯誤種類為'
         crawler_error_type_eq: '錯誤狀態為'

@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe Scrap::Concerns::AnalysisVerdictContent, type: :model do
+RSpec.describe Scrap::Concerns::AnalysisRefereeContent, type: :model do
   let!(:verdict) { create(:verdict) }
   let!(:crawler_history) { create(:crawler_history) }
   let(:including_class) {
     Class.new do
-      include Scrap::Concerns::AnalysisVerdictContent
+      include Scrap::Concerns::AnalysisRefereeContent
     end.new
   }
 

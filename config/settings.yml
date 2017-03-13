@@ -11,6 +11,7 @@ default: &default
     crawler_schedule: '庭期爬取錯誤'
     crawler_verdict: '判決書爬取錯誤'
     crawler_rule: '裁決書爬取錯誤'
+    crawler_referee: '裁判書爬取錯誤'
     crawler_supreme_court_judge: '最高法院法官爬取錯誤'
   crawler_error_types:
     upload_file_error: '檔案上傳失敗'

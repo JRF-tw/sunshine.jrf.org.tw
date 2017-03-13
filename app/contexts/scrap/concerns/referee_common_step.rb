@@ -1,5 +1,5 @@
 module Scrap::Concerns::RefereeCommonStep
-  include Scrap::Concerns::AnalysisVerdictContent
+  include Scrap::Concerns::AnalysisRefereeContent
 
   def before_perform_common_step
     find_or_create_story
@@ -64,7 +64,7 @@ module Scrap::Concerns::RefereeCommonStep
   end
 
   def upload_file
-    Scrap::UploadVerdictContext.new(@original_data).perform(@referee)
+    Scrap::UploadRefereeContext.new(@original_data).perform(@referee)
   end
 
   def record_count_to_daily_notify
