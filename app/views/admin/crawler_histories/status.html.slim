@@ -44,7 +44,7 @@
           tr
             td = ch.crawler_on
             td = ch.verdicts_count
-            td = ch.rules.count
+            td = ch.rules_count
             td
               = "#{ precentage(ch.success_count(:crawler_referee, :parse_judge_error), ch.verdicts_count) }"
               br

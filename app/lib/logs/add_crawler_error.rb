@@ -48,7 +48,7 @@ class Logs::AddCrawlerError
     end
 
     def add_referee_error(crawler_history, referee, type, message)
-      crawler_log = crawler_history.crawler_logs.find_or_create_by(crawler_kind: CrawlerKinds.list.keys.index(:crawler_verdict), crawler_error_type: CrawlerErrorTypes.list.keys.index(type))
+      crawler_log = crawler_history.crawler_logs.find_or_create_by(crawler_kind: CrawlerKinds.list.keys.index(:crawler_referee), crawler_error_type: CrawlerErrorTypes.list.keys.index(type))
       error_message = ["裁判書類型 : #{referee.class.name}, 裁判書id : #{referee.id}, #{message}"]
       crawler_log.crawler_errors << error_message unless crawler_log.crawler_errors.include?(error_message)
       crawler_log.save

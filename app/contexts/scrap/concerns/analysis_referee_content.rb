@@ -71,7 +71,7 @@ module Scrap::Concerns::AnalysisRefereeContent
     role_hash, sub_title_count = parse_role_array(role_array)
     role_hash.each_value { |v| role_number += v.count }
     expect_role_number = new_line_count - sub_title_count
-    Logs::AddCrawlerError.add_referee_error(crawler_history, referee, :parse_referee_role_error, '爬取判決參與角色數量錯誤(內涵pattern 未收錄角色)') unless expect_role_number == role_number
+    Logs::AddCrawlerError.add_referee_error(crawler_history, referee, :parse_referee_role_error, '爬取裁判參與角色數量錯誤(內涵pattern 未收錄角色)') unless expect_role_number == role_number
     role_hash
   end
 

@@ -15,7 +15,7 @@ RSpec.describe Scrap::NotifyDailyContext, type: :model do
     end
 
     context 'rule daily report' do
-      let!(:interval_object) { Redis::Value.new('daily_scrap_rule_intervel') }
+      let!(:interval_object) { Redis::Value.new('daily_scrap_referee_intervel') }
       let!(:count_object) { Redis::Counter.new('daily_scrap_rule_count') }
       before { interval_object.value = "#{Time.zone.today} ~ #{Time.zone.today}" }
       before { count_object.increment }

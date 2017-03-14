@@ -1,5 +1,5 @@
 class Scrap::NotifyDailyContext < BaseContext
-  SCRAP_MODELS = { court: '法院', judge: '法官', verdict: '判決書', schedule: '庭期表', rule: '裁決書' }.freeze
+  SCRAP_MODELS = { court: '法院', judge: '法官', schedule: '庭期表', verdict: '判決書', rule: '裁決書' }.freeze
 
   after_perform :update_to_crawler_history
   after_perform :cleanup_redis_date
@@ -24,8 +24,8 @@ class Scrap::NotifyDailyContext < BaseContext
 
   def parse_message(model)
     class_object = Object.const_get(model.camelize)
-    interval = Redis::Value.new("daily_scrap_#{model}_intervel").value
-    count = Redis::Counter.new("daily_scrap_#{model}_count").value
+    interval = redis_intervel(model).value
+    count = redis_count(model).value
     if interval
       message = "\n#{SCRAP_MODELS[model.to_sym]}爬蟲報告 :\n今日爬取時間參數 : #{interval}\n今日爬取總數 : #{count} 筆\n資料庫目前總數 : #{class_object.count} 筆"
       return message
@@ -37,19 +37,31 @@ class Scrap::NotifyDailyContext < BaseContext
   def update_to_crawler_history
     @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
     SCRAP_MODELS.keys.map(&:to_s).each do |model|
-      @crawler_history.assign_attributes("#{model}s_count": Redis::Counter.new("daily_scrap_#{model}_count").value)
+      @crawler_history.assign_attributes("#{model}s_count": redis_count(model).value)
     end
     @crawler_history.save
   end
 
   def cleanup_redis_date
     SCRAP_MODELS.keys.map(&:to_s).each do |model|
-      Redis::Value.new("daily_scrap_#{model}_intervel").delete
-      Redis::Counter.new("daily_scrap_#{model}_count").value = 0
+      redis_intervel(model).delete
+      redis_count(model).value = 0
     end
   end
 
   def notify_abnormal_data
     Scrap::NotifyAbnormalDataContext.new(@crawler_history).perform
+  end
+
+  def redis_intervel(model)
+    if model == ('verdict' || 'rule')
+      Redis::Value.new('daily_scrap_referee_intervel')
+    else
+      Redis::Value.new("daily_scrap_#{model}_intervel")
+    end
+  end
+
+  def redis_count(model)
+    Redis::Counter.new("daily_scrap_#{model}_count")
   end
 end
