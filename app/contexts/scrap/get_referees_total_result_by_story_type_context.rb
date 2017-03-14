@@ -72,6 +72,9 @@ class Scrap::GetRefereesTotalResultByStoryTypeContext < BaseContext
     else
       row_data.css('td')[1].text.gsub(/(\s)|(\(\w+\))/, '').split(',')
     end
+  rescue
+    Logs::AddCrawlerError.parse_verdict_data_error(@crawler_history, :crawler_failed, "判決書列表抓取錯誤, 來源網址:#{RESULT_URI}, 參數: #{@request_query}, 爬取資料 #{page_data.text}")
+    []
   end
 
   def story_vericct_exist?(split_story_identify)
