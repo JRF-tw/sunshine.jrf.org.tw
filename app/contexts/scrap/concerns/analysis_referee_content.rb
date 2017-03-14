@@ -55,12 +55,12 @@ module Scrap::Concerns::AnalysisRefereeContent
     end
   end
 
-  def parse_party_names(verdict, content, crawler_history)
-    parties = parse_roles_hash(verdict, content, crawler_history).each_value.inject([]) { |a, e| a << e }
+  def parse_party_names(referee, content, crawler_history)
+    parties = parse_roles_hash(referee, content, crawler_history).each_value.inject([]) { |a, e| a << e }
     parties = parties.flatten.reject! { |e| e[/律師/] }
     return parties if parties.present?
     Logs::AddCrawlerError.add_referee_error(crawler_history, referee, :parse_party_error, '爬取當事人格式錯誤, 撈取為空')
-      return []
+    []
   end
 
   def parse_roles_hash(referee, content, crawler_history)
