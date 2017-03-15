@@ -24,6 +24,6 @@ class Rule < ActiveRecord::Base
   serialize :lawyer_names, Array
   serialize :judges_names, Array
   serialize :prosecutor_names, Array
-  store_accessor :crawl_data, :date, :judge_word, :related_story
+  store_accessor :crawl_data, :date, :judge_word, :related_story, :roles_data
   belongs_to :story
 end

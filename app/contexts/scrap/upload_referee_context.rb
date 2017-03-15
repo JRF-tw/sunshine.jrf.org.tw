@@ -56,9 +56,9 @@ class Scrap::UploadRefereeContext < BaseContext
     @referee.assign_attributes(
       file: File.open(@file.path),
       content_file: File.open(@content_file.path),
+      summary: @summary,
       roles_data: @content_file_data['story_related_roles'],
       date: @date,
-      summary: @summary,
       judge_word: @judge_word,
       related_story: @related_story
     )
