@@ -1,4 +1,4 @@
-class Scrap::GetVerdictsContext < BaseContext
+class Scrap::GetRefereesContext < BaseContext
   before_perform  :get_courts
   after_perform   :record_intervel_to_daily_notify
 
@@ -16,7 +16,7 @@ class Scrap::GetVerdictsContext < BaseContext
   def perform
     run_callbacks :perform do
       @courts.each do |court|
-        Scrap::GetVerdictsByCourtContext.delay(retry: false, queue: 'crawler_verdict').perform(court, @start_date, @end_date)
+        Scrap::GetRefereesByCourtContext.delay(retry: false, queue: 'crawler_referee').perform(court, @start_date, @end_date)
       end
     end
   end
@@ -28,6 +28,6 @@ class Scrap::GetVerdictsContext < BaseContext
   end
 
   def record_intervel_to_daily_notify
-    Redis::Value.new('daily_scrap_verdict_intervel').value = "#{@start_date} ~ #{@end_date}"
+    Redis::Value.new('daily_scrap_referee_intervel').value = "#{@start_date} ~ #{@end_date}"
   end
 end

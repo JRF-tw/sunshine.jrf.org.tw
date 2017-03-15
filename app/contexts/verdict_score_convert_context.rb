@@ -5,7 +5,7 @@ class VerdictScoreConvertContext < BaseContext
     @verdict_score = verdict_score
     @story = @verdict_score.story
     @rater = @verdict_score.verdict_rater
-    @verdict = @story.judgment_verdict
+    @verdict = @story.verdict
     @quality_scores = @verdict_score.quality_scores
   end
 

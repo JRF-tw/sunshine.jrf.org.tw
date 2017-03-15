@@ -9,9 +9,10 @@ default: &default
     crawler_judge: '法官爬取錯誤'
     crawler_branch: '股別爬取錯誤'
     crawler_schedule: '庭期爬取錯誤'
-    crawler_verdict: '判決書爬取錯誤'
+    crawler_referee: '裁判書爬取錯誤'
     crawler_supreme_court_judge: '最高法院法官爬取錯誤'
   crawler_error_types:
+    upload_file_error: '檔案上傳失敗'
     parse_data_failed: '解析回傳資料失敗'
     date_not_in_db: '爬蟲取得資料不存在於資料庫'
     parse_main_judge_empty: '取得主審法官失敗'

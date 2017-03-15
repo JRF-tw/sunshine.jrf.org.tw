@@ -29,7 +29,8 @@ namespace :dev do
     'dev:fake_stories',
     'dev:fake_schedules',
     'dev:fake_lawyers',
-    'dev:fake_verdicts'
+    'dev:fake_verdicts',
+    'dev:fake_rules'
   ]
 
   task fake_users: :environment do
@@ -288,7 +289,14 @@ namespace :dev do
   task fake_verdicts: :environment do
     Verdict.destroy_all
     5.times do |_i|
-      Story.all.sample.verdicts.create!(adjudge_date: rand(5).years.ago)
+      Verdict.create(story: Story.all.sample, adjudge_date: rand(5).years.ago, publish_on: rand(5).years.ago)
+    end
+  end
+
+  task fake_rules: :environment do
+    Rule.destroy_all
+    5.times do |_i|
+      Story.all.sample.rules.create!(publish_on: rand(5).years.ago)
     end
   end
 
@@ -321,7 +329,7 @@ namespace :dev do
   task fake_verdict: :environment do
     court = FactoryGirl.create(:court, full_name: "測試法院-#{Time.now}")
     story = FactoryGirl.create(:story, court: court, is_adjudge: true, adjudge_date: Time.now)
-    verdict = FactoryGirl.create(:verdict, story: story, is_judgment: true, adjudge_date: Time.now)
+    verdict = FactoryGirl.create(:verdict, story: story, adjudge_date: Time.now)
 
     puts "該判決書案件類別 = #{verdict.story.story_type}"
     puts "該判決書案件年份 = #{verdict.story.year}"

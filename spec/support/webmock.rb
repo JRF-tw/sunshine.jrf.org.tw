@@ -34,4 +34,9 @@ module Webmock
     stub_request(:get, /http:\/\/tps\.judicial\.gov\.tw\/about\/index\.php\?parent_id\=825/)
       .to_return(status: 200, body: File.read("#{Rails.root}/spec/fixtures/scrap_data/supreme_court_judges.html"))
   end
+
+  def webmock_ruling
+    stub_request(:get, /http:\/\/jirs\.judicial\.gov\.tw\/FJUD\/FJUDQRY03_1\.aspx/)
+      .to_return(status: 200, body: File.read("#{Rails.root}/spec/fixtures/scrap_data/ruling.html"))
+  end
 end

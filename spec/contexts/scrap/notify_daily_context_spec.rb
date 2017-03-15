@@ -14,6 +14,16 @@ RSpec.describe Scrap::NotifyDailyContext, type: :model do
       it { expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
     end
 
+    context 'rule daily report' do
+      let!(:interval_object) { Redis::Value.new('daily_scrap_referee_intervel') }
+      let!(:count_object) { Redis::Counter.new('daily_scrap_rule_count') }
+      before { interval_object.value = "#{Time.zone.today} ~ #{Time.zone.today}" }
+      before { count_object.increment }
+
+      subject { described_class.new.perform }
+      it { expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
+    end
+
     context 'update_to_crawler_history' do
       let!(:crawler_history) { create :crawler_history }
       subject! { described_class.new.perform }

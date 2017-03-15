@@ -11,9 +11,8 @@
 #  lawyer_names     :text
 #  judges_names     :text
 #  prosecutor_names :text
-#  is_judgment      :boolean          default(FALSE)
 #  adjudge_date     :date
-#  publish_date     :date
+#  publish_on       :date
 #  content_file     :string
 #  crawl_data       :hstore
 #

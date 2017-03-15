@@ -5,7 +5,7 @@ class ScheduleScoreConvertContext < BaseContext
   def initialize(schedule_score)
     @schedule_score = schedule_score
     @story = @schedule_score.story
-    @verdict = @story.judgment_verdict
+    @verdict = @story.verdict
     @rater = @schedule_score.schedule_rater
     @judge = @schedule_score.judge
     @schedule = @schedule_score.schedule

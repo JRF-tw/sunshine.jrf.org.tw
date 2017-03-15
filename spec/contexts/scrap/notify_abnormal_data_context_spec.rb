@@ -8,13 +8,13 @@ describe Scrap::NotifyAbnormalDataContext do
       context 'scrap court on monday' do
         before { crawler_history.update_attributes(crawler_on: Time.zone.today.beginning_of_week) }
         subject { described_class.new(crawler_history) }
-        it { expect { subject.perform }.to change_sidekiq_jobs_size_of(SlackService, :notify).by(4) }
+        it { expect { subject.perform }.to change_sidekiq_jobs_size_of(SlackService, :notify).by(5) }
       end
 
       context 'courts should not notify' do
         before { crawler_history.update_attributes(crawler_on: Time.zone.today.end_of_week) }
         subject { described_class.new(crawler_history) }
-        it { expect { subject.perform }.to change_sidekiq_jobs_size_of(SlackService, :notify).by(3) }
+        it { expect { subject.perform }.to change_sidekiq_jobs_size_of(SlackService, :notify).by(4) }
       end
     end
 

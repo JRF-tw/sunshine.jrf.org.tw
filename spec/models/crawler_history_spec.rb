@@ -11,6 +11,7 @@
 #  schedules_count :integer          default(0), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  rules_count     :integer          default(0), not null
 #
 
 require 'rails_helper'

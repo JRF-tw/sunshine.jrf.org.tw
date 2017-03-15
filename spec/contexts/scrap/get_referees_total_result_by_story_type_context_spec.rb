@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Scrap::GetVerdictsTotalResultByStoryTypeContext, type: :model do
+RSpec.describe Scrap::GetRefereesTotalResultByStoryTypeContext, type: :model do
   let!(:court) { create :court, code: 'TPH' }
   let!(:type) { 'V' }
   let!(:start_date) { Time.zone.today }
@@ -9,6 +9,6 @@ RSpec.describe Scrap::GetVerdictsTotalResultByStoryTypeContext, type: :model do
   describe '#perform' do
     subject { described_class.new(court, type, start_date, end_date).perform }
 
-    it { expect { subject }.to change_sidekiq_jobs_size_of(Scrap::ParseVerdictContext, :perform, queue: 'crawler_verdict') }
+    it { expect { subject }.to change_sidekiq_jobs_size_of(Scrap::ParseRefereeContext, :perform, queue: 'crawler_referee') }
   end
 end

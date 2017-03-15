@@ -1,4 +1,4 @@
-class Scrap::GetVerdictsTotalResultByStoryTypeContext < BaseContext
+class Scrap::GetRefereesTotalResultByStoryTypeContext < BaseContext
   INDEX_URI = 'http://jirs.judicial.gov.tw/FJUD/FJUDQRY01_1.aspx'.freeze
   RESULT_URI = 'http://jirs.judicial.gov.tw/FJUD/FJUDQRY02_1.aspx'.freeze
 
@@ -32,7 +32,7 @@ class Scrap::GetVerdictsTotalResultByStoryTypeContext < BaseContext
           scrap_id = i * PAGE_PER + row_index
           next unless scrap_id <= @total_result
           unless story_vericct_exist?(split_story_identify(page_data, row_index))
-            Scrap::ParseVerdictContext.delay(retry: false, queue: 'crawler_verdict').perform(@court, scrap_id, @type, @start_date, @end_date)
+            Scrap::ParseRefereeContext.delay(retry: false, queue: 'crawler_referee').perform(@court, scrap_id, @type, @start_date, @end_date)
           end
         end
       end
@@ -60,7 +60,7 @@ class Scrap::GetVerdictsTotalResultByStoryTypeContext < BaseContext
       self.class.delay_for(1.hour).perform(@court, @type, @start_date, @end_date)
       redis_object.incr
     else
-      Logs::AddCrawlerError.parse_verdict_data_error(@crawler_history, :crawler_failed, "取得法院ID-#{@court.id} 判決書總數失敗, 來源網址:#{RESULT_URI}, 參數: #{@request_query}")
+      Logs::AddCrawlerError.parse_referee_data_error(@crawler_history, :crawler_failed, "取得法院ID-#{@court.id} 判決書總數失敗, 來源網址:#{RESULT_URI}, 參數: #{@request_query}")
     end
   end
 
@@ -69,6 +69,6 @@ class Scrap::GetVerdictsTotalResultByStoryTypeContext < BaseContext
   end
 
   def story_vericct_exist?(split_story_identify)
-    Story.find_by(year: split_story_identify[0], word_type: split_story_identify[1], number: split_story_identify[2]).try(:judgment_verdict).present?
+    Story.find_by(year: split_story_identify[0], word_type: split_story_identify[1], number: split_story_identify[2]).try(:verdict).present?
   end
 end
