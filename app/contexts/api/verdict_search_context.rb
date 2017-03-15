@@ -8,8 +8,8 @@ class Api::VerdictSearchContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      return add_error(:verdicts_not_exist) unless @story.verdicts.present?
-      @story.verdicts
+      return add_error(:verdicts_not_exist) unless @story.verdict
+      @story.verdict
     end
   end
 

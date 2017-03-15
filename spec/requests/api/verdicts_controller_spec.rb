@@ -8,9 +8,9 @@ RSpec.describe Api::VerdictsController, type: :request do
     context 'success' do
       let(:url) { URI.parse(URI.encode("/#{code}-#{year}-#{word_type}-#{number}/verdict")) }
       subject! { get url }
-      it { expect(response_body['verdicts'][0]['court_code']).to eq(code) }
-      it { expect(response_body['verdicts'][0]['court_name']).to eq(court.full_name) }
-      it { expect(response_body['verdicts'][0]['body']['verdict_file_url']).to eq(verdict.file.url) }
+      it { expect(response_body['verdict']['court_code']).to eq(code) }
+      it { expect(response_body['verdict']['court_name']).to eq(court.full_name) }
+      it { expect(response_body['verdict']['body']['verdict_file_url']).to eq(verdict.file.url) }
       it { expect(response).to be_success }
     end
 
@@ -28,7 +28,7 @@ RSpec.describe Api::VerdictsController, type: :request do
       it { expect(response.status).to eq(404) }
     end
 
-    context 'verdicts not exist' do
+    context 'verdict not exist' do
       before { Verdict.destroy_all }
       let(:url) { URI.parse(URI.encode("/#{code}-#{year}-#{word_type}-#{number}/verdict")) }
       subject! { get url }

@@ -13,7 +13,7 @@ describe Api::VerdictSearchContext do
   describe '#perform' do
     context 'success' do
       let(:params) { "#{code}-#{year}-#{word_type}-#{number}" }
-      it { expect(subject.perform).to eq([verdict]) }
+      it { expect(subject.perform).to eq(verdict) }
     end
 
     context 'court not found' do

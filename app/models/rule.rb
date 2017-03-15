@@ -14,6 +14,7 @@
 #  crawl_data       :hstore
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  summary          :string
 #
 
 class Rule < ActiveRecord::Base
@@ -23,5 +24,6 @@ class Rule < ActiveRecord::Base
   serialize :lawyer_names, Array
   serialize :judges_names, Array
   serialize :prosecutor_names, Array
+  store_accessor :crawl_data, :date, :judge_word, :related_story
   belongs_to :story
 end

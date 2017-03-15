@@ -16,6 +16,7 @@
 #  content_file     :string
 #  crawl_data       :hstore
 #  roles_data       :hstore
+#  summary          :string
 #
 
 class Admin::Verdict < ::Verdict

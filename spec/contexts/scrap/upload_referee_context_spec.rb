@@ -9,6 +9,10 @@ RSpec.describe Scrap::UploadRefereeContext, type: :model do
     before { subject }
     it { expect(rule.file).to be_present }
     it { expect(rule.content_file).to be_present }
-    it { expect(rule.crawl_data).to be_present }
+    it { expect(rule.roles_data).to be_present }
+    it { expect(rule.date).to be_present }
+    it { expect(rule.summary).to be_present }
+    it { expect(rule.judge_word).to be_present }
+    it { expect(rule.related_story).to be_present }
   end
 end
