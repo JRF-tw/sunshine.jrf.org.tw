@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   constraints subdomain: "api" do
     get '/:id/verdict', to: "api/verdicts#show", constraints: { id: /\w{3}-\d{2,3}-.+-\d+/ }
-    get ':court_code/:id', to: "api/stories#index", constraints: { court_code: /[A-Z]{3}/, id: /\d{2,3}-.+-\d+/ }
+    get ':court_code/:id', to: "api/stories#show", constraints: { court_code: /\w{3}/, id: /\d{2,3}-.+-\d+/ }, as: 'api_story'
+    get '/', to: "api/stories#index", as: 'api_stories'
   end
 end
