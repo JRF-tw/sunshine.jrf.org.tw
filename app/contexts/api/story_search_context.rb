@@ -51,7 +51,7 @@ class Api::StorySearchContext < BaseContext
   end
 
   def search_story
-    @stories = Story.newest.ransack(@ransack_query).result
+    @stories = Story.newest.ransack(@ransack_query).result.includes(:court)
   end
 
   def ransack_query

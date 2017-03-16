@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   resources :scores, only: [:index]
   resources :judges, only: [:show]
   resources :bulletins, only: [:index, :show]
+  resources :stories, only: [:index]
 end
