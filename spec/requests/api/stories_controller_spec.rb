@@ -75,23 +75,23 @@ RSpec.describe Api::StoriesController, type: :request do
       }.deep_stringify_keys
     end
     context 'success' do
-      let(:url) { URI.parse(URI.encode("/#{code}/#{year}-#{word_type}-#{number}")) }
+      let(:url) { URI.encode("/#{code}/#{year}-#{word_type}-#{number}") }
       subject! { get url }
       it { expect(response_body).to eq(show_json) }
       it { expect(response).to be_success }
     end
 
     context 'court not exist' do
-      let(:url) { URI.parse(URI.encode("/XxX/#{year}-#{word_type}-#{number}")) }
+      let(:url) { URI.encode("/XxX/#{year}-#{word_type}-#{number}") }
       subject! { get url }
       it { expect(response_body['message']).to eq('法院代號不存在') }
       it { expect(response.status).to eq(404) }
     end
 
     context 'story not exist' do
-      let(:url) { URI.parse(URI.encode("/#{code}/#{year}-假字號-#{number}")) }
+      let(:url) { URI.encode("/#{code}/#{year}-假字號-#{number}") }
       subject! { get url }
-      it { expect(response_body['message']).to eq('查無案件') }
+      it { expect(response_body['message']).to eq('查無此案件') }
       it { expect(response.status).to eq(404) }
     end
   end

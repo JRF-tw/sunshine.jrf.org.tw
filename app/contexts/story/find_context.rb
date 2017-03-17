@@ -9,7 +9,7 @@ class Story::FindContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      return add_error(:story_not_found, '查無案件') unless @story.present?
+      return add_error(:story_not_found, '查無此案件') unless @story.present?
       @story
     end
   end
