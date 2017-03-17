@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Api::StoryFindContext do
+describe Story::FindContext do
   let(:story) { create :story }
   let(:court) { story.court }
   let(:code) { court.code }

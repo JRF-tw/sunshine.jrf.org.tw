@@ -1,4 +1,4 @@
-class Api::StoryFindContext < BaseContext
+class Story::FindContext < BaseContext
   before_perform :find_court
   before_perform :find_story
 
