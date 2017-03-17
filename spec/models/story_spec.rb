@@ -33,8 +33,8 @@ RSpec.describe Story do
   end
 
   describe '#identity' do
-    let(:story) { create :story, year: 100, word_type: '耶', number: 100 }
-    it { expect(story.identity).to eq('100-耶-100') }
+    let(:story) { create :story, story_type: '少年', year: 100, word_type: '耶', number: 100 }
+    it { expect(story.identity).to eq('少年-100-耶-100') }
   end
 
   describe '#by_relation_role' do

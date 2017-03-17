@@ -49,7 +49,7 @@ class Story < ActiveRecord::Base
   MAX_LAWYER_SCORED_COUNT = 5
 
   def identity
-    "#{year}-#{word_type}-#{number}"
+    "#{story_type}-#{year}-#{word_type}-#{number}"
   end
 
   def by_relation_role(role)

@@ -25,9 +25,9 @@ section.container.offcanvas-card-wrapper
                 = f.search_field :word_type_cont
             .span6
               .control-group
-                = f.label :court_full_name_eq
-                .controls.select2 = f.select :court_id_eq,
-                collect_for_courts, include_blank: "請選擇"
+                = f.label :story_type_eq
+                .controls.select2 = f.select :story_type_eq,
+                collect_for_story_types, include_blank: "請選擇"
           .row
             .span6
               .control-group
@@ -38,6 +38,11 @@ section.container.offcanvas-card-wrapper
                 = f.label :lawyer_names_cont
                 = f.search_field :lawyer_names_cont
           .row
+            .span6
+              .control-group
+                = f.label :court_full_name_eq
+                .controls.select2 = f.select :court_id_eq,
+                collect_for_courts, include_blank: "請選擇"
             .span6
               .control-group#datepicker
                 = f.label :adjudge_date_gteq

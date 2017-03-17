@@ -11,17 +11,17 @@ describe Story::FindContext do
 
   describe '#perform' do
     context 'success' do
-      let(:params) { { court_code: code, id: "#{year}-#{word_type}-#{number}" } }
+      let(:params) { { court_code: code, id: story.identity } }
       it { expect(subject.perform).to eq(story) }
     end
 
     context 'court not found' do
-      let(:params) { { court_code: code + 'S', id: "#{year}-#{word_type}-#{number}" } }
+      let(:params) { { court_code: code + 'S', id: story.identity } }
       it { expect(subject.perform).to be_falsey }
     end
 
     context 'story not found' do
-      let(:params) { { court_code: code, id: "#{year}-無此字號-#{number}" } }
+      let(:params) { { court_code: code, id: story.identity + '1' } }
       it { expect(subject.perform).to be_falsey }
     end
   end

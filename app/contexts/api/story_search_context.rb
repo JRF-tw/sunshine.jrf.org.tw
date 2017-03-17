@@ -9,6 +9,7 @@ class Api::StorySearchContext < BaseContext
     @word = params[:word]
     @number = params[:number]
     @court_code = params[:court_code]
+    @story_type = params[:story_type]
     @lawyer_words = params[:lawyer_names_cont]
     @judge_words = params[:judge_names_cont]
     @start_time = params[:adjudge_date_gteq]
@@ -29,6 +30,7 @@ class Api::StorySearchContext < BaseContext
       year_eq: @year,
       word_type_eq: @word,
       number_eq: @number,
+      story_type_eq: @story_type,
       lawyer_names_cont: @lawyer_words,
       judges_names_cont: @judge_words,
       adjudge_date_gteq: @start_time,
@@ -52,17 +54,5 @@ class Api::StorySearchContext < BaseContext
 
   def search_story
     @stories = Story.newest.ransack(@ransack_query).result.includes(:court)
-  end
-
-  def ransack_query
-    {
-      year_eq: @year,
-      word_type_eq: @word,
-      number_eq: @number,
-      lawyer_names_cont: @lawyer_words,
-      judges_names_cont: @judge_words,
-      adjudge_date_gteq: @start_time,
-      adjudge_date_lteq: @end_time
-    }
   end
 end
