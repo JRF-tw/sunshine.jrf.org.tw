@@ -32,7 +32,7 @@ RSpec.describe Api::StoriesController, type: :request do
 
     context 'success' do
       subject! { get '/search/stories', q: { number: story.number, lawyer_names_cont: '千鳥' } }
-      it { expect(response_body).to eq(index_json) }
+      it { expect(response_body).to include(index_json) }
       it { expect(response).to be_success }
     end
 
@@ -52,6 +52,24 @@ RSpec.describe Api::StoriesController, type: :request do
       subject! { get '/search/stories' }
       it { expect(response_body['message']).to eq('尚未輸入查詢條件') }
       it { expect(response.status).to eq(404) }
+    end
+
+    context 'has pagination data' do
+      def pagination_data
+        {
+          pagination: {
+            current:  1,
+            previous_url: nil,
+            next_url:     nil,
+            per_page: 20,
+            pages:    1,
+            count:    1
+          }
+        }.deep_stringify_keys
+      end
+
+      subject! { get '/search/stories', q: { number: story.number } }
+      it { expect(response_body).to include(pagination_data) }
     end
   end
 

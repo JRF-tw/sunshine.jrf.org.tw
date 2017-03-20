@@ -13,14 +13,13 @@ describe Api::StorySearchContext do
     end
 
     context 'search word & number & year & type' do
-      let!(:params) { 
+      let!(:params) {
         { q: {
-            year: story2.year,
-            word: story2.word_type,
-            number: story2.number,
-            story_type: story2.story_type
-          } 
-        } 
+          year: story2.year,
+          word: story2.word_type,
+          number: story2.number,
+          story_type: story2.story_type
+        } }
       }
       it { expect(subject).to eq([story2]) }
     end
