@@ -72,14 +72,20 @@ RSpec.describe Scrap::Concerns::AnalysisRefereeContent, type: :model do
   end
 
   describe '#parse_party_names' do
-    context 'exist' do
-      let!(:verdict_content) { "\r\n103年度無敵字第541號 \r\n被　　　告　xxx\n上列" }
+    context 'include lawyer' do
+      let!(:verdict_content) { "\r\n103年度無敵字第541號 \r\n被　　　告　張火旺\r\n原   告　張文雅律師\n上列" }
       subject { including_class.parse_party_names(verdict, verdict_content, crawler_history) }
-      it { expect(subject).to be_truthy }
+      it { expect(subject).to include('張火旺') }
+    end
+
+    context 'not include lawyer' do
+      let!(:verdict_content) { "\r\n103年度無敵字第541號 \r\n被　　　告　張火旺\n上列" }
+      subject { including_class.parse_party_names(verdict, verdict_content, crawler_history) }
+      it { expect(subject).to include('張火旺') }
     end
 
     context 'unexist' do
-      let!(:verdict_content) { "\r\n103年度無敵字第541號 \r\n被　　　打　xxx\n上列" }
+      let!(:verdict_content) { "\r\n103年度無敵字第541號 \r\n被　　　打　火旺張\n上列" }
       subject { including_class.parse_party_names(verdict, verdict_content, crawler_history) }
       it { expect { subject }.to change { CrawlerLog.count } }
     end
