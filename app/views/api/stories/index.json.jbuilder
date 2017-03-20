@@ -1,3 +1,5 @@
+json.pagination @pagination_data
+
 json.stories @stories do |story|
   json.story_type story.story_type
   json.year story.year
