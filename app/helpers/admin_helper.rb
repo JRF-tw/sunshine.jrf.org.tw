@@ -27,6 +27,7 @@ module AdminHelper
     [['開庭評鑑', 'ScheduleScore'], ['判決評鑑', 'VerdictScore']]
   end
 
+  # REFACTOR:
   def collect_all_roles
     [['律師', 'Lawyer', { 'data-role-names' => lawyer_names.to_json }], ['當事人', 'Party', { 'data-role-names' => party_names.to_json }], ['觀察者', 'CourtObserver', { 'data-role-names' => observer_names.to_json }]]
   end
