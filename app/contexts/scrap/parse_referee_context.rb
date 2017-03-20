@@ -1,5 +1,5 @@
 class Scrap::ParseRefereeContext < BaseContext
-  include Concerns::Scrap::AnalysisRefereeContentConcern
+  include Scrap::AnalysisRefereeContentConcern
   RESULT_URI = 'http://jirs.judicial.gov.tw/FJUD/FJUDQRY02_1.aspx'.freeze
   REFEREE_URI = 'http://jirs.judicial.gov.tw/FJUD/FJUDQRY03_1.aspx'.freeze
 

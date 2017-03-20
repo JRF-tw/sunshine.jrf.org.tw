@@ -1,5 +1,5 @@
 class Scrap::ImportRuleContext < BaseContext
-  include Concerns::Scrap::RefereeCommonStepConcern
+  include Scrap::RefereeCommonStepConcern
 
   before_perform    :before_perform_common_step
   after_perform     :after_perform_common_step
