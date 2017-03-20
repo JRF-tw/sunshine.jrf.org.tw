@@ -1,6 +1,6 @@
 class Party::VerdictScoreCheckInfoContext < BaseContext
+  include Concerns::ScoreInterval
   PERMITS = [:court_id, :year, :word_type, :number, :story_type].freeze
-  SCORE_INTERVEL = BaseContext::VERDICT_SCORE_INTERVEL
 
   before_perform :check_court_id
   before_perform :check_year
@@ -55,7 +55,7 @@ class Party::VerdictScoreCheckInfoContext < BaseContext
   end
 
   def valid_score_intervel
-    range = (@story.adjudge_date..@story.adjudge_date + SCORE_INTERVEL)
+    range = (@story.adjudge_date..@story.adjudge_date + VERDICT_INTERVAL)
     return add_error(:out_score_intervel) unless range.include?(Time.zone.today)
   end
 

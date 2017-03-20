@@ -1,6 +1,6 @@
 class Party::CheckScheduleScoreDateContext < BaseContext
+  include Concerns::ScoreInterval
   PERMITS = [:court_id, :year, :word_type, :number, :story_type, :start_on, :confirmed_realdate].freeze
-  SCORE_INTERVEL = BaseContext::SCHEDULE_SCORE_INTERVEL
   MAX_REPORT_TIME = 5
 
   before_perform :check_story
@@ -49,7 +49,7 @@ class Party::CheckScheduleScoreDateContext < BaseContext
   end
 
   def valid_score_intervel
-    range = (@params[:start_on].to_date..@params[:start_on].to_date + SCORE_INTERVEL)
+    range = (@params[:start_on].to_date..@params[:start_on].to_date + SCHEDULE_INTERVAL)
     return add_error(:out_score_intervel) unless range.include?(Time.zone.today)
   end
 

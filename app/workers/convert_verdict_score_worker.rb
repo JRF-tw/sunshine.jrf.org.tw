@@ -1,5 +1,5 @@
 class ConvertVerdictScoreWorker
-  SCORE_INTERVEL = BaseContext::VERDICT_SCORE_INTERVEL
+  include Concerns::ScoreInterval
   include Sidekiq::Worker
   include Sidetiq::Schedulable
   sidekiq_options retry: 3
@@ -17,6 +17,6 @@ class ConvertVerdictScoreWorker
   private
 
   def find_stories
-    Story.not_caculate.where('pronounce_date < ?', Time.zone.today - SCORE_INTERVEL)
+    Story.not_caculate.where('pronounce_date < ?', Time.zone.today - VERDICT_INTERVAL)
   end
 end

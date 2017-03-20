@@ -1,4 +1,5 @@
 class Lawyers::VerdictsController < Lawyers::BaseController
+  include Concerns::ScoreInterval
   before_action :verdict_score, except: [:edit, :update]
   before_action :find_verdict_score, only: [:edit, :update]
   before_action :story_can_score?, only: [:edit, :update]
@@ -66,7 +67,7 @@ class Lawyers::VerdictsController < Lawyers::BaseController
   end
 
   def story_can_score?
-    range = (@verdict_score.story.adjudge_date..@verdict_score.story.adjudge_date + Lawyer::VerdictScoreCheckInfoContext::SCORE_INTERVEL)
+    range = (@verdict_score.story.adjudge_date..@verdict_score.story.adjudge_date + VERDICT_INTERVAL)
     redirect_as_fail(lawyer_root_path, '案件已超過可評鑑判決時間') unless range.include?(Time.zone.today)
   end
 

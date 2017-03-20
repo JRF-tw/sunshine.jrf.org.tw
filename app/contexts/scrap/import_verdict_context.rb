@@ -1,5 +1,5 @@
 class Scrap::ImportVerdictContext < BaseContext
-  include Scrap::Concerns::RefereeCommonStep
+  include Concerns::Scrap::RefereeCommonStepConcern
 
   before_perform  :before_perform_common_step
   after_perform   :update_adjudge_date
