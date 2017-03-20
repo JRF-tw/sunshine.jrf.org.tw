@@ -24,6 +24,13 @@ FactoryGirl.define do
     schedule { score.schedule }
     judge { score.judge }
     score_rater { score.schedule_rater }
+
+    trait :with_verdict_score do
+      score { FactoryGirl.create :verdict_score }
+      schedule nil
+      judge { FactoryGirl.create :judge }
+      score_rater { score.verdict_rater }
+    end
   end
 
 end

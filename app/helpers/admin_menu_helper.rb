@@ -24,7 +24,12 @@ module AdminMenuHelper
       '庭期表管理': { url: admin_schedules_path, match: /\/admin\/schedules/ },
       '案件管理': { url: admin_stories_path, match: /\/admin\/stories/ },
       '判決書管理': { url: admin_verdicts_path, match: /\/admin\/verdicts/ },
-      '評鑑紀錄管理': { url: admin_scores_path, match: /\/admin\/scores/ },
+      '評鑑紀錄管理': {
+        submenu: {
+          '一般評鑑紀錄': { url: admin_scores_path, match: /\/admin\/scores/ },
+          '有效評鑑紀錄': { url: admin_valid_scores_path, match: /\/admin\/valid_scores/ }
+        }
+      },
       '重要判決管理': { url: admin_judgments_path, match: /\/admin\/judgments/ },
       '個人檔案管理': { url: admin_profiles_path, match: /\/admin\/profiles/ },
       '評鑑資料-案例管理': { url: admin_suits_path, match: /\/admin\/suits/ },

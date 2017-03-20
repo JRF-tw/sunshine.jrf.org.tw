@@ -6,10 +6,10 @@
         td = @score.id
       tr
         td 庭期id
-        td = link_to @score.schedule.id, admin_schedule_path(@score.schedule) if @score.schedule
+        td = link_to @score.schedule.id, admin_schedule_path(@score.schedule), target: '_blank' if @score.schedule
       tr
         td 法官
-        td = link_to @score.judge.name, admin_judge_path(@score.judge) 
+        td = link_to @score.judge.name, admin_judge_path(@score.judge), target: '_blank' 
       tr
         td 評鑑人
         td = score_rater_link(@score)
