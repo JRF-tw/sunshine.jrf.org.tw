@@ -61,6 +61,7 @@ RSpec.configure do |config|
   config.include ObserverHelper
   config.include RequestClient, type: :request
   config.include MetaTagMatchers, type: :request
+  config.include ApiHelper, type: :request
   config.include FactoryGirl::Syntax::Methods
 
   config.before(:each){ webmock_all! }

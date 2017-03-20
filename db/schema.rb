@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308094026) do
+ActiveRecord::Schema.define(version: 20170315095451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -572,10 +572,12 @@ ActiveRecord::Schema.define(version: 20170308094026) do
     t.hstore   "crawl_data"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.string   "summary"
   end
 
   add_index "rules", ["publish_on"], name: "index_rules_on_publish_on", using: :btree
   add_index "rules", ["story_id"], name: "index_rules_on_story_id", using: :btree
+  add_index "rules", ["summary"], name: "index_rules_on_summary", using: :btree
 
   create_table "schedule_scores", force: :cascade do |t|
     t.integer  "schedule_id"
@@ -825,9 +827,12 @@ ActiveRecord::Schema.define(version: 20170308094026) do
     t.date     "publish_on"
     t.string   "content_file"
     t.hstore   "crawl_data"
+    t.hstore   "roles_data"
+    t.string   "summary"
   end
 
   add_index "verdicts", ["adjudge_date"], name: "index_verdicts_on_adjudge_date", using: :btree
   add_index "verdicts", ["publish_on"], name: "index_verdicts_on_publish_on", using: :btree
+  add_index "verdicts", ["summary"], name: "index_verdicts_on_summary", using: :btree
 
 end

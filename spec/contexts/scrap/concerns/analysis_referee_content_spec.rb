@@ -85,6 +85,20 @@ RSpec.describe Scrap::Concerns::AnalysisRefereeContent, type: :model do
     end
   end
 
+  describe '#prase_related_story' do
+    context 'more than one story' do
+      let!(:verdict_content) { "105年度上易字第541號\r\n 105年度上易字第545號\r\n 105年度上火字第547號\r\n 上列" }
+      subject { including_class.prase_related_story(verdict_content) }
+      it { expect(subject).to eq(['105年度上易字第545號', '105年度上火字第547號']) }
+    end
+
+    context 'one story' do
+      let!(:verdict_content) { "105年度上易字第541號\r\n 上列" }
+      subject { including_class.prase_related_story(verdict_content) }
+      it { expect(subject).to eq([]) }
+    end
+  end
+
   describe '#parse_roles_hash' do
     let!(:main_titles) { ['代表人', '上 訴 人', '聲請人', '受 刑 人', '抗 告人', '公 訴 人', '選任辯護人', '被  告', '共同', '再抗告人', '兼代表人', '上一被告'] }
     let!(:sub_titles) { ["\r\n即再審聲請人", "\r\n即受刑人", "\r\n即受判決人", "\r\n即被告", "\r\n選任辯護人"] }
