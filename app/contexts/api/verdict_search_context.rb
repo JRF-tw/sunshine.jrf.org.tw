@@ -2,8 +2,8 @@ class Api::VerdictSearchContext < BaseContext
   before_perform :find_court
   before_perform :find_story
 
-  def initialize(search_params)
-    @court_code, @year, @word, @number = search_params.split('-')
+  def initialize(story_identity)
+    @court_code, @year, @word, @number = story_identity.split('-')
   end
 
   def perform
