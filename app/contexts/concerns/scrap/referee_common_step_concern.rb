@@ -1,5 +1,9 @@
 module Scrap::RefereeCommonStepConcern
-  include Scrap::AnalysisRefereeContentConcern
+  extend ActiveSupport::Concern
+
+  included do
+    include Scrap::AnalysisRefereeContentConcern
+  end
 
   def before_perform_common_step
     find_or_create_story
