@@ -31,19 +31,19 @@ RSpec.describe Api::StoriesController, type: :request do
     end
 
     context 'success' do
-      subject! { get '/search/stories', number: story.number, lawyer_names_cont: '千鳥' }
+      subject! { get '/search/stories', q: { number: story.number, lawyer_names_cont: '千鳥' } }
       it { expect(response_body).to eq(index_json) }
       it { expect(response).to be_success }
     end
 
     context 'court code not exist' do
-      subject! { get '/search/stories', court_code: '5566' }
+      subject! { get '/search/stories', q: { court_code: '5566' } }
       it { expect(response_body['message']).to eq('法院代號不存在') }
       it { expect(response.status).to eq(404) }
     end
 
     context 'stories not exist' do
-      subject! { get '/search/stories', number: story.number + 1 }
+      subject! { get '/search/stories', q: { number: story.number + 1 } }
       it { expect(response_body['message']).to eq('查無案件') }
       it { expect(response.status).to eq(404) }
     end
