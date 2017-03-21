@@ -18,7 +18,7 @@ class CrawlerHistory < ActiveRecord::Base
   validates :crawler_on, presence: true, uniqueness: true
   has_many :crawler_logs, dependent: :destroy
 
-  scope :has_verdicts, -> { where('verdicts_count > ? ', 0) }
+  scope :has_referees, -> { where('verdicts_count > ? OR rules_count > ?', 0, 0) }
   scope :newest, -> { order('crawler_on DESC') }
   scope :oldest, -> { order('crawler_on ASC') }
 

@@ -66,6 +66,7 @@ module AdminHelper
       { name: '股別總數', data: crawler_histories.inject({}) { |a, e| a.merge(e.crawler_on => e.branches_count) } },
       { name: '法官總數', data: crawler_histories.inject({}) { |a, e| a.merge(e.crawler_on => e.judges_count) } },
       { name: '判決書總數', data: crawler_histories.inject({}) { |a, e| a.merge(e.crawler_on => e.verdicts_count) } },
+      { name: '裁決書總數', data: crawler_histories.inject({}) { |a, e| a.merge(e.crawler_on => e.rules_count) } },
       { name: '庭期總數', data: crawler_histories.inject({}) { |a, e| a.merge(e.crawler_on => e.schedules_count) } }
     ]
   end
