@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
   mount RedactorRails::Engine => '/redactor_rails'
+  load Rails.root.join('config/routes/search.rb')
   load Rails.root.join('config/routes/api.rb')
   load Rails.root.join('config/routes/classic/devise.rb')
   load Rails.root.join('config/routes/classic/base.rb')

@@ -13,6 +13,4 @@ Rails.application.routes.draw do
   resources :scores, only: [:index]
   resources :judges, only: [:show]
   resources :bulletins, only: [:index, :show]
-  resources :stories, only: [:index]
-  get ':court_code/:id', to: "stories#show", constraints: { court_code: /\w{3}/, id: /.+-\d{2,3}-.+-\d+/ }, as: 'story'
 end
