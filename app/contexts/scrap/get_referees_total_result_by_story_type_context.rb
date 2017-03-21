@@ -65,7 +65,14 @@ class Scrap::GetRefereesTotalResultByStoryTypeContext < BaseContext
   end
 
   def split_story_identify(page_data, row_index)
-    page_data.css('tbody').css('tr')[row_index].css('td')[1].text.gsub(/(\s)|(\(\w+\))/, '').split(',')
+    begin
+      row_data = page_data.css('tbody').css('tr')[row_index]
+      return row_data.css('td')[1].text.gsub(/(\s)|(\(\w+\))/, '').split(',') if row_data
+    rescue NoMethodError
+      Logs::AddCrawlerError.parse_verdict_data_error(@crawler_history, :crawler_failed, "判決書列表抓取錯誤, 來源網址:#{RESULT_URI}, 參數: #{@request_query}, 爬取資料 #{page_data.text}")
+    end
+    Logs::AddCrawlerError.parse_verdict_data_error(@crawler_history, :crawler_failed, "判決書筆數抓取錯誤, 來源網址:#{RESULT_URI}, 參數: #{@request_query}, 行數 #{row_index}") if row_data.nil?
+    []
   end
 
   def story_vericct_exist?(split_story_identify)
