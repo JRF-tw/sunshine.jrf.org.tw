@@ -2,8 +2,9 @@ class Api::VerdictSearchContext < BaseContext
   before_perform :find_court
   before_perform :find_story
 
-  def initialize(story_identity)
-    @court_code, @year, @word, @number = story_identity.split('-')
+  def initialize(params)
+    @court_code = params[:court_code]
+    @story_type, @year, @word, @number = params[:id].split('-')
   end
 
   def perform
@@ -21,7 +22,7 @@ class Api::VerdictSearchContext < BaseContext
   end
 
   def find_story
-    @story = Story.find_by(year: @year, word_type: @word, number: @number, court: @court)
+    @story = Story.find_by(story_type: @story_type, year: @year, word_type: @word, number: @number, court: @court)
     return add_error(:story_not_found) unless @story
   end
 

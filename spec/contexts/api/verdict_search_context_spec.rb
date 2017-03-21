@@ -12,22 +12,22 @@ describe Api::VerdictSearchContext do
 
   describe '#perform' do
     context 'success' do
-      let(:params) { "#{code}-#{year}-#{word_type}-#{number}" }
+      let(:params) { { court_code: code, id: story.identity } }
       it { expect(subject.perform).to eq(verdict) }
     end
 
     context 'court not found' do
-      let(:params) { "HHH-#{year}-#{word_type}-#{number}" }
+      let(:params) { { court_code: 'XxX', id: story.identity } }
       it { expect(subject.perform).to be_falsey }
     end
 
     context 'story not found' do
-      let(:params) { "#{code}-#{year + 1}-#{word_type}-#{number}" }
+      let(:params) { { court_code: code, id: story.identity + '1' } }
       it { expect(subject.perform).to be_falsey }
     end
 
     context 'verdict not found' do
-      let(:params) { "#{code}-#{year}-#{word_type}-#{number}" }
+      let(:params) { { court_code: code, id: story.identity } }
       before { Verdict.destroy_all }
       it { expect(subject.perform).to be_falsey }
     end
