@@ -1,5 +1,5 @@
 class Party::CheckScheduleScoreDateContext < BaseContext
-  include Concerns::ScoreInterval
+  include ScoreIntervalConcern
   PERMITS = [:court_id, :year, :word_type, :number, :story_type, :start_on, :confirmed_realdate].freeze
   MAX_REPORT_TIME = 5
 

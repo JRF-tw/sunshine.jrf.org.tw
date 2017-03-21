@@ -1,5 +1,5 @@
 class Lawyers::VerdictsController < Lawyers::BaseController
-  include Concerns::ScoreInterval
+  include ScoreIntervalConcern
   before_action :verdict_score, except: [:edit, :update]
   before_action :find_verdict_score, only: [:edit, :update]
   before_action :story_can_score?, only: [:edit, :update]

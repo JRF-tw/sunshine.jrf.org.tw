@@ -1,5 +1,5 @@
 class Lawyer::VerdictScoreCheckInfoContext < BaseContext
-  include Concerns::ScoreInterval
+  include ScoreIntervalConcern
   PERMITS = [:court_id, :year, :word_type, :number, :story_type].freeze
 
   before_perform :check_court_id

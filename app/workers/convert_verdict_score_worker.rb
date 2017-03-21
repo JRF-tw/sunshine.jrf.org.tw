@@ -1,5 +1,5 @@
 class ConvertVerdictScoreWorker
-  include Concerns::ScoreInterval
+  include ScoreIntervalConcern
   include Sidekiq::Worker
   include Sidetiq::Schedulable
   sidekiq_options retry: 3
