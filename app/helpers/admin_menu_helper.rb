@@ -39,7 +39,7 @@ module AdminMenuHelper
       '爬蟲紀錄': {
         submenu: {
           '每日爬蟲紀錄': { url: admin_crawler_histories_path, match: /\/admin\/crawler_histories/ },
-          '判決書抓取數據': { url: status_admin_crawler_histories_path, match: /\/admin\/crawler_histories\/status/ },
+          '裁判書抓取數據': { url: status_admin_crawler_histories_path, match: /\/admin\/crawler_histories\/status/ },
           '最高法院法官數據': { url: highest_judges_admin_crawler_histories_path, match: /\/admin\/crawler_histories\/status/ }
         }
       }

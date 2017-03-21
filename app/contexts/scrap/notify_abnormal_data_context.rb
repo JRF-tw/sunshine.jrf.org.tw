@@ -64,28 +64,28 @@ class Scrap::NotifyAbnormalDataContext < BaseContext
   end
 
   def jugde_below_expectations
-    precentage = (@crawler_history.success_count(:crawler_referee, :parse_judge_error).to_f / @crawler_history.verdicts_count.to_f * 100).round(2)
+    precentage = (@crawler_history.success_count(:crawler_referee, :parse_judge_error).to_f / @crawler_history.referees_count.to_f * 100).round(2)
     if precentage < PARSE_SUCCESS_VALIDITY
       @messages << "日期 : #{@crawler_history.crawler_on}, `法官`抓取效度未達期望標準, 效度為: #{precentage} %"
     end
   end
 
   def lawyer_below_expectations
-    precentage = (@crawler_history.success_count(:crawler_referee, :parse_lawyer_error).to_f / @crawler_history.verdicts_count.to_f * 100).round(2)
+    precentage = (@crawler_history.success_count(:crawler_referee, :parse_lawyer_error).to_f / @crawler_history.referees_count.to_f * 100).round(2)
     if precentage < PARSE_SUCCESS_VALIDITY
       @messages << "日期 : #{@crawler_history.crawler_on}, `律師`抓取效度未達期望標準, 效度為: #{precentage} %"
     end
   end
 
   def party_below_expectations
-    precentage = (@crawler_history.success_count(:crawler_referee, :parse_party_error).to_f / @crawler_history.verdicts_count.to_f * 100).round(2)
+    precentage = (@crawler_history.success_count(:crawler_referee, :parse_party_error).to_f / @crawler_history.referees_count.to_f * 100).round(2)
     if precentage < PARSE_SUCCESS_VALIDITY
       @messages << "日期 : #{@crawler_history.crawler_on}, `當事人` 抓取效度未達期望標準, 效度為: #{precentage} %"
     end
   end
 
   def prosecutor_below_expectations
-    precentage = (@crawler_history.success_count(:crawler_referee, :parse_prosecutor_error).to_f / @crawler_history.verdicts_count.to_f * 100).round(2)
+    precentage = (@crawler_history.success_count(:crawler_referee, :parse_prosecutor_error).to_f / @crawler_history.referees_count.to_f * 100).round(2)
     if precentage < PARSE_SUCCESS_VALIDITY
       @messages << "日期 : #{@crawler_history.crawler_on}, `檢察官` 抓取效度未達期望標準, 效度為: #{precentage} %"
     end

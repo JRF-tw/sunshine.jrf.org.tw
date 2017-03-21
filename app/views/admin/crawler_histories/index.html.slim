@@ -24,6 +24,7 @@
           th 爬取法院數量(每週爬取一次)
           th 爬取法官數量
           th 爬取判決書數量
+          th 爬取裁決書數量
           th 爬取庭期數量
           th 操作
       tbody
@@ -33,6 +34,7 @@
             td = ch.courts_count
             td = ch.judges_count
             td = ch.verdicts_count
+            td = ch.rules_count
             td = ch.schedules_count
             td
               = link_to '錯誤圓餅圖', pie_chart_admin_crawler_history_crawler_logs_path(ch), class: 'btn btn-mini'

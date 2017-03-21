@@ -18,12 +18,12 @@ class CrawlerHistory < ActiveRecord::Base
   validates :crawler_on, presence: true, uniqueness: true
   has_many :crawler_logs, dependent: :destroy
 
-  scope :has_verdicts, -> { where('verdicts_count > ? ', 0) }
+  scope :has_referees, -> { where('verdicts_count > ? OR rules_count > ?', 0, 0) }
   scope :newest, -> { order('crawler_on DESC') }
   scope :oldest, -> { order('crawler_on ASC') }
 
   def success_count(crawler_kind, crawler_error_type)
-    verdicts_count - error_log_count(crawler_kind, crawler_error_type)
+    referees_count - error_log_count(crawler_kind, crawler_error_type)
   end
 
   def failed_count(crawler_kind, crawler_error_type)
@@ -37,5 +37,9 @@ class CrawlerHistory < ActiveRecord::Base
   def error_log_count(kind, error_type)
     return 0 unless log = find_log(kind, error_type)
     log.crawler_errors.count
+  end
+
+  def referees_count
+    verdicts_count + rules_count
   end
 end
