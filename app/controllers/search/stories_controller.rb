@@ -1,4 +1,4 @@
-class StoriesController < BaseController
+class Search::StoriesController < BaseController
 
   def index
     @search = Story.newest.ransack(params[:q])

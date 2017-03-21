@@ -32,7 +32,7 @@
             td = story.prosecutor_names.join(',')
             td = story.party_names.join(',')
             td
-              = link_to "詳細資料", story_path(story.court.code, story.identity), class: "btn btn-mini"
+              = link_to "詳細資料", search_story_path(story.court.code, story.identity), class: "btn btn-mini"
     .ui-toolbar.ui-widget-header
       = paginate @stories, theme: :www
 
