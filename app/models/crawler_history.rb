@@ -23,7 +23,7 @@ class CrawlerHistory < ActiveRecord::Base
   scope :oldest, -> { order('crawler_on ASC') }
 
   def success_count(crawler_kind, crawler_error_type)
-    verdicts_count - error_log_count(crawler_kind, crawler_error_type)
+    referees_count - error_log_count(crawler_kind, crawler_error_type)
   end
 
   def failed_count(crawler_kind, crawler_error_type)
@@ -37,5 +37,9 @@ class CrawlerHistory < ActiveRecord::Base
   def error_log_count(kind, error_type)
     return 0 unless log = find_log(kind, error_type)
     log.crawler_errors.count
+  end
+
+  def referees_count
+    verdicts_count + rules_count
   end
 end

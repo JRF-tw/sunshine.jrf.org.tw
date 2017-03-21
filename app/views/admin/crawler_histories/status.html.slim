@@ -46,36 +46,36 @@
             td = ch.verdicts_count
             td = ch.rules_count
             td
-              = "#{ precentage(ch.success_count(:crawler_referee, :parse_judge_error), ch.verdicts_count) }"
+              = "#{ precentage(ch.success_count(:crawler_referee, :parse_judge_error), ch.referees_count) }"
               br
-              = "(#{ ch.success_count(:crawler_referee, :parse_judge_error) } / #{ ch.verdicts_count })"
+              = "(#{ ch.success_count(:crawler_referee, :parse_judge_error) } / #{ ch.referees_count })"
             td
-              = "#{ precentage(ch.failed_count(:crawler_referee, :parse_judge_not_exist), ch.verdicts_count) }"
+              = "#{ precentage(ch.failed_count(:crawler_referee, :parse_judge_not_exist), ch.referees_count) }"
               br
-              = "(#{ ch.failed_count(:crawler_referee, :parse_judge_not_exist) } / #{ch.verdicts_count})"
+              = "(#{ ch.failed_count(:crawler_referee, :parse_judge_not_exist) } / #{ch.referees_count})"
             td
-              = "#{ precentage(ch.success_count(:crawler_referee, :parse_lawyer_error), ch.verdicts_count) }"
+              = "#{ precentage(ch.success_count(:crawler_referee, :parse_lawyer_error), ch.referees_count) }"
               br
-              = "(#{ ch.success_count(:crawler_referee, :parse_lawyer_error) } / #{ch.verdicts_count})"
+              = "(#{ ch.success_count(:crawler_referee, :parse_lawyer_error) } / #{ch.referees_count})"
             td
-              = "#{ precentage(ch.failed_count(:crawler_referee, :parse_lawyer_not_exist), ch.verdicts_count) }"
+              = "#{ precentage(ch.failed_count(:crawler_referee, :parse_lawyer_not_exist), ch.referees_count) }"
               br
-              = "(#{ ch.failed_count(:crawler_referee, :parse_lawyer_not_exist) } / #{ch.verdicts_count})"
+              = "(#{ ch.failed_count(:crawler_referee, :parse_lawyer_not_exist) } / #{ch.referees_count})"
             td
-              = "#{ precentage(ch.success_count(:crawler_referee, :parse_party_error), ch.verdicts_count) }"
+              = "#{ precentage(ch.success_count(:crawler_referee, :parse_party_error), ch.referees_count) }"
               br
-              = "(#{ ch.success_count(:crawler_referee, :parse_party_error) } / #{ch.verdicts_count})"
+              = "(#{ ch.success_count(:crawler_referee, :parse_party_error) } / #{ch.referees_count})"
             td
-              = "#{ precentage(ch.failed_count(:crawler_referee, :parse_party_not_exist), ch.verdicts_count) }"
+              = "#{ precentage(ch.failed_count(:crawler_referee, :parse_party_not_exist), ch.referees_count) }"
               br
-              = "(#{ ch.failed_count(:crawler_referee, :parse_party_not_exist) } / #{ch.verdicts_count})"
+              = "(#{ ch.failed_count(:crawler_referee, :parse_party_not_exist) } / #{ch.referees_count})"
             td
-              = "#{ precentage(ch.success_count(:crawler_referee, :parse_prosecutor_error), ch.verdicts_count) }"
+              = "#{ precentage(ch.success_count(:crawler_referee, :parse_prosecutor_error), ch.referees_count) }"
               br
-              = "(#{ ch.success_count(:crawler_referee, :parse_prosecutor_error) } / #{ch.verdicts_count})"
+              = "(#{ ch.success_count(:crawler_referee, :parse_prosecutor_error) } / #{ch.referees_count})"
             td
-              = "#{ precentage(ch.failed_count(:crawler_referee, :parse_prosecutor_not_exist), ch.verdicts_count) }"
+              = "#{ precentage(ch.failed_count(:crawler_referee, :parse_prosecutor_not_exist), ch.referees_count) }"
               br
-              = "(#{ ch.failed_count(:crawler_referee, :parse_prosecutor_not_exist) } / #{ch.verdicts_count})"
+              = "(#{ ch.failed_count(:crawler_referee, :parse_prosecutor_not_exist) } / #{ch.referees_count})"
     .ui-toolbar.ui-widget-header
       = paginate @crawler_histories, theme: :admin
