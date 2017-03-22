@@ -22,6 +22,6 @@ class Story::FindContext < BaseContext
   end
 
   def find_story
-    @story = Story.find_by(story_type: @type, year: @year, word_type: @word, number: @number, court: @court)
+    @story = @court.stories.find_by(story_type: @type, year: @year, word_type: @word, number: @number)
   end
 end

@@ -1,8 +1,7 @@
 class Api::StoriesController < Api::BaseController
-  include Api::PaginationConcern
 
   def index
-    context = Api::StorySearchContext.new(params)
+    context = Api::StoriesSearchContext.new(params[:q])
     @stories = context.perform
     return respond_error(context.error_messages.join(','), 404) unless @stories
     @pagination_data, @stories = paginate(@stories, 'api_stories_url')

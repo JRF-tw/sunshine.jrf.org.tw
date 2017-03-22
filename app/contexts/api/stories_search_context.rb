@@ -1,16 +1,15 @@
-class Api::StorySearchContext < BaseContext
+class Api::StoriesSearchContext < BaseContext
   before_perform :check_query_exist
   before_perform :set_ransack_query
   before_perform :find_court, if: :court_code_exist?
   before_perform :search_story
 
   def initialize(params)
-    @params = params[:q]
+    @params = params
   end
 
   def perform
     run_callbacks :perform do
-      return add_error(:story_not_found, '查無案件') unless @stories.present?
       @stories
     end
   end

@@ -44,8 +44,8 @@ RSpec.describe Api::StoriesController, type: :request do
 
     context 'stories not exist' do
       subject! { get '/search/stories', q: { number: story.number + 1 } }
-      it { expect(response_body['message']).to eq('查無案件') }
-      it { expect(response.status).to eq(404) }
+      it { expect(response_body['stories']).to eq([]) }
+      it { expect(response).to be_success }
     end
 
     context 'query not exist' do
