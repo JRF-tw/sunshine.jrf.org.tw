@@ -1,5 +1,5 @@
 class Scrap::UploadRefereeContext < BaseContext
-  include Scrap::Concerns::AnalysisRefereeContent
+  include Scrap::AnalysisRefereeContentConcern
   before_perform  :build_content_json
   before_perform  :build_crawl_data
   before_perform  :build_file

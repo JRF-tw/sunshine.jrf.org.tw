@@ -1,4 +1,4 @@
-module Scrap::Concerns::AnalysisRefereeContent
+module Scrap::AnalysisRefereeContentConcern
   extend ActiveSupport::Concern
 
   MAIN_JUDGE = /審判長法\s*官\s*([\p{Word}\w\s\S]*?)\n/

@@ -1,5 +1,5 @@
 class Scrap::ImportVerdictContext < BaseContext
-  include Scrap::Concerns::RefereeCommonStep
+  include Scrap::RefereeCommonStepConcern
 
   before_perform  :before_perform_common_step
   after_perform   :update_adjudge_date
@@ -7,17 +7,12 @@ class Scrap::ImportVerdictContext < BaseContext
   after_perform   :after_perform_common_step
   after_perform   :create_relation_for_role
   after_perform   :calculate_schedule_scores, if: :story_adjudge?
-  # after_perform   :set_delay_calculate_verdict_scores
   after_perform   :send_notice
   after_perform   :send_active_notice
 
   class << self
     def perform(court, original_data, content, word, publish_on, story_type)
       new(court, original_data, content, word, publish_on, story_type).perform
-    end
-
-    def calculate_verdict_scores(story)
-      Story::CalculateVerdictScoresContext.new(story).perform
     end
   end
 
@@ -60,10 +55,6 @@ class Scrap::ImportVerdictContext < BaseContext
   def calculate_schedule_scores
     Story::CalculateScheduleScoresContext.new(@story).perform
   end
-
-  # def set_delay_calculate_verdict_scores
-  #   self.class.delay_until(3.months.from_now).calculate_verdict_scores(@story)
-  # end
 
   def story_adjudge?
     @story.is_adjudge
