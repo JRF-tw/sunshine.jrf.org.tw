@@ -1,0 +1,43 @@
+article
+  = render partial: 'components/hero', locals: {\
+    heading: '判決查詢',
+    description: '判決詳細資料'\
+  }
+
+section.container.offcanvas-card-wrapper
+  .card.card--article
+    = admin_widget_box '判決資料', icon: :th do
+      table.table.table-bordered.table-striped.table-hover
+        tbody
+          tr
+            td 案件
+            td 
+          tr
+            td 法院
+            td 
+          tr
+            td 法院代號
+            td 
+          tr
+            td 案由
+            td 
+          tr
+            td 宣判日期
+            td
+          tr
+            td 發布日期
+            td
+          tr
+            td 相關檢察官
+            td
+          tr
+            td 相關律師
+            td
+          tr
+            td 相關法官
+            td
+          tr
+            td 相關當事人
+            td
+      h2 判決書內文
+      div

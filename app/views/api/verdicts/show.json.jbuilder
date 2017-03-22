@@ -9,6 +9,7 @@ json.verdict do
   json.lawyer_names @verdict.lawyer_names
   json.party_names @verdict.party_names
   json.related_story @verdict.related_story
+  json.publish_on @verdict.publish_on
   json.body do
     json.verdict_file_url @verdict.file.url
     json.verdict_content_url @verdict.content_file.url
