@@ -2,9 +2,9 @@ class Story::FindContext < BaseContext
   before_perform :find_court
   before_perform :find_story
 
-  def initialize(params)
-    @type, @year, @word, @number = params[:id].split('-')
-    @court_code = params[:court_code]
+  def initialize(court_code, id)
+    @court_code = court_code
+    @type, @year, @word, @number = id.split('-')
   end
 
   def perform
@@ -22,6 +22,6 @@ class Story::FindContext < BaseContext
   end
 
   def find_story
-    @story = Story.find_by(story_type: @type, year: @year, word_type: @word, number: @number, court: @court)
+    @story = @court.stories.find_by(story_type: @type, year: @year, word_type: @word, number: @number, court: @court)
   end
 end

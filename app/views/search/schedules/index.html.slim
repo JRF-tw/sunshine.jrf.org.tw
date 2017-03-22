@@ -19,7 +19,6 @@ section.container.offcanvas-card-wrapper
                 th 股別法官
                 th 法庭
                 th 開庭時間
-                th 
             tbody
               - @schedules.each do |schedule|
                 tr
@@ -28,6 +27,7 @@ section.container.offcanvas-card-wrapper
                   td = @court.code
                   td = schedule.branch_name
                   td = schedule.branch_judge.try(:name)
+                  td = schedule.courtroom
                   td = schedule.start_at.try(:to_s)
 
           .ui-toolbar.ui-widget-header
