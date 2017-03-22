@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Api::SchedulesController, type: :request do
   before { host! 'api.example.com' }
-  include_context 'create_data_for_api'
+  include_context 'create_data_for_request'
   let!(:schedule) { create :schedule, :with_branch_judge, story: story, court: court }
   def index_json
     {

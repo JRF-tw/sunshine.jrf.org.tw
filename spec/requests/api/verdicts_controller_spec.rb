@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Api::VerdictsController, type: :request do
-  include_context 'create_data_for_api'
+  include_context 'create_data_for_request'
   let!(:verdict) { create :verdict, story: story }
   before { host! 'api.example.com' }
 

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Search::SchedulesController, type: :request do
   before { host! 'search.example.com' }
-  include_context 'create_data_for_api'
+  include_context 'create_data_for_request'
   let!(:schedule) { create :schedule, story: story, court: court }
 
   describe '#index' do
