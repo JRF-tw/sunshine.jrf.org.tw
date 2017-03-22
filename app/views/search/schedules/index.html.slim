@@ -1,0 +1,36 @@
+article
+  = render partial: 'components/hero', locals: {\
+    heading: '庭期查詢',
+    description: "庭期列表"\
+  } 
+
+section.container.offcanvas-card-wrapper
+  .card.card--artic
+    - if @schedules
+      = admin_widget_box "案件 #{@story.identity} 庭期列表 : 共 #{@schedules.count} 筆", icon: :pencil do
+        .dataTables_wrapper
+          table.table.table-bordered.table-striped.table-hover
+            thead
+              tr
+                th 案件
+                th 法院
+                th 法院代號
+                th 股別名稱
+                th 股別法官
+                th 法庭
+                th 開庭時間
+                th 
+            tbody
+              - @schedules.each do |schedule|
+                tr
+                  td = @story.identity
+                  td = @court.full_name
+                  td = @court.code
+                  td = schedule.branch_name
+                  td = schedule.branch_judge.try(:name)
+                  td = schedule.start_at.try(:to_s)
+
+          .ui-toolbar.ui-widget-header
+            = paginate @schedules, theme: :www
+    - else 
+      = @errors_message
