@@ -1,7 +1,7 @@
 module Scrap::AnalysisRefereeContentConcern
   extend ActiveSupport::Concern
 
-  MAIN_JUDGE = /審判長法\s*官\s*([\p{Word}\w\s\S]*?)\n/
+  MAIN_JUDGE = /審判長法\s*官\s*([\p{Word}\w\s]*?)\n/
   JUDGE = /法\s*官[^\r\n]\s+([\p{Word}\w\s]*?)\n/
   PROSECUTOR = /檢察官(\p{Word}+)到庭執行職務/
   LAWYER = /\s+(\p{Word}+)律師/
@@ -13,6 +13,7 @@ module Scrap::AnalysisRefereeContentConcern
   PARSE_ROLES_PATTERN = /(#{MAIN_ROLE.join('|')}){1}[\s]*(#{SUB_ROLE.join('|')})?(\s+\p{han}+[^\r\n]+)((\r\n\s+\p{han}?\s?\p{han}+[^\r\n]+)*)/
 
   def parse_main_judge_name(referee, content, crawler_history)
+    content = content.tr('　', ' ')
     matched = content.match(MAIN_JUDGE)
     if matched
       return matched[1].squish.delete("\r").delete(' ')
@@ -23,6 +24,7 @@ module Scrap::AnalysisRefereeContentConcern
   end
 
   def parse_judges_names(referee, content, crawler_history)
+    content = content.tr('　', ' ')
     matched = content.match(JUDGE)
     if matched
       return content.scan(JUDGE).map { |i| i[0].squish.delete("\r").delete(' ') }
