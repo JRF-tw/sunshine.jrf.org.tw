@@ -28,7 +28,9 @@ class Scrap::ImportVerdictContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      add_error('create date fail') unless @verdict.save
+      unless @verdict.save
+        Logs::AddCrawlerError.add_verdict_error(@crawler_history, @verdict, :referee_save_error, @verdict.errors.full_messages.join)
+      end
       @verdict
     end
   end

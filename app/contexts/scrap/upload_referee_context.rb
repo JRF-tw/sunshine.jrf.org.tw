@@ -17,11 +17,13 @@ class Scrap::UploadRefereeContext < BaseContext
     @referee = referee
     @type = referee.class.name.downcase
     run_callbacks :perform do
-      add_error('upload file failed') unless @referee.save
+      unless @referee.save
+        Logs::AddCrawlerError.send("add_#{@type}_error", @crawler_history, @referee, :upload_file_error, "儲存失敗 #{@referee.errors.full_messages.join}")
+      end
       true
     end
   rescue
-    Logs::AddCrawlerError.send("add_#{@type}_error", @crawler_history, @referee, :upload_file_error, '檔案上傳s3失敗')
+    Logs::AddCrawlerError.send("add_#{@type}_error", @crawler_history, @referee, :upload_file_error, '內文資料解析失敗')
   end
 
   private

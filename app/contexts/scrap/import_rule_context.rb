@@ -22,7 +22,9 @@ class Scrap::ImportRuleContext < BaseContext
 
   def perform
     run_callbacks :perform do
-      add_error('create date fail') unless @rule.save
+      unless @rule.save
+        Logs::AddCrawlerError.add_rule_error(@crawler_history, @rule, :referee_save_error, @rule.errors.full_messages.join)
+      end
       @rule
     end
   end
