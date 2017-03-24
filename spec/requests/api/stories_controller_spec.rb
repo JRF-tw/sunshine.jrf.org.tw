@@ -9,30 +9,40 @@ RSpec.describe Api::StoriesController, type: :request do
   let(:word_type) { story.word_type }
   let(:number) { story.number }
 
+  def info_partial(story)
+    {
+      identity: {
+        type: story.story_type,
+        year: story.year,
+        word: story.word_type,
+        number: story.number
+      },
+      court: {
+        name: story.court.full_name,
+        code: story.court.code
+      },
+      adjudge_date: story.adjudge_date,
+      pronounce_date: story.pronounce_date,
+      judges_names: story.judges_names,
+      prosecutor_names: story.prosecutor_names,
+      lawyer_names: story.lawyer_names,
+      party_names: story.party_names
+    }
+  end
+
   describe '#index' do
-    def index_json
-      {
-        stories: [{
-          story_type: story.story_type,
-          year: story.year,
-          word_type: story.word_type,
-          number: story.number,
-          adjudge_date: story.adjudge_date,
-          pronounce_date: story.pronounce_date,
-          court_name: court.full_name,
-          court_code: court.code,
-          judges_names: story.judges_names,
-          prosecutor_names: story.prosecutor_names,
-          lawyer_names: story.lawyer_names,
-          party_names: story.party_names,
-          detail_link: api_story_url(story.court.code, story.identity)
-        }]
-      }.deep_stringify_keys
+
+    def index_json(stories)
+      stories_array = []
+      stories.each do |story|
+        stories_array << info_partial(story).merge(detail_link: api_story_url(story.court.code, story.identity))
+      end
+      { stories: stories_array }.deep_stringify_keys
     end
 
     context 'success' do
-      subject! { get '/search/stories', q: { number: story.number, lawyer_names_cont: '千鳥' } }
-      it { expect(response_body).to include(index_json) }
+      subject! { get '/search/stories', q: { number: story.number } }
+      it { expect(response_body).to include(index_json(Story.where(number: story.number))) }
       it { expect(response).to be_success }
     end
 
@@ -75,23 +85,9 @@ RSpec.describe Api::StoriesController, type: :request do
 
   describe '#show' do
     def show_json
-      {
-        story: {
-          story_type: story.story_type,
-          year: story.year,
-          word_type: story.word_type,
-          number: story.number,
-          adjudge_date: story.adjudge_date,
-          pronounce_date: story.pronounce_date,
-          court_name: court.full_name,
-          court_code: court.code,
-          judges_names: story.judges_names,
-          prosecutor_names: story.prosecutor_names,
-          lawyer_names: story.lawyer_names,
-          party_names: story.party_names
-        }
-      }.deep_stringify_keys
+      { story: info_partial(story) }.deep_stringify_keys
     end
+
     context 'success' do
       let(:url) { URI.encode("/#{code}/#{story.identity}") }
       subject! { get url }
