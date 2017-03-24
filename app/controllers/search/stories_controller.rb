@@ -6,7 +6,7 @@ class Search::StoriesController < BaseController
   end
 
   def show
-    context = Story::FindContext.new(params)
+    context = Story::FindContext.new(params[:court_code], params[:id])
     if @story = context.perform
       @court = @story.court
     else

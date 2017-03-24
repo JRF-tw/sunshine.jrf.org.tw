@@ -1,7 +1,6 @@
 json.verdict do
-  json.judgement_number @verdict.judge_word
-  json.court_name @court.full_name
-  json.court_code @court.code
+  json.partial! 'api/stories/identity', story: @story
+  json.partial! 'api/court', court: @court
   json.summary @verdict.summary
   json.date @verdict.date
   json.judges_names @verdict.judges_names

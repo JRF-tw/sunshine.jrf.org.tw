@@ -30,14 +30,14 @@ RSpec.describe Search::StoriesController, type: :request do
       let(:url) { URI.encode("/fJU/#{story.identity}") }
       before { get url }
       it { expect(response).to be_success }
-      it { expect(response.body).to match('法院代號不存在') }
+      it { expect(response.body).to match('該法院代號不存在') }
     end
 
     context 'wrong story data' do
       let(:url) { URI.encode("/#{story.court.code}/#{story.identity + '1'}") }
       before { get url }
       it { expect(response).to be_success }
-      it { expect(response.body).to match('查無此案件') }
+      it { expect(response.body).to match('案件不存在') }
     end
   end
 end

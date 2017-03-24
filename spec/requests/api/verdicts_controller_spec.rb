@@ -6,12 +6,40 @@ RSpec.describe Api::VerdictsController, type: :request do
   before { host! 'api.example.com' }
 
   describe '#show' do
+
+    def show_json
+      {
+        verdict: {
+          story_identity: {
+            type: story.story_type,
+            year: story.year,
+            word: story.word_type,
+            number: story.number
+          },
+          court: {
+            name: court.full_name,
+            code: court.code
+          },
+          summary: verdict.summary,
+          date: verdict.date,
+          judges_names: verdict.judges_names,
+          prosecutor_names: verdict.prosecutor_names,
+          lawyer_names: verdict.lawyer_names,
+          party_names: verdict.party_names,
+          related_story: verdict.related_story,
+          publish_on: verdict.publish_on,
+          body: {
+            verdict_file_url: verdict.file.url,
+            verdict_content_url: verdict.content_file.url
+          }
+        }
+      }.deep_stringify_keys
+    end
+
     context 'success' do
       let(:url) { URI.encode("/#{code}/#{story.identity}/verdict") }
       subject! { get url }
-      it { expect(response_body['verdict']['court_code']).to eq(code) }
-      it { expect(response_body['verdict']['court_name']).to eq(court.full_name) }
-      it { expect(response_body['verdict']['body']['verdict_file_url']).to eq(verdict.file.url) }
+      it { expect(response_body).to eq(show_json) }
       it { expect(response).to be_success }
     end
 

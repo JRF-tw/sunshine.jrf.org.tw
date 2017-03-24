@@ -35,7 +35,7 @@ class Api::StoriesSearchContext < BaseContext
 
   def find_court
     @court = Court.find_by(code: @params[:court_code])
-    return add_error(:court_not_found, '法院代號不存在') unless @court
+    return add_error(:court_not_found, '該法院代號不存在') unless @court
     @ransack_query.merge!(court_id_eq: @court.id)
   end
 

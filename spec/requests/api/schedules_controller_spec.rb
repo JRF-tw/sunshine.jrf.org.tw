@@ -7,9 +7,16 @@ RSpec.describe Api::SchedulesController, type: :request do
   def index_json
     {
       schedules: [{
-        story_identity: story.identity,
-        court_name: court.full_name,
-        court_code: court.code,
+        story_identity: {
+          type: story.story_type,
+          year: story.year,
+          word: story.word_type,
+          number: story.number
+        },
+        court: {
+          name: court.full_name,
+          code: court.code
+        },
         branch_name: schedule.branch_name,
         branch_judge: schedule.branch_judge.name,
         courtroom: schedule.courtroom,

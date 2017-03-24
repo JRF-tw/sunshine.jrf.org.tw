@@ -11,7 +11,7 @@ RSpec.describe Api::StoriesController, type: :request do
 
   def info_partial(story)
     {
-      identity: {
+      story_identity: {
         type: story.story_type,
         year: story.year,
         word: story.word_type,
@@ -48,7 +48,7 @@ RSpec.describe Api::StoriesController, type: :request do
 
     context 'court code not exist' do
       subject! { get '/search/stories', q: { court_code: '5566' } }
-      it { expect(response_body['message']).to eq('法院代號不存在') }
+      it { expect(response_body['message']).to eq('該法院代號不存在') }
       it { expect(response.status).to eq(404) }
     end
 
@@ -98,14 +98,14 @@ RSpec.describe Api::StoriesController, type: :request do
     context 'court not exist' do
       let(:url) { URI.encode("/XxX/#{story.identity}") }
       subject! { get url }
-      it { expect(response_body['message']).to eq('法院代號不存在') }
+      it { expect(response_body['message']).to eq('該法院代號不存在') }
       it { expect(response.status).to eq(404) }
     end
 
     context 'story not exist' do
       let(:url) { URI.encode("/#{code}/#{story.identity + '1'}") }
       subject! { get url }
-      it { expect(response_body['message']).to eq('查無此案件') }
+      it { expect(response_body['message']).to eq('案件不存在') }
       it { expect(response.status).to eq(404) }
     end
   end
