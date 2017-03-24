@@ -31,13 +31,19 @@
             .controls = f.search_field :year_eq
         .span6
           .control-group
-            label.control-label = f.label :number_eq
-            .controls = f.search_field :number_eq
+            label.control-label = f.label :word_type_cont
+            .controls = f.search_field :word_type_cont
       .row
         .span6
           .control-group
-            label.control-label = f.label :word_type_cont
-            .controls = f.search_field :word_type_cont
+            label.control-label = f.label :number_eq
+            .controls = f.search_field :number_eq
+        .span6
+          .control-group
+            label.control-label = f.label :story_type_eq
+            .controls.select2 = f.select :story_type_eq,
+            collect_for_story_types, include_blank: "請選擇"
+          
 
     hr
     .form-actions

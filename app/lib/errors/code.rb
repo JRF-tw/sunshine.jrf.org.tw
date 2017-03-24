@@ -52,6 +52,7 @@ class Errors::Code
     password_confirmation_blank: 400,
     password_less_than_minimum: 400,
     password_not_match_confirmation: 400,
+    params_not_exist: 400,
     phone_number_not_verify: 400,
     phone_number_blank: 400,
     phone_number_conflict: 400,
