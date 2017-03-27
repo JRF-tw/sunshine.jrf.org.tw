@@ -7,11 +7,13 @@ RSpec.describe Api::SchedulesController, type: :request do
   def index_json
     {
       schedules: [{
-        story_identity: {
-          type: story.story_type,
-          year: story.year,
-          word: story.word_type,
-          number: story.number
+        story: {
+          identity: {
+            type: story.story_type,
+            year: story.year,
+            word: story.word_type,
+            number: story.number
+          }
         },
         court: {
           name: court.full_name,

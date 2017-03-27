@@ -11,7 +11,7 @@ RSpec.describe Api::StoriesController, type: :request do
 
   def info_partial(story)
     {
-      story_identity: {
+      identity: {
         type: story.story_type,
         year: story.year,
         word: story.word_type,

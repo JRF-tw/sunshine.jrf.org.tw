@@ -10,11 +10,13 @@ RSpec.describe Api::VerdictsController, type: :request do
     def show_json
       {
         verdict: {
-          story_identity: {
-            type: story.story_type,
-            year: story.year,
-            word: story.word_type,
-            number: story.number
+          story: {
+            identity: {
+              type: story.story_type,
+              year: story.year,
+              word: story.word_type,
+              number: story.number
+            }
           },
           court: {
             name: court.full_name,
