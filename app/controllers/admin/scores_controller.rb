@@ -1,10 +1,10 @@
 class Admin::ScoresController < Admin::BaseController
-  before_action(except: [:index]) { add_crumb('評鑑記錄列表', admin_scores_path) }
+  before_action(except: [:index]) { add_crumb('一般評鑑記錄列表', admin_scores_path) }
 
   def index
     @search = Score::SearchFormObject.new(search_params)
     @scores = Kaminari.paginate_array(@search.result.sort_by(&:created_at).reverse!).page(params[:page]).per(20)
-    @admin_page_title = '評鑑記錄列表'
+    @admin_page_title = '一般評鑑記錄列表'
     add_crumb @admin_page_title, '#'
   end
 

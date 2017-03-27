@@ -10,9 +10,9 @@
             collect_for_boolean, include_blank: "請選擇"
         .span6
           .control-group
-            label.control-label = f.label :have_adjudgement
-            .controls.select2 = f.select :have_adjudgement,
-            collect_for_adjudgement, include_blank: "請選擇"
+            label.control-label = f.label :is_adjudge_eq
+            .controls.select2 = f.select :is_adjudge_eq,
+            collect_for_boolean, include_blank: "請選擇"
       .row
         .span6
           .control-group
@@ -31,13 +31,19 @@
             .controls = f.search_field :year_eq
         .span6
           .control-group
-            label.control-label = f.label :number_eq
-            .controls = f.search_field :number_eq
+            label.control-label = f.label :word_type_cont
+            .controls = f.search_field :word_type_cont
       .row
         .span6
           .control-group
-            label.control-label = f.label :word_type_cont
-            .controls = f.search_field :word_type_cont
+            label.control-label = f.label :number_eq
+            .controls = f.search_field :number_eq
+        .span6
+          .control-group
+            label.control-label = f.label :story_type_eq
+            .controls.select2 = f.select :story_type_eq,
+            collect_for_story_types, include_blank: "請選擇"
+          
 
     hr
     .form-actions
@@ -57,7 +63,6 @@
           th = sort_link(@search, :story_type, '案件類別')
           th = sort_link(@search, :is_pronounce, '是否已宣判')
           th = sort_link(@search, :is_adjudge, '是否已判決')
-          th 是否有判決書
           th 操作
       tbody
         - @stories.each do |story|
@@ -69,10 +74,11 @@
             td = story.number
             td = story.story_type
             td = story.is_pronounce ? "已宣判" : "尚未宣判"
-            td = story.is_adjudge ? "已判決" : "尚未判決"
             td
-              = link_to "是", admin_verdict_path(story.judgment_verdict) if story.judgment_verdict
-
+              - if story.is_adjudge
+                = link_to "已判決", admin_verdict_path(story.verdict) 
+              - else
+                = '尚未宣判'
             td
               = link_to "詳細資料", admin_story_path(story), class: "btn btn-mini"
               | &nbsp;

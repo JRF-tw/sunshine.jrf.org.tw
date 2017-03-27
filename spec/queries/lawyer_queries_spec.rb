@@ -44,12 +44,12 @@ RSpec.describe LawyerQueries do
   end
 
   describe '#pending_score_verdict' do
-    context "story isn't get judgment_verdict" do
+    context "story isn't get verdict" do
       it { expect(query.pending_score_schedules(story).count).to eq(0) }
     end
 
-    context 'story get judgment_verdict' do
-      let!(:verdict) { create :verdict, story: story, is_judgment: true }
+    context 'story get verdict' do
+      let!(:verdict) { create :verdict, story: story }
       it { expect(query.pending_score_verdict(story)).to eq(verdict) }
     end
 

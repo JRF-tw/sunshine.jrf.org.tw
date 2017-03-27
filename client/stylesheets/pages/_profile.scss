@@ -8,7 +8,6 @@
   .image-wrapper {
     $size: r(20);
     display: inline-block;
-    width: $size;
     position: relative (- $size / 2) n() n() n();
     margin-bottom: - $size / 2;
     background-color: $white;
@@ -16,22 +15,27 @@
     border-radius: $size/2;
     overflow: hidden;
     z-index: index($layers, base);
+    fill: $white;
+    @include ir(1/1, $size);
+
+    .icon-judge-avatar { background-color: $blue; }
+    .icon-prosecutor-avatar { background-color: $purple; }
   }
 
-  .text-wrapper { margin-top: r(-3); }
+  .text-wrapper { margin-top: r(-6); }
 
   .active-label {
     display: inline-block;
     padding: 0 r(1);
-    color: $white $gray;
+    background-color: $white;
     border-radius: $global-radius;
     position: relative;
     z-index: index($layers, profile-label);
-    &.active { background-color: $link-color; }
-    &.active.judge { background-color: $blue; }
-    &.active.prosecutor { background-color: $purple; }
+    &.active { color: $link-color; }
+    &.active.judge { color: $blue; }
+    &.active.prosecutor { color: $purple; }
   }
-  
+
   .name {
     margin-bottom: 0;
     font-size: ms(4);

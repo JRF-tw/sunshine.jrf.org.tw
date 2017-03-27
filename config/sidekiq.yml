@@ -3,7 +3,9 @@
 :concurrency: 3
 :queues:
   - [default, 1]
-  - [crawler_verdict, 2]
+  - [crawler_referee, 3]
+  - [crawler_verdict, 1]
+  - [crawler_rule, 1]
 :limits:
   default: 1
   crawler_verdict: 2
@@ -11,7 +13,9 @@ staging:
   :concurrency: 2
   :queues:
   - [default, 1]
+  - [crawler_referee, 3]
   - [crawler_verdict, 1]
+  - [crawler_rule, 1]
   :limits:
     default: 1
     crawler_verdict: 1

@@ -12,9 +12,6 @@
         td 宣判日期
         td = @verdict.adjudge_date
       tr
-        td 是否為判決
-        td = @verdict.is_judgment ? '是' : '否'
-      tr
         td 分析檢察官結果
         td = @verdict.prosecutor_names.join(',')
       tr
@@ -52,7 +49,7 @@
             = ' '
       tr
         td 發布日期
-        td = @verdict.publish_date
+        td = @verdict.publish_on
       tr
         td 文件下載
         td = link_to '點我下載', download_file_admin_verdict_path(@verdict) if @verdict.file

@@ -5,7 +5,7 @@ describe '法官評鑑 - 評鑑紀錄', type: :request do
   let!(:court) { create :court }
   let!(:judge) { create :judge, court: court }
   let!(:story) { create :story, :adjudged }
-  let!(:verdict) { create :verdict, story: story, is_judgment: true }
+  let!(:verdict) { create :verdict, story: story }
 
   before { signin_lawyer(lawyer) }
 

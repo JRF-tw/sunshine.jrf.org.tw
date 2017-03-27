@@ -40,7 +40,8 @@ describe VerdictRelationCreateContext do
   end
 
   context 'name not in verdict' do
-    it { expect(subject.perform('xxx')).to be_falsey }
+    before { subject.perform('xxx') }
+    it { expect(subject.error_messages).to eq(['案件內沒有該人名紀錄']) }
   end
 
   context 'name has many people' do

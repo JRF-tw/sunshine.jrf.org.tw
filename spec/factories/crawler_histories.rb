@@ -11,6 +11,7 @@
 #  schedules_count :integer          default(0), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  rules_count     :integer          default(0), not null
 #
 
 FactoryGirl.define do
@@ -29,11 +30,16 @@ FactoryGirl.define do
       verdicts_count { rand(1..50) }
     end
 
+    trait :has_rule do
+      rules_count { rand(1..50) }
+    end
+
     trait :exist_counts do
       courts_count { rand(1..50) }
       branches_count { rand(1..50) }
       judges_count { rand(1..50) }
       verdicts_count { rand(1..50) }
+      rules_count { rand(1..50) }
       schedules_count { rand(1..50) }
     end
   end

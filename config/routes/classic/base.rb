@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get 'judges', to: 'profiles#judges', as: :judges
   get 'prosecutors', to: 'profiles#prosecutors', as: :prosecutors
 
-  resources :searchs, path: 'search' do
+  resources :searchs, only: [], path: 'search' do
     collection do
       get :judges
       get :prosecutors

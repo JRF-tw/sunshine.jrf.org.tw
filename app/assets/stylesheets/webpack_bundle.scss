@@ -6488,7 +6488,6 @@ abbr[title="required"] {
 
 .profile__avatar .image-wrapper {
   display: inline-block;
-  width: 160px;
   top: -80px;
   position: relative;
   margin-bottom: -80px;
@@ -6497,32 +6496,54 @@ abbr[title="required"] {
   border-radius: 80px;
   overflow: hidden;
   z-index: 1;
+  fill: #fff;
+  position: relative;
+  height: 0;
+  padding-top: 160px;
+  width: 160px;
+}
+
+.profile__avatar .image-wrapper > * {
+  display: block;
+  position: absolute;
+  width: 100% !important;
+  height: 100% !important;
+  top: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.profile__avatar .image-wrapper .icon-judge-avatar {
+  background-color: #2196F3;
+}
+
+.profile__avatar .image-wrapper .icon-prosecutor-avatar {
+  background-color: #9C27B0;
 }
 
 .profile__avatar .text-wrapper {
-  margin-top: -24px;
+  margin-top: -48px;
 }
 
 .profile__avatar .active-label {
   display: inline-block;
   padding: 0 8px;
-  color: #fff;
-  background-color: #b6b6b6;
+  background-color: #fff;
   border-radius: 3px;
   position: relative;
   z-index: 4;
 }
 
 .profile__avatar .active-label.active {
-  background-color: #00bcd4;
+  color: #00bcd4;
 }
 
 .profile__avatar .active-label.active.judge {
-  background-color: #2196F3;
+  color: #2196F3;
 }
 
 .profile__avatar .active-label.active.prosecutor {
-  background-color: #9C27B0;
+  color: #9C27B0;
 }
 
 .profile__avatar .name {

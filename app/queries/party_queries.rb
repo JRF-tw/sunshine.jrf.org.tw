@@ -40,7 +40,7 @@ class PartyQueries
   end
 
   def pending_score_verdict(story)
-    !get_verdict_score(story) && story.judgment_verdict ? Verdict.find(story.judgment_verdict.id) : nil
+    !get_verdict_score(story) && story.verdict ? Verdict.find(story.verdict.id) : nil
   end
 
   def get_scores_array(story, sort_by: 'date')

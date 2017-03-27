@@ -18,11 +18,13 @@
 #  adjudge_date     :date
 #  pronounce_date   :date
 #  is_pronounce     :boolean          default(FALSE)
+#  is_calculated    :boolean          default(FALSE)
 #
 
 class Story < ActiveRecord::Base
-  has_many :schedules
-  has_many :verdicts
+  has_many :schedules, dependent: :destroy
+  has_one :verdict, dependent: :destroy
+  has_many :rules, dependent: :destroy
   has_many :story_relations, dependent: :destroy
   has_many :judges, through: :story_relations, source: :people, source_type: :Judge
   has_many :story_subscriptions, dependent: :destroy
@@ -37,6 +39,7 @@ class Story < ActiveRecord::Base
   serialize :prosecutor_names, Array
 
   scope :newest, -> { order('id DESC') }
+  scope :not_caculate, -> { where(is_calculated: false) }
 
   include Redis::Objects
   counter :lawyer_scored_count
@@ -46,11 +49,7 @@ class Story < ActiveRecord::Base
   MAX_LAWYER_SCORED_COUNT = 5
 
   def identity
-    "#{year}-#{word_type}-#{number}"
-  end
-
-  def judgment_verdict
-    verdicts.find_by_is_judgment(true)
+    "#{story_type}-#{year}-#{word_type}-#{number}"
   end
 
   def by_relation_role(role)
@@ -64,16 +63,7 @@ class Story < ActiveRecord::Base
 
   class << self
     def ransackable_scopes(_auth_object = nil)
-      [:have_adjudgement, :relation_by_judge]
-    end
-
-    def have_adjudgement(status)
-      adjudged_story_ids = Story.joins(:verdicts).where('Verdicts.is_judgment = ?', true).pluck(:id)
-      if status == 'yes'
-        where(id: adjudged_story_ids)
-      elsif status == 'no'
-        where.not(id: adjudged_story_ids)
-      end
+      [:relation_by_judge]
     end
 
     def relation_by_judge(judge_id)

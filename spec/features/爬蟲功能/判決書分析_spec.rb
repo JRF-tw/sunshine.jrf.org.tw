@@ -37,7 +37,7 @@ describe '判決書分析', type: :context do
         end
 
         When '沒抓到律師姓名' do
-          let!(:verdict) { create :verdict, is_judgment: true, story: story, judges_names: [judge_A.name] }
+          let!(:verdict) { create :verdict, story: story, judges_names: [judge_A.name] }
           Then '評鑑皆無效' do
             expect(subject.new(schedule_score_A).perform).to be_falsey
             expect(subject.new(schedule_score_B).perform).to be_falsey

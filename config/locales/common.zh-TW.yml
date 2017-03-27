@@ -326,8 +326,11 @@ zh-TW:
         number_eq: '案號'
         court_full_name_eq: '法院名稱'
         is_pronounce_eq: '是否已宣判'
-        have_adjudgement: '是否有判決書'
+        is_adjudge_eq: '是否有判決書'
         adjudge_date_eq: '宣判日期'
+        adjudge_date_gteq: '宣判日期'
+        judges_names_cont: '法官名稱包含'
+        lawyer_names_cont: '律師名稱包含'
       verdict:
         story_court_full_name_eq: '判決法院'
         content_cont: '內容包含'
@@ -338,7 +341,6 @@ zh-TW:
         unexist_judges_names: '法官為空值'
         unexist_prosecutor_names: '檢察官為空值'
         main_judge_name_present: '有無審判長法官'
-        is_judgment_true: '是否為判決'
       schedule:
         branch_judge_id_eq: '股別法官名稱'
         court_full_name_eq: '法院名稱'
@@ -382,12 +384,14 @@ zh-TW:
         crawler_on_gteq: '爬取日期'
         crawler_on_lteq: '~'
         verdicts_count_gteq: '判決書抓取數量大於'
+        rules_count_gteq: '裁決書抓取數量大於'
       crawler_log:
         crawler_kind_eq: '錯誤種類為'
         crawler_error_type_eq: '錯誤狀態為'
-      schedule_score:
-        judge_id_eq: '法官id'
+      valid_score:
+        judge_id_eq: '法官'
         story_id_eq: '案件id'
-        schedule_rater_type_eq: '評鑑人類型'
-        schedule_rater_id_eq: '評鑑人id'
+        score_type_eq: '評鑑類別'
+        score_rater_type_eq: '評鑑者類別'
+        score_rater_id_eq: '評鑑者姓名'
         created_at_gteq: '評鑑時間'

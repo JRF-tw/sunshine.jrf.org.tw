@@ -27,6 +27,7 @@
 #  unconfirmed_email      :string
 #  phone_number           :string
 #  office_number          :string
+#  active_notice          :boolean          default(TRUE)
 #
 
 require 'rails_helper'

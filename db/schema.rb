@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170207062506) do
+ActiveRecord::Schema.define(version: 20170315095451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -209,6 +209,7 @@ ActiveRecord::Schema.define(version: 20170207062506) do
     t.integer  "schedules_count", default: 0, null: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.integer  "rules_count",     default: 0, null: false
   end
 
   add_index "crawler_histories", ["crawler_on"], name: "index_crawler_histories_on_crawler_on", using: :btree
@@ -559,6 +560,25 @@ ActiveRecord::Schema.define(version: 20170207062506) do
   add_index "reviews", ["is_hidden"], name: "index_reviews_on_is_hidden", using: :btree
   add_index "reviews", ["profile_id"], name: "index_reviews_on_profile_id", using: :btree
 
+  create_table "rules", force: :cascade do |t|
+    t.integer  "story_id"
+    t.string   "file"
+    t.text     "party_names"
+    t.text     "lawyer_names"
+    t.text     "judges_names"
+    t.text     "prosecutor_names"
+    t.date     "publish_on"
+    t.string   "content_file"
+    t.hstore   "crawl_data"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "summary"
+  end
+
+  add_index "rules", ["publish_on"], name: "index_rules_on_publish_on", using: :btree
+  add_index "rules", ["story_id"], name: "index_rules_on_story_id", using: :btree
+  add_index "rules", ["summary"], name: "index_rules_on_summary", using: :btree
+
   create_table "schedule_scores", force: :cascade do |t|
     t.integer  "schedule_id"
     t.integer  "judge_id"
@@ -618,11 +638,13 @@ ActiveRecord::Schema.define(version: 20170207062506) do
     t.date     "adjudge_date"
     t.date     "pronounce_date"
     t.boolean  "is_pronounce",     default: false
+    t.boolean  "is_calculated",    default: false
   end
 
   add_index "stories", ["adjudge_date"], name: "index_stories_on_adjudge_date", using: :btree
   add_index "stories", ["court_id"], name: "index_stories_on_court_id", using: :btree
   add_index "stories", ["is_adjudge"], name: "index_stories_on_is_adjudge", using: :btree
+  add_index "stories", ["is_calculated"], name: "index_stories_on_is_calculated", using: :btree
   add_index "stories", ["is_pronounce"], name: "index_stories_on_is_pronounce", using: :btree
   add_index "stories", ["pronounce_date"], name: "index_stories_on_pronounce_date", using: :btree
 
@@ -796,22 +818,23 @@ ActiveRecord::Schema.define(version: 20170207062506) do
 
   create_table "verdicts", force: :cascade do |t|
     t.integer  "story_id"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "file"
     t.text     "party_names"
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
-    t.boolean  "is_judgment",      default: false
     t.date     "adjudge_date"
-    t.date     "publish_date"
+    t.date     "publish_on"
     t.string   "content_file"
     t.hstore   "crawl_data"
+    t.hstore   "roles_data"
+    t.string   "summary"
   end
 
   add_index "verdicts", ["adjudge_date"], name: "index_verdicts_on_adjudge_date", using: :btree
-  add_index "verdicts", ["is_judgment"], name: "index_verdicts_on_is_judgment", using: :btree
-  add_index "verdicts", ["publish_date"], name: "index_verdicts_on_publish_date", using: :btree
+  add_index "verdicts", ["publish_on"], name: "index_verdicts_on_publish_on", using: :btree
+  add_index "verdicts", ["summary"], name: "index_verdicts_on_summary", using: :btree
 
 end

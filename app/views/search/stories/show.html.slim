@@ -1,0 +1,59 @@
+article
+  = render partial: 'components/hero', locals: {\
+    heading: '單一案件',
+    description: '單一案件詳細資料'\
+  }
+
+section.container.offcanvas-card-wrapper
+  .card.card--article
+    - if @story
+      = admin_widget_box "#{@story.identity}資料", icon: :th do
+        table.table.table-bordered.table-striped.table-hover
+          tbody
+            tr
+              td 類別
+              td = @story.id
+            tr
+              td 年度
+              td = @story.year
+            tr
+              td 字別
+              td = @story.word_type
+            tr
+              td 案號
+              td = @story.number
+            tr
+              td 案件類別
+              td = @story.story_type
+            tr
+              td 判決日期
+              td = @story.adjudge_date
+            tr
+              td 宣判日期
+              td = @story.pronounce_date
+            tr
+              td 法院全名
+              td = @story.court.full_name
+            tr
+              td 法院代碼
+              td = @story.court.code
+            tr
+              td 相關法官
+              td = @story.judges_names.join(',')
+            tr
+              td 相關律師
+              td = @story.lawyer_names.join(',')
+            tr
+              td 相關檢察官
+              td = @story.prosecutor_names.join(',')
+            tr
+              td 相關當事人
+              td = @story.party_names.join(',')
+            tr
+              td 庭期表
+              td = link_to '庭期列表', search_schedules_path(@story.court.code, @story.identity), target: '_blank'
+            tr
+              td 判決
+              td = link_to '詳細資料', search_verdict_path(@story.court.code, @story.identity), target: '_blank'
+    - else
+      = @errors_message

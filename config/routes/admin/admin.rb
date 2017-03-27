@@ -1,8 +1,4 @@
-require 'sidekiq/web'
-require 'sidetiq/web'
-
 Rails.application.routes.draw do
-  mount Sidekiq::Web => '/sidekiq'
   namespace :admin do
     root to: 'profiles#index'
     resources :profiles do
@@ -55,6 +51,7 @@ Rails.application.routes.draw do
         get :stories
       end
     end
+    resources :valid_scores, only: [:index, :show]
     resources :scores, only: [:index] do
       member do
         get :schedule

@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
   mount RedactorRails::Engine => '/redactor_rails'
 
+  load Rails.root.join('config/routes/search.rb')
+  load Rails.root.join('config/routes/api.rb')
+
   load Rails.root.join('config/routes/classic/devise.rb')
   load Rails.root.join('config/routes/classic/base.rb')
 
@@ -11,7 +14,6 @@ Rails.application.routes.draw do
   load Rails.root.join('config/routes/lawyer.rb')
   load Rails.root.join('config/routes/party.rb')
 
-  load Rails.root.join('config/routes/api.rb')
   load Rails.root.join('config/routes/admin/admin.rb')
 
   # routes exception to 404

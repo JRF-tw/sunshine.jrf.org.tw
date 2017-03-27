@@ -17,7 +17,7 @@ FactoryGirl.define do
   factory :court do
     sequence(:full_name) { |n| "測試法院-#{n}" }
     sequence(:name) { |n| "測試地院-#{n}" }
-    code 'TPK'
+    sequence(:code) { ('A'..'Z').to_a.sample(3).join }
     sequence(:scrap_name) { |n| "faker-court-#{n}" }
     is_hidden false
 

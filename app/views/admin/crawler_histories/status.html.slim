@@ -13,19 +13,24 @@
           .control-group
             label.control-label = f.label :verdicts_count_gteq
             .controls= f.search_field :verdicts_count_gteq
+        .span6
+          .control-group
+            label.control-label = f.label :rules_count_gteq
+            .controls= f.search_field :rules_count_gteq
     hr
       .form-actions
         = f.submit value: '搜尋', class: 'btn btn-primary'
         = " "
         = link_to '清空搜尋結果', status_admin_crawler_histories_path, class: 'btn btn-default'
 
-= admin_widget_box '判決書抓取數據', icon: :pencil do
+= admin_widget_box '裁判書抓取數據', icon: :pencil do
   .dataTables_wrapper
     table.table.table-bordered.table-striped.table-hover
       thead
         tr
           th 爬蟲日期
           th 判決書數量
+          th 裁決書數量
           th 法官抓取成功
           th 法官不存在
           th 律師抓取成功
@@ -39,37 +44,38 @@
           tr
             td = ch.crawler_on
             td = ch.verdicts_count
+            td = ch.rules_count
             td
-              = "#{ precentage(ch.success_count(:crawler_verdict, :parse_judge_error), ch.verdicts_count) }"
+              = "#{ precentage(ch.success_count(:crawler_referee, :parse_judge_error), ch.referees_count) }"
               br
-              = "(#{ ch.success_count(:crawler_verdict, :parse_judge_error) } / #{ ch.verdicts_count })"
+              = "(#{ ch.success_count(:crawler_referee, :parse_judge_error) } / #{ ch.referees_count })"
             td
-              = "#{ precentage(ch.failed_count(:crawler_verdict, :parse_judge_not_exist), ch.verdicts_count) }"
+              = "#{ precentage(ch.failed_count(:crawler_referee, :parse_judge_not_exist), ch.referees_count) }"
               br
-              = "(#{ ch.failed_count(:crawler_verdict, :parse_judge_not_exist) } / #{ch.verdicts_count})"
+              = "(#{ ch.failed_count(:crawler_referee, :parse_judge_not_exist) } / #{ch.referees_count})"
             td
-              = "#{ precentage(ch.success_count(:crawler_verdict, :parse_lawyer_error), ch.verdicts_count) }"
+              = "#{ precentage(ch.success_count(:crawler_referee, :parse_lawyer_error), ch.referees_count) }"
               br
-              = "(#{ ch.success_count(:crawler_verdict, :parse_lawyer_error) } / #{ch.verdicts_count})"
+              = "(#{ ch.success_count(:crawler_referee, :parse_lawyer_error) } / #{ch.referees_count})"
             td
-              = "#{ precentage(ch.failed_count(:crawler_verdict, :parse_lawyer_not_exist), ch.verdicts_count) }"
+              = "#{ precentage(ch.failed_count(:crawler_referee, :parse_lawyer_not_exist), ch.referees_count) }"
               br
-              = "(#{ ch.failed_count(:crawler_verdict, :parse_lawyer_not_exist) } / #{ch.verdicts_count})"
+              = "(#{ ch.failed_count(:crawler_referee, :parse_lawyer_not_exist) } / #{ch.referees_count})"
             td
-              = "#{ precentage(ch.success_count(:crawler_verdict, :parse_party_error), ch.verdicts_count) }"
+              = "#{ precentage(ch.success_count(:crawler_referee, :parse_party_error), ch.referees_count) }"
               br
-              = "(#{ ch.success_count(:crawler_verdict, :parse_party_error) } / #{ch.verdicts_count})"
+              = "(#{ ch.success_count(:crawler_referee, :parse_party_error) } / #{ch.referees_count})"
             td
-              = "#{ precentage(ch.failed_count(:crawler_verdict, :parse_party_not_exist), ch.verdicts_count) }"
+              = "#{ precentage(ch.failed_count(:crawler_referee, :parse_party_not_exist), ch.referees_count) }"
               br
-              = "(#{ ch.failed_count(:crawler_verdict, :parse_party_not_exist) } / #{ch.verdicts_count})"
+              = "(#{ ch.failed_count(:crawler_referee, :parse_party_not_exist) } / #{ch.referees_count})"
             td
-              = "#{ precentage(ch.success_count(:crawler_verdict, :parse_prosecutor_error), ch.verdicts_count) }"
+              = "#{ precentage(ch.success_count(:crawler_referee, :parse_prosecutor_error), ch.referees_count) }"
               br
-              = "(#{ ch.success_count(:crawler_verdict, :parse_prosecutor_error) } / #{ch.verdicts_count})"
+              = "(#{ ch.success_count(:crawler_referee, :parse_prosecutor_error) } / #{ch.referees_count})"
             td
-              = "#{ precentage(ch.failed_count(:crawler_verdict, :parse_prosecutor_not_exist), ch.verdicts_count) }"
+              = "#{ precentage(ch.failed_count(:crawler_referee, :parse_prosecutor_not_exist), ch.referees_count) }"
               br
-              = "(#{ ch.failed_count(:crawler_verdict, :parse_prosecutor_not_exist) } / #{ch.verdicts_count})"
+              = "(#{ ch.failed_count(:crawler_referee, :parse_prosecutor_not_exist) } / #{ch.referees_count})"
     .ui-toolbar.ui-widget-header
       = paginate @crawler_histories, theme: :admin

@@ -71,7 +71,7 @@ feature '法官評鑑 - 旁觀者', type: :feature, js: true do
             before { click_button '下一步' }
             Then '顯示錯誤訊息，頁面仍保留原始輸入資訊' do
               expect(page).to have_field('schedule_score_judge_name', with: judge1.name)
-              expect(page).to have_content('法官不存在該法院')
+              expect(page).to have_content('沒有該位法官')
             end
           end
         end

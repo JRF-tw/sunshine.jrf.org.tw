@@ -122,7 +122,7 @@ zh-TW:
       lawyer_have_password: "該律師已設定密碼"
       lawyer_has_verdict: "該律師已關聯判決書"
       lawyer_not_found: "無此律師資料"
-      lawyer_not_found_manual_sign_up: "查無此律師資料 請改以人工管道註冊 <a href='/lawyer/appeal/new'>點此註冊</a>"
+      lawyer_not_found_manual_sign_up: "查無此律師資料 請改以人工管道註冊 <a target='_blank' href='https://marsz330.typeform.com/to/lfDPuQ'>點此註冊</a>"
       invalid_token: "無效的 token"
       invalid_phone_number: "手機號碼格式錯誤"
       impostor_set_fail: "未能設置為冒用者"
@@ -141,6 +141,7 @@ zh-TW:
       password_confirmation_blank: "密碼確認 不可為空白字元"
       password_less_than_minimum: "密碼 不得小於八個字元"
       password_not_match_confirmation: "密碼 需與密碼確認相同"
+      params_not_exist: '尚未輸入查詢條件'
       people_name_error: "取得 多位或沒有 相同姓名的人"
       phone_number_not_verify: "手機號碼尚未驗證 <a href='/party/appeal/new'>人工申訴</a>"
       phone_number_blank: "手機號碼為必填欄位"
@@ -161,6 +162,7 @@ zh-TW:
       start_on_blank: "開庭日期為必填"
       start_on_invalid: "開庭日期不能為未來時間"
       story_not_found: "案件不存在"
+      verdicts_not_exist: '此案件尚未有判決書'
       story_without_people_name: "案件內沒有該人名紀錄"
       story_already_pronounced: "案件已宣判, 無法評鑑"
       story_already_have_judgement: "已有判決書, 不可評鑑開庭"

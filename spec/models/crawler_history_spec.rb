@@ -11,6 +11,7 @@
 #  schedules_count :integer          default(0), not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  rules_count     :integer          default(0), not null
 #
 
 require 'rails_helper'
@@ -25,9 +26,8 @@ RSpec.describe CrawlerHistory, type: :model do
   end
 
   context 'scope' do
-    let!(:crawler_history) { create :crawler_history }
+    let!(:crawler_history) { create :crawler_history, :has_rule }
     let!(:crawler_history1) { create :crawler_history, :yesterday, :has_verdict }
-
     context 'newest' do
       it { expect(CrawlerHistory.newest.first).to eq(crawler_history) }
     end
@@ -36,8 +36,8 @@ RSpec.describe CrawlerHistory, type: :model do
       it { expect(CrawlerHistory.oldest.first).to eq(crawler_history1) }
     end
 
-    context 'has_verdicts' do
-      it { expect(CrawlerHistory.has_verdicts.count).to eq(1) }
+    context 'has_referees' do
+      it { expect(CrawlerHistory.has_referees.count).to eq(2) }
     end
   end
 end
