@@ -1,7 +1,5 @@
 json.verdict do
-  json.story do
-    json.partial! 'api/stories/identity', story: @story
-  end
+  json.partial! 'api/story', story: @story
   json.partial! 'api/court', court: @court
   json.summary @verdict.summary
   json.date @verdict.date

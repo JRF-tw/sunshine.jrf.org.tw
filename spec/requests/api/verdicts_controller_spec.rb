@@ -16,7 +16,14 @@ RSpec.describe Api::VerdictsController, type: :request do
               year: story.year,
               word: story.word_type,
               number: story.number
-            }
+            },
+            adjudge_date: story.adjudge_date,
+            pronounce_date: story.pronounce_date,
+            judges_names: story.judges_names,
+            prosecutor_names: story.prosecutor_names,
+            lawyer_names: story.lawyer_names,
+            party_names: story.party_names,
+            detail_url: api_story_url(story.court.code, story.identity)
           },
           court: {
             name: court.full_name,
