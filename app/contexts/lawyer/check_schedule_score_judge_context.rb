@@ -4,8 +4,8 @@ class Lawyer::CheckScheduleScoreJudgeContext < BaseContext
   before_perform :check_story
   before_perform :check_schedule
   before_perform :check_judge_name
+  before_perform :find_court
   before_perform :find_judge
-  before_perform :check_judge_in_correct_court
   before_perform :check_judge_already_scored
 
   def initialize(lawyer)
@@ -37,14 +37,14 @@ class Lawyer::CheckScheduleScoreJudgeContext < BaseContext
     return add_error(:judge_name_blank) unless @params[:judge_name].present?
   end
 
-  def find_judge
-    # TODO : need check same name issue
-    @judge = Judge.where(name: @params[:judge_name]).last
-    return add_error(:judge_not_found) unless @judge
+  def find_court
+    @court = Court.find(@params[:court_id].to_i)
+    return add_error(:court_not_found) unless @court
   end
 
-  def check_judge_in_correct_court
-    return add_error(:wrong_court_for_judge) if @judge.current_court_id != @params[:court_id].to_i
+  def find_judge
+    @judge = @court.judges.find_by(name: @params[:judge_name])
+    return add_error(:judge_not_found) unless @judge
   end
 
   def check_judge_already_scored
