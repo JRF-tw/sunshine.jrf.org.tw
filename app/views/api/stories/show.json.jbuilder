@@ -1,9 +1,9 @@
 json.story do
   json.partial! 'info', story: @story
   json.schedules do
-    # TODO : schedules index url
+    json.detail_url api_schedules_url(@court.code, @story.identity)
   end
-  json.vedrict do
-    # TODO : verdict show url
+  json.verdict do
+    json.detail_url api_verdict_url(@court.code, @story.identity)
   end
 end

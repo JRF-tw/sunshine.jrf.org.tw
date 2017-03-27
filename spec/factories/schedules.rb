@@ -24,7 +24,7 @@ FactoryGirl.define do
     story { create :story, court: court }
 
     trait :with_branch_judge do
-      branch_judge { create :judge }
+      branch_judge { create :judge, court: court }
     end
 
     trait :date_is_tomorrow do

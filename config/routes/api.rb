@@ -8,9 +8,10 @@ Rails.application.routes.draw do
 
   namespace :api, path: '' do
     constraints(host: /api/) do
-      get '/:id/verdict', to: "verdicts#show", constraints: { id: /\w{3}-\d{2,3}-.+-\d+/ }, as: 'verdict'
-      get ':court_code/:id', to: "stories#show", constraints: { court_code: /\w{3}/, id: /.+-\d{2,3}-.+-\d+/ }, as: 'story'
       get '/search/stories', to: "stories#index", as: 'stories'
+      get ':court_code/:id', to: "stories#show", constraints: { court_code: /\w{3}/, id: /.+-\d{2,3}-.+-\d+/ }, as: 'story'
+      get ':court_code/:id/verdict', to: "verdicts#show", constraints: { court_code: /\w{3}/, id: /.+-\d{2,3}-.+-\d+/ }, as: 'verdict'
+      get ':court_code/:id/schedules', to: "schedules#index", constraints: { court_code: /\w{3}/, id: /.+-\d{2,3}-.+-\d+/ }, as: 'schedules'
     end
   end
 end

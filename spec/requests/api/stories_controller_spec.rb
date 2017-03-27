@@ -48,7 +48,7 @@ RSpec.describe Api::StoriesController, type: :request do
 
     context 'court code not exist' do
       subject! { get '/search/stories', q: { court_code: '5566' } }
-      it { expect(response_body['message']).to eq('法院代號不存在') }
+      it { expect(response_body['message']).to eq('該法院代號不存在') }
       it { expect(response.status).to eq(404) }
     end
 
@@ -84,13 +84,26 @@ RSpec.describe Api::StoriesController, type: :request do
   end
 
   describe '#show' do
+
+    def association_url
+      {
+        schedules: {
+          detail_url: URI.encode("http://#{host}/#{story.court.code}/#{story.identity}/schedules")
+        },
+        verdict: {
+          detail_url: URI.encode("http://#{host}/#{story.court.code}/#{story.identity}/verdict")
+        }
+      }
+    end
+
     def show_json
-      { story: info_partial(story) }.deep_stringify_keys
+      { story: info_partial(story).merge(association_url) }.deep_stringify_keys
     end
 
     context 'success' do
       let(:url) { URI.encode("/#{code}/#{story.identity}") }
       subject! { get url }
+
       it { expect(response_body).to eq(show_json) }
       it { expect(response).to be_success }
     end
@@ -98,14 +111,14 @@ RSpec.describe Api::StoriesController, type: :request do
     context 'court not exist' do
       let(:url) { URI.encode("/XxX/#{story.identity}") }
       subject! { get url }
-      it { expect(response_body['message']).to eq('法院代號不存在') }
+      it { expect(response_body['message']).to eq('該法院代號不存在') }
       it { expect(response.status).to eq(404) }
     end
 
     context 'story not exist' do
       let(:url) { URI.encode("/#{code}/#{story.identity + '1'}") }
       subject! { get url }
-      it { expect(response_body['message']).to eq('查無此案件') }
+      it { expect(response_body['message']).to eq('案件不存在') }
       it { expect(response.status).to eq(404) }
     end
   end

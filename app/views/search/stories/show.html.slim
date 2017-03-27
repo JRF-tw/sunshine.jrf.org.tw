@@ -49,5 +49,11 @@ section.container.offcanvas-card-wrapper
             tr
               td 相關當事人
               td = @story.party_names.join(',')
+            tr
+              td 庭期表
+              td = link_to '庭期列表', search_schedules_path(@story.court.code, @story.identity), target: '_blank'
+            tr
+              td 判決
+              td = link_to '詳細資料', search_verdict_path(@story.court.code, @story.identity), target: '_blank'
     - else
       = @errors_message
