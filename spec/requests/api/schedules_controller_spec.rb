@@ -20,7 +20,7 @@ RSpec.describe Api::SchedulesController, type: :request do
           prosecutor_names: story.prosecutor_names,
           lawyer_names: story.lawyer_names,
           party_names: story.party_names,
-          detail_url: api_story_url(story.court.code, story.identity)
+          detail_url: api_story_url(story.court.code, story.identity, protocol: 'https')
         },
         court: {
           name: court.full_name,

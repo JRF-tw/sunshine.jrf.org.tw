@@ -84,7 +84,7 @@ module Scrap::AnalysisRefereeContentConcern
     false
   end
 
-  def prase_related_story(content)
+  def prase_related_stories(content)
     end_point = content.index('上列')
     data = content[0..end_point]
     data.scan(/.{3}年度.+第.+號/)[1..-1]

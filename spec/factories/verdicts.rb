@@ -12,10 +12,12 @@
 #  judges_names     :text
 #  prosecutor_names :text
 #  adjudge_date     :date
-#  content_file     :string
-#  publish_on       :date
+#  published_on     :date
 #  content_file     :string
 #  crawl_data       :hstore
+#  roles_data       :hstore
+#  reason           :string
+#  related_stories  :text
 #
 
 FactoryGirl.define do

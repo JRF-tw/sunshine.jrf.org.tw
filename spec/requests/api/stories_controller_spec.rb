@@ -35,7 +35,7 @@ RSpec.describe Api::StoriesController, type: :request do
     def index_json(stories)
       stories_array = []
       stories.each do |story|
-        stories_array << info_partial(story).merge(detail_link: api_story_url(story.court.code, story.identity))
+        stories_array << info_partial(story).merge(detail_link: api_story_url(story.court.code, story.identity, protocol: 'https'))
       end
       { stories: stories_array }.deep_stringify_keys
     end
@@ -88,10 +88,10 @@ RSpec.describe Api::StoriesController, type: :request do
     def association_url
       {
         schedules: {
-          detail_url: URI.encode("http://#{host}/#{story.court.code}/#{story.identity}/schedules")
+          detail_url: URI.encode("https://#{host}/#{story.court.code}/#{story.identity}/schedules")
         },
         verdict: {
-          detail_url: URI.encode("http://#{host}/#{story.court.code}/#{story.identity}/verdict")
+          detail_url: URI.encode("https://#{host}/#{story.court.code}/#{story.identity}/verdict")
         }
       }
     end

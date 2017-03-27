@@ -36,9 +36,8 @@ class Scrap::UploadRefereeContext < BaseContext
 
   def build_crawl_data
     @judge_word = @data.css('table')[2].css('table')[1].css('span')[0].text[/\d+,\p{Han}+,\d+/].tr(',', '-')
-    @summary = @data.css('table')[2].css('table')[1].css('span')[2].text[/(?<=\u00a0)\p{Han}+/]
-    @date = @data.css('table')[2].css('table')[1].css('span')[1].text[/\d+/]
-    @related_story = prase_related_story(@data.text)
+    @reason = @data.css('table')[2].css('table')[1].css('span')[2].text[/(?<=\u00a0)\p{Han}+/]
+    @related_stories = prase_related_stories(@data.text)
   end
 
   def build_file
@@ -58,11 +57,10 @@ class Scrap::UploadRefereeContext < BaseContext
     @referee.assign_attributes(
       file: File.open(@file.path),
       content_file: File.open(@content_file.path),
-      summary: @summary,
+      reason: @reason,
       roles_data: @content_file_data['story_related_roles'],
-      date: @date,
       judge_word: @judge_word,
-      related_story: @related_story
+      related_stories: @related_stories
     )
   end
 

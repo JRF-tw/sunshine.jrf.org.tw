@@ -10,8 +10,7 @@ RSpec.describe Scrap::UploadRefereeContext, type: :model do
       it { expect(referee.file).to be_present }
       it { expect(referee.content_file).to be_present }
       it { expect(referee.roles_data).to be_present }
-      it { expect(referee.date).to be_present }
-      it { expect(referee.summary).to be_present }
+      it { expect(referee.reason).to be_present }
       it { expect(referee.judge_word).to be_present }
     end
 
@@ -22,10 +21,9 @@ RSpec.describe Scrap::UploadRefereeContext, type: :model do
       it { expect(referee.file).to be_present }
       it { expect(referee.content_file).to be_present }
       it { expect(referee.roles_data).to be_present }
-      it { expect(referee.date).to be_present }
-      it { expect(referee.summary).to be_present }
+      it { expect(referee.reason).to be_present }
       it { expect(referee.judge_word).to be_present }
-      it { expect(referee.related_story).to be_present }
+      it { expect(referee.related_stories).to be_present }
     end
   end
 end

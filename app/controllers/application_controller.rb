@@ -43,4 +43,7 @@ class ApplicationController < ActionController::Base
     raise ActionController::RoutingError, 'Not Found'
   end
 
+  def default_url_options(options = {})
+    options.merge(protocol: 'https')
+  end
 end
