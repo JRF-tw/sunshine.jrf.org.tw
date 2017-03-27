@@ -7,6 +7,7 @@ describe Party::CheckScheduleScoreJudgeContext do
   let!(:schedule) { create :schedule, story: story }
   let!(:judge) { create :judge, court: court }
   let!(:judge2) { create :judge }
+  let!(:judge3) { create :judge, name: judge.name }
   let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type, start_on: schedule.start_on, confirmed_realdate: false, judge_name: judge.name } }
 
   describe '#perform' do
@@ -34,6 +35,11 @@ describe Party::CheckScheduleScoreJudgeContext do
     context 'judge not in in court' do
       before { params[:judge_name] = judge2.name }
       it { expect(subject).to be_falsey }
+    end
+
+    context 'same judge name in other court' do
+      before { params[:judge_name] = judge3.name }
+      it { expect(subject).to eq(judge) }
     end
 
     context 'check judge already scored' do
