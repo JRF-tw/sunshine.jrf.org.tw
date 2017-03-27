@@ -1,4 +1,5 @@
 class Search::StoriesController < BaseController
+  before_action :http_auth_for_production
 
   def index
     @search = Story.newest.ransack(params[:q])
