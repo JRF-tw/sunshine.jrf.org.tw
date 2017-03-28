@@ -1,7 +1,7 @@
 class CourtObservers::SchedulesController < CourtObservers::BaseController
-  before_action :schedule_score, except: [:edit, :update]
-  before_action :find_schedule_score, only: [:edit, :update]
-  before_action :story_adjudged?, only: [:edit, :update]
+  before_action :schedule_score, except: [:edit, :update, :destroy]
+  before_action :find_schedule_score, only: [:edit, :update, :destroy]
+  before_action :story_adjudged?, only: [:edit, :update, :destroy]
   before_action :init_meta, only: [:rule, :new, :edit, :input_info, :input_date, :input_judge, :thanks_scored]
 
   def rule
@@ -29,6 +29,16 @@ class CourtObservers::SchedulesController < CourtObservers::BaseController
     else
       context.errors
       render_as_fail(:edit, context.error_messages.join(','))
+    end
+  end
+
+  def destroy
+    story = @schedule_score.story
+    context = CourtObserver::ScheduleScoreDeleteContext.new(@schedule_score)
+    if context.perform
+      redirect_as_success(court_observer_root_path, '開庭評鑑已刪除')
+    else
+      redirect_as_fail(court_observer_story_path(story), context.error_messages.join(','))
     end
   end
 

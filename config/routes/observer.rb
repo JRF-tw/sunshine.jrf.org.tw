@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       end
     end
     resource :score do
-      resources :schedules, only: [:new, :create, :edit, :update] do
+      resources :schedules, except: [:show, :index] do
         collection do
           get :rule
           get :input_info
