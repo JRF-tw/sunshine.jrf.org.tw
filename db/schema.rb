@@ -575,6 +575,7 @@ ActiveRecord::Schema.define(version: 20170418022510) do
     t.string   "reason"
     t.text     "related_stories"
     t.string   "abs_url"
+    t.date     "adjudge_date"
   end
 
   add_index "rules", ["published_on"], name: "index_rules_on_published_on", using: :btree
@@ -641,6 +642,7 @@ ActiveRecord::Schema.define(version: 20170418022510) do
     t.date     "pronounce_date"
     t.boolean  "is_pronounce",     default: false
     t.boolean  "is_calculated",    default: false
+    t.string   "reason"
   end
 
   add_index "stories", ["adjudge_date"], name: "index_stories_on_adjudge_date", using: :btree

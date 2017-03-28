@@ -63,7 +63,7 @@ class Parties::VerdictsController < Parties::BaseController
   end
 
   def story_can_score?
-    range = (@verdict_score.story.adjudge_date..@verdict_score.story.adjudge_date + VERDICT_INTERVAL)
+    range = (@verdict_score.story.got_verdict_date..@verdict_score.story.got_verdict_date + VERDICT_INTERVAL)
     redirect_as_fail(party_root_path, '案件已超過可評鑑判決時間') unless range.include?(Time.zone.today)
   end
 

@@ -11,17 +11,17 @@ class Scrap::ImportVerdictContext < BaseContext
   after_perform   :send_active_notice
 
   class << self
-    def perform(court, original_data, content, word, published_on, story_type)
-      new(court, original_data, content, word, published_on, story_type).perform
+    def perform(court, original_data, content, word, adjudge_date, story_type)
+      new(court, original_data, content, word, adjudge_date, story_type).perform
     end
   end
 
-  def initialize(court, original_data, content, word, published_on, story_type)
+  def initialize(court, original_data, content, word, adjudge_date, story_type)
     @court = court
     @original_data = original_data
     @content = content
     @word = word
-    @published_on = published_on
+    @adjudge_date = adjudge_date
     @story_type = story_type
     @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
   end
@@ -38,8 +38,7 @@ class Scrap::ImportVerdictContext < BaseContext
   private
 
   def update_adjudge_date
-    @story.update_attributes(adjudge_date: Time.zone.today, is_adjudge: true) unless @story.adjudge_date
-    @verdict.update_attributes(adjudge_date: Time.zone.today)
+    @story.update_attributes(adjudge_date: @adjudge_date, is_adjudge: true) unless @story.adjudge_date
   end
 
   def update_pronounce_date

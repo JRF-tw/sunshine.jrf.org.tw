@@ -30,14 +30,14 @@ module Scrap::RefereeCommonStepConcern
   def create_rule
     @rule = Rule.find_or_create_by(
       story: @story,
-      published_on: @published_on
+      adjudge_date: @adjudge_date
     )
   end
 
   def create_verdict
     @verdict = Verdict.find_or_create_by(
       story: @story,
-      published_on: @published_on
+      adjudge_date: @adjudge_date
     )
   end
 
@@ -65,6 +65,7 @@ module Scrap::RefereeCommonStepConcern
   end
 
   def update_data_to_story
+    @story.assign_attributes(reason: @referee.reason) if @referee.reason
     @story.assign_attributes(judges_names: (@story.judges_names + @referee.judges_names).uniq)
     @story.assign_attributes(prosecutor_names: (@story.prosecutor_names + @referee.prosecutor_names).uniq)
     @story.assign_attributes(lawyer_names: (@story.lawyer_names + @referee.lawyer_names).uniq)

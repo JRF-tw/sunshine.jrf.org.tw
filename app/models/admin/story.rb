@@ -19,6 +19,7 @@
 #  pronounce_date   :date
 #  is_pronounce     :boolean          default(FALSE)
 #  is_calculated    :boolean          default(FALSE)
+#  reason           :string
 #
 
 class Admin::Story < ::Story
