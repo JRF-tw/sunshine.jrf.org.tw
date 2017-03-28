@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Parties::VerdictsController, type: :request do
   let!(:party) { create :party, :already_confirmed }
   let!(:court) { create :court }
-  let!(:story) { create :story, :pronounced, :adjudged, court: court }
+  let!(:story) { create :story, :pronounced, :adjudged, :with_verdict, court: court }
   let!(:judge) { create :judge, court: court }
   before { signin_party(party) }
 

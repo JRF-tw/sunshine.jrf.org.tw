@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Lawyers::VerdictsController, type: :request do
   let!(:lawyer) { create :lawyer, :with_confirmed, :with_password }
   let!(:court) { create :court }
-  let!(:story) { create :story, :pronounced, :adjudged, court: court }
+  let!(:story) { create :story, :pronounced, :adjudged, :with_verdict, court: court }
   let!(:judge) { create :judge, court: court }
   before { signin_lawyer(lawyer) }
 

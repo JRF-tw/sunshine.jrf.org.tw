@@ -82,9 +82,11 @@ feature '法官評鑑 - 當事人', type: :feature, js: true do
     end
 
     Scenario '案件已抓到判決書，且宣判日在過去或當天' do
+      let!(:verdict) { create :verdict, story: story }
       before { story.update_attributes(is_adjudge: true, is_pronounce: true) }
       Given '判決日與宣判日在當天' do
-        before { story.update_attributes(adjudge_date: Time.zone.today) }
+        before { verdict.update_attributes(created_at: Time.zone.today) }
+        before { story.update_attributes(adjudge_date: Time.zone.today, is_adjudge: true) }
         before { story.update_attributes(pronounce_date: Time.zone.today) }
 
         When '進行新增開庭評鑑' do
@@ -113,6 +115,7 @@ feature '法官評鑑 - 當事人', type: :feature, js: true do
       end
 
       Given '判決日在三個月內的過去，宣判日在三個月外的過去' do
+        before { verdict.update_attributes(created_at: Time.zone.today - 2.months) }
         before { story.update_attributes(adjudge_date: Time.zone.today - 2.months) }
         before { story.update_attributes(pronounce_date: Time.zone.today - 4.months) }
         When '進行新增開庭評鑑' do
@@ -141,6 +144,7 @@ feature '法官評鑑 - 當事人', type: :feature, js: true do
       end
 
       Given '判決日在三個月外的過去，宣判日在三個月外的過去' do
+        before { verdict.update_attributes(created_at: Time.zone.today - 4.months) }
         before { story.update_attributes(adjudge_date: Time.zone.today - 4.months) }
         before { story.update_attributes(pronounce_date: Time.zone.today - 4.months) }
         When '進行新增開庭評鑑' do

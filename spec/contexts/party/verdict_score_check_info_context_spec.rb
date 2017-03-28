@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Party::VerdictScoreCheckInfoContext do
   let!(:party) { create :party }
   let!(:court) { create :court }
-  let!(:story) { create :story, :pronounced, :adjudged, court: court }
+  let!(:story) { create :story, :pronounced, :adjudged, :with_verdict, court: court }
   let!(:params) { { court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type } }
 
   describe '#perform' do
@@ -40,23 +40,25 @@ describe Party::VerdictScoreCheckInfoContext do
 
     context 'story not adjudge' do
       context 'adjudge ' do
-        before { story.update_attributes(adjudge_date: Time.zone.today) }
+        before { story.update_attributes(adjudge_date: Time.zone.today, is_adjudge: true) }
         it { expect(subject).to be_truthy }
       end
 
       context 'not adjudge' do
-        before { story.update_attributes(adjudge_date: nil) }
+        before { story.update_attributes(adjudge_date: nil, is_adjudge: false) }
         it { expect(subject).to be_falsey }
       end
     end
 
     context 'valid_score_intervel' do
       context 'out score intervel' do
+        before { story.verdict.update_attributes(created_at: Time.zone.today - 91.days) }
         before { story.update_attributes(adjudge_date: Time.zone.today - 91.days) }
         it { expect(subject).to be_falsey }
       end
 
       context 'in score intervel' do
+        before { story.verdict.update_attributes(created_at: Time.zone.today - 31.days) }
         before { story.update_attributes(adjudge_date: Time.zone.today - 31.days) }
         it { expect(subject).to be_truthy }
       end
