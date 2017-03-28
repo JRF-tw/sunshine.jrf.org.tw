@@ -9,6 +9,9 @@
         td 案件
         td = link_to "#{@verdict.story.identity}", admin_story_path(@verdict.story)
       tr
+        td 案由
+        td = @verdict.reason
+      tr
         td 宣判日期
         td = @verdict.adjudge_date
       tr
@@ -49,7 +52,7 @@
             = ' '
       tr
         td 發布日期
-        td = @verdict.publish_on
+        td = @verdict.published_on
       tr
         td 文件下載
         td = link_to '點我下載', download_file_admin_verdict_path(@verdict) if @verdict.file

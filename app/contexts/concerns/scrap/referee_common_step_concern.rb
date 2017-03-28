@@ -29,14 +29,14 @@ module Scrap::RefereeCommonStepConcern
   def create_rule
     @rule = Rule.find_or_create_by(
       story: @story,
-      publish_on: @publish_on
+      published_on: @published_on
     )
   end
 
   def create_verdict
     @verdict = Verdict.find_or_create_by(
       story: @story,
-      publish_on: @publish_on
+      published_on: @published_on
     )
   end
 

@@ -7,7 +7,7 @@ article
 section.container.offcanvas-card-wrapper
   .card.card--artic
     - if @schedules
-      = admin_widget_box "案件 #{@story.identity} 庭期列表 : 共 #{@schedules.count} 筆", icon: :pencil do
+      = admin_widget_box "案件 #{@story.identity} 庭期列表 : 共 #{@story.schedules.count} 筆", icon: :pencil do
         .dataTables_wrapper
           table.table.table-bordered.table-striped.table-hover
             thead
@@ -34,3 +34,4 @@ section.container.offcanvas-card-wrapper
             = paginate @schedules, theme: :www
     - else 
       = @errors_message
+    = link_to "回到上一頁", request.referer.present? ? request.referer : search_stories_path

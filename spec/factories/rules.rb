@@ -9,11 +9,13 @@
 #  lawyer_names     :text
 #  judges_names     :text
 #  prosecutor_names :text
-#  publish_on       :date
+#  published_on     :date
 #  content_file     :string
 #  crawl_data       :hstore
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  reason           :string
+#  related_stories  :text
 #
 
 FactoryGirl.define do

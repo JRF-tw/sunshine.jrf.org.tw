@@ -12,11 +12,12 @@
 #  judges_names     :text
 #  prosecutor_names :text
 #  adjudge_date     :date
-#  publish_on       :date
+#  published_on     :date
 #  content_file     :string
 #  crawl_data       :hstore
 #  roles_data       :hstore
-#  summary          :string
+#  reason           :string
+#  related_stories  :text
 #
 
 class Verdict < ActiveRecord::Base
@@ -26,7 +27,8 @@ class Verdict < ActiveRecord::Base
   serialize :lawyer_names, Array
   serialize :judges_names, Array
   serialize :prosecutor_names, Array
-  store_accessor :crawl_data, :date, :judge_word, :related_story, :roles_data
+  serialize :related_stories, Array
+  store_accessor :crawl_data, :judge_word, :related_story, :roles_data
   has_many :verdict_relations, dependent: :destroy
   has_many :parties, through: :verdict_relations, source: :person, source_type: 'Party'
   has_many :lawyers, through: :verdict_relations, source: :person, source_type: 'Lawyer'
