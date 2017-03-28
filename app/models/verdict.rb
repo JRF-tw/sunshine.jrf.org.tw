@@ -28,7 +28,7 @@ class Verdict < ActiveRecord::Base
   serialize :judges_names, Array
   serialize :prosecutor_names, Array
   serialize :related_stories, Array
-  store_accessor :crawl_data, :judge_word, :roles_data
+  store_accessor :crawl_data, :judge_word, :related_story, :roles_data
   has_many :verdict_relations, dependent: :destroy
   has_many :parties, through: :verdict_relations, source: :person, source_type: 'Party'
   has_many :lawyers, through: :verdict_relations, source: :person, source_type: 'Lawyer'

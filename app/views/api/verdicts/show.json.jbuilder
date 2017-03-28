@@ -9,7 +9,7 @@ json.verdict do
   json.related_stories @verdict.related_stories
   json.published_on @verdict.published_on
   json.body do
-    json.raw_html_url @verdict.file.url ? 'https' + @verdict.file.url : nil
-    json.content_url @verdict.content_file.url ? 'https' + @verdict.content_file.url : nil
+    json.raw_html_url @verdict.file.url ? 'https:' + @verdict.file.url : nil
+    json.content_url @verdict.content_file.url ? 'https:' + @verdict.content_file.url : nil
   end
 end
