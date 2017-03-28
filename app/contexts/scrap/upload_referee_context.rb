@@ -42,7 +42,7 @@ class Scrap::UploadRefereeContext < BaseContext
 
   def build_file
     @file = generate_tempfile(@orginal_data, 'referee', 'html')
-    @content_file = generate_tempfile(@content_file_data, @referee.story.identity, 'json')
+    @content_file = generate_tempfile(@content_file_data.to_json, @referee.story.identity, 'json')
   end
 
   def generate_tempfile(data, file_name, file_type)
