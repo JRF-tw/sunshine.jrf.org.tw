@@ -280,14 +280,15 @@ module ApplicationHelper
     ScheduleScore.stored_attributes[scores_type]
   end
 
-  def api_host
-    case Rails.env
-    when 'development'
-      'api.localhost:3000'
-    when 'staging'
-      'api-demo.jrf.org.tw'
-    when 'production'
-      'api.jrf.org.tw'
+  def smart_add_https(url)
+    if url[/\Ahttp:\/\//]
+      url.gsub(/\Ahttp/, 'https')
+    elsif url[/\Ahttps:\/\//]
+      url
+    elsif url[/\A\/\//]
+      "https:#{url}"
+    else
+      "https://#{url}"
     end
   end
 end

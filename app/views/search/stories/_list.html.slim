@@ -1,4 +1,4 @@
-= admin_widget_box "案件列表 : 共 #{@stories.count} 筆", icon: :pencil do
+= admin_widget_box "案件列表 : 共 #{@search.result.count} 筆", icon: :pencil do
   .dataTables_wrapper
     table.table.table-bordered.table-striped.table-hover
       thead
