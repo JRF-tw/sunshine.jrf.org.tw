@@ -279,4 +279,15 @@ module ApplicationHelper
   def get_schedule_score_hstore_attributes(scores_type)
     ScheduleScore.stored_attributes[scores_type]
   end
+
+  def api_host
+    case Rails.env
+    when 'development'
+      'api.localhost:3000'
+    when 'staging'
+      'api-demo.jrf.org.tw'
+    when 'production'
+      'api.jrf.org.tw'
+    end
+  end
 end

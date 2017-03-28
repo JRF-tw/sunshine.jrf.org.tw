@@ -34,3 +34,4 @@ section.container.offcanvas-card-wrapper
             = paginate @schedules, theme: :www
     - else 
       = @errors_message
+    = link_to "回到上一頁", request.referer.present? ? request.referer : search_stories_path

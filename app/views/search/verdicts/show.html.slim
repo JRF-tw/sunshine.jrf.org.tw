@@ -6,38 +6,45 @@ article
 
 section.container.offcanvas-card-wrapper
   .card.card--article
-    = admin_widget_box '判決資料', icon: :th do
-      table.table.table-bordered.table-striped.table-hover
-        tbody
-          tr
-            td 案件
-            td 
-          tr
-            td 法院
-            td 
-          tr
-            td 法院代號
-            td 
-          tr
-            td 案由
-            td 
-          tr
-            td 宣判日期
-            td
-          tr
-            td 發布日期
-            td
-          tr
-            td 相關檢察官
-            td
-          tr
-            td 相關律師
-            td
-          tr
-            td 相關法官
-            td
-          tr
-            td 相關當事人
-            td
-      h2 判決書內文
-      div
+    - if @verdict
+      = admin_widget_box '判決資料', icon: :th do
+        table.table.table-bordered.table-striped.table-hover
+          tbody
+            tr
+              td 案由
+              td = @verdict.reason
+            tr
+              td 案件
+              td = @story.identity
+            tr
+              td 法院
+              td = @court.full_name
+            tr
+              td 法院代號
+              td = @court.code
+            tr
+              td 案由
+              td = @verdict.reason
+            tr
+              td 判決日期
+              td = @verdict.published_on
+            tr
+              td 發布日期
+              td = @verdict.adjudge_date
+            tr
+              td 相關法官
+              td = @verdict.judges_names.join(',')
+            tr
+              td 相關律師
+              td = @verdict.lawyer_names.join(',')  
+            tr
+              td 相關檢察官
+              td = @verdict.prosecutor_names.join(',')
+            tr
+              td 相關當事人
+              td = @verdict.party_names.join(',')
+        h2 判決書內文
+        div = api_verdict_url(@court.code, @story.identity, host: api_host)
+    - else
+      = @errors_message
+    = link_to "回到上一頁", request.referer.present? ? request.referer : search_stories_path

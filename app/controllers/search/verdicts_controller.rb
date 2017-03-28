@@ -2,8 +2,13 @@ class Search::VerdictsController < BaseController
   before_action :http_auth_for_production
 
   def show
-    @court_code = params[:court_code]
-    @id = params[:id]
-    # TODO : pass verdict API url to view
+    context = Story::FindContext.new(params[:court_code], params[:id])
+    if @story = context.perform
+      @court = @story.court
+      @verdict = @story.verdict
+      @errors_message = '尚未有判決書' unless @verdict
+    else
+      @errors_message = context.error_messages.join(',')
+    end
   end
 end

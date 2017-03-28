@@ -331,6 +331,7 @@ zh-TW:
         adjudge_date_gteq: '宣判日期'
         judges_names_cont: '法官名稱包含'
         lawyer_names_cont: '律師名稱包含'
+        reason_cont: '案由包含'
       verdict:
         story_court_full_name_eq: '判決法院'
         content_cont: '內容包含'

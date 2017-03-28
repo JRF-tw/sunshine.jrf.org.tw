@@ -3,8 +3,8 @@ json.verdict do
   json.partial! 'api/court', court: @court
   json.reason @verdict.reason
   json.judges_names @verdict.judges_names
-  json.prosecutor_names @verdict.prosecutor_names
   json.lawyer_names @verdict.lawyer_names
+  json.prosecutor_names @verdict.prosecutor_names
   json.party_names @verdict.party_names
   json.related_stories @verdict.related_stories
   json.published_on @verdict.published_on
