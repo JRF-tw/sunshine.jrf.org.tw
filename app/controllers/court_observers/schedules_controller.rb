@@ -36,10 +36,12 @@ class CourtObservers::SchedulesController < CourtObservers::BaseController
     story = @schedule_score.story
     context = CourtObserver::ScheduleScoreDeleteContext.new(@schedule_score)
     if context.perform
-      redirect_as_success(court_observer_root_path, '開庭評鑑已刪除')
+      flash[:success] = '開庭評鑑已刪除'
     else
-      redirect_as_fail(court_observer_story_path(story), context.error_messages.join(','))
+      flash[:error] = context.error_messages.join(',')
     end
+    return redirect_to court_observer_root_path unless current_court_observer.schedule_scores.where(story: story).count > 0
+    redirect_to court_observer_story_path(story)
   end
 
   def input_info

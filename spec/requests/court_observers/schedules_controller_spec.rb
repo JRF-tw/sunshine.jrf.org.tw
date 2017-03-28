@@ -113,11 +113,22 @@ RSpec.describe CourtObservers::SchedulesController, type: :request do
 
   describe '#destroy' do
     context 'success' do
-      let!(:schedule_score) { create :schedule_score, schedule_rater: court_observer, court_id: court.id }
-      subject! { delete "/observer/score/schedules/#{schedule_score.id}" }
+      context 'delete last schedule score' do
+        let!(:schedule_score) { create :schedule_score, schedule_rater: court_observer, court_id: court.id }
+        subject! { delete "/observer/score/schedules/#{schedule_score.id}" }
 
-      it { expect(response).to be_redirect }
-      it { expect(flash[:success]).to eq('開庭評鑑已刪除') }
+        it { expect(response).to redirect_to(court_observer_root_path) }
+        it { expect(flash[:success]).to eq('開庭評鑑已刪除') }
+      end
+
+      context 'not delete last schedule score' do
+        let!(:schedule_score) { create :schedule_score, schedule_rater: court_observer, court_id: court.id }
+        let!(:schedule_score_2) { create :schedule_score, story: schedule_score.story, schedule_rater: court_observer, court_id: court.id }
+        subject! { delete "/observer/score/schedules/#{schedule_score.id}" }
+
+        it { expect(response).to redirect_to(court_observer_story_path(schedule_score.story)) }
+        it { expect(flash[:success]).to eq('開庭評鑑已刪除') }
+      end
     end
 
     context 'story is adjudged' do
