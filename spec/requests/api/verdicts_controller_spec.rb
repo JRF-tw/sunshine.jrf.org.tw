@@ -20,26 +20,25 @@ RSpec.describe Api::VerdictsController, type: :request do
             adjudge_date: story.adjudge_date,
             pronounce_date: story.pronounce_date,
             judges_names: story.judges_names,
-            prosecutor_names: story.prosecutor_names,
             lawyer_names: story.lawyer_names,
+            prosecutor_names: story.prosecutor_names,
             party_names: story.party_names,
-            detail_url: api_story_url(story.court.code, story.identity)
+            detail_url: api_story_url(story.court.code, story.identity, protocol: 'https')
           },
           court: {
             name: court.full_name,
             code: court.code
           },
-          summary: verdict.summary,
-          date: verdict.date,
+          reason: verdict.reason,
           judges_names: verdict.judges_names,
           prosecutor_names: verdict.prosecutor_names,
           lawyer_names: verdict.lawyer_names,
           party_names: verdict.party_names,
-          related_story: verdict.related_story,
-          publish_on: verdict.publish_on,
+          related_stories: verdict.related_stories,
+          published_on: verdict.published_on,
           body: {
-            verdict_file_url: verdict.file.url,
-            verdict_content_url: verdict.content_file.url
+            raw_html_url: verdict.file.url ? 'https' + @verdict.file.url : nil,
+            content_url: verdict.content_file.url ? 'https' + @verdict.content_file.url : nil
           }
         }
       }.deep_stringify_keys

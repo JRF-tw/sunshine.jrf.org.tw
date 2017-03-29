@@ -8,11 +8,11 @@ RSpec.describe Scrap::ImportRuleContext, type: :model do
   let!(:content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/ruling_content.txt") }
 
   let!(:word) { '106,台抗,94' }
-  let!(:publish_on) { Time.zone.today }
+  let!(:published_on) { Time.zone.today }
   let!(:story_type) { '刑事' }
 
   describe '#perform' do
-    subject { described_class.new(court, original_data, content, word, publish_on, story_type).perform }
+    subject { described_class.new(court, original_data, content, word, published_on, story_type).perform }
 
     context 'create rule' do
       it { expect { subject }.to change { Rule.count } }
@@ -50,12 +50,12 @@ RSpec.describe Scrap::ImportRuleContext, type: :model do
     context '#alert_new_story_type' do
       context 'alert' do
         let!(:story_type) { '新der案件類別' }
-        subject { described_class.new(court, original_data, content, word, publish_on, story_type).perform }
+        subject { described_class.new(court, original_data, content, word, published_on, story_type).perform }
         it { expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
       end
 
       context 'not alert' do
-        subject { described_class.new(court, original_data, content, word, publish_on, story_type).perform }
+        subject { described_class.new(court, original_data, content, word, published_on, story_type).perform }
         it { expect { subject }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
       end
     end

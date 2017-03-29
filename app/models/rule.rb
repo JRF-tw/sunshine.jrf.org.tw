@@ -9,12 +9,13 @@
 #  lawyer_names     :text
 #  judges_names     :text
 #  prosecutor_names :text
-#  publish_on       :date
+#  published_on     :date
 #  content_file     :string
 #  crawl_data       :hstore
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
-#  summary          :string
+#  reason           :string
+#  related_stories  :text
 #
 
 class Rule < ActiveRecord::Base
@@ -24,6 +25,7 @@ class Rule < ActiveRecord::Base
   serialize :lawyer_names, Array
   serialize :judges_names, Array
   serialize :prosecutor_names, Array
-  store_accessor :crawl_data, :date, :judge_word, :related_story, :roles_data
+  serialize :related_stories, Array
+  store_accessor :crawl_data, :judge_word, :roles_data
   belongs_to :story
 end

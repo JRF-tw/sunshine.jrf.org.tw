@@ -64,6 +64,8 @@ ruby:
               edit_score_verdict  = edit_party_score_verdict_path(ss["id"])
             when 'observer'
               edit_score_schedule = edit_court_observer_score_schedule_path(ss["id"])
+              delete_score_schedule =
+              court_observer_score_schedule_path(ss["id"])
             else
             end
           tr
@@ -76,6 +78,11 @@ ruby:
                   class: 'flat-button--addons' do
                   => inline_svg 'pencil'
                   | 編輯評鑑
+                - if type == 'observer'
+                  = link_to delete_score_schedule,
+                    method: :delete, class: 'flat-button--addons','data-confirm': "確認刪除此開庭評鑑？" do
+                    => inline_svg ''
+                    | 刪除評鑑 
               - else
                 = link_to edit_score_verdict,
                   class: 'flat-button--addons' do

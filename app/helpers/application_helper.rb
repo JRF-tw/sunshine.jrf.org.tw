@@ -279,4 +279,16 @@ module ApplicationHelper
   def get_schedule_score_hstore_attributes(scores_type)
     ScheduleScore.stored_attributes[scores_type]
   end
+
+  def smart_add_https(url)
+    if url[/\Ahttp:\/\//]
+      url.gsub(/\Ahttp/, 'https')
+    elsif url[/\Ahttps:\/\//]
+      url
+    elsif url[/\A\/\//]
+      "https:#{url}"
+    else
+      "https://#{url}"
+    end
+  end
 end

@@ -1,36 +1,30 @@
-= admin_widget_box "案件列表 : 搜尋結果為 #{@stories.count} 筆", icon: :pencil do
+= admin_widget_box "案件列表 : 共 #{@stories.total_count} 筆", icon: :pencil do
   .dataTables_wrapper
     table.table.table-bordered.table-striped.table-hover
       thead
         tr
+          th 法院
           th 類別
           th 年度
           th 字別
           th 案號
-          th 判決日期
           th 宣判日期
-          th 法院全名
-          th 法院代碼
+          th 案由
           th 相關法官
           th 相關律師
-          th 相關檢察官
-          th 相關當事人
           th 
       tbody
         - @stories.each do |story|
           tr
+            td = story.court.name
             td = story.story_type
             td = story.year
             td = story.word_type
-            td = story.number
+            td = story.year.to_s + story.word_type + story.number.to_s
             td = story.adjudge_date
-            td = story.pronounce_date
-            td = story.court.full_name
-            td = story.court.code
+            td = story.verdict.try(:reason)
             td = story.judges_names.join(',')
             td = story.lawyer_names.join(',')
-            td = story.prosecutor_names.join(',')
-            td = story.party_names.join(',')
             td
               = link_to "詳細資料", search_story_path(story.court.code, story.identity), class: "btn btn-mini"
     .ui-toolbar.ui-widget-header

@@ -12,11 +12,12 @@
 #  judges_names     :text
 #  prosecutor_names :text
 #  adjudge_date     :date
-#  publish_on       :date
+#  published_on     :date
 #  content_file     :string
 #  crawl_data       :hstore
 #  roles_data       :hstore
-#  summary          :string
+#  reason           :string
+#  related_stories  :text
 #
 
 class Admin::Verdict < ::Verdict

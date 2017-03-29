@@ -38,7 +38,7 @@
       = link_to "清空搜尋結果", admin_verdicts_path, :class => "btn btn-default"
 
 
-= admin_widget_box "判決書列表 : 搜尋結果為 #{@search.result.count} 筆", icon: :pencil do
+= admin_widget_box "判決書列表 : 搜尋結果為 #{@verdicts.total_count} 筆", icon: :pencil do
   .dataTables_wrapper
     table.table.table-bordered.table-striped.table-hover
       thead
@@ -59,7 +59,7 @@
             td = link_to "#{verdict.story.court.full_name}", admin_court_path(verdict.story.court)
             td = verdict.adjudge_date
             td = link_to "#{verdict.story.identity}", admin_story_path(verdict.story)
-            td = verdict.publish_on
+            td = verdict.published_on
             td = link_to "點我預覽", verdict.file.url, target: '_blank' if verdict.file
             td = link_to "點我下載", download_file_admin_verdict_path(verdict) if verdict.file
             td

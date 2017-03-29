@@ -51,9 +51,10 @@ section.container.offcanvas-card-wrapper
               td = @story.party_names.join(',')
             tr
               td 庭期表
-              td = link_to '庭期列表', search_schedules_path(@story.court.code, @story.identity), target: '_blank'
+              td = link_to '庭期列表', search_schedules_path(@story.court.code, @story.identity)
             tr
               td 判決
-              td = link_to '詳細資料', search_verdict_path(@story.court.code, @story.identity), target: '_blank'
+              td = link_to '詳細資料', search_verdict_path(@story.court.code, @story.identity)
     - else
       = @errors_message
+    = link_to "回到上一頁", search_stories_path

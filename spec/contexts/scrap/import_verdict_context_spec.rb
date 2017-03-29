@@ -7,11 +7,11 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
   let!(:original_data) { Mechanize.new.get(Scrap::ParseRefereeContext::REFEREE_URI).body.force_encoding('UTF-8') }
   let!(:content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/judgment_content.txt") }
   let!(:word) { '105,原選上訴,1' }
-  let!(:publish_on) { Time.zone.today }
+  let!(:published_on) { Time.zone.today }
   let!(:story_type) { '刑事' }
 
   describe '#perform' do
-    subject { described_class.new(court, original_data, content, word, publish_on, story_type).perform }
+    subject { described_class.new(court, original_data, content, word, published_on, story_type).perform }
 
     context 'create verdict' do
       it { expect { subject }.to change { Verdict.count } }
@@ -112,12 +112,12 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
     context '#alert_new_story_type' do
       context 'alert' do
         let!(:story_type) { '新der案件類別' }
-        subject { described_class.new(court, original_data, content, word, publish_on, story_type).perform }
+        subject { described_class.new(court, original_data, content, word, published_on, story_type).perform }
         it { expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify) }
       end
 
       context 'not alert' do
-        subject { described_class.new(court, original_data, content, word, publish_on, story_type).perform }
+        subject { described_class.new(court, original_data, content, word, published_on, story_type).perform }
         it { expect { subject }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
       end
     end

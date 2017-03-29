@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170315095451) do
+ActiveRecord::Schema.define(version: 20170327111519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -567,17 +567,18 @@ ActiveRecord::Schema.define(version: 20170315095451) do
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
-    t.date     "publish_on"
+    t.date     "published_on"
     t.string   "content_file"
     t.hstore   "crawl_data"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.string   "summary"
+    t.string   "reason"
+    t.text     "related_stories"
   end
 
-  add_index "rules", ["publish_on"], name: "index_rules_on_publish_on", using: :btree
+  add_index "rules", ["published_on"], name: "index_rules_on_published_on", using: :btree
+  add_index "rules", ["reason"], name: "index_rules_on_reason", using: :btree
   add_index "rules", ["story_id"], name: "index_rules_on_story_id", using: :btree
-  add_index "rules", ["summary"], name: "index_rules_on_summary", using: :btree
 
   create_table "schedule_scores", force: :cascade do |t|
     t.integer  "schedule_id"
@@ -826,15 +827,16 @@ ActiveRecord::Schema.define(version: 20170315095451) do
     t.text     "judges_names"
     t.text     "prosecutor_names"
     t.date     "adjudge_date"
-    t.date     "publish_on"
+    t.date     "published_on"
     t.string   "content_file"
     t.hstore   "crawl_data"
     t.hstore   "roles_data"
-    t.string   "summary"
+    t.string   "reason"
+    t.text     "related_stories"
   end
 
   add_index "verdicts", ["adjudge_date"], name: "index_verdicts_on_adjudge_date", using: :btree
-  add_index "verdicts", ["publish_on"], name: "index_verdicts_on_publish_on", using: :btree
-  add_index "verdicts", ["summary"], name: "index_verdicts_on_summary", using: :btree
+  add_index "verdicts", ["published_on"], name: "index_verdicts_on_published_on", using: :btree
+  add_index "verdicts", ["reason"], name: "index_verdicts_on_reason", using: :btree
 
 end
