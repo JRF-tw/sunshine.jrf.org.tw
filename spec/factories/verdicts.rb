@@ -23,7 +23,7 @@
 FactoryGirl.define do
   factory :verdict do
     story { create(:story) }
-
+    reason '借刀殺人'
     trait :with_file do
       file { File.open("#{Rails.root}/spec/fixtures/scrap_data/judgment.html") }
     end
