@@ -26,7 +26,7 @@
       = " "
       = link_to "清空搜尋結果", admin_schedules_path, :class => "btn btn-default"
 
-= admin_widget_box "庭期表列表 : 搜尋結果為 #{@search.result.count} 筆", icon: :pencil do
+= admin_widget_box "庭期表列表 : 搜尋結果為 #{@schedules.total_count} 筆", icon: :pencil do
   .dataTables_wrapper
     table.table.table-bordered.table-striped.table-hover
       thead

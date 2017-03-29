@@ -33,7 +33,7 @@
       = f.submit :value => "搜尋", :class => "btn btn-primary"
       = " "
       = link_to "清空搜尋結果", admin_observers_path, :class => "btn btn-default"
-= admin_widget_box "觀察員列表 : 搜尋結果為 #{@search.result.count} 筆", icon: :pencil do
+= admin_widget_box "觀察員列表 : 搜尋結果為 #{@court_observers.total_count} 筆", icon: :pencil do
   .dataTables_wrapper
     div
       .dataTables_length
