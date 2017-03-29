@@ -57,4 +57,4 @@ section.container.offcanvas-card-wrapper
               td = link_to '詳細資料', search_verdict_path(@story.court.code, @story.identity)
     - else
       = @errors_message
-    = link_to "回到上一頁", request.referer.present? ? request.referer : search_stories_path
+    = link_to "回到上一頁", search_stories_path

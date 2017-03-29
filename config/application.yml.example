@@ -1,6 +1,7 @@
 defaults: &defaults
   SECRET_KEY_BASE: daskdjaslkjdsalkdj12341234
   host: localhost
+  api_host: api.localhost
   assets_host: localhost:3000
   asset_sync:
     bucket: myapp.5fpro.com
@@ -53,6 +54,7 @@ test:
 staging: &defaults
   SECRET_KEY_BASE: daskdjaslkjdsalkdj12341234
   host: sunshine-demo.jrf.org.tw
+  api_host: api-demo.jrf.org.tw
   assets_host: assets-staging-jrf.s3-website-ap-northeast-1.amazonaws.com
   asset_sync:
     bucket: assets-staging-jrf
@@ -91,6 +93,7 @@ staging: &defaults
 production:
   SECRET_KEY_BASE: daskdjaslkjdsalkdj12341234
   host: sunshine.jrf.org.tw
+  api_host: api.jrf.org.tw
   assets_host: dvtnykzk9n7xc.cloudfront.net
   asset_sync:
     bucket: assets-jrf

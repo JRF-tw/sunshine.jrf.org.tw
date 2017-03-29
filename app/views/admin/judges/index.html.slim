@@ -40,7 +40,7 @@
       = ' '
       = link_to '清空搜尋結果', admin_judges_path, class: 'btn btn-default'
 
-= admin_widget_box "法官列表 : 搜尋結果為 #{@search.result.count} 筆", icon: :pencil do
+= admin_widget_box "法官列表 : 搜尋結果為 #{@judges.total_count} 筆", icon: :pencil do
   .dataTables_wrapper
     div
       .dataTables_length

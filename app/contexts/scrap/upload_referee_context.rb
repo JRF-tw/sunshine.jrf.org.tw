@@ -30,7 +30,7 @@ class Scrap::UploadRefereeContext < BaseContext
 
   def build_content_json
     start_point = @data.css('pre').text.index('上列')
-    @content_file_data['story_related_roles'] = parse_roles_hash(@referee, @data.text, @crawler_history)
+    @content_file_data['related_roles'] = parse_roles_hash(@referee, @data.text, @crawler_history)
     @content_file_data['main_content'] = @data.css('pre').text[start_point..-1]
   end
 
@@ -58,7 +58,7 @@ class Scrap::UploadRefereeContext < BaseContext
       file: File.open(@file.path),
       content_file: File.open(@content_file.path),
       reason: @reason,
-      roles_data: @content_file_data['story_related_roles'],
+      roles_data: @content_file_data['related_roles'],
       judge_word: @judge_word,
       related_stories: @related_stories
     )
