@@ -23,7 +23,7 @@ module Scrap::RefereeCommonStepConcern
 
   def find_or_create_story
     array = @word.match(/\d+,\W+,\d+/)[0].split(',')
-    @story = Story.find_or_create_by(year: array[0], word_type: array[1], number: array[2], court: @court)
+    @story = Story.find_or_create_by(story_type: @story_type, year: array[0], word_type: array[1], number: array[2], court: @court)
   end
 
   def create_rule
