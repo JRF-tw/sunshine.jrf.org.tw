@@ -2,6 +2,7 @@ class Api::BaseController < ApplicationController
   include Api::ErrorConcern
   include Api::PaginationConcern
   skip_before_action :verify_authenticity_token
+  skip_before_action :http_auth_for_staging
   before_action :enable_cors
   before_action :set_default_format
   before_action :set_default_language
