@@ -33,6 +33,7 @@ class Story < ActiveRecord::Base
   has_many :valid_scores
   belongs_to :court
 
+  validates :story_type, :year, :word_type, :number, presence: true
   serialize :party_names, Array
   serialize :lawyer_names, Array
   serialize :judges_names, Array
