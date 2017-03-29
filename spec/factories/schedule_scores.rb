@@ -36,6 +36,10 @@ FactoryGirl.define do
         schedule_score.save
       end
     end
+
+    trait :with_adjudged_story do
+      story { FactoryGirl.create :story, :adjudged }
+    end
   end
 
   factory :schedule_score_for_params, class: ScheduleScore do
