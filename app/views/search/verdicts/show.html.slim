@@ -44,7 +44,7 @@ section.container.offcanvas-card-wrapper
               td 相關當事人
               td = @verdict.party_names.join(',')
         h2 判決書內文
-        div = smart_add_https(@verdict.content_file.url)
+        div = smart_add_https(@verdict.content_file.url) if @verdict.content_file.present?
     - else
       = @errors_message
     = link_to "回到上一頁", request.referer.present? ? request.referer : search_stories_path
