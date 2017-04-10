@@ -40,7 +40,7 @@ class Scrap::GetRefereesByCourtContext < BaseContext
       self.class.delay_for(1.hour).perform(@court, @start_date, @end_date)
       redis_object.incr
     else
-      Logs::AddCrawlerError.parse_verdict_data_error(@crawler_history, :crawler_failed, "取得判決書裁判類別失敗, 來源網址:#{INDEX_URI}")
+      Logs::AddCrawlerError.parse_referee_data_error(@crawler_history, :crawler_failed, "取得判決書裁判類別失敗, 來源網址:#{INDEX_URI}")
     end
     false
   end
