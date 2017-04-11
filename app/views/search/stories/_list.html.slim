@@ -22,7 +22,7 @@
             td = story.word_type
             td = story.year.to_s + story.word_type + story.number.to_s
             td = story.adjudge_date
-            td = story.verdict.try(:reason)
+            td = story.reason
             td = story.judges_names.join(',')
             td = story.lawyer_names.join(',')
             td
