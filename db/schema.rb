@@ -578,6 +578,7 @@ ActiveRecord::Schema.define(version: 20170418022510) do
     t.date     "adjudge_date"
   end
 
+  add_index "rules", ["adjudge_date"], name: "index_rules_on_adjudge_date", using: :btree
   add_index "rules", ["published_on"], name: "index_rules_on_published_on", using: :btree
   add_index "rules", ["reason"], name: "index_rules_on_reason", using: :btree
   add_index "rules", ["story_id"], name: "index_rules_on_story_id", using: :btree
@@ -651,6 +652,7 @@ ActiveRecord::Schema.define(version: 20170418022510) do
   add_index "stories", ["is_calculated"], name: "index_stories_on_is_calculated", using: :btree
   add_index "stories", ["is_pronounce"], name: "index_stories_on_is_pronounce", using: :btree
   add_index "stories", ["pronounce_date"], name: "index_stories_on_pronounce_date", using: :btree
+  add_index "stories", ["reason"], name: "index_stories_on_reason", using: :btree
 
   create_table "story_relations", force: :cascade do |t|
     t.integer  "story_id"

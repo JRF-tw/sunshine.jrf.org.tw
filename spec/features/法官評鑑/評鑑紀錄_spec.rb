@@ -90,7 +90,6 @@ describe '法官評鑑 - 評鑑紀錄', type: :request do
   context 'Given 案件已宣判，且已評鑑判決，但已超過判決評鑑時間' do
     let!(:verdict) { create :verdict, story: story }
     let!(:verdict_score) { create :verdict_score, verdict_rater: lawyer, story: story }
-    before { story.update_attributes(adjudge_date: Time.zone.today - 91.days) }
     before { story.verdict.update_attributes(created_at: Time.zone.today - 91.days) }
     context 'When 到該案件的評鑑記錄頁' do
       subject! { get "/lawyer/stories/#{story.id}" }

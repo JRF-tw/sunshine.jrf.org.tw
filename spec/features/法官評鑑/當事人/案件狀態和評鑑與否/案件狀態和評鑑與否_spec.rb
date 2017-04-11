@@ -86,7 +86,6 @@ feature '法官評鑑 - 當事人', type: :feature, js: true do
       before { story.update_attributes(is_adjudge: true, is_pronounce: true) }
       Given '判決日與宣判日在當天' do
         before { verdict.update_attributes(created_at: Time.zone.today) }
-        before { story.update_attributes(adjudge_date: Time.zone.today, is_adjudge: true) }
         before { story.update_attributes(pronounce_date: Time.zone.today) }
 
         When '進行新增開庭評鑑' do
@@ -116,7 +115,6 @@ feature '法官評鑑 - 當事人', type: :feature, js: true do
 
       Given '判決日在三個月內的過去，宣判日在三個月外的過去' do
         before { verdict.update_attributes(created_at: Time.zone.today - 2.months) }
-        before { story.update_attributes(adjudge_date: Time.zone.today - 2.months) }
         before { story.update_attributes(pronounce_date: Time.zone.today - 4.months) }
         When '進行新增開庭評鑑' do
           before { visit(input_info_party_score_schedules_path) }
@@ -145,7 +143,6 @@ feature '法官評鑑 - 當事人', type: :feature, js: true do
 
       Given '判決日在三個月外的過去，宣判日在三個月外的過去' do
         before { verdict.update_attributes(created_at: Time.zone.today - 4.months) }
-        before { story.update_attributes(adjudge_date: Time.zone.today - 4.months) }
         before { story.update_attributes(pronounce_date: Time.zone.today - 4.months) }
         When '進行新增開庭評鑑' do
           before { visit(input_info_party_score_schedules_path) }
