@@ -23,6 +23,9 @@
         td 案件類別
         td = @story.story_type
       tr
+        td 案由
+        td = @story.reason
+      tr
         td 與案件相關法官
         td
           - @story.by_relation_role('judge').each do |sr|

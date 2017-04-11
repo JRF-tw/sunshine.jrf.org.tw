@@ -43,6 +43,11 @@
             label.control-label = f.label :story_type_eq
             .controls.select2 = f.select :story_type_eq,
             collect_for_story_types, include_blank: "請選擇"
+      .row
+        .span6
+          .control-group
+            label.control-label = f.label :reason_cont
+            .controls = f.search_field :reason_cont
           
 
     hr
@@ -61,6 +66,7 @@
           th = sort_link(@search, :word_type, '字別')
           th = sort_link(@search, :number, '案號')
           th = sort_link(@search, :story_type, '案件類別')
+          th = sort_link(@search, :reason, '案由')
           th = sort_link(@search, :is_pronounce, '是否已宣判')
           th = sort_link(@search, :is_adjudge, '是否已判決')
           th 操作
@@ -73,6 +79,7 @@
             td = story.word_type
             td = story.number
             td = story.story_type
+            td = story.reason
             td = story.is_pronounce ? "已宣判" : "尚未宣判"
             td
               - if story.is_adjudge

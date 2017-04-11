@@ -11,7 +11,11 @@ end
 
 Ransack.configure do |config|
   Ransack::Constants::AREL_PREDICATES.each do |name|
-    config.add_predicate name, :arel_predicate => name
+    config.add_predicate name, arel_predicate: name
+    config.add_predicate 'date_equals', arel_predicate: 'eq',
+      formatter: proc { |v| v.to_date },
+      validator: proc { |v| v.present? },
+      type: :string
   end
   Ransack::Constants::DERIVED_PREDICATES.each do |args|
     config.add_predicate *args

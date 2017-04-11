@@ -38,6 +38,10 @@ class Verdict < ActiveRecord::Base
 
   scope :newest, -> { order('id DESC') }
 
+  ransacker :created_at do
+    Arel.sql('date(created_at)')
+  end
+
   class << self
     def ransackable_scopes(_auth_object = nil)
       [:unexist_party_names, :unexist_lawyer_names, :unexist_judges_names, :unexist_prosecutor_names]
