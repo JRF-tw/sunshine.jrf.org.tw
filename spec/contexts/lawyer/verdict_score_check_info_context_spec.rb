@@ -40,12 +40,12 @@ describe Lawyer::VerdictScoreCheckInfoContext do
 
     context 'story not adjudge' do
       context 'adjudge ' do
-        before { story.update_attributes(adjudge_date: Time.zone.today, is_adjudge: true) }
+        before { story.update_attributes(adjudged_on: Time.zone.today, is_adjudge: true) }
         it { expect(subject).to be_truthy }
       end
 
       context 'not adjudge' do
-        before { story.update_attributes(adjudge_date: nil, is_adjudge: false) }
+        before { story.update_attributes(adjudged_on: nil, is_adjudge: false) }
         it { expect(subject).to be_falsey }
       end
     end

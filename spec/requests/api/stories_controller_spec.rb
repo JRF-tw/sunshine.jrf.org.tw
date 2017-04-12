@@ -21,8 +21,8 @@ RSpec.describe Api::StoriesController, type: :request do
         name: story.court.full_name,
         code: story.court.code
       },
-      adjudge_date: story.adjudge_date,
-      pronounce_date: story.pronounce_date,
+      adjudged_on: story.adjudged_on,
+      pronounced_on: story.pronounced_on,
       judges_names: story.judges_names,
       prosecutor_names: story.prosecutor_names,
       lawyer_names: story.lawyer_names,

@@ -13,8 +13,8 @@ RSpec.describe Admin::StoriesController do
       it { expect(response.body).to match(story.story_type) }
     end
 
-    context 'search the adjudge_date of stories' do
-      before { get '/admin/stories', q: { adjudge_date_eq: story.adjudge_date } }
+    context 'search the adjudged_on of stories' do
+      before { get '/admin/stories', q: { adjudged_on_eq: story.adjudged_on } }
       it { expect(response.body).to match(story.word_type) }
     end
 
@@ -28,8 +28,8 @@ RSpec.describe Admin::StoriesController do
       it { expect(response.body).to match(story_with_verdict.word_type) }
     end
 
-    context 'search the is_pronounce and adjudge_date of stories' do
-      before { get '/admin/stories', q: { is_pronounce_eq: true, adjudge_date_eq: story_with_verdict.adjudge_date } }
+    context 'search the is_pronounce and adjudged_on of stories' do
+      before { get '/admin/stories', q: { is_pronounce_eq: true, adjudged_on_eq: story_with_verdict.adjudged_on } }
       it { expect(response.body).to match(story_with_verdict.word_type) }
     end
 

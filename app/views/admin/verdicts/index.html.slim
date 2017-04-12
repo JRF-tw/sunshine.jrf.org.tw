@@ -11,8 +11,8 @@
       .row
         .span6
           .control-group#datepicker
-            label.control-label = f.label :adjudge_date_eq
-            .controls = f.search_field :adjudge_date_eq
+            label.control-label = f.label :adjudged_on_eq
+            .controls = f.search_field :adjudged_on_eq
         .span6
           .control-group#datepicker
             label.control-label = f.label :created_at_date_equals
@@ -50,7 +50,7 @@
         tr
           th = sort_link(@search, :id, '#')
           th = sort_link(@search, :story_court_full_name, "判決法院" )
-          th = sort_link(@search, :adjudge_date, "宣判日期")
+          th = sort_link(@search, :adjudged_on, "宣判日期")
           th 案件
           th = sort_link(@search, :created_at, "發布日期")
           th 文件預覽
@@ -62,7 +62,7 @@
           tr
             td = verdict.id
             td = link_to "#{verdict.story.court.full_name}", admin_court_path(verdict.story.court)
-            td = verdict.adjudge_date
+            td = verdict.adjudged_on
             td = link_to "#{verdict.story.identity}", admin_story_path(verdict.story)
             td = verdict.created_at.to_date
             td = link_to "點我預覽", verdict.file.url, target: '_blank' if verdict.file

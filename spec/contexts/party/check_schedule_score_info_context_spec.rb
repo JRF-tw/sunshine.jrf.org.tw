@@ -39,25 +39,25 @@ describe Party::CheckScheduleScoreInfoContext do
       it { expect(subject).to be_falsey }
     end
 
-    context 'story has pronounce_date?' do
+    context 'story has pronounced_on?' do
       context 'today pronounced ' do
-        before { story.update_attributes(pronounce_date: Time.zone.today) }
+        before { story.update_attributes(pronounced_on: Time.zone.today) }
         it { expect(subject).to be_truthy }
       end
 
       context 'yesterday pronounced ' do
-        before { story.update_attributes(pronounce_date: Time.zone.today - 1.day) }
+        before { story.update_attributes(pronounced_on: Time.zone.today - 1.day) }
         it { expect(subject).to be_falsey }
       end
 
       context 'will pronounced ' do
-        before { story.update_attributes(pronounce_date: Time.zone.today + 1.day) }
+        before { story.update_attributes(pronounced_on: Time.zone.today + 1.day) }
         it { expect(subject).to be_truthy }
       end
     end
 
     context 'story already_adjudge' do
-      before { story.update_attributes(adjudge_date: Time.zone.today, is_adjudge: true) }
+      before { story.update_attributes(adjudged_on: Time.zone.today, is_adjudge: true) }
       it { expect(subject).to be_falsey }
     end
   end

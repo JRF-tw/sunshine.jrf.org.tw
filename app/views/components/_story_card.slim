@@ -42,7 +42,7 @@ ruby:
         - else
           - if @pending_score_verdict
             tr
-              td = @pending_score_verdict.story.adjudge_date
+              td = @pending_score_verdict.story.adjudged_on
               td = @pending_score_verdict.story.court.code
               td = link_to add_score_verdict, class: 'flat-button--addons' do
                   => inline_svg 'plus-circle-o'

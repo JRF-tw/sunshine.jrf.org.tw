@@ -14,8 +14,8 @@ RSpec.describe Api::SchedulesController, type: :request do
             word: story.word_type,
             number: story.number
           },
-          adjudge_date: story.adjudge_date,
-          pronounce_date: story.pronounce_date,
+          adjudged_on: story.adjudged_on,
+          pronounced_on: story.pronounced_on,
           judges_names: story.judges_names,
           prosecutor_names: story.prosecutor_names,
           lawyer_names: story.lawyer_names,

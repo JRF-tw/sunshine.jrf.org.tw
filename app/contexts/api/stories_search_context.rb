@@ -28,8 +28,8 @@ class Api::StoriesSearchContext < BaseContext
       story_type_eq: @params[:story_type],
       lawyer_names_cont: @params[:lawyer_names_cont],
       judges_names_cont: @params[:judge_names_cont],
-      adjudge_date_gteq: @params[:adjudge_date_gteq],
-      adjudge_date_lteq: @params[:adjudge_date_lteq]
+      adjudged_on_gteq: @params[:adjudged_on_gteq],
+      adjudged_on_lteq: @params[:adjudged_on_lteq]
     }
   end
 

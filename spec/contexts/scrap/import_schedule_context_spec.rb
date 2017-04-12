@@ -52,17 +52,17 @@ RSpec.describe Scrap::ImportScheduleContext, type: :model do
     end
 
     context 'update story pronounce date' do
-      let(:pronounce_date) { hash_data.merge(is_pronounce: true, start_on: Time.zone.today) }
-      subject { described_class.new(court.code).perform(pronounce_date) }
+      let(:pronounced_on) { hash_data.merge(is_pronounce: true, start_on: Time.zone.today) }
+      subject { described_class.new(court.code).perform(pronounced_on) }
 
-      context 'pronounce_date nil' do
-        it { expect(subject.story.pronounce_date).to be_truthy }
+      context 'pronounced_on nil' do
+        it { expect(subject.story.pronounced_on).to be_truthy }
       end
 
-      context 'pronounce_date exist' do
-        before { described_class.new(court.code).perform(pronounce_date) }
+      context 'pronounced_on exist' do
+        before { described_class.new(court.code).perform(pronounced_on) }
 
-        it { expect { subject }.not_to change { subject.story.pronounce_date } }
+        it { expect { subject }.not_to change { subject.story.pronounced_on } }
       end
     end
 

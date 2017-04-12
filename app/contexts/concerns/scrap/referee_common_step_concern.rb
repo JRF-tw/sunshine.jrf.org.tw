@@ -30,14 +30,14 @@ module Scrap::RefereeCommonStepConcern
   def create_rule
     @rule = Rule.find_or_create_by(
       story: @story,
-      adjudge_date: @adjudge_date
+      adjudged_on: @adjudged_on
     )
   end
 
   def create_verdict
     @verdict = Verdict.find_or_create_by(
       story: @story,
-      adjudge_date: @adjudge_date
+      adjudged_on: @adjudged_on
     )
   end
 

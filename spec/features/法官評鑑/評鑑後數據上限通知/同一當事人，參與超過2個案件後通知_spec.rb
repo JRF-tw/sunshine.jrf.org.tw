@@ -22,7 +22,7 @@ feature '法官評鑑', type: :request do
 
         When '當事人新增「未評鑑案件」的「判決評鑑」' do
           let!(:verdict) { create :verdict, story: story }
-          before { story.update_attributes(adjudge_date: Time.now, is_adjudge: true) }
+          before { story.update_attributes(adjudged_on: Time.now, is_adjudge: true) }
           subject { post '/party/score/verdicts', verdict_score: verdict_score_params }
           Then '發送通知' do
             expect { subject }.to change_sidekiq_jobs_size_of(SlackService, :notify)
@@ -40,7 +40,7 @@ feature '法官評鑑', type: :request do
         When '當事人新增「已評鑑案件」的「判決評鑑」' do
           let!(:verdict) { create :verdict, story: story }
           before { create :schedule_score, schedule_rater: party, story: story }
-          before { story.update_attributes(adjudge_date: Time.now) }
+          before { story.update_attributes(adjudged_on: Time.now) }
           subject { post '/party/score/verdicts', verdict_score: verdict_score_params }
           Then '不發送通知' do
             expect { subject }.not_to change_sidekiq_jobs_size_of(SlackService, :notify)

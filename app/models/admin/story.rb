@@ -15,8 +15,8 @@
 #  judges_names     :text
 #  prosecutor_names :text
 #  is_adjudge       :boolean          default(FALSE)
-#  adjudge_date     :date
-#  pronounce_date   :date
+#  adjudged_on      :date
+#  pronounced_on    :date
 #  is_pronounce     :boolean          default(FALSE)
 #  is_calculated    :boolean          default(FALSE)
 #  reason           :string

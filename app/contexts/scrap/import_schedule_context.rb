@@ -4,7 +4,7 @@ class Scrap::ImportScheduleContext < BaseContext
   before_perform  :get_branch_judge
   before_perform  :find_or_create_story
   after_perform   :update_story_is_pronounce
-  after_perform   :update_story_pronounce_date
+  after_perform   :update_story_pronounced_on
   after_perform   :record_count_to_daily_notify
   after_perform   :alert_new_story_type
   after_perform   :log_branch_judge_not_found
@@ -59,9 +59,9 @@ class Scrap::ImportScheduleContext < BaseContext
     @story.update_attributes(is_pronounce: @is_pronounce) if @is_pronounce
   end
 
-  def update_story_pronounce_date
-    unless @story.pronounce_date
-      @story.update_attributes(pronounce_date: @start_on) if @is_pronounce
+  def update_story_pronounced_on
+    unless @story.pronounced_on
+      @story.update_attributes(pronounced_on: @start_on) if @is_pronounce
     end
   end
 

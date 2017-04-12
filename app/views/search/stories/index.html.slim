@@ -40,9 +40,9 @@ section.container.offcanvas-card-wrapper
           .row
             .span6
               .control-group#datepicker
-                = f.label :adjudge_date_gteq
-                .controls= f.search_field :adjudge_date_gteq, placeholder: "啟始時間"
-                .controls = f.search_field :adjudge_date_lteq, placeholder:"結束時間"
+                = f.label :adjudged_on_gteq
+                .controls= f.search_field :adjudged_on_gteq, placeholder: "啟始時間"
+                .controls = f.search_field :adjudged_on_lteq, placeholder:"結束時間"
           .row
             .span6
               .control-group
