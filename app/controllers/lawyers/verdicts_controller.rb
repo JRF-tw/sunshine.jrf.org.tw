@@ -67,7 +67,7 @@ class Lawyers::VerdictsController < Lawyers::BaseController
   end
 
   def story_can_score?
-    range = (@verdict_score.story.got_verdict_date..@verdict_score.story.got_verdict_date + VERDICT_INTERVAL)
+    range = (@verdict_score.story.verdict_got_on..@verdict_score.story.verdict_got_on + VERDICT_INTERVAL)
     redirect_as_fail(lawyer_root_path, '案件已超過可評鑑判決時間') unless range.include?(Time.zone.today)
   end
 

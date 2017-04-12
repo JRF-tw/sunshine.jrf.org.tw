@@ -55,7 +55,7 @@ class Party::VerdictScoreCheckInfoContext < BaseContext
   end
 
   def valid_score_intervel
-    range = (@story.got_verdict_date..@story.got_verdict_date + VERDICT_INTERVAL)
+    range = (@story.verdict_got_on..@story.verdict_got_on + VERDICT_INTERVAL)
     return add_error(:out_score_intervel) unless range.include?(Time.zone.today)
   end
 
