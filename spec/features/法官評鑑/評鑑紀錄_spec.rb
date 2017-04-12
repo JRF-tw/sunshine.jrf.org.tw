@@ -50,7 +50,7 @@ describe '法官評鑑 - 評鑑紀錄', type: :request do
 
   context 'Given 案件已宣判，且尚未評鑑判決，且有開庭評鑑記錄' do
     let!(:schedule_score) { create :schedule_score, :with_start_on, schedule_rater: lawyer, judge: judge, story: story }
-    before { story.update_attributes(adjudged_on: Time.zone.today, is_adjudge: true) }
+    before { story.update_attributes(adjudged_on: Time.zone.today, is_adjudged: true) }
 
     context 'When 到該案件的評鑑記錄頁' do
       subject! { get "/lawyer/stories/#{story.id}" }
@@ -72,7 +72,7 @@ describe '法官評鑑 - 評鑑紀錄', type: :request do
   context 'Given 案件已宣判，且已評鑑判決' do
     let!(:verdict) { create :verdict, story: story }
     let!(:verdict_score) { create :verdict_score, verdict_rater: lawyer, story: story }
-    before { story.update_attributes(adjudged_on: Time.zone.today, is_adjudge: true) }
+    before { story.update_attributes(adjudged_on: Time.zone.today, is_adjudged: true) }
 
     context 'When 到該案件的評鑑記錄頁' do
       subject! { get "/lawyer/stories/#{story.id}" }
@@ -103,7 +103,7 @@ describe '法官評鑑 - 評鑑紀錄', type: :request do
   context 'Given 案件未宣判，已有開庭評鑑記錄' do
     let!(:schedule1) { create :schedule, :date_is_yesterday, court: court, story: story }
     let!(:schedule_score) { create :schedule_score, :with_start_on, schedule_rater: lawyer, judge: judge, story: story }
-    before { story.update_attributes(adjudged_on: nil, is_adjudge: false) }
+    before { story.update_attributes(adjudged_on: nil, is_adjudged: false) }
 
     context 'When 到該案件的評鑑記錄頁' do
       subject! { get "/lawyer/stories/#{story.id}" }

@@ -31,7 +31,7 @@ ruby:
         heading: '待評鑑', star: 'hollow',
         ths: ['開庭/宣判日期', '法院代碼']\
       }
-        - unless @story.is_adjudge
+        - unless @story.is_adjudged
           - @pending_score_schedules.each do |pss|
             tr
               td = pss.start_on

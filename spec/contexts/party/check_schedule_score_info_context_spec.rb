@@ -57,7 +57,7 @@ describe Party::CheckScheduleScoreInfoContext do
     end
 
     context 'story already_adjudge' do
-      before { story.update_attributes(adjudged_on: Time.zone.today, is_adjudge: true) }
+      before { story.update_attributes(adjudged_on: Time.zone.today, is_adjudged: true) }
       it { expect(subject).to be_falsey }
     end
   end

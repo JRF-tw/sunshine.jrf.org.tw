@@ -50,12 +50,12 @@ FactoryGirl.define do
 
     trait :pronounced do
       pronounced_on Time.zone.today
-      is_pronounce true
+      is_pronounced true
     end
 
     trait :adjudged do
       adjudged_on Time.zone.today
-      is_adjudge true
+      is_adjudged true
     end
 
     trait :with_verdict do
@@ -66,7 +66,7 @@ FactoryGirl.define do
 
     trait :adjudged_yesterday do
       adjudged_on Time.zone.yesterday
-      is_adjudge true
+      is_adjudged true
     end
 
   end

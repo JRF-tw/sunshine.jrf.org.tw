@@ -51,7 +51,7 @@ class Party::VerdictScoreCheckInfoContext < BaseContext
   end
 
   def story_not_adjudge
-    return add_error(:verdict_score_not_found) unless @story.is_adjudge
+    return add_error(:verdict_score_not_found) unless @story.is_adjudged
   end
 
   def valid_score_intervel

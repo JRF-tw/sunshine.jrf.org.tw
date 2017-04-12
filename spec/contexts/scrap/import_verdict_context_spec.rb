@@ -46,11 +46,11 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
       end
 
       context 'sync is pronounce to story' do
-        it { expect(subject.story.is_pronounce).to be_truthy }
+        it { expect(subject.story.is_pronounced).to be_truthy }
       end
 
       context 'sync is adjudge to story' do
-        it { expect(subject.story.is_adjudge).to be_truthy }
+        it { expect(subject.story.is_adjudged).to be_truthy }
       end
     end
 

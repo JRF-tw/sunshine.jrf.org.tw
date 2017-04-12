@@ -57,6 +57,6 @@ class Party::CheckScheduleScoreInfoContext < BaseContext
   end
 
   def story_already_adjudge
-    return add_error(:story_already_have_judgement) if @story.is_adjudge
+    return add_error(:story_already_have_judgement) if @story.is_adjudged
   end
 end

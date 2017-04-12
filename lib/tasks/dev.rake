@@ -328,7 +328,7 @@ namespace :dev do
 
   task fake_verdict: :environment do
     court = FactoryGirl.create(:court, full_name: "測試法院-#{Time.now}")
-    story = FactoryGirl.create(:story, court: court, is_adjudge: true, adjudged_on: Time.now)
+    story = FactoryGirl.create(:story, court: court, is_adjudged: true, adjudged_on: Time.now)
     verdict = FactoryGirl.create(:verdict, story: story, adjudged_on: Time.now)
 
     puts "該判決書案件類別 = #{verdict.story.story_type}"

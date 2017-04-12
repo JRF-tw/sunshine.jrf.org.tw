@@ -7,7 +7,7 @@ feature '法官評鑑 - 當事人', type: :feature, js: true do
 
   feature '案件的狀態和評鑑與否' do
     Scenario '案件尚未抓到判決書 (即沒有判決日)' do
-      before { story.update_attributes(is_adjudge: false) }
+      before { story.update_attributes(is_adjudged: false) }
       Given '案件無宣判日' do
         When '進行新增開庭評鑑' do
           before { party_run_schedule_score_flow(schedule) }
@@ -83,7 +83,7 @@ feature '法官評鑑 - 當事人', type: :feature, js: true do
 
     Scenario '案件已抓到判決書，且宣判日在過去或當天' do
       let!(:verdict) { create :verdict, story: story }
-      before { story.update_attributes(is_adjudge: true, is_pronounce: true) }
+      before { story.update_attributes(is_adjudged: true, is_pronounced: true) }
       Given '判決日與宣判日在當天' do
         before { verdict.update_attributes(created_at: Time.zone.today) }
         before { story.update_attributes(pronounced_on: Time.zone.today) }
