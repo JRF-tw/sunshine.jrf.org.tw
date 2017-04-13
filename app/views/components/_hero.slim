@@ -1,7 +1,12 @@
 ruby:
-  static = static || false
-  type = if static
+  static ||= false
+  type =
+    if static
       "base-about"
+    elsif
+      (controller.controller_name == "searchs") ||
+      (controller.controller_name == "stories" && controller.action_name == "index")
+      "searchs-index"
     else
       "#{controller.controller_name}-#{controller.action_name}"
     end
