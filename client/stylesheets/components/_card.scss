@@ -1,55 +1,84 @@
-.offcanvas-card-wrapper { margin-top: r(-8); }
+.offcanvas-card-wrapper {
+  margin-top: r(-8);
+}
 
 .card {
   @include Card();
-  margin: 0 r(2);
-  padding: 0 r(2) r(2);
+  margin    : 0 r(2);
+  padding   : 0 r(2) r(2);
   background: $white;
-  position: relative;
-  z-index: index($layers, base);
+  position  : relative;
+  z-index   : index($layers, base);
   @include susy-media($card-max + r(4)) {
-    margin: 0 auto;
+    margin   : 0 auto;
     max-width: $card-max;
   }
   @include susy($tablet) {
     padding-top: r(2);
+
     &.has-info {
       position: relative r(-3) n() n() n();
-      z-index: index($layers, base);
+      z-index : index($layers, base);
     }
   }
 }
+
 .card--wide {
   @include susy($tablet) {
-    width: 90%;
+    width    : 90%;
     max-width: container($tablet-columns);
 
     .avatar .icon {
-      size: 80px 50px;
+      size        : 80px 50px;
       stroke-width: 4px;
     }
   }
 }
+
+.card--2-columns-form {
+  padding-top: r(2);
+  @include susy($tablet) {
+    padding  : r(2);
+    width    : 90%;
+    max-width: container(6);
+
+    .form-wrapper {
+      margin-bottom: r(2);
+      clear        : fix;
+    }
+
+    .form-group {
+      @include gallery(1 of 2 (1/12));
+    }
+  }
+}
+
 .card--article {
-  padding: r(2) r(2) r(1);
+  padding  : r(2) r(2) r(1);
   max-width: 90%;
   font-size: ms(1);
   @include susy($tablet) {
-    padding: r(3) r(3) r(1);
-    width: 90%;
+    padding  : r(3) r(3) r(1);
+    width    : 90%;
     max-width: container($tablet-columns - 2);
   }
 
-  h4 { margin-top: 0; }
+  h4 {
+    margin-top: 0;
+  }
 
-  ul { margin-bottom: r(2); }
+  ul {
+    margin-bottom: r(2);
+  }
 
-  & > p { margin-top: 0; }
+  & > p {
+    margin-top: 0;
+  }
 
   blockquote {
-    margin-left: 0;
+    margin-left : 0;
     padding-left: r(2);
-    border-left: 5px solid $divider-gray;
+    border-left : 5px solid $divider-gray;
   }
 
   .image-wrapper {
@@ -59,45 +88,52 @@
     }
 
     &:first-child {
-      margin-top: r(-2);
+      margin-top   : r(-2);
       border-radius: $global-radius $global-radius 0 0;
-      overflow: hidden;
+      overflow     : hidden;
       @include susy($tablet) {
         margin-top: r(-3);
       }
     }
   }
 }
+
 .card--flex {
-  display: flex;
+  display  : flex;
   flex-flow: column nowrap;
-  height: 50vh;
+  height   : 50vh;
 }
+
 .card__heading {
-  margin: 0 r(-2) r(2);
-  text: center $white ms(2) r(7);
+  margin          : 0 r(-2) r(2);
+  text            : center $white ms(2) r(7);
   background-color: $accent;
   @include susy($tablet) {
-    text: ms(5) 1.5;
+    text            : ms(5) 1.5;
     background-color: transparent;
-    width: 100%;
-    top: r(-20);
+    width           : 100%;
+    top             : r(-20);
     @include scut-center-transform(x);
 
-    .has-info & { top: r(-17); }
+    .has-info & {
+      top: r(-17);
+    }
 
-    & + .card__message { margin-top: 0; }
+    & + .card__message {
+      margin-top: 0;
+    }
   }
 }
+
 .card__info {
-  display: flex;
-  padding-bottom: r(2);
-  margin-bottom: r(2);
-  flex-flow: row wrap;
+  display        : flex;
+  padding-bottom : r(2);
+  margin-bottom  : r(2);
+  flex-flow      : row wrap;
   justify-content: space-between;
-  align-items: flex-start;
-  position: relative;
-  border-bottom: 1px solid $divider-gray;
+  align-items    : flex-start;
+  position       : relative;
+  border-bottom  : 1px solid $divider-gray;
 
   .title {
     font-size: ms(1);
@@ -110,69 +146,83 @@
 
   .avatar {
     position: absolute 0 0 n() n();
-    z-index: index($layers, base);
+    z-index : index($layers, base);
   }
 
   .icon {
-    stroke: #ABABAB;
+    stroke      : #ABABAB;
     stroke-width: 10px;
-    size: 30px 25px;
+    size        : 30px 25px;
   }
 
-  .icon-avatar-party { stroke-width: 6px; }
+  .icon-avatar-party {
+    stroke-width: 6px;
+  }
 }
+
 .card__rule {
-  flex: 1;
-  overflow: auto;
-  background-image: linear-gradient(to bottom, #fff 30%, rgba(255,255,255,0)),
-                    linear-gradient(to top, #fff 30%, rgba(255,255,255,0)),
-                    radial-gradient(farthest-side at 50% 0%, rgba(0,0,0,.2), rgba(255,255,255,0)),
-                    radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.2), rgba(255,255,255,0));
-  background-repeat: no-repeat;
-  background-position: 50% 0%, 50% 101%, 50% 0%, 50% 100%;
-  background-size: 100% 40px, 100% 40px, 100% 10px, 100% 10px;
+  flex                 : 1;
+  overflow             : auto;
+  background-image     : linear-gradient(to bottom, #fff 30%, rgba(255,255,255,0)), linear-gradient(to top, #fff 30%, rgba(255,255,255,0)), radial-gradient(farthest-side at 50% 0%, rgba(0,0,0,.2), rgba(255,255,255,0)), radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.2), rgba(255,255,255,0));
+  background-repeat    : no-repeat;
+  background-position  : 50% 0%, 50% 101%, 50% 0%, 50% 100%;
+  background-size      : 100% 40px, 100% 40px, 100% 10px, 100% 10px;
   background-attachment: local, local, scroll, scroll;
 
-  > p:first-child { margin-top: 0; }
-  > p:last-child { margin-bottom: 0; }
+  > p:first-child {
+    margin-top: 0;
+  }
+
+  > p:last-child {
+    margin-bottom: 0;
+  }
 }
+
 .card__actions {
   padding-top: r(2);
 }
 
 .card--feature {
   @include Card();
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  margin: r(3) n();
+  display         : flex;
+  flex-flow       : column nowrap;
+  align-items     : center;
+  margin          : r(3) n();
   background-color: $white;
 }
+
 .card--feature__heading {
   margin: 0 0 r(-3);
-  text: center ms(2) $white;
-  &.judge .text { background-color: $blue; }
-  &.prosecutor .text { background-color: $purple; }
+  text  : center ms(2) $white;
+
+  &.judge .text {
+    background-color: $blue;
+  }
+
+  &.prosecutor .text {
+    background-color: $purple;
+  }
 
   .text {
-    display: inline-block;
-    padding: r(1) r(3);
-    position: relative r(-3) n() n() n();
+    display         : inline-block;
+    padding         : r(1) r(3);
+    position        : relative r(-3) n() n() n();
     background-color: $accent;
-    border-radius: $global-radius;
+    border-radius   : $global-radius;
   }
 }
+
 .card--feature__content {
-  display: flex;
-  flex-flow: column nowrap;
+  display        : flex;
+  flex-flow      : column nowrap;
   justify-content: space-between;
-  flex: 1 0 auto;
-  width: 100%;
-  padding: r(2);
-  font-size: ms(1);
+  flex           : 1 0 auto;
+  width          : 100%;
+  padding        : r(2);
+  font-size      : ms(1);
 
   .text-only {
-    margin: auto;
+    margin    : auto;
     text-align: center;
   }
 

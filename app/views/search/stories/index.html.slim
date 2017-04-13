@@ -4,12 +4,13 @@ article
     description: '來查查看案件吧'\
   }   
 section.container.offcanvas-card-wrapper
-  .card.card--wide
-    = search_form_for @search, url: search_stories_path, :wrapper => :md do |f|
-      .form-group
-        = f.search_field :verdict_reason_cont, class: "form-control"
-        = f.label :reason_cont, class: "control-label"
-    
+  .card.card--2-columns-form
+    = search_form_for @search, url: search_stories_path, wrapper: :md do |f|
+      .form-wrapper
+        .form-group
+          = f.search_field :verdict_reason_cont, class: "form-control"
+          = f.label :reason_cont, class: "control-label"
+
       .form-group
         = f.collection_select :court_id_in,
 		  Court.all, :id, :full_name, {},
