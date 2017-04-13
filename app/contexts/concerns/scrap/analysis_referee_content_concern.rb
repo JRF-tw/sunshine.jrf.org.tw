@@ -18,7 +18,7 @@ module Scrap::AnalysisRefereeContentConcern
     if matched
       return matched[1].squish.delete("\r").delete(' ')
     else
-      Logs::AddCrawlerError.add_referee_error(crawler_history, referee, :parse_main_judge_empty, '取得 審判長法官 資訊為空')
+      add_referee_error(crawler_history, referee, :parse_main_judge_empty, '取得 審判長法官 資訊為空')
       return nil
     end
   end
@@ -29,8 +29,8 @@ module Scrap::AnalysisRefereeContentConcern
     if matched
       return content.scan(JUDGE).map { |i| i[0].squish.delete("\r").delete(' ') }
     else
-      Logs::AddCrawlerError.add_referee_error(crawler_history, referee, :parse_judge_error, '爬取法官格式錯誤, 撈取為空') if content =~ HAS_JUDGES
-      Logs::AddCrawlerError.add_referee_error(crawler_history, referee, :parse_judge_not_exist, '裁判書上沒有法官') unless content =~ HAS_JUDGES
+      add_referee_error(crawler_history, referee, :parse_judge_error, '爬取法官格式錯誤, 撈取為空') if content =~ HAS_JUDGES
+      add_referee_error(crawler_history, referee, :parse_judge_not_exist, '裁判書上沒有法官') unless content =~ HAS_JUDGES
       return []
     end
   end
@@ -40,8 +40,8 @@ module Scrap::AnalysisRefereeContentConcern
     if matched
       return content.scan(PROSECUTOR).map { |i| i[0] }
     else
-      Logs::AddCrawlerError.add_referee_error(crawler_history, referee, :parse_prosecutor_error, '爬取檢察官格式錯誤, 撈取為空') if content =~ HAS_PROSECUTOR
-      Logs::AddCrawlerError.add_referee_error(crawler_history, referee, :parse_prosecutor_not_exist, '裁判書上沒有檢察官') unless content =~ HAS_PROSECUTOR
+      add_referee_error(crawler_history, referee, :parse_prosecutor_error, '爬取檢察官格式錯誤, 撈取為空') if content =~ HAS_PROSECUTOR
+      add_referee_error(crawler_history, referee, :parse_prosecutor_not_exist, '裁判書上沒有檢察官') unless content =~ HAS_PROSECUTOR
       return []
     end
   end
@@ -51,8 +51,8 @@ module Scrap::AnalysisRefereeContentConcern
     if matched
       return content.squish.scan(LAWYER).map { |i| i[0] }
     else
-      Logs::AddCrawlerError.add_referee_error(crawler_history, referee, :parse_lawyer_error, '爬取律師格式錯誤, 撈取為空') if content =~ HAS_LAWYER
-      Logs::AddCrawlerError.add_referee_error(crawler_history, referee, :parse_lawyer_not_exist, '裁判書上沒有律師') unless content =~ HAS_LAWYER
+      add_referee_error(crawler_history, referee, :parse_lawyer_error, '爬取律師格式錯誤, 撈取為空') if content =~ HAS_LAWYER
+      add_referee_error(crawler_history, referee, :parse_lawyer_not_exist, '裁判書上沒有律師') unless content =~ HAS_LAWYER
       return []
     end
   end
@@ -61,7 +61,7 @@ module Scrap::AnalysisRefereeContentConcern
     parties = parse_roles_hash(referee, content, crawler_history).each_value.inject([]) { |a, e| a << e }
     parties = parties.flatten.reject { |e| e[/律師/] }
     return parties if parties.present?
-    Logs::AddCrawlerError.add_referee_error(crawler_history, referee, :parse_party_error, '爬取當事人格式錯誤, 撈取為空')
+    add_referee_error(crawler_history, referee, :parse_party_error, '爬取當事人格式錯誤, 撈取為空')
     []
   end
 
@@ -73,10 +73,10 @@ module Scrap::AnalysisRefereeContentConcern
     role_hash, sub_title_count = parse_role_array(role_array)
     role_hash.each_value { |v| role_number += v.count }
     expect_role_number = new_line_count - sub_title_count
-    Logs::AddCrawlerError.add_referee_error(crawler_history, referee, :parse_referee_role_error, '爬取裁判參與角色數量錯誤(內涵pattern 未收錄角色)') unless expect_role_number == role_number
+    add_referee_error(crawler_history, referee, :parse_referee_role_error, '爬取裁判參與角色數量錯誤(內涵pattern 未收錄角色)') unless expect_role_number == role_number
     role_hash
   rescue
-    Logs::AddCrawlerError.add_referee_error(crawler_history, referee, :parse_referee_role_failed, "從內文解析角色失敗  內文: #{content}")
+    add_referee_error(crawler_history, referee, :parse_referee_role_failed, "從內文解析角色失敗  內文: #{content}")
     {}
   end
 
@@ -121,4 +121,13 @@ module Scrap::AnalysisRefereeContentConcern
     end
     [role_hash, sub_title_count]
   end
+
+  def add_referee_error(crawler_history, referee, type, message)
+    if referee.class == Verdict
+      Logs::AddCrawlerError.add_verdict_error(crawler_history, referee, type, message)
+    else
+      Logs::AddCrawlerError.add_rule_error(crawler_history, referee, type, message)
+    end
+  end
+
 end
