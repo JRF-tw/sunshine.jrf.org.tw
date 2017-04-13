@@ -2,63 +2,89 @@ $input-rhythm: r(1);
 $error-rhythm: r(3);
 
 %control-border-bottom {
-  content: "";
-  display: block;
-  size: 100% 1px;
+  content         : "";
+  display         : block;
+  size            : 100% 1px;
   background-color: $accent;
-  position: absolute n() 0 0 0;
-  transform: scaleX(0);
-  transition: transform .3s ease 0s;
+  position        : absolute n() 0 0 0;
+  transform       : scaleX(0);
+  transition      : transform .3s ease 0s;
 }
 
 .form-group {
-  $bottom-gap: r(2);
+  $bottom-gap  : r(2);
   margin-bottom: $bottom-gap;
-  padding-top: r(1);
-  position: relative;
+  padding-top  : r(1);
+  position     : relative;
+
   &.text {
-    &::before { @extend %control-border-bottom; }
-    &.is-focused::before { transform: scaleX(1); }
-  }
-  &.squish-before { margin-top: r(-1); }
-  &.addon-forgot-password {
-    padding-right: 5em;
     &::before {
-      content: "";
-      display: block;
-      size: 100% 1px;
-      background-color: $divider-gray;
-      position: absolute n() 0 0 0;
+      @extend %control-border-bottom;
     }
 
-    input { border-bottom: none; }
+    &.is-focused::before {
+      transform: scaleX(1);
+    }
   }
+
+  &.squish-before {
+    margin-top: r(-1);
+  }
+
+  &.addon-forgot-password {
+    padding-right: 5em;
+
+    &::before {
+      content         : "";
+      display         : block;
+      size            : 100% 1px;
+      background-color: $divider-gray;
+      position        : absolute n() 0 0 0;
+    }
+
+    input {
+      border-bottom: none;
+    }
+  }
+
   &.addon-prefix {
-    &.is-focused .control-label { color: $white; }
-    input:-webkit-autofill + .control-label { color: $white; }
+    &.is-focused .control-label {
+      color: $white;
+    }
 
-    input { padding-left: r(3); }
+    input:-webkit-autofill + .control-label {
+      color: $white;
+    }
 
-    .control-label { padding-left: r(3); }
+    input {
+      padding-left: r(3);
+    }
+
+    .control-label {
+      padding-left: r(3);
+    }
 
     .icon {
-      size: 18px;
-      fill: $text-secondary;
+      size    : 18px;
+      fill    : $text-secondary;
       position: absolute ($input-rhythm * 2) n() n() 0;
     }
   }
+
   &.has-error,
   &.has-hint {
     .control-label::before {
-      top: r(5) + 1px; bottom: auto;
+      top   : r(5) + 1px;
+      bottom: auto;
     }
   }
 }
 
 .form-actions {
   padding: r(1) n();
+
   &--space-between {
-    display: flex;
+    display        : flex;
     justify-content: space-between;
   }
 
@@ -67,153 +93,229 @@ $error-rhythm: r(3);
   }
 
   .flat-button + .raised-button,
-  .flat-button + .raised-button--large { margin-left: r(1); }
+  .flat-button + .raised-button--large {
+    margin-left: r(1);
+  }
 }
 
 #{$all-text-inputs} {
-  display: block;
-  padding: $input-rhythm 0;
-  width: 100%;
-  line-height: 1.25;
-  border: none;
+  display      : block;
+  padding      : $input-rhythm 0;
+  width        : 100%;
+  line-height  : 1.25;
+  border       : none;
   border-bottom: 1px solid $divider-gray;
-  box-shadow: none;
-  outline: none;
+  box-shadow   : none;
+  outline      : none;
+
   &:focus,
   &:not(:disabled):active {
-    + .control-label::before { transform: scaleX(1); }
+    + .control-label::before {
+      transform: scaleX(1);
+    }
   }
-  &:disabled,
-  &.readonly { color: $text-disabled; }
-}
-input, textarea {
-  @include input-placeholder { color: $text-secondary; }
-}
-input:-webkit-autofill {
-  background-color: transparent !important;
-  box-shadow: 0 0 0 100px $white inset;
-  -webkit-text-fill-color: $text-secondary;
+
+  &.readonly,
+  &:disabled {
+    color: $text-disabled;
+  }
 }
 
+input,
+textarea {
+  @include input-placeholder {
+    color: $text-secondary;
+  }
+}
+
+input:-webkit-autofill {
+  background-color       : transparent !important;
+  box-shadow             : 0 0 0 100px $white inset;
+  -webkit-text-fill-color: $text-secondary;
+}
 @mixin active-control-label {
-  text: $text-secondary ms(-1);
-  top: 0;
+  text          : $text-secondary ms(-1);
+  top           : 0;
   pointer-events: none;
 }
+
 .control-label {
-  text: $gray 1.25;
-  position: absolute ($input-rhythm * 2) 0 0 0;
-  transition: all .3s ease 0s;
-  &.disabled { color: $text-disabled !important; }
-  &::before { @extend %control-border-bottom; }
+  text          : $gray 1.25;
+  position      : absolute ($input-rhythm * 2) 0 0 0;
+  transition    : all .3s ease 0s;
+  pointer-events: none;
+
+  &.disabled {
+    color: $text-disabled !important;
+  }
+
+  &::before {
+    @extend %control-border-bottom;
+  }
+
   .readonly & {
     color: $text-disabled !important;
-    &::before { opacity: 0; }
+
+    &::before {
+      opacity: 0;
+    }
   }
+
   .is-focused &,
-  input[value] + &,
   input:focus + &,
-  select ~ & { @include active-control-label; }
+  input[value] + &,
+  select ~ & {
+    @include active-control-label;
+  }
 }
-input:-webkit-autofill + .control-label { @include active-control-label; }
+
+input:-webkit-autofill + .control-label {
+  @include active-control-label;
+}
 
 [type="checkbox"] {
   @include Normalize();
-  size: 18px;
+  size        : 18px;
   margin-right: r(1);
+
   &::after {
-    content: "";
-    display: inline-block;
-    border: 2px solid $divider-gray;
-    border-radius: 2px;
-    size: 18px;
+    content         : "";
+    display         : inline-block;
+    border          : 2px solid $divider-gray;
+    border-radius   : 2px;
+    size            : 18px;
     background-color: #fff;
-    position: relative 4px n() n() n();
+    position        : relative 4px n() n() n();
   }
+
   &:checked::after {
-    background: url(checked.svg) 50% 50% / contain no-repeat;
+    background  : url("checked.svg") 50% 50% / contain no-repeat;
     border-color: $accent;
   }
-  &:focus::after { border-color: $accent; }
+
+  &:focus::after {
+    border-color: $accent;
+  }
 }
 
 select {
   @include Select;
-  size: 100% 34px;
+  size   : 100% 34px;
   outline: none;
-  &:focus + .control-label::before { transform: scaleX(1); }
-  &:disabled { color: $text-disabled; }
+
+  &:focus + .control-label::before {
+    transform: scaleX(1);
+  }
+
+  &:disabled {
+    color: $text-disabled;
+  }
 }
-.chosen-container { width: 100% !important; }
-.chosen-container-active + .control-label::before { transform: scaleX(1); }
+
+.chosen-container {
+  width: 100% !important;
+}
+
+.chosen-container-active + .control-label::before {
+  transform: scaleX(1);
+}
+
 .chosen-single {
   .chosen-container-single & {
     @include Select;
-    text: ms(0);
-    size: 100% 34px;
+    text       : ms(0);
+    size       : 100% 34px;
     line-height: 34px;
-    box-shadow: none;
-    div { display: none; }
+    box-shadow : none;
+
+    div {
+      display: none;
+    }
   }
-  .chosen-container-active & { box-shadow: none; }
+
+  .chosen-container-active & {
+    box-shadow: none;
+  }
+
   .chosen-container-active.chosen-with-drop & {
-    border: none;
+    border          : none;
     background-image: none;
   }
 }
+
 .chosen-container-single .chosen-search {
   padding-bottom: 0;
+
   input[type="text"] {
-    margin-bottom: 0;
-    border-color: $divider-gray;
-    border-width: 0 0 1px 0;
-    line-height: 1.5;
-    background-image: url(search.svg) !important;
+    margin-bottom      : 0;
+    border-color       : $divider-gray;
+    border-width       : 0 0 1px 0;
+    line-height        : 1.5;
+    background-image   : url("search.svg") !important;
     background-position: 100% 50% !important;
-    background-size: size('search.svg') !important;
+    background-size    : size('search.svg') !important;
   }
 }
+
 .chosen-drop {
   text: ms(0) 1.5;
+
   .chosen-container.chosen-with-drop & {
-    background: $white;
-    box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.12), 0px 8px 8px 0px rgba(0,0,0,0.24);
+    background   : $white;
+    box-shadow   : 0 0 8px 0 rgba(0,0,0,0.12), 0 8px 8px 0 rgba(0,0,0,0.24);
     border-radius: $global-radius;
-    border: none;
-    left: r(-1); right: r(-1);
-    width: auto;
+    border       : none;
+    left         : r(-1);
+    right        : r(-1);
+    width        : auto;
   }
 }
+
 .chosen-results {
   .chosen-container & {
-    color: $text-color;
+    color  : $text-color;
     padding: 0;
-    margin: 0;
+    margin : 0;
   }
-  .active-result { padding: n() r(1) !important; }
-  .highlighted { background: none $accent !important; }
+
+  .active-result {
+    padding: n() r(1) !important;
+  }
+
+  .highlighted {
+    background: none $accent !important;
+  }
+
   li.no-results {
-    padding: r(1);
+    padding      : r(1);
     border-radius: 0 0 $global-radius $global-radius;
   }
 }
 
-abbr[title="required"] { display: none; }
+abbr[title="required"] {
+  display: none;
+}
 
-.forgot-password { position: absolute ($input-rhythm * 2) 0 n() n(); }
+.forgot-password {
+  position: absolute ($input-rhythm * 2) 0 n() n();
+}
 
 .help-block--error {
-  margin: r(1) 0;
-  color: $danger;
+  margin     : r(1) 0;
+  color      : $danger;
   font-weight: bold;
 }
+
 .help-block--hint {
   @extend .help-block--error;
   color: $text-secondary;
-  .has-error & { display: none; }
+
+  .has-error & {
+    display: none;
+  }
 }
 
 .checkbox-pre {
   padding-left: 26px;
-  margin-top: r(1);
+  margin-top  : r(1);
 }
