@@ -1,0 +1,75 @@
+%table {
+  thead {
+    color: $text-secondary-dark $accent;
+  }
+
+  tbody tr:hover td {
+    background-color: $gray-lighter;
+    cursor          : pointer;
+  }
+
+  td,
+  th {
+    &:first-child {
+      padding-left: r(2);
+    }
+
+    &:last-child {
+      padding-right: r(2);
+    }
+    @include susy($tablet) {
+      &:first-child {
+        padding-left: r(3);
+      }
+
+      &:last-child {
+        padding-right: r(3);
+      }
+    }
+  }
+
+  th {
+    padding-bottom: r(1);
+  }
+
+  td {
+    padding : r(2) n();
+    position: relative;
+    color   : $text-secondary;
+
+    &::before {
+      content         : "";
+      display         : block;
+      position        : absolute n() 0 0 0;
+      height          : 1px;
+      background-color: $divider-gray;
+    }
+
+    &:first-child::before {
+      left: r(2);
+      @include susy($tablet) {
+        left: r(3);
+      }
+    }
+
+    &:last-child {
+      text-align: right;
+
+      &::before {
+        right: r(2);
+        @include susy($tablet) {
+          right: r(3);
+        }
+      }
+    }
+  }
+
+  tr:last-child td::before {
+    display: none;
+  }
+
+  .icon {
+    size: 18px;
+    fill: currentColor;
+  }
+}

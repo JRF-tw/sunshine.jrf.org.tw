@@ -1,6 +1,7 @@
-= admin_widget_box "案件列表 : 共 #{@stories.total_count} 筆", icon: :pencil do
-  .dataTables_wrapper
-    table.table.table-bordered.table-striped.table-hover
+/ = admin_widget_box "案件列表 : 共 #{@stories.total_count} 筆", icon: :pencil do
+section.search-result
+  .container--list
+    table.search-result__table
       thead
         tr
           th 法院
@@ -27,6 +28,5 @@
             td = story.lawyer_names.join(',')
             td
               = link_to "詳細資料", search_story_path(story.court.code, story.identity), class: "btn btn-mini"
-    .ui-toolbar.ui-widget-header
-      = paginate @stories, theme: :www
-
+              
+    = paginate @stories, theme: :www

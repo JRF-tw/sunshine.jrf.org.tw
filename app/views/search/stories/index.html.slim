@@ -1,8 +1,10 @@
-article
-  = render partial: 'components/hero', locals: {\
-    heading: '案件查詢',
-    description: '來查查看案件吧'\
-  }   
+= render partial: 'components/hero', locals: {\
+  heading: '案件查詢',
+  description: '來查查看案件吧'\
+}   
+
+= render 'list' if @stories
+  
 section.container.offcanvas-card-wrapper
   .card.card--2-columns-form
     = search_form_for @search, url: search_stories_path, wrapper: :md do |f|
@@ -60,4 +62,3 @@ section.container.offcanvas-card-wrapper
         .text-center
           = link_to "清空搜尋結果", search_stories_path, class: "flat-button--large"
         
-    = render 'list' if @stories

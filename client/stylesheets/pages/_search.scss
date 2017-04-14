@@ -1,0 +1,25 @@
+.search-result {
+  margin          : r(-2) n() 7px;
+  padding-bottom  : r(8.5);
+  background-color: $white;
+
+  .container--list {
+    @include susy-media(container(7)) {
+      $offset      : -37px;
+      margin-bottom: $offset;
+      position     : relative $offset n n n;
+    }
+  }
+}
+
+.search-result__table {
+  @extend %table;
+  margin    : n() r(-2) r(4);
+  width     : calc(100% + #{r(4)});
+  text-align: center;
+
+  td,
+  th {
+    padding: r(1);
+  }
+}
