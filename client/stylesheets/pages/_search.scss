@@ -14,7 +14,7 @@
 
 .search-result__table {
   @extend %table;
-  margin    : n() r(-2) r(4);
+  margin    : n() r(-2);
   width     : calc(100% + #{r(4)});
   text-align: center;
 
@@ -22,4 +22,9 @@
   th {
     padding: r(1);
   }
+}
+
+.search-result__total {
+  margin    : r(4) auto;
+  text-align: center;
 }
