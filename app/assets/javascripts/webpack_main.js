@@ -462,33 +462,33 @@
 
 	__webpack_require__(9);
 
-	__webpack_require__(43);
+	__webpack_require__(14);
 
-	__webpack_require__(44);
+	__webpack_require__(15);
 
-	__webpack_require__(45);
+	__webpack_require__(16);
 
-	__webpack_require__(47);
+	__webpack_require__(18);
 
-	__webpack_require__(48);
+	__webpack_require__(19);
 
-	ref = __webpack_require__(49), Toggle = ref.Toggle, Dismiss = ref.Dismiss;
+	ref = __webpack_require__(20), Toggle = ref.Toggle, Dismiss = ref.Dismiss;
 
-	TextInput = __webpack_require__(50).TextInput;
+	TextInput = __webpack_require__(21).TextInput;
 
-	StoryCollapse = __webpack_require__(51);
+	StoryCollapse = __webpack_require__(22);
 
-	Rules = __webpack_require__(52);
+	Rules = __webpack_require__(23);
 
-	ToTop = __webpack_require__(54);
+	ToTop = __webpack_require__(25);
 
-	Tab = __webpack_require__(55);
+	Tab = __webpack_require__(26);
 
-	Arrow = __webpack_require__(56);
+	Arrow = __webpack_require__(27);
 
-	__webpack_require__(57);
+	__webpack_require__(28);
 
-	sprites = __webpack_require__(58);
+	sprites = __webpack_require__(29);
 
 	sprites.keys().forEach(sprites);
 
@@ -590,64 +590,6 @@
 
 	__webpack_require__(13);
 
-	__webpack_require__(14);
-
-	__webpack_require__(15);
-
-	__webpack_require__(16);
-
-	__webpack_require__(17);
-
-	__webpack_require__(18);
-
-	__webpack_require__(19);
-
-	__webpack_require__(20);
-
-	__webpack_require__(21);
-
-	__webpack_require__(22);
-
-	__webpack_require__(23);
-
-	__webpack_require__(24);
-
-	__webpack_require__(25);
-
-	__webpack_require__(26);
-
-	__webpack_require__(27);
-
-	__webpack_require__(28);
-
-	__webpack_require__(29);
-
-	__webpack_require__(30);
-
-	__webpack_require__(31);
-
-	__webpack_require__(32);
-
-	__webpack_require__(33);
-
-	__webpack_require__(34);
-
-	__webpack_require__(35);
-
-	__webpack_require__(36);
-
-	__webpack_require__(37);
-
-	__webpack_require__(38);
-
-	__webpack_require__(39);
-
-	__webpack_require__(40);
-
-	__webpack_require__(41);
-
-	__webpack_require__(42);
-
 
 /***/ },
 /* 10 */
@@ -663,64 +605,6 @@
 /* 13 */
 10,
 /* 14 */
-10,
-/* 15 */
-10,
-/* 16 */
-10,
-/* 17 */
-10,
-/* 18 */
-10,
-/* 19 */
-10,
-/* 20 */
-10,
-/* 21 */
-10,
-/* 22 */
-10,
-/* 23 */
-10,
-/* 24 */
-10,
-/* 25 */
-10,
-/* 26 */
-10,
-/* 27 */
-10,
-/* 28 */
-10,
-/* 29 */
-10,
-/* 30 */
-10,
-/* 31 */
-10,
-/* 32 */
-10,
-/* 33 */
-10,
-/* 34 */
-10,
-/* 35 */
-10,
-/* 36 */
-10,
-/* 37 */
-10,
-/* 38 */
-10,
-/* 39 */
-10,
-/* 40 */
-10,
-/* 41 */
-10,
-/* 42 */
-10,
-/* 43 */
 /***/ function(module, exports) {
 
 	;(function(window){
@@ -980,7 +864,7 @@
 	})(window);
 
 /***/ },
-/* 44 */
+/* 15 */
 /***/ function(module, exports) {
 
 	/*!
@@ -1647,7 +1531,7 @@
 	;
 
 /***/ },
-/* 45 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -1663,7 +1547,7 @@
 	    (function(factory) {
 	        if (true) {
 	            // Register as an anonymous AMD module.
-	            !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(46)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	            !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(17)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	        } else if (typeof exports === 'object') {
 	            // Node/CommonJS
 	            module.exports = factory(require('jquery'));
@@ -2862,13 +2746,13 @@
 
 
 /***/ },
-/* 46 */
+/* 17 */
 /***/ function(module, exports) {
 
 	module.exports = jQuery;
 
 /***/ },
-/* 47 */
+/* 18 */
 /***/ function(module, exports) {
 
 	(function() {
@@ -4131,7 +4015,7 @@
 
 
 /***/ },
-/* 48 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
@@ -4154,7 +4038,7 @@
 	(function(factory) {
 	    'use strict';
 	    if (true) {
-	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(46)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(17)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	    } else if (typeof exports !== 'undefined') {
 	        module.exports = factory(require('jquery'));
 	    } else {
@@ -7029,7 +6913,7 @@
 
 
 /***/ },
-/* 49 */
+/* 20 */
 /***/ function(module, exports) {
 
 	var Dismiss, Toggle;
@@ -7109,7 +6993,7 @@
 
 
 /***/ },
-/* 50 */
+/* 21 */
 /***/ function(module, exports) {
 
 	var TextInput;
@@ -7149,7 +7033,7 @@
 
 
 /***/ },
-/* 51 */
+/* 22 */
 /***/ function(module, exports) {
 
 	var Collapse;
@@ -7181,12 +7065,12 @@
 
 
 /***/ },
-/* 52 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Cookies, Rules;
 
-	Cookies = __webpack_require__(53);
+	Cookies = __webpack_require__(24);
 
 	Rules = (function() {
 	  function Rules() {
@@ -7241,7 +7125,7 @@
 
 
 /***/ },
-/* 53 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -7403,7 +7287,7 @@
 
 
 /***/ },
-/* 54 */
+/* 25 */
 /***/ function(module, exports) {
 
 	var ToTop;
@@ -7438,7 +7322,7 @@
 
 
 /***/ },
-/* 55 */
+/* 26 */
 /***/ function(module, exports) {
 
 	var Tab;
@@ -7470,7 +7354,7 @@
 
 
 /***/ },
-/* 56 */
+/* 27 */
 /***/ function(module, exports) {
 
 	var next, prev;
@@ -7490,7 +7374,7 @@
 
 
 /***/ },
-/* 57 */
+/* 28 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -7502,36 +7386,36 @@
 	});
 
 /***/ },
-/* 58 */
+/* 29 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./arrow-last.svg": 59,
-		"./arrow-next.svg": 63,
-		"./avatar-lawyer.svg": 64,
-		"./avatar-observer.svg": 65,
-		"./avatar-party.svg": 66,
-		"./chart.svg": 67,
-		"./close.svg": 68,
-		"./envelop.svg": 69,
-		"./exit.svg": 70,
-		"./file-search.svg": 71,
-		"./forwards.svg": 72,
-		"./info.svg": 73,
-		"./judge-avatar.svg": 74,
-		"./key.svg": 75,
-		"./medal.svg": 76,
-		"./menu.svg": 77,
-		"./pencil.svg": 78,
-		"./phone.svg": 79,
-		"./plus-circle-o.svg": 80,
-		"./profile.svg": 81,
-		"./prosecutor-avatar.svg": 82,
-		"./star-full.svg": 83,
-		"./star-half.svg": 84,
-		"./star-o.svg": 85,
-		"./star.svg": 86,
-		"./user.svg": 87
+		"./arrow-last.svg": 30,
+		"./arrow-next.svg": 34,
+		"./avatar-lawyer.svg": 35,
+		"./avatar-observer.svg": 36,
+		"./avatar-party.svg": 37,
+		"./chart.svg": 38,
+		"./close.svg": 39,
+		"./envelop.svg": 40,
+		"./exit.svg": 41,
+		"./file-search.svg": 42,
+		"./forwards.svg": 43,
+		"./info.svg": 44,
+		"./judge-avatar.svg": 45,
+		"./key.svg": 46,
+		"./medal.svg": 47,
+		"./menu.svg": 48,
+		"./pencil.svg": 49,
+		"./phone.svg": 50,
+		"./plus-circle-o.svg": 51,
+		"./profile.svg": 52,
+		"./prosecutor-avatar.svg": 53,
+		"./star-full.svg": 54,
+		"./star-half.svg": 55,
+		"./star-o.svg": 56,
+		"./star.svg": 57,
+		"./user.svg": 58
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -7544,25 +7428,25 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 58;
+	webpackContext.id = 29;
 
 
 /***/ },
-/* 59 */
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 24 24\" id=\"icon-arrow-last\" ><path d=\"M20.034 11.407l-6.346-7.045c-.54-.483-1.07-.483-1.587 0-.517.483-.506.988.034 1.515l5.738 6.32-5.738 6.256c-.225.22-.338.472-.338.757 0 .285.113.538.338.757.495.527 1.013.527 1.553 0l6.346-7.045c.225-.22.337-.472.337-.757 0-.286-.112-.538-.337-.758zM4.37 19.967c.495.505 1.013.494 1.553-.033l6.414-7.045c.18-.22.27-.461.27-.724 0-.308-.09-.571-.27-.79L5.924 4.328a1.08 1.08 0 0 0-1.553 0c-.495.483-.495.988 0 1.515l5.739 6.32L4.37 18.42c-.495.527-.495 1.042 0 1.547z\" fill-rule=\"evenodd\"/></symbol>";
 	module.exports = sprite.add(image, "icon-arrow-last");
 
 /***/ },
-/* 60 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Sprite, globalSprite, inject_sprite;
 
-	Sprite = __webpack_require__(61);
+	Sprite = __webpack_require__(32);
 
 	globalSprite = new Sprite();
 
@@ -7578,10 +7462,10 @@
 
 
 /***/ },
-/* 61 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Sniffr = __webpack_require__(62);
+	var Sniffr = __webpack_require__(33);
 
 	/**
 	 * List of SVG attributes to fix url target in them
@@ -7842,7 +7726,7 @@
 
 
 /***/ },
-/* 62 */
+/* 33 */
 /***/ function(module, exports) {
 
 	(function(host) {
@@ -7966,227 +7850,227 @@
 
 
 /***/ },
-/* 63 */
+/* 34 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 24 24\" id=\"icon-arrow-next\" ><path d=\"M16.312 11.407L9.966 4.362c-.54-.483-1.068-.483-1.586 0s-.506.988.034 1.515l5.738 6.32-5.738 6.256c-.225.22-.338.472-.338.757 0 .285.113.538.338.757.495.527 1.012.527 1.552 0l6.346-7.045c.225-.22.338-.472.338-.757 0-.286-.113-.538-.338-.758z\" fill-rule=\"evenodd\"/></symbol>";
 	module.exports = sprite.add(image, "icon-arrow-next");
 
 /***/ },
-/* 64 */
+/* 35 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 183.08 70.95\" id=\"icon-avatar-lawyer\" ><g fill=\"none\" data-name=\"Layer 4\"><path d=\"M29.88 15.19s24 26.25 24 29.25v24.5M153.88 15.19s-24 26.25-24 29.25v24.5\"/><path d=\"M.27 20.94l24.11-6.66V9.94s-.91-2.15 3.52-3.14S53.75 1 56.51 1c3.76 0 30.57 34.94 30.3 39.38-.16 2.61-.09 30.56-.09 30.56M182.81 20.94l-24.43-6.66V9.94s1.23-2.15-3.2-3.14S129.48 1 126.72 1C123 1 96.23 35.94 96.5 40.38c.16 2.61 0 30.56 0 30.56\"/></g></symbol>";
 	module.exports = sprite.add(image, "icon-avatar-lawyer");
 
 /***/ },
-/* 65 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 141.8 57.5\" id=\"icon-avatar-observer\" ><g fill=\"none\" data-name=\"Layer 4\"><circle cx=\"33.59\" cy=\"28.75\" r=\"27.75\"/><circle cx=\"109.48\" cy=\"28.75\" r=\"27.75\"/><path d=\"M56.84 20.75s14.5-7.25 29 0M133 20.68s7.37-1.82 7.87 0M8.84 20.68s-7.37-1.82-7.87 0\"/></g></symbol>";
 	module.exports = sprite.add(image, "icon-avatar-observer");
 
 /***/ },
-/* 66 */
+/* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 72.21 94.12\" id=\"icon-avatar-party\" ><g fill=\"none\" data-name=\"Layer 4\"><path d=\"M57.53 93.47s12.3-14.59 12.3-17.75 3.08-25.25 0-33.25c-1.26-3.27-12-2-12-2L52 56s-15.81 2.69-21.81 25.75M30.34 3.47v41M43.34 3.47v41\"/><path d=\"M57.71 41s.82-17.19-1-28.5c-.86-5.31-6.8-8.26-13.49-9.41-7.78-4.38-12.75-.51-13.37 0h-.07c-7.33 1.39-11 3.55-11.93 7.38-.66 2.79-.92 26.73-1 36.55V21.71c0-4.56-6.24-2.89-7.85-1-7.76 9.1-8 47-8 47l9.06 23.73\"/></g></symbol>";
 	module.exports = sprite.add(image, "icon-avatar-party");
 
 /***/ },
-/* 67 */
+/* 38 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 56 57\" id=\"icon-chart\" ><path d=\"M43.604 44.469V31.927h-6.27V44.47h6.27zm-12.541 0V13.26h-6.125V44.47h6.125zm-12.396 0V22.594h-6.271v21.875h6.27zM49.729.865c1.653 0 3.111.632 4.375 1.895C55.368 4.024 56 5.483 56 7.135v43.459c0 1.653-.632 3.11-1.896 4.375-1.264 1.264-2.722 1.896-4.375 1.896H6.271c-1.653 0-3.111-.632-4.375-1.896C.632 53.705 0 52.247 0 50.594V7.135c0-1.652.632-3.11 1.896-4.375C3.16 1.497 4.618.865 6.27.865h43.458z\" fill-rule=\"evenodd\"/></symbol>";
 	module.exports = sprite.add(image, "icon-chart");
 
 /***/ },
-/* 68 */
+/* 39 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 8 8\" id=\"icon-close\" ><path d=\"M8 .805L4.805 4 8 7.195 7.195 8 4 4.805.805 8 0 7.195 3.195 4 0 .805.805 0 4 3.195 7.195 0z\" fill-rule=\"evenodd\"/></symbol>";
 	module.exports = sprite.add(image, "icon-close");
 
 /***/ },
-/* 69 */
+/* 40 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 24 24\" id=\"icon-envelop\" ><path d=\"M18.737 8H5.263C4.567 8 4 8.56 4 9.25v7.5c0 .69.567 1.25 1.263 1.25h13.474c.696 0 1.263-.56 1.263-1.25v-7.5C20 8.56 19.433 8 18.737 8zm0 .833c.025 0 .049.003.073.007l-6.343 4.184c-.244.161-.69.161-.934 0L5.191 8.84a.42.42 0 0 1 .073-.007h13.474-.001zm0 8.334H5.263a.419.419 0 0 1-.42-.417V9.612l6.223 4.105c.262.173.598.26.934.26.336 0 .672-.087.934-.26l6.224-4.105v7.138c0 .23-.189.417-.421.417z\" fill=\"currentColor\" fill-rule=\"evenodd\"/></symbol>";
 	module.exports = sprite.add(image, "icon-envelop");
 
 /***/ },
-/* 70 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 16 16\" id=\"icon-exit\" ><path d=\"M14.208 0c.473 0 .89.18 1.25.542.361.36.542.777.542 1.25v12.416c0 .473-.18.89-.542 1.25-.36.361-.777.542-1.25.542H1.792c-.5 0-.924-.18-1.271-.542-.347-.36-.521-.777-.521-1.25v-3.541h1.792v3.541h12.416V1.792H1.792v3.541H0V1.792c0-.473.174-.89.52-1.25C.869.18 1.293 0 1.793 0h12.416zM6.292 11.738l2.291-2.355H0V7.617h8.583L6.292 5.262 7.542 4 12 8.5 7.542 13l-1.25-1.262z\" fill-rule=\"evenodd\" fill-opacity=\".87\"/></symbol>";
 	module.exports = sprite.add(image, "icon-exit");
 
 /***/ },
-/* 71 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 24 24\" id=\"icon-file-search\" ><g fill=\"currentColor\" fill-rule=\"evenodd\"><path d=\"M18.881 7.912l-3.656-3.79A.399.399 0 0 0 14.937 4H7.22C6.547 4 6 4.567 6 5.263v13.474C6 19.433 6.547 20 7.219 20H17.78c.672 0 1.219-.567 1.219-1.263V8.21a.432.432 0 0 0-.119-.299zm-.862.299h-2.675a.414.414 0 0 1-.407-.422V5.016l3.082 3.195zm-.238 10.947H7.22a.414.414 0 0 1-.407-.421V5.263c0-.232.182-.42.407-.42h6.906v2.946c0 .697.547 1.264 1.219 1.264h2.844v9.684a.414.414 0 0 1-.407.42z\"/><path d=\"M16.467 17.623l-2.387-2.924c.532-.6.857-1.4.857-2.278 0-1.858-1.457-3.368-3.25-3.368-1.792 0-3.25 1.51-3.25 3.368 0 1.858 1.458 3.368 3.25 3.368.654 0 1.262-.2 1.773-.545l2.386 2.923a.4.4 0 0 0 .573.05.432.432 0 0 0 .048-.594zM9.25 12.42c0-1.393 1.094-2.526 2.438-2.526 1.343 0 2.437 1.133 2.437 2.526 0 1.393-1.094 2.526-2.438 2.526-1.343 0-2.437-1.133-2.437-2.526z\"/></g></symbol>";
 	module.exports = sprite.add(image, "icon-file-search");
 
 /***/ },
-/* 72 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 18 18\" id=\"icon-forwards\" ><g fill-rule=\"evenodd\"><path d=\"M17.429 8.929a8.5 8.5 0 1 0-17 0 8.5 8.5 0 0 0 17 0zm-15.867 0a7.367 7.367 0 1 1 14.733 0 7.367 7.367 0 0 1-14.733 0z\"/><path d=\"M9 5l4 4-4 4-.702-.702 2.784-2.807H5V8.51h6.082L8.298 5.702z\"/></g></symbol>";
 	module.exports = sprite.add(image, "icon-forwards");
 
 /***/ },
-/* 73 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 12 12\" id=\"icon-info\" ><path d=\"M5.408 4.183V2.972h1.184v1.211H5.408zM6 10.803c1.315 0 2.446-.474 3.394-1.423.949-.948 1.423-2.08 1.423-3.394 0-1.315-.474-2.446-1.423-3.394C8.446 1.643 7.314 1.169 6 1.169c-1.315 0-2.446.474-3.394 1.423-.949.948-1.423 2.08-1.423 3.394s.474 2.446 1.423 3.394c.948.949 2.08 1.423 3.394 1.423zM6-.014c1.653 0 3.066.587 4.24 1.76C11.412 2.92 12 4.333 12 5.986s-.587 3.066-1.76 4.24c-1.174 1.173-2.587 1.76-4.24 1.76s-3.066-.587-4.24-1.76C.588 9.051 0 7.638 0 5.985s.587-3.066 1.76-4.24C2.935.573 4.348-.014 6-.014zM5.408 9V5.394h1.184V9H5.408z\" fill-rule=\"evenodd\" fill-opacity=\".7\"/></symbol>";
 	module.exports = sprite.add(image, "icon-info");
 
 /***/ },
-/* 74 */
+/* 45 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 500 500\" id=\"icon-judge-avatar\" ><g data-name=\"Layer 4\"><path d=\"M182.37 351.77h-1.79v-44c0-3.67-26.29-33.79-42.86-51.92l1.33-1.21c7.24 7.91 43.33 47.67 43.33 53.13zM318.85 351.77h-1.79v-44c0-5.46 36.1-45.22 43.33-53.13l1.33 1.21c-16.57 18.13-42.86 48.25-42.86 51.92z\"/><path d=\"M244.69 355.37h-6c0-2.05.22-50.33.51-55-.57-7.45-44.25-64.28-51.9-67.53-3.66.19-23.44 4.21-50.92 10.34-3.58.8-4.7 2-4.87 2.43v10.34l-44.59 12.51-1.63-5.77 40.22-11.35v-5.52c-.05-1.66.59-6.56 9.57-8.56 17.56-3.92 47.73-10.5 52.48-10.5 1.75 0 4.1.7 11.94 9 13.14 14 46.21 56.38 45.69 64.86-.19 3.69-.42 37.38-.5 54.75zm-57.54-122.66zM262.2 355.4l-6-.08c.23-17.32.61-51 .39-54.65-.52-8.6 32.88-51.78 45.65-65.37 7.39-7.87 9.68-8.53 11.39-8.53 4.19 0 26.37 4.88 47.53 9.65l3.77.85c4.17.93 6.62 2.59 7.49 5.06a5.64 5.64 0 0 1-.29 4.31v4.67l42.55 11.37-1.55 5.8-47-12.56v-11.34l.41-.4a8.52 8.52 0 0 0-2.91-1.06l-3.79-.85c-10.23-2.31-41-9.24-45.95-9.49-7.6 3.26-50.77 60.08-51.31 67.62.29 4.6-.35 52.94-.38 55zM185.32 146.88h5.4v28c0 11.11-5.46 14.52-12.66 14.52a17.49 17.49 0 0 1-5.77-1l.81-4.41a12.87 12.87 0 0 0 4.53.81c4.84 0 7.69-2.17 7.69-10.36zM224.66 180.5c0 3.1.06 5.83.25 8.19h-4.84l-.31-4.9h-.12a11.3 11.3 0 0 1-9.93 5.58c-4.71 0-10.36-2.61-10.36-13.15v-17.56h5.46v16.63c0 5.71 1.74 9.55 6.7 9.55a7.89 7.89 0 0 0 7.2-5 8 8 0 0 0 .5-2.79v-18.39h5.46zM259.65 144.64v36.29c0 2.67.06 5.71.25 7.76H255l-.25-5.21h-.12a11.11 11.11 0 0 1-10.24 5.89c-7.26 0-12.84-6.14-12.84-15.26-.06-10 6.14-16.13 13.46-16.13 4.59 0 7.69 2.17 9.06 4.59h.12v-17.93zm-5.46 26.24a9.61 9.61 0 0 0-.25-2.3 8 8 0 0 0-7.88-6.33c-5.65 0-9 5-9 11.6 0 6.08 3 11.11 8.87 11.11a8.21 8.21 0 0 0 8-6.51 9.47 9.47 0 0 0 .25-2.36zM294.58 158.66c-.12 2.17-.25 4.59-.25 8.25v17.43c0 6.89-1.36 11.11-4.28 13.71s-7.14 3.6-10.92 3.6c-3.6 0-7.57-.87-10-2.48l1.37-4.17a16.93 16.93 0 0 0 8.81 2.36c5.58 0 9.68-2.92 9.68-10.49v-3.35h-.12a10.72 10.72 0 0 1-9.55 5c-7.45 0-12.78-6.33-12.78-14.64 0-10.17 6.64-15.94 13.53-15.94 5.21 0 8.07 2.73 9.37 5.21h.12l.25-4.53zm-5.65 11.85a7.78 7.78 0 0 0-.31-2.48 7.86 7.86 0 0 0-7.63-5.77c-5.21 0-8.93 4.41-8.93 11.35 0 5.89 3 10.8 8.87 10.8a8 8 0 0 0 7.57-5.58 9.49 9.49 0 0 0 .43-2.92zM306.43 174.67c.12 7.38 4.84 10.42 10.3 10.42a19.74 19.74 0 0 0 8.31-1.55l.93 3.91a24.32 24.32 0 0 1-10 1.86c-9.25 0-14.77-6.08-14.77-15.14S306.55 158 315.3 158c9.8 0 12.41 8.62 12.41 14.15a20.49 20.49 0 0 1-.19 2.54zm16-3.91c.06-3.47-1.43-8.87-7.57-8.87-5.52 0-7.94 5.09-8.38 8.87z\"/></g></symbol>";
 	module.exports = sprite.add(image, "icon-judge-avatar");
 
 /***/ },
-/* 75 */
+/* 46 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 17 16\" id=\"icon-key\" ><g fill-rule=\"evenodd\"><path d=\"M7.564 7.349c.06 0 .121-.02.17-.062l5.83-4.961-.34-.376-5.83 4.96a.245.245 0 0 0-.024.353.26.26 0 0 0 .194.086z\"/><path d=\"M5.248 16c3.164 0 5.055-2.415 5.055-4.75 0-.673-.166-1.415-.411-1.896l2.33-1.13A.25.25 0 0 0 12.363 8V6h1.545l.058-.003c.343-.022.446-.128.457-.497v-2h1.546c.066 0 .112.007.143.011.062.01.179.027.28-.06.104-.09.1-.204.095-.305-.001-.036-.003-.083-.003-.146V.735A.747.747 0 0 0 15.728 0h-1.996a.776.776 0 0 0-.5.182L6.44 5.962c-.334-.065-.84-.15-1.191-.15C2.354 5.813 0 8.098 0 10.907 0 13.714 2.354 16 5.248 16zm0-9.688c.258 0 .7.06 1.213.164a.26.26 0 0 0 .223-.056L13.572.559a.249.249 0 0 1 .16-.059h1.996c.134 0 .242.105.242.235V3h-1.803a.254.254 0 0 0-.258.25V5.5h-1.803a.254.254 0 0 0-.258.25v2.096l-2.433 1.18a.252.252 0 0 0-.135.165.244.244 0 0 0 .041.205c.227.304.467 1.057.467 1.854 0 2.089-1.698 4.25-4.54 4.25-2.61 0-4.733-2.061-4.733-4.594 0-2.533 2.124-4.594 4.733-4.594z\"/><path d=\"M4.379 13.5c.994 0 1.803-.785 1.803-1.75S5.373 10 4.379 10c-.994 0-1.803.785-1.803 1.75s.809 1.75 1.803 1.75zm0-3c.71 0 1.288.561 1.288 1.25S5.089 13 4.379 13c-.71 0-1.288-.561-1.288-1.25s.578-1.25 1.288-1.25z\"/></g></symbol>";
 	module.exports = sprite.add(image, "icon-key");
 
 /***/ },
-/* 76 */
+/* 47 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 24 24\" id=\"icon-medal\" ><path d=\"M15.618 5.628l-.528-1.625h-1.708L12 3l-1.382 1.003H8.91l-.528 1.625L7 6.632l.528 1.624L7 9.881l1.382 1.003.314.964v8.68a.474.474 0 0 0 .733.393L12 19.207l2.57 1.714a.47.47 0 0 0 .485.023.47.47 0 0 0 .25-.416v-8.68l.313-.964L17 9.881l-.528-1.625L17 6.632l-1.382-1.004zm-.803 4.673l-.408 1.26h-.046l-1.285.003-1.075.78-1.075-.78H9.597l-.41-1.264-1.076-.78.41-1.265-.41-1.264 1.076-.78.41-1.264h1.329L12 4.166l1.075.78h1.329l.41 1.265 1.076.78-.411 1.264.41 1.264-1.075.782z\" fill-rule=\"evenodd\"/></symbol>";
 	module.exports = sprite.add(image, "icon-medal");
 
 /***/ },
-/* 77 */
+/* 48 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 18 12\" id=\"icon-menu\" ><path d=\"M0 12h18v-2H0v2zm0-5h18V5H0v2zm0-7v2h18V0H0z\" fill-rule=\"evenodd\"/></symbol>";
 	module.exports = sprite.add(image, "icon-menu");
 
 /***/ },
-/* 78 */
+/* 49 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 16 16\" id=\"icon-pencil\" ><g fill-rule=\"evenodd\"><path d=\"M2.8 13.6a.4.4 0 0 1-.376-.537l1.6-4.4a.408.408 0 0 1 .093-.146l8.4-8.4a.4.4 0 0 1 .565 0l2.8 2.8a.4.4 0 0 1 0 .565l-8.4 8.4a.397.397 0 0 1-.146.093l-4.4 1.6a.404.404 0 0 1-.137.024l.001.001zm1.946-4.58l-1.277 3.511 3.511-1.277L15.034 3.2 12.8.966 4.746 9.02z\"/><path d=\"M14 16H1.2C.538 16 0 15.462 0 14.8V2C0 1.338.538.8 1.2.8h8a.4.4 0 0 1 0 .8h-8a.4.4 0 0 0-.4.4v12.8c0 .22.18.4.4.4H14a.4.4 0 0 0 .4-.4v-8a.4.4 0 0 1 .8 0v8c0 .662-.538 1.2-1.2 1.2z\"/></g></symbol>";
 	module.exports = sprite.add(image, "icon-pencil");
 
 /***/ },
-/* 79 */
+/* 50 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 24 24\" id=\"icon-phone\" ><g fill=\"currentColor\" fill-rule=\"evenodd\"><path d=\"M15.781 20H8.47a1.211 1.211 0 0 1-1.219-1.2V14c0-.22.182-.4.406-.4.225 0 .407.18.407.4v4.8c0 .22.181.4.406.4h7.312c.224 0 .406-.18.406-.4V5.2c0-.22-.182-.4-.406-.4h-3.25a.403.403 0 0 1-.406-.4c0-.22.182-.4.406-.4h3.25C16.453 4 17 4.538 17 5.2v13.6c0 .662-.547 1.2-1.219 1.2z\"/><path d=\"M14.969 16.8H9.28a.403.403 0 0 1-.406-.4V14c0-.22.182-.4.406-.4.224 0 .406.18.406.4v2h4.876V6.4h-.407a.403.403 0 0 1-.406-.4c0-.22.182-.4.406-.4h.813c.224 0 .406.18.406.4v10.4c0 .22-.182.4-.406.4zM12.531 18.4h-.812a.403.403 0 0 1-.406-.4c0-.22.181-.4.406-.4h.812c.224 0 .406.18.406.4 0 .22-.181.4-.406.4z\"/><path d=\"M8.469 12.8C6.004 12.8 4 10.826 4 8.4S6.004 4 8.469 4c2.464 0 4.469 1.974 4.469 4.4s-2.005 4.4-4.47 4.4zm0-8c-2.016 0-3.656 1.615-3.656 3.6S6.452 12 8.469 12s3.656-1.615 3.656-3.6-1.64-3.6-3.656-3.6z\"/><path d=\"M8.469 7.2a.403.403 0 0 1-.406-.4V6c0-.22.181-.4.406-.4.224 0 .406.18.406.4v.8c0 .22-.182.4-.406.4zM8.469 11.2a.403.403 0 0 1-.406-.4V8.4c0-.22.181-.4.406-.4.224 0 .406.18.406.4v2.4c0 .22-.182.4-.406.4z\"/></g></symbol>";
 	module.exports = sprite.add(image, "icon-phone");
 
 /***/ },
-/* 80 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 16 16\" id=\"icon-plus-circle-o\" ><path d=\"M8 14.404c1.753 0 3.261-.632 4.526-1.897 1.264-1.264 1.897-2.773 1.897-4.526 0-1.753-.633-3.261-1.897-4.526C11.26 2.191 9.753 1.56 8 1.56c-1.753 0-3.261.632-4.526 1.896C2.21 4.72 1.577 6.228 1.577 7.981c0 1.753.633 3.262 1.897 4.526C4.74 13.772 6.247 14.404 8 14.404zM8-.02c2.203 0 4.088.783 5.653 2.348C15.218 3.894 16 5.778 16 7.98c0 2.204-.782 4.088-2.347 5.653-1.565 1.565-3.45 2.347-5.653 2.347-2.203 0-4.088-.782-5.653-2.347C.782 12.069 0 10.184 0 7.98 0 5.778.782 3.894 2.347 2.33 3.912.764 5.797-.02 8-.02zm.789 3.981v3.23h3.23V8.77h-3.23V12H7.21V8.77h-3.23V7.192h3.23v-3.23H8.79z\" fill-rule=\"evenodd\"/></symbol>";
 	module.exports = sprite.add(image, "icon-plus-circle-o");
 
 /***/ },
-/* 81 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 18 16\" id=\"icon-profile\" ><path d=\"M.187 15.992a.253.253 0 0 0 .308-.177c.519-1.922 2.627-2.42 3.887-2.718.316-.074.565-.133.727-.203 1.435-.618 1.903-1.614 2.043-2.34a.25.25 0 0 0-.083-.236c-.747-.64-1.378-1.602-1.776-2.709a.246.246 0 0 0-.051-.085c-.527-.568-.829-1.169-.829-1.647 0-.28.106-.467.346-.609a.25.25 0 0 0 .122-.204C4.992 2.517 6.819.512 9.061.5l.053.003c2.252.031 4.068 2.08 4.133 4.663a.248.248 0 0 0 .09.184c.157.133.23.3.23.529 0 .4-.214.893-.604 1.386a.26.26 0 0 0-.042.079c-.403 1.268-1.126 2.388-1.984 3.073a.25.25 0 0 0-.09.241c.14.726.609 1.72 2.044 2.34.17.073.433.13.767.202 1.247.268 3.335.717 3.847 2.616a.252.252 0 0 0 .486-.13c-.591-2.194-2.956-2.702-4.226-2.975-.295-.064-.55-.118-.673-.172-.937-.404-1.514-1.02-1.718-1.833.87-.742 1.597-1.886 2.013-3.17.442-.57.685-1.156.685-1.658 0-.334-.109-.613-.324-.831C13.628 2.243 11.614.036 9.114 0L9.04 0C6.585.013 4.563 2.162 4.386 4.916c-.315.23-.475.552-.475.962 0 .591.336 1.299.926 1.948.408 1.112 1.04 2.088 1.791 2.772-.203.816-.78 1.434-1.72 1.838-.12.053-.362.11-.642.176-1.28.302-3.661.865-4.257 3.074a.25.25 0 0 0 .178.306z\" fill-rule=\"evenodd\"/></symbol>";
 	module.exports = sprite.add(image, "icon-profile");
 
 /***/ },
-/* 82 */
+/* 53 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 500 500\" id=\"icon-prosecutor-avatar\" ><g data-name=\"Layer 4\"><path d=\"M182.37 347.46h-1.79v-44c0-3.67-26.29-33.79-42.86-51.92l1.33-1.21c7.24 7.91 43.33 47.67 43.33 53.13zM318.85 347.46h-1.79v-44c0-5.46 36.1-45.21 43.33-53.13l1.33 1.21c-16.57 18.13-42.86 48.25-42.86 51.92z\"/><path d=\"M244.69 351.06h-6c0-2.05.22-50.33.51-55-.57-7.45-44.25-64.28-51.9-67.53-3.67.19-23 4.11-50.92 10.34-3.58.8-4.7 2-4.87 2.43v10.34l-44.59 12.51-1.63-5.78L125.5 247v-5.52c-.05-1.66.59-6.56 9.57-8.56 17.57-3.92 47.74-10.5 52.48-10.5 1.75 0 4.11.7 11.94 9 13.14 14 46.21 56.38 45.7 64.87-.19 3.71-.42 37.44-.5 54.77zM131.48 241.31zm55.67-12.9zM262.2 351.09l-6-.08c.23-17.32.61-51 .39-54.65-.52-8.61 32.88-51.79 45.65-65.37 7.39-7.87 9.68-8.53 11.38-8.53 4.18 0 26.35 4.87 47.49 9.64l3.81.86c4.17.93 6.62 2.59 7.49 5.06a5.64 5.64 0 0 1-.29 4.31V247l42.55 11.37-1.55 5.8-47-12.56v-11.34l.41-.4a8.53 8.53 0 0 0-2.91-1.06l-3.82-.86c-10.22-2.31-40.95-9.23-45.91-9.48-7.6 3.26-50.77 60.08-51.31 67.62.29 4.64-.35 52.91-.38 55zM135.17 149.63a52.81 52.81 0 0 1 8.74-.68c4.5 0 7.8 1 9.89 2.93a9.48 9.48 0 0 1 3.09 7.38 10.38 10.38 0 0 1-2.72 7.54c-2.41 2.56-6.33 3.87-10.78 3.87a15.7 15.7 0 0 1-3.66-.31v14.13h-4.55zm4.55 17a15.25 15.25 0 0 0 3.77.37c5.5 0 8.84-2.67 8.84-7.54 0-4.66-3.3-6.91-8.32-6.91a19.11 19.11 0 0 0-4.29.37zM162 167.06c0-3-.05-5.55-.21-7.9h4l.16 5h.21c1.15-3.4 3.93-5.55 7-5.55a5 5 0 0 1 1.31.16v4.34a6.92 6.92 0 0 0-1.57-.16c-3.24 0-5.55 2.46-6.18 5.91a13 13 0 0 0-.21 2.15v13.5H162zM201.54 171.61c0 9.37-6.49 13.45-12.61 13.45-6.86 0-12.14-5-12.14-13 0-8.48 5.55-13.45 12.56-13.45 7.27-.03 12.19 5.26 12.19 13zm-20.1.26c0 5.55 3.19 9.73 7.69 9.73s7.69-4.13 7.69-9.84c0-4.29-2.15-9.73-7.59-9.73s-7.79 5.03-7.79 9.85zM206.72 179.78a12.07 12.07 0 0 0 6.07 1.83c3.35 0 4.92-1.67 4.92-3.77s-1.31-3.4-4.71-4.66c-4.55-1.62-6.7-4.13-6.7-7.17 0-4.08 3.3-7.43 8.74-7.43a12.65 12.65 0 0 1 6.23 1.57l-1.15 3.35a9.86 9.86 0 0 0-5.18-1.47c-2.72 0-4.24 1.57-4.24 3.45 0 2.09 1.52 3 4.81 4.29 4.4 1.67 6.65 3.87 6.65 7.64 0 4.45-3.45 7.59-9.47 7.59a14.44 14.44 0 0 1-7.12-1.73zM230.64 172.66c.1 6.23 4.08 8.79 8.69 8.79a16.65 16.65 0 0 0 7-1.31l.79 3.3a20.52 20.52 0 0 1-8.42 1.56c-7.8 0-12.46-5.13-12.46-12.77s4.5-13.66 11.88-13.66c8.27 0 10.47 7.27 10.47 11.93a17.28 17.28 0 0 1-.16 2.15zm13.5-3.3c.05-2.93-1.2-7.48-6.39-7.48-4.66 0-6.7 4.29-7.07 7.48zM272.35 183.55a17 17 0 0 1-7.27 1.47c-7.64 0-12.61-5.18-12.61-12.93s5.34-13.45 13.61-13.45a15.4 15.4 0 0 1 6.39 1.31l-1 3.56a10.69 10.69 0 0 0-5.34-1.2c-5.81 0-8.95 4.29-8.95 9.58 0 5.86 3.77 9.47 8.79 9.47a13.09 13.09 0 0 0 5.65-1.26zM298.93 177.58c0 2.62.05 4.92.21 6.91h-4.08l-.26-4.13h-.1a9.53 9.53 0 0 1-8.37 4.71c-4 0-8.74-2.2-8.74-11.1v-14.81h4.61v14c0 4.81 1.47 8.06 5.65 8.06a6.66 6.66 0 0 0 6.07-4.19 6.73 6.73 0 0 0 .42-2.36v-15.51h4.61zM312.12 151.88v7.27h6.59v3.51h-6.59v13.66c0 3.14.89 4.92 3.45 4.92a10.23 10.23 0 0 0 2.67-.31l.21 3.45a11.27 11.27 0 0 1-4.08.63 6.38 6.38 0 0 1-5-1.94c-1.31-1.36-1.78-3.61-1.78-6.59v-13.82h-3.89v-3.51h3.92v-6.07zM346.51 171.61c0 9.37-6.49 13.45-12.61 13.45-6.86 0-12.14-5-12.14-13 0-8.48 5.55-13.45 12.56-13.45 7.27-.03 12.19 5.26 12.19 13zm-20.1.26c0 5.55 3.19 9.73 7.69 9.73s7.69-4.13 7.69-9.84c0-4.29-2.15-9.73-7.59-9.73s-7.79 5.03-7.79 9.85zM352.32 167.06c0-3-.05-5.55-.21-7.9h4l.16 5h.21c1.15-3.4 3.93-5.55 7-5.55a5 5 0 0 1 1.31.16v4.34a6.92 6.92 0 0 0-1.57-.16c-3.24 0-5.55 2.46-6.18 5.91a13 13 0 0 0-.21 2.15v13.5h-4.55z\"/></g></symbol>";
 	module.exports = sprite.add(image, "icon-prosecutor-avatar");
 
 /***/ },
-/* 83 */
+/* 54 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 34 32\" id=\"icon-star-full\" ><path d=\"M17 25.679L6.465 32l2.793-11.852L0 12.168l12.211-1.027L17 0l4.789 11.14L34 12.169l-9.258 7.98L27.535 32z\" fill-rule=\"evenodd\"/></symbol>";
 	module.exports = sprite.add(image, "icon-star-full");
 
 /***/ },
-/* 84 */
+/* 55 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 34 32\" id=\"icon-star-half\" ><defs><radialGradient cy=\"0%\" fx=\"50%\" fy=\"0%\" r=\"100%\" id=\"icon-star-half_a\"><stop stop-color=\"currentColor\" offset=\"0%\"/><stop stop-color=\"currentColor\" offset=\"100%\"/></radialGradient></defs><path d=\"M17 22.542l6.385 3.862-1.676-7.172 5.667-4.887-7.503-.63L17 6.935v15.606zm17-10.325l-9.258 7.96L27.535 32 17 25.695 6.465 32l2.793-11.823L0 12.217l12.211-1.025L17 0l4.789 11.192L34 12.217z\" fill=\"currentColor\" fill-rule=\"evenodd\"/></symbol>";
 	module.exports = sprite.add(image, "icon-star-half");
 
 /***/ },
-/* 85 */
+/* 56 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 34 32\" id=\"icon-star-o\" ><path d=\"M17 22.598l6.385 3.792-1.676-7.19 5.667-4.899-7.503-.632L17 6.874l-2.873 6.795-7.503.632 5.667 4.899-1.676 7.19L17 22.598zm17-10.43l-9.258 7.98L27.535 32 17 25.679 6.465 32l2.793-11.852L0 12.168l12.211-1.027L17 0l4.789 11.14L34 12.169z\" fill-rule=\"evenodd\"/></symbol>";
 	module.exports = sprite.add(image, "icon-star-o");
 
 /***/ },
-/* 86 */
+/* 57 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 60 56\" id=\"icon-star\" ><path d=\"M30 44.938L11.408 56l4.93-20.74L0 21.293l21.55-1.798L30 0l8.45 19.496L60 21.294 43.662 35.259 48.592 56z\" fill-rule=\"evenodd\"/></symbol>";
 	module.exports = sprite.add(image, "icon-star");
 
 /***/ },
-/* 87 */
+/* 58 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
-	var sprite = __webpack_require__(60);
+	var sprite = __webpack_require__(31);
 	var image = "<symbol viewBox=\"0 0 56 57\" id=\"icon-user\" ><path d=\"M28 35.082c5.895 0 12.035 1.283 18.421 3.848C52.807 41.495 56 44.852 56 49v7.04H0V49c0-4.148 3.193-7.505 9.579-10.07 6.386-2.565 12.526-3.848 18.421-3.848zm0-7.041c-3.82 0-7.096-1.365-9.825-4.094-2.729-2.729-4.093-6.004-4.093-9.824 0-3.82 1.364-7.123 4.093-9.907C20.905 1.433 24.18.041 28 .041c3.82 0 7.096 1.392 9.825 4.175 2.729 2.784 4.093 6.086 4.093 9.907 0 3.82-1.364 7.095-4.093 9.824-2.73 2.73-6.004 4.094-9.825 4.094z\" fill-rule=\"evenodd\"/></symbol>";
 	module.exports = sprite.add(image, "icon-user");
 

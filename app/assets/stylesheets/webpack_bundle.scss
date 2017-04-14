@@ -1,791 +1,4 @@
 /*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
-
-/* ==========================================================================
-   Normalize.scss settings
-   ========================================================================== */
-
-/**
- * Includes legacy browser support IE6/7
- *
- * Set to false if you want to drop support for IE6 and IE7
- */
-
-/* Base
-   ========================================================================== */
-
-/**
- * 1. Set default font family to sans-serif.
- * 2. Prevent iOS and IE text size adjust after device orientation change,
- *    without disabling user zoom.
- * 3. Corrects text resizing oddly in IE 6/7 when body `font-size` is set using
- *  `em` units.
- */
-
-html {
-  font-family: sans-serif;
-  /* 1 */
-  -ms-text-size-adjust: 100%;
-  /* 2 */
-  -webkit-text-size-adjust: 100%;
-  /* 2 */
-}
-
-/**
- * Remove default margin.
- */
-
-body {
-  margin: 0;
-}
-
-/* HTML5 display definitions
-   ========================================================================== */
-
-/**
- * Correct `block` display not defined for any HTML5 element in IE 8/9.
- * Correct `block` display not defined for `details` or `summary` in IE 10/11
- * and Firefox.
- * Correct `block` display not defined for `main` in IE 11.
- */
-
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-main,
-menu,
-nav,
-section,
-summary {
-  display: block;
-}
-
-/**
- * 1. Correct `inline-block` display not defined in IE 6/7/8/9 and Firefox 3.
- * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
- */
-
-audio,
-canvas,
-progress,
-video {
-  display: inline-block;
-  /* 1 */
-  vertical-align: baseline;
-  /* 2 */
-}
-
-/**
- * Prevents modern browsers from displaying `audio` without controls.
- * Remove excess height in iOS 5 devices.
- */
-
-audio:not([controls]) {
-  display: none;
-  height: 0;
-}
-
-/**
- * Address `[hidden]` styling not present in IE 8/9/10.
- * Hide the `template` element in IE 8/9/10/11, Safari, and Firefox < 22.
- */
-
-[hidden],
-template {
-  display: none;
-}
-
-/* Links
-   ========================================================================== */
-
-/**
- * Remove the gray background color from active links in IE 10.
- */
-
-a {
-  background-color: transparent;
-}
-
-/**
- * Improve readability of focused elements when they are also in an
- * active/hover state.
- */
-
-a:active,
-a:hover {
-  outline: 0;
-}
-
-/* Text-level semantics
-   ========================================================================== */
-
-/**
- * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
- */
-
-abbr[title] {
-  border-bottom: 1px dotted;
-}
-
-/**
- * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
- */
-
-b,
-strong {
-  font-weight: 700;
-}
-
-/**
- * Address styling not present in Safari and Chrome.
- */
-
-dfn {
-  font-style: italic;
-}
-
-/**
- * Address variable `h1` font-size and margin within `section` and `article`
- * contexts in Firefox 4+, Safari, and Chrome.
- */
-
-h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
-}
-
-/**
- * Addresses styling not present in IE 8/9.
- */
-
-mark {
-  background: #ff0;
-  color: #000;
-}
-
-/**
- * Address inconsistent and variable font size in all browsers.
- */
-
-small {
-  font-size: 80%;
-}
-
-/**
- * Prevent `sub` and `sup` affecting `line-height` in all browsers.
- */
-
-sub,
-sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
-
-sup {
-  top: -0.5em;
-}
-
-sub {
-  bottom: -0.25em;
-}
-
-/* Embedded content
-   ========================================================================== */
-
-/**
- * 1. Remove border when inside `a` element in IE 8/9/10.
- * 2. Improves image quality when scaled in IE 7.
- */
-
-img {
-  border: 0;
-}
-
-/**
- * Correct overflow not hidden in IE 9/10/11.
- */
-
-svg:not(:root) {
-  overflow: hidden;
-}
-
-/* Grouping content
-   ========================================================================== */
-
-/**
- * Address margin not present in IE 8/9 and Safari.
- */
-
-figure {
-  margin: 1em 40px;
-}
-
-/**
- * Address differences between Firefox and other browsers.
- */
-
-hr {
-  box-sizing: content-box;
-  height: 0;
-}
-
-/**
- * Contain overflow in all browsers.
- */
-
-pre {
-  overflow: auto;
-}
-
-/**
- * Address odd `em`-unit font size rendering in all browsers.
- * Correct font family set oddly in IE 6, Safari 4/5, and Chrome.
- */
-
-code,
-kbd,
-pre,
-samp {
-  font-family: monospace, monospace;
-  font-size: 1em;
-}
-
-/* Forms
-   ========================================================================== */
-
-/**
- * Known limitation: by default, Chrome and Safari on OS X allow very limited
- * styling of `select`, unless a `border` property is set.
- */
-
-/**
- * 1. Correct color not being inherited.
- *  Known issue: affects color of disabled elements.
- * 2. Correct font properties not being inherited.
- * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
- * 4. Improves appearance and consistency in all browsers.
- */
-
-button,
-input,
-optgroup,
-select,
-textarea {
-  color: inherit;
-  /* 1 */
-  font: inherit;
-  /* 2 */
-  margin: 0;
-  /* 3 */
-}
-
-/**
- * Address `overflow` set to `hidden` in IE 8/9/10/11.
- */
-
-button {
-  overflow: visible;
-}
-
-/**
- * Address inconsistent `text-transform` inheritance for `button` and `select`.
- * All other form control elements do not inherit `text-transform` values.
- * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
- * Correct `select` style inheritance in Firefox.
- */
-
-button,
-select {
-  text-transform: none;
-}
-
-/**
- * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
- *  and `video` controls.
- * 2. Correct inability to style clickable `input` types in iOS.
- * 3. Improve usability and consistency of cursor style between image-type
- *  `input` and others.
- * 4. Removes inner spacing in IE 7 without affecting normal text inputs.
- *  Known issue: inner spacing remains in IE 6.
- */
-
-button,
-html input[type="button"],
-input[type="reset"],
-input[type="submit"] {
-  -webkit-appearance: button;
-  /* 2 */
-  cursor: pointer;
-  /* 3 */
-}
-
-/**
- * Re-set default cursor for disabled elements.
- */
-
-button[disabled],
-html input[disabled] {
-  cursor: default;
-}
-
-/**
- * Remove inner padding and border in Firefox 4+.
- */
-
-button::-moz-focus-inner,
-input::-moz-focus-inner {
-  border: 0;
-  padding: 0;
-}
-
-/**
- * Address Firefox 4+ setting `line-height` on `input` using `!important` in
- * the UA stylesheet.
- */
-
-input {
-  line-height: normal;
-}
-
-/**
- * 1. Address box sizing set to `content-box` in IE 8/9/10.
- * 2. Remove excess padding in IE 8/9/10.
- *  Known issue: excess padding remains in IE 6.
- */
-
-input[type="checkbox"],
-input[type="radio"] {
-  box-sizing: border-box;
-  /* 1 */
-  padding: 0;
-  /* 2 */
-}
-
-/**
- * Fix the cursor style for Chrome's increment/decrement buttons. For certain
- * `font-size` values of the `input`, it causes the cursor style of the
- * decrement button to change from `default` to `text`.
- */
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  height: auto;
-}
-
-/**
- * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
- * 2. Address `box-sizing` set to `border-box` in Safari and Chrome.
- */
-
-input[type="search"] {
-  -webkit-appearance: textfield;
-  /* 1 */
-  box-sizing: content-box;
-  /* 2 */
-}
-
-/**
- * Remove inner padding and search cancel button in Safari and Chrome on OS X.
- * Safari (but not Chrome) clips the cancel button when the search input has
- * padding (and `textfield` appearance).
- */
-
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
-
-/**
- * Define consistent border, margin, and padding.
- */
-
-fieldset {
-  border: 1px solid #c0c0c0;
-  margin: 0 2px;
-  padding: 0.35em 0.625em 0.75em;
-}
-
-/**
- * 1. Correct `color` not being inherited in IE 8/9/10/11.
- * 2. Remove padding so people aren't caught out if they zero out fieldsets.
- * 3. Corrects text not wrapping in Firefox 3.
- * 4. Corrects alignment displayed oddly in IE 6/7.
- */
-
-legend {
-  border: 0;
-  /* 1 */
-  padding: 0;
-  /* 2 */
-}
-
-/**
- * Remove default vertical scrollbar in IE 8/9/10/11.
- */
-
-textarea {
-  overflow: auto;
-}
-
-/**
- * Don't inherit the `font-weight` (applied by a rule above).
- * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
- */
-
-optgroup {
-  font-weight: 700;
-}
-
-/* Tables
-   ========================================================================== */
-
-/**
- * Remove most spacing between table cells.
- */
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-td,
-th {
-  padding: 0;
-}
-
-@media print {
-  * {
-    background: transparent !important;
-    color: #000 !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
-  }
-
-  a,
-  a:visited {
-    text-decoration: underline;
-  }
-
-  a[href]:after {
-    content: " (" attr(href) ")";
-  }
-
-  abbr[title]:after {
-    content: " (" attr(title) ")";
-  }
-
-  .ir a:after,
-  a[href^="javascript:"]:after,
-  a[href^="#"]:after {
-    content: "";
-  }
-
-  pre,
-  blockquote {
-    border: 1px solid #999;
-    page-break-inside: avoid;
-  }
-
-  thead {
-    display: table-header-group;
-  }
-
-  tr,
-  img {
-    page-break-inside: avoid;
-  }
-
-  img {
-    max-width: 100% !important;
-  }
-
-@page {
-    margin: 0.5cm;
-}
-
-  p,
-  h2,
-  h3 {
-    orphans: 3;
-    widows: 3;
-  }
-
-  h2,
-  h3 {
-    page-break-after: avoid;
-  }
-}
-
-@charset "UTF-8";
-
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
-
-html {
-  box-sizing: border-box;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-
-embed,
-img,
-object,
-video {
-  max-width: 100%;
-  height: auto;
-}
-
-html {
-  font-family: HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, "Heiti TC", "LiHei Pro", "Microsoft JhengHei", "\5FAE\8EDF\6B63\9ED1\9AD4", Arial, sans-serif;
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.87);
-  line-height: 1.5;
-  font-size: 14px;
-  -webkit-font-smoothing: antialiased;
-}
-
-html::after {
-  display: none;
-  content: "mobile: (max-width: 414px) | tablet-portrait: (max-width: 768px) and (orientation: portrait) | tablet-landscape: (max-width: 1024px) and (orientation: landscape) | tablet: (min-width: 768px) | tablet-portrait-min: (min-width: 768px) and (orientation: portrait) | tablet-landscape-min: (min-width: 768px) and (orientation: landscape) | desktop: (min-width: 1200px)";
-}
-
-body {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-flow: column nowrap;
-      -ms-flex-flow: column nowrap;
-          flex-flow: column nowrap;
-  background-color: #fff;
-  height: 100vh;
-}
-
-.page-wrapper {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1 0 auto;
-      -ms-flex: 1 0 auto;
-          flex: 1 0 auto;
-  min-height: 160px;
-  background-color: #D7CCC8;
-}
-
-.page-wrapper.lawyer {
-  background-color: #ffc107;
-}
-
-.page-wrapper.party {
-  background-color: #f44336;
-}
-
-.page-wrapper.observer {
-  background-color: #009688;
-}
-
-.page-wrapper.enable-full-billboard {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-flow: column nowrap;
-      -ms-flex-flow: column nowrap;
-          flex-flow: column nowrap;
-}
-
-main[role="main"] {
-  padding-bottom: 80px;
-}
-
-.enable-full-billboard main[role="main"] {
-  padding-bottom: 0;
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-flow: column nowrap;
-      -ms-flex-flow: column nowrap;
-          flex-flow: column nowrap;
-}
-
-html.turbolinks-progress-bar::before {
-  background-color: #00bcd4 !important;
-}
-
-textarea {
-  resize: vertical;
-}
-
-img,
-svg {
-  vertical-align: middle;
-}
-
-img[data-sizes="auto"]:not(.slick-slide) {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.cf:after{
-  content: '';
-  display: block;
-  clear: both;
-}
-
-.clr {
-  clear: both;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-right {
-  text-align: right;
-}
-
-.hidden {
-  display: none !important;
-  visibility: hidden;
-}
-
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
-
-.container {
-  max-width: 478.4px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.container:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 1102.4px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .container:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-}
-
-@media (min-width: 1200px) {
-  .container {
-    max-width: 1248px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .container:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-}
-
-.container--wide,
-.container--list {
-  max-width: 478.4px;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: none;
-  padding-right: 16px;
-  padding-left: 16px;
-}
-
-.container--wide:after,
-.container--list:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-@media (min-width: 880px) {
-  .container--wide,
-  .container--list {
-    padding-right: 32px;
-    padding-left: 32px;
-  }
-}
-
-.container--list {
-  max-width: 852.8px;
-}
-
-@media (min-width: 1200px) {
-  .container--list {
-    max-width: 1248px;
-  }
-}
-
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
-
-a {
-  text-decoration: none;
-  color: #00bcd4;
-}
-
-a:hover,
-a:focus {
-  color: #00a0b4;
-}
-
-::-moz-selection {
-  text-shadow: none;
-  background-color: #eeeeee;
-}
-
-::selection {
-  text-shadow: none;
-  background-color: #eeeeee;
-}
-
-.helper--error {
-  color: #d9534f;
-}
-
-/*
  *  webui popover plugin  - v1.2.16
  *  A lightWeight popover plugin with jquery ,enchance the  popover plugin of bootstrap with some awesome new features. It works well with bootstrap ,but bootstrap is not necessary!
  *  https://github.com/sandywalker/webui-popover
@@ -1689,11 +902,778 @@ This file is generated by `grunt build`, do not edit it by hand.
 */
 
 .list--unstyled,
-.toggle-list {
+.toggle-list,
+.list--avatar,
+.list--profile-info,
+.punishment-detail__list {
   list-style-type: none;
   padding-left: 0;
   margin-top: 0;
   margin-bottom: 0;
+}
+
+.main-header__logo .icon {
+  text-indent: 102%;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* ==========================================================================
+   Normalize.scss settings
+   ========================================================================== */
+
+/**
+ * Includes legacy browser support IE6/7
+ *
+ * Set to false if you want to drop support for IE6 and IE7
+ */
+
+/* Base
+   ========================================================================== */
+
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS and IE text size adjust after device orientation change,
+ *    without disabling user zoom.
+ * 3. Corrects text resizing oddly in IE 6/7 when body `font-size` is set using
+ *  `em` units.
+ */
+
+html {
+  font-family: sans-serif;
+  /* 1 */
+  -ms-text-size-adjust: 100%;
+  /* 2 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+}
+
+/**
+ * Remove default margin.
+ */
+
+body {
+  margin: 0;
+}
+
+/* HTML5 display definitions
+   ========================================================================== */
+
+/**
+ * Correct `block` display not defined for any HTML5 element in IE 8/9.
+ * Correct `block` display not defined for `details` or `summary` in IE 10/11
+ * and Firefox.
+ * Correct `block` display not defined for `main` in IE 11.
+ */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+/**
+ * 1. Correct `inline-block` display not defined in IE 6/7/8/9 and Firefox 3.
+ * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+ */
+
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+  /* 1 */
+  vertical-align: baseline;
+  /* 2 */
+}
+
+/**
+ * Prevents modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/**
+ * Address `[hidden]` styling not present in IE 8/9/10.
+ * Hide the `template` element in IE 8/9/10/11, Safari, and Firefox < 22.
+ */
+
+[hidden],
+template {
+  display: none;
+}
+
+/* Links
+   ========================================================================== */
+
+/**
+ * Remove the gray background color from active links in IE 10.
+ */
+
+a {
+  background-color: transparent;
+}
+
+/**
+ * Improve readability of focused elements when they are also in an
+ * active/hover state.
+ */
+
+a:active,
+a:hover {
+  outline: 0;
+}
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
+ */
+
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+/**
+ * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
+ */
+
+b,
+strong {
+  font-weight: 700;
+}
+
+/**
+ * Address styling not present in Safari and Chrome.
+ */
+
+dfn {
+  font-style: italic;
+}
+
+/**
+ * Address variable `h1` font-size and margin within `section` and `article`
+ * contexts in Firefox 4+, Safari, and Chrome.
+ */
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/**
+ * Addresses styling not present in IE 8/9.
+ */
+
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+/* Embedded content
+   ========================================================================== */
+
+/**
+ * 1. Remove border when inside `a` element in IE 8/9/10.
+ * 2. Improves image quality when scaled in IE 7.
+ */
+
+img {
+  border: 0;
+}
+
+/**
+ * Correct overflow not hidden in IE 9/10/11.
+ */
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * Address margin not present in IE 8/9 and Safari.
+ */
+
+figure {
+  margin: 1em 40px;
+}
+
+/**
+ * Address differences between Firefox and other browsers.
+ */
+
+hr {
+  box-sizing: content-box;
+  height: 0;
+}
+
+/**
+ * Contain overflow in all browsers.
+ */
+
+pre {
+  overflow: auto;
+}
+
+/**
+ * Address odd `em`-unit font size rendering in all browsers.
+ * Correct font family set oddly in IE 6, Safari 4/5, and Chrome.
+ */
+
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * Known limitation: by default, Chrome and Safari on OS X allow very limited
+ * styling of `select`, unless a `border` property is set.
+ */
+
+/**
+ * 1. Correct color not being inherited.
+ *  Known issue: affects color of disabled elements.
+ * 2. Correct font properties not being inherited.
+ * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+ * 4. Improves appearance and consistency in all browsers.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  /* 1 */
+  font: inherit;
+  /* 2 */
+  margin: 0;
+  /* 3 */
+}
+
+/**
+ * Address `overflow` set to `hidden` in IE 8/9/10/11.
+ */
+
+button {
+  overflow: visible;
+}
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+ * Correct `select` style inheritance in Firefox.
+ */
+
+button,
+select {
+  text-transform: none;
+}
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *  and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *  `input` and others.
+ * 4. Removes inner spacing in IE 7 without affecting normal text inputs.
+ *  Known issue: inner spacing remains in IE 6.
+ */
+
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  /* 2 */
+  cursor: pointer;
+  /* 3 */
+}
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+
+input {
+  line-height: normal;
+}
+
+/**
+ * 1. Address box sizing set to `content-box` in IE 8/9/10.
+ * 2. Remove excess padding in IE 8/9/10.
+ *  Known issue: excess padding remains in IE 6.
+ */
+
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */
+}
+
+/**
+ * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+ * `font-size` values of the `input`, it causes the cursor style of the
+ * decrement button to change from `default` to `text`.
+ */
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari and Chrome.
+ */
+
+input[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  box-sizing: content-box;
+  /* 2 */
+}
+
+/**
+ * Remove inner padding and search cancel button in Safari and Chrome on OS X.
+ * Safari (but not Chrome) clips the cancel button when the search input has
+ * padding (and `textfield` appearance).
+ */
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * Define consistent border, margin, and padding.
+ */
+
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+/**
+ * 1. Correct `color` not being inherited in IE 8/9/10/11.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ * 3. Corrects text not wrapping in Firefox 3.
+ * 4. Corrects alignment displayed oddly in IE 6/7.
+ */
+
+legend {
+  border: 0;
+  /* 1 */
+  padding: 0;
+  /* 2 */
+}
+
+/**
+ * Remove default vertical scrollbar in IE 8/9/10/11.
+ */
+
+textarea {
+  overflow: auto;
+}
+
+/**
+ * Don't inherit the `font-weight` (applied by a rule above).
+ * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
+ */
+
+optgroup {
+  font-weight: 700;
+}
+
+/* Tables
+   ========================================================================== */
+
+/**
+ * Remove most spacing between table cells.
+ */
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+@media print {
+  * {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+
+  .ir a:after,
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
+    content: "";
+  }
+
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+
+  img {
+    max-width: 100% !important;
+  }
+
+@page {
+    margin: 0.5cm;
+}
+
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+embed,
+img,
+object,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+html {
+  font-family: HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, "Heiti TC", "LiHei Pro", "Microsoft JhengHei", "\5FAE\8EDF\6B63\9ED1\9AD4", Arial, sans-serif;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.87);
+  line-height: 1.5;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+html::after {
+  display: none;
+  content: "mobile: (max-width: 414px) | tablet-portrait: (max-width: 768px) and (orientation: portrait) | tablet-landscape: (max-width: 1024px) and (orientation: landscape) | tablet: (min-width: 768px) | tablet-portrait-min: (min-width: 768px) and (orientation: portrait) | tablet-landscape-min: (min-width: 768px) and (orientation: landscape) | desktop: (min-width: 1200px)";
+}
+
+body {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: column nowrap;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  background-color: #fff;
+  height: 100vh;
+}
+
+.page-wrapper {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 auto;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto;
+  min-height: 160px;
+  background-color: #D7CCC8;
+}
+
+.page-wrapper.lawyer {
+  background-color: #ffc107;
+}
+
+.page-wrapper.party {
+  background-color: #f44336;
+}
+
+.page-wrapper.observer {
+  background-color: #009688;
+}
+
+.page-wrapper.enable-full-billboard {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: column nowrap;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+}
+
+main[role="main"] {
+  padding-bottom: 80px;
+}
+
+.enable-full-billboard main[role="main"] {
+  padding-bottom: 0;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: column nowrap;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+}
+
+html.turbolinks-progress-bar::before {
+  background-color: #00bcd4 !important;
+}
+
+textarea {
+  resize: vertical;
+}
+
+img,
+svg {
+  vertical-align: middle;
+}
+
+img[data-sizes="auto"]:not(.slick-slide) {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.cf:after{
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.clr {
+  clear: both;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.hidden {
+  display: none !important;
+  visibility: hidden;
+}
+
+.container {
+  max-width: 478.4px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 1102.4px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .container:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1248px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .container:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+.container--wide,
+.container--list {
+  max-width: 478.4px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: none;
+  padding-right: 16px;
+  padding-left: 16px;
+}
+
+.container--wide:after,
+.container--list:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media (min-width: 880px) {
+  .container--wide,
+  .container--list {
+    padding-right: 32px;
+    padding-left: 32px;
+  }
+}
+
+.container--list {
+  max-width: 852.8px;
+}
+
+@media (min-width: 1200px) {
+  .container--list {
+    max-width: 1248px;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: #00bcd4;
+}
+
+a:hover,
+a:focus {
+  color: #00a0b4;
+}
+
+::-moz-selection {
+  text-shadow: none;
+  background-color: #eeeeee;
+}
+
+::selection {
+  text-shadow: none;
+  background-color: #eeeeee;
+}
+
+.helper--error {
+  color: #d9534f;
 }
 
 .list--dot {
@@ -1729,13 +1709,6 @@ This file is generated by `grunt build`, do not edit it by hand.
   padding-left: 26px;
   text-indent: -26px;
 }
-
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
 
 .main-footer {
   color: rgba(0, 0, 0, 0.54);
@@ -1846,20 +1819,6 @@ This file is generated by `grunt build`, do not edit it by hand.
   .main-footer__copy {
     display: block;
   }
-}
-
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
-
-.main-header__logo .icon {
-  text-indent: 102%;
-  white-space: nowrap;
-  overflow: hidden;
-  padding: 0;
 }
 
 .main-header {
@@ -1985,13 +1944,6 @@ This file is generated by `grunt build`, do not edit it by hand.
   top: -1px;
   position: relative;
 }
-
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
 
 .drawer-toggle {
   -webkit-appearance: none;
@@ -2158,13 +2110,6 @@ This file is generated by `grunt build`, do not edit it by hand.
   }
 }
 
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
-
 .billboard {
   padding-top: 300px;
   margin-bottom: -176px;
@@ -2268,13 +2213,6 @@ This file is generated by `grunt build`, do not edit it by hand.
   }
 }
 
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
-
 .offcanvas-card-wrapper {
   margin-top: -64px;
 }
@@ -2318,6 +2256,46 @@ This file is generated by `grunt build`, do not edit it by hand.
     width: 80px;
     height: 50px;
     stroke-width: 4px;
+  }
+}
+
+.card--2-columns-form {
+  padding-top: 16px;
+}
+
+@media (min-width: 768px) {
+  .card--2-columns-form {
+    padding: 16px;
+    width: 90%;
+    max-width: 728px;
+  }
+
+  .card--2-columns-form .form-wrapper:after{
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  .card--2-columns-form .form-wrapper {
+    margin-bottom: 16px;
+  }
+
+  .card--2-columns-form .form-group {
+    width: 48%;
+    float: left;
+  }
+
+  .card--2-columns-form .form-group:nth-child(2n + 1) {
+    margin-left: 0;
+    margin-right: -100%;
+    clear: both;
+    margin-left: 0;
+  }
+
+  .card--2-columns-form .form-group:nth-child(2n + 2) {
+    margin-left: 52%;
+    margin-right: -100%;
+    clear: none;
   }
 }
 
@@ -2568,13 +2546,6 @@ This file is generated by `grunt build`, do not edit it by hand.
   margin-top: 16px;
 }
 
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
-
 .news-card-wrapper {
   margin-top: -56px;
 }
@@ -2684,13 +2655,6 @@ This file is generated by `grunt build`, do not edit it by hand.
           align-self: flex-start;
 }
 
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
-
 .form-group.text::before,
 .control-label::before {
   content: "";
@@ -2798,7 +2762,14 @@ This file is generated by `grunt build`, do not edit it by hand.
 }
 
 .form-actions .flat-button + .raised-button,
-.form-actions .flat-button + .raised-button--large {
+.form-actions .flat-button--densed + .raised-button,
+.form-actions .flat-button--large + .raised-button,
+.form-actions .flat-button + .raised-button--large,
+.form-actions .flat-button--densed + .raised-button--large,
+.form-actions .flat-button--large + .raised-button--large,
+.form-actions .flat-button + .raised-button--large,
+.form-actions .flat-button--densed + .raised-button--large,
+.form-actions .flat-button--large + .raised-button--large {
   margin-left: 8px;
 }
 
@@ -2864,38 +2835,38 @@ textarea:not(:disabled):active + .control-label::before {
           transform: scaleX(1);
 }
 
-input[type="color"]:disabled,
 input[type="color"].readonly,
-input[type="date"]:disabled,
+input[type="color"]:disabled,
 input[type="date"].readonly,
-input[type="datetime"]:disabled,
+input[type="date"]:disabled,
 input[type="datetime"].readonly,
-input[type="datetime-local"]:disabled,
+input[type="datetime"]:disabled,
 input[type="datetime-local"].readonly,
-input[type="email"]:disabled,
+input[type="datetime-local"]:disabled,
 input[type="email"].readonly,
-input[type="month"]:disabled,
+input[type="email"]:disabled,
 input[type="month"].readonly,
-input[type="number"]:disabled,
+input[type="month"]:disabled,
 input[type="number"].readonly,
-input[type="password"]:disabled,
+input[type="number"]:disabled,
 input[type="password"].readonly,
-input[type="search"]:disabled,
+input[type="password"]:disabled,
 input[type="search"].readonly,
-input[type="tel"]:disabled,
+input[type="search"]:disabled,
 input[type="tel"].readonly,
-input[type="text"]:disabled,
+input[type="tel"]:disabled,
 input[type="text"].readonly,
-input[type="time"]:disabled,
+input[type="text"]:disabled,
 input[type="time"].readonly,
-input[type="url"]:disabled,
+input[type="time"]:disabled,
 input[type="url"].readonly,
-input[type="week"]:disabled,
+input[type="url"]:disabled,
 input[type="week"].readonly,
-input:not([type]):disabled,
+input[type="week"]:disabled,
 input:not([type]).readonly,
-textarea:disabled,
-textarea.readonly {
+input:not([type]):disabled,
+textarea.readonly,
+textarea:disabled {
   color: rgba(0, 0, 0, 0.38);
 }
 
@@ -2924,6 +2895,7 @@ input:-webkit-autofill {
   position: absolute;
   -webkit-transition: all .3s ease 0s;
   transition: all .3s ease 0s;
+  pointer-events: none;
 }
 
 .control-label.disabled {
@@ -2939,8 +2911,8 @@ input:-webkit-autofill {
 }
 
 .is-focused .control-label,
-input[value] + .control-label,
 input:focus + .control-label,
+input[value] + .control-label,
 select ~ .control-label {
   color: rgba(0, 0, 0, 0.54);
   font-size: 12px;
@@ -3083,7 +3055,7 @@ select:disabled {
 
 .chosen-container.chosen-with-drop .chosen-drop {
   background: #fff;
-  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.12), 0px 8px 8px 0px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.12), 0 8px 8px 0 rgba(0, 0, 0, 0.24);
   border-radius: 3px;
   border: none;
   left: -8px;
@@ -3140,13 +3112,6 @@ abbr[title="required"] {
   padding-left: 26px;
   margin-top: 8px;
 }
-
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
 
 .raised-button,
 .raised-button--large,
@@ -3283,12 +3248,113 @@ abbr[title="required"] {
   background-color: #fff;
 }
 
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
+.story-list__table thead,
+.search-result__table thead {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: #00bcd4;
+}
+
+.story-list__table tbody tr:hover td,
+.search-result__table tbody tr:hover td {
+  background-color: #eeeeee;
+  cursor: pointer;
+}
+
+.story-list__table td:first-child,
+.search-result__table td:first-child,
+.story-list__table th:first-child,
+.search-result__table th:first-child {
+  padding-left: 16px;
+}
+
+.story-list__table td:last-child,
+.search-result__table td:last-child,
+.story-list__table th:last-child,
+.search-result__table th:last-child {
+  padding-right: 16px;
+}
+
+@media (min-width: 768px) {
+  .story-list__table td:first-child,
+  .search-result__table td:first-child,
+  .story-list__table th:first-child,
+  .search-result__table th:first-child {
+    padding-left: 24px;
+  }
+
+  .story-list__table td:last-child,
+  .search-result__table td:last-child,
+  .story-list__table th:last-child,
+  .search-result__table th:last-child {
+    padding-right: 24px;
+  }
+}
+
+.story-list__table th,
+.search-result__table th {
+  padding-bottom: 8px;
+}
+
+.story-list__table td,
+.search-result__table td {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  position: relative;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.story-list__table td::before,
+.search-result__table td::before {
+  content: "";
+  display: block;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.story-list__table td:first-child::before,
+.search-result__table td:first-child::before {
+  left: 16px;
+}
+
+@media (min-width: 768px) {
+  .story-list__table td:first-child::before,
+  .search-result__table td:first-child::before {
+    left: 24px;
+  }
+}
+
+.story-list__table td:last-child,
+.search-result__table td:last-child {
+  text-align: right;
+}
+
+.story-list__table td:last-child::before,
+.search-result__table td:last-child::before {
+  right: 16px;
+}
+
+@media (min-width: 768px) {
+  .story-list__table td:last-child::before,
+  .search-result__table td:last-child::before {
+    right: 24px;
+  }
+}
+
+.story-list__table tr:last-child td::before,
+.search-result__table tr:last-child td::before {
+  display: none;
+}
+
+.story-list__table .icon,
+.search-result__table .icon {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
 
 .billboard__alert {
   margin: 0 auto;
@@ -3364,13 +3430,6 @@ abbr[title="required"] {
   margin-top: -2px;
 }
 
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
-
 .user-info {
   position: relative;
   margin-bottom: 16px;
@@ -3392,7 +3451,7 @@ abbr[title="required"] {
   position: absolute;
 }
 
-.user-info__content:after {
+.user-info__content:after{
   content: '';
   display: block;
   clear: both;
@@ -3487,7 +3546,8 @@ abbr[title="required"] {
     margin-left: auto;
   }
 
-  .user-info-actions .between .raised-button {
+  .user-info-actions .between .raised-button,
+  .user-info-actions .between .raised-button--large {
     margin-left: 16px;
   }
 }
@@ -3516,13 +3576,6 @@ abbr[title="required"] {
     position: static;
   }
 }
-
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
 
 .step-meter {
   display: -webkit-box;
@@ -3567,13 +3620,6 @@ abbr[title="required"] {
   -webkit-animation: bounceIn 1.5s ease 0s both;
           animation: bounceIn 1.5s ease 0s both;
 }
-
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
 
 .ui-datepicker .ui-datepicker-next,
 .ui-datepicker .ui-datepicker-prev {
@@ -3637,13 +3683,6 @@ abbr[title="required"] {
   left: 4px;
 }
 
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
-
 .form-group .popover-trigger {
   margin-left: 8px;
 }
@@ -3653,20 +3692,6 @@ abbr[title="required"] {
   height: 15px;
   fill: currentColor;
   margin-top: -1px;
-}
-
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
-
-.list--avatar {
-  list-style-type: none;
-  padding-left: 0;
-  margin-top: 0;
-  margin-bottom: 0;
 }
 
 .list--avatar {
@@ -3782,13 +3807,6 @@ abbr[title="required"] {
   background-color: #7B1FA2;
 }
 
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
-
 .pagination {
   display: -webkit-box;
   display: -webkit-flex;
@@ -3797,12 +3815,19 @@ abbr[title="required"] {
   -webkit-flex-flow: row wrap;
       -ms-flex-flow: row wrap;
           flex-flow: row wrap;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  margin: 16px auto;
+  margin: 16px -2px;
   max-width: 664px;
+}
+
+@media (min-width: 656px) {
+  .pagination {
+    margin-right: auto;
+    margin-left: auto;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
 }
 
 .pagination__cell {
@@ -3814,7 +3839,9 @@ abbr[title="required"] {
   -webkit-order: 4;
       -ms-flex-order: 4;
           order: 4;
+  margin-right: 2px;
   margin-bottom: 8px;
+  margin-left: 2px;
   text-align: center;
   -webkit-box-align: center;
   -webkit-align-items: center;
@@ -3830,7 +3857,7 @@ abbr[title="required"] {
   color: rgba(0, 0, 0, 0.54);
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 3px;
-  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.12), 0px 2px 2px 0px rgba(0, 0, 0, 0.24);
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.24);
   -webkit-transition: all .3s ease 0s;
   transition: all .3s ease 0s;
 }
@@ -3865,48 +3892,6 @@ abbr[title="required"] {
   }
 }
 
-.pagination__cell--first {
-  -webkit-box-ordinal-group: 1;
-  -webkit-order: 0;
-      -ms-flex-order: 0;
-          order: 0;
-  width: calc(25% - 4px);
-}
-
-.pagination__cell--first .icon {
-  -webkit-transform: rotate(180deg);
-          transform: rotate(180deg);
-}
-
-.pagination__cell--prev {
-  -webkit-box-ordinal-group: 2;
-  -webkit-order: 1;
-      -ms-flex-order: 1;
-          order: 1;
-  width: calc(25% - 4px);
-}
-
-.pagination__cell--prev .icon {
-  -webkit-transform: rotate(180deg);
-          transform: rotate(180deg);
-}
-
-.pagination__cell--next {
-  -webkit-box-ordinal-group: 3;
-  -webkit-order: 2;
-      -ms-flex-order: 2;
-          order: 2;
-  width: calc(25% - 4px);
-}
-
-.pagination__cell--last {
-  -webkit-box-ordinal-group: 4;
-  -webkit-order: 3;
-      -ms-flex-order: 3;
-          order: 3;
-  width: calc(25% - 4px);
-}
-
 @media (min-width: 656px) {
   .pagination__cell {
     -webkit-box-ordinal-group: 1 !important;
@@ -3923,12 +3908,52 @@ abbr[title="required"] {
   fill: currentColor;
 }
 
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
+.pagination__cell--first,
+.pagination__cell--prev,
+.pagination__cell--next,
+.pagination__cell--last {
+  margin-right: 2px;
+  margin-left: 2px;
+  width: calc(25% - 4px);
+}
+
+.pagination__cell--first {
+  -webkit-box-ordinal-group: 1;
+  -webkit-order: 0;
+      -ms-flex-order: 0;
+          order: 0;
+}
+
+.pagination__cell--first .icon {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.pagination__cell--prev {
+  -webkit-box-ordinal-group: 2;
+  -webkit-order: 1;
+      -ms-flex-order: 1;
+          order: 1;
+}
+
+.pagination__cell--prev .icon {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.pagination__cell--next {
+  -webkit-box-ordinal-group: 3;
+  -webkit-order: 2;
+      -ms-flex-order: 2;
+          order: 2;
+}
+
+.pagination__cell--last {
+  -webkit-box-ordinal-group: 4;
+  -webkit-order: 3;
+      -ms-flex-order: 3;
+          order: 3;
+}
 
 .to-top {
   -webkit-appearance: none;
@@ -3975,13 +4000,6 @@ abbr[title="required"] {
   -webkit-transform: rotate(-90deg);
           transform: rotate(-90deg);
 }
-
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
 
 .no-results {
   margin: 48px auto 0;
@@ -4033,13 +4051,6 @@ abbr[title="required"] {
   left: 16px;
   margin-right: -50%;
 }
-
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
 
 .search-form {
   margin: 0 auto;
@@ -4130,13 +4141,6 @@ abbr[title="required"] {
     margin-top: 0;
   }
 }
-
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
 
 .base-hero {
   position: relative;
@@ -4508,7 +4512,9 @@ abbr[title="required"] {
   background-color: #5D4037;
 }
 
-.base-content-section:nth-child(even) .flat-button {
+.base-content-section:nth-child(even) .flat-button,
+.base-content-section:nth-child(even) .flat-button--densed,
+.base-content-section:nth-child(even) .flat-button--large {
   color: #fff !important;
 }
 
@@ -4627,13 +4633,6 @@ abbr[title="required"] {
   margin: 0;
   padding: 0;
 }
-
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
 
 .story-buttons {
   display: -webkit-box;
@@ -4941,101 +4940,6 @@ abbr[title="required"] {
   margin-bottom: 0;
 }
 
-.story-list__table thead {
-  color: rgba(255, 255, 255, 0.7);
-  background-color: #00bcd4;
-}
-
-.story-list__table tbody tr:hover td {
-  background-color: #eeeeee;
-  cursor: pointer;
-}
-
-.story-list__table td:first-child,
-.story-list__table th:first-child {
-  padding-left: 16px;
-}
-
-.story-list__table td:last-child,
-.story-list__table th:last-child {
-  padding-right: 16px;
-}
-
-@media (min-width: 768px) {
-  .story-list__table td:first-child,
-  .story-list__table th:first-child {
-    padding-left: 24px;
-  }
-
-  .story-list__table td:last-child,
-  .story-list__table th:last-child {
-    padding-right: 24px;
-  }
-}
-
-.story-list__table th {
-  padding-bottom: 8px;
-}
-
-.story-list__table td {
-  padding-top: 16px;
-  padding-bottom: 16px;
-  position: relative;
-  color: rgba(0, 0, 0, 0.54);
-}
-
-.story-list__table td::before {
-  content: "";
-  display: block;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  height: 1px;
-  background-color: rgba(0, 0, 0, 0.12);
-}
-
-.story-list__table td:first-child::before {
-  left: 16px;
-}
-
-@media (min-width: 768px) {
-  .story-list__table td:first-child::before {
-    left: 24px;
-  }
-}
-
-.story-list__table td:last-child {
-  text-align: right;
-}
-
-.story-list__table td:last-child::before {
-  right: 16px;
-}
-
-@media (min-width: 768px) {
-  .story-list__table td:last-child::before {
-    right: 24px;
-  }
-}
-
-.story-list__table tr:last-child td::before {
-  display: none;
-}
-
-.story-list__table .icon {
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
-}
-
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
-
 .who-are-you .page-wrapper {
   background: -webkit-linear-gradient(bottom, transparent 52%, rgba(0, 0, 0, 0.8) 100%) 50% 0 no-repeat, -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)) 50% 0 no-repeat, asset-url('bg--who-are-you-960.jpg') 50% 0%/cover no-repeat;
   background: linear-gradient(to top, transparent 52%, rgba(0, 0, 0, 0.8) 100%) 50% 0 no-repeat, linear-gradient(to top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)) 50% 0 no-repeat, asset-url('bg--who-are-you-960.jpg') 50% 0%/cover no-repeat;
@@ -5299,13 +5203,6 @@ abbr[title="required"] {
     top: 65%;
   }
 }
-
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
 
 @media (min-width: 768px) {
   .form--score {
@@ -6463,20 +6360,6 @@ abbr[title="required"] {
   fill: rgba(0, 0, 0, 0.12);
 }
 
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
-
-.list--profile-info {
-  list-style-type: none;
-  padding-left: 0;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
 .profile {
   margin-top: -16px;
   background-color: #fff;
@@ -6664,13 +6547,6 @@ abbr[title="required"] {
   }
 }
 
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
-
 .award-records {
   padding-top: 48px;
   padding-right: 16px;
@@ -6784,20 +6660,6 @@ abbr[title="required"] {
   font-size: 14px;
   line-height: 1.5;
   margin: 0;
-}
-
-/*
-* Scut, a collection of Sass utilities
-* to ease and improve our implementations of common style-code patterns.
-* v1.4.0
-* Docs at http://davidtheclark.github.io/scut
-*/
-
-.punishment-detail__list {
-  list-style-type: none;
-  padding-left: 0;
-  margin-top: 0;
-  margin-bottom: 0;
 }
 
 .punishment-records {
@@ -6991,5 +6853,40 @@ abbr[title="required"] {
 
 .punishment-detail__spec .term {
   font-weight: 700;
+}
+
+.search-result {
+  margin-top: -16px;
+  margin-bottom: 7px;
+  padding-bottom: 68px;
+  background-color: #fff;
+}
+
+@media (min-width: 852.8px) {
+  .search-result .container--list {
+    margin-bottom: -37px;
+    top: -37px;
+    right: n;
+    bottom: n;
+    left: n;
+    position: relative;
+  }
+}
+
+.search-result__table {
+  margin-right: -16px;
+  margin-left: -16px;
+  width: calc(100% + 32px);
+  text-align: center;
+}
+
+.search-result__table td,
+.search-result__table th {
+  padding: 8px;
+}
+
+.search-result__total {
+  margin: 32px auto;
+  text-align: center;
 }
 
