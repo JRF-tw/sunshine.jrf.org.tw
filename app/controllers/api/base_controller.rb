@@ -7,6 +7,10 @@ class Api::BaseController < ApplicationController
   before_action :set_default_format
   before_action :set_default_language
 
+  def index
+    render json: { status: 'active' }.to_json
+  end
+
   def page_404
     respond_404("No route matches /#{params[:unmatched_route]}")
   end
