@@ -220,17 +220,21 @@ select {
   transform: scaleX(1);
 }
 
+%chosen-select {
+  @extend %Select;
+  text       : ms(0);
+  size       : 100% 34px;
+  line-height: 34px;
+  box-shadow : none;
+
+  div {
+    display: none;
+  }
+}
+
 .chosen-single {
   .chosen-container-single & {
-    @extend %Select;
-    text       : ms(0);
-    size       : 100% 34px;
-    line-height: 34px;
-    box-shadow : none;
-
-    div {
-      display: none;
-    }
+    @extend %chosen-select;
   }
 
   .chosen-container-active & {
@@ -240,6 +244,28 @@ select {
   .chosen-container-active.chosen-with-drop & {
     border          : none;
     background-image: none;
+  }
+}
+
+.chosen-choices {
+  .chosen-container-multi & {
+    @extend %chosen-select;
+    margin        : r(.5)+1px n() 0;
+    padding-bottom: r(.5)-1px;
+    height        : auto;
+
+    li.search-field {
+      margin: 0;
+
+      input[type="text"] {
+        margin: 0;
+      }
+    }
+
+    li.search-choice {
+      margin    : 3px 5px 1px 0;
+      background: none $text-secondary-dark;
+    }
   }
 }
 
