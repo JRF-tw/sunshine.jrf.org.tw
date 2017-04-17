@@ -1,73 +1,64 @@
-$character-gradients: (
-  (name: 'lawyer',
-   gradients: linear-gradient(to bottom,
-                              rgba(255,236,179,0) 12%,
-                              rgba(255,193,9,.6) 80%,
-                              #FFC109 99%)),
-  (name: 'party',
-   gradients: linear-gradient(to bottom,
-                              rgba(255,205,210,0) 12%,
-                              rgba(243,66,54,.6) 69%,
-                              #F44336 94%)),
-  (name: 'observer',
-   gradients: linear-gradient(to bottom,
-                              rgba(178,223,219,0) 12%,
-                              rgba(0,150,136,.6) 68%,
-                              #019688 92%))
-);
+$character-gradients: ( (name: 'lawyer', gradients: linear-gradient(to bottom, rgba(255,236,179,0) 12%, rgba(255,193,9,.6) 80%, #FFC109 99%)), (name: 'party', gradients: linear-gradient(to bottom, rgba(255,205,210,0) 12%, rgba(243,66,54,.6) 69%, #F44336 94%)), (name: 'observer', gradients: linear-gradient(to bottom, rgba(178,223,219,0) 12%, rgba(0,150,136,.6) 68%, #019688 92%)) );
 
 .billboard {
-  padding-top: 300px;
+  padding-top  : 300px;
   margin-bottom: r(-22);
   @include susy($tablet) {
     margin-bottom: r(-7);
-    padding-top: 380px;
+    padding-top  : 380px;
   }
 }
+
 .billboard--classic {
-  padding: r(10) r(3);
-  margin-bottom: r(2);
-  background-size: cover;
+  padding            : r(10) r(3);
+  margin-bottom      : r(2);
+  min-height         : 293px;
+  background-size    : cover;
   background-position: 50% 50%;
 
-  &.billboard--profiles-judges { background-position: 0 50%; }
-  &.billboard--profiles-show   { padding-top: r(20); }
+  &.billboard--profiles-judges {
+    background-position: 0 50%;
+  }
+
+  &.billboard--profiles-show {
+    padding-top: r(20);
+  }
 
   .enable-full-billboard & {
-    flex: 1 0 auto;
+    flex         : 1 0 auto;
     margin-bottom: 0;
   }
 }
+
 .billboard__heading {
   @include Heading(tablet);
 }
+
 .billboard__description {
-  display: inline-block;
-  margin: 0;
-  padding: r(1);
-  color: #bababa;
+  display         : inline-block;
+  margin          : 0;
+  padding         : r(1);
+  color           : #bababa;
   background-color: rgba(0,0,0,.55);
-  border-radius: $global-radius;
-  @include susy($tablet) { font-size: ms(1); }
+  border-radius   : $global-radius;
+  @include susy($tablet) {
+    font-size: ms(1);
+  }
 
-  &:empty { display: none }
+  &:empty {
+    display: none;
+  }
 }
-
 @each $character in $character-gradients {
   $c-gradient: map-get($character, gradients);
-  $gradients: (
-    linear-gradient(to top, rgba(255,255,255,0) 0%,
-                            rgba(44,44,44,.5) 77%,
-                            rgba(0,0,0,.5) 100%),
-    linear-gradient(to top, rgba(0,0,0,.5) 0%,
-                            rgba(0,0,0,.1) 15%,
-                            rgba(0,0,0,0) 30%)
-  );
-  $bg: url('bg--who-are-you-960.jpg') 50% 0% / cover no-repeat;
-  $bg-lg: url('bg--who-are-you-1920.jpg') 50% 0% / cover no-repeat;
+  $gradients : ( linear-gradient(to top, rgba(255,255,255,0) 0%, rgba(44,44,44,.5) 77%, rgba(0,0,0,.5) 100%), linear-gradient(to top, rgba(0,0,0,.5) 0%, rgba(0,0,0,.1) 15%, rgba(0,0,0,0) 30%) );
+  $bg        : url("bg--who-are-you-960.jpg") 50% 0 / cover no-repeat;
+  $bg-lg     : url("bg--who-are-you-1920.jpg") 50% 0 / cover no-repeat;
 
   .billboard--#{map-get($character, name)} {
     background: $c-gradient, $gradients, $bg;
-    @include susy($tablet) { background: $gradients, $bg-lg; }
+    @include susy($tablet) {
+      background: $gradients, $bg-lg;
+    }
   }
 }

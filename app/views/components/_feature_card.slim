@@ -1,5 +1,5 @@
-- attributes = attributes ? attributes : {}
-- job = job ? job : {}
+- attributes ||= {}
+- job ||= {}
 
 section.card--feature *attributes
   h3.card--feature__heading class=(job if job)

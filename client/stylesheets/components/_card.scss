@@ -1,5 +1,12 @@
 .offcanvas-card-wrapper {
   margin-top: r(-8);
+
+  > .container {
+    margin-top: r(-9);
+    @include susy($tablet) {
+      margin-top: r(-8);
+    }
+  }
 }
 
 .card {
@@ -189,6 +196,11 @@
   align-items     : center;
   margin          : r(3) n();
   background-color: $white;
+
+  &.narrow {
+    max-width: $card-max;
+    margin   : n() auto;
+  }
 }
 
 .card--feature__heading {
