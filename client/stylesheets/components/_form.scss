@@ -174,7 +174,7 @@ input:-webkit-autofill + .control-label {
 }
 
 [type="checkbox"] {
-  @include Normalize();
+  @extend %Normalize;
   size        : 18px;
   margin-right: r(1);
 
@@ -199,7 +199,7 @@ input:-webkit-autofill + .control-label {
 }
 
 select {
-  @include Select;
+  @extend %Select;
   size   : 100% 34px;
   outline: none;
 
@@ -222,7 +222,7 @@ select {
 
 .chosen-single {
   .chosen-container-single & {
-    @include Select;
+    @extend %Select;
     text       : ms(0);
     size       : 100% 34px;
     line-height: 34px;

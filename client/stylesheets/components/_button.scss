@@ -1,5 +1,5 @@
 %base {
-  @include Normalize();
+  @extend %Normalize;
   display: inline-block;
   padding: r(1) r(2);
   border-radius: 2px;

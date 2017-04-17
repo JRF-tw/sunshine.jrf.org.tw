@@ -30,7 +30,7 @@ $alert-types: (
   .alert--#{map-get($type, name)} { background-color: map-get($type, color);}
 }
 .alert__close {
-  @include Normalize();
+  @extend %Normalize;
   color: $white;
   fill: currentColor;
   right: r(2);

@@ -1,5 +1,5 @@
 .to-top {
-  @include Normalize();
+  @extend %Normalize;
   size: r(6);
   position: fixed n() r(1) r(1) n();
   z-index: index($layers, to-top);

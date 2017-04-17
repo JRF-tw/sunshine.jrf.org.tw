@@ -15,7 +15,7 @@
 
 .story-button {
   $size        : span(3 of 9 1.5);
-  @include Normalize();
+  @extend %Normalize;
   width        : $size;
   display      : block;
   border       : 1px solid $divider-gray;

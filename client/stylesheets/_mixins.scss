@@ -1,94 +1,110 @@
 // {{Sass mixins --------}}
-@function n() { @return unquote("*"); }
-
-@function r($times: 1) { @return $rhythm-gap * $times; }
-
+@function n() {
+   @return unquote("*");
+}
+@function r($times: 1) {
+   @return $rhythm-gap * $times;
+}
 @function theme($character, $accent: false) {
   @if $character == 'party' {
-    @if $accent == true { @return $red-dark; }
-    @else { @return $red; }
-  } @else if $character == 'lawyer' {
-    @if $accent == true { @return $yellow-dark; }
-    @else { @return $yellow; }
-  } @else if $character == 'observer' {
-    @if $accent == true { @return $green-dark; }
-    @else { @return $green; }
-  } @else {
-    @if $accent == true { @return $brown-dark; }
-    @else { @return $brown; }    
+    @if $accent == true {
+       @return $red-dark;
+    }
+    @else {
+       @return $red;
+    }
+  }
+
+  @else if $character == 'lawyer' {
+    @if $accent == true {
+       @return $yellow-dark;
+    }
+    @else {
+       @return $yellow;
+    }
+  }
+
+  @else if $character == 'observer' {
+    @if $accent == true {
+       @return $green-dark;
+    }
+    @else {
+       @return $green;
+    }
+  }
+  @else {
+     @if $accent == true{
+      @return $brown-dark;
+    }
+    @else {
+       @return $brown;
+    }
   }
 }
-
 @mixin susy($map) {
-  @include susy-breakpoint(map-get($map, query), map-get($map, layout)) {
+   @include susy-breakpoint(map-get($map, query), map-get($map, layout)){
     @content;
   }
 }
-
 @mixin reverse-hide-visually() {
-  border: 0;
-  clip: auto;
+  border  : 0;
+  clip    : auto;
   overflow: hidden;
-  padding: 0;
+  padding : 0;
   position: static;
-  height: auto;
-  width: auto;
+  height  : auto;
+  width   : auto;
 }
-
 @mixin share-breakpoints($map, $cssprop: content) {
-  $description: '';
-
+  $description: "";
   @each $property, $value in $map {
-    @if $description !=  '' {
-      $description: $description + ' | ';
+    @if $description != '' {
+      $description: $description + " | ";
     }
-    
     $description: $description + $property +': '+ inspect($value);
   }
-
-  display: none;
-  #{$cssprop}:  $description;
+  display     : none;
+  #{$cssprop} : $description;
 }
-
 @mixin toggle-fade() {
-  opacity: 0;
+  opacity   : 0;
   visibility: hidden;
   transition: opacity .2s ease 0s, visibility .2s ease .2s;
+
   &.active {
-    opacity: 1;
-    visibility: visible;
+    opacity         : 1;
+    visibility      : visible;
     transition-delay: 0s;
   }
 }
-
 @mixin toggle-show() {
-  opacity: 0;
+  opacity   : 0;
   visibility: hidden;
   transition: opacity .2s ease 0s, visibility .2s ease .2s;
-  overflow: hidden;
-  height: 0;
+  overflow  : hidden;
+  height    : 0;
+
   &.active {
-    opacity: 1;
-    visibility: visible;
+    opacity         : 1;
+    visibility      : visible;
     transition-delay: 0s;
-    overflow: auto;
-    height: auto;
+    overflow        : auto;
+    height          : auto;
   }
 }
-
 @mixin show() {
-  opacity: 1;
-  visibility: visible;
+  opacity         : 1;
+  visibility      : visible;
   transition-delay: 0s;
-  height: auto;  
+  height          : auto;
 }
-
 @mixin input-placeholder() {
-  &::-webkit-input-placeholder, 
+  &:-ms-input-placeholder,
   &::-moz-placeholder,
-  &:-ms-input-placeholder { @content; }
+  &::-webkit-input-placeholder {
+    @content;
+  }
 }
-
 @mixin debug($color: #fff rgba(tomato, .3)) {
-  color: $color
+  color: $color;
 }

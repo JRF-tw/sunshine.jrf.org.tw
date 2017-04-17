@@ -3,7 +3,7 @@
 }
 
 .card {
-  @include Card();
+  @extend %Card;
   margin    : 0 r(2);
   padding   : 0 r(2) r(2);
   background: $white;
@@ -183,7 +183,7 @@
 }
 
 .card--feature {
-  @include Card();
+  @extend %Card;
   display         : flex;
   flex-flow       : column nowrap;
   align-items     : center;

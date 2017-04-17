@@ -1,72 +1,100 @@
 .drawer-toggle {
-  @include Normalize();
-  padding: r(2);
+  @extend %Normalize;
+  padding : r(2);
   position: fixed r(1) n() n() 0;
-  z-index: index($layers, drawer-toggle);
-  @include susy($tablet) { @include Hidden(); }
+  z-index : index($layers, drawer-toggle);
+  @include susy($tablet) {
+     @include Hidden();
+  }
 
   .icon {
     fill: #fff;
     size: r(3);
   }
 }
+
 .drawer {
-  display: flex;
-  flex-flow: column nowrap;
-  position: fixed 0 n() 0 0;
-  width: 304px; max-width: 80%;
-  z-index: index($layers, drawer);
+  display   : flex;
+  flex-flow : column nowrap;
+  position  : fixed 0 n() 0 0;
+  width     : 304px;
+  max-width : 80%;
+  z-index   : index($layers, drawer);
   transition: transform .3s ease 0s;
-  transform: translate3D(-120%, 0, 0);
-  &.active { transform: translate3D(0, 0, 0); }
-  @include susy($tablet) { @include Hidden(); }
+  transform : translate3D(-120%, 0, 0);
+
+  &.active {
+    transform: translate3D(0, 0, 0);
+  }
+  @include susy($tablet) {
+     @include Hidden();
+  }
 }
+
 .drawer__profile {
-  $pad: r(2);
-  padding: $pad ($pad*2 + 50px) $pad $pad;
+  $pad    : r(2);
+  padding : $pad ($pad*2 + 50px) $pad $pad;
   position: relative;
-  color: $text-primary-dark;
+  color   : $text-primary-dark;
   @each $type in $characters {
-    &.#{$type} { background-color: theme($type, true); }
+    &.#{$type} {
+      background-color: theme($type, true);
+    }
   }
 
   .avatar {
-    stroke: $text-primary-dark;
+    stroke      : $text-primary-dark;
     stroke-width: 8px;
-    .icon { size: 24px; }
+
+    .icon {
+      size: 24px;
+    }
   }
 
-  .title, .info { margin-top: r(1); }
+  .info,
+  .title {
+    margin-top: r(1);
+  }
 
   .action {
-    display: inline-block;
+    display : inline-block;
     position: absolute n() 0 0 n();
-    size: 50px;
-    fill: $text-primary-dark;
+    size    : 50px;
+    fill    : $text-primary-dark;
+
     .icon {
       position: absolute n() $pad $pad n();
-      size: 16px;
+      size    : 16px;
     }
   }
 }
+
 .drawer__nav {
-  flex: 1;
-  padding: r(2);
+  flex            : 1;
+  padding         : r(2);
   background-color: $white;
-  box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.18),
-              0px 16px 16px 0px rgba(0,0,0,0.24);
+  box-shadow      : 0 0 16px 0 rgba(0,0,0,0.18), 0 16px 16px 0 rgba(0,0,0,0.24);
+
   .cell {
     display: block;
-    color: $text-secondary;
-    & + .cell { margin-top: r(2); }
+    color  : $text-secondary;
+
+    & + .cell {
+      margin-top: r(2);
+    }
   }
 
-  .link {color: $text-secondary;}
+  .link {
+    color: $text-secondary;
+  }
 }
+
 .drawer-mask {
-  position: fixed 0 0 0 0;
-  z-index: index($layers, drawer-mask);
+  position        : fixed 0 0 0 0;
+  z-index         : index($layers, drawer-mask);
   background-color: $mask-gray;
   @include toggle-fade();
-  @include susy($tablet) { @include Hidden(); }
+  @include susy($tablet) {
+     @include Hidden();
+  }
 }
