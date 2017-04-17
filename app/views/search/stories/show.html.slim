@@ -1,11 +1,14 @@
 article
-  = render partial: 'components/hero', locals: {type: 'searchs-index'}
+  = render partial: 'components/hero', locals: {\
+    type: 'searchs-index',
+    heading: @story.identity\
+  }
 
 .offcanvas-card-wrapper
   - if @story
-    = render layout: 'components/card', locals: {\
-      heading: "#{@story.identity}資料",
-      attrs: {class: "narrow"}\
+    = render layout: 'components/feature_card', locals: {\
+      heading: "案件資料",
+      attributes: {class: "narrow"}\
     }
       dl.story-info
         = render "info__cell", term: "類別", desc: @story.id

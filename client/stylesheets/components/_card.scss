@@ -1,12 +1,5 @@
 .offcanvas-card-wrapper {
   margin-top: r(-8);
-
-  > .container {
-    margin-top: r(-9);
-    @include susy($tablet) {
-      margin-top: r(-8);
-    }
-  }
 }
 
 .card {
