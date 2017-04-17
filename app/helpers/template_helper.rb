@@ -7,8 +7,11 @@ module TemplateHelper
   end
 
   def kv_cell(key, value)
-    concat content_tag :dt, key.to_s, class: 'term'
-    content_tag :dd, value.to_s, class: 'desc'
+    value_str = value.to_s
+    if value_str.length > 0
+      concat content_tag :dt, key.to_s, class: 'term'
+      content_tag :dd, value_str, class: 'desc'
+    end
   end
 
   def kv_email_cell(user)

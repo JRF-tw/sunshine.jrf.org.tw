@@ -207,23 +207,3 @@
     margin-bottom: 0;
   }
 }
-
-.story-info {
-  $indent: r(11);
-  @include scut-key-val($divider: "", $spacing: 0, $indent: $indent);
-
-  .term {
-    padding: r(1)-1px 0 r(1);
-  }
-
-  .desc {
-    padding : r(1)-1px 0 r(1);
-    position: relative;
-
-    &::before {
-      content    : "";
-      border-left: 1px solid $gray-lighter;
-      position   : absolute 0 n 1px r(-2);
-    }
-  }
-}
