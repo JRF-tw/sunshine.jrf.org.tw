@@ -59,8 +59,8 @@ describe '從最高法院的判決書中爬取審判長法官，並且檢查建�
   end
 
   context '來自其他法院的判決書' do
-    let!(:orginal_data) { File.open("#{Rails.root}/spec/fixtures/scrap_data/judgment.html") }
-    let!(:verdict_content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/judgment_content.txt") }
+    let!(:orginal_data) { File.open("#{Rails.root}/spec/fixtures/scrap_data/verdict.html") }
+    let!(:verdict_content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/verdict_content.txt") }
     let!(:verdict_word) { '105,上易緝,2' }
     let!(:verdict_publish_date) { Time.zone.today }
     let!(:verdict_story_type) { '刑事' }

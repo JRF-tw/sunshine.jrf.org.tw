@@ -10,6 +10,7 @@ module Scrap::RefereeCommonStepConcern
     @referee = parse_referee_type(@content, @crawler_history) == 'verdict' ? create_verdict : create_rule
     create_main_judge_by_highest if is_highest_court?
     assign_names
+    assign_abs_url
   end
 
   def after_perform_common_step
@@ -57,6 +58,10 @@ module Scrap::RefereeCommonStepConcern
       lawyer_names: parse_lawyer_names(@referee, @content, @crawler_history),
       party_names: parse_party_names(@referee, @content, @crawler_history)
     )
+  end
+
+  def assign_abs_url
+    @referee.assign_attributes(abs_url: parse_abs_url(@original_data, @crawler_history))
   end
 
   def update_data_to_story
