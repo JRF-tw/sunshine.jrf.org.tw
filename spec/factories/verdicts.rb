@@ -28,6 +28,10 @@ FactoryGirl.define do
     trait :with_file do
       file { File.open("#{Rails.root}/spec/fixtures/scrap_data/verdict.html") }
     end
+
+    trait :with_abs_url do
+      abs_url 'http://jirs.judicial.gov.tw/FJUD/index_1_S.aspx?p=Lpql716tA4TOpNsS09PSW7xWiWpZdzC9EGvtNngUkkU%3d'
+    end
   end
 
   factory :verdict_for_convert_valid_score, class: Verdict do

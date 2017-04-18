@@ -43,6 +43,9 @@ section.container.offcanvas-card-wrapper
             tr
               td 相關當事人
               td = @verdict.party_names.join(',')
+            tr
+              td 司法院公開網址
+              td = link_to '請點我', @verdict.abs_url, target: '_blank' if @verdict.abs_url
         h2 判決書內文
         div = smart_add_https(@verdict.content_file.url) if @verdict.content_file.present?
     - else

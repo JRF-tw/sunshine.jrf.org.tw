@@ -54,6 +54,9 @@
         td 發布日期
         td = @verdict.published_on
       tr
+        td 司法院公開網址
+        td = link_to '請點我', @verdict.abs_url, target: '_blank' if @verdict.abs_url
+      tr
         td 文件下載
         td = link_to '點我下載', download_file_admin_verdict_path(@verdict) if @verdict.file
       tr
