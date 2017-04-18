@@ -14,11 +14,12 @@
 #  lawyer_names     :text
 #  judges_names     :text
 #  prosecutor_names :text
-#  is_adjudge       :boolean          default(FALSE)
-#  adjudge_date     :date
-#  pronounce_date   :date
-#  is_pronounce     :boolean          default(FALSE)
+#  is_adjudged      :boolean          default(FALSE)
+#  adjudged_on      :date
+#  pronounced_on    :date
+#  is_pronounced    :boolean          default(FALSE)
 #  is_calculated    :boolean          default(FALSE)
+#  reason           :string
 #
 
 FactoryGirl.define do
@@ -48,13 +49,13 @@ FactoryGirl.define do
     end
 
     trait :pronounced do
-      pronounce_date Time.zone.today
-      is_pronounce true
+      pronounced_on Time.zone.today
+      is_pronounced true
     end
 
     trait :adjudged do
-      adjudge_date Time.zone.today
-      is_adjudge true
+      adjudged_on Time.zone.today
+      is_adjudged true
     end
 
     trait :with_verdict do
@@ -64,8 +65,8 @@ FactoryGirl.define do
     end
 
     trait :adjudged_yesterday do
-      adjudge_date Time.zone.yesterday
-      is_adjudge true
+      adjudged_on Time.zone.yesterday
+      is_adjudged true
     end
 
   end

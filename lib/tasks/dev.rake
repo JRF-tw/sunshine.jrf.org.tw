@@ -281,7 +281,7 @@ namespace :dev do
         year: rand(70..105),
         word_type: ['生', '老', '病', '死'].sample,
         number: rand(100..999),
-        adjudge_date: rand(5).years.ago
+        adjudged_on: rand(5).years.ago
       )
     end
   end
@@ -289,7 +289,7 @@ namespace :dev do
   task fake_verdicts: :environment do
     Verdict.destroy_all
     5.times do |_i|
-      Verdict.create(story: Story.all.sample, adjudge_date: rand(5).years.ago, published_on: rand(5).years.ago)
+      Verdict.create(story: Story.all.sample, adjudged_on: rand(5).years.ago, published_on: rand(5).years.ago)
     end
   end
 
@@ -328,15 +328,15 @@ namespace :dev do
 
   task fake_verdict: :environment do
     court = FactoryGirl.create(:court, full_name: "測試法院-#{Time.now}")
-    story = FactoryGirl.create(:story, court: court, is_adjudge: true, adjudge_date: Time.now)
-    verdict = FactoryGirl.create(:verdict, story: story, adjudge_date: Time.now)
+    story = FactoryGirl.create(:story, court: court, is_adjudged: true, adjudged_on: Time.now)
+    verdict = FactoryGirl.create(:verdict, story: story, adjudged_on: Time.now)
 
     puts "該判決書案件類別 = #{verdict.story.story_type}"
     puts "該判決書案件年份 = #{verdict.story.year}"
     puts "該判決書案件字號 = #{verdict.story.word_type}"
     puts "該判決書案件案號 = #{verdict.story.number}"
     puts "該判決書隸屬法院 = #{verdict.story.court.full_name}"
-    puts "該判決書宣判日期 = #{verdict.adjudge_date}"
+    puts "該判決書宣判日期 = #{verdict.adjudged_on}"
   end
 
 end

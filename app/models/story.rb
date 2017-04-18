@@ -14,11 +14,12 @@
 #  lawyer_names     :text
 #  judges_names     :text
 #  prosecutor_names :text
-#  is_adjudge       :boolean          default(FALSE)
-#  adjudge_date     :date
-#  pronounce_date   :date
-#  is_pronounce     :boolean          default(FALSE)
+#  is_adjudged      :boolean          default(FALSE)
+#  adjudged_on      :date
+#  pronounced_on    :date
+#  is_pronounced    :boolean          default(FALSE)
 #  is_calculated    :boolean          default(FALSE)
+#  reason           :string
 #
 
 class Story < ActiveRecord::Base
@@ -60,6 +61,12 @@ class Story < ActiveRecord::Base
 
   def detail_info
     "#{court.full_name}#{year}年#{word_type}字第#{number}號"
+  end
+
+  def verdict_got_on
+    if verdict && verdict.created_at
+      verdict.created_at.to_date
+    end
   end
 
   class << self

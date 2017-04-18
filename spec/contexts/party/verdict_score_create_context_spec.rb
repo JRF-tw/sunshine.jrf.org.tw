@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Party::VerdictScoreCreateContext do
   let!(:party) { create :party }
   let!(:court) { create :court }
-  let!(:story) { create :story, :pronounced, :adjudged, court: court }
+  let!(:story) { create :story, :pronounced, :adjudged, :with_verdict, court: court }
   let!(:judge) { create :judge, court: court }
   let!(:judge2) { create :judge }
   let!(:params) { attributes_for(:verdict_score_for_params, court_id: court.id, year: story.year, word_type: story.word_type, number: story.number, story_type: story.story_type) }

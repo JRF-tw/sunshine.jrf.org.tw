@@ -3,8 +3,8 @@ class Scrap::ImportScheduleContext < BaseContext
   before_perform  :build_data
   before_perform  :get_branch_judge
   before_perform  :find_or_create_story
-  after_perform   :update_story_is_pronounce
-  after_perform   :update_story_pronounce_date
+  after_perform   :update_story_is_pronounced
+  after_perform   :update_story_pronounced_on
   after_perform   :record_count_to_daily_notify
   after_perform   :alert_new_story_type
   after_perform   :log_branch_judge_not_found
@@ -34,7 +34,7 @@ class Scrap::ImportScheduleContext < BaseContext
   end
 
   def build_data
-    @is_pronounce = @hash[:is_pronounce]
+    @is_pronounced = @hash[:is_pronounced]
     @story_type   = @hash[:story_type]
     @year         = @hash[:year]
     @word_type    = @hash[:word_type]
@@ -55,13 +55,13 @@ class Scrap::ImportScheduleContext < BaseContext
     @story = @court.stories.find_or_create_by(story_type: @story_type, year: @year, word_type: @word_type, number: @number)
   end
 
-  def update_story_is_pronounce
-    @story.update_attributes(is_pronounce: @is_pronounce) if @is_pronounce
+  def update_story_is_pronounced
+    @story.update_attributes(is_pronounced: @is_pronounced) if @is_pronounced
   end
 
-  def update_story_pronounce_date
-    unless @story.pronounce_date
-      @story.update_attributes(pronounce_date: @start_on) if @is_pronounce
+  def update_story_pronounced_on
+    unless @story.pronounced_on
+      @story.update_attributes(pronounced_on: @start_on) if @is_pronounced
     end
   end
 

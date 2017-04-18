@@ -21,8 +21,8 @@
           td = story.word_type
           td = story.number
           td = story.story_type
-          td = story.is_pronounce ? "已宣判" : "尚未宣判"
-          td = story.is_adjudge ? "已判決" : "尚未判決"
+          td = story.is_pronounced ? "已宣判" : "尚未宣判"
+          td = story.is_adjudged ? "已判決" : "尚未判決"
           td
             = link_to "是", admin_verdict_path(story.verdict) if story.verdict
 

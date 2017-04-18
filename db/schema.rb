@@ -575,8 +575,10 @@ ActiveRecord::Schema.define(version: 20170418022510) do
     t.string   "reason"
     t.text     "related_stories"
     t.string   "abs_url"
+    t.date     "adjudged_on"
   end
 
+  add_index "rules", ["adjudged_on"], name: "index_rules_on_adjudged_on", using: :btree
   add_index "rules", ["published_on"], name: "index_rules_on_published_on", using: :btree
   add_index "rules", ["reason"], name: "index_rules_on_reason", using: :btree
   add_index "rules", ["story_id"], name: "index_rules_on_story_id", using: :btree
@@ -636,19 +638,21 @@ ActiveRecord::Schema.define(version: 20170418022510) do
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
-    t.boolean  "is_adjudge",       default: false
-    t.date     "adjudge_date"
-    t.date     "pronounce_date"
-    t.boolean  "is_pronounce",     default: false
+    t.boolean  "is_adjudged",      default: false
+    t.date     "adjudged_on"
+    t.date     "pronounced_on"
+    t.boolean  "is_pronounced",    default: false
     t.boolean  "is_calculated",    default: false
+    t.string   "reason"
   end
 
-  add_index "stories", ["adjudge_date"], name: "index_stories_on_adjudge_date", using: :btree
+  add_index "stories", ["adjudged_on"], name: "index_stories_on_adjudged_on", using: :btree
   add_index "stories", ["court_id"], name: "index_stories_on_court_id", using: :btree
-  add_index "stories", ["is_adjudge"], name: "index_stories_on_is_adjudge", using: :btree
+  add_index "stories", ["is_adjudged"], name: "index_stories_on_is_adjudged", using: :btree
   add_index "stories", ["is_calculated"], name: "index_stories_on_is_calculated", using: :btree
-  add_index "stories", ["is_pronounce"], name: "index_stories_on_is_pronounce", using: :btree
-  add_index "stories", ["pronounce_date"], name: "index_stories_on_pronounce_date", using: :btree
+  add_index "stories", ["is_pronounced"], name: "index_stories_on_is_pronounced", using: :btree
+  add_index "stories", ["pronounced_on"], name: "index_stories_on_pronounced_on", using: :btree
+  add_index "stories", ["reason"], name: "index_stories_on_reason", using: :btree
 
   create_table "story_relations", force: :cascade do |t|
     t.integer  "story_id"
@@ -827,7 +831,7 @@ ActiveRecord::Schema.define(version: 20170418022510) do
     t.text     "lawyer_names"
     t.text     "judges_names"
     t.text     "prosecutor_names"
-    t.date     "adjudge_date"
+    t.date     "adjudged_on"
     t.date     "published_on"
     t.string   "content_file"
     t.hstore   "crawl_data"
@@ -837,7 +841,7 @@ ActiveRecord::Schema.define(version: 20170418022510) do
     t.string   "abs_url"
   end
 
-  add_index "verdicts", ["adjudge_date"], name: "index_verdicts_on_adjudge_date", using: :btree
+  add_index "verdicts", ["adjudged_on"], name: "index_verdicts_on_adjudged_on", using: :btree
   add_index "verdicts", ["published_on"], name: "index_verdicts_on_published_on", using: :btree
   add_index "verdicts", ["reason"], name: "index_verdicts_on_reason", using: :btree
 

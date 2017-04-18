@@ -17,6 +17,7 @@
 #  reason           :string
 #  related_stories  :text
 #  abs_url          :string
+#  adjudged_on      :date
 #
 
 FactoryGirl.define do

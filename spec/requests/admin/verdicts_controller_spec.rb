@@ -11,8 +11,8 @@ RSpec.describe Admin::VerdictsController do
       it { expect(response).to be_success }
     end
 
-    context 'search the adjudge_date' do
-      before { get '/admin/verdicts', q: { adjudge_date_eq: verdict.adjudge_date } }
+    context 'search the adjudged_on' do
+      before { get '/admin/verdicts', q: { adjudged_on_eq: verdict.adjudged_on } }
       it { expect(response.body).to match(verdict.story.court.full_name) }
     end
 

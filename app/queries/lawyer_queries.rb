@@ -62,7 +62,7 @@ class LawyerQueries
   def verdict_score_data_array(story)
     if verdict_score = @lawyer.verdict_scores.find_by_story_id(story.id)
       vs_hash = verdict_score.as_json
-      vs_hash['date'] = verdict_score.story.adjudge_date.to_s
+      vs_hash['date'] = verdict_score.story.adjudged_on.to_s
       vs_hash['court_code'] = story.court.code
       vs_hash['verdict_score'] = true
       [] << vs_hash

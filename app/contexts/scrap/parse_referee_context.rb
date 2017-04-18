@@ -8,7 +8,7 @@ class Scrap::ParseRefereeContext < BaseContext
   before_perform :parse_nokogiri_data
   before_perform :parse_referee_story_type
   before_perform :parse_referee_word
-  before_perform :parse_referee_publish_date
+  before_perform :parse_referee_adjudged_on
   before_perform :parse_referee_content
 
   class << self
@@ -30,9 +30,9 @@ class Scrap::ParseRefereeContext < BaseContext
   def perform
     run_callbacks :perform do
       if referee_type == 'verdict'
-        Scrap::ImportVerdictContext.delay(retry: false, queue: 'crawler_verdict').perform(@court, @orginal_data, @referee_content, @referee_word, @referee_publish_date, @referee_story_type)
+        Scrap::ImportVerdictContext.delay(retry: false, queue: 'crawler_verdict').perform(@court, @orginal_data, @referee_content, @referee_word, @referee_adjudged_on, @referee_story_type)
       else
-        Scrap::ImportRuleContext.delay(retry: false, queue: 'crawler_rule').perform(@court, @orginal_data, @referee_content, @referee_word, @referee_publish_date, @referee_story_type)
+        Scrap::ImportRuleContext.delay(retry: false, queue: 'crawler_rule').perform(@court, @orginal_data, @referee_content, @referee_word, @referee_adjudged_on, @referee_story_type)
       end
     end
   end
@@ -76,9 +76,9 @@ class Scrap::ParseRefereeContext < BaseContext
     false
   end
 
-  def parse_referee_publish_date
+  def parse_referee_adjudged_on
     date_string = @nokogiri_data.css('table')[4].css('tr')[1].css('td')[0].text.match(/\d+/)[0]
-    @referee_publish_date = Date.new((date_string[0..2].to_i + 1911), date_string[3..4].to_i, date_string[5..6].to_i)
+    @referee_adjudged_on = Date.new((date_string[0..2].to_i + 1911), date_string[3..4].to_i, date_string[5..6].to_i)
   rescue
     Logs::AddCrawlerError.parse_referee_data_error(@crawler_history, :parse_data_failed, '解析資訊錯誤 : 取得 裁判書發布日期 失敗')
     false

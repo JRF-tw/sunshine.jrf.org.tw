@@ -31,7 +31,7 @@ ruby:
         heading: '待評鑑', star: 'hollow',
         ths: ['開庭/宣判日期', '法院代碼']\
       }
-        - unless @story.adjudge_date.present?
+        - unless @story.is_adjudged
           - @pending_score_schedules.each do |pss|
             tr
               td = pss.start_on
@@ -42,7 +42,7 @@ ruby:
         - else
           - if @pending_score_verdict
             tr
-              td = @pending_score_verdict.story.adjudge_date
+              td = @pending_score_verdict.story.adjudged_on
               td = @pending_score_verdict.story.court.code
               td = link_to add_score_verdict, class: 'flat-button--addons' do
                   => inline_svg 'plus-circle-o'

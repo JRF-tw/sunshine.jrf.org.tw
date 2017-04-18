@@ -6,7 +6,7 @@ RSpec.describe Scrap::ImportScheduleContext, type: :model do
   let!(:branch) { create :branch, court: court, judge: judge, name: '平' }
 
   describe '#perform' do
-    let(:hash_data) { { story_type: '民事', year: 105, word_type: '聲', number: '485', start_on: Time.zone.today, start_at: Time.zone.now, branch_name: '平', is_pronounce: false, courtroom: '鋼鐵教廷' } }
+    let(:hash_data) { { story_type: '民事', year: 105, word_type: '聲', number: '485', start_on: Time.zone.today, start_at: Time.zone.now, branch_name: '平', is_pronounced: false, courtroom: '鋼鐵教廷' } }
     subject { described_class.new(court.code).perform(hash_data) }
 
     context 'success' do
@@ -45,24 +45,24 @@ RSpec.describe Scrap::ImportScheduleContext, type: :model do
       it { expect { subject }.to change { Story.count } }
     end
 
-    context 'update story is_pronounce' do
-      let(:adjudged_data) { hash_data.merge(is_pronounce: true) }
+    context 'update story is_pronounced' do
+      let(:adjudged_data) { hash_data.merge(is_pronounced: true) }
       subject { described_class.new(court.code).perform(adjudged_data) }
-      it { expect(subject.story.is_pronounce).to be_truthy }
+      it { expect(subject.story.is_pronounced).to be_truthy }
     end
 
     context 'update story pronounce date' do
-      let(:pronounce_date) { hash_data.merge(is_pronounce: true, start_on: Time.zone.today) }
-      subject { described_class.new(court.code).perform(pronounce_date) }
+      let(:pronounced_on) { hash_data.merge(is_pronounced: true, start_on: Time.zone.today) }
+      subject { described_class.new(court.code).perform(pronounced_on) }
 
-      context 'pronounce_date nil' do
-        it { expect(subject.story.pronounce_date).to be_truthy }
+      context 'pronounced_on nil' do
+        it { expect(subject.story.pronounced_on).to be_truthy }
       end
 
-      context 'pronounce_date exist' do
-        before { described_class.new(court.code).perform(pronounce_date) }
+      context 'pronounced_on exist' do
+        before { described_class.new(court.code).perform(pronounced_on) }
 
-        it { expect { subject }.not_to change { subject.story.pronounce_date } }
+        it { expect { subject }.not_to change { subject.story.pronounced_on } }
       end
     end
 

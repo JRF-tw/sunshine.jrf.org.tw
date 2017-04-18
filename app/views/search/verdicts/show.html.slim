@@ -27,10 +27,7 @@ section.container.offcanvas-card-wrapper
               td = @verdict.reason
             tr
               td 判決日期
-              td = @verdict.published_on
-            tr
-              td 發布日期
-              td = @verdict.adjudge_date
+              td = @verdict.adjudged_on
             tr
               td 相關法官
               td = @verdict.judges_names.join(',')
