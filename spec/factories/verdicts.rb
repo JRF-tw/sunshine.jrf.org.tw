@@ -26,7 +26,7 @@ FactoryGirl.define do
     story { create(:story) }
     reason '借刀殺人'
     trait :with_file do
-      file { File.open("#{Rails.root}/spec/fixtures/scrap_data/judgment.html") }
+      file { File.open("#{Rails.root}/spec/fixtures/scrap_data/verdict.html") }
     end
   end
 

@@ -5,7 +5,7 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
   let!(:judge) { create :judge, name: '鄭永玉' }
   let!(:branch) { create :branch, court: court, judge: judge, chamber_name: '臺灣高等法院花蓮分院刑事庭', name: '丙' }
   let!(:original_data) { Mechanize.new.get(Scrap::ParseRefereeContext::REFEREE_URI).body.force_encoding('UTF-8') }
-  let!(:content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/judgment_content.txt") }
+  let!(:content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/verdict_content.txt") }
   let!(:word) { '105,原選上訴,1' }
   let!(:published_on) { Time.zone.today }
   let!(:story_type) { '刑事' }
@@ -120,6 +120,10 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
         subject { described_class.new(court, original_data, content, word, published_on, story_type).perform }
         it { expect { subject }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
       end
+    end
+
+    context 'update abs_url' do
+      it { expect(subject.abs_url).to be_present }
     end
 
     xit '#send_after_verdict_noice, should be test in AfterVerdictNoticeContextSpec'
