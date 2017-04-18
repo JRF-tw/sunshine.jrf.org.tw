@@ -155,16 +155,16 @@ RSpec.describe Scrap::AnalysisRefereeContentConcern, type: :model do
     end
   end
 
-  describe '#parse_abs_url' do
+  describe '#parse_original_url' do
     context 'success' do
       let!(:verdict_content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/verdict.html") }
-      subject { including_class.parse_abs_url(verdict_content, crawler_history) }
+      subject { including_class.parse_original_url(verdict_content, crawler_history) }
       it { expect { subject }.not_to change { CrawlerLog.count } }
     end
 
-    context 'abs_url not exist' do
+    context 'original_url not exist' do
       let!(:verdict_content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/verdict_without_abs_url.html") }
-      subject { including_class.parse_abs_url(verdict_content, crawler_history) }
+      subject { including_class.parse_original_url(verdict_content, crawler_history) }
       it { expect { subject }.to change { CrawlerLog.count } }
     end
   end

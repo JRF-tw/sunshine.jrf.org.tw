@@ -16,7 +16,7 @@
 #  updated_at       :datetime         not null
 #  reason           :string
 #  related_stories  :text
-#  abs_url          :string
+#  original_url     :string
 #  adjudged_on      :date
 #
 
