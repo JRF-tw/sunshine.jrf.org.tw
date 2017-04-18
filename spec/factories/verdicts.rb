@@ -11,21 +11,26 @@
 #  lawyer_names     :text
 #  judges_names     :text
 #  prosecutor_names :text
-#  adjudge_date     :date
+#  adjudged_on      :date
 #  published_on     :date
 #  content_file     :string
 #  crawl_data       :hstore
 #  roles_data       :hstore
 #  reason           :string
 #  related_stories  :text
+#  abs_url          :string
 #
 
 FactoryGirl.define do
   factory :verdict do
     story { create(:story) }
-
+    reason '借刀殺人'
     trait :with_file do
-      file { File.open("#{Rails.root}/spec/fixtures/scrap_data/judgment.html") }
+      file { File.open("#{Rails.root}/spec/fixtures/scrap_data/verdict.html") }
+    end
+
+    trait :with_abs_url do
+      abs_url 'http://jirs.judicial.gov.tw/FJUD/index_1_S.aspx?p=Lpql716tA4TOpNsS09PSW7xWiWpZdzC9EGvtNngUkkU%3d'
     end
   end
 

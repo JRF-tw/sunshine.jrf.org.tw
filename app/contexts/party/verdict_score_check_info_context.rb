@@ -51,11 +51,11 @@ class Party::VerdictScoreCheckInfoContext < BaseContext
   end
 
   def story_not_adjudge
-    return add_error(:verdict_score_not_found) unless @story.adjudge_date.present?
+    return add_error(:verdict_score_not_found) unless @story.is_adjudged
   end
 
   def valid_score_intervel
-    range = (@story.adjudge_date..@story.adjudge_date + VERDICT_INTERVAL)
+    range = (@story.verdict_got_on..@story.verdict_got_on + VERDICT_INTERVAL)
     return add_error(:out_score_intervel) unless range.include?(Time.zone.today)
   end
 

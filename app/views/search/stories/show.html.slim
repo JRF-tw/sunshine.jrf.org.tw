@@ -26,11 +26,14 @@ section.container.offcanvas-card-wrapper
               td 案件類別
               td = @story.story_type
             tr
+              td 案由
+              td = @story.reason
+            tr
               td 判決日期
-              td = @story.adjudge_date
+              td = @story.adjudged_on
             tr
               td 宣判日期
-              td = @story.pronounce_date
+              td = @story.pronounced_on
             tr
               td 法院全名
               td = @story.court.full_name

@@ -10,6 +10,7 @@ module Scrap::RefereeCommonStepConcern
     @referee = parse_referee_type(@content, @crawler_history) == 'verdict' ? create_verdict : create_rule
     create_main_judge_by_highest if is_highest_court?
     assign_names
+    assign_abs_url
   end
 
   def after_perform_common_step
@@ -23,20 +24,20 @@ module Scrap::RefereeCommonStepConcern
 
   def find_or_create_story
     array = @word.match(/\d+,\W+,\d+/)[0].split(',')
-    @story = Story.find_or_create_by(year: array[0], word_type: array[1], number: array[2], court: @court)
+    @story = Story.find_or_create_by(story_type: @story_type, year: array[0], word_type: array[1], number: array[2], court: @court)
   end
 
   def create_rule
     @rule = Rule.find_or_create_by(
       story: @story,
-      published_on: @published_on
+      adjudged_on: @adjudged_on
     )
   end
 
   def create_verdict
     @verdict = Verdict.find_or_create_by(
       story: @story,
-      published_on: @published_on
+      adjudged_on: @adjudged_on
     )
   end
 
@@ -59,7 +60,12 @@ module Scrap::RefereeCommonStepConcern
     )
   end
 
+  def assign_abs_url
+    @referee.assign_attributes(abs_url: parse_abs_url(@original_data, @crawler_history))
+  end
+
   def update_data_to_story
+    @story.assign_attributes(reason: @referee.reason) if @referee.reason
     @story.assign_attributes(judges_names: (@story.judges_names + @referee.judges_names).uniq)
     @story.assign_attributes(prosecutor_names: (@story.prosecutor_names + @referee.prosecutor_names).uniq)
     @story.assign_attributes(lawyer_names: (@story.lawyer_names + @referee.lawyer_names).uniq)

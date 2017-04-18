@@ -59,5 +59,9 @@ RSpec.describe Scrap::ImportRuleContext, type: :model do
         it { expect { subject }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
       end
     end
+
+    context 'update abs_url' do
+      it { expect(subject.abs_url).to be_present }
+    end
   end
 end

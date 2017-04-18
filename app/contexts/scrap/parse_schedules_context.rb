@@ -57,7 +57,7 @@ class Scrap::ParseSchedulesContext < BaseContext
         start_on: convert_scrap_time(row_data[5].text.strip, row_data[6].text.strip).to_date,
         courtroom: row_data[7].text.strip,
         branch_name: row_data[8].text.strip,
-        is_pronounce: row_data[9].text.strip.match('宣判').present?
+        is_pronounced: row_data[9].text.strip.match('宣判').present?
       }
       @hash_array << hash
     end

@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe Api::StoriesSearchContext do
   let!(:story1) { create :story, word_type: '下難', judges_names: ['宇智波佐助'], lawyer_names: ['旗木卡卡西'] }
-  let!(:story2) { create :story, word_type: '上易', judges_names: ['旋渦鳴人', '宇智波佐助'], adjudge_date: Time.zone.today - 5.days }
-  let!(:story3) { create :story, word_type: '中庸', adjudge_date: Time.zone.today - 3.days }
+  let!(:story2) { create :story, word_type: '上易', judges_names: ['旋渦鳴人', '宇智波佐助'], adjudged_on: Time.zone.today - 5.days }
+  let!(:story3) { create :story, word_type: '中庸', adjudged_on: Time.zone.today - 3.days }
   subject { described_class.new(params).perform }
 
   describe '#perform' do
@@ -34,14 +34,14 @@ describe Api::StoriesSearchContext do
       it { expect(subject).to eq([story2, story1]) }
     end
 
-    context 'search adjudge_date' do
-      context 'only adjudge_date_gteq' do
-        let!(:params) { { adjudge_date_gteq: story2.adjudge_date.to_s } }
+    context 'search adjudged_on' do
+      context 'only adjudged_on_gteq' do
+        let!(:params) { { adjudged_on_gteq: story2.adjudged_on.to_s } }
         it { expect(subject).to eq([story3, story2]) }
       end
 
       context 'date_gteq with date_lteq' do
-        let!(:params) { { adjudge_date_gteq: story2.adjudge_date.to_s, adjudge_date_lteq: (story2.adjudge_date + 1.day).to_s } }
+        let!(:params) { { adjudged_on_gteq: story2.adjudged_on.to_s, adjudged_on_lteq: (story2.adjudged_on + 1.day).to_s } }
         it { expect(subject).to eq([story2]) }
       end
     end

@@ -27,10 +27,7 @@ section.container.offcanvas-card-wrapper
               td = @verdict.reason
             tr
               td 判決日期
-              td = @verdict.published_on
-            tr
-              td 發布日期
-              td = @verdict.adjudge_date
+              td = @verdict.adjudged_on
             tr
               td 相關法官
               td = @verdict.judges_names.join(',')
@@ -43,8 +40,11 @@ section.container.offcanvas-card-wrapper
             tr
               td 相關當事人
               td = @verdict.party_names.join(',')
+            tr
+              td 司法院公開網址
+              td = link_to '請點我', @verdict.abs_url, target: '_blank' if @verdict.abs_url
         h2 判決書內文
-        div = api_verdict_url(@court.code, @story.identity, host: Setting.api_host)
+        div = smart_add_https(@verdict.content_file.url) if @verdict.content_file.present?
     - else
       = @errors_message
     = link_to "回到上一頁", request.referer.present? ? request.referer : search_stories_path

@@ -7,7 +7,7 @@ class Lawyer::CheckScheduleScoreInfoContext < BaseContext
   before_perform :check_number
   before_perform :check_story_type
   before_perform :find_story
-  before_perform :can_score, if: :story_has_pronounce_date?
+  before_perform :can_score, if: :story_has_pronounced_on?
   before_perform :story_already_adjudge
 
   def initialize(lawyer)
@@ -48,15 +48,15 @@ class Lawyer::CheckScheduleScoreInfoContext < BaseContext
     return add_error(:story_not_found) unless @story = Story.where(@params).last
   end
 
-  def story_has_pronounce_date?
-    @story.pronounce_date.present?
+  def story_has_pronounced_on?
+    @story.pronounced_on.present?
   end
 
   def can_score
-    return add_error(:story_already_pronounced) if Time.zone.today > @story.pronounce_date
+    return add_error(:story_already_pronounced) if Time.zone.today > @story.pronounced_on
   end
 
   def story_already_adjudge
-    return add_error(:story_already_have_judgement) if @story.adjudge_date.present?
+    return add_error(:story_already_have_judgement) if @story.is_adjudged
   end
 end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Api::VerdictsController, type: :request do
   include_context 'create_data_for_request'
-  let!(:verdict) { create :verdict, story: story }
+  let!(:verdict) { create :verdict, :with_abs_url, story: story }
   before { host! 'api.example.com' }
 
   describe '#show' do
@@ -17,8 +17,8 @@ RSpec.describe Api::VerdictsController, type: :request do
               word: story.word_type,
               number: story.number
             },
-            adjudge_date: story.adjudge_date,
-            pronounce_date: story.pronounce_date,
+            adjudged_on: story.adjudged_on,
+            pronounced_on: story.pronounced_on,
             judges_names: story.judges_names,
             lawyer_names: story.lawyer_names,
             prosecutor_names: story.prosecutor_names,
@@ -36,6 +36,7 @@ RSpec.describe Api::VerdictsController, type: :request do
           party_names: verdict.party_names,
           related_stories: verdict.related_stories,
           published_on: verdict.published_on,
+          abs_url: verdict.abs_url,
           body: {
             raw_html_url: verdict.file.url ? 'https' + @verdict.file.url : nil,
             content_url: verdict.content_file.url ? 'https' + @verdict.content_file.url : nil

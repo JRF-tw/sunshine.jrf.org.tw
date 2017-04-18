@@ -31,7 +31,7 @@
         tr
           td = "#{s.year}-#{s.word_type}-#{s.number}"
           td = s.court.code
-          td = s.is_pronounce ? "已宣判" : "未宣判"
+          td = s.is_pronounced ? "已宣判" : "未宣判"
           td
             - case type
             - when 'lawyer'

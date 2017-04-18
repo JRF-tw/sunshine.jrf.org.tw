@@ -80,7 +80,7 @@ RSpec.describe LawyerQueries do
 
     context 'have verdict_scores' do
       let!(:verdict_score) { create :verdict_score, verdict_rater: lawyer, story: story }
-      let(:date) { verdict_score.story.adjudge_date.to_s }
+      let(:date) { verdict_score.story.adjudged_on.to_s }
       let(:court_code) { story.court.code }
 
       it { expect(query.get_scores_array(story).first.is_a?(Hash)).to be_truthy }
@@ -94,7 +94,7 @@ RSpec.describe LawyerQueries do
       let!(:verdict_score) { create :verdict_score, verdict_rater: lawyer, story: yesterday_judge_story }
       let!(:schedule_score) { create :schedule_score, :with_start_on, schedule_rater: lawyer, story: yesterday_judge_story }
 
-      it { expect(query.get_scores_array(yesterday_judge_story, sort_by: 'date').first['date']).to eq(verdict_score.story.adjudge_date.to_s) }
+      it { expect(query.get_scores_array(yesterday_judge_story, sort_by: 'date').first['date']).to eq(verdict_score.story.adjudged_on.to_s) }
     end
   end
 end

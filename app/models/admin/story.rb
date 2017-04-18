@@ -14,11 +14,12 @@
 #  lawyer_names     :text
 #  judges_names     :text
 #  prosecutor_names :text
-#  is_adjudge       :boolean          default(FALSE)
-#  adjudge_date     :date
-#  pronounce_date   :date
-#  is_pronounce     :boolean          default(FALSE)
+#  is_adjudged      :boolean          default(FALSE)
+#  adjudged_on      :date
+#  pronounced_on    :date
+#  is_pronounced    :boolean          default(FALSE)
 #  is_calculated    :boolean          default(FALSE)
+#  reason           :string
 #
 
 class Admin::Story < ::Story

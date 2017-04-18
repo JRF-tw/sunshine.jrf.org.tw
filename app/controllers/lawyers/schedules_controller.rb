@@ -93,7 +93,7 @@ class Lawyers::SchedulesController < Lawyers::BaseController
   end
 
   def story_adjudged?
-    redirect_as_fail(lawyer_root_path, '案件已判決') if @schedule_score.story.adjudge_date.present?
+    redirect_as_fail(lawyer_root_path, '案件已判決') if @schedule_score.story.is_adjudged
   end
 
   def init_meta

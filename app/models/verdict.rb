@@ -11,13 +11,14 @@
 #  lawyer_names     :text
 #  judges_names     :text
 #  prosecutor_names :text
-#  adjudge_date     :date
+#  adjudged_on      :date
 #  published_on     :date
 #  content_file     :string
 #  crawl_data       :hstore
 #  roles_data       :hstore
 #  reason           :string
 #  related_stories  :text
+#  abs_url          :string
 #
 
 class Verdict < ActiveRecord::Base
@@ -36,6 +37,10 @@ class Verdict < ActiveRecord::Base
   belongs_to :story
 
   scope :newest, -> { order('id DESC') }
+
+  ransacker :created_at do
+    Arel.sql('date(created_at)')
+  end
 
   class << self
     def ransackable_scopes(_auth_object = nil)

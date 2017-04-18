@@ -16,6 +16,8 @@
 #  updated_at       :datetime         not null
 #  reason           :string
 #  related_stories  :text
+#  abs_url          :string
+#  adjudged_on      :date
 #
 
 require 'rails_helper'

@@ -17,6 +17,6 @@ class ConvertVerdictScoreWorker
   private
 
   def find_stories
-    Story.not_caculate.where('pronounce_date < ?', Time.zone.today - VERDICT_INTERVAL)
+    Story.not_caculate.where('pronounced_on < ?', Time.zone.today - VERDICT_INTERVAL)
   end
 end

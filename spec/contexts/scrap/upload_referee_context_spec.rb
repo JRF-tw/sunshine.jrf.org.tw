@@ -16,7 +16,7 @@ RSpec.describe Scrap::UploadRefereeContext, type: :model do
 
     context 'verdict' do
       let!(:referee) { create :verdict }
-      let!(:original_data) { File.read("#{Rails.root}/spec/fixtures/scrap_data/judgment.html") }
+      let!(:original_data) { File.read("#{Rails.root}/spec/fixtures/scrap_data/verdict.html") }
       before { subject }
       it { expect(referee.file).to be_present }
       it { expect(referee.content_file).to be_present }

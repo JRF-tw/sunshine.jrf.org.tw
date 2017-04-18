@@ -5,7 +5,7 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
   let!(:judge) { create :judge, name: '鄭永玉' }
   let!(:branch) { create :branch, court: court, judge: judge, chamber_name: '臺灣高等法院花蓮分院刑事庭', name: '丙' }
   let!(:original_data) { Mechanize.new.get(Scrap::ParseRefereeContext::REFEREE_URI).body.force_encoding('UTF-8') }
-  let!(:content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/judgment_content.txt") }
+  let!(:content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/verdict_content.txt") }
   let!(:word) { '105,原選上訴,1' }
   let!(:published_on) { Time.zone.today }
   let!(:story_type) { '刑事' }
@@ -46,36 +46,36 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
       end
 
       context 'sync is pronounce to story' do
-        it { expect(subject.story.is_pronounce).to be_truthy }
+        it { expect(subject.story.is_pronounced).to be_truthy }
       end
 
       context 'sync is adjudge to story' do
-        it { expect(subject.story.is_adjudge).to be_truthy }
+        it { expect(subject.story.is_adjudged).to be_truthy }
       end
     end
 
     context 'update adjudge date' do
-      context 'story unexist adjudge_date' do
-        it { expect(subject.story.adjudge_date).to be_truthy }
-        it { expect(subject.adjudge_date).to be_truthy }
+      context 'story unexist adjudged_on' do
+        it { expect(subject.story.adjudged_on).to be_truthy }
+        it { expect(subject.adjudged_on).to be_truthy }
       end
 
-      context 'story exist adjudge_date' do
-        before { subject.story.update_attributes(adjudge_date: Time.zone.today - 1.day) }
+      context 'story exist adjudged_on' do
+        before { subject.story.update_attributes(adjudged_on: Time.zone.today - 1.day) }
 
-        it { expect { subject }.not_to change { subject.story.adjudge_date } }
+        it { expect { subject }.not_to change { subject.story.adjudged_on } }
       end
     end
 
-    context 'update pronounce_date' do
-      context 'story unexist pronounce_date' do
-        it { expect(subject.story.pronounce_date).to be_truthy }
+    context 'update pronounced_on' do
+      context 'story unexist pronounced_on' do
+        it { expect(subject.story.pronounced_on).to be_truthy }
       end
 
-      context 'story exist pronounce_date' do
-        before { subject.story.update_attributes(pronounce_date: Time.zone.today - 1.day) }
+      context 'story exist pronounced_on' do
+        before { subject.story.update_attributes(pronounced_on: Time.zone.today - 1.day) }
 
-        it { expect { subject }.not_to change { subject.story.pronounce_date } }
+        it { expect { subject }.not_to change { subject.story.pronounced_on } }
       end
     end
 
@@ -120,6 +120,10 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
         subject { described_class.new(court, original_data, content, word, published_on, story_type).perform }
         it { expect { subject }.not_to change_sidekiq_jobs_size_of(SlackService, :notify) }
       end
+    end
+
+    context 'update abs_url' do
+      it { expect(subject.abs_url).to be_present }
     end
 
     xit '#send_after_verdict_noice, should be test in AfterVerdictNoticeContextSpec'

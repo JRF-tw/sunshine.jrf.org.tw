@@ -13,12 +13,11 @@ section.container.offcanvas-card-wrapper
             .span6
               .control-group
                 = f.label :reason_cont
-                = f.search_field :verdict_reason_cont
+                = f.search_field :reason_cont
             .span6
               .control-group
                 = f.label :court_full_name_eq
-                .controls.select2 = f.select :court_id_eq,
-                collect_for_courts, include_blank: "請選擇"
+                .controls.select2 = f.collection_select :court_id_in, Court.all, :id, :full_name, {}, { multiple: true , data: { placeholder: "全部法院" } }
           .row
             .span6
               .control-group
@@ -41,9 +40,9 @@ section.container.offcanvas-card-wrapper
           .row
             .span6
               .control-group#datepicker
-                = f.label :adjudge_date_gteq
-                .controls= f.search_field :adjudge_date_gteq, placeholder: "啟始時間"
-                .controls = f.search_field :adjudge_date_lteq, placeholder:"結束時間"
+                = f.label :adjudged_on_gteq
+                .controls= f.search_field :adjudged_on_gteq, placeholder: "啟始時間"
+                .controls = f.search_field :adjudged_on_lteq, placeholder:"結束時間"
           .row
             .span6
               .control-group

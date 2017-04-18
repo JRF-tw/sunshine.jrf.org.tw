@@ -7,7 +7,7 @@ feature '法官評鑑 - 旁觀者', type: :feature, js: true do
 
   feature '案件的狀態和評鑑與否' do
     Scenario '案件尚未抓到判決書 (即沒有判決日)' do
-      before { story.update_attributes(is_adjudge: false) }
+      before { story.update_attributes(is_adjudged: false) }
 
       Given '案件無宣判日' do
         When '進行新增開庭評鑑' do
@@ -35,7 +35,7 @@ feature '法官評鑑 - 旁觀者', type: :feature, js: true do
       end
 
       Given '案件的宣判日在未來' do
-        before { story.update_attributes(pronounce_date: Time.zone.today + 1.day) }
+        before { story.update_attributes(pronounced_on: Time.zone.today + 1.day) }
         When '進行新增開庭評鑑' do
           before { court_observer_run_schedule_score_flow(schedule) }
           Then '成功新增開庭評鑑' do
@@ -61,7 +61,7 @@ feature '法官評鑑 - 旁觀者', type: :feature, js: true do
       end
 
       Given '案件的宣判日在過去' do
-        before { story.update_attributes(pronounce_date: Time.zone.today - 1.day) }
+        before { story.update_attributes(pronounced_on: Time.zone.today - 1.day) }
         When '進行新增開庭評鑑' do
           before { visit(input_info_court_observer_score_schedules_path) }
           before { court_observer_input_info_schedule_score(story) }
@@ -80,11 +80,11 @@ feature '法官評鑑 - 旁觀者', type: :feature, js: true do
     end
 
     Scenario '案件已抓到判決書，且宣判日在過去或當天' do
-      before { story.update_attributes(is_adjudge: true, is_pronounce: true) }
+      before { story.update_attributes(is_adjudged: true, is_pronounced: true) }
 
       Given '判決日與宣判日在當天' do
-        before { story.update_attributes(adjudge_date: Time.zone.today) }
-        before { story.update_attributes(pronounce_date: Time.zone.today) }
+        before { story.update_attributes(adjudged_on: Time.zone.today, is_adjudged: true) }
+        before { story.update_attributes(pronounced_on: Time.zone.today) }
         When '進行新增開庭評鑑' do
           before { visit(input_info_court_observer_score_schedules_path) }
           before { court_observer_input_info_schedule_score(story) }
@@ -102,8 +102,8 @@ feature '法官評鑑 - 旁觀者', type: :feature, js: true do
       end
 
       Given '判決日在三個月內的過去，宣判日在三個月外的過去' do
-        before { story.update_attributes(adjudge_date: Time.zone.today - 2.months) }
-        before { story.update_attributes(pronounce_date: Time.zone.today - 4.months) }
+        before { story.update_attributes(adjudged_on: Time.zone.today - 2.months) }
+        before { story.update_attributes(pronounced_on: Time.zone.today - 4.months) }
         When '進行新增開庭評鑑' do
           before { visit(input_info_court_observer_score_schedules_path) }
           before { court_observer_input_info_schedule_score(story) }
@@ -121,8 +121,8 @@ feature '法官評鑑 - 旁觀者', type: :feature, js: true do
       end
 
       Given '判決日在三個月外的過去，宣判日在三個月外的過去' do
-        before { story.update_attributes(adjudge_date: Time.zone.today - 4.months) }
-        before { story.update_attributes(pronounce_date: Time.zone.today - 4.months) }
+        before { story.update_attributes(adjudged_on: Time.zone.today - 4.months) }
+        before { story.update_attributes(pronounced_on: Time.zone.today - 4.months) }
         When '進行新增開庭評鑑' do
           before { visit(input_info_court_observer_score_schedules_path) }
           before { court_observer_input_info_schedule_score(story) }
