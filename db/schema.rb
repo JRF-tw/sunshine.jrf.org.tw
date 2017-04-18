@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170327111519) do
+ActiveRecord::Schema.define(version: 20170418022510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "postgis"
   enable_extension "hstore"
+  enable_extension "postgis"
 
   create_table "articles", force: :cascade do |t|
     t.integer  "profile_id"
@@ -574,6 +574,7 @@ ActiveRecord::Schema.define(version: 20170327111519) do
     t.datetime "updated_at",       null: false
     t.string   "reason"
     t.text     "related_stories"
+    t.string   "abs_url"
   end
 
   add_index "rules", ["published_on"], name: "index_rules_on_published_on", using: :btree
@@ -833,6 +834,7 @@ ActiveRecord::Schema.define(version: 20170327111519) do
     t.hstore   "roles_data"
     t.string   "reason"
     t.text     "related_stories"
+    t.string   "abs_url"
   end
 
   add_index "verdicts", ["adjudge_date"], name: "index_verdicts_on_adjudge_date", using: :btree
