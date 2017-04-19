@@ -1,8 +1,9 @@
-article
-  = render partial: 'components/hero', locals: {\
-    heading: "案件 #{@story.identity} 庭期列表",
-    type: 'searchs-index'\
-  } 
+- schedule_title = @schedules ? "案件 #{@story.identity} " : ""
+
+= render partial: 'components/hero', locals: {\
+  heading: "#{schedule_title}庭期列表",
+  type: 'searchs-index'\
+} 
 
 .search-result--card
   .container--list
