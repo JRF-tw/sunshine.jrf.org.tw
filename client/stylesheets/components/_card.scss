@@ -194,6 +194,11 @@
     max-width: $card-max;
     margin   : n() auto;
   }
+
+  &.has-story {
+    max-width: 840px;
+    margin   : n() auto;
+  }
 }
 
 .card--feature__heading {
