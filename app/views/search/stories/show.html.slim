@@ -1,8 +1,7 @@
-article
-  = render partial: 'components/hero', locals: {\
-    type: 'searchs-index',
-    heading: @story.identity\
-  }
+= render partial: 'components/hero', locals: {\
+  type: 'searchs-index',
+  heading: @story.identity\
+}
 
 .offcanvas-card-wrapper
   - if @story
