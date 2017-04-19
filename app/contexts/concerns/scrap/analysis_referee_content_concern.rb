@@ -93,10 +93,10 @@ module Scrap::AnalysisRefereeContentConcern
     data.scan(/.{3}年度.+第.+號/)[1..-1]
   end
 
-  def parse_abs_url(original_data, crawler_history)
+  def parse_original_url(original_data, crawler_history)
     Nokogiri::HTML(original_data).css('script')[4].text[/http:\/\/.+(?=;)/].delete('\"')
   rescue
-    Logs::AddCrawlerError.parse_referee_data_error(crawler_history, :parse_abs_url_failed, '解析資訊錯誤 : 取得固定網址失敗')
+    Logs::AddCrawlerError.parse_referee_data_error(crawler_history, :parse_original_url_failed, '解析資訊錯誤 : 取得固定網址失敗')
     nil
   end
 

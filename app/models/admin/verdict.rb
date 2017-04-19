@@ -18,7 +18,7 @@
 #  roles_data       :hstore
 #  reason           :string
 #  related_stories  :text
-#  abs_url          :string
+#  original_url     :string
 #
 
 class Admin::Verdict < ::Verdict

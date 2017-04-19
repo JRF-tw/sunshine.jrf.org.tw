@@ -8,7 +8,7 @@ json.verdict do
   json.party_names @verdict.party_names
   json.related_stories @verdict.related_stories
   json.published_on @verdict.published_on
-  json.abs_url @verdict.abs_url
+  json.original_url @verdict.original_url
   json.body do
     json.raw_html_url @verdict.file.url ? smart_add_https(@verdict.file.url) : nil
     json.content_url @verdict.content_file.url ? smart_add_https(@verdict.content_file.url) : nil
