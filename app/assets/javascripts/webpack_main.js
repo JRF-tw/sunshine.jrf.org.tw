@@ -458,7 +458,7 @@
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Arrow, Dismiss, Rules, StoryCollapse, Tab, TextInput, ToTop, Toggle, ref, sprites;
+	var Arrow, Collapse, Dismiss, Rules, StoryInjection, Tab, TextInput, ToTop, Toggle, ref, ref1, sprites;
 
 	__webpack_require__(9);
 
@@ -472,11 +472,11 @@
 
 	__webpack_require__(19);
 
-	ref = __webpack_require__(20), Toggle = ref.Toggle, Dismiss = ref.Dismiss;
+	ref = __webpack_require__(20), Collapse = ref.Collapse, StoryInjection = ref.StoryInjection;
 
-	TextInput = __webpack_require__(21).TextInput;
+	ref1 = __webpack_require__(21), Toggle = ref1.Toggle, Dismiss = ref1.Dismiss;
 
-	StoryCollapse = __webpack_require__(22);
+	TextInput = __webpack_require__(22).TextInput;
 
 	Rules = __webpack_require__(23);
 
@@ -498,7 +498,9 @@
 
 	new TextInput();
 
-	new StoryCollapse('#story-collapse-toggle');
+	new StoryInjection('[data-story-inject]');
+
+	new Collapse('#story-collapse-toggle');
 
 	new Tab('[data-tab-content]');
 
@@ -6916,6 +6918,61 @@
 /* 20 */
 /***/ function(module, exports) {
 
+	var Collapse, StoryInjection;
+
+	StoryInjection = (function() {
+	  function StoryInjection(query) {
+	    this.query = query;
+	    $(document).on("ready page:load", (function(_this) {
+	      return function() {
+	        var $container;
+	        $container = $(_this.query);
+	        return $.getJSON($container.data("story-inject"), function(res) {
+	          var filteredContent;
+	          filteredContent = res.main_content.replace(/\r\n/g, "<br>");
+	          return $container.html(filteredContent).removeClass("hidden").next(".loading").remove();
+	        });
+	      };
+	    })(this));
+	  }
+
+	  return StoryInjection;
+
+	})();
+
+	Collapse = (function() {
+	  function Collapse(query) {
+	    this.query = query;
+	    $(document).on('page:change', (function(_this) {
+	      return function() {
+	        _this.toggle = $(_this.query);
+	        _this.toggle_wrapper = _this.toggle.parent();
+	        return _this.toggle_target = $(_this.toggle.data('collapse'));
+	      };
+	    })(this));
+	    $(document).on('click', this.query, (function(_this) {
+	      return function(e) {
+	        _this.toggle.toggleClass('active');
+	        _this.toggle_wrapper.toggleClass('extracted');
+	        return _this.toggle_target.slideToggle(300);
+	      };
+	    })(this));
+	  }
+
+	  return Collapse;
+
+	})();
+
+	module.exports = {
+	  Collapse: Collapse,
+	  StoryInjection: StoryInjection
+	};
+
+
+/***/ },
+/* 21 */
+/***/ function(module, exports) {
+
 	var Dismiss, Toggle;
 
 	Toggle = (function() {
@@ -6993,7 +7050,7 @@
 
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports) {
 
 	var TextInput;
@@ -7030,38 +7087,6 @@
 	module.exports = {
 	  TextInput: TextInput
 	};
-
-
-/***/ },
-/* 22 */
-/***/ function(module, exports) {
-
-	var Collapse;
-
-	Collapse = (function() {
-	  function Collapse(query) {
-	    this.query = query;
-	    $(document).on('page:change', (function(_this) {
-	      return function() {
-	        _this.toggle = $(_this.query);
-	        _this.toggle_wrapper = _this.toggle.parent();
-	        return _this.toggle_target = $(_this.toggle.data('collapse'));
-	      };
-	    })(this));
-	    $(document).on('click', this.query, (function(_this) {
-	      return function(e) {
-	        _this.toggle.toggleClass('active');
-	        _this.toggle_wrapper.toggleClass('extracted');
-	        return _this.toggle_target.slideToggle(300);
-	      };
-	    })(this));
-	  }
-
-	  return Collapse;
-
-	})();
-
-	module.exports = Collapse;
 
 
 /***/ },
