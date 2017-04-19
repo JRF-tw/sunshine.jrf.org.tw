@@ -1,33 +1,37 @@
-section.search-result
-  .container--list
-    table.search-result__table
-      thead
-        tr
-          th 法院
-          th 類別
-          th 年度
-          th 字別
-          th 案號
-          th 宣判日期
-          th 案由
-          th 相關法官
-          th 相關律師
-          th 
-      tbody
-        - @stories.each do |story|
+- if @stories
+  section.search-result
+    .container--list
+      table.search-result__table
+        thead
           tr
-            td = story.court.name
-            td = story.story_type
-            td = story.year
-            td = story.word_type
-            td = story.year.to_s + story.word_type + story.number.to_s
-            td = story.adjudged_on
-            td = story.reason
-            td = story.judges_names.join(',')
-            td = story.lawyer_names.join(',')
-            td
-              = link_to "詳細資料", search_story_path(story.court.code, story.identity), class: "btn btn-mini"
-              
-    p.search-result__total = "共 #{@stories.total_count} 筆"
-              
-    = paginate @stories, theme: :www
+            th 法院
+            th 類別
+            th 年度
+            th 字別
+            th 案號
+            th 宣判日期
+            th 案由
+            th 相關法官
+            th 相關律師
+            th 
+        tbody
+          - @stories.each do |story|
+            tr
+              td = story.court.name
+              td = story.story_type
+              td = story.year
+              td = story.word_type
+              td = story.year.to_s + story.word_type + story.number.to_s
+              td = story.adjudged_on
+              td = story.reason
+              td = story.judges_names.join(',')
+              td = story.lawyer_names.join(',')
+              td
+                = link_to "詳細資料", search_story_path(story.court.code, story.identity), class: "btn btn-mini"
+                
+      p.search-result__total = "共 #{@stories.total_count} 筆"
+                
+      = paginate @stories, theme: :www
+      
+- else
+  = @errors_message

@@ -12,6 +12,16 @@
   }
 }
 
+.search-result--card {
+  margin-top: r(-6.5) - 1px;
+
+  .container--list {
+    @extend %Card;
+    padding-bottom  : r(4);
+    background-color: $white;
+  }
+}
+
 .search-result__table {
   @extend %table;
   margin    : n() r(-2);
