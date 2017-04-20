@@ -6,5 +6,5 @@ json.story do
   json.prosecutor_names story.prosecutor_names
   json.lawyer_names story.lawyer_names
   json.party_names story.party_names
-  json.detail_url api_story_url(story.court.code, story.identity, protocol: 'https')
+  json.detail_url api_story_url(story.court.code, story.identity)
 end
