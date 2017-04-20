@@ -84,6 +84,12 @@
     }
   }
 
+  .cell__subtitle {
+    display    : inline-block;
+    margin-left: r(1);
+    font-size  : ms(-1);
+  }
+
   .link {
     color: $text-secondary;
   }

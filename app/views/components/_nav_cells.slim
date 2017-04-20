@@ -5,7 +5,8 @@ span.cell
   | /
   = link_to '檢察官', prosecutors_path, class: 'link'
   
-= link_to who_are_you_path, class: 'cell' do
-  = '評鑑法官'
-  #please-expect= '(敬請期待)'
+= link_to who_are_you_path, class: 'cell'
+  | 評鑑法官
+  span.cell__subtitle = "(敬請期待)"
+  
 = link_to '回報錯誤', 'https://jrf.neticrm.tw/civicrm/profile/create?gid=49&reset=1', class: 'cell', target: '_blank'

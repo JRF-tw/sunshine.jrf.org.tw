@@ -1,7 +1,8 @@
 .main-header {
-  position: fixed 0 0 n() 0;
-  z-index: index($layers, header);
+  position  : fixed 0 0 n() 0;
+  z-index   : index($layers, header);
   transition: background-color .3s ease 0s;
+
   &.has-background {
     box-shadow: 0 2px 5px 0 rgba(0,0,0,.3);
     @each $type in $characters {
@@ -9,62 +10,93 @@
         background-color: theme($type, true);
       }
     }
+
     &.base {
       background-color: #fff;
 
       .main-header__nav .cell,
-      .main-header__nav .link { color: $text-color; }
-      .main-header__logo {
-        .icon { background-image: url('logo.svg'); }
-        .slogan { color: $text-color; }
+      .main-header__nav .link {
+        color: $text-color;
       }
-      & ~ .drawer-toggle .icon { fill: $text-color; }
+
+      .main-header__logo {
+        .icon {
+          background-image: url("logo.svg");
+        }
+
+        .slogan {
+          color: $text-color;
+        }
+      }
+
+      & ~ .drawer-toggle .icon {
+        fill: $text-color;
+      }
     }
   }
 }
+
 .main-header__wrapper {
-  display: flex;
-  align-items: center;
+  display        : flex;
+  align-items    : center;
   justify-content: center;
-  height: r(9);
+  height         : r(9);
   @include susy($tablet) {
     justify-content: space-between;
-    height: r(10);
+    height         : r(10);
   }
 }
+
 .main-header__logo {
   .icon {
     @extend %scut-image-replace;
-    margin: 0;
-    size: r(14) r(5); // 106x40
-    background: url('white-logo.svg') 50% 50% / contain no-repeat;
+    margin    : 0;
+    size      : r(14) r(5); // 106x40
+    background: url("white-logo.svg") 50% 50% / contain no-repeat;
   }
+
   .slogan {
     display: none;
     @include susy($tablet) {
       display: block;
-      margin: 0;
-      text: $text-secondary-dark center ms(-1);
+      margin : 0;
+      text   : $text-secondary-dark center ms(-1);
     }
   }
 }
+
 .main-header__nav {
   display: none;
   @include susy($tablet) {
-    display: block;
+    display    : block;
     margin-left: auto;
   }
 
   .cell {
+    display    : inline-block;
     margin-left: r(3);
+    position   : relative;
+    text       : $text-secondary-dark ms(1);
+
+    &:hover .cell__subtitle {
+      display: block;
+    }
+  }
+
+  .cell__subtitle {
+    display   : none;
+    font-size : ms(-1);
+    text-align: center;
+    position  : absolute n 0 r(-2) 0;
+  }
+
+  .link {
     text: $text-secondary-dark ms(1);
   }
 
-  .link {text: $text-secondary-dark ms(1);}
-
   .icon {
-    size: 17px;
-    fill: currentColor;
+    size    : 17px;
+    fill    : currentColor;
     position: relative -1px n() n() n();
   }
 }
