@@ -4239,8 +4239,13 @@ abbr[title="required"] {
   }
 }
 
+.verdict-story .user-info__content {
+  max-width: 260px;
+}
+
 .verdict-story.narrow .user-info__content {
   width: 100%;
+  max-width: none;
 }
 
 @media (min-width: 768px) {
