@@ -1,4 +1,4 @@
-- schedule_title = @schedules ? "案件 #{@story.identity} " : ""
+- schedule_title = @story ? "案件 #{@story.identity} " : ""
 
 = render partial: 'components/hero', locals: {\
   heading: "#{schedule_title}庭期列表",
@@ -36,7 +36,7 @@
     - else
       = @errors_message
       
-    .text-center
-      = link_to "回到上一頁",
+    .card__actions.text-center
+      = link_to "回上一頁",
         request.referer.present? ? request.referer : search_stories_path,
         class: "raised-button--large"
