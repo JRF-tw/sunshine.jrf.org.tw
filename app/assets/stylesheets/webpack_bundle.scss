@@ -3549,28 +3549,34 @@ abbr[title="required"] {
   }
 }
 
-.list--user-info > dt {
-  clear: both;
-  float: left;
-}
-
-.list--user-info > dt:after {
-  content: "";
-  margin-right: 0;
-}
-
-.list--user-info > dd {
-  margin-left: 88px;
-  margin-bottom: 16px;
+.list--user-info {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-bottom: 0;
 }
 
 .list--user-info .term {
+  margin-bottom: 12px;
   width: 80px;
   color: rgba(0, 0, 0, 0.54);
 }
 
-.list--user-info .desc:empty {
-  height: 21px;
+.list--user-info .desc {
+  margin: 0;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  width: calc(100% - 80px);
 }
 
 .user-info-actions {
