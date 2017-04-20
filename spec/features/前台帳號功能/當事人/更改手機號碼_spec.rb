@@ -89,7 +89,7 @@ feature '前台帳號功能', type: :feature, js: true do
             When '輸入錯誤的驗證碼' do
               before { verify_phone_number('55688') }
               Then '新手機號碼代換失敗' do
-                expect(current_path).to eq(verifing_party_phone_path)
+                expect(current_path).to eq(verify_party_phone_path)
                 expect(page).to have_content('驗證碼輸入錯誤')
               end
             end
