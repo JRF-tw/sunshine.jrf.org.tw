@@ -3579,6 +3579,14 @@ abbr[title="required"] {
   width: calc(100% - 80px);
 }
 
+.list--user-info.story-info .term {
+  width: 96px;
+}
+
+.list--user-info.story-info .desc {
+  width: calc(100% - 96px);
+}
+
 .user-info-actions {
   padding-top: 8px;
   position: relative;
