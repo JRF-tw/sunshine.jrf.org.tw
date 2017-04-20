@@ -11,12 +11,15 @@
   }
 
   .user-info__content {
-    max-width: 260px;
+    width: 100%;
+    @include susy($tablet) {
+      max-width: 260px;
+    }
   }
 
   &.narrow .user-info__content {
     width    : 100%;
-    max-width: none;
+    max-width: none !important;
   }
 }
 
