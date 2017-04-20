@@ -1,35 +1,31 @@
 = render partial: 'components/hero', locals: {\
   type: 'searchs-index',
-  heading: @story.identity\
+  heading: @story.identity \
 }
 
 .offcanvas-card-wrapper
-  - if @story
-    = render layout: 'components/feature_card', locals: {\
-      heading: "案件資料",
-      attributes: {class: "narrow"}\
-    }
-      .user-info__content
-        dl.list--user-info
-          = kv_cell "類別", @story.id
-          = kv_cell "年度", @story.year
-          = kv_cell "字別", @story.word_type
-          = kv_cell "案號", @story.number
-          = kv_cell "案件類別", @story.story_type
-          = kv_cell "案由", @story.reason
-          = kv_cell "判決日期", @story.adjudged_on
-          = kv_cell "宣判日期", @story.pronounced_on
-          = kv_cell "法院全名", @story.court.full_name
-          = kv_cell "法院代碼", @story.court.code
-          = kv_cell "相關法官", @story.judges_names.join(',')
-          = kv_cell "相關律師", @story.lawyer_names.join(',')
-          = kv_cell "相關檢察官", @story.prosecutor_names.join(',')
-          = kv_cell "相關當事人", @story.party_names.join(',')
-          = kv_cell "庭期表", link_to('庭期列表', search_schedules_path(@story.court.code, @story.identity))
-          = kv_cell "判決", link_to('詳細資料', search_verdict_path(@story.court.code, @story.identity))
-        
-      .card__actions.text-center
-        = link_to "回上一頁", search_stories_path, class: "raised-button"
-    
-  - else
-    = @errors_message
+  = render layout: 'components/feature_card', locals: {\
+    heading: "案件資料",
+    attributes: {class: "narrow"}\
+  }
+    .user-info__content
+      dl.list--user-info
+        = kv_cell "類別", @story.id
+        = kv_cell "年度", @story.year
+        = kv_cell "字別", @story.word_type
+        = kv_cell "案號", @story.number
+        = kv_cell "案件類別", @story.story_type
+        = kv_cell "案由", @story.reason
+        = kv_cell "判決日期", @story.adjudged_on
+        = kv_cell "宣判日期", @story.pronounced_on
+        = kv_cell "法院全名", @story.court.full_name
+        = kv_cell "法院代碼", @story.court.code
+        = kv_cell "相關法官", @story.judges_names.join(',')
+        = kv_cell "相關律師", @story.lawyer_names.join(',')
+        = kv_cell "相關檢察官", @story.prosecutor_names.join(',')
+        = kv_cell "相關當事人", @story.party_names.join(',')
+        = kv_cell "庭期表", link_to('庭期列表', search_schedules_path(@story.court.code, @story.identity))
+        = kv_cell "判決", link_to('詳細資料', search_verdict_path(@story.court.code, @story.identity))
+      
+    .card__actions.text-center
+      = link_to "回上一頁", search_stories_path, class: "raised-button"

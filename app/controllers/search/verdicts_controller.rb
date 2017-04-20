@@ -1,5 +1,4 @@
-class Search::VerdictsController < BaseController
-  before_action :http_auth_for_production
+class Search::VerdictsController < Search::BaseController
 
   def show
     context = Story::FindContext.new(params[:court_code], params[:id])

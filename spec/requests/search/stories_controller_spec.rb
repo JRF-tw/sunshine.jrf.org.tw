@@ -28,15 +28,16 @@ RSpec.describe Search::StoriesController, type: :request do
     context 'wrong court code' do
       let(:url) { URI.encode("/search/fJU/#{story.identity}") }
       before { get url }
-      it { expect(response).to be_success }
-      it { expect(response.body).to match('該法院代號不存在') }
+      it { expect(response).to redirect_to('/search') }
+      it { expect(flash[:error]).to eq('該法院代號不存在') }
     end
 
     context 'wrong story data' do
       let(:url) { URI.encode("/search/#{story.court.code}/#{story.identity + '1'}") }
       before { get url }
-      it { expect(response).to be_success }
-      it { expect(response.body).to match('案件不存在') }
+
+      it { expect(response).to redirect_to('/search') }
+      it { expect(flash[:error]).to eq('案件不存在') }
     end
   end
 end

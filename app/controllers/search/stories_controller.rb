@@ -1,9 +1,8 @@
-class Search::StoriesController < BaseController
-  before_action :http_auth_for_production
+class Search::StoriesController < Search::BaseController
 
   def index
     @search = Story.newest.ransack(params[:q])
-    @stories = @search.result.includes(:court, :verdict).page(params[:page]).per(10) if params[:q]
+    @stories = @search.result.includes(:court).page(params[:page]).per(10) if params[:q]
   end
 
   def show
@@ -11,7 +10,7 @@ class Search::StoriesController < BaseController
     if @story = context.perform
       @court = @story.court
     else
-      @errors_message = context.error_messages.join(',')
+      redirect_as_fail(search_stories_path, context.error_messages.join(','))
     end
   end
 end

@@ -8,7 +8,7 @@ module TemplateHelper
 
   def kv_cell(key, value)
     value_str = value.to_s
-    if value_str.length > 0
+    unless value_str.empty?
       concat content_tag :dt, key.to_s, class: 'term'
       content_tag :dd, value_str, class: 'desc'
     end

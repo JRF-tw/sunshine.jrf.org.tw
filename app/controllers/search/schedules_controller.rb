@@ -1,5 +1,4 @@
-class Search::SchedulesController < BaseController
-  before_action :http_auth_for_production
+class Search::SchedulesController < Search::BaseController
 
   def index
     context = Story::FindContext.new(params[:court_code], params[:id])
