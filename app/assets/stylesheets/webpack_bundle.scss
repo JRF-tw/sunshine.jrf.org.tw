@@ -4240,12 +4240,18 @@ abbr[title="required"] {
 }
 
 .verdict-story .user-info__content {
-  max-width: 260px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .verdict-story .user-info__content {
+    max-width: 260px;
+  }
 }
 
 .verdict-story.narrow .user-info__content {
   width: 100%;
-  max-width: none;
+  max-width: none !important;
 }
 
 @media (min-width: 768px) {
