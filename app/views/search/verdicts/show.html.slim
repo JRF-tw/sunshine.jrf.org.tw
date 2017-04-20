@@ -1,4 +1,4 @@
-- has_story = @verdict.content_file.present?
+- has_story = @verdict && @verdict.content_file.present?
 - card_size = has_story ? "has-story" : "narrow"
 
 = render partial: 'components/hero', locals: {\

@@ -7,7 +7,7 @@ class Search::VerdictsController < Search::BaseController
       @verdict = @story.verdict
       @errors_message = '尚未有判決書' unless @verdict
     else
-      @errors_message = context.error_messages.join(',')
+      redirect_as_fail(search_stories_path, context.error_messages.join(','))
     end
   end
 end

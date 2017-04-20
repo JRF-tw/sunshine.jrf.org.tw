@@ -24,8 +24,8 @@
         = kv_cell "相關律師", @story.lawyer_names.join(',')
         = kv_cell "相關檢察官", @story.prosecutor_names.join(',')
         = kv_cell "相關當事人", @story.party_names.join(',')
-        = kv_cell "庭期表", link_to('庭期列表', search_schedules_path(@story.court.code, @story.identity))
-        = kv_cell "判決", link_to('詳細資料', search_verdict_path(@story.court.code, @story.identity))
+        = kv_cell "庭期表", @story.schedules.present? ? link_to('庭期列表', search_schedules_path(@story.court.code, @story.identity)) : '尚未有庭期'
+        = kv_cell "判決", @story.verdict ? link_to('詳細資料', search_verdict_path(@story.court.code, @story.identity)) : '尚未有判決書'
       
     .card__actions.text-center
       = link_to "回上一頁", search_stories_path, class: "raised-button"

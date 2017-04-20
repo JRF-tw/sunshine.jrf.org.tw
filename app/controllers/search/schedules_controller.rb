@@ -6,7 +6,7 @@ class Search::SchedulesController < Search::BaseController
       @court = @story.court
       @schedules = @story.schedules.includes(:branch_judge).page(params[:page]).per(10)
     else
-      @errors_message = context.error_messages.join(',')
+      redirect_as_fail(search_stories_path, context.error_messages.join(','))
     end
   end
 end
