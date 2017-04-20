@@ -12,7 +12,7 @@
     - if @verdict
       .verdict-story class=card_size
         .user-info__content
-          dl.list--user-info
+          dl.list--user-info.story-info
             = kv_cell "案由", @verdict.reason
             = kv_cell "案件", @story.identity
             = kv_cell "法院", @court.full_name

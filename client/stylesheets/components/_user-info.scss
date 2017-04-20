@@ -48,6 +48,18 @@
     flex  : 1 1 auto;
     width : calc(100% - #{$dt-width});
   }
+
+  &.story-info {
+    $dt-width: r(12);
+
+    .term {
+      width: $dt-width;
+    }
+
+    .desc {
+      width: calc(100% - #{$dt-width});
+    }
+  }
 }
 
 .user-info-actions {
