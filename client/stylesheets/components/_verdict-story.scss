@@ -10,8 +10,13 @@
     }
   }
 
+  .user-info__content {
+    max-width: 260px;
+  }
+
   &.narrow .user-info__content {
-    width: 100%;
+    width    : 100%;
+    max-width: none;
   }
 }
 
