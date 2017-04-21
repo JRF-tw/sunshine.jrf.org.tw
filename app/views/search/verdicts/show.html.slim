@@ -13,16 +13,16 @@
       .verdict-story class=card_size
         .user-info__content
           dl.list--user-info.story-info
-            = kv_cell "案由", @verdict.reason
-            = kv_cell "案件", @story.identity
-            = kv_cell "法院", @court.full_name
-            = kv_cell "法院代號", @court.code
-            = kv_cell "案由", @verdict.reason
-            = kv_cell "判決日期", @verdict.adjudged_on
-            = kv_cell "相關法官", @verdict.judges_names.join(',')
-            = kv_cell "相關律師", @verdict.lawyer_names.join(',')  
-            = kv_cell "相關檢察官", @verdict.prosecutor_names.join(',')
-            = kv_cell "相關當事人", @verdict.party_names.join(',')
+            = kv_cell '案由', @verdict.reason
+            = kv_cell '案件', @story.identity
+            = kv_cell '法院', @court.full_name
+            = kv_cell '法院代號', @court.code
+            = kv_cell '判決日期', @verdict.adjudged_on
+            = kv_cell '相關法官', @verdict.judges_names.join(',')
+            = kv_cell '相關律師', @verdict.lawyer_names.join(',')  
+            = kv_cell '相關檢察官', @verdict.prosecutor_names.join(',')
+            = kv_cell '相關當事人', @verdict.party_names.join(',')
+            = kv_cell '司法院公開網址', (link_to '請點我', @verdict.original_url, target: '_blank' if @verdict.original_url)
             
         - if has_story
           article.verdict-story__content
