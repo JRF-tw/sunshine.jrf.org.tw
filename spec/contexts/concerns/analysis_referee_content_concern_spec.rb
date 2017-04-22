@@ -59,13 +59,13 @@ RSpec.describe Scrap::AnalysisRefereeContentConcern, type: :model do
 
   describe '#parse_lawyer_names' do
     context 'exist' do
-      let!(:verdict_content) { '選任辯護人　xxx律師' }
+      let!(:verdict_content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/verdict_with_many_lawyer.text") }
       subject { including_class.parse_lawyer_names(verdict, verdict_content, crawler_history) }
       it { expect(subject).to be_truthy }
     end
 
     context 'unexist' do
-      let!(:verdict_content) { '選任辯護人' }
+      let!(:verdict_content) { '選任辯護人 上列' }
       subject { including_class.parse_lawyer_names(verdict, verdict_content, crawler_history) }
       it { expect { subject }.to change { CrawlerLog.count } }
     end
