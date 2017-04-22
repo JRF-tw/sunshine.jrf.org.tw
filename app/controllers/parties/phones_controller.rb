@@ -46,7 +46,7 @@ class Parties::PhonesController < Parties::BaseController
       redirect_to edit_party_phone_path, flash: { error: context.error_messages.join(', ').to_s }
     else
       flash[:error] = context.error_messages.join(', ')
-      render 'verify'
+      redirect_to verify_party_phone_path
     end
   end
 

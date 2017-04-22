@@ -23,7 +23,7 @@ RSpec.describe Api::VerdictsController, type: :request do
             lawyer_names: story.lawyer_names,
             prosecutor_names: story.prosecutor_names,
             party_names: story.party_names,
-            detail_url: api_story_url(story.court.code, story.identity, protocol: 'https')
+            detail_url: api_story_url(story.court.code, story.identity)
           },
           court: {
             name: court.full_name,
