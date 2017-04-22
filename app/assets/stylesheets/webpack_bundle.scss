@@ -1880,13 +1880,15 @@ a:focus {
 }
 
 .main-footer__copy {
-  display: none;
+  display: block;
+  margin-top: 16px;
   font-size: 12px;
 }
 
-@media (min-width: 880px) {
+@media (min-width: 768px) {
   .main-footer__copy {
-    display: block;
+    margin-top: 0;
+    width: calc(100% - 261px);
   }
 }
 
@@ -3565,7 +3567,7 @@ abbr[title="required"] {
 }
 
 .list--user-info .term {
-  margin-bottom: 12px;
+  padding-bottom: 12px;
   width: 80px;
   color: rgba(0, 0, 0, 0.54);
 }
@@ -3585,6 +3587,11 @@ abbr[title="required"] {
 
 .list--user-info.story-info .desc {
   width: calc(100% - 96px);
+}
+
+.list--user-info.story-info .divided-before {
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 .user-info-actions {
