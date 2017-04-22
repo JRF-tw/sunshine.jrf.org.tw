@@ -99,6 +99,11 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
 
         it { expect { subject }.to change { StoryRelation.count }.by(5) }
       end
+
+      context 'handle many lawyer pattern' do
+        let!(:content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/verdict_with_many_lawyer.text") }
+        it { expect(subject.lawyer_names).to eq(['李旦']) }
+      end
     end
 
     context '#calculate_schedule_scores' do
