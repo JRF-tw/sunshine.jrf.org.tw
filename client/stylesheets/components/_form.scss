@@ -100,11 +100,13 @@ $error-rhythm: r(3);
 
 #{$all-text-inputs} {
   display      : block;
+  appearance   : none;
   padding      : $input-rhythm 0;
   width        : 100%;
   line-height  : 1.25;
   border       : none;
   border-bottom: 1px solid $divider-gray;
+  border-radius: 0;
   box-shadow   : none;
   outline      : none;
 
