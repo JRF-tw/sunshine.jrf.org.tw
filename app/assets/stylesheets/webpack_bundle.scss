@@ -2886,11 +2886,15 @@ input[type="week"],
 input:not([type]),
 textarea {
   display: block;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   padding: 8px 0;
   width: 100%;
   line-height: 1.25;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 0;
   box-shadow: none;
   outline: none;
 }
