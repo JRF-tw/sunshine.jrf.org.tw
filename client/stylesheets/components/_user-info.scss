@@ -38,9 +38,9 @@
   margin-bottom  : 0;
 
   .term {
-    margin-bottom: $gap;
-    width        : $dt-width;
-    color        : $text-secondary;
+    padding-bottom: $gap;
+    width         : $dt-width;
+    color         : $text-secondary;
   }
 
   .desc {
@@ -58,6 +58,11 @@
 
     .desc {
       width: calc(100% - #{$dt-width});
+    }
+
+    .divided-before {
+      padding-top: $gap;
+      border-top : 1px solid $divider-gray;
     }
   }
 }
