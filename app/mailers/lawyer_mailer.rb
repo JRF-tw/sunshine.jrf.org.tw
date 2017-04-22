@@ -27,7 +27,7 @@ class LawyerMailer < ApplicationMailer
     @verdict_url = verdict.file.url
     @limit_date = @story.verdict_got_on + 3.months
     @score_verdicts_link = generate_score_verdicts_link
-    @subject = @story.detail_info + '案件判決書已公開上網，邀請您提供您的寶貴意見！'
+    @subject = @story.detail_info + '判決書已公開上網，邀請您提供您的寶貴意見！'
     mail(to: @lawyer.email, subject: @subject)
   end
 
