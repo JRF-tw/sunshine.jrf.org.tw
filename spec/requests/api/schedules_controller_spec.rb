@@ -14,6 +14,7 @@ RSpec.describe Api::SchedulesController, type: :request do
             word: story.word_type,
             number: story.number
           },
+          reason: story.reason,
           adjudged_on: story.adjudged_on,
           pronounced_on: story.pronounced_on,
           judges_names: story.judges_names,

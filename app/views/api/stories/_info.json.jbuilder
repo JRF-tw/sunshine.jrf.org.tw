@@ -1,5 +1,5 @@
-json.partial! 'identity', story: story
-json.partial! 'api/court', court: story.court
+json.partial! 'api/stories/identity', story: story
+json.reason story.reason
 json.adjudged_on story.adjudged_on
 json.pronounced_on story.pronounced_on
 json.judges_names story.judges_names

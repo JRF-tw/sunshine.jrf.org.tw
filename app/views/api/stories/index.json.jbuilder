@@ -1,6 +1,5 @@
 json.pagination @pagination_data
-
 json.stories @stories do |story|
-  json.partial! 'info', story: story
-  json.detail_link api_story_url(story.court.code, story.identity)
+  json.partial! 'api/story', story: story
+  json.partial! 'api/court', court: story.court
 end

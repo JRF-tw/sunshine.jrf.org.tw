@@ -17,6 +17,7 @@ RSpec.describe Api::VerdictsController, type: :request do
               word: story.word_type,
               number: story.number
             },
+            reason: story.reason,
             adjudged_on: story.adjudged_on,
             pronounced_on: story.pronounced_on,
             judges_names: story.judges_names,
@@ -35,7 +36,7 @@ RSpec.describe Api::VerdictsController, type: :request do
           lawyer_names: verdict.lawyer_names,
           party_names: verdict.party_names,
           related_stories: verdict.related_stories,
-          published_on: verdict.published_on,
+          adjudged_on: verdict.adjudged_on,
           original_url: verdict.original_url,
           body: {
             raw_html_url: verdict.file.url ? 'https' + @verdict.file.url : nil,
