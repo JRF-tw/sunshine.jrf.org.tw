@@ -1,0 +1,184 @@
+identity:
+  properties:
+    type:
+      description: 案件類別
+      type: string
+      example: 民事
+    year:
+      description: 案件年份 民國年
+      type: number
+      example: 105
+    word:
+      description: 案件字別
+      type: string
+      example: 重上
+    number:
+      description: 案件案號
+      type: number
+      example: 608
+fail_messages:
+  type: string
+  enum: ['該法院代號不存在', '案件不存在', '此案件尚未有判決書']
+  description: 描述查詢失敗的原因
+  example: 案件不存在
+pagination_response:
+  properties:
+    current:
+      description: 目前頁數
+      type: number
+      example: 1
+    previous_url?:
+      description: 上一頁連結
+      type: string
+      example: 'https://api.jrf.org.tw/search/stories?page=2&q%5Badjudge_date_gteq%5D=2009-12-27'
+    next_url:
+      description: 下一頁連結
+      type: string
+      example: 'https://api.jrf.org.tw/search/stories?page=3&q%5Badjudge_date_gteq%5D=2009-12-27'
+    per_page:
+      description: 每頁筆數
+      type: number
+      example: 20
+    pages:
+      description: 總頁數
+      type: number
+      example: 16738
+    count:
+      description: 總筆數
+      type: number
+      example: 334757
+Story:
+  properties:
+    identity: identity
+    reason:
+      description: 案由
+      type: string
+      example: 保護管束
+    adjudged_on?:
+      description: 判決日期
+      type: date-only
+      example: 2017-03-27
+    pronounced_on?:
+      description: 宣判日期
+      type: date-only
+      example: 2017-05-27
+    judges_names?:
+      description: 相關法官姓名
+      type: string[]
+      example: ['盧江陽', '黃玉清', '楊熾光']
+    prosecutor_names?:
+      description: 相關檢察官姓名
+      type: string[]
+      example: ["張蘭"]
+    lawyer_names?:
+      description: 相關律師姓名
+      type: string[]
+      example: ['林佳瑩', '張志朋', '吳展旭']
+    party_names?:
+      description: 相關當事人姓名
+      type: string[]
+      example: ["李文財"]
+story_show:
+  type: Story
+  properties:
+    court: Court
+    schedules:
+      properties:
+        detail_url:
+          description: 庭期表index 頁面連結
+          type: string
+          example: https://api.jrf.org.tw/KSH/%E5%88%91%E4%BA%8B-106-%E8%81%B2-397/schedules
+    verdict:
+      properties:
+        detail_url:
+          description: 判決書show 頁面連結
+          type: string
+          example: https://api.jrf.org.tw/KSH/%E5%88%91%E4%BA%8B-106-%E8%81%B2-397/verdict
+story_partial:
+  type: Story
+  properties:
+    detail_url:
+      description: 案件 show 頁面連結
+      type: string
+      example: https://api.jrf.org.tw/ULD/%E5%88%91%E4%BA%8B-105-%E4%BA%A4%E6%98%93-458
+story_index:
+  type: story_partial
+  properties:
+    court: Court
+Court:
+  properties: 
+    name:
+      description: 法院全名
+      type: string
+      example: 臺灣雲林地方法院
+    code:
+      description: 法院代碼
+      type: string
+      example: ULD
+Verdict:
+  properties:
+    story: story_partial
+    court: Court
+    reason?:
+      description: 案由
+      type: string
+      example: 保護管束
+    judges_names?:
+      description: 相關法官姓名
+      type: string[]
+      example: ['盧江陽', '黃玉清', '楊熾光']
+    prosecutor_names?:
+      description: 相關檢察官姓名
+      type: string[]
+      example: ["張蘭"]
+    lawyer_names?:
+      description: 相關律師姓名
+      type: string[]
+      example: ['林佳瑩', '張志朋', '吳展旭']
+    party_names?:
+      description: 相關當事人姓名
+      type: string[]
+      example: ["李文財"]
+    related_stories?:
+      description: 其他相關案件
+      type: string[]
+      example: ['105年度上易字第548號', '105年度上易字第549號', '105年度上易字第550號', '105年度上易字第551號', '105年度上易字第552號']
+    adjudged_on:
+      description: 判決日期
+      type: date-only
+      example: 2017-05-27
+    original_url?: string
+    body:
+      properties:
+        raw_html_url:
+          description: 整份判決書檔案連結
+          type: string
+          example: https://dvtnykzk9n7xc.cloudfront.net/uploads/verdict/file/000/162/402/a74230af-198a-4697-bf17-c0c6783db0b8.html
+        content_url:
+          description: 判決書內文檔案連結
+          type: string
+          example: https://dvtnykzk9n7xc.cloudfront.net/uploads/verdict/content_file/000/162/402/31b7d434-fbe1-49be-a5f0-598c4d4d64fe.json
+Schedule:
+  properties:
+    story: story_partial
+    court: Court
+    branch_name:
+      description: 股別名稱
+      type: string
+      example: 智
+    branch_judge:
+      description: 股別法官
+      type: string
+      example: 賴劍毅
+    courtroom:
+      description: 法庭
+      type: string
+      example: 第八法庭 
+    start_on:
+      description: 開庭日期
+      type: date-only
+      example: 2017-01-16
+    start_at: 
+      description: 開庭時間
+      type: string
+      example: "2017-01-16 10:00"
