@@ -47,6 +47,7 @@ module Scrap::AnalysisRefereeContentConcern
   end
 
   def parse_lawyer_names(referee, content, crawler_history)
+    content = tuncate_role_data(content)
     matched = content.squish.match(LAWYER)
     if matched
       return content.squish.scan(LAWYER).map { |i| i[0] }
@@ -88,7 +89,7 @@ module Scrap::AnalysisRefereeContentConcern
   end
 
   def prase_related_stories(content)
-    end_point = content.index('上列')
+    end_point = get_content_start_point(content)
     data = content[0..end_point]
     data.scan(/.{3}年度.+第.+號/)[1..-1]
   end
@@ -100,12 +101,17 @@ module Scrap::AnalysisRefereeContentConcern
     nil
   end
 
+  def get_content_start_point(content)
+    return content.index('上列') - 1 if content.index('上列')
+    content.index(/[\p{han}\p{p}\d]{20}/)
+  end
+
   private
 
   def tuncate_role_data(content)
-    end_point = content.index('上列') - 1
+    end_point = get_content_start_point(content)
     content.tr!('　', ' ')
-    start_word = content[0..end_point].scan(/.{3}年度.+第.+號/).last
+    return content[0..end_point] unless start_word = content[0..end_point].scan(/.{3}年度.+第.+號/).last
     start_point = content[0..end_point].index(start_word)
     content[start_point..end_point]
   end
