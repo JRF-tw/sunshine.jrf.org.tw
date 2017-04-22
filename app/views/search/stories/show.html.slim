@@ -1,6 +1,6 @@
 = render partial: 'components/hero', locals: {\
   type: 'searchs-index',
-  heading: @story.identity \
+  heading: @story.detail_info \
 }
 
 .offcanvas-card-wrapper
@@ -10,11 +10,10 @@
   }
     .user-info__content
       dl.list--user-info.story-info
-        = kv_cell "類別", @story.id
+        = kv_cell "類別", @story.story_type
         = kv_cell "年度", @story.year
         = kv_cell "字別", @story.word_type
         = kv_cell "案號", @story.number
-        = kv_cell "案件類別", @story.story_type
         = kv_cell "案由", @story.reason
         = kv_cell "判決日期", @story.adjudged_on
         = kv_cell "宣判日期", @story.pronounced_on

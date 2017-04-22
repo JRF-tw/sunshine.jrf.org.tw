@@ -5,6 +5,7 @@ class Search::SchedulesController < Search::BaseController
     if @story = context.perform
       @court = @story.court
       @schedules = @story.schedules.includes(:branch_judge).page(params[:page]).per(10)
+      set_meta(title: { story: @story.identity })
     else
       redirect_as_fail(search_stories_path, context.error_messages.join(','))
     end

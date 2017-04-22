@@ -1,4 +1,4 @@
-- schedule_title = @story ? "案件 #{@story.identity} " : ""
+- schedule_title = @story ? "#{@story.detail_info} " : ""
 
 = render partial: 'components/hero', locals: {\
   heading: "#{schedule_title}庭期列表",
