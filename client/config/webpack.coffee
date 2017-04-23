@@ -111,7 +111,6 @@ module.exports = (env) ->
 
     sassLoader:
       includePaths: [path_to.sass]
-    sassResources: ["#{path_to.sass}/_resource.scss"]
     postcss: [
       require("autoprefixer")(
         browsers: [
@@ -160,7 +159,6 @@ module.exports = (env) ->
             "postcss"
             "resolve-url"
             "sass?sourceMap"
-            "sass-resources"
           ]
         ,
           test: /\.css$/
@@ -186,7 +184,7 @@ module.exports = (env) ->
           test: /\.(sass|scss)$/
           include: path_to.sass
           loader: ExtractTextPlugin.extract "style",
-            "css!postcss!resolve-url!sass?sourceMap!sass-resources"
+            "css!postcss!resolve-url!sass?sourceMap"
         ,
           test: /\.css$/
           loader: ExtractTextPlugin.extract "style", "css"

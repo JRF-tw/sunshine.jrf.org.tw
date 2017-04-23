@@ -112,7 +112,7 @@ $star-size: 34px;
   position: relative;
 
   [type='radio'] {
-    @include Normalize();
+    @extend %Normalize;
     display: inline-block;
     height: $radio-height;
     flex: 1;

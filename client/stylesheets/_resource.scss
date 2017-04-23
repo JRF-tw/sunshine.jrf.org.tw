@@ -1,14 +1,18 @@
-// ---- vendor mixin libraries ----
-@import "mixins",
-        "classes",
-        "bourbon",
-        "~susy",
-        "~scut",
-        "~modularscale-sass/stylesheets/modular-scale",
-        "~sass-toolkit/stylesheets/toolkit";
-
-// ---- variables and config ----
-@import "settings/scale",
-        "settings/grid",
-        "settings/colors",
-        "settings/font";
+/**
+ *  ---- vendor mixin libraries ----
+ */
+@import "mixins";
+@import "bourbon";
+@import "~susy";
+@import "~scut";
+@import "~modularscale-sass/stylesheets/modular-scale";
+@import "~sass-toolkit/stylesheets/toolkit";
+@import "~css-vars/css-vars";
+/**
+ *  ---- variables and config ----
+ */
+@import "settings/scale";
+@import "settings/grid";
+@import "settings/colors";
+@import "settings/font";
+@import "classes";

@@ -1,50 +1,44 @@
-article
-  = render partial: 'components/hero', locals: {\
-    heading: '判決查詢',
-    description: '判決詳細資料'\
-  }
+- has_story = @verdict && @verdict.content_file.present?
+- card_size = has_story ? "has-story" : "narrow"
 
-section.container.offcanvas-card-wrapper
-  .card.card--article
+= render partial: 'components/hero', locals: {\
+  heading: '判決查詢',
+  type: "searchs-index"\
+}
+
+.offcanvas-card-wrapper.container
+  = render layout: "components/feature_card", locals: {\
+    heading: "判決資料", attributes: {class: card_size}}
     - if @verdict
-      = admin_widget_box '判決資料', icon: :th do
-        table.table.table-bordered.table-striped.table-hover
-          tbody
-            tr
-              td 案由
-              td = @verdict.reason
-            tr
-              td 案件
-              td = @story.identity
-            tr
-              td 法院
-              td = @court.full_name
-            tr
-              td 法院代號
-              td = @court.code
-            tr
-              td 案由
-              td = @verdict.reason
-            tr
-              td 判決日期
-              td = @verdict.adjudged_on
-            tr
-              td 相關法官
-              td = @verdict.judges_names.join(',')
-            tr
-              td 相關律師
-              td = @verdict.lawyer_names.join(',')  
-            tr
-              td 相關檢察官
-              td = @verdict.prosecutor_names.join(',')
-            tr
-              td 相關當事人
-              td = @verdict.party_names.join(',')
-            tr
-              td 司法院公開網址
-              td = link_to '請點我', @verdict.abs_url, target: '_blank' if @verdict.abs_url
-        h2 判決書內文
-        div = smart_add_https(@verdict.content_file.url) if @verdict.content_file.present?
+      .verdict-story class=card_size
+        .user-info__content
+          dl.list--user-info.story-info
+            = kv_cell '法院', @court.full_name
+            = kv_cell '案件', @story.identity
+            = kv_cell '判決日期', @verdict.adjudged_on
+            = kv_cell '案由', @verdict.reason
+            = kv_cell '相關法官',
+              @verdict.judges_names.join(','),
+              className: "divided-before"
+            = kv_cell '相關檢察官', @verdict.prosecutor_names.join(',')
+            = kv_cell '相關律師', @verdict.lawyer_names.join(',')  
+            = kv_cell '相關當事人', @verdict.party_names.join(',')
+            = kv_cell '判決網址',
+              (link_to '請點我', @verdict.original_url, target: '_blank' if @verdict.original_url),
+              className: "divided-before"
+            
+        - if has_story
+          article.verdict-story__content
+            h2.heading 判決書內文
+            
+            section.description.hidden data-story-inject=smart_add_https(@verdict.content_file.url)
+            
+            .loading = image_tag "loading.gif"
+        
     - else
       = @errors_message
-    = link_to "回到上一頁", request.referer.present? ? request.referer : search_stories_path
+  
+    .card__actions.text-center
+      = link_to "回上一頁",
+        request.referer.present? ? request.referer : search_stories_path,
+        class: "raised-button"

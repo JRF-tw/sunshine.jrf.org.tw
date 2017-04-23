@@ -1347,6 +1347,10 @@ css-selector-tokenizer@^0.6.0:
     fastparse "^1.1.1"
     regexpu-core "^1.0.0"
 
+css-vars@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/css-vars/-/css-vars-2.1.1.tgz#22d4f877897bb8cc034aaad0c38a9b6b1e60735b"
+
 css-what@1.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/css-what/-/css-what-1.0.0.tgz#d7cc2df45180666f99d2b14462639469e00f736c"

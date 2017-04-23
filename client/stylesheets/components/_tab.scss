@@ -9,7 +9,7 @@
   }
 }
 .section-tab__tab {
-  @include Normalize();
+  @extend %Normalize;
   padding: r(2) r(4);
   text: center ms(1) bold;
   border-bottom: 3px solid #fff;

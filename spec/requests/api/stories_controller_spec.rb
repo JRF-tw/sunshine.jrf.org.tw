@@ -17,10 +17,7 @@ RSpec.describe Api::StoriesController, type: :request do
         word: story.word_type,
         number: story.number
       },
-      court: {
-        name: story.court.full_name,
-        code: story.court.code
-      },
+      reason: story.reason,
       adjudged_on: story.adjudged_on,
       pronounced_on: story.pronounced_on,
       judges_names: story.judges_names,
@@ -30,12 +27,22 @@ RSpec.describe Api::StoriesController, type: :request do
     }
   end
 
+  def court_partial
+    {
+      court: {
+        name: story.court.full_name,
+        code: story.court.code
+      }
+    }
+  end
+
   describe '#index' do
 
     def index_json(stories)
       stories_array = []
       stories.each do |story|
-        stories_array << info_partial(story).merge(detail_link: api_story_url(story.court.code, story.identity, protocol: 'https'))
+        story = info_partial(story).merge(detail_url: api_story_url(story.court.code, story.identity, protocol: 'https')).merge(court_partial)
+        stories_array << story
       end
       { stories: stories_array }.deep_stringify_keys
     end
@@ -97,7 +104,7 @@ RSpec.describe Api::StoriesController, type: :request do
     end
 
     def show_json
-      { story: info_partial(story).merge(association_url) }.deep_stringify_keys
+      { story: info_partial(story).merge(court_partial).merge(association_url) }.deep_stringify_keys
     end
 
     context 'success' do

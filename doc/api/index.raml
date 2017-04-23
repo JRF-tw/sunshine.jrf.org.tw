@@ -1,0 +1,121 @@
+#%RAML 1.0
+title: Jrf search API
+baseUri: https://api.jrf.org.tw
+version: 0.1
+protocols: HTTPS
+documentation:
+ - title: Home
+   content: |
+    API 說明.......
+types: !include types.raml
+
+/{court_code}/{story_identity}:
+  description: Retrieve a specific story
+  uriParameters:
+    court_code:
+      description: 法院代號
+      type: string
+      pattern: \w{3}
+      example: TPH
+    story_identity:
+      description: 案件識別碼 {story_type}-{story_year}-{story_word}-{story_number}
+      type: string
+      pattern: .*-\d{2,3}-.+-\d+
+      example: 民事-105-重上-608
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            properties:
+              story: story_show
+      404:
+        body:
+          application/json:
+            properties:
+              message: fail_messages
+  /verdict:
+    get:
+      description: Retrieve a specific verdict of story
+      responses:
+        200:
+          body:
+            application/json:
+              properties:
+                verdict: Verdict
+        404:
+          body:
+            application/json:
+              properties:
+                message: fail_messages
+  /schedules:
+    get:
+      description: Retrieve a schedules list of story
+      responses:
+        200:
+          body:
+            application/json:
+              properties:
+                schedules?: Schedule[]
+        404:
+          body:
+            application/json:
+              properties:
+                message: fail_messages
+/search:
+  /stories:
+    get:
+      description: Get a list of stories based on given condition
+      queryParameters:
+        page: 
+          description: Specify the page that you want to retrieve
+          type:        integer
+          required:    false
+          example:     1
+        q[story_type]?: 
+          description: 案件類別
+          type: string
+          example: 民事
+        q[year]?:
+          description: 案件年份 民國年
+          type: number
+          example: 105
+        q[word]?:
+          description: 案件字別
+          type: string
+          example: 重上
+        q[number]?:
+          description: 案件案號
+          type: number
+          example: 608
+        q[lawyer_names_cont]?:
+          description: 相關律師姓名包含
+          type: string
+          example: 謝
+        q[judges_names_cont]?:
+          description: 相關法官姓名包含
+          type: string
+          example: 張靜
+        q[adjudged_on_gteq]?:
+          description: 判決日期晚於
+          type: string
+          example: 2009-12-01
+        q[adjudged_on_lteq]?:
+          description: 判決日期早於
+          type: string
+          example: 2017-04-20
+      responses:
+        200:
+          body:
+            application/json:
+              properties:
+                pagination: pagination_response
+                stories?: story_index[]
+        404:
+          body:
+            application/json:
+              properties:
+                message:
+                  description: 錯誤訊息
+                  type: string
+                  example: '尚未輸入查詢條件'

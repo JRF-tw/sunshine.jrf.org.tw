@@ -329,6 +329,7 @@ zh-TW:
         is_adjudged_eq: '是否有判決書'
         adjudged_on_eq: '宣判日期'
         adjudged_on_gteq: '宣判日期'
+        adjudged_on_lteq: '宣判日期結束時間'
         judges_names_cont: '法官名稱包含'
         lawyer_names_cont: '律師名稱包含'
         reason_cont: '案由包含'

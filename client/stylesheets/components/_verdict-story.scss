@@ -1,0 +1,49 @@
+.verdict-story {
+  display       : flex;
+  flex-direction: column;
+  @include susy($tablet) {
+    flex-direction: row;
+    align-items   : flex-start;
+
+    &:not(.narrow) {
+      padding: r(2);
+    }
+  }
+
+  .user-info__content {
+    width: 100%;
+    @include susy($tablet) {
+      max-width: 260px;
+    }
+  }
+
+  &.narrow .user-info__content {
+    width    : 100%;
+    max-width: none !important;
+  }
+}
+
+.verdict-story__content {
+  @include susy($tablet) {
+    flex        : 1 1 auto;
+    padding-left: r(4);
+  }
+
+  .heading {
+    font-size: ms(3);
+    @include susy($tablet) {
+      margin-top: 0;
+    }
+  }
+
+  .description {
+    word-break: break-all;
+  }
+
+  .loading {
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+    height         : 40vh;
+  }
+}

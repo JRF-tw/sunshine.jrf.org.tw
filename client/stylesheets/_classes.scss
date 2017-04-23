@@ -1,36 +1,38 @@
+%Hidden {
+  display   : none !important;
+  visibility: hidden;
+}
 @mixin Hidden {
-  display: none !important; visibility: hidden;
+  display   : none !important;
+  visibility: hidden;
 }
 
-@mixin Select {
-  appearance: none;
-  padding: 0 r(2) 0 0;
+%Select {
+  appearance   : none;
+  padding      : 0 r(2) 0 0;
   border-radius: 0;
-  border: none;
+  border       : none;
   border-bottom: 1px solid $divider-gray;
-  background: url("images/arrow-down.svg")
-              98% 50% / 8px 10px
-              no-repeat
-              transparent;
+  background   : url("images/arrow-down.svg") 98% 50% / 8px 10px no-repeat transparent;
+
   .no-css-appearance & {
     @include scut-padding(n 0);
     background-image: none;
   }
 }
 
-@mixin Normalize() {
+%Normalize {
   appearance: none;
-  border: none;
-  outline: none;
+  border    : none;
+  outline   : none;
   background: none transparent;
-  padding: 0;
+  padding   : 0;
 }
 
-@mixin Card() {
-  box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.12), 0px 8px 8px 0px rgba(0,0,0,0.24);
+%Card {
+  box-shadow   : 0 0 8px 0 rgba(0,0,0,0.12), 0 8px 8px 0 rgba(0,0,0,0.24);
   border-radius: $global-radius;
 }
-
 @mixin Heading($breakpoint) {
   text: 400 center $white ms(4);
   @include susy-media($breakpoint) {

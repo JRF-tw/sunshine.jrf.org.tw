@@ -99,6 +99,11 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
 
         it { expect { subject }.to change { StoryRelation.count }.by(5) }
       end
+
+      context 'handle many lawyer pattern' do
+        let!(:content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/verdict_with_many_lawyer.text") }
+        it { expect(subject.lawyer_names).to eq(['李旦']) }
+      end
     end
 
     context '#calculate_schedule_scores' do
@@ -122,8 +127,8 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
       end
     end
 
-    context 'update abs_url' do
-      it { expect(subject.abs_url).to be_present }
+    context 'update original_url' do
+      it { expect(subject.original_url).to be_present }
     end
 
     xit '#send_after_verdict_noice, should be test in AfterVerdictNoticeContextSpec'

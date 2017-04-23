@@ -75,7 +75,7 @@ $mobile-search-bar-height: 195px;
 }
 %base-hero-carousel__nav {
   $size: r(6);
-  @include Normalize();
+  @extend %Normalize;
   @include scut-center-absolutely(n $size);
   z-index: index($layers, hero-content);
   color: $text-secondary-dark;
@@ -119,7 +119,7 @@ $mobile-search-bar-height: 195px;
   }
 }
 .base-hero-search__tab {
-  @include Normalize();
+  @extend %Normalize;
   padding: r(1) r(2);
   width: 50%;
   text: ms(1) 2 #fff;

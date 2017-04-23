@@ -1,19 +1,27 @@
 // {{Container -----}}
+
 .container {
   @include container();
-  @include susy($tablet) { @include container();}
-  @include susy($desktop) { @include container(); }
+  @include susy($tablet) {
+     @include container();
+  }
+  @include susy($desktop) {
+     @include container();
+  }
 }
 
 .container--wide {
   @include container();
   max-width: none;
-  padding: n() r(2);
-  @include susy-media($footer-copy-twick) { padding: n() r(4); }
+  padding  : n() r(2);
+  @include susy-media($footer-copy-twick) {
+    padding: n() r(4);
+  }
 }
 
 .container--list {
-  @extend .container--wide;
-  max-width: container(7);
-  @include susy($desktop) { max-width: container(10); }
+  padding: n() r(2);
+  @include susy($tablet) {
+     @include container();
+  }
 }

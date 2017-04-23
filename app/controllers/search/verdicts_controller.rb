@@ -1,5 +1,4 @@
-class Search::VerdictsController < BaseController
-  before_action :http_auth_for_production
+class Search::VerdictsController < Search::BaseController
 
   def show
     context = Story::FindContext.new(params[:court_code], params[:id])
@@ -7,8 +6,9 @@ class Search::VerdictsController < BaseController
       @court = @story.court
       @verdict = @story.verdict
       @errors_message = '尚未有判決書' unless @verdict
+      set_meta(title: { story: @story.identity })
     else
-      @errors_message = context.error_messages.join(',')
+      redirect_as_fail(search_stories_path, context.error_messages.join(','))
     end
   end
 end

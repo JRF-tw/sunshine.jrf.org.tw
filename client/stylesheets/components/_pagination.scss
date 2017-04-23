@@ -1,70 +1,93 @@
-$size: r(5);
-$twick-point: ($size * 15 + r(7));
-$max: $size * 15 + r(8);
+$pagination-cell-size: r(5);
+$pagination-twick-point: ($pagination-cell-size * 15 + r(7));
+$pagination-max: $pagination-cell-size * 15 + r(8);
 
 .pagination {
-  display: flex;
+  display  : flex;
   flex-flow: row wrap;
-  justify-content: space-between;
-  margin: r(2) auto;
-  max-width: $max;
+  margin   : r(2) r(-1/4);
+  max-width: $pagination-max;
+  @include susy-media($pagination-twick-point) {
+    margin         : n() auto;
+    justify-content: center;
+  };
 }
+
 .pagination__cell {
-  display: flex;
-  order: 4;
-  margin-bottom: r(1);
-  text-align: center;
-  align-items: center;
+  display        : flex;
+  order          : 4;
+  margin         : n() r(1/4) r(1);
+  text-align     : center;
+  align-items    : center;
   justify-content: center;
-  size: $size;
-  font-weight: bold;
-  color: $text-secondary $text-disabled-dark;
-  border-radius: $global-radius;
-  box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.12),
-              0px 2px 2px 0px rgba(0,0,0,0.24);
-  transition: all .3s ease 0s;
-  &:hover { color: $text-primary $white; }
-  &.active { color: $text-secondary-dark $brown; }
+  size           : $pagination-cell-size;
+  font-weight    : bold;
+  color          : $text-secondary $text-disabled-dark;
+  border-radius  : $global-radius;
+  box-shadow     : 0 0 2px 0 rgba(0,0,0,0.12), 0 2px 2px 0 rgba(0,0,0,0.24);
+  transition     : all .3s ease 0s;
+
+  &:hover {
+    color: $text-primary $white;
+  }
+
+  &.active {
+    color: $text-secondary-dark $brown;
+  }
+
   &.disabled {
-    opacity: .3;
+    opacity       : .3;
     pointer-events: none;
   }
 
   &--gap {
     display: none;
-    @include susy-media($twick-point) {
-      display: flex;
-      cursor: normal;
+    @include susy-media($pagination-twick-point) {
+      display       : flex;
+      cursor        : normal;
       pointer-events: none;
     }
   }
-
-  &--first {
-    order: 0;
-    width: calc(25% - #{r(1)/2});
-    .icon { transform: rotate(180deg); }
-  }
-  &--prev {
-    order: 1;
-    width: calc(25% - #{r(1)/2});
-    .icon { transform: rotate(180deg); }    
-  }
-  &--next {
-    order: 2;
-    width: calc(25% - #{r(1)/2});
-  }
-  &--last {
-    order: 3;
-    width: calc(25% - #{r(1)/2});
-  }
-
-  @include susy-media($twick-point) {
+  @include susy-media($pagination-twick-point) {
     order: 0 !important;
-    width: $size !important;
+    width: $pagination-cell-size !important;
   }
 
   .icon {
     size: r(2);
     fill: currentColor;
   }
+}
+
+%pagination__cell--ctrl {
+  margin: n() r(1)/4;
+  width : calc(25% - #{r(1)/2});
+}
+
+.pagination__cell--first {
+  @extend %pagination__cell--ctrl;
+  order: 0;
+
+  .icon {
+    transform: rotate(180deg);
+  }
+}
+
+.pagination__cell--prev {
+  @extend %pagination__cell--ctrl;
+  order: 1;
+
+  .icon {
+    transform: rotate(180deg);
+  }
+}
+
+.pagination__cell--next {
+  @extend %pagination__cell--ctrl;
+  order: 2;
+}
+
+.pagination__cell--last {
+  @extend %pagination__cell--ctrl;
+  order: 3;
 }

@@ -9,6 +9,7 @@ class Scrap::UploadRefereeContext < BaseContext
   def initialize(orginal_data)
     @orginal_data = orginal_data
     @data = Nokogiri::HTML(@orginal_data)
+    @content = @data.css('pre').text
     @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
     @content_file_data = {}
   end
@@ -29,8 +30,8 @@ class Scrap::UploadRefereeContext < BaseContext
   private
 
   def build_content_json
-    start_point = @data.css('pre').text.index('上列')
-    @content_file_data['related_roles'] = parse_roles_hash(@referee, @data.text, @crawler_history)
+    start_point = get_content_start_point(@content)
+    @content_file_data['related_roles'] = parse_roles_hash(@referee, @content, @crawler_history)
     @content_file_data['main_content'] = @data.css('pre').text[start_point..-1]
   end
 

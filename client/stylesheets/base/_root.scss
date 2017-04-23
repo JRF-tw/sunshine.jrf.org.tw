@@ -60,4 +60,4 @@ img[data-sizes="auto"]:not(.slick-slide) {
 .text-right {text-align: right;}
 
 // Hide from both screenreaders and browsers: h5bp.com/u
-.hidden { @include Hidden; }
+.hidden { @extend %Hidden; }

@@ -11,13 +11,13 @@ require 'slick-carousel'
 
 # Require Custom Modules
 # Modal = require "./modules/modal"
-{Toggle, Dismiss} = require './modules/toggle'
-{TextInput}       = require './modules/form'
-StoryCollapse     = require './modules/stories'
-Rules             = require './modules/rules'
-ToTop             = require './modules/to_top'
-Tab               = require './modules/tab'
-Arrow             = require './modules/arrow'
+{ Collapse, StoryInjection } = require './modules/stories'
+{ Toggle, Dismiss } = require './modules/toggle'
+{ TextInput }       = require './modules/form'
+Rules               = require './modules/rules'
+ToTop               = require './modules/to_top'
+Tab                 = require './modules/tab'
+Arrow               = require './modules/arrow'
 
 # Require entry modules
 # EX:
@@ -31,7 +31,8 @@ Turbolinks.enableProgressBar()
 Turbolinks.enableTransitionCache()
 
 new TextInput()
-new StoryCollapse '#story-collapse-toggle'
+new StoryInjection '[data-story-inject]'
+new Collapse '#story-collapse-toggle'
 new Tab '[data-tab-content]'
 new Rules()
 

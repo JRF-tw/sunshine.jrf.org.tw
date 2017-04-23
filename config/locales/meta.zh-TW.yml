@@ -76,6 +76,25 @@ zh-TW:
         title: '%{name}的相關新聞紀錄'
         description: '%{name}的新聞相關清單。'
         keywords: '%{name}相關新聞,%{name}'
+    search/stories:
+      index:
+        title: '案件搜尋'
+        description: '案件搜尋'
+        keywords: '案件, 搜尋'
+      show:
+        title: '%{story} 案件'
+        description: '案件詳細資料'
+        keywords: '案件, 搜尋'
+    search/schedules:
+      show:
+        title: '%{story} 庭期列表'
+        description: '案件詳細資料'
+        keywords: '庭期'
+    search/verdicts:
+      show:
+        title: '%{story} 判決書'
+        description: '判決詳細資料'
+        keywords: '判決'
     searchs:
       index:
         title: '我想找'

@@ -58,8 +58,7 @@ RSpec.describe Parties::PhonesController, type: :request do
 
     context 'fail' do
       subject! { put '/party/phone/verifing', verify_form: { phone_varify_code: '1234' } }
-      it { expect(response).to be_success }
-      it { expect(response.body).to match('1234') }
+      it { expect(response).to redirect_to('/party/phone/verify') }
     end
 
     context '3 errors reset phone data' do

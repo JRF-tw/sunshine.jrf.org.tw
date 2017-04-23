@@ -14,7 +14,8 @@ RSpec.describe Search::SchedulesController, type: :request do
     context 'story not exist' do
       let(:url) { URI.encode("/search/#{code}/#{story.identity + '1'}/schedules") }
       before { get url }
-      it { expect(response.body).to match('案件不存在') }
+      it { expect(response).to redirect_to('/search') }
+      it { expect(flash[:error]).to eq('案件不存在') }
     end
 
     context 'schedule not exist' do
