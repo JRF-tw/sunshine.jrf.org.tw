@@ -14,8 +14,8 @@ module Scrap::RefereeCommonStepConcern
   end
 
   def after_perform_common_step
-    update_data_to_story
     upload_file
+    update_data_to_story
     record_count_to_daily_notify
     alert_new_story_type
   end
