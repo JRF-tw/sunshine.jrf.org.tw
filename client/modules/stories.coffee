@@ -1,3 +1,17 @@
+class StoryInjection
+  constructor: (@query) ->
+    $(document).on "ready page:load", =>
+      $container = $(@query)
+      
+      $.getJSON $container.data("story-inject"), (res) =>
+        filteredContent = res.main_content.replace /\r\n/g, "<br>"
+
+        $container
+        .html filteredContent
+        .removeClass "hidden"
+        .next ".loading"
+        .remove()
+
 class Collapse
   constructor: (@query) ->
     $(document).on 'page:change', =>
@@ -10,4 +24,6 @@ class Collapse
       @toggle_wrapper.toggleClass 'extracted'
       @toggle_target.slideToggle 300
 
-module.exports = Collapse
+module.exports =
+  Collapse: Collapse
+  StoryInjection: StoryInjection

@@ -1,67 +1,105 @@
 .user-info {
-  position: relative;
+  position     : relative;
   margin-bottom: r(2);
-  @include susy($tablet) { width: span(5 of 10); }
+  @include susy($tablet) {
+    width: span(5 of 10);
+  }
 }
-.user-info__title { margin-top: 0; }
-.user-info__action { position: absolute 2px 0 n() n(); }
+
+.user-info__title {
+  margin-top: 0;
+}
+
+.user-info__action {
+  position: absolute 2px 0 n() n();
+}
+
 .user-info__content {
-  padding: 0 r(2);
+  padding   : 0 r(2);
   background: rgba(0,0,0,.01);
-  border: 1px solid #F2F2F2;
-  clear: fix;
+  border    : 1px solid #F2F2F2;
+  clear     : fix;
 }
 
 .user-info-wrapper {
   @include susy($tablet) {
-    display: flex;
-    flex-flow: row wrap;
+    display        : flex;
+    flex-flow      : row wrap;
     justify-content: space-between;
   }
 }
 
 .list--user-info {
-  $dt-width: r(10);
-  @include scut-key-val('', 0, ($dt-width + r(1)), r(2));
+  $dt-width      : r(10);
+  $gap           : r(1.5);
+  display        : flex;
+  flex-wrap      : wrap;
+  justify-content: space-between;
+  margin-bottom  : 0;
 
   .term {
-    width: $dt-width;
-    color: $text-secondary;
+    padding-bottom: $gap;
+    width         : $dt-width;
+    color         : $text-secondary;
   }
-  .desc:empty { height: round($base-font-size * 1.5); }
+
+  .desc {
+    margin: 0;
+    flex  : 1 1 auto;
+    width : calc(100% - #{$dt-width});
+  }
+
+  &.story-info {
+    $dt-width: r(12);
+
+    .term {
+      width: $dt-width;
+    }
+
+    .desc {
+      width: calc(100% - #{$dt-width});
+    }
+
+    .divided-before {
+      padding-top: $gap;
+      border-top : 1px solid $divider-gray;
+    }
+  }
 }
 
 .user-info-actions {
   padding-top: r(1);
-  position: relative;
+  position   : relative;
   @include susy($tablet) {
-    display: flex;
+    display        : flex;
     justify-content: space-between;
-    align-items: flex-end;
-    padding-top: r(5);
+    align-items    : flex-end;
+    padding-top    : r(5);
   }
-  
+
   .between {
-    display: flex;
+    display        : flex;
     justify-content: space-between;
     @include susy($tablet) {
-      order: 2;
+      order      : 2;
       margin-left: auto;
 
-      .raised-button { margin-left: r(2); }
+      .raised-button {
+        margin-left: r(2);
+      }
     }
   }
 
   .offcanvas {
-    width: r(20);
+    width : r(20);
     bottom: r(-9);
     @include scut-center-transform(x);
     @include susy($tablet) {
-      order: 1;
+      order      : 1;
       margin-left: 0;
-      width: auto;
-      transform: none;
-      position: static;
+      width      : auto;
+      transform  : none;
+      position   : static;
     }
   }
 }

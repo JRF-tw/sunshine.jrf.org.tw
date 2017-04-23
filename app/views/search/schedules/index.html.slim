@@ -1,37 +1,42 @@
-article
-  = render partial: 'components/hero', locals: {\
-    heading: '庭期查詢',
-    description: "庭期列表"\
-  } 
+- schedule_title = @story ? "#{@story.detail_info} " : ""
 
-section.container.offcanvas-card-wrapper
-  .card.card--artic
+= render partial: 'components/hero', locals: {\
+  heading: "#{schedule_title}庭期列表",
+  type: 'searchs-index'\
+} 
+
+.search-result--card
+  .container--list
     - if @schedules
-      = admin_widget_box "案件 #{@story.identity} 庭期列表 : 共 #{@story.schedules.count} 筆", icon: :pencil do
-        .dataTables_wrapper
-          table.table.table-bordered.table-striped.table-hover
-            thead
-              tr
-                th 案件
-                th 法院
-                th 法院代號
-                th 股別名稱
-                th 股別法官
-                th 法庭
-                th 開庭時間
-            tbody
-              - @schedules.each do |schedule|
-                tr
-                  td = @story.identity
-                  td = @court.full_name
-                  td = @court.code
-                  td = schedule.branch_name
-                  td = schedule.branch_judge.try(:name)
-                  td = schedule.courtroom
-                  td = schedule.start_at.try(:to_s)
-
-          .ui-toolbar.ui-widget-header
-            = paginate @schedules, theme: :www
-    - else 
+      table.search-result__table
+        thead
+          tr
+            th 案件
+            th 法院
+            th 法院代號
+            th 股別名稱
+            th 股別法官
+            th 法庭
+            th 開庭時間
+        tbody
+          - @schedules.each do |schedule|
+            tr
+              td = @story.identity
+              td = @court.full_name
+              td = @court.code
+              td = schedule.branch_name
+              td = schedule.branch_judge.try(:name)
+              td = schedule.courtroom
+              td = schedule.start_at.try(:to_s)
+              
+      p.search-result__total = "共 #{@story.schedules.count} 筆"
+                
+      = paginate @schedules, theme: :www
+      
+    - else
       = @errors_message
-    = link_to "回到上一頁", request.referer.present? ? request.referer : search_stories_path
+      
+    .card__actions.text-center
+      = link_to "回上一頁",
+        request.referer.present? ? request.referer : search_stories_path,
+        class: "raised-button--large"

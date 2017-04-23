@@ -1,19 +1,25 @@
 ruby:
-  static = static || false
-  type = if static
+  heading ||= ""
+  description ||= ""
+  static ||= false
+  type =
+    if type
+      type
+    elsif static
       "base-about"
     else
       "#{controller.controller_name}-#{controller.action_name}"
     end
   m_size_path = path_to_image "hero-#{type}-M.png"
   l_size_path = path_to_image "hero-#{type}-L.png"
-  description = description || ""
-
+  
 .billboard[
   class="billboard--#{type} billboard--classic lazyload"
   data-bgset="#{m_size_path} 1000w, #{l_size_path} 2000w"
   data-sizes="auto"
 ]
+  = render 'components/alert'
+  
   h2.billboard__heading = heading
   
   .text-center

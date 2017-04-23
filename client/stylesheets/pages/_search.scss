@@ -1,0 +1,40 @@
+.search-result {
+  margin          : r(-2) n() 7px;
+  padding-bottom  : r(8.5);
+  background-color: $white;
+
+  .container--list {
+    @include susy-media(container(7)) {
+      $offset      : -37px;
+      margin-bottom: $offset;
+      position     : relative $offset n n n;
+    }
+  }
+}
+
+.search-result--card {
+  margin-top: r(-6.5) - 1px;
+
+  .container--list {
+    @extend %Card;
+    padding-bottom  : r(4);
+    background-color: $white;
+  }
+}
+
+.search-result__table {
+  @extend %table;
+  margin    : n() r(-2);
+  width     : calc(100% + #{r(4)});
+  text-align: center;
+
+  td,
+  th {
+    padding: r(1);
+  }
+}
+
+.search-result__total {
+  margin    : r(4) auto;
+  text-align: center;
+}

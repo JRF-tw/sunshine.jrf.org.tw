@@ -1,60 +1,62 @@
-article
-  = render partial: 'components/hero', locals: {\
-    heading: '案件查詢',
-    description: '來查查看案件吧'\
-  }   
+= render partial: 'components/hero', locals: {\
+  heading: '案件搜尋',
+  description: '來查查看案件吧',
+  type: 'searchs-index'\
+}   
+
+= render 'list'
+  
 section.container.offcanvas-card-wrapper
-  .card.card--article
-    = search_form_for @search, url: search_stories_path, :wrapper => :admin, html: { class: 'form-horizontal' } do |f|
-      .well
-        fieldset
-          legend 搜尋
-          .row
-            .span6
-              .control-group
-                = f.label :reason_cont
-                = f.search_field :reason_cont
-            .span6
-              .control-group
-                = f.label :court_full_name_eq
-                .controls.select2 = f.collection_select :court_id_in, Court.all, :id, :full_name, {}, { multiple: true , data: { placeholder: "全部法院" } }
-          .row
-            .span6
-              .control-group
-                = f.label :story_type_eq
-                .controls.select2 = f.select :story_type_eq,
-                collect_for_story_types, include_blank: "請選擇"
-            .span6
-              .control-group
-                = f.label :year_eq
-                = f.search_field :year_eq
-          .row
-            .span6
-              .control-group
-                = f.label :word_type_cont
-                = f.search_field :word_type_cont
-            .span6
-              .control-group
-                = f.label :number_eq
-                = f.search_field :number_eq
-          .row
-            .span6
-              .control-group#datepicker
-                = f.label :adjudged_on_gteq
-                .controls= f.search_field :adjudged_on_gteq, placeholder: "啟始時間"
-                .controls = f.search_field :adjudged_on_lteq, placeholder:"結束時間"
-          .row
-            .span6
-              .control-group
-                = f.label :judges_names_cont
-                = f.search_field :judges_names_cont
-            .span6
-              .control-group
-                = f.label :lawyer_names_cont
-                = f.search_field :lawyer_names_cont
-        hr
-        .form-actions
-          = f.submit value: '搜尋', class: 'btn btn-primary'
-          = ' '
-          = link_to '清空搜尋結果', search_stories_path, class: 'btn btn-default'
-    = render 'list' if @stories
+  .card.card--2-columns-form
+    = search_form_for @search, url: search_stories_path, wrapper: :md do |f|
+      .form-wrapper
+        .form-group
+          = f.search_field :verdict_reason_cont, class: "form-control"
+          = f.label :reason_cont, class: "control-label"
+
+        .form-group
+          = f.collection_select :court_id_in, Court.all, :id, :full_name, {},
+      		  { multiple: true , data: { placeholder: "全部法院" }, class: "form-control" }
+          = f.label :court_full_name_eq, class: "control-label"
+          
+        .form-group
+          = f.select :story_type_eq,
+            collect_for_story_types,
+            include_blank: "請選擇",
+            class: "form-control"
+          = f.label :story_type_eq, class: "control-label"
+        
+        .form-group
+          = f.search_field :year_eq, class: "form-control"
+          = f.label :year_eq, class: "control-label"
+            
+        .form-group
+          = f.search_field :word_type_cont, class: "form-control"
+          = f.label :word_type_cont, class: "control-label"
+          
+        .form-group
+          = f.search_field :number_eq, class: "form-control"
+          = f.label :number_eq, class: "control-label"
+          
+        .form-group
+          = f.search_field :adjudged_on_gteq, class: "datepicker form-control"
+          = f.label :adjudged_on_gteq, class: "control-label"
+          
+        .form-group
+          = f.search_field :adjudged_on_lteq, class: "datepicker form-control"
+          = f.label :adjudged_on_lteq, class: "control-label"
+          
+        .form-group
+          = f.search_field :judges_names_cont, class: "form-control"
+          = f.label :judges_names_cont, class: "control-label"
+          
+        .form-group
+          = f.search_field :lawyer_names_cont, class: "form-control"
+          = f.label :lawyer_names_cont, class: "control-label"
+          
+      .form-actions
+        .text-center
+          = f.submit value: "搜尋", class: "raised-button--large"
+          
+        .text-center
+          = link_to "清空搜尋結果", search_stories_path, class: "flat-button--large"

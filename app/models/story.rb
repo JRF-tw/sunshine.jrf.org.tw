@@ -60,7 +60,7 @@ class Story < ActiveRecord::Base
   end
 
   def detail_info
-    "#{court.full_name}#{year}年#{word_type}字第#{number}號"
+    "#{court.name}#{story_type}案件 #{year}年#{word_type}字第#{number}號"
   end
 
   def verdict_got_on

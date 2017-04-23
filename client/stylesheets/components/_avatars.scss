@@ -12,7 +12,7 @@
 }
 
 .card--avatar {
-  @include Card();
+  @extend %Card;
   display: flex;
   flex-direction: column;
   padding: r(1.5) r(2) 0;
