@@ -45,6 +45,10 @@ RSpec.describe Scrap::ImportRuleContext, type: :model do
         it { expect(subject.party_names).to eq(subject.story.party_names) }
         it { expect(subject.lawyer_names).to eq(subject.story.lawyer_names) }
       end
+
+      context 'update story reason' do
+        it { expect(subject.story.reason).to be_present }
+      end
     end
 
     context '#alert_new_story_type' do

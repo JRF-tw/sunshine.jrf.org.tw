@@ -52,6 +52,10 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
       context 'sync is adjudge to story' do
         it { expect(subject.story.is_adjudged).to be_truthy }
       end
+
+      context 'update story reason' do
+        it { expect(subject.story.reason).to be_present }
+      end
     end
 
     context 'update adjudge date' do
