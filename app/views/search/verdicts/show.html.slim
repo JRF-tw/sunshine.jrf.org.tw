@@ -13,15 +13,15 @@
       .verdict-story class=card_size
         .user-info__content
           dl.list--user-info.story-info
-            = kv_cell '法院', link_to_search_story(court: @court)
+            = kv_cell '法院', (link_to @court.full_name, url_for_search_story(court: @court))
             = kv_cell '案件', @story.identity
             = kv_cell '判決日期', @verdict.adjudged_on
             = kv_cell '案由', @verdict.reason
             = kv_cell '相關法官',
-              @verdict.judges_names.map { |j| link_to_search_story(judge_name: j) }.join(' ').html_safe,
+              @verdict.judges_names.map { |j| link_to j, url_for_search_story(judge_name: j) }.join(' ').html_safe,
               className: "divided-before"
             = kv_cell '相關檢察官', @verdict.prosecutor_names.join(',')
-            = kv_cell '相關律師', @verdict.lawyer_names.map { |l| link_to_search_story(lawyer_name: l) }.join(' ').html_safe
+            = kv_cell '相關律師', @verdict.lawyer_names.map { |l| link_to l, url_for_search_story(lawyer_name: l) }.join(' ').html_safe
             = kv_cell '相關當事人', @verdict.party_names.join(',')
             = kv_cell '判決網址',
               (link_to '請點我', @verdict.original_url, target: '_blank' if @verdict.original_url),

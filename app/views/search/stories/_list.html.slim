@@ -17,15 +17,15 @@
         tbody
           - @stories.each do |story|
             tr
-              td = link_to_search_story(court: story.court)
+              td = link_to story.court.full_name, url_for_search_story(court: story.court)
               td = story.story_type
               td = story.year
               td = story.word_type
               td = story.year.to_s + story.word_type + story.number.to_s
               td = story.adjudged_on
               td = story.reason
-              td = story.judges_names.map { |j| link_to_search_story(judge_name: j) }.join(' ').html_safe
-              td = story.lawyer_names.map { |l| link_to_search_story(lawyer_name: l) }.join(' ').html_safe
+              td = story.judges_names.map { |j| link_to j, url_for_search_story(judge_name: j) }.join(' ').html_safe
+              td = story.lawyer_names.map { |l| link_to l, url_for_search_story(lawyer_name: l) }.join(' ').html_safe
               td
                 = link_to "詳細資料", search_story_path(story.court.code, story.identity), class: "btn btn-mini"
                 
