@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170418083606) do
+ActiveRecord::Schema.define(version: 20170424041514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -644,6 +644,7 @@ ActiveRecord::Schema.define(version: 20170418083606) do
     t.boolean  "is_pronounced",    default: false
     t.boolean  "is_calculated",    default: false
     t.string   "reason"
+    t.integer  "schedules_count",  default: 0
   end
 
   add_index "stories", ["adjudged_on"], name: "index_stories_on_adjudged_on", using: :btree

@@ -13,52 +13,54 @@ section.container.offcanvas-card-wrapper
     = search_form_for @search, url: search_stories_path, wrapper: :md do |f|
       .form-wrapper
         .form-group
-          = f.search_field :reason_cont, class: "form-control"
-          = f.label :reason_cont, class: "control-label"
-
+          = f.search_field :reason_cont, class: 'form-control'
+          = f.label :reason_cont, class: 'control-label'
         .form-group
           = f.collection_select :court_id_in, Court.all, :id, :full_name, {},
-      		  { multiple: true , data: { placeholder: "全部法院" }, class: "form-control" }
-          = f.label :court_full_name_eq, class: "control-label"
+      		  { multiple: true , data: { placeholder: '全部法院' }, class: 'form-control' }
+          = f.label :court_full_name_eq, class: 'control-label'
           
         .form-group
           = f.select :story_type_eq,
             collect_for_story_types,
-            include_blank: "請選擇",
-            class: "form-control"
-          = f.label :story_type_eq, class: "control-label"
+            include_blank: '請選擇',
+            class: 'form-control'
+          = f.label :story_type_eq, class: 'control-label'
         
         .form-group
-          = f.search_field :year_eq, class: "form-control"
-          = f.label :year_eq, class: "control-label"
+          = f.search_field :year_eq, class: 'form-control'
+          = f.label :year_eq, class: 'control-label'
             
         .form-group
-          = f.search_field :word_type_cont, class: "form-control"
-          = f.label :word_type_cont, class: "control-label"
+          = f.search_field :word_type_cont, class: 'form-control'
+          = f.label :word_type_cont, class: 'control-label'
           
         .form-group
-          = f.search_field :number_eq, class: "form-control"
-          = f.label :number_eq, class: "control-label"
+          = f.search_field :number_eq, class: 'form-control'
+          = f.label :number_eq, class: 'control-label'
           
         .form-group
-          = f.search_field :adjudged_on_gteq, class: "datepicker form-control"
-          = f.label :adjudged_on_gteq, class: "control-label"
+          = f.search_field :adjudged_on_gteq, class: 'datepicker form-control'
+          = f.label :adjudged_on_gteq, class: 'control-label'
           
         .form-group
-          = f.search_field :adjudged_on_lteq, class: "datepicker form-control"
-          = f.label :adjudged_on_lteq, class: "control-label"
+          = f.search_field :adjudged_on_lteq, class: 'datepicker form-control'
+          = f.label :adjudged_on_lteq, class: 'control-label'
           
         .form-group
-          = f.search_field :judges_names_cont, class: "form-control"
-          = f.label :judges_names_cont, class: "control-label"
+          = f.search_field :judges_names_cont, class: 'form-control'
+          = f.label :judges_names_cont, class: 'control-label'
           
         .form-group
-          = f.search_field :lawyer_names_cont, class: "form-control"
-          = f.label :lawyer_names_cont, class: "control-label"
+          = f.search_field :lawyer_names_cont, class: 'form-control'
+          = f.label :lawyer_names_cont, class: 'control-label'
+        .form-group
+          = f.search_field :schedules_count_gteq, class: 'form-control'
+          = f.label :schedules_count_gteq, class: 'control-label'
           
       .form-actions
         .text-center
-          = f.submit value: "搜尋", class: "raised-button--large"
+          = f.submit value: '搜尋', class: 'raised-button--large'
           
         .text-center
-          = link_to "清空搜尋結果", search_stories_path, class: "flat-button--large"
+          = link_to '清空搜尋結果', search_stories_path, class: 'flat-button--large'

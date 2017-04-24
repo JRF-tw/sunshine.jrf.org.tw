@@ -20,6 +20,7 @@
 #  is_pronounced    :boolean          default(FALSE)
 #  is_calculated    :boolean          default(FALSE)
 #  reason           :string
+#  schedules_count  :integer          default(0)
 #
 
 class Story < ActiveRecord::Base
@@ -68,6 +69,11 @@ class Story < ActiveRecord::Base
     if verdict && verdict.created_at
       verdict.created_at.to_date
     end
+  end
+
+  def schedules_count_result
+    return '暫無' if schedules_count == 0
+    schedules_count
   end
 
   class << self

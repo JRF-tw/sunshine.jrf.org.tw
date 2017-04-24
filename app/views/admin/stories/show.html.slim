@@ -1,5 +1,5 @@
 - content_for :btns do
-  = link_to "庭期列表", admin_schedules_path(q: { "story_id_eq" => @story.id } ), class: "btn btn-large"
+  = link_to '庭期列表', admin_schedules_path(q: { 'story_id_eq' => @story.id } ), class: 'btn btn-large'
 
 = admin_widget_box "#{@story.identity}資料", icon: :th do
   table.table.table-bordered.table-striped.table-hover
@@ -66,6 +66,9 @@
         td 是否有判決書
         td
           = link_to '是', admin_verdict_path(@story.verdict) if @story.verdict
+      tr
+        td 開庭次數
+        td = @story.schedules_count_result
       tr
         td 新增日期
         td = @story.created_at

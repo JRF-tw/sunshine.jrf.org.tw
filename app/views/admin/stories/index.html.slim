@@ -1,4 +1,4 @@
-= search_form_for @search, :url => admin_stories_path, :wrapper => :admin, :html => { :class => "form-horizontal" } do |f|
+= search_form_for @search, :url => admin_stories_path, :wrapper => :admin, :html => { :class => 'form-horizontal' } do |f|
   .well
     fieldset
       legend 搜尋
@@ -7,18 +7,18 @@
           .control-group
             label.control-label = f.label :is_pronounced_eq
             .controls.select2 = f.select :is_pronounced_eq,
-            collect_for_boolean, include_blank: "請選擇"
+            collect_for_boolean, include_blank: '請選擇'
         .span6
           .control-group
             label.control-label = f.label :is_adjudged_eq
             .controls.select2 = f.select :is_adjudged_eq,
-            collect_for_boolean, include_blank: "請選擇"
+            collect_for_boolean, include_blank: '請選擇'
       .row
         .span6
           .control-group
             label.control-label = f.label :court_full_name_eq
             .controls.select2 = f.select :court_id_eq,
-            collect_for_courts, include_blank: "請選擇"
+            collect_for_courts, include_blank: '請選擇'
         .span6
           .control-group#datepicker
             label.control-label = f.label :adjudged_on_eq
@@ -42,19 +42,22 @@
           .control-group
             label.control-label = f.label :story_type_eq
             .controls.select2 = f.select :story_type_eq,
-            collect_for_story_types, include_blank: "請選擇"
+            collect_for_story_types, include_blank: '請選擇'
       .row
         .span6
           .control-group
             label.control-label = f.label :reason_cont
             .controls = f.search_field :reason_cont
+          .control-group
+            label.control-label = f.label :schedules_count_gteq
+            .controls.select2 = f.search_field :schedules_count_gteq
           
 
     hr
     .form-actions
-      = f.submit :value => "搜尋", :class => "btn btn-primary"
-      = " "
-      = link_to "清空搜尋結果", admin_stories_path, :class => "btn btn-default"
+      = f.submit :value => '搜尋', :class => 'btn btn-primary'
+      = ' '
+      = link_to '清空搜尋結果', admin_stories_path, :class => 'btn btn-default'
 = admin_widget_box "案件列表 : 搜尋結果為 #{@stories.total_count} 筆", icon: :pencil do
   .dataTables_wrapper
     table.table.table-bordered.table-striped.table-hover
@@ -69,6 +72,7 @@
           th = sort_link(@search, :reason, '案由')
           th = sort_link(@search, :is_pronounced, '是否已宣判')
           th = sort_link(@search, :is_adjudged, '是否已判決')
+          th = sort_link(@search, :schedules_count, '開庭次數')
           th 操作
       tbody
         - @stories.each do |story|
@@ -80,16 +84,17 @@
             td = story.number
             td = story.story_type
             td = story.reason
-            td = story.is_pronounced ? "已宣判" : "尚未宣判"
+            td = story.is_pronounced ? '已宣判' : '尚未宣判'
             td
               - if story.is_adjudged
-                = link_to "已判決", admin_verdict_path(story.verdict) 
+                = link_to '已判決', admin_verdict_path(story.verdict) 
               - else
                 = '尚未宣判'
+            td = story.schedules_count_result
             td
-              = link_to "詳細資料", admin_story_path(story), class: "btn btn-mini"
+              = link_to '詳細資料', admin_story_path(story), class: 'btn btn-mini'
               | &nbsp;
-              = link_to "庭期列表", admin_schedules_path(q: { "story_id_eq" => story.id } ), class: "btn btn-mini"
+              = link_to '庭期列表', admin_schedules_path(q: { 'story_id_eq' => story.id } ), class: 'btn btn-mini'
               | &nbsp;
     .ui-toolbar.ui-widget-header
       = paginate @stories, theme: :admin

@@ -13,21 +13,21 @@
             th 案由
             th 相關法官
             th 相關律師
+            th 開庭次數
             th 
         tbody
           - @stories.each do |story|
             tr
               td = link_to story.court.full_name, url_for_search_story(court: story.court)
               td = link_to story.story_type, url_for_search_story(story_type: story.story_type)
-              td = story.year
-              td = story.word_type
-              td = story.number
+              td = story.year.to_s + story.word_type + story.number.to_s
               td = link_to story.adjudged_on, url_for_search_story(adjudged_on: story.adjudged_on) if story.adjudged_on
               td = link_to story.reason, url_for_search_story(reason: story.reason) if story.reason
               td = story.judges_names.map { |j| link_to j, url_for_search_story(judge_name: j) }.join(' ').html_safe
               td = story.lawyer_names.map { |l| link_to l, url_for_search_story(lawyer_name: l) }.join(' ').html_safe
+              td = story.schedules_count_result
               td
-                = link_to "詳細資料", search_story_path(story.court.code, story.identity), class: "btn btn-mini"
+                = link_to '詳細資料', search_story_path(story.court.code, story.identity), class: 'btn btn-mini'
                 
       p.search-result__total = "共 #{@stories.total_count} 筆"
                 
