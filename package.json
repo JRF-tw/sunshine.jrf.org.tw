@@ -15,7 +15,7 @@
   "homepage": "https://github.com/5fpro/jrf-sunny#readme",
   "publicPath": "/assets/",
   "scripts": {
-    "start": "redis-server & F2E_DEV=true bundle exec rails s -b 0.0.0.0 & bundle exec guard -i & npm run dev-server",
+    "start": "redis-server & F2E_DEV=true bundle exec rails s -b 0.0.0.0 & npm run dev-server",
     "rails": "redis-server & bundle exec rails s & bundle exec guard -i",
     "console": "redis-server & bundle exec rails c",
     "check": "rubocop --auto-correct",
