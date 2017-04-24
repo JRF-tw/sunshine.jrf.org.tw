@@ -291,4 +291,8 @@ module ApplicationHelper
       "https://#{url}"
     end
   end
+
+  def url_for_search_story(court: nil, lawyer_name: nil, judge_name: nil)
+    search_stories_path(q: { court_id_in: [court.try(:id)], judges_names_cont: judge_name, lawyer_names_cont: lawyer_name })
+  end
 end

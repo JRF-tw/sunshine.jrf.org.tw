@@ -54,6 +54,9 @@
         td 司法院公開網址
         td = link_to '請點我', @verdict.original_url, target: '_blank' if @verdict.original_url
       tr
+        td 前台顯示頁面
+        td = link_to '請點我', search_verdict_path(@verdict.story.court.code, @verdict.story.identity), target: '_blank'
+      tr
         td 文件下載
         td = link_to '點我下載', download_file_admin_verdict_path(@verdict) if @verdict.file
       tr

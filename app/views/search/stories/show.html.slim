@@ -17,10 +17,10 @@
         = kv_cell "案由", @story.reason
         = kv_cell "判決日期", @story.adjudged_on
         = kv_cell "宣判日期", @story.pronounced_on
-        = kv_cell "法院全名", @story.court.full_name
+        = kv_cell "法院全名", (link_to @story.court.full_name, url_for_search_story(court: @story.court))
         = kv_cell "法院代碼", @story.court.code
-        = kv_cell "相關法官", @story.judges_names.join(',')
-        = kv_cell "相關律師", @story.lawyer_names.join(',')
+        = kv_cell "相關法官", @story.judges_names.map { |j| link_to j, url_for_search_story(judge_name: j) }.join(' ').html_safe
+        = kv_cell "相關律師", @story.lawyer_names.map { |l| link_to l, url_for_search_story(lawyer_name: l) }.join(' ').html_safe
         = kv_cell "相關檢察官", @story.prosecutor_names.join(',')
         = kv_cell "相關當事人", @story.party_names.join(',')
         
