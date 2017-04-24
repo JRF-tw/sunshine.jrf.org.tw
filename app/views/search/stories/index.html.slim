@@ -1,6 +1,8 @@
 = render partial: 'components/hero', locals: {\
   heading: '案件搜尋',
-  description: '來查查看案件吧',
+  description: "這裡可以搜尋司法陽光網自2016年1月1日以來所收集之判決書#{tag :br}\
+  如需要串接本網站 API，歡迎參考#{link_to ' API 開發人員說明文件', 'https://5fpro.github.io/raml-api-console/?raml=https://5fpro.github.io/jrf-sunny/api/index.raml', target: '_blank'}#{tag :br}\
+  本功能由#{link_to ' g0v grant ', 'https://grants.g0v.tw/', target: '_blank'}贊助部分開發費用",
   type: 'searchs-index'\
 }   
 
