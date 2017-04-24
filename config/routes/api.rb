@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :courts, only: [:index, :show]
     get "judges", to: "profiles#judges", as: :judges
     get "prosecutors", to: "profiles#prosecutors", as: :prosecutors
+    get '/' => redirect('https://5fpro.github.io/raml-api-console/?raml=https://5fpro.github.io/jrf-sunny/api/index.raml')
   end
 
   namespace :api, path: '' do
