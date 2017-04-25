@@ -13,7 +13,8 @@
   .user-info__content {
     width: 100%;
     @include susy($tablet) {
-      max-width: 260px;
+      flex-shrink: 0;
+      max-width  : 260px;
     }
   }
 
@@ -37,7 +38,7 @@
   }
 
   .description {
-    word-break: break-all;
+    white-space: pre-wrap;
   }
 
   .loading {
