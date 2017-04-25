@@ -41,6 +41,7 @@ class Story < ActiveRecord::Base
   serialize :prosecutor_names, Array
 
   scope :newest, -> { order('id DESC') }
+  scope :search_sort, -> { reorder('adjudged_on DESC NULLS LAST, created_at DESC') }
   scope :not_caculate, -> { where(is_calculated: false) }
 
   include Redis::Objects

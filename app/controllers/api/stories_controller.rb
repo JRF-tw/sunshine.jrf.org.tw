@@ -4,7 +4,7 @@ class Api::StoriesController < Api::BaseController
     context = Api::StoriesSearchContext.new(params[:q])
     @stories = context.perform
     return respond_error(context.error_messages.join(','), 404) unless @stories
-    @pagination_data, @stories = paginate(@stories, 'api_stories_url')
+    @pagination_data, @stories = paginate(@stories.search_sort, 'api_stories_url')
   end
 
   def show

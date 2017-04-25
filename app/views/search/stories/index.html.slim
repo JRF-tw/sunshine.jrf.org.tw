@@ -13,7 +13,7 @@ section.container.offcanvas-card-wrapper
     = search_form_for @search, url: search_stories_path, wrapper: :md do |f|
       .form-wrapper
         .form-group
-          = f.search_field :verdict_reason_cont, class: "form-control"
+          = f.search_field :reason_cont, class: "form-control"
           = f.label :reason_cont, class: "control-label"
 
         .form-group

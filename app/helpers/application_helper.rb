@@ -292,7 +292,7 @@ module ApplicationHelper
     end
   end
 
-  def url_for_search_story(court: nil, lawyer_name: nil, judge_name: nil)
-    search_stories_path(q: { court_id_in: [court.try(:id)], judges_names_cont: judge_name, lawyer_names_cont: lawyer_name })
+  def url_for_search_story(court: nil, lawyer_name: nil, judge_name: nil, story_type: nil, reason: nil, adjudged_on: nil)
+    search_stories_path(q: { court_id_in: [court.try(:id)], judges_names_cont: judge_name, lawyer_names_cont: lawyer_name, story_type_eq: story_type, reason_cont: reason, adjudged_on_gteq: adjudged_on, adjudged_on_lteq: adjudged_on })
   end
 end
