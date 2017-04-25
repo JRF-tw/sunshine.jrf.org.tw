@@ -6929,7 +6929,7 @@
 	        $container = $(_this.query);
 	        return $.getJSON($container.data("story-inject"), function(res) {
 	          var filteredContent;
-	          filteredContent = res.main_content.replace(/\r\n/g, "<br>");
+	          filteredContent = getReJDocString(res.main_content);
 	          return $container.html(filteredContent).removeClass("hidden").next(".loading").remove();
 	        });
 	      };
