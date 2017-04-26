@@ -2,9 +2,9 @@ class StoryInjection
   constructor: (@query) ->
     $(document).on "ready page:load", =>
       $container = $(@query)
-      
+
       $.getJSON $container.data("story-inject"), (res) =>
-        filteredContent = res.main_content.replace /\r\n/g, "<br>"
+        filteredContent = getReJDocString res.main_content
 
         $container
         .html filteredContent

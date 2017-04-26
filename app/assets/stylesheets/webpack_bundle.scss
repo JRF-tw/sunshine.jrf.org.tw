@@ -2582,12 +2582,6 @@ a:focus {
   margin-left: auto;
 }
 
-.card--feature.has-story {
-  max-width: 840px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
 .card--feature__heading {
   margin: 0 0 -24px;
   text-align: center;
@@ -4264,6 +4258,9 @@ abbr[title="required"] {
 
 @media (min-width: 768px) {
   .verdict-story .user-info__content {
+    -webkit-flex-shrink: 0;
+        -ms-flex-negative: 0;
+            flex-shrink: 0;
     max-width: 260px;
   }
 }
@@ -4294,7 +4291,7 @@ abbr[title="required"] {
 }
 
 .verdict-story__content .description {
-  word-break: break-all;
+  white-space: pre-wrap;
 }
 
 .verdict-story__content .loading {
