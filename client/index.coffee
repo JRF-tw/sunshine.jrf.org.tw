@@ -2,7 +2,7 @@
 require "stylesheets"
 
 # Require Modernizr
-require "modernizr"
+# import Modernizr from "modernizr"
 
 require 'waypoints/lib/jquery.waypoints'
 require 'webui-popover/dist/jquery.webui-popover.js'
