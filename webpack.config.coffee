@@ -22,7 +22,7 @@ common_config = (env) -> merge [
     alias:
       icons:      pathTo("icons")
       images:     pathTo("images")
-      modernizr$: path.resolve __dirname, "./.modernizrrc"
+      modernizr$: ".modernizrrc"
       masonry$:   "masonry-layout/dist/masonry.pkgd.js"
       isotope$:   "isotope-layout"
       gumshoe$:   "gumshoe/dist/js/gumshoe.js"
