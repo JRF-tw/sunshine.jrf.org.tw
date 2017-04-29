@@ -52,6 +52,7 @@ exports.devServer = (options) ->
     port:  8080
     host:  "0.0.0.0"
     disableHostCheck: on
+    headers: {"Access-Control-Allow-Origin": "*"}
   plugins: [
     new webpack.HotModuleReplacementPlugin mutiStep: on
   ]
