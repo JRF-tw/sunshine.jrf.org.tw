@@ -134,7 +134,11 @@ exports.loadImage = (env) ->
   module:
     rules: [
       test: /\.(png|jpe?g|gif|svg)$/i
-      exclude: pathTo("icons")
+      include: [
+        pathTo "images"
+        path.resolve __dirname, "./node_modules/webui-popover/img"
+        path.resolve __dirname, "./node_modules/chosen-js"
+      ]
       use: [
         "file-loader?name=images/[name].[ext]"
         loader: "image-webpack-loader"
