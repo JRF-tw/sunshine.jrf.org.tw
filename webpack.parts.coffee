@@ -176,3 +176,6 @@ exports.loadAMDModule = (pattern) ->
 
 exports.uglifyJs = ->
   plugins: [new webpack.optimize.UglifyJsPlugin()]
+
+exports.extractBundles = (bundles) ->
+  plugins: (new webpack.optimize.CommonsChunkPlugin bundle for bundle in bundles)

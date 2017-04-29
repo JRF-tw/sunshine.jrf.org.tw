@@ -129,10 +129,6 @@ var _modernizrrc = __webpack_require__(35);
 
 var _modernizrrc2 = _interopRequireDefault(_modernizrrc);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Arrow, Collapse, Dismiss, Rules, StoryInjection, Tab, TextInput, ToTop, Toggle, ref, ref1, sprites;
-
 __webpack_require__(6);
 
 __webpack_require__(5);
@@ -149,21 +145,35 @@ __webpack_require__(2);
 
 __webpack_require__(7);
 
-ref = __webpack_require__(19), Collapse = ref.Collapse, StoryInjection = ref.StoryInjection;
+var _stories = __webpack_require__(19);
 
-ref1 = __webpack_require__(22), Toggle = ref1.Toggle, Dismiss = ref1.Dismiss;
+var _toggle = __webpack_require__(22);
 
-TextInput = __webpack_require__(17).TextInput;
+var _form = __webpack_require__(17);
 
-Rules = __webpack_require__(18);
+var _rules = __webpack_require__(18);
 
-ToTop = __webpack_require__(21);
+var _rules2 = _interopRequireDefault(_rules);
 
-Tab = __webpack_require__(20);
+var _to_top = __webpack_require__(21);
 
-Arrow = __webpack_require__(16);
+var _to_top2 = _interopRequireDefault(_to_top);
+
+var _tab = __webpack_require__(20);
+
+var _tab2 = _interopRequireDefault(_tab);
+
+var _arrow = __webpack_require__(16);
+
+var Arrow = _interopRequireWildcard(_arrow);
 
 __webpack_require__(15);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var sprites;
 
 sprites = __webpack_require__(14);
 
@@ -173,61 +183,61 @@ Turbolinks.enableProgressBar();
 
 Turbolinks.enableTransitionCache();
 
-new TextInput();
+new _form.TextInput();
 
-new StoryInjection('[data-story-inject]');
+new _stories.StoryInjection("[data-story-inject]");
 
-new Collapse('#story-collapse-toggle');
+new _stories.Collapse("#story-collapse-toggle");
 
-new Tab('[data-tab-content]');
+new _tab2.default("[data-tab-content]");
 
-new Rules();
+new _rules2.default();
 
-$(document).on('ready page:load', function () {
+$(document).on("ready page:load", function () {
   $("input.datepicker").each(function (input) {
     return $(this).datepicker({
       dateFormat: "yy-mm-dd",
       altField: $(this).next(),
       onClose: function onClose() {
-        return $(this).trigger('blur');
+        return $(this).trigger("blur");
       }
     });
   });
-  new Toggle('.switch');
-  new Dismiss('[data-dismiss]');
-  $('select').chosen({
-    no_results_text: '沒有選項符合',
+  new _toggle.Toggle(".switch");
+  new _toggle.Dismiss("[data-dismiss]");
+  $("select").chosen({
+    no_results_text: "沒有選項符合",
     search_contains: true
   });
-  $('.popover-trigger').webuiPopover();
-  new ToTop('#to-top');
-  return $('#base-hero-carousel').slick({
+  $(".popover-trigger").webuiPopover();
+  new _to_top2.default("#to-top");
+  return $("#base-hero-carousel").slick({
     dots: false,
     infinite: true,
     speed: 300,
     fade: true,
-    cssEase: 'linear',
+    cssEase: "linear",
     adaptiveHeight: false,
     slidesToShow: 1,
     autoplay: true,
     autoplaySpeed: 5000,
-    appendArrows: '.base-hero',
-    prevArrow: Arrow.prev('base-hero-carousel'),
-    nextArrow: Arrow.next('base-hero-carousel')
+    appendArrows: ".base-hero",
+    prevArrow: Arrow.prev("base-hero-carousel"),
+    nextArrow: Arrow.next("base-hero-carousel")
   });
 });
 
 $(document).on("page:change", function () {
   var $main_header;
-  $('input.form-control:not([autofocus], :hidden)').trigger('blur');
+  $("input.form-control:not([autofocus], :hidden)").trigger("blur");
   Waypoint.destroyAll();
-  $main_header = $('#main-header');
-  return $('.base-hero-carousel__cell .heading, .card__heading, .character-selector__heading, .profile__avatar, .billboard__heading').waypoint({
+  $main_header = $("#main-header");
+  return $(".base-hero-carousel__cell .heading, .card__heading, .character-selector__heading, .profile__avatar, .billboard__heading").waypoint({
     handler: function handler(direction) {
-      if (direction === 'down') {
-        return $main_header.addClass('has-background');
+      if (direction === "down") {
+        return $main_header.addClass("has-background");
       } else {
-        return $main_header.removeClass('has-background');
+        return $main_header.removeClass("has-background");
       }
     },
     offset: function offset() {
@@ -240,18 +250,18 @@ $(document).on("page:change", function () {
  * 評分星星
  */
 
-$(document).on('mouseenter', '.form-group--score [type="radio"]', function (e) {
-  return $(this).addClass('hover');
-}).on('mouseleave', '.form-group--score [type="radio"]', function (e) {
-  return $(this).removeClass('hover');
+$(document).on("mouseenter", '.form-group--score [type="radio"]', function (e) {
+  return $(this).addClass("hover");
+}).on("mouseleave", '.form-group--score [type="radio"]', function (e) {
+  return $(this).removeClass("hover");
 });
 
 /**
  * 評鑑紀錄 table
  */
 
-$(document).on('click', '.story-list__table tbody tr', function (e) {
-  return Turbolinks.visit($('td:last a', e.currentTarget).attr('href'));
+$(document).on("click", ".story-list__table tbody tr", function (e) {
+  return Turbolinks.visit($("td:last a", e.currentTarget).attr("href"));
 });
 
 /***/ }),
@@ -337,19 +347,15 @@ $(document).on('ready page:load', function () {
 "use strict";
 
 
-var next, prev;
-
-prev = function prev(class_name) {
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var prev = exports.prev = function prev(class_name) {
   return "<button type='button' class='" + class_name + "__prev appearance-none'>\n  <svg class='icon'><use xlink:href='#icon-arrow-next' /></svg>\n</button>";
 };
 
-next = function next(class_name) {
+var next = exports.next = function next(class_name) {
   return "<button type='button' class='" + class_name + "__next appearance-none'>\n  <svg class='icon'><use xlink:href='#icon-arrow-next' /></svg>\n</button>";
-};
-
-module.exports = {
-  prev: prev,
-  next: next
 };
 
 /***/ }),
@@ -359,9 +365,10 @@ module.exports = {
 "use strict";
 
 
-var TextInput;
-
-TextInput = function () {
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var TextInput = exports.TextInput = function () {
   function TextInput() {
     $(document).on('focus', 'input.form-control, .text.form-control', function (_this) {
       return function (e) {
@@ -389,10 +396,6 @@ TextInput = function () {
   return TextInput;
 }();
 
-module.exports = {
-  TextInput: TextInput
-};
-
 /***/ }),
 /* 18 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -400,30 +403,38 @@ module.exports = {
 "use strict";
 
 
-var Cookies, Rules;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-Cookies = __webpack_require__(34);
+var _jsCookie = __webpack_require__(34);
 
-Rules = function () {
+var _jsCookie2 = _interopRequireDefault(_jsCookie);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Rules;
+
+exports.default = Rules = function () {
   function Rules() {
-    $(document).on('click', '#appeal-to-schedule', function (_this) {
+    $(document).on("click", "#appeal-to-schedule", function (_this) {
       return function (e) {
-        return _this.check_cookie(e, 'schedule');
+        return _this.check_cookie(e, "schedule");
       };
     }(this));
-    $(document).on('click', '#appeal-to-verdict', function (_this) {
+    $(document).on("click", "#appeal-to-verdict", function (_this) {
       return function (e) {
-        return _this.check_cookie(e, 'verdict');
+        return _this.check_cookie(e, "verdict");
       };
     }(this));
-    $(document).on('click', '#confirmed-schedule-rules', function (_this) {
+    $(document).on("click", "#confirmed-schedule-rules", function (_this) {
       return function (e) {
-        return _this.set_cookie_and_go(e, 'schedule');
+        return _this.set_cookie_and_go(e, "schedule");
       };
     }(this));
-    $(document).on('click', '#confirmed-verdict-rules', function (_this) {
+    $(document).on("click", "#confirmed-verdict-rules", function (_this) {
       return function (e) {
-        return _this.set_cookie_and_go(e, 'verdict');
+        return _this.set_cookie_and_go(e, "verdict");
       };
     }(this));
   }
@@ -431,8 +442,8 @@ Rules = function () {
   Rules.prototype.check_cookie = function (e, type) {
     var role;
     e.preventDefault();
-    role = $(e.target).data('role');
-    if (Cookies.get(role + "_has_seen_" + type + "_rules")) {
+    role = $(e.target).data("role");
+    if (_jsCookie2.default.get(role + "_has_seen_" + type + "_rules")) {
       return Turbolinks.visit(e.target.href);
     } else {
       return Turbolinks.visit("/" + role + "/score/" + type + "s/rule");
@@ -442,8 +453,8 @@ Rules = function () {
   Rules.prototype.set_cookie_and_go = function (e, type) {
     var role;
     e.preventDefault();
-    role = $(e.target).data('role');
-    Cookies.set(role + "_has_seen_" + type + "_rules", true, {
+    role = $(e.target).data("role");
+    _jsCookie2.default.set(role + "_has_seen_" + type + "_rules", true, {
       expires: 7
     });
     return Turbolinks.visit(e.target.href);
@@ -452,8 +463,6 @@ Rules = function () {
   return Rules;
 }();
 
-module.exports = Rules;
-
 /***/ }),
 /* 19 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -461,9 +470,10 @@ module.exports = Rules;
 "use strict";
 
 
-var Collapse, StoryInjection;
-
-StoryInjection = function () {
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var StoryInjection = exports.StoryInjection = function () {
   function StoryInjection(query) {
     this.query = query;
     $(document).on("ready page:load", function (_this) {
@@ -482,7 +492,7 @@ StoryInjection = function () {
   return StoryInjection;
 }();
 
-Collapse = function () {
+var Collapse = exports.Collapse = function () {
   function Collapse(query) {
     this.query = query;
     $(document).on('page:change', function (_this) {
@@ -504,11 +514,6 @@ Collapse = function () {
   return Collapse;
 }();
 
-module.exports = {
-  Collapse: Collapse,
-  StoryInjection: StoryInjection
-};
-
 /***/ }),
 /* 20 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -516,9 +521,12 @@ module.exports = {
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 var Tab;
 
-Tab = function () {
+exports.default = Tab = function () {
   function Tab(query) {
     this.query = query;
     $(document).on("click", this.query, function (_this) {
@@ -540,8 +548,6 @@ Tab = function () {
   return Tab;
 }();
 
-module.exports = Tab;
-
 /***/ }),
 /* 21 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -549,9 +555,12 @@ module.exports = Tab;
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 var ToTop;
 
-ToTop = function () {
+exports.default = ToTop = function () {
   function ToTop(query) {
     var $to_top;
     this.query = query;
@@ -576,8 +585,6 @@ ToTop = function () {
   return ToTop;
 }();
 
-module.exports = ToTop;
-
 /***/ }),
 /* 22 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -585,9 +592,10 @@ module.exports = ToTop;
 "use strict";
 
 
-var Dismiss, Toggle;
-
-Toggle = function () {
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var Toggle = exports.Toggle = function () {
   function Toggle(query) {
     this.query = query;
     $(this.query).on('click', function (_this) {
@@ -637,7 +645,7 @@ Toggle = function () {
   return Toggle;
 }();
 
-Dismiss = function () {
+var Dismiss = exports.Dismiss = function () {
   function Dismiss(query) {
     this.query = query;
     $(this.query).on('click', function (e) {
@@ -652,11 +660,6 @@ Dismiss = function () {
 
   return Dismiss;
 }();
-
-module.exports = {
-  Toggle: Toggle,
-  Dismiss: Dismiss
-};
 
 /***/ }),
 /* 23 */

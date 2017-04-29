@@ -91,12 +91,11 @@ module.exports = (env) ->
       publicPath: pkg.publicPath
       filename: "javascripts/webpack_[name].js"
     plugins: [
-      new webpack.optimize.CommonsChunkPlugin
-        name: "vendor"
       new webpack.DefinePlugin
         "process.env":
           "NODE_ENV": JSON.stringify "production"
       new webpack.NoEmitOnErrorsPlugin()
     ]
+    parts.extractBundles [{name: "vendor"}]
     parts.extractStylesheet env
   ]
