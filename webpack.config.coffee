@@ -33,10 +33,10 @@ common_config = (env) -> merge [
 
   entry:
     main: [
-      'animate-css-webpack!./config/animate-css.js'
-      './index.coffee'
+      "animate-css-webpack!./config/animate-css.js"
+      "./stylesheets"
+      "./index.coffee"
     ]
-    priority: './priority.coffee'
 
   output:
     chunkFilename: "javascripts/webpack_chunk_[id].js"
@@ -75,11 +75,24 @@ module.exports = (env) ->
 
   return merge [
     common_config env
+    entry:
+      vendor: [
+        "picturefill"
+        "lazysizes/plugins/rias/ls.rias"
+        "lazysizes/plugins/bgset/ls.bgset"
+        "lazysizes"
+        "waypoints/lib/jquery.waypoints"
+        "webui-popover/dist/jquery.webui-popover.js"
+        "chosen-js"
+        "slick-carousel"
+      ]
     output:
       path: path.resolve __dirname, env.build_path
       publicPath: pkg.publicPath
       filename: "javascripts/webpack_[name].js"
     plugins: [
+      new webpack.optimize.CommonsChunkPlugin
+        name: "vendor"
       new webpack.DefinePlugin
         "process.env":
           "NODE_ENV": JSON.stringify "production"
