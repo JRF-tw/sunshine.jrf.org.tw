@@ -29,8 +29,6 @@ cssPreLoaders = (options) ->
     "sass-loader?#{JSON.stringify
       includePaths: [pathTo("stylesheets")]
       sourceMap: on}"
-    "sass-resources-loader?#{JSON.stringify
-      resources: path.join pathTo('stylesheets'), '_resource.scss'}"
   ]
 
 assetHash = ({asset_hash}) -> if asset_hash then '-[hash]' else ''
