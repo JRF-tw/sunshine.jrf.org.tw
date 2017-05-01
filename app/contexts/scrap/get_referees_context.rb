@@ -3,7 +3,7 @@ class Scrap::GetRefereesContext < BaseContext
   END_TIME = Time.zone.today.strftime('%Y%m%d').freeze
 
   before_perform  :get_courts
-  after_perform   :record_intervel_to_daily_notify 
+  after_perform   :record_intervel_to_daily_notify
 
   class << self
     def perform

@@ -36,7 +36,7 @@ class Scrap::UploadRefereeContentFileContext < BaseContext
   end
 
   def build_crawl_data
-    @judge_word = @data.css('table')[2].css('table')[1].css('span')[0].text[/\d+,\p{Han}+,\d+/].tr(',', '-')
+    @judge_word = @data.css('table')[2].css('table')[1].css('span')[0].text[/\d+,[\p{Han}()]+,\d+/].tr(',', '-')
     @reason = @data.css('table')[2].css('table')[1].css('span')[2].text[/(?<=\u00a0)\p{Han}+/]
     @related_stories = prase_related_stories(@data.text)
   end
