@@ -1,6 +1,9 @@
 class Scrap::GetRefereesContext < BaseContext
+  START_TIME = (Time.zone.today - 2.months).strftime('%Y%m%d').freeze
+  END_TIME = Time.zone.today.strftime('%Y%m%d').freeze
+
   before_perform  :get_courts
-  after_perform   :record_intervel_to_daily_notify
+  after_perform   :record_intervel_to_daily_notify 
 
   class << self
     def perform
@@ -8,9 +11,9 @@ class Scrap::GetRefereesContext < BaseContext
     end
   end
 
-  def initialize
-    @start_date = (Time.zone.today - 2.months).strftime('%Y%m%d')
-    @end_date = Time.zone.today.strftime('%Y%m%d')
+  def initialize(start_date: START_TIME, end_date: END_TIME)
+    @start_date = start_date
+    @end_date = end_date
   end
 
   def perform
