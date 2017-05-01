@@ -6,5 +6,6 @@ options:
   # - mq
 
 feature-detects:
+  - css/appearance
   # - svg
   # - video

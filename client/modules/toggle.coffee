@@ -1,4 +1,4 @@
-class Toggle
+export class Toggle
   constructor: (@query) ->
     $(@query).on 'click', (e) =>
       $this = $(e.currentTarget)
@@ -20,13 +20,9 @@ class Toggle
     else
       $(targets).removeClass 'active'
 
-class Dismiss
+export class Dismiss
   constructor: (@query) ->
     $(@query).on 'click', (e) ->
       $this = $(@)
       switch $this.data 'dismiss'
         when 'alert' then $this.parent().slideUp()
-
-module.exports =
-  Toggle: Toggle
-  Dismiss: Dismiss

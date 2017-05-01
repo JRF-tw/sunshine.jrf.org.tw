@@ -19,13 +19,19 @@ gulp.task 'resolve-url', ->
     url\(
       #{publicPath}
       images\/
-      ([^\.]+\.(png|jpe?g|gif|svg))
+      (.+\.(png|jpe?g|gif|svg))
     \)
   ///ig
 
-  replace_assets_path = (_full, $1) -> "asset-url('#{$1}')"
+  replace_assets_path = (_full, $1) ->
+    result = "asset-url('#{$1}')"
+    console.log """
+      Resolve: #{_full}
+      To: #{result}
+    """
+    result
 
-  gulp.src path.join("app/assets", "stylesheets/webpack_bundle.+(css|scss)")
+  gulp.src path.join("app/assets", "stylesheets/webpack_*.+(css|scss)")
       .pipe notify.handleError replace(assets_pattern, replace_assets_path)
       .pipe notify.handleError replace(sourcemap_pattern, "")
       .pipe gulp.dest path.join("app/assets", "stylesheets")
@@ -34,13 +40,14 @@ gulp.task 'resolve-url', ->
 # END
 #
 
-precompile = (cb) ->
-  task = exec "git add -A --ignore-errors && git commit -m 'Precompile f2e assets.'"
+run = (cmd, cb) ->
+  task = exec cmd
   task.stdout.on "data", (data) -> console.log data.toString()
   task.stderr.on "data", (data) -> console.log data.toString()
   task.on "exit", -> cb()
 
-gulp.task "update", (cb) -> precompile(cb)
+gulp.task 'update', (cb) ->
+  run "git add -A --ignore-errors && git commit -m 'Precompile f2e assets.'", cb
 
 #
 # Build Responsive Image

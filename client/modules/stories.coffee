@@ -1,4 +1,4 @@
-class StoryInjection
+export class StoryInjection
   constructor: (@query) ->
     $(document).on "ready page:load", =>
       $container = $(@query)
@@ -12,7 +12,7 @@ class StoryInjection
         .next ".loading"
         .remove()
 
-class Collapse
+export class Collapse
   constructor: (@query) ->
     $(document).on 'page:change', =>
       @toggle = $(@query)
@@ -23,7 +23,3 @@ class Collapse
       @toggle.toggleClass 'active'
       @toggle_wrapper.toggleClass 'extracted'
       @toggle_target.slideToggle 300
-
-module.exports =
-  Collapse: Collapse
-  StoryInjection: StoryInjection

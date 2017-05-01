@@ -1,0 +1,29 @@
+plugins:
+  autoprefixer:
+    browsers:
+      - last 2 versions
+      - last 3 Safari versions
+      - Safari 8
+      - Android 4.3
+  postcss-assets:
+    loadPaths:
+      - client/images/
+      - client/icons/
+  postcss-short:
+    # border:
+    #   skip: n
+    # border-radius:
+    #   skip: n
+    # color:
+    #   skip: n
+    # font-size:
+    #   skip: n
+    # position:
+    #   skip: n
+    # size:
+    #   skip: n
+    # spacing:
+    #   skip: n
+  postcss-clearfix:
+  postcss-strip-units:
+  postcss-calc:

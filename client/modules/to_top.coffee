@@ -1,7 +1,7 @@
-class ToTop
+export default class ToTop
   constructor: (@query) ->
     $to_top = $(@query)
-    
+
     $to_top.on 'click', ->
       $('html, body').animate
         scrollTop: 0
@@ -14,5 +14,3 @@ class ToTop
           $to_top.addClass 'active'
         else
           $to_top.removeClass 'active'
-    
-module.exports = ToTop

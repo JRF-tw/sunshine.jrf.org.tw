@@ -1,6 +1,6 @@
-require "magnific-popup"
+import "magnific-popup"
 
-class Modal
+export default class Modal
   constructor: (@query) ->
     MFC = $.magnificPopup.instance
 
@@ -23,5 +23,3 @@ class Modal
         #     <svg class='modal-arrow__icon'><use xlink:href=#{arrow}></svg>
         #   </button>
         # """
-
-module.exports = Modal

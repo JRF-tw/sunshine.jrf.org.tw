@@ -1,15 +1,14 @@
 doctype 5
-html
+html.no-js
   head
     = display_meta_tags
     = stylesheet_link_tag    'application', media: 'all',
                              'data-turbolinks-track' => true
-    = javascript_include_tag 'priority', 'data-turbolinks-track' => true
+    = javascript_include_tag 'vendor', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
 
     - if ENV['F2E_DEV']
       - ip = Socket.ip_address_list.detect{|intf| intf.ipv4_private?}.ip_address
-      = javascript_include_tag "http://#{ip}:8080/assets/javascripts/webpack_priority.js", 'data-turbolinks-track' => true
       = javascript_include_tag "http://#{ip}:8080/assets/javascripts/webpack_main.js", 'data-turbolinks-track' => true
 
     = csrf_meta_tags

@@ -1,6 +1,6 @@
 # require 'magnific-popup/dist/magnific-popup.css'
-require 'webui-popover/dist/jquery.webui-popover.css'
-require 'chosen-js/chosen.css'
-require "slick-carousel/slick/slick.css"
+import "webui-popover/dist/jquery.webui-popover.css"
+import "chosen-js/chosen.css"
+import "slick-carousel/slick/slick.css"
 
-require 'entry.scss'
+import "entry.scss"
