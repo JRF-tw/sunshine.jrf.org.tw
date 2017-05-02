@@ -1,7 +1,4 @@
 class Scrap::GetRefereesContext < BaseContext
-  START_TIME = (Time.zone.today - 2.months).strftime('%Y%m%d').freeze
-  END_TIME = Time.zone.today.strftime('%Y%m%d').freeze
-
   before_perform  :get_courts
   after_perform   :record_intervel_to_daily_notify
 
@@ -11,15 +8,15 @@ class Scrap::GetRefereesContext < BaseContext
     end
   end
 
-  def initialize(start_date: START_TIME, end_date: END_TIME)
-    @start_date = start_date
-    @end_date = end_date
+  def initialize(start_on: nil, end_on: nil)
+    @start_on = start_on || (Time.zone.today - 2.months).strftime('%Y%m%d').freeze
+    @end_on = end_on || Time.zone.today.strftime('%Y%m%d').freeze
   end
 
   def perform
     run_callbacks :perform do
       @courts.each do |court|
-        Scrap::GetRefereesByCourtContext.delay(retry: false, queue: 'crawler_referee').perform(court, @start_date, @end_date)
+        Scrap::GetRefereesByCourtContext.delay(retry: false, queue: 'crawler_referee').perform(court, @start_on, @end_on)
       end
     end
   end
@@ -31,6 +28,6 @@ class Scrap::GetRefereesContext < BaseContext
   end
 
   def record_intervel_to_daily_notify
-    Redis::Value.new('daily_scrap_referee_intervel').value = "#{@start_date} ~ #{@end_date}"
+    Redis::Value.new('daily_scrap_referee_intervel').value = "#{@start_on} ~ #{@end_on}"
   end
 end
