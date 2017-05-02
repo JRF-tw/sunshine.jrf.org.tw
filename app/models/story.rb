@@ -71,11 +71,6 @@ class Story < ActiveRecord::Base
     end
   end
 
-  def schedules_count_result
-    return '暫無' if schedules_count == 0
-    schedules_count
-  end
-
   class << self
     def ransackable_scopes(_auth_object = nil)
       [:relation_by_judge]

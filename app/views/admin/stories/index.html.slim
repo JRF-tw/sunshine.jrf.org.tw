@@ -90,7 +90,7 @@
                 = link_to '已判決', admin_verdict_path(story.verdict) 
               - else
                 = '尚未宣判'
-            td = story.schedules_count_result
+            td = story_schedules_count_result(story)
             td
               = link_to '詳細資料', admin_story_path(story), class: 'btn btn-mini'
               | &nbsp;

@@ -25,7 +25,7 @@
               td = link_to story.reason, url_for_search_story(reason: story.reason) if story.reason
               td = story.judges_names.map { |j| link_to j, url_for_search_story(judge_name: j) }.join(' ').html_safe
               td = story.lawyer_names.map { |l| link_to l, url_for_search_story(lawyer_name: l) }.join(' ').html_safe
-              td = story.schedules_count_result
+              td = story_schedules_count_result(story)
               td
                 = link_to '詳細資料', search_story_path(story.court.code, story.identity), class: 'btn btn-mini'
                 

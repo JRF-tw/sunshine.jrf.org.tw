@@ -68,7 +68,7 @@
           = link_to '是', admin_verdict_path(@story.verdict) if @story.verdict
       tr
         td 開庭次數
-        td = @story.schedules_count_result
+        td = story_schedules_count_result(@story)
       tr
         td 新增日期
         td = @story.created_at
