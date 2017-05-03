@@ -17,6 +17,7 @@ default: &default
     upload_file_error: '檔案上傳失敗'
     parse_data_failed: '解析回傳資料失敗'
     parse_original_url_failed: '取得固定網址失敗'
+    parse_stories_history_url_failed: '取得歷審裁判網址失敗'
     date_not_in_db: '爬蟲取得資料不存在於資料庫'
     parse_main_judge_empty: '取得主審法官失敗'
     parse_main_judge_error: '取得主審法官錯誤'

@@ -135,6 +135,10 @@ RSpec.describe Scrap::ImportVerdictContext, type: :model do
       it { expect(subject.original_url).to be_present }
     end
 
+    context 'update stories_history_url' do
+      it { expect(subject.stories_history_url).to be_present }
+    end
+
     xit '#send_after_verdict_noice, should be test in AfterVerdictNoticeContextSpec'
   end
 end

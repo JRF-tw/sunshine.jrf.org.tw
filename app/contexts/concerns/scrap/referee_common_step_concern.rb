@@ -11,6 +11,7 @@ module Scrap::RefereeCommonStepConcern
     create_main_judge_by_highest if is_highest_court?
     assign_names
     assign_original_url
+    assign_stories_history_url
   end
 
   def after_perform_common_step
@@ -62,6 +63,10 @@ module Scrap::RefereeCommonStepConcern
 
   def assign_original_url
     @referee.assign_attributes(original_url: parse_original_url(@original_data, @crawler_history))
+  end
+
+  def assign_stories_history_url
+    @referee.assign_attributes(stories_history_url: parse_stories_history_url(@original_data, @crawler_history))
   end
 
   def update_data_to_story
