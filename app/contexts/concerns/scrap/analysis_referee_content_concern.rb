@@ -81,6 +81,28 @@ module Scrap::AnalysisRefereeContentConcern
     {}
   end
 
+  def parse_original_url(referee, original_data, crawler_history)
+    Nokogiri::HTML(original_data).css('script')[4].text[/http:\/\/.+(?=;)/].delete('\"')
+  rescue
+    add_referee_error(crawler_history, referee, :parse_original_url_failed, '取得固定網址失敗')
+    nil
+  end
+
+  def parse_stories_history_url(referee, original_data, crawler_history)
+    path = Nokogiri::HTML(original_data).at_xpath('//a[text()="歷審裁判"]').attributes['href'].value
+    HOST_URI + path
+  rescue
+    add_referee_error(crawler_history, referee, :parse_stories_history_url_failed, '取得歷審裁判 網址失敗')
+    nil
+  end
+
+  def parse_reason(referee, original_data, crawler_history)
+    Nokogiri::HTML(original_data).css('table')[2].css('table')[1].css('span')[2].text[/(?<=\u00a0)\p{Han}+/]
+  rescue
+    add_referee_error(crawler_history, referee, :parse_reason_failed, '取得案由失敗')
+    nil
+  end
+
   def parse_referee_type(content, crawler_history)
     content.split.first.match(/判決/).present? ? 'verdict' : 'rule'
   rescue
@@ -92,21 +114,6 @@ module Scrap::AnalysisRefereeContentConcern
     end_point = get_content_start_point(content)
     data = content[0..end_point]
     data.scan(/.{3}年度.+第.+號/)[1..-1]
-  end
-
-  def parse_original_url(original_data, crawler_history)
-    Nokogiri::HTML(original_data).css('script')[4].text[/http:\/\/.+(?=;)/].delete('\"')
-  rescue
-    Logs::AddCrawlerError.parse_referee_data_error(crawler_history, :parse_original_url_failed, '解析資訊錯誤 : 取得固定網址失敗')
-    nil
-  end
-
-  def parse_stories_history_url(original_data, crawler_history)
-    path = Nokogiri::HTML(original_data).at_xpath('//a[text()="歷審裁判"]').attributes['href'].value
-    HOST_URI + path
-  rescue
-    Logs::AddCrawlerError.parse_referee_data_error(crawler_history, :parse_stories_history_url_failed, '解析資訊錯誤 : 取得歷審裁判 網址失敗')
-    nil
   end
 
   def get_content_start_point(content)

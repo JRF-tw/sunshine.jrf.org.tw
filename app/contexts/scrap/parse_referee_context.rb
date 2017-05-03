@@ -4,7 +4,7 @@ class Scrap::ParseRefereeContext < BaseContext
   REFEREE_URI = 'http://jirs.judicial.gov.tw/FJUD/FJUDQRY03_1.aspx'.freeze
 
   before_perform :get_referee_data
-  before_perform :parse_orginal_data
+  before_perform :parse_original_data
   before_perform :parse_nokogiri_data
   before_perform :parse_referee_story_type
   before_perform :parse_referee_word
@@ -30,9 +30,9 @@ class Scrap::ParseRefereeContext < BaseContext
   def perform
     run_callbacks :perform do
       if referee_type == 'verdict'
-        Scrap::ImportVerdictContext.delay(retry: false, queue: 'crawler_verdict').perform(@court, @orginal_data, @referee_content, @referee_word, @referee_adjudged_on, @referee_story_type)
+        Scrap::ImportVerdictContext.delay(retry: false, queue: 'crawler_verdict').perform(@court, @original_data, @referee_content, @referee_word, @referee_adjudged_on, @referee_story_type)
       else
-        Scrap::ImportRuleContext.delay(retry: false, queue: 'crawler_rule').perform(@court, @orginal_data, @referee_content, @referee_word, @referee_adjudged_on, @referee_story_type)
+        Scrap::ImportRuleContext.delay(retry: false, queue: 'crawler_rule').perform(@court, @original_data, @referee_content, @referee_word, @referee_adjudged_on, @referee_story_type)
       end
     end
   end
@@ -48,8 +48,8 @@ class Scrap::ParseRefereeContext < BaseContext
     request_retry(key: "#{REFEREE_URI} / data=#{@referee_query} /#{Time.zone.today}")
   end
 
-  def parse_orginal_data
-    @orginal_data = @response_data.body.force_encoding('UTF-8')
+  def parse_original_data
+    @original_data = @response_data.body.force_encoding('UTF-8')
   rescue
     Logs::AddCrawlerError.parse_referee_data_error(@crawler_history, :parse_data_failed, '解析資訊錯誤 : UTF-8 轉碼失敗')
     false
