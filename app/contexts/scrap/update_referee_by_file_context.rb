@@ -6,7 +6,7 @@ class Scrap::UpdateRefereeByFileContext < BaseContext
   def initialize(referee, url = nil)
     @referee = referee
     @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
-    @target_url = url || reformat_url(@referee.file.url)
+    @target_url = url || reformat_url
   end
 
   def perform
@@ -17,9 +17,8 @@ class Scrap::UpdateRefereeByFileContext < BaseContext
 
   private
 
-  def reformat_url(url)
-    protocol = Rails.env.staging? || Rails.env.production? ? 'https:' : 'http:'
-    protocol + url
+  def reformat_url
+    'https:' + @referee.file.url
   end
 
   def get_referee_data

@@ -5,8 +5,8 @@ describe Scrap::UpdateRefereeByFileContext do
 
   describe 'perform' do
     context 'verdict' do
-      let!(:verdict) { create :verdict, :with_file }
-      subject { described_class.new(verdict).perform }
+      let!(:verdict) { create :verdict }
+      subject { described_class.new(verdict, Scrap::ParseRefereeContext::REFEREE_URI).perform }
 
       it { expect { subject }.to change { verdict.reason } }
       it { expect { subject }.to change { verdict.original_url } }
@@ -14,8 +14,8 @@ describe Scrap::UpdateRefereeByFileContext do
     end
 
     context 'rule' do
-      let!(:rule) { create :rule, :with_file }
-      subject { described_class.new(rule).perform }
+      let!(:rule) { create :rule }
+      subject { described_class.new(rule, Scrap::ParseRefereeContext::REFEREE_URI).perform }
 
       it { expect { subject }.to change { rule.reason } }
       it { expect { subject }.to change { rule.original_url } }
