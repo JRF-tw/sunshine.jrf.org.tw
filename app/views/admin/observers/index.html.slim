@@ -45,7 +45,6 @@
           th 學校
           th 系級
           th Email
-          th 學校
           th 認證時間
           th 操作
       tbody
@@ -56,7 +55,6 @@
             td = court_observer.school
             td = court_observer.department_level
             td = court_observer.email
-            td = court_observer.school
             td = court_observer.confirmed_at || '尚未認證'
             td
               = link_to "詳細資料", admin_observer_path(court_observer), class: "btn btn-mini"
