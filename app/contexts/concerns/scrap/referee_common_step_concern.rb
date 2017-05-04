@@ -11,6 +11,7 @@ module Scrap::RefereeCommonStepConcern
     create_main_judge_by_highest if is_highest_court?
     assign_names
     assign_original_url
+    assign_stories_history_url
   end
 
   def after_perform_common_step
@@ -61,7 +62,16 @@ module Scrap::RefereeCommonStepConcern
   end
 
   def assign_original_url
-    @referee.assign_attributes(original_url: parse_original_url(@original_data, @crawler_history))
+    @referee.assign_attributes(original_url: parse_original_url(@referee, @original_data, @crawler_history))
+  end
+
+  def assign_stories_history_url
+    @referee.assign_attributes(stories_history_url: parse_stories_history_url(@referee, @original_data, @crawler_history))
+  end
+
+  def upload_file
+    Scrap::UploadRefereeFileContext.new(@original_data).perform(@referee)
+    Scrap::UploadRefereeContentFileContext.new(@original_data).perform(@referee)
   end
 
   def update_data_to_story
@@ -71,11 +81,6 @@ module Scrap::RefereeCommonStepConcern
     @story.assign_attributes(lawyer_names: (@story.lawyer_names + @referee.lawyer_names).uniq)
     @story.assign_attributes(party_names: (@story.party_names + @referee.party_names).uniq)
     @story.save
-  end
-
-  def upload_file
-    Scrap::UploadRefereeFileContext.new(@original_data).perform(@referee)
-    Scrap::UploadRefereeContentFileContext.new(@original_data).perform(@referee)
   end
 
   def record_count_to_daily_notify

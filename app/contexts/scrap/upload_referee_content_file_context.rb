@@ -6,9 +6,9 @@ class Scrap::UploadRefereeContentFileContext < BaseContext
   before_perform  :assign_value
   after_perform   :remove_tempfile
 
-  def initialize(orginal_data)
-    @orginal_data = orginal_data
-    @data = Nokogiri::HTML(@orginal_data)
+  def initialize(original_data)
+    @original_data = original_data
+    @data = Nokogiri::HTML(@original_data)
     @content = @data.css('pre').text
     @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
     @content_file_data = {}
@@ -37,7 +37,7 @@ class Scrap::UploadRefereeContentFileContext < BaseContext
 
   def build_crawl_data
     @judge_word = @data.css('table')[2].css('table')[1].css('span')[0].text[/\d+,[\p{Han}()]+,\d+/].tr(',', '-')
-    @reason = @data.css('table')[2].css('table')[1].css('span')[2].text[/(?<=\u00a0)\p{Han}+/]
+    @reason = parse_reason(@referee, @original_data, @crawler_history)
     @related_stories = prase_related_stories(@data.text)
   end
 

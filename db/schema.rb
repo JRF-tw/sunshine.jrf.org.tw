@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170424041514) do
+ActiveRecord::Schema.define(version: 20170503074712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -570,12 +570,13 @@ ActiveRecord::Schema.define(version: 20170424041514) do
     t.date     "published_on"
     t.string   "content_file"
     t.hstore   "crawl_data"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "reason"
     t.text     "related_stories"
     t.string   "original_url"
     t.date     "adjudged_on"
+    t.string   "stories_history_url"
   end
 
   add_index "rules", ["adjudged_on"], name: "index_rules_on_adjudged_on", using: :btree
@@ -825,8 +826,8 @@ ActiveRecord::Schema.define(version: 20170424041514) do
 
   create_table "verdicts", force: :cascade do |t|
     t.integer  "story_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "file"
     t.text     "party_names"
     t.text     "lawyer_names"
@@ -840,6 +841,7 @@ ActiveRecord::Schema.define(version: 20170424041514) do
     t.string   "reason"
     t.text     "related_stories"
     t.string   "original_url"
+    t.string   "stories_history_url"
   end
 
   add_index "verdicts", ["adjudged_on"], name: "index_verdicts_on_adjudged_on", using: :btree

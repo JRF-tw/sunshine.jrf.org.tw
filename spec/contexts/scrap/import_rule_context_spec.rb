@@ -67,5 +67,9 @@ RSpec.describe Scrap::ImportRuleContext, type: :model do
     context 'update original_url' do
       it { expect(subject.original_url).to be_present }
     end
+
+    context 'update stories_history_url' do
+      it { expect(subject.stories_history_url).to be_present }
+    end
   end
 end

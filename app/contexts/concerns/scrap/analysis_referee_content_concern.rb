@@ -11,7 +11,7 @@ module Scrap::AnalysisRefereeContentConcern
   MAIN_ROLE = ["代\s*表\s*人", "上\s*訴\s*人", "聲\s*請\s*人", "受\s*刑\s*人", "抗\s*告\s*人", "公\s*訴\s*人", "選\s*任\s*辯\s*護\s*人", "被\s*告", "共\s*同", "再\s*抗\s*告\s*人", "兼\s*代\s*表\s*人", "上\s*一\s*被\s*告", "原\s*告", "指\s*定\s*辯\s*護\s*人", "再\s*審\s*原\s*告", "再\s*審\s*相\s*對\s*人", "法\s*定\s*代\s*理\s*人", "再\s*審\s*原\s*告", "再\s*審\s*被\s*告"].freeze
   SUB_ROLE = ["即\s*再\s*審\s*聲\s*請\s*人", "即\s*受\s*刑\s*人", "即\s*受\s*判\s*決\s*人", "即\s*被\s*告", "選\s*任\s*辯\s*護\s*人", "訴\s*訟\s*代\s*理\s*人", "複\s*代\s*理\s*人"].freeze
   PARSE_ROLES_PATTERN = /(#{MAIN_ROLE.join('|')}){1}[\s]*(#{SUB_ROLE.join('|')})?(\s+\p{han}+[^\r\n]+)((\r\n\s+\p{han}?\s?\p{han}+[^\r\n]+)*)/
-
+  HOST_URI = 'http://jirs.judicial.gov.tw/FJUD/'.freeze
   def parse_main_judge_name(referee, content, crawler_history)
     content = content.tr('　', ' ')
     matched = content.match(MAIN_JUDGE)
@@ -81,6 +81,28 @@ module Scrap::AnalysisRefereeContentConcern
     {}
   end
 
+  def parse_original_url(referee, original_data, crawler_history)
+    Nokogiri::HTML(original_data).css('script')[4].text[/http:\/\/.+(?=;)/].delete('\"')
+  rescue
+    add_referee_error(crawler_history, referee, :parse_original_url_failed, '取得固定網址失敗')
+    nil
+  end
+
+  def parse_stories_history_url(referee, original_data, crawler_history)
+    path = Nokogiri::HTML(original_data).at_xpath('//a[text()="歷審裁判"]').attributes['href'].value
+    HOST_URI + path
+  rescue
+    add_referee_error(crawler_history, referee, :parse_stories_history_url_failed, '取得歷審裁判 網址失敗')
+    nil
+  end
+
+  def parse_reason(referee, original_data, crawler_history)
+    Nokogiri::HTML(original_data).css('table')[2].css('table')[1].css('span')[2].text[/(?<=\u00a0)\p{Han}+/]
+  rescue
+    add_referee_error(crawler_history, referee, :parse_reason_failed, '取得案由失敗')
+    nil
+  end
+
   def parse_referee_type(content, crawler_history)
     content.split.first.match(/判決/).present? ? 'verdict' : 'rule'
   rescue
@@ -92,13 +114,6 @@ module Scrap::AnalysisRefereeContentConcern
     end_point = get_content_start_point(content)
     data = content[0..end_point]
     data.scan(/.{3}年度.+第.+號/)[1..-1]
-  end
-
-  def parse_original_url(original_data, crawler_history)
-    Nokogiri::HTML(original_data).css('script')[4].text[/http:\/\/.+(?=;)/].delete('\"')
-  rescue
-    Logs::AddCrawlerError.parse_referee_data_error(crawler_history, :parse_original_url_failed, '解析資訊錯誤 : 取得固定網址失敗')
-    nil
   end
 
   def get_content_start_point(content)
