@@ -32,6 +32,8 @@ class Judge < ActiveRecord::Base
   has_many :stories, through: :story_relations, as: :people
   has_many :verdict_relations, as: :person, dependent: :destroy
   has_many :verdicts, through: :verdict_relations
+  has_many :rule_relations, as: :person, dependent: :destroy
+  has_many :rules, through: :rule_relations
   has_many :schedule_scores
   has_many :valid_scores
   has_one :prosecutor

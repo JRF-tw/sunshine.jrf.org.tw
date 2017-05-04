@@ -32,8 +32,11 @@
 
 class Lawyer < ActiveRecord::Base
   has_many :story_relations, as: :people, dependent: :destroy
+  has_many :stories, through: :story_relations
   has_many :verdict_relations, as: :person, dependent: :destroy
   has_many :verdicts, through: :verdict_relations
+  has_many :rule_relations, as: :person, dependent: :destroy
+  has_many :rules, through: :rule_relations
   has_many :story_subscriptions, as: :subscriber, dependent: :destroy
   has_many :schedule_scores, as: :schedule_rater
   has_many :verdict_scores, as: :verdict_rater

@@ -28,7 +28,10 @@ class Story < ActiveRecord::Base
   has_one :verdict, dependent: :destroy
   has_many :rules, dependent: :destroy
   has_many :story_relations, dependent: :destroy
-  has_many :judges, through: :story_relations, source: :people, source_type: :Judge
+  has_many :parties, through: :story_relations, source: :person, source_type: 'Party'
+  has_many :lawyers, through: :story_relations, source: :person, source_type: 'Lawyer'
+  has_many :prosecutors, through: :story_relations, source: :person, source_type: 'Prosecutor'
+  has_many :judges, through: :story_relations, source: :people, source_type: 'Judge'
   has_many :story_subscriptions, dependent: :destroy
   has_many :verdict_scores
   has_many :schedule_scores
