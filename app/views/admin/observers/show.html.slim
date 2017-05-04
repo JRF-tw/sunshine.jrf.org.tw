@@ -20,6 +20,9 @@
         td 手機
         td = @court_observer.phone_number
       tr
+        td 認證時間
+        td = @court_observer.confirmed_at || '尚未認證'
+      tr
         td 案件列表
         td
           = link_to "TODO 案件列表", "#", class: "btn btn-mini"
