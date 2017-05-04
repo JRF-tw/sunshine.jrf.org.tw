@@ -1,5 +1,6 @@
 - content_for :btns do
   = link_to '庭期列表', admin_schedules_path(q: { 'story_id_eq' => @story.id } ), class: 'btn btn-large'
+  = link_to '裁定列表', admin_rules_path(q: { 'story_id_eq' => @story.id } ), class: 'btn btn-large'
 
 = admin_widget_box "#{@story.identity}資料", icon: :th do
   table.table.table-bordered.table-striped.table-hover

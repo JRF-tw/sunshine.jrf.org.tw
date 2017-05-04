@@ -1,4 +1,4 @@
-= search_form_for @search, :url => admin_verdicts_path, :wrapper => :admin, :html => { :class => 'form-horizontal' } do |f|
+= search_form_for @search, :url => admin_rules_path, :wrapper => :admin, :html => { :class => 'form-horizontal' } do |f|
   .well
     fieldset
       legend 搜尋
@@ -40,10 +40,9 @@
     .form-actions
       = f.submit :value => '搜尋', :class => 'btn btn-primary'
       = ' '
-      = link_to '清空搜尋結果', admin_verdicts_path, :class => 'btn btn-default'
+      = link_to '清空搜尋結果', admin_rules_path, :class => 'btn btn-default'
 
-
-= admin_widget_box "判決列表 : 搜尋結果為 #{@verdicts.total_count} 筆", icon: :pencil do
+= admin_widget_box @search_form_title + ": 搜尋結果為 #{@rules.total_count} 筆", icon: :pencil do
   .dataTables_wrapper
     table.table.table-bordered.table-striped.table-hover
       thead
@@ -58,18 +57,18 @@
           th
 
       tbody
-        - @verdicts.each do |verdict|
+        - @rules.each do |rule|
           tr
-            td = verdict.id
-            td = link_to "#{verdict.story.court.full_name}", admin_court_path(verdict.story.court)
-            td = verdict.adjudged_on
-            td = link_to "#{verdict.story.identity}", admin_story_path(verdict.story)
-            td = verdict.created_at.to_date
-            td = link_to '點我預覽', verdict.file.url, target: '_blank' if verdict.file
-            td = link_to '點我下載', download_file_admin_verdict_path(verdict) if verdict.file
+            td = rule.id
+            td = link_to "#{rule.story.court.full_name}", admin_court_path(rule.story.court)
+            td = rule.adjudged_on
+            td = link_to "#{rule.story.identity}", admin_story_path(rule.story)
+            td = rule.created_at.to_date
+            td = link_to '點我預覽', rule.file.url, target: '_blank' if rule.file
+            td = link_to '點我下載', download_file_admin_rule_path(rule) if rule.file
             td
-              = link_to '詳細資料', admin_verdict_path(verdict), class: 'btn btn-mini'
+              = link_to '詳細資料', admin_rule_path(rule), class: 'btn btn-mini'
               | &nbsp;
 
     .ui-toolbar.ui-widget-header
-      = paginate @verdicts, theme: :admin
+      = paginate @rules, theme: :admin

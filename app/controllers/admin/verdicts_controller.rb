@@ -1,16 +1,16 @@
 class Admin::VerdictsController < Admin::BaseController
   before_action :verdict
-  before_action(except: [:index]) { add_crumb('判決書列表', admin_verdicts_path) }
+  before_action(except: [:index]) { add_crumb('判決列表', admin_verdicts_path) }
 
   def index
     @search = Verdict.includes(story: :court).newest.ransack(params[:q])
     @verdicts = @search.result.includes(:story).page(params[:page]).per(20)
-    @admin_page_title = '判決書列表'
+    @admin_page_title = '判決列表'
     add_crumb @admin_page_title, '#'
   end
 
   def show
-    @admin_page_title = "#{@verdict.story.court.name}-#{@verdict.story.identity} - 判決書"
+    @admin_page_title = "#{@verdict.story.court.name}-#{@verdict.story.identity} - 判決"
     add_crumb @admin_page_title, '#'
   end
 

@@ -25,7 +25,7 @@ FactoryGirl.define do
   factory :rule do
     story { create(:story) }
     trait :with_file do
-      file { File.open("#{Rails.root}/spec/fixtures/scrap_data/ruling.html") }
+      file { File.open("#{Rails.root}/spec/fixtures/scrap_data/rule.html") }
     end
   end
 
