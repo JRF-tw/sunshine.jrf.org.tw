@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Scrap::UploadRefereeContentFileContext, type: :model do
-  let!(:original_data) { File.read("#{Rails.root}/spec/fixtures/scrap_data/ruling.html") }
+  let!(:original_data) { File.read("#{Rails.root}/spec/fixtures/scrap_data/rule.html") }
   subject { described_class.new(original_data).perform(referee) }
   describe '#perform' do
     context 'rule' do

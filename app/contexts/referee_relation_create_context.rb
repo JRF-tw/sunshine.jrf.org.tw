@@ -1,23 +1,23 @@
-class VerdictRelationCreateContext < BaseContext
+class RefereeRelationCreateContext < BaseContext
   before_perform :find_person_type
   before_perform :find_person, unless: :is_judge?
   before_perform :find_judge_person, if: :is_judge?
   before_perform :check_scoped
   before_perform :build_data
 
-  def initialize(verdict)
-    @verdict = verdict
-    @story = @verdict.story
+  def initialize(referee)
+    @referee = referee
+    @story = @referee.story
     @court = @story.court
   end
 
   def perform(person_name)
     @person_name = person_name
     run_callbacks :perform do
-      if @verdict_relation.save
-        @verdict_relation
+      if @referee_relation.save
+        @referee_relation
       else
-        add_error(:data_create_fail, @verdict_relation.errors.full_messages.join("\n"))
+        add_error(:data_create_fail, @referee_relation.errors.full_messages.join("\n"))
       end
     end
   end
@@ -25,10 +25,10 @@ class VerdictRelationCreateContext < BaseContext
   private
 
   def find_person_type
-    @person_type = 'Party' if @verdict.party_names.include?(@person_name)
-    @person_type = 'Lawyer' if @verdict.lawyer_names.include?(@person_name)
-    @person_type = 'Judge' if @verdict.judges_names.include?(@person_name)
-    @person_type = 'Prosecutor' if @verdict.prosecutor_names.include?(@person_name)
+    @person_type = 'Party' if @referee.party_names.include?(@person_name)
+    @person_type = 'Lawyer' if @referee.lawyer_names.include?(@person_name)
+    @person_type = 'Judge' if @referee.judges_names.include?(@person_name)
+    @person_type = 'Prosecutor' if @referee.prosecutor_names.include?(@person_name)
     add_error(:story_without_people_name) unless @person_type
   end
 
@@ -53,7 +53,15 @@ class VerdictRelationCreateContext < BaseContext
   end
 
   def build_data
-    @verdict_relation = @verdict.verdict_relations.find_or_initialize_by(person: @person)
+    @referee_relation = @referee.class == Verdict ? init_verdict_relation : init_rule_relation
+  end
+
+  def init_verdict_relation
+    @referee.verdict_relations.find_or_initialize_by(person: @person)
+  end
+
+  def init_rule_relation
+    @referee.rule_relations.find_or_initialize_by(person: @person)
   end
 
 end

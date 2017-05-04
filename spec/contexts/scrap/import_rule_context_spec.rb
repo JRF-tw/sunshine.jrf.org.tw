@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Scrap::ImportRuleContext, type: :model do
-  let!(:court) { create :court, code: 'TPS', full_name: '最高法院' }
-  let!(:judge) { create :judge, name: '洪昌宏' }
-  let!(:branch) { create :branch, court: court, judge: judge, chamber_name: '最高法院刑事第八庭', name: '丙' }
-  let!(:original_data) { File.read("#{Rails.root}/spec/fixtures/scrap_data/ruling.html") }
-  let!(:content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/ruling_content.txt") }
+  let!(:court) { create :court, code: 'TNH', full_name: '臺灣高等法院臺南分院' }
+  let!(:judge) { create :judge, name: '林英志' }
+  let!(:branch) { create :branch, court: court, judge: judge, chamber_name: '臺灣高等法院臺南分院刑事第六庭', name: '丙' }
+  let!(:original_data) { File.read("#{Rails.root}/spec/fixtures/scrap_data/rule.html") }
+  let!(:content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/rule_content.txt") }
 
   let!(:word) { '106,台抗,94' }
   let!(:published_on) { Time.zone.today }
@@ -70,6 +70,25 @@ RSpec.describe Scrap::ImportRuleContext, type: :model do
 
     context 'update stories_history_url' do
       it { expect(subject.stories_history_url).to be_present }
+    end
+
+    context 'create relations' do
+      context 'rule_relations' do
+        let!(:judge1) { create :judge, name: '林福來' }
+        let!(:lawyer) { create :lawyer, name: '蕭敦仁' }
+        let!(:party) { create :party, name: '鄭文玉' }
+        let!(:branch1) { create :branch, court: court, judge: judge1, chamber_name: '刑事第六庭' }
+        it { expect { subject }.to change { RuleRelation.count }.by(4) }
+      end
+
+      context 'story_relations' do
+        let!(:judge1) { create :judge, name: '林福來' }
+        let!(:lawyer) { create :lawyer, name: '蕭敦仁' }
+        let!(:party) { create :party, name: '鄭文玉' }
+        let!(:branch1) { create :branch, court: court, judge: judge1, chamber_name: '刑事第六庭' }
+
+        it { expect { subject }.to change { StoryRelation.count }.by(4) }
+      end
     end
   end
 end

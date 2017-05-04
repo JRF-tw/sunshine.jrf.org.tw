@@ -37,6 +37,6 @@ module Webmock
 
   def webmock_ruling
     stub_request(:get, /http:\/\/jirs\.judicial\.gov\.tw\/FJUD\/FJUDQRY03_1\.aspx/)
-      .to_return(status: 200, body: File.read("#{Rails.root}/spec/fixtures/scrap_data/ruling.html"))
+      .to_return(status: 200, body: File.read("#{Rails.root}/spec/fixtures/scrap_data/rule.html"))
   end
 end

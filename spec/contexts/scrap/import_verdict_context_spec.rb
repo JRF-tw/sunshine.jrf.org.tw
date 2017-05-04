@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Scrap::ImportVerdictContext, type: :model do
-  let!(:court) { create :court, code: 'HLH', full_name: '臺灣高等法院花蓮分院' }
+  let!(:court) { create :court, code: 'TCH', full_name: '臺灣高等法院臺中分院' }
   let!(:judge) { create :judge, name: '鄭永玉' }
-  let!(:branch) { create :branch, court: court, judge: judge, chamber_name: '臺灣高等法院花蓮分院刑事庭', name: '丙' }
+  let!(:branch) { create :branch, court: court, judge: judge, chamber_name: '臺灣高等法院臺中分院刑事第五庭', name: '丙' }
   let!(:original_data) { Mechanize.new.get(Scrap::ParseRefereeContext::REFEREE_URI).body.force_encoding('UTF-8') }
   let!(:content) { File.read("#{Rails.root}/spec/fixtures/scrap_data/verdict_content.txt") }
   let!(:word) { '105,原選上訴,1' }
