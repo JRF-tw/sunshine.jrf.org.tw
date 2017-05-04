@@ -20,6 +20,7 @@
 #  is_pronounced    :boolean          default(FALSE)
 #  is_calculated    :boolean          default(FALSE)
 #  reason           :string
+#  schedules_count  :integer          default(0)
 #
 
 class Admin::Story < ::Story

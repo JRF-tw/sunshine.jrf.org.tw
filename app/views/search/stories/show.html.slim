@@ -5,25 +5,25 @@
 
 .offcanvas-card-wrapper
   = render layout: 'components/feature_card', locals: {\
-    heading: "案件資料",
-    attributes: {class: "narrow"}\
+    heading: '案件資料',
+    attributes: {class: 'narrow'}\
   }
     .user-info__content
       dl.list--user-info.story-info
-        = kv_cell "類別", (link_to @story.story_type, url_for_search_story(story_type: @story.story_type), target: '_blank')
-        = kv_cell "年度", @story.year
-        = kv_cell "字別", @story.word_type
-        = kv_cell "案號", @story.number
-        = kv_cell "案由", (link_to @story.reason, url_for_search_story(reason: @story.reason), target: '_blank' if @story.reason)
-        = kv_cell "判決日期", (link_to @story.adjudged_on, url_for_search_story(adjudged_on: @story.adjudged_on), target: '_blank' if @story.adjudged_on)
-        = kv_cell "宣判日期", @story.pronounced_on
-        = kv_cell "法院全名", (link_to @story.court.full_name, url_for_search_story(court: @story.court), target: '_blank')
-        = kv_cell "法院代碼", @story.court.code
-        = kv_cell "相關法官", @story.judges_names.map { |j| link_to j, url_for_search_story(judge_name: j), target: '_blank' }.join(' ').html_safe
-        = kv_cell "相關律師", @story.lawyer_names.map { |l| link_to l, url_for_search_story(lawyer_name: l), target: '_blank' }.join(' ').html_safe
-        = kv_cell "相關檢察官", @story.prosecutor_names.join(',')
-        = kv_cell "相關當事人", @story.party_names.join(',')
-        
+        = kv_cell '類別', (link_to @story.story_type, url_for_search_story(story_type: @story.story_type), target: '_blank')
+        = kv_cell '年度', @story.year
+        = kv_cell '字別', @story.word_type
+        = kv_cell '案號', @story.number
+        = kv_cell '案由', (link_to @story.reason, url_for_search_story(reason: @story.reason), target: '_blank' if @story.reason)
+        = kv_cell '判決日期', (link_to @story.adjudged_on, url_for_search_story(adjudged_on: @story.adjudged_on), target: '_blank' if @story.adjudged_on)
+        = kv_cell '宣判日期', @story.pronounced_on
+        = kv_cell '法院全名', (link_to @story.court.full_name, url_for_search_story(court: @story.court), target: '_blank')
+        = kv_cell '法院代碼', @story.court.code
+        = kv_cell '相關法官', @story.judges_names.map { |j| link_to j, url_for_search_story(judge_name: j), target: '_blank' }.join(' ').html_safe
+        = kv_cell '相關律師', @story.lawyer_names.map { |l| link_to l, url_for_search_story(lawyer_name: l), target: '_blank' }.join(' ').html_safe
+        = kv_cell '相關檢察官', @story.prosecutor_names.join(',')
+        = kv_cell '相關當事人', @story.party_names.join(',')
+        = kv_cell '開庭次數', story_schedules_count_result(@story)
         dt.term 庭期表
         dd.desc
           - if @story.schedules.present?
@@ -34,7 +34,7 @@
               'data-content' => '由於司法院網站無法查詢歷史庭期資料，因此本網站僅提供從 2016年9月1日以來的庭期資料',
               'data-width' => '200'
               
-        = kv_cell "判決", @story.verdict ? link_to('詳細資料', search_verdict_path(@story.court.code, @story.identity)) : '尚未有判決書'
+        = kv_cell '判決', @story.verdict ? link_to('詳細資料', search_verdict_path(@story.court.code, @story.identity)) : '尚未有判決書'
       
     .card__actions.text-center
-      = link_to "回上一頁", search_stories_path, class: "raised-button"
+      = link_to '回上一頁', search_stories_path, class: 'raised-button'
