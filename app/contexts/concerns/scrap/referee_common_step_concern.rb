@@ -74,7 +74,8 @@ module Scrap::RefereeCommonStepConcern
   end
 
   def upload_file
-    Scrap::UploadRefereeContext.new(@original_data).perform(@referee)
+    Scrap::UploadRefereeFileContext.new(@original_data).perform(@referee)
+    Scrap::UploadRefereeContentFileContext.new(@original_data).perform(@referee)
   end
 
   def record_count_to_daily_notify

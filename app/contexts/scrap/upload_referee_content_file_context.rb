@@ -1,4 +1,4 @@
-class Scrap::UploadRefereeContext < BaseContext
+class Scrap::UploadRefereeContentFileContext < BaseContext
   include Scrap::AnalysisRefereeContentConcern
   before_perform  :build_content_json
   before_perform  :build_crawl_data
@@ -19,7 +19,7 @@ class Scrap::UploadRefereeContext < BaseContext
     @type = referee.class.name.downcase
     run_callbacks :perform do
       unless @referee.save
-        Logs::AddCrawlerError.send("add_#{@type}_error", @crawler_history, @referee, :upload_file_error, "儲存失敗 #{@referee.errors.full_messages.join}")
+        Logs::AddCrawlerError.send("add_#{@type}_error", @crawler_history, @referee, :upload_file_error, "內文儲存失敗 #{@referee.errors.full_messages.join}")
       end
       true
     end
@@ -36,13 +36,12 @@ class Scrap::UploadRefereeContext < BaseContext
   end
 
   def build_crawl_data
-    @judge_word = @data.css('table')[2].css('table')[1].css('span')[0].text[/\d+,\p{Han}+,\d+/].tr(',', '-')
+    @judge_word = @data.css('table')[2].css('table')[1].css('span')[0].text[/\d+,[\p{Han}()]+,\d+/].tr(',', '-')
     @reason = @data.css('table')[2].css('table')[1].css('span')[2].text[/(?<=\u00a0)\p{Han}+/]
     @related_stories = prase_related_stories(@data.text)
   end
 
   def build_file
-    @file = generate_tempfile(@orginal_data, 'referee', 'html')
     @content_file = generate_tempfile(@content_file_data.to_json, @referee.story.identity, 'json')
   end
 
@@ -56,7 +55,6 @@ class Scrap::UploadRefereeContext < BaseContext
 
   def assign_value
     @referee.assign_attributes(
-      file: File.open(@file.path),
       content_file: File.open(@content_file.path),
       reason: @reason,
       roles_data: @content_file_data['related_roles'],
@@ -66,7 +64,6 @@ class Scrap::UploadRefereeContext < BaseContext
   end
 
   def remove_tempfile
-    @file.unlink
     @content_file.unlink
   end
 end
