@@ -36,3 +36,8 @@ footer.main-footer
       | 本網站資料係取自於#{link_to '總統府', 'http://www.president.gov.tw/', target: '_blank'}、#{link_to '司法院', 'http://www.judicial.gov.tw/', target: '_blank'}、#{link_to '監察院', 'http://www.cy.gov.tw/', target: '_blank'}、#{link_to '法務部', 'http://www.moj.gov.tw/', target: '_blank'}公開資料，及
       = link_to 'g0v零時政府', 'http://g0v.tw/', target: '_blank'
       | 公開資料與公開新聞資料。
+      
+    .main-footer__g0v-logo
+      = link_to image_tag('http://grants.g0v.tw/images/power/poweredby-long.png', size: '200x30'),
+                'http://grants.g0v.tw/power/',
+                target: '_blank'
