@@ -23,7 +23,12 @@ module AdminMenuHelper
       '檢察署管理': { url: admin_prosecutors_offices_path, match: /\/admin\/prosecutors_offices/ },
       '庭期表管理': { url: admin_schedules_path, match: /\/admin\/schedules/ },
       '案件管理': { url: admin_stories_path, match: /\/admin\/stories/ },
-      '判決書管理': { url: admin_verdicts_path, match: /\/admin\/verdicts/ },
+      '裁判書管理': {
+        submenu: {
+          '判決管理': { url: admin_verdicts_path, match: /\/admin\/verdicts/ },
+          '裁定管理': { url: admin_rules_path, match: /\/admin\/rules/ }
+        }
+      },
       '評鑑紀錄管理': {
         submenu: {
           '一般評鑑紀錄': { url: admin_scores_path, match: /\/admin\/scores/ },

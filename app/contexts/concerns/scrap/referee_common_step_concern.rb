@@ -19,6 +19,7 @@ module Scrap::RefereeCommonStepConcern
     update_data_to_story
     record_count_to_daily_notify
     alert_new_story_type
+    create_relation_for_role
   end
 
   private
@@ -89,5 +90,13 @@ module Scrap::RefereeCommonStepConcern
 
   def alert_new_story_type
     SlackService.notify_new_story_type_alert("取得新的案件類別 : #{@story_type}") if @story_type.present? && !StoryTypes.list.include?(@story_type)
+  end
+
+  def create_relation_for_role
+    role_name = @referee.lawyer_names + @referee.judges_names + @referee.party_names + @referee.prosecutor_names
+    role_name.each do |name|
+      RefereeRelationCreateContext.new(@referee).perform(name)
+      Story::RelationCreateContext.new(@story).perform(name)
+    end
   end
 end

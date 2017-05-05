@@ -345,6 +345,17 @@ zh-TW:
         unexist_prosecutor_names: '檢察官為空值'
         main_judge_name_present: '有無審判長法官'
         created_at_date_equals: '發布日期'
+      rule:
+        story_court_full_name_eq: '判決法院'
+        content_cont: '內容包含'
+        adjudged_on_eq: '宣判日期'
+        main_judge_id_eq: '審判長法官'
+        unexist_party_names: '當事人為空值'
+        unexist_lawyer_names: '律師為空值'
+        unexist_judges_names: '法官為空值'
+        unexist_prosecutor_names: '檢察官為空值'
+        main_judge_name_present: '有無審判長法官'
+        created_at_date_equals: '發布日期'
       schedule:
         branch_judge_id_eq: '股別法官名稱'
         court_full_name_eq: '法院名稱'

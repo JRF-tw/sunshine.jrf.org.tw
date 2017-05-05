@@ -44,6 +44,11 @@ Rails.application.routes.draw do
         get :download_file
       end
     end
+    resources :rules do
+      member do
+        get :download_file
+      end
+    end
     resources :observers, only: [:show, :index]
     resources :parties do
       member do

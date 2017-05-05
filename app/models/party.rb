@@ -45,9 +45,12 @@ class Party < ActiveRecord::Base
   validates :unconfirmed_email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }, allow_nil: true
 
   has_many :story_relations, as: :people, dependent: :destroy
+  has_many :stories, through: :story_relations
   has_many :story_subscriptions, as: :subscriber, dependent: :destroy
   has_many :verdict_relations, as: :person, dependent: :destroy
   has_many :verdicts, through: :verdict_relations
+  has_many :rule_relations, as: :person, dependent: :destroy
+  has_many :rules, through: :rule_relations
 
   include Redis::Objects
   value :delete_phone_job_id

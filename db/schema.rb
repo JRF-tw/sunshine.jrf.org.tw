@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170503074712) do
+ActiveRecord::Schema.define(version: 20170504025324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -559,6 +559,22 @@ ActiveRecord::Schema.define(version: 20170503074712) do
 
   add_index "reviews", ["is_hidden"], name: "index_reviews_on_is_hidden", using: :btree
   add_index "reviews", ["profile_id"], name: "index_reviews_on_profile_id", using: :btree
+
+  create_table "rule_relations", force: :cascade do |t|
+    t.integer  "rule_id"
+    t.integer  "person_id"
+    t.string   "person_type"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "rule_relations", ["person_id", "person_type"], name: "index_rule_relations_on_person_id_and_person_type", using: :btree
+  add_index "rule_relations", ["person_id"], name: "index_rule_relations_on_person_id", using: :btree
+  add_index "rule_relations", ["person_type"], name: "index_rule_relations_on_person_type", using: :btree
+  add_index "rule_relations", ["rule_id", "person_id", "person_type"], name: "rule_relations_full_index", using: :btree
+  add_index "rule_relations", ["rule_id", "person_id"], name: "index_rule_relations_on_rule_id_and_person_id", using: :btree
+  add_index "rule_relations", ["rule_id", "person_type"], name: "index_rule_relations_on_rule_id_and_person_type", using: :btree
+  add_index "rule_relations", ["rule_id"], name: "index_rule_relations_on_rule_id", using: :btree
 
   create_table "rules", force: :cascade do |t|
     t.integer  "story_id"

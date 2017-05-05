@@ -1,5 +1,5 @@
 
-= admin_widget_box "#{@verdict.story.identity} - 判決書", icon: :th do
+= admin_widget_box "#{@verdict.story.identity} - 判決", icon: :th do
   table.table.table-bordered.table-striped.table-hover
     tbody
       tr
@@ -20,8 +20,8 @@
       tr
         td 陪審檢察官
         td
-          - @verdict.verdict_relations.by_type('Prosecutor').each do |relations|
-            = link_to "#{relations.person.name} ", admin_prosecutor_path(relations.person)
+          - @verdict.prosecutors.each do |prosecutor|
+            = link_to "#{prosecutor.name} ", admin_prosecutor_path(prosecutor)
             = ' '
       tr
         td 分析律師結果
@@ -29,26 +29,26 @@
       tr
         td 陪審律師
         td
-          - @verdict.verdict_relations.by_type('Lawyer').each do |relations|
-            = link_to "#{relations.person.name} ", admin_lawyer_path(relations.person)
-            = " "
+          - @verdict.lawyers.each do |lawyer|
+            = link_to "#{lawyer.name} ", admin_lawyer_path(lawyer)
+            = ' '
       tr
         td 分析陪審法官結果
         td = @verdict.judges_names.join(',')
       tr
         td 陪審法官
         td
-          - @verdict.verdict_relations.by_type('Judge').each do |relations|
-            = link_to "#{relations.person.name} ", admin_judge_path(relations.person)
-            = " "
+          - @verdict.judges.each do |judge|
+            = link_to "#{judge.name} ", admin_judge_path(judge)
+            = ' '
       tr
         td 分析當事人結果
         td = @verdict.party_names.join(',')
       tr
         td 陪審當事人
         td
-          - @verdict.verdict_relations.by_type('Party').each do |relations|
-            = link_to "#{relations.person.name} ", admin_party_path(relations.person)
+          - @verdict.parties.each do |party|
+            = link_to "#{party.name} ", admin_party_path(party)
             = ' '
       tr
         td 司法院公開網址

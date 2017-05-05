@@ -5,7 +5,6 @@ class Scrap::ImportVerdictContext < BaseContext
   after_perform   :update_adjudged_on
   after_perform   :update_pronounced_on
   after_perform   :after_perform_common_step
-  after_perform   :create_relation_for_role
   after_perform   :calculate_schedule_scores, if: :story_adjudge?
   after_perform   :send_notice
   after_perform   :send_active_notice
@@ -43,14 +42,6 @@ class Scrap::ImportVerdictContext < BaseContext
 
   def update_pronounced_on
     @story.update_attributes(pronounced_on: Time.zone.today, is_pronounced: true) unless @story.pronounced_on
-  end
-
-  def create_relation_for_role
-    verdict_role_name = @verdict.lawyer_names + @verdict.judges_names + @verdict.party_names + @verdict.prosecutor_names
-    verdict_role_name.each do |name|
-      VerdictRelationCreateContext.new(@verdict).perform(name)
-      Story::RelationCreateContext.new(@story).perform(name)
-    end
   end
 
   def calculate_schedule_scores
