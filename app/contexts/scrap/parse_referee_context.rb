@@ -65,14 +65,14 @@ class Scrap::ParseRefereeContext < BaseContext
   def parse_referee_story_type
     @referee_story_type = @nokogiri_data.css('table')[0].css('b').text.match(/\s+(\p{Word}+)類/)[1]
   rescue
-    Logs::AddCrawlerError.parse_referee_data_error(@crawler_history, :parse_data_failed, '解析資訊錯誤 : 取得 裁判書類別 失敗')
+    Logs::AddCrawlerError.parse_referee_data_error(@crawler_history, :parse_data_failed, "解析資訊錯誤 : 取得 裁判書類別失敗 Query: #{@referee_query}")
     false
   end
 
   def parse_referee_word
     @referee_word = @nokogiri_data.css('table')[4].css('tr')[0].css('td')[0].text
   rescue
-    Logs::AddCrawlerError.parse_referee_data_error(@crawler_history, :parse_data_failed, '解析資訊錯誤 : 取得 裁判書字別 失敗')
+    Logs::AddCrawlerError.parse_referee_data_error(@crawler_history, :parse_data_failed, "解析資訊錯誤 : 取得 裁判書字別失敗 Query: #{@referee_query}")
     false
   end
 
@@ -80,14 +80,14 @@ class Scrap::ParseRefereeContext < BaseContext
     date_string = @nokogiri_data.css('table')[4].css('tr')[1].css('td')[0].text.match(/\d+/)[0]
     @referee_adjudged_on = Date.new((date_string[0..2].to_i + 1911), date_string[3..4].to_i, date_string[5..6].to_i)
   rescue
-    Logs::AddCrawlerError.parse_referee_data_error(@crawler_history, :parse_data_failed, '解析資訊錯誤 : 取得 裁判書發布日期 失敗')
+    Logs::AddCrawlerError.parse_referee_data_error(@crawler_history, :parse_data_failed, "解析資訊錯誤 : 取得 裁判書發布日期 失敗 Query: #{@referee_query}")
     false
   end
 
   def parse_referee_content
     @referee_content = @nokogiri_data.css('pre').text
   rescue
-    Logs::AddCrawlerError.parse_referee_data_error(@crawler_history, :parse_data_failed, '解析資訊錯誤 : 取得 裁判書內容 失敗')
+    Logs::AddCrawlerError.parse_referee_data_error(@crawler_history, :parse_data_failed, "解析資訊錯誤 : 取得 裁判書內容 失敗 Query: #{@referee_query}")
     false
   end
 
