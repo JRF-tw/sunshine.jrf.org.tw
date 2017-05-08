@@ -12,7 +12,7 @@ class Import::CreateRefereeContext < BaseContext
   before_perform :assign_attributes
   after_perform  :update_data_to_story
   after_perform  :update_date_to_story, if: :is_verdict?
-  after_perform  :create_relation_for_role, if: :is_verdict?
+  after_perform  :create_relation_for_role
   after_perform  :remove_tempfile
 
   def initialize(hash_data)
@@ -109,9 +109,9 @@ class Import::CreateRefereeContext < BaseContext
   end
 
   def create_relation_for_role
-    verdict_role_name = @referee.lawyer_names + @referee.judges_names + @referee.party_names + @referee.prosecutor_names
-    verdict_role_name.each do |name|
-      VerdictRelationCreateContext.new(@referee).perform(name)
+    referee_role_name = @referee.lawyer_names + @referee.judges_names + @referee.party_names + @referee.prosecutor_names
+    referee_role_name.each do |name|
+      RefereeRelationCreateContext.new(@referee).perform(name)
       Story::RelationCreateContext.new(@story).perform(name)
     end
   end
