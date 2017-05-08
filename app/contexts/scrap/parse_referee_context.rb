@@ -3,6 +3,7 @@ class Scrap::ParseRefereeContext < BaseContext
   RESULT_URI = 'http://jirs.judicial.gov.tw/FJUD/FJUDQRY02_1.aspx'.freeze
   REFEREE_URI = 'http://jirs.judicial.gov.tw/FJUD/FJUDQRY03_1.aspx'.freeze
 
+  before_perform :init_query
   before_perform :get_referee_data
   before_perform :parse_original_data
   before_perform :parse_nokogiri_data
@@ -12,16 +13,19 @@ class Scrap::ParseRefereeContext < BaseContext
   before_perform :parse_referee_content
 
   class << self
-    def perform(court, scrap_id, type, start_date, end_date)
-      new(court, scrap_id, type, start_date, end_date).perform
+    def perform(court:, scrap_id: nil, type: nil, year: nil, word: nil, number: nil, start_date: nil, end_date: nil)
+      new(court: court, scrap_id: scrap_id, type: type, year: year, word: word, number: number, start_date: start_date, end_date: end_date).perform
     end
   end
 
-  def initialize(court, scrap_id, type, start_date, end_date)
-    @scrap_id = scrap_id
+  def initialize(court:, scrap_id: nil, type: nil, year: nil, word: nil, number: nil, start_date: nil, end_date: nil)
     @court = court
+    @scrap_id = scrap_id
     @type = type
-    @start_date = start_date
+    @year = year
+    @word = word
+    @number = number
+    @stary_date = start_date
     @end_date = end_date
     @sleep_time_interval = rand(0.1..1.0).round(3)
     @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
@@ -39,9 +43,20 @@ class Scrap::ParseRefereeContext < BaseContext
 
   private
 
+  def init_query
+    @referee_query = CrawlerQueries.new(
+      scrap_id: @scrap_id,
+      court: @court,
+      type: @type,
+      year: @year,
+      word: @word,
+      number: @number,
+      start_date: @start_date,
+      end_date: @end_date
+    ).show_url
+  end
+
   def get_referee_data
-    court_value = @court.code + ' ' + @court.scrap_name
-    @referee_query = "?id=#{@scrap_id}&v_court=#{court_value}&v_sys=#{@type}&jud_year=&jud_case=&jud_no=&jud_no_end=&jud_title=&keyword=&sdate=#{@start_date}&edate=#{@end_date}&page=1&searchkw=&jmain=&cw=0"
     sleep @sleep_time_interval
     @response_data = Mechanize.new.get(REFEREE_URI + @referee_query, {}, RESULT_URI)
   rescue
@@ -98,7 +113,16 @@ class Scrap::ParseRefereeContext < BaseContext
   def request_retry(key:)
     redis_object = Redis::Counter.new(key, expiration: 1.day)
     if redis_object.value < 12
-      self.class.delay_for(1.hour).perform(@court, @scrap_id, @type, @start_date, @end_date)
+      self.class.delay_for(1.hour).perform(
+        scrap_id: @scrap_id,
+        court: @court,
+        type: @type,
+        year: @year,
+        word: @word,
+        number: @number,
+        start_date: @start_date,
+        end_date: @end_date
+      )
       redis_object.incr
     else
       Logs::AddCrawlerError.parse_referee_data_error(@crawler_history, :crawler_failed, "取得 裁判書內容失敗 : 來源網址: #{REFEREE_URI}, 參數: #{@referee_query}")

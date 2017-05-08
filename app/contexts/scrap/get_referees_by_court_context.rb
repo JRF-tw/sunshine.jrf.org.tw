@@ -19,7 +19,7 @@ class Scrap::GetRefereesByCourtContext < BaseContext
   def perform
     run_callbacks :perform do
       @story_types.each do |type|
-        Scrap::GetRefereesTotalResultByStoryTypeContext.delay(retry: false, queue: 'crawler_referee').perform(@court, type, @start_date, @end_date)
+        Scrap::GetRefereesTotalResultContext.delay(retry: false, queue: 'crawler_referee').perform(court: @court, type: type, start_date: @start_date, end_date: @end_date)
       end
     end
   end
