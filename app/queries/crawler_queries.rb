@@ -2,7 +2,7 @@ class CrawlerQueries
 
   class << self
     def by_story(story)
-      new(court: story.court, type: story.type_for_crawler, year: story.year, word: story.word_type, number: story.number).url
+      new(court: story.court, type: story.type_for_crawler, year: story.year, word: story.word_type, number: story.number).index_url
     end
   end
 
@@ -13,7 +13,7 @@ class CrawlerQueries
     @year = year
     @word = word
     @number = number
-    @stary_date = start_date
+    @start_date = start_date
     @end_date = end_date
   end
 
