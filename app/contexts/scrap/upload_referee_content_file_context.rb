@@ -32,7 +32,7 @@ class Scrap::UploadRefereeContentFileContext < BaseContext
   def build_content_json
     start_point = get_content_start_point(@content)
     @content_file_data['related_roles'] = parse_roles_hash(@referee, @content, @crawler_history)
-    @content_file_data['main_content'] = @data.css('pre').text[start_point..-1]
+    @content_file_data['main_content'] = @content[start_point..-1]
   end
 
   def build_crawl_data
