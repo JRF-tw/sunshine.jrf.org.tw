@@ -35,7 +35,6 @@ RSpec.describe Api::VerdictsController, type: :request do
           prosecutor_names: verdict.prosecutor_names,
           lawyer_names: verdict.lawyer_names,
           party_names: verdict.party_names,
-          related_stories: verdict.related_stories,
           adjudged_on: verdict.adjudged_on,
           original_url: verdict.original_url,
           body: {

@@ -8,7 +8,6 @@ json.verdict do
   json.lawyer_names @verdict.lawyer_names
   json.prosecutor_names @verdict.prosecutor_names
   json.party_names @verdict.party_names
-  json.related_stories @verdict.related_stories
   json.adjudged_on @verdict.adjudged_on
   json.original_url @verdict.original_url
   json.body do
