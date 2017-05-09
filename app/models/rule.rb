@@ -38,6 +38,7 @@ class Rule < ActiveRecord::Base
   belongs_to :story
 
   scope :newest, -> { order('id DESC') }
+  scope :search_sort, -> { reorder('adjudged_on DESC NULLS LAST, created_at DESC') }
 
   class << self
     def ransackable_scopes(_auth_object = nil)

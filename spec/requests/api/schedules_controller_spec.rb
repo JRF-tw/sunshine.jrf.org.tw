@@ -37,7 +37,7 @@ RSpec.describe Api::SchedulesController, type: :request do
     }.deep_stringify_keys
   end
 
-  describe '#show' do
+  describe '#index' do
     context 'success' do
       let(:url) { URI.encode("/#{code}/#{story.identity}/schedules") }
       subject! { get url }

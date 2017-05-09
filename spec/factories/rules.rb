@@ -27,6 +27,10 @@ FactoryGirl.define do
     trait :with_file do
       file { File.open("#{Rails.root}/spec/fixtures/scrap_data/rule.html") }
     end
+
+    trait :with_original_url do
+      original_url 'http://jirs.judicial.gov.tw/FJUD/index_1_S.aspx?p=cuFaWjq4uRFo8IK6d3HqDRI%2fH02WUkgUP9selP3kGCE%3d'
+    end
   end
 
 end
