@@ -13,19 +13,19 @@ class Scrap::ParseRefereeContext < BaseContext
   before_perform :parse_referee_content
 
   class << self
-    def perform(court:, scrap_id: nil, type: nil, year: nil, word: nil, number: nil, start_date: nil, end_date: nil)
+    def perform(court:, scrap_id: 1, type: nil, year: nil, word: nil, number: nil, start_date: nil, end_date: nil)
       new(court: court, scrap_id: scrap_id, type: type, year: year, word: word, number: number, start_date: start_date, end_date: end_date).perform
     end
   end
 
-  def initialize(court:, scrap_id: nil, type: nil, year: nil, word: nil, number: nil, start_date: nil, end_date: nil)
+  def initialize(court:, scrap_id: 1, type: nil, year: nil, word: nil, number: nil, start_date: nil, end_date: nil)
     @court = court
     @scrap_id = scrap_id
     @type = type
     @year = year
     @word = word
     @number = number
-    @stary_date = start_date
+    @start_date = start_date
     @end_date = end_date
     @sleep_time_interval = rand(0.1..1.0).round(3)
     @crawler_history = CrawlerHistory.find_or_create_by(crawler_on: Time.zone.today)
