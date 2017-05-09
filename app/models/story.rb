@@ -74,6 +74,19 @@ class Story < ActiveRecord::Base
     end
   end
 
+  def type_for_crawler
+    case story_type
+    when '刑事'
+      'M'
+    when '民事'
+      'V'
+    when '行政'
+      'A'
+    when '公懲'
+      'P'
+    end
+  end
+
   class << self
     def ransackable_scopes(_auth_object = nil)
       [:relation_by_judge]

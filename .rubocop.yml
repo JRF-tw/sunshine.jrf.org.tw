@@ -33,7 +33,7 @@ Metrics/ModuleLength:
   Enabled: false
 
 Metrics/ParameterLists:
-  Max: 6
+  Max: 10
 
 Style/AccessorMethodName:
   Enabled: false

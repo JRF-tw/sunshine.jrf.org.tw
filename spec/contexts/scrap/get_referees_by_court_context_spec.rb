@@ -8,6 +8,6 @@ RSpec.describe Scrap::GetRefereesByCourtContext, type: :model do
   describe '#perform' do
     subject { described_class.new(court, start_date, end_date).perform }
 
-    it { expect { subject }.to change_sidekiq_jobs_size_of(Scrap::GetRefereesTotalResultByStoryTypeContext, :perform, queue: 'crawler_referee') }
+    it { expect { subject }.to change_sidekiq_jobs_size_of(Scrap::GetRefereesTotalResultContext, :perform, queue: 'crawler_referee') }
   end
 end
