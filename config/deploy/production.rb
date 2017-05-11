@@ -11,7 +11,9 @@ require "aws-sdk"
 aws_conf = YAML.load(IO.read("./config/application.yml"))["development"]["aws"].symbolize_keys
 AWS.config(aws_conf.merge(region: "ap-northeast-1"))
 lb_name = "web"
+crawler_lb_name = 'crawler'
 servers = AWS::ELB.new.load_balancers[lb_name].instances.map(&:ip_address)
+crawler_servers = AWS::ELB.new.load_balancers[crawler_lb_name].instances.map(&:ip_address)
 
 shadow_server = "52.192.156.48"
 role :app,                servers + [ shadow_server ]
@@ -22,7 +24,7 @@ role :sidekiq_server,     shadow_server
 role :assets_sync_server, shadow_server
 
 # crawler_server = '54.238.209.110' 
-# role :crawler,  crawler_server
+role :crawler,  crawler_servers
 
 # sitemap_generator
 # after "deploy", "deploy:sitemap:create"
