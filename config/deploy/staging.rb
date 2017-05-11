@@ -13,6 +13,9 @@ role :whenever_server,    server
 role :sidekiq_server,     server
 role :assets_sync_server, server
 
+# crawler_server = '54.238.209.110' 
+# role :crawler,  crawler_server
+
 # Extended Server Syntax
 # ======================
 # This can be used to drop a more detailed server definition into the

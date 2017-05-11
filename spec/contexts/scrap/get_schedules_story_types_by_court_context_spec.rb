@@ -8,6 +8,6 @@ RSpec.describe Scrap::GetSchedulesStoryTypesByCourtContext, type: :model do
   describe '#perform' do
     subject { described_class.new(court.code, start_date, end_date).perform }
 
-    it { expect { subject }.to change_sidekiq_jobs_size_of(Scrap::GetSchedulesPagesByStoryTypeContext, :perform) }
+    it { expect { subject }.to change_sidekiq_jobs_size_of(Scrap::GetSchedulesPagesByStoryTypeContext, :perform, queue: 'crawler_schedule') }
   end
 end
