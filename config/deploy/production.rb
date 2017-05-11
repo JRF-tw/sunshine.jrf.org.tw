@@ -21,6 +21,9 @@ role :whenever_server,    shadow_server
 role :sidekiq_server,     shadow_server
 role :assets_sync_server, shadow_server
 
+# crawler_server = '54.238.209.110' 
+# role :crawler,  crawler_server
+
 # sitemap_generator
 # after "deploy", "deploy:sitemap:create"
 

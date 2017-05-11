@@ -25,7 +25,7 @@ class Scrap::GetSchedulesPagesByStoryTypeContext < BaseContext
     run_callbacks :perform do
       @page_total.times.each_with_index do |i|
         current_page = i + 1
-        Scrap::ParseSchedulesContext.delay(retry: false).perform(@court_code, @story_type, current_page, @page_total, @start_date_format, @end_date_format)
+        Scrap::ParseSchedulesContext.delay(retry: false, queue: 'crawler_schedule').perform(@court_code, @story_type, current_page, @page_total, @start_date_format, @end_date_format)
       end
     end
   end

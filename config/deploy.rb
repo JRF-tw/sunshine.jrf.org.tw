@@ -66,6 +66,7 @@ end
 
 
 after 'deploy:publishing', 'deploy:restart'
+after 'bundler:install', 'sidekiq:upload_crawler_config'
 namespace :deploy do
   task :restart do
     invoke 'unicorn:legacy_restart'
