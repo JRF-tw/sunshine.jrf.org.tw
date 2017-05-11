@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe Api::SchedulesController, type: :request do
-  before { host! 'api.example.com' }
+RSpec.describe Api::RulesController, type: :request do
   include_context 'create_data_for_request'
-  let!(:schedule) { create :schedule, :with_branch_judge, story: story, court: court }
+  let!(:rule) { create :rule, :with_original_url, story: story }
+  before { host! 'api.example.com' }
   def index_json
     {
       story: {
@@ -17,54 +17,58 @@ RSpec.describe Api::SchedulesController, type: :request do
         adjudged_on: story.adjudged_on,
         pronounced_on: story.pronounced_on,
         judges_names: story.judges_names,
-        prosecutor_names: story.prosecutor_names,
         lawyer_names: story.lawyer_names,
+        prosecutor_names: story.prosecutor_names,
         party_names: story.party_names,
-        detail_url: api_story_url(story.court.code, story.identity, protocol: 'https')
+        detail_url: api_story_url(story.court.code, story.identity)
       },
       court: {
         name: court.full_name,
         code: court.code
       },
-      schedules: [{
-        branch_name: schedule.branch_name,
-        branch_judge: schedule.branch_judge.name,
-        courtroom: schedule.courtroom,
-        start_on: schedule.start_on.to_s,
-        start_at: schedule.start_at.to_s
+      rules: [{
+        reason: rule.reason,
+        judges_names: rule.judges_names,
+        prosecutor_names: rule.prosecutor_names,
+        lawyer_names: rule.lawyer_names,
+        party_names: rule.party_names,
+        adjudged_on: rule.adjudged_on,
+        original_url: rule.original_url,
+        body: {
+          raw_html_url: rule.file.url ? 'https:' + rule.file.url : nil,
+          content_url: rule.content_file.url ? 'https:' + rule.content_file.url : nil
+        }
       }]
-
     }.deep_stringify_keys
   end
-
   describe '#index' do
     context 'success' do
-      let(:url) { URI.encode("/#{code}/#{story.identity}/schedules") }
+      let(:url) { URI.encode("/#{code}/#{story.identity}/rules") }
       subject! { get url }
       it { expect(response_body).to eq(index_json) }
       it { expect(response).to be_success }
     end
 
     context 'court not exist' do
-      let(:url) { URI.encode("/XxX/#{story.identity}/schedules") }
+      let(:url) { URI.encode("/XxX/#{story.identity}/rules") }
       subject! { get url }
       it { expect(response_body['message']).to eq('該法院代號不存在') }
       it { expect(response.status).to eq(404) }
     end
 
     context 'story not exist' do
-      let(:url) { URI.encode("/#{code}/#{story.identity + '1'}/schedules") }
+      let(:url) { URI.encode("/#{code}/#{story.identity + '1'}/rules") }
       subject! { get url }
       it { expect(response_body['message']).to eq('案件不存在') }
       it { expect(response.status).to eq(404) }
     end
 
-    context 'schedule not exist' do
-      before { Schedule.destroy_all }
-      let(:url) { URI.encode("/#{code}/#{story.identity}/schedules") }
+    context 'rule not exist' do
+      before { Rule.destroy_all }
+      let(:url) { URI.encode("/#{code}/#{story.identity}/rules") }
       subject! { get url }
-      it { expect(response_body['schedules']).to eq([]) }
-      it { expect(response).to be_success }
+      it { expect(response_body['message']).to eq('此案件尚未有裁決書') }
+      it { expect(response.status).to eq(404) }
     end
   end
 end

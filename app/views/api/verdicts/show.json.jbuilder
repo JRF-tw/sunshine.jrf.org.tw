@@ -2,13 +2,14 @@ json.verdict do
   json.story do
     json.partial! 'api/story', story: @story
   end
-  json.partial! 'api/court', court: @court
+  json.court do
+    json.partial! 'api/court', court: @court
+  end
   json.reason @verdict.reason
   json.judges_names @verdict.judges_names
   json.lawyer_names @verdict.lawyer_names
   json.prosecutor_names @verdict.prosecutor_names
   json.party_names @verdict.party_names
-  json.related_stories @verdict.related_stories
   json.adjudged_on @verdict.adjudged_on
   json.original_url @verdict.original_url
   json.body do

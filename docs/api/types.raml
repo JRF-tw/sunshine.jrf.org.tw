@@ -139,10 +139,6 @@ Verdict:
       description: 相關當事人姓名
       type: string[]
       example: ["李文財"]
-    related_stories?:
-      description: 其他相關案件
-      type: string[]
-      example: ['105年度上易字第548號', '105年度上易字第549號', '105年度上易字第550號', '105年度上易字第551號', '105年度上易字第552號']
     adjudged_on:
       description: 判決日期
       type: date-only
@@ -158,6 +154,43 @@ Verdict:
           description: 判決書內文檔案連結
           type: string
           example: https://dvtnykzk9n7xc.cloudfront.net/uploads/verdict/content_file/000/162/402/31b7d434-fbe1-49be-a5f0-598c4d4d64fe.json
+Rule:
+  properties:
+    reason?:
+      description: 案由
+      type: string
+      example: 交付法庭錄音光碟
+    judges_names?:
+      description: 相關法官姓名
+      type: string[]
+      example: ['蔡聰明', '崔玲琦', '陳憲裕']
+    prosecutor_names?:
+      description: 相關檢察官姓名
+      type: string[]
+      example: ["張蘭"]
+    lawyer_names?:
+      description: 相關律師姓名
+      type: string[]
+      example: ['潘心瑀']
+    party_names?:
+      description: 相關當事人姓名
+      type: string[]
+      example: ["陳振興"]
+    adjudged_on:
+      description: 判決日期
+      type: date-only
+      example: 2017-05-27
+    original_url?: string
+    body:
+      properties:
+        raw_html_url:
+          description: 整份判決書檔案連結
+          type: string
+          example: https:////dvtnykzk9n7xc.cloudfront.net/uploads/rule/file/000/089/414/e794ed29-56bf-43f7-a8da-36e501ac0798.html
+        content_url:
+          description: 判決書內文檔案連結
+          type: string
+          example: https://dvtnykzk9n7xc.cloudfront.net/uploads/rule/content_file/000/089/414/ccdfa4c4-7e5f-41b1-ab5a-8d1f30f77f07.json
 Schedule:
   properties:
     story: story_partial

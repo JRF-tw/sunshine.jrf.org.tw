@@ -16,12 +16,12 @@ types: !include types.raml
       description: 法院代號
       type: string
       pattern: \w{3}
-      example: TPH
+      example: KSB
     story_identity:
       description: 案件識別碼 {story_type}-{story_year}-{story_word}-{story_number}
       type: string
       pattern: .*-\d{2,3}-.+-\d+
-      example: 民事-105-重上-608
+      example: 行政-104-訴-157
   get:
     responses:
       200:
@@ -43,6 +43,22 @@ types: !include types.raml
             application/json:
               properties:
                 verdict: Verdict
+        404:
+          body:
+            application/json:
+              properties:
+                message: fail_messages
+  /rules:
+    get:
+      description: Retrieve a rules list of story
+      responses:
+        200:
+          body:
+            application/json:
+              properties:
+                story: story_partial
+                court: Court
+                rules: Rule[]
         404:
           body:
             application/json:
