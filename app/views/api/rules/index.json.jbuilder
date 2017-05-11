@@ -1,7 +1,9 @@
 json.story do
   json.partial! 'api/story', story: @story
 end
-json.partial! 'api/court', court: @court
+json.court do
+  json.partial! 'api/court', court: @court
+end
 json.rules @rules do |rule|
   json.reason rule.reason
   json.judges_names rule.judges_names

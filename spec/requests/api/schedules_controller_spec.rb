@@ -6,27 +6,27 @@ RSpec.describe Api::SchedulesController, type: :request do
   let!(:schedule) { create :schedule, :with_branch_judge, story: story, court: court }
   def index_json
     {
+      story: {
+        identity: {
+          type: story.story_type,
+          year: story.year,
+          word: story.word_type,
+          number: story.number
+        },
+        reason: story.reason,
+        adjudged_on: story.adjudged_on,
+        pronounced_on: story.pronounced_on,
+        judges_names: story.judges_names,
+        prosecutor_names: story.prosecutor_names,
+        lawyer_names: story.lawyer_names,
+        party_names: story.party_names,
+        detail_url: api_story_url(story.court.code, story.identity, protocol: 'https')
+      },
+      court: {
+        name: court.full_name,
+        code: court.code
+      },
       schedules: [{
-        story: {
-          identity: {
-            type: story.story_type,
-            year: story.year,
-            word: story.word_type,
-            number: story.number
-          },
-          reason: story.reason,
-          adjudged_on: story.adjudged_on,
-          pronounced_on: story.pronounced_on,
-          judges_names: story.judges_names,
-          prosecutor_names: story.prosecutor_names,
-          lawyer_names: story.lawyer_names,
-          party_names: story.party_names,
-          detail_url: api_story_url(story.court.code, story.identity, protocol: 'https')
-        },
-        court: {
-          name: court.full_name,
-          code: court.code
-        },
         branch_name: schedule.branch_name,
         branch_judge: schedule.branch_judge.name,
         courtroom: schedule.courtroom,
