@@ -7,6 +7,7 @@ namespace :load do
   end
 end
 
+after 'bundler:install', 'sidekiq:upload_crawler_config'
 namespace :sidekiq do
   task :upload_crawler_config do
     on roles(:crawler) do
