@@ -10,13 +10,13 @@ RSpec.describe Scrap::ParseRefereeContext, type: :model do
   describe '#perform' do
     context 'verdict' do
       subject { described_class.new(court: court, scrap_id: scrap_id, type: type, start_date: start_date, end_date: end_date).perform }
-      it { expect { subject }.to change_sidekiq_jobs_size_of(Scrap::ImportVerdictContext, :perform, queue: 'crawler_verdict') }
+      it { expect { subject }.to change_sidekiq_jobs_size_of(Scrap::ImportVerdictContext, :perform, queue: 'import_referee') }
     end
 
     context 'rule' do
       before { webmock_ruling }
       subject { described_class.new(court: court, scrap_id: scrap_id, type: type, start_date: start_date, end_date: end_date).perform }
-      it { expect { subject }.to change_sidekiq_jobs_size_of(Scrap::ImportRuleContext, :perform, queue: 'crawler_rule') }
+      it { expect { subject }.to change_sidekiq_jobs_size_of(Scrap::ImportRuleContext, :perform, queue: 'import_referee') }
     end
   end
 end

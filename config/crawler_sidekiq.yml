@@ -4,36 +4,30 @@
 :queues:
   - [crawler_schedule, 1]
   - [crawler_referee, 2]
-  - [crawler_verdict, 1]
-  - [crawler_rule, 1]
+  - [import_referee, 1]
 :limits:
   crawler_schedule: 1
-  crawler_referee: 1
-  crawler_verdict: 1
-  crawler_rule: 1
+  crawler_referee: 2
+  import_referee: 1
 staging:
   :concurrency: 3
   :queues:
     - [crawler_schedule, 1]
     - [crawler_referee, 2]
-    - [crawler_verdict, 1]
-    - [crawler_rule, 1]
+    - [import_referee, 1]
   :limits:
     crawler_schedule: 1
-    crawler_referee: 1
-    crawler_verdict: 1
-    crawler_rule: 1
+    crawler_referee: 2
+    import_referee: 1
 production:
   :concurrency: 4
   :queues:
     - [crawler_schedule, 1]
     - [crawler_referee, 2]
-    - [crawler_verdict, 1]
-    - [crawler_rule, 1]
+    - [import_referee, 1]
   :limits:
     crawler_schedule: 1
-    crawler_referee: 2
-    crawler_verdict: 1
-    crawler_rule: 1
+    crawler_referee: 3
+    import_referee: 2
 
 
