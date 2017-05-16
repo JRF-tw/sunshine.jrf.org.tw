@@ -34,9 +34,9 @@ class Scrap::ParseRefereeContext < BaseContext
   def perform
     run_callbacks :perform do
       if referee_type == 'verdict'
-        Scrap::ImportVerdictContext.delay(retry: false, queue: 'crawler_verdict').perform(@court, @original_data, @referee_content, @referee_word, @referee_adjudged_on, @referee_story_type)
+        Scrap::ImportVerdictContext.delay(retry: false, queue: 'import_referee').perform(@court, @original_data, @referee_content, @referee_word, @referee_adjudged_on, @referee_story_type)
       else
-        Scrap::ImportRuleContext.delay(retry: false, queue: 'crawler_rule').perform(@court, @original_data, @referee_content, @referee_word, @referee_adjudged_on, @referee_story_type)
+        Scrap::ImportRuleContext.delay(retry: false, queue: 'import_referee').perform(@court, @original_data, @referee_content, @referee_word, @referee_adjudged_on, @referee_story_type)
       end
     end
   end
