@@ -113,7 +113,7 @@ class Scrap::ParseRefereeContext < BaseContext
   def request_retry(key:)
     redis_object = Redis::Counter.new(key, expiration: 1.day)
     if redis_object.value < 12
-      self.class.delay_for(1.hour).perform(
+      self.class.delay_for(1.hour, queue: 'crawler_referee').perform(
         scrap_id: @scrap_id,
         court: @court,
         type: @type,

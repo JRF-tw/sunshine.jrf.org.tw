@@ -37,7 +37,7 @@ class Scrap::GetRefereesByCourtContext < BaseContext
   def request_retry(key:)
     redis_object = Redis::Counter.new(key, expiration: 1.day)
     if redis_object.value < 12
-      self.class.delay_for(1.hour).perform(@court, @start_date, @end_date)
+      self.class.delay_for(1.hour, queue: 'crawler_referee').perform(@court, @start_date, @end_date)
       redis_object.incr
     else
       Logs::AddCrawlerError.parse_referee_data_error(@crawler_history, :crawler_failed, "取得裁判書類別失敗, 來源網址:#{INDEX_URI}")
