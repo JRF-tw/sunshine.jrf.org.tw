@@ -34,9 +34,9 @@ class Scrap::ParseRefereeContext < BaseContext
   def perform
     run_callbacks :perform do
       if referee_type == 'verdict'
-        Scrap::ImportVerdictContext.delay(retry: false, queue: 'crawler_verdict').perform(@court, @original_data, @referee_content, @referee_word, @referee_adjudged_on, @referee_story_type)
+        Scrap::ImportVerdictContext.delay(retry: false, queue: 'import_referee').perform(@court, @original_data, @referee_content, @referee_word, @referee_adjudged_on, @referee_story_type)
       else
-        Scrap::ImportRuleContext.delay(retry: false, queue: 'crawler_rule').perform(@court, @original_data, @referee_content, @referee_word, @referee_adjudged_on, @referee_story_type)
+        Scrap::ImportRuleContext.delay(retry: false, queue: 'import_referee').perform(@court, @original_data, @referee_content, @referee_word, @referee_adjudged_on, @referee_story_type)
       end
     end
   end
@@ -113,7 +113,7 @@ class Scrap::ParseRefereeContext < BaseContext
   def request_retry(key:)
     redis_object = Redis::Counter.new(key, expiration: 1.day)
     if redis_object.value < 12
-      self.class.delay_for(1.hour).perform(
+      self.class.delay_for(1.hour, queue: 'crawler_referee').perform(
         scrap_id: @scrap_id,
         court: @court,
         type: @type,
