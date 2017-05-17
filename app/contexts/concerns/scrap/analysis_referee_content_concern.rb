@@ -106,7 +106,7 @@ module Scrap::AnalysisRefereeContentConcern
   def parse_referee_type(content, crawler_history)
     content.split.first.match(/判決/).present? ? 'verdict' : 'rule'
   rescue
-    Logs::AddCrawlerError.parse_referee_data_error(crawler_history, :parse_data_failed, "解析資訊錯誤 : 取得 裁判書類型 失敗, 內文: #{@content}")
+    Logs::AddCrawlerError.parse_referee_data_error(crawler_history, :parse_data_failed, "解析資訊錯誤 : 取得 裁判書類型 失敗, 內文: #{content}")
     false
   end
 
@@ -119,6 +119,9 @@ module Scrap::AnalysisRefereeContentConcern
   def get_content_start_point(content)
     return content.index('上列') - 1 if content.index('上列')
     content.index(/[\p{han}\p{p}\d]{20}/)
+  rescue
+    Logs::AddCrawlerError.parse_referee_data_error(crawler_history, :parse_data_failed, "擷取內文起始點失敗, 內文: #{content}")
+    100
   end
 
   private

@@ -37,6 +37,7 @@ class Verdict < ActiveRecord::Base
   has_many :judges, through: :verdict_relations, source: :person, source_type: 'Judge'
   has_many :prosecutors, through: :verdict_relations, source: :person, source_type: 'Prosecutor'
   belongs_to :story
+  validates :story_id, uniqueness: true
 
   scope :newest, -> { order('id DESC') }
 
