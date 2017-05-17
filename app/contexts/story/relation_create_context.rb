@@ -14,7 +14,7 @@ class Story::RelationCreateContext < BaseContext
       if @story_relation.save
         @story_relation
       else
-        add_error(:data_create_fail, @judge.errors.full_messages.join("\n"))
+        add_error(:data_create_fail, @story.errors.full_messages.join("\n"))
       end
     end
   end
