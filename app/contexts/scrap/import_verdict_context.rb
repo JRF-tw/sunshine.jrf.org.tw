@@ -37,7 +37,7 @@ class Scrap::ImportVerdictContext < BaseContext
   private
 
   def update_adjudged_on
-    @story.update_attributes(adjudged_on: @adjudged_on, is_adjudged: true) unless @story.adjudged_on
+    @story.update_attributes(adjudged_on: @adjudged_on, is_adjudged: true) unless @story.adjudged_on == @adjudged_on
   end
 
   def update_pronounced_on

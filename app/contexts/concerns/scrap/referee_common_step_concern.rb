@@ -37,10 +37,8 @@ module Scrap::RefereeCommonStepConcern
   end
 
   def create_verdict
-    @verdict = Verdict.find_or_create_by(
-      story: @story,
-      adjudged_on: @adjudged_on
-    )
+    @verdict = Verdict.find_or_create_by(story: @story)
+    @verdict.assign_attributes(adjudged_on: @adjudged_on)
   end
 
   def create_main_judge_by_highest
