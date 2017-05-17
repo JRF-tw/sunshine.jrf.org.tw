@@ -4,7 +4,7 @@ class Import::CreateRefereeContext < BaseContext
   before_perform :parse_json_data
   before_perform :find_court
   before_perform :find_or_create_story
-  before_perform :find_or_create_referee
+  before_perform :create_referee
   before_perform :create_main_judge_by_highest, if: :is_highest_court?
   before_perform :assign_names
   before_perform :build_content_json
@@ -49,12 +49,21 @@ class Import::CreateRefereeContext < BaseContext
     @story = Story.find_or_create_by(story_type: @story_type, year: @year, word_type: @word, number: @number, court: @court)
   end
 
-  def find_or_create_referee
-    referee_class = is_verdict? ? Verdict : Rule
-    @referee = referee_class.find_or_create_by(
+  def create_referee
+    is_verdict? ? find_or_create_verdict : find_or_create_rule
+  end
+
+  def find_or_create_rule
+    @referee = Rule.find_or_create_by(
       story: @story,
       adjudged_on: @adjudged_on
     )
+  end
+
+  def find_or_create_verdict
+    @referee = Verdict.find_or_create_by(story: @story)
+    @referee.assign_attributes(adjudged_on: @adjudged_on)
+    @referee
   end
 
   def create_main_judge_by_highest
@@ -104,7 +113,7 @@ class Import::CreateRefereeContext < BaseContext
   end
 
   def update_date_to_story
-    @story.update_attributes(adjudged_on: @adjudged_on, is_adjudged: true) unless @story.adjudged_on
+    @story.update_attributes(adjudged_on: @adjudged_on, is_adjudged: true) unless @story.adjudged_on == @adjudged_on
     @story.update_attributes(pronounced_on: Time.zone.today, is_pronounced: true) unless @story.pronounced_on
   end
 
