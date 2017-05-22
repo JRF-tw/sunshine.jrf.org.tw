@@ -10,5 +10,5 @@
 .form-actions
   = f.submit "送出", class: "btn btn-primary"
   = " "
-  = link_to send("admin_#{@owner_singularize}_licenses_path", @owner), class: "btn" do
+  = link_to polymorphic_path([@owner, :licenses]), class: "btn" do
     = "回到#{@owner.name}的專業證書列表"

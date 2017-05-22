@@ -2,9 +2,9 @@ class Admin::ReviewsController < Admin::BaseController
   include OwnerFindingConcern
   before_action :find_owner
   before_action :review
-  before_action { add_crumb("#{owner_type}列表", send("admin_#{owner_pluralize}_path")) }
-  before_action { add_crumb("#{owner_type}檔案 - #{@owner.name}的詳細資料", send("admin_#{owner_singularize}_path", @owner.id)) }
-  before_action(except: [:index]) { add_crumb("#{@owner.name}的相關新聞評論列表", send("admin_#{owner_singularize}_reviews_path", @owner.id)) }
+  before_action { add_crumb("#{owner_type}列表", polymorphic_path(@owner.class)) }
+  before_action { add_crumb("#{owner_type}檔案 - #{@owner.name}的詳細資料", polymorphic_path(@owner)) }
+  before_action(except: [:index]) { add_crumb("#{@owner.name}的相關新聞評論列表", polymorphic_path([@owner, :reviews])) }
 
   def index
     @reviews = @owner.reviews.all.newest.page(params[:page]).per(10)
@@ -25,7 +25,7 @@ class Admin::ReviewsController < Admin::BaseController
   def create
     if review.save
       respond_to do |f|
-        f.html { redirect_to send("admin_#{owner_singularize}_reviews_path", @owner), flash: { success: "#{@owner.name}的相關新聞評論 - 已新增" } }
+        f.html { redirect_to polymorphic_path([@owner, :reviews]), flash: { success: "#{@owner.name}的相關新聞評論 - 已新增" } }
         f.js { render }
       end
     else
@@ -43,7 +43,7 @@ class Admin::ReviewsController < Admin::BaseController
 
   def update
     if review.update_attributes(review_params)
-      redirect_to send("admin_#{owner_singularize}_reviews_path", @owner), flash: { success: "#{@owner.name}的相關新聞評論 - 已修改" }
+      redirect_to polymorphic_path([@owner, :reviews]), flash: { success: "#{@owner.name}的相關新聞評論 - 已修改" }
     else
       @admin_page_title = "編輯#{@owner.name}的相關新聞評論"
       add_crumb @admin_page_title, '#'
@@ -54,7 +54,7 @@ class Admin::ReviewsController < Admin::BaseController
 
   def destroy
     if review.destroy
-      redirect_to send("admin_#{owner_singularize}_reviews_path", @owner), flash: { success: "#{@owner.name}的相關新聞評論 - 已刪除" }
+      redirect_to polymorphic_path([@owner, :reviews]), flash: { success: "#{@owner.name}的相關新聞評論 - 已刪除" }
     else
       flash[:error] = review.errors.full_messages
       redirect_to :back
@@ -62,11 +62,6 @@ class Admin::ReviewsController < Admin::BaseController
   end
 
   private
-
-  def find_owner
-    @owner_class = Object.const_get(request.env['PATH_INFO'][/admin\/\w+/].singularize.camelize)
-    @owner = @owner_class.find(owner_id)
-  end
 
   def review
     @review ||= params[:id] ? @owner.reviews.find(params[:id]) : @owner.reviews.new(review_params)

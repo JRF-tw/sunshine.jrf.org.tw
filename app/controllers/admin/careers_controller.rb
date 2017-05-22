@@ -2,9 +2,9 @@ class Admin::CareersController < Admin::BaseController
   include OwnerFindingConcern
   before_action :find_owner
   before_action :career
-  before_action { add_crumb("#{owner_type}列表", send("admin_#{owner_pluralize}_path")) }
-  before_action { add_crumb("#{owner_type}檔案 - #{@owner.name}的詳細資料", send("admin_#{owner_singularize}_path", @owner.id)) }
-  before_action(except: [:index]) { add_crumb("#{@owner.name}的職務經歷列表", send("admin_#{owner_singularize}_careers_path", @owner.id)) }
+  before_action { add_crumb("#{owner_type}列表", polymorphic_path(@owner.class)) }
+  before_action { add_crumb("#{owner_type}檔案 - #{@owner.name}的詳細資料", polymorphic_path(@owner)) }
+  before_action(except: [:index]) { add_crumb("#{@owner.name}的職務經歷列表", polymorphic_path([@owner, :careers])) }
 
   def index
     @careers = @owner.careers.all.order_by_publish_at.page(params[:page]).per(10)
@@ -25,7 +25,7 @@ class Admin::CareersController < Admin::BaseController
   def create
     if career.save
       respond_to do |f|
-        f.html { redirect_to send("admin_#{owner_singularize}_careers_path", @owner), flash: { success: "#{@owner.name}的職務經歷 - 已新增" } }
+        f.html { redirect_to polymorphic_path([@owner, :careers]), flash: { success: "#{@owner.name}的職務經歷 - 已新增" } }
         f.js { render }
       end
     else
@@ -43,7 +43,7 @@ class Admin::CareersController < Admin::BaseController
 
   def update
     if career.update_attributes(career_params)
-      redirect_to send("admin_#{owner_singularize}_careers_path", @owner), flash: { success: "#{@owner.name}的職務經歷 - 已修改" }
+      redirect_to polymorphic_path([@owner, :careers]), flash: { success: "#{@owner.name}的職務經歷 - 已修改" }
     else
       @admin_page_title = "編輯#{@owner.name}的職務經歷"
       add_crumb @admin_page_title, '#'
@@ -54,7 +54,7 @@ class Admin::CareersController < Admin::BaseController
 
   def destroy
     if career.destroy
-      redirect_to send("admin_#{owner_singularize}_careers_path", @owner), flash: { success: "#{@owner.name}的職務經歷 - 已刪除" }
+      redirect_to polymorphic_path([@owner, :careers]), flash: { success: "#{@owner.name}的職務經歷 - 已刪除" }
     else
       flash[:error] = career.errors.full_messages
       redirect_to :back
@@ -62,11 +62,6 @@ class Admin::CareersController < Admin::BaseController
   end
 
   private
-
-  def find_owner
-    @owner_class = Object.const_get(request.env['PATH_INFO'][/admin\/\w+/].singularize.camelize)
-    @owner = @owner_class.find(owner_id)
-  end
 
   def career
     @career ||= params[:id] ? @owner.careers.find(params[:id]) : @owner.careers.new(career_params)

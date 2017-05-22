@@ -2,7 +2,7 @@
   .dataTables_wrapper
     div
       .dataTables_length
-        = link_to "新增#{@owner.name}的相關新聞評論", send("new_admin_#{@owner_singularize}_review_path", @owner), class: "btn btn-primary btn-mini"
+        = link_to "新增#{@owner.name}的相關新聞評論", polymorphic_path([:new, @owner, :review]), class: "btn btn-primary btn-mini"
     table.table.table-bordered.table-striped.table-hover
       thead
         tr
@@ -21,8 +21,8 @@
             td= review.title
             td= review.memo
             td
-              = link_to "編輯", send("edit_admin_#{@owner_singularize}_review_path", @owner, review), class: "btn btn-mini btn-success"
+              = link_to "編輯", edit_polymorphic_path([@owner, review]), class: "btn btn-mini btn-success"
               | &nbsp;
-              = link_to "刪除", send("admin_#{@owner_singularize}_review_path", @owner, review), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除#{@owner.name}的相關新聞評論？"
+              = link_to "刪除", polymorphic_path([@owner, review]), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除#{@owner.name}的相關新聞評論？"
     .ui-toolbar.ui-widget-header
       = paginate @reviews, theme: :admin

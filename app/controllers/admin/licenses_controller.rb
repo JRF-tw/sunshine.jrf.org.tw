@@ -2,9 +2,9 @@ class Admin::LicensesController < Admin::BaseController
   include OwnerFindingConcern
   before_action :find_owner
   before_action :license
-  before_action { add_crumb("#{owner_type}列表", send("admin_#{owner_pluralize}_path")) }
-  before_action { add_crumb("#{owner_type}檔案 - #{@owner.name}的詳細資料", send("admin_#{owner_singularize}_path", @owner.id)) }
-  before_action(except: [:index]) { add_crumb("#{@owner.name}的專業證書列表", send("admin_#{owner_singularize}_licenses_path", @owner.id)) }
+  before_action { add_crumb("#{owner_type}列表", polymorphic_path(@owner.class)) }
+  before_action { add_crumb("#{owner_type}檔案 - #{@owner.name}的詳細資料", polymorphic_path(@owner)) }
+  before_action(except: [:index]) { add_crumb("#{@owner.name}的專業證書列表", polymorphic_path([@owner, :licenses])) }
 
   def index
     @licenses = @owner.licenses.all.newest.page(params[:page]).per(10)
@@ -25,7 +25,7 @@ class Admin::LicensesController < Admin::BaseController
   def create
     if license.save
       respond_to do |f|
-        f.html { redirect_to send("admin_#{owner_singularize}_licenses_path", @owner), flash: { success: "#{@owner.name}的專業證書 - #{license.title} 已新增" } }
+        f.html { redirect_to polymorphic_path([@owner, :licenses]), flash: { success: "#{@owner.name}的專業證書 - #{license.title} 已新增" } }
         f.js { render }
       end
     else
@@ -43,7 +43,7 @@ class Admin::LicensesController < Admin::BaseController
 
   def update
     if license.update_attributes(license_params)
-      redirect_to send("admin_#{owner_singularize}_licenses_path", @owner), flash: { success: "#{@owner.name}的專業證書 - #{license.title} 已修改" }
+      redirect_to polymorphic_path([@owner, :licenses]), flash: { success: "#{@owner.name}的專業證書 - #{license.title} 已修改" }
     else
       @admin_page_title = "編輯#{@owner.name}的專業證書 - #{license.title}"
       add_crumb @admin_page_title, '#'
@@ -54,7 +54,7 @@ class Admin::LicensesController < Admin::BaseController
 
   def destroy
     if license.destroy
-      redirect_to send("admin_#{owner_singularize}_licenses_path", @owner), flash: { success: "#{@owner.name}的專業證書 - #{license.title} 已刪除" }
+      redirect_to polymorphic_path([@owner, :licenses]), flash: { success: "#{@owner.name}的專業證書 - #{license.title} 已刪除" }
     else
       flash[:error] = license.errors.full_messages
       redirect_to :back
@@ -62,11 +62,6 @@ class Admin::LicensesController < Admin::BaseController
   end
 
   private
-
-  def find_owner
-    @owner_class = Object.const_get(request.env['PATH_INFO'][/admin\/\w+/].singularize.camelize)
-    @owner = @owner_class.find(owner_id)
-  end
 
   def license
     @license ||= params[:id] ? @owner.licenses.find(params[:id]) : @owner.licenses.new(license_params)

@@ -2,9 +2,9 @@ class Admin::EducationsController < Admin::BaseController
   include OwnerFindingConcern
   before_action :find_owner
   before_action :education
-  before_action { add_crumb("#{owner_type}列表", send("admin_#{owner_pluralize}_path")) }
-  before_action { add_crumb("#{owner_type}檔案 - #{@owner.name}的詳細資料", send("admin_#{owner_singularize}_path", @owner.id)) }
-  before_action(except: [:index]) { add_crumb("#{@owner.name}的學經歷列表", send("admin_#{owner_singularize}_educations_path", @owner.id)) }
+  before_action { add_crumb("#{owner_type}列表", polymorphic_path(@owner.class)) }
+  before_action { add_crumb("#{owner_type}檔案 - #{@owner.name}的詳細資料", polymorphic_path(@owner)) }
+  before_action(except: [:index]) { add_crumb("#{@owner.name}的學經歷列表", polymorphic_path([@owner, :educations])) }
 
   def index
     @educations = @owner.educations.all.newest.page(params[:page]).per(10)
@@ -25,7 +25,7 @@ class Admin::EducationsController < Admin::BaseController
   def create
     if education.save
       respond_to do |f|
-        f.html { redirect_to send("admin_#{owner_singularize}_educations_path", @owner), flash: { success: "#{@owner.name}的學經歷 - #{education.title} 已新增" } }
+        f.html { redirect_to polymorphic_path([@owner, :educations]), flash: { success: "#{@owner.name}的學經歷 - #{education.title} 已新增" } }
         f.js { render }
       end
     else
@@ -43,7 +43,7 @@ class Admin::EducationsController < Admin::BaseController
 
   def update
     if education.update_attributes(education_params)
-      redirect_to send("admin_#{owner_singularize}_educations_path", @owner), flash: { success: "#{@owner.name}的學經歷 - #{education.title} 已修改" }
+      redirect_to polymorphic_path([@owner, :educations]), flash: { success: "#{@owner.name}的學經歷 - #{education.title} 已修改" }
     else
       @admin_page_title = "編輯#{@owner.name}的學經歷 - #{education.title}"
       add_crumb @admin_page_title, '#'
@@ -54,7 +54,7 @@ class Admin::EducationsController < Admin::BaseController
 
   def destroy
     if education.destroy
-      redirect_to send("admin_#{owner_singularize}_educations_path", @owner), flash: { success: "#{@owner.name}的學經歷 - #{education.title} 已刪除" }
+      redirect_to polymorphic_path([@owner, :educations]), flash: { success: "#{@owner.name}的學經歷 - #{education.title} 已刪除" }
     else
       flash[:error] = education.errors.full_messages
       redirect_to :back
@@ -62,11 +62,6 @@ class Admin::EducationsController < Admin::BaseController
   end
 
   private
-
-  def find_owner
-    @owner_class = Object.const_get(request.env['PATH_INFO'][/admin\/\w+/].singularize.camelize)
-    @owner = @owner_class.find(owner_id)
-  end
 
   def education
     @education ||= params[:id] ? @owner.educations.find(params[:id]) : @owner.educations.new(education_params)

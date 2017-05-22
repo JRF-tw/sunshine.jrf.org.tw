@@ -2,9 +2,9 @@ class Admin::ArticlesController < Admin::BaseController
   include OwnerFindingConcern
   before_action :find_owner
   before_action :article
-  before_action { add_crumb("#{owner_type}列表", send("admin_#{owner_pluralize}_path")) }
-  before_action { add_crumb("#{owner_type}檔案 - #{@owner.name}的詳細資料", send("admin_#{owner_singularize}_path", @owner.id)) }
-  before_action(except: [:index]) { add_crumb("#{@owner.name}的發表言論列表", send("admin_#{owner_singularize}_articles_path", @owner.id)) }
+  before_action { add_crumb("#{owner_type}列表", polymorphic_path(@owner.class)) }
+  before_action { add_crumb("#{owner_type}檔案 - #{@owner.name}的詳細資料", polymorphic_path(@owner)) }
+  before_action(except: [:index]) { add_crumb("#{@owner.name}的發表言論列表", polymorphic_path([@owner, :articles])) }
 
   def index
     @articles = @owner.articles.all.newest.page(params[:page]).per(10)
@@ -25,7 +25,7 @@ class Admin::ArticlesController < Admin::BaseController
   def create
     if article.save
       respond_to do |f|
-        f.html { redirect_to send("admin_#{owner_singularize}_articles_path", @owner), flash: { success: "#{@owner.name}的發表言論 - 已新增" } }
+        f.html { redirect_to polymorphic_path([@owner, :articles]), flash: { success: "#{@owner.name}的發表言論 - 已新增" } }
         f.js { render }
       end
     else
@@ -43,7 +43,7 @@ class Admin::ArticlesController < Admin::BaseController
 
   def update
     if article.update_attributes(article_params)
-      redirect_to send("admin_#{owner_singularize}_articles_path", @owner), flash: { success: "#{@owner.name}的發表言論 - 已修改" }
+      redirect_to polymorphic_path([@owner, :articles]), flash: { success: "#{@owner.name}的發表言論 - 已修改" }
     else
       @admin_page_title = "編輯#{@owner.name}的發表言論"
       add_crumb @admin_page_title, '#'
@@ -54,7 +54,7 @@ class Admin::ArticlesController < Admin::BaseController
 
   def destroy
     if article.destroy
-      redirect_to send("admin_#{owner_singularize}_articles_path", @owner), flash: { success: "#{@owner.name}的發表言論 - 已刪除" }
+      redirect_to polymorphic_path([@owner, :articles]), flash: { success: "#{@owner.name}的發表言論 - 已刪除" }
     else
       flash[:error] = article.errors.full_messages
       redirect_to :back
@@ -62,11 +62,6 @@ class Admin::ArticlesController < Admin::BaseController
   end
 
   private
-
-  def find_owner
-    @owner_class = Object.const_get(request.env['PATH_INFO'][/admin\/\w+/].singularize.camelize)
-    @owner = @owner_class.find(owner_id)
-  end
 
   def article
     @article ||= params[:id] ? @owner.articles.find(params[:id]) : @owner.articles.new(article_params)

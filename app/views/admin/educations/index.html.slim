@@ -2,7 +2,7 @@
   .dataTables_wrapper
     div
       .dataTables_length
-        = link_to "新增#{@owner.name}的學經歷", send("new_admin_#{@owner_singularize}_education_path", @owner), class: "btn btn-primary btn-mini"
+        = link_to "新增#{@owner.name}的學經歷", polymorphic_path([:new, @owner, :education]), class: "btn btn-primary btn-mini"
     table.table.table-bordered.table-striped.table-hover
       thead
         tr
@@ -21,8 +21,8 @@
             td= education.end_at_in_tw
             td= education.memo
             td
-              = link_to "編輯", send("edit_admin_#{@owner_singularize}_education_path", @owner, education), class: "btn btn-mini btn-success"
+              = link_to "編輯", edit_polymorphic_path([@owner, education]), class: "btn btn-mini btn-success"
               | &nbsp;
-              = link_to "刪除", send("admin_#{@owner_singularize}_education_path", @owner, education), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除#{@owner.name}的學經歷 - #{education.title}？"
+              = link_to "刪除", polymorphic_path([@owner, education]), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除#{@owner.name}的學經歷 - #{education.title}？"
     .ui-toolbar.ui-widget-header
       = paginate @educations, theme: :admin
