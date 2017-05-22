@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Admin::PunishmentsController do
-  let!(:prosecutor) { create :prosecutor }
+  let!(:prosecutor) { create :admin_prosecutor }
 
   before { signin_user }
 

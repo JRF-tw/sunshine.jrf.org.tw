@@ -19,8 +19,8 @@
 
 FactoryGirl.define do
   factory :license do
-    profile do
-      create :profile
+    owner do
+      create :judge
     end
     license_type 'haha'
     unit 'foo'

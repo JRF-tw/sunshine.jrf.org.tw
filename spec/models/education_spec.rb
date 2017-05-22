@@ -26,8 +26,8 @@ RSpec.describe Education, type: :model do
 
   it 'has_many :educations, dependent: :destroy' do
     expect(Education.count).to eq(1)
-    profile = education.profile
-    profile.destroy
+    owner = education.owner
+    owner.destroy
     expect(Education.count).to be_zero
   end
 end

@@ -13,11 +13,13 @@ Rails.application.routes.draw do
   resources :scores, only: [:index]
   resources :judges, only: [:index, :show] do
     resources :awards, only: [:index]
-    resources :punishments, only: [:index]
+    resources :punishments, only: [:index, :show]
+    resources :reviews, only: [:index]
   end
   resources :prosecutors, only: [:index, :show] do
     resources :awards, only: [:index]
-    resources :punishments, only: [:index]
+    resources :punishments, only: [:index, :show]
+    resources :reviews, only: [:index]
   end
   resources :bulletins, only: [:index, :show]
 end

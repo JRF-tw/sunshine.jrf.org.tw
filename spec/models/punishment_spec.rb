@@ -45,18 +45,18 @@ RSpec.describe Punishment, type: :model do
 
   it 'has_many :punishment, dependent: :destroy' do
     expect(Punishment.count).to eq(1)
-    profile = punishment.profile
-    profile.destroy
+    owner = punishment.owner
+    owner.destroy
     expect(Punishment.count).to be_zero
   end
 
   it '#punishments_count counter cache' do
-    profile = create :profile
-    Admin::Punishment.create decision_unit: 'foofoo', profile_id: profile.id
-    profile.reload
-    expect(profile.punishments_count).to eq(1)
-    Admin::Punishment.last.destroy
-    profile.reload
-    expect(profile.punishments_count).to be_zero
+    judge = create :judge
+    Punishment.create decision_unit: 'foofoo', owner: judge
+    judge.reload
+    expect(judge.punishments_count).to eq(1)
+    Punishment.last.destroy
+    judge.reload
+    expect(judge.punishments_count).to be_zero
   end
 end

@@ -17,8 +17,8 @@
 
 FactoryGirl.define do
   factory :education do
-    profile do
-      create :profile
+    owner do
+      create :judge
     end
     title 'foo'
   end

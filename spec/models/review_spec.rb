@@ -29,8 +29,8 @@ RSpec.describe Review, type: :model do
 
   it 'has_many :careers, dependent: :destroy' do
     expect(Review.count).to eq(1)
-    profile = review.profile
-    profile.destroy
+    owner = review.owner
+    owner.destroy
     expect(Review.count).to be_zero
   end
 end

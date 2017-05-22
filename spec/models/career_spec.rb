@@ -38,8 +38,8 @@ RSpec.describe Career, type: :model do
 
   it 'has_many :careers, dependent: :destroy' do
     expect(Career.count).to eq(1)
-    profile = career.profile
-    profile.destroy
+    owner = career.owner
+    owner.destroy
     expect(Career.count).to be_zero
   end
 end

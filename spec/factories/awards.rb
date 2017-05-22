@@ -19,8 +19,8 @@
 
 FactoryGirl.define do
   factory :award do
-    profile do
-      create :profile
+    owner do
+      create :judge
     end
     award_type '嘉獎一次'
     unit '司法院'

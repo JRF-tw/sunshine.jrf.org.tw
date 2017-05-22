@@ -20,8 +20,8 @@
 
 FactoryGirl.define do
   factory :review do
-    profile do
-      create :profile
+    owner do
+      create :judge
     end
     name 'foo'
     title 'bar'

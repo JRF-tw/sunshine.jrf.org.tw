@@ -3,7 +3,7 @@ module OwnerFindingConcern
   private
 
   def find_owner
-    @owner_class = Object.const_get(request.env['PATH_INFO'][/admin\/\w+/].singularize.camelize)
+    @owner_class = Object.const_get(request.env['PATH_INFO'][/(\/admin)?\/\w+/].singularize.camelize)
     @owner = @owner_class.find(owner_id)
   end
 

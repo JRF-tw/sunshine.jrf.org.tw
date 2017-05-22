@@ -29,8 +29,8 @@
 
 FactoryGirl.define do
   factory :article do
-    profile do
-      create :profile
+    owner do
+      create :judge
     end
     article_type '專書'
     publish_year '1986'

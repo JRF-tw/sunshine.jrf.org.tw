@@ -36,8 +36,8 @@
 
 FactoryGirl.define do
   factory :punishment do
-    profile do
-      create :profile
+    owner do
+      create :judge
     end
     decision_unit 'foo'
   end

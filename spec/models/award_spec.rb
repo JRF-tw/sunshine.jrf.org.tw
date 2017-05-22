@@ -28,8 +28,8 @@ RSpec.describe Award, type: :model do
 
   it 'has_many :awards, dependent: :destroy' do
     expect(Award.count).to eq(1)
-    profile = award.profile
-    profile.destroy
+    owner = award.owner
+    owner.destroy
     expect(Award.count).to be_zero
   end
 end
