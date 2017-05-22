@@ -1,4 +1,5 @@
 class ReviewsController < BaseController
+  include OwnerFindingConcern
   before_action :find_owner
 
   def index
@@ -15,16 +16,5 @@ class ReviewsController < BaseController
       keywords: { name: @owner.name },
       image: ActionController::Base.helpers.asset_path('hero-profiles-show-M.png')
     )
-  end
-
-  private
-
-  def find_owner
-    @owner_class = Object.const_get(request.env['PATH_INFO'][/\w+/].singularize.camelize)
-    @owner = @owner_class.find(owner_id)
-  end
-
-  def owner_id
-    params["#{@owner_class.to_s.downcase.demodulize}_id"]
   end
 end

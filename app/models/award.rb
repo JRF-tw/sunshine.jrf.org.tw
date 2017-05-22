@@ -26,6 +26,7 @@ class Award < ActiveRecord::Base
 
   belongs_to :owner, polymorphic: true
   belongs_to :profile
+  validates :owner_id, :owner_type, :award_type, :unit, :publish_at_in_tw, presence: true
 
   scope :newest, -> { order('id DESC') }
   scope :order_by_publish_at, -> { order('publish_at DESC, id DESC') }

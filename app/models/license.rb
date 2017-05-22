@@ -26,6 +26,7 @@ class License < ActiveRecord::Base
 
   belongs_to :owner, polymorphic: true
   belongs_to :profile
+  validates :owner_id, :owner_type, :license_type, :unit, :title, presence: true
 
   scope :newest, -> { order('id DESC') }
   scope :order_by_publish_at, -> { order('publish_at DESC, id DESC') }

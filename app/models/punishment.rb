@@ -43,6 +43,7 @@ class Punishment < ActiveRecord::Base
 
   belongs_to :owner, polymorphic: true
   belongs_to :profile
+  validates :owner_id, :owner_type, presence: true
 
   scope :newest, -> { order('id DESC') }
   scope :order_by_relevant_date, -> { order('relevant_date DESC, id DESC') }

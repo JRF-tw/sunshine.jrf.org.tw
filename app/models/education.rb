@@ -24,6 +24,7 @@ class Education < ActiveRecord::Base
 
   belongs_to :owner, polymorphic: true
   belongs_to :profile
+  validates :owner_id, :owner_type, :title, presence: true
 
   scope :newest, -> { order('id DESC') }
   scope :order_by_end_at, -> { order('end_at DESC, id DESC') }

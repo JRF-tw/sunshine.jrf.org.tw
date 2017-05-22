@@ -36,6 +36,26 @@ class Article < ActiveRecord::Base
 
   belongs_to :owner, polymorphic: true
   belongs_to :profile
+  validates :owner_id, :owner_type, :article_type, presence: true
+  validate :validate_publish_date
 
   scope :newest, -> { order('id DESC') }
+
+  ARTICLE_TYPES = [
+    '編輯專書',
+    '期刊文章',
+    '會議論文',
+    '報紙投書',
+    '專書',
+    '碩博士論文',
+    '報告',
+    '其他'
+  ].freeze
+
+  private
+
+  def validate_publish_date
+    return true if publish_year.present? || paper_publish_at.present? || news_publish_at.present?
+    false
+  end
 end
