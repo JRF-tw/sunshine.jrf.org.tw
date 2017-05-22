@@ -17,10 +17,6 @@ class JudgesController < BaseController
     @newest_award = @judge.awards.shown.order_by_publish_at.first
     @newest_punishments = @judge.punishments.shown.order_by_relevant_date.first(3)
     @newest_reviews = @judge.reviews.shown.had_title.order_by_publish_at.first(3)
-    description = ["#{@judge.name}個人資料介紹。"]
-    description << "性別#{@judge.gender}、" if @judge.gender.present?
-    description << "出生年份#{@judge.birth_year}、" if @judge.birth_year.present?
-    description << '現任法官'
     image = @judge.avatar.present? ? @judge.avatar.L_540.url : nil
     set_meta(
       title: { name: @judge.name },

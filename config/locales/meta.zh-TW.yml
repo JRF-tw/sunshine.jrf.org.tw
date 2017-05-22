@@ -44,6 +44,11 @@ zh-TW:
         title: '%{name} - 法官個人頁'
         description: '%{name} 法官的個人資訊'
         keywords: '%{name}, 法官'
+    prosecutors:
+      show:
+        title: '%{name} - 檢察官個人頁'
+        description: '%{name} 檢察官的個人資訊'
+        keywords: '%{name}, 檢察官'
     procedures:
       index:
         title: '%{title} - 處理經過'

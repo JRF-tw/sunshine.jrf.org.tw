@@ -17,10 +17,6 @@ class ProsecutorsController < BaseController
     @newest_award = @prosecutor.awards.shown.order_by_publish_at.first
     @newest_punishments = @prosecutor.punishments.shown.order_by_relevant_date.first(3)
     @newest_reviews = @prosecutor.reviews.shown.had_title.order_by_publish_at.first(3)
-    description = ["#{@prosecutor.name}個人資料介紹。"]
-    description << "性別#{@prosecutor.gender}、" if @prosecutor.gender.present?
-    description << "出生年份#{@prosecutor.birth_year}、" if @prosecutor.birth_year.present?
-    description << '現任法官'
     image = @prosecutor.avatar.present? ? @prosecutor.avatar.L_540.url : nil
     set_meta(
       title: { name: @prosecutor.name },

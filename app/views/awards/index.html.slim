@@ -1,4 +1,4 @@
-= render partial: 'components/profile_hero', locals: { person: @owner }
+= render partial: 'components/profile_hero', locals: { person: @owner, job: @owner.class.name.underscore }
 
 section.award-records.container
   / h3.section-heading--gray.text-center 獎勵紀錄
