@@ -241,18 +241,7 @@ module ApplicationHelper
   end
 
   def get_name_by_role(role)
-    case role.class.name
-    when 'Lawyer'
-      '律師'
-    when 'Party'
-      '當事人'
-    when 'CourtObserver'
-      '旁觀者'
-    when 'Judge'
-      '法官'
-    when 'Prosecutor'
-      '檢察官'
-    end
+    role.model_name.human
   end
 
   def get_institution_by_role(role)

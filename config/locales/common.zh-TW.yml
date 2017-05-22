@@ -38,6 +38,7 @@ zh-TW:
       party: '當事人'
       court_observer: '旁觀者'
       prosecutor: '檢察官'
+      judge: '法官'
       lawyer: '律師'
     attributes:
       court:
