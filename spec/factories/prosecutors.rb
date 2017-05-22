@@ -21,6 +21,7 @@
 #  is_judge              :boolean          default(FALSE)
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
+#  punishments_count     :integer          default(0)
 #
 
 FactoryGirl.define do

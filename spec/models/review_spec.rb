@@ -16,6 +16,8 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  is_hidden  :boolean
+#  owner_id   :integer
+#  owner_type :string
 #
 
 require 'rails_helper'

@@ -32,6 +32,8 @@
 #  updated_at       :datetime
 #  is_hidden        :boolean
 #  status           :text
+#  owner_id         :integer
+#  owner_type       :string
 #
 
 FactoryGirl.define do
