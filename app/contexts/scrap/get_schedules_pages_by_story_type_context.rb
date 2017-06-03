@@ -33,10 +33,9 @@ class Scrap::GetSchedulesPagesByStoryTypeContext < BaseContext
   private
 
   def page_total_by_story_type_and_court_code
-    sql = "UPPER(CRTID)='#{@court_code}' AND DUDT>='#{@start_date_format}' AND DUDT<='#{@end_date_format}' AND SYS='#{@story_type}'  ORDER BY  DUDT,DUTM,CRMYY,CRMID,CRMNO"
-    @data = { sql_conction: sql }
+    @data = { crtid: @court_code, sys: @story_type, date1: @start_date_format, date2: @end_date_format }
     sleep @sleep_time_interval
-    response_data = Mechanize.new.get(SCHEDULE_INFO_URI, @data)
+    response_data = Mechanize.new.post(SCHEDULE_INFO_URI, @data)
     response_data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
     @page_total = if response_data.css('table')[2].css('tr')[0].text =~ /合計件數/
                     response_data.css('table')[2].css('tr')[0].text.match(/\d+/)[0].to_i / PAGE_PER + 1
