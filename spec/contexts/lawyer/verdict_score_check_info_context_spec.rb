@@ -52,12 +52,13 @@ describe Lawyer::VerdictScoreCheckInfoContext do
 
     context 'valid_score_intervel' do
       context 'out score intervel' do
-        before { story.verdict.update_attributes(created_at: Time.zone.today - 91.days) }
+        before { story.verdict.update_attributes(created_at: Time.zone.today - 95.days) }
+
         it { expect(subject).to be_falsey }
       end
 
       context 'in score intervel' do
-        before { story.verdict.update_attributes(created_at: Time.zone.today - 31.days) }
+        before { story.verdict.update_attributes(created_at: Time.zone.today - 35.days) }
         it { expect(subject).to be_truthy }
       end
     end
