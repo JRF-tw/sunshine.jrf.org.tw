@@ -32,13 +32,12 @@ class Scrap::ParseSchedulesContext < BaseContext
   private
 
   def scrap_schedule
-    sql = "UPPER(CRTID)='#{@court_code}' AND DUDT>='#{@start_date_format}' AND DUDT<='#{@end_date_format}' AND SYS='#{@story_type}'  ORDER BY  DUDT,DUTM,CRMYY,CRMID,CRMNO"
-    @data = { pageNow: @current_page, sql_conction: sql, pageTotal: @page_total, pageSize: 15, rowStart: 1 }
+    @params = "?pageNow=#{@current_page}&pageTotal=#{@page_total}&pageSize=15&rowStart=1&crtid=#{@court_code}&sys=#{@story_type}&date1=#{@start_date_format}&date2=#{@end_date_format}&dptcd=&crmyy=&crmid=&crmno="
     sleep @sleep_time_interval
-    response_data = Mechanize.new.get(SCHEDULE_INFO_URI, @data)
+    response_data = Mechanize.new.get(SCHEDULE_INFO_URI + @params)
     @data = Nokogiri::HTML(Iconv.new('UTF-8//IGNORE', 'Big5').iconv(response_data.body))
   rescue
-    request_retry(key: "#{SCHEDULE_INFO_URI} / data=#{@data} / #{Time.zone.today}")
+    request_retry(key: "#{SCHEDULE_INFO_URI} / params=#{@params} / #{Time.zone.today}")
   end
 
   def parse_schedule_info
@@ -78,7 +77,7 @@ class Scrap::ParseSchedulesContext < BaseContext
       self.class.delay_for(1.hour).perform(@court_code, @story_type, @current_page, @page_total, @start_date_format, @end_date_format)
       redis_object.incr
     else
-      Logs::AddCrawlerError.parse_schedule_data_error(@crawler_history, :crawler_failed, "取得法院代碼-#{@court_code}庭期單頁資料失敗, 來源網址:#{SCHEDULE_INFO_URI}, 參數:#{@data}")
+      Logs::AddCrawlerError.parse_schedule_data_error(@crawler_history, :crawler_failed, "取得法院代碼-#{@court_code}庭期單頁資料失敗, 來源網址:#{SCHEDULE_INFO_URI}, 參數:#{@params}")
     end
     false
   end
