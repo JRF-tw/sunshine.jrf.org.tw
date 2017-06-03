@@ -7,6 +7,9 @@ module Webmock
       .with(body: { 'court' => 'TPH' })
       .to_return(status: 200, body: File.read("#{Rails.root}/spec/fixtures/scrap_data/single_court_info.html"))
 
+    stub_request(:post, /http:\/\/csdi\.judicial\.gov\.tw\/abbs\/wkw\/WHD3A02\.jsp/)
+      .to_return(status: 200, body: File.read("#{Rails.root}/spec/fixtures/scrap_data/schedule_info.htm"))
+
     stub_request(:get, /http:\/\/csdi\.judicial\.gov\.tw\/abbs\/wkw\/WHD3A02\.jsp/)
       .to_return(status: 200, body: File.read("#{Rails.root}/spec/fixtures/scrap_data/schedule_info.htm"))
 
