@@ -21,7 +21,7 @@
         .span6
           .control-group
             label.control-label = f.label :is_prosecutor_true
-            .controls#select2 = f.select :is_prosecutor_true,
+            .controls = f.select :is_prosecutor_true,
             collect_for_is_prosecutor, include_blank: '請選擇'
       .row
         .span6
