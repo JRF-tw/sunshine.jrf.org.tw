@@ -16,6 +16,8 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  is_hidden  :boolean
+#  owner_id   :integer
+#  owner_type :string
 #
 
 require 'rails_helper'
@@ -29,8 +31,8 @@ RSpec.describe Review, type: :model do
 
   it 'has_many :careers, dependent: :destroy' do
     expect(Review.count).to eq(1)
-    profile = review.profile
-    profile.destroy
+    owner = review.owner
+    owner.destroy
     expect(Review.count).to be_zero
   end
 end

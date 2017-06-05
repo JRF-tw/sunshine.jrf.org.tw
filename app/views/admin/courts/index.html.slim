@@ -18,7 +18,7 @@
         .span6
           .control-group
             label.control-label = f.label :is_hidden_eq
-            .controls#select2 = f.select :is_hidden_eq,
+            .controls = f.select :is_hidden_eq,
             collect_for_boolean, include_blank: '請選擇'
     hr
     .form-actions

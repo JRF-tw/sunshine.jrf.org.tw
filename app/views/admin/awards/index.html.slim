@@ -1,8 +1,8 @@
-= admin_widget_box "#{@profile.name}的獎勵紀錄列表", icon: :pencil do
+= admin_widget_box "#{@owner.name}的獎勵紀錄列表", icon: :pencil do
   .dataTables_wrapper
     div
       .dataTables_length
-        = link_to "新增#{@profile.name}的獎勵紀錄", new_admin_profile_award_path(@profile), class: "btn btn-primary btn-mini"
+        = link_to "新增#{@owner.name}的獎勵紀錄", polymorphic_path([:new, @owner, :award]), class: "btn btn-primary btn-mini"
     table.table.table-bordered.table-striped.table-hover
       thead
         tr
@@ -21,8 +21,8 @@
             td= award.publish_at_in_tw
             td= award.memo
             td
-              = link_to "編輯", edit_admin_profile_award_path(@profile, award), class: "btn btn-mini btn-success"
+              = link_to "編輯", edit_polymorphic_path([@owner, award]), class: "btn btn-mini btn-success"
               | &nbsp;
-              = link_to "刪除", admin_profile_award_path(@profile, award), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除#{@profile.name}的獎勵紀錄？"
+              = link_to "刪除", polymorphic_path([@owner, award]), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除#{@owner.name}的獎勵紀錄？"
     .ui-toolbar.ui-widget-header
       = paginate @awards, theme: :admin

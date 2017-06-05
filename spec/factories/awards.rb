@@ -15,12 +15,14 @@
 #  created_at  :datetime
 #  updated_at  :datetime
 #  is_hidden   :boolean
+#  owner_id    :integer
+#  owner_type  :string
 #
 
 FactoryGirl.define do
   factory :award do
-    profile do
-      create :profile
+    owner do
+      create :judge
     end
     award_type '嘉獎一次'
     unit '司法院'

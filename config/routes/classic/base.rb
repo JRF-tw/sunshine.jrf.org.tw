@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   root to: 'base#index', only: [:show]
   get '/robots.txt', to: 'base#robots', defaults: { format: 'text' }
-  get 'judges', to: 'profiles#judges', as: :judges
-  get 'prosecutors', to: 'profiles#prosecutors', as: :prosecutors
 
   resources :searchs, only: [], path: 'search' do
     collection do

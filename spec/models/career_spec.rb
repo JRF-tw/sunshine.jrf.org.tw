@@ -25,6 +25,8 @@
 #  created_at          :datetime
 #  updated_at          :datetime
 #  is_hidden           :boolean
+#  owner_id            :integer
+#  owner_type          :string
 #
 
 require 'rails_helper'
@@ -38,8 +40,8 @@ RSpec.describe Career, type: :model do
 
   it 'has_many :careers, dependent: :destroy' do
     expect(Career.count).to eq(1)
-    profile = career.profile
-    profile.destroy
+    owner = career.owner
+    owner.destroy
     expect(Career.count).to be_zero
   end
 end

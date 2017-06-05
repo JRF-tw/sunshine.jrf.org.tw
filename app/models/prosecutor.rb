@@ -21,9 +21,12 @@
 #  is_judge              :boolean          default(FALSE)
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
+#  punishments_count     :integer          default(0)
 #
 
 class Prosecutor < ActiveRecord::Base
+  include HiddenOrNot
+  include ProfileData
   belongs_to :prosecutors_office
   belongs_to :judge
   has_many :verdict_relations, as: :person, dependent: :destroy
@@ -32,5 +35,7 @@ class Prosecutor < ActiveRecord::Base
   has_many :rules, through: :rule_relations
   has_many :story_relations, as: :people, dependent: :destroy
   has_many :stories, through: :story_relations
+
+  scope :order_by_name, -> { order('name DESC') }
   mount_uploader :avatar, AvatarUploader
 end

@@ -1,4 +1,15 @@
 - content_for :btns do
+  button.btn.btn-info.btn-large.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button" 
+    | 其他資料管理
+    span.caret
+  ul.dropdown-menu
+    li= link_to "學經歷管理", admin_prosecutor_educations_path(@prosecutor)
+    li= link_to "職務經歷管理", admin_prosecutor_careers_path(@prosecutor)
+    li= link_to "專業證書管理", admin_prosecutor_licenses_path(@prosecutor)
+    li= link_to "獎勵紀錄管理", admin_prosecutor_awards_path(@prosecutor)
+    li= link_to "懲處紀錄管理", admin_prosecutor_punishments_path(@prosecutor)
+    li= link_to "發表言論列表", admin_prosecutor_articles_path(@prosecutor)
+    li= link_to "相關新聞評論列表", admin_prosecutor_reviews_path(@prosecutor)
   = link_to '編輯', edit_admin_prosecutor_path(@prosecutor), class: 'btn btn-large btn-success'
   = link_to '轉換為法官', set_to_judge_admin_prosecutor_path(@prosecutor), class: 'btn btn-large btn-warning', method: :post, 'data-confirm': "確認將 #{@prosecutor.name} 轉換為法官？" unless @prosecutor.is_judge
 

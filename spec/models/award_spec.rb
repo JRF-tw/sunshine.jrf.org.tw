@@ -15,6 +15,8 @@
 #  created_at  :datetime
 #  updated_at  :datetime
 #  is_hidden   :boolean
+#  owner_id    :integer
+#  owner_type  :string
 #
 
 require 'rails_helper'
@@ -28,8 +30,8 @@ RSpec.describe Award, type: :model do
 
   it 'has_many :awards, dependent: :destroy' do
     expect(Award.count).to eq(1)
-    profile = award.profile
-    profile.destroy
+    owner = award.owner
+    owner.destroy
     expect(Award.count).to be_zero
   end
 end

@@ -16,12 +16,14 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  is_hidden  :boolean
+#  owner_id   :integer
+#  owner_type :string
 #
 
 FactoryGirl.define do
   factory :review do
-    profile do
-      create :profile
+    owner do
+      create :judge
     end
     name 'foo'
     title 'bar'
