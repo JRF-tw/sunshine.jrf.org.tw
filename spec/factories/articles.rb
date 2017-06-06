@@ -25,12 +25,14 @@
 #  created_at       :datetime
 #  updated_at       :datetime
 #  is_hidden        :boolean
+#  owner_id         :integer
+#  owner_type       :string
 #
 
 FactoryGirl.define do
   factory :article do
-    profile do
-      create :profile
+    owner do
+      create :judge
     end
     article_type '專書'
     publish_year '1986'

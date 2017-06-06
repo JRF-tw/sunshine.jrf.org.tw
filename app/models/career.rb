@@ -25,6 +25,8 @@
 #  created_at          :datetime
 #  updated_at          :datetime
 #  is_hidden           :boolean
+#  owner_id            :integer
+#  owner_type          :string
 #
 
 class Career < ActiveRecord::Base
@@ -32,7 +34,9 @@ class Career < ActiveRecord::Base
   include TaiwanAge
   tw_age_columns :publish_at, :start_at, :end_at
 
+  belongs_to :owner, polymorphic: true
   belongs_to :profile
+  validates :owner_id, :owner_type, :career_type, :publish_at_in_tw, presence: true
 
   scope :newest, -> { order('id DESC') }
   scope :order_by_publish_at, -> { order('publish_at DESC, id DESC') }

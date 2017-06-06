@@ -32,6 +32,8 @@
 #  updated_at       :datetime
 #  is_hidden        :boolean
 #  status           :text
+#  owner_id         :integer
+#  owner_type       :string
 #
 
 class Punishment < ActiveRecord::Base
@@ -39,7 +41,9 @@ class Punishment < ActiveRecord::Base
   include TaiwanAge
   tw_age_columns :relevant_date
 
+  belongs_to :owner, polymorphic: true, counter_cache: :punishments_count
   belongs_to :profile
+  validates :owner_id, :owner_type, presence: true
 
   scope :newest, -> { order('id DESC') }
   scope :order_by_relevant_date, -> { order('relevant_date DESC, id DESC') }

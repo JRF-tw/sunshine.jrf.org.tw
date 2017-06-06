@@ -1,11 +1,11 @@
-= render partial: 'components/profile_hero', locals: { person: @profile }
+= render partial: 'components/profile_hero', locals: { person: @owner, job: @owner.class.name.underscore }
 
 section.punishment-records.container
   / h3.section-heading--gray.text-center 懲處與其他相關紀錄
 
   - @punishments.each do |punishment|
 
-    = link_to profile_punishment_path(@profile, punishment), class: 'punishment-record'
+    = link_to send("#{get_singularize_by_role(@owner)}_punishments_path", @owner, punishment), class: 'punishment-record'
       
       h4.punishment-record__reason= render_punishment_reason(punishment)
 
@@ -15,4 +15,4 @@ section.punishment-records.container
 
   = paginate @punishments, theme: 'www'
 
-= render partial: 'components/related_records'
+= render partial: 'components/related_records', locals: { person: @owner }

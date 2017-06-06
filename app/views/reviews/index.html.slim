@@ -1,4 +1,4 @@
-= render partial: 'components/profile_hero', locals: { person: @profile }
+= render partial: 'components/profile_hero', locals: { person: @owner, job: @owner.class.name.underscore }
 
 section.section-rhythm.container
   h3.section-heading--gray.text-center 相關新聞評論
@@ -24,4 +24,4 @@ section.section-rhythm.container
   
   = paginate @reviews, theme: 'www'
 
-= render partial: 'components/related_records'
+= render partial: 'components/related_records', locals: { person: @owner }

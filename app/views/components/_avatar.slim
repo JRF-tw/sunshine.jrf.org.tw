@@ -1,4 +1,5 @@
-= link_to profile_path(person),
+- link = send("#{person.class.to_s.downcase}_path", person)
+= link_to link,
 	class: ["card--avatar",
 					"card--avatar--#{type}",
 				 ("card--avatar--inactive" unless person.is_active)]
@@ -10,5 +11,5 @@
 		- if person.stage.present? && person.stage != 0
 			li = "司訓第 #{person.stage} 期"
 	
-	- if person.current_court
-		.card--avatar__job = "#{person.current_court}"
+	- if get_institution_by_role(person)
+		.card--avatar__job = "#{get_institution_by_role(person)}"

@@ -13,6 +13,8 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  is_hidden  :boolean
+#  owner_id   :integer
+#  owner_type :string
 #
 
 require 'rails_helper'
@@ -26,8 +28,8 @@ RSpec.describe Education, type: :model do
 
   it 'has_many :educations, dependent: :destroy' do
     expect(Education.count).to eq(1)
-    profile = education.profile
-    profile.destroy
+    owner = education.owner
+    owner.destroy
     expect(Education.count).to be_zero
   end
 end

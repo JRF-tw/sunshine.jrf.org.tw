@@ -15,6 +15,8 @@
 #  created_at   :datetime
 #  updated_at   :datetime
 #  is_hidden    :boolean
+#  owner_id     :integer
+#  owner_type   :string
 #
 
 require 'rails_helper'
@@ -28,8 +30,8 @@ RSpec.describe License, type: :model do
 
   it 'has_many :licenses, dependent: :destroy' do
     expect(License.count).to eq(1)
-    profile = license.profile
-    profile.destroy
+    owner = license.owner
+    owner.destroy
     expect(License.count).to be_zero
   end
 end

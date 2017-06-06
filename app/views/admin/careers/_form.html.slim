@@ -20,5 +20,5 @@
 .form-actions
   = f.submit "送出", class: "btn btn-primary"
   = " "
-  = link_to admin_profile_careers_path(@profile), class: "btn" do
-    = "回到#{@profile.name}的職務經歷列表"
+  = link_to polymorphic_path([@owner, :careers]), class: "btn" do
+    = "回到#{@owner.name}的職務經歷列表"

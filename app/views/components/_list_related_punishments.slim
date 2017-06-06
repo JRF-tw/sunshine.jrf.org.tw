@@ -2,10 +2,10 @@ ul.list--dot
   - @newest_punishments.each do |punishment|
     li
       - if punishment.punish.present?
-        = link_to summary_text("#{render_punishment_decision_unit(punishment)}：#{punishment.punish}", 16), profile_punishment_path(@profile, punishment)
+        = link_to summary_text("#{render_punishment_decision_unit(punishment)}：#{punishment.punish}", 16), send("#{get_singularize_by_role(person)}_punishments_path", person, punishment)
       - elsif punishment.decision_result.present?
-        = link_to summary_text("#{render_punishment_decision_unit(punishment)}：#{punishment.decision_result}", 16), profile_punishment_path(@profile, punishment)
+        = link_to summary_text("#{render_punishment_decision_unit(punishment)}：#{punishment.decision_result}", 16), send("#{get_singularize_by_role(person)}_punishments_path", person, punishment)
       - elsif punishment.summary.present?
-        = link_to summary_text("#{render_punishment_decision_unit(punishment)}：#{punishment.summary}", 16), profile_punishment_path(@profile, punishment)
+        = link_to summary_text("#{render_punishment_decision_unit(punishment)}：#{punishment.summary}", 16), send("#{get_singularize_by_role(person)}_punishments_path", person, punishment)
       - else
-        = link_to "決定機關：#{render_punishment_decision_unit(punishment)}", profile_punishment_path(@profile, punishment)
+        = link_to "決定機關：#{render_punishment_decision_unit(punishment)}", send("#{get_singularize_by_role(person)}_punishments_path", person, punishment)

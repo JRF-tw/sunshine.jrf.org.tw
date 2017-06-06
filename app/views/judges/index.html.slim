@@ -1,0 +1,8 @@
+= render 'searchs/results',
+  heading: '認識法官',
+  description: '決定當事人一生的法官，究竟有什麼紀錄？帶您來看看！',
+  people: @judges,
+  type: 'judge',
+  placeholder: '選法院或輸入關鍵字',
+  search_url: judges_searchs_path,
+  options: collection_for_courts

@@ -61,19 +61,6 @@
               | &nbsp;
               = link_to "編輯", edit_admin_profile_path(profile), class: "btn btn-mini btn-success"
               | &nbsp;
-              .btn-group
-                a.btn.btn-info.btn-mini.dropdown-toggle{ data-toggle="dropdown" href="#"}
-                  | 其他資料管理
-                  span.caret
-                ul.dropdown-menu
-                  li= link_to "學經歷管理", admin_profile_educations_path(profile)
-                  li= link_to "職務經歷管理", admin_profile_careers_path(profile)
-                  li= link_to "專業證書管理", admin_profile_licenses_path(profile)
-                  li= link_to "獎勵紀錄管理", admin_profile_awards_path(profile)
-                  li= link_to "懲處紀錄管理", admin_profile_punishments_path(profile)
-                  li= link_to "發表言論列表", admin_profile_articles_path(profile)
-                  li= link_to "相關新聞評論列表", admin_profile_reviews_path(profile)
-              | &nbsp;
               = link_to "刪除", admin_profile_path(profile), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除個人檔案 - #{profile.name}？"
     .ui-toolbar.ui-widget-header
       = paginate @profiles, theme: :admin

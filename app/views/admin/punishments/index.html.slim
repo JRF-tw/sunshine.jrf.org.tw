@@ -1,8 +1,8 @@
-= admin_widget_box "#{@profile.name}的懲處紀錄列表", icon: :pencil do
+= admin_widget_box "#{@owner.name}的懲處紀錄列表", icon: :pencil do
   .dataTables_wrapper
     div
       .dataTables_length
-        = link_to "新增#{@profile.name}的懲處紀錄", new_admin_profile_punishment_path(@profile), class: "btn btn-primary btn-mini"
+        = link_to "新增#{@owner.name}的懲處紀錄", polymorphic_path([:new, @owner, :punishment]), class: "btn btn-primary btn-mini"
     table.table.table-bordered.table-striped.table-hover
       thead
         tr
@@ -23,8 +23,8 @@
             td= punishment.decision_result
             td= punishment.memo
             td
-              = link_to "編輯", edit_admin_profile_punishment_path(@profile, punishment), class: "btn btn-mini btn-success"
+              = link_to "編輯", edit_polymorphic_path([@owner, punishment]), class: "btn btn-mini btn-success"
               | &nbsp;
-              = link_to "刪除", admin_profile_punishment_path(@profile, punishment), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除#{@profile.name}的懲處紀錄？"
+              = link_to "刪除", polymorphic_path([@owner, punishment]), class: "btn btn-mini btn-danger", method: :delete, "data-confirm": "確認刪除#{@owner.name}的懲處紀錄？"
     .ui-toolbar.ui-widget-header
       = paginate @punishments, theme: :admin

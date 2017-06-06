@@ -24,6 +24,9 @@
 #
 
 class Judge < ActiveRecord::Base
+  include HiddenOrNot
+  include ProfileData
+
   has_many :branches
   has_many :current_branches, -> { where(missed: false) }, class_name: 'Branch'
   belongs_to :court, foreign_key: :current_court_id
@@ -38,6 +41,7 @@ class Judge < ActiveRecord::Base
   has_many :valid_scores
   has_one :prosecutor
 
+  scope :order_by_name, -> { order('name DESC') }
   mount_uploader :avatar, AvatarUploader
 
 end

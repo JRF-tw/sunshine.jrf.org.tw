@@ -25,11 +25,10 @@ ruby:
           = person.is_active ? '在職': '不在職'
         h2.name= person.name
         p.job
-          - if person.current_court
-            = "#{person.current_court} #{person.current}"
+          - if get_institution_by_role(person)
+            = "#{get_institution_by_role(person)} #{get_name_by_role(person)}"
           - else
-            = person.current
-
+            = get_name_by_role(person)
     section.profile__info
       ul.list--profile-info
         - if person.gender.present?

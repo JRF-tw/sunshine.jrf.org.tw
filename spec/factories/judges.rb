@@ -27,6 +27,16 @@ FactoryGirl.define do
   factory :judge do
     sequence(:name) { |n| "Raptor Judge-#{n}" }
     court { create :court }
+    is_hidden false
+    trait :with_avatar do
+      avatar File.open "#{Rails.root}/spec/fixtures/person_avatar/people-1.jpg"
+    end
+  end
+
+  factory :admin_judge, class: Admin::Judge do |_f|
+    sequence(:name) { |n| "Raptor Judge-#{n}" }
+    court { create :court }
+    is_hidden false
     trait :with_avatar do
       avatar File.open "#{Rails.root}/spec/fixtures/person_avatar/people-1.jpg"
     end
