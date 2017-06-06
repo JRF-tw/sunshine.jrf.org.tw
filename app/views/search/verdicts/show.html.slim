@@ -22,7 +22,6 @@
               className: "divided-before"
             = kv_cell '相關檢察官', @verdict.prosecutor_names.join(',')
             = kv_cell '相關律師', @verdict.lawyer_names.map { |l| link_to l, url_for_search_story(lawyer_name: l), target: '_blank' }.join(' ').html_safe
-            = kv_cell '相關當事人', @verdict.party_names.join(',')
             = kv_cell '判決網址',
               (link_to '請點我', @verdict.original_url, target: '_blank' if @verdict.original_url),
               className: "divided-before"
