@@ -6,7 +6,6 @@ class ProfilesController < BaseController
       not_found
     end
     @careers = @profile.careers.shown.order_by_publish_at
-    @suits = @profile.suit_list
     @educations = @profile.educations.shown.order_by_end_at
     @licenses = @profile.licenses.shown.order_by_publish_at
     @newest_award = @profile.awards.shown.order_by_publish_at.first

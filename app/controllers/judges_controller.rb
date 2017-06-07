@@ -11,7 +11,6 @@ class JudgesController < BaseController
       not_found
     end
     @careers = @judge.careers.shown.order_by_publish_at
-    @suits = []
     @educations = @judge.educations.shown.order_by_end_at
     @licenses = @judge.licenses.shown.order_by_publish_at
     @newest_award = @judge.awards.shown.order_by_publish_at.first

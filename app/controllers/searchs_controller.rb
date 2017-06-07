@@ -3,12 +3,6 @@ class SearchsController < BaseController
     set_meta(image: ActionController::Base.helpers.asset_path('hero-searchs-index-M.png'))
   end
 
-  def suits
-    get_params_utf8(['q', 'state'])
-    @suit = Suit.shown.find_state(params_utf8[:state]).front_like_search(title: params_utf8[:q], summary: params_utf8[:q], content: params_utf8[:q], keyword: params_utf8[:q]).page(params[:page]).per(12)
-    set_meta(image: ActionController::Base.helpers.asset_path('hero-searchs-index-M.png'))
-  end
-
   def judges
     get_params_utf8(['q', 'judge'])
     @judges = Judge.shown.ransack(court_id_eq: params_utf8[:judge], name_cont: params_utf8[:q]).result.includes(:court).order(:name).page(params[:page]).per(12)

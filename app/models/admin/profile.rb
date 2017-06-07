@@ -38,11 +38,6 @@ class Admin::Profile < ::Profile
   has_many :judgments, class_name: 'Admin::Judgment', through: :judgment_judges
   has_many :judgment_prosecutors, dependent: :destroy
   has_many :judgments, class_name: 'Admin::Judgment', through: :judgment_prosecutors
-  has_many :suit_judges, dependent: :destroy
-  has_many :suits, class_name: 'Admin::Suit', through: :suit_judges
-  has_many :suit_prosecutors, dependent: :destroy
-  has_many :suits, class_name: 'Admin::Suit', through: :suit_prosecutors
-  has_many :procedures, class_name: 'Admin::Procedure', dependent: :destroy
 
   CURRENT_TYPES = [
     '法官',

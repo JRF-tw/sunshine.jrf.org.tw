@@ -1,3 +1,0 @@
-= admin_widget_box "編輯重要判決", icon: :pencil do
-  = simple_form_for @judgment, url: admin_judgment_path(@judgment), method: :put, wrapper: :admin do |f|
-    = render partial: "form", object: f, as: :f

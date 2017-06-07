@@ -49,11 +49,6 @@ zh-TW:
         title: '%{name} - 檢察官個人頁'
         description: '%{name} 檢察官的個人資訊'
         keywords: '%{name}, 檢察官'
-    procedures:
-      index:
-        title: '%{title} - 處理經過'
-        description: '%{title} %{summary}'
-        keywords: '不適任法官案例,不適任檢察官案例,司法恐龍案例,司法案例'
     profiles:
       judges:
         title: '認識法官'
@@ -105,10 +100,6 @@ zh-TW:
         title: '我想找'
         description: '想找司法案例嗎？想找法官檢察官基本資料嗎？你想找的全在這！'
         keywords: '找法官,找檢察官,找案例,找不適任法官,找不適任檢察官,找司法恐龍'
-      suits:
-        title: '案例搜尋結果'
-        description: '案例搜尋結果，快來看看有哪些案例！'
-        keywords: '不適任法官案例,不適任檢察官案例,司法恐龍案例,法官案例,檢察官案例'
       judges:
         title: '法官搜尋結果'
         description: '法官搜尋結果，快來看看有哪些法官資料！'
@@ -117,11 +108,6 @@ zh-TW:
         title: '檢察官搜尋結果'
         description: '檢察官搜尋結果，快來看看有哪些檢察官資料！'
         keywords: '找檢察官,檢察官,檢察署'
-    suits:
-      index:
-        title: '司法案例面面觀'
-        description: '不適任的法官、檢察官狀況有哪些？看看幾個案例，認識不適任的法官、檢察官！'
-        keywords: '不適任法官,不適任檢察官,司法案例面面觀,司法恐龍,恐龍法官,恐龍檢察官'
       show:
         title: '%{title}'
         description: '%{title} %{summary}'

@@ -2,17 +2,12 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'profiles#index'
     resources :profiles
-    resources :suits do
-      resources :procedures
-    end
     get '/courts/edit_weight', to: 'courts#edit_weight', as: 'courts_edit_weight'
     put '/courts/:id/update_weight', to: 'courts#update_weight', as: 'court_update_weight'
     resources :courts
     resources :prosecutors_offices
-    resources :judgments
     resources :banners
     resources :bulletins
-    resources :suit_banners
     resources :users
     resources :stories
     resources :schedules

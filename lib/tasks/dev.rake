@@ -19,13 +19,9 @@ namespace :dev do
     'dev:fake_awards',
     'dev:fake_reviews',
     'dev:fake_articles',
-    'dev:fake_judgments',
-    'dev:fake_suits',
-    'dev:fake_procedures',
     'dev:fake_punishments',
     'dev:fake_banners',
     'dev:fake_bulletins',
-    'dev:fake_suit_banners',
     'dev:fake_stories',
     'dev:fake_schedules',
     'dev:fake_lawyers',
@@ -161,67 +157,6 @@ namespace :dev do
     end
   end
 
-  task fake_judgments: :environment do
-    Judgment.destroy_all
-    50.times do |i|
-      court = Admin::Court.all.sample
-      presiding_judge = Admin::Profile.judges.sample
-      main_judge = Admin::Profile.judges.sample
-      judge_nos = ["我的願構調王出#{i}", "那作之所好能一地#{i}", "新布類系眼美成的子#{i}", "晚適事制質一銷可麗民#{i}", "色手黃備型食勢我成原動#{i}"]
-      court_nos = ["#{i}我的願構調王出", "#{i}那作之所好能一地", "#{i}新布類系眼美成的子", "#{i}晚適事制質一銷可麗民", "#{i}色手黃備型食勢我成原動"]
-      judge_type = Admin::Judgment::JUDGMENT_TYPES.sample
-      judgment = Admin::Judgment.create!(court: court, presiding_judge: presiding_judge, main_judge: main_judge, judge_no: judge_nos.sample, court_no: court_nos.sample, judge_type: judge_type, judge_date: rand(20).years.ago, is_hidden: false)
-      judge_ids = Profile.judges.sample((1..3).to_a.sample).map(&:id)
-      prosecutor_ids = Profile.prosecutors.sample((1..3).to_a.sample).map(&:id)
-      judge_ids.each do |j|
-        judgment.judgment_judges.create!(profile_id: j)
-      end
-      prosecutor_ids.each do |p|
-        judgment.judgment_prosecutors.create!(profile_id: p)
-      end
-    end
-  end
-
-  task fake_suits: :environment do
-    Suit.destroy_all
-    titles = ['我的願構調王出', '那作之所好能一地', '新布類系眼美成的子', '晚適事制質一銷可麗民', '色手黃備型食勢我成原動', '春資一臺無反的共的家示例', '林全無間一新進遊然統國德足', '機來了各正又解手孩目這走運醫', '多制負能狀隨方計算自化的中已廣']
-    text = ['的世業銷一食今方無想產做前，養他熱：氣總男極！利見體？道不自原結位手。備叫然目功物的展這得界遊我世專關情長道快眼不到首麼員候風：酒作速等，人清今重離燈氣黃運少主馬多風構沒原在性麼注不愛自下以少講劇了的兩，後頭說怎處作女間了花天！', '局有歌升個國民起本己想作成下為在…… 度模復場對接西明家風你。道我功部語育，學不他車義活環教手國開…… 了人又回不己念時來的港不包感的結事率成現？來集落，禮的愛結許能朋海中都個時，員足萬亮同進的居質動，著不的；感沒於大廣天；看時交放種活原素設後而活我財臺不邊類港以子果？', '力年華。力步說建產阿；此清一是了現學報同放所書旅怕聽代…… 石麼高經應邊的校自位專，電行氣！因上信你！境產幾樣讓友二打子認平心投，方不要易呢中影多開生到生型自準示車男公臺小不。']
-    keywords = ['態度不佳', '撤回上訴', '侵越權限', '不正訊問', '憤怒鳥檢察官', '測試關鍵字']
-    titles.each_with_index do |t, i|
-      judge_ids = Profile.judges.sample((2..5).to_a.sample).map(&:id)
-      prosecutor_ids = Profile.prosecutors.sample((2..5).to_a.sample).map(&:id)
-      summary = text.sample
-      content = text.sample
-      suit_no = (1000..1200).to_a.sample
-      state = Suit::STATE.sample
-      keyword = keywords.sample((1..3).to_a.sample).join(',')
-      file = File.open "#{Rails.root}/spec/fixtures/suit_pic/case-#{i + 1}.jpg"
-      suit = Admin::Suit.create!(title: t, state: state, suit_no: suit_no, summary: summary, content: content, pic: file, keyword: keyword, is_hidden: false)
-      judge_ids.each do |j|
-        suit.suit_judges.create!(profile_id: j)
-      end
-      prosecutor_ids.each do |p|
-        suit.suit_prosecutors.create!(profile_id: p)
-      end
-    end
-  end
-
-  task fake_procedures: :environment do
-    Procedure.destroy_all
-    Admin::Suit.all.each do |suit|
-      (2..5).to_a.sample.times do
-        profile = (suit.judges + suit.prosecutors).sample
-        unit = Admin::Court.all.sample
-        titles = ['檢察官', '副司長', '檢察長', '法官', '主任檢察官']
-        procedure_units = ['司改會', '檢評會', '監察院', '法評會', '司法院人審會']
-        procedure_contents = ['結束', '行政處理中']
-        procedure_results = ['請求個案評鑑', '受評鑑人有懲戒之必要，報由法務部移送監察院審查，建議休職二年。', '休職，期間壹年陸月。', '受評鑑法官詹駿鴻報由司法院交付司法院人事審議委員會審議，建議處分記過貳次。', '警告處分', '本件請求不成立，並移請職務監督權人為適當之處分']
-        suit.procedures.create!(profile: profile, unit: unit.name, title: titles.sample, procedure_unit: procedure_units.sample, procedure_content: procedure_contents.sample, procedure_result: procedure_results.sample, procedure_date: rand(20).years.ago, suit_no: suit.suit_no, procedure_no: "#{(90..105).to_a.sample}年檢評字第#{(1..100).to_a.sample}號", is_hidden: false)
-      end
-    end
-    Suit.all.each { |suit| suit.update_attributes(is_hidden: false) }
-  end
-
   task fake_punishments: :environment do
     Punishment.destroy_all
     decision_units = ['公懲會', '檢評會', '監察院(新)', '監察院(舊)', '職務法庭', '法評會', '司法院']
@@ -254,21 +189,6 @@ namespace :dev do
         title: "重要公告-#{i}",
         content: content.sample,
         pic: File.open("#{Rails.root}/spec/fixtures/banner/L_banner_#{[1, 2].sample}.jpg")
-      )
-    end
-  end
-
-  task fake_suit_banners: :environment do
-    SuitBanner.destroy_all
-    urls = ['https://www.facebook.com', 'https://www.google.com', 'https://www.yahoo.com']
-    titles = ['我的願構調王出', '那作之所好能一地', '新布類系眼美成的子', '晚適事制質一銷可麗民', '色手黃備型食勢我成原動', '春資一臺無反的共的家示例', '林全無間一新進遊然統國德足', '機來了各正又解手孩目這走運醫', '多制負能狀隨方計算自化的中已廣']
-    text = ['的世業銷一食今方無想產做前，養他熱：氣總男極！利見體？道不自原結位手。備叫然目功物的展這得界遊我世專關情長道快眼不到首麼員候風：酒作速等，人清今重離燈氣黃運少主馬多風構沒原在性麼注不愛自下以少講劇了的兩，後頭說怎處作女間了花天！', '局有歌升個國民起本己想作成下為在…… 度模復場對接西明家風你。道我功部語育，學不他車義活環教手國開…… 了人又回不己念時來的港不包感的結事率成現？來集落，禮的愛結許能朋海中都個時，員足萬亮同進的居質動，著不的；感沒於大廣天；看時交放種活原素設後而活我財臺不邊類港以子果？', '力年華。力步說建產阿；此清一是了現學報同放所書旅怕聽代…… 石麼高經應邊的校自位專，電行氣！因上信你！境產幾樣讓友二打子認平心投，方不要易呢中影多開生到生型自準示車男公臺小不。']
-    urls.each_with_index do |url, i|
-      Admin::SuitBanner.create!(
-        pic_l: File.open("#{Rails.root}/spec/fixtures/suit_banner/case_#{i + 1}.jpg"),
-        pic_m: File.open("#{Rails.root}/spec/fixtures/suit_banner/case_#{i + 1}.jpg"),
-        pic_s: File.open("#{Rails.root}/spec/fixtures/suit_banner/case_#{i + 1}.jpg"),
-        url: url, title: titles.sample, content: text.sample, weight: i + 1
       )
     end
   end

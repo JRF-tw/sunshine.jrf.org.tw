@@ -11,7 +11,6 @@ class ProsecutorsController < BaseController
       not_found
     end
     @careers = @prosecutor.careers.shown.order_by_publish_at
-    @suits = []
     @educations = @prosecutor.educations.shown.order_by_end_at
     @licenses = @prosecutor.licenses.shown.order_by_publish_at
     @newest_award = @prosecutor.awards.shown.order_by_publish_at.first

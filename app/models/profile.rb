@@ -40,11 +40,6 @@ class Profile < ActiveRecord::Base
   has_many :judgments, through: :judgment_judges
   has_many :judgment_prosecutors, dependent: :destroy
   has_many :judgments, through: :judgment_prosecutors
-  has_many :suit_judges, dependent: :destroy
-  has_many :suits, through: :suit_judges
-  has_many :suit_prosecutors, dependent: :destroy
-  has_many :suits, through: :suit_prosecutors
-  has_many :procedures, dependent: :destroy
 
   scope :newest, -> { order('id DESC') }
   scope :had_avatar, -> { where.not(avatar: nil) }

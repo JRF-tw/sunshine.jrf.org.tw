@@ -1,6 +1,0 @@
-= link_to banner.url, class: 'carousel__cell' do
-  section
-    .caption
-      h3.heading = summary_text(banner.title, 14)
-      p.description = summary_text(banner.content, 90)
-    = render partial: 'components/art_direction', locals: {banner: banner}
