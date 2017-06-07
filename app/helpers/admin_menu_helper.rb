@@ -35,7 +35,6 @@ module AdminMenuHelper
           '有效評鑑紀錄': { url: admin_valid_scores_path, match: /\/admin\/valid_scores/ }
         }
       },
-      '個人檔案管理': { url: admin_profiles_path, match: /\/admin\/profiles/ },
       '首頁橫幅管理': { url: admin_banners_path, match: /\/admin\/banners/ },
       '公告訊息管理': { url: admin_bulletins_path, match: /\/admin\/bulletins/ },
       '爬蟲紀錄': {

@@ -10,8 +10,6 @@ class BaseController < ApplicationController
   def index
     @banners = Banner.shown.order_by_weight
     @bulletins = Bulletin.most_recent(6)
-    @judges = Profile.judges.shown.active.had_avatar.sample(12)
-    @prosecutors = Profile.prosecutors.shown.active.had_avatar.sample(12)
     image = @banners.count > 0 ? @banners.first.pic.W_1296.url : nil
     set_meta(image: image)
   end

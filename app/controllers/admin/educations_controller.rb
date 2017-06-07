@@ -68,6 +68,6 @@ class Admin::EducationsController < Admin::BaseController
   end
 
   def education_params
-    params.fetch(:education, {}).permit(:owner_id, :owner_type, :title, :content, :start_at_in_tw, :end_at_in_tw, :start_at, :end_at, :source, :memo, :is_hidden)
+    params.fetch(:education, {}).permit(:title, :content, :start_at_in_tw, :end_at_in_tw, :start_at, :end_at, :source, :memo, :is_hidden)
   end
 end

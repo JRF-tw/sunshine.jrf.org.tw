@@ -28,7 +28,6 @@ class Review < ActiveRecord::Base
   tw_age_columns :publish_at
 
   belongs_to :owner, polymorphic: true
-  belongs_to :profile
   validates :owner_id, :owner_type, :name, :title, presence: true
 
   scope :newest, -> { order('id DESC') }

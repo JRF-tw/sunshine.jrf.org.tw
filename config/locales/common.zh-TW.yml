@@ -21,7 +21,6 @@ zh-TW:
   activerecord:
     models:
       court: '法院'
-      profile: '個人檔案'
       education: '學經歷'
       career: '職務經歷'
       license: '專業證書'
@@ -54,25 +53,6 @@ zh-TW:
         school: '學校'
         department_level: '系級'
         student_number: '學號'
-      profile:
-        name: '姓名'
-        current: '現職'
-        current_court: '現職法院'
-        current_department: '庭別'
-        current_branch: '股別'
-        remove_avatar: '移除現有頭像'
-        avatar: '頭像'
-        gender: '性別'
-        gender_source: '性別來源'
-        birth_year: '出生年'
-        birth_year_source: '出生年來源'
-        stage: '司訓所期別'
-        stage_source: '司訓所期別來源'
-        appointment: '任用資格'
-        appointment_source: '任用資格來源'
-        is_active: '在職中？'
-        memo: '備註'
-        is_hidden: '隱藏'
       judge:
         name: '姓名'
         court: '任職法院'
@@ -247,11 +227,6 @@ zh-TW:
       bulletin:
         title_cont: '標題包含'
         content_cont: '內文包含'
-      profile:
-        is_active_true: '在職中'
-        is_hidden_true: '不顯示於前端'
-        current_eq: '現職'
-        name_cont: '姓名包含'
       court:
         full_name_cont: "全名包含"
         name_cont: "前台顯示簡稱包含"

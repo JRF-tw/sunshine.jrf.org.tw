@@ -10,9 +10,4 @@ Rails.application.routes.draw do
   end
 
   get 'about', to: 'base#about', as: :about
-
-  resources :profiles do
-    resources :awards
-    resources :punishments
-  end
 end

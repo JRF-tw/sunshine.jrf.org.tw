@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   namespace :admin do
-    root to: 'profiles#index'
+    root to: 'stories#index'
     resources :profiles
     get '/courts/edit_weight', to: 'courts#edit_weight', as: 'courts_edit_weight'
     put '/courts/:id/update_weight', to: 'courts#update_weight', as: 'court_update_weight'
