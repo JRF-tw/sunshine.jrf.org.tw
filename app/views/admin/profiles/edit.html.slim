@@ -1,3 +1,0 @@
-= admin_widget_box "編輯個人檔案", icon: :pencil do
-  = simple_form_for @profile, url: admin_profile_path(@profile), method: :put, wrapper: :admin do |f|
-    = render partial: "form", object: f, as: :f

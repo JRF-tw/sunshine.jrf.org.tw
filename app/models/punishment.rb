@@ -42,7 +42,6 @@ class Punishment < ActiveRecord::Base
   tw_age_columns :relevant_date
 
   belongs_to :owner, polymorphic: true, counter_cache: :punishments_count
-  belongs_to :profile
   validates :owner_id, :owner_type, presence: true
 
   scope :newest, -> { order('id DESC') }

@@ -68,6 +68,6 @@ class Admin::CareersController < Admin::BaseController
   end
 
   def career_params
-    params.fetch(:career, {}).permit(:profile_id, :career_type, :old_unit, :old_title, :old_assign_court, :old_assign_judicial, :old_pt, :new_unit, :new_title, :new_assign_court, :new_assign_judicial, :new_pt, :start_at, :end_at, :publish_at, :start_at_in_tw, :end_at_in_tw, :publish_at_in_tw, :source, :source_link, :origin_desc, :memo, :is_hidden)
+    params.fetch(:career, {}).permit(:career_type, :old_unit, :old_title, :old_assign_court, :old_assign_judicial, :old_pt, :new_unit, :new_title, :new_assign_court, :new_assign_judicial, :new_pt, :start_at, :end_at, :publish_at, :start_at_in_tw, :end_at_in_tw, :publish_at_in_tw, :source, :source_link, :origin_desc, :memo, :is_hidden)
   end
 end

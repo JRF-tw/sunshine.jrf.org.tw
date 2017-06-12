@@ -16,7 +16,6 @@
 class Court < ActiveRecord::Base
   include HiddenOrNot
   sortable column: :weight, add_new_at: nil
-  has_many :judgments
   has_many :stories
   has_many :schedules
   has_many :branches

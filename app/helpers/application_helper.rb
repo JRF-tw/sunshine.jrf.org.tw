@@ -1,29 +1,5 @@
 module ApplicationHelper
 
-  def class_of_suits
-    if params[:controller] == 'suits'
-      return 'active'
-    else
-      return nil
-    end
-  end
-
-  def class_of_judges
-    if (params[:controller] == 'profiles') && (params[:action] == 'judges')
-      return 'active'
-    else
-      return nil
-    end
-  end
-
-  def class_of_prosecutors
-    if (params[:controller] == 'profiles') && (params[:action] == 'prosecutors')
-      return 'active'
-    else
-      return nil
-    end
-  end
-
   def class_of_about
     if (params[:controller] == 'base') && (params[:action] == 'about')
       return 'active'
@@ -142,10 +118,6 @@ module ApplicationHelper
 
   def collection_for_prosecutors_offices
     ProsecutorsOffice.shown.map { |c| [c.full_name, c.id] }.unshift(['全部檢察署', ''])
-  end
-
-  def collection_state_for_suits
-    Suit::STATE.clone.unshift('全部')
   end
 
   def active_for_search_group_cell(param, active = nil)

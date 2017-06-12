@@ -30,7 +30,6 @@
 #
 
 class Admin::Article < ::Article
-  belongs_to :profile, class_name: 'Admin::Profile'
 
   validates :profile_id, :article_type, presence: true
   validate :validate_publish_date

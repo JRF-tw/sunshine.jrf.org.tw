@@ -68,6 +68,6 @@ class Admin::ReviewsController < Admin::BaseController
   end
 
   def review_params
-    params.fetch(:review, {}).permit(:@owner_id, :publish_at_in_tw, :publish_at, :name, :title, :content, :comment, :no, :source, :file, :memo, :is_hidden)
+    params.fetch(:review, {}).permit(:publish_at_in_tw, :publish_at, :name, :title, :content, :comment, :no, :source, :file, :memo, :is_hidden)
   end
 end
