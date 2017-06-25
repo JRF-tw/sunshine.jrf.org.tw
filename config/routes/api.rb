@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     get '/' => redirect('https://5fpro.github.io/raml-api-console/?raml=https://5fpro.github.io/jrf-sunny/api/index.raml')
   end
 
-  namespace :api, path: '' do
+  namespace :api, path: '', defaults: { format: "json" } do
     constraints(host: /api/) do
       root to: "base#index"
       resources :courts, only: [:index, :show]
