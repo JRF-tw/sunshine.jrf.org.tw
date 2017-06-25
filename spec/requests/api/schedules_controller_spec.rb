@@ -24,6 +24,7 @@ RSpec.describe Api::SchedulesController, type: :request do
       },
       court: {
         name: court.full_name,
+        simple_name: court.name,
         code: court.code
       },
       schedules: [{

@@ -29,10 +29,7 @@ RSpec.describe Api::StoriesController, type: :request do
 
   def court_partial
     {
-      court: {
-        name: story.court.full_name,
-        code: story.court.code
-      }
+      court: court_body(story.court)
     }
   end
 
