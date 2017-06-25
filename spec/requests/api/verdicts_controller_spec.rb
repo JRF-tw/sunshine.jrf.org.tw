@@ -26,10 +26,7 @@ RSpec.describe Api::VerdictsController, type: :request do
             party_names: story.party_names,
             detail_url: api_story_url(story.court.code, story.identity)
           },
-          court: {
-            name: court.full_name,
-            code: court.code
-          },
+          court: court_body(court),
           reason: verdict.reason,
           judges_names: verdict.judges_names,
           prosecutor_names: verdict.prosecutor_names,

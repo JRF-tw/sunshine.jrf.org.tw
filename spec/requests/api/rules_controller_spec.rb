@@ -22,10 +22,7 @@ RSpec.describe Api::RulesController, type: :request do
         party_names: story.party_names,
         detail_url: api_story_url(story.court.code, story.identity)
       },
-      court: {
-        name: court.full_name,
-        code: court.code
-      },
+      court: court_body(court),
       rules: [{
         reason: rule.reason,
         judges_names: rule.judges_names,

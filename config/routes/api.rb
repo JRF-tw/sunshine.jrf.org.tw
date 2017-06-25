@@ -6,9 +6,10 @@ Rails.application.routes.draw do
     get '/' => redirect('https://5fpro.github.io/raml-api-console/?raml=https://5fpro.github.io/jrf-sunny/api/index.raml')
   end
 
-  namespace :api, path: '' do
+  namespace :api, path: '', defaults: { format: "json" } do
     constraints(host: /api/) do
       root to: "base#index"
+      resources :courts, only: [:index, :show]
       get '/search/stories', to: "stories#index", as: 'stories'
       get ':court_code/:id', to: "stories#show", constraints: { court_code: /\w{3}/, id: /.*-\d{2,3}-.+-\d+/ }, as: 'story'
       get ':court_code/:id/verdict', to: "verdicts#show", constraints: { court_code: /\w{3}/, id: /.*-\d{2,3}-.+-\d+/ }, as: 'verdict'
