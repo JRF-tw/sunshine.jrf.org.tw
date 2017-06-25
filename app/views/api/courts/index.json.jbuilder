@@ -1,3 +1,3 @@
 json.courts @courts do |court|
-  json.merge! court.attributes
+  json.partial! 'api/court', court: court
 end
