@@ -14,6 +14,20 @@ RSpec.describe Admin::ObserversController do
       before { get '/admin/observers', q: { name_cont: court_observer.name } }
       it { expect(response.body).to match(court_observer.email) }
     end
+
+    describe 'xls format' do
+      context 'success' do
+        subject { get '/admin/observers', format: :xlsx }
+        it { expect(subject).to be(200) }
+      end
+
+      context 'after search success' do
+        before { get '/admin/observers', q: { name_cont: court_observer.name } }
+        subject { get '/admin/observers', format: :xlsx }
+        it { expect(subject).to be(200) }
+      end
+    end
+
   end
 
   describe '#show' do
@@ -23,18 +37,11 @@ RSpec.describe Admin::ObserversController do
     end
   end
 
-  describe '#download_file' do
+  describe '#school_export' do
     let!(:court_observer) { create :court_observer }
-
     context 'success' do
-      subject { get '/admin/observers', format: :xlsx }
-      it { expect(subject).to be(200) }
-    end
-
-    context 'after search success' do
-      before { get '/admin/observers', q: { name_cont: court_observer.name } }
-      subject { get '/admin/observers', format: :xlsx }
-      it { expect(subject).to be(200) }
+      before { post '/admin/observers/school_export.xlsx' }
+      it { expect(response).to be_success }
     end
   end
 end

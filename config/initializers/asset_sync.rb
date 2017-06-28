@@ -10,7 +10,7 @@ AssetSync.configure do |config|
   # config.google_storage_secret_access_key = Setting.asset_sync.google_storage_secret_access_key
 
   # Don't delete files from the store
-  config.existing_remote_files = "ignore" # Existing pre-compiled assets on S3 will be kept
+  config.existing_remote_files = 'keep' # Existing pre-compiled assets on S3 will be kept
   # To delete existing remote files.
   #   config.existing_remote_files: "delete"
   # To ignore existing remote files and overwrite.
