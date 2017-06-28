@@ -184,6 +184,10 @@ module ApplicationHelper
     [['是', true], ['否', false]]
   end
 
+  def collect_for_is_null
+    [['是', '1'], ['否', '0']]
+  end
+
   def collect_for_is_prosecutor
     [['法官', false], ['檢察官', true]]
   end
