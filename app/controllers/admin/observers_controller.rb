@@ -20,6 +20,14 @@ class Admin::ObserversController < Admin::BaseController
     add_crumb @admin_page_title, '#'
   end
 
+  def school_export
+    @search = CourtObserver.all.ransack(params[:q])
+    @court_observers = @search.result
+    respond_to do |format|
+      format.xlsx { render xlsx: 'school_export', filename: '學生旁觀者.xlsx' }
+    end
+  end
+
   private
 
   def court_observer

@@ -50,7 +50,11 @@ Rails.application.routes.draw do
         get :download_file
       end
     end
-    resources :observers, only: [:show, :index]
+    resources :observers, only: [:show, :index] do
+      collection do
+        post :school_export
+      end
+    end
     resources :parties do
       member do
         put :set_to_imposter
