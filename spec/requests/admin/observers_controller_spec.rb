@@ -40,7 +40,7 @@ RSpec.describe Admin::ObserversController do
   describe '#school_export' do
     let!(:court_observer) { create :court_observer }
     context 'success' do
-      before { post "/admin/observers/school_export.xlsx" }
+      before { post '/admin/observers/school_export.xlsx' }
       it { expect(response).to be_success }
     end
   end
