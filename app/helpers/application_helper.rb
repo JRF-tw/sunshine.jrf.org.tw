@@ -185,7 +185,7 @@ module ApplicationHelper
   end
 
   def collect_for_is_null
-    [['是', '1'], ['否', '0']]
+    [['是', true], ['否', false]]
   end
 
   def collect_for_is_prosecutor
