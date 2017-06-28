@@ -32,8 +32,8 @@
         .span6
           .control-group
             label.control-label = f.label :prosecutors_office_id_null
-            .controls.select2 = f.check_box :prosecutors_office_id_null
-        
+            .controls.select2 = f.select :prosecutors_office_id_null, collect_for_is_null, include_blank: '請選擇'
+
     hr
     .form-actions
       = f.submit value: '搜尋', class: 'btn btn-primary'
