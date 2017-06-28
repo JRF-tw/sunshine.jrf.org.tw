@@ -1,6 +1,6 @@
 - content_for :btns do
   = link_to "下載 excel 檔", admin_observers_path(params.slice(:q).merge(format: :xlsx)), class: "btn btn-success"
-  = link_to '下載 excel 檔（學校用）', school_export_admin_observers_path(params.slice(:q).merge(format: :xlsx)), class: "btn"
+  = link_to '下載 excel 檔（學校用）', school_export_admin_observers_path(params.slice(:q).merge(format: :xlsx)), class: "btn", method: :post
 = search_form_for @search, url: admin_observers_path, wrapper: :admin, html: { class: "form-horizontal" } do |f|
   .well
     fieldset
