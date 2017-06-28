@@ -2,7 +2,7 @@ development: &default
   adapter: 'postgis'
   encoding: 'unicode'
   database: 'jrf_sunny_development'
-  host: '127.0.0.1'
+  host: 'localhost'
   username: 'root'
   password: ''
   postgis_extension: true
